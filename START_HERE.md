@@ -6,10 +6,14 @@
 - Governance Framework: gx10-governance (**GGF v1.1 Baseline**)
 - Quality System Standard: **QMS / ISO 9001 Compliance** (`HERMES-QMS` & `QMS-ISO9001`)
 - Primary Repository: https://github.com/huanruilee/Transcriptions
+- Official Audio Catalog URL: https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68
 
 ---
 
-## 1. 專案核心定位與原則
+## ⚠️ 音檔與 Git 儲存庫規範 (Audio Asset Policy)
+
+* **🚫 嚴禁將音檔 (.mp3 / .wav) 上傳至 GitHub**：音檔為大型二進位資產，必須留在 `gx10` 伺服器本機工作區 (`/home/henry/gdrive/善顯共學/音檔/`) 或透過 HTTPS Web 服務提供串流。
+* **📄 GitHub 專用定位**：GitHub 儲存庫**僅存放程式碼 (`src/`)、規格文件 (`docs/`)、Schema (`DATA_SCHEMA.md`)、轉譯 JSON (`courses/`)、腳本 (`scripts/`) 與測試 (`tests/`)**，確保未來任何 Agent 都能遵循技術資料與規範自動復刻與執行。
 
 本儲存庫的核心目標是 **「結合 GGF 治理與 QMS (ISO 9001) 品質管理體系，定義清楚的成果要求 (Deliverables) 與高階運作流程 (Workflow)」**。
 
