@@ -8,62 +8,46 @@
 
 ---
 
-## 1. Objective & Scope
+## 1. 專案核心定位與原則
 
-This repository hosts the **Transcriptions Multi-Media Learning Platform** for series courses, with *入中論善顯密意疏* (Illumination of the Thought of Madhyamakavatara) as the primary benchmark course.
+本儲存庫的核心目標是 **「定義清楚的成果要求 (Deliverable Requirements) 與高階運作流程 (Operating Workflow)」**。
 
-The platform provides readers with an interactive experience to listen to audio, read formatted transcripts, view structural TOCs (科判), search terminology, and take notes.
-
----
-
-## 2. GGF Operating Principles for Agent (小法)
-
-When operating on this repository, **小法 (gx10 Agent)** MUST adhere to the following 5 GGF principles:
-
-1. **Evidence First (證據優先)**:
-   Never declare a task complete without empirical test evidence. Always run `npm test` before committing changes.
-2. **Policy Before Prompt (規範先於 Prompt)**:
-   Read `docs/SPECIFICATION.md` and `docs/DATA_SCHEMA.md` as the single source of truth. Do not infer schema or contract logic.
-3. **Governance Above Agents (治理高於 Agent)**:
-   Follow `docs/AGENT_GUIDELINES.md` for task intake, branching, and commit message formats.
-4. **Review Produces Verdict; Only Henry Produces Decision (審查與決策分離)**:
-   Agent execution and test runs produce a Verdict. Breaking changes to schemas or core APIs are **Henry Reserved Decisions** requiring explicit user confirmation.
-5. **Program Management (階層式計畫管理)**:
-   Track work in `docs/TASKS.md` following `Project -> Milestone (Phase) -> Task`.
+* **成果與體驗優先**：定義音文雙向同步、科判 TOC 跳轉、2A/2B 命名、自動換段排版等最終使用者體驗標竿。
+* **Agent 技術自主權**：**小法享有選擇具體工具（Python/JS 腳本、OpenCC、ffmpeg 等）與實現做法的完全裁量權**，只需確保產出符合 `docs/SPECIFICATION.md` 與 `docs/DATA_SCHEMA.md` 的成果標準。
 
 ---
 
-## 3. Required Reading Order for Agent (小法)
+## 2. GGF 成果導向治理原則
 
-When 小法 initializes or starts a working session on this repository, read the files in the following order:
+當 **小法 (gx10 Agent)** 於本儲存庫運作時，遵循以下 4 大 GGF 成果治理原則：
 
-1. `START_HERE.md` (this file)
-2. `docs/AGENT_GUIDELINES.md` (Agent SOP & Commit Rules)
-3. `docs/SPECIFICATION.md` (4 Core Feature Requirements & UI Specs)
-4. `docs/DATA_SCHEMA.md` (JSON Schema Specifications)
-5. `docs/TASKS.md` (Active Task Backlog & Progress Tracker)
-6. `courses/入中論善顯密意疏/course.json` (Sample Course Meta)
+1. **成果與驗收標準為本 (Deliverables & Acceptance Basis First)**：
+   * 閱讀 `docs/SPECIFICATION.md` 作為最終交付成果的審查標準。
+2. **工具與實作自主 (Tooling & Implementation Autonomy)**：
+   * 小法自由決定使用何種語言、工具、轉譯庫或批次處理邏輯，不設限特定工具。
+3. **驗證與證據提供 (Verification Evidence)**：
+   * 每次交付必須通過測試與驗證，確保網頁與 JSON 資料品質無誤。
+4. **保留決策權 (Henry Reserved Decisions)**：
+   * 僅破壞性 Schema 修改或刪除數據列為 Henry 保留決策。
 
 ---
 
-## 4. Agent Intake & Execution Protocol (SOP)
+## 3. 小法讀取順序 (Required Reading Order)
+
+1. `START_HERE.md`（本檔案：定位與原則）
+2. `docs/AGENT_GUIDELINES.md`（小法作業流程與自主權聲明）
+3. `docs/SPECIFICATION.md`（最終交付成果與 UI/UX 驗收要求）
+4. `docs/DATA_SCHEMA.md`（數據格式標準）
+5. `docs/TASKS.md`（高階里程碑與 Task 清單）
+
+---
+
+## 4. 高階運作流程 (Intake Protocol)
 
 ```text
-Intake Step 1: Read START_HERE.md and docs/TASKS.md
-Intake Step 2: Pick next uncompleted task [ ] from docs/TASKS.md
-Intake Step 3: Read corresponding section in docs/SPECIFICATION.md & DATA_SCHEMA.md
-Intake Step 4: Write/modify code in src/ or courses/
-Intake Step 5: Write unit/integration tests in tests/
-Intake Step 6: Run `npm test` -> Verify 0 errors (Generate Evidence)
-Intake Step 7: Update docs/TASKS.md to mark task as [x] Completed
-Intake Step 8: Commit & Push with semantic commit message: `feat:`, `fix:`, `docs:`, `test:`
+1. 讀取 START_HERE.md & docs/TASKS.md -> 領取任務
+2. 檢視 docs/SPECIFICATION.md -> 確認最終成果驗收標準
+3. 小法自主選擇工具、語言與腳本進行開發與轉譯
+4. 執行品質驗證 -> 產出驗證證據 (Evidence)
+5. 寫入 docs/TASKS.md -> Commit & Push
 ```
-
----
-
-## 5. Henry Reserved Decisions (需要 Henry 明確授權的事項)
-
-The Agent MUST NOT perform the following without explicit Henry authorization:
-- Modifying core JSON Schema formats in `docs/DATA_SCHEMA.md` that break backward compatibility.
-- Deleting existing course content files under `courses/`.
-- Changing git remote origins or force-pushing to `main`.
