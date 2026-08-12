@@ -12,7 +12,7 @@
 
 ## ⚠️ 音檔與 Git 儲存庫規範 (Audio Asset Policy)
 
-* **🚫 嚴禁將音檔 (.mp3 / .wav) 上傳至 GitHub**：音檔為大型二進位資產，必須留在 `gx10` 伺服器本機工作區 (`/home/henry/gdrive/善顯共學/音檔/`) 或透過 HTTPS Web 服務提供串流。
+* **🚫 嚴禁將音檔 (.mp3 / .wav) 上傳至 GitHub 或存放於 gdrive**：音檔放置於 `gx10` 伺服器本機工作區 (`/home/henry/audio_files/`)，透過 9090 HTTPS Web 服務提供串流。原始音檔目錄可參照：[https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68](https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68)。
 * **📄 GitHub 專用定位**：GitHub 儲存庫**僅存放程式碼 (`src/`)、規格文件 (`docs/`)、Schema (`DATA_SCHEMA.md`)、轉譯 JSON (`courses/`)、腳本 (`scripts/`) 與測試 (`tests/`)**，確保未來任何 Agent 都能遵循技術資料與規範自動復刻與執行。
 * **🌐 即時網頁預覽 (Live Web Preview)**：小法每完成一批次轉譯與測試，**必須同步部署更新 `https://gx10-2887.tail378c21.ts.net:9090/index.html`**，並於進度簡報中附上預覽連結，讓 Henry 能即時線上測試與觀看成果。
 
