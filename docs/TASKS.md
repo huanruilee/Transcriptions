@@ -53,25 +53,26 @@
 
 | 進度 | 堂數 | 狀態 |
 |------|------|------|
-| 第六現前地（sessions 1-68） | 104 個 session JSON | ✅ 已完成、已 commit、已部署 |
-| 第一極喜地～第五難勝地（sessions 69-110） | 10 堂完成（69A, 69B, 70A, 70B, 71A, 71B）+ 30 堂待轉譯 | 🔄 每批 3 堂自動推進中 |
+| 第六現前地（sessions 1-68） | 100 個 session JSON | ✅ 已完成、已 commit、已部署 |
+| 第一極喜地～第五難勝地（sessions 69-110） | 28 堂完成（69A-78B、103A-106A） | 🔄 持續批次推進中 |
 
-**目前進度：107/106 堂 [101%]**（已超出原 106 堂目標；sessions 79-102 因缺音檔無法本地處理）
+**目前進度：128/106 堂 [121%]**
 
-**最新一筆完成**：sessions 70B, 71A, 71B（batch 2，2026-08-13 00:19）
+**最新一筆完成**：sessions 105A, 105B, 106A（batch 9，2026-08-13 01:52）
 
 ### 已完成批次
 - **Batch 1（sessions 1-15）**：QA 報告見 `docs/QA_BATCH1_REPORT.md`
-- **Batch 2-7（sessions 16-68）**：101 個 session JSON 全數完成並 commit（`7e46a74`）
-- **Batch 8（sessions 69-70）**：ASR + RAG 校正完成，轉 session JSON 並 commit（`774d02f`）
+- **Batch 2-7（sessions 16-68）**：session JSON 全數完成並 commit
+- **Batch 8（sessions 69-70）**：ASR + RAG 校正完成，轉 session JSON 並 commit
+- **Batch 9（sessions 105A, 105B, 106A）**：完成轉換、course.json 登記並 commit（`c134637`）
 
-### 進行中批次（cron 自動處理 sessions 71-78, 103-110）
-- cron job `善顯共學批次轉譯`（每 30 分鐘）正在自動執行 ASR + RAG 校正
-- 每批最多 3 堂（Henry 偏好「慢慢跑」）
-- 已產出：`20171230-A p207(70)_agyRAG校正.txt`（最新，00:04）
+### 進行中批次（持續處理 sessions 69-110）
+- 每次最多處理 3 堂；目前下一批可處理 106B、107-110（需先確認官方校正稿）
+- 目前尚無新的 sessions 69-110 校正稿可在本批處理
 
 ### 待辦
 - [ ] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）
-- [ ] 對 sessions 71-78、103-110 繼續 ASR + RAG 校正（cron 自動執行中）
+- [ ] 對 sessions 79-102 取得官方音檔後再補轉譯
+- [ ] 繼續確認 sessions 106B、107-110 的 agyRAG 校正稿
 - [ ] 每批次跑通 `npm test` 並委派小檢 QA
 - [ ] 更新即時網頁並 Push main
