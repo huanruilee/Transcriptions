@@ -44,3 +44,27 @@
 
 - [x] **Task 5.1**: 執行 `npm test` 自動化驗證，確保 0 錯誤並產生測試 Evidence。
 - [x] **Task 5.2**: 提交並推送到 GitHub `https://github.com/huanruilee/Transcriptions`。
+
+---
+
+## 📊 課程語料轉譯進度 (Course Data Ingestion Progress)
+
+**目標：106 堂完整數據鏈（session_01.json 至 session_106B.json）**
+
+| 進度 | 堂數 | 狀態 |
+|------|------|------|
+| 第六現前地（sessions 1-68） | 101 個 session JSON | ✅ 已完成、已 commit、已部署 |
+| 第一極喜地～第五難勝地（sessions 69-110） | 待轉譯 | ⏳ 需 ASR + RAG 校正 |
+
+**目前進度：101/106 堂 [95%]**（第六現前地全數完成）
+
+### 已完成批次
+- **Batch 1（sessions 1-15）**：QA 報告見 `docs/QA_BATCH1_REPORT.md`
+- **Batch 2-7（sessions 16-68）**：101 個 session JSON 全數完成並 commit（`7e46a74`）
+
+### 待辦批次（sessions 69-110）
+- [ ] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）
+- [ ] 對 sessions 69-78、103-110 執行 ASR + RAG 校正
+- [ ] 轉換為 session JSON 並更新 course.json
+- [ ] 每批次跑通 `npm test` 並委派小檢 QA
+- [ ] 更新即時網頁並 Push main
