@@ -67,4 +67,5 @@
 
 ## 🔗 預覽連結
 
-https://gx10-2887.tail378c21.ts.net:9090/index.html#session-110B
+- **Tailscale 網域**：https://gx10-2887.tail378c21.ts.net:9090/index.html#session-110B
+- **VPN IP fallback**：https://100.113.144.100:9090/index.html#session-110B
