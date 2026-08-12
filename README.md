@@ -1,6 +1,7 @@
 # Transcriptions (系列課程逐字稿多媒體學習平台)
 
 [![GGF Governed](https://img.shields.io/badge/Governance-GGF%20v1.1-blue.svg)](https://github.com/huanruilee/gx10-governance)
+[![QMS Compliant](https://img.shields.io/badge/Quality-QMS%20ISO%209001-green.svg)](docs/AGENT_GUIDELINES.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 `Transcriptions` 是一個開源、模組化、高互動性的系列課程逐字稿多媒體學習平台專案。
