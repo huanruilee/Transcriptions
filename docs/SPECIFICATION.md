@@ -74,3 +74,16 @@
 4. **連續播放 (Auto Play Queue)**：
    * 監聽播放器 `audio.addEventListener('ended', ...)`。
    * 當 2A 堂音檔播放結束時，自動載入並接續播放 2B 堂音檔與逐字稿，側邊欄 active 狀態自動遞移。
+
+---
+
+## 5. 📖 頁碼與原文出處對照 (Page Citation & Source Mapping)
+
+### 痛點背景與小法日誌洞察
+根據小法 (gx10 Agent) 教練日誌（*「把查原文從驗證變成敘述的組成部分」*），長篇經論講記學習必須具備精確的頁碼出處標註。讀者聽講時需要對照《入中論善顯密意疏》實體書頁碼（如 `p.63`）。
+
+### 規格規範
+1. **段落頁碼標記 (Page Citation Tag)**：
+   * 逐字稿段落標記出處頁碼（例：`[p.63]`）。
+2. **MacWhisper 原始檔名自動轉換器 (`scripts/convert_macwhisper.py`)**：
+   * 小法可使用轉換腳本自動解析 MacWhisper 的產出檔名：`YYYYMMDD-[A/B] 課程名稱-科判pXX(堂數).txt` 或 `.whisper`，自動提取 `date`, `subSession ('A'/'B')`, `pageRange`, `sessionNum` 並產出標準 `session.json`。
