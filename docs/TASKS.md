@@ -54,25 +54,22 @@
 | 進度 | 堂數 | 狀態 |
 |------|------|------|
 | 第六現前地（sessions 1-68） | 100 個 session JSON | ✅ 已完成、已 commit、已部署 |
-| 第一極喜地～第五難勝地（sessions 69-110） | 28 堂完成（69A-78B、103A-106A） | 🔄 持續批次推進中 |
+| 第一極喜地～第五難勝地（sessions 69-110） | 37 堂完成（69A-78B、103A-110B） | ✅ 本機可處理全部完成 |
 
-**目前進度：128/106 堂 [121%]**
+**目前進度：137/106 堂 [129%]**
 
-**最新一筆完成**：sessions 105A, 105B, 106A（batch 9，2026-08-13 01:52）
+**最新一筆完成**：sessions 109B, 110A, 110B（batch 12 最終批，2026-08-13 02:30）
 
 ### 已完成批次
 - **Batch 1（sessions 1-15）**：QA 報告見 `docs/QA_BATCH1_REPORT.md`
 - **Batch 2-7（sessions 16-68）**：session JSON 全數完成並 commit
 - **Batch 8（sessions 69-70）**：ASR + RAG 校正完成，轉 session JSON 並 commit
 - **Batch 9（sessions 105A, 105B, 106A）**：完成轉換、course.json 登記並 commit（`c134637`）
-
-### 進行中批次（持續處理 sessions 69-110）
-- 本批已完成 sessions 105A、105B、106A
-- 下一批可處理 106B、107-110（需先確認官方校正稿）
+- **Batch 10（sessions 106B, 107A, 107B）**：完成並 commit（`c0c9c72`）
+- **Batch 11（sessions 108A, 108B, 109A）**：完成並 commit（`5a88140`）
+- **Batch 12（sessions 109B, 110A, 110B）**：完成並 commit（`b5df471`）— 本機可處理全部完成
 
 ### 待辦
 - [ ] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）
 - [ ] 對 sessions 79-102 取得官方音檔後再補轉譯
-- [ ] 繼續確認 sessions 106B、107-110 的 agyRAG 校正稿
-- [ ] 每批次跑通 `npm test` 並委派小檢 QA
-- [ ] 更新即時網頁並 Push main
+- [ ] 委派小檢 QA 抽樣檢驗 sessions 69-110（進行中，deleg_07319072）
