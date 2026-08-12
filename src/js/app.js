@@ -4,7 +4,7 @@
 
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC } from './toc.js';
-import { initSyncPlayer } from './syncPlayer.js';
+import { initSyncPlayer, getCurrentTimeScaleRatio } from './syncPlayer.js';
 import { initSearch } from './search.js';
 
 let courseData = null;
@@ -14,6 +14,7 @@ let allFlattenedSentences = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle();
+  initMobileSidebarToggle();
   initSearch();
   await loadCourseData();
 });
@@ -27,7 +28,7 @@ async function loadCourseData() {
     tocData = await tocResp.json();
 
     // Determine starting session (hash or localStorage or first)
-    const savedSession = localStorage.getItem('last_session_id') || location.hash.replace('#session-', '');
+    const savedSession = location.hash ? location.hash.replace('#session-', '') : (localStorage.getItem('last_session_id') || '01');
     const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
 
     renderSidebar(courseData.sessions, initialSession.sessionId, switchSession);
@@ -46,6 +47,10 @@ async function switchSession(session) {
 
   renderSidebar(courseData.sessions, session.sessionId, switchSession);
   updateHeaderTitle(session);
+
+  // Close mobile sidebar on selection
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar) sidebar.classList.remove('mobile-open');
 
   try {
     const resp = await fetch(session.jsonUrl);
@@ -77,12 +82,15 @@ function renderTranscript(sessionData) {
 
   container.innerHTML = html;
 
-  // Click-to-Seek binding
+  // Click-to-Seek binding with Ratio Scaling
   container.querySelectorAll('.sentence').forEach((el, idx) => {
     el.addEventListener('click', () => {
       const audio = document.getElementById('audio-element');
       if (audio) {
-        audio.currentTime = allFlattenedSentences[idx].start;
+        const ratio = getCurrentTimeScaleRatio();
+        const rawStart = allFlattenedSentences[idx].start;
+        const targetTime = ratio > 0 ? (rawStart * ratio) : rawStart;
+        audio.currentTime = targetTime;
         audio.play();
       }
     });
@@ -119,7 +127,9 @@ function handleSeekTo(targetSessionId, timestamp) {
     switchSession(targetSession).then(() => {
       const audio = document.getElementById('audio-element');
       if (audio) {
-        audio.currentTime = timestamp;
+        const ratio = getCurrentTimeScaleRatio();
+        const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
+        audio.currentTime = targetTime;
         audio.play();
       }
     });
@@ -133,5 +143,15 @@ function initThemeToggle() {
   btn.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
     btn.textContent = document.body.classList.contains('dark-mode') ? '☀️ 淺色模式' : '🌙 深色模式';
+  });
+}
+
+function initMobileSidebarToggle() {
+  const btn = document.getElementById('mobile-sidebar-btn');
+  const sidebar = document.querySelector('.sidebar');
+  if (!btn || !sidebar) return;
+
+  btn.addEventListener('click', () => {
+    sidebar.classList.toggle('mobile-open');
   });
 }

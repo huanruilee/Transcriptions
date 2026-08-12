@@ -35,7 +35,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
   color: var(--text-main);
-  padding-bottom: 90px; /* space for fixed player */
+  padding-bottom: 110px; /* space for fixed player */
 }
 
 /* Header */
@@ -46,7 +46,7 @@ body {
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-color);
-  padding: 14px 24px;
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,23 +55,23 @@ body {
 
 .app-header h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--primary-color);
 }
 
 .header-tools {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
 }
 
 .search-input {
-  padding: 8px 14px;
+  padding: 6px 12px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  font-size: 0.9rem;
-  width: 220px;
+  font-size: 0.85rem;
+  width: 180px;
   transition: all 0.2s;
 }
 
@@ -82,19 +82,32 @@ body {
 }
 
 .theme-toggle-btn {
-  padding: 8px 14px;
+  padding: 6px 12px;
   background-color: var(--accent-color);
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: background-color 0.2s;
+  white-space: nowrap;
 }
 
 .theme-toggle-btn:hover {
   background-color: var(--accent-hover);
+}
+
+/* Sidebar Toggle for Mobile */
+.mobile-sidebar-toggle {
+  display: none;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 /* Layout Container */
@@ -105,19 +118,19 @@ body {
 
 /* Sidebar */
 .sidebar {
-  width: 320px;
+  width: 300px;
   background-color: var(--sidebar-bg);
   color: var(--sidebar-text);
-  padding: 24px 16px;
+  padding: 20px 14px;
   flex-shrink: 0;
 }
 
 .sidebar h2 {
   margin-top: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #94a3b8;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #334155;
   letter-spacing: 0.05em;
 }
@@ -125,14 +138,16 @@ body {
 .session-list {
   list-style: none;
   padding: 0;
-  margin: 16px 0 0 0;
+  margin: 12px 0 0 0;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
 }
 
 .session-item {
-  padding: 12px 14px;
-  margin-bottom: 8px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
   background-color: #0f172a;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   border-left: 4px solid transparent;
   transition: all 0.2s;
@@ -149,20 +164,20 @@ body {
 
 .session-title {
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #f1f5f9;
 }
 
 .session-meta {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #94a3b8;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Main Reader Content */
 .main-content {
   flex: 1;
-  padding: 36px 48px;
+  padding: 28px 36px;
   display: flex;
   justify-content: center;
 }
@@ -178,26 +193,26 @@ body {
   border: 1px solid var(--border-color);
   border-left: 4px solid var(--accent-color);
   border-radius: 8px;
-  padding: 16px 20px;
-  margin-bottom: 32px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
 }
 
 .toc-accordion summary {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--primary-color);
   cursor: pointer;
   user-select: none;
 }
 
 .toc-tree {
-  margin-top: 12px;
-  padding-left: 16px;
+  margin-top: 10px;
+  padding-left: 14px;
   list-style: none;
 }
 
 .toc-tree li {
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 .toc-link {
@@ -205,6 +220,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   cursor: pointer;
+  font-size: 0.95rem;
 }
 
 .toc-link:hover {
@@ -214,16 +230,16 @@ body {
 /* Transcript Reader Typography */
 .transcript-section {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   line-height: var(--line-height);
   color: #1e293b;
 }
 
 .transcript-paragraph {
   margin-bottom: var(--paragraph-margin);
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-left: 3px solid transparent;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 6px 6px 0;
   transition: background-color 0.25s, border-color 0.25s;
 }
 
@@ -234,9 +250,10 @@ body {
 
 .sentence {
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 3px 4px;
   border-radius: 3px;
   transition: background-color 0.2s;
+  display: inline;
 }
 
 .sentence:hover {
@@ -285,41 +302,45 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  min-height: 80px;
   background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-color);
-  padding: 0 32px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
   z-index: 1000;
+  gap: 16px;
 }
 
 .now-playing-info {
   display: flex;
   flex-direction: column;
-  min-width: 240px;
+  min-width: 180px;
 }
 
 .now-playing-title {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
 }
 
 .now-playing-status {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .player-controls {
   flex: 1;
-  max-width: 650px;
+  max-width: 600px;
   display: flex;
   align-items: center;
-  gap: 16px;
 }
 
 .player-controls audio {
@@ -328,13 +349,13 @@ body {
 
 .scroll-lock-indicator {
   position: fixed;
-  bottom: 95px;
-  right: 32px;
+  bottom: 90px;
+  right: 20px;
   background-color: var(--primary-color);
   color: white;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   display: none;
@@ -343,4 +364,118 @@ body {
 
 .scroll-lock-indicator.visible {
   display: block;
+}
+
+/* ==========================================================================
+   📱 Mobile Responsive Styles (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 120px; /* larger space for mobile stacked player */
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .app-header h1 {
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .header-tools {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .search-input {
+    flex: 1;
+    width: auto;
+  }
+
+  .mobile-sidebar-toggle {
+    display: inline-block;
+  }
+
+  .app-layout {
+    flex-direction: column;
+  }
+
+  /* Collapsible / Drawer Sidebar on Mobile */
+  .sidebar {
+    width: 100%;
+    padding: 14px;
+    border-bottom: 1px solid #334155;
+    display: none; /* toggled by mobile menu button */
+  }
+
+  .sidebar.mobile-open {
+    display: block;
+  }
+
+  .session-list {
+    max-height: 220px;
+  }
+
+  .main-content {
+    padding: 16px 12px;
+  }
+
+  #active-session-title {
+    font-size: 1.15rem !important;
+    margin-bottom: 14px;
+  }
+
+  .transcript-section {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .transcript-paragraph {
+    padding: 8px 10px;
+    margin-bottom: 1rem;
+  }
+
+  .sentence {
+    padding: 4px 2px; /* touch friendly target */
+  }
+
+  /* Compact Stacked Mobile Player Bar */
+  .player-bar {
+    flex-direction: column;
+    height: auto;
+    padding: 8px 12px;
+    gap: 6px;
+    align-items: stretch;
+  }
+
+  .now-playing-info {
+    min-width: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .now-playing-title {
+    max-width: 260px;
+    font-size: 0.85rem;
+  }
+
+  .player-controls {
+    max-width: 100%;
+  }
+
+  .player-controls audio {
+    height: 36px;
+  }
+
+  .scroll-lock-indicator {
+    bottom: 115px;
+    right: 12px;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
 }

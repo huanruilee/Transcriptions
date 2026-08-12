@@ -1,15 +1,29 @@
 /**
  * syncPlayer.js - Audio-Text Synchronization Engine
- * Handles Click-to-Seek, Auto-Highlighting, Auto-Scroll with Scroll Lock, and Auto-Next queue.
+ * Handles Click-to-Seek, Auto-Highlighting with Ratio Alignment, Scroll Lock, and Auto-Next queue.
  */
 
-import { findSentenceIndexByTime } from './timeAligner.js';
+import { findSentenceIndexByTime, calculateTimeScaleRatio } from './timeAligner.js';
 
 let userIsScrolling = false;
 let scrollTimeout = null;
+let currentRatio = 1.0;
 
 export function initSyncPlayer(audioElement, allSentences, onNextSessionRequested) {
   const lockIndicator = document.getElementById('scroll-lock-indicator');
+
+  // Recalculate ratio when audio metadata is loaded
+  const updateRatio = () => {
+    if (audioElement.duration && audioElement.duration > 0) {
+      currentRatio = calculateTimeScaleRatio(allSentences, audioElement.duration);
+    } else {
+      currentRatio = 1.0;
+    }
+  };
+
+  audioElement.addEventListener('loadedmetadata', updateRatio);
+  audioElement.addEventListener('durationchange', updateRatio);
+  updateRatio();
 
   // Detect manual user scrolling
   const handleUserScroll = () => {
@@ -40,7 +54,7 @@ export function initSyncPlayer(audioElement, allSentences, onNextSessionRequeste
   // Time update listener
   audioElement.addEventListener('timeupdate', () => {
     const currentTime = audioElement.currentTime;
-    const activeIdx = findSentenceIndexByTime(allSentences, currentTime);
+    const activeIdx = findSentenceIndexByTime(allSentences, currentTime, currentRatio);
 
     document.querySelectorAll('.sentence.active').forEach(el => el.classList.remove('active'));
 
@@ -62,4 +76,8 @@ export function initSyncPlayer(audioElement, allSentences, onNextSessionRequeste
       onNextSessionRequested();
     }
   });
+}
+
+export function getCurrentTimeScaleRatio() {
+  return currentRatio;
 }
