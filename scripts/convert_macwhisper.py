@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 """
-convert_macwhisper.py - Convert MacWhisper exported transcripts into standard session.json format.
-Parser for MacWhisper filenames like:
-  20161022-A 入中論善顯密意疏-第六現前地p81(17).txt
-Extracts:
-  - Date: 2016-10-22
-  - SubSession: A / B
-  - Course: 入中論善顯密意疏
-  - Section: 第六現前地
-  - PageRange: p.81
-  - SessionNum: 17 -> sessionId: 17A
+convert_macwhisper.py - Convert MacWhisper & Flyday exported transcripts into standard session.json format.
+Supports filename patterns:
+  1. YYYYMMDD[-A|-B] 入中論善顯密意疏-第六現前地pNN(X).MP3 / .txt
+  2. YYYYMMDD_第六現前地_pNN_第X堂.MP3 / .txt
+  3. Filter out redundant `*_seekable.mp3` ffmpeg variants.
 """
 
 import sys
@@ -19,51 +14,41 @@ import os
 
 def parse_filename(filepath):
     filename = os.path.basename(filepath)
-    # Match YYYYMMDD-[A/B] course-section pXX(num)
-    pattern = r"(\d{4})(\d{2})(\d{2})-([AB])\s*(.*?)-(.*?)(p\d+)\((\d+)\)"
-    m = re.search(pattern, filename)
-    if not m:
-        # Fallback regex
-        pattern_fallback = r"(\d{4})(\d{2})(\d{2})-([AB])"
-        m_fall = re.search(pattern_fallback, filename)
-        if m_fall:
-            yyyy, mm, dd, sub = m_fall.groups()
-            return {
-                "date": f"{yyyy}-{mm}-{dd}",
-                "subSession": sub,
-                "sessionNum": 1,
-                "sessionId": f"01{sub}",
-                "pageRange": "p.63",
-                "periodLabel": "上節" if sub == 'A' else "下節"
-            }
+
+    # Skip seekable duplicate variants created by ffmpeg
+    if "_seekable" in filename:
+        print(f"Skipping duplicate seekable variant: {filename}")
         return None
 
-    yyyy, mm, dd, sub, course, section, page, num = m.groups()
-    session_id = f"{int(num):02d}{sub}"
-    period_label = "上節" if sub == 'A' else "下節"
+    # Pattern 1: YYYYMMDD[-A|-B] Course-Section pNN(Num)
+    pattern1 = r"(\d{4})(\d{2})(\d{2})[-_]?([AB])?\s*(.*?)[-_](.*?)(?:p|頁)(\d+)(?:\((\d+)\)|_第(\d+)堂)?"
+    m1 = re.search(pattern1, filename)
     
-    return {
-        "date": f"{yyyy}-{mm}-{dd}",
-        "subSession": sub,
-        "sessionNum": int(num),
-        "sessionId": session_id,
-        "pageRange": page,
-        "periodLabel": period_label,
-        "course": course,
-        "section": section
-    }
+    if m1:
+        yyyy, mm, dd, sub, course, section, page, num1, num2 = m1.groups()
+        num = num1 or num2 or "1"
+        sub = sub or "A"
+        session_id = f"{int(num):02d}{sub}"
+        period_label = "上節" if sub == 'A' else "下節"
+        
+        return {
+            "date": f"{yyyy}-{mm}-{dd}",
+            "subSession": sub,
+            "sessionNum": int(num),
+            "sessionId": session_id,
+            "pageRange": f"p.{page}",
+            "periodLabel": period_label,
+            "course": course.strip() if course else "入中論善顯密意疏",
+            "section": section.strip() if section else "第六現前地"
+        }
+
+    return None
 
 def convert_txt_to_session_json(txt_filepath, output_json_path):
     meta = parse_filename(txt_filepath)
     if not meta:
-        meta = {
-            "date": "2016-05-28",
-            "subSession": "A",
-            "sessionNum": 2,
-            "sessionId": "02A",
-            "pageRange": "p.63",
-            "periodLabel": "上節"
-        }
+        print(f"File {txt_filepath} skipped or unrecognized pattern.")
+        return
 
     title = f"第 {meta['sessionNum']}{meta['subSession']} 堂 ({meta['periodLabel']}) | {meta['date']} | {meta['pageRange']}"
     
@@ -77,6 +62,7 @@ def convert_txt_to_session_json(txt_filepath, output_json_path):
             line = line.strip()
             if not line:
                 continue
+            
             # Parse timestamp if present [00:12] text
             ts_match = re.match(r"^\[(\d{2}):(\d{2})\]\s*(.*)", line)
             if ts_match:
