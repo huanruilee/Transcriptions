@@ -1,0 +1,45 @@
+/* Dark Mode Colors */
+body.dark-mode {
+  --primary-color: #f8fafc;
+  --accent-color: #60a5fa;
+  --accent-hover: #93c5fd;
+  --bg-color: #0f172a;
+  --sidebar-bg: #020617;
+  --sidebar-text: #f8fafc;
+  --sidebar-hover: #1e293b;
+  --sidebar-active: #3b82f6;
+  --card-bg: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --highlight-bg: #854d0e;
+  --highlight-border: #facc15;
+  --search-hit-bg: #c2410c;
+}
+
+body.dark-mode .app-header {
+  background-color: rgba(15, 23, 42, 0.95);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .toc-accordion {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .transcript-section {
+  color: #f1f5f9;
+}
+
+body.dark-mode .transcript-paragraph:hover {
+  background-color: #1e293b;
+}
+
+body.dark-mode .sentence:hover {
+  background-color: #334155;
+}
+
+body.dark-mode .player-bar {
+  background-color: rgba(15, 23, 42, 0.98);
+  border-top-color: var(--border-color);
+}

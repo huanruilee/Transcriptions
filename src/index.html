@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入中論善顯密意疏 逐字稿多媒體學習平台</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="app-header">
+    <h1>《入中論善顯密意疏》多媒體學習平台</h1>
+    <div class="header-tools">
+      <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋講記關鍵字...">
+      <button id="theme-toggle" class="theme-toggle-btn">🌙 深色模式</button>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>🗂️ 課程單元選單</h2>
+      <ul id="session-list" class="session-list">
+        <!-- Rendered by sidebar.js -->
+      </ul>
+    </aside>
+
+    <!-- Main Reader -->
+    <main class="main-content">
+      <div class="reader-container">
+        
+        <!-- Active Session Header Title -->
+        <h1 id="active-session-title" style="color: var(--primary-color); margin-top: 0; font-size: 1.5rem; font-weight: 700;">
+          第 2A 堂 (上) | 2016-05-28 | p.63
+        </h1>
+
+        <!-- Collapsible TOC -->
+        <div id="toc-container">
+          <!-- Rendered by toc.js -->
+        </div>
+
+        <!-- Transcript Section -->
+        <article id="transcript-container" class="transcript-section">
+          <!-- Rendered by app.js -->
+        </article>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Scroll Lock Floating Indicator -->
+  <div id="scroll-lock-indicator" class="scroll-lock-indicator">
+    🎯 手動滾動中（點擊恢復自動跟隨進度）
+  </div>
+
+  <!-- Fixed Bottom Audio Player -->
+  <footer class="player-bar">
+    <div class="now-playing-info">
+      <div id="now-playing-title" class="now-playing-title">加載音檔中...</div>
+      <div class="now-playing-status">音文同步中</div>
+    </div>
+    <div class="player-controls">
+      <audio id="audio-element" controls preload="metadata"></audio>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
