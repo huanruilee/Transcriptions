@@ -1,6 +1,9 @@
 /**
  * syncPlayer.js - Audio-Text Synchronization Engine
  * Handles Click-to-Seek, Auto-Highlighting with Ratio Alignment, Scroll Lock, and Auto-Next queue.
+ *
+ * Pattern: Module-singleton initialization with updateSession() to swap target
+ * audio/sentences without re-binding event listeners (fixes memory leak Bug 1.1).
  */
 
 import { findSentenceIndexByTime, calculateTimeScaleRatio } from './timeAligner.js';
@@ -8,25 +11,30 @@ import { findSentenceIndexByTime, calculateTimeScaleRatio } from './timeAligner.
 let userIsScrolling = false;
 let scrollTimeout = null;
 let currentRatio = 1.0;
+let initialized = false;
 
-export function initSyncPlayer(audioElement, allSentences, onNextSessionRequested) {
-  const lockIndicator = document.getElementById('scroll-lock-indicator');
+// Cached DOM references (acquired once)
+let lockIndicator = null;
 
-  // Recalculate ratio when audio metadata is loaded
-  const updateRatio = () => {
-    if (audioElement.duration && audioElement.duration > 0) {
-      currentRatio = calculateTimeScaleRatio(allSentences, audioElement.duration);
-    } else {
-      currentRatio = 1.0;
-    }
-  };
+// Cached handler functions (for removal in case of teardown)
+let boundAudioElement = null;
+let boundSentences = null;
+let boundNextCallback = null;
+let handleUserScroll = null;
+let handleIndicatorClick = null;
+let handleTimeUpdate = null;
+let handleEnded = null;
+let handleLoadedMetadata = null;
+let handleDurationChange = null;
+let updateRatio = null;
 
-  audioElement.addEventListener('loadedmetadata', updateRatio);
-  audioElement.addEventListener('durationchange', updateRatio);
-  updateRatio();
+export function initSyncPlayer() {
+  if (initialized) return; // Singleton guard: only bind once
 
-  // Detect manual user scrolling
-  const handleUserScroll = () => {
+  lockIndicator = document.getElementById('scroll-lock-indicator');
+
+  // User-scroll detection
+  handleUserScroll = () => {
     userIsScrolling = true;
     if (lockIndicator) lockIndicator.classList.add('visible');
 
@@ -36,23 +44,61 @@ export function initSyncPlayer(audioElement, allSentences, onNextSessionRequeste
       if (lockIndicator) lockIndicator.classList.remove('visible');
     }, 4000);
   };
-
   window.addEventListener('wheel', handleUserScroll, { passive: true });
   window.addEventListener('touchmove', handleUserScroll, { passive: true });
 
+  // Lock indicator click
   if (lockIndicator) {
-    lockIndicator.addEventListener('click', () => {
+    handleIndicatorClick = () => {
       userIsScrolling = false;
       lockIndicator.classList.remove('visible');
       const activeEl = document.querySelector('.sentence.active');
       if (activeEl) {
         activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    });
+    };
+    lockIndicator.addEventListener('click', handleIndicatorClick);
   }
 
-  // Time update listener
-  audioElement.addEventListener('timeupdate', () => {
+  initialized = true;
+}
+
+/**
+ * Switch the sync player's target audio/sentences. Should be called whenever
+ * the active session changes. Does NOT re-bind global listeners (singleton pattern).
+ */
+export function updateSession(audioElement, allSentences, onNextSessionRequested) {
+  // If previously bound to a different audio, unbind old listeners first
+  if (boundAudioElement && boundAudioElement !== audioElement) {
+    if (handleTimeUpdate) boundAudioElement.removeEventListener('timeupdate', handleTimeUpdate);
+    if (handleEnded) boundAudioElement.removeEventListener('ended', handleEnded);
+    if (handleLoadedMetadata) boundAudioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    if (handleDurationChange) boundAudioElement.removeEventListener('durationchange', handleDurationChange);
+  }
+
+  boundAudioElement = audioElement;
+  boundSentences = allSentences;
+  boundNextCallback = onNextSessionRequested;
+
+  if (!audioElement) return;
+
+  // Recalculate ratio
+  updateRatio = () => {
+    if (audioElement.duration && audioElement.duration > 0) {
+      currentRatio = calculateTimeScaleRatio(allSentences, audioElement.duration);
+    } else {
+      currentRatio = 1.0;
+    }
+  };
+
+  handleLoadedMetadata = updateRatio;
+  handleDurationChange = updateRatio;
+  audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
+  audioElement.addEventListener('durationchange', handleDurationChange);
+  updateRatio();
+
+  // Time update → highlight + scroll
+  handleTimeUpdate = () => {
     const currentTime = audioElement.currentTime;
     const activeIdx = findSentenceIndexByTime(allSentences, currentTime, currentRatio);
 
@@ -68,16 +114,24 @@ export function initSyncPlayer(audioElement, allSentences, onNextSessionRequeste
         }
       }
     }
-  });
+  };
+  audioElement.addEventListener('timeupdate', handleTimeUpdate);
 
-  // Auto-play next session on ended
-  audioElement.addEventListener('ended', () => {
-    if (typeof onNextSessionRequested === 'function') {
-      onNextSessionRequested();
+  // Auto-play next
+  handleEnded = () => {
+    if (typeof boundNextCallback === 'function') {
+      boundNextCallback();
     }
-  });
+  };
+  audioElement.addEventListener('ended', handleEnded);
 }
 
 export function getCurrentTimeScaleRatio() {
   return currentRatio;
+}
+
+// Backward-compat: original API still works (delegates to singleton + update)
+export function initSyncPlayerCompat(audioElement, allSentences, onNextSessionRequested) {
+  initSyncPlayer();
+  updateSession(audioElement, allSentences, onNextSessionRequested);
 }

@@ -4,7 +4,7 @@
 
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC } from './toc.js';
-import { initSyncPlayer, getCurrentTimeScaleRatio } from './syncPlayer.js';
+import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio } from './syncPlayer.js';
 import { initSearch } from './search.js';
 
 let courseData = null;
@@ -34,6 +34,13 @@ async function loadCourseData() {
     renderSidebar(courseData.sessions, initialSession.sessionId, switchSession);
     renderTOC(tocData.sections, handleSeekTo);
     await switchSession(initialSession);
+
+    // Listen to browser back/forward (Bug 1.3 fix)
+    window.addEventListener('hashchange', () => {
+      const targetId = location.hash.replace('#session-', '');
+      const target = courseData.sessions.find(s => s.sessionId === targetId);
+      if (target && target !== currentSessionData) switchSession(target);
+    });
   } catch (err) {
     console.error('Failed to initialize course data:', err);
   }
@@ -95,6 +102,12 @@ function renderTranscript(sessionData) {
       }
     });
   });
+
+  // Re-apply search highlight on session switch (Bug 4.2 fix)
+  const searchInput = document.getElementById('search-input');
+  if (searchInput && searchInput.value.trim()) {
+    searchInput.dispatchEvent(new Event('input'));
+  }
 }
 
 function setupAudioPlayer(audioUrl) {
@@ -107,7 +120,9 @@ function setupAudioPlayer(audioUrl) {
     nowPlaying.textContent = currentSessionData.title;
   }
 
-  initSyncPlayer(audio, allFlattenedSentences, handleNextSession);
+  // Singleton pattern: init once on first call, then just update target
+  initSyncPlayer();
+  updateSession(audio, allFlattenedSentences, handleNextSession);
 }
 
 function handleNextSession() {
@@ -123,17 +138,43 @@ function handleNextSession() {
 
 function handleSeekTo(targetSessionId, timestamp) {
   const targetSession = courseData.sessions.find(s => s.sessionId === targetSessionId);
-  if (targetSession) {
-    switchSession(targetSession).then(() => {
-      const audio = document.getElementById('audio-element');
-      if (audio) {
-        const ratio = getCurrentTimeScaleRatio();
-        const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
-        audio.currentTime = targetTime;
-        audio.play();
+  if (!targetSession) return;
+
+  switchSession(targetSession).then(() => {
+    const audio = document.getElementById('audio-element');
+    if (!audio) return;
+
+    // Wait for metadata before setting currentTime (Bug 1.2 fix)
+    const applySeek = () => {
+      const ratio = getCurrentTimeScaleRatio();
+      const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
+      audio.currentTime = targetTime;
+      audio.play();
+
+      // Smooth-scroll to target paragraph (Bug 8.1 fix)
+      const targetParaId = findParagraphByTime(timestamp);
+      if (targetParaId) {
+        const el = document.getElementById(targetParaId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    });
+    };
+
+    if (audio.readyState >= 1 && audio.duration > 0) {
+      applySeek();
+    } else {
+      audio.addEventListener('loadedmetadata', applySeek, { once: true });
+    }
+  });
+}
+
+function findParagraphByTime(timestamp) {
+  if (!currentSessionData || !currentSessionData.paragraphs) return null;
+  for (const p of currentSessionData.paragraphs) {
+    if (timestamp >= p.start && timestamp <= p.end) {
+      return p.id;
+    }
   }
+  return null;
 }
 
 function initThemeToggle() {
