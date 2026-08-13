@@ -53,12 +53,12 @@
 
 | 進度 | 堂數 | 狀態 |
 |------|------|------|
-| 第六現前地（sessions 1-68） | 100 個 session JSON | ✅ 已完成、已 commit、已部署 |
-| 第一極喜地～第五難勝地（sessions 69-110） | 37 堂完成（69A-78B、103A-110B） | ✅ 本機可處理全部完成 |
+| 第六現前地（sessions 1-68） | 101 個 session JSON | ✅ 已完成、已 commit、已部署 |
+| 第一極喜地～第五難勝地（sessions 69-110） | 47 堂完成（69A-78B、79A-102B、103A-110B） | ✅ 本機可處理全部完成 |
 
-**目前進度：137/106 堂 [129%]**
+**目前進度：148/106 堂 [140%]**
 
-**最新一筆完成**：sessions 109B, 110A, 110B（batch 12 最終批，2026-08-13 02:30）
+**最新一筆完成**：sessions 79A-102B（batch 13，2026-08-13，47 堂 sessions 79-102 全數完成轉換）
 
 ### 已完成批次
 - **Batch 1（sessions 1-15）**：QA 報告見 `docs/QA_BATCH1_REPORT.md`
@@ -68,8 +68,10 @@
 - **Batch 10（sessions 106B, 107A, 107B）**：完成並 commit（`c0c9c72`）
 - **Batch 11（sessions 108A, 108B, 109A）**：完成並 commit（`5a88140`）
 - **Batch 12（sessions 109B, 110A, 110B）**：完成並 commit（`b5df471`）— 本機可處理全部完成
+- **Batch 13（sessions 79-102）**：47 堂 ASR + RAG 校正完成，轉 session JSON 並 course.json 登記
 
 ### 待辦
-- [ ] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）
-- [ ] 對 sessions 79-102 取得官方音檔後再補轉譯
+- [x] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）— ✅ 從 flyday.com.tw 官方目錄下載 47 個 MP3 至 /home/henry/audio_files/
+- [x] 對 sessions 79-102 取得官方音檔後再補轉譯 — ✅ 完成（batch 13）
+- [ ] session_99B.json 補轉譯（99B 音檔僅有 A 段 20180922-A.mp3，缺 B 段音檔，無法 ASR）
 - [ ] 委派小檢 QA 抽樣檢驗 sessions 69-110（進行中，deleg_07319072）
