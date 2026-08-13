@@ -3,25 +3,41 @@
  * Formats 2A/2B session items and renders unique topic summaries.
  */
 
-export function renderSidebar(sessions, activeSessionId, onSelectSession) {
+export function renderSidebar(sessions, activeSessionId, onSelectSession, unavailableSessions) {
   const container = document.getElementById('session-list');
   if (!container) return;
 
-  container.innerHTML = '';
+  container.textContent = '';
+
+  // Map of unavailable sessionId -> note, for inserting disabled gap markers
+  const unavailableMap = new Map();
+  (unavailableSessions || []).forEach(u => unavailableMap.set(u.sessionId, u));
 
   sessions.forEach(session => {
     const li = document.createElement('li');
     li.className = `session-item ${session.sessionId === activeSessionId ? 'active' : ''}`;
-    
+
     // Format title badge
     let periodText = session.periodLabel ? ` (${session.periodLabel})` : '';
     let mainLabel = `第 ${session.sessionId} 堂${periodText}`;
 
-    li.innerHTML = `
-      <div class="session-title">${mainLabel}</div>
-      <div class="session-meta">${session.date || ''} | ${session.pageRange || ''}</div>
-      ${session.summary ? `<div class="session-summary">${session.summary}</div>` : ''}
-    `;
+    const titleEl = document.createElement('div');
+    titleEl.className = 'session-title';
+    titleEl.textContent = mainLabel;
+
+    const metaEl = document.createElement('div');
+    metaEl.className = 'session-meta';
+    metaEl.textContent = `${session.date || ''} | ${session.pageRange || ''}`;
+
+    li.appendChild(titleEl);
+    li.appendChild(metaEl);
+
+    if (session.summary) {
+      const summaryEl = document.createElement('div');
+      summaryEl.className = 'session-summary';
+      summaryEl.textContent = session.summary;
+      li.appendChild(summaryEl);
+    }
 
     li.addEventListener('click', () => {
       if (typeof onSelectSession === 'function') {
@@ -30,7 +46,42 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession) {
     });
 
     container.appendChild(li);
+
+    // Insert a disabled gap marker for any unavailable session that follows
+    // this one in the A/B sequence (e.g. 99A → 99B unavailable).
+    const nextId = nextSessionId(session.sessionId);
+    if (nextId && unavailableMap.has(nextId)) {
+      const gap = unavailableMap.get(nextId);
+      const gapLi = document.createElement('li');
+      gapLi.className = 'session-item session-unavailable';
+      gapLi.setAttribute('aria-disabled', 'true');
+
+      const gapTitle = document.createElement('div');
+      gapTitle.className = 'session-title';
+      gapTitle.textContent = `第 ${nextId} 堂 (缺音檔)`;
+
+      const gapMeta = document.createElement('div');
+      gapMeta.className = 'session-meta';
+      gapMeta.textContent = gap.note || '音檔待補';
+
+      gapLi.appendChild(gapTitle);
+      gapLi.appendChild(gapMeta);
+      container.appendChild(gapLi);
+    }
   });
+}
+
+/**
+ * Compute the next sessionId in the A/B sequence, or null if this is a B segment.
+ * e.g. '99A' → '99B', '99B' → '100A'.
+ */
+function nextSessionId(sessionId) {
+  const match = sessionId.match(/^(\d+)([AB])$/);
+  if (!match) return null;
+  const num = parseInt(match[1], 10);
+  const sub = match[2];
+  if (sub === 'A') return `${String(num).padStart(2, '0')}B`;
+  return `${String(num + 1).padStart(2, '0')}A`;
 }
 
 export function updateHeaderTitle(session) {
@@ -40,8 +91,16 @@ export function updateHeaderTitle(session) {
   let periodText = session.periodLabel ? ` (${session.periodLabel})` : '';
   let fullTitle = `第 ${session.sessionId} 堂${periodText} | ${session.date || ''} | ${session.pageRange || ''}`;
 
-  titleEl.innerHTML = `
-    <div>${fullTitle}</div>
-    ${session.summary ? `<div style="font-size: 0.95rem; font-weight: 500; color: var(--accent-color); margin-top: 6px;">🎯 主題：${session.summary}</div>` : ''}
-  `;
+  titleEl.textContent = '';
+
+  const titleDiv = document.createElement('div');
+  titleDiv.textContent = fullTitle;
+  titleEl.appendChild(titleDiv);
+
+  if (session.summary) {
+    const summaryDiv = document.createElement('div');
+    summaryDiv.style.cssText = 'font-size: 0.95rem; font-weight: 500; color: var(--accent-color); margin-top: 6px;';
+    summaryDiv.textContent = `🎯 主題：${session.summary}`;
+    titleEl.appendChild(summaryDiv);
+  }
 }

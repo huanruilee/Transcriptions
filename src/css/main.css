@@ -36,6 +36,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   padding-bottom: 110px; /* space for fixed player */
+  overflow-x: hidden; /* prevent horizontal scroll on narrow viewports */
 }
 
 /* Header */
@@ -236,6 +237,22 @@ body {
   color: #e0e7ff;
 }
 
+.session-item.session-unavailable {
+  background-color: #1e293b;
+  border-left: 4px solid #64748b;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.session-item.session-unavailable .session-title {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.session-item.session-unavailable .session-meta {
+  color: #64748b;
+}
+
 .session-title {
   font-weight: 600;
   font-size: 0.9rem;
@@ -395,6 +412,21 @@ body {
   background-color: var(--search-hit-bg);
 }
 
+.sentence.search-current {
+  background-color: var(--search-current-bg, #fde68a);
+  outline: 2px solid var(--search-current-border, #f59e0b);
+  border-radius: 3px;
+}
+
+.search-status {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 4px 8px;
+  background-color: var(--search-status-bg, #f1f5f9);
+  border-radius: 6px;
+}
+
 /* Buddhist Terms Tooltip */
 .term {
   border-bottom: 1.5px dotted var(--accent-color);
@@ -509,16 +541,28 @@ body {
   .app-header h1 {
     font-size: 1.05rem;
     text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .header-tools {
     justify-content: space-between;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .search-input {
-    flex: 1;
+    flex: 1 1 100%;
     width: auto;
+    order: 10; /* push search to its own row */
+    min-width: 0;
+  }
+
+  .search-status {
+    order: 11;
+    flex: 1 1 100%;
+    text-align: center;
   }
 
   .mobile-sidebar-toggle {

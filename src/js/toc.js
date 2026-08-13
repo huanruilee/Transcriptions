@@ -17,18 +17,39 @@ export function renderTOC(sections, onSeekTo) {
   }
 
   container.style.display = 'block';
-  container.innerHTML = `
-    <details class="toc-accordion">
-      <summary>📑 科判章節目錄 (點擊即刻跳轉播放)</summary>
-      <div class="toc-scope-toggle">
-        <button class="toc-scope-btn ${currentScope === 'course' ? 'active' : ''}" data-scope="course">本課科判</button>
-        <button class="toc-scope-btn ${currentScope === 'book' ? 'active' : ''}" data-scope="book">全書總科判</button>
-      </div>
-      <ul class="toc-tree" id="toc-tree-root">
-        ${renderSectionNodes(sections, currentScope === 'course')}
-      </ul>
-    </details>
-  `;
+  container.textContent = '';
+
+  const details = document.createElement('details');
+  details.className = 'toc-accordion';
+
+  const summary = document.createElement('summary');
+  summary.textContent = '📑 科判章節目錄 (點擊即刻跳轉播放)';
+  details.appendChild(summary);
+
+  const scopeToggle = document.createElement('div');
+  scopeToggle.className = 'toc-scope-toggle';
+
+  const courseBtn = document.createElement('button');
+  courseBtn.className = `toc-scope-btn ${currentScope === 'course' ? 'active' : ''}`;
+  courseBtn.dataset.scope = 'course';
+  courseBtn.textContent = '本課科判';
+  scopeToggle.appendChild(courseBtn);
+
+  const bookBtn = document.createElement('button');
+  bookBtn.className = `toc-scope-btn ${currentScope === 'book' ? 'active' : ''}`;
+  bookBtn.dataset.scope = 'book';
+  bookBtn.textContent = '全書總科判';
+  scopeToggle.appendChild(bookBtn);
+
+  details.appendChild(scopeToggle);
+
+  const treeRoot = document.createElement('ul');
+  treeRoot.className = 'toc-tree';
+  treeRoot.id = 'toc-tree-root';
+  renderSectionNodes(sections, currentScope === 'course', treeRoot);
+  details.appendChild(treeRoot);
+
+  container.appendChild(details);
 
   // Scope toggle binding
   container.querySelectorAll('.toc-scope-btn').forEach(btn => {
@@ -81,11 +102,12 @@ export function applyActiveHighlight(sessionId) {
 }
 
 /**
- * Render TOC nodes. When scope === 'course', only show nodes belonging to the
- * active session (plus their ancestors so the hierarchy is preserved).
+ * Render TOC nodes into the given parent <ul>. When scope === 'course', only
+ * show nodes belonging to the active session (plus their ancestors so the
+ * hierarchy is preserved). Dynamic titles are set via textContent.
  */
-function renderSectionNodes(nodes, courseOnly) {
-  return nodes.map(node => {
+function renderSectionNodes(nodes, courseOnly, parentUl) {
+  nodes.forEach(node => {
     const hasChildren = node.children && node.children.length > 0;
     const nodeSession = node.sessionId;
 
@@ -93,27 +115,40 @@ function renderSectionNodes(nodes, courseOnly) {
     if (courseOnly && currentActiveSessionId && nodeSession !== currentActiveSessionId) {
       // If this node has children that match, keep it as a collapsed ancestor
       if (hasChildren && nodeContainsSession(node, currentActiveSessionId)) {
-        return `
-          <li>
-            <details class="toc-sub">
-              <summary class="toc-ancestor">${node.title}</summary>
-              <ul class="toc-tree">${renderSectionNodes(node.children, true)}</ul>
-            </details>
-          </li>
-        `;
+        const li = document.createElement('li');
+        const details = document.createElement('details');
+        details.className = 'toc-sub';
+        const summary = document.createElement('summary');
+        summary.className = 'toc-ancestor';
+        summary.textContent = node.title;
+        details.appendChild(summary);
+        const childUl = document.createElement('ul');
+        childUl.className = 'toc-tree';
+        renderSectionNodes(node.children, true, childUl);
+        details.appendChild(childUl);
+        li.appendChild(details);
+        parentUl.appendChild(li);
       }
-      return '';
+      return;
     }
 
-    return `
-      <li>
-        <a class="toc-link" data-session-id="${nodeSession}" data-timestamp="${node.timestamp}">
-          ${node.title}
-        </a>
-        ${hasChildren ? `<ul class="toc-tree">${renderSectionNodes(node.children, courseOnly)}</ul>` : ''}
-      </li>
-    `;
-  }).join('');
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+    link.className = 'toc-link';
+    link.dataset.sessionId = nodeSession;
+    link.dataset.timestamp = String(node.timestamp);
+    link.textContent = node.title;
+    li.appendChild(link);
+
+    if (hasChildren) {
+      const childUl = document.createElement('ul');
+      childUl.className = 'toc-tree';
+      renderSectionNodes(node.children, courseOnly, childUl);
+      li.appendChild(childUl);
+    }
+
+    parentUl.appendChild(li);
+  });
 }
 
 function nodeContainsSession(node, sessionId) {

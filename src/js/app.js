@@ -10,6 +10,7 @@ import { initSearch } from './search.js';
 let courseData = null;
 let tocData = null;
 let currentSessionData = null;
+let currentSessionId = null;
 let allFlattenedSentences = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -33,7 +34,7 @@ async function loadCourseData() {
     const savedSession = location.hash ? location.hash.replace('#session-', '') : (localStorage.getItem('last_session_id') || '01');
     const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
 
-    renderSidebar(courseData.sessions, initialSession.sessionId, switchSession);
+    renderSidebar(courseData.sessions, initialSession.sessionId, switchSession, courseData.unavailableSessions);
     renderTOC(tocData.sections, handleSeekTo);
     await switchSession(initialSession);
 
@@ -41,7 +42,10 @@ async function loadCourseData() {
     window.addEventListener('hashchange', () => {
       const targetId = location.hash.replace('#session-', '');
       const target = courseData.sessions.find(s => s.sessionId === targetId);
-      if (target && target !== currentSessionData) switchSession(target);
+      // Guard by sessionId, not object identity: the course index object and the
+      // loaded session JSON object are never the same reference, so comparing
+      // them directly would always be true and cause duplicate loads.
+      if (target && currentSessionId !== targetId) switchSession(target);
     });
   } catch (err) {
     console.error('Failed to initialize course data:', err);
@@ -51,10 +55,16 @@ async function loadCourseData() {
 async function switchSession(session) {
   if (!session) return;
 
+  // Avoid re-loading the session that is already active (Issue #8 P1).
+  // This also prevents the hashchange listener from triggering a second load
+  // when switchSession() writes location.hash for the same session.
+  if (currentSessionId === session.sessionId) return;
+
+  currentSessionId = session.sessionId;
   localStorage.setItem('last_session_id', session.sessionId);
   location.hash = `#session-${session.sessionId}`;
 
-  renderSidebar(courseData.sessions, session.sessionId, switchSession);
+  renderSidebar(courseData.sessions, session.sessionId, switchSession, courseData.unavailableSessions);
   updateHeaderTitle(session);
   applyActiveHighlight(session.sessionId);
 
@@ -78,19 +88,28 @@ function renderTranscript(sessionData) {
 
   allFlattenedSentences = [];
   let sentCounter = 0;
-  let html = '';
+  container.textContent = '';
 
   sessionData.paragraphs.forEach(p => {
-    html += `<p class="transcript-paragraph" id="${p.id}">`;
+    const pEl = document.createElement('p');
+    pEl.className = 'transcript-paragraph';
+    pEl.id = p.id;
+
     p.sentences.forEach(s => {
       const idx = sentCounter++;
       allFlattenedSentences.push(s);
-      html += `<span class="sentence" id="sent-${idx}" data-start="${s.start}" data-end="${s.end}">${s.text}</span> `;
+      const span = document.createElement('span');
+      span.className = 'sentence';
+      span.id = `sent-${idx}`;
+      span.dataset.start = String(s.start);
+      span.dataset.end = String(s.end);
+      span.textContent = s.text;
+      pEl.appendChild(span);
+      pEl.appendChild(document.createTextNode(' '));
     });
-    html += `</p>`;
-  });
 
-  container.innerHTML = html;
+    container.appendChild(pEl);
+  });
 
   // Click-to-Seek binding with Ratio Scaling
   container.querySelectorAll('.sentence').forEach((el, idx) => {
