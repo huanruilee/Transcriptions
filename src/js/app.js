@@ -3,7 +3,7 @@
  */
 
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
-import { renderTOC } from './toc.js';
+import { renderTOC, applyActiveHighlight } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio } from './syncPlayer.js';
 import { initSearch } from './search.js';
 
@@ -14,7 +14,9 @@ let allFlattenedSentences = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle();
+  initSidebarToggle();
   initMobileSidebarToggle();
+  initFontSizeControls();
   initSearch();
   await loadCourseData();
 });
@@ -54,6 +56,7 @@ async function switchSession(session) {
 
   renderSidebar(courseData.sessions, session.sessionId, switchSession);
   updateHeaderTitle(session);
+  applyActiveHighlight(session.sessionId);
 
   // Close mobile sidebar on selection
   const sidebar = document.querySelector('.sidebar');
@@ -195,4 +198,71 @@ function initMobileSidebarToggle() {
   btn.addEventListener('click', () => {
     sidebar.classList.toggle('mobile-open');
   });
+}
+
+/**
+ * Desktop collapsible sidebar toggle.
+ * Toggles .sidebar-collapsed on .app-layout; main content auto-expands to 100%.
+ * Default: expanded on desktop (>1024px), collapsed on smaller screens.
+ */
+function initSidebarToggle() {
+  const btn = document.getElementById('sidebar-toggle');
+  const layout = document.querySelector('.app-layout');
+  if (!btn || !layout) return;
+
+  // Default state based on viewport width
+  const isDesktop = window.innerWidth > 1024;
+  if (!isDesktop) {
+    layout.classList.add('sidebar-collapsed');
+  }
+
+  btn.addEventListener('click', () => {
+    layout.classList.toggle('sidebar-collapsed');
+  });
+
+  // Persist preference
+  const saved = localStorage.getItem('sidebar_collapsed');
+  if (saved === 'true') {
+    layout.classList.add('sidebar-collapsed');
+  } else if (saved === 'false') {
+    layout.classList.remove('sidebar-collapsed');
+  }
+
+  // Save on toggle
+  const observer = new MutationObserver(() => {
+    localStorage.setItem('sidebar_collapsed', layout.classList.contains('sidebar-collapsed') ? 'true' : 'false');
+  });
+  observer.observe(layout, { attributes: true, attributeFilter: ['class'] });
+}
+
+/**
+ * Font size controls (A- / A+).
+ * Adjusts the transcript font size and persists the scale factor.
+ */
+function initFontSizeControls() {
+  const decreaseBtn = document.getElementById('font-decrease');
+  const increaseBtn = document.getElementById('font-increase');
+  const label = document.getElementById('font-size-label');
+  const transcript = document.getElementById('transcript-container');
+  if (!decreaseBtn || !increaseBtn || !label || !transcript) return;
+
+  const BASE = 1.1; // rem, matches .transcript-section font-size
+  let scale = parseFloat(localStorage.getItem('font_scale') || '1');
+  applyFontScale(scale);
+
+  decreaseBtn.addEventListener('click', () => {
+    scale = Math.max(0.8, +(scale - 0.1).toFixed(1));
+    applyFontScale(scale);
+  });
+
+  increaseBtn.addEventListener('click', () => {
+    scale = Math.min(1.6, +(scale + 0.1).toFixed(1));
+    applyFontScale(scale);
+  });
+
+  function applyFontScale(s) {
+    transcript.style.fontSize = `${(BASE * s).toFixed(2)}rem`;
+    label.textContent = `${Math.round(s * 100)}%`;
+    localStorage.setItem('font_scale', String(s));
+  }
 }

@@ -98,7 +98,23 @@ body {
   background-color: var(--accent-hover);
 }
 
-/* Sidebar Toggle for Mobile */
+/* Sidebar Toggle for Desktop & Mobile */
+.sidebar-toggle-btn {
+  display: inline-block;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: var(--accent-hover);
+}
+
 .mobile-sidebar-toggle {
   display: none;
   background: var(--accent-color);
@@ -108,6 +124,36 @@ body {
   border-radius: 6px;
   font-size: 0.85rem;
   cursor: pointer;
+}
+
+/* Font Size Controls */
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.font-size-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.font-size-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.font-size-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 36px;
+  text-align: center;
 }
 
 /* Layout Container */
@@ -123,6 +169,20 @@ body {
   color: var(--sidebar-text);
   padding: 20px 14px;
   flex-shrink: 0;
+  transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+/* Collapsed state (desktop) */
+.app-layout.sidebar-collapsed .sidebar {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+}
+
+.app-layout.sidebar-collapsed .main-content {
+  /* main-content already flex:1, so it auto-expands to 100% */
 }
 
 .sidebar h2 {
@@ -158,8 +218,22 @@ body {
 }
 
 .session-item.active {
-  background-color: var(--sidebar-hover);
-  border-left-color: var(--sidebar-active);
+  background-color: var(--sidebar-active);
+  border-left-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+.session-item.active .session-title {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.session-item.active .session-meta {
+  color: #dbeafe;
+}
+
+.session-item.active .session-summary {
+  color: #e0e7ff;
 }
 
 .session-title {
@@ -236,6 +310,46 @@ body {
 
 .toc-link:hover {
   text-decoration: underline;
+}
+
+/* TOC active highlight (current session's section) */
+.toc-link.active {
+  background-color: rgba(52, 152, 219, 0.15);
+  color: var(--primary-color);
+  font-weight: 700;
+  border-left: 3px solid var(--accent-color);
+  padding-left: 8px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* TOC scope toggle buttons */
+.toc-scope-toggle {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.toc-scope-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  color: var(--text-muted);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toc-scope-btn.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+/* TOC accordion default collapsed */
+.toc-accordion[open] summary {
+  margin-bottom: 8px;
 }
 
 /* Transcript Reader Typography */
@@ -409,6 +523,13 @@ body {
 
   .mobile-sidebar-toggle {
     display: inline-block;
+  }
+
+  /* On mobile, sidebar is a drawer; ignore desktop collapsed state */
+  .app-layout.sidebar-collapsed .sidebar {
+    width: 100%;
+    padding: 14px;
+    opacity: 1;
   }
 
   .app-layout {

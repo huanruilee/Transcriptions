@@ -13,7 +13,16 @@
   <header class="app-header">
     <h1>《入中論善顯密意疏》多媒體學習平台</h1>
     <div class="header-tools">
+      <!-- Desktop sidebar toggle -->
+      <button id="sidebar-toggle" class="sidebar-toggle-btn" title="收合/展開側邊欄">☰</button>
+      <!-- Mobile sidebar toggle -->
       <button id="mobile-sidebar-btn" class="mobile-sidebar-toggle">🗂️ 課程目錄</button>
+      <!-- Font size controls -->
+      <div class="font-size-controls">
+        <button id="font-decrease" class="font-size-btn" title="縮小字體">A-</button>
+        <span id="font-size-label" class="font-size-label">100%</span>
+        <button id="font-increase" class="font-size-btn" title="放大字體">A+</button>
+      </div>
       <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋講記關鍵字...">
       <button id="theme-toggle" class="theme-toggle-btn">🌙 深色模式</button>
     </div>
@@ -23,7 +32,7 @@
   <div class="app-layout">
     
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <h2>🗂️ 課程單元選單</h2>
       <ul id="session-list" class="session-list">
         <!-- Rendered by sidebar.js -->
@@ -39,7 +48,7 @@
           第 2A 堂 (上) | 2016-05-28 | p.63
         </h1>
 
-        <!-- Collapsible TOC -->
+        <!-- Collapsible TOC with Course/Book Toggle -->
         <div id="toc-container">
           <!-- Rendered by toc.js -->
         </div>
