@@ -68,8 +68,9 @@ export function initSyncPlayer() {
  * the active session changes. Does NOT re-bind global listeners (singleton pattern).
  */
 export function updateSession(audioElement, allSentences, onNextSessionRequested) {
-  // If previously bound to a different audio, unbind old listeners first
-  if (boundAudioElement && boundAudioElement !== audioElement) {
+  // Always unbind the previous session handlers. The app reuses the same audio
+  // element across sessions, so checking element identity is not enough.
+  if (boundAudioElement) {
     if (handleTimeUpdate) boundAudioElement.removeEventListener('timeupdate', handleTimeUpdate);
     if (handleEnded) boundAudioElement.removeEventListener('ended', handleEnded);
     if (handleLoadedMetadata) boundAudioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
@@ -79,6 +80,11 @@ export function updateSession(audioElement, allSentences, onNextSessionRequested
   boundAudioElement = audioElement;
   boundSentences = allSentences;
   boundNextCallback = onNextSessionRequested;
+  handleTimeUpdate = null;
+  handleEnded = null;
+  handleLoadedMetadata = null;
+  handleDurationChange = null;
+  updateRatio = null;
 
   if (!audioElement) return;
 

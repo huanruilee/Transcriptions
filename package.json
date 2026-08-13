@@ -5,7 +5,9 @@
   "main": "src/js/app.js",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/unit/*.test.js",
+    "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:acceptance": "node --test tests/acceptance/*.test.js",
     "dev": "npx serve src -p 9090",
     "start": "npx serve src -p 9090"
   },
