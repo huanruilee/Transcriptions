@@ -56,9 +56,10 @@
 | 第六現前地（sessions 1-68） | 101 個 session JSON | ✅ 已完成、已 commit、已部署 |
 | 第一極喜地～第五難勝地（sessions 69-110） | 47 堂完成（69A-78B、79A-102B、103A-110B） | ✅ 本機可處理全部完成 |
 
-**目前進度：198/106 堂 [187%]**
+**目前進度：199/106 堂 [188%]**（course.json 已登記至 199 sessions；含 27B 補做）
 
 **最新一筆完成**：sessions 11-19 補轉譯（batch 14，2026-08-13，18 個 session JSON 全數完成，course.json 更新至 198 sessions）
+*附註：2026-08-14 工作區發現 draft 狀態的 course.json 27B 條目 + session_27B.json + completion.test.js 199 預期值更新，已登錄但**未 commit**（歸屬待其他 agent 確認 commit 範圍）。*
 
 ### 已完成批次
 - **Batch 1（sessions 1-15）**：QA 報告見 `docs/QA_BATCH1_REPORT.md`
@@ -70,6 +71,7 @@
 - **Batch 12（sessions 109B, 110A, 110B）**：完成並 commit（`b5df471`）— 本機可處理全部完成
 - **Batch 13（sessions 79-102）**：47 堂 ASR + RAG 校正完成，轉 session JSON 並 course.json 登記
 - **Batch 14（sessions 11-19）**：18 個 session JSON 補轉譯完成（11A-19B），course.json 更新至 198 sessions，commit `1803355`
+- **Draft（2026-08-14）**：session_27B.json 補做下節（27A 2016-12-31 上節存在、27B 下節原稿存在於 Obsidian），course.json + completion.test.js 同步更新至 199 sessions；scripts/local_rag_correct.py 與 scripts/pilot_local_rag.py 為其他 agent 介入之草稿 — **尚未 commit**，待歸屬 agent 確認。
 
 ### 待辦
 - [x] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）— ✅ 從 flyday.com.tw 官方目錄下載 47 個 MP3 至 /home/henry/audio_files/
