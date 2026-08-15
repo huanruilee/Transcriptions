@@ -21,7 +21,7 @@ test('completion acceptance: course index references complete session JSON and p
   const course = readJson(COURSE_PATH);
   const seenIds = new Set();
 
-  assert.equal(course.sessions.length, 198, 'course.json should list the accepted 198 published sessions');
+  assert.equal(course.sessions.length, 199, 'course.json should list the accepted 199 published sessions (including 27B補做 2026-08-14)');
 
   for (const entry of course.sessions) {
     assert.equal(typeof entry.sessionId, 'string', 'sessionId should be present');
