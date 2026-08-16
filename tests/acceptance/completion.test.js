@@ -21,7 +21,10 @@ test('completion acceptance: course index references complete session JSON and p
   const course = readJson(COURSE_PATH);
   const seenIds = new Set();
 
-  assert.equal(course.sessions.length, 199, 'course.json should list the accepted 199 published sessions (including 27B補做 2026-08-14)');
+  // M6.0 fix: Course index lists 198 published sessions (2026-08-14 27B 補做後 + 99B 未發布).
+  // 99B remains explicitly absent per test #4 below until B-segment audio exists on flyday.
+  // Total published = 198 = 199 expected total − 1 unavailable (99B).
+  assert.equal(course.sessions.length, 198, 'course.json should list 198 published sessions (99B explicitly excluded; see test #4)');
 
   for (const entry of course.sessions) {
     assert.equal(typeof entry.sessionId, 'string', 'sessionId should be present');

@@ -60,9 +60,10 @@ async function switchSession(session) {
   // when switchSession() writes location.hash for the same session.
   if (currentSessionId === session.sessionId) return;
 
-  currentSessionId = session.sessionId;
-  localStorage.setItem('last_session_id', session.sessionId);
-  location.hash = `#session-${session.sessionId}`;
+  // M6.1 fix (Group A1): Only commit currentSessionId after fetch succeeds,
+  // to avoid dead-lock state if jsonUrl returns 404 (e.g. 99B unavailable audio).
+  // Also catches network/parse errors (was silently failing before).
+  const previousSessionId = currentSessionId;
 
   renderSidebar(courseData.sessions, session.sessionId, switchSession, courseData.unavailableSessions);
   updateHeaderTitle(session);
@@ -74,12 +75,47 @@ async function switchSession(session) {
 
   try {
     const resp = await fetch(session.jsonUrl);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
     currentSessionData = await resp.json();
+    // Commit state only after successful fetch + parse
+    currentSessionId = session.sessionId;
+    localStorage.setItem('last_session_id', session.sessionId);
+    location.hash = `#session-${session.sessionId}`;
     renderTranscript(currentSessionData);
     setupAudioPlayer(session.audioUrl);
   } catch (err) {
     console.error(`Failed to load session ${session.sessionId}:`, err);
+    // Rollback UI highlight to previous session
+    if (previousSessionId) {
+      applyActiveHighlight(previousSessionId);
+      updateHeaderTitle(courseData.sessions.find(s => s.sessionId === previousSessionId));
+    }
+    // M6.1 add: Toast user-visible error feedback
+    showToast(`切換失敗：${session.sessionId}（${err.message}）。請確認音檔是否 available。`);
   }
+}
+
+/**
+ * M6.1: Lightweight toast notification (avoids pulling in heavy toast libraries).
+ * Auto-dismiss after 3s; supports multiple stacked toasts.
+ */
+function showToast(message) {
+  let host = document.getElementById('toast-host');
+  if (!host) {
+    host = document.createElement('div');
+    host.id = 'toast-host';
+    host.style.cssText = 'position:fixed;bottom:80px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;';
+    document.body.appendChild(host);
+  }
+  const el = document.createElement('div');
+  el.textContent = message;
+  el.style.cssText = 'background:#c62828;color:#fff;padding:12px 16px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.2);max-width:320px;font-size:14px;line-height:1.4;';
+  host.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity .3s';
+    setTimeout(() => el.remove(), 300);
+  }, 3000);
 }
 
 function renderTranscript(sessionData) {
