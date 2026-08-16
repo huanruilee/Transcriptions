@@ -6,6 +6,7 @@ import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio } from './syncPlayer.js';
 import { initSearch } from './search.js';
+import { formatAriaTime, safePlay } from './a11y.js';
 
 let courseData = null;
 let tocData = null;
@@ -13,36 +14,6 @@ let currentSessionData = null;
 let currentSessionId = null;
 let allFlattenedSentences = [];
 let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
-
-/**
- * M6.3 a11y: Format a virtual-time seconds value as "X 分 Y 秒" for screen readers.
- * Different from formatTime (HH:MM:SS) — this is for aria-label audio cues.
- */
-function formatAriaTime(seconds) {
-  if (!Number.isFinite(seconds) || seconds < 0) return '0 秒';
-  const total = Math.round(seconds);
-  const m = Math.floor(total / 60);
-  const s = total % 60;
-  if (m === 0) return `${s} 秒`;
-  return `${m} 分 ${s} 秒`;
-}
-
-/**
- * M6.3 (AGY review): Safe audio.play() wrapper.
- * audio.play() returns a Promise that rejects if the source is missing/404 or
- * the browser blocks autoplay. An unhandled rejection leaves the player stuck
- * in "loading/paused". Catch it and surface a toast instead.
- */
-function safePlay(audio, fallbackMsg) {
-  if (!audio) return;
-  const p = audio.play();
-  if (p && typeof p.catch === 'function') {
-    p.catch((err) => {
-      console.warn('[safePlay] play() rejected:', err && err.name, err && err.message);
-      showToast(fallbackMsg || '音檔播放失敗，請確認音源存在。');
-    });
-  }
-}
 
 document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle();
@@ -202,7 +173,7 @@ function renderTranscript(sessionData) {
         const rawStart = allFlattenedSentences[idx].start;
         const targetTime = ratio > 0 ? (rawStart * ratio) : rawStart;
         audio.currentTime = targetTime;
-        safePlay(audio);
+        safePlay(audio, undefined, showToast);
       }
     });
     // M6.3 a11y (AGY review): Roving Tabindex keyboard navigation.
@@ -256,7 +227,7 @@ function handleNextSession() {
     const nextSession = courseData.sessions[currentIdx + 1];
     switchSession(nextSession).then(() => {
       const audio = document.getElementById('audio-element');
-      if (audio) safePlay(audio);
+      if (audio) safePlay(audio, undefined, showToast);
     });
   }
 }
@@ -284,7 +255,7 @@ function handleSeekTo(targetSessionId, timestamp) {
         const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
         audio.currentTime = targetTime;
       }
-      safePlay(audio);
+      safePlay(audio, undefined, showToast);
 
       // Smooth-scroll to target paragraph (Bug 8.1 fix)
       const targetParaId = timestampPending ? currentSessionData.paragraphs[0].id : findParagraphByTime(timestamp);
