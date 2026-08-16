@@ -339,6 +339,25 @@ body {
   border-radius: 0 4px 4px 0;
 }
 
+/* M6.2: Visually distinguish TOC nodes with missing timestamps (timestamp=0) */
+.toc-link.toc-timestamp-pending {
+  color: #999;
+  font-style: italic;
+}
+.toc-timestamp-badge {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 3px;
+  padding: 0 6px;
+  margin-left: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-style: normal;
+  cursor: help;
+}
+
 /* TOC scope toggle buttons */
 .toc-scope-toggle {
   display: flex;

@@ -198,19 +198,29 @@ function handleSeekTo(targetSessionId, timestamp) {
   const targetSession = courseData.sessions.find(s => s.sessionId === targetSessionId);
   if (!targetSession) return;
 
+  // M6.2 fix (Qwen F1): timestamp=0 means "missing/unannotated" — don't seek to 0.
+  // Instead, switch session + show toast + scroll to first paragraph.
+  const timestampPending = timestamp === 0;
+
   switchSession(targetSession).then(() => {
     const audio = document.getElementById('audio-element');
     if (!audio) return;
 
     // Wait for metadata before setting currentTime (Bug 1.2 fix)
     const applySeek = () => {
-      const ratio = getCurrentTimeScaleRatio();
-      const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
-      audio.currentTime = targetTime;
+      if (timestampPending) {
+        // Don't seek; just play from current position (defaults to 0).
+        // Show toast so user knows the chapter timestamp is missing.
+        showToast(`${targetSessionId} 章節起點未標註，目前從頭播放。`);
+      } else {
+        const ratio = getCurrentTimeScaleRatio();
+        const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
+        audio.currentTime = targetTime;
+      }
       audio.play();
 
       // Smooth-scroll to target paragraph (Bug 8.1 fix)
-      const targetParaId = findParagraphByTime(timestamp);
+      const targetParaId = timestampPending ? currentSessionData.paragraphs[0].id : findParagraphByTime(timestamp);
       if (targetParaId) {
         const el = document.getElementById(targetParaId);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });

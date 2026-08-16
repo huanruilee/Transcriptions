@@ -138,6 +138,21 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     link.dataset.sessionId = nodeSession;
     link.dataset.timestamp = String(node.timestamp);
     link.textContent = node.title;
+
+    // M6.2 fix (Qwen F1): Visually mark timestamps that are 0 (= missing).
+    // Reason: 40/43 zero-timestamps cannot be auto-derived from sentence.start
+    // (all sessions start at 0.0 because audio-cpp ASR resets per-file).
+    // UI shows "章節起點待補" instead of "0:00" so user knows it's not a real marker.
+    if (node.timestamp === 0 && nodeSession) {
+      const badge = document.createElement('span');
+      badge.className = 'toc-timestamp-badge';
+      badge.textContent = '章節起點待補';
+      badge.title = '此子章節的真實起點需手動標註或 LLM 分析（sentence.start 全為 0.0）';
+      link.appendChild(document.createTextNode(' '));
+      link.appendChild(badge);
+      link.classList.add('toc-timestamp-pending');
+    }
+
     li.appendChild(link);
 
     if (hasChildren) {
