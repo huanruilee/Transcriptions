@@ -12,6 +12,37 @@ let tocData = null;
 let currentSessionData = null;
 let currentSessionId = null;
 let allFlattenedSentences = [];
+let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
+
+/**
+ * M6.3 a11y: Format a virtual-time seconds value as "X 分 Y 秒" for screen readers.
+ * Different from formatTime (HH:MM:SS) — this is for aria-label audio cues.
+ */
+function formatAriaTime(seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0) return '0 秒';
+  const total = Math.round(seconds);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  if (m === 0) return `${s} 秒`;
+  return `${m} 分 ${s} 秒`;
+}
+
+/**
+ * M6.3 (AGY review): Safe audio.play() wrapper.
+ * audio.play() returns a Promise that rejects if the source is missing/404 or
+ * the browser blocks autoplay. An unhandled rejection leaves the player stuck
+ * in "loading/paused". Catch it and surface a toast instead.
+ */
+function safePlay(audio, fallbackMsg) {
+  if (!audio) return;
+  const p = audio.play();
+  if (p && typeof p.catch === 'function') {
+    p.catch((err) => {
+      console.warn('[safePlay] play() rejected:', err && err.name, err && err.message);
+      showToast(fallbackMsg || '音檔播放失敗，請確認音源存在。');
+    });
+  }
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle();
@@ -60,6 +91,12 @@ async function switchSession(session) {
   // when switchSession() writes location.hash for the same session.
   if (currentSessionId === session.sessionId) return;
 
+  // M6.3 (AGY review): Guard against race condition — if a load is already in
+  // flight (fetch not yet resolved), ignore re-entry. Without this, rapid
+  // clicks / hash changes during async fetch could trigger duplicate loads.
+  if (sessionLoading) return;
+  sessionLoading = true;
+
   // M6.1 fix (Group A1): Only commit currentSessionId after fetch succeeds,
   // to avoid dead-lock state if jsonUrl returns 404 (e.g. 99B unavailable audio).
   // Also catches network/parse errors (was silently failing before).
@@ -92,6 +129,8 @@ async function switchSession(session) {
     }
     // M6.1 add: Toast user-visible error feedback
     showToast(`切換失敗：${session.sessionId}（${err.message}）。請確認音檔是否 available。`);
+  } finally {
+    sessionLoading = false;
   }
 }
 
@@ -140,6 +179,12 @@ function renderTranscript(sessionData) {
       span.dataset.start = String(s.start);
       span.dataset.end = String(s.end);
       span.textContent = s.text;
+      // M6.3 a11y (AGY review): Roving Tabindex — only the first sentence is
+      // tab-focusable; the rest are tabindex=-1 to avoid Tab Flood (thousands of
+      // sentences would trap keyboard users). Arrow keys move focus + seek.
+      // No role="button" on <span> — it's not a button, it's a seek target.
+      span.tabIndex = idx === 0 ? 0 : -1;
+      span.setAttribute('aria-label', `跳到音檔 ${formatAriaTime(s.start)}`);
       pEl.appendChild(span);
       pEl.appendChild(document.createTextNode(' '));
     });
@@ -148,7 +193,8 @@ function renderTranscript(sessionData) {
   });
 
   // Click-to-Seek binding with Ratio Scaling
-  container.querySelectorAll('.sentence').forEach((el, idx) => {
+  const sentenceEls = container.querySelectorAll('.sentence');
+  sentenceEls.forEach((el, idx) => {
     el.addEventListener('click', () => {
       const audio = document.getElementById('audio-element');
       if (audio) {
@@ -156,7 +202,28 @@ function renderTranscript(sessionData) {
         const rawStart = allFlattenedSentences[idx].start;
         const targetTime = ratio > 0 ? (rawStart * ratio) : rawStart;
         audio.currentTime = targetTime;
-        audio.play();
+        safePlay(audio);
+      }
+    });
+    // M6.3 a11y (AGY review): Roving Tabindex keyboard navigation.
+    // Enter/Space seeks to this sentence; ArrowDown/ArrowUp moves focus to the
+    // next/previous sentence (roving tabindex) and seeks there too.
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const delta = e.key === 'ArrowDown' ? 1 : -1;
+        const nextIdx = idx + delta;
+        if (nextIdx >= 0 && nextIdx < sentenceEls.length) {
+          const next = sentenceEls[nextIdx];
+          // Roving tabindex: move focus to the target sentence
+          el.tabIndex = -1;
+          next.tabIndex = 0;
+          next.focus();
+          next.click(); // seek audio to that sentence
+        }
       }
     });
   });
@@ -189,7 +256,7 @@ function handleNextSession() {
     const nextSession = courseData.sessions[currentIdx + 1];
     switchSession(nextSession).then(() => {
       const audio = document.getElementById('audio-element');
-      if (audio) audio.play();
+      if (audio) safePlay(audio);
     });
   }
 }
@@ -217,7 +284,7 @@ function handleSeekTo(targetSessionId, timestamp) {
         const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
         audio.currentTime = targetTime;
       }
-      audio.play();
+      safePlay(audio);
 
       // Smooth-scroll to target paragraph (Bug 8.1 fix)
       const targetParaId = timestampPending ? currentSessionData.paragraphs[0].id : findParagraphByTime(timestamp);

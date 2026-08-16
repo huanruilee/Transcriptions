@@ -69,6 +69,15 @@ export function renderTOC(sections, onSeekTo) {
       const timestamp = parseFloat(link.dataset.timestamp);
       onSeekTo(targetSession, timestamp);
     });
+    // M6.3 a11y: Keyboard activation (Enter / Space) for role="button"
+    link.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const targetSession = link.dataset.sessionId;
+        const timestamp = parseFloat(link.dataset.timestamp);
+        onSeekTo(targetSession, timestamp);
+      }
+    });
   });
 
   // Apply active highlight if we already know the session
@@ -135,6 +144,12 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     const li = document.createElement('li');
     const link = document.createElement('a');
     link.className = 'toc-link';
+    // M6.3 a11y (AGY review): <a href> is natively focusable + keyboard-activatable,
+    // so NO role="button" and NO tabindex=0 needed (avoids "Link Button" double
+    // announcement). href is a hash so middle-click "open in new tab" works
+    // semantically (the click handler still e.preventDefault()s for same-tab nav).
+    link.href = `#session-${nodeSession}-t${node.timestamp}`;
+    link.setAttribute('aria-label', `跳到 ${nodeSession} 章節：${node.title}`);
     link.dataset.sessionId = nodeSession;
     link.dataset.timestamp = String(node.timestamp);
     link.textContent = node.title;
