@@ -6,12 +6,14 @@ import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio } from './syncPlayer.js';
 import { initSearch } from './search.js';
+import { formatAriaTime, safePlay } from './a11y.js';
 
 let courseData = null;
 let tocData = null;
 let currentSessionData = null;
 let currentSessionId = null;
 let allFlattenedSentences = [];
+let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
 
 document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle();
@@ -60,9 +62,16 @@ async function switchSession(session) {
   // when switchSession() writes location.hash for the same session.
   if (currentSessionId === session.sessionId) return;
 
-  currentSessionId = session.sessionId;
-  localStorage.setItem('last_session_id', session.sessionId);
-  location.hash = `#session-${session.sessionId}`;
+  // M6.3 (AGY review): Guard against race condition — if a load is already in
+  // flight (fetch not yet resolved), ignore re-entry. Without this, rapid
+  // clicks / hash changes during async fetch could trigger duplicate loads.
+  if (sessionLoading) return;
+  sessionLoading = true;
+
+  // M6.1 fix (Group A1): Only commit currentSessionId after fetch succeeds,
+  // to avoid dead-lock state if jsonUrl returns 404 (e.g. 99B unavailable audio).
+  // Also catches network/parse errors (was silently failing before).
+  const previousSessionId = currentSessionId;
 
   renderSidebar(courseData.sessions, session.sessionId, switchSession, courseData.unavailableSessions);
   updateHeaderTitle(session);
@@ -74,12 +83,49 @@ async function switchSession(session) {
 
   try {
     const resp = await fetch(session.jsonUrl);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
     currentSessionData = await resp.json();
+    // Commit state only after successful fetch + parse
+    currentSessionId = session.sessionId;
+    localStorage.setItem('last_session_id', session.sessionId);
+    location.hash = `#session-${session.sessionId}`;
     renderTranscript(currentSessionData);
     setupAudioPlayer(session.audioUrl);
   } catch (err) {
     console.error(`Failed to load session ${session.sessionId}:`, err);
+    // Rollback UI highlight to previous session
+    if (previousSessionId) {
+      applyActiveHighlight(previousSessionId);
+      updateHeaderTitle(courseData.sessions.find(s => s.sessionId === previousSessionId));
+    }
+    // M6.1 add: Toast user-visible error feedback
+    showToast(`切換失敗：${session.sessionId}（${err.message}）。請確認音檔是否 available。`);
+  } finally {
+    sessionLoading = false;
   }
+}
+
+/**
+ * M6.1: Lightweight toast notification (avoids pulling in heavy toast libraries).
+ * Auto-dismiss after 3s; supports multiple stacked toasts.
+ */
+function showToast(message) {
+  let host = document.getElementById('toast-host');
+  if (!host) {
+    host = document.createElement('div');
+    host.id = 'toast-host';
+    host.style.cssText = 'position:fixed;bottom:80px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;';
+    document.body.appendChild(host);
+  }
+  const el = document.createElement('div');
+  el.textContent = message;
+  el.style.cssText = 'background:#c62828;color:#fff;padding:12px 16px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.2);max-width:320px;font-size:14px;line-height:1.4;';
+  host.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity .3s';
+    setTimeout(() => el.remove(), 300);
+  }, 3000);
 }
 
 function renderTranscript(sessionData) {
@@ -104,6 +150,12 @@ function renderTranscript(sessionData) {
       span.dataset.start = String(s.start);
       span.dataset.end = String(s.end);
       span.textContent = s.text;
+      // M6.3 a11y (AGY review): Roving Tabindex — only the first sentence is
+      // tab-focusable; the rest are tabindex=-1 to avoid Tab Flood (thousands of
+      // sentences would trap keyboard users). Arrow keys move focus + seek.
+      // No role="button" on <span> — it's not a button, it's a seek target.
+      span.tabIndex = idx === 0 ? 0 : -1;
+      span.setAttribute('aria-label', `跳到音檔 ${formatAriaTime(s.start)}`);
       pEl.appendChild(span);
       pEl.appendChild(document.createTextNode(' '));
     });
@@ -112,7 +164,8 @@ function renderTranscript(sessionData) {
   });
 
   // Click-to-Seek binding with Ratio Scaling
-  container.querySelectorAll('.sentence').forEach((el, idx) => {
+  const sentenceEls = container.querySelectorAll('.sentence');
+  sentenceEls.forEach((el, idx) => {
     el.addEventListener('click', () => {
       const audio = document.getElementById('audio-element');
       if (audio) {
@@ -120,7 +173,28 @@ function renderTranscript(sessionData) {
         const rawStart = allFlattenedSentences[idx].start;
         const targetTime = ratio > 0 ? (rawStart * ratio) : rawStart;
         audio.currentTime = targetTime;
-        audio.play();
+        safePlay(audio, undefined, showToast);
+      }
+    });
+    // M6.3 a11y (AGY review): Roving Tabindex keyboard navigation.
+    // Enter/Space seeks to this sentence; ArrowDown/ArrowUp moves focus to the
+    // next/previous sentence (roving tabindex) and seeks there too.
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const delta = e.key === 'ArrowDown' ? 1 : -1;
+        const nextIdx = idx + delta;
+        if (nextIdx >= 0 && nextIdx < sentenceEls.length) {
+          const next = sentenceEls[nextIdx];
+          // Roving tabindex: move focus to the target sentence
+          el.tabIndex = -1;
+          next.tabIndex = 0;
+          next.focus();
+          next.click(); // seek audio to that sentence
+        }
       }
     });
   });
@@ -153,7 +227,7 @@ function handleNextSession() {
     const nextSession = courseData.sessions[currentIdx + 1];
     switchSession(nextSession).then(() => {
       const audio = document.getElementById('audio-element');
-      if (audio) audio.play();
+      if (audio) safePlay(audio, undefined, showToast);
     });
   }
 }
@@ -162,19 +236,29 @@ function handleSeekTo(targetSessionId, timestamp) {
   const targetSession = courseData.sessions.find(s => s.sessionId === targetSessionId);
   if (!targetSession) return;
 
+  // M6.2 fix (Qwen F1): timestamp=0 means "missing/unannotated" — don't seek to 0.
+  // Instead, switch session + show toast + scroll to first paragraph.
+  const timestampPending = timestamp === 0;
+
   switchSession(targetSession).then(() => {
     const audio = document.getElementById('audio-element');
     if (!audio) return;
 
     // Wait for metadata before setting currentTime (Bug 1.2 fix)
     const applySeek = () => {
-      const ratio = getCurrentTimeScaleRatio();
-      const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
-      audio.currentTime = targetTime;
-      audio.play();
+      if (timestampPending) {
+        // Don't seek; just play from current position (defaults to 0).
+        // Show toast so user knows the chapter timestamp is missing.
+        showToast(`${targetSessionId} 章節起點未標註，目前從頭播放。`);
+      } else {
+        const ratio = getCurrentTimeScaleRatio();
+        const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
+        audio.currentTime = targetTime;
+      }
+      safePlay(audio, undefined, showToast);
 
       // Smooth-scroll to target paragraph (Bug 8.1 fix)
-      const targetParaId = findParagraphByTime(timestamp);
+      const targetParaId = timestampPending ? currentSessionData.paragraphs[0].id : findParagraphByTime(timestamp);
       if (targetParaId) {
         const el = document.getElementById(targetParaId);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });

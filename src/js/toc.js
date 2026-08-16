@@ -69,6 +69,15 @@ export function renderTOC(sections, onSeekTo) {
       const timestamp = parseFloat(link.dataset.timestamp);
       onSeekTo(targetSession, timestamp);
     });
+    // M6.3 a11y: Keyboard activation (Enter / Space) for role="button"
+    link.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const targetSession = link.dataset.sessionId;
+        const timestamp = parseFloat(link.dataset.timestamp);
+        onSeekTo(targetSession, timestamp);
+      }
+    });
   });
 
   // Apply active highlight if we already know the session
@@ -135,9 +144,30 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     const li = document.createElement('li');
     const link = document.createElement('a');
     link.className = 'toc-link';
+    // M6.3 a11y (AGY review): <a href> is natively focusable + keyboard-activatable,
+    // so NO role="button" and NO tabindex=0 needed (avoids "Link Button" double
+    // announcement). href is a hash so middle-click "open in new tab" works
+    // semantically (the click handler still e.preventDefault()s for same-tab nav).
+    link.href = `#session-${nodeSession}-t${node.timestamp}`;
+    link.setAttribute('aria-label', `跳到 ${nodeSession} 章節：${node.title}`);
     link.dataset.sessionId = nodeSession;
     link.dataset.timestamp = String(node.timestamp);
     link.textContent = node.title;
+
+    // M6.2 fix (Qwen F1): Visually mark timestamps that are 0 (= missing).
+    // Reason: 40/43 zero-timestamps cannot be auto-derived from sentence.start
+    // (all sessions start at 0.0 because audio-cpp ASR resets per-file).
+    // UI shows "章節起點待補" instead of "0:00" so user knows it's not a real marker.
+    if (node.timestamp === 0 && nodeSession) {
+      const badge = document.createElement('span');
+      badge.className = 'toc-timestamp-badge';
+      badge.textContent = '章節起點待補';
+      badge.title = '此子章節的真實起點需手動標註或 LLM 分析（sentence.start 全為 0.0）';
+      link.appendChild(document.createTextNode(' '));
+      link.appendChild(badge);
+      link.classList.add('toc-timestamp-pending');
+    }
+
     li.appendChild(link);
 
     if (hasChildren) {
