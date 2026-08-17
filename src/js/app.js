@@ -633,7 +633,7 @@ function initSidebarFilter() {
   input.addEventListener('input', () => {
     sidebarFilterValue = input.value.trim().toLowerCase();
     if (courseData) {
-      renderSidebar(courseData.sessions, currentSessionId, switchSession, courseData.unavailableSessions);
+      renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
     }
   });
 }
