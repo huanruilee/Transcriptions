@@ -14,6 +14,7 @@ let currentSessionData = null;
 let currentSessionId = null;
 let allFlattenedSentences = [];
 let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
+let sidebarFilterValue = ''; // P2: sidebar filter state
 
 document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle();
@@ -21,6 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMobileSidebarToggle();
   initFontSizeControls();
   initSearch();
+  initCourseOverview(); // P1: course overview entry
+  initSidebarFilter();  // P2: sidebar filter
+  initSessionNav();     // P0-3: prev/next session nav
   await loadCourseData();
 });
 
@@ -32,11 +36,18 @@ async function loadCourseData() {
     const tocResp = await fetch('courses/入中論善顯密意疏/toc.json');
     tocData = await tocResp.json();
 
+    // P0-1: Update course count in header + sidebar
+    const totalSessions = courseData.sessions.length;
+    const headerCount = document.getElementById('header-course-count');
+    const sidebarCount = document.getElementById('sidebar-course-count');
+    if (headerCount) headerCount.textContent = `(全 ${totalSessions} 講)`;
+    if (sidebarCount) sidebarCount.textContent = `(全 ${totalSessions} 講)`;
+
     // Determine starting session (hash or localStorage or first)
     const savedSession = location.hash ? location.hash.replace('#session-', '') : (localStorage.getItem('last_session_id') || '01');
     const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
 
-    renderSidebar(courseData.sessions, initialSession.sessionId, switchSession, courseData.unavailableSessions);
+    renderSidebar(getFilteredSessions(), initialSession.sessionId, switchSession, courseData.unavailableSessions);
     renderTOC(tocData.sections, handleSeekTo);
     await switchSession(initialSession);
 
@@ -73,8 +84,9 @@ async function switchSession(session) {
   // Also catches network/parse errors (was silently failing before).
   const previousSessionId = currentSessionId;
 
-  renderSidebar(courseData.sessions, session.sessionId, switchSession, courseData.unavailableSessions);
+  renderSidebar(getFilteredSessions(), session.sessionId, switchSession, courseData.unavailableSessions);
   updateHeaderTitle(session);
+  updateBreadcrumb(session); // P0-2: breadcrumb
   applyActiveHighlight(session.sessionId);
 
   // Close mobile sidebar on selection
@@ -204,6 +216,53 @@ function renderTranscript(sessionData) {
   if (searchInput && searchInput.value.trim()) {
     searchInput.dispatchEvent(new Event('input'));
   }
+
+  // P0-3: End-of-session card (next session + back to overview)
+  appendEndSessionCard(sessionData);
+}
+
+/**
+ * P0-3: Append an "end of session" card at the bottom of the transcript,
+ * offering "next session" and "back to course overview" actions.
+ */
+function appendEndSessionCard(sessionData) {
+  const container = document.getElementById('transcript-container');
+  if (!container || !courseData) return;
+
+  // Remove any existing end-session card
+  const existing = container.querySelector('.end-session-card');
+  if (existing) existing.remove();
+
+  const currentIdx = courseData.sessions.findIndex(s => s.sessionId === sessionData.sessionId);
+  const hasNext = currentIdx !== -1 && currentIdx < courseData.sessions.length - 1;
+  const nextSession = hasNext ? courseData.sessions[currentIdx + 1] : null;
+
+  const card = document.createElement('div');
+  card.className = 'end-session-card';
+
+  const h3 = document.createElement('h3');
+  h3.textContent = '🎉 本講結束';
+  card.appendChild(h3);
+
+  const actions = document.createElement('div');
+  actions.className = 'end-session-actions';
+
+  if (nextSession) {
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'end-session-btn primary';
+    nextBtn.textContent = `➡️ 進入下一講 第 ${nextSession.sessionId} 堂`;
+    nextBtn.addEventListener('click', () => switchSession(nextSession));
+    actions.appendChild(nextBtn);
+  }
+
+  const overviewBtn = document.createElement('button');
+  overviewBtn.className = 'end-session-btn secondary';
+  overviewBtn.textContent = '🏠 返回 198 講總目錄';
+  overviewBtn.addEventListener('click', () => showCourseOverview());
+  actions.appendChild(overviewBtn);
+
+  card.appendChild(actions);
+  container.appendChild(card);
 }
 
 function setupAudioPlayer(audioUrl) {
@@ -368,4 +427,235 @@ function initFontSizeControls() {
     label.textContent = `${Math.round(s * 100)}%`;
     localStorage.setItem('font_scale', String(s));
   }
+}
+
+/**
+ * P0-2: Update breadcrumb navigation with the current session.
+ */
+function updateBreadcrumb(session) {
+  const current = document.getElementById('breadcrumb-current');
+  if (!current || !session) return;
+  let periodText = session.periodLabel ? ` (${session.periodLabel})` : '';
+  current.textContent = `第 ${session.sessionId} 堂${periodText}`;
+}
+
+/**
+ * P1: Initialize the course overview entry button.
+ */
+function initCourseOverview() {
+  const btn = document.getElementById('course-overview-btn');
+  const breadcrumbHome = document.getElementById('breadcrumb-home');
+  if (btn) btn.addEventListener('click', () => showCourseOverview());
+  if (breadcrumbHome) breadcrumbHome.addEventListener('click', (e) => {
+    e.preventDefault();
+    showCourseOverview();
+  });
+}
+
+/**
+ * P1: Show the course overview landing page (198-session grid + continue learning).
+ * Replaces the reader content with a full course map so users see the whole course.
+ */
+function showCourseOverview() {
+  const reader = document.querySelector('.reader-container');
+  if (!reader || !courseData) return;
+
+  // Hide TOC + transcript, show overview
+  const tocContainer = document.getElementById('toc-container');
+  const transcript = document.getElementById('transcript-container');
+  const activeTitle = document.getElementById('active-session-title');
+  const breadcrumb = document.querySelector('.breadcrumb');
+  if (tocContainer) tocContainer.style.display = 'none';
+  if (transcript) transcript.style.display = 'none';
+  if (activeTitle) activeTitle.style.display = 'none';
+  if (breadcrumb) breadcrumb.style.display = 'none';
+
+  // Build overview container
+  let overview = document.getElementById('course-overview');
+  if (!overview) {
+    overview = document.createElement('div');
+    overview.id = 'course-overview';
+    overview.className = 'course-overview';
+    reader.appendChild(overview);
+  }
+  overview.style.display = 'block';
+  overview.textContent = '';
+
+  // Back button
+  const back = document.createElement('a');
+  back.className = 'course-overview-back';
+  back.textContent = '← 返回閱讀器';
+  back.addEventListener('click', () => hideCourseOverview());
+  overview.appendChild(back);
+
+  // Hero
+  const hero = document.createElement('div');
+  hero.className = 'course-overview-hero';
+  const heroTitle = document.createElement('h1');
+  heroTitle.textContent = '《入中論善顯密意疏》多媒體學習平台';
+  hero.appendChild(heroTitle);
+  const heroDesc = document.createElement('p');
+  heroDesc.textContent = '見無法師 主講 · 音文雙向同步 · 逐字稿 + 章節目錄';
+  hero.appendChild(heroDesc);
+  const badges = document.createElement('div');
+  badges.className = 'course-overview-badges';
+  const total = courseData.sessions.length;
+  const badge1 = document.createElement('span');
+  badge1.className = 'course-overview-badge';
+  badge1.textContent = `📚 全套 ${total} 講`;
+  const badge2 = document.createElement('span');
+  badge2.className = 'course-overview-badge';
+  badge2.textContent = '🎧 音文同步';
+  const badge3 = document.createElement('span');
+  badge3.className = 'course-overview-badge';
+  badge3.textContent = '📖 科判目錄';
+  badges.appendChild(badge1);
+  badges.appendChild(badge2);
+  badges.appendChild(badge3);
+  hero.appendChild(badges);
+  overview.appendChild(hero);
+
+  // Continue learning card (P2: localStorage progress)
+  const lastSessionId = localStorage.getItem('last_session_id');
+  const lastSession = lastSessionId ? courseData.sessions.find(s => s.sessionId === lastSessionId) : null;
+  if (lastSession) {
+    const cont = document.createElement('div');
+    cont.className = 'continue-learning';
+    const contText = document.createElement('div');
+    contText.className = 'continue-learning-text';
+    contText.textContent = `▶️ 您上次聽到：第 ${lastSession.sessionId} 堂 (${lastSession.date || ''})`;
+    const contBtn = document.createElement('button');
+    contBtn.className = 'continue-learning-btn';
+    contBtn.textContent = '繼續收聽';
+    contBtn.addEventListener('click', () => {
+      hideCourseOverview();
+      switchSession(lastSession);
+    });
+    cont.appendChild(contText);
+    cont.appendChild(contBtn);
+    overview.appendChild(cont);
+  }
+
+  // Session grid
+  const section = document.createElement('div');
+  section.className = 'course-overview-section';
+  const sectionTitle = document.createElement('h2');
+  sectionTitle.textContent = `📚 全部 ${total} 講`;
+  section.appendChild(sectionTitle);
+  const grid = document.createElement('div');
+  grid.className = 'course-overview-grid';
+
+  courseData.sessions.forEach(session => {
+    const card = document.createElement('div');
+    card.className = 'course-overview-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `第 ${session.sessionId} 堂`);
+
+    const title = document.createElement('div');
+    title.className = 'course-overview-card-title';
+    title.textContent = `第 ${session.sessionId} 堂`;
+    card.appendChild(title);
+
+    const meta = document.createElement('div');
+    meta.className = 'course-overview-card-meta';
+    meta.textContent = `${session.date || ''} | ${session.pageRange || ''}`;
+    card.appendChild(meta);
+
+    if (session.summary) {
+      const summary = document.createElement('div');
+      summary.className = 'course-overview-card-summary';
+      summary.textContent = session.summary;
+      card.appendChild(summary);
+    }
+
+    const open = () => {
+      hideCourseOverview();
+      switchSession(session);
+    };
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
+    });
+    grid.appendChild(card);
+  });
+
+  section.appendChild(grid);
+  overview.appendChild(section);
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/**
+ * P1: Hide the course overview and restore the reader.
+ */
+function hideCourseOverview() {
+  const overview = document.getElementById('course-overview');
+  const tocContainer = document.getElementById('toc-container');
+  const transcript = document.getElementById('transcript-container');
+  const activeTitle = document.getElementById('active-session-title');
+  const breadcrumb = document.querySelector('.breadcrumb');
+  if (overview) overview.style.display = 'none';
+  if (tocContainer) tocContainer.style.display = '';
+  if (transcript) transcript.style.display = '';
+  if (activeTitle) activeTitle.style.display = '';
+  if (breadcrumb) breadcrumb.style.display = '';
+}
+
+/**
+ * P2: Return sessions filtered by the sidebar filter value.
+ * Matches sessionId, date, pageRange, or summary (case-insensitive).
+ */
+function getFilteredSessions() {
+  if (!courseData) return [];
+  if (!sidebarFilterValue) return courseData.sessions;
+  const q = sidebarFilterValue;
+  return courseData.sessions.filter(s => {
+    const haystack = [
+      s.sessionId, s.date, s.pageRange, s.summary, s.title,
+      s.periodLabel, s.subSession
+    ].filter(Boolean).join(' ').toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+/**
+ * P2: Initialize the sidebar filter (quick search by session id or summary).
+ */
+function initSidebarFilter() {
+  const input = document.getElementById('sidebar-filter');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    sidebarFilterValue = input.value.trim().toLowerCase();
+    if (courseData) {
+      renderSidebar(courseData.sessions, currentSessionId, switchSession, courseData.unavailableSessions);
+    }
+  });
+}
+
+/**
+ * P0-3: Initialize prev/next session navigation buttons in the player bar.
+ */
+function initSessionNav() {
+  const prevBtn = document.getElementById('prev-session-btn');
+  const nextBtn = document.getElementById('next-session-btn');
+  if (prevBtn) prevBtn.addEventListener('click', () => navigateSession(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => navigateSession(1));
+}
+
+/**
+ * P0-3: Navigate to the previous/next session.
+ */
+function navigateSession(delta) {
+  if (!courseData || !currentSessionId) return;
+  const currentIdx = courseData.sessions.findIndex(s => s.sessionId === currentSessionId);
+  if (currentIdx === -1) return;
+  const targetIdx = currentIdx + delta;
+  if (targetIdx < 0 || targetIdx >= courseData.sessions.length) return;
+  switchSession(courseData.sessions[targetIdx]);
 }
