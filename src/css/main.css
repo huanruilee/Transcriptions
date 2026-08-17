@@ -688,3 +688,283 @@ body {
     padding: 6px 12px;
   }
 }
+
+/* ============================================================
+   UX Course Overview (AGY 建議 2026-08-17)
+   P0-1: Header course count
+   P0-2: Breadcrumb
+   P0-3: Prev/Next session nav
+   P1:   Course overview button + landing
+   P2:   Sidebar filter
+   ============================================================ */
+
+/* P0-1: Header course count */
+.header-course-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-color, #f59e0b);
+  margin-left: 8px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* P0-2: Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  background: var(--bg-secondary, #f1f5f9);
+  border-radius: 6px;
+  flex-wrap: wrap;
+}
+.breadcrumb-link {
+  color: var(--primary-color, #2563eb);
+  text-decoration: none;
+  font-weight: 500;
+}
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+.breadcrumb-sep {
+  color: #94a3b8;
+}
+.breadcrumb-current {
+  color: #475569;
+  font-weight: 600;
+}
+
+/* P0-3: Prev/Next session nav buttons */
+.session-nav-btn {
+  background: var(--sidebar-bg, #1e293b);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.session-nav-btn:hover {
+  background: var(--sidebar-hover, #334155);
+}
+.session-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* P1: Course overview button */
+.course-overview-btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0 10px 0;
+  padding: 10px 12px;
+  background: var(--primary-color, #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.course-overview-btn:hover {
+  background: var(--primary-hover, #1d4ed8);
+}
+
+/* P2: Sidebar filter */
+.sidebar-filter {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+.sidebar-filter::placeholder {
+  color: #64748b;
+}
+.sidebar-filter:focus {
+  outline: 2px solid var(--primary-color, #2563eb);
+  border-color: transparent;
+}
+
+/* P1: Course overview landing page */
+.course-overview {
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.course-overview-hero {
+  background: linear-gradient(135deg, var(--primary-color, #2563eb), #1e3a8a);
+  color: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+}
+.course-overview-hero h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+}
+.course-overview-hero p {
+  margin: 4px 0;
+  opacity: 0.95;
+  font-size: 0.95rem;
+}
+.course-overview-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.course-overview-badge {
+  background: rgba(255,255,255,0.2);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.course-overview-section {
+  margin-bottom: 24px;
+}
+.course-overview-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: var(--primary-color, #2563eb);
+  border-bottom: 2px solid var(--primary-color, #2563eb);
+  padding-bottom: 6px;
+}
+.course-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.course-overview-card {
+  background: var(--bg-secondary, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.course-overview-card:hover {
+  border-color: var(--primary-color, #2563eb);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+}
+.course-overview-card-title {
+  font-weight: 700;
+  color: var(--primary-color, #2563eb);
+  margin-bottom: 4px;
+}
+.course-overview-card-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+.course-overview-card-summary {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.4;
+}
+.course-overview-back {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--primary-color, #2563eb);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+.course-overview-back:hover {
+  text-decoration: underline;
+}
+
+/* P1: Continue learning card */
+.continue-learning {
+  background: var(--bg-secondary, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--accent-color, #f59e0b);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.continue-learning-text {
+  font-size: 0.95rem;
+  color: #475569;
+}
+.continue-learning-btn {
+  background: var(--accent-color, #f59e0b);
+  color: #1e293b;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.continue-learning-btn:hover {
+  background: #d97706;
+}
+
+/* P0-3: End of session card */
+.end-session-card {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--bg-secondary, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: center;
+}
+.end-session-card h3 {
+  margin: 0 0 12px 0;
+  color: var(--primary-color, #2563eb);
+}
+.end-session-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.end-session-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.end-session-btn.primary {
+  background: var(--primary-color, #2563eb);
+  color: #fff;
+}
+.end-session-btn.primary:hover {
+  background: #1d4ed8;
+}
+.end-session-btn.secondary {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+.end-session-btn.secondary:hover {
+  background: #cbd5e1;
+}
+
+/* Mobile: hide course count in header on small screens */
+@media (max-width: 768px) {
+  .header-course-count {
+    display: none;
+  }
+  .course-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}

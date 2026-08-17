@@ -11,12 +11,12 @@
 
   <!-- Sticky Header -->
   <header class="app-header">
-    <h1>《入中論善顯密意疏》多媒體學習平台</h1>
+    <h1>《入中論善顯密意疏》多媒體學習平台 <span class="header-course-count" id="header-course-count">(全 198 講)</span></h1>
     <div class="header-tools">
       <!-- Desktop sidebar toggle -->
       <button id="sidebar-toggle" class="sidebar-toggle-btn" title="收合/展開側邊欄">☰</button>
       <!-- Mobile sidebar toggle -->
-      <button id="mobile-sidebar-btn" class="mobile-sidebar-toggle">🗂️ 課程目錄</button>
+      <button id="mobile-sidebar-btn" class="mobile-sidebar-toggle">🗂️ 198 講目錄</button>
       <!-- Font size controls -->
       <div class="font-size-controls">
         <button id="font-decrease" class="font-size-btn" title="縮小字體">A-</button>
@@ -35,7 +35,11 @@
     
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-      <h2>🗂️ 課程單元選單</h2>
+      <h2>🗂️ 課程單元 <span id="sidebar-course-count">(全 198 講)</span></h2>
+      <!-- P1: Course overview entry button -->
+      <button id="course-overview-btn" class="course-overview-btn" title="查看全部 198 講課程總覽">🏠 課程總覽 (198 講)</button>
+      <!-- P2: Sidebar filter -->
+      <input type="text" id="sidebar-filter" class="sidebar-filter" placeholder="🔍 快速搜尋講次 (如 02A / 歸敬頌)..." aria-label="快速搜尋講次" autocomplete="off">
       <ul id="session-list" class="session-list">
         <!-- Rendered by sidebar.js -->
       </ul>
@@ -44,7 +48,14 @@
     <!-- Main Reader -->
     <main class="main-content">
       <div class="reader-container">
-        
+
+        <!-- P0-2: Breadcrumb navigation -->
+        <nav class="breadcrumb" aria-label="麵包屑導覽">
+          <a href="#" id="breadcrumb-home" class="breadcrumb-link">🏠 全部課程 (198 講)</a>
+          <span class="breadcrumb-sep">›</span>
+          <span id="breadcrumb-current" class="breadcrumb-current">第 01 堂</span>
+        </nav>
+
         <!-- Active Session Header Title -->
         <h1 id="active-session-title" style="color: var(--primary-color); margin-top: 0; font-size: 1.5rem; font-weight: 700;">
           第 2A 堂 (上) | 2016-05-28 | p.63
@@ -77,7 +88,10 @@
       <div class="now-playing-status">音文同步中</div>
     </div>
     <div class="player-controls">
+      <!-- P0-3: Prev/Next session navigation -->
+      <button id="prev-session-btn" class="session-nav-btn" title="上一講" aria-label="上一講">⏮️</button>
       <audio id="audio-element" controls preload="metadata"></audio>
+      <button id="next-session-btn" class="session-nav-btn" title="下一講" aria-label="下一講">⏭️</button>
     </div>
   </footer>
 
