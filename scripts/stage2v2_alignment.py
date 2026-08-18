@@ -380,6 +380,7 @@ def align_session(sid: str, device: str = "cpu"):
         pil_paras.append({"sentences": pi_sents})
     pil = {
         "paragraphs": pil_paras,
+        "_pilot_v2": True,
         "_meta": {
             "source_session": sid,
             "alignment_engine": "whisperx-wav2vec2-xlsr-53",
