@@ -5,7 +5,7 @@
   "main": "src/js/app.js",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js",
+    "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:acceptance": "node --test tests/acceptance/*.test.js",
     "test:quality": "node --test tests/quality.test.js",

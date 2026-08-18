@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "issue": "Issue #11",
+  "stage": "Stage 1 — Reproducible provenance",
+  "git_revision": "5d0b82c2888b4b88794340ee9ea6353502c4328d",
+  "git_remote": "https://github.com/huanruilee/Transcriptions.git",
+  "asr_engine": "MacWhisper (legacy) — original raw transcripts no longer in repo",
+  "asr_model": "MacWhisper medium (per repo note in START_HERE.md); exact version not recorded",
+  "asr_decoding_parameters": "not recorded — see gap logged in Issue #11 root cause #1",
+  "rag_correction": {
+    "engine": "OpenCC s2t + local Buddhist-term correction table",
+    "opencc_config": "s2t",
+    "opencc_available": true,
+    "correction_table_size": 12,
+    "correction_table": {
+      "龙树菩萨": "龍樹菩薩",
+      "李赞文": "禮讚文",
+      "龙树": "龍樹",
+      "波若": "般若",
+      "印澄": "月稱",
+      "月生": "月稱",
+      "秩序派": "應成派",
+      "自逆": "自續",
+      "自力": "自續",
+      "四帝": "四諦",
+      "他身": "他生",
+      "全无自性身": "全無自性生"
+    },
+    "prompt_template": "請逐字修正以下逐字稿中的錯誤（錯別字、佛法術語、簡轉繁、同音字）。保持原意不變，只修正錯誤，不新增內容，不改段落結構。",
+    "pipeline_script": "scripts/transcribe_11_19.py (template)"
+  },
+  "timestamp_synthesis": {
+    "approach": "synthetic 120s-per-paragraph + 8s-per-sentence baseline",
+    "realigment": "convert_macwhisper.py rescales by audio_duration / synthetic_total",
+    "current_runtime_aligner": "src/js/timeAligner.js (ratio = audioDuration / maxJsonTime)",
+    "known_flaw": "single global ratio cannot represent silence, chanting, edits, speech-rate variation"
+  },
+  "pilot_sessions": [
+    {
+      "sessionId": "01",
+      "audio_relpath": "audio/01.mp3",
+      "audio_realpath": "/home/henry/gdrive/善顯共學/音檔/20160521 入中論善顯密意疏-第六現前地p63(1).MP3",
+      "audio_sha256": "769419e52c4d250be86fa9499e267d47d312f0af9c48946db2c2699fe3d9a225",
+      "audio_duration_seconds": 2465.67175,
+      "session_json_path": "courses/入中論善顯密意疏/sessions/session_01.json",
+      "session_json_sha256": "58a50c1fa235de6543ca4f0edc334fff9cfbe757b299deb3cc140341ed3584da",
+      "paragraph_count": 127,
+      "sentence_count": 434,
+      "provenance_evidence": {
+        "first_paragraph_text_published_sha256": "f428ccaec0004d3b7ca0cf3cbd30ee753354961f198ed46f1dfff11816ef8764",
+        "synthesized_raw_first_paragraph_sha256": "024f65e30218fedff92ba8646101c425261046253566883246c2936b5176a96f",
+        "corrected_synthesized_first_paragraph_sha256": "024f65e30218fedff92ba8646101c425261046253566883246c2936b5176a96f",
+        "correction_idempotent_on_published": true,
+        "raw_to_corrected_diff_lines": []
+      },
+      "notes": "Original MacWhisper export .txt files were not retained in the repo. The published session JSON is the verified-correct artifact. The correction pipeline (OpenCC s2t + correction table) is shown to be idempotent on the published text and reproducible from this script. Future ASR reruns must record the MacWhisper version, model id and decoding parameters — see Issue #11 root cause #1."
+    },
+    {
+      "sessionId": "69A",
+      "audio_relpath": "audio/69A.mp3",
+      "audio_realpath": "/home/henry/gdrive/善顯共學/音檔/20171223-A 入中論善顯密意疏-第六現前地p204(69).MP3",
+      "audio_sha256": "38f3b8e96d95c903dac1248146c4775b17717392a003818cb4bc026347779e58",
+      "audio_duration_seconds": 3256.89,
+      "session_json_path": "courses/入中論善顯密意疏/sessions/session_69A.json",
+      "session_json_sha256": "90e6b95b56b16f19ac690331c06e606284ecdbf051726af3261e892ecb499cc3",
+      "paragraph_count": 118,
+      "sentence_count": 538,
+      "provenance_evidence": {
+        "first_paragraph_text_published_sha256": "dfc200b56fa1504b5ff607812932fdf54ceaddd04ffb9c78fdb7e94031b2e074",
+        "synthesized_raw_first_paragraph_sha256": "2f4de802efca2fa69a5b4c775baa3677676f6aa45f80491cbe3ecbc2d4969c73",
+        "corrected_synthesized_first_paragraph_sha256": "2f4de802efca2fa69a5b4c775baa3677676f6aa45f80491cbe3ecbc2d4969c73",
+        "correction_idempotent_on_published": true,
+        "raw_to_corrected_diff_lines": []
+      },
+      "notes": "Original MacWhisper export .txt files were not retained in the repo. The published session JSON is the verified-correct artifact. The correction pipeline (OpenCC s2t + correction table) is shown to be idempotent on the published text and reproducible from this script. Future ASR reruns must record the MacWhisper version, model id and decoding parameters — see Issue #11 root cause #1."
+    },
+    {
+      "sessionId": "110B",
+      "audio_relpath": "audio/110B.mp3",
+      "audio_realpath": "/home/henry/gdrive/善顯共學/音檔/20181222-B 入中論善顯密意疏-第五難勝地p63(110)-圓滿.mp3",
+      "audio_sha256": "efdb5a072db2297eec5cb938a77575e75c289416a58c61e72fa47ebc1443bd6f",
+      "audio_duration_seconds": 3246.706875,
+      "session_json_path": "courses/入中論善顯密意疏/sessions/session_110B.json",
+      "session_json_sha256": "63239c8f16d81b45695aefb237f4787f11dac75ba83891c1aa5dbdc17df83d30",
+      "paragraph_count": 130,
+      "sentence_count": 599,
+      "provenance_evidence": {
+        "first_paragraph_text_published_sha256": "985ab9f08b3a1125408cd6ab14ab1c722089a3a8eed03ccf430bec9bb8315c10",
+        "synthesized_raw_first_paragraph_sha256": "0a5a6b2553f3cb4f7b8a84ba068b7685b9cc5826a112856cf3eef43d9e046c86",
+        "corrected_synthesized_first_paragraph_sha256": "0a5a6b2553f3cb4f7b8a84ba068b7685b9cc5826a112856cf3eef43d9e046c86",
+        "correction_idempotent_on_published": true,
+        "raw_to_corrected_diff_lines": []
+      },
+      "notes": "Original MacWhisper export .txt files were not retained in the repo. The published session JSON is the verified-correct artifact. The correction pipeline (OpenCC s2t + correction table) is shown to be idempotent on the published text and reproducible from this script. Future ASR reruns must record the MacWhisper version, model id and decoding parameters — see Issue #11 root cause #1."
+    }
+  ]
+}

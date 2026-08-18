@@ -1,0 +1,46 @@
+{
+  "tool": "scripts/stage0_probe_slice.py",
+  "audio_target": "/home/henry/gdrive/善顯共學/音檔/20160521 入中論善顯密意疏-第六現前地p63(1).MP3",
+  "slice_seconds": 30.0,
+  "first_paragraph_synthetic": {
+    "start": 0.0,
+    "end": 19.26,
+    "sentences_count": 5
+  },
+  "first_three_sentences_in_slice": [
+    {
+      "start": 0.0,
+      "end": 1.28,
+      "text": "[p.63] 好。"
+    },
+    {
+      "start": 1.28,
+      "end": 2.57,
+      "text": "嗯，嗯，從第一頁看看，又是第一頁嘛，對吧？"
+    },
+    {
+      "start": 2.57,
+      "end": 3.85,
+      "text": "第六頁。"
+    }
+  ],
+  "mid_three_sentences_in_paragraph": [
+    {
+      "start": 2.57,
+      "end": 3.85,
+      "text": "第六頁。"
+    },
+    {
+      "start": 3.85,
+      "end": 5.14,
+      "text": "本書第六頁。"
+    },
+    {
+      "start": 5.14,
+      "end": 19.26,
+      "text": "第六頁啊，這是本書的第六頁。"
+    }
+  ],
+  "current_alignment_behavior": "convert_macwhisper.py rescales synthetic 120s/8s timestamps by a single global factor = audio_duration / total_synthetic_duration. After rescale the last sentence end == audio duration exactly (ratio = 1.0). Local speech-rate variation, chanting pauses, and edits are NOT represented.",
+  "next_step": "Stage 2 forced alignment: run whisper with word_timestamps=True on each session's audio, force-align corrected transcript text to the words, rebuild sentence.start/end from the word boundaries."
+}

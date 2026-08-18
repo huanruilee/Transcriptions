@@ -1,0 +1,57 @@
+{
+  "tool": "scripts/stage2_calibration.py",
+  "sessionId": "01",
+  "engine": "whisperx",
+  "engine_wall_seconds": 159.04,
+  "clip_window": [
+    1202.835875,
+    1262.835875
+  ],
+  "audio_duration": 2465.67175,
+  "in_clip_sentence_count": 10,
+  "aligned_sentence_count": 10,
+  "aligned_chars_count": 169,
+  "needs_review_count": 0,
+  "needs_review_sentences": [],
+  "sample_cer": 0.0,
+  "cer_basis_chars": {
+    "transcribed_chars": 169,
+    "corrected_chars": 169,
+    "transcribed_chars_normalized": 147,
+    "corrected_chars_normalized": 147
+  },
+  "delta_starts": {
+    "median": 29.874,
+    "p95": 51.194,
+    "count": 10
+  },
+  "delta_ends": {
+    "median": 29.403,
+    "p95": 57.798,
+    "count": 10
+  },
+  "synthetic_pattern_detected": false,
+  "first_aligned_sentence": {
+    "published_start": 1199.45,
+    "published_end": 1213.57,
+    "text": "二地的時候是持戒波羅蜜多增勝。",
+    "aligned_start": 1.16,
+    "aligned_end": 4.041,
+    "mean_score": 0.8337999999999999,
+    "needs_review": false,
+    "matched": 15,
+    "total": 15
+  },
+  "last_aligned_sentence": {
+    "published_start": 1254.67,
+    "published_end": 1271.36,
+    "text": "對，因為這個很厚，翻來覆去也不會。",
+    "aligned_start": 0.06,
+    "aligned_end": 3.441,
+    "mean_score": 0.8260588235294117,
+    "needs_review": false,
+    "matched": 17,
+    "total": 17
+  },
+  "wall_seconds": 159.4
+}

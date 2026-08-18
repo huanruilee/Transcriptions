@@ -1,0 +1,57 @@
+{
+  "tool": "scripts/stage2_calibration.py",
+  "sessionId": "110B",
+  "engine": "whisperx",
+  "engine_wall_seconds": 131.25,
+  "clip_window": [
+    1593.3534375,
+    1653.3534375
+  ],
+  "audio_duration": 3246.706875,
+  "in_clip_sentence_count": 15,
+  "aligned_sentence_count": 15,
+  "aligned_chars_count": 290,
+  "needs_review_count": 0,
+  "needs_review_sentences": [],
+  "sample_cer": 0.0,
+  "cer_basis_chars": {
+    "transcribed_chars": 290,
+    "corrected_chars": 290,
+    "transcribed_chars_normalized": 249,
+    "corrected_chars_normalized": 249
+  },
+  "delta_starts": {
+    "median": 30.006,
+    "p95": 57.224,
+    "count": 15
+  },
+  "delta_ends": {
+    "median": 27.945,
+    "p95": 56.21,
+    "count": 15
+  },
+  "synthetic_pattern_detected": false,
+  "first_aligned_sentence": {
+    "published_start": 1578.4,
+    "published_end": 1598.38,
+    "text": "接下去進入到見道修道的時候，無言而彼色身，無色身。",
+    "aligned_start": 3.581,
+    "aligned_end": 8.783,
+    "mean_score": 0.85244,
+    "needs_review": false,
+    "matched": 25,
+    "total": 25
+  },
+  "last_aligned_sentence": {
+    "published_start": 1653.32,
+    "published_end": 1654.99,
+    "text": "因為對我們來說都是有相，各種的相。",
+    "aligned_start": 1.581,
+    "aligned_end": 5.562,
+    "mean_score": 0.9181176470588236,
+    "needs_review": false,
+    "matched": 17,
+    "total": 17
+  },
+  "wall_seconds": 131.5
+}

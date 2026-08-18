@@ -1,0 +1,189 @@
+{
+  "tool": "scripts/stage2_calibration.py",
+  "issue": "Issue #11",
+  "stage": "Stage 2 — Forced alignment pilot",
+  "asr_engine": "WhisperX (wav2vec2-base zh + 3500-token Mandarin dict)",
+  "asr_engine_details": {
+    "alignment_model": "wav2vec2-base (Mandarin) via WhisperX",
+    "compute_type": "CPU",
+    "device": "cpu",
+    "language": "zh"
+  },
+  "ratios_runtime": {
+    "use_aligned_ratio": 1.0,
+    "legacy_global_ratio_preserved": "src/js/timeAligner.js calculateTimeScaleRatio"
+  },
+  "sessions": [
+    {
+      "tool": "scripts/stage2_calibration.py",
+      "sessionId": "01",
+      "engine": "whisperx",
+      "engine_wall_seconds": 159.04,
+      "clip_window": [
+        1202.835875,
+        1262.835875
+      ],
+      "audio_duration": 2465.67175,
+      "in_clip_sentence_count": 10,
+      "aligned_sentence_count": 10,
+      "aligned_chars_count": 169,
+      "needs_review_count": 0,
+      "needs_review_sentences": [],
+      "sample_cer": 0.0,
+      "cer_basis_chars": {
+        "transcribed_chars": 169,
+        "corrected_chars": 169,
+        "transcribed_chars_normalized": 147,
+        "corrected_chars_normalized": 147
+      },
+      "delta_starts": {
+        "median": 29.874,
+        "p95": 51.194,
+        "count": 10
+      },
+      "delta_ends": {
+        "median": 29.403,
+        "p95": 57.798,
+        "count": 10
+      },
+      "synthetic_pattern_detected": false,
+      "first_aligned_sentence": {
+        "published_start": 1199.45,
+        "published_end": 1213.57,
+        "text": "二地的時候是持戒波羅蜜多增勝。",
+        "aligned_start": 1.16,
+        "aligned_end": 4.041,
+        "mean_score": 0.8337999999999999,
+        "needs_review": false,
+        "matched": 15,
+        "total": 15
+      },
+      "last_aligned_sentence": {
+        "published_start": 1254.67,
+        "published_end": 1271.36,
+        "text": "對，因為這個很厚，翻來覆去也不會。",
+        "aligned_start": 0.06,
+        "aligned_end": 3.441,
+        "mean_score": 0.8260588235294117,
+        "needs_review": false,
+        "matched": 17,
+        "total": 17
+      },
+      "wall_seconds": 159.4
+    },
+    {
+      "tool": "scripts/stage2_calibration.py",
+      "sessionId": "69A",
+      "engine": "whisperx",
+      "engine_wall_seconds": 118.23,
+      "clip_window": [
+        1598.445,
+        1658.445
+      ],
+      "audio_duration": 3256.89,
+      "in_clip_sentence_count": 13,
+      "aligned_sentence_count": 13,
+      "aligned_chars_count": 343,
+      "needs_review_count": 0,
+      "needs_review_sentences": [],
+      "sample_cer": 0.0,
+      "cer_basis_chars": {
+        "transcribed_chars": 343,
+        "corrected_chars": 343,
+        "transcribed_chars_normalized": 297,
+        "corrected_chars_normalized": 297
+      },
+      "delta_starts": {
+        "median": 29.115,
+        "p95": 57.461,
+        "count": 13
+      },
+      "delta_ends": {
+        "median": 21.88,
+        "p95": 51.759,
+        "count": 13
+      },
+      "synthetic_pattern_detected": false,
+      "first_aligned_sentence": {
+        "published_start": 1580.6,
+        "published_end": 1600.84,
+        "text": "」那這邊就是這樣解釋，就過去了。",
+        "aligned_start": 0.88,
+        "aligned_end": 6.122,
+        "mean_score": 0.881375,
+        "needs_review": false,
+        "matched": 16,
+        "total": 16
+      },
+      "last_aligned_sentence": {
+        "published_start": 1657.89,
+        "published_end": 1659.73,
+        "text": "對，可是就是說《般若經》，反正《般若經》我是不太知道，只是就是說，如果找一兩頁，這個這個的前後文一兩頁多啊，就是太多這種，無無無有有有有有有無無，就很多了。",
+        "aligned_start": 0.88,
+        "aligned_end": 28.149,
+        "mean_score": 0.8360897435897436,
+        "needs_review": false,
+        "matched": 78,
+        "total": 78
+      },
+      "wall_seconds": 118.6
+    },
+    {
+      "tool": "scripts/stage2_calibration.py",
+      "sessionId": "110B",
+      "engine": "whisperx",
+      "engine_wall_seconds": 131.25,
+      "clip_window": [
+        1593.3534375,
+        1653.3534375
+      ],
+      "audio_duration": 3246.706875,
+      "in_clip_sentence_count": 15,
+      "aligned_sentence_count": 15,
+      "aligned_chars_count": 290,
+      "needs_review_count": 0,
+      "needs_review_sentences": [],
+      "sample_cer": 0.0,
+      "cer_basis_chars": {
+        "transcribed_chars": 290,
+        "corrected_chars": 290,
+        "transcribed_chars_normalized": 249,
+        "corrected_chars_normalized": 249
+      },
+      "delta_starts": {
+        "median": 30.006,
+        "p95": 57.224,
+        "count": 15
+      },
+      "delta_ends": {
+        "median": 27.945,
+        "p95": 56.21,
+        "count": 15
+      },
+      "synthetic_pattern_detected": false,
+      "first_aligned_sentence": {
+        "published_start": 1578.4,
+        "published_end": 1598.38,
+        "text": "接下去進入到見道修道的時候，無言而彼色身，無色身。",
+        "aligned_start": 3.581,
+        "aligned_end": 8.783,
+        "mean_score": 0.85244,
+        "needs_review": false,
+        "matched": 25,
+        "total": 25
+      },
+      "last_aligned_sentence": {
+        "published_start": 1653.32,
+        "published_end": 1654.99,
+        "text": "因為對我們來說都是有相，各種的相。",
+        "aligned_start": 1.581,
+        "aligned_end": 5.562,
+        "mean_score": 0.9181176470588236,
+        "needs_review": false,
+        "matched": 17,
+        "total": 17
+      },
+      "wall_seconds": 131.5
+    }
+  ]
+}
