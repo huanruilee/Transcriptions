@@ -1,0 +1,63 @@
+{
+  "sessions": [
+    {
+      "sessionId": "01",
+      "diagnostics": {
+        "n_sentences": 434,
+        "n_aligned": 434,
+        "n_omitted": 0,
+        "n_low_confidence": 52,
+        "cer_overall": 0.0,
+        "cer_max": 0.0,
+        "ts_start_median": 33.815,
+        "ts_start_p95": 128.719,
+        "ts_end_median": 33.815,
+        "ts_end_p95": 128.719,
+        "ts_start_max": 165.764,
+        "ts_end_max": 165.764,
+        "n_term_errors": 0,
+        "term_missed_list": []
+      }
+    },
+    {
+      "sessionId": "69A",
+      "diagnostics": {
+        "n_sentences": 538,
+        "n_aligned": 538,
+        "n_omitted": 0,
+        "n_low_confidence": 52,
+        "cer_overall": 0.0,
+        "cer_max": 0.0,
+        "ts_start_median": 45.433,
+        "ts_start_p95": 92.701,
+        "ts_end_median": 45.433,
+        "ts_end_p95": 92.701,
+        "ts_start_max": 111.971,
+        "ts_end_max": 111.971,
+        "n_term_errors": 0,
+        "term_missed_list": []
+      }
+    },
+    {
+      "sessionId": "110B",
+      "diagnostics": {
+        "n_sentences": 599,
+        "n_aligned": 599,
+        "n_omitted": 0,
+        "n_low_confidence": 42,
+        "cer_overall": 0.0,
+        "cer_max": 0.0,
+        "ts_start_median": 19.341,
+        "ts_start_p95": 83.731,
+        "ts_end_median": 19.341,
+        "ts_end_p95": 83.731,
+        "ts_start_max": 111.881,
+        "ts_end_max": 111.881,
+        "n_term_errors": 0,
+        "term_missed_list": []
+      }
+    }
+  ],
+  "supersedes_commit": "2eaaf4f",
+  "supersedes_reason": "Stage 3 used SequenceMatcher.ratio() as CER (wrong) and measured ts error against nearest ASR word (not matched utterance). v2 uses Levenshtein/|ref| and matched-sentence index."
+}

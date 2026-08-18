@@ -1,0 +1,34 @@
+{
+  "stages": [
+    {
+      "sessionId": "69A",
+      "diagnostics": {
+        "n_sentences": 538,
+        "n_needs_review": 52,
+        "n_no_align": 0,
+        "ratio_needs_review": 0.0967,
+        "audio_duration": 3256.89
+      },
+      "audio_sha256": "38f3b8e96d95c903dac1248146c4775b17717392a003818cb4bc026347779e58",
+      "session_json_sha256": "90e6b95b56b16f19ac690331c06e606284ecdbf051726af3261e892ecb499cc3",
+      "evidence_path": "qa_27B/stage2v2_alignment_69A.json",
+      "pilot_path": "qa_27B/stage2v2_aligned_69A.json"
+    },
+    {
+      "sessionId": "110B",
+      "diagnostics": {
+        "n_sentences": 599,
+        "n_needs_review": 42,
+        "n_no_align": 0,
+        "ratio_needs_review": 0.0701,
+        "audio_duration": 3246.707
+      },
+      "audio_sha256": "efdb5a072db2297eec5cb938a77575e75c289416a58c61e72fa47ebc1443bd6f",
+      "session_json_sha256": "63239c8f16d81b45695aefb237f4787f11dac75ba83891c1aa5dbdc17df83d30",
+      "evidence_path": "qa_27B/stage2v2_alignment_110B.json",
+      "pilot_path": "qa_27B/stage2v2_aligned_110B.json"
+    }
+  ],
+  "supersedes_commit": "2eaaf4f",
+  "supersedes_reason": "Previous version used 60s-mid-clip window (non-monotonic) and CER echo. v2 uses WhisperX align() with wav2vec2-large-xlsr-53 Mandarin model, on the FULL audio, producing monotonic char-level timestamps anchored in audio confidence scores."
+}

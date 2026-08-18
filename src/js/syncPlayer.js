@@ -67,7 +67,7 @@ export function initSyncPlayer() {
  * Switch the sync player's target audio/sentences. Should be called whenever
  * the active session changes. Does NOT re-bind global listeners (singleton pattern).
  */
-export function updateSession(audioElement, allSentences, onNextSessionRequested) {
+export function updateSession(audioElement, allSentences, onNextSessionRequested, options = {}) {
   // Always unbind the previous session handlers. The app reuses the same audio
   // element across sessions, so checking element identity is not enough.
   if (boundAudioElement) {
@@ -89,8 +89,13 @@ export function updateSession(audioElement, allSentences, onNextSessionRequested
   if (!audioElement) return;
 
   // Recalculate ratio
+  // Issue #11 v2 — when pilot v2 payload is loaded (sentences already carry
+  // audio-grounded timestamps from WhisperX), we force ratio = 1.0 so the
+  // legacy fallback scaling does NOT corrupt the aligned timestamps.
   updateRatio = () => {
-    if (audioElement.duration && audioElement.duration > 0) {
+    if (options.pilot_v2 === true) {
+      currentRatio = 1.0;
+    } else if (audioElement.duration && audioElement.duration > 0) {
       currentRatio = calculateTimeScaleRatio(allSentences, audioElement.duration);
     } else {
       currentRatio = 1.0;

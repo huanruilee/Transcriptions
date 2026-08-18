@@ -94,9 +94,26 @@ async function switchSession(session) {
   if (sidebar) sidebar.classList.remove('mobile-open');
 
   try {
-    const resp = await fetch(session.jsonUrl);
-    if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
-    currentSessionData = await resp.json();
+    // Issue #11 v2 — feature-flagged pilot route. When ?pilot=<sid> is in
+    // the URL, we fetch the v2-aligned payload instead of the production
+    // session JSON. This lets the pilot run side-by-side without
+    // overwriting production JSON.
+    const pilotMatch = location.search.match(/[?&]pilot=([\w-]+)/);
+    let resp;
+    if (pilotMatch && session.sessionId === pilotMatch[1]) {
+      const pilotUrl = `qa_27B/stage2v2_aligned_${session.sessionId}.json`;
+      console.info(`[pilot] loading v2-aligned payload from ${pilotUrl}`);
+      resp = await fetch(pilotUrl);
+      if (!resp.ok) throw new Error(`pilot HTTP ${resp.status}`);
+      currentSessionData = await resp.json();
+      // Mark this session as loaded from the v2 pilot path so the UI can
+      // optionally show a small "pilot v2" badge.
+      currentSessionData._pilot_v2 = true;
+    } else {
+      resp = await fetch(session.jsonUrl);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+      currentSessionData = await resp.json();
+    }
     // Commit state only after successful fetch + parse
     currentSessionId = session.sessionId;
     localStorage.setItem('last_session_id', session.sessionId);
@@ -275,9 +292,14 @@ function setupAudioPlayer(audioUrl) {
     nowPlaying.textContent = currentSessionData.title;
   }
 
-  // Singleton pattern: init once on first call, then just update target
+  // Singleton pattern: init once on first call, then just update target.
+  // Issue #11 v2 — when the loaded session came from the pilot v2 payload,
+  // pass pilot_v2:true so updateSession forces ratio = 1.0 (no legacy
+  // fallback scaling, since v2 timestamps are already audio-grounded).
   initSyncPlayer();
-  updateSession(audio, allFlattenedSentences, handleNextSession);
+  updateSession(audio, allFlattenedSentences, handleNextSession, {
+    pilot_v2: currentSessionData && currentSessionData._pilot_v2 === true
+  });
 }
 
 function handleNextSession() {
