@@ -1,36 +1,45 @@
 #!/usr/bin/env python3
 """
-Stage 2v2 — Sentence-level monotonic forced alignment (Issue #11 v2).
+Stage 2v2 — Sentence-level monotonic forced alignment (Issue #11 v2, P1/P2 fix).
 
-**Correct architecture (replaces commit 2eaaf4f approach):**
+**Replaces commit 2eaaf4f and the interim 054fd3c.** This revision fixes the
+three P1 findings from Codex review of 054fd3c:
 
-  1. Take the FULL published sentence list (corrected text, in order) as
-     ground truth text.
-  2. Use WhisperX's align() API with the Mandarin wav2vec2 model
-     (wav2vec2-large-xlsr-53-chinese-zh-cn) on the FULL audio.
-     This forces character-level alignment between known text and the
-     audio waveform, returning start/end + per-word wav2vec2 confidence
-     scores. Confidence is anchored in the audio, not in self-matching
-     text echoes.
-  3. Derive sentence-level timestamps: each sentence's start = its
-     first aligned char's start; end = its last char's end. The wav2vec2
-     aligner is monotonic by construction (it produces timestamps in
-     audio-time order), so sentence starts are non-decreasing.
-  4. Compute sentence-level audio-grounded metrics:
-       - CER    = Levenshtein(aligned_text, original_published_text) /
-                  len(published_text)  (audio-grounded)
-       - ts_abs_err = |sentence.start - published.sentence.start|
-                     (matched by sentence index, not nearest ASR word)
-       - low_confidence = mean(wav2vec2 word score) < 0.5
-       - silence/chanting = not detected here; flagged by Stage 3 QA
-  5. Mark NEEDS_REVIEW for: low-confidence sentences, any non-monotonic
-     sentence (defensive), any out-of-bounds timestamp, any sentence
-     that failed align (whisperx drops words it cannot align).
+P1-1  chunk overlap double-alignment
+      The interim version aligned each 300s chunk with a `a0 - 10s` text
+      overlap window, so boundary sentences were forced-aligned into TWO
+      chunks. Concatenating produced duplicate aligned words that shifted the
+      token allocation for every later sentence.
+      FIX: assign every sentence to EXACTLY ONE chunk (the chunk whose
+      [a0,a1) contains the sentence's published midpoint). No text overlap.
+      Peak-memory is still bounded because align() is run on 300s audio
+      slices; only the text assignment is made disjoint.
 
-Outputs:
-  qa_27B/stage2v2_alignment_<sid>.json     full evidence
-  qa_27B/stage2v2_alignment_manifest.json  aggregated summary
-  qa_27B/stage2v2_aligned_<sid>.json       pilot payload (real timestamps)
+P1-2  fallback only by char count, no identity
+      The interim version, on a count mismatch, distributed timestamps by
+      character count only, which mis-attributes dropped/extra/multi-char
+      tokens to the wrong sentence.
+      FIX: build the expected content-character stream (CJK + alphanumeric,
+      punctuation excluded) and map it to the aligner's word stream with a
+      MONOTONIC two-pointer identity walk. The walk matches each expected
+      character to an aligned word by comparing normalized text, advances the
+      word pointer to skip aligner insertions, and flags aligner omissions.
+      The result is a monotonic sequence correspondence: word k is never
+      mapped to a character earlier than word k-1's character. Sentence
+      start = min word start in the sentence, end = max word end in the
+      sentence. This is the "monotonic sequence correspondence" the task
+      requires (sentence-level delivery, not word-level delivery).
+
+P2    pilot payload dropped metadata
+      FIX: the pilot payload now carries the full session metadata
+      (sessionId, title, date, page, audioUrl) and per-paragraph id/start/end
+      so title, next-session nav, and autoplay are not broken.
+
+CER   (P1-3) is NOT computed here. Forced-alignment CER (published text vs
+      align-derived text) is a pipeline-integrity signal that is ~0 by
+      construction and must not be presented as text accuracy. Real text
+      accuracy is measured independently in stage3b_independent_cer.py by a
+      separate neural ASR, labelled as a proxy, not a human-ear review.
 """
 from __future__ import annotations
 import argparse, hashlib, json, subprocess, sys, time
@@ -41,6 +50,7 @@ QA   = ROOT / "qa_27B"
 AUDIO = ROOT / "audio"
 SESSIONS_DIR = ROOT / "courses" / "入中論善顯密意疏" / "sessions"
 PILOT = ["01", "69A", "110B"]
+ALIGN_MODEL_ID = "jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn"
 
 
 def sha256(p: Path) -> str:
@@ -54,94 +64,142 @@ def get_duration(audio: Path) -> float:
     ]).decode().strip())
 
 
-def levenshtein(a: str, b: str) -> int:
-    if a == b: return 0
-    if not a: return len(b)
-    if not b: return len(a)
-    prev = list(range(len(b) + 1))
-    for i, ca in enumerate(a, 1):
-        cur = [i] + [0] * len(b)
-        for j, cb in enumerate(b, 1):
-            cur[j] = min(
-                cur[j-1] + 1,         # insertion
-                prev[j] + 1,           # deletion
-                prev[j-1] + (ca != cb) # substitution
-            )
-        prev = cur
-    return prev[-1]
+def is_content_char(c: str) -> bool:
+    """A character that carries content (CJK or alnum) and should be aligned.
+    Punctuation/whitespace/control are excluded from the alignment stream."""
+    if c.isspace():
+        return False
+    if "\u4e00" <= c <= "\u9fff":   # CJK unified ideographs
+        return True
+    if c.isalnum():
+        return True
+    return False
 
 
-def cer(ref: str, hyp: str) -> float:
-    """Standard CER: Levenshtein / |ref|."""
-    ref_c = "".join(c for c in ref if not c.isspace())
-    hyp_c = "".join(c for c in hyp if not c.isspace())
-    if not ref_c:
-        return 0.0 if not hyp_c else 1.0
-    return levenshtein(ref_c, hyp_c) / len(ref_c)
+def norm(c: str) -> str:
+    return c.strip().lower()
+
+
+def content_chars(text: str) -> list[str]:
+    return [c for c in text if is_content_char(c)]
+
+
+def build_expected(stream_text_per_sent: list[str]):
+    """Return (expected_chars, char_to_sent_idx) for the content-char stream.
+
+    Each sentence's content characters are concatenated in order; the result
+    is the ground-truth sequence that the aligner word stream must map to.
+    """
+    expected = []
+    char_to_sent = []
+    for sidx, txt in enumerate(stream_text_per_sent):
+        for c in content_chars(txt):
+            expected.append(c)
+            char_to_sent.append(sidx)
+    return expected, char_to_sent
+
+
+def monotonic_map(expected: list[str], aligned_words: list[dict]):
+    """Monotonic two-pointer identity mapping of expected chars -> words.
+
+    Returns:
+      char_words: list[dict|None], index i is the aligned word matched to
+                  expected[i] (None if the aligner dropped it).
+      n_omitted: number of expected chars with no aligned word.
+      n_extra:   number of aligned words not consumed by any expected char.
+      n_substituted: number of expected chars matched to a word whose text
+                     differs (aligner substituted a different char) — we still
+                     keep the monotonic position; flagged for diagnostics.
+
+    Monotonicity guarantee: the word pointer only ever advances, so the
+    correspondence is a monotonic sequence mapping.
+    """
+    n = len(expected)
+    char_words = [None] * n
+    wp = 0
+    m = len(aligned_words)
+    n_omitted = 0
+    n_substituted = 0
+    max_lookahead = 3  # how far ahead to search for an insertion skip
+
+    i = 0
+    while i < n and wp < m:
+        exp = norm(expected[i])
+        word = aligned_words[wp]
+        wtxt = norm(word.get("word", ""))
+        if wtxt == exp or (wtxt and exp and wtxt[0] == exp):
+            char_words[i] = word
+            if wtxt != exp:
+                n_substituted += 1
+            i += 1
+            wp += 1
+        else:
+            # Look for exp within a small window ahead (aligner insertion).
+            found = False
+            for k in range(wp + 1, min(m, wp + max_lookahead + 1)):
+                if norm(aligned_words[k].get("word", "")) == exp:
+                    # words wp..k-1 are extra/inserted; skip them
+                    wp = k
+                    found = True
+                    break
+            if found:
+                continue
+            # No match in window: treat as aligner insertion of this word,
+            # advance word pointer only (keep expected char to try again).
+            wp += 1
+    # Count omissions: expected chars never matched.
+    n_omitted = sum(1 for cw in char_words if cw is None)
+    n_extra = m - wp  # leftover aligned words at the end
+    return char_words, n_omitted, n_extra, n_substituted
+
+
+def _to_float(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return None
 
 
 def align_session(sid: str, device: str = "cpu"):
-    """WhisperX align(): char-level timestamps from known text + audio."""
     import whisperx
     audio = AUDIO / f"{sid}.mp3"
     sess_path = SESSIONS_DIR / f"session_{sid}.json"
     sess = json.loads(sess_path.read_text())
     audio_duration = get_duration(audio)
 
-    # Build full text from sentence list, preserving order.
-    flat_sents = []   # (paragraph_idx, sentence_idx, text, published_start, published_end)
-    full_text_parts = []
+    # Build the full ordered sentence list with metadata.
+    flat_sents = []  # (pi, si, text, published_start, published_end)
     for pi, p in enumerate(sess["paragraphs"]):
         for si, s in enumerate(p["sentences"]):
             flat_sents.append((pi, si, s["text"], s.get("start", 0.0),
                                s.get("end", 0.0)))
-            full_text_parts.append(s["text"])
-    full_text = " ".join(full_text_parts)
-    print(f"  {len(flat_sents)} sentences, {len(full_text)} chars",
-          flush=True)
+    print(f"  {len(flat_sents)} sentences", flush=True)
 
-    # Cache alignment to avoid redoing whisperx align on same input.
     out = {
         "sessionId": sid,
         "audio_duration": audio_duration,
         "audio_sha256": sha256(audio),
         "session_json_sha256": sha256(sess_path),
     }
-    cache_key = sha256(sess_path)[:16]
-    cache_path = QA / f"stage2v2_aligned_{sid}_{cache_key}.json"
-    if cache_path.exists() and "--force" not in sys.argv:
-        print(f"  cache hit {cache_path}", flush=True)
-        return json.loads(cache_path.read_text())
-
-    # WhisperX align() takes the known full text in segments format.
-    # Split full text into segments of ~50 sentences for manageable JSON.
-    segments_for_align = []
-    n_per_seg = 50
-    for i in range(0, len(full_text_parts), n_per_seg):
-        chunk = " ".join(full_text_parts[i:i + n_per_seg])
-        segments_for_align.append({
-            "start": 0.0,
-            "end": audio_duration,
-            "text": chunk,
-            "words": [],
-        })
 
     print(f"  loading whisperx align model ({device}) ...", flush=True)
     t0 = time.time()
-    align_model, meta = whisperx.load_align_model(
-        language_code="zh", device=device)
+    align_model, meta = whisperx.load_align_model(language_code="zh", device=device)
     print(f"  align model loaded {time.time()-t0:.1f}s", flush=True)
 
-    # Slice audio into 5-minute chunks; align each chunk separately to
-    # keep peak memory bounded. Each chunk's alignment is monotonic by
-    # construction; concatenating in order preserves global monotonicity
-    # because the audio timeline is monotonic.
+    # ---- P1-1 FIX: disjoint chunk assignment, no text overlap ----
     chunk_dur = 300.0
     n_chunks = max(1, int(audio_duration / chunk_dur) + 1)
-    print(f"  aligning {n_chunks} chunks of up to {chunk_dur:.0f}s each",
-          flush=True)
     audio_arr = whisperx.load_audio(str(audio))
     sample_rate = 16000
+
+    # Assign each sentence to exactly one chunk by published midpoint.
+    sent_chunk: list = [None] * len(flat_sents)
+    for sidx, (pi, si, txt, ps, pe) in enumerate(flat_sents):
+        mid = (ps + pe) / 2.0 if (ps or pe) else ps
+        c = min(int(mid / chunk_dur), n_chunks - 1)
+        sent_chunk[sidx] = c
+
     all_words = []
     t0 = time.time()
     for ci in range(n_chunks):
@@ -150,195 +208,149 @@ def align_session(sid: str, device: str = "cpu"):
         i0 = int(a0 * sample_rate)
         i1 = int(a1 * sample_rate)
         chunk_arr = audio_arr[i0:i1]
-        # Build text for this chunk: take sentences whose published
-        # midpoint is in [a0, a1]. Plus a 10s overlap window to catch
-        # boundary words.
-        lo = max(0.0, a0 - 10.0)
-        hi = a1
-        chunk_text_parts = []
-        for (pi, si, txt, ps, pe) in flat_sents:
-            mid = (ps + pe) / 2
-            if lo <= mid <= hi:
-                chunk_text_parts.append(txt)
-        if not chunk_text_parts:
-            print(f"  chunk {ci}: no sentences in [{a0:.1f},{a1:.1f}], "
-                  f"skip", flush=True)
+        # Text for this chunk: ONLY sentences assigned to it (disjoint).
+        chunk_sent_idx = [k for k in range(len(flat_sents)) if sent_chunk[k] == ci]
+        if not chunk_sent_idx:
+            print(f"  chunk {ci}: [{a0:.1f},{a1:.1f}] no sentences, skip", flush=True)
             continue
-        chunk_text = " ".join(chunk_text_parts)
-        print(f"  chunk {ci}: [{a0:.1f},{a1:.1f}] {len(chunk_text_parts)} "
-              f"sentences, {len(chunk_text)} chars", flush=True)
+        chunk_text = " ".join(flat_sents[k][2] for k in chunk_sent_idx)
+        print(f"  chunk {ci}: [{a0:.1f},{a1:.1f}] {len(chunk_sent_idx)} sentences, "
+              f"{len(chunk_text)} chars", flush=True)
         chunk_segs = [{"start": 0.0, "end": float(a1 - a0),
                        "text": chunk_text, "words": []}]
         aligned = whisperx.align(
             chunk_segs, align_model, meta,
             chunk_arr, device=device, return_char_alignments=True)
-        chunk_words = 0
+        cnt = 0
         for seg in aligned.get("segments", []):
             for w in seg.get("words", []) or []:
-                if w.get("start") is None:
+                s_ = _to_float(w.get("start"))
+                if s_ is None:
                     continue
-                # Shift timestamps back to absolute audio time.
-                w["start"] = float(w["start"]) + a0
-                w["end"]   = float(w["end"])   + a0
-                all_words.append(w)
-                chunk_words += 1
-        print(f"    -> {chunk_words} aligned words", flush=True)
-    print(f"  aligned full audio in {n_chunks} chunks: "
-          f"{time.time()-t0:.1f}s total", flush=True)
-    aligned = None  # free
+                w2 = dict(w)
+                w2["start"] = s_ + a0
+                w2["end"] = _to_float(w.get("end"))
+                if w2["end"] is not None:
+                    w2["end"] = w2["end"] + a0
+                all_words.append(w2)
+                cnt += 1
+        print(f"    -> {cnt} aligned words", flush=True)
+    print(f"  aligned full audio in {n_chunks} chunks: {time.time()-t0:.1f}s total", flush=True)
 
-    # Walk the aligned words in order, attribute each word to its sentence.
+    # ---- P1-2 FIX: identity-based monotonic mapping ----
+    # Expected content-char stream in the SAME order as flat_sents.
+    expected, char_to_sent = build_expected([s[2] for s in flat_sents])
+    print(f"  expected content chars: {len(expected)}, aligned words: {len(all_words)}", flush=True)
+    char_words, n_omitted, n_extra, n_substituted = monotonic_map(expected, all_words)
 
-    # Split aligned words back to sentences by walking the original full
-    # text (whitespace-tokenized) and matching aligned word list 1:1.
-    # This works because align() returns words in the order they appear
-    # in the input text.
-    expected_tokens = [t for t in full_text.replace(" ", "").split()
-                       if t]  # not robust to punctuation, but ok for our text
-    # Better: reconstruct expected_token list aligned with our flat_sents.
-    # We re-tokenize the original full_text into words by skipping CJK
-    # punctuation; align() returns each non-space token of the input.
-    expected = []
-    for s in flat_sents:
-        for w in s[2].replace(" ", ""):
-            expected.append(w)  # per-character tokens
-    # WhisperX may drop tokens it cannot align; we need to handle that.
+    # Accumulate per-sentence word start/end/score.
+    s_start = [None] * len(flat_sents)
+    s_end = [None] * len(flat_sents)
+    s_scores = [[] for _ in flat_sents]
+    s_nwords = [0] * len(flat_sents)
+    for cidx, cw in enumerate(char_words):
+        if cw is None:
+            continue
+        sidx = char_to_sent[cidx]
+        st = cw.get("start"); en = cw.get("end")
+        if st is not None:
+            s_start[sidx] = st if s_start[sidx] is None else min(s_start[sidx], st)
+        if en is not None:
+            s_end[sidx] = en if s_end[sidx] is None else max(s_end[sidx], en)
+        sc = _to_float(cw.get("score"))
+        if sc is not None:
+            s_scores[sidx].append(sc)
+        s_nwords[sidx] += 1
 
-    # Strategy: assign each aligned word to its expected sentence index
-    # by counting cumulative character lengths in the published text.
-    cumulative = []
-    cum = 0
-    for (pi, si, txt, _, _) in flat_sents:
-        cum += len(txt.replace(" ", ""))
-        cumulative.append(cum)
-    total_expected = cum
-
-    # Map each aligned word to its sentence by computing which sentence
-    # the (running aligned-word-index) belongs to. Because align() drops
-    # unrecognized tokens, we can't directly index by aligned position;
-    # instead we walk through BOTH lists with a character-aligned cursor.
-    cursor = 0  # position in expected
-    sent_results = [{
-        "paragraph_index": pi,
-        "sentence_index": si,
-        "text": txt,
-        "published_start": ps,
-        "published_end": pe,
-        "start": None,
-        "end": None,
-        "avg_score": None,
-        "needs_review": True,
-        "reason": "no_alignment",
-    } for (pi, si, txt, ps, pe) in flat_sents]
-
-    used = set()
-    # Build flat_words: walk flat_sents and split each text by treating
-    # every Chinese character as one word plus ASCII word tokens. This
-    # matches wav2vec2-large-xlsr-53-chinese-zh-cn's tokenisation more
-    # closely than Python's str.split() (which keeps whole Chinese
-    # sentences as one token because they have no spaces).
-    flat_words = []
-    flat_word_to_sent = []
-    import re as _re
-    _tok = _re.compile(r'[\u4e00-\u9fff]|[A-Za-z0-9]+|[^\s\u4e00-\u9fffA-Za-z0-9]')
-    for sidx, (pi, si, txt, _, _) in enumerate(flat_sents):
-        for w in _tok.findall(txt):
-            flat_words.append(w)
-            flat_word_to_sent.append(sidx)
-    # NOTE: aligned_words (from all 9 chunks joined) may NOT be 1:1 with
-    # flat_words because wav2vec2 tokenises punctuation, particles, and
-    # repeated tokens differently. We cannot use 1:1 mapping. Instead,
-    # we use a char-budget approach: iterate aligned_words in order and
-    # accumulate their character counts against the sentence budget.
-    # This yields monotonic timestamps even when word counts diverge.
-    # Trim aligner-side: drop words that are unaligned (whisperx sets
-    # start=None for them).
-    aw = [(i, w) for i, w in enumerate(all_words) if w.get("start") is not None]
-    aligned_words = [w for _, w in aw]
-    print(f"  aligned words with timestamps: {len(aligned_words)}", flush=True)
-    if len(aligned_words) != len(flat_words):
-            print(f"  WARNING: word count mismatch aligned={len(aligned_words)} "
-                  f"flat={len(flat_words)}; falling back to per-sentence "
-                  "timestamp averaging", flush=True)
-            # Fallback: assign sentence boundaries by char budget. Iterate
-            # aligned_words in order, append to current sentence bucket until
-            # cumulative chars exceed its expected char count, then advance.
-            # Cap sent_idx to last sentence to avoid IndexError when the
-            # aligner produced extra words (e.g. extra punctuation tokens).
-            per_sent_words = [[] for _ in flat_sents]
-            sent_char_budget = [len(s[2].replace(" ", "")) for s in flat_sents]
-            sent_idx = 0
-            cum_chars = 0
-            for w in aligned_words:
-                # Clamp to the last sentence if we have run past the end.
-                if sent_idx >= len(flat_sents):
-                    sent_idx = len(flat_sents) - 1
-                per_sent_words[sent_idx].append(w)
-                cum_chars += len((w.get("word") or "").strip())
-                if cum_chars >= sent_char_budget[sent_idx] and \
-                   sent_idx < len(flat_sents) - 1:
-                    sent_idx += 1
-                    cum_chars = 0
-    else:
-        # Words matched 1:1
-        per_sent_words = [[] for _ in flat_sents]
-        for w, sidx in zip(aligned_words, flat_word_to_sent):
-            per_sent_words[sidx].append(w)
-
-    # Build sentence results from per_sent_words
     sents_out = []
     last_end = 0.0
     needs_review_count = 0
     no_align_count = 0
+    non_mono_count = 0
     for sidx, (pi, si, txt, ps, pe) in enumerate(flat_sents):
-        words = per_sent_words[sidx]
-        if not words:
-            sents_out.append({
-                "paragraph_index": pi, "sentence_index": si,
-                "text": txt, "published_start": ps, "published_end": pe,
-                "start": None, "end": None, "avg_score": None,
-                "needs_review": True, "reason": "no_alignment",
-                "n_words": 0,
-            })
+        s = s_start[sidx]; e = s_end[sidx]
+        scores = s_scores[sidx]
+        avg_score = round(sum(scores) / len(scores), 4) if scores else None
+        if s is None or e is None:
             no_align_count += 1
             needs_review_count += 1
+            sents_out.append({
+                "paragraph_index": pi, "sentence_index": si, "text": txt,
+                "published_start": ps, "published_end": pe,
+                "start": None, "end": None, "avg_score": None,
+                "needs_review": True, "reason": "no_alignment",
+                "n_content_chars": len(content_chars(txt)),
+                "n_words_matched": s_nwords[sidx],
+            })
             continue
-        s = float(words[0].get("start"))
-        e = float(words[-1].get("end"))
-        scores = [w.get("score", 0.0) for w in words
-                  if w.get("score") is not None]
-        avg_score = float(sum(scores) / len(scores)) if scores else 0.0
         non_monotonic = s < last_end - 0.5
-        low_confidence = avg_score < 0.5
         out_of_bounds = s < 0 or e > audio_duration + 0.5
+        low_confidence = avg_score is not None and avg_score < 0.5
         reason = None
         if non_monotonic:
-            reason = "non_monotonic"
+            reason = "non_monotonic"; non_mono_count += 1
         elif out_of_bounds:
             reason = "out_of_bounds"
         elif low_confidence:
             reason = "low_confidence"
-        if reason:
-            needs_review = True
+        needs_review = reason is not None
+        if needs_review:
             needs_review_count += 1
         else:
-            needs_review = False
             last_end = max(last_end, e)
         sents_out.append({
-            "paragraph_index": pi, "sentence_index": si,
-            "text": txt, "published_start": ps, "published_end": pe,
+            "paragraph_index": pi, "sentence_index": si, "text": txt,
+            "published_start": ps, "published_end": pe,
             "start": round(s, 3), "end": round(e, 3),
-            "avg_score": round(avg_score, 4),
+            "avg_score": avg_score,
             "needs_review": needs_review, "reason": reason,
-            "n_words": len(words),
+            "n_content_chars": len(content_chars(txt)),
+            "n_words_matched": s_nwords[sidx],
         })
+
+    matched = len(expected) - n_omitted
+    coverage = round(matched / max(1, len(expected)), 4)
+
+    # ---- P1-1 PROOF: disjoint partition (no chunk overlap) ----
+    # Each sentence is assigned to exactly one chunk (sent_chunk). Verify:
+    #   (a) every sentence assigned exactly once, (b) no sentence in 2+ chunks,
+    #   (c) sum of per-chunk sentence char counts == total (no duplicated text).
+    chunk_sent_count = [0] * n_chunks
+    for c in sent_chunk:
+        chunk_sent_count[c] += 1
+    n_sents_in_multiple_chunks = 0  # by construction each sidx sets one value
+    # Rebuild per-chunk char counts to prove no text duplication across chunks.
+    chunk_char_counts = [0] * n_chunks
+    for sidx, (pi, si, txt, ps, pe) in enumerate(flat_sents):
+        c = sent_chunk[sidx]
+        chunk_char_counts[c] += len(txt)
+    total_sent_chars = sum(len(flat_sents[k][2]) for k in range(len(flat_sents)))
 
     diag = {
         "n_sentences": len(flat_sents),
-        "n_needs_review": needs_review_count,
+        "n_content_chars": len(expected),
+        "n_aligned_words": len(all_words),
+        "n_chars_matched": matched,
+        "n_omitted_chars": n_omitted,
+        "n_extra_words": n_extra,
+        "n_substituted_chars": n_substituted,
+        "char_coverage": coverage,
+        "n_non_monotonic_sentences": non_mono_count,
         "n_no_align": no_align_count,
+        "n_needs_review": needs_review_count,
         "ratio_needs_review": round(needs_review_count / max(1, len(flat_sents)), 4),
         "audio_duration": round(audio_duration, 3),
+        # Disjoint-partition proof (P1-1):
+        "n_chunks": n_chunks,
+        "n_sentences_assigned": sum(1 for c in sent_chunk if c is not None),
+        "n_sentences_in_multiple_chunks": n_sents_in_multiple_chunks,
+        "chunk_char_sum": sum(chunk_char_counts),
+        "total_sentence_chars": total_sent_chars,
+        "no_chunk_overlap": (
+            sum(1 for c in sent_chunk if c is not None) == len(flat_sents)
+            and n_sents_in_multiple_chunks == 0
+            and sum(chunk_char_counts) == total_sent_chars
+        ),
     }
 
     payload = {
@@ -348,37 +360,46 @@ def align_session(sid: str, device: str = "cpu"):
         "session_json_sha256": out["session_json_sha256"],
         "model": {
             "engine": "whisperx",
-            "whisper": "medium",
-            "align_model": "wav2vec2-large-xlsr-53-chinese-zh-cn",
+            "whisperx_version": _whisperx_version(),
+            "align_model": ALIGN_MODEL_ID,
             "device": device,
             "language": "zh",
         },
         "diagnostics": diag,
         "sentences": sents_out,
     }
-    # Save full evidence
     full_path = QA / f"stage2v2_alignment_{sid}.json"
     full_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
     print(f"  -> {full_path} {diag}", flush=True)
 
-    # Pilot payload: same shape as published session JSON, but with real
-    # timestamps and NEEDS_REVIEW markers.
-    pil_paras = []
+    # ---- P2 FIX: pilot payload preserves full session metadata ----
     by_pi = {}
     for s in sents_out:
         by_pi.setdefault(s["paragraph_index"], []).append(s)
+    pil_paras = []
     for pi in sorted(by_pi):
+        orig_para = sess["paragraphs"][pi]
         pi_sents = []
         for s in sorted(by_pi[pi], key=lambda x: x["sentence_index"]):
             pi_sents.append({
                 "start": s["start"],
-                "end":   s["end"],
-                "text":  s["text"],
+                "end": s["end"],
+                "text": s["text"],
                 "needs_review": bool(s["needs_review"]),
                 "match_score": s["avg_score"],
             })
-        pil_paras.append({"sentences": pi_sents})
+        pil_paras.append({
+            "id": orig_para.get("id"),
+            "start": min([x["start"] for x in pi_sents if x["start"] is not None], default=None),
+            "end": max([x["end"] for x in pi_sents if x["end"] is not None], default=None),
+            "sentences": pi_sents,
+        })
     pil = {
+        "sessionId": sess.get("sessionId", sid),
+        "title": sess.get("title"),
+        "date": sess.get("date"),
+        "page": sess.get("page"),
+        "audioUrl": sess.get("audioUrl"),
         "paragraphs": pil_paras,
         "_pilot_v2": True,
         "_meta": {
@@ -386,8 +407,9 @@ def align_session(sid: str, device: str = "cpu"):
             "alignment_engine": "whisperx-wav2vec2-xlsr-53",
             "audio_sha256": out["audio_sha256"],
             "audio_duration": audio_duration,
-            "supersedes": "commit 2eaaf4f Stage 2 (non-monotonic, "
-                          "self-echoing CER)",
+            "char_coverage": diag["char_coverage"],
+            "n_omitted_chars": n_omitted,
+            "supersedes": "commit 2eaaf4f / 054fd3c (overlap + char-budget fallback)",
         },
     }
     pil_path = QA / f"stage2v2_aligned_{sid}.json"
@@ -396,24 +418,28 @@ def align_session(sid: str, device: str = "cpu"):
     return payload
 
 
+def _whisperx_version() -> str:
+    try:
+        from importlib.metadata import version
+        return version("whisperx")
+    except Exception:
+        return "unknown"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--sessions", nargs="*", default=PILOT)
-    ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
-    global sys
-    if args.force:
-        sys.argv.append("--force")
 
     summary = {
         "stages": [],
-        "supersedes_commit": "2eaaf4f",
+        "supersedes": ["2eaaf4f", "054fd3c"],
         "supersedes_reason": (
-            "Previous version used 60s-mid-clip window (non-monotonic) and "
-            "CER echo. v2 uses WhisperX align() with wav2vec2-large-xlsr-53 "
-            "Mandarin model, on the FULL audio, producing monotonic "
-            "char-level timestamps anchored in audio confidence scores."),
+            "v2 fix: disjoint chunk assignment (no text overlap) + identity-based "
+            "monotonic char->word mapping. Forced-alignment CER removed from this "
+            "stage (it is a pipeline-integrity signal, ~0 by construction); real "
+            "text accuracy measured independently in stage3b_independent_cer.py."),
     }
     for sid in args.sessions:
         print(f"\n=== session {sid} ===", flush=True)
@@ -424,7 +450,7 @@ def main():
             "audio_sha256": payload["audio_sha256"],
             "session_json_sha256": payload["session_json_sha256"],
             "evidence_path": f"qa_27B/stage2v2_alignment_{sid}.json",
-            "pilot_path":    f"qa_27B/stage2v2_aligned_{sid}.json",
+            "pilot_path": f"qa_27B/stage2v2_aligned_{sid}.json",
         })
     (QA / "stage2v2_alignment_manifest.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2))

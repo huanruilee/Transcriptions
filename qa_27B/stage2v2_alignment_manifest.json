@@ -1,13 +1,55 @@
 {
   "stages": [
     {
+      "sessionId": "01",
+      "diagnostics": {
+        "n_sentences": 434,
+        "n_content_chars": 8574,
+        "n_aligned_words": 10062,
+        "n_chars_matched": 8574,
+        "n_omitted_chars": 0,
+        "n_extra_words": 1,
+        "n_substituted_chars": 0,
+        "char_coverage": 1.0,
+        "n_non_monotonic_sentences": 0,
+        "n_no_align": 1,
+        "n_needs_review": 54,
+        "ratio_needs_review": 0.1244,
+        "audio_duration": 2465.672,
+        "n_chunks": 9,
+        "n_sentences_assigned": 434,
+        "n_sentences_in_multiple_chunks": 0,
+        "chunk_char_sum": 10150,
+        "total_sentence_chars": 10150,
+        "no_chunk_overlap": true
+      },
+      "audio_sha256": "769419e52c4d250be86fa9499e267d47d312f0af9c48946db2c2699fe3d9a225",
+      "session_json_sha256": "58a50c1fa235de6543ca4f0edc334fff9cfbe757b299deb3cc140341ed3584da",
+      "evidence_path": "qa_27B/stage2v2_alignment_01.json",
+      "pilot_path": "qa_27B/stage2v2_aligned_01.json"
+    },
+    {
       "sessionId": "69A",
       "diagnostics": {
         "n_sentences": 538,
-        "n_needs_review": 52,
+        "n_content_chars": 11381,
+        "n_aligned_words": 13416,
+        "n_chars_matched": 11381,
+        "n_omitted_chars": 0,
+        "n_extra_words": 1,
+        "n_substituted_chars": 0,
+        "char_coverage": 1.0,
+        "n_non_monotonic_sentences": 0,
         "n_no_align": 0,
+        "n_needs_review": 52,
         "ratio_needs_review": 0.0967,
-        "audio_duration": 3256.89
+        "audio_duration": 3256.89,
+        "n_chunks": 11,
+        "n_sentences_assigned": 538,
+        "n_sentences_in_multiple_chunks": 0,
+        "chunk_char_sum": 13459,
+        "total_sentence_chars": 13459,
+        "no_chunk_overlap": true
       },
       "audio_sha256": "38f3b8e96d95c903dac1248146c4775b17717392a003818cb4bc026347779e58",
       "session_json_sha256": "90e6b95b56b16f19ac690331c06e606284ecdbf051726af3261e892ecb499cc3",
@@ -18,10 +60,24 @@
       "sessionId": "110B",
       "diagnostics": {
         "n_sentences": 599,
-        "n_needs_review": 42,
+        "n_content_chars": 11257,
+        "n_aligned_words": 13030,
+        "n_chars_matched": 11257,
+        "n_omitted_chars": 0,
+        "n_extra_words": 1,
+        "n_substituted_chars": 0,
+        "char_coverage": 1.0,
+        "n_non_monotonic_sentences": 0,
         "n_no_align": 0,
-        "ratio_needs_review": 0.0701,
-        "audio_duration": 3246.707
+        "n_needs_review": 40,
+        "ratio_needs_review": 0.0668,
+        "audio_duration": 3246.707,
+        "n_chunks": 11,
+        "n_sentences_assigned": 599,
+        "n_sentences_in_multiple_chunks": 0,
+        "chunk_char_sum": 13046,
+        "total_sentence_chars": 13046,
+        "no_chunk_overlap": true
       },
       "audio_sha256": "efdb5a072db2297eec5cb938a77575e75c289416a58c61e72fa47ebc1443bd6f",
       "session_json_sha256": "63239c8f16d81b45695aefb237f4787f11dac75ba83891c1aa5dbdc17df83d30",
@@ -29,6 +85,9 @@
       "pilot_path": "qa_27B/stage2v2_aligned_110B.json"
     }
   ],
-  "supersedes_commit": "2eaaf4f",
-  "supersedes_reason": "Previous version used 60s-mid-clip window (non-monotonic) and CER echo. v2 uses WhisperX align() with wav2vec2-large-xlsr-53 Mandarin model, on the FULL audio, producing monotonic char-level timestamps anchored in audio confidence scores."
+  "supersedes": [
+    "2eaaf4f",
+    "054fd3c"
+  ],
+  "supersedes_reason": "v2 fix: disjoint chunk assignment (no text overlap) + identity-based monotonic char->word mapping. Forced-alignment CER removed from this stage (it is a pipeline-integrity signal, ~0 by construction); real text accuracy measured independently in stage3b_independent_cer.py."
 }

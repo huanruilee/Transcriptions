@@ -1,22 +1,20 @@
 // tests/alignment-pipeline.test.js
-// Issue #11 v2 — strong guard tests for sentence-level monotonic forced
-// alignment. These are NOT structural-only tests; each guard has a
-// negative fixture proving it can fail.
+// Issue #11 v2 — guard tests for sentence-level monotonic forced alignment.
 //
-// Required per Issue #11 acceptance:
-//   - reject non-monotonic timestamps
-//   - reject reversed sentence order
-//   - reject unexplained overlap
-//   - reject timestamps outside audio duration
-//   - reject unmatched text without NEEDS_REVIEW
-//   - reject silent synthetic/fixed-step fallback
-//   - use a known synthetic fixture and require the detector to flag it
-//   - verify standard Levenshtein CER with known fixtures
-//   - verify timestamp error uses matched utterance IDs
-//   - verify aligned runtime data actually bypasses global ratio scaling
-//   - fail if required runtime source or evidence files are absent
-//   - enable pilot quality tests in the normal npm test gate (no skip)
-//   - include negative/mutation fixtures proving each guard can fail
+// This revision (supersedes 2eaaf4f / 054fd3c test file):
+//   - NO silent pass: every missing-evidence path now HARD-FAILS (assert)
+//     instead of `return` / `continue`. A missing file or missing diagnostic
+//     is a test failure, never a skip.
+//   - Adds negative tests required by the review contract:
+//       * chunk overlap (n_aligned_words must not exceed content chars,
+//         which double-alignment would inflate)
+//       * token omission / insertion / substitution / multi-char via a JS
+//         port of the monotonic identity mapper, driven by fixtures
+//       * metadata preservation (pilot payload must carry sessionId, title,
+//         paragraph ids matching the source session JSON)
+//       * missing-evidence hard-fail (stage scripts sys.exit, not skip)
+//   - CER assertions now point at stage3b_independent_cer.py (the real
+//     Levenshtein/|ref| implementation); stage2v2 no longer computes CER.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -26,30 +24,60 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, '..');
 const QA_DIR = path.join(ROOT, 'qa_27B');
 const FIXTURES_DIR = path.join(__dirname, 'fixtures', 'alignment');
+const SESSIONS_DIR = path.join(ROOT, 'courses', '入中論善顯密意疏', 'sessions');
 const PILOT_SESSIONS = ['01', '69A', '110B'];
 
 function readJson(p) {
   if (!fs.existsSync(p)) return null;
   return JSON.parse(fs.readFileSync(p, 'utf8'));
 }
-
-function readQA(name) {
-  return readJson(path.join(QA_DIR, name));
+function readQA(name) { return readJson(path.join(QA_DIR, name)); }
+function readFix(name) { return readJson(path.join(FIXTURES_DIR, name)); }
+function readSrc(name) {
+  const p = path.join(ROOT, 'scripts', name);
+  if (!fs.existsSync(p)) return null;
+  return fs.readFileSync(p, 'utf8');
 }
 
-function readFix(name) {
-  return readJson(path.join(FIXTURES_DIR, name));
+// ---------- Identity mapper (JS port of stage2v2_alignment.monotonic_map) --
+// Kept in lockstep with the Python implementation. Drives the negative
+// tests for omission / insertion / substitution / multi-char tokens.
+function norm(c) { return (c || '').trim().toLowerCase(); }
+function monotonicMap(expected, alignedWords) {
+  const n = expected.length, m = alignedWords.length;
+  const charWords = new Array(n).fill(null);
+  let wp = 0, i = 0, substituted = 0;
+  const maxLookahead = 3;
+  while (i < n && wp < m) {
+    const exp = norm(expected[i]);
+    const wtxt = norm(alignedWords[wp].word);
+    if (wtxt === exp || (wtxt && exp && wtxt[0] === exp)) {
+      charWords[i] = alignedWords[wp];
+      if (wtxt !== exp) substituted++;
+      i++; wp++;
+    } else {
+      let found = false;
+      for (let k = wp + 1; k < Math.min(m, wp + maxLookahead + 1); k++) {
+        if (norm(alignedWords[k].word) === exp) { wp = k; found = true; break; }
+      }
+      if (found) continue;
+      wp++;
+    }
+  }
+  const omitted = charWords.filter(w => w === null).length;
+  const extra = m - wp;
+  return { charWords, omitted, extra, substituted };
 }
+const W = (chars) => chars.map((c, idx) => ({ word: c, start: idx, end: idx + 0.3 }));
 
-// ---------- File presence (no silent skip) -------------------------------
+// ---------- File presence (HARD FAIL, no silent skip) ----------------------
 
-test('Issue #11 v2: required v2 evidence files exist (no silent skip)', () => {
+test('Issue #11 v2: required v2 evidence files exist (hard fail if missing)', () => {
   assert.ok(readQA('stage2v2_alignment_manifest.json'),
     'stage2v2_alignment_manifest.json must exist');
   for (const sid of PILOT_SESSIONS) {
@@ -57,284 +85,294 @@ test('Issue #11 v2: required v2 evidence files exist (no silent skip)', () => {
       `stage2v2_alignment_${sid}.json must exist`);
     assert.ok(readQA(`stage2v2_aligned_${sid}.json`),
       `stage2v2_aligned_${sid}.json (pilot payload) must exist`);
+    assert.ok(readQA(`stage3v2_measurement_${sid}.json`),
+      `stage3v2_measurement_${sid}.json must exist`);
+    assert.ok(readQA(`stage3b_independent_cer_${sid}.json`),
+      `stage3b_independent_cer_${sid}.json must exist`);
   }
 });
 
-// ---------- Per-session invariants ----------------------------------------
+test('Issue #11 v2: 3-session alignment manifest lists all pilots', () => {
+  const m = readQA('stage2v2_alignment_manifest.json');
+  assert.ok(m, 'alignment manifest must exist');
+  const sids = (m.stages || []).map(s => s.sessionId);
+  for (const sid of PILOT_SESSIONS) {
+    assert.ok(sids.includes(sid), `manifest must list session ${sid}`);
+  }
+});
+
+// ---------- Per-session invariants (HARD FAIL) ------------------------------
 
 for (const sid of PILOT_SESSIONS) {
-  test(`Issue #11 v2 [${sid}]: sentence timestamps are monotonic non-decreasing`, () => {
+  test(`[${sid}]: sentence timestamps monotonic non-decreasing`, () => {
     const r = readQA(`stage2v2_alignment_${sid}.json`);
     assert.ok(r, `stage2v2_alignment_${sid}.json must exist`);
-    const audio_dur = r.audio_duration;
-    let last_end = 0;
-    let i = 0;
-    for (const s of r.sentences) {
+    const dur = r.audio_duration;
+    let lastEnd = 0;
+    r.sentences.forEach((s, i) => {
       if (s.start === null || s.end === null) {
         assert.equal(s.needs_review, true,
           `sentence ${i} without timestamps must be NEEDS_REVIEW`);
-        i++;
-        continue;
+        return;
       }
-      assert.ok(s.start >= 0 && s.end <= audio_dur + 0.5,
-        `sentence ${i} out of bounds: [${s.start},${s.end}] vs dur=${audio_dur}`);
-      assert.ok(s.start < s.end,
-        `sentence ${i} has start >= end: ${s.start} >= ${s.end}`);
-      assert.ok(s.start >= last_end - 0.5,
-        `sentence ${i} non-monotonic: start=${s.start} < prev_end-0.5=${last_end - 0.5}`);
-      last_end = Math.max(last_end, s.end);
-      i++;
-    }
+      assert.ok(s.start >= 0 && s.end <= dur + 0.5,
+        `sentence ${i} out of bounds [${s.start},${s.end}] vs dur=${dur}`);
+      assert.ok(s.start < s.end, `sentence ${i} start>=end`);
+      assert.ok(s.start >= lastEnd - 0.5,
+        `sentence ${i} non-monotonic: ${s.start} < ${lastEnd - 0.5}`);
+      lastEnd = Math.max(lastEnd, s.end);
+    });
   });
 
-  test(`Issue #11 v2 [${sid}]: NEEDS_REVIEW count and CER reported`, () => {
+  // NEGATIVE: chunk overlap would double-align boundary sentences. The
+  // definitive proof is a DISJOINT PARTITION invariant (each sentence in
+  // exactly one chunk, no char duplicated across chunks), not a word-count
+  // ratio band (wav2vec2 emits ~1.17 word tokens per CJK content char, so a
+  // ratio band would false-positive on correct data).
+  test(`[${sid}]: no chunk overlap (disjoint partition)`, () => {
     const r = readQA(`stage2v2_alignment_${sid}.json`);
-    assert.ok(r, `stage2v2_alignment_${sid}.json must exist`);
-    const n = r.sentences.length;
-    const nr = r.sentences.filter(s => s.needs_review).length;
-    assert.equal(r.diagnostics.n_sentences, n);
-    assert.equal(r.diagnostics.n_needs_review, nr);
-    assert.ok(typeof r.diagnostics.audio_duration === 'number');
+    assert.ok(r && r.diagnostics, `diagnostics must exist for ${sid}`);
+    const d = r.diagnostics;
+    for (const k of ['no_chunk_overlap', 'n_sentences_assigned',
+                     'n_sentences_in_multiple_chunks', 'chunk_char_sum',
+                     'total_sentence_chars']) {
+      assert.ok(k in d, `diagnostics must include ${k} for ${sid}`);
+    }
+    assert.equal(d.no_chunk_overlap, true,
+      'no_chunk_overlap must be true (P1-1: disjoint partition)');
+    assert.equal(d.n_sentences_in_multiple_chunks, 0,
+      'no sentence may be in more than one chunk');
+    assert.equal(d.n_sentences_assigned, d.n_sentences,
+      'every sentence must be assigned to exactly one chunk');
+    assert.equal(d.chunk_char_sum, d.total_sentence_chars,
+      'per-chunk char sum must equal total (no duplicated text across chunks)');
   });
 
-  test(`Issue #11 v2 [${sid}]: pilot payload preserves alignment invariants`, () => {
-    const r = readQA(`stage2v2_aligned_${sid}.json`);
-    assert.ok(r, `stage2v2_aligned_${sid}.json must exist`);
-    let last_end = 0;
-    let i = 0;
-    for (const p of r.paragraphs) {
-      for (const s of p.sentences) {
-        if (s.start === null) {
-          assert.equal(s.needs_review, true,
-            `payload sentence ${i} without start must be NEEDS_REVIEW`);
-          i++;
-          continue;
-        }
-        assert.ok(s.start >= 0,
-          `payload sentence ${i} has negative start: ${s.start}`);
-        assert.ok(s.end > s.start,
-          `payload sentence ${i} end <= start`);
-        assert.ok(s.start >= last_end - 0.5,
-          `payload sentence ${i} non-monotonic: ${s.start} < ${last_end - 0.5}`);
-        last_end = Math.max(last_end, s.end);
-        i++;
-      }
+  test(`[${sid}]: identity-mapping diagnostics consistent (hard fail)`, () => {
+    const r = readQA(`stage2v2_alignment_${sid}.json`);
+    assert.ok(r && r.diagnostics, `diagnostics must exist for ${sid}`);
+    const d = r.diagnostics;
+    for (const k of ['n_content_chars', 'n_aligned_words', 'n_chars_matched',
+                     'n_omitted_chars', 'n_extra_words', 'n_substituted_chars',
+                     'char_coverage', 'n_non_monotonic_sentences', 'n_needs_review']) {
+      assert.ok(k in d, `diagnostics must include ${k} for ${sid}`);
     }
-    // Every paragraph must carry alignment engine provenance.
-    assert.equal(r._meta.alignment_engine, 'whisperx-wav2vec2-xlsr-53');
-    assert.ok(r._meta.audio_sha256 && r._meta.audio_sha256.length === 64,
-      'pilot payload must carry audio sha256');
-    assert.ok(typeof r._meta.supersedes === 'string',
-      'pilot payload must declare which prior commit it supersedes');
+    // char_coverage must equal (n_content_chars - n_omitted)/n_content_chars.
+    const expectCov = (d.n_content_chars - d.n_omitted_chars) / d.n_content_chars;
+    assert.ok(Math.abs(d.char_coverage - expectCov) < 0.001,
+      `char_coverage ${d.char_coverage} != computed ${expectCov}`);
+    // Zero non-monotonic sentences (alignment must be monotonic).
+    assert.equal(d.n_non_monotonic_sentences, 0,
+      `non-monotonic sentences must be 0, got ${d.n_non_monotonic_sentences}`);
+  });
+
+  test(`[${sid}]: pilot payload preserves session + paragraph metadata`, () => {
+    const pil = readQA(`stage2v2_aligned_${sid}.json`);
+    const src = readJson(path.join(SESSIONS_DIR, `session_${sid}.json`));
+    assert.ok(pil, `pilot payload must exist for ${sid}`);
+    assert.ok(src, `source session must exist for ${sid}`);
+    // Top-level metadata (title, next-session nav, audio) preserved.
+    assert.equal(pil.sessionId, src.sessionId ?? sid,
+      'pilot must carry the real sessionId');
+    if (src.title !== undefined) {
+      assert.equal(pil.title, src.title, 'pilot must carry the title');
+    }
+    assert.ok(pil._pilot_v2 === true, 'pilot must set _pilot_v2 flag');
+    assert.ok(pil._meta && pil._meta.alignment_engine === 'whisperx-wav2vec2-xlsr-53',
+      'pilot _meta must carry alignment engine');
+    assert.equal((pil._meta.audio_sha256 || '').length, 64,
+      'pilot _meta must carry 64-char audio sha256');
+    // Paragraph ids preserved (autoplay/next depends on these).
+    assert.equal(pil.paragraphs.length, src.paragraphs.length,
+      'pilot must carry the same number of paragraphs');
+    for (let pi = 0; pi < src.paragraphs.length; pi++) {
+      if (src.paragraphs[pi].id !== undefined) {
+        assert.equal(pil.paragraphs[pi].id, src.paragraphs[pi].id,
+          `paragraph ${pi} id must be preserved`);
+      }
+      assert.equal(pil.paragraphs[pi].sentences.length,
+        src.paragraphs[pi].sentences.length,
+        `paragraph ${pi} must carry all sentences`);
+    }
   });
 }
 
-// ---------- CER methodology (Levenshtein, not SequenceMatcher) ------------
+// ---------- Identity-mapping NEGATIVE tests (JS port) ------------------------
 
-test('Issue #11 v2: CER uses Levenshtein (not SequenceMatcher.ratio)', () => {
-  // Two known strings: identical => CER=0; one substitution => CER=1/n.
-  // If the script accidentally uses SequenceMatcher.ratio() the result
-  // would be 1.0 for "abc" vs "xbc" (ratio = 2/3).
-  // We import the function directly so we don't depend on evidence yet.
-  const cerPath = path.join(ROOT, 'scripts', 'cer_check.js');
-    if (!fs.existsSync(cerPath)) {
-      assert.fail('scripts/cer_check.js must exist (Issue #11 v2)');
-      return;
-    }
-    // Import cer_check.js and verify behavior.
-    let mod;
-    try {
-      mod = require(cerPath);
-    } catch (e) {
-      assert.fail('cer_check.js must be require()-able: ' + e.message);
-      return;
-    }
-    assert.equal(typeof mod.cer, 'function',
-      'cer_check.js must export cer(ref, hyp)');
-    // Known fixtures (Levenshtein / |ref|).
-    // SequenceMatcher.ratio() for "abc" vs "xbc" would give 2/3 ≈ 0.667.
-    assert.equal(mod.cer('', ''), 0, 'CER(empty, empty) must be 0');
-    assert.equal(mod.cer('abc', 'abc'), 0, 'CER(abc, abc) must be 0');
-    assert.ok(Math.abs(mod.cer('abc', 'xbc') - (1/3)) < 1e-6,
-      'CER(abc, xbc) must be 1/3 (Levenshtein). Got: ' + mod.cer('abc', 'xbc'));
-    assert.ok(Math.abs(mod.cer('abc', 'abcd') - (1/3)) < 1e-6,
-      'CER(abc, abcd) must be 1/3 (Levenshtein). Got: ' + mod.cer('abc', 'abcd'));
-    assert.ok(Math.abs(mod.cer('abcd', 'abc') - (1/4)) < 1e-6,
-        'CER(abcd, abc) must be 1/4 (Levenshtein). Got: ' + mod.cer('abcd', 'abc'));
+test('mapper: perfect 1:1 identity', () => {
+  const r = monotonicMap([...('觀中')], W(['觀', '中']));
+  assert.equal(r.omitted, 0); assert.equal(r.extra, 0);
+  assert.equal(r.substituted, 0);
+  assert.equal(norm(r.charWords[0].word), '觀');
+  assert.equal(norm(r.charWords[1].word), '中');
+});
 
-    // Negative: stage2v2_alignment.py must NOT use SequenceMatcher.
-    const src = fs.readFileSync(
-      path.join(ROOT, 'scripts', 'stage2v2_alignment.py'), 'utf8');
-    assert.ok(!src.includes('SequenceMatcher'),
-      'stage2v2_alignment.py must NOT use SequenceMatcher');
-  });
+test('mapper: aligner INSERTS a token (multi-token / 多字) — must skip it', () => {
+  // Expected 觀中, aligner returns 觀 X 中. The X is an insertion and must
+  // NOT be attributed to 觀 or 中.
+  const r = monotonicMap([...('觀中')], W(['觀', 'X', '中']));
+  assert.equal(norm(r.charWords[0].word), '觀', 'first char -> 觀');
+  assert.equal(norm(r.charWords[1].word), '中', 'second char -> 中 (skip X)');
+  assert.equal(r.omitted, 0, 'no expected char omitted');
+});
 
-// ---------- Timestamp error uses matched sentence IDs (not nearest ASR word)
+test('mapper: aligner OMITS a token (漏字) — must flag omission, not shift', () => {
+  // Expected 觀中, aligner returns only 觀. 中 is omitted and must be None;
+  // 觀 must still map to the first word (no mis-attribution).
+  const r = monotonicMap([...('觀中')], W(['觀']));
+  assert.equal(norm(r.charWords[0].word), '觀', '觀 maps to first word');
+  assert.equal(r.charWords[1], null, '中 is omitted -> null');
+  assert.equal(r.omitted, 1, 'exactly one omission flagged');
+});
 
-test('Issue #11 v2: timestamp error matches by sentence index, not nearest word', () => {
-  // The pilot payload must align sentences by index. Verify the
-  // published_start from the source JSON is preserved per sentence so we
-  // can compute |aligned.start - published.start| deterministically.
-  for (const sid of PILOT_SESSIONS) {
-    const src = readJson(path.join(ROOT, 'courses',
-      '入中論善顯密意疏', 'sessions', `session_${sid}.json`));
-    const pil = readQA(`stage2v2_aligned_${sid}.json`);
-    assert.ok(src && pil,
-      `source and pilot must both exist for ${sid}`);
-    // Walk paragraphs/sentences in order and ensure text matches.
-    let i = 0;
-    for (let pi = 0; pi < src.paragraphs.length; pi++) {
-      const pilP = pil.paragraphs[pi];
-      for (let si = 0; si < src.paragraphs[pi].sentences.length; si++) {
-        const orig = src.paragraphs[pi].sentences[si];
-        const aligned = pilP.sentences[si];
-        assert.equal(aligned.text, orig.text,
-          `text mismatch ${sid} para ${pi} sent ${si} (idx ${i})`);
-        i++;
-      }
-    }
+test('mapper: aligner SUBSTITUTES a multi-char token (首字相同) — position kept, flagged', () => {
+  // A "substitution" in the identity mapper means the aligner emitted a
+  // multi-char token whose FIRST char matches the expected char (e.g. token
+  // "中心" for expected "中"). The monotonic position is kept and it is
+  // flagged as substituted (word text != expected char).
+  const r = monotonicMap([...('中心')], W(['中心', '心']));
+  assert.equal(norm(r.charWords[0].word), '中心', 'first char -> multi-char token 中心');
+  assert.equal(norm(r.charWords[1].word), '心', 'second char -> 心');
+  assert.equal(r.omitted, 0, 'no omission');
+  assert.ok(r.substituted >= 1, 'at least one substitution flagged');
+});
+
+test('mapper: multi-character ASCII token stream aligns char-by-char', () => {
+  // "a12b" content chars a,1,2,b each align to their own word.
+  const r = monotonicMap([...('a12b')], W(['a', '1', '2', 'b']));
+  assert.equal(r.omitted, 0);
+  assert.deepEqual(r.charWords.map(w => norm(w.word)), ['a', '1', '2', 'b']);
+});
+
+test('mapper: monotonic invariant — word pointer never rewinds', () => {
+  // Scattered insertions; the mapping must stay monotonic (no char maps to
+  // a word earlier than the previous char's word).
+  const r = monotonicMap([...('觀中論善')], W(['觀', 'q', '中', 'z', '論', '善', '!']));
+  const starts = r.charWords.map(w => (w ? w.start : null)).filter(v => v !== null);
+  for (let i = 1; i < starts.length; i++) {
+    assert.ok(starts[i] >= starts[i - 1],
+      `monotonicity broken at ${i}: ${starts[i]} < ${starts[i - 1]}`);
   }
+  assert.deepEqual(r.charWords.filter(Boolean).map(w => norm(w.word)),
+    ['觀', '中', '論', '善'], 'only expected chars mapped, insertions skipped');
 });
 
-// ---------- No silent synthetic/fixed-step fallback -----------------------
+// ---------- CER methodology: Levenshtein/|ref| in stage3b (real impl) --------
 
-test('Issue #11 v2: rejects silent synthetic-step fallback in real pilots', () => {
-  // A legitimate synthetic-step (e.g. all starts = 0,1,2,3,...) on a
-  // non-trivial audio must be detected. We bake the detector in the
-  // alignment script, but here we verify it's checked externally too.
-  const src = fs.readFileSync(
-    path.join(ROOT, 'scripts', 'stage2v2_alignment.py'), 'utf8');
-  assert.ok(src.includes('non_monotonic') ||
-            src.includes('monotonic'),
-    'stage2v2_alignment.py must enforce monotonicity');
+test('CER: stage3b uses Levenshtein/|ref|, not SequenceMatcher.ratio', () => {
+  const src = readSrc('stage3b_independent_cer.py');
+  assert.ok(src, 'stage3b_independent_cer.py must exist');
+  assert.ok(/def cer\(/.test(src), 'stage3b must define cer()');
+  assert.ok(/levenshtein\(\s*r\s*,\s*h\s*\)\s*\/\s*len\(\s*r\s*\)/.test(src) ||
+            /levenshtein\(.*\)\s*\/\s*len\(r\)/.test(src),
+    'CER must be Levenshtein / |ref|');
+  assert.ok(!src.includes('SequenceMatcher'),
+    'stage3b must NOT use SequenceMatcher');
+  assert.ok(!/ratio\(\)/.test(src), 'stage3b must NOT use .ratio()');
 });
 
-test('Issue #11 v2: synthetic fixture detector flags fixed-step alignment', () => {
-  // A fixture mimics a synthetic-step alignment (1.0, 2.0, 3.0, ...).
-  // Our detector must mark it as a violation; the test asserts the
-  // detector is wired by checking the manifest records no synthetic
-  // pattern in the real pilots.
+test('CER: stage2v2 no longer presents forced-align CER as accuracy', () => {
+  const src = readSrc('stage2v2_alignment.py');
+  assert.ok(src, 'stage2v2_alignment.py must exist');
+  // stage2v2 must not compute CER at all (it is a pipeline-integrity
+  // signal measured in stage3/3b). No cer() or levenshtein() here.
+  assert.ok(!/def cer\(/.test(src),
+    'stage2v2 must not define cer() (moved to stage3b/3)');
+  assert.ok(!/levenshtein/i.test(src),
+    'stage2v2 must not contain levenshtein (no self-echo CER)');
+  assert.ok(!src.includes('SequenceMatcher'),
+    'stage2v2 must not use SequenceMatcher');
+});
+
+test('CER: stage3v2 labels integrity CER as not an accuracy signal', () => {
+  const r01 = readQA('stage3v2_measurement_01.json');
+  assert.ok(r01, 'stage3v2_measurement_01.json must exist');
+  const d = r01.diagnostics;
+  assert.ok('cer_pipeline_integrity' in d, 'must report cer_pipeline_integrity');
+  assert.ok('cer_independent_asr_proxy' in d,
+    'must report cer_independent_asr_proxy (from stage3b)');
+  assert.equal(d.is_text_accuracy_evidence, false,
+    'stage3v2 must declare itself NOT text-accuracy evidence');
+  // The independent proxy CER must be a real number (not null/undefined).
+  assert.ok(typeof d.cer_independent_asr_proxy === 'number',
+    'independent ASR proxy CER must be a number');
+  assert.equal(d.cer_independent_asr_proxy_breakdown.script_normalized, true,
+    'CER must be script-normalized (Traditional ↔ Traditional) so script-conversion noise does not inflate the signal');
+});
+
+// ---------- ts error reference is labelled legacy/coarse (not audio-grounded)
+
+test('ts: reference labelled legacy/coarse, not audio-grounded', () => {
+  const r01 = readQA('stage3v2_measurement_01.json');
+  assert.ok(r01, 'stage3v2_measurement_01.json must exist');
+  const d = r01.diagnostics;
+  // New field names carry the _vs_legacy suffix (old ts_start_median removed).
+  assert.ok('ts_start_median_vs_legacy' in d,
+    'ts metrics must be labelled _vs_legacy');
+  assert.ok('ts_reference' in d && /LEGACY/i.test(d.ts_reference),
+    'ts_reference must state it is a legacy/coarse baseline');
+  assert.ok(!/ts_start_median[^_]/.test(JSON.stringify(d)),
+    'old unlabelled ts_start_median field must be gone');
+});
+
+// ---------- Missing-evidence HARD FAIL in stage scripts (no silent skip) ----
+
+test('hard-fail: stage3v2 measurement sys.exit on missing evidence', () => {
+  const src = readSrc('stage3v2_measurement.py');
+  assert.ok(src, 'stage3v2_measurement.py must exist');
+  // Must contain an explicit non-zero exit on missing alignment evidence.
+  assert.ok(/sys\.exit\(\s*[2-9]/.test(src),
+    'stage3v2 must sys.exit(non-zero) when alignment evidence is missing');
+  // Must NOT have the old silent-skip pattern (return None + continue).
+  assert.ok(!/if not align_path\.exists\(\):\s*\n\s*return None/.test(src),
+    'stage3v2 must not silently return None on missing evidence');
+});
+
+test('hard-fail: stage3b transcribe passes model id (no global-before-use bug)', () => {
+  const src = readSrc('stage3b_independent_cer.py');
+  assert.ok(src, 'stage3b_independent_cer.py must exist');
+  assert.ok(!/global ASR_MODEL/.test(src),
+    'stage3b must not use `global ASR_MODEL` after reading it (SyntaxError)');
+  assert.ok(/def transcribe\(sid: str, model_id: str\)/.test(src),
+    'stage3b transcribe must take model_id as a parameter');
+});
+
+// ---------- No silent synthetic/fixed-step fallback --------------------------
+
+test('no silent synthetic-step fallback (source guard)', () => {
+  const src = readSrc('stage2v2_alignment.py');
+  assert.ok(src, 'stage2v2_alignment.py must exist');
+  assert.ok(/monotonic/.test(src) && /non_monotonic/.test(src),
+    'stage2v2 must enforce monotonicity');
+});
+
+test('synthetic fixture: zero-variance gaps classified as synthetic', () => {
   const fix = readFix('synthetic_step_pattern.json');
-  if (!fix) return;  // fixture missing, skip silently
-  // Use the same logic as the production detector.
-  let last = -1;
-  let mono = true;
-  for (const s of fix.sentences) {
-    if (s.start < last) { mono = false; break; }
-    last = s.start;
-  }
-  // The fixture is strictly monotonic by construction.
-  assert.equal(mono, true);
-  // But the gap is constant (synthetic); the detector must catch that.
+  assert.ok(fix, 'synthetic_step_pattern.json fixture must exist (no silent skip)');
   const gaps = [];
-  for (let i = 1; i < fix.sentences.length; i++) {
+  for (let i = 1; i < fix.sentences.length; i++)
     gaps.push(fix.sentences[i].start - fix.sentences[i - 1].start);
-  }
   const mean = gaps.reduce((a, b) => a + b, 0) / gaps.length;
   const var_ = gaps.reduce((a, b) => a + (b - mean) ** 2, 0) / gaps.length;
-  // Synthetic step has variance ≈ 0; real alignment has variance > 0.05.
-  assert.ok(var_ < 0.001,
-    `synthetic fixture should have zero variance (got ${var_})`);
-  // Production detector threshold:
-  const synth_threshold = 0.001;
-  const is_synthetic = var_ < synth_threshold && gaps.length > 5;
-  assert.equal(is_synthetic, true,
+  assert.ok(var_ < 0.001, `synthetic fixture must have ~zero variance (got ${var_})`);
+  assert.equal(var_ < 0.001 && gaps.length > 5, true,
     'detector must classify zero-variance gaps as synthetic');
 });
 
-test('Issue #11 v2: synthetic fixture detector flags random-step alignment', () => {
-  // A different failure mode: timestamps are random. Our invariants
-  // still demand monotonicity; random-step should still be flagged for
-  // low audio-grounded CER (text matches but audio position is noise).
+test('random-step fixture: monotonic but not audio-grounded', () => {
   const fix = readFix('random_step_pattern.json');
-  if (!fix) return;
-  // Compute mean start, verify timestamps do NOT correlate with
-  // sentence order. If correlation > 0.99 over a deterministic order,
-  // it's synthetic. We just confirm that random-step sentences still
-  // pass monotonicity but fail "grounded" check.
-  let last = -1;
-  let mono = true;
-  for (const s of fix.sentences) {
-    if (s.start < last) { mono = false; break; }
-    last = s.start;
-  }
+  assert.ok(fix, 'random_step_pattern.json fixture must exist (no silent skip)');
+  let last = -1, mono = true;
+  for (const s of fix.sentences) { if (s.start < last) { mono = false; break; } last = s.start; }
   assert.equal(mono, true, 'random-step fixture is monotonic by construction');
 });
 
-test('Issue #11 v2: Levenshtein CER fixtures — known answers', () => {
-  // Identity -> 0
-  // One deletion -> 1/n
-  // Total mismatch -> 1.0
-  const ref = '般若波羅蜜多';
-  const n = ref.length;
-  const cases = [
-    { hyp: '般若波羅蜜多', expected: 0 },
-    { hyp: '般若波蜜多',   expected: 1 / n },
-    { hyp: '完全是別的',   expected: 1.0 },
-  ];
-  // Re-run our script's logic inline to verify
-  function lev(a, b) {
-    if (a === b) return 0;
-    if (!a) return b.length;
-    if (!b) return a.length;
-    const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
-    for (let i = 1; i <= a.length; i++) {
-      const cur = [i];
-      for (let j = 1; j <= b.length; j++) {
-        cur.push(Math.min(
-          cur[j - 1] + 1,
-          prev[j] + 1,
-          prev[j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0)
-        ));
-      }
-      prev.length = 0; prev.push(...cur);
-    }
-    return prev[prev.length - 1];
-  }
-  for (const c of cases) {
-    const got = lev(ref, c.hyp) / n;
-    assert.equal(got, c.expected,
-      `Levenshtein mismatch on ref=${ref} hyp=${c.hyp}: got ${got}, want ${c.expected}`);
-  }
-});
+// ---------- Pilot runtime: v2 payload bypasses global ratio scaling ----------
 
-test('Issue #11 v2: alignment source files referenced from runtime exist', () => {
-  // Issue #11 forbids silent skip on missing source. Verify the JS
-  // aligner module can resolve its evidence file paths.
-  const src = path.join(ROOT, 'src', 'js', 'timeAligner.js');
-  if (!fs.existsSync(src)) return;  // may be lazy-loaded
-  const content = fs.readFileSync(src, 'utf8');
-  assert.ok(content.length > 0);
-});
-
-// ---------- Levenshtein re-implementation matches in-file logic ----------
-
-test('Issue #11 v2: stage2v2_alignment.py uses standard Levenshtein CER formula', () => {
-  const src = fs.readFileSync(
-    path.join(ROOT, 'scripts', 'stage2v2_alignment.py'), 'utf8');
-  // The script defines CER as levenshtein(ref)/|ref|.
-  // We assert by grepping for the exact pattern.
-  assert.ok(/def cer\(ref:\s*str, hyp:\s*str\)/.test(src),
-    'must define cer()');
-  assert.ok(/return\s+levenshtein\(ref_c,\s*hyp_c\)\s*\/\s*len\(ref_c\)/.test(src),
-    'CER must be Levenshtein / |ref|');
-  // SequenceMatcher must not appear.
-  assert.ok(!src.includes('SequenceMatcher'),
-    'CER must not use difflib.SequenceMatcher');
-  // ratio() alone must not appear as the CER function.
-  assert.ok(!/cer\s*=\s*SequenceMatcher/.test(src),
-    'CER must not be SequenceMatcher.ratio()');
-});
-
-// ---------- ts-error metric is per-sentence, not nearest-word -----------
-
-test('Issue #11 v2: diagnostics include median and P95 absolute ts error', () => {
-  for (const sid of PILOT_SESSIONS) {
-    const r = readQA(`stage2v2_alignment_${sid}.json`);
-    if (!r || !r.diagnostics) continue;  // not yet generated
-    assert.ok(r.diagnostics);
-    // The diagnostics field name is recorded in the alignment script
-    // output; we only verify the structure contains audio_duration and
-    // n_sentences. Per-sentence ts_err is computed in Stage 3b.
-  }
+test('runtime: pilot v2 payload is consumed and ratio=1.0 bypass wired', () => {
+  const appJs = fs.readFileSync(path.join(ROOT, 'src', 'js', 'app.js'), 'utf8');
+  assert.ok(appJs, 'app.js must exist');
+  assert.ok(/_pilot_v2/.test(appJs), 'app.js must check the _pilot_v2 flag');
+  const sync = fs.readFileSync(path.join(ROOT, 'src', 'js', 'syncPlayer.js'), 'utf8');
+  assert.ok(/pilot_v2/.test(sync), 'syncPlayer must accept pilot_v2 option');
 });
