@@ -1,0 +1,33 @@
+{
+  "stages": [
+    {
+      "sessionId": "01",
+      "cer_independent_asr_proxy": 0.291791,
+      "cer_raw_script_mismatch": 0.291493,
+      "script_normalized": true,
+      "asr_model": "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+      "is_go_gate": false,
+      "evidence_path": "qa_27B/stage3b_independent_cer_01.json"
+    },
+    {
+      "sessionId": "69A",
+      "cer_independent_asr_proxy": 0.319022,
+      "cer_raw_script_mismatch": 0.544648,
+      "script_normalized": true,
+      "asr_model": "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+      "is_go_gate": false,
+      "evidence_path": "qa_27B/stage3b_independent_cer_69A.json"
+    },
+    {
+      "sessionId": "110B",
+      "cer_independent_asr_proxy": 0.257022,
+      "cer_raw_script_mismatch": 0.496853,
+      "script_normalized": true,
+      "asr_model": "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+      "is_go_gate": false,
+      "evidence_path": "qa_27B/stage3b_independent_cer_110B.json"
+    }
+  ],
+  "asr_model": "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+  "note": "Independent ASR proxy. NOT a human ear review, NOT a GO/NO-GO gate. Technical/reproducibility signal only."
+}

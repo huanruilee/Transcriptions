@@ -1,17 +1,27 @@
 {
-  "supersedes_commit": "2eaaf4f",
-  "supersedes_reason": "commit 2eaaf4f lacked model version pinning, audio hashes, and explicit reproduction commands. Stage 2 used an invalid 60-second-mid-clip window; Stage 3 used SequenceMatcher.ratio as CER (wrong) and nearest-word ts error (wrong).",
+  "supersedes": [
+    "2eaaf4f",
+    "054fd3c"
+  ],
+  "supersedes_reason": "2eaaf4f lacked version pinning and used a 60s-mid-clip window (non-monotonic) + SequenceMatcher.ratio as CER. 054fd3c added chunking but had a text-overlap double-alignment (P1-1) and a char-budget fallback (P1-2), and still presented forced-align CER as accuracy (P1-3).",
   "branch": "issue11-v2-correction",
-  "git_head_sha": "2eaaf4fed0eb26573fa1762de33c91d04a6820dd",
+  "git_head_sha": "1b553137d831e2e3c28a9dc06bb202773696e336",
   "versions": {
     "python": "3.11.15",
     "node": "v22.23.1",
     "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.39",
-    "cuda_available": "False",
-    "whisperx": "unknown",
+    "torch": "2.8.0",
+    "whisperx": "3.8.6",
+    "faster_whisper": "1.2.1",
+    "opencc": "0.1.7",
+    "huggingface_hub": "0.36.2",
+    "transformers": "4.57.6",
     "align_model_id": "jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn",
-    "align_model_dir_exists": "True",
-    "align_model_dir_size": "5105024244"
+    "align_model_dir_exists": true,
+    "align_model_dir_size": 5105024244,
+    "independent_asr_model_id": "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+    "independent_asr_model_dir_exists": true,
+    "independent_asr_model_dir_size": 3243332006
   },
   "inputs_sha256": {
     "session_01.json": "58a50c1fa235de6543ca4f0edc334fff9cfbe757b299deb3cc140341ed3584da",
@@ -19,17 +29,18 @@
     "session_110B.json": "63239c8f16d81b45695aefb237f4787f11dac75ba83891c1aa5dbdc17df83d30"
   },
   "outputs_sha256": {
-    "stage2v2_alignment_69A.json": "cd26806516db8a2c6af29b48f449798d9bf52d13d87c94a142aef7580966c526",
-    "stage2v2_alignment_manifest.json": "8c6fe6b71f5cd1da636e82bd1690974323c08c0213239536c8b56061f20ffdbf",
-    "stage2v2_alignment_110B.json": "df8f14a4d50ed45105b7cfe5de04c371e63e9931872bb7542f152c4889718141",
-    "stage2v2_alignment_01.json": "be685d77a99df9720e7a0c74341084df35529a77de47eb25288ad582ed49302c",
-    "stage2v2_aligned_01.json": "6e731167ea7da1128e1875368121e42950d8c28b1505c1642dd467e6ceedbff9",
-    "stage2v2_aligned_69A.json": "cbc4bcb9786f90853a44571153e4c23b1ab37fe1f7577b6d69375604f0510be2",
-    "stage2v2_aligned_110B.json": "a18b26c6a7d8d2ddb958beefa191bdae72a0b9662f6f313e3a08cfa9777f25e5",
-    "stage3v2_measurement_manifest.json": "430188d6ee328836e4c3bae992b20528167bf46e99fc7743a6d1de3271e6bb67",
-    "stage3v2_measurement_69A.json": "be8b31c46b6230e3144ad1d32efd64b700da3d986e94d0af4688cc6565a844c1",
-    "stage3v2_measurement_110B.json": "b14a89852c08772741596ceefc3ef0ad426c182f8b3a5ff184a41bfd0a19cad2",
-    "stage3v2_measurement_01.json": "39949fd8d9a9270d5e77515ade1f0b4386cd25dde387611a9e7cdc6a6ec33d43"
+    "stage2v2_alignment_01.json": "914b9f70c219ec1adda9170a09d2428915b43221dc499d8efabce3b4d6b8d6b9",
+    "stage2v2_alignment_69A.json": "151897de4ada35f584c1f21cb0d9fa8510d71c8598503bae7ef75a9dbf05a0cd",
+    "stage2v2_alignment_110B.json": "b48daa154dfff085154cb70af377800da730375817226801af4092c9285b4d5b",
+    "stage2v2_aligned_01.json": "b0f05773ef5d336835e2f63d0b74edfd87d28d74dd614f655f4d2a9cecb93f7d",
+    "stage2v2_aligned_69A.json": "1ac9aaef5ba2c28ccf0464d3d3ebd6a87bff80f16f621ff623c6f0f616f97f6c",
+    "stage2v2_aligned_110B.json": "0317ddd43a9c594f76b76352f74dedf9cee22b0ae20535a7820adeeabc3b6014",
+    "stage3v2_measurement_01.json": "d2781cdafba8ce2cf9fe259cd62a937e2b823e5efc778212c44fdd919b9198bc",
+    "stage3v2_measurement_69A.json": "d17d17cea43c903b18072eb7c1f5f19a76179bd98698e620d2a4ce5afc433408",
+    "stage3v2_measurement_110B.json": "c137d336017ba47eba1a0bb4f6e7e9f3aa2579c8b0ec7e2176f0d9854a8fcda1",
+    "stage3b_independent_cer_01.json": "75acb2ac48e81dd14b4498ce06a86e44363e8eef053188827610ad68c32a2976",
+    "stage3b_independent_cer_69A.json": "14633f2eae5690e6d2ef78f3a11080ef325acbf0819befc5c6ce233d088e85e7",
+    "stage3b_independent_cer_110B.json": "2efc0875adbf0eeb693c6e6ace01c77e700ff2d8bf65bf72899bfef9b0db2eaa"
   },
   "audio_sha256": {
     "49A.mp3": "807e10b60576eb781da74a0521a10fd4bd62a375b2faf0195550bf96f54c97ab",
@@ -232,22 +243,24 @@
     "13B.mp3": "fb81bcac9001613b224b63c9565eabf6f0ffe7c5dd2cca0ad1effe0440de0d4b",
     "10B.mp3": "ceb58a7f27a45caa2557d5cc89a57ccc27aac7a287203c7d393a343d19cb870f"
   },
+  "alignment_manifest_present": true,
   "repro_commands": [
     "pip install 'huggingface-hub>=0.34.0,<1.0' whisperx faster-whisper opencc-python-reimplemented",
     "python scripts/stage2v2_alignment.py --sessions 01 69A 110B",
+    "python scripts/stage3b_independent_cer.py --sessions 01 69A 110B",
     "python scripts/stage3v2_measurement.py --sessions 01 69A 110B",
-    "python scripts/stage4v2_provenance.py",
-    "npm test"
+    "python scripts/stage4v2_provenance.py --head-sha <FINAL_SHA>",
+    "npm test",
+    "curl -s https://gx10-2887.tail378c21.ts.net/transcriptions/?pilot=01"
   ],
   "estimated_timings": {
-    "alignment_session_01_minutes_estimated": 9,
-    "alignment_session_69A_minutes_estimated": 11,
-    "alignment_session_110B_minutes_estimated": 11,
-    "measurement_total_seconds_estimated": 10,
-    "test_total_seconds_estimated": 30
+    "alignment_session_minutes_est": 9,
+    "independent_asr_session_minutes_est": 8,
+    "measurement_seconds_est": 10,
+    "test_seconds_est": 30
   },
   "historical_gaps": [
-    "Original MacWhisper provenance cannot be recovered — the MacWhisper workflow ran outside this repo and did not emit version-locked transcripts. The published sentence texts and timestamps in courses/.../session_*.json are therefore treated as an opaque third-party artefact; we do not claim audio provenance for the original MacWhisper step."
+    "Original MacWhisper provenance cannot be recovered — it ran outside this repo. Published sentence texts/timestamps are treated as an opaque third-party artefact; no audio provenance is claimed for the original MacWhisper step."
   ],
   "evidence_path": "qa_27B/stage4v2_provenance.json"
 }

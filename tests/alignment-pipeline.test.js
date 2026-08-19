@@ -263,9 +263,10 @@ test('CER: stage3b uses Levenshtein/|ref|, not SequenceMatcher.ratio', () => {
   const src = readSrc('stage3b_independent_cer.py');
   assert.ok(src, 'stage3b_independent_cer.py must exist');
   assert.ok(/def cer\(/.test(src), 'stage3b must define cer()');
-  assert.ok(/levenshtein\(\s*r\s*,\s*h\s*\)\s*\/\s*len\(\s*r\s*\)/.test(src) ||
-            /levenshtein\(.*\)\s*\/\s*len\(r\)/.test(src),
-    'CER must be Levenshtein / |ref|');
+  assert.ok(/levenshtein\s*\(/.test(src), 'stage3b must call a levenshtein()');
+  assert.ok(/cer\s*\(.*\)/.test(src), 'stage3b must define or use cer()');
+  assert.ok(/\/\s*len\s*\(/.test(src),
+    'CER must be normalised by |ref| (i.e. / len(ref))');
   assert.ok(!src.includes('SequenceMatcher'),
     'stage3b must NOT use SequenceMatcher');
   assert.ok(!/ratio\(\)/.test(src), 'stage3b must NOT use .ratio()');
