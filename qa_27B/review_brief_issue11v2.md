@@ -112,7 +112,7 @@ paragraphs[].sentences[].start, end, text, needs_review, match_score
 | n aligned words | 10 062 | 13 416 | 13 030 |
 | **char_coverage** | **1.0** | **1.0** | **1.0** |
 | n omitted chars | 0 | 0 | 0 |
-| n extra words | 1 | 1 | 1 |
+| n extra words | 1 488 | 2 035 | 1 773 |
 | n non-monotonic | **0** | **0** | **0** |
 | **no_chunk_overlap** | **true** | **true** | **true** |
 | chunk_char_sum | 10 150 | 13 459 | 13 046 |
