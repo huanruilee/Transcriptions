@@ -93,11 +93,29 @@ def _clean(s: str) -> str:
                    and unicodedata.category(c)[0] not in ("P", "S"))
 
 
+# Normalize faster-whisper output from Simplified to Traditional before CER.
+# Without this the audit systematically flags correct ASR as INCONCLUSIVE
+# (own_cer > 0.50 from script mismatch alone), as the reviewer caught.
+_OPENCC_S2T = None
+def _s2t(s: str) -> str:
+    global _OPENCC_S2T
+    if _OPENCC_S2T is None:
+        import opencc
+        _OPENCC_S2T = opencc.OpenCC("s2t")
+    return _OPENCC_S2T.convert(s)
+
+
 def seg_cer(ref: str, hyp: str) -> float:
-    r, h = _clean(ref), _clean(hyp)
+    # Compare Traditional vs Traditional (both sides s2t-normalized) so a
+    # correct ASR in Simplified doesn't get flagged as high-CER noise.
+    r, h = _clean(_s2t(ref)), _clean(_s2t(hyp))
     if not r:
         return 0.0 if not h else 1.0
-    return levenshtein(r, h) / len(r)
+    # Cap at 1.0: levenshtein/|ref| > 1 means hyp is much longer than ref,
+    # but a single segment's CER should never exceed 1.0 (would mean every
+    # ref char was wrong at least once). The old formula bled into >1 and
+    # broke the `all three CERs >= 0.999` discrimination check.
+    return min(1.0, levenshtein(r, h) / len(r))
 
 
 def extract_segment(sid: str, start: float, end: float, out_wav: Path) -> bool:
