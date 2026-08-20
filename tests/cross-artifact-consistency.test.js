@@ -70,14 +70,23 @@ test.describe('Cross-artifact consistency (hard fail on ANY drift)', () => {
   const pkg = readJSON('review_verification_package.json');
   const brief = readBrief();
 
-  const hasEvidence = raws.every(r => r.a !== null);
-  const hasAll = hasEvidence && manifest && pkg && brief;
+  const missingRaw = raws.filter(r => r.a === null).map(r => r.sid);
+  const hasEvidence = missingRaw.length === 0;
+  const hasAll = hasEvidence && manifest !== null && pkg !== null && brief !== null;
 
-  test('evidence files exist (skip if pipeline not run)', () => {
-    if (!hasEvidence) {
-      console.log('  (skipping — pipeline evidence not yet generated)');
-      return; // not a failure; pipeline hasn't run yet
+  // HARD FAIL on missing evidence (reviewer #5349634955 follow-up:
+  // was previously soft-skipped, hiding drift). Each missing artifact gets
+  // its own assertion so the failure log names exactly what is gone.
+  test('evidence files exist (HARD FAIL if any missing)', () => {
+    const missing = [];
+    for (const { sid, a } of raws) {
+      if (a === null) missing.push(`qa_27B/stage2v2_alignment_${sid}.json`);
     }
+    if (manifest === null) missing.push('qa_27B/stage2v2_alignment_manifest.json');
+    if (pkg === null) missing.push('qa_27B/review_verification_package.json');
+    if (brief === null) missing.push('qa_27B/review_brief_issue11v2.md');
+    assert.deepEqual(missing, [],
+      `HARD FAIL — cross-artifact evidence is incomplete; cannot guarantee consistency. Missing: ${missing.join(', ')}. Run scripts/run_full_chain.sh to regenerate.`);
   });
 
   // --- 1. Raw JSON internal invariant: n_extra = n_aligned - n_content + n_omitted

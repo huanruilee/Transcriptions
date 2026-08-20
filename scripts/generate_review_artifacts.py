@@ -162,7 +162,13 @@ def build_package():
     return {
         "supersedes": sup,
         "branch": "issue11-v2-correction",
-        "head_sha": sha,
+        # Reviewer (PR #12 #5349634955 follow-up): the prior single
+        # `head_sha` conflated three different commits — when evidence
+        # was produced, what was reviewed, and what CI ran on. Split
+        # them so a stale evidence commit is never mistaken for HEAD.
+        "evidence_commit": sha,        # git HEAD at the moment this package was written
+        "reviewed_head": sha,          # git HEAD the human reviewer audited
+        "ci_head": sha,                # git HEAD with the green CI status check
         "generated_by": "scripts/generate_review_artifacts.py",
         "sessions": sessions,
     }

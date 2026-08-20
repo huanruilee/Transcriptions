@@ -20,7 +20,11 @@ This script tests exactly that, per sentence, on the REAL audio:
         - its OWN published sentence (own_cer)
         - the PREVIOUS published sentence (prev_cer)
         - the NEXT published sentence (next_cer)
-  5. anchor_ok(N)  :=  own_cer <= prev_cer  AND  own_cer <= next_cer
+  5. anchor_ok(N)  :=  own_cer < prev_cer  AND  own_cer < next_cer
+     (strict tie-break; ties mean the audio could belong to either neighbour
+      and the timestamp is not anchored)
+  6. INCONCLUSIVE if ASR emits empty / segment < 0.5s / all three CERs are 1.0
+     / own_cer > MAX_OWN_CER. INCONCLUSIVE does NOT count as PASS.
 
 If the timestamp is correct, the audio in [start,end] matches sentence N, so
 own_cer is the smallest. If the timestamp is mis-anchored (off by a sentence),
@@ -30,15 +34,28 @@ is the clean audio-grounded anchor signal.
 
 Honest labelling (carried in the output so nobody over-claims):
   - is_audio_grounded : True   (real audio segments are used)
-  - is_human_ear_review : False (this is a machine ASR anchor check, NOT a
-                                 human listening; final text-accuracy /
-                                 Buddhist-term acceptance still needs ears)
+  - is_human_ear_review : False (this is a MACHINE ASR anchor check, NOT a
+                                 human listening; the reviewer requested
+                                 "audio-capable *human-ear* sentence-anchor
+                                 review" for samples flagged ANCHOR_FAIL
+                                 or INCONCLUSIVE — that step still needs a
+                                 human and is NOT covered by this script)
   - is_go_gate : False by itself; it is a required *technical* precondition.
 
-Verdict scale (per session):
-  GO      anchor_rate >= 0.90  AND  timestamps monotonic
+Verdict scale (per session, over CONCLUSIVE rows only):
+  GO      anchor_rate >= 0.90  AND  timestamps monotonic  AND  zero INCONCLUSIVE
   ADJUST  0.70 <= anchor_rate < 0.90
-  STOP    anchor_rate < 0.70
+  STOP    anchor_rate < 0.70  OR  any INCONCLUSIVE  OR  monotonicity fails
+
+Per-segment decision (reviewer #5349634955 follow-up):
+  ANCHOR_OK     own_cer < prev_cer AND own_cer < next_cer AND own_cer <= MAX_OWN_CER
+                AND asr emitted text AND segment >= MIN_SEG_DUR
+  ANCHOR_FAIL   same conditions as ANCHOR_OK but own_cer is NOT the strict min
+  INCONCLUSIVE  asr emitted empty string, OR segment is too short (< MIN_SEG_DUR),
+                OR all three CERs are >=0.999 (no discrimination),
+                OR own_cer > MAX_OWN_CER (compare meaningless)
+                INCONCLUSIVE is excluded from the rate; its presence forces
+                STOP because we cannot prove the timestamps are anchored.
 """
 from __future__ import annotations
 import argparse, json, subprocess, time
@@ -51,6 +68,8 @@ ASR_MODEL = "mobiuslabsgmbh/faster-whisper-large-v3-turbo"
 PILOT = ["01", "69A", "110B"]
 N_SAMPLE = 25          # sentences sampled per session (evenly spaced)
 G_OWN, A_OWN = 0.90, 0.70   # anchor_rate GO / ADJUST thresholds
+MAX_OWN_CER = 0.50   # own_cer must be <= this; otherwise INCONCLUSIVE
+MIN_SEG_DUR = 0.5    # segments shorter than this are INCONCLUSIVE (too brief to discriminate)
 
 
 def levenshtein(a: str, b: str) -> int:
@@ -136,9 +155,47 @@ def main():
                 sents.append({"start": s["start"], "end": s["end"],
                               "text": s["text"], "needs_review": s.get("needs_review", False)})
         n = len(sents)
-        k = min(args.n_sample, n)
-        # evenly spaced indices
-        idxs = sorted({round(i * (n - 1) / max(1, k - 1)) for i in range(k)}) if k > 1 else [0]
+        # Sentence sampling — reviewer #5349634955 follow-up:
+        # Plain even spacing misses the cases that matter most for an audio
+        # anchor audit: session start/end, chunk boundaries (where the
+        # forced-aligner might drift), and NEEDS_REVIEW sentences. Build a
+        # set of MUST-CHECK indices first, then fill to n_sample with even
+        # spacing.
+        must = set()
+        if n >= 1:
+            must.add(0)
+            must.add(n - 1)
+        # ~5-minute chunk boundaries in the audio timeline (300s). Pick
+        # the sentence whose [start,end] contains each boundary; if no
+        # sentence straddles it, take the nearest by start.
+        for boundary in range(300, int(sents[-1]["end"]) if sents and sents[-1].get("end") else 0, 300):
+            pick = None
+            for j, ss in enumerate(sents):
+                if ss.get("start") is None or ss.get("end") is None:
+                    continue
+                if ss["start"] <= boundary <= ss["end"]:
+                    pick = j; break
+            if pick is None:
+                # nearest by start
+                best = min(((abs((ss.get("start") or 0) - boundary), j)
+                            for j, ss in enumerate(sents)
+                            if ss.get("start") is not None), default=None)
+                if best is not None:
+                    pick = best[1]
+            if pick is not None:
+                must.add(pick)
+        # Every NEEDS_REVIEW sentence — these are the aligner's own
+        # low-confidence flags; they must NOT be skipped.
+        for j, ss in enumerate(sents):
+            if ss.get("needs_review"):
+                must.add(j)
+        # Pad with even spacing to hit n_sample.
+        n_target = min(args.n_sample, n)
+        if len(must) < n_target:
+            stride = max(1, (n - 1) // (n_target - len(must) + 1))
+            for j in range(0, n, stride):
+                must.add(j)
+        idxs = sorted(i for i in must if i < n)[:n_target]
 
         rows = []
         # Coarse monotonicity check (skip sentence pairs with any missing ts)
@@ -151,45 +208,89 @@ def main():
         t0 = time.time()
         for rank, i in enumerate(idxs):
             s = sents[i]
+            seg_dur = (s["end"] or 0) - (s["start"] or 0) if s.get("start") is not None and s.get("end") is not None else 0
             wav = tmp / f"{sid}_{i:03d}.wav"
             ok = extract_segment(sid, s["start"], s["end"], wav)
+            row = {"i": i, "start": s["start"], "end": s["end"],
+                   "dur": round(seg_dur, 3), "published": s.get("text", ""),
+                   "needs_review": s.get("needs_review", False)}
             if not ok:
-                rows.append({"i": i, "start": s["start"], "end": s["end"],
-                             "extract_failed": True, "anchor_ok": False})
-                continue
+                row.update({"extract_failed": True, "verdict": "INCONCLUSIVE",
+                            "reason": "extract_failed", "anchor_ok": False})
+                rows.append(row); continue
+
             hyp = asr(wav)
-            own = seg_cer(sents[i]["text"], hyp)
+            own = seg_cer(s["text"], hyp)
             prev = seg_cer(sents[i-1]["text"], hyp) if i > 0 else 9.9
-            nxt = seg_cer(sents[i+1]["text"], hyp) if i < n-1 else 9.9
-            anchor_ok = (own <= prev) and (own <= nxt)
-            rows.append({"i": i, "start": s["start"], "end": s["end"],
-                         "dur": round(s["end"]-s["start"], 3),
-                         "published": s["text"],
-                         "asr": hyp.strip(),
-                         "own_cer": round(own, 4), "prev_cer": round(prev, 4),
-                         "next_cer": round(nxt, 4),
-                         "anchor_ok": anchor_ok,
-                         "needs_review": s.get("needs_review", False)})
+            nxt  = seg_cer(sents[i+1]["text"], hyp) if i < n-1 else 9.9
+
+            # --- Per-segment decision (reviewer #5349634955 follow-up):
+            # own_cer == prev_cer == next_cer == 1.0 means ASR emitted
+            # nothing or noise that matches none of the three sentences.
+            # That has zero discriminating power — calling it PASS would
+            # be misleading. Same when audio is too brief, or own CER
+            # is so bad that the comparison isn't meaningful.
+            reason = None
+            if not hyp.strip():
+                reason = "asr_empty"
+            elif seg_dur < MIN_SEG_DUR:
+                reason = "segment_too_short"
+            elif own >= 0.999 and prev >= 0.999 and nxt >= 0.999:
+                reason = "asr_no_discrimination"
+            elif own > MAX_OWN_CER:
+                reason = "own_cer_above_max"
+
+            if reason is not None:
+                row.update({"asr": hyp.strip(), "own_cer": round(own, 4),
+                            "prev_cer": round(prev, 4), "next_cer": round(nxt, 4),
+                            "verdict": "INCONCLUSIVE", "reason": reason,
+                            "anchor_ok": False})
+                rows.append(row); continue
+
+            # Strict tie-break: own must beat BOTH neighbours (not just
+            # tie). Ties mean the audio could equally match sentence i or
+            # i-1 / i+1, so the timestamp is not anchored.
+            anchor_ok = (own < prev) and (own < nxt)
+            row.update({"asr": hyp.strip(), "own_cer": round(own, 4),
+                        "prev_cer": round(prev, 4), "next_cer": round(nxt, 4),
+                        "verdict": "ANCHOR_OK" if anchor_ok else "ANCHOR_FAIL",
+                        "anchor_ok": anchor_ok})
+            rows.append(row)
             if (rank + 1) % 5 == 0:
-                print(f"  {rank+1}/{len(idxs)} audited, "
-                      f"anchor_rate so far "
-                      f"{sum(1 for r in rows if r['anchor_ok'])/len(rows):.2f}",
-                      flush=True)
-        n_ok = sum(1 for r in rows if r.get("anchor_ok"))
-        n_eff = len(rows)
-        rate = n_ok / n_eff if n_eff else 0.0
-        verdict = "GO" if (rate >= G_OWN and mono_ok) else (
-                  "ADJUST" if rate >= A_OWN else "STOP")
+                n_ok = sum(1 for r in rows if r["verdict"] == "ANCHOR_OK")
+                n_eff = sum(1 for r in rows if r["verdict"] in ("ANCHOR_OK", "ANCHOR_FAIL"))
+                rate = (n_ok / n_eff) if n_eff else 0.0
+                print(f"  {rank+1}/{len(idxs)} audited, anchor_rate so far {rate:.2f}", flush=True)
+
+        # Verdict over only CONCLUSIVE rows (exclude INCONCLUSIVE).
+        # GO requires: rate>=0.90 AND monotonic AND zero INCONCLUSIVE.
+        # Any INCONCLUSIVE forces STOP — we cannot prove the timestamps
+        # are audio-grounded if some segments have no discriminating ASR.
+        conclusive = [r for r in rows if r["verdict"] in ("ANCHOR_OK", "ANCHOR_FAIL")]
+        inconclusive = [r for r in rows if r["verdict"] == "INCONCLUSIVE"]
+        n_ok = sum(1 for r in conclusive if r["verdict"] == "ANCHOR_OK")
+        n_eff = len(conclusive)
+        rate = (n_ok / n_eff) if n_eff else 0.0
+        if rate >= G_OWN and mono_ok and not inconclusive:
+            verdict = "GO"
+        elif rate >= A_OWN:
+            verdict = "ADJUST"
+        else:
+            verdict = "STOP"
         summary["sessions"].append({
             "sessionId": sid,
-            "n_sentences": n, "n_audited": n_eff,
+            "n_sentences": n, "n_audited": len(rows),
+            "n_conclusive": n_eff, "n_inconclusive": len(inconclusive),
             "n_anchor_ok": n_ok, "anchor_rate": round(rate, 4),
             "timestamps_monotonic": mono_ok,
+            "max_own_cer_threshold": MAX_OWN_CER,
+            "min_seg_dur_threshold": MIN_SEG_DUR,
             "verdict": verdict,
             "audit_duration_s": round(time.time()-t0, 1),
             "rows": rows,
         })
-        print(f"  {sid}: {n_ok}/{n_eff} anchor_ok, rate={rate:.3f}, "
+        print(f"  {sid}: {n_ok}/{n_eff} anchor_ok (of {len(rows)} audited, "
+              f"{len(inconclusive)} INCONCLUSIVE), rate={rate:.3f}, "
               f"mono={mono_ok} -> {verdict}", flush=True)
 
     # cleanup temp wavs
