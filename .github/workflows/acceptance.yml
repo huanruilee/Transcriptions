@@ -23,5 +23,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build human-review package (manifest + HTML + clips)
+        # Regenerates qa_27B/human_review_manifest.{json,md},
+        # reviews/index.html, and the extracted WAV clips under
+        # qa_27B/_human_review_clips/. Reads the committed audit
+        # JSONs (no model load), so it's fast and deterministic.
+        run: npm run build:human-review-package
+
       - name: Run completion gate
         run: npm test

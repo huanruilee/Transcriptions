@@ -5,10 +5,12 @@
   "main": "src/js/app.js",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js tests/cross-artifact-consistency.test.js",
+    "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js tests/cross-artifact-consistency.test.js tests/required-set-not-truncated.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:acceptance": "node --test tests/acceptance/*.test.js",
     "test:quality": "node --test tests/quality.test.js",
+    "test:human-review": "node --test tests/required-set-not-truncated.test.js",
+    "build:human-review-package": "python3 scripts/build_human_review_package.py",
     "test:qa": "node scripts/qa_analyze.js",
     "test:qa:json": "node scripts/qa_analyze.js --json",
     "dev": "npx serve src -p 9090",

@@ -31,6 +31,7 @@ evidence; only the numbers table is computed.
 """
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -84,15 +85,42 @@ def collect(sid):
     }
 
 
-def build_package():
-    sup = ["2eaaf4f", "054fd3c", "ff2b4cc"]
+def _git(args, default="unknown"):
+    import subprocess
     try:
-        import subprocess
-        sha = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=ROOT,
-            stderr=subprocess.DEVNULL).decode().strip()
+        return subprocess.check_output(
+            ["git"] + args, cwd=ROOT, stderr=subprocess.DEVNULL).decode().strip()
     except Exception:
-        sha = "unknown"
+        return default
+
+
+def _resolve_shas(args):
+    """Resolve evidence_commit / reviewed_head / ci_head.
+
+    evidence_commit: most recent commit that touched any
+                     qa_27B/stage2v2_alignment_*.json (the commit whose
+                     pipeline run produced the on-disk evidence).
+    reviewed_head:   HEAD at the moment the generator runs (the commit
+                     that is being delivered to the reviewer).
+    ci_head:         the SHA whose green CI status the reviewer can
+                     verify (GITHUB_HEAD_SHA in CI, otherwise HEAD).
+    """
+    evidence = args.evidence_commit or _git(
+        ["log", "-1", "--format=%H", "--", "qa_27B/stage2v2_alignment_01.json",
+         "qa_27B/stage2v2_alignment_69A.json",
+         "qa_27B/stage2v2_alignment_110B.json"])
+    if evidence == "unknown":
+        evidence = _git(["rev-parse", "HEAD"])
+    reviewed = args.reviewed_head or _git(["rev-parse", "HEAD"])
+    # CI head: prefer GITHUB_HEAD_SHA (set by GitHub Actions), else HEAD.
+    ci = args.ci_head or os.environ.get("GITHUB_HEAD_SHA") or _git(
+        ["rev-parse", "HEAD"])
+    return evidence, reviewed, ci
+
+
+def build_package(args):
+    sup = ["2eaaf4f", "054fd3c", "ff2b4cc"]
+    evidence_commit, reviewed_head, ci_head = _resolve_shas(args)
     sessions = {}
     for sid in PILOT:
         d = collect(sid)
@@ -162,13 +190,13 @@ def build_package():
     return {
         "supersedes": sup,
         "branch": "issue11-v2-correction",
-        # Reviewer (PR #12 #5349634955 follow-up): the prior single
-        # `head_sha` conflated three different commits — when evidence
-        # was produced, what was reviewed, and what CI ran on. Split
-        # them so a stale evidence commit is never mistaken for HEAD.
-        "evidence_commit": sha,        # git HEAD at the moment this package was written
-        "reviewed_head": sha,          # git HEAD the human reviewer audited
-        "ci_head": sha,                # git HEAD with the green CI status check
+        # Reviewer (PR #12 #5349634955 round 3): three distinct commits
+        # — when evidence was produced, what was reviewed, and what CI
+        # ran on. They are resolved by `_resolve_shas(args)` from CLI /
+        # env / git, never all set to HEAD.
+        "evidence_commit": evidence_commit,
+        "reviewed_head": reviewed_head,
+        "ci_head": ci_head,
         "generated_by": "scripts/generate_review_artifacts.py",
         "sessions": sessions,
     }
@@ -376,9 +404,16 @@ def main():
                     help="regenerate the whole brief (static prose + computed table)")
     ap.add_argument("--write-table-only", action="store_true",
                     help="write only review_brief_table_fragment.md")
+    ap.add_argument("--evidence-commit", default=None,
+                    help="override the SHA recorded as evidence_commit")
+    ap.add_argument("--reviewed-head", default=None,
+                    help="override the SHA recorded as reviewed_head")
+    ap.add_argument("--ci-head", default=None,
+                    help="override the SHA recorded as ci_head "
+                         "(default: $GITHUB_HEAD_SHA if set, else HEAD)")
     args = ap.parse_args()
 
-    pkg = build_package()
+    pkg = build_package(args)
     PKG.write_text(json.dumps(pkg, ensure_ascii=False, indent=2) + "\n",
                    encoding="utf-8")
     print(f"wrote {PKG.name}")

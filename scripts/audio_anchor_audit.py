@@ -122,6 +122,8 @@ def extract_segment(sid: str, start: float, end: float, out_wav: Path) -> bool:
     src = AUDIO / f"{sid}.mp3"
     if not src.exists():
         return False
+    if start is None or end is None:
+        return False  # sentence has no audio-grounded timestamp
     dur = max(0.25, end - start)
     cmd = ["ffmpeg", "-y", "-loglevel", "error",
            "-ss", f"{start:.3f}", "-i", str(src), "-t", f"{dur:.3f}",
@@ -173,19 +175,26 @@ def main():
                 sents.append({"start": s["start"], "end": s["end"],
                               "text": s["text"], "needs_review": s.get("needs_review", False)})
         n = len(sents)
-        # Sentence sampling — reviewer #5349634955 follow-up:
-        # Plain even spacing misses the cases that matter most for an audio
-        # anchor audit: session start/end, chunk boundaries (where the
-        # forced-aligner might drift), and NEEDS_REVIEW sentences. Build a
-        # set of MUST-CHECK indices first, then fill to n_sample with even
-        # spacing.
+        # Required set per reviewer (PR #12 #5349634955 round 3):
+        #   0, n-1, every 300-s chunk boundary, every NEEDS_REVIEW.
+        # `idxs` is the union (required + even-fill). Required indices
+        # are NEVER dropped by the n-sample cap; the cap only bounds
+        # the even-fill padding. This is verified by
+        # tests/required-set-not-truncated.test.js (regression B2).
+        # Sentences with start=None or end=None are skipped from the
+        # required set (they have no audio to anchor); this is logged.
         must = set()
+        none_ts_skipped = []
         if n >= 1:
-            must.add(0)
-            must.add(n - 1)
-        # ~5-minute chunk boundaries in the audio timeline (300s). Pick
-        # the sentence whose [start,end] contains each boundary; if no
-        # sentence straddles it, take the nearest by start.
+            if sents[0].get("start") is not None and sents[0].get("end") is not None:
+                must.add(0)
+            else:
+                none_ts_skipped.append(0)
+            if sents[n-1].get("start") is not None and sents[n-1].get("end") is not None:
+                must.add(n - 1)
+            else:
+                none_ts_skipped.append(n - 1)
+        # ~5-minute chunk boundaries in the audio timeline (300s).
         for boundary in range(300, int(sents[-1]["end"]) if sents and sents[-1].get("end") else 0, 300):
             pick = None
             for j, ss in enumerate(sents):
@@ -194,7 +203,6 @@ def main():
                 if ss["start"] <= boundary <= ss["end"]:
                     pick = j; break
             if pick is None:
-                # nearest by start
                 best = min(((abs((ss.get("start") or 0) - boundary), j)
                             for j, ss in enumerate(sents)
                             if ss.get("start") is not None), default=None)
@@ -202,18 +210,36 @@ def main():
                     pick = best[1]
             if pick is not None:
                 must.add(pick)
-        # Every NEEDS_REVIEW sentence — these are the aligner's own
-        # low-confidence flags; they must NOT be skipped.
+        # Every NEEDS_REVIEW sentence (skip those with no timestamps).
         for j, ss in enumerate(sents):
             if ss.get("needs_review"):
-                must.add(j)
-        # Pad with even spacing to hit n_sample.
-        n_target = min(args.n_sample, n)
+                if ss.get("start") is not None and ss.get("end") is not None:
+                    must.add(j)
+                else:
+                    none_ts_skipped.append(j)
+        # Pad with even spacing, but NEVER drop required indices.
+        # If `must` already meets n_target, audit only the required set;
+        # if it exceeds n_target, audit the entire required set (no cap).
+        n_target = args.n_sample
         if len(must) < n_target:
             stride = max(1, (n - 1) // (n_target - len(must) + 1))
             for j in range(0, n, stride):
                 must.add(j)
-        idxs = sorted(i for i in must if i < n)[:n_target]
+        idxs = sorted(i for i in must if i < n)  # NO [:n_target] cap
+        # Diagnostic: how many of the audited indices are required?
+        # Compute once and reuse; sentence index `j` is in scope.
+        boundaries = list(range(300, int(sents[-1]["end"])
+                                if sents and sents[-1].get("end") else 0, 300))
+        def is_required(j: int) -> bool:
+            if j == 0 or (n and j == n - 1): return True
+            if sents[j].get("needs_review"): return True
+            for b in boundaries:
+                if (sents[j].get("start") is not None
+                    and sents[j].get("end") is not None
+                    and sents[j]["start"] <= b <= sents[j]["end"]):
+                    return True
+            return False
+        required_set_size = sum(1 for i in idxs if is_required(i))
 
         rows = []
         # Coarse monotonicity check (skip sentence pairs with any missing ts)
@@ -305,11 +331,18 @@ def main():
             "min_seg_dur_threshold": MIN_SEG_DUR,
             "verdict": verdict,
             "audit_duration_s": round(time.time()-t0, 1),
+            # Full audited index list (NOT truncated). Used by the human-
+            # review manifest builder (B1) — every required index must
+            # appear here. tests/required-set-not-truncated.test.js
+            # asserts this for every session.
+            "audit_indices": idxs,
+            "n_required": required_set_size,
             "rows": rows,
         })
         print(f"  {sid}: {n_ok}/{n_eff} anchor_ok (of {len(rows)} audited, "
-              f"{len(inconclusive)} INCONCLUSIVE), rate={rate:.3f}, "
-              f"mono={mono_ok} -> {verdict}", flush=True)
+              f"{len(inconclusive)} INCONCLUSIVE; {required_set_size} "
+              f"required samples), rate={rate:.3f}, mono={mono_ok} -> "
+              f"{verdict}", flush=True)
 
     # cleanup temp wavs
     for f in tmp.glob("*.wav"):

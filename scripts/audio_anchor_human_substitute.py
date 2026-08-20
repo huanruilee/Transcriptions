@@ -114,8 +114,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sessions", nargs="*", default=PILOT)
     ap.add_argument("--n-sample", type=int, default=N_SAMPLE)
-    ap.add_argument("--agreement-threshold", type=float, default=0.5,
-                    help="Min 2-ASR agreement score to count as AUDIO_ANCHORED")
+    ap.add_argument("--agreement-threshold", type=float, default=0.7,
+                    help="Min 2-ASR agreement score to count as AUDIO_ANCHORED "
+                         "(default 0.7; this is the value documented in the script, "
+                         "CLI default, evidence JSON, PR body, and brief)")
     args = ap.parse_args()
 
     from faster_whisper import WhisperModel
@@ -177,6 +179,11 @@ def main():
         # Sample (mirror audio_anchor_audit logic: must-include start/end +
         # chunk boundaries + NEEDS_REVIEW)
         must = {0, n - 1} if n >= 1 else set()
+        # Defensive: skip sentences with no audio-grounded timestamps.
+        if n and (sents[0].get("start") is None or sents[0].get("end") is None):
+            must.discard(0)
+        if n and (sents[n-1].get("start") is None or sents[n-1].get("end") is None):
+            must.discard(n - 1)
         for boundary in range(300, int(sents[-1]["end"]) if sents else 0, 300):
             pick = None
             for j, ss in enumerate(sents):
@@ -193,13 +200,18 @@ def main():
             if pick is not None:
                 must.add(pick)
         for j, ss in enumerate(sents):
-            if ss.get("needs_review"): must.add(j)
-        n_target = min(args.n_sample, n)
+            if ss.get("needs_review"):
+                if ss.get("start") is not None and ss.get("end") is not None:
+                    must.add(j)
+        # Pad with even spacing, but NEVER drop required indices.
+        # Reviewer (PR #12 #5349634955 round 3): cap-only matters for
+        # the even-fill padding; required samples always audited.
+        n_target = args.n_sample  # NO `min(args.n_sample, n)` cap
         if len(must) < n_target:
             stride = max(1, (n - 1) // (n_target - len(must) + 1))
             for j in range(0, n, stride):
                 must.add(j)
-        idxs = sorted(i for i in must if i < n)[:n_target]
+        idxs = sorted(i for i in must if i < n)  # NO [:n_target] cap
 
         rows = []
         n_anchored = 0
@@ -254,13 +266,19 @@ def main():
                 "needs_review_flag": s.get("needs_review", False),
             })
 
-        # Pick a small human-review-queue: unanchored + needs_review_flag
-        # + start/end of session
-        review_queue = sorted(
-            [r["i"] for r in rows if r.get("needs_human_review")
-             or r.get("needs_review_flag")
-             or r.get("i") in {idxs[0], idxs[-1]} if isinstance(r, dict)]
-        )
+        # Human-review queue (reviewer round 3 — must NOT be truncated):
+        #   every UNANCHORED / EXTRACT_FAILED / SILENCE_HEAVY row +
+        #   every NEEDS_REVIEW-flagged row + session start (i=0) +
+        #   session end (last idx). NO [:20] cap.
+        is_first = idxs[0] if idxs else None
+        is_last = idxs[-1] if idxs else None
+        review_queue = sorted({
+            r["i"] for r in rows
+            if (r.get("needs_human_review")
+                or r.get("needs_review_flag")
+                or r.get("i") == is_first
+                or r.get("i") == is_last)
+        })
 
         n_human = sum(1 for r in rows if r.get("needs_human_review"))
         n_interstitial = sum(1 for r in rows if r.get("verdict") == "INTERSTITIAL")
@@ -275,7 +293,12 @@ def main():
             "n_silence_heavy": n_silence,
             "n_unanchored": n_unanchored,
             "n_needs_human_review": n_human,
-            "human_review_queue": review_queue[:20],  # cap output
+            # Full audit + full human-review queue (NOT truncated).
+            # The manifest builder uses these to enumerate the human
+            # review package. Required-set regression test reads these
+            # to assert no sample was dropped.
+            "audit_indices": idxs,
+            "human_review_queue": review_queue,
             "rows": rows,
         })
         print(f"  {sid}: anchored={n_anchored}/{len(rows)} "
