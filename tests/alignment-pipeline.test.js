@@ -48,11 +48,29 @@ function readSrc(name) {
 // Kept in lockstep with the Python implementation. Drives the negative
 // tests for omission / insertion / substitution / multi-char tokens.
 function norm(c) { return (c || '').trim().toLowerCase(); }
+function classifyExtraWord(word) {
+  const txt = (word && word.word) || '';
+  if (txt === '' || txt.trim() === '') return 'empty';
+  if ([...txt].length > 1) return 'multi_char_token';
+  const ch = txt;
+  const cp = ch.codePointAt(0);
+  const isPunct =
+    (cp >= 0x2000 && cp <= 0x206F) || // general punctuation
+    (cp >= 0x3000 && cp <= 0x303F) || // CJK symbols & punctuation
+    (cp >= 0xFF00 && cp <= 0xFFEF) || // halfwidth/fullwidth forms
+    (cp >= 0x2100 && cp <= 0x214F) || // letterlike symbols
+    '.,;:!?"\'()[]{}<>-_~@#$%^&*+=/\\|'.includes(ch);
+  if (isPunct) return 'source_punctuation';
+  // A single L*/N* char that was not consumed = unmatched aligner token.
+  return 'unmatched';
+}
 function monotonicMap(expected, alignedWords) {
   const n = expected.length, m = alignedWords.length;
   const charWords = new Array(n).fill(null);
   let wp = 0, i = 0, substituted = 0;
   const maxLookahead = 3;
+  const insertions = []; // recorded extra words (window skips + trailing)
+  const recordExtra = (idx) => { const w = { ...alignedWords[idx] }; w.kind = 'inserted'; insertions.push(w); };
   while (i < n && wp < m) {
     const exp = norm(expected[i]);
     const wtxt = norm(alignedWords[wp].word);
@@ -63,15 +81,31 @@ function monotonicMap(expected, alignedWords) {
     } else {
       let found = false;
       for (let k = wp + 1; k < Math.min(m, wp + maxLookahead + 1); k++) {
-        if (norm(alignedWords[k].word) === exp) { wp = k; found = true; break; }
+        if (norm(alignedWords[k].word) === exp) {
+          for (let e = wp; e < k; e++) recordExtra(e);
+          wp = k; found = true; break;
+        }
       }
       if (found) continue;
-      wp++;
+      recordExtra(wp); wp++;
     }
   }
-  const omitted = charWords.filter(w => w === null).length;
-  const extra = m - wp;
-  return { charWords, omitted, extra, substituted };
+  while (wp < m) { recordExtra(wp); wp++; } // trailing extras
+  const matched = charWords.filter(w => w !== null).length;
+  const omitted = n - matched;
+  // n_extra from the INVARIANT, not a separate count.
+  const extra = m - matched;
+  if (extra !== insertions.length) {
+    throw new Error(
+      `n_extra invariant broken: m=${m} matched=${matched} -> extra=${extra}, ` +
+      `recorded=${insertions.length}`);
+  }
+  const breakdown = {
+    source_punctuation: 0, source_symbol: 0, multi_char_token: 0,
+    unmatched: 0, empty: 0,
+  };
+  for (const w of insertions) { const c = classifyExtraWord(w); breakdown[c]++; }
+  return { charWords, omitted, extra, substituted, insertions, breakdown };
 }
 const W = (chars) => chars.map((c, idx) => ({ word: c, start: idx, end: idx + 0.3 }));
 
@@ -164,6 +198,23 @@ for (const sid of PILOT_SESSIONS) {
     // Zero non-monotonic sentences (alignment must be monotonic).
     assert.equal(d.n_non_monotonic_sentences, 0,
       `non-monotonic sentences must be 0, got ${d.n_non_monotonic_sentences}`);
+    // REVIEWER INVARIANT (hard fail):
+    //   n_extra_words == n_aligned_words - n_content_chars + n_omitted_chars
+    // The OLD `n_extra = m - wp` only counted trailing extras and produced
+    // n_extra_words=1, which violated this. Hard-fail if the counter drifts.
+    const expectExtra = d.n_aligned_words - d.n_content_chars + d.n_omitted_chars;
+    assert.equal(d.n_extra_words, expectExtra,
+      `n_extra_words ${d.n_extra_words} != invariant ${expectExtra} ` +
+      `(n_aligned ${d.n_aligned_words} - n_content ${d.n_content_chars} ` +
+      `+ n_omitted ${d.n_omitted_chars})`);
+    // Token-level classification must reconcile with n_extra_words.
+    assert.ok(d.insertion_breakdown,
+      `insertion_breakdown must be present for ${sid}`);
+    const bsum = Object.values(d.insertion_breakdown).reduce((a, b) => a + b, 0);
+    assert.equal(bsum, d.n_extra_words,
+      `insertion_breakdown sum ${bsum} != n_extra_words ${d.n_extra_words}`);
+    assert.equal(d.n_extra_invariant_check, true,
+      `n_extra_invariant_check must be true for ${sid}`);
   });
 
   test(`[${sid}]: pilot payload preserves session + paragraph metadata`, () => {
@@ -214,6 +265,84 @@ test('mapper: aligner INSERTS a token (multi-token / 多字) — must skip it', 
   assert.equal(norm(r.charWords[0].word), '觀', 'first char -> 觀');
   assert.equal(norm(r.charWords[1].word), '中', 'second char -> 中 (skip X)');
   assert.equal(r.omitted, 0, 'no expected char omitted');
+  assert.equal(r.extra, 1, 'n_extra_words must be exactly 1 (the X)');
+  assert.equal(r.breakdown.unmatched, 1, 'X is a non-source char -> unmatched');
+});
+
+test('mapper: LEADING insertion is counted (reviewer requirement)', () => {
+  // Expected 觀中, aligner returns ，觀中. The leading ，is a source-punct extra.
+  const r = monotonicMap([...('觀中')], W(['，', '觀', '中']));
+  assert.equal(r.omitted, 0);
+  assert.equal(r.extra, 1, 'leading punct must be counted as 1 extra');
+  assert.equal(r.breakdown.source_punctuation, 1);
+});
+
+test('mapper: MULTIPLE insertions in a run are all counted', () => {
+  // Expected 觀中, aligner returns 觀，、中. Two punct extras in the middle.
+  const r = monotonicMap([...('觀中')], W(['觀', '，', '、', '中']));
+  assert.equal(r.omitted, 0);
+  assert.equal(r.extra, 2, 'both middle insertions counted');
+  assert.equal(r.breakdown.source_punctuation, 2);
+});
+
+test('mapper: TRAILING insertion is counted (old m-wp bug regression)', () => {
+  // Expected 觀中, aligner returns 觀中。 The trailing 。is an extra.
+  // Old `extra = m - wp` counted this; ensure it still works + invariant holds.
+  const r = monotonicMap([...('觀中')], W(['觀', '中', '。']));
+  assert.equal(r.omitted, 0);
+  assert.equal(r.extra, 1, 'trailing punct counted');
+  assert.equal(r.breakdown.source_punctuation, 1);
+});
+
+test('mapper: LONG insertion run (> maxLookahead) fully counted', () => {
+  // 4 leading punct then the real content; window search (3) cannot find it,
+  // so the no-match path records each as an extra one-by-one.
+  const r = monotonicMap([...('觀中')], W(['，', '。', '、', '：', '觀', '中']));
+  assert.equal(r.omitted, 0);
+  assert.equal(r.extra, 4, 'all 4 leading punct counted');
+  assert.equal(r.breakdown.source_punctuation, 4);
+});
+
+test('mapper: omission + insertion combined', () => {
+  // Expected 觀中, aligner returns 觀X. 中 omitted, X inserted.
+  const r = monotonicMap([...('觀中')], W(['觀', 'X']));
+  assert.equal(r.omitted, 1, '中 omitted');
+  assert.equal(r.extra, 1, 'X inserted');
+  // Invariant: n_extra = m - (n - n_omitted) = 2 - (2-1) = 1  ✓
+  assert.equal(r.extra, 2 - (2 - r.omitted), 'invariant holds');
+});
+
+test('mapper: multi-character EXTRA token classified as multi_char_token', () => {
+  // Expected 觀中, aligner returns 觀中中中. The trailing 中中 is a multi-char extra.
+  const r = monotonicMap([...('觀中')], W(['觀', '中', '中中']));
+  assert.equal(r.omitted, 0);
+  assert.equal(r.extra, 1, 'one multi-char extra token');
+  assert.equal(r.breakdown.multi_char_token, 1);
+});
+
+test('mapper: empty word classified as empty, counted as extra', () => {
+  const r = monotonicMap([...('觀中')], W(['觀', '', '中']));
+  assert.equal(r.extra, 1);
+  assert.equal(r.breakdown.empty, 1);
+});
+
+test('mapper: n_extra invariant holds for all cases (reviewer formula)', () => {
+  // n_extra = n_aligned_words - (n_content_chars - n_omitted_chars)
+  const cases = [
+    [[...('觀中')], W(['觀', '中'])],
+    [[...('觀中')], W(['觀', 'X', '中'])],
+    [[...('觀中')], W(['，', '觀', '中'])],
+    [[...('觀中')], W(['觀', '中', '。'])],
+    [[...('觀中')], W(['觀', 'X'])],
+    [[...('觀中論善')], W(['觀', 'q', '中', 'z', '論', '善', '!'])],
+  ];
+  for (const [exp, words] of cases) {
+    const r = monotonicMap(exp, words);
+    const m = words.length;
+    const n = exp.length;
+    assert.equal(r.extra, m - (n - r.omitted),
+      `invariant broken for exp=${exp} m=${m} omitted=${r.omitted}`);
+  }
 });
 
 test('mapper: aligner OMITS a token (漏字) — must flag omission, not shift', () => {

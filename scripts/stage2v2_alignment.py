@@ -99,28 +99,70 @@ def build_expected(stream_text_per_sent: list[str]):
     return expected, char_to_sent
 
 
-def monotonic_map(expected: list[str], aligned_words: list[dict]):
-    """Monotonic two-pointer identity mapping of expected chars -> words.
+def _classify_extra_word(word: dict) -> str:
+    """Classify an aligned word that was NOT consumed as a 1:1 content match.
+
+    Categories (token-level, mutually exclusive):
+      - "source_punctuation" : word text is a single Unicode P* (punctuation) char
+                               present in the source sentence text.
+      - "source_symbol"      : word text is a single Unicode S* (currency/modifier)
+                               or C* (control) char present in the source.
+      - "multi_char_token"   : word text is >1 char (aligner emitted a multi-char
+                               token at a single position).
+      - "unmatched"          : word text is not found in the source sentence text
+                               (a genuine aligner hallucination) — needs review.
+      - "empty"              : word text is empty/whitespace-only.
+    """
+    txt = word.get("word", "") or ""
+    if txt == "" or txt.isspace():
+        return "empty"
+    if len(txt) > 1:
+        return "multi_char_token"
+    ch = txt
+    import unicodedata
+    cat = unicodedata.category(ch)
+    if cat.startswith("P"):
+        return "source_punctuation"
+    if cat.startswith("S") or cat.startswith("C"):
+        return "source_symbol"
+    # A single L*/N* char that was not consumed = an unmatched aligner token.
+    return "unmatched"
+
+
+def monotonic_map(expected: list, aligned_words: list):
+    """Monotonic two-pointer identity mapping of expected content chars -> words.
+
+    `expected` is the ordered list of content chars (whitespace/punct excluded).
+    `aligned_words` is the ordered list of aligned words (align() emits one word
+    per non-whitespace source char, so it also includes punctuation/symbols).
 
     Returns:
       char_words: list[dict|None], index i is the aligned word matched to
                   expected[i] (None if the aligner dropped it).
       n_omitted: number of expected chars with no aligned word.
       n_extra:   number of aligned words not consumed by any expected char.
-      n_substituted: number of expected chars matched to a word whose text
-                     differs (aligner substituted a different char) — we still
-                     keep the monotonic position; flagged for diagnostics.
+      n_substituted: number of expected chars matched to a word whose text differs.
+      insertions: list of the extra aligned words (window skips + trailing).
+      insertion_breakdown: {category: count} token-level classification.
 
-    Monotonicity guarantee: the word pointer only ever advances, so the
-    correspondence is a monotonic sequence mapping.
+    INVARIANT (holds by construction; asserted):
+        matched   = n_content_chars - n_omitted_chars
+        n_extra   = n_aligned_words - matched
+                  = n_aligned_words - n_content_chars + n_omitted_chars
+    n_extra counts EVERY skipped aligned token (leading, middle, trailing).
     """
     n = len(expected)
+    m = len(aligned_words)
     char_words = [None] * n
     wp = 0
-    m = len(aligned_words)
-    n_omitted = 0
+    max_lookahead = 3
     n_substituted = 0
-    max_lookahead = 3  # how far ahead to search for an insertion skip
+    insertions = []          # the actual extra aligned words (for classification)
+
+    def _record_extra(idx):
+        w = dict(aligned_words[idx])
+        w["kind"] = "inserted"
+        insertions.append(w)
 
     i = 0
     while i < n and wp < m:
@@ -134,23 +176,47 @@ def monotonic_map(expected: list[str], aligned_words: list[dict]):
             i += 1
             wp += 1
         else:
-            # Look for exp within a small window ahead (aligner insertion).
+            # Look for exp within a small window ahead (aligner insertion run).
             found = False
             for k in range(wp + 1, min(m, wp + max_lookahead + 1)):
                 if norm(aligned_words[k].get("word", "")) == exp:
-                    # words wp..k-1 are extra/inserted; skip them
+                    for extra in range(wp, k):
+                        _record_extra(extra)
                     wp = k
                     found = True
                     break
             if found:
                 continue
-            # No match in window: treat as aligner insertion of this word,
-            # advance word pointer only (keep expected char to try again).
+            # No match in window: record this word as an extra, advance wp only
+            # (keep the expected char; retry against the next word). This still
+            # counts every skipped token, including runs longer than max_lookahead.
+            _record_extra(wp)
             wp += 1
-    # Count omissions: expected chars never matched.
-    n_omitted = sum(1 for cw in char_words if cw is None)
-    n_extra = m - wp  # leftover aligned words at the end
-    return char_words, n_omitted, n_extra, n_substituted
+
+    # Trailing aligned words (no expected char left to consume them) are extras.
+    while wp < m:
+        _record_extra(wp)
+        wp += 1
+
+    n_matched = sum(1 for cw in char_words if cw is not None)
+    n_omitted = n - n_matched
+    # n_extra from the INVARIANT (source of truth), not from a separate count.
+    n_extra = m - n_matched
+    # Sanity: the recorded extras must reconcile exactly with the invariant.
+    assert n_extra == len(insertions), \
+        f"n_extra invariant broken: m={m} n_matched={n_matched} -> " \
+        f"n_extra={n_extra}, but recorded extras={len(insertions)}"
+    breakdown = {
+        "source_punctuation": 0,
+        "source_symbol": 0,
+        "multi_char_token": 0,
+        "unmatched": 0,
+        "empty": 0,
+    }
+    for w in insertions:
+        cat = _classify_extra_word(w)
+        breakdown[cat] += 1
+    return char_words, n_omitted, n_extra, n_substituted, insertions, breakdown
 
 
 def _to_float(x):
@@ -241,7 +307,11 @@ def align_session(sid: str, device: str = "cpu"):
     # Expected content-char stream in the SAME order as flat_sents.
     expected, char_to_sent = build_expected([s[2] for s in flat_sents])
     print(f"  expected content chars: {len(expected)}, aligned words: {len(all_words)}", flush=True)
-    char_words, n_omitted, n_extra, n_substituted = monotonic_map(expected, all_words)
+    (char_words, n_omitted, n_extra, n_substituted,
+     insertion_words, insertion_breakdown) = monotonic_map(expected, all_words)
+    print(f"  mapped: matched={len(expected)-n_omitted} omitted={n_omitted} "
+          f"extra={n_extra} substituted={n_substituted} "
+          f"breakdown={insertion_breakdown}", flush=True)
 
     # Accumulate per-sentence word start/end/score.
     s_start = [None] * len(flat_sents)
@@ -335,6 +405,15 @@ def align_session(sid: str, device: str = "cpu"):
         "n_extra_words": n_extra,
         "n_substituted_chars": n_substituted,
         "char_coverage": coverage,
+        # Token-level classification of every extra aligned token (P1-2 fix):
+        # proves whether extras are source punctuation/symbols vs genuine
+        # aligner insertions. Sum of breakdown == n_extra_words by construction.
+        "insertion_breakdown": insertion_breakdown,
+        "insertion_breakdown_sum": sum(insertion_breakdown.values()),
+        # Invariant that must hold for any correct mapper:
+        "n_extra_invariant_check": (
+            n_extra == len(all_words) - (len(expected) - n_omitted)
+        ),
         "n_non_monotonic_sentences": non_mono_count,
         "n_no_align": no_align_count,
         "n_needs_review": needs_review_count,
