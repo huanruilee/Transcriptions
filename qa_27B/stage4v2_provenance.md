@@ -1,7 +1,7 @@
 # Issue #11 v2 — Provenance & Reproducibility
 
 - **Branch:** `issue11-v2-correction`
-- **Git HEAD (final):** `1b553137d831e2e3c28a9dc06bb202773696e336`
+- **Git HEAD (final):** `481eccfc07ddfeb3659f91e252c25f0939f26341`
 - **Python:** 3.11.15
 - **Node:** v22.23.1
 - **Platform:** Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.39

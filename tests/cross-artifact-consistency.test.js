@@ -56,7 +56,7 @@ function briefValue(label, col) {
 // Extract a number from a brief cell (may be "1 488" or "1488" or "0.2918")
 function parseNum(s) {
   if (s === null || s === undefined) return null;
-  const clean = s.replace(/,/g, '').replace(/\s+/g, '').replace(/^true$|^false$/, '').trim();
+  const clean = s.replace(/,/g, '').replace(/\s+/g, '').trim();
   if (clean === 'true') return true;
   if (clean === 'false') return false;
   const n = parseFloat(clean);
@@ -101,10 +101,15 @@ test.describe('Cross-artifact consistency (hard fail on ANY drift)', () => {
   }
 
   // --- 2. Manifest vs raw JSON
-  if (hasEvidence && manifest) {
+  // The stage2v2 manifest stores per-session data under `stages[]` (each
+  // entry has `sessionId` + `diagnostics{}`). Normalize that once.
+  const manifestBySid = manifest && (manifest.sessions
+    || (manifest.stages && Object.fromEntries(
+         manifest.stages.map(s => [s.sessionId, s.diagnostics]))));
+  if (hasEvidence && manifestBySid) {
     test('manifest: n_extra_words matches raw JSON for all sessions', () => {
       for (const { sid, a } of raws) {
-        const entry = manifest.sessions[sid];
+        const entry = manifestBySid[sid];
         assert.ok(entry, `manifest missing session ${sid}`);
         assert.equal(entry.n_extra_words, a.diagnostics.n_extra_words,
           `${sid}: manifest n_extra ${entry.n_extra_words} != raw ${a.diagnostics.n_extra_words}`);
@@ -113,7 +118,7 @@ test.describe('Cross-artifact consistency (hard fail on ANY drift)', () => {
 
     test('manifest: n_content_chars + n_aligned_words match raw JSON', () => {
       for (const { sid, a } of raws) {
-        const entry = manifest.sessions[sid];
+        const entry = manifestBySid[sid];
         assert.equal(entry.n_content_chars, a.diagnostics.n_content_chars,
           `${sid}: manifest n_content ${entry.n_content_chars} != raw ${a.diagnostics.n_content_chars}`);
         assert.equal(entry.n_aligned_words, a.diagnostics.n_aligned_words,

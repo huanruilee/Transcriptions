@@ -49,15 +49,21 @@ consumes aligned words in identity order with these flags:
 - `kind == "match"`  : single-char word == expected char
 - `kind == "merged"` : multi-char ASCII token starts with expected char
                        (e.g. "ab" for expected "a") — flagged as low score
-- `kind == "inserted"`: an extra word with no expected char (whisperx
-                        hallucinated punctuation, kept at position)
+- `kind == "inserted"`: an extra word with no expected char. **Every extra
+                       token is classified at token level** into
+                       `insertion_breakdown` (source_punctuation /
+                       source_symbol / multi_char_token / unmatched / empty).
+                       The committed evidence shows the extras are **source
+                       punctuation/symbols**, NOT hallucinated content.
 - `kind == "omitted"` : expected char that consumed no word — flagged
 
 The output guarantees `char_positions` is **strictly non-decreasing**;
-the `n_non_monotonic_sentences` diagnostic must be `0`.
+the `n_non_monotonic_sentences` diagnostic must be `0`. The counter obeys
+the invariant `n_extra_words == n_aligned_words - n_content_chars +
+n_omitted_chars` and is hard-asserted in the test suite.
 
 **Recompute** by running the mapper on the published text + aligned
-words and checking the monotonicity + char_coverage invariants.
+words and checking the monotonicity + char_coverage + n_extra invariants.
 
 ### M3 — Independent ASR proxy CER (P1-3)
 
@@ -110,21 +116,26 @@ paragraphs[].sentences[].start, end, text, needs_review, match_score
 | n sentences | 434 | 538 | 599 |
 | n content chars | 8 574 | 11 381 | 11 257 |
 | n aligned words | 10 062 | 13 416 | 13 030 |
-| **char_coverage** | **1.0** | **1.0** | **1.0** |
+| char_coverage | **1.0** | **1.0** | **1.0** |
 | n omitted chars | 0 | 0 | 0 |
 | n extra words | 1 488 | 2 035 | 1 773 |
+| extra = source_punctuation | 1 488 | 2 035 | 1 773 |
+| extra = source_symbol | 0 | 0 | 0 |
+| extra = unmatched | 0 | 0 | 0 |
+| extra = multi_char_token | 0 | 0 | 0 |
 | n non-monotonic | **0** | **0** | **0** |
-| **no_chunk_overlap** | **true** | **true** | **true** |
+| no_chunk_overlap | **true** | **true** | **true** |
 | chunk_char_sum | 10 150 | 13 459 | 13 046 |
 | total_sentence_chars | 10 150 | 13 459 | 13 046 |
 | n NEEDS_REVIEW | 54 | 52 | 40 |
 | review rate | 12.44 % | 9.67 % | 6.68 % |
-| **cer_pipeline_integrity** (self-echo) | **0.000** | **0.000** | **0.000** |
-| **cer_independent_asr_proxy** (real proxy) | **0.2918** | **0.3190** | **0.2570** |
-| cer_breakdown.cer_raw_script_mismatch | 0.2915 | 0.5446 | 0.4969 |
+| cer_pipeline_integrity (self-echo) | **0.0000** | **0.0000** | **0.0000** |
+| cer_independent_asr_proxy (real proxy) | **0.2979** | **0.3079** | **0.2570** |
+| cer_breakdown.cer_raw_script_mismatch | 0.2976 | 0.5348 | 0.4969 |
 | is_text_accuracy_evidence | **false** | **false** | **false** |
-| ts_start median vs legacy | 21.2 s | 18.8 s | 14.1 s |
-| ts_start P95 vs legacy | 64.8 s | 55.9 s | 62.2 s |
+| ts_start median vs legacy | 21.2 | 18.8 | 14.1 |
+| ts_start P95 vs legacy | 64.8 | 55.9 | 62.2 |
+
 
 **Critical reading of CER**: `cer_pipeline_integrity = 0.000` is a
 *pipeline integrity* check (round-trip) — it only catches **dropped**
@@ -147,5 +158,4 @@ invariants pass, no omissions, perfect disjoint partition). The
 *legacy* `published_start` (8 s / 120 s step) is NOT an audio reference
 — it is a coarse baseline. **`ts_reference` in stage3v2 explicitly
 labels it as such.** Until an audio-capable reviewer audits at least
-one full session sentence-by-sentence, the system carries no GO
-certification on absolute timestamp accuracy.
+one full session sentence-by-sentence, the system carries no GO.

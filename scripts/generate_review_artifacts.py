@@ -199,7 +199,7 @@ def build_table():
     row("extra = multi_char_token",
         [sp(ib[s].get("multi_char_token", 0)) for s in range(3)])
     row("n non-monotonic", acol("n_non_monotonic_sentences"), bold=True)
-    row("no_chunk_overlap", acol("no_chunk_overlap", b), bold=True)
+    row("no_chunk_overlap", [b(collect(s)["alignment"]["no_chunk_overlap"]) for s in PILOT], bold=True)
     row("chunk_char_sum", acol("chunk_char_sum"))
     row("total_sentence_chars", acol("total_sentence_chars"))
     row("n NEEDS_REVIEW", acol("n_needs_review"))

@@ -141,9 +141,13 @@ def main():
         idxs = sorted({round(i * (n - 1) / max(1, k - 1)) for i in range(k)}) if k > 1 else [0]
 
         rows = []
-        mono_ok = all(sents[i]["end"] <= sents[i+1]["start"] + 0.05 or
-                      sents[i]["start"] <= sents[i+1]["start"]
-                      for i in range(len(sents) - 1))
+        # Coarse monotonicity check (skip sentence pairs with any missing ts)
+        pairs_with_ts = [(sents[i], sents[i+1])
+                         for i in range(len(sents) - 1)
+                         if sents[i].get("start") is not None and sents[i].get("end") is not None
+                         and sents[i+1].get("start") is not None and sents[i+1].get("end") is not None]
+        mono_ok = all(a["end"] <= b["start"] + 0.05 or a["start"] <= b["start"]
+                      for a, b in pairs_with_ts)
         t0 = time.time()
         for rank, i in enumerate(idxs):
             s = sents[i]

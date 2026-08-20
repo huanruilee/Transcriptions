@@ -5,7 +5,7 @@
   ],
   "supersedes_reason": "2eaaf4f lacked version pinning and used a 60s-mid-clip window (non-monotonic) + SequenceMatcher.ratio as CER. 054fd3c added chunking but had a text-overlap double-alignment (P1-1) and a char-budget fallback (P1-2), and still presented forced-align CER as accuracy (P1-3).",
   "branch": "issue11-v2-correction",
-  "git_head_sha": "1b553137d831e2e3c28a9dc06bb202773696e336",
+  "git_head_sha": "481eccfc07ddfeb3659f91e252c25f0939f26341",
   "versions": {
     "python": "3.11.15",
     "node": "v22.23.1",
@@ -29,18 +29,18 @@
     "session_110B.json": "63239c8f16d81b45695aefb237f4787f11dac75ba83891c1aa5dbdc17df83d30"
   },
   "outputs_sha256": {
-    "stage2v2_alignment_01.json": "914b9f70c219ec1adda9170a09d2428915b43221dc499d8efabce3b4d6b8d6b9",
-    "stage2v2_alignment_69A.json": "151897de4ada35f584c1f21cb0d9fa8510d71c8598503bae7ef75a9dbf05a0cd",
-    "stage2v2_alignment_110B.json": "b48daa154dfff085154cb70af377800da730375817226801af4092c9285b4d5b",
+    "stage2v2_alignment_01.json": "a1097431d401737d9f615d49b88a973e9d7945e69508cbee86abb42cdf52f867",
+    "stage2v2_alignment_69A.json": "19ff100842421d28eb8775c4eead70ea0da6ba5e7bd5a93b7de8a8ec994f29e6",
+    "stage2v2_alignment_110B.json": "b4da0dee52a893717a89167d4c98cd8fd5b7f1f3560679353f45bf2c1bc47104",
     "stage2v2_aligned_01.json": "b0f05773ef5d336835e2f63d0b74edfd87d28d74dd614f655f4d2a9cecb93f7d",
     "stage2v2_aligned_69A.json": "1ac9aaef5ba2c28ccf0464d3d3ebd6a87bff80f16f621ff623c6f0f616f97f6c",
     "stage2v2_aligned_110B.json": "0317ddd43a9c594f76b76352f74dedf9cee22b0ae20535a7820adeeabc3b6014",
-    "stage3v2_measurement_01.json": "d2781cdafba8ce2cf9fe259cd62a937e2b823e5efc778212c44fdd919b9198bc",
-    "stage3v2_measurement_69A.json": "d17d17cea43c903b18072eb7c1f5f19a76179bd98698e620d2a4ce5afc433408",
-    "stage3v2_measurement_110B.json": "c137d336017ba47eba1a0bb4f6e7e9f3aa2579c8b0ec7e2176f0d9854a8fcda1",
-    "stage3b_independent_cer_01.json": "75acb2ac48e81dd14b4498ce06a86e44363e8eef053188827610ad68c32a2976",
-    "stage3b_independent_cer_69A.json": "14633f2eae5690e6d2ef78f3a11080ef325acbf0819befc5c6ce233d088e85e7",
-    "stage3b_independent_cer_110B.json": "2efc0875adbf0eeb693c6e6ace01c77e700ff2d8bf65bf72899bfef9b0db2eaa"
+    "stage3v2_measurement_01.json": "c1b3de548972ef507365c338f5b21feef31973b7b4665cfaf5029d00f06524e2",
+    "stage3v2_measurement_69A.json": "cc04fa6a324e924460c17ad03ac3064633a4af8d6fd0f62c37052cc1227e8794",
+    "stage3v2_measurement_110B.json": "7ab573bf3e7e7ddcd94e1f5c70eaaa04d85c592d4a4f90fe6e9f7027bee34615",
+    "stage3b_independent_cer_01.json": "d5a063a715311d129e4bc4ed11f82cf1f629a83e87e5aa01586f4b8c248d33eb",
+    "stage3b_independent_cer_69A.json": "4b073ef4b3885e75acd4f8f520d4ecfdeacdade2aed6c413591f37b7e8399e13",
+    "stage3b_independent_cer_110B.json": "a8d51405e669db172654ffdda021ebb53f79dd8285619316e2f90a686593c611"
   },
   "audio_sha256": {
     "49A.mp3": "807e10b60576eb781da74a0521a10fd4bd62a375b2faf0195550bf96f54c97ab",
