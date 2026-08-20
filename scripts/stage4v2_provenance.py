@@ -107,7 +107,14 @@ def main():
             sys.stderr.write(f"WARN: missing output {name}\n")
 
     # 3-session alignment manifest presence (hard requirement).
-    manifest_ok = (QA / "stage2v2_alignment_manifest.json").exists()
+    manifest_path = QA / "stage2v2_alignment_manifest.json"
+    manifest_ok = manifest_path.exists()
+    if not manifest_ok:
+        sys.stderr.write(
+            "HARD FAIL: stage2v2_alignment_manifest.json missing — "
+            "stage2v2_alignment.py must be run first to produce it.\n"
+        )
+        sys.exit(2)
 
     versions = {
         "python": platform.python_version(),
