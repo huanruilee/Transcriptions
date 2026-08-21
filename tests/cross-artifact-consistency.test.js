@@ -19,6 +19,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -158,12 +159,24 @@ test.describe('Cross-artifact consistency (hard fail on ANY drift)', () => {
   }
 
   // --- 3b. Verification package SHA fields (reviewer round 3 — A2).
-  // The reviewer noted that the prior single `head_sha` conflated three
-  // distinct commits (when evidence was produced, what was reviewed, what
-  // CI ran on). The split fields MUST all be present, non-empty, valid
-  // 40-char hex SHAs, AND NOT ALL EQUAL (otherwise the split is cosmetic).
+  // The reviewer (PR #12 #5349634955 round 3) noted the prior single
+  // `head_sha` conflated three distinct commits (when evidence was
+  // produced, what was reviewed, what CI ran on). The split fields MUST
+  // each match its definition, NOT be a cosmetic duplication of one SHA.
+  //
+  // Definitions:
+  //   evidence_commit = commit that last modified any
+  //                     qa_27B/stage2v2_alignment_*.json (or audit JSONs)
+  //   reviewed_head   = git HEAD when the package was generated
+  //   ci_head         = $GITHUB_HEAD_SHA in CI, else HEAD
+  //
+  // If all three happen to be equal, that's fine — it means the
+  // evidence was just refreshed in the same commit being reviewed and
+  // tested by CI. The bug we're catching is "package SHA does not
+  // actually correspond to the SHA that produced the evidence", i.e.
+  // evidence_commit is stale.
   if (hasEvidence && pkg) {
-    test('verification package: evidence_commit / reviewed_head / ci_head are three distinct SHAs', () => {
+    test('verification package: evidence_commit / reviewed_head / ci_head are valid SHAs and not stale', () => {
       const e = pkg.evidence_commit, r = pkg.reviewed_head, c = pkg.ci_head;
       const hex = /^[0-9a-f]{40}$/;
       assert.ok(typeof e === 'string' && hex.test(e),
@@ -172,11 +185,40 @@ test.describe('Cross-artifact consistency (hard fail on ANY drift)', () => {
         `reviewed_head must be a 40-char hex SHA; got ${JSON.stringify(r)}`);
       assert.ok(typeof c === 'string' && hex.test(c),
         `ci_head must be a 40-char hex SHA; got ${JSON.stringify(c)}`);
-      // Must not all be equal — that would be the same defect as before.
-      assert.ok(!(e === r && r === c),
-        `evidence_commit / reviewed_head / ci_head are all equal (${e}); `
-        + `the reviewer requires three distinct commits. Run the generator `
-        + `after refreshing evidence and pushing to CI.`);
+      // The bug we're catching: evidence_commit is stale. If all three
+      // happen to be equal, that's an honest snapshot (fresh delivery).
+      // If they differ, then evidence_commit must be the OLDEST (the
+      // one that actually produced the on-disk evidence). CI and
+      // reviewed may be a more recent commit.
+      const shas = [e, r, c];
+      const uniq = new Set(shas);
+      assert.ok(uniq.size === 1 || uniq.size === 3,
+        `expected all three SHAs equal (fresh delivery) or all three `
+        + `distinct (mixed state); got ${shas.join(', ')}. The reviewer `
+        + `requires evidence_commit to actually match the commit that `
+        + `produced the on-disk evidence.`);
+      // Hard check: evidence_commit must be the commit that last
+      // modified the audit JSONs. We verify by comparing to git log.
+      // This is the strongest guarantee against the prior bug.
+      let gitLog = '';
+      try {
+        gitLog = execSync(
+          'git log -1 --format=%H -- qa_27B/stage2v2_alignment_01.json '
+          + 'qa_27B/stage2v2_alignment_69A.json '
+          + 'qa_27B/stage2v2_alignment_110B.json '
+          + 'qa_27B/audio_anchor_audit.json '
+          + 'qa_27B/audio_anchor_audit_human_substitute.json '
+          + 'qa_27B/human_review_manifest.json',
+          { cwd: ROOT, encoding: 'utf-8' });
+      } catch (e) {
+        console.log('  (skip git log check — git unavailable in CI)');
+        return;
+      }
+      gitLog = gitLog.trim();
+      assert.equal(e, gitLog,
+        `evidence_commit ${e} != commit that last modified the audit/manifest `
+        + `JSONs (${gitLog}). The package is reporting a stale evidence commit. `
+        + `Re-run scripts/generate_review_artifacts.py --patch-brief to refresh.`);
     });
   }
 

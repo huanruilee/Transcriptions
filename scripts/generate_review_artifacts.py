@@ -106,9 +106,13 @@ def _resolve_shas(args):
                      verify (GITHUB_HEAD_SHA in CI, otherwise HEAD).
     """
     evidence = args.evidence_commit or _git(
-        ["log", "-1", "--format=%H", "--", "qa_27B/stage2v2_alignment_01.json",
+        ["log", "-1", "--format=%H", "--",
+         "qa_27B/stage2v2_alignment_01.json",
          "qa_27B/stage2v2_alignment_69A.json",
-         "qa_27B/stage2v2_alignment_110B.json"])
+         "qa_27B/stage2v2_alignment_110B.json",
+         "qa_27B/audio_anchor_audit.json",
+         "qa_27B/audio_anchor_audit_human_substitute.json",
+         "qa_27B/human_review_manifest.json"])
     if evidence == "unknown":
         evidence = _git(["rev-parse", "HEAD"])
     reviewed = args.reviewed_head or _git(["rev-parse", "HEAD"])
