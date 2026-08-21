@@ -186,6 +186,27 @@ def build():
         sub_verdict_by_i = {
             r["i"]: r.get("verdict", "UNKNOWN") for r in (s_sub.get("rows", []) if s_sub else [])}
 
+        # Pre-compute the boundary sentence index (with nearest-by-start
+        # fallback) for the REASONS loop. Must match _compute_base_required
+        # so a boundary sample that's nearest-by-start (not straddling)
+        # still gets CHUNK_BOUNDARY in reasons — otherwise the ANCHOR_OK
+        # skip below would drop a sample that was in `required`.
+        last_end = (sents[-1].get("end") or 0) if sents else 0
+        boundary_sentence = {}
+        for b in range(300, int(last_end), 300):
+            pick = None
+            for j, ss in enumerate(sents):
+                if ss.get("start") is None or ss.get("end") is None:
+                    continue
+                if ss["start"] <= b <= ss["end"]:
+                    pick = j; break
+            if pick is None:
+                best = min(((abs((ss.get("start") or 0) - b), j)
+                            for j, ss in enumerate(sents)
+                            if ss.get("start") is not None), default=None)
+                if best is not None: pick = best[1]
+            if pick is not None: boundary_sentence[pick] = b
+
         samples = []
         for i in sorted(required):
             if i >= n: continue
@@ -220,11 +241,11 @@ def build():
             if i == 0: reasons.append("START")
             if i == n - 1: reasons.append("END")
             if s.get("needs_review"): reasons.append("NEEDS_REVIEW")
-            # 300-s chunk boundary
-            for b in range(300, int(sents[-1]["end"]) if sents and sents[-1].get("end") else 0, 300):
-                if (s.get("start") is not None and s.get("end") is not None
-                        and s["start"] <= b <= s["end"]):
-                    reasons.append(f"CHUNK_BOUNDARY@{b}s"); break
+            # 300-s chunk boundary (uses the pre-computed boundary_sentence
+            # map which mirrors _compute_base_required, including the
+            # nearest-by-start fallback).
+            if i in boundary_sentence:
+                reasons.append(f"CHUNK_BOUNDARY@{boundary_sentence[i]}s")
             strict_v = strict_reason_by_i.get(i, "")
             if strict_v.startswith("INCONCLUSIVE"):
                 reasons.append("STRICT_INCONCLUSIVE")

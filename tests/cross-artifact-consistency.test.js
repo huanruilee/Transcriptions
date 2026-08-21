@@ -157,6 +157,29 @@ test.describe('Cross-artifact consistency (hard fail on ANY drift)', () => {
     });
   }
 
+  // --- 3b. Verification package SHA fields (reviewer round 3 — A2).
+  // The reviewer noted that the prior single `head_sha` conflated three
+  // distinct commits (when evidence was produced, what was reviewed, what
+  // CI ran on). The split fields MUST all be present, non-empty, valid
+  // 40-char hex SHAs, AND NOT ALL EQUAL (otherwise the split is cosmetic).
+  if (hasEvidence && pkg) {
+    test('verification package: evidence_commit / reviewed_head / ci_head are three distinct SHAs', () => {
+      const e = pkg.evidence_commit, r = pkg.reviewed_head, c = pkg.ci_head;
+      const hex = /^[0-9a-f]{40}$/;
+      assert.ok(typeof e === 'string' && hex.test(e),
+        `evidence_commit must be a 40-char hex SHA; got ${JSON.stringify(e)}`);
+      assert.ok(typeof r === 'string' && hex.test(r),
+        `reviewed_head must be a 40-char hex SHA; got ${JSON.stringify(r)}`);
+      assert.ok(typeof c === 'string' && hex.test(c),
+        `ci_head must be a 40-char hex SHA; got ${JSON.stringify(c)}`);
+      // Must not all be equal — that would be the same defect as before.
+      assert.ok(!(e === r && r === c),
+        `evidence_commit / reviewed_head / ci_head are all equal (${e}); `
+        + `the reviewer requires three distinct commits. Run the generator `
+        + `after refreshing evidence and pushing to CI.`);
+    });
+  }
+
   // --- 4. Brief table vs raw JSON
   if (hasEvidence && brief) {
     test('brief: "n extra words" row matches raw JSON n_extra_words', () => {
