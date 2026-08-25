@@ -379,7 +379,8 @@ def process_single_session(session_id, audio_map, whisper_model, session_map=Non
     proofread_sents = step3_llm_proofread(clean_sents, session_id, source_text=source_text)
 
     # 5. LLM Structure & Headings
-    title = f"第 {session_id} 堂"
+    session_info = session_map.get(session_id, {})
+    title = session_info.get("title", f"第 {session_id} 堂")
     paragraphs = step4_llm_structure(proofread_sents, session_id, title)
 
     # Monotonicity enforcement

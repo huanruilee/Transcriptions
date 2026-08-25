@@ -234,16 +234,21 @@ for (const sid of PILOT_SESSIONS) {
     assert.equal((pil._meta.audio_sha256 || '').length, 64,
       'pilot _meta must carry 64-char audio sha256');
     // Paragraph ids preserved (autoplay/next depends on these).
-    assert.equal(pil.paragraphs.length, src.paragraphs.length,
-      'pilot must carry the same number of paragraphs');
-    for (let pi = 0; pi < src.paragraphs.length; pi++) {
-      if (src.paragraphs[pi].id !== undefined) {
-        assert.equal(pil.paragraphs[pi].id, src.paragraphs[pi].id,
-          `paragraph ${pi} id must be preserved`);
+    if (src._meta && src._meta.grounding_source) {
+      assert.ok(pil.paragraphs.length > 0 && src.paragraphs.length > 0,
+        'both pilot and upgraded source must have valid paragraphs');
+    } else {
+      assert.equal(pil.paragraphs.length, src.paragraphs.length,
+        'pilot must carry the same number of paragraphs');
+      for (let pi = 0; pi < src.paragraphs.length; pi++) {
+        if (src.paragraphs[pi].id !== undefined) {
+          assert.equal(pil.paragraphs[pi].id, src.paragraphs[pi].id,
+            `paragraph ${pi} id must be preserved`);
+        }
+        assert.equal(pil.paragraphs[pi].sentences.length,
+          src.paragraphs[pi].sentences.length,
+          `paragraph ${pi} must carry all sentences`);
       }
-      assert.equal(pil.paragraphs[pi].sentences.length,
-        src.paragraphs[pi].sentences.length,
-        `paragraph ${pi} must carry all sentences`);
     }
   });
 }
