@@ -344,6 +344,19 @@ body {
   color: #999;
   font-style: italic;
 }
+.toc-session-badge {
+  display: inline-block;
+  background: rgba(39, 174, 96, 0.12);
+  color: #2e7d32;
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  border-radius: 4px;
+  padding: 0 5px;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+}
+
 .toc-page-badge {
   display: inline-block;
   background: rgba(52, 152, 219, 0.12);
@@ -351,7 +364,7 @@ body {
   border: 1px solid rgba(52, 152, 219, 0.3);
   border-radius: 4px;
   padding: 0 5px;
-  margin-left: 6px;
+  margin-left: 4px;
   font-size: 0.72rem;
   font-weight: 600;
   font-family: var(--font-mono, monospace);

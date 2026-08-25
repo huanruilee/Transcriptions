@@ -67,6 +67,8 @@ export function renderTOC(sections, onSeekTo) {
       e.preventDefault();
       const targetSession = link.dataset.sessionId;
       const timestamp = parseFloat(link.dataset.timestamp);
+      // Auto-collapse TOC accordion after selection
+      details.open = false;
       onSeekTo(targetSession, timestamp);
     });
     // M6.3 a11y: Keyboard activation (Enter / Space) for role="button"
@@ -75,6 +77,8 @@ export function renderTOC(sections, onSeekTo) {
         e.preventDefault();
         const targetSession = link.dataset.sessionId;
         const timestamp = parseFloat(link.dataset.timestamp);
+        // Auto-collapse TOC accordion after selection
+        details.open = false;
         onSeekTo(targetSession, timestamp);
       }
     });
@@ -154,6 +158,16 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     link.dataset.timestamp = String(node.timestamp);
     link.textContent = node.title;
     li.appendChild(link);
+
+    // Show session badge if session is present
+    if (nodeSession) {
+      const sessionBadge = document.createElement('span');
+      sessionBadge.className = 'toc-session-badge';
+      sessionBadge.textContent = nodeSession;
+      sessionBadge.title = `第 ${nodeSession} 堂音檔講次`;
+      link.appendChild(document.createTextNode(' '));
+      link.appendChild(sessionBadge);
+    }
 
     // Show clean page badge if page is present
     if (node.page) {
