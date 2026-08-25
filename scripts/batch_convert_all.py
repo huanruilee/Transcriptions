@@ -396,14 +396,17 @@ def process_single_session(session_id, audio_map, whisper_model, session_map=Non
         p["end"] = p["sentences"][-1]["end"]
 
     # Assemble JSON payload
+    today_date = time.strftime("%Y-%m-%d")
     payload = {
         "sessionId": session_id,
         "title": title,
         "audioUrl": audio_url,
+        "lastUpdated": today_date,
         "paragraphs": paragraphs,
         "_meta": {
             "engine": "whisper-large-v3-turbo",
             "llm_proofread": "Qwen3.8-27B-FP8 (Grounded In-Context)",
+            "last_updated": today_date,
             "grounding_source": "《入中論善顯密意疏》真值底本",
             "audio_duration": duration,
             "total_paragraphs": len(paragraphs),

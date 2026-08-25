@@ -274,6 +274,16 @@ function renderTranscript(sessionData) {
     searchInput.dispatchEvent(new Event('input'));
   }
 
+  // Display Last-Updated Date & Local Model Verification Badge
+  const dateStr = sessionData.lastUpdated || sessionData._meta?.last_updated || (sessionData._meta?.processed_at ? sessionData._meta.processed_at.split(' ')[0] : '2026-08-25');
+  const metaFooter = document.createElement('div');
+  metaFooter.className = 'transcript-update-footer';
+  metaFooter.innerHTML = `
+    <span class="meta-item">📅 逐字稿最後更新：<strong>${dateStr}</strong></span>
+    <span class="meta-item">✨ 本地大模型（Qwen3.8-27B）深度校對與科判對齊</span>
+  `;
+  container.appendChild(metaFooter);
+
   // P0-3: End-of-session card (next session + back to overview)
   appendEndSessionCard(sessionData);
 }
