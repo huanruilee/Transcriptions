@@ -22,6 +22,20 @@ describe('Local Model Headings & Semantic Segmentation Acceptance Tests', () => 
     assert.ok(session._meta, 'Session must include _meta block');
   });
 
+  test('All LLM-converted session JSONs must have at least 6 thematic subheadings', () => {
+    const sessionsDir = path.resolve('courses/入中論善顯密意疏/sessions');
+    const files = fs.readdirSync(sessionsDir).filter(f => f.endsWith('.json') && !f.includes('bak'));
+    
+    for (const f of files) {
+      const sPath = path.join(sessionsDir, f);
+      const sData = JSON.parse(fs.readFileSync(sPath, 'utf8'));
+      if (sData._meta && sData._meta.llm_proofread) {
+        const headings = sData.paragraphs.filter(p => p.heading && p.heading.trim().length > 0);
+        assert.ok(headings.length >= 6, `${f} is LLM-converted but only has ${headings.length} headings (expected >= 6)`);
+      }
+    }
+  });
+
   test('DOM rendering properly generates .transcript-heading elements for paragraphs with headings', () => {
     const session = JSON.parse(fs.readFileSync(session29Path, 'utf8'));
     
