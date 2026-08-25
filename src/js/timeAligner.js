@@ -12,6 +12,15 @@ export function findSentenceIndexByTime(sentences, currentTime, timeScaleRatio =
   // Convert actual audio currentTime to virtual JSON timestamp
   const virtualTime = timeScaleRatio > 0 ? (currentTime / timeScaleRatio) : currentTime;
 
+  if (virtualTime < sentences[0].start) {
+    return -1;
+  }
+
+  const lastSentence = sentences[sentences.length - 1];
+  if (virtualTime > lastSentence.end + 1.0) {
+    return -1;
+  }
+
   let low = 0;
   let high = sentences.length - 1;
 
@@ -21,10 +30,15 @@ export function findSentenceIndexByTime(sentences, currentTime, timeScaleRatio =
 
     if (virtualTime >= s.start && virtualTime <= s.end) {
       return mid;
-    } else if (virtualTime < s.start) {
-      high = mid - 1;
-    } else {
+    } else if (virtualTime > s.end) {
+      // Check if within pause gap before the next sentence
+      const nextStart = mid < sentences.length - 1 ? sentences[mid + 1].start : s.end + 1.0;
+      if (virtualTime < nextStart) {
+        return mid; // Smoothly hold highlight during intra-sentence pause
+      }
       low = mid + 1;
+    } else {
+      high = mid - 1;
     }
   }
 

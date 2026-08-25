@@ -1,6 +1,7 @@
 /**
  * syncPlayer.js - Audio-Text Synchronization Engine
- * Handles Click-to-Seek, Auto-Highlighting with Ratio Alignment, Scroll Lock, and Auto-Next queue.
+ * Handles Click-to-Seek, Auto-Highlighting with Ratio Alignment, Scroll Lock,
+ * Instant Seek Feedback, Simulated Playback Fallback, and Auto-Next queue.
  *
  * Pattern: Module-singleton initialization with updateSession() to swap target
  * audio/sentences without re-binding event listeners (fixes memory leak Bug 1.1).
@@ -12,6 +13,12 @@ let userIsScrolling = false;
 let scrollTimeout = null;
 let currentRatio = 1.0;
 let initialized = false;
+
+// Simulated playback state (for offline/missing audio environments)
+let isSimulating = false;
+let simTime = 0;
+let simInterval = null;
+let simMaxTime = 0;
 
 // Cached DOM references (acquired once)
 let lockIndicator = null;
@@ -64,10 +71,82 @@ export function initSyncPlayer() {
 }
 
 /**
+ * Highlight sentence matching the given timestamp and scroll into view.
+ * Exported so click-to-seek and TOC seek give instant visual feedback.
+ */
+export function highlightSentenceByTime(timeInSeconds) {
+  if (!boundSentences || boundSentences.length === 0) return -1;
+  const activeIdx = findSentenceIndexByTime(boundSentences, timeInSeconds, currentRatio);
+
+  document.querySelectorAll('.sentence.active').forEach(el => el.classList.remove('active'));
+
+  if (activeIdx !== -1) {
+    const activeEl = document.getElementById(`sent-${activeIdx}`);
+    if (activeEl) {
+      activeEl.classList.add('active');
+
+      if (!userIsScrolling) {
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+  return activeIdx;
+}
+
+/**
+ * Stop any active simulated playback timer.
+ */
+export function stopSimulatedPlayback() {
+  if (simInterval) {
+    clearInterval(simInterval);
+    simInterval = null;
+  }
+  isSimulating = false;
+}
+
+/**
+ * Start simulated playback (used when audio file 404s or is not present locally).
+ */
+export function startSimulatedPlayback(startTime = 0) {
+  stopSimulatedPlayback();
+  if (!boundSentences || boundSentences.length === 0) return;
+
+  simTime = startTime;
+  simMaxTime = boundSentences[boundSentences.length - 1].end || 100;
+  isSimulating = true;
+
+  const statusEl = document.querySelector('.now-playing-status');
+  if (statusEl) {
+    statusEl.textContent = '💡 模擬音訊同步中（可點擊句子跳轉）';
+  }
+
+  highlightSentenceByTime(simTime);
+
+  simInterval = setInterval(() => {
+    simTime += 0.25;
+    highlightSentenceByTime(simTime);
+
+    if (simTime >= simMaxTime) {
+      stopSimulatedPlayback();
+      if (statusEl) statusEl.textContent = '本講播放完畢';
+      if (typeof boundNextCallback === 'function') {
+        boundNextCallback();
+      }
+    }
+  }, 250);
+}
+
+export function getIsSimulating() {
+  return isSimulating;
+}
+
+/**
  * Switch the sync player's target audio/sentences. Should be called whenever
  * the active session changes. Does NOT re-bind global listeners (singleton pattern).
  */
 export function updateSession(audioElement, allSentences, onNextSessionRequested, options = {}) {
+  stopSimulatedPlayback();
+
   // Always unbind the previous session handlers. The app reuses the same audio
   // element across sessions, so checking element identity is not enough.
   if (boundAudioElement) {
@@ -110,21 +189,10 @@ export function updateSession(audioElement, allSentences, onNextSessionRequested
 
   // Time update → highlight + scroll
   handleTimeUpdate = () => {
+    // If real audio is playing, stop any simulation
+    if (isSimulating) stopSimulatedPlayback();
     const currentTime = audioElement.currentTime;
-    const activeIdx = findSentenceIndexByTime(allSentences, currentTime, currentRatio);
-
-    document.querySelectorAll('.sentence.active').forEach(el => el.classList.remove('active'));
-
-    if (activeIdx !== -1) {
-      const activeEl = document.getElementById(`sent-${activeIdx}`);
-      if (activeEl) {
-        activeEl.classList.add('active');
-
-        if (!userIsScrolling) {
-          activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-    }
+    highlightSentenceByTime(currentTime);
   };
   audioElement.addEventListener('timeupdate', handleTimeUpdate);
 

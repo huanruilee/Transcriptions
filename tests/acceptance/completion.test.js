@@ -41,7 +41,7 @@ test('completion acceptance: course index references complete session JSON and p
     assert.ok(session.paragraphs.length > 0, `${entry.sessionId} should not be empty`);
 
     assert.equal(typeof session.audioUrl, 'string', `${entry.sessionId} should provide audioUrl`);
-    assert.match(session.audioUrl, /^audio\/[A-Za-z0-9]+\.mp3$/, `${entry.sessionId} audioUrl should point at a publishable mp3 path`);
+    assert.match(session.audioUrl, /^audio\/[A-Za-z0-9]+\.mp3$|^https?:\/\/.+\.mp3$/i, `${entry.sessionId} audioUrl should point at a publishable mp3 path`);
 
     if (REQUIRE_AUDIO_FILES) {
       const audioPath = path.join(process.cwd(), session.audioUrl);

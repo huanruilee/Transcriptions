@@ -239,7 +239,7 @@ if (!WebSocketCtor) {
 
     await t.test('audio element has a valid src', () => {
       assert.ok(audioSrc && audioSrc !== '(not set)', `audio src=${audioSrc}`);
-      assert.match(audioSrc, /\.mp3$|^audio\//, `audio src should point to an mp3 file: ${audioSrc}`);
+      assert.match(audioSrc, /\.mp3$|^audio\//i, `audio src should point to an mp3 file: ${audioSrc}`);
     });
 
     await t.test('course overview button toggles #course-overview', () => {

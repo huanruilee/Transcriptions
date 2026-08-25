@@ -4,29 +4,32 @@
 
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
-import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio } from './syncPlayer.js';
+import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback } from './syncPlayer.js';
 import { initSearch } from './search.js';
 import { formatAriaTime, safePlay } from './a11y.js';
 
 let courseData = null;
 let tocData = null;
+let audioMapData = {};
 let currentSessionData = null;
 let currentSessionId = null;
 let allFlattenedSentences = [];
 let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
 let sidebarFilterValue = ''; // P2: sidebar filter state
 
-document.addEventListener('DOMContentLoaded', async () => {
-  initThemeToggle();
-  initSidebarToggle();
-  initMobileSidebarToggle();
-  initFontSizeControls();
-  initSearch();
-  initCourseOverview(); // P1: course overview entry
-  initSidebarFilter();  // P2: sidebar filter
-  initSessionNav();     // P0-3: prev/next session nav
-  await loadCourseData();
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', async () => {
+    initThemeToggle();
+    initSidebarToggle();
+    initMobileSidebarToggle();
+    initFontSizeControls();
+    initSearch();
+    initCourseOverview(); // P1: course overview entry
+    initSidebarFilter();  // P2: sidebar filter
+    initSessionNav();     // P0-3: prev/next session nav
+    await loadCourseData();
+  });
+}
 
 async function loadCourseData() {
   try {
@@ -35,6 +38,13 @@ async function loadCourseData() {
 
     const tocResp = await fetch('courses/入中論善顯密意疏/toc.json');
     tocData = await tocResp.json();
+
+    try {
+      const audioMapResp = await fetch('courses/入中論善顯密意疏/audio_map.json');
+      if (audioMapResp.ok) {
+        audioMapData = await audioMapResp.json();
+      }
+    } catch (_) {}
 
     // P0-1: Update course count in header + sidebar
     const totalSessions = courseData.sessions.length;
@@ -119,7 +129,7 @@ async function switchSession(session) {
     localStorage.setItem('last_session_id', session.sessionId);
     location.hash = `#session-${session.sessionId}`;
     renderTranscript(currentSessionData);
-    setupAudioPlayer(session.audioUrl);
+    setupAudioPlayer(resolveAudioUrl(session.audioUrl, null, session.sessionId));
   } catch (err) {
     console.error(`Failed to load session ${session.sessionId}:`, err);
     // Rollback UI highlight to previous session
@@ -166,6 +176,13 @@ function renderTranscript(sessionData) {
   container.textContent = '';
 
   sessionData.paragraphs.forEach(p => {
+    if (p.heading) {
+      const headingEl = document.createElement('h3');
+      headingEl.className = 'transcript-heading';
+      headingEl.textContent = p.heading;
+      container.appendChild(headingEl);
+    }
+
     const pEl = document.createElement('p');
     pEl.className = 'transcript-paragraph';
     pEl.id = p.id;
@@ -192,17 +209,40 @@ function renderTranscript(sessionData) {
     container.appendChild(pEl);
   });
 
-  // Click-to-Seek binding with Ratio Scaling
+  // Click-to-Seek binding with Ratio Scaling and instant visual feedback
   const sentenceEls = container.querySelectorAll('.sentence');
   sentenceEls.forEach((el, idx) => {
     el.addEventListener('click', () => {
+      const rawStart = allFlattenedSentences[idx].start;
+      highlightSentenceByTime(rawStart);
+
       const audio = document.getElementById('audio-element');
       if (audio) {
         const ratio = getCurrentTimeScaleRatio();
-        const rawStart = allFlattenedSentences[idx].start;
         const targetTime = ratio > 0 ? (rawStart * ratio) : rawStart;
-        audio.currentTime = targetTime;
-        safePlay(audio, undefined, showToast);
+
+        const applySeekAndPlay = () => {
+          try {
+            audio.currentTime = targetTime;
+          } catch (_) {}
+          safePlay(audio, undefined, () => {
+            startSimulatedPlayback(rawStart);
+          });
+        };
+
+        if (audio.readyState >= 1) {
+          applySeekAndPlay();
+        } else {
+          // If metadata not yet loaded, wait for loadedmetadata before setting currentTime
+          audio.addEventListener('loadedmetadata', () => {
+            try {
+              audio.currentTime = targetTime;
+            } catch (_) {}
+          }, { once: true });
+          safePlay(audio, undefined, () => {
+            startSimulatedPlayback(rawStart);
+          });
+        }
       }
     });
     // M6.3 a11y (AGY review): Roving Tabindex keyboard navigation.
@@ -282,6 +322,24 @@ function appendEndSessionCard(sessionData) {
   container.appendChild(card);
 }
 
+export function resolveAudioUrl(url, customBase, sessionId, mapOverride) {
+  const map = mapOverride || audioMapData;
+  if (sessionId && map && map[sessionId]) {
+    return map[sessionId];
+  }
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  const base = customBase || (courseData && courseData.audioBaseUrl);
+  if (base) {
+    const cleanBase = base.replace(/\/+$/, '');
+    const cleanUrl = url.replace(/^\/+/, '');
+    return `${cleanBase}/${cleanUrl}`;
+  }
+  return url;
+}
+
 function setupAudioPlayer(audioUrl) {
   const audio = document.getElementById('audio-element');
   const nowPlaying = document.getElementById('now-playing-title');
@@ -325,18 +383,24 @@ function handleSeekTo(targetSessionId, timestamp) {
     const audio = document.getElementById('audio-element');
     if (!audio) return;
 
-    // Wait for metadata before setting currentTime (Bug 1.2 fix)
     const applySeek = () => {
       if (timestampPending) {
         // Don't seek; just play from current position (defaults to 0).
-        // Show toast so user knows the chapter timestamp is missing.
         showToast(`${targetSessionId} 章節起點未標註，目前從頭播放。`);
+        highlightSentenceByTime(0);
       } else {
+        highlightSentenceByTime(timestamp);
         const ratio = getCurrentTimeScaleRatio();
         const targetTime = ratio > 0 ? (timestamp * ratio) : timestamp;
-        audio.currentTime = targetTime;
+        try {
+          audio.currentTime = targetTime;
+        } catch (_) {}
       }
-      safePlay(audio, undefined, showToast);
+
+      safePlay(audio, undefined, () => {
+        // Missing audio fallback: start simulated playback
+        startSimulatedPlayback(timestampPending ? 0 : timestamp);
+      });
 
       // Smooth-scroll to target paragraph (Bug 8.1 fix)
       const targetParaId = timestampPending ? currentSessionData.paragraphs[0].id : findParagraphByTime(timestamp);
@@ -349,7 +413,8 @@ function handleSeekTo(targetSessionId, timestamp) {
     if (audio.readyState >= 1 && audio.duration > 0) {
       applySeek();
     } else {
-      audio.addEventListener('loadedmetadata', applySeek, { once: true });
+      // In offline/mock mode loadedmetadata may not fire, trigger immediately
+      applySeek();
     }
   });
 }
