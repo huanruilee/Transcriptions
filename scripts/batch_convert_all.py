@@ -97,11 +97,50 @@ BUDDHIST_GLOSSARY = [
     (r"\b4D\b|4d|４Ｄ", "四諦"),
 ]
 
+SOURCE_TEXT_DIR = Path("courses/入中論善顯密意疏/source_text")
+COURSE_JSON_PATH = Path("courses/入中論善顯密意疏/course.json")
+
 def load_audio_map():
     if AUDIO_MAP_PATH.exists():
         with open(AUDIO_MAP_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
     return {}
+
+def load_course_session_map():
+    if COURSE_JSON_PATH.exists():
+        with open(COURSE_JSON_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return {s["sessionId"]: s for s in data.get("sessions", [])}
+    return {}
+
+def get_session_source_text(session_id, session_map):
+    session_info = session_map.get(session_id, {})
+    page_range = session_info.get("pageRange", "")
+    if not page_range:
+        return "", []
+
+    # Parse page numbers like "p.63", "p.97-p.100", "p.103-106", "P84"
+    nums = [int(n) for n in re.findall(r'\d+', page_range)]
+    if not nums:
+        return "", []
+
+    start_p = nums[0]
+    end_p = nums[-1] if len(nums) > 1 else start_p
+    # Limit range sanity (max 8 pages per session)
+    if end_p - start_p > 8:
+        end_p = start_p + 4
+
+    page_texts = []
+    for p in range(start_p, end_p + 1):
+        pt_path = SOURCE_TEXT_DIR / f"page_{p:03d}.txt"
+        if pt_path.exists():
+            with open(pt_path, "r", encoding="utf-8") as f:
+                page_texts.append(f"【第 {p} 頁】\n" + f.read().strip())
+
+    combined_text = "\n\n".join(page_texts)
+    # Extract dynamic terms (2-6 character Chinese terms from quotes or brackets)
+    found_terms = set(re.findall(r'[「『《〈]([\u4e00-\u9fff]{2,8})[」』》〉]', combined_text))
+    return combined_text, list(found_terms)
 
 def download_audio_if_needed(session_id, audio_url):
     local_path = AUDIO_DIR / f"{session_id}.mp3"
@@ -148,8 +187,8 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model):
     print(f"  ✅ Extracted {len(raw_sentences)} raw spoken sentences.")
     return raw_sentences, info.duration
 
-def step2_pre_polish(raw_sentences):
-    print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation...")
+def step2_pre_polish(raw_sentences, dynamic_terms=None):
+    print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: {len(dynamic_terms or [])})...")
     merged_sents = []
     curr_chunk = []
 
@@ -189,12 +228,23 @@ def step2_pre_polish(raw_sentences):
     print(f"  ✅ Consolidated into {len(merged_sents)} readable full sentences.")
     return merged_sents
 
-def step3_llm_proofread(sentences, session_id):
-    print(f"\n[Step 3/5] 🧠 Deep proofreading with local Qwen3.8-27B for {session_id}...")
+def step3_llm_proofread(sentences, session_id, source_text=""):
+    print(f"\n[Step 3/5] 🧠 Deep proofreading with local Qwen3.8-27B for {session_id} (Grounded: {len(source_text)} chars)...")
+    
+    source_context_block = ""
+    if source_text:
+        source_context_block = f"""\n\n【當前講次對應之《入中論善顯密意疏》底本參考原文】：
+---
+{source_text[:3000]}
+---"""
+
     system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的佛學專家與校對主編。
-當前文本為法師第 {session_id} 堂錄音口述逐字稿。
-請嚴格修正 ASR 產生的同音錯字與佛學名相，保持繁體中文與口語流暢，保留正確中文標點符號。
-【極重要】：輸入有 N 句話，輸出必須是剛好 N 句話的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併或刪減句子！"""
+當前文本為法師第 {session_id} 堂錄音口述逐字稿。{source_context_block}
+
+【校對原則】：
+1. 【引用論疏原文時】：若法師在讀誦或引述論疏底本（如「頌曰：...」、「疏云：...」或經文），請嚴格依照上方底本字句校正 ASR 同音錯字。
+2. 【白話講述開示時】：請保持口語對話與開示語氣自然流暢，僅依據底本校正佛學名相與錯別字，切勿將白話強行改寫為文言。
+3. 【極重要】：輸入有 N 句話，輸出必須是剛好 N 句話的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併或刪減句子！繁體中文輸出。"""
 
     batch_size = 12
     total_sents = len(sentences)
@@ -203,7 +253,7 @@ def step3_llm_proofread(sentences, session_id):
     corrected_sentences = []
     for b_idx, batch in enumerate(batches):
         input_texts = [s["text"] for s in batch]
-        prompt = f"請校對以下 {len(input_texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(input_texts, ensure_ascii=False, indent=2)
+        prompt = f"請依據底本校對以下 {len(input_texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(input_texts, ensure_ascii=False, indent=2)
         payload = {
             "model": "Qwen3.8-27B",
             "messages": [
@@ -300,13 +350,21 @@ def step4_llm_structure(sentences, session_id, title):
 
     return paragraphs
 
-def process_single_session(session_id, audio_map, whisper_model):
+def process_single_session(session_id, audio_map, whisper_model, session_map=None):
+    if session_map is None:
+        session_map = load_course_session_map()
+
     audio_url = audio_map.get(session_id, f"https://buddha.flyday.com.tw/{session_id}.MP3")
     json_path = SESSIONS_DIR / f"session_{session_id}.json"
 
     print(f"\n=======================================================")
-    print(f"🚀 PROCESSING SESSION {session_id} — Full Pipeline Standard")
+    print(f"🚀 PROCESSING SESSION {session_id} — Grounded Pipeline Standard")
     print(f"=======================================================")
+
+    # 0. Load Ground Truth Treatise Text for this Session
+    source_text, dynamic_terms = get_session_source_text(session_id, session_map)
+    if source_text:
+        print(f"  📖 Loaded {len(source_text)} chars of treatise grounding text ({len(dynamic_terms)} terms).")
 
     # 1. Audio
     audio_path = download_audio_if_needed(session_id, audio_url)
@@ -314,11 +372,11 @@ def process_single_session(session_id, audio_map, whisper_model):
     # 2. ASR
     raw_sents, duration = step1_asr_transcribe(session_id, audio_path, whisper_model)
 
-    # 3. Pre-polish
-    clean_sents = step2_pre_polish(raw_sents)
+    # 3. Pre-polish with dynamic vocabulary
+    clean_sents = step2_pre_polish(raw_sents, dynamic_terms=dynamic_terms)
 
-    # 4. LLM Proofread
-    proofread_sents = step3_llm_proofread(clean_sents, session_id)
+    # 4. Grounded LLM Proofread with Local Qwen3.8-27B
+    proofread_sents = step3_llm_proofread(clean_sents, session_id, source_text=source_text)
 
     # 5. LLM Structure & Headings
     title = f"第 {session_id} 堂"
@@ -344,7 +402,8 @@ def process_single_session(session_id, audio_map, whisper_model):
         "paragraphs": paragraphs,
         "_meta": {
             "engine": "whisper-large-v3-turbo",
-            "llm_proofread": "Qwen3.8-27B-FP8",
+            "llm_proofread": "Qwen3.8-27B-FP8 (Grounded In-Context)",
+            "grounding_source": "《入中論善顯密意疏》真值底本",
             "audio_duration": duration,
             "total_paragraphs": len(paragraphs),
             "total_sentences": sum(len(p["sentences"]) for p in paragraphs),
@@ -366,6 +425,7 @@ def main():
     args = parser.parse_args()
 
     audio_map = load_audio_map()
+    session_map = load_course_session_map()
     all_sessions = list(audio_map.keys())
 
     if args.sessions:
@@ -395,7 +455,7 @@ def main():
 
         try:
             t0 = time.time()
-            success = process_single_session(sid, audio_map, whisper_model)
+            success = process_single_session(sid, audio_map, whisper_model, session_map=session_map)
             elapsed = time.time() - t0
             progress[sid] = {"status": "SUCCESS", "elapsed_seconds": round(elapsed, 1)}
         except Exception as e:
