@@ -63,5 +63,5 @@ npm test
 2. **聲學吻合度**：`verify_audio_sync.py` 盲測通過率需 $\ge 75\%$。
 3. **時間戳單調性**：所有句子必須滿足 $s[i].\text{start} \ge s[i-1].\text{end} - 0.05$。
 4. **音訊連結**：`audioUrl` 與 `audio_map.json` 指向官方原始 Flyday 串流。
-5. **測試套件**：`npm test` 包含 140 項單元與驗收測試全數通過（PASS 綠燈）。
+5. **測試套件**：`npm test` 包含 148 項單元與驗收測試全數通過（PASS 綠燈；1 項品質測試預設跳過，可透過 `TRANSCRIPTIONS_RUN_QUALITY=1` 啟用）。
 

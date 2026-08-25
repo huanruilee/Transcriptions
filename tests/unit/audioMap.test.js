@@ -34,4 +34,23 @@ describe('Audio Map and Remote Stream Resolution Tests', () => {
     const session29 = JSON.parse(fs.readFileSync(session29Path, 'utf8'));
     assert.ok(session29.audioUrl.includes('flyday'), 'session_29A.json audioUrl must point to remote Flyday stream');
   });
+
+  test('audio_map.json: all Flyday URLs use uppercase .MP3 extension', () => {
+    const audioMap = JSON.parse(fs.readFileSync(audioMapPath, 'utf8'));
+    const keys = Object.keys(audioMap);
+    const nonUppercase = [];
+
+    for (const key of keys) {
+      const url = audioMap[key];
+      if (!url.endsWith('.MP3')) {
+        nonUppercase.push(`${key}: ${url}`);
+      }
+    }
+
+    assert.deepEqual(
+      nonUppercase,
+      [],
+      `Found ${nonUppercase.length} entry(s) with non-uppercase .MP3 extension:\n${nonUppercase.join('\n')}`
+    );
+  });
 });
