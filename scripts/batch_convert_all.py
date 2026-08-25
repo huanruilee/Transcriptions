@@ -376,10 +376,10 @@ def main():
         print("Usage: python3 scripts/batch_convert_all.py --sessions 29A 30A OR --all")
         sys.exit(0)
 
-    # Initialize GPU Whisper Model once
-    print("\n📦 Loading faster-whisper large-v3-turbo on GX10 GPU...")
+    # Initialize Whisper Model (large-v3-turbo with int8 on multi-core ARM64)
+    print("\n📦 Loading faster-whisper large-v3-turbo on GX10 (int8, 8 threads)...")
     from faster_whisper import WhisperModel
-    whisper_model = WhisperModel("large-v3-turbo", device="cuda", compute_type="float16")
+    whisper_model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
 
     print(f"🎯 Target queue: {len(targets)} sessions ({targets[:5]}...)")
 
