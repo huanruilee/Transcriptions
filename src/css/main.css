@@ -344,18 +344,31 @@ body {
   color: #999;
   font-style: italic;
 }
+.toc-page-badge {
+  display: inline-block;
+  background: rgba(52, 152, 219, 0.12);
+  color: var(--primary-color);
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  border-radius: 4px;
+  padding: 0 5px;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+}
+
 .toc-timestamp-badge {
   display: inline-block;
-  background: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
+  background: #e8f4fd;
+  color: #1976d2;
+  border: 1px solid #bbdefb;
   border-radius: 3px;
   padding: 0 6px;
   margin-left: 6px;
   font-size: 0.75rem;
   font-weight: 600;
   font-style: normal;
-  cursor: help;
+  cursor: pointer;
 }
 
 /* TOC scope toggle buttons */

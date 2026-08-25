@@ -153,22 +153,29 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     link.dataset.sessionId = nodeSession;
     link.dataset.timestamp = String(node.timestamp);
     link.textContent = node.title;
+    li.appendChild(link);
 
-    // M6.2 fix (Qwen F1): Visually mark timestamps that are 0 (= missing).
-    // Reason: 40/43 zero-timestamps cannot be auto-derived from sentence.start
-    // (all sessions start at 0.0 because audio-cpp ASR resets per-file).
-    // UI shows "章節起點待補" instead of "0:00" so user knows it's not a real marker.
-    if (node.timestamp === 0 && nodeSession) {
-      const badge = document.createElement('span');
-      badge.className = 'toc-timestamp-badge';
-      badge.textContent = '章節起點待補';
-      badge.title = '此子章節的真實起點需手動標註或 LLM 分析（sentence.start 全為 0.0）';
+    // Show clean page badge if page is present
+    if (node.page) {
+      const pageBadge = document.createElement('span');
+      pageBadge.className = 'toc-page-badge';
+      pageBadge.textContent = `p.${node.page}`;
+      pageBadge.title = `論典第 ${node.page} 頁`;
       link.appendChild(document.createTextNode(' '));
-      link.appendChild(badge);
-      link.classList.add('toc-timestamp-pending');
+      link.appendChild(pageBadge);
     }
 
-    li.appendChild(link);
+    // Show timestamp badge if positive timestamp exists
+    if (node.timestamp > 0) {
+      const min = Math.floor(node.timestamp / 60);
+      const sec = Math.floor(node.timestamp % 60).toString().padStart(2, '0');
+      const badge = document.createElement('span');
+      badge.className = 'toc-timestamp-badge';
+      badge.textContent = `${min}:${sec}`;
+      badge.title = `點擊跳轉至 ${min}:${sec}`;
+      link.appendChild(document.createTextNode(' '));
+      link.appendChild(badge);
+    }
 
     if (hasChildren) {
       const childUl = document.createElement('ul');
