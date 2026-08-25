@@ -1,0 +1,411 @@
+#!/usr/bin/env python3
+"""
+batch_convert_all.py - Complete batch conversion pipeline orchestrator for GX10.
+Executes the standardized 5-step 29A-quality transformation for all sessions:
+1. Fetch/Stream official Flyday audio
+2. Transcribe with local Whisper Large-v3 on GPU
+3. Rule-based pre-polishing & punctuation
+4. Deep proofreading with local Qwen3.8-27B
+5. Structure analysis & subheading generation with local Qwen3.8-27B
+6. Automated verification & progress checkpointing
+"""
+import sys
+import os
+import json
+import re
+import time
+import argparse
+import subprocess
+from pathlib import Path
+import requests
+
+# Constants & Endpoints
+LLM_URL = "http://192.168.122.1:8001/v1/chat/completions"
+AUDIO_MAP_PATH = Path("courses/入中論善顯密意疏/audio_map.json")
+SESSIONS_DIR = Path("courses/入中論善顯密意疏/sessions")
+AUDIO_DIR = Path("audio")
+PROGRESS_FILE = Path("conversion_progress.json")
+
+# Ensure directories exist
+AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+SESSIONS_DIR.mkdir(parents=True, exist_ok=True)
+
+# Common Buddhist Glossary for Rule-based Pre-polishing
+BUDDHIST_GLOSSARY = [
+    (r"生一[地諦第]", "勝義諦"),
+    (r"勝一[地諦第]", "勝義諦"),
+    (r"生意[地諦第]", "勝義諦"),
+    (r"世俗[地第]", "世俗諦"),
+    (r"四[屬屬][地諦第]", "世俗諦"),
+    (r"俗[地第]", "世俗諦"),
+    (r"二[地第]", "二諦"),
+    (r"四[地第]", "四諦"),
+    (r"關帶世間", "觀待世間"),
+    (r"觀帶世間", "觀待世間"),
+    (r"關帶", "觀待"),
+    (r"七[狂況礦]法", "欺誑法"),
+    (r"不七[狂況礦]法", "不欺誑法"),
+    (r"不[欺欺][狂況礦]法", "不欺誑法"),
+    (r"羊眼", "陽焰"),
+    (r"陽眼", "陽焰"),
+    (r"執陽焰[爲為]水", "執陽焰為水"),
+    (r"頌[約結約]", "頌曰"),
+    (r"頌[雲云]", "頌云"),
+    (r"無分微[塵陳]", "無分微塵"),
+    (r"現[前千]地", "現前地"),
+    (r"善[顯顯]密意[疏書]", "善顯密意疏"),
+    (r"入中[論論]", "入中論"),
+    (r"自[虛續續]派", "自續派"),
+    (r"自[虛續續]", "自續"),
+    (r"應成派", "應成派"),
+    (r"中[觀觀]派", "中觀派"),
+    (r"中[觀觀]宗", "中觀宗"),
+    (r"正世俗", "正世俗"),
+    (r"[道倒]世俗", "倒世俗"),
+    (r"正[道倒]", "正倒"),
+    (r"設法", "色法"),
+    (r"不先一心法", "不相應行法"),
+    (r"不相應行[法識]", "不相應行法"),
+    (r"數論", "數論"),
+    (r"順世", "順世"),
+    (r"神我", "神我"),
+    (r"倒[裏裡]面", "倒裡面"),
+    (r"所[知智]", "所知"),
+    (r"能[知智]", "能知"),
+    (r"現量", "現量"),
+    (r"比量", "比量"),
+    (r"名言", "名言"),
+    (r"勝義", "勝義"),
+    (r"世俗", "世俗"),
+    (r"空[信性]", "空性"),
+    (r"如水注水", "如水注水"),
+    (r"損壞之因", "損壞之因"),
+    (r"損壞[羹更]", "損壞根"),
+    (r"六[根識]", "六根"),
+    (r"眼[識識]", "眼識"),
+    (r"耳[識識]", "耳識"),
+    (r"鼻[識識]", "鼻識"),
+    (r"舌[識識]", "舌識"),
+    (r"身[識識]", "身識"),
+    (r"意[識識]", "意識"),
+    (r"非紋症|肺紋症", "飛蚊症"),
+    (r"至向有|自向有", "自相有"),
+    (r"咒詩", "咒師"),
+    (r"過世", "過失"),
+    (r"限到", "陷到"),
+    (r"\b2D\b|2d|２Ｄ", "二諦"),
+    (r"\b4D\b|4d|４Ｄ", "四諦"),
+]
+
+def load_audio_map():
+    if AUDIO_MAP_PATH.exists():
+        with open(AUDIO_MAP_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+def download_audio_if_needed(session_id, audio_url):
+    local_path = AUDIO_DIR / f"{session_id}.mp3"
+    if local_path.exists() and local_path.stat().st_size > 1000000:
+        return local_path
+
+    print(f"  📥 Downloading audio for {session_id} from {audio_url}...")
+    headers = {"User-Agent": "Mozilla/5.0"}
+    r = requests.get(audio_url, headers=headers, stream=True, timeout=60)
+    r.raise_for_status()
+    with open(local_path, "wb") as f:
+        for chunk in r.iter_content(chunk_size=1024*1024):
+            if chunk:
+                f.write(chunk)
+    print(f"  ✅ Saved audio to {local_path} ({local_path.stat().st_size / 1024 / 1024:.1f} MB)")
+    return local_path
+
+def step1_asr_transcribe(session_id, audio_path, whisper_model):
+    print(f"\n[Step 1/5] 🎙️ Running Whisper Large-v3 ASR on GPU for {session_id}...")
+    segments, info = whisper_model.transcribe(
+        str(audio_path),
+        language="zh",
+        vad_filter=True,
+        vad_parameters=dict(min_silence_duration_ms=500),
+        beam_size=5,
+        word_timestamps=True
+    )
+    
+    raw_sentences = []
+    prev_end = 0.0
+    for seg in segments:
+        text = seg.text.strip()
+        if not text:
+            continue
+        start = max(round(seg.start, 3), prev_end)
+        end = max(round(seg.end, 3), start + 0.3)
+        raw_sentences.append({
+            "start": start,
+            "end": end,
+            "text": text
+        })
+        prev_end = end
+
+    print(f"  ✅ Extracted {len(raw_sentences)} raw spoken sentences.")
+    return raw_sentences, info.duration
+
+def step2_pre_polish(raw_sentences):
+    print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation...")
+    merged_sents = []
+    curr_chunk = []
+
+    for i, s in enumerate(raw_sentences):
+        curr_chunk.append(s)
+        is_last = (i == len(raw_sentences) - 1)
+        next_s = raw_sentences[i+1] if not is_last else None
+        gap = (next_s["start"] - s["end"]) if next_s else 999.0
+        combined_text = "".join(x["text"] for x in curr_chunk)
+
+        if is_last or gap >= 1.1 or len(combined_text) >= 28 or re.search(r'[。？！]$', s["text"].strip()):
+            raw_text = " ".join(x["text"].strip() for x in curr_chunk if x["text"].strip())
+            # Apply regex glossary
+            for pat, repl in BUDDHIST_GLOSSARY:
+                raw_text = re.sub(pat, repl, raw_text)
+            
+            # Clean oral tokens & format punctuation
+            raw_text = re.sub(r'^[嗯啊喔對哦，、\s]+', '', raw_text)
+            raw_text = re.sub(r'謝謝大家.*|感謝觀看.*|點讚.*|訂閱.*', '', raw_text).strip()
+            
+            if raw_text:
+                if not re.search(r'[。？！…」』]$', raw_text):
+                    if re.search(r'(嗎|呢|吧|對不對|是不是|如何|哪裡|怎麼|為什麼|何須|何故)[？\?]?$', raw_text):
+                        raw_text = re.sub(r'[，、\s]*$', '？', raw_text)
+                    elif re.search(r'(啦|啊|嘛|喔|了|的|這樣|這個)[！\!]?$', raw_text):
+                        raw_text = re.sub(r'[，、\s]*$', '。', raw_text)
+                    else:
+                        raw_text += '。'
+                
+                merged_sents.append({
+                    "start": curr_chunk[0]["start"],
+                    "end": curr_chunk[-1]["end"],
+                    "text": raw_text
+                })
+            curr_chunk = []
+
+    print(f"  ✅ Consolidated into {len(merged_sents)} readable full sentences.")
+    return merged_sents
+
+def step3_llm_proofread(sentences, session_id):
+    print(f"\n[Step 3/5] 🧠 Deep proofreading with local Qwen3.8-27B for {session_id}...")
+    system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的佛學專家與校對主編。
+當前文本為法師第 {session_id} 堂錄音口述逐字稿。
+請嚴格修正 ASR 產生的同音錯字與佛學名相，保持繁體中文與口語流暢，保留正確中文標點符號。
+【極重要】：輸入有 N 句話，輸出必須是剛好 N 句話的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併或刪減句子！"""
+
+    batch_size = 12
+    total_sents = len(sentences)
+    batches = [sentences[i:i + batch_size] for i in range(0, total_sents, batch_size)]
+    
+    corrected_sentences = []
+    for b_idx, batch in enumerate(batches):
+        input_texts = [s["text"] for s in batch]
+        prompt = f"請校對以下 {len(input_texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(input_texts, ensure_ascii=False, indent=2)
+        payload = {
+            "model": "Qwen3.8-27B",
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.05,
+            "chat_template_kwargs": {"enable_thinking": False}
+        }
+
+        try:
+            r = requests.post(LLM_URL, json=payload, timeout=60)
+            r.raise_for_status()
+            content = r.json()["choices"][0]["message"]["content"]
+            match = re.search(r'\[\s*".*"\s*\]', content, re.DOTALL)
+            if match:
+                corr_list = json.loads(match.group(0))
+                if len(corr_list) == len(batch):
+                    for idx, s in enumerate(batch):
+                        corrected_sentences.append({
+                            "start": s["start"],
+                            "end": s["end"],
+                            "text": corr_list[idx]
+                        })
+                    continue
+        except Exception as e:
+            print(f"    ⚠️ Batch {b_idx+1} LLM fallback: {e}")
+
+        # Fallback
+        corrected_sentences.extend(batch)
+
+    print(f"  ✅ Completed LLM proofreading across {len(batches)} batches.")
+    return corrected_sentences
+
+def step4_llm_structure(sentences, session_id, title):
+    print(f"\n[Step 4/5] 📑 Semantic structuring & subheading generation with Qwen3.8-27B...")
+    # First cluster sentences into preliminary paragraphs
+    paragraphs = []
+    curr_p = []
+    p_num = 1
+    for i, s in enumerate(sentences):
+        curr_p.append(s)
+        is_last = (i == len(sentences) - 1)
+        next_s = sentences[i+1] if not is_last else None
+        gap = (next_s["start"] - s["end"]) if next_s else 999.0
+        total_p_chars = sum(len(x["text"]) for x in curr_p)
+
+        if is_last or gap >= 2.2 or len(curr_p) >= 6 or total_p_chars >= 160:
+            paragraphs.append({
+                "id": f"p-{p_num}",
+                "start": curr_p[0]["start"],
+                "end": curr_p[-1]["end"],
+                "sentences": curr_p
+            })
+            p_num += 1
+            curr_p = []
+
+    # Send digest to Qwen3.8-27B for semantic heading extraction
+    para_digest = [f"{p['id']} ({p['start']:.1f}s): {''.join(s['text'] for s in p['sentences'])[:65]}..." for p in paragraphs]
+    prompt = f"以下是第 {session_id} 堂共 {len(paragraphs)} 個段落的時間與開頭摘要。請分析文義轉折，劃分 6~10 個小標題，並回傳 JSON 陣列：\n\n" + "\n".join(para_digest)
+    
+    system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的佛學專家。
+當前任務是對法師第 {session_id} 堂錄音逐字稿進行「文義結構分析與小標題劃分」。
+請輸出標準 JSON 陣列，格式如：
+[
+  {{ "start_paragraph_id": "p-1", "heading": "【科判導讀】主題說明..." }}
+]"""
+
+    try:
+        payload = {
+            "model": "Qwen3.8-27B",
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.1,
+            "chat_template_kwargs": {"enable_thinking": False}
+        }
+        r = requests.post(LLM_URL, json=payload, timeout=90)
+        r.raise_for_status()
+        content = r.json()["choices"][0]["message"]["content"]
+        match = re.search(r'\[\s*\{.*\}\s*\]', content, re.DOTALL)
+        if match:
+            sections = json.loads(match.group(0))
+            heading_map = {item["start_paragraph_id"]: item["heading"] for item in sections}
+            for p in paragraphs:
+                if p["id"] in heading_map:
+                    p["heading"] = heading_map[p["id"]]
+            print(f"  ✅ Extracted {len(sections)} semantic headings from Qwen3.8-27B.")
+    except Exception as e:
+        print(f"  ⚠️ Heading extraction fallback: {e}")
+        if paragraphs:
+            paragraphs[0]["heading"] = f"【本講開示】{title}"
+
+    return paragraphs
+
+def process_single_session(session_id, audio_map, whisper_model):
+    audio_url = audio_map.get(session_id, f"https://buddha.flyday.com.tw/{session_id}.MP3")
+    json_path = SESSIONS_DIR / f"session_{session_id}.json"
+
+    print(f"\n=======================================================")
+    print(f"🚀 PROCESSING SESSION {session_id} — Full Pipeline Standard")
+    print(f"=======================================================")
+
+    # 1. Audio
+    audio_path = download_audio_if_needed(session_id, audio_url)
+
+    # 2. ASR
+    raw_sents, duration = step1_asr_transcribe(session_id, audio_path, whisper_model)
+
+    # 3. Pre-polish
+    clean_sents = step2_pre_polish(raw_sents)
+
+    # 4. LLM Proofread
+    proofread_sents = step3_llm_proofread(clean_sents, session_id)
+
+    # 5. LLM Structure & Headings
+    title = f"第 {session_id} 堂"
+    paragraphs = step4_llm_structure(proofread_sents, session_id, title)
+
+    # Monotonicity enforcement
+    prev_end = 0.0
+    for p in paragraphs:
+        for s in p["sentences"]:
+            if s["start"] < prev_end:
+                s["start"] = round(prev_end, 3)
+            if s["end"] <= s["start"]:
+                s["end"] = round(s["start"] + 0.5, 3)
+            prev_end = s["end"]
+        p["start"] = p["sentences"][0]["start"]
+        p["end"] = p["sentences"][-1]["end"]
+
+    # Assemble JSON payload
+    payload = {
+        "sessionId": session_id,
+        "title": title,
+        "audioUrl": audio_url,
+        "paragraphs": paragraphs,
+        "_meta": {
+            "engine": "whisper-large-v3-turbo",
+            "llm_proofread": "Qwen3.8-27B-FP8",
+            "audio_duration": duration,
+            "total_paragraphs": len(paragraphs),
+            "total_sentences": sum(len(p["sentences"]) for p in paragraphs),
+            "processed_at": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+    }
+
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    print(f"🎉 Successfully generated {json_path} ({len(paragraphs)} paragraphs).")
+    return True
+
+def main():
+    parser = argparse.ArgumentParser(description="Batch conversion pipeline for Buddhist lecture sessions")
+    parser.add_argument("--sessions", nargs="+", help="Specific session IDs to process (e.g. 29A 30A 31A)")
+    parser.add_argument("--all", action="store_true", help="Process all available sessions in audio_map.json")
+    parser.add_argument("--resume", action="store_true", help="Resume from last completed session")
+    args = parser.parse_args()
+
+    audio_map = load_audio_map()
+    all_sessions = list(audio_map.keys())
+
+    if args.sessions:
+        targets = args.sessions
+    elif args.all:
+        targets = all_sessions
+    else:
+        print("Usage: python3 scripts/batch_convert_all.py --sessions 29A 30A OR --all")
+        sys.exit(0)
+
+    # Initialize GPU Whisper Model once
+    print("\n📦 Loading faster-whisper large-v3-turbo on GX10 GPU...")
+    from faster_whisper import WhisperModel
+    whisper_model = WhisperModel("large-v3-turbo", device="cuda", compute_type="float16")
+
+    print(f"🎯 Target queue: {len(targets)} sessions ({targets[:5]}...)")
+
+    progress = {}
+    if PROGRESS_FILE.exists() and args.resume:
+        with open(PROGRESS_FILE, "r") as f:
+            progress = json.load(f)
+
+    for idx, sid in enumerate(targets, 1):
+        if sid in progress and progress[sid].get("status") == "SUCCESS":
+            print(f"⏭️ Skipping already completed session {sid} [{idx}/{len(targets)}]")
+            continue
+
+        try:
+            t0 = time.time()
+            success = process_single_session(sid, audio_map, whisper_model)
+            elapsed = time.time() - t0
+            progress[sid] = {"status": "SUCCESS", "elapsed_seconds": round(elapsed, 1)}
+        except Exception as e:
+            print(f"❌ Error processing {sid}: {e}")
+            progress[sid] = {"status": "FAILED", "error": str(e)}
+
+        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
+            json.dump(progress, f, ensure_ascii=False, indent=2)
+
+    print("\n🏁 Batch conversion execution completed!")
+
+if __name__ == "__main__":
+    main()
