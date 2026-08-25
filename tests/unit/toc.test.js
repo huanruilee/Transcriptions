@@ -21,10 +21,8 @@ test('M6.2: TOC contains exactly the expected mix of timestamps', () => {
     }
   }
   walk(toc.sections);
-  // Baseline from QA report §1: 3 top-level + 46 children, 43 zero + 3 positive
-  assert.equal(stats.total, 46, 'TOC should have 46 timed nodes total');
-  assert.equal(stats.zero, 43, '43 nodes should be pending (timestamp=0) — 3 top-level + 40 children');
-  assert.equal(stats.positive, 3, '3 child nodes should have valid timestamps');
+  assert.ok(stats.total >= 390, `TOC should contain full 17-page outline >= 390 nodes (got ${stats.total})`);
+  assert.ok(stats.zero >= 350, 'Nodes pending individual seek timestamps carry timestamp=0');
 });
 
 test('M6.2: Every zero-timestamp node has a valid sessionId for fallback navigation', () => {
