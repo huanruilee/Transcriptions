@@ -17,14 +17,41 @@ import time
 import argparse
 import subprocess
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 import requests
 
 # Constants & Endpoints
-LLM_URL = "http://192.168.122.1:8001/v1/chat/completions"
+ROUTER_URL = os.environ.get("ROUTER_URL", "http://127.0.0.1:4001/v1/chat/completions")
+VLLM_FALLBACK_URL = os.environ.get("VLLM_FALLBACK_URL", "http://192.168.122.1:8001/v1/chat/completions")
 AUDIO_MAP_PATH = Path("courses/入中論善顯密意疏/audio_map.json")
 SESSIONS_DIR = Path("courses/入中論善顯密意疏/sessions")
 AUDIO_DIR = Path("audio")
 PROGRESS_FILE = Path("conversion_progress.json")
+
+def get_router_headers():
+    """Retrieve auth header for GX10 Smart Router from env or infra config."""
+    key = os.environ.get("ROUTER_API_KEY", "")
+    if not key:
+        env_path = Path("/home/henry/gx10-infra-config/.env")
+        if env_path.exists():
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("ROUTER_AGENT_KEYS="):
+                        raw = line.split("=", 1)[1].strip("\"'")
+                        for p in raw.split(","):
+                            p = p.strip()
+                            if p and ":" in p:
+                                key = p.split(":", 1)[0].strip()
+                                break
+                    elif line.startswith("ROUTER_API_KEYS=") and not key:
+                        raw = line.split("=", 1)[1].strip("\"'")
+                        key = raw.split(",")[0].strip()
+    if key:
+        return {"Authorization": f"Bearer {key}"}
+    return {}
+
+ROUTER_HEADERS = get_router_headers()
 
 # Ensure directories exist
 AUDIO_DIR.mkdir(parents=True, exist_ok=True)
@@ -228,8 +255,35 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
     print(f"  ✅ Consolidated into {len(merged_sents)} readable full sentences.")
     return merged_sents
 
+def call_llm_completion(messages, temperature=0.05, timeout=60):
+    """Call LLM via GX10 Smart Router (Port 4001) with fallback to direct local vLLM."""
+    # 1. Try Smart Router (Port 4001) with model 'primary'
+    try:
+        payload = {
+            "model": "primary",
+            "messages": messages,
+            "temperature": temperature,
+            "chat_template_kwargs": {"enable_thinking": False}
+        }
+        r = requests.post(ROUTER_URL, json=payload, headers=ROUTER_HEADERS, timeout=timeout)
+        if r.status_code == 200:
+            return r.json()["choices"][0]["message"]["content"]
+    except Exception as e:
+        pass
+
+    # 2. Fallback directly to local vLLM (Port 8001) with model 'Qwen3.8-27B'
+    payload = {
+        "model": "Qwen3.8-27B",
+        "messages": messages,
+        "temperature": temperature,
+        "chat_template_kwargs": {"enable_thinking": False}
+    }
+    r = requests.post(VLLM_FALLBACK_URL, json=payload, timeout=timeout)
+    r.raise_for_status()
+    return r.json()["choices"][0]["message"]["content"]
+
 def step3_llm_proofread(sentences, session_id, source_text=""):
-    print(f"\n[Step 3/5] 🧠 Deep proofreading with local Qwen3.8-27B for {session_id} (Grounded: {len(source_text)} chars)...")
+    print(f"\n[Step 3/5] 🧠 Deep proofreading with Smart Router for {session_id} (Grounded: {len(source_text)} chars)...")
     
     source_context_block = ""
     if source_text:
@@ -250,46 +304,50 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
     total_sents = len(sentences)
     batches = [sentences[i:i + batch_size] for i in range(0, total_sents, batch_size)]
     
-    corrected_sentences = []
-    for b_idx, batch in enumerate(batches):
+    def process_batch(b_idx, batch):
         input_texts = [s["text"] for s in batch]
         prompt = f"請依據底本校對以下 {len(input_texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(input_texts, ensure_ascii=False, indent=2)
-        payload = {
-            "model": "Qwen3.8-27B",
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ],
-            "temperature": 0.05,
-            "chat_template_kwargs": {"enable_thinking": False}
-        }
-
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": prompt}
+        ]
         try:
-            r = requests.post(LLM_URL, json=payload, timeout=60)
-            r.raise_for_status()
-            content = r.json()["choices"][0]["message"]["content"]
+            content = call_llm_completion(messages, temperature=0.05, timeout=60)
             match = re.search(r'\[\s*".*"\s*\]', content, re.DOTALL)
             if match:
                 corr_list = json.loads(match.group(0))
                 if len(corr_list) == len(batch):
+                    res = []
                     for idx, s in enumerate(batch):
-                        corrected_sentences.append({
+                        res.append({
                             "start": s["start"],
                             "end": s["end"],
                             "text": corr_list[idx]
                         })
-                    continue
+                    return b_idx, res
         except Exception as e:
             print(f"    ⚠️ Batch {b_idx+1} LLM fallback: {e}")
 
-        # Fallback
-        corrected_sentences.extend(batch)
+        # Fallback to raw batch
+        return b_idx, batch
 
-    print(f"  ✅ Completed LLM proofreading across {len(batches)} batches.")
+    results = [None] * len(batches)
+    # Execute with 4 parallel threads on GX10 Smart Router
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = [executor.submit(process_batch, i, b) for i, b in enumerate(batches)]
+        for fut in futures:
+            b_idx, batch_res = fut.result()
+            results[b_idx] = batch_res
+
+    corrected_sentences = []
+    for b_res in results:
+        corrected_sentences.extend(b_res)
+
+    print(f"  ✅ Completed LLM proofreading across {len(batches)} batches (Smart Router parallel).")
     return corrected_sentences
 
 def step4_llm_structure(sentences, session_id, title):
-    print(f"\n[Step 4/5] 📑 Semantic structuring & subheading generation with Qwen3.8-27B...")
+    print(f"\n[Step 4/5] 📑 Semantic structuring & subheading generation with Smart Router...")
     # First cluster sentences into preliminary paragraphs
     paragraphs = []
     curr_p = []
@@ -311,7 +369,7 @@ def step4_llm_structure(sentences, session_id, title):
             p_num += 1
             curr_p = []
 
-    # Send digest to Qwen3.8-27B for semantic heading extraction
+    # Send digest to LLM for semantic heading extraction
     para_digest = [f"{p['id']} ({p['start']:.1f}s): {''.join(s['text'] for s in p['sentences'])[:65]}..." for p in paragraphs]
     prompt = f"以下是第 {session_id} 堂共 {len(paragraphs)} 個段落的時間與開頭摘要。請分析文義轉折，劃分 6~10 個小標題，並回傳 JSON 陣列：\n\n" + "\n".join(para_digest)
     
@@ -323,18 +381,11 @@ def step4_llm_structure(sentences, session_id, title):
 ]"""
 
     try:
-        payload = {
-            "model": "Qwen3.8-27B",
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ],
-            "temperature": 0.1,
-            "chat_template_kwargs": {"enable_thinking": False}
-        }
-        r = requests.post(LLM_URL, json=payload, timeout=90)
-        r.raise_for_status()
-        content = r.json()["choices"][0]["message"]["content"]
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": prompt}
+        ]
+        content = call_llm_completion(messages, temperature=0.1, timeout=90)
         match = re.search(r'\[\s*\{.*\}\s*\]', content, re.DOTALL)
         if match:
             sections = json.loads(match.group(0))
@@ -342,7 +393,7 @@ def step4_llm_structure(sentences, session_id, title):
             for p in paragraphs:
                 if p["id"] in heading_map:
                     p["heading"] = heading_map[p["id"]]
-            print(f"  ✅ Extracted {len(sections)} semantic headings from Qwen3.8-27B.")
+            print(f"  ✅ Extracted {len(sections)} semantic headings from Smart Router.")
     except Exception as e:
         print(f"  ⚠️ Heading extraction fallback: {e}")
         if paragraphs:
@@ -405,7 +456,7 @@ def process_single_session(session_id, audio_map, whisper_model, session_map=Non
         "paragraphs": paragraphs,
         "_meta": {
             "engine": "whisper-large-v3-turbo",
-            "llm_proofread": "Qwen3.8-27B-FP8 (Grounded In-Context)",
+            "llm_proofread": "Smart Router (MiniMax-M3 / Qwen3.8-27B Grounded)",
             "last_updated": today_date,
             "grounding_source": "《入中論善顯密意疏》真值底本",
             "audio_duration": duration,

@@ -43,7 +43,7 @@ describe('🌟 29A Golden Benchmark Quality Standard Test Suite', () => {
     convertedSessions.forEach(({ file, data }) => {
       assert.ok(data._meta, `${file} must include _meta object`);
       assert.ok(data._meta.engine && data._meta.engine.includes('whisper'), `${file} engine must be whisper variant`);
-      assert.ok(data._meta.llm_proofread && data._meta.llm_proofread.includes('Qwen3.8-27B'), `${file} llm_proofread must be Qwen3.8-27B variant`);
+      assert.ok(data._meta.llm_proofread && (data._meta.llm_proofread.includes('Qwen3.8-27B') || data._meta.llm_proofread.includes('Smart Router')), `${file} llm_proofread must be Smart Router or Qwen3.8-27B variant`);
       const dateVal = data.lastUpdated || data._meta.last_updated || (data._meta.processed_at ? data._meta.processed_at.split(' ')[0] : '');
       assert.match(dateVal, /^\d{4}-\d{2}-\d{2}$/, `${file} must have valid YYYY-MM-DD lastUpdated date`);
       
