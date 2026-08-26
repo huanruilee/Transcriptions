@@ -472,6 +472,19 @@ def process_single_session(session_id, audio_map, whisper_model, session_map=Non
         }
     }
 
+    # Strict Taiwan Standard Traditional Chinese (繁體中文) Pass
+    try:
+        import opencc
+        t_conv = opencc.OpenCC('s2twp')
+        def to_trad(o):
+            if isinstance(o, str): return t_conv.convert(o)
+            elif isinstance(o, list): return [to_trad(x) for x in o]
+            elif isinstance(o, dict): return {k: to_trad(v) for k, v in o.items()}
+            return o
+        payload = to_trad(payload)
+    except Exception as e:
+        pass
+
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
