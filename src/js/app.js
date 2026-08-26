@@ -1,7 +1,8 @@
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
-import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback } from './syncPlayer.js';
+import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll } from './syncPlayer.js';
 import { initSearch } from './search.js';
+
 import { formatAriaTime, safePlay } from './a11y.js';
 import { openSentenceEditorModal, getCorrection, getNote, getAllCorrections, getAllNotes, exportNotesAsMarkdown } from './annotation.js';
 
@@ -253,6 +254,7 @@ function renderTranscript(sessionData) {
   });
 
   function triggerEditorModal(idx) {
+    cancelPendingAutoScroll();
     const audio = document.getElementById('audio-element');
     if (audio && !audio.paused) audio.pause();
     const sentObj = allFlattenedSentences[idx];
@@ -270,11 +272,24 @@ function renderTranscript(sessionData) {
   const sentenceEls = container.querySelectorAll('.sentence');
   sentenceEls.forEach((el, idx) => {
     let lastTapTime = 0;
+    let lastClickTime = 0;
 
-    // Single Click: Jump & Play
-    el.addEventListener('click', () => {
+    // Single Click: Jump & Play (with delayed auto-scroll to allow double click)
+    el.addEventListener('click', (e) => {
+      const now = Date.now();
+      // Fast double-click detector (380ms)
+      if (now - lastClickTime < 380 && lastClickTime > 0) {
+        e.preventDefault();
+        cancelPendingAutoScroll();
+        triggerEditorModal(idx);
+        lastClickTime = 0;
+        return;
+      }
+      lastClickTime = now;
+
       const rawStart = allFlattenedSentences[idx].start;
-      highlightSentenceByTime(rawStart);
+      // Delay auto-scroll by 400ms so the screen stays still under the cursor during double-click!
+      highlightSentenceByTime(rawStart, { delayScrollMs: 400 });
 
       const audio = document.getElementById('audio-element');
       if (audio) {
@@ -308,8 +323,10 @@ function renderTranscript(sessionData) {
     // Double Click: Enter Proofreading & Notes Modal
     el.addEventListener('dblclick', (e) => {
       e.preventDefault();
+      cancelPendingAutoScroll();
       triggerEditorModal(idx);
     });
+
 
     // Mobile / Touch Double Tap Support
     el.addEventListener('touchend', (e) => {

@@ -70,11 +70,27 @@ export function initSyncPlayer() {
   initialized = true;
 }
 
+let pendingScrollTimeout = null;
+
+/**
+ * Cancel any pending delayed auto-scroll.
+ */
+export function cancelPendingAutoScroll() {
+  if (pendingScrollTimeout) {
+    clearTimeout(pendingScrollTimeout);
+    pendingScrollTimeout = null;
+  }
+}
+
 /**
  * Highlight sentence matching the given timestamp and scroll into view.
  * Exported so click-to-seek and TOC seek give instant visual feedback.
+ * @param {number} timeInSeconds
+ * @param {Object} [options]
+ * @param {number} [options.delayScrollMs=0] - Delay before auto-scrolling (prevents double-click jitter)
  */
-export function highlightSentenceByTime(timeInSeconds) {
+export function highlightSentenceByTime(timeInSeconds, options = {}) {
+  const { delayScrollMs = 0 } = options;
   if (!boundSentences || boundSentences.length === 0) return -1;
   const activeIdx = findSentenceIndexByTime(boundSentences, timeInSeconds, currentRatio);
 
@@ -86,12 +102,23 @@ export function highlightSentenceByTime(timeInSeconds) {
       activeEl.classList.add('active');
 
       if (!userIsScrolling) {
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        cancelPendingAutoScroll();
+        if (delayScrollMs > 0) {
+          pendingScrollTimeout = setTimeout(() => {
+            if (!userIsScrolling) {
+              activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            pendingScrollTimeout = null;
+          }, delayScrollMs);
+        } else {
+          activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
     }
   }
   return activeIdx;
 }
+
 
 /**
  * Stop any active simulated playback timer.
