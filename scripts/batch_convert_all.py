@@ -381,11 +381,17 @@ def step4_llm_structure(sentences, session_id, title):
 ]"""
 
     try:
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt}
-        ]
-        content = call_llm_completion(messages, temperature=0.1, timeout=90)
+        payload = {
+            "model": "Qwen3.8-27B",
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.1,
+            "chat_template_kwargs": {"enable_thinking": False}
+        }
+        r = requests.post(VLLM_FALLBACK_URL, json=payload, timeout=90)
+        content = r.json()["choices"][0]["message"]["content"]
         match = re.search(r'\[\s*\{.*\}\s*\]', content, re.DOTALL)
         if match:
             sections = json.loads(match.group(0))
@@ -393,7 +399,7 @@ def step4_llm_structure(sentences, session_id, title):
             for p in paragraphs:
                 if p["id"] in heading_map:
                     p["heading"] = heading_map[p["id"]]
-            print(f"  ✅ Extracted {len(sections)} semantic headings from Smart Router.")
+            print(f"  ✅ Extracted {len(sections)} semantic headings from Qwen3.8-27B.")
     except Exception as e:
         print(f"  ⚠️ Heading extraction fallback: {e}")
         if paragraphs:
