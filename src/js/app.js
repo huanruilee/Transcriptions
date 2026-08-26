@@ -7,6 +7,7 @@ import { renderTOC, applyActiveHighlight } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback } from './syncPlayer.js';
 import { initSearch } from './search.js';
 import { formatAriaTime, safePlay } from './a11y.js';
+import { openSentenceEditorModal, getCorrection, getNote, getAllCorrections, getAllNotes, exportNotesAsMarkdown } from './annotation.js';
 
 let courseData = null;
 let tocData = null;
@@ -16,6 +17,7 @@ let currentSessionId = null;
 let allFlattenedSentences = [];
 let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
 let sidebarFilterValue = ''; // P2: sidebar filter state
+let currentInteractionMode = 'listen'; // 'listen' | 'proofread'
 
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', async () => {
@@ -27,6 +29,8 @@ if (typeof document !== 'undefined') {
     initCourseOverview(); // P1: course overview entry
     initSidebarFilter();  // P2: sidebar filter
     initSessionNav();     // P0-3: prev/next session nav
+    initModeToggle();     // Annotation & Proofread mode
+    initExportNotes();    // Export notes button
     await loadCourseData();
   });
 }
@@ -194,36 +198,74 @@ function renderTranscript(sessionData) {
       container.appendChild(headingEl);
     }
 
-    const pEl = document.createElement('p');
-    pEl.className = 'transcript-paragraph';
-    pEl.id = p.id;
+    const allNotes = getAllNotes(currentSessionId);
+    const allCorrs = getAllCorrections(currentSessionId);
 
     p.sentences.forEach(s => {
       const idx = sentCounter++;
+      s.id = s.id || `sent-${idx}`;
       allFlattenedSentences.push(s);
+
+      const corr = allCorrs[s.id];
+      const note = allNotes[s.id];
+
       const span = document.createElement('span');
       span.className = 'sentence';
-      span.id = `sent-${idx}`;
+      span.id = s.id;
       span.dataset.start = String(s.start);
       span.dataset.end = String(s.end);
-      span.textContent = s.text;
-      // M6.3 a11y (AGY review): Roving Tabindex — only the first sentence is
-      // tab-focusable; the rest are tabindex=-1 to avoid Tab Flood (thousands of
-      // sentences would trap keyboard users). Arrow keys move focus + seek.
-      // No role="button" on <span> — it's not a button, it's a seek target.
+      span.textContent = corr ? corr.correctedText : s.text;
+
+      if (corr) {
+        span.classList.add('has-correction');
+        span.title = `【已校勘】原音辨識：${corr.originalText}`;
+      }
+
+      if (note) {
+        span.classList.add('has-note');
+        const badge = document.createElement('span');
+        badge.className = 'sentence-note-badge';
+        badge.textContent = `📌 ${note.pageRef || '筆記'}`;
+        badge.title = note.content;
+        span.appendChild(badge);
+      }
+
       span.tabIndex = idx === 0 ? 0 : -1;
       span.setAttribute('aria-label', `跳到音檔 ${formatAriaTime(s.start)}`);
       pEl.appendChild(span);
       pEl.appendChild(document.createTextNode(' '));
+
+      if (note) {
+        const noteCard = document.createElement('div');
+        noteCard.className = 'sentence-note-card';
+        noteCard.innerHTML = `<b>📌 法義筆記 (${note.tag || '研讀'} ${note.pageRef ? '｜ ' + note.pageRef : ''})：</b> ${escapeHtml(note.content)}`;
+        pEl.appendChild(noteCard);
+      }
     });
 
     container.appendChild(pEl);
   });
 
-  // Click-to-Seek binding with Ratio Scaling and instant visual feedback
+  // Click-to-Seek or Proofread binding
   const sentenceEls = container.querySelectorAll('.sentence');
   sentenceEls.forEach((el, idx) => {
+    const triggerEditor = () => {
+      const audio = document.getElementById('audio-element');
+      if (audio && !audio.paused) audio.pause();
+      const sentObj = allFlattenedSentences[idx];
+      openSentenceEditorModal(currentSessionId, sentObj, () => {
+        renderTranscript(currentSessionData);
+      }, () => {
+        renderTranscript(currentSessionData);
+      });
+    };
+
     el.addEventListener('click', () => {
+      if (currentInteractionMode === 'proofread') {
+        triggerEditor();
+        return;
+      }
+
       const rawStart = allFlattenedSentences[idx].start;
       highlightSentenceByTime(rawStart);
 
@@ -244,7 +286,6 @@ function renderTranscript(sessionData) {
         if (audio.readyState >= 1) {
           applySeekAndPlay();
         } else {
-          // If metadata not yet loaded, wait for loadedmetadata before setting currentTime
           audio.addEventListener('loadedmetadata', () => {
             try {
               audio.currentTime = targetTime;
@@ -256,9 +297,11 @@ function renderTranscript(sessionData) {
         }
       }
     });
-    // M6.3 a11y (AGY review): Roving Tabindex keyboard navigation.
-    // Enter/Space seeks to this sentence; ArrowDown/ArrowUp moves focus to the
-    // next/previous sentence (roving tabindex) and seeks there too.
+
+    el.addEventListener('dblclick', () => {
+      triggerEditor();
+    });
+
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -269,11 +312,10 @@ function renderTranscript(sessionData) {
         const nextIdx = idx + delta;
         if (nextIdx >= 0 && nextIdx < sentenceEls.length) {
           const next = sentenceEls[nextIdx];
-          // Roving tabindex: move focus to the target sentence
           el.tabIndex = -1;
           next.tabIndex = 0;
           next.focus();
-          next.click(); // seek audio to that sentence
+          next.click();
         }
       }
     });
@@ -767,3 +809,54 @@ function navigateSession(delta) {
   if (targetIdx < 0 || targetIdx >= courseData.sessions.length) return;
   switchSession(courseData.sessions[targetIdx]);
 }
+
+/**
+ * Initialize Annotation & Proofreading Mode Toggle
+ */
+function initModeToggle() {
+  const btn = document.getElementById('mode-toggle-btn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    if (currentInteractionMode === 'listen') {
+      currentInteractionMode = 'proofread';
+      btn.textContent = '📝 校對與筆記中';
+      btn.classList.add('mode-active');
+      showToast('已切換為「📝 校對與筆記模式」：點擊任意句子即可展開編輯與 AI 預審！');
+    } else {
+      currentInteractionMode = 'listen';
+      btn.textContent = '🎧 聆聽模式';
+      btn.classList.remove('mode-active');
+      showToast('已切換為「🎧 聆聽模式」：點擊句子即刻跳播。');
+    }
+  });
+}
+
+/**
+ * Initialize Export Notes as Markdown
+ */
+function initExportNotes() {
+  const btn = document.getElementById('export-notes-btn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    if (!currentSessionId || !currentSessionData) return;
+    const md = exportNotesAsMarkdown(currentSessionId, currentSessionData);
+    const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `善顯密意疏_第${currentSessionId}堂_研讀筆記與校對紀錄.md`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    showToast(`✅ 已成功匯出 第 ${currentSessionId} 堂 Markdown 研讀筆記！`);
+  });
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《入中論善顯密意疏》AI 智慧審核控制台</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    .review-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .review-header {
+      background: var(--surface-color, #fff);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+    }
+    .auth-banner {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: var(--bg-alt, #f8f9fa);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+    .review-card {
+      background: var(--surface-color, #fff);
+      border: 1px solid var(--border-color, #e0e0e0);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+    .review-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-color: var(--primary-color, #1976d2);
+    }
+    .diff-box {
+      background: var(--bg-color, #fafafa);
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 12px 0;
+    }
+    .diff-del {
+      background: #ffebee;
+      color: #c62828;
+      text-decoration: line-through;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    .diff-ins {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    .ai-badge-box {
+      background: #f0f7ff;
+      border-left: 4px solid #1976d2;
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      font-size: 0.95rem;
+    }
+    .review-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="app-header">
+    <h1>🛡️《入中論善顯密意疏》AI 智慧審核控制台</h1>
+    <div class="header-tools">
+      <a href="index.html" class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.4);">← 返回閱讀器</a>
+    </div>
+  </header>
+
+  <div class="review-container">
+    <div class="review-header">
+      <h2>📋 待審核逐字稿校勘與筆記清單</h2>
+      <p style="color: var(--text-secondary, #666); margin: 6px 0 0 0;">
+        由讀者提交之校對建議，已透過後台 AI 自動比對《入中論善顯密意疏》底本並提供置信度評估。
+      </p>
+
+      <div class="auth-banner" id="auth-banner">
+        <span>🔐 管理員驗證：</span>
+        <input type="password" id="admin-passkey-input" class="form-input" placeholder="請輸入 Admin Passkey 解鎖審批..." style="width: 260px;">
+        <button id="auth-unlock-btn" class="btn btn-primary">解鎖審核權限</button>
+        <span id="auth-status" style="margin-left: 10px; font-weight: 600;"></span>
+      </div>
+    </div>
+
+    <!-- Review Items List -->
+    <div id="review-list-container">
+      <!-- Rendered dynamically -->
+      <div class="review-card" id="demo-item-1">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 700; color: var(--primary-color);">📌 第 29A 堂 (p.97) ｜ 句子 #sent-14</span>
+          <span style="font-size: 0.85rem; color: #888;">時間：01:23 ~ 01:27 (4.3s)</span>
+        </div>
+
+        <div class="diff-box">
+          <b>對照：</b>因此破除<del class="diff-del">事事師</del><ins class="diff-ins">實事師</ins>的妄計。
+        </div>
+
+        <div class="ai-badge-box">
+          <b>🤖 AI 智慧審核 (Qwen 27B / MiniMax)：</b>
+          <span style="color: #2e7d32; font-weight: 700;">🟢 【極力推薦採納】</span>
+          <p style="margin: 4px 0 0 0; font-size: 0.9rem; color: #444;">
+            吻合善顯密意疏 p.97 「破實事師所計自相」之名相義理。原 ASR 語音誤辨同音字。
+          </p>
+        </div>
+
+        <div class="review-actions">
+          <button class="btn btn-secondary review-play-btn" data-start="83.2" data-end="87.5">🎧 試聽 3 秒音訊切片</button>
+          <div style="flex: 1;"></div>
+          <button class="btn btn-danger review-reject-btn" disabled>✗ 忽略</button>
+          <button class="btn btn-primary review-approve-btn" disabled>✓ 採納並更新</button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="review-audio-player" src="https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170114-A%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p97(29).MP3" preload="metadata" style="display: none;"></audio>
+  </div>
+
+  <script type="module">
+    import { verifyAdminPasskey, calculateAudioSliceRange, playAudioSlice } from './js/review.js';
+
+    const authInput = document.getElementById('admin-passkey-input');
+    const unlockBtn = document.getElementById('auth-unlock-btn');
+    const authStatus = document.getElementById('auth-status');
+    const audioPlayer = document.getElementById('review-audio-player');
+
+    let isAuthenticated = sessionStorage.getItem('admin_authenticated') === 'true';
+
+    function updateAuthUI() {
+      if (isAuthenticated) {
+        authStatus.textContent = '✅ 已通過管理員驗證';
+        authStatus.style.color = '#2e7d32';
+        document.querySelectorAll('.review-approve-btn, .review-reject-btn').forEach(btn => btn.disabled = false);
+      } else {
+        authStatus.textContent = '🔒 未解鎖';
+        authStatus.style.color = '#c62828';
+        document.querySelectorAll('.review-approve-btn, .review-reject-btn').forEach(btn => btn.disabled = true);
+      }
+    }
+
+    unlockBtn.addEventListener('click', () => {
+      const passkey = authInput.value;
+      if (verifyAdminPasskey(passkey)) {
+        isAuthenticated = true;
+        sessionStorage.setItem('admin_authenticated', 'true');
+        updateAuthUI();
+      } else {
+        alert('密鑰錯誤，請重新輸入！');
+      }
+    });
+
+    document.querySelectorAll('.review-play-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const start = parseFloat(btn.dataset.start);
+        const end = parseFloat(btn.dataset.end);
+        const slice = calculateAudioSliceRange(start, end);
+        playAudioSlice(audioPlayer, slice.start, slice.end);
+      });
+    });
+
+    document.querySelectorAll('.review-approve-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!isAuthenticated) return;
+        const card = btn.closest('.review-card');
+        card.style.opacity = '0.5';
+        btn.textContent = '✓ 已採納';
+        btn.disabled = true;
+        alert('已成功採納該校勘項目！');
+      });
+    });
+
+    document.querySelectorAll('.review-reject-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!isAuthenticated) return;
+        const card = btn.closest('.review-card');
+        card.remove();
+      });
+    });
+
+    updateAuthUI();
+  </script>
+</body>
+</html>

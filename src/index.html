@@ -25,7 +25,10 @@
       </div>
       <!-- M6.3 a11y: aria-label for screen readers -->
       <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋講記關鍵字..." aria-label="搜尋講記內容（支援佛法術語自動展開）" autocomplete="off" role="searchbox">
-      <span id="search-status" class="search-status" hidden></span>
+      <!-- Mode Toggle: Listen vs Proofread -->
+      <button id="mode-toggle-btn" class="mode-toggle-btn" title="切換 🎧聆聽模式 / 📝校對與筆記模式">🎧 聆聽模式</button>
+      <button id="export-notes-btn" class="export-notes-btn" title="匯出當講研讀筆記與校對紀錄">📥 匯出筆記</button>
+      <a href="review.html" class="review-center-link" title="開啟 AI 智慧審核控制台" target="_blank">🛡️ 審核中心</a>
       <button id="theme-toggle" class="theme-toggle-btn">🌙 深色模式</button>
     </div>
   </header>
