@@ -1,8 +1,4 @@
-/**
- * app.js - Main Application Orchestrator
- */
-
-import { renderSidebar, updateHeaderTitle, toggleAllAccordionGroups } from './sidebar.js';
+import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback } from './syncPlayer.js';
 import { initSearch } from './search.js';
@@ -28,8 +24,6 @@ if (typeof document !== 'undefined') {
     initSearch();
     initCourseOverview(); // P1: course overview entry
     initSidebarFilter();  // P2: sidebar filter
-    initSidebarPills();   // P4: quick filter chips
-    initAccordionToggleAll(); // P3: expand / collapse all groups
     initSessionNav();     // P0-3: prev/next session nav
     initModeToggle();     // Annotation & Proofread mode
     initExportNotes();    // Export notes button
@@ -800,50 +794,12 @@ function hideCourseOverview() {
 
 /**
  * P2: Return sessions filtered by the sidebar filter value.
- * Matches chapter pills, sessionId, date, pageRange, or summary (case-insensitive).
+ * Matches sessionId, date, pageRange, or summary (case-insensitive).
  */
 function getFilteredSessions() {
   if (!courseData) return [];
   if (!sidebarFilterValue) return courseData.sessions;
   const q = sidebarFilterValue;
-
-  // Fast mapping for authentic chapter chips
-  if (q === '歸敬頌') {
-    return courseData.sessions.filter(s => {
-      const num = parseInt(s.sessionId, 10);
-      return (num >= 85 && num <= 93) || (s.summary && s.summary.includes('歸敬'));
-    });
-  }
-  if (q === '前五地') {
-    return courseData.sessions.filter(s => {
-      const num = parseInt(s.sessionId, 10);
-      return num >= 94 && num <= 110;
-    });
-  }
-  if (q === '破四生') {
-    return courseData.sessions.filter(s => {
-      const num = parseInt(s.sessionId, 10);
-      return num >= 4 && num <= 40;
-    });
-  }
-  if (q === '二諦') {
-    return courseData.sessions.filter(s => {
-      const num = parseInt(s.sessionId, 10);
-      return (num >= 41 && num <= 60) || (s.summary && s.summary.includes('二諦'));
-    });
-  }
-  if (q === '我執') {
-    return courseData.sessions.filter(s => {
-      const num = parseInt(s.sessionId, 10);
-      return num >= 61 && num <= 78;
-    });
-  }
-  if (q === '果地') {
-    return courseData.sessions.filter(s => {
-      const num = parseInt(s.sessionId, 10);
-      return num >= 79 && num <= 84;
-    });
-  }
 
   return courseData.sessions.filter(s => {
     const haystack = [
@@ -855,7 +811,7 @@ function getFilteredSessions() {
 }
 
 /**
- * P2: Initialize the sidebar filter (quick search by session id or summary).
+ * P2: Initialize the sidebar filter (quick search by session id, date, page or summary).
  */
 function initSidebarFilter() {
   const input = document.getElementById('sidebar-filter');
@@ -863,55 +819,6 @@ function initSidebarFilter() {
 
   input.addEventListener('input', () => {
     sidebarFilterValue = input.value.trim().toLowerCase();
-    if (courseData) {
-      renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
-    }
-  });
-}
-
-/**
- * P4: Initialize Quick Filter Chips (歸敬頌, 前五地, 第六地, 後四地, 果地, 全部)
- */
-function initSidebarPills() {
-  const container = document.getElementById('quick-filter-pills');
-  if (!container) return;
-
-  const pills = container.querySelectorAll('.filter-pill');
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-
-      const filterType = pill.dataset.filter;
-      const input = document.getElementById('sidebar-filter');
-
-      if (filterType === 'all') {
-        sidebarFilterValue = '';
-        if (input) input.value = '';
-      } else {
-        sidebarFilterValue = filterType.toLowerCase();
-        if (input) input.value = filterType;
-      }
-
-      if (courseData) {
-        renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
-      }
-    });
-  });
-}
-
-/**
- * P3: Initialize Expand / Collapse All Accordion Groups Toggle
- */
-function initAccordionToggleAll() {
-  const btn = document.getElementById('accordion-toggle-all-btn');
-  if (!btn) return;
-
-  let isAllExpanded = false;
-  btn.addEventListener('click', () => {
-    isAllExpanded = !isAllExpanded;
-    toggleAllAccordionGroups(isAllExpanded);
-    btn.textContent = isAllExpanded ? '📁 全部收合' : '📂 全部展開';
     if (courseData) {
       renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
     }
