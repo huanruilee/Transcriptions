@@ -46,6 +46,15 @@ async function loadCourseData() {
       }
     } catch (_) {}
 
+    if (courseData && courseData.sessions && audioMapData) {
+      courseData.sessions.forEach(s => {
+        if (audioMapData[s.sessionId]) {
+          s.flydayAudioUrl = audioMapData[s.sessionId];
+          s.officialAudioUrl = audioMapData[s.sessionId];
+        }
+      });
+    }
+
     // P0-1: Update course count in header + sidebar
     const totalSessions = courseData.sessions.length;
     const headerCount = document.getElementById('header-course-count');
@@ -94,8 +103,10 @@ async function switchSession(session) {
   // Also catches network/parse errors (was silently failing before).
   const previousSessionId = currentSessionId;
 
+  const flydayUrl = (audioMapData && audioMapData[session.sessionId]) || session.flydayAudioUrl || session.officialAudioUrl;
+
   renderSidebar(getFilteredSessions(), session.sessionId, switchSession, courseData.unavailableSessions);
-  updateHeaderTitle(session);
+  updateHeaderTitle(session, flydayUrl);
   updateBreadcrumb(session); // P0-2: breadcrumb
   applyActiveHighlight(session.sessionId);
 

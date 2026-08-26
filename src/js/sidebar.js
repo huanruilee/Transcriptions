@@ -84,7 +84,7 @@ function nextSessionId(sessionId) {
   return `${String(num + 1).padStart(2, '0')}A`;
 }
 
-export function updateHeaderTitle(session) {
+export function updateHeaderTitle(session, exactFlydayUrl) {
   const titleEl = document.getElementById('active-session-title');
   if (!titleEl || !session) return;
 
@@ -104,7 +104,7 @@ export function updateHeaderTitle(session) {
     titleEl.appendChild(summaryDiv);
   }
 
-  const externalAudioUrl = session.flydayAudioUrl || session.officialAudioUrl || (session.audioUrl && session.audioUrl.startsWith('http') ? session.audioUrl : `https://buddha.flyday.com.tw/${session.sessionId}.MP3`);
+  const externalAudioUrl = exactFlydayUrl || session.flydayAudioUrl || session.officialAudioUrl;
 
   if (externalAudioUrl) {
     const audioLinkDiv = document.createElement('div');
@@ -120,7 +120,7 @@ export function updateHeaderTitle(session) {
     audioA.target = '_blank';
     audioA.rel = 'noopener noreferrer';
     audioA.textContent = `Flyday 官方音檔 (${session.sessionId}.MP3) ↗`;
-    audioA.style.cssText = 'color: var(--primary-color, #1976d2); text-decoration: underline;';
+    audioA.style.cssText = 'color: var(--primary-color, #1976d2); text-decoration: underline; font-weight: 600;';
     audioLinkDiv.appendChild(audioA);
 
     titleEl.appendChild(audioLinkDiv);
