@@ -103,4 +103,25 @@ export function updateHeaderTitle(session) {
     summaryDiv.textContent = `🎯 主題：${session.summary}`;
     titleEl.appendChild(summaryDiv);
   }
+
+  if (session.audioUrl) {
+    const audioLinkDiv = document.createElement('div');
+    audioLinkDiv.className = 'session-audio-link-container';
+    audioLinkDiv.style.cssText = 'font-size: 0.88rem; font-weight: 400; color: var(--text-secondary, #666); margin-top: 6px; display: flex; align-items: center; gap: 6px;';
+    
+    const audioIcon = document.createElement('span');
+    audioIcon.textContent = '🎧 原始音檔：';
+    audioLinkDiv.appendChild(audioIcon);
+
+    const audioA = document.createElement('a');
+    audioA.href = session.audioUrl;
+    audioA.target = '_blank';
+    audioA.rel = 'noopener noreferrer';
+    audioA.textContent = `Flyday 官方音檔 (${session.sessionId}.MP3) ↗`;
+    audioA.style.cssText = 'color: var(--primary-color, #1976d2); text-decoration: underline;';
+    audioLinkDiv.appendChild(audioA);
+
+    titleEl.appendChild(audioLinkDiv);
+  }
 }
+

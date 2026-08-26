@@ -43,10 +43,10 @@ def main():
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append("## 📖 二、全 198 講次課堂進度與課本頁數詳細對照表")
+    lines.append("## 📖 二、全 198 講次課堂進度、課本頁數與原始音檔對照表")
     lines.append("")
-    lines.append("| 講次 | 授課日期 | 善顯底本頁碼 | 科判主題與課堂開示摘要 | 底本對應關鍵科文/偈頌 |")
-    lines.append("| :--- | :--- | :--- | :--- | :--- |")
+    lines.append("| 講次 | 授課日期 | 善顯底本頁碼 | 🎧 原始音檔連結 | 科判主題與課堂開示摘要 | 底本對應關鍵科文/偈頌 |")
+    lines.append("| :--- | :--- | :--- | :--- | :--- | :--- |")
 
     # Pre-extract section headings for all pages
     page_headings = {}
@@ -67,6 +67,7 @@ def main():
         sid = s.get("sessionId", "")
         date = s.get("date", "—")
         prange = s.get("pageRange", "—")
+        audio_url = s.get("audioUrl", f"https://buddha.flyday.com.tw/{sid}.MP3")
         summary = s.get("summary", "").replace("\n", " ").strip()
         
         # Parse page numbers
@@ -99,7 +100,8 @@ def main():
         else:
             summary_display = summary[:50] + "..." if len(summary) > 50 else summary
 
-        lines.append(f"| **第 {sid} 堂** | {date} | `{prange}` | {summary_display} | {preview_text} |")
+        audio_link = f"[{sid}.MP3 ↗]({audio_url})" if audio_url else "—"
+        lines.append(f"| **第 {sid} 堂** | {date} | `{prange}` | {audio_link} | {summary_display} | {preview_text} |")
 
     lines.append("")
     lines.append("---")
