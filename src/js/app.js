@@ -529,13 +529,27 @@ function handleSeekTo(targetSessionId, timestamp) {
 }
 
 function findParagraphByTime(timestamp) {
-  if (!currentSessionData || !currentSessionData.paragraphs) return null;
+  if (!currentSessionData || !currentSessionData.paragraphs || currentSessionData.paragraphs.length === 0) return null;
+  if (timestamp <= 0) return currentSessionData.paragraphs[0].id;
+  
+  // Exact interval check
   for (const p of currentSessionData.paragraphs) {
     if (timestamp >= p.start && timestamp <= p.end) {
       return p.id;
     }
   }
-  return null;
+  
+  // Closest paragraph preceding or nearest timestamp
+  let bestPara = currentSessionData.paragraphs[0];
+  let minDiff = Math.abs(currentSessionData.paragraphs[0].start - timestamp);
+  for (const p of currentSessionData.paragraphs) {
+    const diff = Math.abs(p.start - timestamp);
+    if (diff < minDiff) {
+      minDiff = diff;
+      bestPara = p;
+    }
+  }
+  return bestPara ? bestPara.id : null;
 }
 
 function initThemeToggle() {
