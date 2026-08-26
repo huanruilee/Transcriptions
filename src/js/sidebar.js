@@ -192,8 +192,10 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession, unavai
   if (activeSessionId) {
     setTimeout(() => {
       const activeEl = container.querySelector(`.session-item.active`);
-      if (activeEl) {
-        activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (activeEl && typeof activeEl.scrollIntoView === 'function') {
+        try {
+          activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (_) {}
       }
     }, 50);
   }
