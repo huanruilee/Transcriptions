@@ -71,6 +71,23 @@ export function initSyncPlayer() {
 }
 
 let pendingScrollTimeout = null;
+let userInteractionLockUntil = 0;
+
+/**
+ * Freeze auto-scrolling for a specified duration (e.g. 500ms)
+ * to guarantee that clicks/double-clicks never cause screen jumps.
+ */
+export function freezeAutoScroll(durationMs = 500) {
+  userInteractionLockUntil = Math.max(userInteractionLockUntil, Date.now() + durationMs);
+  cancelPendingAutoScroll();
+}
+
+/**
+ * Check if auto-scrolling is currently temporarily frozen.
+ */
+export function isAutoScrollFrozen() {
+  return Date.now() < userInteractionLockUntil;
+}
 
 /**
  * Cancel any pending delayed auto-scroll.
@@ -101,11 +118,11 @@ export function highlightSentenceByTime(timeInSeconds, options = {}) {
     if (activeEl) {
       activeEl.classList.add('active');
 
-      if (!userIsScrolling) {
+      if (!userIsScrolling && !isAutoScrollFrozen()) {
         cancelPendingAutoScroll();
         if (delayScrollMs > 0) {
           pendingScrollTimeout = setTimeout(() => {
-            if (!userIsScrolling) {
+            if (!userIsScrolling && !isAutoScrollFrozen()) {
               activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             pendingScrollTimeout = null;
@@ -118,6 +135,7 @@ export function highlightSentenceByTime(timeInSeconds, options = {}) {
   }
   return activeIdx;
 }
+
 
 
 /**

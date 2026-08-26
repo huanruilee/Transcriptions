@@ -1,7 +1,8 @@
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
-import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll } from './syncPlayer.js';
+import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll, freezeAutoScroll } from './syncPlayer.js';
 import { initSearch } from './search.js';
+
 
 import { formatAriaTime, safePlay } from './a11y.js';
 import { openSentenceEditorModal, getCorrection, getNote, getAllCorrections, getAllNotes, exportNotesAsMarkdown } from './annotation.js';
@@ -254,6 +255,7 @@ function renderTranscript(sessionData) {
   });
 
   function triggerEditorModal(idx) {
+    freezeAutoScroll(1200);
     cancelPendingAutoScroll();
     const audio = document.getElementById('audio-element');
     if (audio && !audio.paused) audio.pause();
@@ -274,13 +276,16 @@ function renderTranscript(sessionData) {
     let lastTapTime = 0;
     let lastClickTime = 0;
 
-    // Single Click: Jump & Play (with delayed auto-scroll to allow double click)
+    // Single Click: Jump & Play (freezes auto-scroll for 600ms to allow double-click without jitter)
     el.addEventListener('click', (e) => {
+      // 1. Immediately freeze any scrolling (timeupdate/seek/smooth scroll) for 600ms
+      freezeAutoScroll(600);
+
       const now = Date.now();
-      // Fast double-click detector (380ms)
-      if (now - lastClickTime < 380 && lastClickTime > 0) {
+      // Fast double-click detector (450ms window)
+      if (now - lastClickTime < 450 && lastClickTime > 0) {
         e.preventDefault();
-        cancelPendingAutoScroll();
+        freezeAutoScroll(1500);
         triggerEditorModal(idx);
         lastClickTime = 0;
         return;
@@ -288,8 +293,7 @@ function renderTranscript(sessionData) {
       lastClickTime = now;
 
       const rawStart = allFlattenedSentences[idx].start;
-      // Delay auto-scroll by 400ms so the screen stays still under the cursor during double-click!
-      highlightSentenceByTime(rawStart, { delayScrollMs: 400 });
+      highlightSentenceByTime(rawStart);
 
       const audio = document.getElementById('audio-element');
       if (audio) {
@@ -323,9 +327,10 @@ function renderTranscript(sessionData) {
     // Double Click: Enter Proofreading & Notes Modal
     el.addEventListener('dblclick', (e) => {
       e.preventDefault();
-      cancelPendingAutoScroll();
+      freezeAutoScroll(1500);
       triggerEditorModal(idx);
     });
+
 
 
     // Mobile / Touch Double Tap Support
