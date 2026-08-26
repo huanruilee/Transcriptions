@@ -260,11 +260,14 @@ function renderTranscript(sessionData) {
     const audio = document.getElementById('audio-element');
     if (audio && !audio.paused) audio.pause();
     const sentObj = allFlattenedSentences[idx];
+    const prevSent = idx > 0 ? allFlattenedSentences[idx - 1] : null;
+    const nextSent = idx < allFlattenedSentences.length - 1 ? allFlattenedSentences[idx + 1] : null;
+
     openSentenceEditorModal(currentSessionId, sentObj, () => {
       renderTranscript(currentSessionData);
     }, () => {
       renderTranscript(currentSessionData);
-    });
+    }, { prev: prevSent, next: nextSent });
   }
 
   // Click-to-Seek and Double-Click-to-Proofread binding
