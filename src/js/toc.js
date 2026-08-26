@@ -124,8 +124,11 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     const hasChildren = node.children && node.children.length > 0;
     const nodeSession = node.sessionId;
 
+    const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0 ? node.sessionIds : (nodeSession ? [nodeSession] : []);
+    const nodeMatchesActive = currentActiveSessionId ? nodeSessions.includes(currentActiveSessionId) : false;
+
     // In course scope, filter to nodes matching active session
-    if (courseOnly && currentActiveSessionId && nodeSession !== currentActiveSessionId) {
+    if (courseOnly && currentActiveSessionId && !nodeMatchesActive) {
       // If this node has children that match, keep it as a collapsed ancestor
       if (hasChildren && nodeContainsSession(node, currentActiveSessionId)) {
         const li = document.createElement('li');
@@ -145,28 +148,33 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
       return;
     }
 
+    const primarySession = nodeMatchesActive ? currentActiveSessionId : (nodeSessions[0] || nodeSession);
+
     const li = document.createElement('li');
     const link = document.createElement('a');
     link.className = 'toc-link';
-    // M6.3 a11y (AGY review): <a href> is natively focusable + keyboard-activatable,
-    // so NO role="button" and NO tabindex=0 needed (avoids "Link Button" double
-    // announcement). href is a hash so middle-click "open in new tab" works
-    // semantically (the click handler still e.preventDefault()s for same-tab nav).
-    link.href = `#session-${nodeSession}-t${node.timestamp}`;
-    link.setAttribute('aria-label', `跳到 ${nodeSession} 章節：${node.title}`);
-    link.dataset.sessionId = nodeSession;
+    link.href = `#session-${primarySession}-t${node.timestamp}`;
+    link.setAttribute('aria-label', `跳到 ${primarySession} 章節：${node.title}`);
+    link.dataset.sessionId = primarySession;
     link.dataset.timestamp = String(node.timestamp);
     link.textContent = node.title;
     li.appendChild(link);
 
-    // Show session badge if session is present
-    if (nodeSession) {
-      const sessionBadge = document.createElement('span');
-      sessionBadge.className = 'toc-session-badge';
-      sessionBadge.textContent = nodeSession;
-      sessionBadge.title = `第 ${nodeSession} 堂音檔講次`;
-      link.appendChild(document.createTextNode(' '));
-      link.appendChild(sessionBadge);
+    // Show session badges (supporting multiple sessions if taught in multiple classes)
+    if (nodeSessions.length > 0) {
+      nodeSessions.forEach(sid => {
+        const sessionBadge = document.createElement('span');
+        sessionBadge.className = `toc-session-badge ${sid === currentActiveSessionId ? 'active' : ''}`;
+        sessionBadge.textContent = sid;
+        sessionBadge.title = `點擊切換至 第 ${sid} 堂 講授段落`;
+        sessionBadge.addEventListener('click', (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          window.location.hash = `#session-${sid}`;
+        });
+        link.appendChild(document.createTextNode(' '));
+        link.appendChild(sessionBadge);
+      });
     }
 
     // Show clean page badge if page is present
@@ -195,7 +203,7 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
       const childUl = document.createElement('ul');
       childUl.className = 'toc-tree';
       renderSectionNodes(node.children, courseOnly, childUl);
-      li.appendChild(childUl);
+      parentUl.appendChild(childUl);
     }
 
     parentUl.appendChild(li);
@@ -204,8 +212,10 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
 
 function nodeContainsSession(node, sessionId) {
   if (node.sessionId === sessionId) return true;
+  if (Array.isArray(node.sessionIds) && node.sessionIds.includes(sessionId)) return true;
   if (node.children) {
     return node.children.some(child => nodeContainsSession(child, sessionId));
   }
   return false;
 }
+

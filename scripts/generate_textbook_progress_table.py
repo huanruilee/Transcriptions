@@ -106,11 +106,61 @@ def main():
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append("## 🔍 三、校正應用與檢索指南")
+    lines.append("## 🔄 三、同一課文位置之多講次交叉對照表（深度辯析與跨期呼應）")
+    lines.append("")
+    lines.append("> 當格西在多堂課中講述、辯析或複習同一頁課文時，本表將相關講次、授課日期、原始音檔與各堂側重焦點並列，方便校對者與學習者**同時交叉參照**。")
+    lines.append("")
+    lines.append("| 善顯底本頁碼 | 涵蓋講次列表 | 授課日期與音檔連結 | 科判主題大綱 | 課堂焦點與辨析要點 |")
+    lines.append("| :--- | :--- | :--- | :--- | :--- |")
+
+    # Build shared page map
+    from collections import defaultdict
+    page_to_s_list = defaultdict(list)
+    for s in sessions:
+        pr = s.get("pageRange", "").strip()
+        if pr:
+            page_to_s_list[pr].append(s)
+
+    def sort_p_key(p):
+        nums = re.findall(r'\d+', p)
+        return int(nums[0]) if nums else 9999
+
+    for pr in sorted([p for p in page_to_s_list if len(page_to_s_list[p]) >= 2], key=sort_p_key):
+        s_list = page_to_s_list[pr]
+        p_nums = [int(n) for n in re.findall(r'\d+', pr)]
+        p_num = p_nums[0] if p_nums else 0
+        
+        section_h = page_headings.get(p_num, page_headings.get(p_num - 1, "—"))
+        
+        sids_text = "、".join([f"**第 {s['sessionId']} 堂**" for s in s_list])
+        links_list = []
+        for s in s_list:
+            sid = s['sessionId']
+            sdate = s['date']
+            surl = s.get('audioUrl', f"https://buddha.flyday.com.tw/{sid}.MP3")
+            links_list.append(f"• 第 {sid} 堂 ({sdate})：[{sid}.MP3 ↗]({surl})")
+        links_text = "<br>".join(links_list)
+        
+        focus_items = []
+        for s in s_list:
+            sum_t = s.get("summary", "").replace("\n", " ").strip()
+            if sum_t and not sum_t.startswith("嗯") and not sum_t.startswith("對") and not sum_t.startswith("OK"):
+                focus_items.append(f"• **第 {s['sessionId']} 堂**：{sum_t[:45]}...")
+            else:
+                focus_items.append(f"• **第 {s['sessionId']} 堂**：課堂深究辯析與問答")
+        focus_text = "<br>".join(focus_items)
+
+        lines.append(f"| `{pr}` | {sids_text} (共 {len(s_list)} 堂) | {links_text} | {section_h} | {focus_text} |")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## 🔍 四、校正應用與檢索指南")
     lines.append("")
     lines.append("1. **法義與名相精準校正**：校對錄音時，若遇專用名相（如「七相推求」、「薩迦耶見」、「自相有」、「實事師」、「自證分」），可直接依本表定位底本頁數 `courses/入中論善顯密意疏/source_text/page_XXX.txt` 進行原文比對。")
     lines.append("2. **科判大綱劃分（Step 4 小標題）**：本表分期對照可作為篇章轉折與小標題結構之權威範疇依據。")
     lines.append("3. **跨講次義理連貫性檢驗**：同一個論題（如「破自生」橫跨第 20A~24A 堂，「破唯識」橫跨第 35A~55B 堂）可參考相鄰講次底本頁碼連貫核驗。")
+    lines.append("4. **多講次目錄跳轉**：平台科判章節目錄（TOC）已支援多講次 Badge 標籤，讀者可直接在同一科判條目下自由點選跳轉至提及該課文的各講次錄音。")
     lines.append("")
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
@@ -120,3 +170,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
