@@ -800,12 +800,51 @@ function hideCourseOverview() {
 
 /**
  * P2: Return sessions filtered by the sidebar filter value.
- * Matches sessionId, date, pageRange, or summary (case-insensitive).
+ * Matches chapter pills, sessionId, date, pageRange, or summary (case-insensitive).
  */
 function getFilteredSessions() {
   if (!courseData) return [];
   if (!sidebarFilterValue) return courseData.sessions;
   const q = sidebarFilterValue;
+
+  // Fast mapping for authentic chapter chips
+  if (q === '歸敬頌') {
+    return courseData.sessions.filter(s => {
+      const num = parseInt(s.sessionId, 10);
+      return (num >= 85 && num <= 93) || (s.summary && s.summary.includes('歸敬'));
+    });
+  }
+  if (q === '前五地') {
+    return courseData.sessions.filter(s => {
+      const num = parseInt(s.sessionId, 10);
+      return num >= 94 && num <= 110;
+    });
+  }
+  if (q === '破四生') {
+    return courseData.sessions.filter(s => {
+      const num = parseInt(s.sessionId, 10);
+      return num >= 4 && num <= 40;
+    });
+  }
+  if (q === '二諦') {
+    return courseData.sessions.filter(s => {
+      const num = parseInt(s.sessionId, 10);
+      return (num >= 41 && num <= 60) || (s.summary && s.summary.includes('二諦'));
+    });
+  }
+  if (q === '我執') {
+    return courseData.sessions.filter(s => {
+      const num = parseInt(s.sessionId, 10);
+      return num >= 61 && num <= 78;
+    });
+  }
+  if (q === '果地') {
+    return courseData.sessions.filter(s => {
+      const num = parseInt(s.sessionId, 10);
+      return num >= 79 && num <= 84;
+    });
+  }
+
   return courseData.sessions.filter(s => {
     const haystack = [
       s.sessionId, s.date, s.pageRange, s.summary, s.title,

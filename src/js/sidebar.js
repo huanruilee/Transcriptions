@@ -1,22 +1,23 @@
 /**
- * sidebar.js - Enhanced Structured Session List Renderer
- * Features:
- * 1. Information Density & Compact Cards (Badges, single-line ellipsis, text-muted meta)
- * 2. Active State & Smooth Auto-Scrolling
- * 3. Buddhist Chapter / Bhūmi Accordion Grouping (8 Major Sections)
- * 4. Expand / Collapse All state toggles
- * 5. Quick Filter Chips & Sticky Search Support
+ * sidebar.js - Authentic Doctrinal & Chronological Session List Renderer
+ * Groups all 198 sessions according to actual historical lecture sequence & treatise chapters:
+ * 1. 【2016 開篇概論】: 01 ~ 03B (p.63~66)
+ * 2. 【第六現前地・破四生之理】: 04A ~ 40B (p.68~123)
+ * 3. 【第六現前地・二諦與唯識釋難】: 41A ~ 60B (p.124~185)
+ * 4. 【第六現前地・車喻破我執與十六空】: 61A ~ 78B (p.186~240)
+ * 5. 【第七至十地 & 果地佛地功德】: 79A ~ 84B (p.241~285)
+ * 6. 【2018 詳講・序論與歸敬頌】: 85A ~ 93B (p.6~18)
+ * 7. 【2018 詳講・前五地波羅蜜多】: 94A ~ 110B (p.19~63)
  */
 
 export const CHAPTER_GROUPS = [
-  { id: 'ch-1', title: '序論與歸敬頌', filterKey: '歸敬頌', min: 1, max: 2, range: '01A - 02B' },
-  { id: 'ch-2', title: '第一極喜地至第五難勝地', filterKey: '前五地', min: 3, max: 10, range: '03A - 10B' },
-  { id: 'ch-3', title: '第六現前地・破四生之理', filterKey: '第六地', min: 11, max: 40, range: '11A - 40B' },
-  { id: 'ch-4', title: '第六現前地・二諦與破實事師', filterKey: '第六地', min: 41, max: 60, range: '41A - 60B' },
-  { id: 'ch-5', title: '第六現前地・廣破我執車喻', filterKey: '第六地', min: 61, max: 80, range: '61A - 80B' },
-  { id: 'ch-6', title: '第六現前地・十六空抉擇', filterKey: '第六地', min: 81, max: 95, range: '81A - 95B' },
-  { id: 'ch-7', title: '第七遠行地至第十法雲地', filterKey: '後四地', min: 96, max: 99, range: '96A - 99B' },
-  { id: 'ch-8', title: '果地・佛地功德與迴向', filterKey: '果地', min: 100, max: 105, range: '100A - 102B' }
+  { id: 'ch-2018-homage', title: '【2018 詳講・序論與歸敬頌】', filterKey: '歸敬頌', range: '85A - 93B (p.6~18)', match: (num) => num >= 85 && num <= 93 },
+  { id: 'ch-2018-five', title: '【2018 詳講・前五地波羅蜜多】', filterKey: '前五地', range: '94A - 110B (p.19~63)', match: (num) => num >= 94 && num <= 110 },
+  { id: 'ch-intro', title: '【2016 開篇概論】', filterKey: '2016開篇', range: '01 - 03B (p.63~66)', match: (num) => num >= 1 && num <= 3 },
+  { id: 'ch-six-1', title: '【第六現前地・破四生之理】', filterKey: '破四生', range: '04A - 40B (p.68~123)', match: (num) => num >= 4 && num <= 40 },
+  { id: 'ch-six-2', title: '【第六現前地・二諦與唯識釋難】', filterKey: '二諦', range: '41A - 60B (p.124~185)', match: (num) => num >= 41 && num <= 60 },
+  { id: 'ch-six-3', title: '【第六現前地・車喻破我執與十六空】', filterKey: '破我執', range: '61A - 78B (p.186~240)', match: (num) => num >= 61 && num <= 78 },
+  { id: 'ch-post-six', title: '【第七至十地 & 果地佛地功德】', filterKey: '果地', range: '79A - 84B (p.241~285)', match: (num) => num >= 79 && num <= 84 }
 ];
 
 // Persistent Set of expanded group IDs
@@ -30,7 +31,7 @@ function getSessionNum(sessionId) {
 
 function findGroupForSession(sessionId) {
   const num = getSessionNum(sessionId);
-  return CHAPTER_GROUPS.find(g => num >= g.min && num <= g.max) || CHAPTER_GROUPS[0];
+  return CHAPTER_GROUPS.find(g => g.match(num)) || CHAPTER_GROUPS[0];
 }
 
 export function toggleAllAccordionGroups(expandAll = true) {
@@ -63,9 +64,10 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession, unavai
     }
   }
 
-  // If first time and no active session, expand the first chapter
+  // If first time and no active session, expand active or first chapter
   if (!hasInitializedAccordion) {
-    expandedGroups.add('ch-1');
+    expandedGroups.add('ch-2018-homage');
+    expandedGroups.add('ch-intro');
     hasInitializedAccordion = true;
   }
 
@@ -78,7 +80,7 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession, unavai
     if (group && groupedData.has(group.id)) {
       groupedData.get(group.id).push(session);
     } else {
-      groupedData.get('ch-1').push(session);
+      groupedData.get('ch-intro').push(session);
     }
   });
 
