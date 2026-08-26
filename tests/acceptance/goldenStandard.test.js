@@ -110,4 +110,16 @@ describe('🌟 29A Golden Benchmark Quality Standard Test Suite', () => {
       });
     });
   });
+
+  // 7. Pattern 6: Pure Traditional Chinese Standard (Zero Simplified Characters)
+  test('Pattern 6 (Traditional Chinese Purity): Converted sessions contain 0 simplified characters', () => {
+    // Strictly simplified characters where Simplified !== Traditional
+    const STRICT_SIMP_REGEX = /[为这样个说体经论门从对么变实证觉关开边过问题时间还会点现显义极胜广当无师发与见随应处观摄识别业释难车声闻缘执许计总种听讲话导读记诵辩净谛]/g;
+
+    convertedSessions.forEach(({ file, data }) => {
+      const fullText = JSON.stringify(data);
+      const matches = fullText.match(STRICT_SIMP_REGEX);
+      assert.ok(!matches || matches.length === 0, `${file} contains ${matches ? matches.length : 0} simplified characters: [${matches ? [...new Set(matches)].join(', ') : ''}]`);
+    });
+  });
 });
