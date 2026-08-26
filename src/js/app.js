@@ -198,6 +198,10 @@ function renderTranscript(sessionData) {
       container.appendChild(headingEl);
     }
 
+    const pEl = document.createElement('p');
+    pEl.className = 'transcript-paragraph';
+    pEl.id = p.id || `p-${sentCounter}`;
+
     const allNotes = getAllNotes(currentSessionId);
     const allCorrs = getAllCorrections(currentSessionId);
 
