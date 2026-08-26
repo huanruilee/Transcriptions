@@ -17,9 +17,9 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession, unavai
     const li = document.createElement('li');
     li.className = `session-item ${session.sessionId === activeSessionId ? 'active' : ''}`;
 
-    // Format title badge
+    // Format title badge: （85A）20180512 歸敬頌p6
     let periodText = session.periodLabel ? ` (${session.periodLabel})` : '';
-    let mainLabel = `第 ${session.sessionId} 堂${periodText}`;
+    let mainLabel = session.sidebarLabel || `（${session.sessionId}）${(session.date || '').replace(/-/g, '')} ${session.pageRange || ''}`;
 
     const titleEl = document.createElement('div');
     titleEl.className = 'session-title';
@@ -27,7 +27,7 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession, unavai
 
     const metaEl = document.createElement('div');
     metaEl.className = 'session-meta';
-    metaEl.textContent = `${session.date || ''} | ${session.pageRange || ''}`;
+    metaEl.textContent = `第 ${session.sessionId} 堂${periodText} | ${session.date || ''} | ${session.pageRange || ''}`;
 
     li.appendChild(titleEl);
     li.appendChild(metaEl);

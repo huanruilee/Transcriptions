@@ -158,7 +158,7 @@ test('Issue #9: sidebar filter behavior — Course Overview bulk render', async 
     setFilter(window, '歸敬頌');
     const items = visibleSessionTitles(window);
     assert.ok(items.length >= 1, `expected at least 1 match for 歸敬頌, got ${items.length}`);
-    assert.match(items[0], /第 01 堂/, `first match should be 第 01 堂, got ${items[0]}`);
+    assert.match(items[0], /(?:01|第 01 堂)/, `first match should be 01, got ${items[0]}`);
   });
 
   await t.test('clearing the filter restores the complete list', () => {
@@ -221,12 +221,12 @@ test('Issue #9: sidebar filter behavior — Course Overview bulk render', async 
     const initialActive = window.document.querySelector('.session-item.active');
     assert.ok(initialActive, 'should have an active session-item at baseline');
     assert.match(initialActive.querySelector('.session-title')?.textContent || '',
-      /第 01 堂/, `active session should be 第 01 堂, got ${initialActive.querySelector('.session-title')?.textContent}`);
+      /(?:01|第 01 堂)/, `active session should be 01, got ${initialActive.querySelector('.session-title')?.textContent}`);
     setFilter(window, '歸敬頌');
     setFilter(window, '');
     const restoredActive = window.document.querySelector('.session-item.active');
     assert.ok(restoredActive, 'active session should be restored after clearing filter');
     assert.match(restoredActive.querySelector('.session-title')?.textContent || '',
-      /第 01 堂/, `active session should still be 第 01 堂 after round trip, got ${restoredActive.querySelector('.session-title')?.textContent}`);
+      /(?:01|第 01 堂)/, `active session should still be 01 after round trip, got ${restoredActive.querySelector('.session-title')?.textContent}`);
   });
 });
