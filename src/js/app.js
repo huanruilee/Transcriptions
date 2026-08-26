@@ -1,5 +1,5 @@
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
-import { renderTOC, applyActiveHighlight } from './toc.js';
+import { renderTOC, applyActiveHighlight, updateDoctrinalBreadcrumb, highlightTOCNodeByTime } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll, freezeAutoScroll } from './syncPlayer.js';
 import { initSearch } from './search.js';
 
@@ -29,6 +29,7 @@ if (typeof document !== 'undefined') {
     initSessionNav();     // P0-3: prev/next session nav
     initModeToggle();     // Annotation & Proofread mode
     initExportNotes();    // Export notes button
+    initTOCDrawerTrigger(); // Phase 1: mobile TOC drawer
     await loadCourseData();
   });
 }
@@ -459,13 +460,29 @@ function setupAudioPlayer(audioUrl) {
     nowPlaying.textContent = currentSessionData.title;
   }
 
+  // Phase 1: throttled time-update callback for breadcrumb & TOC node sync (~2Hz)
+  let lastBreadcrumbUpdate = 0;
+  const onTimeUpdate = (rawAudioTime) => {
+    const now = Date.now();
+    if (now - lastBreadcrumbUpdate < 500) return; // throttle to 2 Hz
+    lastBreadcrumbUpdate = now;
+    // Convert audio time → transcript time using the already-imported ratio fn
+    const ratio = getCurrentTimeScaleRatio();
+    const transcriptTime = ratio > 0 ? rawAudioTime / ratio : rawAudioTime;
+    if (tocData && tocData.sections) {
+      updateDoctrinalBreadcrumb(transcriptTime, currentSessionId);
+      highlightTOCNodeByTime(transcriptTime, currentSessionId);
+    }
+  };
+
   // Singleton pattern: init once on first call, then just update target.
   // Issue #11 v2 — when the loaded session came from the pilot v2 payload,
   // pass pilot_v2:true so updateSession forces ratio = 1.0 (no legacy
   // fallback scaling, since v2 timestamps are already audio-grounded).
   initSyncPlayer();
   updateSession(audio, allFlattenedSentences, handleNextSession, {
-    pilot_v2: currentSessionData && currentSessionData._pilot_v2 === true
+    pilot_v2: currentSessionData && currentSessionData._pilot_v2 === true,
+    onTimeUpdate,
   });
 }
 
@@ -1021,4 +1038,20 @@ if (typeof window !== 'undefined') {
   }
 }
 
-
+/**
+ * Phase 1: Mobile TOC drawer trigger.
+ * Tapping the 📖 科判 button in the footer scrolls the TOC accordion into view
+ * and opens it so the user can see the current doctrinal position.
+ */
+function initTOCDrawerTrigger() {
+  const btn = document.getElementById('toc-drawer-trigger');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const tocContainer = document.getElementById('toc-container');
+    const accordion = tocContainer && tocContainer.querySelector('.toc-accordion');
+    if (accordion) {
+      accordion.open = true;
+      accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}

@@ -601,6 +601,121 @@ body {
   margin-bottom: 8px;
 }
 
+/* ─── Phase 1: Sticky Doctrinal Breadcrumb ────────────────────────────────── */
+#toc-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 6px 14px 6px 10px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, rgba(139, 30, 30, 0.06) 0%, rgba(197, 155, 39, 0.05) 100%);
+  border: 1px solid rgba(139, 30, 30, 0.18);
+  border-left: 4px solid #8b1e1e;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  animation: breadcrumb-fadein 0.25s ease;
+  min-height: 30px;
+}
+
+@keyframes breadcrumb-fadein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.toc-breadcrumb-icon {
+  margin-right: 8px;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.toc-breadcrumb-sep {
+  color: #8b1e1e;
+  font-weight: 700;
+  padding: 0 2px;
+  font-size: 0.78rem;
+  opacity: 0.7;
+}
+
+.toc-breadcrumb-node {
+  color: #5a3030;
+  font-weight: 500;
+  cursor: default;
+}
+
+.toc-breadcrumb-leaf {
+  color: #8b1e1e;
+  font-weight: 700;
+  background: rgba(139, 30, 30, 0.08);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+/* Dark mode */
+body.dark-mode #toc-breadcrumb {
+  background: linear-gradient(90deg, rgba(197, 155, 39, 0.08) 0%, rgba(139, 30, 30, 0.06) 100%);
+  border-color: rgba(197, 155, 39, 0.3);
+  border-left-color: #c59b27;
+}
+body.dark-mode .toc-breadcrumb-sep { color: #c59b27; }
+body.dark-mode .toc-breadcrumb-node { color: #c5a87a; }
+body.dark-mode .toc-breadcrumb-leaf {
+  color: #c59b27;
+  background: rgba(197, 155, 39, 0.12);
+}
+
+/* ─── Phase 1: Real-time TOC node highlight (time-driven, not session-driven) */
+.toc-link.toc-time-active {
+  background: linear-gradient(90deg, rgba(139, 30, 30, 0.12) 0%, transparent 100%);
+  color: #8b1e1e;
+  font-weight: 700;
+  border-left: 3px solid #8b1e1e;
+  padding-left: 6px;
+  border-radius: 0 4px 4px 0;
+  transition: background 0.3s ease, color 0.2s ease;
+}
+
+body.dark-mode .toc-link.toc-time-active {
+  background: linear-gradient(90deg, rgba(197, 155, 39, 0.15) 0%, transparent 100%);
+  color: #c59b27;
+  border-left-color: #c59b27;
+}
+
+/* ─── Phase 1: Mobile TOC Drawer Trigger Button ───────────────────────────── */
+.toc-drawer-trigger-btn {
+  display: none; /* hidden on desktop, shown on mobile via media query */
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.toc-drawer-trigger-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+  .toc-drawer-trigger-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  /* On mobile, truncate breadcrumb to 2 levels */
+  .toc-breadcrumb-node:not(:nth-last-child(3)):not(.toc-breadcrumb-icon) {
+    display: none;
+  }
+  .toc-breadcrumb-sep:not(:nth-last-child(2)) {
+    display: none;
+  }
+}
+
+
 /* Transcript Reader Typography */
 .transcript-section {
   font-family: var(--font-serif);

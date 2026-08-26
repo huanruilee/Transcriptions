@@ -66,6 +66,9 @@
           <span id="breadcrumb-current" class="breadcrumb-current">第 01 堂</span>
         </nav>
 
+        <!-- Phase 1: Sticky Doctrinal Breadcrumb — updates live as audio plays -->
+        <div id="toc-breadcrumb" class="toc-breadcrumb" role="navigation" aria-label="即時科判路徑" style="display:none;"></div>
+
         <!-- Active Session Header Title -->
         <h1 id="active-session-title" style="color: var(--primary-color); margin-top: 0; font-size: 1.5rem; font-weight: 700;">
           第 2A 堂 (上) | 2016-05-28 | p.63
@@ -102,6 +105,8 @@
       <button id="prev-session-btn" class="session-nav-btn" title="上一講" aria-label="上一講">⏮️</button>
       <audio id="audio-element" controls preload="metadata"></audio>
       <button id="next-session-btn" class="session-nav-btn" title="下一講" aria-label="下一講">⏭️</button>
+      <!-- Phase 1: Mobile TOC drawer trigger -->
+      <button id="toc-drawer-trigger" class="toc-drawer-trigger-btn" data-testid="toc-drawer-trigger" title="查看即時科判位置" aria-label="展開科判目錄">📖 科判</button>
     </div>
   </footer>
 

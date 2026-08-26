@@ -27,6 +27,7 @@ let lockIndicator = null;
 let boundAudioElement = null;
 let boundSentences = null;
 let boundNextCallback = null;
+let boundTimeUpdateCallback = null; // Phase 1: external time-sync hook (breadcrumb/TOC)
 let handleUserScroll = null;
 let handleIndicatorClick = null;
 let handleTimeUpdate = null;
@@ -204,6 +205,7 @@ export function updateSession(audioElement, allSentences, onNextSessionRequested
   boundAudioElement = audioElement;
   boundSentences = allSentences;
   boundNextCallback = onNextSessionRequested;
+  boundTimeUpdateCallback = options.onTimeUpdate || null; // Phase 1: breadcrumb/TOC sync hook
   handleTimeUpdate = null;
   handleEnded = null;
   handleLoadedMetadata = null;
@@ -232,12 +234,16 @@ export function updateSession(audioElement, allSentences, onNextSessionRequested
   audioElement.addEventListener('durationchange', handleDurationChange);
   updateRatio();
 
-  // Time update → highlight + scroll
+  // Time update → highlight + scroll + Phase 1 breadcrumb/TOC sync
   handleTimeUpdate = () => {
     // If real audio is playing, stop any simulation
     if (isSimulating) stopSimulatedPlayback();
     const currentTime = audioElement.currentTime;
     highlightSentenceByTime(currentTime);
+    // Phase 1: fire external callback (breadcrumb + TOC node highlight)
+    if (typeof boundTimeUpdateCallback === 'function') {
+      boundTimeUpdateCallback(currentTime);
+    }
   };
   audioElement.addEventListener('timeupdate', handleTimeUpdate);
 

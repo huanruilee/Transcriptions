@@ -2,10 +2,16 @@
  * toc.js - Table of Contents Accordion & Seeking
  * Renders nested collapsible <details> menu, supports course/book scope toggle,
  * and highlights the section(s) matching the currently active session.
+ *
+ * Phase 1 Upgrade (Syllabus UX):
+ *   - findAncestorChain(timestamp, sections): resolves the full doctrinal path at a given time
+ *   - updateDoctrinalBreadcrumb(timestamp, sections): updates the sticky top breadcrumb bar
+ *   - highlightTOCNodeByTime(timestamp): syncs TOC tree highlight to current playback position
  */
 
 let currentActiveSessionId = null;
 let currentScope = 'course'; // 'course' | 'book'
+let _cachedSections = null;  // Phase 1: keep reference for time-driven updates
 
 export function renderTOC(sections, onSeekTo) {
   const container = document.getElementById('toc-container');
@@ -15,6 +21,8 @@ export function renderTOC(sections, onSeekTo) {
     container.style.display = 'none';
     return;
   }
+
+  _cachedSections = sections; // cache for breadcrumb/highlight updates
 
   container.style.display = 'block';
   container.textContent = '';
@@ -32,12 +40,14 @@ export function renderTOC(sections, onSeekTo) {
   const courseBtn = document.createElement('button');
   courseBtn.className = `toc-scope-btn ${currentScope === 'course' ? 'active' : ''}`;
   courseBtn.dataset.scope = 'course';
+  courseBtn.dataset.testid = 'toc-scope-course';
   courseBtn.textContent = '本課科判';
   scopeToggle.appendChild(courseBtn);
 
   const bookBtn = document.createElement('button');
   bookBtn.className = `toc-scope-btn ${currentScope === 'book' ? 'active' : ''}`;
   bookBtn.dataset.scope = 'book';
+  bookBtn.dataset.testid = 'toc-scope-book';
   bookBtn.textContent = '全書總科判';
   scopeToggle.appendChild(bookBtn);
 
@@ -114,6 +124,157 @@ export function applyActiveHighlight(sessionId) {
   });
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Phase 1: Doctrinal Breadcrumb & Real-time TOC Sync
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Walk the TOC tree and find the deepest node whose timestamp <= t,
+ * returning the full ancestor chain from root to that leaf.
+ * @param {number} t - current playback time in seconds (within current session)
+ * @param {Array}  sections - root sections array from toc.json
+ * @param {string} sessionId - the currently active session ID for filtering
+ * @returns {Array<{title, timestamp, sessionId}>} ancestor chain, root → leaf
+ */
+export function findAncestorChain(t, sections, sessionId) {
+  let bestChain = [];
+  let bestTimestamp = -1;
+
+  function walk(nodes, chain) {
+    for (const node of nodes) {
+      // Only consider nodes that belong to the active session
+      const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
+        ? node.sessionIds
+        : (node.sessionId ? [node.sessionId] : []);
+
+      if (sessionId && nodeSessions.length > 0 && !nodeSessions.includes(sessionId)) {
+        // Recurse into children that might belong to this session
+        if (node.children && node.children.length > 0) {
+          walk(node.children, chain);
+        }
+        continue;
+      }
+
+      const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
+      const currentChain = [...chain, { title: node.title, timestamp: ts, sessionId: node.sessionId }];
+
+      // A node is "active" if its timestamp <= t and it's the deepest/latest such node
+      if (ts <= t && ts > bestTimestamp) {
+        bestTimestamp = ts;
+        bestChain = [...currentChain];
+      }
+
+      if (node.children && node.children.length > 0) {
+        walk(node.children, currentChain);
+      }
+    }
+  }
+
+  walk(sections, []);
+  return bestChain;
+}
+
+/**
+ * Format an ancestor chain array into a compact breadcrumb string.
+ * Keeps at most maxDepth levels; truncates from the front if longer.
+ */
+export function formatBreadcrumb(chain, maxDepth = 5) {
+  if (!chain || chain.length === 0) return '';
+  const display = chain.length > maxDepth
+    ? ['…', ...chain.slice(chain.length - maxDepth).map(n => n.title)]
+    : chain.map(n => n.title);
+  return display.join(' ❯ ');
+}
+
+/**
+ * Update the sticky doctrinal breadcrumb bar (#toc-breadcrumb) based on
+ * the current playback timestamp. Called by app.js on every timeupdate.
+ * @param {number} t - current audio time in seconds (already scaled to transcript time)
+ * @param {string} sessionId - active session ID
+ */
+export function updateDoctrinalBreadcrumb(t, sessionId) {
+  const breadcrumbEl = document.getElementById('toc-breadcrumb');
+  if (!breadcrumbEl || !_cachedSections) return;
+
+  const chain = findAncestorChain(t, _cachedSections, sessionId);
+  if (chain.length === 0) {
+    breadcrumbEl.textContent = '';
+    breadcrumbEl.style.display = 'none';
+    return;
+  }
+
+  const text = formatBreadcrumb(chain, 5);
+
+  // Only update DOM if content actually changed (avoid flicker on every frame)
+  if (breadcrumbEl.dataset.lastText === text) return;
+  breadcrumbEl.dataset.lastText = text;
+
+  breadcrumbEl.innerHTML = '';
+  breadcrumbEl.style.display = 'flex';
+
+  const icon = document.createElement('span');
+  icon.className = 'toc-breadcrumb-icon';
+  icon.textContent = '📖';
+  breadcrumbEl.appendChild(icon);
+
+  const parts = chain.length > 5
+    ? [{ title: '…' }, ...chain.slice(chain.length - 5)]
+    : chain;
+
+  parts.forEach((node, i) => {
+    if (i > 0) {
+      const sep = document.createElement('span');
+      sep.className = 'toc-breadcrumb-sep';
+      sep.textContent = ' ❯ ';
+      sep.setAttribute('aria-hidden', 'true');
+      breadcrumbEl.appendChild(sep);
+    }
+    const span = document.createElement('span');
+    span.className = i === parts.length - 1 ? 'toc-breadcrumb-leaf' : 'toc-breadcrumb-node';
+    span.textContent = node.title;
+    if (node.title !== '…') {
+      span.title = `點擊展開科判目錄至「${node.title}」`;
+    }
+    breadcrumbEl.appendChild(span);
+  });
+}
+
+/**
+ * Highlight the TOC tree node closest to the current playback time.
+ * Does NOT scroll the TOC panel (to avoid fighting user's manual scroll).
+ * Called by app.js on timeupdate (throttled to ~2Hz).
+ * @param {number} t - current transcript time in seconds
+ * @param {string} sessionId - active session ID
+ */
+export function highlightTOCNodeByTime(t, sessionId) {
+  const container = document.getElementById('toc-container');
+  if (!container || !_cachedSections) return;
+
+  const chain = findAncestorChain(t, _cachedSections, sessionId);
+  if (chain.length === 0) return;
+
+  const leafNode = chain[chain.length - 1];
+
+  // Clear previous time-based highlights (distinct from session-based .active)
+  container.querySelectorAll('.toc-link.toc-time-active').forEach(el => {
+    el.classList.remove('toc-time-active');
+  });
+
+  // Find the link that matches leaf timestamp + sessionId
+  const links = container.querySelectorAll('.toc-link');
+  links.forEach(link => {
+    const lts = parseFloat(link.dataset.timestamp || '0');
+    const lsid = link.dataset.sessionId;
+    if (Math.abs(lts - leafNode.timestamp) < 0.5 && lsid === (leafNode.sessionId || sessionId)) {
+      link.classList.add('toc-time-active');
+    }
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Internal rendering helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
 /**
  * Render TOC nodes into the given parent <ul>. When scope === 'course', only
  * show nodes belonging to the active session (plus their ancestors so the
@@ -157,6 +318,7 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     link.setAttribute('aria-label', `跳到 ${primarySession} 章節：${node.title}`);
     link.dataset.sessionId = primarySession;
     link.dataset.timestamp = String(node.timestamp);
+    link.dataset.testid = `toc-node-${node.title.substring(0, 8).replace(/\s/g, '')}`;
     link.textContent = node.title;
     li.appendChild(link);
 
@@ -218,4 +380,3 @@ function nodeContainsSession(node, sessionId) {
   }
   return false;
 }
-
