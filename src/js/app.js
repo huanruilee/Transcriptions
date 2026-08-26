@@ -2,7 +2,7 @@
  * app.js - Main Application Orchestrator
  */
 
-import { renderSidebar, updateHeaderTitle } from './sidebar.js';
+import { renderSidebar, updateHeaderTitle, toggleAllAccordionGroups } from './sidebar.js';
 import { renderTOC, applyActiveHighlight } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback } from './syncPlayer.js';
 import { initSearch } from './search.js';
@@ -28,6 +28,8 @@ if (typeof document !== 'undefined') {
     initSearch();
     initCourseOverview(); // P1: course overview entry
     initSidebarFilter();  // P2: sidebar filter
+    initSidebarPills();   // P4: quick filter chips
+    initAccordionToggleAll(); // P3: expand / collapse all groups
     initSessionNav();     // P0-3: prev/next session nav
     initModeToggle();     // Annotation & Proofread mode
     initExportNotes();    // Export notes button
@@ -546,19 +548,30 @@ function initMobileSidebarToggle() {
  * Default: expanded on desktop (>1024px), collapsed on smaller screens.
  */
 function initSidebarToggle() {
-  const btn = document.getElementById('sidebar-toggle');
-  const layout = document.querySelector('.app-layout');
-  if (!btn || !layout) return;
+  const btn = document.getElementById('sidebar-toggle') || document.getElementById('sidebar-toggle-btn');
+  const expandBtn = document.getElementById('sidebar-expand-btn');
+  const layout = document.querySelector('.app-layout') || document.body;
+  if (!btn && !expandBtn) return;
 
-  // Default state based on viewport width
-  const isDesktop = window.innerWidth > 1024;
-  if (!isDesktop) {
-    layout.classList.add('sidebar-collapsed');
+  const updateExpandBtnVisibility = () => {
+    if (!expandBtn) return;
+    const isCollapsed = layout.classList.contains('sidebar-collapsed');
+    expandBtn.style.display = isCollapsed ? 'block' : 'none';
+  };
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      layout.classList.toggle('sidebar-collapsed');
+      updateExpandBtnVisibility();
+    });
   }
 
-  btn.addEventListener('click', () => {
-    layout.classList.toggle('sidebar-collapsed');
-  });
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => {
+      layout.classList.remove('sidebar-collapsed');
+      updateExpandBtnVisibility();
+    });
+  }
 
   // Persist preference
   const saved = localStorage.getItem('sidebar_collapsed');
@@ -567,6 +580,7 @@ function initSidebarToggle() {
   } else if (saved === 'false') {
     layout.classList.remove('sidebar-collapsed');
   }
+  updateExpandBtnVisibility();
 
   // Save on toggle
   const observer = new MutationObserver(() => {
@@ -810,6 +824,55 @@ function initSidebarFilter() {
 
   input.addEventListener('input', () => {
     sidebarFilterValue = input.value.trim().toLowerCase();
+    if (courseData) {
+      renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
+    }
+  });
+}
+
+/**
+ * P4: Initialize Quick Filter Chips (歸敬頌, 前五地, 第六地, 後四地, 果地, 全部)
+ */
+function initSidebarPills() {
+  const container = document.getElementById('quick-filter-pills');
+  if (!container) return;
+
+  const pills = container.querySelectorAll('.filter-pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const filterType = pill.dataset.filter;
+      const input = document.getElementById('sidebar-filter');
+
+      if (filterType === 'all') {
+        sidebarFilterValue = '';
+        if (input) input.value = '';
+      } else {
+        sidebarFilterValue = filterType.toLowerCase();
+        if (input) input.value = filterType;
+      }
+
+      if (courseData) {
+        renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
+      }
+    });
+  });
+}
+
+/**
+ * P3: Initialize Expand / Collapse All Accordion Groups Toggle
+ */
+function initAccordionToggleAll() {
+  const btn = document.getElementById('accordion-toggle-all-btn');
+  if (!btn) return;
+
+  let isAllExpanded = false;
+  btn.addEventListener('click', () => {
+    isAllExpanded = !isAllExpanded;
+    toggleAllAccordionGroups(isAllExpanded);
+    btn.textContent = isAllExpanded ? '📁 全部收合' : '📂 全部展開';
     if (courseData) {
       renderSidebar(getFilteredSessions(), currentSessionId, switchSession, courseData.unavailableSessions);
     }
