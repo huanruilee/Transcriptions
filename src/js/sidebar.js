@@ -104,7 +104,9 @@ export function updateHeaderTitle(session) {
     titleEl.appendChild(summaryDiv);
   }
 
-  if (session.audioUrl) {
+  const externalAudioUrl = session.flydayAudioUrl || session.officialAudioUrl || (session.audioUrl && session.audioUrl.startsWith('http') ? session.audioUrl : `https://buddha.flyday.com.tw/${session.sessionId}.MP3`);
+
+  if (externalAudioUrl) {
     const audioLinkDiv = document.createElement('div');
     audioLinkDiv.className = 'session-audio-link-container';
     audioLinkDiv.style.cssText = 'font-size: 0.88rem; font-weight: 400; color: var(--text-secondary, #666); margin-top: 6px; display: flex; align-items: center; gap: 6px;';
@@ -114,7 +116,7 @@ export function updateHeaderTitle(session) {
     audioLinkDiv.appendChild(audioIcon);
 
     const audioA = document.createElement('a');
-    audioA.href = session.audioUrl;
+    audioA.href = externalAudioUrl;
     audioA.target = '_blank';
     audioA.rel = 'noopener noreferrer';
     audioA.textContent = `Flyday 官方音檔 (${session.sessionId}.MP3) ↗`;

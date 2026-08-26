@@ -63,11 +63,14 @@ def main():
         except Exception:
             pass
 
+    with open("courses/入中論善顯密意疏/audio_map.json", "r", encoding="utf-8") as f:
+        audio_map = json.load(f)
+
     for s in sessions:
         sid = s.get("sessionId", "")
         date = s.get("date", "—")
         prange = s.get("pageRange", "—")
-        audio_url = s.get("audioUrl", f"https://buddha.flyday.com.tw/{sid}.MP3")
+        audio_url = audio_map.get(sid, s.get("flydayAudioUrl", f"https://buddha.flyday.com.tw/{sid}.MP3"))
         summary = s.get("summary", "").replace("\n", " ").strip()
         
         # Parse page numbers
@@ -137,7 +140,7 @@ def main():
         for s in s_list:
             sid = s['sessionId']
             sdate = s['date']
-            surl = s.get('audioUrl', f"https://buddha.flyday.com.tw/{sid}.MP3")
+            surl = audio_map.get(sid, s.get('flydayAudioUrl', f"https://buddha.flyday.com.tw/{sid}.MP3"))
             links_list.append(f"• 第 {sid} 堂 ({sdate})：[{sid}.MP3 ↗]({surl})")
         links_text = "<br>".join(links_list)
         
