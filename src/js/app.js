@@ -864,3 +864,92 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+/**
+ * ============================================================================
+ * Zero-Token Browser Test Harness (__TEST_API__)
+ * Allows fast headless tests and in-browser diagnostics without burning LLM tokens.
+ * ============================================================================
+ */
+if (typeof window !== 'undefined') {
+  window.__TEST_API__ = {
+    getCourseData: () => courseData,
+    getCurrentSession: () => currentSessionData,
+    getCurrentSessionId: () => currentSessionId,
+    getInteractionMode: () => currentInteractionMode,
+    getFlattenedSentences: () => allFlattenedSentences,
+    switchSessionById: async (id) => {
+      const s = courseData?.sessions?.find(x => x.sessionId === id);
+      if (s) await switchSession(s);
+      return s;
+    },
+    setInteractionMode: (mode) => {
+      if (currentInteractionMode !== mode) {
+        document.getElementById('mode-toggle-btn')?.click();
+      }
+      return currentInteractionMode;
+    },
+    openSentenceEditor: (sentIndex = 0) => {
+      const sent = allFlattenedSentences[sentIndex];
+      if (sent) {
+        openSentenceEditorModal(currentSessionId, sent, () => renderTranscript(currentSessionData), () => renderTranscript(currentSessionData));
+        return true;
+      }
+      return false;
+    },
+    runSelfDiagnostics: async () => {
+      const results = [];
+      const log = (name, pass, detail) => results.push({ name, pass, detail });
+
+      try {
+        // 1. Check Course Data
+        log('1. Course Data Loaded', courseData && courseData.sessions.length >= 198, `${courseData?.sessions?.length} sessions`);
+        
+        // 2. Switch to 03A
+        await window.__TEST_API__.switchSessionById('03A');
+        const s03a = window.__TEST_API__.getCurrentSession();
+        log('2. Switch to 03A', s03a && s03a.sessionId === '03A' && s03a.paragraphs.length > 0, `${s03a?.paragraphs?.length} paragraphs rendered`);
+
+        // 3. Verify Mode Toggle
+        window.__TEST_API__.setInteractionMode('proofread');
+        log('3. Mode Toggle (Proofread)', window.__TEST_API__.getInteractionMode() === 'proofread', 'current mode is proofread');
+
+        // 4. Open Sentence Editor Modal
+        const opened = window.__TEST_API__.openSentenceEditor(0);
+        const modal = document.getElementById('sentence-editor-modal');
+        log('4. Sentence Editor Modal Open', opened && modal !== null, modal ? 'modal in DOM' : 'modal missing');
+
+        // 5. Test AI Check Button
+        if (modal) {
+          const aiBtn = modal.querySelector('#modal-ai-check-btn');
+          aiBtn?.click();
+          await new Promise(r => setTimeout(r, 500));
+          const aiBox = modal.querySelector('#modal-ai-preview');
+          log('5. AI Preview Render', aiBox && aiBox.style.display !== 'none', aiBox?.textContent?.slice(0, 30));
+
+          // Close modal
+          modal.querySelector('#modal-cancel-btn')?.click();
+        }
+
+        // 6. Return Mode to Listen
+        window.__TEST_API__.setInteractionMode('listen');
+        log('6. Reset to Listen Mode', window.__TEST_API__.getInteractionMode() === 'listen', 'restored');
+
+      } catch (err) {
+        log('Fatal Test Error', false, err.message);
+      }
+
+      const allPassed = results.every(r => r.pass);
+      console.log('🏁 [Self-Diagnostics Report]', allPassed ? '✅ ALL PASSED' : '❌ FAILURES DETECTED', results);
+      return { passed: allPassed, results };
+    }
+  };
+
+  // Auto-run if URL contains ?self-test=1
+  if (typeof location !== 'undefined' && location.search.includes('self-test=1')) {
+    window.addEventListener('load', () => {
+      setTimeout(() => window.__TEST_API__.runSelfDiagnostics(), 800);
+    });
+  }
+}
+
+

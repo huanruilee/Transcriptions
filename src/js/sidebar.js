@@ -16,6 +16,9 @@ export function renderSidebar(sessions, activeSessionId, onSelectSession, unavai
   sessions.forEach(session => {
     const li = document.createElement('li');
     li.className = `session-item ${session.sessionId === activeSessionId ? 'active' : ''}`;
+    li.dataset.sessionId = session.sessionId;
+    li.dataset.testid = `session-item-${session.sessionId}`;
+    li.id = `session-${session.sessionId}`;
 
     // Format title badge: （85A）20180512 歸敬頌p6
     let periodText = session.periodLabel ? ` (${session.periodLabel})` : '';
