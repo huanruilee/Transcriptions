@@ -220,9 +220,10 @@ function renderTranscript(sessionData) {
       span.dataset.end = String(s.end);
       span.textContent = corr ? corr.correctedText : s.text;
 
+      span.title = corr ? `【已校勘】原音：${corr.originalText}（雙擊可再次校對）` : '點擊跳播 ｜ 連擊兩下（Double Click）進入校對與筆記';
+
       if (corr) {
         span.classList.add('has-correction');
-        span.title = `【已校勘】原音辨識：${corr.originalText}`;
       }
 
       if (note) {
@@ -230,19 +231,24 @@ function renderTranscript(sessionData) {
         const badge = document.createElement('span');
         badge.className = 'sentence-note-badge';
         badge.textContent = `📌 ${note.pageRef || '筆記'}`;
-        badge.title = note.content;
+        badge.title = `${note.content}（點擊可編輯）`;
+        badge.addEventListener('click', (e) => {
+          e.stopPropagation();
+          triggerEditorModal(idx);
+        });
         span.appendChild(badge);
       }
 
       span.tabIndex = idx === 0 ? 0 : -1;
-      span.setAttribute('aria-label', `跳到音檔 ${formatAriaTime(s.start)}`);
+      span.setAttribute('aria-label', `跳到音檔 ${formatAriaTime(s.start)}，雙擊進入校對`);
       pEl.appendChild(span);
       pEl.appendChild(document.createTextNode(' '));
 
       if (note) {
         const noteCard = document.createElement('div');
         noteCard.className = 'sentence-note-card';
-        noteCard.innerHTML = `<b>📌 法義筆記 (${note.tag || '研讀'} ${note.pageRef ? '｜ ' + note.pageRef : ''})：</b> ${escapeHtml(note.content)}`;
+        noteCard.innerHTML = `<b>📌 法義筆記 (${note.tag || '研讀'} ${note.pageRef ? '｜ ' + note.pageRef : ''})：</b> ${escapeHtml(note.content)} <span style="font-size:0.75rem; color:#b45309; cursor:pointer; margin-left:8px;" title="點擊編輯筆記">✏️ 編輯</span>`;
+        noteCard.addEventListener('click', () => triggerEditorModal(idx));
         pEl.appendChild(noteCard);
       }
     });
@@ -250,26 +256,24 @@ function renderTranscript(sessionData) {
     container.appendChild(pEl);
   });
 
-  // Click-to-Seek or Proofread binding
+  function triggerEditorModal(idx) {
+    const audio = document.getElementById('audio-element');
+    if (audio && !audio.paused) audio.pause();
+    const sentObj = allFlattenedSentences[idx];
+    openSentenceEditorModal(currentSessionId, sentObj, () => {
+      renderTranscript(currentSessionData);
+    }, () => {
+      renderTranscript(currentSessionData);
+    });
+  }
+
+  // Click-to-Seek and Double-Click-to-Proofread binding
   const sentenceEls = container.querySelectorAll('.sentence');
   sentenceEls.forEach((el, idx) => {
-    const triggerEditor = () => {
-      const audio = document.getElementById('audio-element');
-      if (audio && !audio.paused) audio.pause();
-      const sentObj = allFlattenedSentences[idx];
-      openSentenceEditorModal(currentSessionId, sentObj, () => {
-        renderTranscript(currentSessionData);
-      }, () => {
-        renderTranscript(currentSessionData);
-      });
-    };
+    let lastTapTime = 0;
 
+    // Single Click: Jump & Play
     el.addEventListener('click', () => {
-      if (currentInteractionMode === 'proofread') {
-        triggerEditor();
-        return;
-      }
-
       const rawStart = allFlattenedSentences[idx].start;
       highlightSentenceByTime(rawStart);
 
@@ -302,14 +306,31 @@ function renderTranscript(sessionData) {
       }
     });
 
-    el.addEventListener('dblclick', () => {
-      triggerEditor();
+    // Double Click: Enter Proofreading & Notes Modal
+    el.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      triggerEditorModal(idx);
+    });
+
+    // Mobile / Touch Double Tap Support
+    el.addEventListener('touchend', (e) => {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTapTime;
+      if (tapLength < 350 && tapLength > 0) {
+        e.preventDefault();
+        triggerEditorModal(idx);
+      }
+      lastTapTime = currentTime;
     });
 
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         el.click();
+      } else if (e.key === 'e' || e.key === 'E') {
+        // Hotkey 'E' to edit active sentence
+        e.preventDefault();
+        triggerEditorModal(idx);
       } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         const delta = e.key === 'ArrowDown' ? 1 : -1;
