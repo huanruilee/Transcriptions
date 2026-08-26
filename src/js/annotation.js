@@ -274,11 +274,29 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
     if (previewSpan) previewSpan.textContent = txtArea.value;
   });
 
-  // Close bindings
-  const closeModal = () => modal.remove();
+  // Close bindings & Escape hotkey
+  const closeModal = () => {
+    window.removeEventListener('keydown', handleEscapeKey);
+    modal.remove();
+  };
+
+  const handleEscapeKey = (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal();
+    } else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      const saveBtn = modal.querySelector('#modal-save-btn');
+      if (saveBtn) saveBtn.click();
+    }
+  };
+
+  window.addEventListener('keydown', handleEscapeKey);
   modal.querySelector('.modal-backdrop').addEventListener('click', closeModal);
   modal.querySelector('#modal-close-btn').addEventListener('click', closeModal);
   modal.querySelector('#modal-cancel-btn').addEventListener('click', closeModal);
+
 
   // AI Check binding (Discourse & Context Aware)
   modal.querySelector('#modal-ai-check-btn').addEventListener('click', async () => {
