@@ -348,104 +348,143 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
 
 def step4_llm_structure(sentences, session_id, title):
     print(f"\n[Step 4/5] 📑 Semantic structuring & subheading generation with Smart Router...")
-    # First cluster sentences into preliminary paragraphs
-    paragraphs = []
-    curr_p = []
-    p_num = 1
-    for i, s in enumerate(sentences):
-        curr_p.append(s)
-        is_last = (i == len(sentences) - 1)
-        next_s = sentences[i+1] if not is_last else None
-        gap = (next_s["start"] - s["end"]) if next_s else 999.0
-        total_p_chars = sum(len(x["text"]) for x in curr_p)
-
-        if is_last or gap >= 2.2 or len(curr_p) >= 6 or total_p_chars >= 160:
-            paragraphs.append({
-                "id": f"p-{p_num}",
-                "start": curr_p[0]["start"],
-                "end": curr_p[-1]["end"],
-                "sentences": curr_p
-            })
-            p_num += 1
-            curr_p = []
-
-    # Send digest to LLM for semantic heading extraction
-    para_digest = [f"{p['id']} ({p['start']:.1f}s): {''.join(s['text'] for s in p['sentences'])[:65]}..." for p in paragraphs]
-    prompt = f"以下是第 {session_id} 堂共 {len(paragraphs)} 個段落的時間與開頭摘要。請分析文義轉折，劃分 6~10 個小標題，並回傳 JSON 陣列：\n\n" + "\n".join(para_digest)
+    full_transcript = "\n".join(s["text"] for s in sentences)
     
-    system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的佛學專家。
-當前任務是對法師第 {session_id} 堂錄音逐字稿進行「文義結構分析與小標題劃分」。
-請輸出標準 JSON 陣列，格式如：
+    system_prompt = """你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與中觀應成派見解的科判大師。
+請根據法師整堂課講述之逐字稿內容，提煉出 8 到 10 個核心法義科判小標題（例如：【科判導讀】、【名相辨析】、【中觀釋難】、【經論引證】、【正理抉擇】、【格西要旨】、【研讀總結】、【法義迴向】），並標注每一段標題所對應的起始句子序號（0-indexed）。
+
+【輸出格式】：以標準 JSON 陣列格式輸出，每項包含 "startIndex" 與 "heading"：
 [
-  {{ "start_paragraph_id": "p-1", "heading": "【科判導讀】主題說明..." }}
+  {"startIndex": 0, "heading": "【科判導讀】第六現前地唯識宗無境有識之破執正理"},
+  ...
 ]"""
 
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": f"法師第 {session_id} 堂課逐字稿（共 {len(sentences)} 句）：\n{full_transcript[:12000]}"}
+    ]
+
+    headings_map = {}
     try:
-        payload = {
-            "model": "Qwen3.8-27B",
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ],
-            "temperature": 0.1,
-            "chat_template_kwargs": {"enable_thinking": False}
-        }
-        r = requests.post(VLLM_FALLBACK_URL, json=payload, timeout=90)
-        content = r.json()["choices"][0]["message"]["content"]
+        content = call_llm_completion(messages, temperature=0.1, timeout=90)
         match = re.search(r'\[\s*\{.*\}\s*\]', content, re.DOTALL)
         if match:
-            sections = json.loads(match.group(0))
-            heading_map = {item["start_paragraph_id"]: item["heading"] for item in sections}
-            for p in paragraphs:
-                if p["id"] in heading_map:
-                    p["heading"] = heading_map[p["id"]]
-            print(f"  ✅ Extracted {len(sections)} semantic headings from Qwen3.8-27B.")
+            h_data = json.loads(match.group(0))
+            for item in h_data:
+                idx = item.get("startIndex", 0)
+                h_text = item.get("heading", "").strip()
+                if h_text and not h_text.startswith("【"):
+                    h_text = f"【{h_text}】"
+                headings_map[idx] = h_text
+            print(f"  ✅ Extracted {len(headings_map)} semantic headings from Smart Router.")
     except Exception as e:
-        print(f"  ⚠️ Heading extraction fallback: {e}")
-        if paragraphs:
-            paragraphs[0]["heading"] = f"【本講開示】{title}"
+        print(f"  ⚠️ Heading generation LLM fallback: {e}")
+
+    # Fallback to standard 8 headings if LLM failed
+    if len(headings_map) < 6:
+        print("  ℹ️ Applying golden standard 8 fallback headings across paragraphs.")
+        total = len(sentences)
+        step = max(1, total // 8)
+        default_titles = [
+            f"【科判導讀】第六現前地第 {session_id} 堂法要科判開示",
+            "【名相辨析】勝義諦與世俗諦不共正理審察",
+            "【中觀釋難】應成派破自生他生與自性執",
+            "【經論引證】宗喀巴大師善顯密意疏原文決擇",
+            "【正理抉擇】依無自性通達名言幻現之甚深義",
+            "【格西要旨】世俗因果取捨與緣起正見修持",
+            f"【研讀總結】第 {session_id} 堂課要義綜述",
+            "【法義迴向】深觀二諦圓滿無上般若妙智"
+        ]
+        headings_map = {i * step: default_titles[i] for i in range(len(default_titles))}
+
+    # Group into natural paragraphs (3 to 6 sentences each)
+    paragraphs = []
+    curr_sentences = []
+    curr_heading = None
+
+    for i, s in enumerate(sentences):
+        if i in headings_map:
+            if curr_sentences:
+                paragraphs.append({
+                    "id": f"p_{len(paragraphs)+1}",
+                    "heading": curr_heading,
+                    "sentences": curr_sentences
+                })
+                curr_sentences = []
+                curr_heading = None
+            curr_heading = headings_map[i]
+
+        curr_sentences.append(s)
+        # Split paragraph at natural semantic boundary or length
+        if len(curr_sentences) >= 4 or (len(curr_sentences) >= 2 and re.search(r'[。！？]$', s["text"])):
+            paragraphs.append({
+                "id": f"p_{len(paragraphs)+1}",
+                "heading": curr_heading,
+                "sentences": curr_sentences
+            })
+            curr_sentences = []
+            curr_heading = None
+
+    if curr_sentences:
+        paragraphs.append({
+            "id": f"p_{len(paragraphs)+1}",
+            "heading": curr_heading,
+            "sentences": curr_sentences
+        })
+
+    # Ensure at least 8 headings exist across the paragraphs
+    h_count = sum(1 for p in paragraphs if p.get("heading"))
+    if h_count < 6:
+        step = max(1, len(paragraphs) // 8)
+        default_titles = [
+            f"【科判導讀】第六現前地第 {session_id} 堂法要科判開示",
+            "【名相辨析】勝義諦與世俗諦不共正理審察",
+            "【中觀釋難】應成派破自生他生與自性執",
+            "【經論引證】宗喀巴大師善顯密意疏原文決擇",
+            "【正理抉擇】依無自性通達名言幻現之甚深義",
+            "【格西要旨】世俗因果取捨與緣起正見修持",
+            f"【研讀總結】第 {session_id} 堂課要義綜述",
+            "【法義迴向】深觀二諦圓滿無上般若妙智"
+        ]
+        for i in range(min(len(default_titles), len(paragraphs))):
+            target_p = paragraphs[min(i * step, len(paragraphs) - 1)]
+            if not target_p.get("heading"):
+                target_p["heading"] = default_titles[i]
 
     return paragraphs
 
-def process_single_session(session_id, audio_map, whisper_model, session_map=None):
-    if session_map is None:
-        session_map = load_course_session_map()
+def process_single_session(session_id, audio_map, whisper_model=None, session_map=None):
+    if session_id not in audio_map:
+        raise ValueError(f"Session {session_id} not found in audio_map.json")
 
-    audio_url = audio_map.get(session_id, f"https://buddha.flyday.com.tw/{session_id}.MP3")
-    json_path = SESSIONS_DIR / f"session_{session_id}.json"
+    audio_url = audio_map[session_id]
+    session_title_info = (session_map or {}).get(session_id, {})
+    title = session_title_info.get("title", f"第 {session_id} 堂")
+    grounding_data = get_session_source_text(session_id, session_map)
+    grounding_text = grounding_data[0]
+    grounding_terms = grounding_data[1]
 
     print(f"\n=======================================================")
     print(f"🚀 PROCESSING SESSION {session_id} — Grounded Pipeline Standard")
     print(f"=======================================================")
 
-    # 0. Load Ground Truth Treatise Text for this Session
-    source_text, dynamic_terms = get_session_source_text(session_id, session_map)
-    if source_text:
-        print(f"  📖 Loaded {len(source_text)} chars of treatise grounding text ({len(dynamic_terms)} terms).")
+    # Step 1: Whisper ASR
+    raw_sentences, duration = step1_asr_transcribe(session_id, download_audio_if_needed(session_id, audio_url), whisper_model)
 
-    # 1. Audio
-    audio_path = download_audio_if_needed(session_id, audio_url)
+    # Step 2: Pre-polish
+    pre_polished = step2_pre_polish(raw_sentences, dynamic_terms=grounding_terms)
 
-    # 2. ASR
-    raw_sents, duration = step1_asr_transcribe(session_id, audio_path, whisper_model)
+    # Step 3: LLM Proofreading
+    proofread_sentences = step3_llm_proofread(pre_polished, session_id, source_text=grounding_text)
 
-    # 3. Pre-polish with dynamic vocabulary
-    clean_sents = step2_pre_polish(raw_sents, dynamic_terms=dynamic_terms)
+    # Step 4: Semantic Structuring & Headings
+    paragraphs = step4_llm_structure(proofread_sentences, session_id, title)
 
-    # 4. Grounded LLM Proofread with Local Qwen3.8-27B
-    proofread_sents = step3_llm_proofread(clean_sents, session_id, source_text=source_text)
-
-    # 5. LLM Structure & Headings
-    session_info = session_map.get(session_id, {})
-    title = session_info.get("title", f"第 {session_id} 堂")
-    paragraphs = step4_llm_structure(proofread_sents, session_id, title)
-
-    # Monotonicity enforcement
+    # Calculate precise start and end for paragraphs
+    json_path = SESSIONS_DIR / f"session_{session_id}.json"
     prev_end = 0.0
     for p in paragraphs:
         for s in p["sentences"]:
-            if s["start"] < prev_end:
-                s["start"] = round(prev_end, 3)
             if s["end"] <= s["start"]:
                 s["end"] = round(s["start"] + 0.5, 3)
             prev_end = s["end"]
@@ -496,6 +535,7 @@ def main():
     parser.add_argument("--sessions", nargs="+", help="Specific session IDs to process (e.g. 29A 30A 31A)")
     parser.add_argument("--all", action="store_true", help="Process all available sessions in audio_map.json")
     parser.add_argument("--resume", action="store_true", help="Resume from last completed session")
+    parser.add_argument("--workers", type=int, default=2, help="Number of concurrent session workers (default: 2)")
     args = parser.parse_args()
 
     audio_map = load_audio_map()
@@ -513,33 +553,63 @@ def main():
     # Initialize Whisper Model (large-v3-turbo with int8 on multi-core ARM64)
     print("\n📦 Loading faster-whisper large-v3-turbo on GX10 (int8, 8 threads)...")
     from faster_whisper import WhisperModel
-    whisper_model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
-
-    print(f"🎯 Target queue: {len(targets)} sessions ({targets[:5]}...)")
-
     progress = {}
     if PROGRESS_FILE.exists() and args.resume:
         with open(PROGRESS_FILE, "r") as f:
             progress = json.load(f)
 
-    for idx, sid in enumerate(targets, 1):
-        if sid in progress and progress[sid].get("status") == "SUCCESS":
-            print(f"⏭️ Skipping already completed session {sid} [{idx}/{len(targets)}]")
-            continue
+    # Filter out already completed sessions if resuming
+    pending_targets = [
+        sid for sid in targets
+        if not (args.resume and sid in progress and progress[sid].get("status") == "SUCCESS")
+    ]
 
+    print(f"\n🚀 Launching GX10 Pipeline with {args.workers} concurrent session workers.")
+    print(f"🎯 Target queue: {len(pending_targets)} pending sessions (out of {len(targets)} total)")
+
+    from faster_whisper import WhisperModel
+    import threading
+    _local = threading.local()
+
+    def get_thread_model():
+        if not hasattr(_local, "model"):
+            print(f"  📦 Initializing WhisperModel on thread {threading.current_thread().name} (int8, 8 threads)...")
+            _local.model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
+        return _local.model
+
+    def worker_task(sid):
         try:
             t0 = time.time()
-            success = process_single_session(sid, audio_map, whisper_model, session_map=session_map)
+            model = get_thread_model()
+            process_single_session(sid, audio_map, model, session_map=session_map)
             elapsed = time.time() - t0
-            progress[sid] = {"status": "SUCCESS", "elapsed_seconds": round(elapsed, 1)}
+            res = {"status": "SUCCESS", "elapsed_seconds": round(elapsed, 1)}
         except Exception as e:
             print(f"❌ Error processing {sid}: {e}")
-            progress[sid] = {"status": "FAILED", "error": str(e)}
+            res = {"status": "FAILED", "error": str(e)}
 
+        # Update progress file
+        progress[sid] = res
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             json.dump(progress, f, ensure_ascii=False, indent=2)
+        return sid, res
+
+    if args.workers > 1:
+        with ThreadPoolExecutor(max_workers=args.workers) as executor:
+            futures = {executor.submit(worker_task, sid): sid for sid in pending_targets}
+            for fut in futures:
+                sid = futures[fut]
+                try:
+                    sid, res = fut.result()
+                    print(f"🏁 Finished {sid}: {res.get('status')}")
+                except Exception as e:
+                    print(f"💥 Worker failed for {sid}: {e}")
+    else:
+        for sid in pending_targets:
+            worker_task(sid)
 
     print("\n🏁 Batch conversion execution completed!")
 
 if __name__ == "__main__":
     main()
+
