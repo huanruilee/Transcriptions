@@ -180,4 +180,58 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
 
     assert.equal(purityErrors.length, 0, `Found ${purityErrors.length} text purity errors:\n${purityErrors.slice(0, 10).join('\n')}`);
   });
+
+  await t.test('4. Non-Regression Gate: Phonetic Corruption & Garbage Token Blacklist', () => {
+    // Known severe ASR phonetic corruptions that must NEVER be merged into master
+    const CORRUPTION_BLACKLIST = [
+      { pattern: /主觀藥/, suggestion: '龍猛不共諸關要' },
+      { pattern: /廣續如中文/, suggestion: '當即廣釋入中論' },
+      { pattern: /廟\s*聖者父子/, suggestion: '妙音與聖者父子足' },
+      { pattern: /摩尼塔王/, suggestion: '牟尼法王' },
+      { pattern: /葡萄切[勒熱了]|普特伽羅/, suggestion: '補特伽羅' },
+      { pattern: /此宗有何能[政整治]/, suggestion: '此宗有何能諍' },
+      { pattern: /生[意一]諦/, suggestion: '勝義諦' },
+      { pattern: /七狂法/, suggestion: '不欺誑法' },
+      { pattern: /(?<!太)陽眼/, suggestion: '陽焰' },
+      { pattern: /咒詩/, suggestion: '咒師' },
+      { pattern: /非紋症|肺紋症/, suggestion: '飛蚊症' },
+      { pattern: /損壞[羹更]/, suggestion: '損壞根' }
+    ];
+
+    const blacklistErrors = [];
+
+    sessions.forEach(({ file, fullPath }) => {
+      // Exclude legacy ungrounded drafts until converted & cleaned
+      const data = JSON.parse(readFileSync(fullPath, 'utf8'));
+      const isConverted = data._meta && data._meta.engine === 'whisper-large-v3-turbo';
+      if (!isConverted) return;
+
+      (data.paragraphs || []).forEach((p, pIdx) => {
+        (p.sentences || []).forEach((s, sIdx) => {
+          for (const { pattern, suggestion } of CORRUPTION_BLACKLIST) {
+            if (pattern.test(s.text)) {
+              blacklistErrors.push(`${file} [p_${pIdx}_s_${sIdx}]: Blacklisted phonetic corruption "${s.text.match(pattern)[0]}" (Expected: "${suggestion}") in sentence: "${s.text}"`);
+            }
+          }
+        });
+      });
+    });
+
+    assert.equal(blacklistErrors.length, 0, `Found ${blacklistErrors.length} corruption blacklist violations:\n${blacklistErrors.slice(0, 10).join('\n')}`);
+  });
+
+  await t.test('5. Status Lock Protection: APPROVED Baseline Text Integrity', () => {
+    const statusErrors = [];
+
+    sessions.forEach(({ file, fullPath }) => {
+      const data = JSON.parse(readFileSync(fullPath, 'utf8'));
+      if (data._meta && data._meta.status === 'APPROVED') {
+        if (!data._meta.approved_at || !data._meta.approved_by) {
+          statusErrors.push(`${file}: APPROVED status must specify 'approved_at' and 'approved_by' metadata`);
+        }
+      }
+    });
+
+    assert.equal(statusErrors.length, 0, `Found ${statusErrors.length} status metadata errors:\n${statusErrors.join('\n')}`);
+  });
 });
