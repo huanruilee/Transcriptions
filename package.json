@@ -14,6 +14,7 @@
     "test:qa": "node scripts/qa_analyze.js",
     "test:qa:json": "node scripts/qa_analyze.js --json",
     "test:asr-gate": "node --test tests/unit/asrIntegrityGate.test.js",
+    "test:rating": "node --test tests/unit/reviewRating.test.js",
     "dev": "npx serve src -p 9090",
     "start": "npx serve src -p 9090"
   },
