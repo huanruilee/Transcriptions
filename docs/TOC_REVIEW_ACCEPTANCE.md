@@ -2,9 +2,9 @@
 
 Generated: 2026-08-27
 
-Acceptance status: OPEN
+Acceptance status: WEB_REVIEW_OK_CONTENT_ACCEPTANCE_OPEN
 
-Henry / domain review required before TOC content acceptance.
+Henry web review OK recorded on 2026-08-27. Domain/content review flags remain open.
 
 ## Purpose
 
@@ -19,7 +19,7 @@ It separates engineering verification from doctrinal/content acceptance.
 - M3 draft PR: #22
 - M4 draft PR: #23
 
-The stacked PRs are proposals. They are not an accepted baseline until Henry reviews and merges them.
+The stacked PRs have Henry web review OK. They are not an accepted repository baseline until merged.
 
 ## Automated Gate Summary
 
@@ -42,9 +42,11 @@ node scripts/audit_toc.js
 These commands verify renderer behavior, data-contract hygiene, accessibility-related TOC behavior,
 completion acceptance constraints, and explicit TOC coverage accounting.
 
-## Human Review Scope
+## Human Review Result
 
-Review is still needed for:
+Henry reviewed the web result and recorded review OK on 2026-08-27.
+
+The following domain/content review flags remain open:
 
 - Whether the 15 broad `sessionIds` spans should be split, retained as inferred, or corrected.
 - Whether the 180 `timestamp: 0` nodes should remain pending or receive precise playback offsets.
@@ -52,12 +54,12 @@ Review is still needed for:
 - Whether the 79-110 chapter mapping concerns recorded in `docs/QA_REPORT_79_102.md` require TOC title or scope changes.
 - Whether `sessionAnchors` generated from primary `sessionId` nodes match the intended course navigation experience.
 
-## Recommended Acceptance Checklist
+## Remaining Acceptance Checklist
 
-- Henry confirms the M1-M4 stacked PR order is acceptable.
 - Henry or a domain reviewer samples the flagged 79-110 area against actual transcript/audio content.
-- Henry decides whether M5 may keep `Acceptance status: OPEN` as an audit artifact or should be updated to `ACCEPTED` in a later review PR.
+- Henry decides whether the remaining content flags can be accepted as-is or need correction.
 - Any accepted content corrections are captured in a separate commit or PR with reviewer notes.
+- Final repository baseline still requires merging the stacked PRs.
 
 ## Residual Non-TOC Test Signal
 
