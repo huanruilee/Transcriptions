@@ -13,6 +13,7 @@
     "build:human-review-package": "python3 scripts/build_human_review_package.py",
     "test:qa": "node scripts/qa_analyze.js",
     "test:qa:json": "node scripts/qa_analyze.js --json",
+    "test:asr-gate": "node --test tests/unit/asrIntegrityGate.test.js",
     "dev": "npx serve src -p 9090",
     "start": "npx serve src -p 9090"
   },
