@@ -13,7 +13,7 @@ let currentActiveSessionId = null;
 let currentScope = 'course'; // 'course' | 'book'
 let _cachedSections = null;  // Phase 1: keep reference for time-driven updates
 
-export function renderTOC(sections, onSeekTo) {
+export function renderTOC(sections, onSeekTo, options = {}) {
   const container = document.getElementById('toc-container');
   if (!container) return;
 
@@ -23,6 +23,12 @@ export function renderTOC(sections, onSeekTo) {
   }
 
   _cachedSections = sections; // cache for breadcrumb/highlight updates
+  if (options.activeSessionId !== undefined) {
+    currentActiveSessionId = options.activeSessionId;
+  }
+  if (options.scope === 'course' || options.scope === 'book') {
+    currentScope = options.scope;
+  }
 
   container.style.display = 'block';
   container.textContent = '';
@@ -66,7 +72,10 @@ export function renderTOC(sections, onSeekTo) {
     btn.addEventListener('click', () => {
       currentScope = btn.dataset.scope;
       // Re-render with new scope, preserving active highlight
-      renderTOC(sections, onSeekTo);
+      renderTOC(sections, onSeekTo, {
+        activeSessionId: currentActiveSessionId,
+        scope: currentScope,
+      });
       applyActiveHighlight(currentActiveSessionId);
     });
   });
@@ -313,9 +322,18 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
 
     const li = document.createElement('li');
     const link = document.createElement('a');
-    link.className = 'toc-link';
-    link.href = `#session-${primarySession}-t${node.timestamp}`;
-    link.setAttribute('aria-label', `跳到 ${primarySession} 章節：${node.title}`);
+    const timestampPending = node.timestamp === 0;
+    link.className = `toc-link${timestampPending ? ' toc-timestamp-pending' : ''}`;
+    link.href = timestampPending ? `#session-${primarySession}` : `#session-${primarySession}-t${node.timestamp}`;
+    link.setAttribute(
+      'aria-label',
+      timestampPending
+        ? `${primarySession} 章節起點待補：${node.title}`
+        : `跳到 ${primarySession} 章節：${node.title}`
+    );
+    if (timestampPending) {
+      link.setAttribute('aria-disabled', 'true');
+    }
     link.dataset.sessionId = primarySession;
     link.dataset.timestamp = String(node.timestamp);
     link.dataset.testid = `toc-node-${node.title.substring(0, 8).replace(/\s/g, '')}`;
@@ -359,13 +377,20 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
       badge.title = `點擊跳轉至 ${min}:${sec}`;
       link.appendChild(document.createTextNode(' '));
       link.appendChild(badge);
+    } else if (timestampPending) {
+      const badge = document.createElement('span');
+      badge.className = 'toc-timestamp-pending-badge';
+      badge.textContent = '起點待補';
+      badge.title = '此科判尚未標定精準播放時間';
+      link.appendChild(document.createTextNode(' '));
+      link.appendChild(badge);
     }
 
     if (hasChildren) {
       const childUl = document.createElement('ul');
       childUl.className = 'toc-tree';
       renderSectionNodes(node.children, courseOnly, childUl);
-      parentUl.appendChild(childUl);
+      li.appendChild(childUl);
     }
 
     parentUl.appendChild(li);

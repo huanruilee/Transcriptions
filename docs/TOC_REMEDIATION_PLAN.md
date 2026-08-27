@@ -61,6 +61,35 @@ node --test tests/unit/tocRemediation.test.js
 - `TOC remediation: broad sessionIds spans must be marked for review`
 - `TOC remediation: published sessions without TOC anchors require explicit coverage status`
 
+## M2 Rendering Fix Result
+
+2026-08-27 在 `codex/toc-m2-rendering-fix` 執行：
+
+```bash
+node --test tests/unit/tocRemediation.test.js
+```
+
+結果：5 tests, 3 pass, 2 fail。
+
+已轉綠的 M2 rendering 契約：
+
+- `TOC remediation: nested children render inside their parent list item`
+- `TOC remediation: initial course scope can render only the active session`
+- `TOC remediation: timestamp=0 nodes are pending anchors, not precise seek links`
+
+保留給後續 milestones 的紅燈：
+
+- `TOC remediation: broad sessionIds spans must be marked for review`（M3 / M4）
+- `TOC remediation: published sessions without TOC anchors require explicit coverage status`（M3 / M4）
+
+既有回歸測試：
+
+```bash
+node --test tests/unit/toc.test.js tests/unit/a11y.test.js tests/acceptance/completion.test.js
+```
+
+結果：15 tests, 15 pass。
+
 ## 建議資料模型方向
 
 後續實作時，建議把三種概念拆開：

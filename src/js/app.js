@@ -70,7 +70,10 @@ async function loadCourseData() {
     const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
 
     renderSidebar(getFilteredSessions(), initialSession.sessionId, switchSession, courseData.unavailableSessions);
-    renderTOC(tocData.sections, handleSeekTo);
+    renderTOC(tocData.sections, handleSeekTo, {
+      activeSessionId: initialSession.sessionId,
+      scope: 'course',
+    });
     await switchSession(initialSession);
 
     // Listen to browser back/forward (Bug 1.3 fix)
@@ -142,6 +145,11 @@ async function switchSession(session) {
     currentSessionId = session.sessionId;
     localStorage.setItem('last_session_id', session.sessionId);
     location.hash = `#session-${session.sessionId}`;
+    if (tocData && tocData.sections) {
+      renderTOC(tocData.sections, handleSeekTo, {
+        activeSessionId: session.sessionId,
+      });
+    }
     renderTranscript(currentSessionData);
     setupAudioPlayer(resolveAudioUrl(session.audioUrl, null, session.sessionId));
   } catch (err) {
