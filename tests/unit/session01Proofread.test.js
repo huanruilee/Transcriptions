@@ -106,17 +106,22 @@ describe('Session 01 opening-praise grounded proofreading', () => {
 
   it('preserves existing timestamps (no audio-alignment rerun)', () => {
     const content = JSON.parse(fs.readFileSync(SESSION_PATH, 'utf8'));
-    // Spot-check 4 representative timestamps from paragraphs that should be
-    // preserved verbatim across the correction.
-    const expectedStarts = [0.21, 29.45, 116.12, 318.94];
-    const expectedEnds = [12.72, 48.74, 118.56, 321.36];
+    // Spot-check representative paragraph-level timestamps. These must be
+    // preserved verbatim across the proofreading pass because no audio
+    // alignment rerun was performed.
+    const expected = [
+      { id: 'p_1', start: 0.21, end: 20.04 },
+      { id: 'p_3', start: 29.45, end: 48.74 },
+      { id: 'p_7', start: 106.74, end: 116.12 },
+      { id: 'p_8', start: 116.12, end: 133.31 },
+      { id: 'p_21', start: 318.94, end: 333.81 },
+    ];
 
-    // Find first paragraph with start = 0.21 etc.
-    const findPara = (start) => content.paragraphs.find((p) => p.start === start);
-    for (let i = 0; i < expectedStarts.length; i++) {
-      const para = findPara(expectedStarts[i]);
-      assert.ok(para, `Paragraph starting at ${expectedStarts[i]} must exist`);
-      assert.equal(para.end, expectedEnds[i]);
+    for (const e of expected) {
+      const para = content.paragraphs.find((p) => p.id === e.id);
+      assert.ok(para, `Paragraph ${e.id} must exist`);
+      assert.equal(para.start, e.start, `${e.id} start must be preserved`);
+      assert.equal(para.end, e.end, `${e.id} end must be preserved`);
     }
   });
 
