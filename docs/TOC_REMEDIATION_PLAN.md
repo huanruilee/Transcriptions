@@ -90,6 +90,48 @@ node --test tests/unit/toc.test.js tests/unit/a11y.test.js tests/acceptance/comp
 
 結果：15 tests, 15 pass。
 
+
+
+## M3 Data Audit Result
+
+2026-08-27 在 `codex/toc-m3-data-audit` 執行：
+
+```bash
+node scripts/audit_toc.js
+```
+
+結果：
+
+- Published sessions: 198
+- Sessions with precise positive TOC anchors: 82
+- Broad sessionIds spans over 20: 15
+- timestamp=0 pending nodes: 180
+- Invalid TOC targets: 0
+- Published sessions without explicit TOC coverage status: 0
+
+M3 交付內容：
+
+- 新增 `scripts/audit_toc.js`，可重跑 TOC data audit。
+- 新增 `docs/TOC_DATA_AUDIT.md`，保存 M3 audit summary 與 findings。
+- 將 15 個大跨度 `sessionIds` 節點標示為 `reviewStatus: "needs_review"`。
+- 將 116 個缺精準 TOC anchor 的 published sessions 明確列入 `toc.coverage.needsReview`。
+
+M3 驗證：
+
+```bash
+node --test tests/unit/tocRemediation.test.js
+```
+
+結果：5 tests, 5 pass。
+
+```bash
+node --test tests/unit/toc.test.js tests/unit/a11y.test.js tests/acceptance/completion.test.js
+```
+
+結果：15 tests, 15 pass。
+
+M3 只建立 audit/status，不把科判歸屬或時間戳精準度視為內容驗收；這些保留到 M4/M5。
+
 ## 建議資料模型方向
 
 後續實作時，建議把三種概念拆開：
