@@ -6,6 +6,7 @@ import { initSearch } from './search.js';
 
 import { formatAriaTime, safePlay } from './a11y.js';
 import { openSentenceEditorModal, getCorrection, getNote, getAllCorrections, getAllNotes, exportNotesAsMarkdown } from './annotation.js';
+import { initReviewRating } from './reviewRating.js';
 
 let courseData = null;
 let tocData = null;
@@ -30,6 +31,17 @@ if (typeof document !== 'undefined') {
     initModeToggle();     // Annotation & Proofread mode
     initExportNotes();    // Export notes button
     initTOCDrawerTrigger(); // Phase 1: mobile TOC drawer
+    initReviewRating(() => {
+      if (currentSessionData) {
+        return {
+          sessionId: currentSessionId,
+          title: currentSessionData.title || `第 ${currentSessionId} 堂`,
+          pageRange: currentSessionData.pageRange || (courseData?.sessions?.find(s => s.sessionId === currentSessionId)?.pageRange) || '',
+          ...currentSessionData
+        };
+      }
+      return courseData?.sessions?.find(s => s.sessionId === currentSessionId) || { sessionId: currentSessionId };
+    });
     await loadCourseData();
   });
 }

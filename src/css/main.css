@@ -1611,3 +1611,219 @@ body.dark-mode .toc-link.toc-time-active {
 }
 .btn-danger:hover { background: #fecaca; }
 
+/* 1~10 Review Rating Modal Styles */
+.session-rating-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.session-rating-btn:hover {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
+}
+
+.rating-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.rating-modal-card {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.rating-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  background: #f8fafc;
+}
+.rating-modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+}
+.modal-close-btn:hover { color: #0f172a; }
+
+.rating-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.rating-session-info {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color, #3498db);
+}
+
+.rating-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.rating-scale-container {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.score-chip {
+  flex: 1;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-chip:hover {
+  transform: translateY(-2px);
+}
+
+.score-chip.score-low:hover, .score-chip.score-low.selected {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+.score-chip.score-mid:hover, .score-chip.score-mid.selected {
+  background: #ffedd5;
+  border-color: #f97316;
+  color: #c2410c;
+}
+.score-chip.score-high:hover, .score-chip.score-high.selected {
+  background: #dcfce7;
+  border-color: #22c55e;
+  color: #15803d;
+}
+
+.score-chip.selected {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  font-size: 1.15rem;
+}
+
+.rating-hint-text {
+  font-size: 0.85rem;
+  color: #64748b;
+  min-height: 20px;
+}
+
+.rating-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rating-tag {
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  font-size: 0.82rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.rating-tag:hover {
+  background: #e2e8f0;
+}
+.rating-tag.active {
+  background: #e0e7ff;
+  border-color: #6366f1;
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.rating-notes-input {
+  width: 100%;
+  height: 75px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+}
+.rating-notes-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.rating-alert-box {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.rating-modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  background: #f8fafc;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+
