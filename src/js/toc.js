@@ -12,10 +12,14 @@
 let currentActiveSessionId = null;
 let currentScope = 'course'; // 'course' | 'book'
 let _cachedSections = null;  // Phase 1: keep reference for time-driven updates
+let _cachedSessionAnchors = null; // M4: separated playback/navigation anchors
 
-export function renderTOC(sections, onSeekTo) {
+export function renderTOC(tocInput, onSeekTo, options = {}) {
   const container = document.getElementById('toc-container');
   if (!container) return;
+
+  const sections = Array.isArray(tocInput) ? tocInput : tocInput?.sections;
+  const sessionAnchors = Array.isArray(tocInput?.sessionAnchors) ? tocInput.sessionAnchors : null;
 
   if (!sections || sections.length === 0) {
     container.style.display = 'none';
@@ -23,6 +27,13 @@ export function renderTOC(sections, onSeekTo) {
   }
 
   _cachedSections = sections; // cache for breadcrumb/highlight updates
+  _cachedSessionAnchors = sessionAnchors;
+  if (options.activeSessionId !== undefined) {
+    currentActiveSessionId = options.activeSessionId;
+  }
+  if (options.scope === 'course' || options.scope === 'book') {
+    currentScope = options.scope;
+  }
 
   container.style.display = 'block';
   container.textContent = '';
@@ -56,7 +67,11 @@ export function renderTOC(sections, onSeekTo) {
   const treeRoot = document.createElement('ul');
   treeRoot.className = 'toc-tree';
   treeRoot.id = 'toc-tree-root';
-  renderSectionNodes(sections, currentScope === 'course', treeRoot);
+  if (currentScope === 'course' && currentActiveSessionId && _cachedSessionAnchors) {
+    renderSessionAnchorNodes(_cachedSessionAnchors, currentActiveSessionId, treeRoot);
+  } else {
+    renderSectionNodes(sections, currentScope === 'course', treeRoot);
+  }
   details.appendChild(treeRoot);
 
   container.appendChild(details);
@@ -66,7 +81,10 @@ export function renderTOC(sections, onSeekTo) {
     btn.addEventListener('click', () => {
       currentScope = btn.dataset.scope;
       // Re-render with new scope, preserving active highlight
-      renderTOC(sections, onSeekTo);
+      renderTOC(tocInput, onSeekTo, {
+        activeSessionId: currentActiveSessionId,
+        scope: currentScope,
+      });
       applyActiveHighlight(currentActiveSessionId);
     });
   });
@@ -280,6 +298,142 @@ export function highlightTOCNodeByTime(t, sessionId) {
  * show nodes belonging to the active session (plus their ancestors so the
  * hierarchy is preserved). Dynamic titles are set via textContent.
  */
+
+function renderSessionAnchorNodes(anchors, sessionId, parentUl) {
+  const matchingAnchors = anchors.filter(anchor => anchor.sessionId === sessionId);
+
+  if (matchingAnchors.length === 0) {
+    const li = document.createElement('li');
+    li.className = 'toc-empty';
+    li.textContent = '本課尚未建立精準科判錨點';
+    parentUl.appendChild(li);
+    return;
+  }
+
+  const tree = buildAnchorTree(matchingAnchors);
+  renderAnchorTree(tree, parentUl, sessionId);
+}
+
+function buildAnchorTree(anchors) {
+  const root = [];
+  const rootMap = new Map();
+
+  for (const anchor of anchors) {
+    const path = Array.isArray(anchor.outlinePath) && anchor.outlinePath.length > 0
+      ? anchor.outlinePath
+      : [anchor.title];
+    let siblings = root;
+    let siblingMap = rootMap;
+
+    path.forEach((title, index) => {
+      if (!siblingMap.has(title)) {
+        const node = { title, children: [], childMap: new Map(), anchor: null };
+        siblingMap.set(title, node);
+        siblings.push(node);
+      }
+      const node = siblingMap.get(title);
+      if (index === path.length - 1) {
+        node.anchor = anchor;
+      }
+      siblings = node.children;
+      siblingMap = node.childMap;
+    });
+  }
+
+  return root;
+}
+
+function renderAnchorTree(nodes, parentUl, sessionId) {
+  for (const node of nodes) {
+    const li = document.createElement('li');
+    if (node.anchor) {
+      li.appendChild(createAnchorLink(node.anchor, sessionId));
+    } else {
+      const details = document.createElement('details');
+      details.className = 'toc-sub';
+      details.open = true;
+      const summary = document.createElement('summary');
+      summary.className = 'toc-ancestor';
+      summary.textContent = node.title;
+      details.appendChild(summary);
+      const childUl = document.createElement('ul');
+      childUl.className = 'toc-tree';
+      renderAnchorTree(node.children, childUl, sessionId);
+      details.appendChild(childUl);
+      li.appendChild(details);
+    }
+
+    if (node.anchor && node.children.length > 0) {
+      const childUl = document.createElement('ul');
+      childUl.className = 'toc-tree';
+      renderAnchorTree(node.children, childUl, sessionId);
+      li.appendChild(childUl);
+    }
+
+    parentUl.appendChild(li);
+  }
+}
+
+function createAnchorLink(anchor, sessionId) {
+  const link = document.createElement('a');
+  const timestampPending = anchor.timestamp === 0 || anchor.status === 'missing_timestamp';
+  link.className = `toc-link${timestampPending ? ' toc-timestamp-pending' : ''}`;
+  link.href = timestampPending ? `#session-${sessionId}` : `#session-${sessionId}-t${anchor.timestamp}`;
+  link.setAttribute(
+    'aria-label',
+    timestampPending
+      ? `${sessionId} 章節起點待補：${anchor.title}`
+      : `跳到 ${sessionId} 章節：${anchor.title}`
+  );
+  if (timestampPending) {
+    link.setAttribute('aria-disabled', 'true');
+  }
+  link.dataset.sessionId = sessionId;
+  link.dataset.timestamp = String(anchor.timestamp);
+  link.dataset.anchorId = anchor.anchorId;
+  link.dataset.testid = `toc-anchor-${anchor.anchorId}`;
+  link.textContent = anchor.title;
+
+  const status = anchor.status || 'inferred';
+  if (status === 'needs_review') {
+    const badge = document.createElement('span');
+    badge.className = 'toc-review-badge';
+    badge.textContent = '待審';
+    badge.title = anchor.reviewReason || '此科判錨點需人工複審';
+    link.appendChild(document.createTextNode(' '));
+    link.appendChild(badge);
+  }
+
+  if (anchor.page) {
+    const pageBadge = document.createElement('span');
+    pageBadge.className = 'toc-page-badge';
+    pageBadge.textContent = `p.${anchor.page}`;
+    pageBadge.title = `論典第 ${anchor.page} 頁`;
+    link.appendChild(document.createTextNode(' '));
+    link.appendChild(pageBadge);
+  }
+
+  if (anchor.timestamp > 0) {
+    const min = Math.floor(anchor.timestamp / 60);
+    const sec = Math.floor(anchor.timestamp % 60).toString().padStart(2, '0');
+    const badge = document.createElement('span');
+    badge.className = 'toc-timestamp-badge';
+    badge.textContent = `${min}:${sec}`;
+    badge.title = `點擊跳轉至 ${min}:${sec}`;
+    link.appendChild(document.createTextNode(' '));
+    link.appendChild(badge);
+  } else {
+    const badge = document.createElement('span');
+    badge.className = 'toc-timestamp-pending-badge';
+    badge.textContent = '起點待補';
+    badge.title = '此科判尚未標定精準播放時間';
+    link.appendChild(document.createTextNode(' '));
+    link.appendChild(badge);
+  }
+
+  return link;
+}
+
 function renderSectionNodes(nodes, courseOnly, parentUl) {
   nodes.forEach(node => {
     const hasChildren = node.children && node.children.length > 0;
@@ -313,9 +467,18 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
 
     const li = document.createElement('li');
     const link = document.createElement('a');
-    link.className = 'toc-link';
-    link.href = `#session-${primarySession}-t${node.timestamp}`;
-    link.setAttribute('aria-label', `跳到 ${primarySession} 章節：${node.title}`);
+    const timestampPending = node.timestamp === 0;
+    link.className = `toc-link${timestampPending ? ' toc-timestamp-pending' : ''}`;
+    link.href = timestampPending ? `#session-${primarySession}` : `#session-${primarySession}-t${node.timestamp}`;
+    link.setAttribute(
+      'aria-label',
+      timestampPending
+        ? `${primarySession} 章節起點待補：${node.title}`
+        : `跳到 ${primarySession} 章節：${node.title}`
+    );
+    if (timestampPending) {
+      link.setAttribute('aria-disabled', 'true');
+    }
     link.dataset.sessionId = primarySession;
     link.dataset.timestamp = String(node.timestamp);
     link.dataset.testid = `toc-node-${node.title.substring(0, 8).replace(/\s/g, '')}`;
@@ -359,13 +522,20 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
       badge.title = `點擊跳轉至 ${min}:${sec}`;
       link.appendChild(document.createTextNode(' '));
       link.appendChild(badge);
+    } else if (timestampPending) {
+      const badge = document.createElement('span');
+      badge.className = 'toc-timestamp-pending-badge';
+      badge.textContent = '起點待補';
+      badge.title = '此科判尚未標定精準播放時間';
+      link.appendChild(document.createTextNode(' '));
+      link.appendChild(badge);
     }
 
     if (hasChildren) {
       const childUl = document.createElement('ul');
       childUl.className = 'toc-tree';
       renderSectionNodes(node.children, courseOnly, childUl);
-      parentUl.appendChild(childUl);
+      li.appendChild(childUl);
     }
 
     parentUl.appendChild(li);

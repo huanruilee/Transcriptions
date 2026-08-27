@@ -531,6 +531,33 @@ body {
   color: #999;
   font-style: italic;
 }
+
+.toc-timestamp-pending-badge {
+  display: inline-block;
+  background: rgba(127, 140, 141, 0.12);
+  color: #777;
+  border: 1px solid rgba(127, 140, 141, 0.28);
+  border-radius: 3px;
+  padding: 0 6px;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.toc-review-badge {
+  display: inline-block;
+  background: rgba(243, 156, 18, 0.14);
+  color: #9a5d00;
+  border: 1px solid rgba(243, 156, 18, 0.32);
+  border-radius: 3px;
+  padding: 0 6px;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .toc-session-badge {
   display: inline-block;
   background: rgba(39, 174, 96, 0.12);
@@ -1610,4 +1637,3 @@ body.dark-mode .toc-link.toc-time-active {
   color: #b91c1c;
 }
 .btn-danger:hover { background: #fecaca; }
-
