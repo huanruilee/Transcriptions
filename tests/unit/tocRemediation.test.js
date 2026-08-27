@@ -172,3 +172,17 @@ test('TOC remediation M4: course scope uses sessionAnchors instead of legacy ses
     'sessionAnchors course scope should not show legacy multi-session fan-out badges'
   );
 });
+
+test('TOC remediation M5: review package records web review OK while content flags remain open', () => {
+  const reviewPath = path.join(process.cwd(), 'docs/TOC_REVIEW_ACCEPTANCE.md');
+  const review = fs.readFileSync(reviewPath, 'utf8');
+
+  assert.match(review, /Acceptance status:\s+WEB_REVIEW_OK_CONTENT_ACCEPTANCE_OPEN/);
+  assert.match(review, /Henry web review OK recorded on 2026-08-27/);
+  assert.match(review, /Published sessions:\s+198/);
+  assert.match(review, /Precise positive TOC anchor sessions:\s+82/);
+  assert.match(review, /Broad sessionIds spans needing review:\s+15/);
+  assert.match(review, /Pending timestamp nodes:\s+180/);
+  assert.match(review, /Coverage needs-review sessions:\s+116/);
+  assert.match(review, /domain\/content review flags remain open/i);
+});

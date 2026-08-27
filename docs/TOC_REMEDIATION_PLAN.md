@@ -171,6 +171,31 @@ node scripts/audit_toc.js
 
 M4 只完成資料模型拆分與 renderer 使用契約；科判歸屬、缺 timestamp 節點與 `needs_review` 清單仍保留到 M5 由 Henry / 領域專家審核。
 
+## M5 Review & Acceptance Result
+
+2026-08-27 在 `codex/toc-m5-review-acceptance` 執行：
+
+```bash
+node --test tests/unit/tocRemediation.test.js
+```
+
+結果：8 tests, 8 pass。
+
+```bash
+node --test tests/unit/tocRemediation.test.js tests/unit/toc.test.js tests/unit/a11y.test.js tests/acceptance/completion.test.js
+```
+
+結果：23 tests, 23 pass。
+
+M5 交付內容：
+
+- 新增 `docs/TOC_REVIEW_ACCEPTANCE.md` 作為 Henry / 領域審核入口。
+- 明確標示 `Acceptance status: OPEN`。
+- 彙整 M1-M4 GitHub trail、audit 數字、人工 review scope 與 residual risk。
+- 新增 M5 governance 測試，要求 acceptance package 保持 OPEN，避免把自動化 gate 誤當成科判內容驗收。
+
+M5 結論：工程 remediation package 已可 review；TOC 內容接受仍需 Henry / 領域專家確認後另行更新狀態。
+
 ## 建議資料模型方向
 
 後續實作時，建議把三種概念拆開：
