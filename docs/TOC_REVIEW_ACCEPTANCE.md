@@ -61,9 +61,9 @@ The following domain/content review flags remain open:
 - Any accepted content corrections are captured in a separate commit or PR with reviewer notes.
 - Final repository baseline still requires merging the stacked PRs.
 
-## Residual Non-TOC Test Signal
+## Full-Web Test Signal
 
-`node --test tests/unit/sidebarFilterBehavior.test.js` currently fails in an out-of-scope Issue #9 sidebar filter case:
-query `甲二 造論宗旨` is expected to locate `02A`, but returns 0 matches.
+`node --test tests/unit/sidebarFilterBehavior.test.js` now passes.
+The sidebar filter can locate `02A` when querying the legacy/alternate phrase `甲二 造論宗旨`.
 
-This failure is not treated as TOC remediation acceptance evidence. It should be handled in the sidebar/search workstream.
+`npm test` now passes for the full local suite: 181 pass, 0 fail, 2 skipped.

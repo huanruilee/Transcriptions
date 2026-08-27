@@ -16,6 +16,7 @@ let allFlattenedSentences = [];
 let sessionLoading = false; // M6.3 (AGY review): race-condition guard for switchSession
 let sidebarFilterValue = ''; // P2: sidebar filter state
 let currentInteractionMode = 'listen'; // 'listen' | 'proofread'
+const sidebarTocSearchCache = new Map();
 
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', async () => {
@@ -861,14 +862,56 @@ function getFilteredSessions() {
   if (!courseData) return [];
   if (!sidebarFilterValue) return courseData.sessions;
   const q = sidebarFilterValue;
+  const normalizedQuery = normalizeSidebarSearchText(q);
 
   return courseData.sessions.filter(s => {
     const haystack = [
       s.sessionId, s.date, s.pageRange, s.summary, s.title,
-      s.periodLabel, s.subSession
+      s.periodLabel, s.subSession,
+      ...(s.searchAliases || []),
+      getTocSearchTextForSession(s.sessionId)
     ].filter(Boolean).join(' ').toLowerCase();
-    return haystack.includes(q);
+    return haystack.includes(q) || normalizeSidebarSearchText(haystack).includes(normalizedQuery);
   });
+}
+
+function normalizeSidebarSearchText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[\s,，、。．.・:：;；|｜()（）【】「」『』《》〈〉\-—_/]+/g, '');
+}
+
+function getTocSearchTextForSession(sessionId) {
+  if (!tocData || !sessionId) return '';
+  if (sidebarTocSearchCache.has(sessionId)) return sidebarTocSearchCache.get(sessionId);
+
+  const terms = [];
+
+  const visit = (nodes, parents = []) => {
+    for (const node of nodes || []) {
+      const path = parents.concat(node.title).filter(Boolean);
+      const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
+        ? node.sessionIds
+        : (node.sessionId ? [node.sessionId] : []);
+      if (nodeSessions.includes(sessionId)) {
+        terms.push(...path);
+      }
+      visit(node.children, path);
+    }
+  };
+
+  const sections = Array.isArray(tocData) ? tocData : (tocData.sections || []);
+  visit(sections);
+
+  for (const anchor of tocData.sessionAnchors || []) {
+    if (anchor.sessionId === sessionId) {
+      terms.push(anchor.title, ...(anchor.outlinePath || []));
+    }
+  }
+
+  const text = [...new Set(terms.filter(Boolean))].join(' ');
+  sidebarTocSearchCache.set(sessionId, text);
+  return text;
 }
 
 /**
