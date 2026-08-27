@@ -70,7 +70,7 @@ async function loadCourseData() {
     const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
 
     renderSidebar(getFilteredSessions(), initialSession.sessionId, switchSession, courseData.unavailableSessions);
-    renderTOC(tocData.sections, handleSeekTo, {
+    renderTOC(tocData, handleSeekTo, {
       activeSessionId: initialSession.sessionId,
       scope: 'course',
     });
@@ -146,7 +146,7 @@ async function switchSession(session) {
     localStorage.setItem('last_session_id', session.sessionId);
     location.hash = `#session-${session.sessionId}`;
     if (tocData && tocData.sections) {
-      renderTOC(tocData.sections, handleSeekTo, {
+      renderTOC(tocData, handleSeekTo, {
         activeSessionId: session.sessionId,
       });
     }

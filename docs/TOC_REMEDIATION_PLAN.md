@@ -132,6 +132,45 @@ node --test tests/unit/toc.test.js tests/unit/a11y.test.js tests/acceptance/comp
 
 M3 只建立 audit/status，不把科判歸屬或時間戳精準度視為內容驗收；這些保留到 M4/M5。
 
+## M4 Data Model Cleanup Result
+
+2026-08-27 在 `codex/toc-m4-data-model-cleanup` 執行：
+
+```bash
+node scripts/build_toc_model.js
+```
+
+結果：生成 393 個 `sessionAnchors`。
+
+M4 交付內容：
+
+- 新增 `scripts/build_toc_model.js`，可重建 TOC v2 導航模型。
+- 在 `toc.json` 新增 `modelVersion: "toc-v2"`、`modelNotes`、`modelGeneratedBy` 與 `sessionAnchors`。
+- 保留 `sections` 作為全書科判結構；course scope 改以 `sessionAnchors` 作為播放導覽資料。
+- course scope 不再用 legacy `sessionIds` fan-out badge 當作本課科判導覽。
+
+M4 驗證：
+
+```bash
+node --test tests/unit/tocRemediation.test.js
+```
+
+結果：7 tests, 7 pass。
+
+```bash
+node --test tests/unit/tocRemediation.test.js tests/unit/toc.test.js tests/unit/a11y.test.js tests/acceptance/completion.test.js
+```
+
+結果：22 tests, 22 pass。
+
+```bash
+node scripts/audit_toc.js
+```
+
+結果：Invalid TOC targets: 0；Published sessions without explicit TOC coverage status: 0。
+
+M4 只完成資料模型拆分與 renderer 使用契約；科判歸屬、缺 timestamp 節點與 `needs_review` 清單仍保留到 M5 由 Henry / 領域專家審核。
+
 ## 建議資料模型方向
 
 後續實作時，建議把三種概念拆開：

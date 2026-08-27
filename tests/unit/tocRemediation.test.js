@@ -134,3 +134,41 @@ test('TOC remediation: published sessions without TOC anchors require explicit c
 
   assert.deepEqual(unaccounted, [], `published sessions without precise TOC anchors need explicit coverage status:\n${unaccounted.join(' ')}`);
 });
+
+
+test('TOC remediation M4: toc.json separates book outline from session anchors', () => {
+  const toc = readJson(TOC_PATH);
+
+  assert.equal(toc.modelVersion, 'toc-v2');
+  assert.equal(Array.isArray(toc.sections), true, 'sections should remain the book outline tree');
+  assert.equal(Array.isArray(toc.sessionAnchors), true, 'sessionAnchors should provide playback/navigation anchors');
+  assert.ok(toc.sessionAnchors.length >= 390, 'sessionAnchors should cover the generated TOC anchor model');
+
+  for (const anchor of toc.sessionAnchors) {
+    assert.equal(typeof anchor.anchorId, 'string', 'anchorId should be stable and explicit');
+    assert.equal(typeof anchor.sessionId, 'string', `${anchor.anchorId} should have one primary sessionId`);
+    assert.equal(Array.isArray(anchor.sessionIds), false, `${anchor.anchorId} must not carry legacy sessionIds fan-out`);
+    assert.equal(typeof anchor.timestamp, 'number', `${anchor.anchorId} should carry timestamp state`);
+    assert.equal(Array.isArray(anchor.outlinePath), true, `${anchor.anchorId} should point back to the book outline path`);
+    assert.ok(anchor.outlinePath.length > 0, `${anchor.anchorId} should include a non-empty outline path`);
+    assert.match(anchor.status, /^(inferred|missing_timestamp|needs_review)$/, `${anchor.anchorId} should carry explicit review status`);
+  }
+});
+
+test('TOC remediation M4: course scope uses sessionAnchors instead of legacy sessionIds fan-out', async () => {
+  const toc = readJson(TOC_PATH);
+  const document = await renderTocForTest(toc, { activeSessionId: '01', scope: 'course' });
+  const links = [...document.querySelectorAll('.toc-link')];
+
+  assert.ok(links.length > 0, 'session 01 should render from sessionAnchors');
+  assert.equal(
+    links.every(link => link.dataset.sessionId === '01'),
+    true,
+    'course-scope anchor links should target only the active session'
+  );
+  assert.equal(
+    [...document.querySelectorAll('.toc-session-badge')].length,
+    0,
+    'sessionAnchors course scope should not show legacy multi-session fan-out badges'
+  );
+});
