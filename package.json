@@ -15,6 +15,8 @@
     "test:qa:json": "node scripts/qa_analyze.js --json",
     "test:asr-gate": "node --test tests/unit/asrIntegrityGate.test.js",
     "test:rating": "node --test tests/unit/reviewRating.test.js",
+    "score": "python3 scripts/quality_scorer.py",
+    "score:fix": "python3 scripts/quality_scorer.py --fix",
     "dev": "npx serve src -p 9090",
     "start": "npx serve src -p 9090"
   },
