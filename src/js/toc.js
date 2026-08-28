@@ -161,8 +161,9 @@ export function findAncestorChain(t, sections, sessionId) {
       const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
       const currentChain = [...chain, { title: node.title, timestamp: ts, sessionId: node.sessionId }];
 
-      // A node is "active" if its timestamp <= t and it's the deepest/latest such node
-      if (ts <= t && ts > bestTimestamp) {
+      // A node is "active" if its own acoustic timestamp belongs to this session and <= t
+      const isNodeAnchorForThisSession = node.sessionId === sessionId;
+      if (isNodeAnchorForThisSession && ts <= t && ts > bestTimestamp) {
         bestTimestamp = ts;
         bestChain = [...currentChain];
       }
@@ -409,11 +410,8 @@ export function findTOCNodeAtParagraphStart(paragraphStart, sessionId, tolerance
 
   function walk(nodes) {
     for (const node of nodes) {
-      const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
-        ? node.sessionIds
-        : (node.sessionId ? [node.sessionId] : []);
-
-      const sessionMatch = nodeSessions.length === 0 || nodeSessions.includes(sessionId);
+      // Strict session match: acoustic timestamps are specific to the primary sessionId!
+      const sessionMatch = node.sessionId === sessionId;
       const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
 
       if (sessionMatch && ts > 0 && Math.abs(ts - paragraphStart) <= tolerance) {
