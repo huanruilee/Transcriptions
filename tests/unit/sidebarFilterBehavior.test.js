@@ -167,14 +167,12 @@ test('Issue #9: sidebar filter behavior — Course Overview bulk render', async 
     assert.equal(count, totalItems, `clearing should restore all ${totalItems} items, got ${count}`);
   });
 
-  await t.test('filter "99B" excludes the unavailable session from the session list', () => {
-    // 99B is in `unavailableSessions` (not in `sessions`). The filter searches
-    // `courseData.sessions`, so 99B should not appear in results; the rendered
-    // gap marker for 99B only appears next to 99A when the filter is empty.
+  await t.test('filter "99B" matches published 99B session in the session list', () => {
     setFilter(window, '99B');
     const items = visibleSessionTitles(window);
-    assert.equal(items.length, 0,
-      `filter "99B" should match no published sessions, got ${items.length}: ${JSON.stringify(items)}`);
+    assert.equal(items.length, 1,
+      `filter "99B" should match published 99B session, got ${items.length}: ${JSON.stringify(items)}`);
+    assert.match(items[0], /99B/, `match should be 第 99B 堂, got ${items[0]}`);
   });
 
   await t.test('filter "99A" finds the 99A session', () => {
@@ -184,10 +182,10 @@ test('Issue #9: sidebar filter behavior — Course Overview bulk render', async 
     assert.match(items[0], /99A/, `match should be 第 99A 堂, got ${items[0]}`);
   });
 
-  await t.test('filter "甲二 造論宗旨" (multi-character Chinese summary) locates 02A', () => {
-    setFilter(window, '甲二 造論宗旨');
+  await t.test('filter "釋禮敬" (multi-character Chinese summary) locates 02A', () => {
+    setFilter(window, '釋禮敬');
     const items = visibleSessionTitles(window);
-    assert.equal(items.length, 1, `expected 1 match for 甲二 造論宗旨, got ${items.length}: ${JSON.stringify(items)}`);
+    assert.equal(items.length, 1, `expected 1 match for 釋禮敬, got ${items.length}: ${JSON.stringify(items)}`);
     assert.match(items[0], /2A/, `first match should be 第 2A 堂, got ${items[0]}`);
   });
 
@@ -207,14 +205,11 @@ test('Issue #9: sidebar filter behavior — Course Overview bulk render', async 
     assert.ok(items.length >= 2, `expected multiple matches for p.63, got ${items.length}`);
   });
 
-  await t.test('unavailable session behavior intact: clearing shows the 99B gap marker', () => {
+  await t.test('unavailable session behavior intact: all sessions are published in v1.1', () => {
     setFilter(window, '');
     const container = window.document.getElementById('session-list');
     const gaps = container.querySelectorAll('.session-item.session-unavailable');
     assert.equal(gaps.length, totalUnavailable, `expected ${totalUnavailable} unavailable gap marker(s), got ${gaps.length}`);
-    if (gaps.length > 0) {
-      assert.match(gaps[0].querySelector('.session-title')?.textContent || '', /99B/);
-    }
   });
 
   await t.test('active session highlight survives a filter empty->empty round trip', () => {
