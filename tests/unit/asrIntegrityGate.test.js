@@ -234,4 +234,37 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
 
     assert.equal(statusErrors.length, 0, `Found ${statusErrors.length} status metadata errors:\n${statusErrors.join('\n')}`);
   });
+
+  await t.test('6. Session 99B Integrity & Non-Regression Gate (Audio & Transcript Available)', () => {
+    const courseDir = path.join(COURSES_ROOT, '入中論善顯密意疏');
+    const coursePath = path.join(courseDir, 'course.json');
+    const audioMapPath = path.join(courseDir, 'audio_map.json');
+    const session99BPath = path.join(courseDir, 'sessions/session_99B.json');
+
+    assert.ok(existsSync(coursePath), 'course.json must exist');
+    assert.ok(existsSync(session99BPath), 'session_99B.json must exist on disk');
+
+    const courseData = JSON.parse(readFileSync(coursePath, 'utf8'));
+    const session99B = (courseData.sessions || []).find(s => s.sessionId === '99B');
+
+    assert.ok(session99B, 'course.json must contain session 99B in published sessions list');
+    assert.ok(session99B.audioUrl && session99B.audioUrl.endsWith('.MP3'), '99B must have a valid official audioUrl (.MP3)');
+    assert.ok(session99B.jsonUrl && existsSync(path.join(PROJECT_ROOT, session99B.jsonUrl)), '99B must have a valid jsonUrl pointing to existing file');
+
+    // Ensure unavailableSessions does NOT contain 99B
+    const unavailable = courseData.unavailableSessions || [];
+    const unavailable99B = unavailable.find(u => u.sessionId === '99B');
+    assert.equal(unavailable99B, undefined, '99B must NOT be marked as unavailable or missing audio in course.json');
+
+    // Check audio_map.json
+    if (existsSync(audioMapPath)) {
+      const audioMap = JSON.parse(readFileSync(audioMapPath, 'utf8'));
+      assert.ok(audioMap['99B'], 'audio_map.json must contain 99B entry');
+      assert.ok(audioMap['99B'].includes('.MP3'), 'audio_map.json 99B must point to valid .MP3 file');
+    }
+
+    // Check session_99B.json content
+    const sessionData = JSON.parse(readFileSync(session99BPath, 'utf8'));
+    assert.ok(sessionData.paragraphs && sessionData.paragraphs.length > 50, 'session_99B.json must contain valid paragraphs');
+  });
 });
