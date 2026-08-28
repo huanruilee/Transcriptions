@@ -254,6 +254,17 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
           </div>
           <textarea id="modal-note-content" class="form-textarea" rows="2" placeholder="記錄此段文義核心、名相辨析或個人體悟...">${escapeHtml(initialNoteContent)}</textarea>
         </div>
+
+        <!-- Active Learning Global Rule Option -->
+        <div class="active-learning-box" style="margin-top: 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 6px; padding: 10px 12px;">
+          <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; color: #1e40af; font-weight: 600; font-size: 0.88rem;">
+            <input type="checkbox" id="modal-learn-term-checkbox" checked style="margin-top: 3px; width: 16px; height: 16px; accent-color: #2563eb;">
+            <span>🧠 標記為全庫通用佛學名相修正（系統將自動學習詞條規則）</span>
+          </label>
+          <div style="font-size: 0.78rem; color: #64748b; margin-top: 4px; margin-left: 24px; line-height: 1.4;">
+            若此修正屬於普遍性的 ASR 同音識別錯誤（例如：<b>顛倒式 ➔ 顛倒識</b>、<b>對所限 ➔ 對所現</b>、<b>有不進步 ➔ 有部、經部</b>），勾選後系統將註冊為主動學習事件，供審核中心一鍵全庫推廣並納入 CI 門禁。
+          </div>
+        </div>
       </div>
 
       <div class="modal-footer">
@@ -322,13 +333,33 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
     const pageRef = modal.querySelector('#modal-page-ref').value.trim();
     const tag = modal.querySelector('#modal-tag-select').value;
 
+    const isGlobalLearn = modal.querySelector('#modal-learn-term-checkbox')?.checked;
+
     if (correctedText && correctedText !== sentence.text) {
       saveCorrection(sessionId, sid, {
         originalText: sentence.text,
         correctedText,
         start: sentence.start,
-        end: sentence.end
+        end: sentence.end,
+        isGlobalLearn: Boolean(isGlobalLearn)
       });
+
+      if (isGlobalLearn && typeof localStorage !== 'undefined') {
+        try {
+          const suggestions = JSON.parse(localStorage.getItem('learned_suggestions') || '[]');
+          suggestions.push({
+            sessionId,
+            sentenceId: sid,
+            timestamp: sentence.start,
+            originalText: sentence.text,
+            correctedText,
+            submittedAt: new Date().toISOString()
+          });
+          localStorage.setItem('learned_suggestions', JSON.stringify(suggestions));
+        } catch (e) {
+          console.warn('Failed to save learned_suggestions', e);
+        }
+      }
     } else {
       removeCorrection(sessionId, sid);
     }

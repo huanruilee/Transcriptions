@@ -196,7 +196,10 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
       { pattern: /咒詩/, suggestion: '咒師' },
       { pattern: /非紋症|肺紋症/, suggestion: '飛蚊症' },
       { pattern: /損壞[羹更]/, suggestion: '損壞根' },
-      { pattern: /有不[、\s]?進步/, suggestion: '有部、經部' }
+      { pattern: /有不[、\s]?進步/, suggestion: '有部、經部' },
+      { pattern: /顛倒式/, suggestion: '顛倒識' },
+      { pattern: /對所限|自己的所限/, suggestion: '對所現/自己的所現' },
+      { pattern: /應層/, suggestion: '應成' }
     ];
 
     const blacklistErrors = [];

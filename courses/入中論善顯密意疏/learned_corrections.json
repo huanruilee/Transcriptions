@@ -45,9 +45,44 @@
       "learned_from": "用戶校對第 01 堂",
       "confidence": 0.99,
       "reasoning": "說一切有部與經部，ASR 錯轉為有不進步。"
+    },
+    "顛倒式": {
+      "corrected": "顛倒識",
+      "category": "中觀量論心類學",
+      "safe_regex": "顛倒式",
+      "treatise_ref": "善顯密意疏 心類學辨析",
+      "learned_from": "用戶校對第 08A 堂",
+      "confidence": 0.99,
+      "reasoning": "心類學顛倒識（viparyaya-jñāna），ASR 錯轉為顛倒式。"
+    },
+    "對所限": {
+      "corrected": "對所現",
+      "category": "中觀量論境心名相",
+      "safe_regex": "對所限|自己的所限",
+      "treatise_ref": "善顯密意疏 境與有境",
+      "learned_from": "用戶校對第 08A 堂",
+      "confidence": 0.99,
+      "reasoning": "顯現境/所現分（pratibhāsa），ASR 錯轉為所限。"
+    },
+    "應層": {
+      "corrected": "應成",
+      "category": "中觀派別名相",
+      "safe_regex": "應層",
+      "treatise_ref": "善顯密意疏 應成自續辨析",
+      "learned_from": "用戶校對第 08A 堂",
+      "confidence": 0.99,
+      "reasoning": "中觀應成派（Prāsaṅgika），ASR 錯轉為應層。"
     }
   },
   "context_rules": [
+    {
+      "sessionId": "95B",
+      "original": "菩薩從初地進趣二地。",
+      "proposed": "菩薩從初地進趣二諦。",
+      "pageRef": "p.23",
+      "confidence": 0.88,
+      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
+    },
     {
       "sessionId": "95B",
       "original": "菩薩從初地進趣二地。",
