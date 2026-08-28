@@ -370,3 +370,42 @@ function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
+/**
+ * Exports all corrections for active learning ingestion as structured JSON events
+ */
+export function exportCorrectionEventsJson(sessionId, sessionData) {
+  const corrections = getAllCorrections(sessionId);
+  const notes = getAllNotes(sessionId);
+  const events = [];
+
+  const sentencesMap = {};
+  if (sessionData && sessionData.paragraphs) {
+    sessionData.paragraphs.forEach(p => {
+      p.sentences.forEach(s => {
+        const sid = s.id || `sent-${s.start}`;
+        sentencesMap[sid] = s;
+      });
+    });
+  }
+
+  for (const [sid, corr] of Object.entries(corrections)) {
+    const s = sentencesMap[sid] || {};
+    const n = notes[sid] || {};
+    events.push({
+      sessionId,
+      sentenceId: sid,
+      start: corr.start || s.start || 0,
+      end: corr.end || s.end || 0,
+      originalText: corr.originalText || s.text || '',
+      proposedText: corr.correctedText || '',
+      pageRef: n.pageRef || sessionData?.pageRange || '',
+      note: n.content || '',
+      tag: n.tag || '',
+      timestamp: Date.now()
+    });
+  }
+
+  return events;
+}
+
