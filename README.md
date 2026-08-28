@@ -16,6 +16,7 @@
 
 ## 📚 專案核心文件索引 (Documentation Index)
 
+* 📖 **[系統介紹與使用說明 (User Guide)](docs/USER_GUIDE.md)**：一般讀者與法友專屬的介面功能導覽、三分鐘快速上手與操作小技巧。
 * 🔬 **[完整可複現性指南 (Reproducibility Guide)](docs/REPRODUCIBILITY_GUIDE.md)**：開發者與 AI Agent 專屬的環境建置、GPU 端點、批次流水線與自進化 SOP。
 * 📜 **[199 講全量完工結案報告 (Final Project Closure Report)](docs/ASR_M1_FINAL_CLOSURE_REPORT.md)**：量化數據指標、品質評分、技術突破與架構圖。
 * 🛡️ **[ASR-M2 品質防退化門禁測試](tests/unit/asrIntegrityGate.test.js)**：Schema 契約、時間戳單調性、文字純度與名相黑名單。
