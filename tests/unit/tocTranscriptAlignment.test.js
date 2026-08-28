@@ -169,4 +169,40 @@ test('📑 科判與課文位置對應完整性測試 (TOC & Transcript Position
 
     assert.equal(unresolvableParas.length, 0, `All TOC anchors must resolve a scrollable paragraph ID:\n${unresolvableParas.join('\n')}`);
   });
+
+  await t.test('5. Strict Session Isolation Gate for Inline TOC Anchor Cards (Zero Cross-Session Leakage)', async () => {
+    const { JSDOM } = await import('jsdom');
+    const dom = new JSDOM('<div id="toc-container"></div>', { url: 'http://localhost/' });
+    globalThis.document = dom.window.document;
+    globalThis.window = dom.window;
+
+    // Import findTOCNodeAtParagraphStart and renderTOC
+    const { renderTOC, findTOCNodeAtParagraphStart } = await import('../../src/js/toc.js');
+    renderTOC(toc.sections, () => {});
+
+    // Specific Regression Check for Session 01
+    const s01_0s = findTOCNodeAtParagraphStart(0.21, '01', 2);
+    assert.ok(s01_0s, 'Session 01 @ 0.21s must resolve its primary anchor');
+    assert.equal(s01_0s.page, 63, 'Session 01 @ 0.21s page must be 63 (not p.64 from 02B)');
+    assert.match(s01_0s.title, /庚[一二三]/, 'Session 01 @ 0.21s title must be 庚一~庚三 (not 辛四 from 02B)');
+
+    // Ensure 21.20s in Session 01 does NOT match 108A's 22.43s (辛一 p.60)
+    const s01_22s = findTOCNodeAtParagraphStart(21.20, '01', 2);
+    assert.equal(s01_22s, null, 'Session 01 @ 21.20s must NOT match 108A timestamp anchor (辛一 p.60)');
+
+    // Global Non-Regression Invariant: Any matched node must have sessionId === activeSessionId
+    for (const sid of publishedSessions) {
+      const sData = getSession(sid);
+      if (!sData) continue;
+      for (const p of sData.paragraphs || []) {
+        const pStart = p.sentences?.[0]?.start;
+        if (typeof pStart !== 'number') continue;
+        const matched = findTOCNodeAtParagraphStart(pStart, sid, 2);
+        if (matched) {
+          assert.equal(matched.sessionId, sid, `Matched TOC anchor "${matched.title}" in session ${sid} must strictly belong to ${sid}, got ${matched.sessionId}`);
+        }
+      }
+    }
+  });
 });
+
