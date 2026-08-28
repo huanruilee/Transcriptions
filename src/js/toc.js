@@ -13,9 +13,12 @@ let currentActiveSessionId = null;
 let currentScope = 'course'; // 'course' | 'book'
 let _cachedSections = null;  // Phase 1: keep reference for time-driven updates
 
-export function renderTOC(sections, onSeekTo) {
+export function renderTOC(sections, onSeekTo, options = {}) {
   const container = document.getElementById('toc-container');
   if (!container) return;
+
+  if (options.scope) currentScope = options.scope;
+  if (options.activeSessionId) currentActiveSessionId = options.activeSessionId;
 
   if (!sections || sections.length === 0) {
     container.style.display = 'none';
@@ -314,10 +317,15 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     const li = document.createElement('li');
     const link = document.createElement('a');
     link.className = 'toc-link';
-    link.href = `#session-${primarySession}-t${node.timestamp}`;
+    if (node.timestamp === 0 || !node.timestamp) {
+      link.setAttribute('aria-disabled', 'true');
+      link.href = `#session-${primarySession}`;
+    } else {
+      link.href = `#session-${primarySession}-t${node.timestamp}`;
+    }
     link.setAttribute('aria-label', `跳到 ${primarySession} 章節：${node.title}`);
     link.dataset.sessionId = primarySession;
-    link.dataset.timestamp = String(node.timestamp);
+    link.dataset.timestamp = String(node.timestamp || 0);
     link.dataset.testid = `toc-node-${node.title.substring(0, 8).replace(/\s/g, '')}`;
     link.textContent = node.title;
     li.appendChild(link);
@@ -365,7 +373,7 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
       const childUl = document.createElement('ul');
       childUl.className = 'toc-tree';
       renderSectionNodes(node.children, courseOnly, childUl);
-      parentUl.appendChild(childUl);
+      li.appendChild(childUl);
     }
 
     parentUl.appendChild(li);

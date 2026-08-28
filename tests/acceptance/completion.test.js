@@ -21,10 +21,8 @@ test('completion acceptance: course index references complete session JSON and p
   const course = readJson(COURSE_PATH);
   const seenIds = new Set();
 
-  // M6.0 fix: Course index lists 198 published sessions (2026-08-14 27B 補做後 + 99B 未發布).
-  // 99B remains explicitly absent per test #4 below until B-segment audio exists on flyday.
-  // Total published = 198 = 199 expected total − 1 unavailable (99B).
-  assert.equal(course.sessions.length, 198, 'course.json should list 198 published sessions (99B explicitly excluded; see test #4)');
+  // Full 199 sessions published (01~110B, including 99B recovered).
+  assert.equal(course.sessions.length, 199, 'course.json should list all 199 published sessions');
 
   for (const entry of course.sessions) {
     assert.equal(typeof entry.sessionId, 'string', 'sessionId should be present');
@@ -114,12 +112,12 @@ test('completion acceptance: toc links target existing sessions and in-range tim
   assert.ok(checkedLinks > 0, 'toc should include timed navigation links');
 });
 
-test('completion acceptance: known missing 99B is explicitly absent from published course index', () => {
+test('completion acceptance: session 99B is published and accessible in course index', () => {
   const course = readJson(COURSE_PATH);
   const ids = new Set(course.sessions.map(entry => entry.sessionId));
 
   assert.equal(ids.has('99A'), true, '99A should be published');
-  assert.equal(ids.has('99B'), false, '99B is not published because no B-segment source audio is available');
-  assert.equal(ids.has('100A'), true, '100A should follow 99A in the current accepted index');
-  assert.equal(fs.existsSync(path.join(SESSIONS_DIR, 'session_99B.json')), false, 'unpublished 99B JSON should not exist silently');
+  assert.equal(ids.has('99B'), true, '99B is now published with official audio and transcripts');
+  assert.equal(ids.has('100A'), true, '100A should follow 99B in the accepted index');
+  assert.equal(fs.existsSync(path.join(SESSIONS_DIR, 'session_99B.json')), true, 'published 99B JSON must exist');
 });

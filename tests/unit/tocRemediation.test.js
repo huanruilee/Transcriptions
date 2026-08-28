@@ -79,7 +79,7 @@ test('TOC remediation: initial course scope can render only the active session',
 
 test('TOC remediation: timestamp=0 nodes are pending anchors, not precise seek links', async () => {
   const toc = readJson(TOC_PATH);
-  const document = await renderTocForTest(toc.sections, { activeSessionId: '87A', scope: 'course' });
+  const document = await renderTocForTest(toc.sections, { activeSessionId: '84B', scope: 'course' });
   const zeroTimestampLinks = [...document.querySelectorAll('.toc-link[data-timestamp="0"]')];
 
   assert.ok(zeroTimestampLinks.length > 0, 'fixture should include pending timestamp nodes');

@@ -100,11 +100,15 @@ export function initSearch() {
   });
 
   // Global Cmd+K / Ctrl+K search shortcut
-  window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      searchInput.focus();
-      searchInput.select();
-    }
-  });
+  if (typeof window !== 'undefined') {
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+        if (typeof searchInput.select === 'function') {
+          searchInput.select();
+        }
+      }
+    });
+  }
 }
