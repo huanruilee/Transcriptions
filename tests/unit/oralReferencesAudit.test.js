@@ -46,4 +46,24 @@ test('📖 課文口述「頁次」與「科判」自動化交叉核對門禁 (O
     assert.match(allText, /第六頁/, 'Session 01 opening must mention p.6 of the treatise');
     assert.match(allText, /六三|六十三/, 'Session 01 transition must mention p.63 of the treatise');
   });
+
+  await t.test('4. Golden Sub-heading Anchor: Session 103B accurately captures "庚二 離垢地" & sub-clauses', () => {
+    const session103BPath = path.join(SESSIONS_DIR, 'session_103B.json');
+    assert.ok(existsSync(session103BPath), 'session_103B.json must exist');
+
+    const data = JSON.parse(readFileSync(session103BPath, 'utf8'));
+    const allText = data.paragraphs.flatMap(p => p.sentences.map(s => s.text)).join(' ');
+
+    assert.match(allText, /庚二/, 'Session 103B must contain teacher oral reference to outline "庚二"');
+    assert.match(allText, /戒清淨/, 'Session 103B must capture "辛一 明此地戒清淨" doctrinal term');
+  });
+
+  await t.test('5. Whole Corpus Audit Script Integrity: audit_oral_references.py exists & executable', () => {
+    const scriptPath = path.join(PROJECT_ROOT, 'scripts/audit_oral_references.py');
+    assert.ok(existsSync(scriptPath), 'scripts/audit_oral_references.py must exist');
+    const content = readFileSync(scriptPath, 'utf8');
+    assert.ok(content.includes('chinese_to_arabic'), 'Script must define chinese_to_arabic parser');
+    assert.ok(content.includes('PAGE_MENTION_RE'), 'Script must define PAGE_MENTION_RE extractor');
+  });
 });
+
