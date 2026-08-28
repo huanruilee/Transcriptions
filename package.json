@@ -17,6 +17,9 @@
     "test:rating": "node --test tests/unit/reviewRating.test.js",
     "score": "python3 scripts/quality_scorer.py",
     "score:fix": "python3 scripts/quality_scorer.py --fix",
+    "learn:eval": "python3 scripts/active_learning_manager.py --eval",
+    "learn:sync": "python3 scripts/active_learning_manager.py --sync-all",
+    "learn:dry-run": "python3 scripts/active_learning_manager.py --sync-all --dry-run",
     "dev": "npx serve src -p 9090",
     "start": "npx serve src -p 9090"
   },
