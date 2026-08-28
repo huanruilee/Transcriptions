@@ -1,9 +1,8 @@
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
 import { renderTOC, applyActiveHighlight, updateDoctrinalBreadcrumb, highlightTOCNodeByTime, findTOCNodeAtParagraphStart } from './toc.js';
-import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll, freezeAutoScroll } from './syncPlayer.js';
+import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll, freezeAutoScroll, cyclePlaybackRate, loadSavedPlaybackRate, setPlaybackRate } from './syncPlayer.js';
 import { initSearch } from './search.js';
-
-
+import { initContextMenu } from './contextMenu.js';
 import { formatAriaTime, safePlay } from './a11y.js';
 import { openSentenceEditorModal, getCorrection, getNote, getAllCorrections, getAllNotes, exportNotesAsMarkdown } from './annotation.js';
 import { initReviewRating } from './reviewRating.js';
@@ -22,7 +21,11 @@ if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', async () => {
     initThemeToggle();
     initSidebarToggle();
-    initMobileSidebarToggle();
+    initSidebarResizer();
+    initMobileDrawer();
+    initMobileActionSheet();
+    initPlaybackRateControl();
+    initFabReturnPlaying();
     initFontSizeControls();
     initSearch();
     initCourseOverview(); // P1: course overview entry
@@ -31,6 +34,7 @@ if (typeof document !== 'undefined') {
     initModeToggle();     // Annotation & Proofread mode
     initExportNotes();    // Export notes button
     initTOCDrawerTrigger(); // Phase 1: mobile TOC drawer
+    initTouchContextMenu();
     initReviewRating(() => {
       if (currentSessionData) {
         return {
@@ -642,9 +646,8 @@ function initMobileSidebarToggle() {
 }
 
 /**
- * Desktop collapsible sidebar toggle.
+ * Desktop collapsible sidebar toggle with [ shortcut support.
  * Toggles .sidebar-collapsed on .app-layout; main content auto-expands to 100%.
- * Default: expanded on desktop (>1024px), collapsed on smaller screens.
  */
 function initSidebarToggle() {
   const btn = document.getElementById('sidebar-toggle') || document.getElementById('sidebar-toggle-btn');
@@ -672,6 +675,16 @@ function initSidebarToggle() {
     });
   }
 
+  // Keyboard shortcut: [ toggles sidebar (when not editing input)
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+    if (e.key === '[') {
+      e.preventDefault();
+      layout.classList.toggle('sidebar-collapsed');
+      updateExpandBtnVisibility();
+    }
+  });
+
   // Persist preference
   const saved = localStorage.getItem('sidebar_collapsed');
   if (saved === 'true') {
@@ -686,6 +699,213 @@ function initSidebarToggle() {
     localStorage.setItem('sidebar_collapsed', layout.classList.contains('sidebar-collapsed') ? 'true' : 'false');
   });
   observer.observe(layout, { attributes: true, attributeFilter: ['class'] });
+}
+
+/**
+ * Sidebar width resizer (200px ~ 420px) with mouse dragging.
+ */
+function initSidebarResizer() {
+  const sidebar = document.getElementById('sidebar');
+  const resizer = document.getElementById('sidebar-resizer');
+  if (!sidebar || !resizer) return;
+
+  let isResizing = false;
+  resizer.addEventListener('pointerdown', () => {
+    isResizing = true;
+    resizer.classList.add('resizing');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if (!isResizing) return;
+    const newWidth = Math.max(200, Math.min(e.clientX, 420));
+    document.documentElement.style.setProperty('--sidebar-width', `${newWidth}px`);
+    sidebar.style.width = `${newWidth}px`;
+  });
+
+  window.addEventListener('pointerup', () => {
+    if (isResizing) {
+      isResizing = false;
+      resizer.classList.remove('resizing');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      const w = sidebar.style.width;
+      if (w) localStorage.setItem('sidebar_custom_width', w);
+    }
+  });
+
+  const savedW = localStorage.getItem('sidebar_custom_width');
+  if (savedW) {
+    document.documentElement.style.setProperty('--sidebar-width', savedW);
+    sidebar.style.width = savedW;
+  }
+}
+
+/**
+ * Mobile Navigation Drawer toggle with backdrop overlay.
+ */
+function initMobileDrawer() {
+  const mobileBtn = document.getElementById('mobile-sidebar-btn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  if (!sidebar) return;
+
+  const openDrawer = () => {
+    sidebar.classList.add('drawer-open');
+    if (overlay) overlay.classList.add('active');
+  };
+
+  const closeDrawer = () => {
+    sidebar.classList.remove('drawer-open');
+    if (overlay) overlay.classList.remove('active');
+  };
+
+  if (mobileBtn) mobileBtn.addEventListener('click', openDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+
+  // Close drawer on selecting a session on mobile
+  const sessionList = document.getElementById('session-list');
+  if (sessionList) {
+    sessionList.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && e.target.closest('.session-item')) {
+        closeDrawer();
+      }
+    });
+  }
+}
+
+/**
+ * Mobile Action Sheet (⋯ 更多功能面板).
+ */
+function initMobileActionSheet() {
+  const moreBtn = document.getElementById('mobile-more-btn');
+  let sheet = document.getElementById('mobile-action-sheet');
+  let overlay = document.getElementById('sidebar-overlay');
+
+  if (!sheet) {
+    sheet = document.createElement('div');
+    sheet.id = 'mobile-action-sheet';
+    sheet.className = 'mobile-action-sheet';
+    sheet.innerHTML = `
+      <div class="action-sheet-header">
+        <div class="action-sheet-title">⚙️ 閱讀與輔助工具</div>
+        <button class="action-sheet-close" id="action-sheet-close-btn">✕</button>
+      </div>
+      <div class="action-sheet-grid">
+        <button class="action-sheet-btn" id="sheet-export-notes-btn">📥 匯出研讀筆記</button>
+        <button class="action-sheet-btn" id="sheet-session-rating-btn">⭐ 講次審核評分</button>
+        <button class="action-sheet-btn" id="sheet-theme-toggle-btn">🌙 切換深淺模式</button>
+        <button class="action-sheet-btn" id="sheet-course-overview-btn">🏠 課程總覽 (198講)</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 4px;">
+        <span style="font-size:0.9rem; color:var(--text-secondary);">字體大小：</span>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button id="sheet-font-dec" style="padding:6px 12px; border-radius:6px; border:1px solid #ccc; background:var(--bg-secondary, #eee); cursor:pointer;">A-</button>
+          <span id="sheet-font-label" style="font-size:0.9rem; min-width:40px; text-align:center;">100%</span>
+          <button id="sheet-font-inc" style="padding:6px 12px; border-radius:6px; border:1px solid #ccc; background:var(--bg-secondary, #eee); cursor:pointer;">A+</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(sheet);
+  }
+
+  const openSheet = () => {
+    sheet.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+  };
+
+  const closeSheet = () => {
+    sheet.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+  };
+
+  if (moreBtn) moreBtn.addEventListener('click', openSheet);
+  const closeBtn = document.getElementById('action-sheet-close-btn');
+  if (closeBtn) closeBtn.addEventListener('click', closeSheet);
+
+  document.getElementById('sheet-export-notes-btn')?.addEventListener('click', () => {
+    closeSheet();
+    document.getElementById('export-notes-btn')?.click();
+  });
+  document.getElementById('sheet-session-rating-btn')?.addEventListener('click', () => {
+    closeSheet();
+    document.getElementById('session-rating-btn')?.click();
+  });
+  document.getElementById('sheet-theme-toggle-btn')?.addEventListener('click', () => {
+    document.getElementById('theme-toggle')?.click();
+  });
+  document.getElementById('sheet-course-overview-btn')?.addEventListener('click', () => {
+    closeSheet();
+    document.getElementById('course-overview-btn')?.click();
+  });
+  document.getElementById('sheet-font-dec')?.addEventListener('click', () => {
+    document.getElementById('font-decrease')?.click();
+    const l = document.getElementById('font-size-label')?.textContent;
+    if (l) document.getElementById('sheet-font-label').textContent = l;
+  });
+  document.getElementById('sheet-font-inc')?.addEventListener('click', () => {
+    document.getElementById('font-increase')?.click();
+    const l = document.getElementById('font-size-label')?.textContent;
+    if (l) document.getElementById('sheet-font-label').textContent = l;
+  });
+}
+
+/**
+ * Playback rate selector button (1.0x / 1.2x / 1.5x / 2.0x).
+ */
+function initPlaybackRateControl() {
+  const btn = document.getElementById('playback-rate-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      cyclePlaybackRate();
+    });
+  }
+  loadSavedPlaybackRate();
+}
+
+/**
+ * Floating Return-to-Playing FAB button.
+ */
+function initFabReturnPlaying() {
+  const fab = document.getElementById('fab-return-playing');
+  if (!fab) return;
+
+  fab.addEventListener('click', () => {
+    const activeEl = document.querySelector('.sentence.active');
+    if (activeEl) {
+      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fab.classList.remove('visible');
+    }
+  });
+}
+
+/**
+ * Touch Context Menu integration (Long-press on sentences).
+ */
+function initTouchContextMenu() {
+  initContextMenu({
+    onPlay: (sentenceElem) => {
+      const start = parseFloat(sentenceElem.getAttribute('data-start') || '0');
+      handleSeekTo(start);
+    },
+    onNote: (sentenceElem) => {
+      const idx = parseInt(sentenceElem.getAttribute('data-index') || '0', 10);
+      const sentObj = allFlattenedSentences[idx];
+      if (sentObj) {
+        openSentenceEditorModal(currentSessionId, idx, sentObj, (updatedText) => {
+          sentObj.text = updatedText;
+          sentenceElem.textContent = updatedText;
+        });
+      }
+    },
+    onCopy: (sentenceElem) => {
+      const text = sentenceElem.textContent.trim();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      }
+    }
+  });
 }
 
 /**

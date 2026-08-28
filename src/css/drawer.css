@@ -1,0 +1,156 @@
+/* Mobile Navigation Drawer & Backdrop Styles (UI v1.1/v1.2) */
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Sidebar Resizer Handle (Desktop) */
+.sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 20;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.sidebar-resizer:hover,
+.sidebar-resizer.resizing {
+  background: var(--primary-color, #8b1e1e);
+}
+
+/* Mobile Action Sheet (⋯ 更多功能彈窗) */
+.mobile-action-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-primary, #ffffff);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  padding: 16px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
+}
+
+.mobile-action-sheet.active {
+  display: block;
+  transform: translateY(0);
+}
+
+.action-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.action-sheet-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary, #333333);
+}
+
+.action-sheet-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-secondary, #666666);
+}
+
+.action-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.action-sheet-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  background: var(--bg-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  color: var(--text-primary, #333333);
+  font-size: 0.85rem;
+  cursor: pointer;
+  gap: 6px;
+}
+
+.action-sheet-btn:active {
+  background: var(--primary-light, #f0e6e6);
+}
+
+/* Context Menu for Touch Long-Press */
+.touch-context-menu {
+  position: fixed;
+  background: var(--bg-primary, #ffffff);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color, #e0e0e0);
+  z-index: 1005;
+  display: none;
+  flex-direction: row;
+  overflow: hidden;
+  animation: contextMenuPop 0.15s ease-out;
+}
+
+@keyframes contextMenuPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.touch-context-menu.active {
+  display: flex;
+}
+
+.context-menu-item {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  color: var(--text-primary, #333333);
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border-color, #e0e0e0);
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.context-menu-item:last-child {
+  border-right: none;
+}
+
+.context-menu-item:hover,
+.context-menu-item:active {
+  background: var(--bg-secondary, #f0f0f0);
+}

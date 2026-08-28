@@ -26,5 +26,34 @@
       "learned_from": "用戶校對與疏文對照",
       "confidence": 0.99
     }
-  }
+  },
+  "global_terms": {
+    "事事師": {
+      "corrected": "實事師",
+      "category": "中觀派別名相",
+      "safe_regex": "事事師",
+      "treatise_ref": "善顯密意疏 p.97",
+      "learned_from": "第 29A 堂",
+      "confidence": 0.99,
+      "reasoning": "確鑿名相修正：善顯密意疏破實事師所計。"
+    }
+  },
+  "context_rules": [
+    {
+      "sessionId": "95B",
+      "original": "菩薩從初地進趣二地。",
+      "proposed": "菩薩從初地進趣二諦。",
+      "pageRef": "p.23",
+      "confidence": 0.88,
+      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
+    },
+    {
+      "sessionId": "95B",
+      "original": "菩薩從初地進趣二地。",
+      "proposed": "菩薩從初地進趣二諦。",
+      "pageRef": "p.23",
+      "confidence": 0.88,
+      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
+    }
+  ]
 }

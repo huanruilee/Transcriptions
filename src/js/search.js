@@ -98,4 +98,13 @@ export function initSearch() {
       searchInput.blur();
     }
   });
+
+  // Global Cmd+K / Ctrl+K search shortcut
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
+  });
 }

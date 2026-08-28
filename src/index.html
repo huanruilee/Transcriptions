@@ -9,36 +9,48 @@
 </head>
 <body>
 
-  <!-- Sticky Header -->
+  <!-- Sticky 3-Segment Header (Desktop & Mobile) -->
   <header class="app-header">
-    <h1>《入中論善顯密意疏》多媒體學習平台 <span class="header-course-count" id="header-course-count">(全 198 講)</span></h1>
-    <div class="header-tools">
+    <div class="header-left">
       <!-- Desktop sidebar toggle -->
-      <button id="sidebar-toggle" class="sidebar-toggle-btn" title="收合/展開側邊欄">☰</button>
+      <button id="sidebar-toggle" class="sidebar-toggle-btn" title="收合/展開側邊欄 (快捷鍵 [)">☰</button>
       <!-- Mobile sidebar toggle -->
       <button id="mobile-sidebar-btn" class="mobile-sidebar-toggle">🗂️ 198 講目錄</button>
+      <h1>《入中論善顯密意疏》多媒體學習平台 <span class="header-course-count" id="header-course-count">(全 198 講)</span></h1>
+    </div>
+
+    <div class="header-center">
+      <!-- M6.3 a11y: aria-label for screen readers + Cmd+K shortcut -->
+      <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋講記關鍵字... (⌘K / Ctrl+K)" aria-label="搜尋講記內容（支援佛法術語自動展開）" autocomplete="off" role="searchbox">
+    </div>
+
+    <div class="header-right">
       <!-- Font size controls -->
       <div class="font-size-controls">
         <button id="font-decrease" class="font-size-btn" title="縮小字體">A-</button>
         <span id="font-size-label" class="font-size-label">100%</span>
         <button id="font-increase" class="font-size-btn" title="放大字體">A+</button>
       </div>
-      <!-- M6.3 a11y: aria-label for screen readers -->
-      <input type="text" id="search-input" class="search-input" placeholder="🔍 搜尋講記關鍵字..." aria-label="搜尋講記內容（支援佛法術語自動展開）" autocomplete="off" role="searchbox">
       <!-- Proofreading & Notes Guide -->
-      <span class="notes-hint" style="font-size:0.8rem; color:rgba(255,255,255,0.9); background:rgba(255,255,255,0.15); padding:4px 8px; border-radius:4px; border:1px solid rgba(255,255,255,0.25); white-space:nowrap;">💡 雙擊句子進入校對/筆記</span>
+      <span class="notes-hint" style="font-size:0.8rem; color:rgba(255,255,255,0.9); background:rgba(255,255,255,0.15); padding:4px 8px; border-radius:4px; border:1px solid rgba(255,255,255,0.25); white-space:nowrap;">💡 雙擊編輯/長按選單</span>
       <button id="export-notes-btn" class="export-notes-btn" title="匯出當講研讀筆記與校對紀錄">📥 匯出筆記</button>
-      <button id="session-rating-btn" class="session-rating-btn" title="對當前講次進行 1~10 分審核評分">⭐ 講次審核 (1~10分)</button>
+      <button id="session-rating-btn" class="session-rating-btn" title="對當前講次進行 1~10 分審核評分">⭐ 講次審核</button>
       <a href="review.html" class="review-center-link" title="開啟 AI 智慧審核控制台" target="_blank">🛡️ 審核中心</a>
       <button id="theme-toggle" class="theme-toggle-btn">🌙 深色模式</button>
+      <!-- Mobile ⋯ More Tools Button -->
+      <button id="mobile-more-btn" class="mobile-tools-btn" title="開啟更多功能選單">⋯ 更多</button>
     </div>
   </header>
+
+  <!-- Mobile Drawer Backdrop Overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
   <!-- Main Layout -->
   <div class="app-layout">
     
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
+      <div class="sidebar-resizer" id="sidebar-resizer" title="拖曳調整側欄寬度"></div>
       <div class="sidebar-sticky-header">
         <div class="sidebar-header-row">
           <h2>🗂️ 課程單元 <span id="sidebar-course-count">(全 198 講)</span></h2>
@@ -95,6 +107,11 @@
     🎯 手動滾動中（點擊恢復自動跟隨進度）
   </div>
 
+  <!-- Floating Return to Current Playing Position FAB -->
+  <button id="fab-return-playing" class="fab-return-playing" title="平滑滾動回當前播放句子">
+    🎯 回到播放處
+  </button>
+
   <!-- Fixed Bottom Audio Player -->
   <footer class="player-bar">
     <div class="now-playing-info">
@@ -106,6 +123,8 @@
       <button id="prev-session-btn" class="session-nav-btn" title="上一講" aria-label="上一講">⏮️</button>
       <audio id="audio-element" controls preload="metadata"></audio>
       <button id="next-session-btn" class="session-nav-btn" title="下一講" aria-label="下一講">⏭️</button>
+      <!-- Playback Rate Selector (1.0x, 1.2x, 1.5x, 2.0x) -->
+      <button id="playback-rate-btn" class="playback-rate-btn" title="點擊切換播放倍速 (1.0x / 1.2x / 1.5x / 2.0x)">1.0x</button>
       <!-- Phase 1: Mobile TOC drawer trigger -->
       <button id="toc-drawer-trigger" class="toc-drawer-trigger-btn" data-testid="toc-drawer-trigger" title="查看即時科判位置" aria-label="展開科判目錄">📖 科判</button>
     </div>
