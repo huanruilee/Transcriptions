@@ -430,8 +430,12 @@ function renderTranscript(sessionData) {
     searchInput.dispatchEvent(new Event('input'));
   }
 
-  // Display Last-Updated Date & Local Model Verification Badge
-  const dateStr = sessionData.lastUpdated || sessionData._meta?.last_updated || (sessionData._meta?.processed_at ? sessionData._meta.processed_at.split(' ')[0] : '2026-08-25');
+  // Display Last-Updated Datetime (Down to Seconds) & Local Model Verification Badge
+  const dateStr = (sessionData._meta?.processed_at && sessionData._meta.processed_at.includes(':'))
+    ? sessionData._meta.processed_at
+    : (sessionData.lastUpdated && sessionData.lastUpdated.includes(':')
+      ? sessionData.lastUpdated.replace('T', ' ').replace('Z', '')
+      : (sessionData.lastUpdated || sessionData._meta?.last_updated || '2026-08-28'));
   const metaFooter = document.createElement('div');
   metaFooter.className = 'transcript-update-footer';
   metaFooter.innerHTML = `

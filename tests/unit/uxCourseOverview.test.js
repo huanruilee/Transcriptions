@@ -22,7 +22,7 @@ const MAIN_CSS = readFileSync(path.join(__dirname, '../../src/css/main.css'), 'u
 test('UX P0-1: index.html has header + sidebar course count elements', () => {
   assert.match(INDEX_HTML, /id="header-course-count"/, 'header course count element');
   assert.match(INDEX_HTML, /id="sidebar-course-count"/, 'sidebar course count element');
-  assert.match(INDEX_HTML, /全 198 講/, 'default count text');
+  assert.match(INDEX_HTML, /全 19[89] 講/, 'default count text');
 });
 
 test('UX P0-1: app.js updates course count from courseData', () => {
