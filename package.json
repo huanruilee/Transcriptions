@@ -17,6 +17,7 @@
     "test:qa:json": "node scripts/qa_analyze.js --json",
     "test:asr-gate": "node --test tests/unit/asrIntegrityGate.test.js",
     "test:rating": "node --test tests/unit/reviewRating.test.js",
+    "audit:oral": "python3 scripts/audit_oral_references.py",
     "score": "python3 scripts/quality_scorer.py",
     "score:fix": "python3 scripts/quality_scorer.py --fix",
     "learn:eval": "python3 scripts/active_learning_manager.py --eval",
