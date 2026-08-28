@@ -1,14 +1,25 @@
 # Transcriptions (系列課程逐字稿多媒體學習平台)
 
+[![100% Complete](https://img.shields.io/badge/Progress-199%2F199%20(100%25)-brightgreen.svg)](https://huanruilee.github.io/Transcriptions/)
+[![Quality Score](https://img.shields.io/badge/Quality%20Score-10.0%2F10.0%20(Full%20Pass)-blue.svg)](docs/ASR_M1_FINAL_CLOSURE_REPORT.md)
+[![ASR Gate Passed](https://img.shields.io/badge/ASR--M2%20Gate-6%2F6%20Passed-success.svg)](tests/unit/asrIntegrityGate.test.js)
 [![GGF Governed](https://img.shields.io/badge/Governance-GGF%20v1.1-blue.svg)](https://github.com/huanruilee/gx10-governance)
-[![QMS Compliant](https://img.shields.io/badge/Quality-QMS%20ISO%209001-green.svg)](docs/AGENT_GUIDELINES.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-`Transcriptions` 是一個開源、模組化、高互動性的系列課程逐字稿多媒體學習平台專案。
+`Transcriptions` 是一個開源、高精度、具備主動學習與自進化能力的系列課程逐字稿多媒體學習平台。
 
-本專案旨在將傳統影音與純文字逐字稿結合，提供**聲音與文字雙向同步高亮**、**可折疊科判 (TOC) 錨點 Seeking**、**自動換段與排版優化**、**集數 2A/2B 命名重構**以及**全文檢索與名詞註解**等學習功能。
+本專案已圓滿完成 **《入中論善顯密意疏》全系列 199 講（共 166.3 小時、71,842 句、186 萬字）** 的全量 Grounded 高精度語音轉寫，提供**微秒級聲音文字雙向同步高亮**、**可折疊科判 (TOC) 錨點 Seeking**、**1～10 分線上 Review 評分工單**與**主動學習防誤判自進化**等前沿學習功能。
 
-第一階段以 **《入中論善顯密意疏》** 講記作為標竿示範課程。
+🌐 **線上正式閱讀器**：👉 **[https://huanruilee.github.io/Transcriptions/](https://huanruilee.github.io/Transcriptions/)**
+
+---
+
+## 📚 專案核心文件索引 (Documentation Index)
+
+* 🔬 **[完整可複現性指南 (Reproducibility Guide)](docs/REPRODUCIBILITY_GUIDE.md)**：開發者與 AI Agent 專屬的環境建置、GPU 端點、批次流水線與自進化 SOP。
+* 📜 **[199 講全量完工結案報告 (Final Project Closure Report)](docs/ASR_M1_FINAL_CLOSURE_REPORT.md)**：量化數據指標、品質評分、技術突破與架構圖。
+* 🛡️ **[ASR-M2 品質防退化門禁測試](tests/unit/asrIntegrityGate.test.js)**：Schema 契約、時間戳單調性、文字純度與名相黑名單。
+* 🧠 **[主動學習三級語境歧義仲裁引擎](scripts/active_learning_manager.py)**：防止同音字誤判（如十地「二地」vs「二諦」）的閉環自進化機制。
 
 ---
 
