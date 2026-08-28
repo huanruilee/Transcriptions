@@ -236,34 +236,69 @@ def download_audio_if_needed(session_id, audio_url):
     print(f"  ✅ Saved audio to {local_path} ({local_path.stat().st_size / 1024 / 1024:.1f} MB)")
     return local_path
 
-def step1_asr_transcribe(session_id, audio_path, whisper_model):
-    print(f"\n[Step 1/5] 🎙️ Running Whisper Large-v3 ASR on GPU for {session_id}...")
-    segments, info = whisper_model.transcribe(
-        str(audio_path),
-        language="zh",
-        vad_filter=True,
-        vad_parameters=dict(min_silence_duration_ms=500),
-        beam_size=5,
-        word_timestamps=True
-    )
-    
-    raw_sentences = []
-    prev_end = 0.0
-    for seg in segments:
-        text = seg.text.strip()
-        if not text:
-            continue
-        start = max(round(seg.start, 3), prev_end)
-        end = max(round(seg.end, 3), start + 0.3)
-        raw_sentences.append({
-            "start": start,
-            "end": end,
-            "text": text
-        })
-        prev_end = end
+WHISPER_GPU_URL = os.environ.get("WHISPER_GPU_URL", "http://127.0.0.1:8010/v1/audio/transcriptions")
 
-    print(f"  ✅ Extracted {len(raw_sentences)} raw spoken sentences.")
-    return raw_sentences, info.duration
+def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
+    print(f"\n[Step 1/5] 🎙️ Running Whisper Large-v3 ASR on GPU (Port 8010 CUDA) for {session_id}...")
+    
+    # 1. First Priority: Dedicated GPU Whisper Microservice on Port 8010 (59x Realtime, CUDA int8 on GB10)
+    try:
+        with open(audio_path, "rb") as f:
+            files = {"file": (os.path.basename(audio_path), f, "audio/mpeg")}
+            data = {"language": "zh", "response_format": "verbose_json", "beam_size": "5"}
+            r = requests.post(WHISPER_GPU_URL, files=files, data=data, timeout=300)
+            if r.status_code == 200:
+                res = r.json()
+                duration = res.get("duration", 0)
+                raw_sentences = []
+                prev_end = 0.0
+                for seg in res.get("segments", []):
+                    text = seg.get("text", "").strip()
+                    if not text:
+                        continue
+                    start = max(round(seg.get("start", 0), 3), prev_end)
+                    end = max(round(seg.get("end", 0), 3), start + 0.3)
+                    raw_sentences.append({
+                        "start": start,
+                        "end": end,
+                        "text": text
+                    })
+                    prev_end = end
+                print(f"  ⚡ Extracted {len(raw_sentences)} raw spoken sentences via GPU Whisper Service (Duration: {duration/60:.1f}m).")
+                return raw_sentences, duration
+    except Exception as e:
+        print(f"  ⚠️ GPU Whisper Service fallback: {e}")
+
+    # 2. Local fallback if service is unreachable
+    if whisper_model:
+        segments, info = whisper_model.transcribe(
+            str(audio_path),
+            language="zh",
+            vad_filter=True,
+            vad_parameters=dict(min_silence_duration_ms=500),
+            beam_size=5,
+            word_timestamps=True
+        )
+        
+        raw_sentences = []
+        prev_end = 0.0
+        for seg in segments:
+            text = seg.text.strip()
+            if not text:
+                continue
+            start = max(round(seg.start, 3), prev_end)
+            end = max(round(seg.end, 3), start + 0.3)
+            raw_sentences.append({
+                "start": start,
+                "end": end,
+                "text": text
+            })
+            prev_end = end
+
+        print(f"  ✅ Extracted {len(raw_sentences)} raw spoken sentences (Local Fallback).")
+        return raw_sentences, info.duration
+    
+    raise RuntimeError("Neither GPU Whisper Service nor local model is available.")
 
 def step2_pre_polish(raw_sentences, dynamic_terms=None):
     print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: {len(dynamic_terms or [])})...")
