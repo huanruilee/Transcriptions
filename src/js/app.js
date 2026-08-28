@@ -1,5 +1,5 @@
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
-import { renderTOC, applyActiveHighlight, updateDoctrinalBreadcrumb, highlightTOCNodeByTime } from './toc.js';
+import { renderTOC, applyActiveHighlight, updateDoctrinalBreadcrumb, highlightTOCNodeByTime, findTOCNodeAtParagraphStart } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll, freezeAutoScroll } from './syncPlayer.js';
 import { initSearch } from './search.js';
 
@@ -207,6 +207,46 @@ function renderTranscript(sessionData) {
       headingEl.className = 'transcript-heading';
       headingEl.textContent = p.heading;
       container.appendChild(headingEl);
+    }
+
+    // Phase 2: Inline Doctrinal Anchor Card
+    // If this paragraph's start timestamp coincides with a TOC node, inject
+    // a slim card above the paragraph showing the doctrinal path.
+    if (p.sentences && p.sentences.length > 0 && tocData && tocData.sections) {
+      const paraStart = p.sentences[0].start || 0;
+      const tocNode = findTOCNodeAtParagraphStart(paraStart, currentSessionId, 2);
+      if (tocNode) {
+        const anchorCard = document.createElement('div');
+        anchorCard.className = 'toc-anchor-card';
+        anchorCard.dataset.testid = `toc-anchor-${Math.floor(paraStart)}`;
+        anchorCard.setAttribute('aria-label', `科判節點：${tocNode.title}`);
+
+        const icon = document.createElement('span');
+        icon.className = 'toc-anchor-icon';
+        icon.textContent = '📌';
+        anchorCard.appendChild(icon);
+
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'toc-anchor-title';
+        titleSpan.textContent = tocNode.title;
+        anchorCard.appendChild(titleSpan);
+
+        if (tocNode.page) {
+          const pageBadge = document.createElement('span');
+          pageBadge.className = 'toc-anchor-page';
+          pageBadge.textContent = `p.${tocNode.page}`;
+          anchorCard.appendChild(pageBadge);
+        }
+
+        const min = Math.floor(tocNode.timestamp / 60);
+        const sec = Math.floor(tocNode.timestamp % 60).toString().padStart(2, '0');
+        const tsBadge = document.createElement('span');
+        tsBadge.className = 'toc-anchor-ts';
+        tsBadge.textContent = `${min}:${sec}`;
+        anchorCard.appendChild(tsBadge);
+
+        container.appendChild(anchorCard);
+      }
     }
 
     const pEl = document.createElement('p');

@@ -380,3 +380,44 @@ function nodeContainsSession(node, sessionId) {
   }
   return false;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Phase 2: Inline Doctrinal Anchor Card helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Given a paragraph's start timestamp and current sessionId, find the TOC node
+ * whose timestamp matches within a small tolerance (<=2s). Returns the node
+ * object if found, otherwise null. Used to inject inline doctrinal anchor cards.
+ * @param {number} paragraphStart - paragraph start time in seconds (transcript scale)
+ * @param {string} sessionId - active session ID
+ * @param {number} [tolerance=2] - max seconds difference to consider a match
+ * @returns {{title: string, timestamp: number, page?: number, sessionId?: string}|null}
+ */
+export function findTOCNodeAtParagraphStart(paragraphStart, sessionId, tolerance = 2) {
+  if (!_cachedSections) return null;
+
+  let match = null;
+
+  function walk(nodes) {
+    for (const node of nodes) {
+      const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
+        ? node.sessionIds
+        : (node.sessionId ? [node.sessionId] : []);
+
+      const sessionMatch = nodeSessions.length === 0 || nodeSessions.includes(sessionId);
+      const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
+
+      if (sessionMatch && ts > 0 && Math.abs(ts - paragraphStart) <= tolerance) {
+        match = { title: node.title, timestamp: ts, page: node.page, sessionId: node.sessionId };
+      }
+
+      if (node.children && node.children.length > 0) {
+        walk(node.children);
+      }
+    }
+  }
+
+  walk(_cachedSections);
+  return match;
+}

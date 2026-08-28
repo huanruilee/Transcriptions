@@ -715,6 +715,64 @@ body.dark-mode .toc-link.toc-time-active {
   }
 }
 
+/* ─── Phase 2: Inline Doctrinal Anchor Card ──────────────────────────────── */
+.toc-anchor-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px 4px 8px;
+  margin: 10px 0 4px 0;
+  background: linear-gradient(90deg, rgba(139, 30, 30, 0.07) 0%, rgba(197, 155, 39, 0.05) 100%);
+  border: 1px solid rgba(139, 30, 30, 0.2);
+  border-left: 3px solid #8b1e1e;
+  border-radius: 0 20px 20px 0;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  animation: anchorCardSlide 0.2s ease;
+  cursor: default;
+}
+
+@keyframes anchorCardSlide {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toc-anchor-icon { font-size: 0.85rem; flex-shrink: 0; }
+
+.toc-anchor-title {
+  color: #7a1c1c;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.toc-anchor-page {
+  background: rgba(52, 152, 219, 0.1);
+  color: #1a6ea3;
+  border: 1px solid rgba(52, 152, 219, 0.25);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+}
+
+.toc-anchor-ts {
+  background: rgba(139, 30, 30, 0.08);
+  color: #8b1e1e;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+}
+
+body.dark-mode .toc-anchor-card {
+  background: linear-gradient(90deg, rgba(197, 155, 39, 0.1) 0%, rgba(139, 30, 30, 0.06) 100%);
+  border-color: rgba(197, 155, 39, 0.3);
+  border-left-color: #c59b27;
+}
+body.dark-mode .toc-anchor-title { color: #c59b27; }
+body.dark-mode .toc-anchor-ts { background: rgba(197, 155, 39, 0.12); color: #c59b27; }
 
 /* Transcript Reader Typography */
 .transcript-section {
