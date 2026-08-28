@@ -1,5 +1,7 @@
-/* CSS Design System for Transcriptions Platform */
+/* CSS Design System for Transcriptions Platform (UI v1.1/v1.2) */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+@import 'drawer.css';
+@import 'playerV2.css';
 
 :root {
   --primary-color: #2c3e50;
@@ -10,6 +12,7 @@
   --sidebar-text: #f8fafc;
   --sidebar-hover: #334155;
   --sidebar-active: #2563eb;
+  --sidebar-width: 280px;
   --card-bg: #ffffff;
   --text-main: #1e293b;
   --text-muted: #64748b;
@@ -20,9 +23,9 @@
   
   --font-serif: 'Noto Serif TC', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --line-height: 1.8;
-  --paragraph-margin: 1.2rem;
-  --max-reader-width: 800px;
+  --line-height: 1.75;
+  --paragraph-margin: 12px;
+  --max-reader-width: 780px;
 }
 
 * {
@@ -39,7 +42,7 @@ body {
   overflow-x: hidden; /* prevent horizontal scroll on narrow viewports */
 }
 
-/* Header */
+/* 3-Segment App Header (Desktop & Mobile) */
 .app-header {
   position: sticky;
   top: 0;
@@ -47,18 +50,59 @@ body {
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-color);
-  padding: 12px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
 .app-header h1 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: var(--primary-color);
+  white-space: nowrap;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 380px;
+  margin: 0 16px;
+}
+
+.header-center .search-input {
+  width: 100%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.mobile-tools-btn {
+  display: none;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .header-tools {
@@ -72,7 +116,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 0.85rem;
-  width: 180px;
+  width: 100%;
   transition: all 0.2s;
 }
 
@@ -1882,6 +1926,83 @@ body.dark-mode .toc-anchor-ts { background: rgba(197, 155, 39, 0.12); color: #c5
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+/* ==========================================================================
+   Mobile & Tablet Responsive Styles (UI v1.1/v1.2)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .app-header {
+    height: 48px;
+    padding: 6px 12px;
+  }
+
+  .app-header h1 {
+    font-size: 0.9rem;
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-course-count {
+    display: none;
+  }
+
+  .header-center {
+    display: none;
+  }
+
+  .header-right .font-size-controls,
+  .header-right .notes-hint,
+  .header-right .export-notes-btn,
+  .header-right .session-rating-btn,
+  .header-right .review-center-link,
+  .header-right .theme-toggle-btn {
+    display: none;
+  }
+
+  .mobile-tools-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-sidebar-toggle {
+    display: inline-block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 82% !important;
+    max-width: 320px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.drawer-open {
+    transform: translateX(0);
+  }
+
+  .reader-container {
+    padding: 12px 14px;
+  }
+
+  .transcript-sentence {
+    line-height: 1.68;
+    margin-bottom: 8px;
+  }
+
+  .doctrinal-card {
+    padding: 8px 12px;
+    margin: 12px 0 8px 0;
+    border-left-width: 3px;
+  }
 }
 
 

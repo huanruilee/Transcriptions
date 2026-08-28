@@ -256,6 +256,57 @@ export function updateSession(audioElement, allSentences, onNextSessionRequested
   audioElement.addEventListener('ended', handleEnded);
 }
 
+export const PLAYBACK_RATES = [1.0, 1.2, 1.5, 2.0];
+let currentPlaybackRate = 1.0;
+
+export function getPlaybackRate() {
+  return currentPlaybackRate;
+}
+
+export function setPlaybackRate(rate) {
+  const numRate = parseFloat(rate);
+  currentPlaybackRate = PLAYBACK_RATES.includes(numRate) ? numRate : 1.0;
+  if (boundAudioElement) {
+    boundAudioElement.playbackRate = currentPlaybackRate;
+  }
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('transcription_playback_rate', currentPlaybackRate.toString());
+    }
+  } catch (e) {}
+
+  if (typeof document !== 'undefined') {
+    const btn = document.getElementById('playback-rate-btn');
+    if (btn) {
+      btn.textContent = `${currentPlaybackRate.toFixed(1)}x`;
+    }
+    const mobileBtn = document.getElementById('mobile-playback-rate-btn');
+    if (mobileBtn) {
+      mobileBtn.textContent = `${currentPlaybackRate.toFixed(1)}x`;
+    }
+  }
+  return currentPlaybackRate;
+}
+
+export function cyclePlaybackRate() {
+  const currentIdx = PLAYBACK_RATES.indexOf(currentPlaybackRate);
+  const nextIdx = (currentIdx + 1) % PLAYBACK_RATES.length;
+  return setPlaybackRate(PLAYBACK_RATES[nextIdx]);
+}
+
+export function loadSavedPlaybackRate() {
+  try {
+    const saved = localStorage.getItem('transcription_playback_rate');
+    if (saved) {
+      const parsed = parseFloat(saved);
+      if (PLAYBACK_RATES.includes(parsed)) {
+        return setPlaybackRate(parsed);
+      }
+    }
+  } catch (e) {}
+  return setPlaybackRate(1.0);
+}
+
 export function getCurrentTimeScaleRatio() {
   return currentRatio;
 }
@@ -264,4 +315,5 @@ export function getCurrentTimeScaleRatio() {
 export function initSyncPlayerCompat(audioElement, allSentences, onNextSessionRequested) {
   initSyncPlayer();
   updateSession(audioElement, allSentences, onNextSessionRequested);
+  loadSavedPlaybackRate();
 }

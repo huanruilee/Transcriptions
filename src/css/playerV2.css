@@ -1,0 +1,90 @@
+/* Player V2 & Playback Rate Styles (UI v1.1/v1.2) */
+
+/* Playback Rate Selector Button */
+.playback-rate-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.playback-rate-btn:hover,
+.playback-rate-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+/* Floating Return to Current Playing Position FAB */
+.fab-return-playing {
+  position: fixed;
+  bottom: 84px;
+  right: 20px;
+  background: var(--primary-color, #8b1e1e);
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 990;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+}
+
+.fab-return-playing.visible {
+  display: flex;
+  animation: fabPop 0.2s ease-out;
+}
+
+@keyframes fabPop {
+  0% { transform: translateY(10px) scale(0.9); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Mobile Responsive Player Bar */
+@media (max-width: 768px) {
+  .player-bar {
+    height: 58px;
+    padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .now-playing-info {
+    display: none; /* Hide detailed title on tiny screens to maximize controls */
+  }
+
+  .player-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  #audio-element {
+    flex: 1;
+    min-width: 140px;
+    height: 36px;
+  }
+
+  .playback-rate-btn {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .fab-return-playing {
+    bottom: 74px;
+    right: 14px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

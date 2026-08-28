@@ -1,12 +1,13 @@
 {
   "name": "transcriptions-platform",
-  "version": "1.0.0",
+  "version": "1.1.0-dev",
   "description": "Multi-media transcript learning platform for series courses, governed by GGF",
   "main": "src/js/app.js",
   "type": "module",
   "scripts": {
     "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js tests/cross-artifact-consistency.test.js tests/required-set-not-truncated.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
+    "test:ui-v2": "node --test tests/unit/uiV2Revamp.test.js",
     "test:acceptance": "node --test tests/acceptance/*.test.js",
     "test:quality": "node --test tests/quality.test.js",
     "test:human-review": "node --test tests/required-set-not-truncated.test.js",
