@@ -258,7 +258,7 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
         <!-- Active Learning Global Rule Option -->
         <div class="active-learning-box" style="margin-top: 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 6px; padding: 10px 12px;">
           <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; color: #1e40af; font-weight: 600; font-size: 0.88rem;">
-            <input type="checkbox" id="modal-learn-term-checkbox" checked style="margin-top: 3px; width: 16px; height: 16px; accent-color: #2563eb;">
+            <input type="checkbox" id="modal-learn-term-checkbox" style="margin-top: 3px; width: 16px; height: 16px; accent-color: #2563eb;">
             <span>🧠 標記為全庫通用佛學名相修正（系統將自動學習詞條規則）</span>
           </label>
           <div style="font-size: 0.78rem; color: #64748b; margin-top: 4px; margin-left: 24px; line-height: 1.4;">
