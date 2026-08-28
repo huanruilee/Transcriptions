@@ -279,6 +279,11 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
 
   document.body.appendChild(modal);
 
+  const learnCb = modal.querySelector('#modal-learn-term-checkbox');
+  if (learnCb) {
+    learnCb.checked = false;
+  }
+
   const txtArea = modal.querySelector('#modal-corrected-text');
   const previewSpan = modal.querySelector('#context-current-preview');
   txtArea.addEventListener('input', () => {
