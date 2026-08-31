@@ -46,12 +46,15 @@ python3 scripts/batch_convert_all.py --sessions 01
 ### 步驟 4：調用本地 Qwen3.8-27B 進行文義結構與小標題劃分
 * **產出**：大模型研讀全篇內容，依科判與論義轉折劃分 6~10 個核心主題章節小標題，寫入 `paragraphs[].heading`。
 
-### 步驟 5：客觀聲學同步盲測與單元驗收測試
+### 步驟 5：客觀聲學同步盲測、回歸審計與單元驗收測試
 ```bash
-# 1. 聲學同步盲測
+# 1. 單講品質審計與 7 大 Pattern 回歸測試（例如 97B 或 29A）
+npm run audit:session -- 97B
+
+# 2. 聲學同步盲測
 python3 scripts/verify_audio_sync.py 29A audio/29A.mp3 --samples 15
 
-# 2. 全套前端與資料驗收測試
+# 3. 全套前端與資料驗收測試
 npm test
 ```
 
@@ -63,5 +66,7 @@ npm test
 2. **聲學吻合度**：`verify_audio_sync.py` 盲測通過率需 $\ge 75\%$。
 3. **時間戳單調性**：所有句子必須滿足 $s[i].\text{start} \ge s[i-1].\text{end} - 0.05$。
 4. **音訊連結**：`audioUrl` 與 `audio_map.json` 指向官方原始 Flyday 串流。
-5. **測試套件**：`npm test` 包含 148 項單元與驗收測試全數通過（PASS 綠燈；1 項品質測試預設跳過，可透過 `TRANSCRIPTIONS_RUN_QUALITY=1` 啟用）。
+5. **單講品質審計**：`npm run audit:session -- <sessionId>` 達到 0 Failures（符合 29A Golden Standard）。
+6. **測試套件**：`npm test` 包含 148 項單元與驗收測試全數通過（PASS 綠燈；1 項品質測試預設跳過，可透過 `TRANSCRIPTIONS_RUN_QUALITY=1` 啟用）。
+
 

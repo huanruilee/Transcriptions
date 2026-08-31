@@ -95,9 +95,32 @@ graph TD
 
 ---
 
+### 8️⃣ 單講品質審計與回歸診斷 (Session Quality Audit & Regression Runner)
+* **相關檔案**：`scripts/audit_session_regression.js`
+* **檢驗指令**：
+  ```bash
+  # 診斷特定講次（如 97B）
+  npm run audit:session -- 97B
+  # 或直接執行
+  node scripts/audit_session_regression.js 97B
+
+  # 批次診斷：全部 (all)、未升級草稿 (legacy)、已升級 (converted)
+  node scripts/audit_session_regression.js legacy
+  ```
+* **架構說明**：
+  - `tests/acceptance/goldenStandard.test.js` 守門已轉換完成之 89 堂課（帶有 `_meta` 標記）。
+  - 對於尚未升級的 110 堂 legacy 草稿（如 97B），使用 `audit_session_regression.js` 進行 7 大 Pattern 深度回歸診斷，並自動對照 `courses/入中論善顯密意疏/source_text/page_XXX.txt` 論著原文。
+
+---
+
 ## 🏃 執行全套測試
 
 ```bash
+# 執行核心單元與驗收測試
 npm test
+
+# 執行單講品質回歸審計
+npm run audit:session -- 97B
 ```
 * **期望輸出**：`pass 148 / fail 0 / skipped 1 (149 tests total)`
+
