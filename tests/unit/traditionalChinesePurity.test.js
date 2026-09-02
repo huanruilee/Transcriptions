@@ -69,8 +69,20 @@ test('🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字
 
     sessionFiles.forEach(file => {
       const fullPath = path.join(SESSIONS_DIR, file);
-      const content = readFileSync(fullPath, 'utf8');
-      const matches = content.match(SIMP_REGEX);
+      const data = JSON.parse(readFileSync(fullPath, 'utf8'));
+      const publicText = [];
+      function collect(value, key = '') {
+        if (typeof value === 'string') {
+          if (key !== 'rawText') publicText.push(value);
+          return;
+        }
+        if (Array.isArray(value)) return value.forEach(item => collect(item, key));
+        if (value && typeof value === 'object') {
+          Object.entries(value).forEach(([childKey, childValue]) => collect(childValue, childKey));
+        }
+      }
+      collect(data);
+      const matches = publicText.join('\n').match(SIMP_REGEX);
 
       if (matches && matches.length > 0) {
         totalViolations += matches.length;
