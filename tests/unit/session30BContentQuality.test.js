@@ -101,7 +101,7 @@ test('30B preserves source-grounded high-confidence terminology corrections', ()
     [17, '三類補特伽羅見不見'],
     [64, '世俗諦的這些法'],
     [75, '明叫做世俗諦'],
-    [96, '人人說為世俗諦'],
+    [96, '能仁說為世俗諦'],
     [654, '就是初地菩薩二地菩薩到七地']
   ]);
 
@@ -109,6 +109,59 @@ test('30B preserves source-grounded high-confidence terminology corrections', ()
     assert.equal(bySegment.get(segmentId)?.replace(/[。！？；：，、]$/, ''), text,
       `source segment ${segmentId} must use the source-grounded correction`);
   }
+});
+
+test('30B second-pass audit restores representative doctrinal phrases', () => {
+  const session = load(SESSION_PATH);
+  const bySegment = new Map(sentences(session).map((sentence) => [sentence.sourceSegmentId, sentence.text]));
+  const expected = new Map([
+    [34, '這樣的愚癡。'],
+    [89, '瓶子在無明前面是諦。'],
+    [158, '是明世俗諦為何世俗前安立為諦的那個世俗。'],
+    [493, '聲聞阿羅漢。'],
+    [494, '獨覺阿羅漢。'],
+    [529, '因為清淨地菩薩還是有實有現。'],
+    [642, '對那個時候他就會瞭解瓶子是世俗諦。'],
+    [1124, '釋論說影像、谷響等少分。'],
+    [1142, '陽焰是虛妄的。'],
+    [1193, '谷響因為對凡夫的世俗來說，'],
+    [1215, '對凡夫的世俗識。'],
+    [1291, '現影像的眼識。'],
+    [1300, '執臉面的影像為臉面。'],
+    [1303, '執陽焰，'],
+    [1304, '執谷響的。'],
+    [1305, '眼識都是顛倒識。'],
+    [1488, '意說善名言者。'],
+    [1508, '現似，'],
+    [1509, '形質，'],
+    [1511, '但是已知。'],
+    [453, '對無明來說，'],
+    [490, '無明這個世俗前面。'],
+    [533, '所以現為是中文的。'],
+    [773, '由於三種人前不現為諦實。'],
+    [947, '則具無明者畢竟不見。'],
+    [1265, '亦見為虛妄者。'],
+    [1449, '並不相違。'],
+    [1514, '是觀待彼心。'],
+    [1527, '是世俗諦也。'],
+    [170, '世俗諦是誰去安立的？'],
+    [171, '那個其實名言識安立的了。'],
+    [181, '是透由或者是說依由世俗諦的那個世俗而安立世俗諦。'],
+    [1307, '總之呢，']
+  ]);
+
+  for (const [segmentId, text] of expected) {
+    assert.equal(bySegment.get(segmentId), text, `unexpected second-pass text at source segment ${segmentId}`);
+  }
+
+  const audit = session._meta?.candidateEvidence?.automatedAudit;
+  const cumulative = audit?.totalAutoApplied ?? audit?.autoApplied;
+  assert.ok(cumulative >= 180, `expected at least 180 audited corrections, found ${cumulative}`);
+  assert.equal(audit?.requiresReview, true, 'LIKELY audio reconstructions must remain fail-closed');
+  assert.deepEqual(
+    session._meta?.candidateEvidence?.manualReviewQueue?.map((item) => item.sourceSegmentId),
+    [170, 171, 1307]
+  );
 });
 
 test('30B records the first-pass adjudication for the final uncertain passage', () => {
@@ -140,6 +193,16 @@ test('30B evidence ledger does not mark one source segment both applied and unre
   const overlap = unresolved.filter((segmentId) => applied.has(segmentId));
 
   assert.deepEqual(overlap, [], `evidence ledger has applied/unresolved overlap: ${overlap.join(', ')}`);
+});
+
+test('30B keeps likely audio reconstructions out of the applied ledger', () => {
+  const session = load(SESSION_PATH);
+  const applied = new Set((session._meta?.candidateEvidence?.applied || []).map((item) => item.sourceSegmentId));
+  const proposed = session._meta?.candidateEvidence?.proposed || [];
+
+  assert.deepEqual(proposed.map((item) => item.sourceSegmentId), [170, 171, 1307]);
+  assert.ok(proposed.every((item) => item.confidence === 'LIKELY'));
+  assert.ok(proposed.every((item) => !applied.has(item.sourceSegmentId)));
 });
 
 test('30B includes semantic headings for the source chapter outline', () => {

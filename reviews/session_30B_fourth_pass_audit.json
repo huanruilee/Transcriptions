@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "30B",
+  "generatedBy": "transcript_candidate_auditor.mjs",
+  "summary": {
+    "scanned": 1734,
+    "candidates": 4,
+    "confirmed": 1,
+    "likely": 3,
+    "warnings": 0,
+    "acceptedExceptions": 1
+  },
+  "items": [
+    {
+      "sourceSegmentId": 170,
+      "start": 324,
+      "end": 325,
+      "originalText": "世俗諦是隨安立的。",
+      "suggestedText": "世俗諦是誰去安立的？",
+      "confidence": "LIKELY",
+      "candidates": [
+        {
+          "ruleId": "who-establishes-conventional-truth-audio",
+          "before": "世俗諦是隨安立的。",
+          "after": "世俗諦是誰去安立的？",
+          "confidence": "LIKELY",
+          "evidence": [
+            "audio 316-362s: three decodes yield 隨/隨意/隨於 before 安立",
+            "local question-answer context suggests the phonemes as 誰去安立"
+          ]
+        }
+      ],
+      "residualWarnings": []
+    },
+    {
+      "sourceSegmentId": 171,
+      "start": 325,
+      "end": 328,
+      "originalText": "那個其實明世俗是安立的了。",
+      "suggestedText": "那個其實名言識安立的了。",
+      "confidence": "LIKELY",
+      "candidates": [
+        {
+          "ruleId": "conventional-consciousness-establishes",
+          "before": "那個其實明世俗是安立的了。",
+          "after": "那個其實名言識安立的了。",
+          "confidence": "LIKELY",
+          "evidence": [
+            "audio 316-362s slow decode: 其實明眼是安立的",
+            "local context repeatedly contrasts 名言識 and 名言量"
+          ]
+        }
+      ],
+      "residualWarnings": []
+    },
+    {
+      "sourceSegmentId": 181,
+      "start": 347,
+      "end": 359,
+      "originalText": "是透有或者是說依有世俗諦的那個世俗而安立世俗諦。",
+      "suggestedText": "是透由或者是說依由世俗諦的那個世俗而安立世俗諦。",
+      "confidence": "CONFIRMED",
+      "candidates": [
+        {
+          "ruleId": "through-or-dependent-on",
+          "before": "是透有或者是說依有世俗諦的那個世俗而安立世俗諦。",
+          "after": "是透由或者是說依由世俗諦的那個世俗而安立世俗諦。",
+          "confidence": "CONFIRMED",
+          "evidence": [
+            "audio 316-362s: repeated 有 phonemes; sentence grammar resolves 透由 / 依由"
+          ]
+        }
+      ],
+      "residualWarnings": []
+    },
+    {
+      "sourceSegmentId": 1307,
+      "start": 2252.98,
+      "end": 2253.96,
+      "originalText": "裝置了，",
+      "suggestedText": "總之呢，",
+      "confidence": "LIKELY",
+      "candidates": [
+        {
+          "ruleId": "in-summary-discourse-marker",
+          "before": "裝置了，",
+          "after": "總之呢，",
+          "confidence": "LIKELY",
+          "evidence": [
+            "audio 2248-2257s decodes 裝置了 / 種子了",
+            "surrounding clause suggests: 顛倒識嘛，總之呢，就變成這樣"
+          ]
+        }
+      ],
+      "residualWarnings": []
+    }
+  ]
+}
