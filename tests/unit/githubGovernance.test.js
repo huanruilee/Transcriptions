@@ -27,7 +27,10 @@ test('GitHub governance: production deploy waits for successful main acceptance'
     'Only accepted main commits may deploy');
   assert.match(workflow, /ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha\s*\}\}/,
     'Deployment must check out the exact commit that passed acceptance');
-  assert.match(workflow, /cancel-in-progress:\s*true/,
+  const deployJob = workflow.slice(workflow.indexOf('\n  deploy:'));
+  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('\njobs:')), /concurrency:/,
+    'Workflow-level concurrency must not let skipped workflow_run events cancel a valid deploy');
+  assert.match(deployJob, /\n    concurrency:\s*\n\s+group:\s*["']?pages["']?\s*\n\s+cancel-in-progress:\s*true/,
     'A newer accepted main commit must supersede an older pending deployment');
 });
 
