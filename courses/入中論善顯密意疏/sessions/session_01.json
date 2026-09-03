@@ -119,7 +119,7 @@
         {
           "start": 106.74,
           "end": 116.12,
-          "text": "無垢淨慧眼，此間欲宣彼宗者，我為除其惡說垢，因眾請故以淨語。"
+          "text": "我以無垢淨慧眼，不共要義皆善見，此間欲宣彼宗者，我為除其惡說垢，因眾請故以淨語。"
         }
       ],
       "start": 106.74,
@@ -3135,6 +3135,18 @@
     "audio_duration": 2465.671875,
     "total_paragraphs": 174,
     "total_sentences": 346,
+    "groundedProofreading": {
+      "session01OpeningPraise": {
+        "method": "source-grounded text-only correction",
+        "source": "courses/入中論善顯密意疏/source_text/page_006.txt",
+        "paragraphs": "p_3-p_8",
+        "timestampsPreserved": true,
+        "audioAlignmentRerun": false,
+        "reviewIssue": "https://github.com/huanruilee/Transcriptions/issues/130",
+        "implementationPr": "https://github.com/huanruilee/Transcriptions/pull/139",
+        "notes": "Opening praise regression guard added after Antigravity PR #119 absorbed the content fix but not the Xiaofa regression test/provenance record."
+      }
+    },
     "processed_at": "2026-08-28 10:52:14",
     "status": "APPROVED",
     "approved_at": "2026-08-27",
