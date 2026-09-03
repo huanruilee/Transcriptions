@@ -45,7 +45,7 @@ OUTPUTS
   qa_27B/_human_review_clips/         (extracted audio clips, LOCAL ONLY)
 """
 from __future__ import annotations
-import argparse, hashlib, json, subprocess, time
+import argparse, copy, hashlib, json, subprocess, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -87,6 +87,16 @@ def sha256_file(p: Path) -> str:
     return h.hexdigest()
 
 
+def normalized_manifest(manifest: dict) -> dict:
+    """Remove local-only clip claims before comparing semantic review inputs."""
+    normalized = copy.deepcopy(manifest)
+    for session in normalized.get("sessions", []):
+        for sample in session.get("samples", []):
+            sample.pop("audio_clip_path", None)
+            sample.pop("audio_clip_sha256", None)
+    return normalized
+
+
 def _compute_base_required(sents):
     """Compute start/end + 300-s chunk boundary + NEEDS_REVIEW directly
     from the pilot JSON. The audit JSONs only ADD samples to this base
@@ -118,7 +128,7 @@ def _compute_base_required(sents):
     return req
 
 
-def build():
+def build(extract_audio: bool = True):
     strict = json.loads((QA / "audio_anchor_audit.json").read_text())
     substitute = json.loads(
         (QA / "audio_anchor_audit_human_substitute.json").read_text())
@@ -151,7 +161,8 @@ def build():
         "sessions": [],
     }
 
-    CLIPS.mkdir(exist_ok=True)
+    if extract_audio:
+        CLIPS.mkdir(exist_ok=True)
     for sid in PILOT:
         s_strict = by_sid.get(sid)
         s_sub = sub_by_sid.get(sid)
@@ -264,9 +275,13 @@ def build():
                 reasons.append("EVEN_FILL")
 
             sample_id = f"{sid}-{i:04d}"
-            (CLIPS / sid).mkdir(exist_ok=True)
             clip_path = CLIPS / sid / f"{sample_id}.wav"
-            clip_ok = extract_clip(sid, s["start"], s["end"], clip_path)
+            if extract_audio:
+                (CLIPS / sid).mkdir(exist_ok=True)
+                clip_ok = extract_clip(sid, s["start"], s["end"], clip_path)
+            else:
+                clip_ok = False
+            output_clip_path = str(clip_path.relative_to(ROOT)) if clip_ok else None
             clip_sha = sha256_file(clip_path) if clip_ok else None
 
             samples.append({
@@ -282,7 +297,7 @@ def build():
                 "strict_verdict": strict_v or "NOT_AUDITED",
                 "substitute_verdict": sub_v or "NOT_AUDITED",
                 "reasons": reasons,
-                "audio_clip_path": str(clip_path.relative_to(ROOT)) if clip_ok else None,
+                "audio_clip_path": output_clip_path,
                 "audio_clip_sha256": clip_sha,
                 "reviewer_verdict": None,
                 "reviewer_note": "",
@@ -298,6 +313,23 @@ def build():
         })
 
     return out
+
+
+def verify_outputs(generated: dict) -> None:
+    """Verify committed review semantics without asserting unavailable audio."""
+    manifest_path = QA / "human_review_manifest.json"
+    committed = json.loads(manifest_path.read_text())
+    if normalized_manifest(committed) != normalized_manifest(generated):
+        raise SystemExit(
+            "human_review_manifest.json semantic content is stale; "
+            "rebuild it in an environment with the source audio")
+
+    html = (REVIEWS / "index.html").read_text()
+    embedded = f"const MANIFEST = {json.dumps(committed, ensure_ascii=False)};"
+    if embedded not in html:
+        raise SystemExit(
+            "reviews/index.html does not embed the committed review manifest")
+    print("verified committed human-review semantics and HTML manifest")
 
 
 def write_outputs(out: dict):
@@ -508,9 +540,14 @@ render();
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sessions", nargs="*", default=PILOT)
+    ap.add_argument("--check", action="store_true",
+                    help="verify committed semantic outputs without extracting audio")
     args = ap.parse_args()
-    out = build()
-    write_outputs(out)
+    out = build(extract_audio=not args.check)
+    if args.check:
+        verify_outputs(out)
+    else:
+        write_outputs(out)
 
 
 if __name__ == "__main__":

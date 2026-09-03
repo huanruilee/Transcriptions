@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a reproducible application, transcript, data, or deployment defect.
+title: "[Bug] "
+labels: [bug, needs-triage]
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: Include the page, session, timestamp, or artifact involved.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and evidence
+      description: Provide commands, URLs, screenshots, audio timestamps, or commit SHAs.
+    validations:
+      required: true
+  - type: dropdown
+    id: acceptance
+    attributes:
+      label: Affected acceptance layer
+      options:
+        - Application behavior
+        - Transcript structure
+        - Transcript content
+        - Audio provenance/alignment
+        - Deployment
+        - Unknown
+    validations:
+      required: true
