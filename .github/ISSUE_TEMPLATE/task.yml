@@ -1,0 +1,39 @@
+name: Governed task
+description: Define implementation work with ownership, milestone, and acceptance evidence.
+title: "[Task] "
+labels: [needs-triage]
+body:
+  - type: input
+    id: milestone
+    attributes:
+      label: Milestone
+      description: Name the GitHub milestone this work advances.
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Owner or implementing agent
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and exclusions
+      description: State what may change and what must remain untouched.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable, testable completion conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Required evidence
+      description: Include tests, provenance, reviewer, and deployment checks.
+    validations:
+      required: true

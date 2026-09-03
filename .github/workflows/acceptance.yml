@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: acceptance-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Unit and acceptance tests
@@ -13,10 +20,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24'
 
@@ -29,6 +36,9 @@ jobs:
         # qa_27B/_human_review_clips/. Reads the committed audit
         # JSONs (no model load), so it's fast and deterministic.
         run: npm run build:human-review-package
+
+      - name: Verify generated review artifacts are committed
+        run: git diff --exit-code -- qa_27B/human_review_manifest.json qa_27B/human_review_manifest.md reviews/index.html reviews/README.md
 
       - name: Run completion gate
         run: npm test

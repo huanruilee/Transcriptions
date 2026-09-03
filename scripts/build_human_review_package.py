@@ -87,6 +87,45 @@ def sha256_file(p: Path) -> str:
     return h.hexdigest()
 
 
+def load_existing_clip_metadata() -> dict:
+    """Load committed clip evidence for deterministic no-audio CI rebuilds."""
+    manifest = QA / "human_review_manifest.json"
+    if not manifest.exists():
+        return {}
+    try:
+        current = json.loads(manifest.read_text())
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    indexed = {}
+    for session in current.get("sessions", []):
+        sid = session.get("sessionId")
+        for sample in session.get("samples", []):
+            indexed[(sid, sample.get("sentence_index"))] = sample
+    return indexed
+
+
+def preserved_clip_metadata(existing: dict, sid: str, index: int,
+                            sentence: dict) -> tuple[str | None, str | None]:
+    """Reuse clip evidence only when the source sample identity is unchanged."""
+    prior = existing.get((sid, index), {})
+    expected_path = f"qa_27B/_human_review_clips/{sid}/{sid}-{index:04d}.wav"
+    clip_path = prior.get("audio_clip_path")
+    clip_sha = prior.get("audio_clip_sha256")
+    identity_matches = (
+        prior.get("start") == sentence.get("start") and
+        prior.get("end") == sentence.get("end") and
+        prior.get("current_text") == sentence.get("text")
+    )
+    valid_sha = (
+        isinstance(clip_sha, str) and len(clip_sha) == 64 and
+        all(char in "0123456789abcdef" for char in clip_sha)
+    )
+    if identity_matches and clip_path == expected_path and valid_sha:
+        return clip_path, clip_sha
+    return None, None
+
+
 def _compute_base_required(sents):
     """Compute start/end + 300-s chunk boundary + NEEDS_REVIEW directly
     from the pilot JSON. The audit JSONs only ADD samples to this base
@@ -135,6 +174,7 @@ def build():
     # Index audits by sessionId
     by_sid = {s["sessionId"]: s for s in strict["sessions"]}
     sub_by_sid = {s["sessionId"]: s for s in substitute["sessions"]}
+    existing_clip_metadata = load_existing_clip_metadata()
 
     out = {
         "schema_version": 1,
@@ -267,7 +307,12 @@ def build():
             (CLIPS / sid).mkdir(exist_ok=True)
             clip_path = CLIPS / sid / f"{sample_id}.wav"
             clip_ok = extract_clip(sid, s["start"], s["end"], clip_path)
-            clip_sha = sha256_file(clip_path) if clip_ok else None
+            if clip_ok:
+                output_clip_path = str(clip_path.relative_to(ROOT))
+                clip_sha = sha256_file(clip_path)
+            else:
+                output_clip_path, clip_sha = preserved_clip_metadata(
+                    existing_clip_metadata, sid, i, s)
 
             samples.append({
                 "sample_id": sample_id,
@@ -282,7 +327,7 @@ def build():
                 "strict_verdict": strict_v or "NOT_AUDITED",
                 "substitute_verdict": sub_v or "NOT_AUDITED",
                 "reasons": reasons,
-                "audio_clip_path": str(clip_path.relative_to(ROOT)) if clip_ok else None,
+                "audio_clip_path": output_clip_path,
                 "audio_clip_sha256": clip_sha,
                 "reviewer_verdict": None,
                 "reviewer_note": "",
