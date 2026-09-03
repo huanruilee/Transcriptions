@@ -222,6 +222,85 @@ For editorial content, additionally require:
 Health checks, CUDA availability, image digests, and successful HTTP requests
 are necessary operational evidence but do not prove transcript correctness.
 
+### Deterministic candidate audit for a weaker worker
+
+Before asking Xiaofa to reason over a complete transcript, run the repository
+candidate auditor. It converts known ASR failure modes into bounded rules with
+positive fixtures, negative fixtures, source evidence, and a machine-readable
+ledger. The worker is an executor of this contract, not the authority that
+decides an unsupported reading.
+
+Run a dry audit first:
+
+```sh
+npm run audit:transcript -- \
+  --session courses/入中論善顯密意疏/sessions/session_30B.json \
+  --source-range 95-105 \
+  --report reviews/session_30B_automated_audit.json
+```
+
+The report separates `CONFIRMED` candidates from residual warnings. Inspect the
+report and its source citations before applying anything. Then, and only then,
+apply confirmed candidates:
+
+```sh
+npm run audit:transcript -- \
+  --session courses/入中論善顯密意疏/sessions/session_30B.json \
+  --source-range 95-105 \
+  --report reviews/session_30B_automated_audit.json \
+  --apply-confirmed
+```
+
+Required invariants:
+
+- `rawText`, timestamps, paragraph identity, and `sourceSegmentId` never change;
+- every applied correction records before, after, confidence, rule IDs, and
+  source or audio evidence in `_meta.candidateEvidence.applied`;
+- numbered grounds such as `二地菩薩` remain unchanged;
+- a replacement that leaves a known artifact still emits a residual warning;
+- `LIKELY` and warning items are review tasks, never automatic edits;
+- rerunning the dry audit after application must yield zero known candidates
+  and zero residual warnings before the worker may report deterministic GREEN;
+- deterministic GREEN still requires representative audio/source review and
+  does not by itself authorize `PUBLISHED` status.
+
+This split reduces model dependence: source-backed recurring errors are handled
+by tested code, while Xiaofa spends its limited reasoning only on the small
+uncertainty queue. When a new human-confirmed error is found, add one positive
+fixture, one false-positive fixture, and one evidence-bearing rule before using
+it on another session.
+
+Run the blocking gate after application:
+
+```sh
+npm run audit:transcript -- \
+  --session courses/入中論善顯密意疏/sessions/session_30B.json \
+  --source-range 95-105 \
+  --fail-on-review
+```
+
+Exit `0` means no known candidate or review warning remains. Exit `2` means the
+worker must return the generated segment queue for review and must not claim
+completion. Preserve cumulative audit-run counts so a later pass cannot erase
+the evidence from an earlier pass.
+
+For an ambiguous audio span, use this adjudication order:
+
+1. cut a timestamped clip and record its SHA-256;
+2. compare raw ASR, the local sentence window, the matching source page, and at
+   least one independently produced decode;
+3. treat parameter changes on the same ASR model as corroboration, not as an
+   independent reviewer;
+4. auto-apply only when the wording is source-compatible and the evidence does
+   not conflict;
+5. if a later decode conflicts with a `CONFIRMED` choice, revert that choice,
+   remove it from the applied ledger, and place the segment back in the review
+   queue;
+6. send only the compact unresolved queue to a stronger or human reviewer.
+
+This makes weak-agent work efficient: deterministic scans handle the full
+transcript, while expensive reasoning is limited to timestamped exceptions.
+
 ### M5: Run independent review
 
 Dispatch a different agent after GREEN. The reviewer must receive the commit,
