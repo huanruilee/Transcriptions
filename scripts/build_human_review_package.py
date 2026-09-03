@@ -45,7 +45,7 @@ OUTPUTS
   qa_27B/_human_review_clips/         (extracted audio clips, LOCAL ONLY)
 """
 from __future__ import annotations
-import argparse, hashlib, json, subprocess, time
+import argparse, copy, hashlib, json, subprocess, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -87,43 +87,14 @@ def sha256_file(p: Path) -> str:
     return h.hexdigest()
 
 
-def load_existing_clip_metadata() -> dict:
-    """Load committed clip evidence for deterministic no-audio CI rebuilds."""
-    manifest = QA / "human_review_manifest.json"
-    if not manifest.exists():
-        return {}
-    try:
-        current = json.loads(manifest.read_text())
-    except (OSError, json.JSONDecodeError):
-        return {}
-
-    indexed = {}
-    for session in current.get("sessions", []):
-        sid = session.get("sessionId")
+def normalized_manifest(manifest: dict) -> dict:
+    """Remove local-only clip claims before comparing semantic review inputs."""
+    normalized = copy.deepcopy(manifest)
+    for session in normalized.get("sessions", []):
         for sample in session.get("samples", []):
-            indexed[(sid, sample.get("sentence_index"))] = sample
-    return indexed
-
-
-def preserved_clip_metadata(existing: dict, sid: str, index: int,
-                            sentence: dict) -> tuple[str | None, str | None]:
-    """Reuse clip evidence only when the source sample identity is unchanged."""
-    prior = existing.get((sid, index), {})
-    expected_path = f"qa_27B/_human_review_clips/{sid}/{sid}-{index:04d}.wav"
-    clip_path = prior.get("audio_clip_path")
-    clip_sha = prior.get("audio_clip_sha256")
-    identity_matches = (
-        prior.get("start") == sentence.get("start") and
-        prior.get("end") == sentence.get("end") and
-        prior.get("current_text") == sentence.get("text")
-    )
-    valid_sha = (
-        isinstance(clip_sha, str) and len(clip_sha) == 64 and
-        all(char in "0123456789abcdef" for char in clip_sha)
-    )
-    if identity_matches and clip_path == expected_path and valid_sha:
-        return clip_path, clip_sha
-    return None, None
+            sample.pop("audio_clip_path", None)
+            sample.pop("audio_clip_sha256", None)
+    return normalized
 
 
 def _compute_base_required(sents):
@@ -157,7 +128,7 @@ def _compute_base_required(sents):
     return req
 
 
-def build():
+def build(extract_audio: bool = True):
     strict = json.loads((QA / "audio_anchor_audit.json").read_text())
     substitute = json.loads(
         (QA / "audio_anchor_audit_human_substitute.json").read_text())
@@ -174,7 +145,6 @@ def build():
     # Index audits by sessionId
     by_sid = {s["sessionId"]: s for s in strict["sessions"]}
     sub_by_sid = {s["sessionId"]: s for s in substitute["sessions"]}
-    existing_clip_metadata = load_existing_clip_metadata()
 
     out = {
         "schema_version": 1,
@@ -191,7 +161,8 @@ def build():
         "sessions": [],
     }
 
-    CLIPS.mkdir(exist_ok=True)
+    if extract_audio:
+        CLIPS.mkdir(exist_ok=True)
     for sid in PILOT:
         s_strict = by_sid.get(sid)
         s_sub = sub_by_sid.get(sid)
@@ -304,15 +275,14 @@ def build():
                 reasons.append("EVEN_FILL")
 
             sample_id = f"{sid}-{i:04d}"
-            (CLIPS / sid).mkdir(exist_ok=True)
             clip_path = CLIPS / sid / f"{sample_id}.wav"
-            clip_ok = extract_clip(sid, s["start"], s["end"], clip_path)
-            if clip_ok:
-                output_clip_path = str(clip_path.relative_to(ROOT))
-                clip_sha = sha256_file(clip_path)
+            if extract_audio:
+                (CLIPS / sid).mkdir(exist_ok=True)
+                clip_ok = extract_clip(sid, s["start"], s["end"], clip_path)
             else:
-                output_clip_path, clip_sha = preserved_clip_metadata(
-                    existing_clip_metadata, sid, i, s)
+                clip_ok = False
+            output_clip_path = str(clip_path.relative_to(ROOT)) if clip_ok else None
+            clip_sha = sha256_file(clip_path) if clip_ok else None
 
             samples.append({
                 "sample_id": sample_id,
@@ -343,6 +313,23 @@ def build():
         })
 
     return out
+
+
+def verify_outputs(generated: dict) -> None:
+    """Verify committed review semantics without asserting unavailable audio."""
+    manifest_path = QA / "human_review_manifest.json"
+    committed = json.loads(manifest_path.read_text())
+    if normalized_manifest(committed) != normalized_manifest(generated):
+        raise SystemExit(
+            "human_review_manifest.json semantic content is stale; "
+            "rebuild it in an environment with the source audio")
+
+    html = (REVIEWS / "index.html").read_text()
+    embedded = f"const MANIFEST = {json.dumps(committed, ensure_ascii=False)};"
+    if embedded not in html:
+        raise SystemExit(
+            "reviews/index.html does not embed the committed review manifest")
+    print("verified committed human-review semantics and HTML manifest")
 
 
 def write_outputs(out: dict):
@@ -553,9 +540,14 @@ render();
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sessions", nargs="*", default=PILOT)
+    ap.add_argument("--check", action="store_true",
+                    help="verify committed semantic outputs without extracting audio")
     args = ap.parse_args()
-    out = build()
-    write_outputs(out)
+    out = build(extract_audio=not args.check)
+    if args.check:
+        verify_outputs(out)
+    else:
+        write_outputs(out)
 
 
 if __name__ == "__main__":

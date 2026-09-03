@@ -31,28 +31,27 @@ test('GitHub governance: production deploy waits for successful main acceptance'
     'A newer accepted main commit must supersede an older pending deployment');
 });
 
-test('GitHub governance: acceptance is least-privilege and checks generated drift', () => {
+test('GitHub governance: acceptance is least-privilege and checks review drift', () => {
   const workflow = read('.github/workflows/acceptance.yml');
 
   assert.match(workflow, /permissions:\s*\n\s+contents:\s*read/,
     'Acceptance workflow must explicitly use read-only repository permissions');
-  assert.match(workflow, /git diff --exit-code/,
-    'CI must fail when generated review artifacts are not committed');
+  assert.match(workflow, /build_human_review_package\.py --check/,
+    'CI must verify review semantics without rewriting local audio evidence');
 });
 
-test('GitHub governance: no-audio CI preserves matching reviewed clip evidence', () => {
+test('GitHub governance: no-audio CI ignores clip fields but detects semantic drift', () => {
   const probe = `
-from scripts.build_human_review_package import preserved_clip_metadata
-sample = {"start": 1.0, "end": 2.0, "text": "same"}
-prior = {("01", 7): {
-  "start": 1.0, "end": 2.0, "current_text": "same",
-  "audio_clip_path": "qa_27B/_human_review_clips/01/01-0007.wav",
-  "audio_clip_sha256": "a" * 64,
-}}
-assert preserved_clip_metadata(prior, "01", 7, sample) == (
-  "qa_27B/_human_review_clips/01/01-0007.wav", "a" * 64)
-changed = {"start": 1.0, "end": 2.0, "text": "changed"}
-assert preserved_clip_metadata(prior, "01", 7, changed) == (None, None)
+from scripts.build_human_review_package import normalized_manifest
+left = {"sessions": [{"samples": [{
+  "current_text": "same", "audio_clip_path": "old.wav",
+  "audio_clip_sha256": "a" * 64}]}]}
+right = {"sessions": [{"samples": [{
+  "current_text": "same", "audio_clip_path": None,
+  "audio_clip_sha256": None}]}]}
+assert normalized_manifest(left) == normalized_manifest(right)
+right["sessions"][0]["samples"][0]["current_text"] = "changed"
+assert normalized_manifest(left) != normalized_manifest(right)
 `;
   const result = spawnSync('python3', ['-c', probe], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr || result.stdout);
