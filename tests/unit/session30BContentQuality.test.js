@@ -122,6 +122,15 @@ test('30B published metadata cannot claim acceptance while semantic review is in
   }
 });
 
+test('30B evidence ledger does not mark one source segment both applied and unresolved', () => {
+  const session = load(SESSION_PATH);
+  const applied = new Set((session._meta?.candidateEvidence?.applied || []).map((item) => item.sourceSegmentId));
+  const unresolved = (session._meta?.candidateEvidence?.unresolved || []).map((item) => item.sourceSegmentId);
+  const overlap = unresolved.filter((segmentId) => applied.has(segmentId));
+
+  assert.deepEqual(overlap, [], `evidence ledger has applied/unresolved overlap: ${overlap.join(', ')}`);
+});
+
 test('30B includes semantic headings for the source chapter outline', () => {
   const session = load(SESSION_PATH);
   const headings = session.paragraphs.filter((paragraph) => typeof paragraph.heading === 'string' && paragraph.heading.trim());
