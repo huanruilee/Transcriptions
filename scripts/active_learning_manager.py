@@ -18,7 +18,9 @@ import urllib.request
 
 COURSE_ROOT = Path(__file__).parent.parent / "courses" / "入中論善顯密意疏"
 SOURCE_TEXT_DIR = COURSE_ROOT / "source_text"
-LEARNED_JSON_PATH = COURSE_ROOT / "learned_corrections.json"
+LEARNED_JSON_PATH = Path(os.environ.get(
+    "LEARNED_CORRECTIONS_PATH", COURSE_ROOT / "learned_corrections.json"
+))
 SESSIONS_DIR = COURSE_ROOT / "sessions"
 SMART_ROUTER_URL = os.environ.get("SMART_ROUTER_URL", "http://127.0.0.1:4001/v1/chat/completions")
 

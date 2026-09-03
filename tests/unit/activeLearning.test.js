@@ -1,10 +1,26 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
 test('🧠 Active Learning & Contextual Disambiguation Engine Test Suite', async (t) => {
+
+  // Keep subprocess learning isolated from the repository's production database.
+  const learnedCorrectionsPath = resolve(
+    mkdtempSync(resolve(tmpdir(), 'active-learning-test-')),
+    'learned_corrections.json'
+  );
+  writeFileSync(learnedCorrectionsPath, JSON.stringify({
+    _metadata: { course: '入中論善顯密意疏', version: '2.0' },
+    global_terms: {},
+    context_rules: []
+  }));
+  const pythonEnv = {
+    ...process.env,
+    LEARNED_CORRECTIONS_PATH: learnedCorrectionsPath
+  };
 
   const annotationModule = await import('../../src/js/annotation.js');
   const { exportCorrectionEventsJson, saveCorrection, getAllCorrections } = annotationModule;
@@ -52,7 +68,7 @@ test('🧠 Active Learning & Contextual Disambiguation Engine Test Suite', async
       '--original', '因此破除事事師的妄計。',
       '--proposed', '因此破除實事師的妄計。',
       '--page', 'p.97'
-    ], { encoding: 'utf-8' });
+    ], { encoding: 'utf-8', env: pythonEnv });
 
     assert.equal(py.status, 0, `Python script exited with error: ${py.stderr}`);
     const res = JSON.parse(py.stdout);
@@ -69,7 +85,7 @@ test('🧠 Active Learning & Contextual Disambiguation Engine Test Suite', async
       '--original', '菩薩從初地進趣二地。',
       '--proposed', '菩薩從初地進趣二諦。', // Intentional wrong user edit
       '--page', 'p.23'
-    ], { encoding: 'utf-8' });
+    ], { encoding: 'utf-8', env: pythonEnv });
 
     assert.equal(py.status, 0, `Python script exited with error: ${py.stderr}`);
     const res = JSON.parse(py.stdout);
@@ -81,7 +97,7 @@ test('🧠 Active Learning & Contextual Disambiguation Engine Test Suite', async
       'scripts/active_learning_manager.py',
       '--sync-all',
       '--dry-run'
-    ], { encoding: 'utf-8' });
+    ], { encoding: 'utf-8', env: pythonEnv });
 
     assert.equal(py.status, 0, `Dry-run failed: ${py.stderr}`);
     assert.ok(py.stdout.includes('Active Learning Retrospective Global Sync ([DRY-RUN] )'), 'Must print dry-run header');
