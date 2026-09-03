@@ -8858,9 +8858,9 @@
         {
           "start": 1523,
           "end": 1525,
-          "text": "他的言而逼之生意。",
+          "text": "他的名言識之諦實的意思。",
           "rawText": "他的言而逼之生意",
-          "proofreadText": "他的言而逼之生意。",
+          "proofreadText": "他的名言識之諦實的意思。",
           "sourceSegmentId": 868,
           "_originalParagraph": "p_11"
         }
@@ -17824,6 +17824,14 @@
           "after": "藏自性的意思了。"
         },
         {
+          "sourceSegmentId": 868,
+          "before": "他的言而逼之生意。",
+          "after": "他的名言識之諦實的意思。",
+          "confidence": "LIKELY",
+          "evidence": "source_text/page_101.txt:3-14; source_text/page_102.txt:12-24; sessions/session_31A.json:3216-3331; sessions/session_32A.json:666-755",
+          "note": "音訊尾段穩定對應「的意思」，中段配合同講次脈絡判為「諦實」；名言識與世俗前面之語義由同課前後段交叉支持，保留 rawText 供後續人工覆核。"
+        },
+        {
           "sourceSegmentId": 1305,
           "before": "演示都是颠倒式",
           "after": "影像都是顛倒識。",
@@ -17837,33 +17845,7 @@
           "evidence": "source_text/page_101.txt:15"
         }
       ],
-      "unresolved": [
-        {
-          "sourceSegmentId": 868,
-          "start": 1523,
-          "end": 1525,
-          "text": "他的言而逼之生意。",
-          "reason": "短片段及較長上下文重新辨識仍有多組不一致，尚無足夠正字證據。",
-          "candidateReadings": [
-            "他的名言識之諦實的意思。",
-            "他的名言是諦實的意思。"
-          ],
-          "audioEvidence": {
-            "shortClip": {
-              "path": "30B_1514_1530.wav",
-              "sha256": "f8a0366f0ae0eb0c9e02f90fc4544daa47a88cc54d91b1648ee87bbb208f88a9",
-              "range": "1523-1525"
-            },
-            "contextClip": {
-              "path": "30B_1480_1560.wav",
-              "sha256": "aacf873401fcc0453872550b233f3e8a67ae279d2d3974049c10d692db860b93",
-              "range": "1480-1560"
-            },
-            "decodingSummary": "三組設定均保留言而逼著生意或近似字串，未收斂至單一正字讀法。"
-          },
-          "nextAction": "人工聽辨 1523-1525 秒後，才可決定是否採用候選讀法。"
-        }
-      ]
+      "unresolved": []
     }
   }
 }

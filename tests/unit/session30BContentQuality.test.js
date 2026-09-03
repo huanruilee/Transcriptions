@@ -111,6 +111,17 @@ test('30B preserves source-grounded high-confidence terminology corrections', ()
   }
 });
 
+test('30B records the first-pass adjudication for the final uncertain passage', () => {
+  const session = load(SESSION_PATH);
+  const sentence = sentences(session).find((item) => item.sourceSegmentId === 868);
+  const ledger = session._meta?.candidateEvidence?.applied?.find((item) => item.sourceSegmentId === 868);
+
+  assert.equal(sentence?.text, '他的名言識之諦實的意思。');
+  assert.equal(sentence?.rawText, '他的言而逼之生意');
+  assert.equal(ledger?.confidence, 'LIKELY');
+  assert.match(ledger?.evidence || '', /page_101\.txt/);
+});
+
 test('30B published metadata cannot claim acceptance while semantic review is incomplete', () => {
   const session = load(SESSION_PATH);
   const text = sentences(session).map((sentence) => sentence.text).join('\n');
