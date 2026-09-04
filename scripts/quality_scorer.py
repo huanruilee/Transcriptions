@@ -61,6 +61,16 @@ ERROR_DICTIONARY = {
     r"廟 聖者父子": ("妙音與聖者父子足", "卷首禮讚文音誤"),
     r"自[虛緒]派": ("自續派", "自續派音誤"),
     r"自[虛緒](?!論|經|相|身|心)": ("自續", "自續音誤"),
+    
+    # 31B 學習累積：中觀量論與緣起名相
+    r"明眼識": ("名言識", "名言識（tha-snyad shes-pa）誤聽為明眼識"),
+    r"佔物無明": ("染污無明", "染污無明（kliṣṭâvidyā）誤聽為佔物無明"),
+    r"十二元[緊緊]": ("十二緣起", "十二緣起支誤聽為十二元緊"),
+    r"有之所設": ("有支所攝", "有支所攝無明誤聽為有之所設"),
+    r"實子無明": ("實執無明", "實執無明誤聽為實子無明"),
+    r"憑[子衣]老": ("瓶衣等", "瓶衣等世俗諦法誤聽為憑子老"),
+    r"慧解太初": ("慧解太粗", "慧解太粗誤聽為慧解太初"),
+    r"精進地菩薩": ("清淨地菩薩", "清淨地菩薩誤聽為精進地菩薩"),
 }
 
 SESSIONS_DIR = Path("courses/入中論善顯密意疏/sessions")
@@ -78,6 +88,20 @@ def scan_session_quality(session_path):
     total_chars = 0
 
     for p_idx, p in enumerate(data.get("paragraphs", [])):
+        heading = p.get("heading", "")
+        if heading:
+            for pat, (correct, desc) in ERROR_DICTIONARY.items():
+                for match in re.finditer(pat, heading):
+                    detected_errors.append({
+                        "para_idx": p_idx,
+                        "sent_idx": -1,
+                        "time": p.get("start", 0),
+                        "matched": match.group(0),
+                        "expected": correct,
+                        "desc": f"【段落標題】{desc}",
+                        "sentence_text": heading
+                    })
+
         for s_idx, s in enumerate(p.get("sentences", [])):
             total_sentences += 1
             text = s.get("text", "")

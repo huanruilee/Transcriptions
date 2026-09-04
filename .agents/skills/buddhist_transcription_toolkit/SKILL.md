@@ -68,6 +68,8 @@ flowchart LR
   - `start` and `end` must be non-negative numbers with monotonic progression ($s[i].start \ge s[i-1].end - 0.05$).
   - `text` must be clean Traditional Chinese with proper punctuation (`，` `。` `！` `？`).
   - Zero simplified characters, zero prompt leaks (`Here is`, `【輸出】`), zero corrupt tokens (`咒詩`, `葡萄切勒`).
+* **Heading Consistency Standard**: Paragraph headings (`paragraph.heading`) must be proofread in tandem with sentences. Whenever a correction term is learned or applied (e.g. `明眼識` ➔ `名言識`), scan and synchronize headings so residual typos do not remain.
+* **Metadata Timestamp Synchronization**: Every modification or recalibration of a session MUST update `_meta.processed_at` and `last_updated` with the current local timestamp (`YYYY-MM-DD HH:MM:SS`) to guarantee the web UI update footer reflects reality.
 
 ---
 
@@ -149,6 +151,16 @@ During live oral commentary, ASR models frequently phoneticize Tibetan/Taiwanese
 | `為世` | `唯識` | 大乘唯識宗 |
 | `葡萄切勒` | `補特伽羅` | Pudgala，數取趣/補特伽羅 |
 | `勝一地` | `勝義諦` | Paramārtha-satya，二諦之勝義諦 |
+| `明眼識` | `名言識` | tha-snyad shes-pa，世間常人善名言者之識，非「明眼識」 |
+| `佔物無明` | `染污無明` | kliṣṭâvidyā，十二緣起第一支之無明，台語發音訛為佔物 |
+| `十二元緊` | `十二緣起` | dvādaśâṅga-pratītyasamutpāda，十二緣起支 |
+| `有之所設` | `有支所攝` | srid-pa'i yan-lag-gis bsdus-pa，有支所攝無明 |
+| `實子無明` | `實執無明` | bden-'dzin-gyi ma-rig-pa，執實之無明 |
+| `憑子老` / `憑衣等` | `瓶衣等` | ghata-pata-ādi，經論常喻瓶衣等世俗諸法 |
+| `慧解太初` | `慧解太粗` | 慧解太粗未能通達甚深真實義 |
+| `精進地菩薩` | `清淨地菩薩` | 清淨地（八至十地）菩薩及阿羅漢 |
+| `此女兒太無關係` | `此能立太無關係` | sādhana，宗因喻之「能立」，ASR 訛聽為女兒 |
+| `心跟敬` | `心境二義` | 量論所立心與境二者之義 |
 
 ---
 
