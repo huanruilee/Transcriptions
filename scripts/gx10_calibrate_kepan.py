@@ -288,10 +288,22 @@ def analyze_session(session_id, endpoint, dry_run=False):
 
     return analysis
 
+CLUSTERS = {
+    1: ("25A", "35B"),    # 二諦體與世俗/勝義諦辯析 (p.93–106)
+    2: ("01", "10B"),     # 序品、讚大悲、第一地極喜地 (p.1–30)
+    3: ("11A", "24B"),    # 第二地離垢地至第五地難勝地 (p.31–92)
+    4: ("36A", "50B"),    # 酉二 釋勝義諦（破自生與自續宗辯析） (p.106–135)
+    5: ("51A", "70B"),    # 破他生與唯識無境辯析（阿賴耶識破立） (p.136–185)
+    6: ("71A", "85B"),    # 破共生無因生與人法二無我 (p.186–220)
+    7: ("86A", "102B"),   # 十六空廣釋與地道圓滿功德 (p.221–260)
+    8: ("103A", "110B"),  # 第七地至第十地、佛地法身功德圓滿 (p.261–285)
+}
+
 def main():
     parser = argparse.ArgumentParser(description="Calibrate Session TOC & Headings using GX10 Qwen3.8-27B")
     parser.add_argument("--session", type=str, help="Specific session ID (e.g. 31A)")
     parser.add_argument("--range", type=str, help="Range of sessions (e.g. 31A..31B)")
+    parser.add_argument("--cluster", type=int, choices=range(1, 9), help="Cluster number (1 to 8)")
     parser.add_argument("--dry-run", action="store_true", help="Do not write changes to disk")
     args = parser.parse_args()
 
@@ -300,16 +312,22 @@ def main():
 
     if args.session:
         analyze_session(args.session, endpoint, dry_run=args.dry_run)
-    elif args.range:
-        parts = args.range.split("..")
-        if len(parts) != 2:
-            print("Invalid range format. Use e.g. 31A..31B")
-            sys.exit(1)
+    elif args.range or args.cluster:
+        if args.cluster:
+            start_sid, end_sid = CLUSTERS[args.cluster]
+            print(f"📦 Launching Cluster {args.cluster}: {start_sid} .. {end_sid}")
+        else:
+            parts = args.range.split("..")
+            if len(parts) != 2:
+                print("Invalid range format. Use e.g. 31A..31B")
+                sys.exit(1)
+            start_sid, end_sid = parts[0], parts[1]
+
         course_data = load_json(COURSE_FILE)
         sids = [s["sessionId"] for s in course_data["sessions"]]
         try:
-            start_idx = sids.index(parts[0])
-            end_idx = sids.index(parts[1])
+            start_idx = sids.index(start_sid)
+            end_idx = sids.index(end_sid)
         except ValueError as e:
             print(f"Session not found in course.json: {e}")
             sys.exit(1)
@@ -317,7 +335,10 @@ def main():
         target_sids = sids[start_idx:end_idx+1]
         print(f"🎯 Target sessions ({len(target_sids)}): {target_sids}")
         for sid in target_sids:
-            analyze_session(sid, endpoint, dry_run=args.dry_run)
+            try:
+                analyze_session(sid, endpoint, dry_run=args.dry_run)
+            except Exception as e:
+                print(f"❌ Error analyzing session {sid}: {e}")
     else:
         parser.print_help()
 
