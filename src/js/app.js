@@ -6,6 +6,7 @@ import { initContextMenu } from './contextMenu.js';
 import { formatAriaTime, safePlay } from './a11y.js';
 import { openSentenceEditorModal, getCorrection, getNote, getAllCorrections, getAllNotes, exportNotesAsMarkdown } from './annotation.js';
 import { initReviewRating } from './reviewRating.js';
+import { openLocalSyncModal } from './localSync.js';
 
 let courseData = null;
 let tocData = null;
@@ -33,6 +34,7 @@ if (typeof document !== 'undefined') {
     initSessionNav();     // P0-3: prev/next session nav
     initModeToggle();     // Annotation & Proofread mode
     initExportNotes();    // Export notes button
+    initLocalSyncButton(); // Local active learning sync bridge
     initTOCDrawerTrigger(); // Phase 1: mobile TOC drawer
     initTouchContextMenu();
     initReviewRating(() => {
@@ -869,6 +871,7 @@ function initMobileActionSheet() {
         <button class="action-sheet-close" id="action-sheet-close-btn">✕</button>
       </div>
       <div class="action-sheet-grid">
+        <button class="action-sheet-btn" id="sheet-local-sync-btn">⚡ 本機學習同步</button>
         <button class="action-sheet-btn" id="sheet-export-notes-btn">📥 匯出研讀筆記</button>
         <button class="action-sheet-btn" id="sheet-session-rating-btn">⭐ 講次審核評分</button>
         <button class="action-sheet-btn" id="sheet-theme-toggle-btn">🌙 切換深淺模式</button>
@@ -900,6 +903,10 @@ function initMobileActionSheet() {
   const closeBtn = document.getElementById('action-sheet-close-btn');
   if (closeBtn) closeBtn.addEventListener('click', closeSheet);
 
+  document.getElementById('sheet-local-sync-btn')?.addEventListener('click', () => {
+    closeSheet();
+    openLocalSyncModal();
+  });
   document.getElementById('sheet-export-notes-btn')?.addEventListener('click', () => {
     closeSheet();
     document.getElementById('export-notes-btn')?.click();
@@ -1291,6 +1298,18 @@ function initExportNotes() {
     URL.revokeObjectURL(url);
     showToast(`✅ 已成功匯出 第 ${currentSessionId} 堂 Markdown 研讀筆記！`);
   });
+}
+
+/**
+ * Initialize 1-Click Local Sync Button in Header
+ */
+function initLocalSyncButton() {
+  const btn = document.getElementById('local-sync-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      openLocalSyncModal();
+    });
+  }
 }
 
 function escapeHtml(str) {

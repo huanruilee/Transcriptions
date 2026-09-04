@@ -3,6 +3,8 @@
  * Handles localStorage persistence, diff generation, modal editor, and Markdown export.
  */
 
+import { checkSyncServerStatus, syncCorrectionToLocalBackend, showSyncToast } from './localSync.js';
+
 const STORAGE_PREFIX_CORRECTION = 'transcriptions_corr_';
 const STORAGE_PREFIX_NOTES = 'transcriptions_note_';
 
@@ -264,6 +266,10 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
           <div style="font-size: 0.78rem; color: #64748b; margin-top: 4px; margin-left: 24px; line-height: 1.4;">
             若此修正屬於普遍性的 ASR 同音識別錯誤（例如：<b>顛倒式 ➔ 顛倒識</b>、<b>對所限 ➔ 對所現</b>、<b>有不進步 ➔ 有部、經部</b>），勾選後系統將註冊為主動學習事件，供審核中心一鍵全庫推廣並納入 CI 門禁。
           </div>
+          <div id="modal-sync-badge" style="margin-top: 8px; margin-left: 24px; font-size: 0.78rem; display: flex; align-items: center; gap: 6px; color: #64748b;">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8;"></span>
+            <span>本機同步後台：連線檢測中...</span>
+          </div>
         </div>
       </div>
 
@@ -278,6 +284,23 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
   `;
 
   document.body.appendChild(modal);
+
+  const syncBadge = modal.querySelector('#modal-sync-badge');
+  if (syncBadge && typeof checkSyncServerStatus === 'function') {
+    checkSyncServerStatus().then(st => {
+      if (st.online) {
+        syncBadge.innerHTML = `
+          <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 6px #10b981;"></span>
+          <span style="color: #059669; font-weight: 600;">⚡ 本機直連後台在線 (儲存時將自動同步寫入磁碟與名相字典)</span>
+        `;
+      } else {
+        syncBadge.innerHTML = `
+          <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94a3b8;"></span>
+          <span style="color: #64748b;">⚪ 本機直連後台離線 (將暫存於瀏覽器，隨時可 1 鍵同步)</span>
+        `;
+      }
+    }).catch(() => {});
+  }
 
   const learnCb = modal.querySelector('#modal-learn-term-checkbox');
   if (learnCb) {
@@ -349,20 +372,50 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
         isGlobalLearn: Boolean(isGlobalLearn)
       });
 
-      if (isGlobalLearn && typeof localStorage !== 'undefined') {
-        try {
-          const suggestions = JSON.parse(localStorage.getItem('learned_suggestions') || '[]');
-          suggestions.push({
+      if (isGlobalLearn) {
+        if (typeof localStorage !== 'undefined') {
+          try {
+            const suggestions = JSON.parse(localStorage.getItem('learned_suggestions') || '[]');
+            suggestions.push({
+              sessionId,
+              sentenceId: sid,
+              timestamp: sentence.start,
+              originalText: sentence.text,
+              correctedText,
+              submittedAt: new Date().toISOString()
+            });
+            localStorage.setItem('learned_suggestions', JSON.stringify(suggestions));
+          } catch (e) {
+            console.warn('Failed to save learned_suggestions', e);
+          }
+        }
+
+        // Asynchronously sync to local backend if running
+        if (typeof syncCorrectionToLocalBackend === 'function') {
+          syncCorrectionToLocalBackend({
             sessionId,
             sentenceId: sid,
-            timestamp: sentence.start,
             originalText: sentence.text,
             correctedText,
-            submittedAt: new Date().toISOString()
-          });
-          localStorage.setItem('learned_suggestions', JSON.stringify(suggestions));
-        } catch (e) {
-          console.warn('Failed to save learned_suggestions', e);
+            pageRef,
+            note: noteContent,
+            timestamp: sentence.start,
+            isGlobalLearn: true,
+            applyToDisk: true
+          }).then(res => {
+            if (res && res.success) {
+              const dec = res.learning?.decision;
+              if (dec === 'GLOBAL_PROMOTED') {
+                const pair = res.learning?.phonetic_pair;
+                const pairText = pair ? `「${pair.typo} ➔ ${pair.corrected}」` : '';
+                showSyncToast(`🌟 成功直連本機後台！${pairText}已晉升全庫規則並更新磁碟！`, 'success');
+              } else if (dec === 'CONTEXT_SPECIFIC') {
+                showSyncToast(`🔒 已直連本機後台：標記為講次特定語境修訂。`, 'info');
+              } else {
+                showSyncToast(`⚡ 已直連本機後台並更新。`, 'success');
+              }
+            }
+          }).catch(() => {});
         }
       }
     } else {

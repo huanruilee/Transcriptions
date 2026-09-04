@@ -164,3 +164,21 @@ Automated tests in `tests/unit/` enforce strict behavioral invariants that must 
 2. **Monotonic Timestamps & Segment Preservation**:
    - Editorial corrections must modify only `text`.
    - Never alter acoustic timing markers (`start`, `end`) or delete segments, preserving click-to-seek and sentence editor audio sync.
+
+---
+
+## 9. 1-Click Local Active Learning & Disk Sync Bridge (1 鍵直連本機後台)
+
+To enable self-evolving transcription learning from interactive web proofreading without manual copy-paste:
+
+1. **Local Sync Server (`scripts/sync_server.py`)**:
+   - Zero-dependency Python server listening on port `9091` with full CORS enabled.
+   - Provides `/api/status`, `/api/learn`, `/api/sync-batch`, and `/api/learned`.
+   - Ingests human corrections, updates `learned_corrections.json`, and applies verified edits directly to target `session_*.json` on disk.
+2. **Frontend Integration (`src/js/localSync.js` & `src/js/annotation.js`)**:
+   - **Real-Time Auto Sync**: When saving an edit in the sentence editor with `🧠 標記為全庫通用佛學名相修正` checked, automatically posts to `/api/learn`. If online, changes are written to disk and learned immediately.
+   - **1-Click Sync Hub (`#local-sync-btn`)**: Clicking the header button opens the sync hub, checking connection status and transferring all accumulated edits from `localStorage['learned_suggestions']` into the repository with a single click.
+3. **Execution Command**:
+   ```bash
+   npm run sync-server   # or: python3 scripts/sync_server.py
+   ```
