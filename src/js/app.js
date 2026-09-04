@@ -50,16 +50,67 @@ if (typeof document !== 'undefined') {
   });
 }
 
-async function loadCourseData() {
+let catalogData = null;
+let currentCourseId = 'ru-zhong-lun';
+let currentCoursePath = 'courses/入中論善顯密意疏';
+let isHashListenerAttached = false;
+
+function parseHashRoute() {
+  const raw = location.hash ? location.hash.replace(/^#/, '') : '';
+  if (!raw) return { courseId: null, sessionId: null };
+  if (raw.startsWith('session-')) {
+    return { courseId: null, sessionId: raw.replace('session-', '') };
+  }
+  const params = new URLSearchParams(raw);
+  return {
+    courseId: params.get('course') || null,
+    sessionId: params.get('session') || null
+  };
+}
+
+async function loadCourseData(targetCourseId, targetSessionId) {
   try {
-    const courseResp = await fetch('courses/入中論善顯密意疏/course.json');
+    try {
+      const catResp = await fetch('courses/catalog.json');
+      if (catResp.ok) {
+        catalogData = await catResp.json();
+      }
+    } catch (_) {}
+
+    const hashRoute = parseHashRoute();
+    const effectiveCourseId = targetCourseId || hashRoute.courseId || (catalogData && catalogData.defaultCourseId) || 'ru-zhong-lun';
+
+    if (catalogData && Array.isArray(catalogData.courses) && catalogData.courses.length > 0) {
+      const found = catalogData.courses.find(c => c.id === effectiveCourseId || c.title === effectiveCourseId) || catalogData.courses[0];
+      currentCourseId = found.id;
+      currentCoursePath = found.path || `courses/${found.title}`;
+
+      const courseSelect = document.getElementById('course-select');
+      if (courseSelect) {
+        courseSelect.innerHTML = catalogData.courses.map(c => 
+          `<option value="${c.id}" ${c.id === currentCourseId ? 'selected' : ''}>📖 ${c.title}</option>`
+        ).join('');
+        if (!courseSelect._bound) {
+          courseSelect._bound = true;
+          courseSelect.addEventListener('change', async (e) => {
+            const nextCourseId = e.target.value;
+            if (nextCourseId !== currentCourseId) {
+              currentSessionId = null;
+              await loadCourseData(nextCourseId);
+            }
+          });
+        }
+      }
+    }
+
+    const courseResp = await fetch(`${currentCoursePath}/course.json`);
     courseData = await courseResp.json();
 
-    const tocResp = await fetch('courses/入中論善顯密意疏/toc.json');
+    const tocResp = await fetch(`${currentCoursePath}/toc.json`);
     tocData = await tocResp.json();
 
     try {
-      const audioMapResp = await fetch('courses/入中論善顯密意疏/audio_map.json');
+      const audioMapResp = await fetch(`${currentCoursePath}/audio_map.json`);
       if (audioMapResp.ok) {
         audioMapData = await audioMapResp.json();
       }
@@ -82,7 +133,7 @@ async function loadCourseData() {
     if (sidebarCount) sidebarCount.textContent = `(全 ${totalSessions} 講)`;
 
     // Determine starting session (hash or localStorage or first)
-    const savedSession = location.hash ? location.hash.replace('#session-', '') : (localStorage.getItem('last_session_id') || '01');
+    const savedSession = targetSessionId || hashRoute.sessionId || (location.hash ? location.hash.replace('#session-', '') : (localStorage.getItem(`last_session_${currentCourseId}`) || localStorage.getItem('last_session_id') || '01'));
     const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
 
     renderSidebar(getFilteredSessions(), initialSession.sessionId, switchSession, courseData.unavailableSessions);
@@ -90,14 +141,22 @@ async function loadCourseData() {
     await switchSession(initialSession);
 
     // Listen to browser back/forward (Bug 1.3 fix)
-    window.addEventListener('hashchange', () => {
-      const targetId = location.hash.replace('#session-', '');
-      const target = courseData.sessions.find(s => s.sessionId === targetId);
-      // Guard by sessionId, not object identity: the course index object and the
-      // loaded session JSON object are never the same reference, so comparing
-      // them directly would always be true and cause duplicate loads.
-      if (target && currentSessionId !== targetId) switchSession(target);
-    });
+    if (!isHashListenerAttached) {
+      isHashListenerAttached = true;
+      window.addEventListener('hashchange', () => {
+        const route = parseHashRoute();
+        if (route.courseId && route.courseId !== currentCourseId) {
+          loadCourseData(route.courseId, route.sessionId);
+          return;
+        }
+        const targetId = route.sessionId || (location.hash ? location.hash.replace('#session-', '') : '');
+        const target = courseData.sessions.find(s => s.sessionId === targetId);
+        // Guard by sessionId, not object identity: the course index object and the
+        // loaded session JSON object are never the same reference, so comparing
+        // them directly would always be true and cause duplicate loads.
+        if (target && currentSessionId !== targetId) switchSession(target);
+      });
+    }
   } catch (err) {
     console.error('Failed to initialize course data:', err);
   }
@@ -150,14 +209,16 @@ async function switchSession(session) {
       // optionally show a small "pilot v2" badge.
       currentSessionData._pilot_v2 = true;
     } else {
-      resp = await fetch(session.jsonUrl);
+      const targetUrl = session.jsonUrl || `${currentCoursePath}/sessions/session_${session.sessionId}.json`;
+      resp = await fetch(targetUrl);
       if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
       currentSessionData = await resp.json();
     }
     // Commit state only after successful fetch + parse
     currentSessionId = session.sessionId;
     localStorage.setItem('last_session_id', session.sessionId);
-    location.hash = `#session-${session.sessionId}`;
+    localStorage.setItem(`last_session_${currentCourseId}`, session.sessionId);
+    location.hash = (currentCourseId && currentCourseId !== 'ru-zhong-lun') ? `#course=${currentCourseId}&session=${session.sessionId}` : `#session-${session.sessionId}`;
     renderTranscript(currentSessionData);
     setupAudioPlayer(resolveAudioUrl(session.audioUrl, null, session.sessionId));
   } catch (err) {
@@ -1007,10 +1068,10 @@ function showCourseOverview() {
   const hero = document.createElement('div');
   hero.className = 'course-overview-hero';
   const heroTitle = document.createElement('h1');
-  heroTitle.textContent = '《入中論善顯密意疏》多媒體學習平台';
+  heroTitle.textContent = `《${courseData?.title || '入中論善顯密意疏'}》多媒體學習平台`;
   hero.appendChild(heroTitle);
   const heroDesc = document.createElement('p');
-  heroDesc.textContent = '見無法師 主講 · 音文雙向同步 · 逐字稿 + 章節目錄';
+  heroDesc.textContent = `${courseData?.lecturer || courseData?.master || '見悲青增格西'} 主講 · 音文雙向同步 · 逐字稿 + 章節目錄`;
   hero.appendChild(heroDesc);
   const badges = document.createElement('div');
   badges.className = 'course-overview-badges';
