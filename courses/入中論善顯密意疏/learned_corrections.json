@@ -1,77 +1,475 @@
 {
   "_metadata": {
-    "description": "Dynamic Active Learning Knowledge Base for Treatise Terminology Corrections",
+    "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
-    "lastUpdated": "2026-08-26T11:44:00Z"
-  },
-  "terms": {
-    "事事師": {
-      "corrected": "實事師",
-      "category": "中觀派別名相",
-      "treatise_ref": "善顯密意疏 p.97",
-      "learned_from": "用戶校對第 29A 堂",
-      "confidence": 0.99
-    },
-    "自正分": {
-      "corrected": "自證分",
-      "category": "唯識中觀名相",
-      "treatise_ref": "善顯密意疏 破自證分品",
-      "learned_from": "用戶校對與疏文對照",
-      "confidence": 0.99
-    },
-    "薩甲耶見": {
-      "corrected": "薩迦耶見",
-      "category": "佛學名相",
-      "treatise_ref": "善顯密意疏 破薩迦耶見",
-      "learned_from": "用戶校對與疏文對照",
-      "confidence": 0.99
-    }
+    "version": "3.0",
+    "lastUpdated": "2026-09-04T11:25:00Z",
+    "totalGlobalTerms": 60
   },
   "global_terms": {
+    "明眼識": {
+      "corrected": "名言識",
+      "category": "中觀量論名相",
+      "safe_regex": "明眼識",
+      "treatise_ref": "善顯密意疏 p.101",
+      "confidence": 0.99,
+      "reasoning": "藏文 tha-snyad shes-pa，世間常人善名言者名言識，ASR 常誤聽為明眼識。"
+    },
+    "聖意識": {
+      "corrected": "勝義識",
+      "category": "中觀量論名相",
+      "safe_regex": "聖意識",
+      "treatise_ref": "善顯密意疏 p.73",
+      "confidence": 0.99,
+      "reasoning": "勝義量/勝義識（paramārtha-jñāna），ASR 誤聽為聖意識。"
+    },
+    "相偽": {
+      "corrected": "相違",
+      "category": "因明邏輯名相",
+      "safe_regex": "相偽",
+      "treatise_ref": "善顯密意疏 正理門",
+      "confidence": 0.99,
+      "reasoning": "正相違（viruddha），ASR 誤聽為相偽。"
+    },
+    "五米": {
+      "corrected": "無明",
+      "category": "佛學根本煩惱",
+      "safe_regex": "五米",
+      "treatise_ref": "善顯密意疏 十二緣起",
+      "confidence": 0.99,
+      "reasoning": "染污無明（avidyā），ASR 台語發音口誤為五米。"
+    },
+    "地實": {
+      "corrected": "諦實",
+      "category": "二諦名相",
+      "safe_regex": "地實",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "諦實成立（satya），ASR 誤聽為地實。"
+    },
+    "非時有兒": {
+      "corrected": "非實有耳",
+      "category": "經論消文語氣",
+      "safe_regex": "非時有兒",
+      "treatise_ref": "善顯密意疏 p.102 L24",
+      "confidence": 0.99,
+      "reasoning": "原典「成立諸法於彼三人之前為非實有耳」，ASR 誤聽。"
+    },
+    "值時有": {
+      "corrected": "執實有",
+      "category": "中觀宗義名相",
+      "safe_regex": "值時有",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "執諸法實有，ASR 誤聽為值時有。"
+    },
+    "假信": {
+      "corrected": "假性",
+      "category": "中觀二諦名相",
+      "safe_regex": "假信",
+      "treatise_ref": "善顯密意疏 p.102 L15",
+      "confidence": 0.99,
+      "reasoning": "原典「唯是假性，全無諦實」，ASR 誤聽為假信。"
+    },
+    "生文": {
+      "corrected": "聲聞",
+      "category": "三乘名相",
+      "safe_regex": "生文",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "聲聞獨覺之聲聞（Śrāvaka），ASR 誤聽為生文。"
+    },
+    "髒斃": {
+      "corrected": "障蔽",
+      "category": "中觀法義名相",
+      "safe_regex": "髒斃|藏幣",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "無明障蔽、所知障障蔽，ASR 嚴重訛聽。"
+    },
+    "據生": {
+      "corrected": "俱生",
+      "category": "心類學實執名相",
+      "safe_regex": "據生",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "俱生我執、俱生起（sahaja），ASR 誤為據生。"
+    },
+    "據無明": {
+      "corrected": "具無明",
+      "category": "經論引文名相",
+      "safe_regex": "據無明",
+      "treatise_ref": "善顯密意疏 p.101",
+      "confidence": 0.99,
+      "reasoning": "《釋論》「實性於具無明者畢竟不現」，ASR 誤為據無明。"
+    },
+    "七弟": {
+      "corrected": "七地",
+      "category": "十地名相",
+      "safe_regex": "七弟(?!兄|弟)",
+      "treatise_ref": "善顯密意疏 p.102 L18",
+      "confidence": 0.99,
+      "reasoning": "菩薩第七遠行地，七地以下菩薩，ASR 誤為七弟。"
+    },
+    "消聞": {
+      "corrected": "消文",
+      "category": "講課用詞",
+      "safe_regex": "消聞",
+      "treatise_ref": "課堂口語",
+      "confidence": 0.99,
+      "reasoning": "依原典逐句解說消文，ASR 誤為消聞。"
+    },
+    "強位": {
+      "corrected": "強謂",
+      "category": "經論引文消文",
+      "safe_regex": "強位",
+      "treatise_ref": "善顯密意疏 p.102 L26",
+      "confidence": 0.99,
+      "reasoning": "原典「若不如上釋，強謂是於彼等成立非世俗諦者」，ASR 誤為強位。"
+    },
+    "成可效顧": {
+      "corrected": "誠可笑故",
+      "category": "經論引文消文",
+      "safe_regex": "成可效顧",
+      "treatise_ref": "善顯密意疏 p.103 L3",
+      "confidence": 0.99,
+      "reasoning": "原典「於彼以無實執為理由，誠可笑故」，ASR 誤為成可效顧。"
+    },
+    "貪承吃": {
+      "corrected": "貪瞋痴",
+      "category": "三毒煩惱",
+      "safe_regex": "貪承吃|貪承詞",
+      "treatise_ref": "善顯密意疏 煩惱品",
+      "confidence": 0.99,
+      "reasoning": "貪瞋痴三毒心所，ASR 誤聽。"
+    },
+    "貪承": {
+      "corrected": "貪瞋",
+      "category": "煩惱名相",
+      "safe_regex": "貪承(?!受|擔|認)",
+      "treatise_ref": "善顯密意疏 煩惱品",
+      "confidence": 0.99,
+      "reasoning": "貪瞋煩惱，ASR 誤為貪承。"
+    },
+    "畢竟不限": {
+      "corrected": "畢竟不現",
+      "category": "經論引文消文",
+      "safe_regex": "畢竟不限",
+      "treatise_ref": "善顯密意疏 p.101 L16",
+      "confidence": 0.99,
+      "reasoning": "原典「諸法實性，則具無明者畢竟不見/不現」，ASR 誤為不限。"
+    },
+    "為斷盡無明": {
+      "corrected": "未斷盡無明",
+      "category": "經論引文消文",
+      "safe_regex": "為斷盡無明",
+      "treatise_ref": "善顯密意疏 p.101 末行",
+      "confidence": 0.99,
+      "reasoning": "原典「此許未斷盡無明之聖人」，ASR 誤為為斷盡無明，顛倒法義。"
+    },
+    "義皆現證": {
+      "corrected": "亦皆現證",
+      "category": "經論引文消文",
+      "safe_regex": "義皆現證",
+      "treatise_ref": "善顯密意疏 p.102 L3",
+      "confidence": 0.99,
+      "reasoning": "原典「亦皆現證真實義」，ASR 誤為義皆現證。"
+    },
+    "後導致": {
+      "corrected": "後得智",
+      "category": "修道智德名相",
+      "safe_regex": "後導致|後的智",
+      "treatise_ref": "善顯密意疏 p.102 L3",
+      "confidence": 0.99,
+      "reasoning": "聖人後得智（pṛṣṭha-labdha-jñāna），ASR 誤為後導致/後的智。"
+    },
+    "見到修到": {
+      "corrected": "見道修道",
+      "category": "五道名相",
+      "safe_regex": "見到修到",
+      "treatise_ref": "善顯密意疏 道建立",
+      "confidence": 0.99,
+      "reasoning": "大乘見道位與修道位，ASR 誤為見到修到。"
+    },
     "事事師": {
       "corrected": "實事師",
       "category": "中觀派別名相",
       "safe_regex": "事事師",
       "treatise_ref": "善顯密意疏 p.97",
-      "learned_from": "第 29A 堂",
       "confidence": 0.99,
-      "reasoning": "確鑿名相修正：善顯密意疏破實事師所計。"
+      "reasoning": "實事師（vastu-sat-vādī），ASR 誤為事事師。"
+    },
+    "自正分": {
+      "corrected": "自證分",
+      "category": "唯識中觀名相",
+      "safe_regex": "自正分",
+      "treatise_ref": "善顯密意疏 破自證分",
+      "confidence": 0.99,
+      "reasoning": "自證分（sva-saṃvedana），ASR 誤為自正分。"
+    },
+    "薩甲耶見": {
+      "corrected": "薩迦耶見",
+      "category": "根本見解名相",
+      "safe_regex": "薩甲耶見",
+      "treatise_ref": "善顯密意疏 破薩迦耶見",
+      "confidence": 0.99,
+      "reasoning": "薩迦耶見（satkāya-dṛṣṭi），ASR 誤為薩甲耶見。"
     },
     "有不進步": {
       "corrected": "有部、經部",
       "category": "四部宗義名相",
       "safe_regex": "有不[、\\s]?進步",
       "treatise_ref": "善顯密意疏 宗義部派",
-      "learned_from": "用戶校對第 01 堂",
       "confidence": 0.99,
-      "reasoning": "說一切有部與經部，ASR 錯轉為有不進步。"
+      "reasoning": "說一切有部與經部二宗，ASR 誤為有不進步。"
     },
     "顛倒式": {
       "corrected": "顛倒識",
-      "category": "中觀量論心類學",
+      "category": "量論心類學名相",
       "safe_regex": "顛倒式",
-      "treatise_ref": "善顯密意疏 心類學辨析",
-      "learned_from": "用戶校對第 08A 堂",
+      "treatise_ref": "善顯密意疏 心類學",
       "confidence": 0.99,
-      "reasoning": "心類學顛倒識（viparyaya-jñāna），ASR 錯轉為顛倒式。"
+      "reasoning": "心類學顛倒識（viparyaya-jñāna），ASR 誤為顛倒式。"
     },
     "對所限": {
       "corrected": "對所現",
-      "category": "中觀量論境心名相",
+      "category": "量論境心名相",
       "safe_regex": "對所限|自己的所限",
       "treatise_ref": "善顯密意疏 境與有境",
-      "learned_from": "用戶校對第 08A 堂",
       "confidence": 0.99,
-      "reasoning": "顯現境/所現分（pratibhāsa），ASR 錯轉為所限。"
+      "reasoning": "顯現境/所現分，ASR 誤為所限。"
     },
     "應層": {
       "corrected": "應成",
       "category": "中觀派別名相",
       "safe_regex": "應層",
-      "treatise_ref": "善顯密意疏 應成自續辨析",
-      "learned_from": "用戶校對第 08A 堂",
+      "treatise_ref": "善顯密意疏 應成自續",
       "confidence": 0.99,
-      "reasoning": "中觀應成派（Prāsaṅgika），ASR 錯轉為應層。"
+      "reasoning": "中觀應成派，ASR 誤為應層。"
+    },
+    "自取": {
+      "corrected": "自續",
+      "category": "中觀派別名相",
+      "safe_regex": "自[取虛緒]派|自[取虛緒](?!論|經|相|身|心)",
+      "treatise_ref": "善顯密意疏 自續派",
+      "confidence": 0.99,
+      "reasoning": "中觀自續派（Svātantrika），ASR 誤為自取/自虛/自緒。"
+    },
+    "為世": {
+      "corrected": "唯識",
+      "category": "大乘宗義名相",
+      "safe_regex": "為世派|為世宗",
+      "treatise_ref": "善顯密意疏 破唯識",
+      "confidence": 0.99,
+      "reasoning": "唯識宗（Vijñānavāda），ASR 誤為為世。"
+    },
+    "葡萄切勒": {
+      "corrected": "補特伽羅",
+      "category": "佛學核心名相",
+      "safe_regex": "葡萄切[勒熱了的]+|普特伽羅",
+      "treatise_ref": "善顯密意疏 人無我",
+      "confidence": 0.99,
+      "reasoning": "梵文 Pudgala（補特伽羅），ASR 音譯嚴重訛化。"
+    },
+    "勝一地": {
+      "corrected": "勝義諦",
+      "category": "二諦名相",
+      "safe_regex": "[生聖勝][一意意義]地|生意[諦第]",
+      "treatise_ref": "善顯密意疏 勝義諦品",
+      "confidence": 0.99,
+      "reasoning": "二諦之勝義諦（Paramārtha-satya），ASR 誤為勝一地/生意諦。"
+    },
+    "四肢低": {
+      "corrected": "世俗諦",
+      "category": "二諦名相",
+      "safe_regex": "四肢低|四[屬屬][地諦第]",
+      "treatise_ref": "善顯密意疏 世俗諦品",
+      "confidence": 0.99,
+      "reasoning": "世俗諦（Saṃvṛti-satya），ASR 誤為四肢低。"
+    },
+    "原青色": {
+      "corrected": "緣青色",
+      "category": "因明現量名相",
+      "safe_regex": "原青色|原青眼|見青[為爲][元緣]",
+      "treatise_ref": "善顯密意疏 根識現量",
+      "confidence": 0.99,
+      "reasoning": "緣青色之眼識，ASR 誤為原青色。"
+    },
+    "陽眼": {
+      "corrected": "陽焰",
+      "category": "八喻名相",
+      "safe_regex": "(?<!太)[陽羊]眼",
+      "treatise_ref": "善顯密意疏 陽焰喻",
+      "confidence": 0.99,
+      "reasoning": "幻事八喻之陽焰（marīci），ASR 誤為陽眼/羊眼。"
+    },
+    "七狂法": {
+      "corrected": "不欺誑法",
+      "category": "二諦名相",
+      "safe_regex": "[七乞][狂況礦]法",
+      "treatise_ref": "善顯密意疏 勝義不欺誑",
+      "confidence": 0.99,
+      "reasoning": "勝義無欺誑、不欺誑法，ASR 誤為七狂法。"
+    },
+    "咒詩": {
+      "corrected": "咒師",
+      "category": "幻事喻名相",
+      "safe_regex": "咒詩",
+      "treatise_ref": "善顯密意疏 幻師咒師",
+      "confidence": 0.99,
+      "reasoning": "幻化所依之能咒師，ASR 誤為咒詩。"
+    },
+    "非紋症": {
+      "corrected": "飛蚊症",
+      "category": "翳根錯亂喻",
+      "safe_regex": "非紋症|肺紋症",
+      "treatise_ref": "善顯密意疏 眩翳喻",
+      "confidence": 0.99,
+      "reasoning": "根有損害之飛蚊症，ASR 誤為非紋症。"
+    },
+    "損壞羹": {
+      "corrected": "損壞根",
+      "category": "根識名相",
+      "safe_regex": "損壞[羹更]",
+      "treatise_ref": "善顯密意疏 損根因緣",
+      "confidence": 0.99,
+      "reasoning": "內外損害諸根，ASR 誤為損壞羹。"
+    },
+    "充銳知士": {
+      "corrected": "聰叡智士",
+      "category": "論師功德名相",
+      "safe_regex": "[充][銳類]知[士識]",
+      "treatise_ref": "善顯密意疏 卷首",
+      "confidence": 0.99,
+      "reasoning": "聰叡智士，ASR 誤為充銳知士。"
+    },
+    "最驚議": {
+      "corrected": "最精微",
+      "category": "經論正理讚譽",
+      "safe_regex": "最[驚][議意]+|精[偉]",
+      "treatise_ref": "善顯密意疏 卷首讚",
+      "confidence": 0.99,
+      "reasoning": "義理最精微，ASR 誤為最驚議。"
+    },
+    "深吸正理": {
+      "corrected": "深細正理",
+      "category": "中觀正理讚譽",
+      "safe_regex": "深[吸]正理|神[系]",
+      "treatise_ref": "善顯密意疏 正理門",
+      "confidence": 0.99,
+      "reasoning": "深細正理，ASR 誤為深吸正理。"
+    },
+    "有何能政": {
+      "corrected": "有何能諍",
+      "category": "正理辯難名相",
+      "safe_regex": "此宗有何能[政整治]+",
+      "treatise_ref": "善顯密意疏 應成無諍",
+      "confidence": 0.99,
+      "reasoning": "於此宗派有何能諍，ASR 誤為有何能政。"
+    },
+    "摩尼塔王": {
+      "corrected": "牟尼法王",
+      "category": "佛陀德號",
+      "safe_regex": "摩尼塔王",
+      "treatise_ref": "善顯密意疏 卷首讚",
+      "confidence": 0.99,
+      "reasoning": "釋迦牟尼法王，ASR 誤為摩尼塔王。"
+    },
+    "主觀藥": {
+      "corrected": "諸關要",
+      "category": "經論宗門名相",
+      "safe_regex": "主觀藥",
+      "treatise_ref": "善顯密意疏 卷首",
+      "confidence": 0.99,
+      "reasoning": "龍猛不共諸關要，ASR 誤為主觀藥。"
+    },
+    "廣續如中文": {
+      "corrected": "當即廣釋入中論",
+      "category": "論著造論名相",
+      "safe_regex": "廣續如中文",
+      "treatise_ref": "善顯密意疏 造論方便",
+      "confidence": 0.99,
+      "reasoning": "造論宗大師當即廣釋入中論，ASR 嚴重音訛。"
+    },
+    "廟 聖者父子": {
+      "corrected": "妙音與聖者父子足",
+      "category": "傳承禮讚名相",
+      "safe_regex": "廟\\s*聖者父子",
+      "treatise_ref": "善顯密意疏 卷首讚",
+      "confidence": 0.99,
+      "reasoning": "文殊妙音與龍樹聖者父子，ASR 誤為廟。"
+    },
+    "物意嗎": {
+      "corrected": "戌一嗎",
+      "category": "科判章節代號",
+      "safe_regex": "物[意一]嗎",
+      "treatise_ref": "科判 戌一",
+      "confidence": 0.99,
+      "reasoning": "地支科判「戌一」，ASR 誤為物意。"
+    },
+    "民語何世俗": {
+      "corrected": "明於何世俗",
+      "category": "科判章節名稱",
+      "safe_regex": "民[語语]何世俗",
+      "treatise_ref": "科判 戌一 明於何世俗前為諦",
+      "confidence": 0.99,
+      "reasoning": "科判標題「明於何世俗」，ASR 誤為民語。"
+    },
+    "真意為有自信": {
+      "corrected": "增益為有自性",
+      "category": "中觀破執名相",
+      "safe_regex": "真意[爲為]有自[信性]",
+      "treatise_ref": "善顯密意疏 破自性",
+      "confidence": 0.99,
+      "reasoning": "將無自性法增益為有自性，ASR 誤為真意有自信。"
+    },
+    "障必為體": {
+      "corrected": "障蔽為體",
+      "category": "無明定義名相",
+      "safe_regex": "障[必畢]為體",
+      "treatise_ref": "善顯密意疏 世俗諦品",
+      "confidence": 0.99,
+      "reasoning": "無明以障蔽真實為體，ASR 誤為障必。"
+    },
+    "來人所為": {
+      "corrected": "能仁說為",
+      "category": "經教印證用語",
+      "safe_regex": "來人所[為名]",
+      "treatise_ref": "善顯密意疏 經論引證",
+      "confidence": 0.99,
+      "reasoning": "釋迦能仁世尊說為，ASR 誤為來人所為。"
+    },
+    "無信而迷亂": {
+      "corrected": "無性而迷亂",
+      "category": "錯亂識名相",
+      "safe_regex": "無[信信]而迷亂",
+      "treatise_ref": "善顯密意疏 觀待實妄",
+      "confidence": 0.99,
+      "reasoning": "諸法自性本無，而顯現自性之迷亂，ASR 誤為無信。"
+    },
+    "虛為真世俗": {
+      "corrected": "許為真世俗",
+      "category": "中觀二諦名相",
+      "safe_regex": "[虛虚]為真世俗",
+      "treatise_ref": "善顯密意疏 自續宗二諦",
+      "confidence": 0.99,
+      "reasoning": "自續派承許為倒世俗或真世俗，ASR 誤為虛為。"
+    },
+    "影像自行空": {
+      "corrected": "影像自性空",
+      "category": "中觀空性名相",
+      "safe_regex": "影像自行空",
+      "treatise_ref": "善顯密意疏 影像喻",
+      "confidence": 0.99,
+      "reasoning": "非影像自性空，ASR 誤為影像自行空。"
+    },
+    "無明瞭": {
+      "corrected": "無明了",
+      "category": "錯字過度繁化",
+      "safe_regex": "無明瞭",
+      "treatise_ref": "OpenCC 過度轉換保護",
+      "confidence": 0.99,
+      "reasoning": "簡體無明了轉繁體時被誤轉為無明瞭，正確應為無明了知之了。"
     }
   },
   "context_rules": [
@@ -81,119 +479,7 @@
       "proposed": "菩薩從初地進趣二諦。",
       "pageRef": "p.23",
       "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
-    },
-    {
-      "sessionId": "95B",
-      "original": "菩薩從初地進趣二地。",
-      "proposed": "菩薩從初地進趣二諦。",
-      "pageRef": "p.23",
-      "confidence": 0.88,
-      "reasoning": "含同音語境依賴詞，隔離為單句修改。"
+      "reasoning": "含同音語境依賴詞（二地 vs 二諦），隔離為單句修改，保護全庫十地菩薩名相不被盲換。"
     }
   ]
 }
