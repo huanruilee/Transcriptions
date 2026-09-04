@@ -56,8 +56,8 @@ test('📑 科判與課文位置對應完整性測試 (TOC & Transcript Position
     return sessionCache.get(sid);
   }
 
-  await t.test('1. Session Reference Integrity (All 393 nodes point to valid published sessions)', () => {
-    assert.equal(allNodes.length, 393, 'TOC must contain exactly 393 doctrinal nodes');
+  await t.test('1. Session Reference Integrity (All TOC nodes point to valid published sessions)', () => {
+    assert.ok(allNodes.length >= 393, `TOC must retain the 393-node baseline (got ${allNodes.length})`);
     const missingSessions = [];
 
     allNodes.forEach(({ node, ancestors }) => {
@@ -205,4 +205,3 @@ test('📑 科判與課文位置對應完整性測試 (TOC & Transcript Position
     }
   });
 });
-

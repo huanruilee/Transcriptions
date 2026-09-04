@@ -172,6 +172,25 @@ BUDDHIST_GLOSSARY = [
     (r"限到", "陷到"),
     (r"\b2D\b|2d|２Ｄ", "二諦"),
     (r"\b4D\b|4d|４Ｄ", "四諦"),
+
+    # 30B Doctrinal & Outline phonetics
+    (r"這個是物[意一]嗎", "這個是戌一嗎"),
+    (r"物[意一]嗎", "戌一嗎"),
+    (r"民[語语]何世俗", "明於何世俗"),
+    (r"名言何世俗前為諦", "明於何世俗前為諦"),
+    (r"真意[爲為]有自[信性]", "增益為有自性"),
+    (r"無自[信性]真意[爲為]有自[信性]", "無自性增益為有自性"),
+    (r"障[必畢]為體", "障蔽為體"),
+    (r"來人所[為名]", "能仁說為"),
+    (r"人人說為世俗[諦帝地]", "能仁說為世俗諦"),
+    (r"人人說名世俗[諦帝地]", "能仁說名世俗諦"),
+    (r"無[信信]而迷亂", "無性而迷亂"),
+    (r"[虛虚]為真世俗", "許為真世俗"),
+    (r"影像自行空", "影像自性空"),
+    (r"執連面", "執臉面"),
+    (r"現連面", "現臉面"),
+    (r"古[生神]", "谷響"),
+    (r"行止", "形質"),
 ]
 
 
@@ -194,6 +213,17 @@ def load_course_session_map():
 def get_session_source_text(session_id, session_map):
     session_info = session_map.get(session_id, {})
     page_range = session_info.get("pageRange", "")
+    if not page_range:
+        try:
+            from prepare_session_manifest import MISSING_SESSIONS_CATALOG
+            page_range = MISSING_SESSIONS_CATALOG.get(session_id, {}).get("pageRange", "")
+        except Exception:
+            try:
+                from scripts.prepare_session_manifest import MISSING_SESSIONS_CATALOG
+                page_range = MISSING_SESSIONS_CATALOG.get(session_id, {}).get("pageRange", "")
+            except Exception:
+                pass
+
     if not page_range:
         return "", []
 
@@ -238,6 +268,12 @@ def download_audio_if_needed(session_id, audio_url):
 
 WHISPER_GPU_URL = os.environ.get("WHISPER_GPU_URL", "http://127.0.0.1:8010/v1/audio/transcriptions")
 
+BUDDHIST_WHISPER_INITIAL_PROMPT = (
+    "以下是見悲青增格西講授《入中論善顯密意疏》的開示錄音。包含專有名相：見悲青增格西、月稱菩薩、宗喀巴大師、"
+    "中觀應成派、自續派、唯識、經部、有部、世俗諦、勝義諦、二諦、無自性、中觀應成、"
+    "阿賴耶識、空性、現觀、菩提心、見行、遮遣、所破、因明量論、名言有、勝義無、七相推求。"
+)
+
 def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
     print(f"\n[Step 1/5] 🎙️ Running Whisper Large-v3 ASR on GPU (Port 8010 CUDA) for {session_id}...")
     
@@ -245,7 +281,17 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
     try:
         with open(audio_path, "rb") as f:
             files = {"file": (os.path.basename(audio_path), f, "audio/mpeg")}
-            data = {"language": "zh", "response_format": "verbose_json", "beam_size": "5"}
+            data = {
+                "language": "zh",
+                "response_format": "verbose_json",
+                "beam_size": "5",
+                "initial_prompt": BUDDHIST_WHISPER_INITIAL_PROMPT,
+                "patience": "1.2",
+                "repetition_penalty": "1.08",
+                "condition_on_previous_text": "false",
+                "vad_min_silence_duration_ms": "600",
+                "vad_speech_pad_ms": "400"
+            }
             r = requests.post(WHISPER_GPU_URL, files=files, data=data, timeout=300)
             if r.status_code == 200:
                 res = r.json()
@@ -274,9 +320,13 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
         segments, info = whisper_model.transcribe(
             str(audio_path),
             language="zh",
+            initial_prompt=BUDDHIST_WHISPER_INITIAL_PROMPT,
             vad_filter=True,
-            vad_parameters=dict(min_silence_duration_ms=500),
+            vad_parameters=dict(min_silence_duration_ms=600, speech_pad_ms=400),
             beam_size=5,
+            patience=1.2,
+            condition_on_previous_text=False,
+            repetition_penalty=1.08,
             word_timestamps=True
         )
         
@@ -375,6 +425,26 @@ def call_llm_completion(messages, temperature=0.05, timeout=60):
 def step3_llm_proofread(sentences, session_id, source_text=""):
     print(f"\n[Step 3/5] 🧠 Deep proofreading with Smart Router for {session_id} (Grounded: {len(source_text)} chars)...")
     
+    # 1. Outline scaffolding from toc.json
+    outline_context = ""
+    toc_path = Path("courses/入中論善顯密意疏/toc.json")
+    if toc_path.exists():
+        try:
+            with open(toc_path, "r", encoding="utf-8") as f:
+                toc_data = json.load(f)
+            matching_titles = []
+            def search_sections(sections):
+                for sec in sections:
+                    if session_id in sec.get("sessionIds", []) or sec.get("sessionId") == session_id:
+                        matching_titles.append(sec.get("title", ""))
+                    if "children" in sec:
+                        search_sections(sec["children"])
+            search_sections(toc_data.get("sections", []))
+            if matching_titles:
+                outline_context = "\n\n【當前講次宗喀巴大師科判綱目】：\n" + "\n".join(f"- {t}" for t in matching_titles)
+        except Exception:
+            pass
+
     source_context_block = ""
     if source_text:
         source_context_block = f"""\n\n【當前講次對應之《入中論善顯密意疏》底本參考原文】：
@@ -383,15 +453,20 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
 ---"""
 
     system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的頂級佛學專家與校對主編。
-當前文本為法師第 {session_id} 堂錄音口述逐字稿。{source_context_block}
+當前文本為【見悲青增格西】講授第 {session_id} 堂錄音口述逐字稿。{outline_context}{source_context_block}
 
 【佛法名相與同音錯字校對手冊】：
-- 補特伽羅（Pudgala / gang zag）：語音常誤為「葡萄切勒/葡萄切熱/葡萄切了/普特伽羅」，務必校正為「補特伽羅」。
+- 科判代號與綱目：格西常念天干地支科判（如「戌一」、「亥一」），語音常誤為「物意/物一」，務必校為「戌一/亥一」；「明於何世俗前為諦」常誤為「民語/名言」，務必校為「明於何世俗前為諦」。
+- 佛陀尊稱：底本「能仁說名世俗諦」，語音常誤為「來人所為/人人說為/老人」，務必校為「能仁說為/能仁說名世俗諦」。
+- 障蔽（kun rdzob / 能障）：世俗諦之世俗即「障蔽真實性」之義，語音常誤為「藏幣/藏自性」，務必校為「障蔽/障自性」。
+- 增益（Samāropa）：語音常誤為「真意/爭議」，務必校正為「增益」（如「增益為有自性」）。
+- 自性（Svabhāva）：常誤為「自信」，凡涉中觀性空法理，務必校正為「自性」（如「無自性」、「自性空」）。
+- 經論引文：如《楞伽經》「無性而迷亂，許為真世俗」常誤為「無信而迷亂/虛為真世俗」，務必校為「無性而迷亂，許為真世俗」。
+- 補特伽羅（Pudgala）：語音常誤為「葡萄切勒/葡萄切熱/葡萄切了/普特伽羅」，務必校正為「補特伽羅」。
 - 此宗能諍 / 出過：語音常誤為「此宗有何能政治/能整/能政」，務必校正為「此宗有何能諍/能諍」。
 - 緣青色 / 見青之緣：語音常誤為「原青色/原青眼/相偽/見青為元」，務必校正為「緣青色/緣青眼識/相違/見青之緣」。
 - 聰叡智士：語音常誤為「充類知識/聰銳志士」，務必校正為「聰叡智士」。
-- 宗喀巴大師疏文：語音常誤為「最驚議/精偉/深吸/神系/門禁/雲我終無所需」，務必校正為「最精微/精微/深細/深細正理/門徑/云我宗無所許」。
-- 二諦正理：語音常誤為「生一地/生意諦/勝一地/世俗地/七狂法/陽眼/咒詩」，務必校正為「勝義諦/世俗諦/不欺誑法/陽焰/咒師/自相有/自證分/依他起」。
+- 二諦正理：語音常誤為「生一地/生意諦/勝一地/世俗地/七狂法/陽眼/咒詩/古生/行止」，務必校正為「勝義諦/世俗諦/不欺誑法/陽焰/咒師/自相有/自證分/依他起/谷響/形質」。
 
 【校對原則】：
 1. 【引用論疏原文時】：若法師在讀誦或引述論疏底本（如「頌曰：...」、「疏云：...」或經文），請嚴格依照上方底本字句校正 ASR 同音錯字。
@@ -419,10 +494,12 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
                 if len(corr_list) == len(batch):
                     res = []
                     for idx, s in enumerate(batch):
+                        clean_c = corr_list[idx]
+                        clean_c = clean_c.replace("無明瞭", "無明了").replace("明瞭了", "明了了")
                         res.append({
                             "start": s["start"],
                             "end": s["end"],
-                            "text": corr_list[idx]
+                            "text": clean_c
                         })
                     return b_idx, res
         except Exception as e:
@@ -650,9 +727,7 @@ def main():
         print("Usage: python3 scripts/batch_convert_all.py --sessions 29A 30A OR --all")
         sys.exit(0)
 
-    # Initialize Whisper Model (large-v3-turbo with int8 on multi-core ARM64)
-    print("\n📦 Loading faster-whisper large-v3-turbo on GX10 (int8, 8 threads)...")
-    from faster_whisper import WhisperModel
+    # Check for Whisper Model (Optional local fallback)
     progress = {}
     if PROGRESS_FILE.exists() and args.resume:
         with open(PROGRESS_FILE, "r") as f:
@@ -667,14 +742,16 @@ def main():
     print(f"\n🚀 Launching GX10 Pipeline with {args.workers} concurrent session workers.")
     print(f"🎯 Target queue: {len(pending_targets)} pending sessions (out of {len(targets)} total)")
 
-    from faster_whisper import WhisperModel
     import threading
     _local = threading.local()
 
     def get_thread_model():
         if not hasattr(_local, "model"):
-            print(f"  📦 Initializing WhisperModel on thread {threading.current_thread().name} (int8, 8 threads)...")
-            _local.model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
+            try:
+                from faster_whisper import WhisperModel
+                _local.model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
+            except Exception:
+                _local.model = None
         return _local.model
 
     def worker_task(sid):

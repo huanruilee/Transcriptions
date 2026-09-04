@@ -21,8 +21,8 @@ test('completion acceptance: course index references complete session JSON and p
   const course = readJson(COURSE_PATH);
   const seenIds = new Set();
 
-  // Full 199 sessions published (01~110B, including 99B recovered).
-  assert.equal(course.sessions.length, 199, 'course.json should list all 199 published sessions');
+  // Full course inventory: all 219 sessions canonically complete.
+  assert.equal(course.sessions.length, 219, `course.json should list all published sessions (expected 219, got ${course.sessions.length})`);
 
   for (const entry of course.sessions) {
     assert.equal(typeof entry.sessionId, 'string', 'sessionId should be present');
