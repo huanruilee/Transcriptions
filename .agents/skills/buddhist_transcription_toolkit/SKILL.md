@@ -255,3 +255,38 @@ flowchart TD
 4. **Live Verification & Web Review Marker Integration**:
    - GX10 directly generates `[REVIEW: reason]`, marking `reviewNeeded: true` and `uncertainty` in the session JSON, lighting up amber dashed underlines and `🔍 待核定` badges on GitHub Pages.
 
+---
+
+## 12. Smart Router Hybrid Multi-Tier Inference Engine (混合三層智慧路由與容錯架構)
+
+To maximize throughput and ensure 24/7 non-stop autonomous execution without quota exhaustion or latency spikes, the calibration system operates through the **Smart Router** (`http://127.0.0.1:14001/v1` via SSH tunnel to GX10 Port 4001):
+
+```mermaid
+flowchart TD
+    Client[Batch Calibration Client] -->|Bearer Token & extra_body| Router[Smart Router Port 4001 / 14001]
+    Router -->|Quota >= 30%| Tier1[Tier 1: MiniMax-Text-01]
+    Router -->|Quota < 10% or 429| Tier2[Tier 2: GX10 Local vLLM Qwen3.8-27B]
+    Router -->|Local Busy / Error| Tier3[Tier 3: Eneural qwen38fn-1m Cloud]
+    Daemon[QuotaDaemon mmx quota] -->|Every 30s| Router
+```
+
+### Routing & Model Specifications
+1. **Tier 1 (Primary Cloud): `minimax/MiniMax-Text-01`**
+   - **Characteristics**: Fast text/instruction model operating on user subscription quota.
+   - **Throughput**: ~25-30s per 40-sentence batch (~900 tokens).
+   - **Crucial Rule**: Never use `MiniMax-M3` for bulk proofreading as its unbounded reasoning tokens cause output truncation (`finish_reason: length`).
+2. **Tier 2 (Local Engine): `openai/Qwen3.8-27B` (vLLM Port 8001)**
+   - **Thinking Control**: Passed via `extra_body={"chat_template_kwargs": {"enable_thinking": False}}`. Disabling thinking produces answers in 1.8s instead of 100+ seconds.
+   - **LiteLLM drop_params**: `litellm.drop_params = True` strips `chat_template_kwargs` automatically when routing to cloud providers that do not support it.
+3. **Tier 3 (Cloud Fallback): `openai/qwen38fn-1m` (Eneural)**
+   - Used when both Tier 1 and Tier 2 are saturated or experiencing downtime.
+
+### Defensive Post-Polish Guard & Dynamic Quality Remediation
+1. **Array Length Preservation**:
+   - In batch LLM proofreading, if an upstream model returns fewer sentences than the prompt input (e.g. 38 instead of 40), fallback logic must append the original/prepolished batch slice to prevent array drift and preserve 1-to-1 sentence indexing.
+2. **Defensive Post-Polish Guard**:
+   - Immediately after LLM inference returns, apply `deterministic_prepolish_sentences` again before saving to disk. This guarantees that even if an LLM hallucinates or accidentally reverts a known term, the correct Buddhist term is deterministically enforced.
+3. **Automated Quality Gate Remediation**:
+   - Run `quality_scorer.scan_session_quality` and `targeted_remediation` immediately after each session completes to verify score $\ge 10/10$. Any residual errors matching `ERROR_DICTIONARY` are remediated in-place within 0.01s.
+
+

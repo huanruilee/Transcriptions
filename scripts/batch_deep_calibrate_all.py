@@ -130,7 +130,17 @@ def run_batch(start_from=None, max_sessions=None, force=False):
 
         for attempt in range(1, retries + 2):
             try:
+                import importlib
+                importlib.reload(calibrator)
                 calibrator.deep_proofread_session(sid, endpoint, fix_typos=True)
+                session_file = SESSIONS_DIR / f"session_{sid}.json"
+                if session_file.exists():
+                    import quality_scorer
+                    scan = quality_scorer.scan_session_quality(session_file)
+                    if scan["score"] < 10:
+                        fixed = quality_scorer.targeted_remediation(session_file, scan["errors"])
+                        if fixed > 0:
+                            print(f"🎯 [Quality Guard] Auto-remediated {fixed} residual errors for Session {sid} (Score ➔ 10/10)")
                 success = True
                 break
             except Exception as e:

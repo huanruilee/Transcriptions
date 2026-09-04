@@ -20,6 +20,9 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(line_buffering=True)
+
 ROOT = Path(__file__).resolve().parent.parent
 COURSE_DIR = ROOT / "courses" / "入中論善顯密意疏"
 SOURCE_DIR = COURSE_DIR / "source_text"
@@ -28,10 +31,17 @@ TOC_FILE = COURSE_DIR / "toc.json"
 COURSE_FILE = COURSE_DIR / "course.json"
 
 DEFAULT_ENDPOINTS = [
-    "http://127.0.0.1:18001/v1",       # Local Mac SSH tunnel
-    "http://192.168.122.1:8001/v1",     # Direct on GX10 host
-    "http://127.0.0.1:8001/v1",         # Direct local on GX10
+    "http://127.0.0.1:14001/v1",       # Smart Router via local Mac SSH tunnel (GX10 port 4001)
+    "http://127.0.0.1:4001/v1",        # Smart Router direct on GX10 host
+    "http://127.0.0.1:18001/v1",       # Direct vLLM fallback via Mac SSH tunnel (GX10 port 8001)
+    "http://192.168.122.1:8001/v1",     # Direct vLLM on GX10 host
+    "http://127.0.0.1:8001/v1",         # Direct local vLLM on GX10
 ]
+
+ROUTER_AUTH_TOKEN = os.environ.get(
+    "ROUTER_API_KEY",
+    "gx10-c6a5ae95f47bb838fff310e20cf22e6488a0a7b9ff32290d4d864f5d6f2110f5"
+)
 
 LEARNED_FILE = COURSE_DIR / "learned_corrections.json"
 
@@ -78,19 +88,26 @@ def deterministic_prepolish_sentences(sentences, learned_terms):
     return prepolished, total_pre_fixes
 
 def get_active_endpoint():
+    token = ROUTER_AUTH_TOKEN
     for ep in DEFAULT_ENDPOINTS:
         try:
-            req = urllib.request.Request(f"{ep}/models", method="GET")
-            with urllib.request.urlopen(req, timeout=2) as resp:
+            headers = {}
+            if "4001" in ep or "14001" in ep:
+                headers["Authorization"] = f"Bearer {token}"
+            req = urllib.request.Request(f"{ep}/models", headers=headers, method="GET")
+            with urllib.request.urlopen(req, timeout=3) as resp:
                 if resp.status == 200:
                     return ep
         except Exception:
             continue
-    raise RuntimeError("Cannot connect to GX10 Qwen3.8-27B endpoint.")
+    raise RuntimeError("Cannot connect to Smart Router or GX10 endpoint.")
 
-def query_llm(endpoint, system_prompt, user_prompt, temperature=0.0, max_tokens=4000):
+def query_llm(endpoint, system_prompt, user_prompt, temperature=0.0, max_tokens=4000, api_key=None):
+    is_smart_router = ("4001" in endpoint or "14001" in endpoint)
+    model_name = "primary" if is_smart_router else "Qwen3.8-27B"
+
     payload = {
-        "model": "Qwen3.8-27B",
+        "model": model_name,
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
@@ -99,15 +116,27 @@ def query_llm(endpoint, system_prompt, user_prompt, temperature=0.0, max_tokens=
         "max_tokens": max_tokens,
         "chat_template_kwargs": {"enable_thinking": False}
     }
+
+    headers = {"Content-Type": "application/json"}
+    token = api_key or ROUTER_AUTH_TOKEN
+    if token and is_smart_router:
+        headers["Authorization"] = f"Bearer {token}"
+
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         f"{endpoint}/chat/completions",
         data=data,
-        headers={"Content-Type": "application/json"},
+        headers=headers,
         method="POST"
     )
-    with urllib.request.urlopen(req, timeout=120) as resp:
+    start_t = time.time()
+    with urllib.request.urlopen(req, timeout=240) as resp:
         result = json.loads(resp.read().decode("utf-8"))
+        elapsed = time.time() - start_t
+        model_used = result.get("model", model_name)
+        usage = result.get("usage", {})
+        comp_toks = usage.get("completion_tokens", 0)
+        print(f"      ⚡ [Router: {model_used} | {comp_toks} tokens | {elapsed:.2f}s]")
         return result["choices"][0]["message"]["content"]
 
 def load_json(path):
@@ -198,12 +227,22 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
                 print(f"⚠️ Warning: Failed to parse batch JSON, keeping prepolished text.")
                 proofread_results.extend(batch)
             else:
-                corrected_batch = json.loads(m.group(0))
-                if len(corrected_batch) == len(batch):
+                try:
+                    corrected_batch = json.loads(m.group(0))
+                except Exception as ex:
+                    print(f"⚠️ Warning: JSON decode error ({ex}), keeping prepolished text.")
+                    corrected_batch = None
+
+                if corrected_batch and len(corrected_batch) == len(batch):
                     proofread_results.extend(corrected_batch)
                 else:
-                    print(f"⚠️ Warning: Batch count mismatch ({len(corrected_batch)} != {len(batch)}), falling back to prepolished.")
+                    count_str = len(corrected_batch) if corrected_batch else "None"
+                    print(f"⚠️ Warning: Batch count mismatch ({count_str} != {len(batch)}), falling back to prepolished.")
                     proofread_results.extend(batch)
+        # Defensive Post-Polish Guard (ensures no LLM output reverts known learned homophones)
+        proofread_results, post_fixes = deterministic_prepolish_sentences(proofread_results, learned_terms)
+        if post_fixes > 0:
+            print(f"🛡️ [Post-Polish Defensive Guard] Cleaned {post_fixes} residual homophones from LLM output!")
 
         # Apply proofread sentences back & collect review queue
         modified_count = 0
@@ -347,7 +386,7 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
 """
     outline_user_prompt = f"請依據以上物理邊界與底本原文，分析第 {session_id} 講逐字稿代表段落：\n" + sample_summary
 
-    outline_raw = query_llm(endpoint, outline_sys_prompt, outline_user_prompt, temperature=0.0)
+    outline_raw = query_llm(endpoint, outline_sys_prompt, outline_user_prompt, temperature=0.0, max_tokens=1500)
     m = re.search(r'\{.*\}', outline_raw, re.DOTALL)
     if not m:
         raise ValueError(f"Failed to parse outline JSON:\n{outline_raw}")
@@ -372,7 +411,19 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
     print(f"✅ Applied {len(heading_map)} calibrated headings to {session_file.name}")
 
     # Synchronize course.json
-    session_meta["summary"] = outline_data.get("summary", session_meta.get("summary"))
+    orig_summary = session_meta.get("summary", "")
+    ai_summary = outline_data.get("summary", orig_summary)
+    if " ・ " in orig_summary:
+        prefix = orig_summary.split(" ・ ")[0]
+        if prefix not in ai_summary:
+            session_meta["summary"] = f"{prefix} ・ {ai_summary}"
+        else:
+            session_meta["summary"] = ai_summary
+    elif any(k in orig_summary for k in ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛"]):
+        session_meta["summary"] = f"{orig_summary} ・ {ai_summary}"
+    else:
+        session_meta["summary"] = ai_summary
+
     session_meta["title"] = f"第 {session_meta.get('sessionNum')}{session_meta.get('subSession')} 堂 ({session_meta.get('periodLabel')}) | {session_meta.get('date')} | p.{page_num}"
     session_meta["sidebarLabel"] = f"（{session_id}）{session_meta.get('date').replace('-','')} 第六現前地p.{page_num}"
     save_json(COURSE_FILE, course_data)
@@ -396,6 +447,10 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
                     sids = n.setdefault("sessionIds", [])
                     if session_id not in sids:
                         sids.append(session_id)
+            nums = [int(re.findall(r'\d+', s)[0]) for s in n.get("sessionIds", []) if re.findall(r'\d+', s)]
+            if len(nums) >= 2 and (max(nums) - min(nums) > 20):
+                n["needsReview"] = True
+                n["reviewStatus"] = "needs_review"
             if n.get("children"):
                 update_toc(n["children"])
 
