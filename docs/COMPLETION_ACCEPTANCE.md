@@ -6,7 +6,7 @@ transcript platform.
 ## What The Gate Checks
 
 - Unit behavior for segmentation, time lookup, and the audio sync player.
-- `course.json` publishes exactly the accepted 198 sessions.
+- `course.json` publishes exactly the accepted 219 sessions.
 - Every published session points to an existing session JSON file.
 - Every published session has non-empty paragraph and sentence transcript data.
 - Every published session has monotonic paragraph and sentence timestamps.
@@ -29,4 +29,6 @@ require local audio-file presence:
 TRANSCRIPTIONS_REQUIRE_AUDIO_FILES=1 npm run test:acceptance
 ```
 
-GitHub Actions runs `npm test` on pushes and pull requests to `main`.
+GitHub Actions runs `npm test` on pushes and pull requests to `main`. The Pages
+deployment workflow starts only after the `main` push acceptance run succeeds,
+and deploys the exact commit SHA that passed that gate.
