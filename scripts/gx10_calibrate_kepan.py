@@ -20,6 +20,9 @@ from pathlib import Path
 import urllib.request
 import urllib.error
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from asr_lexicon import generate_prompt_bias_guidance
+
 ROOT = Path(__file__).resolve().parent.parent
 COURSE_DIR = ROOT / "courses" / "入中論善顯密意疏"
 SOURCE_DIR = COURSE_DIR / "source_text"
@@ -137,6 +140,8 @@ def analyze_session(session_id, endpoint, dry_run=False):
         for p in selected_samples
     )
 
+    bias_guidance = generate_prompt_bias_guidance(limit=18)
+
     system_prompt = """你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的佛學專家與校對主編。
 你的任務是依據法師（見悲青增格西）當堂錄音逐字稿與論疏底本，進行精確的「科判對齊、小標題劃分與講次摘要」。
 
@@ -154,6 +159,8 @@ def analyze_session(session_id, endpoint, dry_run=False):
 
 3. 【課程摘要 (Summary)】：
    - 一句精鍊的繁體中文課程綱要，格式如：「酉一 釋世俗諦 ・ 戌一 明於何世俗前為諦何前不諦（亥一 正義）與影像谷響喻」。
+
+""" + bias_guidance + """
 
 【輸出格式】：
 必須嚴格輸出純 JSON 物件，不得包含 markdown 標籤或任何前導文字：
