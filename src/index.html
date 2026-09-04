@@ -87,10 +87,13 @@
         <!-- Phase 1: Sticky Doctrinal Breadcrumb — updates live as audio plays -->
         <div id="toc-breadcrumb" class="toc-breadcrumb" role="navigation" aria-label="即時科判路徑" style="display:none;"></div>
 
-        <!-- Active Session Header Title -->
-        <h1 id="active-session-title" style="color: var(--primary-color); margin-top: 0; font-size: 1.5rem; font-weight: 700;">
-          第 2A 堂 (上) | 2016-05-28 | p.63
-        </h1>
+        <!-- Active Session Header Title & Mobile TOC Trigger -->
+        <div class="session-header-row">
+          <h1 id="active-session-title" style="color: var(--primary-color); margin-top: 0; font-size: 1.5rem; font-weight: 700;">
+            第 2A 堂 (上) | 2016-05-28 | p.63
+          </h1>
+          <button id="mobile-toc-drawer-btn" class="mobile-toc-drawer-btn" data-testid="mobile-toc-drawer-btn" aria-haspopup="dialog" aria-label="展開本課科判目錄">📑 本課科判</button>
+        </div>
 
         <!-- Collapsible TOC with Course/Book Toggle -->
         <div id="toc-container">
@@ -135,6 +138,10 @@
     </div>
   </footer>
 
-  <script type="module" src="js/app.js?v=1.1.4"></script>
+  <!-- Mobile Bottom Sheet TOC Drawer & Backdrop -->
+  <div id="toc-sheet-backdrop" class="toc-sheet-backdrop" data-testid="toc-sheet-backdrop"></div>
+  <div id="toc-bottom-sheet" class="toc-bottom-sheet" data-testid="toc-bottom-sheet" role="dialog" aria-modal="true" aria-label="本課科判目錄"></div>
+
+  <script type="module" src="js/app.js?v=1.1.5"></script>
 </body>
 </html>

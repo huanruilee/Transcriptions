@@ -101,6 +101,9 @@ export function renderTOC(sections, onSeekTo, options = {}) {
   if (currentActiveSessionId) {
     applyActiveHighlight(currentActiveSessionId);
   }
+
+  // Phase 2 / Mobile Upgrade: initialize mobile bottom sheet
+  initTOCBottomSheet(sections, onSeekTo, currentActiveSessionId);
 }
 
 /**
@@ -111,20 +114,25 @@ export function renderTOC(sections, onSeekTo, options = {}) {
 export function applyActiveHighlight(sessionId) {
   currentActiveSessionId = sessionId;
   const container = document.getElementById('toc-container');
-  if (!container) return;
+  if (container) {
+    // Clear previous active
+    container.querySelectorAll('.toc-link.active').forEach(el => el.classList.remove('active'));
 
-  // Clear previous active
-  container.querySelectorAll('.toc-link.active').forEach(el => el.classList.remove('active'));
+    // Highlight all links whose data-session-id matches
+    const matches = container.querySelectorAll(`.toc-link[data-session-id="${sessionId}"]`);
+    matches.forEach(el => {
+      el.classList.add('active');
+      // Scroll the first match into view (centered) so user sees current position
+      if (el === matches[0]) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
 
-  // Highlight all links whose data-session-id matches
-  const matches = container.querySelectorAll(`.toc-link[data-session-id="${sessionId}"]`);
-  matches.forEach(el => {
-    el.classList.add('active');
-    // Scroll the first match into view (centered) so user sees current position
-    if (el === matches[0]) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  });
+  // Update mobile bottom sheet with new session context if cached
+  if (_cachedSections && _bottomSheetOnSeekTo) {
+    initTOCBottomSheet(_cachedSections, _bottomSheetOnSeekTo, sessionId);
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -331,21 +339,9 @@ function renderSectionNodes(nodes, courseOnly, parentUl) {
     link.textContent = node.title;
     li.appendChild(link);
 
-    // Show session badges (supporting multiple sessions if taught in multiple classes)
+    // Show session badges (pinned active session + collapsed ghost badge)
     if (nodeSessions.length > 0) {
-      nodeSessions.forEach(sid => {
-        const sessionBadge = document.createElement('span');
-        sessionBadge.className = `toc-session-badge ${sid === currentActiveSessionId ? 'active' : ''}`;
-        sessionBadge.textContent = sid;
-        sessionBadge.title = `點擊切換至 第 ${sid} 堂 講授段落`;
-        sessionBadge.addEventListener('click', (e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          window.location.hash = `#session-${sid}`;
-        });
-        link.appendChild(document.createTextNode(' '));
-        link.appendChild(sessionBadge);
-      });
+      renderSessionBadges(link, nodeSessions, currentActiveSessionId);
     }
 
     // Show clean page badge if page is present
@@ -427,3 +423,362 @@ export function findTOCNodeAtParagraphStart(paragraphStart, sessionId, tolerance
   walk(_cachedSections);
   return match;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Desktop Tag Collapse & Popover Navigation
+// ─────────────────────────────────────────────────────────────────────────────
+
+let activePopover = null;
+
+/**
+ * Close any active session popover.
+ */
+export function closeActivePopover() {
+  if (activePopover) {
+    if (activePopover.anchor) {
+      activePopover.anchor.setAttribute('aria-expanded', 'false');
+    }
+    if (activePopover.el && activePopover.el.parentNode) {
+      activePopover.el.parentNode.removeChild(activePopover.el);
+    }
+    activePopover = null;
+  }
+}
+
+/**
+ * Toggle session popover next to anchor button.
+ * @param {HTMLElement} anchorBtn
+ * @param {string[]} allSessions
+ * @param {string|null} activeSessionId
+ */
+export function togglePopover(anchorBtn, allSessions, activeSessionId) {
+  if (activePopover && activePopover.anchor === anchorBtn) {
+    closeActivePopover();
+    return;
+  }
+  closeActivePopover();
+
+  if (typeof document === 'undefined') return;
+
+  const popover = document.createElement('div');
+  popover.className = 'toc-popover';
+  popover.setAttribute('role', 'tooltip');
+
+  const title = document.createElement('div');
+  title.className = 'toc-popover-title';
+  title.textContent = `相關講次 (${allSessions.length})`;
+  popover.appendChild(title);
+
+  const list = document.createElement('div');
+  list.className = 'toc-popover-list';
+
+  allSessions.forEach(sid => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `popover-session-item ${sid === activeSessionId ? 'active' : ''}`;
+    btn.textContent = sid;
+    btn.title = `切換至第 ${sid} 講`;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      closeActivePopover();
+      if (typeof window !== 'undefined') {
+        window.location.hash = `#session-${sid}`;
+      }
+    });
+    list.appendChild(btn);
+  });
+
+  popover.appendChild(list);
+
+  anchorBtn.setAttribute('aria-expanded', 'true');
+  if (document.body) {
+    document.body.appendChild(popover);
+    const rect = typeof anchorBtn.getBoundingClientRect === 'function' ? anchorBtn.getBoundingClientRect() : null;
+    const scrollY = typeof window !== 'undefined' ? (window.scrollY || 0) : 0;
+    const scrollX = typeof window !== 'undefined' ? (window.scrollX || 0) : 0;
+    const top = (rect ? rect.bottom : 0) + scrollY + 4;
+    const left = Math.max(8, (rect ? rect.left : 0) + scrollX - 10);
+    popover.style.top = `${top}px`;
+    popover.style.left = `${left}px`;
+  } else if (anchorBtn.parentNode) {
+    anchorBtn.parentNode.appendChild(popover);
+  }
+
+  activePopover = { el: popover, anchor: anchorBtn };
+}
+
+/**
+ * Render pinned session badge + collapsed ghost button for remaining sessions.
+ * @param {HTMLElement} link
+ * @param {string[]} nodeSessions
+ * @param {string|null} activeSessionId
+ */
+export function renderSessionBadges(link, nodeSessions, activeSessionId) {
+  if (!nodeSessions || nodeSessions.length === 0 || typeof document === 'undefined') return;
+
+  // Find pinned session: active session if present in nodeSessions, else first session
+  const hasActive = activeSessionId && nodeSessions.includes(activeSessionId);
+  const pinnedSession = hasActive ? activeSessionId : nodeSessions[0];
+
+  // 1. Pinned badge
+  const pinnedBadge = document.createElement('span');
+  pinnedBadge.className = `toc-session-badge ${pinnedSession === activeSessionId ? 'active' : ''}`;
+  pinnedBadge.textContent = pinnedSession;
+  pinnedBadge.title = `點擊切換至 第 ${pinnedSession} 堂 講授段落`;
+  pinnedBadge.addEventListener('click', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (typeof window !== 'undefined') {
+      window.location.hash = `#session-${pinnedSession}`;
+    }
+  });
+  link.appendChild(document.createTextNode(' '));
+  link.appendChild(pinnedBadge);
+
+  // 2. Collapsed ghost button if multiple sessions
+  const otherSessions = nodeSessions.filter(sid => sid !== pinnedSession);
+  if (otherSessions.length > 0) {
+    const collapseBtn = document.createElement('button');
+    collapseBtn.type = 'button';
+    collapseBtn.className = 'toc-badge-collapsed';
+    collapseBtn.dataset.testid = 'toc-badge-collapsed';
+    collapseBtn.setAttribute('aria-haspopup', 'dialog');
+    collapseBtn.setAttribute('aria-expanded', 'false');
+    collapseBtn.title = `查看其餘 ${otherSessions.length} 個講次（點擊展開）`;
+    collapseBtn.textContent = `+${otherSessions.length} 講 ▾`;
+
+    collapseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      togglePopover(collapseBtn, nodeSessions, activeSessionId);
+    });
+
+    link.appendChild(document.createTextNode(' '));
+    link.appendChild(collapseBtn);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Mobile Bottom Sheet Drawer for Course TOC
+// ─────────────────────────────────────────────────────────────────────────────
+
+let _bottomSheetSections = null;
+let _bottomSheetOnSeekTo = null;
+
+/**
+ * Open the mobile TOC bottom sheet drawer.
+ */
+export function openTOCBottomSheet() {
+  if (typeof document === 'undefined') return;
+  const sheet = document.getElementById('toc-bottom-sheet');
+  const backdrop = document.getElementById('toc-sheet-backdrop');
+  if (sheet) sheet.classList.add('open');
+  if (backdrop) backdrop.classList.add('open');
+  if (document.body) document.body.classList.add('toc-sheet-open');
+}
+
+/**
+ * Close the mobile TOC bottom sheet drawer.
+ */
+export function closeTOCBottomSheet() {
+  if (typeof document === 'undefined') return;
+  const sheet = document.getElementById('toc-bottom-sheet');
+  const backdrop = document.getElementById('toc-sheet-backdrop');
+  if (sheet) sheet.classList.remove('open');
+  if (backdrop) backdrop.classList.remove('open');
+  if (document.body) document.body.classList.remove('toc-sheet-open');
+}
+
+/**
+ * Return whether the mobile TOC bottom sheet drawer is currently open.
+ * @returns {boolean}
+ */
+export function isBottomSheetOpen() {
+  if (typeof document === 'undefined') return false;
+  const sheet = document.getElementById('toc-bottom-sheet');
+  return !!(sheet && sheet.classList.contains('open'));
+}
+
+/**
+ * Initialize or update the mobile bottom sheet drawer.
+ * @param {Array} sections - root sections array from toc.json
+ * @param {Function} onSeekTo - callback (targetSession, timestamp)
+ * @param {string|null} activeSessionId - currently active session ID
+ */
+export function initTOCBottomSheet(sections, onSeekTo, activeSessionId) {
+  _bottomSheetSections = sections;
+  _bottomSheetOnSeekTo = onSeekTo;
+
+  if (typeof document === 'undefined') return;
+
+  const sheet = document.getElementById('toc-bottom-sheet');
+  const backdrop = document.getElementById('toc-sheet-backdrop');
+  const mobileDrawerBtn = document.getElementById('mobile-toc-drawer-btn');
+
+  // Filter nodes belonging to activeSessionId
+  const sessionNodes = [];
+  function collectSessionNodes(nodes) {
+    if (!Array.isArray(nodes)) return;
+    for (const n of nodes) {
+      const sids = Array.isArray(n.sessionIds) && n.sessionIds.length > 0
+        ? n.sessionIds
+        : (n.sessionId ? [n.sessionId] : []);
+      if (activeSessionId && sids.includes(activeSessionId)) {
+        sessionNodes.push(n);
+      }
+      if (n.children && n.children.length > 0) {
+        collectSessionNodes(n.children);
+      }
+    }
+  }
+  collectSessionNodes(sections);
+
+  // Update header button label with matching section count
+  if (mobileDrawerBtn) {
+    const count = sessionNodes.length;
+    mobileDrawerBtn.textContent = count > 0 ? `📑 本課科判 (${count})` : '📑 本課科判';
+  }
+
+  if (!sheet) return;
+
+  sheet.innerHTML = '';
+
+  const dragHandle = document.createElement('div');
+  dragHandle.className = 'sheet-drag-handle';
+  sheet.appendChild(dragHandle);
+
+  const header = document.createElement('div');
+  header.className = 'sheet-header';
+
+  const titleGroup = document.createElement('div');
+  titleGroup.className = 'sheet-title-group';
+
+  const title = document.createElement('div');
+  title.className = 'sheet-title';
+  title.textContent = '📑 本課科判目錄';
+  titleGroup.appendChild(title);
+
+  const subtitle = document.createElement('div');
+  subtitle.className = 'sheet-subtitle';
+  subtitle.textContent = `講次：${activeSessionId || '未指定'}（共 ${sessionNodes.length} 個節點）`;
+  titleGroup.appendChild(subtitle);
+
+  header.appendChild(titleGroup);
+
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.className = 'sheet-close-btn';
+  closeBtn.id = 'sheet-close-btn';
+  closeBtn.setAttribute('aria-label', '關閉科判目錄');
+  closeBtn.textContent = '✕';
+  closeBtn.addEventListener('click', () => {
+    closeTOCBottomSheet();
+  });
+  header.appendChild(closeBtn);
+
+  sheet.appendChild(header);
+
+  const body = document.createElement('div');
+  body.className = 'sheet-body';
+
+  if (sessionNodes.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'sheet-empty';
+    empty.style.padding = '24px 16px';
+    empty.style.textAlign = 'center';
+    empty.style.color = 'var(--text-muted, #777)';
+    empty.textContent = '本講次尚無專屬科判節點';
+    body.appendChild(empty);
+  } else {
+    const ul = document.createElement('ul');
+    ul.className = 'sheet-node-list';
+
+    sessionNodes.forEach(node => {
+      const li = document.createElement('li');
+      li.className = 'sheet-node-item';
+
+      const info = document.createElement('div');
+      info.className = 'sheet-node-info';
+
+      const nodeTitle = document.createElement('span');
+      nodeTitle.className = 'sheet-node-title';
+      nodeTitle.textContent = node.title;
+      info.appendChild(nodeTitle);
+
+      if (node.page) {
+        const pageSpan = document.createElement('span');
+        pageSpan.className = 'toc-page-badge';
+        pageSpan.textContent = `p.${node.page}`;
+        info.appendChild(pageSpan);
+      }
+
+      li.appendChild(info);
+
+      const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
+      if (ts > 0) {
+        const min = Math.floor(ts / 60);
+        const sec = Math.floor(ts % 60).toString().padStart(2, '0');
+
+        const tsBtn = document.createElement('button');
+        tsBtn.type = 'button';
+        tsBtn.className = 'sheet-timestamp-btn';
+        tsBtn.dataset.sessionId = activeSessionId;
+        tsBtn.dataset.timestamp = String(ts);
+        tsBtn.setAttribute('aria-label', `跳至 ${min}:${sec} 播放`);
+        tsBtn.innerHTML = `<span class="sheet-ts-icon">⏱️</span> ${min}:${sec}`;
+
+        tsBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeTOCBottomSheet();
+          if (onSeekTo) {
+            onSeekTo(activeSessionId, ts);
+          }
+        });
+
+        li.appendChild(tsBtn);
+      } else {
+        const pending = document.createElement('span');
+        pending.className = 'sheet-ts-pending';
+        pending.textContent = '待標註';
+        li.appendChild(pending);
+      }
+
+      ul.appendChild(li);
+    });
+
+    body.appendChild(ul);
+  }
+
+  sheet.appendChild(body);
+
+  if (backdrop) {
+    backdrop.onclick = () => {
+      closeTOCBottomSheet();
+    };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Global Accessibility Listeners (Escape & Outside Click)
+// ─────────────────────────────────────────────────────────────────────────────
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', (e) => {
+    if (activePopover && activePopover.el && !activePopover.el.contains(e.target) && e.target !== activePopover.anchor) {
+      closeActivePopover();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (activePopover) {
+        closeActivePopover();
+      }
+      if (isBottomSheetOpen()) {
+        closeTOCBottomSheet();
+      }
+    }
+  });
+}
+
