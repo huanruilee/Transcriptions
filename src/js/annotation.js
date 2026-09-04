@@ -225,6 +225,16 @@ export function openSentenceEditorModal(sessionId, sentence, onSaveCallback, onD
       </div>
 
       <div class="modal-body">
+        ${(sentence.reviewNeeded || sentence.uncertainty) ? `
+        <!-- AI Review Uncertainty Banner -->
+        <div class="review-needed-callout" style="background: #fff7ed; border: 1px solid #fdba74; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 0.88rem; color: #9a3412;">
+          <div style="font-weight: bold; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+            <span>🔍 AI 大模型存疑提示（待人工聽音核定）</span>
+          </div>
+          <div style="line-height: 1.5;">${escapeHtml(sentence.uncertainty || sentence.review_reason || '此句可能存在生僻佛學名相或語音盲區，請依錄音耳聽核定正確用字。')}</div>
+        </div>
+        ` : ''}
+
         <!-- Context Snippet Box -->
         <div class="context-snippet-box" style="background: rgba(0,0,0,0.03); border: 1px dashed rgba(0,0,0,0.15); border-radius: 6px; padding: 10px; margin-bottom: 12px; font-size: 0.9rem; line-height: 1.6;">
           <div style="font-size: 0.8rem; font-weight: bold; color: #78350f; margin-bottom: 4px;">📖 前後文義脈絡（段落語境）：</div>

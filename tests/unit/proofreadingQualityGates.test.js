@@ -93,3 +93,36 @@ test('Proofreading Quality Gate: Session 31B Text Purity and Conformance', (t) =
   assert.ok(!allText.includes('女兒太無關係'), 'Must not contain "女兒太無關係"');
 });
 
+test('Proofreading Quality Gate: Session 32A Text Purity and Review Markers', () => {
+  const session32APath = path.join(__dirname, '../../courses/入中論善顯密意疏/sessions/session_32A.json');
+  assert.ok(existsSync(session32APath), 'Session 32A file must exist');
+
+  const session = JSON.parse(readFileSync(session32APath, 'utf8'));
+  let allText = '';
+  let reviewNeededCount = 0;
+
+  for (const p of session.paragraphs) {
+    for (const s of p.sentences) {
+      allText += s.text + ' ';
+      if (s.reviewNeeded) {
+        reviewNeededCount++;
+        assert.ok(s.uncertainty && s.uncertainty.length > 0, 'Uncertainty reason must be non-empty when reviewNeeded is true');
+      }
+    }
+  }
+
+  // Must not contain known ASR errors
+  assert.ok(!allText.includes('皮活沙'), 'Must not contain "皮活沙" (should be 毘婆沙)');
+  assert.ok(!allText.includes('皮革沙'), 'Must not contain "皮革沙" (should be 毘婆沙)');
+  assert.ok(!allText.includes('撒家眼見'), 'Must not contain "撒家眼見" (should be 薩迦耶見)');
+  assert.ok(!allText.includes('長一自在我空'), 'Must not contain "長一自在我空" (should be 常一自在我空)');
+  assert.ok(!allText.includes('生文跟獨久'), 'Must not contain "生文跟獨久" (should be 聲聞跟獨覺)');
+  assert.ok(!allText.includes('十有空'), 'Must not contain "十有空" (should be 實有空)');
+  assert.ok(!allText.includes('三聖 五道'), 'Must not contain "三聖 五道" (should be 三乘 五道)');
+  assert.ok(!allText.includes('人回的根本'), 'Must not contain "人回的根本" (should be 輪迴的根本)');
+  assert.ok(!allText.includes('二字的第一個'), 'Must not contain "二字的第一個" (should be 十二支的第一個)');
+
+  // Must have uncertainty review markers for web UI verification
+  assert.ok(reviewNeededCount > 0, `Must have marked uncertain sentences for web UI review (found ${reviewNeededCount})`);
+});
+

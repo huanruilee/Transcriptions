@@ -3,8 +3,8 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-09-04T21:52:00+08:00",
-    "totalGlobalTerms": 68
+    "lastUpdated": "2026-09-04T22:23:25.001986+08:00",
+    "totalGlobalTerms": 77
   },
   "global_terms": {
     "明眼識": {
@@ -534,6 +534,94 @@
       "treatise_ref": "善顯密意疏 p.102",
       "confidence": 0.99,
       "reasoning": "心與境二者之義，ASR 誤聽為心跟敬。"
+    },
+    "皮活沙": {
+      "corrected": "毘婆沙",
+      "category": "宗義部派名相",
+      "safe_regex": "皮活沙",
+      "treatise_ref": "俱舍論/宗義寶鬘 毘婆沙部",
+      "confidence": 0.99,
+      "reasoning": "Vaibhāṣika 毘婆沙宗，ASR 誤聽為皮活沙。"
+    },
+    "皮革沙": {
+      "corrected": "毘婆沙",
+      "category": "宗義部派名相",
+      "safe_regex": "皮革沙",
+      "treatise_ref": "俱舍論/宗義寶鬘 毘婆沙部",
+      "confidence": 0.99,
+      "reasoning": "Vaibhāṣika 毘婆沙宗，ASR 誤聽為皮革沙。"
+    },
+    "中大師": {
+      "corrected": "宗大師",
+      "category": "造論祖師尊稱",
+      "safe_regex": "中大師",
+      "treatise_ref": "宗喀巴大師",
+      "confidence": 0.99,
+      "reasoning": "宗喀巴大師（Tsongkhapa），ASR 音近誤聽為中大師。"
+    },
+    "撒家眼見": {
+      "corrected": "薩迦耶見",
+      "category": "根本煩惱名相",
+      "safe_regex": "撒家眼見",
+      "treatise_ref": "善顯密意疏 p.103 亥二",
+      "confidence": 0.99,
+      "reasoning": "satkāya-dṛṣṭi 薩迦耶見（壞聚見/我見），ASR 音訛誤為撒家眼見。"
+    },
+    "尺寸不共": {
+      "corrected": "此宗不共",
+      "category": "宗義建立名相",
+      "safe_regex": "尺寸不共",
+      "treatise_ref": "善顯密意疏 p.103 亥二釋煩惱不共建立",
+      "confidence": 0.99,
+      "reasoning": "自宗/此宗不共建立，ASR 音訛為尺寸不共。"
+    },
+    "長一自在我空": {
+      "corrected": "常一自在我空",
+      "category": "人無我名相",
+      "safe_regex": "長一自在我空",
+      "treatise_ref": "宗義寶鬘 人無我品",
+      "confidence": 0.99,
+      "reasoning": "常、一、自主之我空，粗分人無我，ASR 誤為長一自在我空。"
+    },
+    "生文跟獨久": {
+      "corrected": "聲聞跟獨覺",
+      "category": "小乘二乘名相",
+      "safe_regex": "生文跟獨久",
+      "treatise_ref": "善顯密意疏 p.102 L14",
+      "confidence": 0.99,
+      "reasoning": "Śrāvaka & Pratyekabuddha 聲聞獨覺二乘，ASR 誤為生文跟獨久。"
+    },
+    "十有空": {
+      "corrected": "實有空",
+      "category": "中觀空性名相",
+      "safe_regex": "十有空",
+      "treatise_ref": "善顯密意疏 p.103 空性抉擇",
+      "confidence": 0.99,
+      "reasoning": "實有空（無自性空），ASR 音近誤為十有空。"
+    },
+    "其面論是要": {
+      "corrected": "清辯論師等",
+      "category": "中觀祖師名相",
+      "safe_regex": "其面論是要",
+      "treatise_ref": "自續派始祖 清辯論師（Bhāviveka）",
+      "confidence": 0.99,
+      "reasoning": "中觀自續派清辯論師，ASR 音訛為其面論是要。"
+    },
+    "事故有說": {
+      "corrected": "是故有說",
+      "category": "論文原句",
+      "safe_regex": "事故有說",
+      "treatise_ref": "善顯密意疏 p.101 L25",
+      "confidence": 0.99,
+      "reasoning": "原文「是故有說：世間常識亦知為錯亂之影像等境」，ASR 誤聽。"
+    },
+    "一直有錯亂": {
+      "corrected": "亦知為錯亂",
+      "category": "論文原句",
+      "safe_regex": "一直有錯亂",
+      "treatise_ref": "善顯密意疏 p.101 L25",
+      "confidence": 0.99,
+      "reasoning": "原文「亦知為錯亂之影像等境」，ASR 誤聽。"
     }
   },
   "context_rules": [
