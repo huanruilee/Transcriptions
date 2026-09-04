@@ -179,6 +179,8 @@ if (!WebSocketCtor) {
     await send('Network.setCacheDisabled', { cacheDisabled: true });
 
     // Force reload
+    consoleMessages.length = 0;
+    exceptions.length = 0;
     await send('Page.reload', { ignoreCache: true });
 
     // Wait for load + JS fetch + render

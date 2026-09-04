@@ -134,11 +134,22 @@ async function loadCourseData(targetCourseId, targetSessionId) {
 
     // Determine starting session (hash or localStorage or first)
     const savedSession = targetSessionId || hashRoute.sessionId || (location.hash ? location.hash.replace('#session-', '') : (localStorage.getItem(`last_session_${currentCourseId}`) || localStorage.getItem('last_session_id') || '01'));
-    const initialSession = courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0];
+    const initialSession = (courseData.sessions && courseData.sessions.length > 0)
+      ? (courseData.sessions.find(s => s.sessionId === savedSession) || courseData.sessions[0])
+      : null;
 
-    renderSidebar(getFilteredSessions(), initialSession.sessionId, switchSession, courseData.unavailableSessions);
-    renderTOC(tocData.sections, handleSeekTo);
-    await switchSession(initialSession);
+    if (initialSession) {
+      renderSidebar(getFilteredSessions(), initialSession.sessionId, switchSession, courseData.unavailableSessions);
+      renderTOC(tocData?.sections || [], handleSeekTo);
+      await switchSession(initialSession);
+    } else {
+      renderSidebar([], null, switchSession, courseData.unavailableSessions);
+      renderTOC([], handleSeekTo);
+      const article = document.getElementById('transcript-container');
+      if (article) {
+        article.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-muted);">本課程音檔與逐字稿籌備中，敬請期待。</div>';
+      }
+    }
 
     // Listen to browser back/forward (Bug 1.3 fix)
     if (!isHashListenerAttached) {
