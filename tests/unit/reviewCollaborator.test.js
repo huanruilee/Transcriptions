@@ -8,7 +8,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
@@ -19,6 +19,7 @@ const SCRIPT_PATH = path.join(PROJECT_ROOT, 'scripts', 'review_collaborator.py')
 const REPORTS_DIR = path.join(PROJECT_ROOT, 'reports');
 
 test('🤝 Review Collaborator Suite', async (t) => {
+  mkdirSync(REPORTS_DIR, { recursive: true });
   assert.ok(existsSync(SCRIPT_PATH), 'review_collaborator.py must exist');
 
   const testSessionId = 'test_collab';
