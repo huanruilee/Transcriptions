@@ -7,6 +7,8 @@
   "scripts": {
     "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js tests/cross-artifact-consistency.test.js tests/required-set-not-truncated.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
+    "test:completeness": "node --test tests/unit/webSourceCompleteness.test.js",
+    "test:completeness:strict": "TRANSCRIPTIONS_STRICT_COMPLETENESS=1 node --test tests/unit/webSourceCompleteness.test.js",
     "test:ui-v2": "node --test tests/unit/uiV2Revamp.test.js",
     "test:toc": "node --test tests/unit/tocTranscriptAlignment.test.js",
     "test:oral": "node --test tests/unit/oralReferencesAudit.test.js",
@@ -17,6 +19,7 @@
     "test:qa": "node scripts/qa_analyze.js",
     "test:qa:json": "node scripts/qa_analyze.js --json",
     "test:asr-gate": "node --test tests/unit/asrIntegrityGate.test.js",
+    "test:proofread": "node --test tests/unit/proofreadingQualityGates.test.js",
     "test:rating": "node --test tests/unit/reviewRating.test.js",
     "audit:oral": "python3 scripts/audit_oral_references.py",
     "audit:transcript": "node scripts/transcript_candidate_auditor.mjs",

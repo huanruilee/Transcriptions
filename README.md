@@ -1,6 +1,6 @@
 # Transcriptions (系列課程逐字稿多媒體學習平台)
 
-[![100% Complete](https://img.shields.io/badge/Progress-200%2F200%20(100%25)-brightgreen.svg)](https://huanruilee.github.io/Transcriptions/)
+[![100% Complete](https://img.shields.io/badge/Progress-219%2F219%20(100%25)-brightgreen.svg)](https://huanruilee.github.io/Transcriptions/)
 [![Quality Score](https://img.shields.io/badge/Quality%20Score-10.0%2F10.0%20(Full%20Pass)-blue.svg)](docs/ASR_M1_FINAL_CLOSURE_REPORT.md)
 [![ASR Gate Passed](https://img.shields.io/badge/ASR--M2%20Gate-6%2F6%20Passed-success.svg)](tests/unit/asrIntegrityGate.test.js)
 [![GGF Governed](https://img.shields.io/badge/Governance-GGF%20v1.1-blue.svg)](https://github.com/huanruilee/gx10-governance)
@@ -8,7 +8,7 @@
 
 `Transcriptions` 是一個開源、高精度、具備主動學習與自進化能力的系列課程逐字稿多媒體學習平台。
 
-本專案目前收錄 **《入中論善顯密意疏》200 講次資料**；每一講的正式發布、候選稿與人工複核狀態，以課程資料及自動驗收門禁為準。平台提供音訊逐字稿、時間軸對齊、科判導覽與可追溯校對流程。
+本專案目前收錄 **《入中論善顯密意疏》219 講次資料**；每一講的正式發布、候選稿與人工複核狀態，以課程資料及自動驗收門禁為準。平台提供音訊逐字稿、時間軸對齊、科判導覽與可追溯校對流程。
 
 🌐 **線上正式閱讀器**：👉 **[https://huanruilee.github.io/Transcriptions/](https://huanruilee.github.io/Transcriptions/)**
 

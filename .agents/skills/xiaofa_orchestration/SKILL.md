@@ -63,11 +63,12 @@ HTTP 200, healthy container, or plausible screenshot is not acceptance.
 Write a short task brief before dispatch:
 
 ```text
-Scope: one bug or one bounded feature; list allowed paths.
-Baseline: branch, commit, workspace root, and known unrelated changes.
-RED: exact command and the expected failure.
-GREEN: exact invariants and commands that must pass.
-Source: authoritative URL/files and identity rules.
+Scope: one bounded session or cluster (e.g. 03B or 03B..07B); list allowed paths.
+Preflight: verify Whisper GPU (8010) and vLLM (8001/4001) health.
+Baseline: branch, commit, workspace root, and current completeness audit count.
+RED: exact command (e.g., npm run test:completeness:strict) and expected missing failure.
+GREEN: exact invariants and commands that must pass (e.g., npm run test:completeness).
+Source: canonical 219 web URL (https://buddha.flyday.com.tw/...) and source_text pageRange.
 Evidence: persistent directory and required raw artifacts.
 Forbidden: placeholders, invented data, merge, deploy, restart, hardware mutation.
 Closeout: branch/commit, test output, diff, reviewer handoff, residual risk.
@@ -75,6 +76,35 @@ Closeout: branch/commit, test output, diff, reviewer handoff, residual risk.
 
 Do not let a worker infer a broad goal from a short sentence. A task should be
 small enough that its failure has one primary cause.
+
+### Automated Manifest & Turnkey Dispatch Assistant
+Use the automated dispatch assistant to generate standardized task briefs or inspect missing session inventory:
+```sh
+python3 scripts/prepare_session_manifest.py --list      # Inspect 18 missing sessions
+python3 scripts/prepare_session_manifest.py --batch 1    # Generate turnkey prompt for Batch 1 (03B..07B)
+python3 scripts/prepare_session_manifest.py --prompt 03B # Generate turnkey prompt for single session
+```
+
+### Preflight: Verify local microservices health
+Before dispatching any ASR transcription task, verify that the required local microservices are up and responsive:
+```sh
+curl -s http://127.0.0.1:8010/health
+# Expected: {"backend":"cuda","compute_type":"int8","device":"cuda","model_loaded":true,"status":"ok"}
+
+curl -s http://192.168.122.1:8001/v1/models
+# Expected: HTTP 200 with loaded model (Qwen3.8-27B)
+```
+If either service is unresponsive, halt with `BLOCKED`. Do not proceed with simulated or CPU fallback transcription without explicit orchestrator approval.
+
+### Pipeline Execution Invariants & Field-Tested Lessons
+Based on the full 219-session production rollout, the following invariants MUST be adhered to:
+1. **Never Import Heavy CTranslate2 on CPU Runtimes**: The GX10 environment uses the Dockerized Port 8010 Whisper microservice. Calling scripts (`batch_convert_all.py`) must gracefully decouple local imports to prevent `libctranslate2.so.4` dynamic linker faults.
+2. **Metadata Catalog Fallback**: When transcribing new or backlog sessions not yet registered in `course.json`, the pipeline must fallback to `scripts/prepare_session_manifest.py:MISSING_SESSIONS_CATALOG` to guarantee treatise page range grounding.
+3. **Mandatory Post-Processing Sanity Gates**:
+   - **Traditional Chinese Purity Gate**: Immediately pass output JSON through OpenCC `s2twp` or strict dictionary substitution; verify with `node --test tests/unit/traditionalChinesePurity.test.js`.
+   - **Phonetic Corruption Blacklist Gate**: Run `node --test tests/unit/asrIntegrityGate.test.js` to catch any homophone slips (e.g. `應層 -> 應成`, `有不進步 -> 有部、經部`, `自取 -> 自續`, `為世 -> 唯識`).
+   - **Atomic Dual-Registration**: When a session is verified, simultaneously register it in `course.json` (with metadata) and `toc.json` (`coverage.missingAnchors`).
+4. **Autonomous Streaming Pipeline**: When processing multiple sessions, queue them in a single batch on the GPU runner (e.g., `--sessions 39B 41B 48B...`). This amortizes process overhead and enables unattended continuous execution without agent context token exhaustion.
 
 ### M1: Establish the workspace
 
@@ -113,8 +143,9 @@ runner failure and must be reported with the path.
 ### M2: Write and run the RED test
 
 The test must fail on the baseline for the intended reason. For a TOC/session
-change, test the contract across all relevant artifacts, not just one file:
+change or missing session transcription, test the contract across all relevant artifacts:
 
+- for missing sessions: `npm run test:completeness:strict` must fail and explicitly cite the target session as missing from the 219 web catalog;
 - official session inventory contains the expected session;
 - `course.json`, session JSON, `audio_map`, and sidebar agree;
 - published session has non-empty text and timestamped monotonic segments;
@@ -124,15 +155,27 @@ change, test the contract across all relevant artifacts, not just one file:
 Save the command and complete failing output. If the test passes before the
 fix, stop and explain why the baseline is not the expected baseline.
 
-### M3: Implement the smallest fix
+### M3: Execution Tracks: End-to-End Pipeline vs. Surgical Editorial
 
-Give Xiaofa only the allowed paths and the invariants. Require a focused diff.
-For ASR bugs, materialize one-shot generators before consuming them more than
-once. For content work, preserve the raw ASR, source-grounded correction, and
-published representation as separate traceable layers.
+Select the correct operational track for Xiaofa based on the task type:
 
-Do not allow a UI marker to conceal missing content. A pending marker is a
-valid interim state; an empty or invented session is not.
+#### Track 1: New Session Grounded Transcription (Batch Pipeline)
+When commissioning a missing session (e.g. `03B`, `04B`):
+1. **Pre-requisite**: Ensure the session entry exists in `course.json` with its authoritative `pageRange` (e.g. `p.66`) and in `audio_map.json` with its Flyday URL.
+2. **Execute Standard Pipeline**: Xiaofa MUST invoke the proven 5-step automated pipeline rather than writing ad-hoc scripts:
+   ```sh
+   python3 scripts/batch_convert_all.py --sessions <SID>
+   ```
+3. **Invariants**:
+   - Materializes `courses/入中論善顯密意疏/sessions/session_<SID>.json`.
+   - Never overwrite or modify unrelated existing session JSON files.
+   - Text is 100% Traditional Chinese with monotonic timestamps.
+
+#### Track 2: Existing Session Deterministic Audit & Surgical Remediation
+When fixing homophones or adjusting headings in an existing session (e.g. `30B`):
+- Run `npm run audit:transcript` with `--report` and `--apply-confirmed`.
+- Use `scripts/active_learning_manager.py` for ambiguity arbitration.
+- Preserve raw ASR and timestamps; do not blindly overwrite spoken words.
 
 ### M3.5: Freeze the editorial input
 
@@ -193,7 +236,14 @@ produced tool loops and unverifiable summaries.
 Require all of the following before review:
 
 - targeted RED test now passes;
-- relevant unit/integration tests pass;
+- completeness audit confirms that the missing backlog decreased monotonically without regressions:
+  ```sh
+  npm run test:completeness
+  ```
+- relevant unit and schema tests pass:
+  ```sh
+  npm run test:unit
+  ```
 - JSON/schema and cross-artifact consistency checks pass;
 - changed-file list and diff inspection show no scope leakage;
 - evidence files are readable from the persistent directory;
@@ -221,6 +271,24 @@ For editorial content, additionally require:
 
 Health checks, CUDA availability, image digests, and successful HTTP requests
 are necessary operational evidence but do not prove transcript correctness.
+
+### Token-Efficient Evidence Compression (Preventing LLM Token Waste)
+
+To prevent orchestrator context window bloat and eliminate excessive token consumption:
+1. **No Raw Transcript Dumps**: Workers MUST NOT print complete transcripts, raw Whisper JSON outputs, or thousands of sentence lines into terminal stdout.
+2. **File Persistence**: All detailed logs, diffs, and raw transcripts must be saved directly to `reviews/evidence/<SID>_transcription/` or `reviews/evidence/batch_<N>_transcription/`.
+3. **Structured Stdout Progress Card**: Workers must output ONLY a compact, structured completion card to stdout (< 200 tokens per session):
+```text
+==============================================================
+✅ [Session <SID> Completed]
+• Audio Source: <FILENAME> (Duration: <MMm SSs>, SHA-256: <HASH>)
+• Grounded Pages: <PAGE_RANGE> (<SOURCE_FILE>)
+• Transcribed: <N> sentences | <M> paragraphs | <K> subheadings
+• Audio Sync Match: <PCT>% (Threshold: >= 75%)
+• Evidence Directory: reviews/evidence/<SID>_transcription/summary.md
+• Verification: npm run test:unit (PASS) | Completeness (-1 missing)
+==============================================================
+```
 
 ### Deterministic candidate audit for a weaker worker
 
@@ -468,8 +536,47 @@ PENDING, BLOCKED, or GREEN to ACCEPTED.
 - Read-only independent review with direct artifact citations.
 - Rollback identity captured before deployment.
 
-## Reusable Xiaofa dispatch prompt
+## Reusable Xiaofa dispatch prompts
 
+### Template A: New Session Grounded Transcription (Missing Sessions Commissioning)
+```text
+You are the implementation worker (小法). Work only on transcribing and indexing session <SID>.
+
+Workspace: /home/henry/.gx10/xiaofa/workspace/Transcriptions
+Evidence directory: reviews/evidence/<SID>_transcription
+Allowed paths:
+- courses/入中論善顯密意疏/sessions/session_<SID>.json
+- courses/入中論善顯密意疏/course.json
+- courses/入中論善顯密意疏/audio_map.json
+- courses/入中論善顯密意疏/toc.json
+
+Forbidden: No fake/placeholder JSON, no invented words, no modifying unrelated sessions, no editing tests.
+
+Step 0 (Preflight):
+1. `cd /home/henry/.gx10/xiaofa/workspace/Transcriptions` and verify `pwd`.
+2. Check Whisper GPU: `curl -s http://127.0.0.1:8010/health`
+3. Check Qwen vLLM: `curl -s http://192.168.122.1:8001/v1/models`
+   If either fails, stop immediately with BLOCKED.
+
+Step 1 (RED Test):
+Run `npm run test:completeness:strict` and record that session <SID> is missing.
+
+Step 2 (Execution):
+Run the verified batch conversion pipeline:
+`python3 scripts/batch_convert_all.py --sessions <SID>`
+
+Step 3 (GREEN Test):
+1. Verify transcript non-emptiness: `session_<SID>.json` has valid paragraphs and monotonic timestamps.
+2. Ensure course.json and audio_map.json contain <SID> with official Flyday URL: <OFFICIAL_FLYDAY_URL>.
+3. Add <SID> to toc.json coverage.missingAnchors (if not anchored yet).
+4. Run `npm run test:completeness` to confirm missing session count dropped by 1.
+5. Run `npm run test:unit` to verify zero regression.
+
+Step 4 (Closeout):
+Save evidence bundle (hashes, sentence count, duration, test output) to reviews/evidence/<SID>_transcription/summary.md.
+```
+
+### Template B: Existing Session Surgical Remediation
 ```text
 You are the implementation worker. Work only on: <one bounded scope>.
 
@@ -481,17 +588,15 @@ restart, or hardware mutation unless explicitly authorized.
 
 First `cd` to the exact workspace, record `pwd`, and assert that the resolved
 project root and evidence directory are descendants of that workspace. Then
-record git root, branch, commit, and status. Abort and report the path if any
-profile memory or inherited `TERMINAL_CWD` points elsewhere.
+record git root, branch, commit, and status.
 Then run the RED command and save its complete output. Stop if the baseline
 does not fail as specified.
 
 Implement the smallest fix. Run the GREEN commands and save complete outputs,
 changed-file list, diff check, source metadata, hashes, and runtime identity.
 
-For transcript editorial work, also produce a review ledger and samples for
-the first, middle, last, and every heading-bounded passage. Add punctuation
-and paragraphs only in the published layer. Preserve raw ASR and mark any
+For transcript editorial work, run `npm run audit:transcript -- --session <PATH> --apply-confirmed`.
+Add punctuation and paragraphs only in the published layer. Preserve raw ASR and mark any
 uncertain doctrinal or Tibetan term instead of guessing.
 
 Close with: status, commit, exact commands and exit codes, evidence paths,

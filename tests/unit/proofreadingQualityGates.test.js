@@ -1,0 +1,65 @@
+/**
+ * tests/unit/proofreadingQualityGates.test.js
+ * Verification of Automated Proofreading Workflow Improvements:
+ * 1. Outline Scaffolding & Letter Recovery (戌一, 明於何世俗)
+ * 2. Doctrinal Term Phonetic Correction (增益, 障蔽, 自性)
+ * 3. Holy Citation & Root Text Grounding (能仁說名/說為, 楞伽經引文)
+ * 4. OpenCC Defensive Filter (無明了 protection)
+ * 5. Batch pipeline configuration checks in batch_convert_all.py
+ */
+
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync, existsSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PROJECT_ROOT = path.join(__dirname, '../..');
+
+test('Proofreading Quality Gate: Outline & Doctrinal Rules in Pipeline', (t) => {
+  const scriptPath = path.join(PROJECT_ROOT, 'scripts', 'batch_convert_all.py');
+  assert.ok(existsSync(scriptPath), 'batch_convert_all.py must exist');
+  const content = readFileSync(scriptPath, 'utf8');
+
+  // 1. Outline Scaffolding
+  assert.match(content, /outline_context\s*=/, 'Pipeline must build outline context');
+  assert.match(content, /當前講次宗喀巴大師科判綱目/, 'Prompt must inject outline headings');
+
+  // 2. Glossary pre-masking
+  assert.match(content, /物\[意一\]嗎.*戌一嗎/, 'Must map 物意/物一 -> 戌一');
+  assert.match(content, /民\[語语\]何世俗.*明於何世俗/, 'Must map 民語 -> 明於');
+  assert.match(content, /真意.*增益/, 'Must map 真意 -> 增益');
+  assert.match(content, /障\[必畢\]為體.*障蔽為體/, 'Must map 障必為體 -> 障蔽為體');
+  assert.match(content, /來人所\[為名\].*能仁說為/, 'Must map 來人所為/名 -> 能仁說為');
+  assert.match(content, /無\[信信\]而迷亂.*無性而迷亂/, 'Must map 無信而迷亂 -> 無性而迷亂');
+  assert.match(content, /\[虛虚\]為真世俗.*許為真世俗/, 'Must map 虛為真世俗 -> 許為真世俗');
+  assert.match(content, /影像自行空.*影像自性空/, 'Must map 影像自行空 -> 影像自性空');
+
+  // 3. OpenCC Defensive Filter
+  assert.match(content, /\.replace\("無明瞭", "無明了"\)/, 'Must defend 無明了 from OpenCC over-conversion');
+});
+
+test('Proofreading Quality Gate: Session 30B Text Purity and Conformance', (t) => {
+  const sessionPath = path.join(PROJECT_ROOT, 'courses', '入中論善顯密意疏', 'sessions', 'session_30B.json');
+  assert.ok(existsSync(sessionPath), 'session_30B.json must exist');
+  const session = JSON.parse(readFileSync(sessionPath, 'utf8'));
+
+  const allText = session.paragraphs.flatMap(p => p.sentences.map(s => s.text)).join(' ');
+
+  // Verified corrections must exist in session_30B text
+  assert.ok(allText.includes('這個是戌一嗎'), 'Must contain "這個是戌一嗎" (corrected from 物意)');
+  assert.ok(allText.includes('明於何世俗前為諦'), 'Must contain "明於何世俗前為諦" (corrected from 民語/名言)');
+  assert.ok(allText.includes('障蔽'), 'Must contain "障蔽" (corrected from 藏幣/藏自性)');
+  assert.ok(allText.includes('增益為有自性'), 'Must contain "增益為有自性" (corrected from 真意為有自信)');
+  assert.ok(allText.includes('能仁說名世俗諦') || allText.includes('能仁說為世俗諦'), 'Must contain "能仁說名/為世俗諦" (corrected from 來人所為)');
+  assert.ok(allText.includes('無性而迷亂，許為真世俗'), 'Must contain "無性而迷亂，許為真世俗" (corrected from 無信而迷亂虛為真世俗)');
+  assert.ok(allText.includes('無明了'), 'Must contain "無明了" (defended against 無明瞭)');
+
+  // Corruptions must NOT exist
+  assert.ok(!allText.includes('這個是物意嗎'), 'Must not contain "這個是物意嗎"');
+  assert.ok(!allText.includes('民語何世俗'), 'Must not contain "民語何世俗"');
+  assert.ok(!allText.includes('真意為有自信'), 'Must not contain "真意為有自信"');
+  assert.ok(!allText.includes('來人所為世間'), 'Must not contain "來人所為世間"');
+  assert.ok(!allText.includes('無明瞭'), 'Must not contain "無明瞭"');
+});

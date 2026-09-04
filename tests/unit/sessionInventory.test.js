@@ -79,4 +79,29 @@ test('session inventory: 30B published transcript is non-empty and timestamped',
   assert.equal(session._meta?.engine, 'whisper-large-v3-turbo',
     '30B must record the accepted ASR engine');
   assert.ok(session._meta?.sourceAudioUrl, '30B must record source audio provenance');
+  assert.equal(typeof session._meta?.sourceAudioDuration, 'number',
+    '30B must record the authoritative source audio duration');
+  const finalEnd = sentences.at(-1).end;
+  assert.ok(finalEnd <= session._meta.sourceAudioDuration + 0.1,
+    `30B published transcript must exclude ASR tail beyond source duration (${finalEnd} > ${session._meta.sourceAudioDuration})`);
+
+  const headings = session._meta?.headingEvidence;
+  assert.ok(Array.isArray(headings) && headings.length >= 6,
+    '30B must contain at least six grounded section headings');
+  for (const heading of headings) {
+    assert.equal(typeof heading.title, 'string');
+    assert.ok(heading.title.trim().length > 0);
+    assert.equal(typeof heading.source, 'string');
+    assert.equal(typeof heading.firstSegmentId, 'number');
+    assert.equal(typeof heading.timestamp, 'number');
+  }
+
+  for (const sentence of sentences) {
+    assert.equal(typeof sentence.rawText, 'string',
+      '30B must retain raw ASR text for provenance');
+    assert.equal(typeof sentence.proofreadText, 'string',
+      '30B must retain proofread text for provenance');
+    assert.equal(typeof sentence.sourceSegmentId, 'number',
+      '30B must retain source segment identity');
+  }
 });

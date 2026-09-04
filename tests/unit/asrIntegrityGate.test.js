@@ -199,7 +199,16 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
       { pattern: /有不[、\s]?進步/, suggestion: '有部、經部' },
       { pattern: /顛倒式/, suggestion: '顛倒識' },
       { pattern: /對所限|自己的所限/, suggestion: '對所現/自己的所現' },
-      { pattern: /應層/, suggestion: '應成' }
+      { pattern: /應層/, suggestion: '應成' },
+      { pattern: /物[意一]嗎/, suggestion: '戌一嗎' },
+      { pattern: /民[語语]何世俗/, suggestion: '明於何世俗' },
+      { pattern: /真意[爲為]有自[信性]/, suggestion: '增益為有自性' },
+      { pattern: /障[必畢]為體/, suggestion: '障蔽為體' },
+      { pattern: /來人所[為名]/, suggestion: '能仁說為' },
+      { pattern: /無[信信]而迷亂/, suggestion: '無性而迷亂' },
+      { pattern: /[虛虚]為真世俗/, suggestion: '許為真世俗' },
+      { pattern: /影像自行空/, suggestion: '影像自性空' },
+      { pattern: /無明瞭/, suggestion: '無明了' }
     ];
 
     const blacklistErrors = [];

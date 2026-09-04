@@ -6,7 +6,7 @@ transcript platform.
 ## What The Gate Checks
 
 - Unit behavior for segmentation, time lookup, and the audio sync player.
-- `course.json` publishes exactly the accepted 200 sessions.
+- `course.json` publishes exactly the accepted 219 sessions.
 - Every published session points to an existing session JSON file.
 - Every published session has non-empty paragraph and sentence transcript data.
 - Every published session has monotonic paragraph and sentence timestamps.
