@@ -12,8 +12,9 @@ Features:
 4. Non-Regression Gate Protection: Enforces dry-run diff check and verifies test:asr-gate before committing global edits.
 """
 
-import json, sys, os, re, argparse
+import json, sys, os, re, argparse, difflib
 from pathlib import Path
+from datetime import datetime, timezone
 import urllib.request
 
 COURSE_ROOT = Path(__file__).parent.parent / "courses" / "入中論善顯密意疏"
@@ -33,6 +34,21 @@ HOMOPHONE_AMBIGUITY_GUARD = {
     "正義": ("正智", "有時為世間公義，有時為正智，需依語境區分")
 }
 
+def extract_diff_pair(original, proposed):
+    """Extracts a single replacement pair (typo, corrected) between two text strings."""
+    if not original or not proposed or original == proposed:
+        return None
+    matcher = difflib.SequenceMatcher(None, original, proposed)
+    opcodes = matcher.get_opcodes()
+    replaces = [
+        (original[i1:i2], proposed[j1:j2])
+        for tag, i1, i2, j1, j2 in opcodes
+        if tag == "replace"
+    ]
+    if len(replaces) == 1:
+        return replaces[0]
+    return None
+
 def load_learned_corrections():
     if LEARNED_JSON_PATH.exists():
         try:
@@ -40,9 +56,12 @@ def load_learned_corrections():
                 return json.load(f)
         except Exception:
             pass
-    return {"_metadata": {"course": "入中論善顯密意疏", "version": "2.0"}, "global_terms": {}, "context_rules": []}
+    return {"_metadata": {"course": "入中論善顯密意疏", "version": "3.0"}, "global_terms": {}, "context_rules": []}
 
 def save_learned_corrections(data):
+    if "_metadata" in data and "global_terms" in data:
+        data["_metadata"]["totalGlobalTerms"] = len(data["global_terms"])
+        data["_metadata"]["lastUpdated"] = datetime.now(timezone.utc).isoformat()
     with open(LEARNED_JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
@@ -145,21 +164,43 @@ def evaluate_and_learn_edit(session_id, original_text, proposed_text, page_range
                 "reasoning": "標準格魯派藏音 gang zag 漢譯補特伽羅。"
             }
         elif any(h in original_text for h in HOMOPHONE_AMBIGUITY_GUARD):
+            matched_guard = [h for h in HOMOPHONE_AMBIGUITY_GUARD if h in original_text][0]
             result = {
                 "decision": "CONTEXT_SPECIFIC",
                 "confidence": 0.88,
                 "phonetic_pair": None,
                 "safe_regex": None,
-                "reasoning": "含同音語境依賴詞，隔離為單句修改。"
+                "reasoning": f"含同音語境依賴詞「{matched_guard}」，{HOMOPHONE_AMBIGUITY_GUARD[matched_guard][1]}，隔離為單句修改。"
             }
         else:
-            result = {
-                "decision": "CONTEXT_SPECIFIC" if original_text != proposed_text else "REJECTED",
-                "confidence": 0.90 if original_text != proposed_text else 0.5,
-                "phonetic_pair": None,
-                "safe_regex": None,
-                "reasoning": "單句自訂校訂。"
-            }
+            diff_pair = extract_diff_pair(original_text, proposed_text)
+            if diff_pair:
+                typo, corrected = diff_pair
+                if len(typo) >= 2 and len(corrected) >= 2 and len(typo) <= 10 and len(corrected) <= 10:
+                    safe_reg = generate_safe_regex_pattern(typo, corrected)
+                    result = {
+                        "decision": "GLOBAL_PROMOTED",
+                        "confidence": 0.98,
+                        "phonetic_pair": {"typo": typo, "corrected": corrected, "category": "佛學名相校訂"},
+                        "safe_regex": safe_reg,
+                        "reasoning": f"讀者校對回饋修正：「{typo} ➔ {corrected}」。"
+                    }
+                else:
+                    result = {
+                        "decision": "CONTEXT_SPECIFIC",
+                        "confidence": 0.88,
+                        "phonetic_pair": None,
+                        "safe_regex": None,
+                        "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+                    }
+            else:
+                result = {
+                    "decision": "CONTEXT_SPECIFIC" if original_text != proposed_text else "REJECTED",
+                    "confidence": 0.90 if original_text != proposed_text else 0.5,
+                    "phonetic_pair": None,
+                    "safe_regex": None,
+                    "reasoning": "單句自訂校訂。"
+                }
 
     # Absorption into learned_corrections.json based on decision
     decision = result.get("decision", "REJECTED")
