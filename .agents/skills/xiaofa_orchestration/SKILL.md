@@ -78,33 +78,46 @@ Do not let a worker infer a broad goal from a short sentence. A task should be
 small enough that its failure has one primary cause.
 
 ### Automated Manifest & Turnkey Dispatch Assistant
-Use the automated dispatch assistant to generate standardized task briefs or inspect missing session inventory:
+Use the automated dispatch assistant to inspect session inventory or generate batch task prompts:
 ```sh
-python3 scripts/prepare_session_manifest.py --list      # Inspect 18 missing sessions
-python3 scripts/prepare_session_manifest.py --batch 1    # Generate turnkey prompt for Batch 1 (03B..07B)
-python3 scripts/prepare_session_manifest.py --prompt 03B # Generate turnkey prompt for single session
+python3 scripts/prepare_session_manifest.py --list      # Inspect session inventory
 ```
 
-### Preflight: Verify local microservices health
-Before dispatching any ASR transcription task, verify that the required local microservices are up and responsive:
+### Preflight: Verify local microservices health & SSH Tunnel
+All 219 sessions have been 100% transcribed. For ongoing calibration and proofreading, the system uses a **Zero-Token SSH Tunnel Decoupled Orchestration Architecture**:
+* **Mac Orchestrator**: Maintains clean local git worktree, executes test suites (`npm test`), and dispatches batch tasks without burning cloud context tokens.
+* **Remote GX10 Host**: Headless GPU compute host hosting Whisper (Port 8010) and vLLM Qwen3.8-27B (Port 8001).
+
+1. Establish SSH local port forwarding tunnel:
 ```sh
+ssh -f -N -L 18001:192.168.122.1:8001 gx10
+```
+2. Verify endpoints:
+```sh
+# Local tunnel to remote vLLM Qwen3.8-27B:
+curl -s http://127.0.0.1:18001/v1/models
+
+# Remote Whisper microservice (direct or via tunnel):
 curl -s http://127.0.0.1:8010/health
 # Expected: {"backend":"cuda","compute_type":"int8","device":"cuda","model_loaded":true,"status":"ok"}
-
-curl -s http://192.168.122.1:8001/v1/models
-# Expected: HTTP 200 with loaded model (Qwen3.8-27B)
 ```
-If either service is unresponsive, halt with `BLOCKED`. Do not proceed with simulated or CPU fallback transcription without explicit orchestrator approval.
+If either service is unresponsive, halt with `BLOCKED`.
 
 ### Pipeline Execution Invariants & Field-Tested Lessons
-Based on the full 219-session production rollout, the following invariants MUST be adhered to:
-1. **Never Import Heavy CTranslate2 on CPU Runtimes**: The GX10 environment uses the Dockerized Port 8010 Whisper microservice. Calling scripts (`batch_convert_all.py`) must gracefully decouple local imports to prevent `libctranslate2.so.4` dynamic linker faults.
-2. **Metadata Catalog Fallback**: When transcribing new or backlog sessions not yet registered in `course.json`, the pipeline must fallback to `scripts/prepare_session_manifest.py:MISSING_SESSIONS_CATALOG` to guarantee treatise page range grounding.
+Based on the full 219-session production rollout and continuous calibration:
+1. **Decoupled Local/Remote Architecture**:
+   - Do NOT run interactive git operations or maintain a shared dirty clone directly on gx10 (`/home/henry/.gx10/xiaofa/workspace`).
+   - Run Python drivers locally on Mac via port forwarding (`http://127.0.0.1:18001/v1`), keeping code edits and git history strictly local, clean, and testable.
+2. **Zero-Token Orchestrator Invariant**:
+   - The Orchestrator (Claude / Antigravity) must never load full session transcripts into the cloud conversation context. All heavy semantic diffing and parsing must be delegated to local scripts running against the local Qwen3.8-27B endpoint.
 3. **Mandatory Post-Processing Sanity Gates**:
    - **Traditional Chinese Purity Gate**: Immediately pass output JSON through OpenCC `s2twp` or strict dictionary substitution; verify with `node --test tests/unit/traditionalChinesePurity.test.js`.
-   - **Phonetic Corruption Blacklist Gate**: Run `node --test tests/unit/asrIntegrityGate.test.js` to catch any homophone slips (e.g. `應層 -> 應成`, `有不進步 -> 有部、經部`, `自取 -> 自續`, `為世 -> 唯識`).
-   - **Atomic Dual-Registration**: When a session is verified, simultaneously register it in `course.json` (with metadata) and `toc.json` (`coverage.missingAnchors`).
-4. **Autonomous Streaming Pipeline**: When processing multiple sessions, queue them in a single batch on the GPU runner (e.g., `--sessions 39B 41B 48B...`). This amortizes process overhead and enables unattended continuous execution without agent context token exhaustion.
+   - **Phonetic Corruption Blacklist Gate**: Run `node --test tests/unit/asrIntegrityGate.test.js` to catch any homophone slips.
+   - **Physical Line Boundary Verification**: Ensure session headings never overshoot the physical text cutoff in `source_text/page_XXX.txt`.
+   - **Historical Filter Invariant**: Preserve required filter tokens in early session summaries (e.g. `歸敬頌` in 01, `釋禮敬` in 02A) to satisfy `tests/unit/sidebarFilterBehavior.test.js`.
+4. **Cluster Pipeline Execution**:
+   - Execute calibration in 8 structured clusters (`scripts/gx10_calibrate_kepan.py --cluster {1..8}`).
+   - Verify 100% pass across all 279 unit and acceptance tests before opening PR with auto-merge enabled.
 
 ### M1: Establish the workspace
 
@@ -602,6 +615,29 @@ uncertain doctrinal or Tibetan term instead of guessing.
 Close with: status, commit, exact commands and exit codes, evidence paths,
 limitations, rollback details if authorized, and the next reviewer command.
 Do not report complete when an evidence file is missing.
+```
+
+### Template C: Cluster Batch Calibration & Zero-Token Orchestration
+```text
+You are the Orchestrator. Calibrate Cluster <N> of the 219-session library using zero cloud context tokens.
+
+Preflight:
+1. Ensure SSH tunnel is active: `ssh -f -N -L 18001:192.168.122.1:8001 gx10`
+2. Probe vLLM model endpoint: `curl -s http://127.0.0.1:18001/v1/models`
+
+Execution:
+1. Create dedicated branch: `git checkout -b remediate/cluster-<N>-kepan`
+2. Run local batch calibration driver:
+   `python3 scripts/gx10_calibrate_kepan.py --cluster <N>`
+3. Run complete test suite:
+   `npm test`
+   Invariant: Must pass 100% (279 passed, 0 failed).
+
+Integration & Deployment:
+1. Commit: `git commit -m "remediate(cluster-<N>): calibrate kepan and session headings via gx10 Qwen3.8-27B"`
+2. Push & open PR: `gh pr create --title "..." --body "..."`
+3. Enable auto-merge: `gh pr merge <PR_NUMBER> --squash --auto`
+4. Confirm merge and GitHub Pages deployment workflow.
 ```
 
 ## Orchestrator closeout checklist
