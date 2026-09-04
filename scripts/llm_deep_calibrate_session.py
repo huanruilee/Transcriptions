@@ -17,6 +17,7 @@ import re
 import sys
 import time
 import urllib.request
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -164,7 +165,8 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
 【校對原則】：
 1. 嚴格修正所有佛學名相與同音訛字（如五米➔無明、石子➔實執、假信➔假性、地實➔諦實、世論➔《釋論》、生文➔聲聞、消聞➔消文等）。
 2. 保留見悲青增格西講課的白話開示語氣與口語助詞（如「對不對」、「這樣可以嗎」），切勿改寫為古文文言。
-3. 【極重要輸出規範】：輸入有 N 句話，必須返回剛好相同數量的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併、刪減或遺漏句子！
+3. 若對某句修正缺乏充分把握、或口語與底本法義嚴重衝突，請在該句開頭加上「[REVIEW: 存疑原因]」，後續將由高級專家大模型深度會診。
+4. 【極重要輸出規範】：輸入有 N 句話，必須返回剛好相同數量的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併、刪減或遺漏句子！
 """
             user_prompt = f"請依據底本校對以下 {len(batch)} 個句子，返回相同長度的 JSON 字串陣列：\n" + json.dumps(batch, ensure_ascii=False, indent=2)
 
@@ -181,17 +183,58 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
                     print(f"⚠️ Warning: Batch count mismatch ({len(corrected_batch)} != {len(batch)}), falling back to original.")
                     proofread_results.extend(batch)
 
-        # Apply proofread sentences back
+        # Apply proofread sentences back & collect review queue
         modified_count = 0
+        review_queue = []
+
         for idx, (p_i, s_i) in enumerate(sentence_lookup):
             if idx < len(proofread_results):
                 old_t = session_data["paragraphs"][p_i]["sentences"][s_i]["text"]
-                new_t = proofread_results[idx]
+                raw_new_t = proofread_results[idx]
+                s_obj = session_data["paragraphs"][p_i]["sentences"][s_i]
+
+                # Check if flagged for review
+                review_match = re.match(r'^\[(?:REVIEW|存疑)[:：]?\s*(.*?)\]\s*(.*)$', raw_new_t)
+                if review_match:
+                    reason, clean_new_t = review_match.groups()
+                    new_t = clean_new_t or old_t
+                    ctx_before = session_data["paragraphs"][p_i]["sentences"][s_i-1]["text"] if s_i > 0 else ""
+                    ctx_after = session_data["paragraphs"][p_i]["sentences"][s_i+1]["text"] if s_i < len(session_data["paragraphs"][p_i]["sentences"])-1 else ""
+                    review_queue.append({
+                        "session_id": session_id,
+                        "sentence_idx": idx,
+                        "start": s_obj.get("start", 0),
+                        "end": s_obj.get("end", 0),
+                        "asr_text": old_t,
+                        "local_proposal": new_t,
+                        "uncertainty_reason": reason or "模型主動標註存疑",
+                        "context_before": ctx_before,
+                        "context_after": ctx_after,
+                        "page_ref": page_range,
+                        "audio_url": session_data.get("audioUrl", "")
+                    })
+                else:
+                    new_t = raw_new_t
+
                 if old_t != new_t:
                     modified_count += 1
                     session_data["paragraphs"][p_i]["sentences"][s_i]["text"] = new_t
 
         print(f"✅ Text proofreading complete! Corrected {modified_count} sentences.")
+        if review_queue:
+            REPORTS_DIR = ROOT / "reports"
+            REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+            q_file = REPORTS_DIR / f"review_queue_{session_id}.json"
+            q_data = {
+                "session_id": session_id,
+                "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "total_sentences": len(all_sentences),
+                "review_count": len(review_queue),
+                "items": review_queue
+            }
+            with open(q_file, "w", encoding="utf-8") as f:
+                json.dump(q_data, f, ensure_ascii=False, indent=2)
+            print(f"⚠️ [Tier 2 Escalation] Detected {len(review_queue)} uncertain sentences. Exported to {q_file} for High-Tier Review!")
 
     # 2. Step 2: Doctrinal Outline & Kepan Grounding
     print("\n🧭 Step 2: Grounded Doctrinal Outline & Boundary Analysis...")
