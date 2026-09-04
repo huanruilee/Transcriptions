@@ -225,3 +225,33 @@ To achieve zero-error Buddhist transcription without over-reliance on cloud APIs
 4. **Web Review Console Audio Verification**:
    - For rare auditory ambiguities, run `python3 scripts/review_collaborator.py -s <SID> --export-web` to generate 3-second playback slices for `review.html`.
 
+---
+
+## 11. Autonomous Non-Stop Full-Course Calibration Pipeline (全庫無中斷校訂運轉規範)
+
+When calibrating or re-proofreading all 220 sessions across the treatise, execution must be fully autonomous, resilient, and non-stop:
+
+```mermaid
+flowchart TD
+    A[Start Session SID] --> B[Step 0: 0-Token CPU Deterministic Pre-polish]
+    B --> C[Step 1: Dynamic Lexicon Prompt Injection]
+    C --> D[Step 2: GX10 Qwen3.8-27B Dual-Track Calibration]
+    D --> E[Step 3: Automated [REVIEW] Tagging to Web UI]
+    E --> F[Step 4: Grounded Kepan Heading Alignment]
+    F --> G[Step 5: Timestamp & Metadata Auto-Sync]
+    G --> H[Update batch_calibration_progress.json]
+    H --> I[Advance to Next Session]
+```
+
+1. **Zero-Token Pre-polish & Dynamic Knowledge Feed**:
+   - Every session is first pre-polished by Python CPU using `learned_corrections.json` (77+ terms) before GPU inference.
+   - The 27B model prompt dynamically inherits all accumulated terms, preventing repetitive mistakes.
+2. **Auto-Retry & Fault Isolation (Never Halt)**:
+   - If a network glitch or API hiccup occurs, the runner retries up to 2 times with a 5-second backoff.
+   - If a session fails catastrophically, it logs the error to `reports/batch_calibration_progress.json` and continues immediately to the next session without stopping the global pipeline.
+3. **Resumability & Progress Auditing**:
+   - Progress is tracked in `reports/batch_calibration_progress.json` with live percentage display `[RUN XX/220 | YY.Y%]`.
+   - The runner can be resumed at any time using `python3 scripts/batch_deep_calibrate_all.py` without re-running completed sessions.
+4. **Live Verification & Web Review Marker Integration**:
+   - GX10 directly generates `[REVIEW: reason]`, marking `reviewNeeded: true` and `uncertainty` in the session JSON, lighting up amber dashed underlines and `🔍 待核定` badges on GitHub Pages.
+
