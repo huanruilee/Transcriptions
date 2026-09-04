@@ -194,3 +194,34 @@ To enable self-evolving transcription learning from interactive web proofreading
    ```bash
    npm run sync-server   # or: python3 scripts/sync_server.py
    ```
+
+---
+
+## 10. Human-AI Tiered Collaborative Review Protocol (階梯式協同審查規範)
+
+To achieve zero-error Buddhist transcription without over-reliance on cloud APIs or human burnout, the system employs a 3-tier collaborative review funnel:
+
+```
+[Tier 1: Local GX10 Qwen3.8-27B] 
+       │ (90~95% standard proofreading)
+       ▼ (uncertainty flags: [REVIEW: reason] / lexicon blindspots)
+[reports/review_queue_<SID>.json]
+       │
+       ▼
+[Tier 2: Antigravity AI Flagship Agent]
+       │ (deep doctrinal analysis against treatise source text)
+       ▼ (adjudicates rulings & formats collaborative report)
+[Tier 3: Human Review / review.html]
+         (one-click approval or 3-second audio snippet ear verification)
+```
+
+1. **Uncertainty Flagging in Local Model**:
+   - When GX10 encounters ambiguous homophones or doctrinal conflicts, it tags the sentence with `[REVIEW: reason]`.
+   - `scripts/llm_deep_calibrate_session.py` automatically extracts these items into `reports/review_queue_<SID>.json`.
+2. **High-Tier Agent Review & Formatting**:
+   - Run `python3 scripts/review_collaborator.py -s <SID> --format-markdown` to generate an executive review briefing with sentence context, ASR audio, local proposals, and source text citations.
+3. **Automated Ruling Application & Active Learning**:
+   - Run `python3 scripts/review_collaborator.py -s <SID> --apply <decisions.json>` to apply agreed rulings, update session timestamps, and absorb new terms into `learned_corrections.json`.
+4. **Web Review Console Audio Verification**:
+   - For rare auditory ambiguities, run `python3 scripts/review_collaborator.py -s <SID> --export-web` to generate 3-second playback slices for `review.html`.
+
