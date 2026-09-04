@@ -105,10 +105,10 @@ async function loadCourseData(targetCourseId, targetSessionId) {
       }
     }
 
-    const courseResp = await fetch(`${currentCoursePath}/course.json?_t=${Date.now()}`, { cache: 'no-cache' });
+    const courseResp = await fetch(`${currentCoursePath}/course.json`, { cache: 'no-cache' });
     courseData = await courseResp.json();
 
-    const tocResp = await fetch(`${currentCoursePath}/toc.json?_t=${Date.now()}`, { cache: 'no-cache' });
+    const tocResp = await fetch(`${currentCoursePath}/toc.json`, { cache: 'no-cache' });
     tocData = await tocResp.json();
 
     try {
@@ -223,8 +223,7 @@ async function switchSession(session) {
       currentSessionData._pilot_v2 = true;
     } else {
       const targetUrl = session.jsonUrl || `${currentCoursePath}/sessions/session_${session.sessionId}.json`;
-      const fetchUrl = targetUrl.includes('?') ? `${targetUrl}&_t=${Date.now()}` : `${targetUrl}?_t=${Date.now()}`;
-      resp = await fetch(fetchUrl, { cache: 'no-cache' });
+      resp = await fetch(targetUrl, { cache: 'no-cache' });
       if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
       currentSessionData = await resp.json();
     }
