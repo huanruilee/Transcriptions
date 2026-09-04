@@ -315,8 +315,13 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
         pid = p.get("id")
         if pid in heading_map:
             p["heading"] = heading_map[pid]
-        elif "heading" in p:
-            del p["heading"]
+    now_dt = datetime.now()
+    session_data["lastUpdated"] = now_dt.strftime("%Y-%m-%d")
+    if "_meta" not in session_data:
+        session_data["_meta"] = {}
+    session_data["_meta"]["last_updated"] = now_dt.strftime("%Y-%m-%d")
+    session_data["_meta"]["processed_at"] = now_dt.strftime("%Y-%m-%d %H:%M:%S")
+    session_data["_meta"]["llm_proofread"] = "Smart Router (GX10 Qwen3.8-27B Grounded + Antigravity Tiered Review)"
 
     save_json(session_file, session_data)
     print(f"✅ Applied {len(heading_map)} calibrated headings to {session_file.name}")
