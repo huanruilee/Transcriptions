@@ -20,7 +20,7 @@ import assert from 'node:assert/strict';
 import http from 'node:http';
 
 const DEBUG_PORT = process.env.CHROME_DEBUG_PORT || '9222';
-const LIVE_URL = process.env.LIVE_URL || 'https://gx10-2887.tail378c21.ts.net/transcriptions/';
+const LIVE_URL = process.env.LIVE_URL || 'https://huanruilee.github.io/Transcriptions/';
 const REQUIRE_BROWSER = process.env.REQUIRE_BROWSER_SMOKE === '1';
 
 async function isChromeReachable() {

@@ -1,5 +1,5 @@
 import { renderSidebar, updateHeaderTitle } from './sidebar.js';
-import { renderTOC, applyActiveHighlight, updateDoctrinalBreadcrumb, highlightTOCNodeByTime, findTOCNodeAtParagraphStart } from './toc.js';
+import { renderTOC, applyActiveHighlight, updateDoctrinalBreadcrumb, highlightTOCNodeByTime, findTOCNodeAtParagraphStart, openTOCBottomSheet } from './toc.js';
 import { initSyncPlayer, updateSession, getCurrentTimeScaleRatio, highlightSentenceByTime, startSimulatedPlayback, cancelPendingAutoScroll, freezeAutoScroll, cyclePlaybackRate, loadSavedPlaybackRate, setPlaybackRate } from './syncPlayer.js';
 import { initSearch } from './search.js';
 import { initContextMenu } from './contextMenu.js';
@@ -1376,19 +1376,21 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * Phase 1: Mobile TOC drawer trigger.
- * Tapping the 📖 科判 button in the footer scrolls the TOC accordion into view
- * and opens it so the user can see the current doctrinal position.
+ * Mobile TOC drawer trigger.
+ * Tapping the 📖 科判 button in footer or 📑 本課科判 in header opens the Bottom Sheet Drawer.
  */
 function initTOCDrawerTrigger() {
-  const btn = document.getElementById('toc-drawer-trigger');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const tocContainer = document.getElementById('toc-container');
-    const accordion = tocContainer && tocContainer.querySelector('.toc-accordion');
-    if (accordion) {
-      accordion.open = true;
-      accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+  const footerBtn = document.getElementById('toc-drawer-trigger');
+  if (footerBtn) {
+    footerBtn.addEventListener('click', () => {
+      openTOCBottomSheet();
+    });
+  }
+
+  const mobileBtn = document.getElementById('mobile-toc-drawer-btn');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      openTOCBottomSheet();
+    });
+  }
 }
