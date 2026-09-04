@@ -141,6 +141,14 @@ def apply_review_decisions(session_id, decisions, update_learned=True):
                 data["paragraphs"][p_i]["sentences"][s_i]["text"] = final_text
                 applied_count += 1
 
+            if d.get("review_needed") or action == "flag_for_web_review":
+                data["paragraphs"][p_i]["sentences"][s_i]["reviewNeeded"] = True
+                data["paragraphs"][p_i]["sentences"][s_i]["uncertainty"] = d.get("uncertainty") or d.get("reasoning") or "待人工聽音核定"
+            elif "reviewNeeded" in data["paragraphs"][p_i]["sentences"][s_i] and action in ("accept_proposal", "custom", "keep_asr"):
+                del data["paragraphs"][p_i]["sentences"][s_i]["reviewNeeded"]
+                if "uncertainty" in data["paragraphs"][p_i]["sentences"][s_i]:
+                    del data["paragraphs"][p_i]["sentences"][s_i]["uncertainty"]
+
             if update_learned and "learn_term" in d and d["learn_term"]:
                 learned_terms.append(d["learn_term"])
 
@@ -208,9 +216,57 @@ def export_to_web_review_queue(queue_data, output_path=None):
     print(f"🌐 Exported {len(web_queue)} items for web review console: {output_path}")
     return web_queue
 
+def extract_queue_from_session(session_id):
+    """Scan session JSON for reviewNeeded / uncertainty markers and build review queue data."""
+    session_file = SESSIONS_DIR / f"session_{session_id}.json"
+    if not session_file.exists():
+        raise FileNotFoundError(f"Session file not found: {session_file}")
+
+    course_data = load_json(COURSE_FILE)
+    session_meta = next((s for s in course_data.get("sessions", []) if s.get("sessionId") == session_id), {})
+    page_ref = session_meta.get("pageRange", "")
+
+    data = load_json(session_file)
+    review_items = []
+    flat_idx = 0
+
+    for p in data.get("paragraphs", []):
+        sentences = p.get("sentences", [])
+        for s_i, s in enumerate(sentences):
+            if s.get("reviewNeeded") or s.get("uncertainty"):
+                ctx_before = sentences[s_i - 1].get("text", "") if s_i > 0 else ""
+                ctx_after = sentences[s_i + 1].get("text", "") if s_i < len(sentences) - 1 else ""
+                review_items.append({
+                    "session_id": session_id,
+                    "sentence_idx": flat_idx,
+                    "start": s.get("start", 0),
+                    "end": s.get("end", 0),
+                    "asr_text": s.get("text", ""),
+                    "local_proposal": s.get("text", ""),
+                    "uncertainty_reason": s.get("uncertainty", "標註存疑待核定"),
+                    "context_before": ctx_before,
+                    "context_after": ctx_after,
+                    "page_ref": page_ref,
+                    "audio_url": data.get("audioUrl", "")
+                })
+            flat_idx += 1
+
+    queue_data = {
+        "session_id": session_id,
+        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "total_sentences": flat_idx,
+        "review_count": len(review_items),
+        "items": review_items
+    }
+    output_path = REPORTS_DIR / f"review_queue_{session_id}.json"
+    save_json(output_path, queue_data)
+    print(f"📋 Extracted {len(review_items)} review items from session_{session_id}.json -> {output_path}")
+    return queue_data
+
 def main():
     parser = argparse.ArgumentParser(description="Collaborative Tiered Reviewer CLI")
-    parser.add_argument("--session", "-s", help="Session ID (e.g. 31B)")
+    parser.add_argument("--session", "-s", help="Session ID (e.g. 31B, 32A)")
+    parser.add_argument("--extract", action="store_true", help="Extract review queue from session JSON reviewNeeded markers")
     parser.add_argument("--format-markdown", action="store_true", help="Format queue JSON as readable Markdown")
     parser.add_argument("--apply", help="Path to decisions JSON to apply")
     parser.add_argument("--export-web", action="store_true", help="Export to review.html format")
@@ -218,10 +274,14 @@ def main():
 
     if args.session:
         queue_path = REPORTS_DIR / f"review_queue_{args.session}.json"
+        
+        if args.extract:
+            extract_queue_from_session(args.session)
+            return
+
         if args.format_markdown:
             if not queue_path.exists():
-                print(f"Error: Review queue not found at {queue_path}", file=sys.stderr)
-                sys.exit(1)
+                extract_queue_from_session(args.session)
             q_data = load_json(queue_path)
             md = generate_review_markdown(q_data)
             print(md)
@@ -234,8 +294,7 @@ def main():
 
         if args.export_web:
             if not queue_path.exists():
-                print(f"Error: Review queue not found at {queue_path}", file=sys.stderr)
-                sys.exit(1)
+                extract_queue_from_session(args.session)
             q_data = load_json(queue_path)
             export_to_web_review_queue(q_data)
             return

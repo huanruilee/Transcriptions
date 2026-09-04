@@ -355,6 +355,20 @@ function renderTranscript(sessionData) {
         span.classList.add('has-correction');
       }
 
+      // Review-needed / uncertainty visual cues
+      if (s.reviewNeeded || s.uncertainty || (s.text && (s.text.includes('【存疑】') || s.text.includes('【待定】')))) {
+        span.classList.add('has-review-needed');
+        const reviewBadge = document.createElement('span');
+        reviewBadge.className = 'sentence-review-badge';
+        reviewBadge.textContent = '🔍 待核定';
+        reviewBadge.title = s.uncertainty || s.review_reason || '此句存疑，點擊進入編輯器進行核定確認';
+        reviewBadge.addEventListener('click', (e) => {
+          e.stopPropagation();
+          triggerEditorModal(idx);
+        });
+        span.appendChild(reviewBadge);
+      }
+
       if (note) {
         span.classList.add('has-note');
         const badge = document.createElement('span');
