@@ -2,9 +2,9 @@
   "_metadata": {
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
-    "version": "3.0",
-    "lastUpdated": "2026-09-04T11:25:00Z",
-    "totalGlobalTerms": 60
+    "version": "3.1",
+    "lastUpdated": "2026-09-04T21:52:00+08:00",
+    "totalGlobalTerms": 68
   },
   "global_terms": {
     "明眼識": {
@@ -470,6 +470,70 @@
       "treatise_ref": "OpenCC 過度轉換保護",
       "confidence": 0.99,
       "reasoning": "簡體無明了轉繁體時被誤轉為無明瞭，正確應為無明了知之了。"
+    },
+    "佔物無明": {
+      "corrected": "染污無明",
+      "category": "根本煩惱名相",
+      "safe_regex": "佔物無明",
+      "treatise_ref": "善顯密意疏 p.102 十二緣起",
+      "confidence": 0.99,
+      "reasoning": "染污無明（kliṣṭâvidyā），台語發音 ASR 訛為佔物無明。"
+    },
+    "十二元緊": {
+      "corrected": "十二緣起",
+      "category": "緣起法義名相",
+      "safe_regex": "十二元[緊緊]",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "十二緣起支（dvādaśâṅga-pratītyasamutpāda），ASR 訛聽為十二元緊。"
+    },
+    "有之所設": {
+      "corrected": "有支所攝",
+      "category": "緣起支派名相",
+      "safe_regex": "有之所設",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "藏文 srid-pa'i yan-lag-gis bsdus-pa，有支所攝無明，ASR 誤為有之所設。"
+    },
+    "實子無明": {
+      "corrected": "實執無明",
+      "category": "中觀無明名相",
+      "safe_regex": "實子無明",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "實有執著無明，ASR 將「執」誤辨為「子」。"
+    },
+    "憑子老": {
+      "corrected": "瓶衣等",
+      "category": "因明經論常喻",
+      "safe_regex": "憑子老|憑衣等",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "瓶衣等（ghata-pata-ādi）諸世俗諦法，ASR 訛聽。"
+    },
+    "慧解太初": {
+      "corrected": "慧解太粗",
+      "category": "量論消文用語",
+      "safe_regex": "慧解太初",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "慧解太粗未能悟入深義，ASR 誤辨粗為初。"
+    },
+    "精進地菩薩": {
+      "corrected": "清淨地菩薩",
+      "category": "菩薩地階名相",
+      "safe_regex": "精進地菩薩",
+      "treatise_ref": "善顯密意疏 p.103",
+      "confidence": 0.99,
+      "reasoning": "清淨地（八至十地）菩薩，ASR 訛聽為精進地菩薩。"
+    },
+    "心跟敬": {
+      "corrected": "心境二義",
+      "category": "量論因明名相",
+      "safe_regex": "心跟敬",
+      "treatise_ref": "善顯密意疏 p.102",
+      "confidence": 0.99,
+      "reasoning": "心與境二者之義，ASR 誤聽為心跟敬。"
     }
   },
   "context_rules": [
@@ -480,6 +544,14 @@
       "pageRef": "p.23",
       "confidence": 0.88,
       "reasoning": "含同音語境依賴詞（二地 vs 二諦），隔離為單句修改，保護全庫十地菩薩名相不被盲換。"
+    },
+    {
+      "sessionId": "31B",
+      "original": "都當成我們一般的那個世俗諦，這樣的話，則此女兒太無關係，今成立某法為世俗諦。",
+      "proposed": "都當成我們一般的那個世俗諦，這樣的話，則此能立太無關係，今成立某法為世俗諦。",
+      "pageRef": "p.102",
+      "confidence": 0.99,
+      "reasoning": "宗因喻之能立（sādhana），ASR 訛為女兒；隔離為 context_rule 保障一般世俗女兒一詞不受全域誤換。"
     }
   ]
 }

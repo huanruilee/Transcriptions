@@ -63,3 +63,33 @@ test('Proofreading Quality Gate: Session 30B Text Purity and Conformance', (t) =
   assert.ok(!allText.includes('來人所為世間'), 'Must not contain "來人所為世間"');
   assert.ok(!allText.includes('無明瞭'), 'Must not contain "無明瞭"');
 });
+
+test('Proofreading Quality Gate: Session 31B Text Purity and Conformance', (t) => {
+  const sessionPath = path.join(PROJECT_ROOT, 'courses', '入中論善顯密意疏', 'sessions', 'session_31B.json');
+  assert.ok(existsSync(sessionPath), 'session_31B.json must exist');
+  const session = JSON.parse(readFileSync(sessionPath, 'utf8'));
+
+  const allText = session.paragraphs.flatMap(p => p.sentences.map(s => s.text)).join(' ');
+  const headings = session.paragraphs.map(p => p.heading || '').join(' ');
+
+  // Verified corrections must exist in session_31B text
+  assert.ok(allText.includes('名言識'), 'Must contain "名言識" (corrected from 明眼識)');
+  assert.ok(allText.includes('染污無明'), 'Must contain "染污無明" (corrected from 佔物無明)');
+  assert.ok(allText.includes('十二緣起'), 'Must contain "十二緣起" (corrected from 十二元緊)');
+  assert.ok(allText.includes('有支所攝'), 'Must contain "有支所攝" (corrected from 有之所設)');
+  assert.ok(allText.includes('能立太無關係'), 'Must contain "能立太無關係" (corrected from 女兒太無關係)');
+  assert.ok(allText.includes('瓶衣等'), 'Must contain "瓶衣等" (corrected from 憑子老/憑衣等)');
+  assert.ok(allText.includes('清淨地菩薩'), 'Must contain "清淨地菩薩" (corrected from 精進地菩薩)');
+
+  // Heading must not contain residual errors
+  assert.ok(headings.includes('名言識前非諦'), 'Heading must contain "名言識前非諦"');
+  assert.ok(!headings.includes('明眼識'), 'Heading must not contain "明眼識"');
+
+  // Corruptions must NOT exist
+  assert.ok(!allText.includes('明眼識'), 'Must not contain "明眼識"');
+  assert.ok(!allText.includes('佔物無明'), 'Must not contain "佔物無明"');
+  assert.ok(!allText.includes('十二元緊'), 'Must not contain "十二元緊"');
+  assert.ok(!allText.includes('有之所設'), 'Must not contain "有之所設"');
+  assert.ok(!allText.includes('女兒太無關係'), 'Must not contain "女兒太無關係"');
+});
+
