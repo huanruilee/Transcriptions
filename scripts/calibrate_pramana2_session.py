@@ -270,17 +270,22 @@ def main():
 """
             user_prompt = f"請依據底本校對以下 {len(batch)} 句，返回相同長度的 JSON 字串陣列：\n" + json.dumps(batch, ensure_ascii=False)
             raw_out = query_llm(endpoint, sys_prompt, user_prompt)
-            m = re.search(r"\[.*\]", raw_out, re.DOTALL)
+            cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_out.strip())
+            m = re.search(r"\[.*\]", cleaned, re.DOTALL)
             parsed = None
             if m:
                 try:
                     parsed = json.loads(m.group(0))
                 except Exception:
-                    parsed = None
+                    # salvage: extract per-line quoted strings
+                    parsed = re.findall(r'"((?:[^"\\]|\\.)*)"', m.group(0))
+                    if parsed and len(parsed) != len(batch):
+                        parsed = None
             if parsed and len(parsed) == len(batch):
                 results.extend(parsed)
             else:
-                print(f"   ⚠️ batch {i//batch_size+1} count mismatch, keeping prepolished")
+                got = len(parsed) if parsed else f"raw[:120]={raw_out[:120]!r}"
+                print(f"   ⚠️ batch {i//batch_size+1} mismatch ({got} != {len(batch)}), keeping prepolished")
                 results.extend(batch)
             print(f"   • {min(i+batch_size, len(prepolished))}/{len(prepolished)}", flush=True)
 
