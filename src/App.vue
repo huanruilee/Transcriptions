@@ -249,6 +249,24 @@
 
         <!-- 逐字稿本文 (文章自然排版) -->
         <article class="transcript-article">
+          <!-- 文章開頭：講次標題與校勘時間標記 -->
+          <header class="session-article-header">
+            <h1 class="session-article-title">
+              {{ currentSessionInfo?.title || `第 ${currentSessionId} 講` }}
+            </h1>
+            <div class="session-article-meta">
+              <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
+                🕒 最後校正更新：{{ currentLastUpdated }}
+              </span>
+              <span class="meta-tag status-tag">
+                ✅ 已校勘核定
+              </span>
+              <span v-if="currentSessionInfo?.page" class="meta-tag page-tag">
+                📖 底本頁碼：{{ currentSessionInfo.page }}
+              </span>
+            </div>
+          </header>
+
           <div
             v-for="p in paragraphs"
             :key="p.id"
@@ -540,6 +558,7 @@ const activeTOCChain = computed(() => {
 });
 
 const currentAudioUrl = ref('');
+const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
 const isLoading = ref(false);
 
@@ -807,6 +826,7 @@ async function loadSession(sessionId: string) {
 
     const data = await res.json();
     currentAudioUrl.value = data.audioUrl || '';
+    currentLastUpdated.value = data.lastUpdated || '';
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
@@ -1350,9 +1370,52 @@ if (typeof window !== 'undefined') {
   backdrop-filter: blur(4px);
 }
 
-.crumb-sep {
+.session-article-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.session-article-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+}
+
+.session-article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.meta-tag {
+  font-size: 0.82rem;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
   color: var(--text-muted);
-  margin-left: 4px;
+}
+
+.update-tag {
+  background: rgba(154, 52, 18, 0.08);
+  color: var(--accent-color);
+  font-weight: 600;
+  border-color: rgba(154, 52, 18, 0.2);
+}
+
+.status-tag {
+  color: #166534;
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  font-weight: 500;
+}
+
+.page-tag {
+  color: var(--text-muted);
 }
 
 .paragraph-block {
