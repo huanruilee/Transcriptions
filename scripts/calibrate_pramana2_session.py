@@ -290,9 +290,12 @@ def main():
             print(f"   • {min(i+batch_size, len(prepolished))}/{len(prepolished)}", flush=True)
 
         results, post_fixes = prepolish(results)
-        # punctuation normalisation: half-width comma between CJK → full-width
+        # punctuation normalisation: half-width comma adjacent to CJK → full-width
+        # (covers sentence-boundary cases: trailing "," of one + leading CJK of next)
         def _punct(t):
-            return re.sub(r"(?<=[\u4e00-\u9fff]),(?=[\u4e00-\u9fff])", "，", t)
+            t = re.sub(r"(?<=[\u4e00-\u9fff]),", "，", t)
+            t = re.sub(r",(?=[\u4e00-\u9fff])", "，", t)
+            return t
         results = [_punct(t) for t in results]
         print(f"🛡️ post-polish guard: {post_fixes} residual fixes")
 
