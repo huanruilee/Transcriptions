@@ -463,6 +463,22 @@
       @close="uiStore.closeAllDrawers"
       @seek="handleTOCSeek"
     />
+
+    <!-- 全域學習與同步通知 Toast Banner (學到資料庫即時回饋) -->
+    <Transition name="toast-fade">
+      <div
+        v-if="uiStore.toast.visible"
+        class="global-toast-banner"
+        :class="`toast-${uiStore.toast.type}`"
+        role="alert"
+      >
+        <span class="toast-icon">
+          {{ uiStore.toast.type === 'success' ? '✨' : uiStore.toast.type === 'warning' ? '⚠️' : uiStore.toast.type === 'error' ? '❌' : 'ℹ️' }}
+        </span>
+        <span class="toast-message">{{ uiStore.toast.message }}</span>
+        <button class="toast-close" @click="uiStore.toast.visible = false">✕</button>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -1731,5 +1747,100 @@ if (typeof window !== 'undefined') {
   .native-audio {
     width: 160px;
   }
+}
+
+/* 全域 Toast Banner 樣式 */
+.global-toast-banner {
+  position: fixed;
+  top: calc(var(--header-height, 56px) + 16px);
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  font-size: 0.92rem;
+  max-width: 460px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  flex: 1;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0 4px;
+}
+.toast-close:hover {
+  opacity: 1;
+}
+
+.toast-success {
+  background: rgba(240, 253, 244, 0.95);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #15803d;
+}
+
+.toast-info {
+  background: rgba(240, 249, 255, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #0369a1;
+}
+
+.toast-warning {
+  background: rgba(254, 252, 232, 0.95);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  color: #a16207;
+}
+
+.toast-error {
+  background: rgba(254, 242, 242, 0.95);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #b91c1c;
+}
+
+/* 深色模式適配 */
+[data-theme='dark'] .toast-success,
+[data-theme='obsidian'] .toast-success {
+  background: rgba(22, 101, 52, 0.92);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #dcfce7;
+}
+
+[data-theme='dark'] .toast-info,
+[data-theme='obsidian'] .toast-info {
+  background: rgba(7, 89, 133, 0.92);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #e0f2fe;
+}
+
+.toast-fade-enter-active,
+.toast-fade-leave-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-fade-enter-from {
+  opacity: 0;
+  transform: translateY(-16px) scale(0.95);
+}
+
+.toast-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
 }
 </style>
