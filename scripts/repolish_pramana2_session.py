@@ -7,9 +7,9 @@ from pathlib import Path
 COURSE = Path("courses/釋量論第二品")
 learned = json.load(open(COURSE / "learned_corrections.json"))["global_terms"]
 S2T = str.maketrans("们这学时现说应观对变问经运义证实际归觉讲师设点线长门间东车马鸟鱼为当"
-                    "艺医还种发话质请关远让从个与会来两儿无气数",
+                    "艺医还种发话质请关远让从个与会来两儿无气数诸众确诉脱",
                     "們這學時現說應觀對變問經運義證實際歸覺講師設點線長門間東車馬鳥魚為當"
-                    "藝醫還種發話質請關遠讓從個與會來兩兒無氣數")
+                    "藝醫還種發話質請關遠讓從個與會來兩兒無氣數諸眾確訴脫")
 
 def polish(t):
     for typo, info in learned.items():
