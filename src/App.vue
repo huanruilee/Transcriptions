@@ -265,6 +265,22 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
+
+            <!-- YouTube 影片嵌入視窗 (釋量論課程影音同步) -->
+            <div
+              v-if="courseStore.currentMediaType === 'video/youtube' && currentYoutubeVideoId"
+              class="youtube-player-container"
+            >
+              <iframe
+                id="youtube-iframe"
+                class="youtube-iframe"
+                :src="`https://www.youtube.com/embed/${currentYoutubeVideoId}?enablejsapi=1&origin=${originUrl}`"
+                title="YouTube 影音講記"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
           </header>
 
           <div
@@ -575,6 +591,8 @@ const activeTOCChain = computed(() => {
 });
 
 const currentAudioUrl = ref('');
+const currentYoutubeVideoId = ref('');
+const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
 const isLoading = ref(false);
@@ -662,11 +680,36 @@ function handleExportNotes() {
   downloadMarkdownFile(filename, md);
 }
 
-// 音訊跳轉
+// 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   playerStore.updateTime(time);
+  
+  // 1. 若為 YouTube 影片模式，發送 postMessage 命令給 YouTube Iframe
+  if (courseStore.currentMediaType === 'video/youtube') {
+    const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    if (ytIframe && ytIframe.contentWindow) {
+      ytIframe.contentWindow.postMessage(
+        JSON.stringify({
+          event: 'command',
+          func: 'seekTo',
+          args: [time, true],
+        }),
+        '*'
+      );
+      ytIframe.contentWindow.postMessage(
+        JSON.stringify({
+          event: 'command',
+          func: 'playVideo',
+          args: [],
+        }),
+        '*'
+      );
+    }
+  }
+
+  // 2. HTML5 原生音訊
   const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audioEl) {
+  if (audioEl && audioEl.src && courseStore.currentMediaType === 'audio/mp3') {
     audioEl.currentTime = time;
     audioEl.play().catch(() => {});
   }
@@ -807,8 +850,9 @@ onUnmounted(() => {
 
 async function loadRealCourseData() {
   const baseUrl = import.meta.env.BASE_URL || '/';
+  const cPath = courseStore.currentCoursePath;
   try {
-    const resCourse = await fetch(`${baseUrl}courses/入中論善顯密意疏/course.json`);
+    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
     if (resCourse.ok) {
       const data = await resCourse.json();
       const sessions = (data.sessions || []).map((s: any) => ({
@@ -820,11 +864,12 @@ async function loadRealCourseData() {
         lastUpdated: s.lastUpdated || '',
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
+        youtubeVideoId: s.youtubeVideoId,
       }));
       courseStore.setSessions(sessions);
     }
 
-    const resTOC = await fetch(`${baseUrl}courses/入中論善顯密意疏/toc.json`);
+    const resTOC = await fetch(`${baseUrl}${cPath}/toc.json`);
     if (resTOC.ok) {
       const tocData = await resTOC.json();
       courseStore.setTOC(tocData);
@@ -834,19 +879,28 @@ async function loadRealCourseData() {
   }
 }
 
+// 監聽課程切換：動態切換課程目錄並載入該課程第一講
+watch(() => courseStore.currentCourseId, async (newCourseId) => {
+  await loadRealCourseData();
+  const firstSession = courseStore.sessions[0]?.id || (newCourseId === 'shi-liang-lun-er' ? '01' : '02A');
+  await loadSession(firstSession);
+});
+
 async function loadSession(sessionId: string) {
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
   isLoading.value = true;
 
   const baseUrl = import.meta.env.BASE_URL || '/';
+  const cPath = courseStore.currentCoursePath;
   try {
-    const url = `${baseUrl}courses/入中論善顯密意疏/sessions/session_${sessionId}.json`;
+    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json`;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
     currentAudioUrl.value = data.audioUrl || '';
+    currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
 
     let sentCounter = 0;
@@ -875,7 +929,7 @@ async function loadSession(sessionId: string) {
     annotationStore.loadSessionAnnotations(sessionId);
 
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl && currentAudioUrl.value) {
+    if (audioEl && currentAudioUrl.value && courseStore.currentMediaType === 'audio/mp3') {
       audioEl.src = currentAudioUrl.value;
       audioEl.load();
     }
@@ -1433,6 +1487,27 @@ if (typeof window !== 'undefined') {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.3);
   font-weight: 500;
+}
+
+.youtube-player-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  margin-top: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: #000;
+}
+
+.youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .page-tag {
