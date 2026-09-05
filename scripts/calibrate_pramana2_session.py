@@ -299,7 +299,11 @@ def main():
             t = re.sub(r"(?<=[\u4e00-\u9fff]),", "，", t)
             t = re.sub(r",(?=[\u4e00-\u9fff])", "，", t)
             return t
-        results = [_punct(t) for t in results]
+        # simplified→traditional whitelist (LLM occasionally mixes scripts mid-sentence).
+        # ONLY unambiguous one-to-one mappings; 干/后/发/面/钟/谷/余/鲜/适/台 excluded (1-to-many).
+        S2T = str.maketrans("们这学时现说应观对变问经运义证实际归觉讲师设点线长门间东车马鸟鱼为当",
+                            "們這學時現說應觀對變問經運義證實際歸覺講師設點線長門間東車馬鳥魚為當")
+        results = [_punct(t).translate(S2T) for t in results]
         print(f"🛡️ post-polish guard: {post_fixes} residual fixes")
 
         for idx, (pi, si) in enumerate(lookup):
