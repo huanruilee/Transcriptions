@@ -65,11 +65,12 @@ def load_reference_lectures():
     text = REF_FILE.read_text(encoding="utf-8")
     lectures = {}
     for idx, marker in enumerate(CN_LIST, start=1):
-        m = re.search(rf"^# {marker}(.*)$", text, re.MULTILINE)
+        # headers come in two shapes: "# 第九講 標題" and "# [第十講](https://…) 標題"
+        m = re.search(rf"^# \[?{marker}\]?(\(.*?\))?(.*)$", text, re.MULTILINE)
         if not m:
             continue
         start = m.end()
-        nxt = re.search(r"^# 第[一二三四五六七八九十卅]+講", text[start:], re.MULTILINE)
+        nxt = re.search(r"^# \[?第[一二三四五六七八九十卅]+講", text[start:], re.MULTILINE)
         body = text[start: start + nxt.start()] if nxt else text[start:]
         # split by ## subsections
         parts = re.split(r"^## (.+?)(?:\{#[^}]*\})?\s*$", body, flags=re.MULTILINE)
@@ -80,7 +81,8 @@ def load_reference_lectures():
         for i in range(1, len(parts) - 1, 2):
             title = re.sub(r"\s+", "", parts[i])
             sections.append((title, parts[i + 1].strip()))
-        lectures[idx] = {"title": m.group(1).strip(), "sections": sections}
+        title = re.sub(r"\[|\]|\(https?://[^)]*\)", "", m.group(2)).strip()
+        lectures[idx] = {"title": title, "sections": sections}
     return lectures
 
 
