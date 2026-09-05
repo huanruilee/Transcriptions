@@ -155,7 +155,8 @@ def build_segments(raw):
         if not txt:
             continue
         if sentences and s["start"] - sentences[-1]["end"] < 0.35 and len(sentences[-1]["text"]) < 60:
-            sentences[-1]["text"] += "，" + txt if re.search(r"[，、]$", sentences[-1]["text"]) else sentences[-1]["text"] + "，" + txt
+            sep = "" if re.search(r"[，、]$", sentences[-1]["text"]) else "，"
+            sentences[-1]["text"] = sentences[-1]["text"] + sep + txt
             sentences[-1]["end"] = s["end"]
         else:
             sentences.append({"start": round(float(s["start"]), 2), "end": round(float(s["end"]), 2), "text": txt})
@@ -242,8 +243,8 @@ def main():
     review_items = []
     if not args.skip_proofread:
         endpoint = get_active_endpoint()
-        print(f"✍️ proofreading via {endpoint} (batch=40)...")
-        batch_size = 40
+        print(f"✍️ proofreading via {endpoint} (batch=20)...")
+        batch_size = 20
         results = []
         for i in range(0, len(prepolished), batch_size):
             batch = prepolished[i:i+batch_size]
