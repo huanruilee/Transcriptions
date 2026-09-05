@@ -95,14 +95,16 @@ class LocalSyncHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split("?")[0]
-        if path == "/" or path == "/api/status":
+        if path == "/" or path == "/api/status" or path == "/api/health":
             learned_db = alm.load_learned_corrections()
             terms = learned_db.get("global_terms", {})
             rules = learned_db.get("context_rules", [])
             session_files = list(SESSIONS_DIR.glob("session_*.json")) if SESSIONS_DIR.exists() else []
 
+            status_val = "online" if path == "/api/status" else "ok"
             self._send_json(200, {
-                "status": "online",
+                "status": status_val,
+                "online": True,
                 "service": "Transcriptions Local Active Learning & Sync Bridge",
                 "version": "2.0",
                 "totalGlobalTerms": len(terms),
@@ -127,7 +129,7 @@ class LocalSyncHandler(http.server.BaseHTTPRequestHandler):
             self._send_json(400, {"error": f"Invalid JSON payload: {e}"})
             return
 
-        if path == "/api/learn":
+        if path in ("/api/learn", "/api/submit_correction"):
             session_id = str(body.get("sessionId", "")).strip()
             sentence_id = str(body.get("sentenceId", "")).strip()
             original_text = str(body.get("originalText", "")).strip()
@@ -216,6 +218,33 @@ class LocalSyncHandler(http.server.BaseHTTPRequestHandler):
                 "contextSpecificCount": context_count,
                 "diskUpdatedCount": disk_updated_count,
                 "details": results
+            })
+
+        elif path == "/api/corrections":
+            session_id = str(body.get("sessionId", "")).strip()
+            corrections = body.get("corrections", {})
+            notes = body.get("notes", {})
+            total_synced = 0
+
+            for sent_id, corr_data in corrections.items():
+                orig = corr_data.get("original", "")
+                prop = corr_data.get("corrected", "")
+                page = corr_data.get("pageRef", "")
+                note = corr_data.get("note", "")
+                learn = corr_data.get("learnTerm", False)
+
+                if session_id and prop:
+                    update_session_on_disk(session_id, sent_id, prop)
+                    total_synced += 1
+
+                if orig and prop and orig != prop and learn:
+                    alm.evaluate_and_learn_edit(session_id, orig, prop, page_range=page, context=note)
+
+            self._send_json(200, {
+                "success": True,
+                "sessionId": session_id,
+                "totalSynced": total_synced,
+                "message": f"Successfully synced {total_synced} corrections to disk."
             })
 
         elif path == "/api/shutdown":
