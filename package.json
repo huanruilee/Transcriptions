@@ -5,6 +5,10 @@
   "main": "src/js/app.js",
   "type": "module",
   "scripts": {
+    "dev:v2": "vite",
+    "build:v2": "vite build",
+    "test:v2": "vitest run",
+    "test:v2:watch": "vitest",
     "test": "node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js tests/cross-artifact-consistency.test.js tests/required-set-not-truncated.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:completeness": "node --test tests/unit/webSourceCompleteness.test.js",
@@ -50,7 +54,16 @@
   },
   "homepage": "https://github.com/huanruilee/Transcriptions#readme",
   "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/test-utils": "^2.5.0",
+    "@vueuse/core": "^14.4.0",
+    "happy-dom": "^20.14.0",
     "jsdom": "^30.0.1",
+    "pinia": "^4.0.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2",
+    "vitest": "^5.0.0",
+    "vue": "^3.5.42",
     "ws": "^8.21.3"
   },
   "engines": {
