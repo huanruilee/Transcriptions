@@ -62,6 +62,14 @@ def update_session_on_disk(session_id, sentence_id, corrected_text, timestamp=No
                 break
 
         if matched:
+            from datetime import datetime
+            now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            data["lastUpdated"] = now_str
+            if "_meta" not in data:
+                data["_meta"] = {}
+            data["_meta"]["last_updated"] = now_str
+            data["_meta"]["processed_at"] = now_str
+
             with open(cand, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
             return True, f"Updated {cand.name}"
