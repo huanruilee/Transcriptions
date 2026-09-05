@@ -3,8 +3,8 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-09-05T00:15:46.411002+00:00",
-    "totalGlobalTerms": 95
+    "lastUpdated": "2026-09-05T12:24:18.248348+00:00",
+    "totalGlobalTerms": 100
   },
   "global_terms": {
     "明眼識": {
@@ -774,6 +774,51 @@
       "treatise_ref": "善顯密意疏 唯名言安立諸法",
       "confidence": 0.99,
       "reasoning": "應成派至極關要「唯名言而立」，ASR 音訛為唯名言而你。"
+    },
+    "志向": {
+      "corrected": "自相",
+      "category": "佛學名相校訂",
+      "safe_regex": "志向",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 10A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「志向 ➔ 自相」。"
+    },
+    "長矣": {
+      "corrected": "常亦",
+      "category": "佛學名相校訂",
+      "safe_regex": "長矣",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「長矣 ➔ 常亦」。"
+    },
+    "長短": {
+      "corrected": "常斷",
+      "category": "佛學名相校訂",
+      "safe_regex": "長短",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「長短 ➔ 常斷」。"
+    },
+    "牙衰": {
+      "corrected": "芽雖",
+      "category": "佛學名相校訂",
+      "safe_regex": "牙衰",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「牙衰 ➔ 芽雖」。"
+    },
+    "相夥": {
+      "corrected": "香火",
+      "category": "佛學名相校訂",
+      "safe_regex": "相夥",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「相夥 ➔ 香火」。"
     }
   },
   "context_rules": [
@@ -1152,6 +1197,86 @@
       "pageRef": "",
       "confidence": 0.9,
       "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "10A",
+      "original": "可是他們講的 有心安利 虛妄跟我們講的 有心安利 虛妄不一樣 他們講的有心安利。",
+      "proposed": "可是他們講的 由心安立 虛妄跟我們講的 由心安立 虛妄不一樣 他們講的由心安立。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "10A",
+      "original": "跟我講的 有心安利不一樣 這樣。",
+      "proposed": "跟我講的 由心安立不一樣 這樣。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "10A",
+      "original": "安利之體系。",
+      "proposed": "安立之體性。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "非時有兒",
+      "proposed": "非實有耳",
+      "pageRef": "p.102",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "怎麼講 沒有那麼的苦修就對了 從而正悟嘛 對 那個時候也是談到。",
+      "proposed": "怎麼講 沒有那麼的苦修就對了 從而證悟嘛 對 那個時候也是談到。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "員 呃 總這樣 怎麼講 自信空 對啊 所以就元氣 嗯 而且是遠離長短的元氣。",
+      "proposed": "員 呃 總這樣 怎麼講 自信空 對啊 所以就緣起 嗯 而且是遠離常斷的元氣。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "像比方說 如果自信有的話 在總觀來說 自信有的話 就 該怎麼講。",
+      "proposed": "像比方說 如果自性有的話 在總觀來說 自性有的話 就 該怎麼講。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "法師有調整那個字 就是你剛才碰到那個地方 是牙衰現有 然後痘號。",
+      "proposed": "法師有調整那個字 就是你剛才碰到那個地方 是芽雖現有 然後逗號。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "反正有兒子 有女兒的話 就叫做那個嗎 有相夥 有相夥 對不對 那他就是他們的相夥嗎。",
+      "proposed": "反正有兒子 有女兒的話 就叫做那個嗎 有香火 有香火 對不對 那他就是他們的香火嗎。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "正厲害的話 就是針對的是 像中官跟下部吧 對不對。",
+      "proposed": "正厲害的話 就是針對的是 像中觀跟下部吧 對不對。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
     }
   ]
 }
