@@ -355,9 +355,10 @@ def align_and_generate_session_json(
     session_json = {
         "sessionId": s_id,
         "title": f"第 {int(s_id)} 講 | {session_info['title'].replace('釋量論第二品 ', '')}",
-        "audioUrl": f"https://www.youtube.com/watch?v={session_info['video_id']}",
+        "audioUrl": f"https://drive.google.com/uc?export=download&id={session_info['audio_id']}",
         "mediaType": "video/youtube",
         "youtubeVideoId": session_info["video_id"],
+        "youtubeUrl": f"https://www.youtube.com/watch?v={session_info['video_id']}",
         "lastUpdated": time.strftime("%Y-%m-%d %H:%M:%S"),
         "paragraphs": final_paragraphs
     }
