@@ -148,6 +148,20 @@ def query_llm(endpoint, system_prompt, user_prompt, temperature=0.0, max_tokens=
                 raise
 
 
+def parse_array(raw_out, expect):
+    """Parse LLM output into a list of exactly `expect` strings; None on drift."""
+    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_out.strip())
+    m = re.search(r"\[.*\]", cleaned, re.DOTALL)
+    if not m:
+        return None
+    try:
+        parsed = json.loads(m.group(0))
+    except Exception:
+        # salvage: extract per-line quoted strings
+        parsed = re.findall(r'"((?:[^"\\]|\\.)*)"', m.group(0))
+    return parsed if isinstance(parsed, list) and len(parsed) == expect else None
+
+
 def build_segments(raw):
     """ASR verbose_json segments → sentences; merge tiny fragments, split paragraphs on gaps."""
     segs = [s for s in raw["segments"] if (s.get("text") or "").strip()]
@@ -273,25 +287,22 @@ def main():
 5. 存疑標記：語意急促或多解難以確證時，句首加「[REVIEW: 原因]」，供人耳聽音核定。
 6. 【輸出規範】：輸入 N 句，必須返回恰好 N 個字串的 JSON 陣列，不可合併、刪減或遺漏。
 """
-            user_prompt = f"請依據底本校對以下 {len(batch)} 句，返回相同長度的 JSON 字串陣列：\n" + json.dumps(batch, ensure_ascii=False)
-            raw_out = query_llm(endpoint, sys_prompt, user_prompt)
-            cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw_out.strip())
-            m = re.search(r"\[.*\]", cleaned, re.DOTALL)
-            parsed = None
-            if m:
-                try:
-                    parsed = json.loads(m.group(0))
-                except Exception:
-                    # salvage: extract per-line quoted strings
-                    parsed = re.findall(r'"((?:[^"\\]|\\.)*)"', m.group(0))
-                    if parsed and len(parsed) != len(batch):
-                        parsed = None
-            if parsed and len(parsed) == len(batch):
-                results.extend(parsed)
-            else:
-                got = len(parsed) if parsed else f"raw[:120]={raw_out[:120]!r}"
-                print(f"   ⚠️ batch {i//batch_size+1} mismatch ({got} != {len(batch)}), keeping prepolished")
-                results.extend(batch)
+            def polish_chunk(bchunk):
+                up = f"請依據底本校對以下 {len(bchunk)} 句，返回相同長度的 JSON 字串陣列：\n" + json.dumps(bchunk, ensure_ascii=False)
+                return parse_array(query_llm(endpoint, sys_prompt, up), len(bchunk))
+
+            def resolve(bchunk, depth=0):
+                got = polish_chunk(bchunk)
+                if got is not None:
+                    return got
+                if len(bchunk) >= 4 and depth < 3:
+                    mid = len(bchunk) // 2
+                    print(f"   ↻ drift {len(bchunk)} → halve retry ({mid}+{len(bchunk)-mid})", flush=True)
+                    return resolve(bchunk[:mid], depth + 1) + resolve(bchunk[mid:], depth + 1)
+                print(f"   ⚠️ batch {i//batch_size+1} drift unresolved, keeping prepolished", flush=True)
+                return bchunk
+
+            results.extend(resolve(batch))
             print(f"   • {min(i+batch_size, len(prepolished))}/{len(prepolished)}", flush=True)
 
         results, post_fixes = prepolish(results)
