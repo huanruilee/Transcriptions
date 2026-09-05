@@ -827,6 +827,16 @@ onMounted(async () => {
   window.addEventListener('scroll', onUserScroll, { passive: true });
   window.addEventListener('wheel', onUserScroll, { passive: true });
   window.addEventListener('touchmove', onUserScroll, { passive: true });
+
+  // 支援 URL 參數 ?course=shi-liang-lun-er
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseParam = urlParams.get('course');
+    if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
+      courseStore.currentCourseId = courseParam;
+    }
+  }
+
   await loadRealCourseData();
 
   // 監聽 URL Hash 變更
@@ -838,7 +848,8 @@ onMounted(async () => {
   });
 
   const initialHash = window.location.hash.replace('#session-', '').replace('#', '');
-  const targetId = initialHash || '02A';
+  const defaultFirst = courseStore.sessions[0]?.id || (courseStore.currentCourseId === 'shi-liang-lun-er' ? '01' : '02A');
+  const targetId = initialHash || defaultFirst;
   await loadSession(targetId);
 });
 
@@ -879,8 +890,13 @@ async function loadRealCourseData() {
   }
 }
 
-// 監聽課程切換：動態切換課程目錄並載入該課程第一講
+// 監聽課程切換：動態切換課程目錄、同步 URL 參數並載入該課程第一講
 watch(() => courseStore.currentCourseId, async (newCourseId) => {
+  if (typeof window !== 'undefined') {
+    const url = new URL(window.location.href);
+    url.searchParams.set('course', newCourseId);
+    window.history.replaceState({}, '', url.toString());
+  }
   await loadRealCourseData();
   const firstSession = courseStore.sessions[0]?.id || (newCourseId === 'shi-liang-lun-er' ? '01' : '02A');
   await loadSession(firstSession);
