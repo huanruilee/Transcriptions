@@ -188,6 +188,9 @@ def main():
     toc = load_json(TOC_FILE)
     toc_sec = next(s for s in toc["sections"] if s.get("sessionId") == sid)
     learned = load_json(LEARNED_FILE).get("global_terms", {})
+    for _k, _v in learned.items():
+        if not isinstance(_v, dict) or "corrected" not in _v:
+            raise SystemExit(f"❌ learned_corrections.json entry '{_k}' has wrong shape (need dict with 'corrected')")
     lectures = load_reference_lectures()
     if n not in lectures:
         sys.exit(f"reference lecture {n} not found in 成量品全文")
