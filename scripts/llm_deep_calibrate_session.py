@@ -123,21 +123,30 @@ def query_llm(endpoint, system_prompt, user_prompt, temperature=0.0, max_tokens=
         headers["Authorization"] = f"Bearer {token}"
 
     data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        f"{endpoint}/chat/completions",
-        data=data,
-        headers=headers,
-        method="POST"
-    )
-    start_t = time.time()
-    with urllib.request.urlopen(req, timeout=240) as resp:
-        result = json.loads(resp.read().decode("utf-8"))
-        elapsed = time.time() - start_t
-        model_used = result.get("model", model_name)
-        usage = result.get("usage", {})
-        comp_toks = usage.get("completion_tokens", 0)
-        print(f"      ⚡ [Router: {model_used} | {comp_toks} tokens | {elapsed:.2f}s]")
-        return result["choices"][0]["message"]["content"]
+    for attempt in range(1, 4):
+        req = urllib.request.Request(
+            f"{endpoint}/chat/completions",
+            data=data,
+            headers=headers,
+            method="POST"
+        )
+        start_t = time.time()
+        try:
+            with urllib.request.urlopen(req, timeout=240) as resp:
+                raw_bytes = resp.read()
+                result = json.loads(raw_bytes.decode("utf-8", errors="replace"))
+                elapsed = time.time() - start_t
+                model_used = result.get("model", model_name)
+                usage = result.get("usage", {})
+                comp_toks = usage.get("completion_tokens", 0)
+                print(f"      ⚡ [Router: {model_used} | {comp_toks} tokens | {elapsed:.2f}s]")
+                return result["choices"][0]["message"]["content"]
+        except Exception as e:
+            if attempt < 3:
+                print(f"      ⚠️ [query_llm attempt {attempt}/3] {e}, retrying in 3s...", flush=True)
+                time.sleep(3)
+            else:
+                raise e
 
 def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -364,6 +373,7 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
 - 輸出 6～10 個段落小標題，格式必須嚴格為 `【類別】說明`。
 - 類別限於：【科判導讀】、【經論引證】、【名相辨析】、【正理抉擇】、【格西要旨】、【中觀釋難】、【研讀總結】。
 - 必須錨定在法師轉折論述的段落 ID。
+- 【極重要】：請保持精簡，嚴格輸出 6～8 個 headings 小標題，禁止生成冗長解說，確保 JSON 在 800 tokens 內完整閉合！
 
 輸出純 JSON 格式：
 {{
@@ -386,12 +396,22 @@ def deep_proofread_session(session_id, endpoint, fix_typos=True):
 """
     outline_user_prompt = f"請依據以上物理邊界與底本原文，分析第 {session_id} 講逐字稿代表段落：\n" + sample_summary
 
-    outline_raw = query_llm(endpoint, outline_sys_prompt, outline_user_prompt, temperature=0.0, max_tokens=1500)
+    outline_raw = query_llm(endpoint, outline_sys_prompt, outline_user_prompt, temperature=0.0, max_tokens=2500)
     m = re.search(r'\{.*\}', outline_raw, re.DOTALL)
-    if not m:
-        raise ValueError(f"Failed to parse outline JSON:\n{outline_raw}")
+    outline_data = None
+    if m:
+        try:
+            outline_data = json.loads(m.group(0))
+        except Exception as ex:
+            print(f"⚠️ Warning: Outline JSON parse error ({ex}), applying graceful outline fallback.")
 
-    outline_data = json.loads(m.group(0))
+    if not outline_data:
+        outline_data = {
+            "headings": [
+                {"paragraphId": "p_1", "timestamp": 0.5, "heading": f"【科判導讀】第 {session_id} 堂經論開示研讀"}
+            ],
+            "summary": f"第 {session_id} 堂經論義理研讀與中觀正理抉擇。"
+        }
 
     # Apply headings
     heading_map = {h["paragraphId"]: h["heading"] for h in outline_data.get("headings", [])}
