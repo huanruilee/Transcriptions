@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { type SentenceItem } from '../composables/useTimeSync';
+import { useUIStore } from './ui';
 
 export interface CorrectionItem {
   sentenceId: string;
@@ -218,8 +219,9 @@ export const useAnnotationStore = defineStore('annotation', {
     },
 
     async pushToBackend(item: CorrectionItem) {
+      const uiStore = useUIStore();
       try {
-        await fetch('http://127.0.0.1:9091/api/submit_correction', {
+        const res = await fetch('http://127.0.0.1:9091/api/submit_correction', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -233,8 +235,26 @@ export const useAnnotationStore = defineStore('annotation', {
             note: item.note,
           }),
         });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success) {
+            const dec = data.learning?.decision;
+            if (dec === 'GLOBAL_PROMOTED') {
+              const pair = data.learning?.phonetic_pair;
+              const pairText = pair ? `「${pair.typo} ➔ ${pair.corrected}」` : '';
+              uiStore.showToast(`🌟 成功學到知識庫！${pairText}已晉升全庫規則並更新磁碟！`, 'success', 5000);
+            } else if (dec === 'CONTEXT_SPECIFIC') {
+              uiStore.showToast(`🔒 已直連本機後台：標記為講次特定語境修訂，已寫入磁碟。`, 'info', 4000);
+            } else {
+              uiStore.showToast(`⚡ 已直連本機後台，成功更新磁碟檔案！`, 'success', 3500);
+            }
+          }
+        } else {
+          uiStore.showToast('⚠️ 本機後台回應異常，已暫存於瀏覽器。', 'warning', 3500);
+        }
       } catch (e) {
         console.warn('推送到本機同步後台失敗:', e);
+        uiStore.showToast('⚪ 本機同步後台未連線，變更已安全暫存於本機瀏覽器。', 'info', 3500);
       }
     },
   },

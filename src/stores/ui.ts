@@ -14,6 +14,11 @@ export const useUIStore = defineStore('ui', {
     isTOCSheetOpen: false,
     isSentenceModalOpen: false,
     editingSentenceId: null as string | null,
+    toast: {
+      visible: false,
+      message: '',
+      type: 'info' as 'info' | 'success' | 'warning' | 'error',
+    },
   }),
 
   actions: {
@@ -47,6 +52,17 @@ export const useUIStore = defineStore('ui', {
     closeAllDrawers() {
       this.isMobileDrawerOpen = false;
       this.isTOCSheetOpen = false;
+    },
+
+    showToast(message: string, type: 'info' | 'success' | 'warning' | 'error' = 'info', duration = 4000) {
+      this.toast.message = message;
+      this.toast.type = type;
+      this.toast.visible = true;
+      setTimeout(() => {
+        if (this.toast.message === message) {
+          this.toast.visible = false;
+        }
+      }, duration);
     },
   },
 });
