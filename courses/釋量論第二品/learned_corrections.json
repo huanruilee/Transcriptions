@@ -14,14 +14,6 @@
       "confidence": 0.95,
       "reasoning": "正相違（viruddha），ASR 誤聽為相偽。"
     },
-    "五米": {
-      "corrected": "無明",
-      "category": "佛學根本煩惱",
-      "safe_regex": "五米",
-      "treatise_ref": "seeded from 入中論 lexicon; 「無明」x91 in 成量品全文",
-      "confidence": 0.95,
-      "reasoning": "染污無明（avidyā），ASR 台語發音口誤為五米。"
-    },
     "地實": {
       "corrected": "諦實",
       "category": "二諦名相",
@@ -121,7 +113,7 @@
     "中大師": {
       "corrected": "宗大師",
       "category": "造論祖師尊稱",
-      "safe_regex": "中大師",
+      "safe_regex": "(?<!當)中大師|中大師開示|禮敬中大師",
       "treatise_ref": "seeded from 入中論 lexicon; 「宗大師」x19 in 成量品全文",
       "confidence": 0.95,
       "reasoning": "宗喀巴大師（Tsongkhapa），ASR 音近誤聽為中大師。"
@@ -160,15 +152,6 @@
       "learned_from": "第 02A 堂",
       "confidence": 0.95,
       "reasoning": "讀者校對回饋修正：「計算 ➔ 偈頌」。"
-    },
-    "相關": {
-      "corrected": "現觀",
-      "category": "佛學名相校訂",
-      "safe_regex": "相關",
-      "treatise_ref": "seeded from 入中論 lexicon; 「現觀」x4 in 成量品全文",
-      "learned_from": "第 02A 堂",
-      "confidence": 0.95,
-      "reasoning": "讀者校對回饋修正：「相關 ➔ 現觀」。"
     },
     "是深地": {
       "corrected": "四聖諦",
