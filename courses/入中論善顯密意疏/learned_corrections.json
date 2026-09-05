@@ -3,8 +3,8 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-09-05T12:24:18.248348+00:00",
-    "totalGlobalTerms": 100
+    "lastUpdated": "2026-09-05T12:45:44.343802+00:00",
+    "totalGlobalTerms": 116
   },
   "global_terms": {
     "明眼識": {
@@ -819,6 +819,118 @@
       "learned_from": "第 36A 堂",
       "confidence": 0.98,
       "reasoning": "讀者校對回饋修正：「相夥 ➔ 香火」。"
+    },
+    "持有一性": {
+      "corrected": "實有",
+      "category": "中觀宗義名相",
+      "safe_regex": "持有一性",
+      "confidence": 0.99,
+      "reasoning": "實有一體/實有自性，ASR 口誤為持有一性。"
+    },
+    "持有": {
+      "corrected": "實有",
+      "category": "中觀宗義名相",
+      "safe_regex": "(?<=法為)持有|(?<=不是)持有|(?<=成立)持有|持有成立",
+      "confidence": 0.95,
+      "reasoning": "實有成立，ASR 常誤聽為持有。"
+    },
+    "義生": {
+      "corrected": "異生",
+      "category": "佛學科判名相",
+      "safe_regex": "義生",
+      "confidence": 0.99,
+      "reasoning": "異生（pṛthagjana，凡夫），ASR 誤聽為義生。"
+    },
+    "聖一有": {
+      "corrected": "勝義有",
+      "category": "二諦名相",
+      "safe_regex": "聖一有|聖意有",
+      "confidence": 0.99,
+      "reasoning": "勝義有（paramārthasat），ASR 誤聽為聖一有/聖意有。"
+    },
+    "明言似": {
+      "corrected": "名言識",
+      "category": "中觀量論名相",
+      "safe_regex": "明言似",
+      "confidence": 0.99,
+      "reasoning": "名言識，ASR 誤聽為明言似。"
+    },
+    "印誠": {
+      "corrected": "應成",
+      "category": "中觀宗派名相",
+      "safe_regex": "印誠|印成派",
+      "confidence": 0.99,
+      "reasoning": "應成派（Prāsaṅgika），ASR 誤聽為印誠。"
+    },
+    "諮詢派": {
+      "corrected": "自續派",
+      "category": "中觀宗派名相",
+      "safe_regex": "諮詢派|秩序派",
+      "confidence": 0.99,
+      "reasoning": "自續派（Svātantrika），ASR 誤聽為諮詢/秩序派。"
+    },
+    "牙死": {
+      "corrected": "芽時",
+      "category": "經論因果比喻",
+      "safe_regex": "牙死",
+      "confidence": 0.99,
+      "reasoning": "芽生長之時，ASR 誤聽為牙死。"
+    },
+    "香蓄": {
+      "corrected": "相續",
+      "category": "佛學法相因果",
+      "safe_regex": "香蓄",
+      "confidence": 0.99,
+      "reasoning": "相續（saṃtāna），ASR 誤聽為香蓄。"
+    },
+    "棒筆記": {
+      "corrected": "謗彼",
+      "category": "偈頌文句還原",
+      "safe_regex": "棒筆記|棒筆",
+      "confidence": 0.99,
+      "reasoning": "入中論頌「謗彼即壞諸法故」，ASR 誤聽為棒筆記/棒筆。"
+    },
+    "建刀衛": {
+      "corrected": "見道位",
+      "category": "五道十地名相",
+      "safe_regex": "建刀衛",
+      "confidence": 0.99,
+      "reasoning": "見道位（darśana-mārga），ASR 誤聽為建刀衛。"
+    },
+    "憲政": {
+      "corrected": "現證",
+      "category": "中觀量論名相",
+      "safe_regex": "憲政",
+      "confidence": 0.99,
+      "reasoning": "現證空性，ASR 誤聽為憲政。"
+    },
+    "保基金": {
+      "corrected": "《寶積經》",
+      "category": "經典引證",
+      "safe_regex": "保基金|保際經",
+      "confidence": 0.99,
+      "reasoning": "大寶積經，ASR 誤聽為保基金/保際經。"
+    },
+    "父子佳瑟": {
+      "corrected": "迦葉",
+      "category": "佛典尊者名",
+      "safe_regex": "父子佳瑟|佳瑟|佳業",
+      "confidence": 0.99,
+      "reasoning": "迦葉尊者（Kāśyapa），ASR 誤聽為佳瑟/佳業。"
+    },
+    "一是他起": {
+      "corrected": "依他起",
+      "category": "唯識三性名相",
+      "safe_regex": "一是他起|以他已",
+      "confidence": 0.99,
+      "reasoning": "依他起性（paratantra），ASR 誤聽為一是他起/以他已。"
+    },
+    "四邊成十": {
+      "corrected": "圓成實",
+      "category": "唯識三性名相",
+      "safe_regex": "四邊成十",
+      "confidence": 0.99,
+      "reasoning": "圓成實性（pariniṣpanna），ASR 誤聽為四邊成十。"
     }
   },
   "context_rules": [
@@ -1274,6 +1386,214 @@
       "sessionId": "36A",
       "original": "正厲害的話 就是針對的是 像中官跟下部吧 對不對。",
       "proposed": "正厲害的話 就是針對的是 像中觀跟下部吧 對不對。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "呃，總之這樣，怎麼講，自信空，對啊，所以就是元氣，嗯，而且是遠離常斷的元氣。",
+      "proposed": "緣 呃 總這樣 怎麼講 自性空 對啊 所以就緣起 嗯 而且是遠離常斷的緣起。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "不多一常電，常斷，這樣。",
+      "proposed": "不墮常斷，這樣。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "不多常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "proposed": "不墮常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "怎麼講 沒有那麼的苦修就對了 從而正悟嘛 對 那個時候也是談到。",
+      "proposed": "怎麼講 沒有那麼的苦修就對了 從而證悟嘛 對 那個時候也是談到。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "呃，總之這樣，怎麼講，自信空，對啊，所以就是元氣，嗯，而且是遠離常斷的元氣。",
+      "proposed": "緣 呃 總這樣 怎麼講 自性空 對啊 所以就緣起 嗯 而且是遠離常斷的緣起。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "像比方說 如果自信有的話 在總觀來說 自信有的話 就 該怎麼講。",
+      "proposed": "像比方說 如果自性有的話 在總觀來說 自性有的話 就 該怎麼講。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "不多常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "proposed": "不墮常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "像比方說，如果自信有的話，在總觀來說，自信有的話，就，該怎麼講。",
+      "proposed": "像比方說 如果自性有的話 在中觀來說 自性有的話 就 該怎麼講。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "這樣可以嗎？如果自信有的話，第一剎那呢，跟第二剎那呢，就別別無關了，就不會這樣。",
+      "proposed": "這樣可以嗎？如果自性有的話，第一剎那呢，跟第二剎那呢，就別別無關了，就不會這樣。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "這樣，這樣對吧？對啊，所以就是變成，總之自信無的話，就會不常斷不短。",
+      "proposed": "這樣，這樣對吧？對啊，所以就是變成，總之自性無的話，就會不常亦不斷。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "這邊講的就是說，會不常斷不短。",
+      "proposed": "這邊講的就是說，會不常亦不斷。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "什麼之類的，不可以這樣，對啊，所以就變成，會長，這樣可以嗎？",
+      "proposed": "什麼之類的，不可以這樣，對啊，所以就變成，會常，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "怎麼講 沒有那麼的苦修就對了 從而正悟嘛 對 那個時候也是談到。",
+      "proposed": "怎麼講 沒有那麼的苦修就對了 從而證悟嘛 對 那個時候也是談到。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "呃，總之這樣，怎麼講，自信空，對啊，所以就是元氣，嗯，而且是遠離常斷的元氣。",
+      "proposed": "緣 呃 總這樣 怎麼講 自性空 對啊 所以就緣起 嗯 而且是遠離常斷的緣起。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "像比方說，如果自信有的話，在總觀來說，自信有的話，就，該怎麼講。",
+      "proposed": "像比方說 如果自性有的話 在中觀來說 自性有的話 就 該怎麼講。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "不多常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "proposed": "不墮常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "這邊講的就是說，會不常斷不短。",
+      "proposed": "這邊講的就是說，會不常亦不斷。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "什麼之類的，不可以這樣，對啊，所以就變成，會長，這樣可以嗎？",
+      "proposed": "什麼之類的，不可以這樣，對啊，所以就變成，會常，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "怎麼講 沒有那麼的苦修就對了 從而正悟嘛 對 那個時候也是談到。",
+      "proposed": "怎麼講 沒有那麼的苦修就對了 從而證悟嘛 對 那個時候也是談到。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "呃，總之這樣，怎麼講，自信空，對啊，所以就是元氣，嗯，而且是遠離常斷的元氣。",
+      "proposed": "緣 呃 總這樣 怎麼講 自性空 對啊 所以就緣起 嗯 而且是遠離常斷的緣起。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "像比方說，如果自信有的話，在總觀來說，自信有的話，就，該怎麼講。",
+      "proposed": "像比方說 如果自性有的話 在中觀來說 自性有的話 就 該怎麼講。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "不多常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "proposed": "不墮常斷的功德嘛，該這麼講，反正就是，不多常斷的功德，就是不多常斷了。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "這邊講的就是說，會不常斷不短。",
+      "proposed": "這邊講的就是說，會不常亦不斷。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "什麼之類的，不可以這樣，對啊，所以就變成，會長，這樣可以嗎？",
+      "proposed": "什麼之類的，不可以這樣，對啊，所以就變成，會常，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "對，大概就是這個樣子，可是如果持有的話，禮拜四的，放到這邊的零，跟今天的這個零。",
+      "proposed": "對，大概就是這個樣子，可是如果實有的話，禮拜四的，放到這邊的零，跟今天的這個零。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "對，所以就變成，如果完全相同的話，它就長了嘛，一模一樣，那個是百分之百的。",
+      "proposed": "對，所以就變成，如果完全相同的話，它就常了嘛，一模一樣，那個是百分之百的。",
       "pageRef": "",
       "confidence": 0.88,
       "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
