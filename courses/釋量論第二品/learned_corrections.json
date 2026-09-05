@@ -1,5 +1,372 @@
 {
-  "courseId": "shi-liang-lun-er",
-  "domain_lexicon": {},
-  "replacements": {}
+  "_metadata": {
+    "course": "釋量論第二品",
+    "version": "3.0",
+    "seeded": "2026-09-06: 37 global_terms carried from 入中論 lexicon (corrected-term verified x>=2 in 成量品全文); reference_glossary from 題綱+全書 high-frequency 因明名相",
+    "totalGlobalTerms": 37
+  },
+  "global_terms": {
+    "相偽": {
+      "corrected": "相違",
+      "category": "因明邏輯名相",
+      "safe_regex": "相偽",
+      "treatise_ref": "seeded from 入中論 lexicon; 「相違」x82 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "正相違（viruddha），ASR 誤聽為相偽。"
+    },
+    "五米": {
+      "corrected": "無明",
+      "category": "佛學根本煩惱",
+      "safe_regex": "五米",
+      "treatise_ref": "seeded from 入中論 lexicon; 「無明」x91 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "染污無明（avidyā），ASR 台語發音口誤為五米。"
+    },
+    "地實": {
+      "corrected": "諦實",
+      "category": "二諦名相",
+      "safe_regex": "地實",
+      "treatise_ref": "seeded from 入中論 lexicon; 「諦實」x4 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "諦實成立（satya），ASR 誤聽為地實。"
+    },
+    "生文": {
+      "corrected": "聲聞",
+      "category": "三乘名相",
+      "safe_regex": "生文",
+      "treatise_ref": "seeded from 入中論 lexicon; 「聲聞」x16 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "聲聞獨覺之聲聞（Śrāvaka），ASR 誤聽為生文。"
+    },
+    "據生": {
+      "corrected": "俱生",
+      "category": "心類學實執名相",
+      "safe_regex": "據生",
+      "treatise_ref": "seeded from 入中論 lexicon; 「俱生」x137 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "俱生我執、俱生起（sahaja），ASR 誤為據生。"
+    },
+    "貪承": {
+      "corrected": "貪瞋",
+      "category": "煩惱名相",
+      "safe_regex": "貪承(?!受|擔|認)",
+      "treatise_ref": "seeded from 入中論 lexicon; 「貪瞋」x28 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "貪瞋煩惱，ASR 誤為貪承。"
+    },
+    "薩甲耶見": {
+      "corrected": "薩迦耶見",
+      "category": "根本見解名相",
+      "safe_regex": "薩甲耶見",
+      "treatise_ref": "seeded from 入中論 lexicon; 「薩迦耶見」x58 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "薩迦耶見（satkāya-dṛṣṭi），ASR 誤為薩甲耶見。"
+    },
+    "應層": {
+      "corrected": "應成",
+      "category": "中觀派別名相",
+      "safe_regex": "應層",
+      "treatise_ref": "seeded from 入中論 lexicon; 「應成」x6 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "中觀應成派，ASR 誤為應層。"
+    },
+    "自取": {
+      "corrected": "自續",
+      "category": "中觀派別名相",
+      "safe_regex": "自[取虛緒]派|自[取虛緒](?!論|經|相|身|心)",
+      "treatise_ref": "seeded from 入中論 lexicon; 「自續」x5 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "中觀自續派（Svātantrika），ASR 誤為自取/自虛/自緒。"
+    },
+    "為世": {
+      "corrected": "唯識",
+      "category": "大乘宗義名相",
+      "safe_regex": "為世派|為世宗",
+      "treatise_ref": "seeded from 入中論 lexicon; 「唯識」x5 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "唯識宗（Vijñānavāda），ASR 誤為為世。"
+    },
+    "葡萄切勒": {
+      "corrected": "補特伽羅",
+      "category": "佛學核心名相",
+      "safe_regex": "葡萄切[勒熱了的]+|普特伽羅",
+      "treatise_ref": "seeded from 入中論 lexicon; 「補特伽羅」x52 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "梵文 Pudgala（補特伽羅），ASR 音譯嚴重訛化。"
+    },
+    "咒詩": {
+      "corrected": "咒師",
+      "category": "幻事喻名相",
+      "safe_regex": "咒詩",
+      "treatise_ref": "seeded from 入中論 lexicon; 「咒師」x2 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "幻化所依之能咒師，ASR 誤為咒詩。"
+    },
+    "非紋症": {
+      "corrected": "飛蚊症",
+      "category": "翳根錯亂喻",
+      "safe_regex": "非紋症|肺紋症",
+      "treatise_ref": "seeded from 入中論 lexicon; 「飛蚊症」x2 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "根有損害之飛蚊症，ASR 誤為非紋症。"
+    },
+    "十二元緊": {
+      "corrected": "十二緣起",
+      "category": "緣起法義名相",
+      "safe_regex": "十二元[緊緊]",
+      "treatise_ref": "seeded from 入中論 lexicon; 「十二緣起」x3 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "十二緣起支（dvādaśâṅga-pratītyasamutpāda），ASR 訛聽為十二元緊。"
+    },
+    "中大師": {
+      "corrected": "宗大師",
+      "category": "造論祖師尊稱",
+      "safe_regex": "中大師",
+      "treatise_ref": "seeded from 入中論 lexicon; 「宗大師」x19 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "宗喀巴大師（Tsongkhapa），ASR 音近誤聽為中大師。"
+    },
+    "撒家眼見": {
+      "corrected": "薩迦耶見",
+      "category": "根本煩惱名相",
+      "safe_regex": "撒家眼見",
+      "treatise_ref": "seeded from 入中論 lexicon; 「薩迦耶見」x58 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "satkāya-dṛṣṭi 薩迦耶見（壞聚見/我見），ASR 音訛誤為撒家眼見。"
+    },
+    "關帶": {
+      "corrected": "觀待",
+      "category": "佛學名相校訂",
+      "safe_regex": "關帶",
+      "treatise_ref": "seeded from 入中論 lexicon; 「觀待」x230 in 成量品全文",
+      "learned_from": "第 22B 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「關帶 ➔ 觀待」。"
+    },
+    "明眼": {
+      "corrected": "名言",
+      "category": "佛學名相校訂",
+      "safe_regex": "明眼",
+      "treatise_ref": "seeded from 入中論 lexicon; 「名言」x18 in 成量品全文",
+      "learned_from": "第 22B 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「明眼 ➔ 名言」。"
+    },
+    "計算": {
+      "corrected": "偈頌",
+      "category": "佛學名相校訂",
+      "safe_regex": "計算",
+      "treatise_ref": "seeded from 入中論 lexicon; 「偈頌」x391 in 成量品全文",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「計算 ➔ 偈頌」。"
+    },
+    "相關": {
+      "corrected": "現觀",
+      "category": "佛學名相校訂",
+      "safe_regex": "相關",
+      "treatise_ref": "seeded from 入中論 lexicon; 「現觀」x4 in 成量品全文",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「相關 ➔ 現觀」。"
+    },
+    "是深地": {
+      "corrected": "四聖諦",
+      "category": "佛學名相校訂",
+      "safe_regex": "是深地",
+      "treatise_ref": "seeded from 入中論 lexicon; 「四聖諦」x143 in 成量品全文",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「是深地 ➔ 四聖諦」。"
+    },
+    "生氣菩提心": {
+      "corrected": "生起菩提心",
+      "category": "大乘修道發心名相",
+      "safe_regex": "生氣菩提心",
+      "treatise_ref": "seeded from 入中論 lexicon; 「生起菩提心」x12 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "發菩提心、生起菩提心（bodhicitta-utpāda），ASR 將口語生起誤辨為生氣。"
+    },
+    "巨生": {
+      "corrected": "俱生",
+      "category": "心類學實執名相",
+      "safe_regex": "巨生(?!死)",
+      "treatise_ref": "seeded from 入中論 lexicon; 「俱生」x137 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "俱生起我執、俱生無明（sahaja），ASR 常將俱生誤聽為巨生。"
+    },
+    "騙擊": {
+      "corrected": "遍計",
+      "category": "唯識三性名相",
+      "safe_regex": "騙擊[所執]*",
+      "treatise_ref": "seeded from 入中論 lexicon; 「遍計」x16 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "遍計所執（parikalpita），ASR 訛辨為騙擊。"
+    },
+    "志向": {
+      "corrected": "自相",
+      "category": "佛學名相校訂",
+      "safe_regex": "志向",
+      "treatise_ref": "seeded from 入中論 lexicon; 「自相」x13 in 成量品全文",
+      "learned_from": "第 10A 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「志向 ➔ 自相」。"
+    },
+    "長矣": {
+      "corrected": "常亦",
+      "category": "佛學名相校訂",
+      "safe_regex": "長矣",
+      "treatise_ref": "seeded from 入中論 lexicon; 「常亦」x5 in 成量品全文",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「長矣 ➔ 常亦」。"
+    },
+    "持有一性": {
+      "corrected": "實有",
+      "category": "中觀宗義名相",
+      "safe_regex": "持有一性",
+      "confidence": 0.95,
+      "reasoning": "實有一體/實有自性，ASR 口誤為持有一性。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「實有」x4 in 成量品全文"
+    },
+    "持有": {
+      "corrected": "實有",
+      "category": "中觀宗義名相",
+      "safe_regex": "(?<=法為)持有|(?<=不是)持有|(?<=成立)持有|持有成立",
+      "confidence": 0.95,
+      "reasoning": "實有成立，ASR 常誤聽為持有。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「實有」x4 in 成量品全文"
+    },
+    "印誠": {
+      "corrected": "應成",
+      "category": "中觀宗派名相",
+      "safe_regex": "印誠|印成派",
+      "confidence": 0.95,
+      "reasoning": "應成派（Prāsaṅgika），ASR 誤聽為印誠。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「應成」x6 in 成量品全文"
+    },
+    "諮詢派": {
+      "corrected": "自續派",
+      "category": "中觀宗派名相",
+      "safe_regex": "諮詢派|秩序派",
+      "confidence": 0.95,
+      "reasoning": "自續派（Svātantrika），ASR 誤聽為諮詢/秩序派。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「自續派」x5 in 成量品全文"
+    },
+    "香蓄": {
+      "corrected": "相續",
+      "category": "佛學法相因果",
+      "safe_regex": "香蓄",
+      "confidence": 0.95,
+      "reasoning": "相續（saṃtāna），ASR 誤聽為香蓄。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「相續」x93 in 成量品全文"
+    },
+    "建刀衛": {
+      "corrected": "見道位",
+      "category": "五道十地名相",
+      "safe_regex": "建刀衛",
+      "confidence": 0.95,
+      "reasoning": "見道位（darśana-mārga），ASR 誤聽為建刀衛。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「見道位」x17 in 成量品全文"
+    },
+    "憲政": {
+      "corrected": "現證",
+      "category": "中觀量論名相",
+      "safe_regex": "憲政",
+      "confidence": 0.95,
+      "reasoning": "現證空性，ASR 誤聽為憲政。",
+      "treatise_ref": "seeded from 入中論 lexicon; 「現證」x146 in 成量品全文"
+    },
+    "元氣": {
+      "corrected": "緣起",
+      "category": "中觀核心名相",
+      "safe_regex": "元氣",
+      "treatise_ref": "seeded from 入中論 lexicon; 「緣起」x20 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "諸法緣起（pratītyasamutpāda），ASR 誤聽為元氣。"
+    },
+    "自信無": {
+      "corrected": "自性無",
+      "category": "中觀宗義名相",
+      "safe_regex": "自信無",
+      "treatise_ref": "seeded from 入中論 lexicon; 「自性無」x4 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "自性無，ASR 誤聽為自信無。"
+    },
+    "無自信": {
+      "corrected": "無自性",
+      "category": "中觀宗義名相",
+      "safe_regex": "無自信",
+      "treatise_ref": "seeded from 入中論 lexicon; 「無自性」x3 in 成量品全文",
+      "confidence": 0.95,
+      "reasoning": "無自性（niḥsvabhāva），ASR 誤聽為無自信。"
+    },
+    "續因": {
+      "corrected": "相有",
+      "category": "佛學名相校訂",
+      "safe_regex": "續因",
+      "treatise_ref": "seeded from 入中論 lexicon; 「相有」x5 in 成量品全文",
+      "learned_from": "第 38B 堂",
+      "confidence": 0.95,
+      "reasoning": "讀者校對回饋修正：「續因 ➔ 相有」。"
+    }
+  },
+  "context_rules": [],
+  "reference_glossary": {
+    "_note": "非替換規則。供 llm_deep_calibrate prompt 與 calibration run 對照用；實際 typo→correct 規則由第1-4講 calibration 產生。",
+    "terms": [
+      "量士夫",
+      "現量",
+      "比量",
+      "再決知",
+      "義共相",
+      "自相",
+      "共相",
+      "近取因",
+      "增上緣",
+      "等無間緣",
+      "所緣緣",
+      "無欺誑",
+      "四諦",
+      "苦諦",
+      "集諦",
+      "滅諦",
+      "道諦",
+      "行相",
+      "無我",
+      "我執",
+      "大悲",
+      "菩提心",
+      "法稱論師",
+      "陳那",
+      "集量論",
+      "成量品",
+      "釋量論",
+      "因三相",
+      "正因",
+      "周遍",
+      "逆周遍",
+      "勝義",
+      "世俗",
+      "二諦",
+      "自證",
+      "伺察",
+      "已決度",
+      "未決度",
+      "顛倒",
+      "錯亂識",
+      "剎那",
+      "相續",
+      "同體",
+      "異體",
+      "能立",
+      "所立",
+      "應成",
+      "自續",
+      "造物主",
+      "大自在天",
+      "聲聞",
+      "緣起"
+    ]
+  }
 }
