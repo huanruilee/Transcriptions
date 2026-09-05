@@ -3,8 +3,8 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-09-05T13:00:52.267323+00:00",
-    "totalGlobalTerms": 116
+    "lastUpdated": "2026-09-05T22:30:00+08:00",
+    "totalGlobalTerms": 128
   },
   "global_terms": {
     "明眼識": {
@@ -931,6 +931,102 @@
       "safe_regex": "四邊成十",
       "confidence": 0.99,
       "reasoning": "圓成實性（pariniṣpanna），ASR 誤聽為四邊成十。"
+    },
+    "元氣": {
+      "corrected": "緣起",
+      "category": "中觀核心名相",
+      "safe_regex": "元氣",
+      "treatise_ref": "善顯密意疏 p.111",
+      "confidence": 0.99,
+      "reasoning": "諸法緣起（pratītyasamutpāda），ASR 誤聽為元氣。"
+    },
+    "常電": {
+      "corrected": "常斷",
+      "category": "中觀見地名相",
+      "safe_regex": "常電",
+      "treatise_ref": "善顯密意疏 p.111",
+      "confidence": 0.99,
+      "reasoning": "不墮常斷二邊，ASR 誤聽為常電。"
+    },
+    "自信空": {
+      "corrected": "自性空",
+      "category": "中觀宗義名相",
+      "safe_regex": "自信空",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "諸法自性空（svabhāva-śūnya），ASR 誤聽為自信空。"
+    },
+    "自信無": {
+      "corrected": "自性無",
+      "category": "中觀宗義名相",
+      "safe_regex": "自信無",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "自性無，ASR 誤聽為自信無。"
+    },
+    "無自信": {
+      "corrected": "無自性",
+      "category": "中觀宗義名相",
+      "safe_regex": "無自信",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "無自性（niḥsvabhāva），ASR 誤聽為無自信。"
+    },
+    "直指無自相": {
+      "corrected": "執為無自相",
+      "category": "中觀量論名相",
+      "safe_regex": "直指無自相",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "執諸法為無自相，ASR 誤為直指無自相。"
+    },
+    "直主法自相無": {
+      "corrected": "執諸法自相無",
+      "category": "中觀量論名相",
+      "safe_regex": "直主法自相無",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "執諸法自相無，ASR 誤聽。"
+    },
+    "直諸法": {
+      "corrected": "執諸法",
+      "category": "中觀宗義名相",
+      "safe_regex": "直諸法",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "執諸法（grahīta），ASR 誤為直諸法。"
+    },
+    "名言似": {
+      "corrected": "名言識",
+      "category": "中觀二諦名相",
+      "safe_regex": "名言似",
+      "treatise_ref": "善顯密意疏 p.113",
+      "confidence": 0.99,
+      "reasoning": "名言識（tha-snyad shes-pa），ASR 誤聽為名言似。"
+    },
+    "四論": {
+      "corrected": "《釋論》",
+      "category": "底本論典名相",
+      "safe_regex": "四論",
+      "treatise_ref": "月稱入中論釋",
+      "confidence": 0.98,
+      "reasoning": "宗喀巴大師引月稱《入中論釋》（釋論），口語常被聽為四論。"
+    },
+    "無名緣行": {
+      "corrected": "無明緣行",
+      "category": "十二因緣名相",
+      "safe_regex": "無名緣行",
+      "treatise_ref": "善顯密意疏 p.112",
+      "confidence": 0.99,
+      "reasoning": "十二緣起初二支無明緣行，ASR 誤為無名緣行。"
+    },
+    "諸行 你行空": {
+      "corrected": "諸行性空",
+      "category": "中觀緣起名相",
+      "safe_regex": "諸行[ 　]*你行空",
+      "treatise_ref": "善顯密意疏 p.112",
+      "confidence": 0.99,
+      "reasoning": "諸行性空，ASR 聽成口語碎片。"
     }
   },
   "context_rules": [
