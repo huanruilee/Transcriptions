@@ -806,8 +806,9 @@ onUnmounted(() => {
 });
 
 async function loadRealCourseData() {
+  const baseUrl = import.meta.env.BASE_URL || '/';
   try {
-    const resCourse = await fetch('/courses/入中論善顯密意疏/course.json');
+    const resCourse = await fetch(`${baseUrl}courses/入中論善顯密意疏/course.json`);
     if (resCourse.ok) {
       const data = await resCourse.json();
       const sessions = (data.sessions || []).map((s: any) => ({
@@ -823,7 +824,7 @@ async function loadRealCourseData() {
       courseStore.setSessions(sessions);
     }
 
-    const resTOC = await fetch('/courses/入中論善顯密意疏/toc.json');
+    const resTOC = await fetch(`${baseUrl}courses/入中論善顯密意疏/toc.json`);
     if (resTOC.ok) {
       const tocData = await resTOC.json();
       courseStore.setTOC(tocData);
@@ -838,8 +839,9 @@ async function loadSession(sessionId: string) {
   window.location.hash = `session-${sessionId}`;
   isLoading.value = true;
 
+  const baseUrl = import.meta.env.BASE_URL || '/';
   try {
-    const url = `/courses/入中論善顯密意疏/sessions/session_${sessionId}.json`;
+    const url = `${baseUrl}courses/入中論善顯密意疏/sessions/session_${sessionId}.json`;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
