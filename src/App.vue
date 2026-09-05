@@ -396,9 +396,38 @@
           ⏮️
         </button>
 
+        <!-- YouTube 影音控制器 (當課程為 video/youtube 時顯示) -->
+        <div
+          v-if="courseStore.currentMediaType === 'video/youtube'"
+          class="custom-media-controls"
+        >
+          <button
+            id="media-play-toggle-btn"
+            class="custom-play-btn"
+            :title="isMediaPlaying ? '暫停' : '播放'"
+            @click="toggleMediaPlay"
+          >
+            {{ isMediaPlaying ? '⏸️' : '▶️' }}
+          </button>
+          <span class="custom-time-readout">
+            {{ formatTime(playerStore.currentTime) }} / {{ formatTime(mediaDuration) }}
+          </span>
+          <input
+            id="media-seek-slider"
+            type="range"
+            class="custom-seek-slider"
+            min="0"
+            :max="mediaDuration || 100"
+            :value="playerStore.currentTime"
+            @input="onSeekSliderChange"
+          />
+        </div>
+
+        <!-- 原生音訊標籤 (保留以滿足 DOM Contract，audio/mp3 模式下正常使用) -->
         <audio
           id="audio-element"
           class="native-audio"
+          v-show="courseStore.currentMediaType === 'audio/mp3'"
           controls
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
@@ -596,6 +625,10 @@ const originUrl = computed(() => (typeof window !== 'undefined' ? window.locatio
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
 const isLoading = ref(false);
+const isMediaPlaying = ref(false);
+const mediaDuration = ref(0);
+let ytPlayer: any = null;
+let ytTrackerInterval: any = null;
 
 const totalSessionDuration = computed(() => {
   const all = paragraphs.value.flatMap(p => p.sentences);
@@ -680,12 +713,85 @@ function handleExportNotes() {
   downloadMarkdownFile(filename, md);
 }
 
+// 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
+function toggleMediaPlay() {
+  if (courseStore.currentMediaType === 'video/youtube') {
+    if (isMediaPlaying.value) {
+      pauseMedia();
+    } else {
+      playMedia();
+    }
+  } else {
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl) {
+      if (audioEl.paused) audioEl.play().catch(() => {});
+      else audioEl.pause();
+    }
+  }
+}
+
+function playMedia() {
+  if (courseStore.currentMediaType === 'video/youtube') {
+    if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+      try {
+        ytPlayer.playVideo();
+      } catch (e) {}
+    }
+    const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    if (ytIframe && ytIframe.contentWindow) {
+      ytIframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+        '*'
+      );
+    }
+    isMediaPlaying.value = true;
+    startYTTracker();
+  } else {
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl) audioEl.play().catch(() => {});
+  }
+}
+
+function pauseMedia() {
+  if (courseStore.currentMediaType === 'video/youtube') {
+    if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+      try {
+        ytPlayer.pauseVideo();
+      } catch (e) {}
+    }
+    const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    if (ytIframe && ytIframe.contentWindow) {
+      ytIframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
+        '*'
+      );
+    }
+    isMediaPlaying.value = false;
+    stopYTTracker();
+  } else {
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl) audioEl.pause();
+  }
+}
+
+function onSeekSliderChange(e: Event) {
+  const target = e.target as HTMLInputElement;
+  const time = parseFloat(target.value);
+  seekToTime(time);
+}
+
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   playerStore.updateTime(time);
   
-  // 1. 若為 YouTube 影片模式，發送 postMessage 命令給 YouTube Iframe
+  // 1. 若為 YouTube 影片模式
   if (courseStore.currentMediaType === 'video/youtube') {
+    if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
+      try {
+        ytPlayer.seekTo(time, true);
+        ytPlayer.playVideo();
+      } catch (e) {}
+    }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
@@ -705,14 +811,118 @@ function seekToTime(time: number) {
         '*'
       );
     }
+    isMediaPlaying.value = true;
+    startYTTracker();
+  } else {
+    // 2. HTML5 原生音訊
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl && audioEl.src && currentAudioUrl.value) {
+      audioEl.currentTime = time;
+      audioEl.play().catch(() => {});
+    }
+  }
+}
+
+// YouTube Iframe API 初始化與時間追蹤
+function setupYouTubePlayer() {
+  if (typeof window === 'undefined') return;
+
+  if (!(window as any).YT) {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScript = document.getElementsByTagName('script')[0];
+    firstScript?.parentNode?.insertBefore(tag, firstScript);
   }
 
-  // 2. HTML5 原生音訊
-  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audioEl && audioEl.src && currentAudioUrl.value) {
-    audioEl.currentTime = time;
-    audioEl.play().catch(() => {});
+  const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+  if (ytIframe && ytIframe.contentWindow) {
+    ytIframe.contentWindow.postMessage(JSON.stringify({ event: 'listening' }), '*');
   }
+
+  let attempts = 0;
+  const checkYT = setInterval(() => {
+    attempts++;
+    const iframe = document.getElementById('youtube-iframe');
+    if (!iframe || attempts > 50) {
+      clearInterval(checkYT);
+      return;
+    }
+    if ((window as any).YT && (window as any).YT.Player) {
+      clearInterval(checkYT);
+      try {
+        if (ytPlayer && typeof ytPlayer.destroy === 'function') {
+          try { ytPlayer.destroy(); } catch (e) {}
+        }
+        ytPlayer = new (window as any).YT.Player('youtube-iframe', {
+          events: {
+            onReady: (e: any) => {
+              const dur = e.target.getDuration();
+              if (dur && dur > 0) mediaDuration.value = dur;
+            },
+            onStateChange: (e: any) => {
+              // 1: PLAYING, 2: PAUSED, 0: ENDED
+              if (e.data === 1) {
+                isMediaPlaying.value = true;
+                startYTTracker();
+              } else if (e.data === 2 || e.data === 0) {
+                isMediaPlaying.value = false;
+                stopYTTracker();
+              }
+            },
+          },
+        });
+      } catch (err) {}
+    }
+  }, 100);
+}
+
+function startYTTracker() {
+  stopYTTracker();
+  ytTrackerInterval = setInterval(() => {
+    if (ytPlayer && typeof ytPlayer.getCurrentTime === 'function') {
+      try {
+        const t = ytPlayer.getCurrentTime();
+        if (typeof t === 'number' && !isNaN(t)) {
+          playerStore.updateTime(t);
+        }
+        const d = ytPlayer.getDuration();
+        if (d && !isNaN(d) && d > 0) {
+          mediaDuration.value = d;
+        }
+      } catch (e) {}
+    }
+  }, 250);
+}
+
+function stopYTTracker() {
+  if (ytTrackerInterval) {
+    clearInterval(ytTrackerInterval);
+    ytTrackerInterval = null;
+  }
+}
+
+function onYouTubeMessage(event: MessageEvent) {
+  try {
+    const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+    if (!data) return;
+    if (data.event === 'infoDelivery' && data.info) {
+      if (typeof data.info.currentTime === 'number') {
+        playerStore.updateTime(data.info.currentTime);
+      }
+      if (typeof data.info.duration === 'number' && data.info.duration > 0) {
+        mediaDuration.value = data.info.duration;
+      }
+      if (typeof data.info.playerState === 'number') {
+        isMediaPlaying.value = (data.info.playerState === 1);
+        if (data.info.playerState === 1) startYTTracker();
+        else stopYTTracker();
+      }
+    } else if (data.event === 'onStateChange') {
+      isMediaPlaying.value = (data.info === 1);
+      if (data.info === 1) startYTTracker();
+      else stopYTTracker();
+    }
+  } catch (e) {}
 }
 
 // 科判跳轉 (跨講或本講時間戳)
@@ -794,11 +1004,7 @@ function setupKeyboardShortcuts() {
   window.addEventListener('keydown', (e: KeyboardEvent) => {
     handleGlobalKeyDown(e, {
       onTogglePlay: () => {
-        const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-        if (audioEl) {
-          if (audioEl.paused) audioEl.play().catch(() => {});
-          else audioEl.pause();
-        }
+        toggleMediaPlay();
       },
       onToggleSidebar: () => toggleSidebar(),
       onCloseModal: () => {
@@ -827,6 +1033,7 @@ onMounted(async () => {
   window.addEventListener('scroll', onUserScroll, { passive: true });
   window.addEventListener('wheel', onUserScroll, { passive: true });
   window.addEventListener('touchmove', onUserScroll, { passive: true });
+  window.addEventListener('message', onYouTubeMessage);
 
   // 支援 URL 參數 ?course=shi-liang-lun-er
   if (typeof window !== 'undefined') {
@@ -857,6 +1064,8 @@ onUnmounted(() => {
   window.removeEventListener('scroll', onUserScroll);
   window.removeEventListener('wheel', onUserScroll);
   window.removeEventListener('touchmove', onUserScroll);
+  window.removeEventListener('message', onYouTubeMessage);
+  stopYTTracker();
 });
 
 async function loadRealCourseData() {
@@ -944,14 +1153,36 @@ async function loadSession(sessionId: string) {
     playerStore.setSentences(allSentences);
     annotationStore.loadSessionAnnotations(sessionId);
 
-    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl) {
-      if (currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
-        audioEl.src = currentAudioUrl.value;
-        audioEl.load();
-      } else {
+    if (allSentences.length > 0) {
+      const last = allSentences[allSentences.length - 1];
+      mediaDuration.value = last.end ?? last.end_time ?? 0;
+    }
+
+    if (courseStore.currentMediaType === 'video/youtube') {
+      // 停止並清空原生音訊，防止播放前一門課程（如入中論）的殘留音檔
+      const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+      if (audioEl) {
+        audioEl.pause();
         audioEl.removeAttribute('src');
         audioEl.load();
+      }
+      isMediaPlaying.value = false;
+      stopYTTracker();
+      setTimeout(() => {
+        setupYouTubePlayer();
+      }, 100);
+    } else {
+      stopYTTracker();
+      isMediaPlaying.value = false;
+      const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+      if (audioEl) {
+        if (currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+          audioEl.src = currentAudioUrl.value;
+          audioEl.load();
+        } else {
+          audioEl.removeAttribute('src');
+          audioEl.load();
+        }
       }
     }
   } catch (err) {
@@ -1091,8 +1322,23 @@ function formatTime(secs: number): string {
 
 // 監聽播放倍率變更
 watch(() => playerStore.playbackRate, (rate) => {
-  const audio = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audio) audio.playbackRate = rate;
+  if (courseStore.currentMediaType === 'video/youtube') {
+    if (ytPlayer && typeof ytPlayer.setPlaybackRate === 'function') {
+      try {
+        ytPlayer.setPlaybackRate(rate);
+      } catch (e) {}
+    }
+    const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    if (ytIframe && ytIframe.contentWindow) {
+      ytIframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'setPlaybackRate', args: [rate] }),
+        '*'
+      );
+    }
+  } else {
+    const audio = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audio) audio.playbackRate = rate;
+  }
 });
 
 // 暴露 CLI / API 測試介面 (供純文字 CLI 驗收，零截圖 Token 消耗)
@@ -1773,6 +2019,56 @@ if (typeof window !== 'undefined') {
 
 .native-audio {
   height: 36px;
+}
+
+.custom-media-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.custom-play-btn {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.custom-play-btn:hover {
+  transform: scale(1.08);
+}
+
+.custom-time-readout {
+  font-size: 0.85rem;
+  font-family: monospace;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.custom-seek-slider {
+  width: 180px;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+  height: 6px;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .custom-seek-slider {
+    width: 80px;
+  }
+  .custom-time-readout {
+    font-size: 0.75rem;
+  }
 }
 
 .rate-btn, .toc-trigger-btn {
