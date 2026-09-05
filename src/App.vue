@@ -709,7 +709,7 @@ function seekToTime(time: number) {
 
   // 2. HTML5 原生音訊
   const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audioEl && audioEl.src && courseStore.currentMediaType === 'audio/mp3') {
+  if (audioEl && audioEl.src && currentAudioUrl.value) {
     audioEl.currentTime = time;
     audioEl.play().catch(() => {});
   }
@@ -945,9 +945,14 @@ async function loadSession(sessionId: string) {
     annotationStore.loadSessionAnnotations(sessionId);
 
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl && currentAudioUrl.value && courseStore.currentMediaType === 'audio/mp3') {
-      audioEl.src = currentAudioUrl.value;
-      audioEl.load();
+    if (audioEl) {
+      if (currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+        audioEl.src = currentAudioUrl.value;
+        audioEl.load();
+      } else {
+        audioEl.removeAttribute('src');
+        audioEl.load();
+      }
     }
   } catch (err) {
     console.error(`載入講次 ${sessionId} 逐字稿失敗:`, err);
