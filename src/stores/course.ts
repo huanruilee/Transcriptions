@@ -5,6 +5,8 @@ export interface SessionMeta {
   title: string;
   page?: string;
   summary?: string;
+  date?: string;
+  lastUpdated?: string;
 }
 
 export interface TOCNode {

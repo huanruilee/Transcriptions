@@ -550,6 +550,7 @@ const overviewSessions = computed(() => {
     title: s.title,
     page: s.page,
     date: s.date || '',
+    lastUpdated: s.lastUpdated || '',
   }));
 });
 
@@ -798,6 +799,8 @@ async function loadRealCourseData() {
         title: s.title || `第 ${s.sessionId} 講`,
         page: s.pageRange || '',
         summary: s.summary || '',
+        date: s.date || '',
+        lastUpdated: s.lastUpdated || '',
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
       }));
