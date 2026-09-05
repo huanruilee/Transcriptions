@@ -1,0 +1,96 @@
+/* Universal Typography and Layout Design Tokens for Classical Buddhist Texts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --font-serif: 'Noto Serif TC', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --line-height: 1.8;
+  --paragraph-margin: 16px;
+  --max-reader-width: 780px;
+  --sidebar-width: 280px;
+  --header-height: 54px;
+  --player-height: 80px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 預設主題：【紙墨雅緻】(Parchment & Ink) */
+body,
+body[data-theme='parchment'] {
+  --bg-color: #FAF8F5;
+  --sidebar-bg: #F2ECE1;
+  --card-bg: #FFFFFF;
+  --surface-bg: #FAF6EE;
+  --input-bg: #FFFFFF;
+  --text-main: #2B2623;
+  --text-muted: #6B635B;
+  --primary-color: #7C2D12;
+  --accent-color: #B45309;
+  --highlight-bg: #FEF08A;
+  --highlight-border: #D97706;
+  --border-color: #E6DED2;
+  --search-hit-bg: rgba(180, 83, 9, 0.20);
+  --box-bg: rgba(0, 0, 0, 0.03);
+  --box-border: rgba(0, 0, 0, 0.12);
+  --callout-bg: #FFF7ED;
+  --callout-border: #FDBA74;
+  --callout-text: #9A3412;
+  --diff-del-bg: #FEE2E2;
+  --diff-del-text: #B91C1C;
+  --diff-ins-bg: #DCFCE7;
+  --diff-ins-text: #15803D;
+}
+
+/* 主題 B：【靜慮夜讀】(Zen Dark) - 高對比清晰護眼配色 */
+body[data-theme='zen-dark'] {
+  --bg-color: #191817;
+  --sidebar-bg: #121110;
+  --card-bg: #22201E;
+  --surface-bg: #2B2825;
+  --input-bg: #1B1A19;
+  --text-main: #EDE7DC;
+  --text-muted: #A8A196;
+  --primary-color: #FB923C;
+  --accent-color: #F59E0B;
+  --highlight-bg: rgba(245, 158, 11, 0.28);
+  --highlight-border: #F59E0B;
+  --border-color: #3E3A34;
+  --search-hit-bg: rgba(245, 158, 11, 0.32);
+  --box-bg: rgba(255, 255, 255, 0.05);
+  --box-border: rgba(255, 255, 255, 0.15);
+  --callout-bg: rgba(251, 146, 60, 0.15);
+  --callout-border: #EA580C;
+  --callout-text: #FDBA74;
+  --diff-del-bg: rgba(239, 68, 68, 0.25);
+  --diff-del-text: #FCA5A5;
+  --diff-ins-bg: rgba(34, 197, 94, 0.25);
+  --diff-ins-text: #86EFAC;
+}
+
+/* 主題 C：【貝葉古卷】(Sepia / Sandalwood) */
+body[data-theme='sepia'] {
+  --bg-color: #F3EBD9;
+  --sidebar-bg: #E7DCB8;
+  --card-bg: #FAF5E8;
+  --surface-bg: #EFE4CC;
+  --input-bg: #FCF9F2;
+  --text-main: #3D3022;
+  --text-muted: #756653;
+  --primary-color: #7C2D12;
+  --accent-color: #9A3412;
+  --highlight-bg: #FDE68A;
+  --highlight-border: #B45309;
+  --border-color: #DACFB6;
+  --search-hit-bg: rgba(154, 52, 18, 0.22);
+  --box-bg: rgba(0, 0, 0, 0.04);
+  --box-border: rgba(0, 0, 0, 0.14);
+  --callout-bg: #FFF3DD;
+  --callout-border: #F6C176;
+  --callout-text: #8B4513;
+  --diff-del-bg: #FDE8E8;
+  --diff-del-text: #9B1C1C;
+  --diff-ins-bg: #DEF7EC;
+  --diff-ins-text: #03543F;
+}
