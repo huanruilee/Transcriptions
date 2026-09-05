@@ -101,8 +101,10 @@ class LocalSyncHandler(http.server.BaseHTTPRequestHandler):
             rules = learned_db.get("context_rules", [])
             session_files = list(SESSIONS_DIR.glob("session_*.json")) if SESSIONS_DIR.exists() else []
 
+            status_val = "online" if path == "/api/status" else "ok"
             self._send_json(200, {
-                "status": "ok",
+                "status": status_val,
+                "online": True,
                 "service": "Transcriptions Local Active Learning & Sync Bridge",
                 "version": "2.0",
                 "totalGlobalTerms": len(terms),
