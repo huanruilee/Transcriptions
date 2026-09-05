@@ -93,7 +93,10 @@ function handleSelect(sessionId: string) {
             </div>
             <div class="card-title">{{ s.title || `第 ${s.session_id} 堂` }}</div>
             <div v-if="s.summary" class="card-summary">{{ s.summary }}</div>
-            <div v-if="s.date" class="card-date">{{ s.date }}</div>
+            <div class="card-footer-info">
+              <span v-if="s.lastUpdated" class="card-updated" title="最後校對更新時間">🕒 {{ s.lastUpdated }}</span>
+              <span v-else-if="s.date" class="card-date">{{ s.date }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -287,10 +290,22 @@ function handleSelect(sessionId: string) {
   color: var(--accent-color, #9a3412);
   line-height: 1.3;
 }
+.card-footer-info {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
 .card-date {
   font-size: 0.72rem;
   color: var(--text-muted, #a89f91);
-  margin-top: auto;
+}
+.card-updated {
+  font-size: 0.72rem;
+  color: var(--accent-color, #9a3412);
+  background: rgba(154, 52, 18, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 500;
 }
 .modal-footer {
   padding: 12px 24px;
