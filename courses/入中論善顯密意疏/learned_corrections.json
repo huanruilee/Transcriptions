@@ -3,8 +3,8 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-09-04T14:39:19.103325+00:00",
-    "totalGlobalTerms": 77
+    "lastUpdated": "2026-09-05T12:24:18.248348+00:00",
+    "totalGlobalTerms": 100
   },
   "global_terms": {
     "明眼識": {
@@ -622,6 +622,203 @@
       "treatise_ref": "善顯密意疏 p.101 L25",
       "confidence": 0.99,
       "reasoning": "原文「亦知為錯亂之影像等境」，ASR 誤聽。"
+    },
+    "關帶": {
+      "corrected": "觀待",
+      "category": "佛學名相校訂",
+      "safe_regex": "關帶",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 22B 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「關帶 ➔ 觀待」。"
+    },
+    "明眼": {
+      "corrected": "名言",
+      "category": "佛學名相校訂",
+      "safe_regex": "明眼",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 22B 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「明眼 ➔ 名言」。"
+    },
+    "三寫": {
+      "corrected": "善顯",
+      "category": "佛學名相校訂",
+      "safe_regex": "三寫",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 01 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「三寫 ➔ 善顯」。"
+    },
+    "出戲": {
+      "corrected": "粗細",
+      "category": "佛學名相校訂",
+      "safe_regex": "出戲",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「出戲 ➔ 粗細」。"
+    },
+    "計算": {
+      "corrected": "偈頌",
+      "category": "佛學名相校訂",
+      "safe_regex": "計算",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「計算 ➔ 偈頌」。"
+    },
+    "相關": {
+      "corrected": "現觀",
+      "category": "佛學名相校訂",
+      "safe_regex": "相關",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「相關 ➔ 現觀」。"
+    },
+    "是深地": {
+      "corrected": "四聖諦",
+      "category": "佛學名相校訂",
+      "safe_regex": "是深地",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「是深地 ➔ 四聖諦」。"
+    },
+    "嘎東": {
+      "corrected": "噶當",
+      "category": "佛學名相校訂",
+      "safe_regex": "嘎東",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 02A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「嘎東 ➔ 噶當」。"
+    },
+    "生氣菩提心": {
+      "corrected": "生起菩提心",
+      "category": "大乘修道發心名相",
+      "safe_regex": "生氣菩提心",
+      "treatise_ref": "善顯密意疏 卷首及初地",
+      "confidence": 0.99,
+      "reasoning": "發菩提心、生起菩提心（bodhicitta-utpāda），ASR 將口語生起誤辨為生氣。"
+    },
+    "懂空氣": {
+      "corrected": "懂空性",
+      "category": "中觀見地名相",
+      "safe_regex": "懂空氣",
+      "treatise_ref": "善顯密意疏 空性品",
+      "confidence": 0.99,
+      "reasoning": "通達空性、了知空性，口語「懂空性」被 ASR 誤辨為懂空氣。"
+    },
+    "巨生": {
+      "corrected": "俱生",
+      "category": "心類學實執名相",
+      "safe_regex": "巨生(?!死)",
+      "treatise_ref": "善顯密意疏 卷六",
+      "confidence": 0.99,
+      "reasoning": "俱生起我執、俱生無明（sahaja），ASR 常將俱生誤聽為巨生。"
+    },
+    "道肝": {
+      "corrected": "《稻稈經》",
+      "category": "緣起根本經論",
+      "safe_regex": "道肝(?!臟)",
+      "treatise_ref": "稻稈經（Śālistamba Sūtra）",
+      "confidence": 0.99,
+      "reasoning": "大乘引證內外緣起之《稻稈經》，ASR 訛記為道肝。"
+    },
+    "類也是": {
+      "corrected": "賴耶識",
+      "category": "唯識中觀名相",
+      "safe_regex": "類也是",
+      "treatise_ref": "善顯密意疏 破阿賴耶識品",
+      "confidence": 0.99,
+      "reasoning": "阿賴耶識（ālaya-vijñāna）口語速讀時 ASR 音訛為類也是。"
+    },
+    "騙擊": {
+      "corrected": "遍計",
+      "category": "唯識三性名相",
+      "safe_regex": "騙擊[所執]*",
+      "treatise_ref": "善顯密意疏 唯識三自性",
+      "confidence": 0.99,
+      "reasoning": "遍計所執（parikalpita），ASR 訛辨為騙擊。"
+    },
+    "波雷經": {
+      "corrected": "《般若經》",
+      "category": "大乘經論名相",
+      "safe_regex": "波雷經",
+      "treatise_ref": "般若波羅蜜多經",
+      "confidence": 0.99,
+      "reasoning": "Prajñāpāramitā 般若經，ASR 音訛為波雷經。"
+    },
+    "波羅星星": {
+      "corrected": "《般若心經》",
+      "category": "大乘經論名相",
+      "safe_regex": "波羅星星",
+      "treatise_ref": "般若波羅蜜多心經",
+      "confidence": 0.99,
+      "reasoning": "般若心經，ASR 重複音訛為波羅星星。"
+    },
+    "獅子有": {
+      "corrected": "實質有",
+      "category": "中觀有境實相名相",
+      "safe_regex": "獅子有(?!法|物|害)",
+      "treatise_ref": "善顯密意疏 實質有與假有",
+      "confidence": 0.99,
+      "reasoning": "實質有（dravyasat），ASR 音訛為獅子有。"
+    },
+    "唯名言而你": {
+      "corrected": "唯名言而立",
+      "category": "中觀應成根本正義",
+      "safe_regex": "唯名言而你",
+      "treatise_ref": "善顯密意疏 唯名言安立諸法",
+      "confidence": 0.99,
+      "reasoning": "應成派至極關要「唯名言而立」，ASR 音訛為唯名言而你。"
+    },
+    "志向": {
+      "corrected": "自相",
+      "category": "佛學名相校訂",
+      "safe_regex": "志向",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 10A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「志向 ➔ 自相」。"
+    },
+    "長矣": {
+      "corrected": "常亦",
+      "category": "佛學名相校訂",
+      "safe_regex": "長矣",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「長矣 ➔ 常亦」。"
+    },
+    "長短": {
+      "corrected": "常斷",
+      "category": "佛學名相校訂",
+      "safe_regex": "長短",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「長短 ➔ 常斷」。"
+    },
+    "牙衰": {
+      "corrected": "芽雖",
+      "category": "佛學名相校訂",
+      "safe_regex": "牙衰",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「牙衰 ➔ 芽雖」。"
+    },
+    "相夥": {
+      "corrected": "香火",
+      "category": "佛學名相校訂",
+      "safe_regex": "相夥",
+      "treatise_ref": "善顯密意疏 ",
+      "learned_from": "第 36A 堂",
+      "confidence": 0.98,
+      "reasoning": "讀者校對回饋修正：「相夥 ➔ 香火」。"
     }
   },
   "context_rules": [
@@ -781,6 +978,302 @@
       "sessionId": "32A",
       "original": "對心內學這些要有一定的把握 否則沒什麼討論的。",
       "proposed": "對心類學這些要有一定的把握 否則沒什麼討論的。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "01",
+      "original": "所以變了不了義的話 就基本上是比較沒有了格。",
+      "proposed": "所以辨了不了義的話 就基本上是比較沒有了格。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "22B",
+      "original": "搞清楚兩個想法就對了，大概是這樣，這樣可以嗎？第一，那第二我們就再跨到那個他身。",
+      "proposed": "搞清楚兩個想法就對了，大概是這樣，這樣可以嗎？第一，那第二我們就再跨到那個他生。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "22B",
+      "original": "想自行空的 這個情況也好 這個就要想的是說 若是鏡上有的話 會出現什麼問題。",
+      "proposed": "想自性空的 這個情況也好 這個就要想的是說 若是鏡上有的話 會出現什麼問題。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "01",
+      "original": "至義以及他的實義，對，就有了那個《顯句論》跟《入中論》，這樣，對，那這兩個就在印度的話，就是非常有名氣。",
+      "proposed": "字義以及他的實義，對，就有了那個《顯句論》跟《入中論》，這樣，對，那這兩個就在印度的話，就是非常有名氣。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "01",
+      "original": "這樣的時候就會變成了不起的一個散說，那我沒辦法這樣比較嘛，所以就也就是那個樣子。",
+      "proposed": "這樣的時候就會變成了不起的一個善說，那我沒辦法這樣比較嘛，所以就也就是那個樣子。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "01",
+      "original": "《入中論》三學秘書，對。",
+      "proposed": "《入中論善顯密意疏》，對。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "01",
+      "original": "像 資糧道 大乘資糧道 加行道 見道的時候 叫做出地嘛 對不對 見道開始叫出地。",
+      "proposed": "像 資糧道 大乘資糧道 加行道 見道的時候 叫做初地嘛 對不對 見道開始叫初地。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "01",
+      "original": "離垢地、第三地呢，法光；第四呢，焰慧；第五。",
+      "proposed": "離垢地、第三地呢，發光；第四呢，焰慧；第五。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "01",
+      "original": "或者是說前出地的時候 不是也很接近嗎 是沒有錯了 可是就是變成。",
+      "proposed": "或者是說前初地的時候 不是也很接近嗎 是沒有錯了 可是就是變成。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "01",
+      "original": "六十 應該是六十吧 此地佛指有情修菩提分法 教前次光有超勝 有沒有 對 對 所以這邊要好好地看一下。",
+      "proposed": "六十 應該是六十吧 此地佛子，由情修三十七菩提分法 較前增上，從此所發智慧光焰,較第三地所說如赤金光尤為超勝。以發增上正智火焰,故此地名曰焰慧。如有超勝 有沒有 對 對 所以這邊要好好地看一下。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "01",
+      "original": "四諦這樣可以嗎，出戲，對，但第六地的時候，就會增上那個順理十二緣起的內容。",
+      "proposed": "四諦這樣可以嗎，出戲，對，但第六地的時候，就會增上那個順逆十二緣起的內容。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "那個正等覺法是什麼？其實我有解釋了，就是說，十地啦、四五位啦、十八不共法啦。",
+      "proposed": "那個正等覺法是什麼？其實我有解釋了，就是說，十力啦、四無所畏啦、十八不共法啦。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "對，他指認的就是像四諦，不是了，像那個十利、四五位、十八不共法，這些，這樣可以嗎？",
+      "proposed": "對，他指認的就是像四諦，不是了，像那個十力、四無所畏、十八不共法，這些，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "前面就講了很多觀行（廣義），倒進來嘛，對。可是問題是說，《入中論》真正，不能說真正了。",
+      "proposed": "前面就講了很多廣行道進來嘛，對。可是問題是說，《入中論》真正，不能說真正了。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "所以補進來，觀行（廣義）跟神變（神通）合併在一起。",
+      "proposed": "所以補進來，廣行跟深見合併在一起。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "怎麼補觀行（廣義）這個區塊？這個時候會討論這些，可以這樣嗎？對，那總之就是變成。",
+      "proposed": "怎麼補廣行這個區塊？這個時候會討論這些，可以這樣嗎？對，那總之就是變成。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "對不對？現前，現正，現正的更清楚，這個意思，對，所以就變成。",
+      "proposed": "對不對？現前，現證，現證的更清楚，這個意思，對，所以就變成。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "且若以智慧 聲聞 獨覺 什麼 從這邊去講的話 在出地的時候 就講到遠行地的時候。",
+      "proposed": "且若以智慧 聲聞 獨覺 什麼 從這邊去講的話 在初地的時候 就講到遠行地的時候。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "比方說像見道的時候，獲得了真上意樂的菩提心，這樣可以嗎？對，所以牠真的是大大的。",
+      "proposed": "比方說像見道的時候，獲得了增上意樂的菩提心，這樣可以嗎？對，所以牠真的是大大的。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "那個真上意樂的菩提心，所以更大的一個接近，會這樣講，這樣可以嗎？",
+      "proposed": "那個增上意樂的菩提心，所以更大的一個接近，會這樣講，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "對啊，這個一方面的話，就是片子，你看看，應該是第四諦嘛，四諦的出戲。",
+      "proposed": "對啊，這個一方面的話，就是遍智，你看看，應該是第四諦嘛，四諦的粗細。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "OK，對，所以會這樣，這樣可以嗎？這個是一個，那第四諦的時候，是三十七道品。",
+      "proposed": "OK，對，所以會這樣，這樣可以嗎？這個是一個，那第四地的時候，是三十七道品。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "獲得了三巧，三巧的話，就是說精通嘛，對不對？對，三巧，會這樣講，這樣可以嗎？",
+      "proposed": "獲得了善巧，三巧的話，就是說精通嘛，對不對？對，三巧，會這樣講，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "獲得了三巧，三巧的話，就是說精通嘛，對不對？對，三巧，會這樣講，這樣可以嗎？",
+      "proposed": "獲得了善巧，善巧的話，就是說精通嘛，對不對？對，善巧，會這樣講，這樣可以嗎？",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "因為那些，講說的那些，書籍也好，就不見瞭，對，有時候是書籍在，可是就是說。",
+      "proposed": "因為那些，講說的那些，書籍也好，就不見了，對，有時候是書籍在，可是就是說。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "連書本都已經不見瞭，對，所以就。",
+      "proposed": "連書本都已經不見了，對，所以就。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "02A",
+      "original": "是聖地，三十七道品，緣起，這樣可以嗎？十二緣起的順利，對，這些智慧品的。",
+      "proposed": "四聖諦，三十七道品，緣起，這樣可以嗎？十二緣起的順利，對，這些智慧品的。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "10A",
+      "original": "可是他們講的 有心安利 虛妄跟我們講的 有心安利 虛妄不一樣 他們講的有心安利。",
+      "proposed": "可是他們講的 由心安立 虛妄跟我們講的 由心安立 虛妄不一樣 他們講的由心安立。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "10A",
+      "original": "跟我講的 有心安利不一樣 這樣。",
+      "proposed": "跟我講的 由心安立不一樣 這樣。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "10A",
+      "original": "安利之體系。",
+      "proposed": "安立之體性。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "非時有兒",
+      "proposed": "非實有耳",
+      "pageRef": "p.102",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "怎麼講 沒有那麼的苦修就對了 從而正悟嘛 對 那個時候也是談到。",
+      "proposed": "怎麼講 沒有那麼的苦修就對了 從而證悟嘛 對 那個時候也是談到。",
+      "pageRef": "",
+      "confidence": 0.88,
+      "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "員 呃 總這樣 怎麼講 自信空 對啊 所以就元氣 嗯 而且是遠離長短的元氣。",
+      "proposed": "員 呃 總這樣 怎麼講 自信空 對啊 所以就緣起 嗯 而且是遠離常斷的元氣。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "像比方說 如果自信有的話 在總觀來說 自信有的話 就 該怎麼講。",
+      "proposed": "像比方說 如果自性有的話 在總觀來說 自性有的話 就 該怎麼講。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "法師有調整那個字 就是你剛才碰到那個地方 是牙衰現有 然後痘號。",
+      "proposed": "法師有調整那個字 就是你剛才碰到那個地方 是芽雖現有 然後逗號。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "反正有兒子 有女兒的話 就叫做那個嗎 有相夥 有相夥 對不對 那他就是他們的相夥嗎。",
+      "proposed": "反正有兒子 有女兒的話 就叫做那個嗎 有香火 有香火 對不對 那他就是他們的香火嗎。",
+      "pageRef": "",
+      "confidence": 0.9,
+      "reasoning": "單句自訂校訂。"
+    },
+    {
+      "sessionId": "36A",
+      "original": "正厲害的話 就是針對的是 像中官跟下部吧 對不對。",
+      "proposed": "正厲害的話 就是針對的是 像中觀跟下部吧 對不對。",
       "pageRef": "",
       "confidence": 0.88,
       "reasoning": "單字或長句替換，隔離為單句修改以防全域誤替。"
