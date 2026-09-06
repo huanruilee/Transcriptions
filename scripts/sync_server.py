@@ -28,6 +28,7 @@ import active_learning_manager as alm
 
 COURSES_DIR = CURRENT_DIR.parent / "courses"
 DEFAULT_COURSE_ROOT = COURSES_DIR / "入中論善顯密意疏"
+COURSE_ROOT = DEFAULT_COURSE_ROOT
 SESSIONS_DIR = DEFAULT_COURSE_ROOT / "sessions"
 
 def find_session_file(session_id, course_name=None):
