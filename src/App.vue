@@ -788,12 +788,21 @@ function seekToTime(time: number) {
   if (courseStore.currentMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
+        if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
         ytPlayer.seekTo(time, true);
         ytPlayer.playVideo();
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
     if (ytIframe && ytIframe.contentWindow) {
+      ytIframe.contentWindow.postMessage(
+        JSON.stringify({
+          event: 'command',
+          func: 'unMute',
+          args: [],
+        }),
+        '*'
+      );
       ytIframe.contentWindow.postMessage(
         JSON.stringify({
           event: 'command',
@@ -816,9 +825,15 @@ function seekToTime(time: number) {
   } else {
     // 2. HTML5 原生音訊
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl && audioEl.src && currentAudioUrl.value) {
+    if (audioEl && currentAudioUrl.value) {
+      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+        audioEl.src = currentAudioUrl.value;
+        audioEl.load();
+      }
       audioEl.currentTime = time;
-      audioEl.play().catch(() => {});
+      audioEl.play().catch((e) => {
+        console.warn('Audio playback failed:', e);
+      });
     }
   }
 }
@@ -1260,15 +1275,11 @@ function isAutoScrollFrozen(): boolean {
   return Date.now() < autoScrollFrozenUntil;
 }
 
-// 單擊跳播 vs 雙擊編輯 450ms 防抖隔離 (對齊 V1 邏輯)
+// 單擊立即跳播 (保留瀏覽器 User Activation 用戶手勢，防止被 Autoplay 策略攔截) vs 雙擊編輯
 function handleSentenceClick(s: any) {
   const now = Date.now();
   if (now - lastClickTime < 450 && lastClickTime > 0) {
-    // 450ms 內連續兩次點擊：確認為雙擊，取消單擊跳播定時器，進入編輯彈窗，並凍結滾動 1500ms
-    if (singleClickTimer) {
-      clearTimeout(singleClickTimer);
-      singleClickTimer = null;
-    }
+    // 450ms 內連續兩次點擊：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
     lastClickTime = 0;
     freezeAutoScroll(1500);
     openSentenceEditor(s);
@@ -1276,19 +1287,15 @@ function handleSentenceClick(s: any) {
   }
   lastClickTime = now;
 
-  // 單擊：延遲 250ms 執行跳播，若在 450ms 內再次點擊則視為雙擊取消跳播
+  // 單擊：立即同步跳播，保留使用者主動點擊手勢權杖，聲音即點即播
   freezeAutoScroll(600);
-  if (singleClickTimer) clearTimeout(singleClickTimer);
-  singleClickTimer = setTimeout(() => {
-    playerStore.resetScrollLock();
-    playerStore.activeSentenceId = s.id;
-    seekToTime(s.start_time);
-    const el = document.getElementById(s.id);
-    if (el && !isAutoScrollFrozen()) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    singleClickTimer = null;
-  }, 250);
+  playerStore.resetScrollLock();
+  playerStore.activeSentenceId = s.id;
+  seekToTime(s.start_time);
+  const el = document.getElementById(s.id);
+  if (el && !isAutoScrollFrozen()) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function openSentenceEditor(s: any) {
