@@ -181,15 +181,32 @@ def transcribe_session_on_gx10(session_info: dict) -> dict:
     if run_ssh_gx10(check_cmd).strip() == "EXISTS":
         print(f"[{s_id}] Cached Whisper transcript found on gx10: {whisper_json_path}")
     else:
-        print(f"[{s_id}] Downloading audio MP3 (Drive ID: {audio_id}) to gx10 workspace...")
-        download_script = f"""
-import subprocess, os
-audio_url = 'https://drive.google.com/uc?export=download&id={audio_id}'
+        check_mp3 = f"test -f /home/henry/.gx10/xiaofa/workspace/Transcriptions/session_{s_id}.mp3 && wc -c < /home/henry/.gx10/xiaofa/workspace/Transcriptions/session_{s_id}.mp3 || echo '0'"
+        mp3_size = int(run_ssh_gx10(check_mp3).strip() or 0)
+        if mp3_size < 1000000:
+            print(f"[{s_id}] Downloading audio MP3 (Drive ID: {audio_id}) to gx10 workspace...")
+            dl_script_content = f"""import requests, re, os
+session = requests.Session()
+url = 'https://drive.google.com/uc?export=download&id={audio_id}'
+res = session.get(url)
 mp3_path = '/home/henry/.gx10/xiaofa/workspace/Transcriptions/session_{s_id}.mp3'
-subprocess.run(['curl', '-s', '-L', audio_url, '-o', mp3_path], check=True)
+if "Google Drive can't scan this file for viruses" in res.text or 'confirm=' in res.text:
+    m_uuid = re.search(r'name="uuid" value="([^"]+)"', res.text)
+    uuid = m_uuid.group(1) if m_uuid else ''
+    dl_url = f'https://drive.usercontent.google.com/download?id={audio_id}&export=download&confirm=t&uuid={{uuid}}'
+    res2 = session.get(dl_url, stream=True)
+    with open(mp3_path, 'wb') as f:
+        for chunk in res2.iter_content(1024*1024):
+            f.write(chunk)
+else:
+    with open(mp3_path, 'wb') as f:
+        f.write(res.content)
 print(f'Downloaded mp3 size: {{os.path.getsize(mp3_path)}} bytes')
 """
-        run_ssh_gx10(f"python3 -c \"{download_script}\"")
+            run_ssh_gx10(f"cat << 'EOF' > /tmp/dl_{s_id}.py\n{dl_script_content}\nEOF")
+            run_ssh_gx10(f"python3 /tmp/dl_{s_id}.py")
+        else:
+            print(f"[{s_id}] Using existing MP3 on gx10 ({mp3_size} bytes)")
         
         print(f"[{s_id}] Running Whisper large-v3-turbo GPU transcription...")
         t0 = time.time()
