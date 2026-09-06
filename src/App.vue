@@ -731,28 +731,42 @@ function toggleMediaPlay() {
 }
 
 function playMedia() {
+  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+  if (audioEl && currentAudioUrl.value) {
+    if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+      audioEl.src = currentAudioUrl.value;
+      audioEl.load();
+    }
+    audioEl.play().catch(() => {});
+  }
+
   if (courseStore.currentMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
       try {
+        if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
         ytPlayer.playVideo();
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
+        '*'
+      );
+      ytIframe.contentWindow.postMessage(
         JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
         '*'
       );
     }
-    isMediaPlaying.value = true;
     startYTTracker();
-  } else {
-    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl) audioEl.play().catch(() => {});
   }
+  isMediaPlaying.value = true;
 }
 
 function pauseMedia() {
+  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+  if (audioEl) audioEl.pause();
+
   if (courseStore.currentMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
       try {
@@ -766,12 +780,9 @@ function pauseMedia() {
         '*'
       );
     }
-    isMediaPlaying.value = false;
     stopYTTracker();
-  } else {
-    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl) audioEl.pause();
   }
+  isMediaPlaying.value = false;
 }
 
 function onSeekSliderChange(e: Event) {
@@ -784,7 +795,18 @@ function onSeekSliderChange(e: Event) {
 function seekToTime(time: number) {
   playerStore.updateTime(time);
   
-  // 1. 若為 YouTube 影片模式
+  // 1. 原生音訊跳轉播放 (確保所有課程包含釋量論皆有高可靠性音檔即點即播)
+  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+  if (audioEl && currentAudioUrl.value) {
+    if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+      audioEl.src = currentAudioUrl.value;
+      audioEl.load();
+    }
+    audioEl.currentTime = time;
+    audioEl.play().catch(() => {});
+  }
+
+  // 2. YouTube 影音同步跳轉
   if (courseStore.currentMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
@@ -820,22 +842,9 @@ function seekToTime(time: number) {
         '*'
       );
     }
-    isMediaPlaying.value = true;
     startYTTracker();
-  } else {
-    // 2. HTML5 原生音訊
-    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-    if (audioEl && currentAudioUrl.value) {
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-        audioEl.src = currentAudioUrl.value;
-        audioEl.load();
-      }
-      audioEl.currentTime = time;
-      audioEl.play().catch((e) => {
-        console.warn('Audio playback failed:', e);
-      });
-    }
   }
+  isMediaPlaying.value = true;
 }
 
 // YouTube Iframe API 初始化與時間追蹤
@@ -1173,32 +1182,25 @@ async function loadSession(sessionId: string) {
       mediaDuration.value = last.end ?? last.end_time ?? 0;
     }
 
-    if (courseStore.currentMediaType === 'video/youtube') {
-      // 停止並清空原生音訊，防止播放前一門課程（如入中論）的殘留音檔
-      const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-      if (audioEl) {
-        audioEl.pause();
+    isMediaPlaying.value = false;
+    stopYTTracker();
+
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl) {
+      audioEl.pause();
+      if (currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+        audioEl.src = currentAudioUrl.value;
+        audioEl.load();
+      } else {
         audioEl.removeAttribute('src');
         audioEl.load();
       }
-      isMediaPlaying.value = false;
-      stopYTTracker();
+    }
+
+    if (courseStore.currentMediaType === 'video/youtube') {
       setTimeout(() => {
         setupYouTubePlayer();
       }, 100);
-    } else {
-      stopYTTracker();
-      isMediaPlaying.value = false;
-      const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-      if (audioEl) {
-        if (currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
-          audioEl.src = currentAudioUrl.value;
-          audioEl.load();
-        } else {
-          audioEl.removeAttribute('src');
-          audioEl.load();
-        }
-      }
     }
   } catch (err) {
     console.error(`載入講次 ${sessionId} 逐字稿失敗:`, err);
