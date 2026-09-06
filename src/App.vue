@@ -277,7 +277,8 @@
                 :src="`https://www.youtube.com/embed/${currentYoutubeVideoId}?enablejsapi=1&origin=${originUrl}`"
                 title="YouTube 影音講記"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
               ></iframe>
             </div>
@@ -629,6 +630,8 @@ const isMediaPlaying = ref(false);
 const mediaDuration = ref(0);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
+let ytPlayerInitInterval: any = null;
+let isInitialMounted = false;
 
 const totalSessionDuration = computed(() => {
   const all = paragraphs.value.flatMap(p => p.sentences);
@@ -731,13 +734,15 @@ function toggleMediaPlay() {
 }
 
 function playMedia() {
-  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audioEl && currentAudioUrl.value) {
-    if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-      audioEl.src = currentAudioUrl.value;
-      audioEl.load();
+  if (courseStore.currentMediaType === 'audio/mp3') {
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl && currentAudioUrl.value) {
+      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+        audioEl.src = currentAudioUrl.value;
+        audioEl.load();
+      }
+      audioEl.play().catch(() => {});
     }
-    audioEl.play().catch(() => {});
   }
 
   if (courseStore.currentMediaType === 'video/youtube') {
@@ -764,8 +769,10 @@ function playMedia() {
 }
 
 function pauseMedia() {
-  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audioEl) audioEl.pause();
+  if (courseStore.currentMediaType === 'audio/mp3') {
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl) audioEl.pause();
+  }
 
   if (courseStore.currentMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
@@ -795,18 +802,20 @@ function onSeekSliderChange(e: Event) {
 function seekToTime(time: number) {
   playerStore.updateTime(time);
   
-  // 1. 原生音訊跳轉播放 (確保所有課程包含釋量論皆有高可靠性音檔即點即播)
-  const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
-  if (audioEl && currentAudioUrl.value) {
-    if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-      audioEl.src = currentAudioUrl.value;
-      audioEl.load();
+  // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
+  if (courseStore.currentMediaType === 'audio/mp3') {
+    const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
+    if (audioEl && currentAudioUrl.value) {
+      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+        audioEl.src = currentAudioUrl.value;
+        audioEl.load();
+      }
+      audioEl.currentTime = time;
+      audioEl.play().catch(() => {});
     }
-    audioEl.currentTime = time;
-    audioEl.play().catch(() => {});
   }
 
-  // 2. YouTube 影音同步跳轉
+  // 2. YouTube 影音同步跳轉 (同時支援 YouTube API 物件與 postMessage 雙通道)
   if (courseStore.currentMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
@@ -851,6 +860,7 @@ function seekToTime(time: number) {
 function setupYouTubePlayer() {
   if (typeof window === 'undefined') return;
 
+  // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
   if (!(window as any).YT) {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -858,25 +868,60 @@ function setupYouTubePlayer() {
     firstScript?.parentNode?.insertBefore(tag, firstScript);
   }
 
-  const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
-  if (ytIframe && ytIframe.contentWindow) {
-    ytIframe.contentWindow.postMessage(JSON.stringify({ event: 'listening' }), '*');
+  const existingIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+
+  // 2. 若播放器物件已存在且已綁定當前 DOM 中的 iframe，直接透過 cueVideoById 切換影片，絕不呼叫會自毀 DOM 的 destroy()
+  if (
+    ytPlayer &&
+    typeof ytPlayer.cueVideoById === 'function' &&
+    existingIframe &&
+    (typeof ytPlayer.getIframe === 'function' ? ytPlayer.getIframe() === existingIframe : true)
+  ) {
+    if (currentYoutubeVideoId.value) {
+      try {
+        ytPlayer.cueVideoById(currentYoutubeVideoId.value);
+        if (existingIframe.contentWindow) {
+          existingIframe.contentWindow.postMessage(
+            JSON.stringify({
+              event: 'command',
+              func: 'cueVideoById',
+              args: [currentYoutubeVideoId.value],
+            }),
+            '*'
+          );
+        }
+        return;
+      } catch (e) {
+        console.warn('ytPlayer.cueVideoById 失敗，重新綁定:', e);
+      }
+    }
+  }
+
+  if (existingIframe && existingIframe.contentWindow) {
+    existingIframe.contentWindow.postMessage(JSON.stringify({ event: 'listening' }), '*');
+  }
+
+  if (ytPlayerInitInterval) {
+    clearInterval(ytPlayerInitInterval);
+    ytPlayerInitInterval = null;
   }
 
   let attempts = 0;
-  const checkYT = setInterval(() => {
+  ytPlayerInitInterval = setInterval(() => {
     attempts++;
     const iframe = document.getElementById('youtube-iframe');
-    if (!iframe || attempts > 50) {
-      clearInterval(checkYT);
+    if (!iframe) {
+      if (attempts > 50) {
+        clearInterval(ytPlayerInitInterval);
+        ytPlayerInitInterval = null;
+      }
       return;
     }
     if ((window as any).YT && (window as any).YT.Player) {
-      clearInterval(checkYT);
+      clearInterval(ytPlayerInitInterval);
+      ytPlayerInitInterval = null;
       try {
-        if (ytPlayer && typeof ytPlayer.destroy === 'function') {
-          try { ytPlayer.destroy(); } catch (e) {}
-        }
+        // 重要：絕對不可呼叫 ytPlayer.destroy()！YouTube API 的 destroy() 會執行 Node.removeChild 永久拔除 iframe！
         ytPlayer = new (window as any).YT.Player('youtube-iframe', {
           events: {
             onReady: (e: any) => {
@@ -895,7 +940,12 @@ function setupYouTubePlayer() {
             },
           },
         });
-      } catch (err) {}
+      } catch (err) {
+        console.warn('YT.Player 初始化失敗:', err);
+      }
+    } else if (attempts > 50) {
+      clearInterval(ytPlayerInitInterval);
+      ytPlayerInitInterval = null;
     }
   }, 100);
 }
@@ -1082,6 +1132,7 @@ onMounted(async () => {
   const defaultFirst = courseStore.sessions[0]?.id || (courseStore.currentCourseId === 'shi-liang-lun-er' ? '01' : '02A');
   const targetId = initialHash || defaultFirst;
   await loadSession(targetId);
+  isInitialMounted = true;
 });
 
 onUnmounted(() => {
@@ -1090,6 +1141,11 @@ onUnmounted(() => {
   window.removeEventListener('touchmove', onUserScroll);
   window.removeEventListener('message', onYouTubeMessage);
   stopYTTracker();
+  if (ytPlayerInitInterval) {
+    clearInterval(ytPlayerInitInterval);
+    ytPlayerInitInterval = null;
+  }
+  isInitialMounted = false;
 });
 
 async function loadRealCourseData() {
@@ -1123,8 +1179,10 @@ async function loadRealCourseData() {
   }
 }
 
-// 監聽課程切換：動態切換課程目錄、同步 URL 參數並載入該課程第一講
-watch(() => courseStore.currentCourseId, async (newCourseId) => {
+// 監聽課程切換：動態切換課程目錄、同步 URL 參數並載入該課程第一講 (初次載入由 onMounted 負責，防止 Hash 競態覆寫)
+watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
+  if (!isInitialMounted) return;
+  if (newCourseId === oldCourseId) return;
   if (typeof window !== 'undefined') {
     const url = new URL(window.location.href);
     url.searchParams.set('course', newCourseId);
@@ -1188,7 +1246,7 @@ async function loadSession(sessionId: string) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) {
       audioEl.pause();
-      if (currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+      if (courseStore.currentMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       } else {
