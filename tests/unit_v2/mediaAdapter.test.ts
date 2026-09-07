@@ -55,4 +55,29 @@ describe('MediaAdapter Test Pattern (TDD)', () => {
     adapter.setPlaybackRate(2.0);
     expect(adapter.getPlaybackRate()).toBe(2.0);
   });
+
+  it('在 YouTube 課程模式下應渲染專屬置底播放控制列並隱藏原生 audio 標籤', async () => {
+    const { mount } = await import('@vue/test-utils');
+    const { createPinia, setActivePinia } = await import('pinia');
+    const { useCourseStore } = await import('../../src/stores/course');
+    const App = (await import('../../src/App.vue')).default;
+
+    setActivePinia(createPinia());
+    const wrapper = mount(App);
+    const courseStore = useCourseStore();
+    
+    // 預設為入中論 (audio/mp3)
+    expect(courseStore.currentMediaType).toBe('audio/mp3');
+    expect(wrapper.find('#audio-element').isVisible()).toBe(true);
+    expect(wrapper.find('#media-play-toggle-btn').exists()).toBe(false);
+
+    // 切換為釋量論第二品 (video/youtube)
+    courseStore.currentCourseId = 'shi-liang-lun-er';
+    await wrapper.vm.$nextTick();
+
+    expect(courseStore.currentMediaType).toBe('video/youtube');
+    expect(wrapper.find('#media-play-toggle-btn').exists()).toBe(true);
+    expect(wrapper.find('#media-seek-slider').exists()).toBe(true);
+    expect((wrapper.find('#audio-element').element as HTMLElement).style.display).toBe('none');
+  });
 });
