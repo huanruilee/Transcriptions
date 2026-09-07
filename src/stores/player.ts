@@ -24,17 +24,16 @@ export const usePlayerStore = defineStore('player', {
 
     setSentences(items: SentenceItem[]) {
       this.sentences = items;
+      this.currentTime = 0;
+      this.activeSentenceId = null;
+      this.activeSentenceIndex = -1;
     },
 
     updateTime(time: number) {
       this.currentTime = time;
-      if (this.sentences.length > 0) {
-        const idx = findSentenceIndexByTime(this.sentences, time);
-        if (idx !== -1) {
-          this.activeSentenceIndex = idx;
-          this.activeSentenceId = this.sentences[idx].id;
-        }
-      }
+      const idx = findSentenceIndexByTime(this.sentences, time);
+      this.activeSentenceIndex = idx;
+      this.activeSentenceId = idx === -1 ? null : this.sentences[idx].id;
     },
 
     handleUserScroll(timeoutMs = 2500) {

@@ -270,7 +270,14 @@
             <div
               v-if="courseStore.currentMediaType === 'video/youtube' && currentYoutubeVideoId"
               class="youtube-player-container"
+              :class="{ 'is-floating': isVideoFloating }"
             >
+              <button
+                class="floating-video-toggle"
+                data-testid="floating-video-toggle"
+                :aria-pressed="isVideoFloating"
+                @click="isVideoFloating = !isVideoFloating"
+              >{{ isVideoFloating ? '↙ 還原影片' : '📌 浮動置頂' }}</button>
               <iframe
                 id="youtube-iframe"
                 class="youtube-iframe"
@@ -349,7 +356,8 @@
 
           <!-- 講末自動導引推薦卡片 -->
           <EndOfSessionCard
-            v-if="navInfo.hasNext"
+            v-if="navInfo.hasNext && hasMediaEnded"
+            :key="currentSessionId"
             :next-session-id="navInfo.next?.id"
             :next-session-title="navInfo.next?.title"
             @next="goToNextSession"
@@ -432,6 +440,8 @@
           controls
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
+          @ended="hasMediaEnded = true"
+          @play="hasMediaEnded = false"
         ></audio>
 
         <button
@@ -560,6 +570,8 @@ const sidebarWidth = ref(280);
 const searchInputRef = ref<HTMLInputElement | null>(null);
 
 // 彈窗狀態
+const isVideoFloating = ref(false);
+const hasMediaEnded = ref(false);
 const isSyncModalOpen = ref(false);
 const isReviewModalOpen = ref(false);
 const isOverviewModalOpen = ref(false);
@@ -800,6 +812,7 @@ function onSeekSliderChange(e: Event) {
 
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
+  hasMediaEnded.value = false;
   playerStore.updateTime(time);
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
@@ -931,9 +944,11 @@ function setupYouTubePlayer() {
             onStateChange: (e: any) => {
               // 1: PLAYING, 2: PAUSED, 0: ENDED
               if (e.data === 1) {
+                hasMediaEnded.value = false;
                 isMediaPlaying.value = true;
                 startYTTracker();
               } else if (e.data === 2 || e.data === 0) {
+                hasMediaEnded.value = e.data === 0;
                 isMediaPlaying.value = false;
                 stopYTTracker();
               }
@@ -976,6 +991,8 @@ function stopYTTracker() {
 }
 
 function onYouTubeMessage(event: MessageEvent) {
+  const iframe = document.getElementById('youtube-iframe') as HTMLIFrameElement | null;
+  if (!iframe || event.source !== iframe.contentWindow || event.origin !== 'https://www.youtube.com') return;
   try {
     const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
     if (!data) return;
@@ -987,11 +1004,13 @@ function onYouTubeMessage(event: MessageEvent) {
         mediaDuration.value = data.info.duration;
       }
       if (typeof data.info.playerState === 'number') {
+        hasMediaEnded.value = data.info.playerState === 0;
         isMediaPlaying.value = (data.info.playerState === 1);
         if (data.info.playerState === 1) startYTTracker();
         else stopYTTracker();
       }
     } else if (data.event === 'onStateChange') {
+      hasMediaEnded.value = data.info === 0;
       isMediaPlaying.value = (data.info === 1);
       if (data.info === 1) startYTTracker();
       else stopYTTracker();
@@ -1194,6 +1213,9 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 });
 
 async function loadSession(sessionId: string) {
+  hasMediaEnded.value = false;
+  stopYTTracker();
+  playerStore.setSentences([]);
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
   isLoading.value = true;
@@ -1833,6 +1855,32 @@ if (typeof window !== 'undefined') {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   background: #000;
+}
+
+.floating-video-toggle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  padding: 8px 12px;
+  border: 1px solid #777;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+}
+
+.youtube-player-container.is-floating {
+  position: fixed;
+  top: calc(var(--header-height, 64px) + 12px);
+  right: 16px;
+  z-index: 90;
+  width: min(400px, calc(100vw - 32px));
+  height: auto;
+  aspect-ratio: 16 / 9;
+  padding-bottom: 0;
+  margin-top: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .youtube-iframe {
