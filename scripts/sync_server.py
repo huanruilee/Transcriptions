@@ -26,20 +26,51 @@ if str(CURRENT_DIR) not in sys.path:
 
 import active_learning_manager as alm
 
-COURSE_ROOT = CURRENT_DIR.parent / "courses" / "入中論善顯密意疏"
-SESSIONS_DIR = COURSE_ROOT / "sessions"
+COURSES_DIR = CURRENT_DIR.parent / "courses"
+DEFAULT_COURSE_ROOT = COURSES_DIR / "入中論善顯密意疏"
+COURSE_ROOT = DEFAULT_COURSE_ROOT
+SESSIONS_DIR = DEFAULT_COURSE_ROOT / "sessions"
 
-def update_session_on_disk(session_id, sentence_id, corrected_text, timestamp=None):
+def find_session_file(session_id, course_name=None):
+    """Finds target session_*.json across registered courses."""
+    candidates = []
+    if course_name:
+        c_clean = str(course_name).strip()
+        alias_map = {
+            "shi-liang-lun-er": "釋量論第二品",
+            "ru-zhong-lun": "入中論善顯密意疏"
+        }
+        mapped_name = alias_map.get(c_clean, c_clean)
+        for name in [mapped_name, c_clean]:
+            p = COURSES_DIR / name / "sessions"
+            if p.exists() and p not in candidates:
+                candidates.append(p)
+
+    candidates.append(DEFAULT_COURSE_ROOT / "sessions")
+    if COURSES_DIR.exists():
+        for c_dir in COURSES_DIR.iterdir():
+            s_dir = c_dir / "sessions"
+            if c_dir.is_dir() and s_dir.exists() and s_dir not in candidates:
+                candidates.append(s_dir)
+
+    for s_dir in candidates:
+        cand = s_dir / f"session_{session_id}.json"
+        if cand.exists():
+            return cand
+        if session_id.isdigit() and len(session_id) == 1:
+            cand = s_dir / f"session_{int(session_id):02d}.json"
+            if cand.exists():
+                return cand
+    return None
+
+def update_session_on_disk(session_id, sentence_id, corrected_text, timestamp=None, course_name=None):
     """Safely updates a sentence's text in the target session_*.json on disk."""
     if not session_id or not corrected_text:
         return False, "Missing sessionId or correctedText"
 
-    cand = SESSIONS_DIR / f"session_{session_id}.json"
-    if not cand.exists() and session_id.isdigit() and len(session_id) == 1:
-        cand = SESSIONS_DIR / f"session_{int(session_id):02d}.json"
-
-    if not cand.exists():
-        return False, f"Session file not found: {cand.name}"
+    cand = find_session_file(session_id, course_name=course_name)
+    if not cand or not cand.exists():
+        return False, f"Session file not found for session {session_id}"
 
     try:
         with open(cand, "r", encoding="utf-8") as f:
@@ -146,12 +177,14 @@ class LocalSyncHandler(http.server.BaseHTTPRequestHandler):
             apply_to_disk = body.get("applyToDisk", True)
             timestamp = body.get("timestamp") or body.get("start")
 
+            course_name = body.get("course") or body.get("courseId")
+
             # 1. Optionally update session on disk
             disk_updated = False
             disk_msg = "Skipped"
             if apply_to_disk and session_id and corrected_text:
                 disk_updated, disk_msg = update_session_on_disk(
-                    session_id, sentence_id, corrected_text, timestamp=timestamp
+                    session_id, sentence_id, corrected_text, timestamp=timestamp, course_name=course_name
                 )
 
             # 2. Evaluate with Active Learning Engine
@@ -194,10 +227,11 @@ class LocalSyncHandler(http.server.BaseHTTPRequestHandler):
                 ts = ev.get("timestamp") or ev.get("start")
                 apply_disk = ev.get("applyToDisk", True)
 
+                c_name = ev.get("course") or ev.get("courseId") or body.get("course") or body.get("courseId")
                 # Disk update
                 disk_ok = False
                 if apply_disk and sid and prop:
-                    disk_ok, _ = update_session_on_disk(sid, sent_id, prop, timestamp=ts)
+                    disk_ok, _ = update_session_on_disk(sid, sent_id, prop, timestamp=ts, course_name=c_name)
                     if disk_ok:
                         disk_updated_count += 1
 
