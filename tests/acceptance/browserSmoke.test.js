@@ -101,12 +101,12 @@ if (!WebSocketCtor) {
   test.skip('browser smoke requires ws package — install with `npm i ws`', () => {});
 } else {
   test('browser smoke (Issue #10): Live URL renders a working learning platform', async (t) => {
-    if (!(await isChromeReachable())) {
-      if (REQUIRE_BROWSER) {
-        throw new Error(`Chrome not reachable on 127.0.0.1:${DEBUG_PORT}. Start with: chromium --headless --remote-debugging-port=${DEBUG_PORT} --remote-allow-origins=*`);
-      }
-      t.skip?.(`Chrome not reachable on 127.0.0.1:${DEBUG_PORT}`);
+    if (!REQUIRE_BROWSER) {
+      t.skip?.('Browser smoke requires explicit opt-in: set REQUIRE_BROWSER_SMOKE=1 (CLI tests use unit_v2/domContract instead)');
       return;
+    }
+    if (!(await isChromeReachable())) {
+      throw new Error(`Chrome not reachable on 127.0.0.1:${DEBUG_PORT}. Start with: chromium --headless --remote-debugging-port=${DEBUG_PORT} --remote-allow-origins=*`);
     }
 
     const tab = await getTab(LIVE_URL);

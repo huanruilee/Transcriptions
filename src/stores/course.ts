@@ -25,18 +25,32 @@ export const useCourseStore = defineStore('course', {
         id: 'ru-zhong-lun',
         title: '入中論善顯密意疏',
         master: '見悲青增格西',
+        path: 'courses/入中論善顯密意疏',
         mediaType: 'audio/mp3',
       },
       {
         id: 'shi-liang-lun-er',
         title: '釋量論第二品',
         master: '如性法師',
+        path: 'courses/釋量論第二品',
         mediaType: 'video/youtube',
       },
     ],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],
   }),
+
+  getters: {
+    currentCourse(state) {
+      return state.catalog.find((c) => c.id === state.currentCourseId) || state.catalog[0];
+    },
+    currentCoursePath(): string {
+      return this.currentCourse?.path || 'courses/入中論善顯密意疏';
+    },
+    currentMediaType(): string {
+      return this.currentCourse?.mediaType || 'audio/mp3';
+    },
+  },
 
   actions: {
     setSessions(items: SessionMeta[]) {
