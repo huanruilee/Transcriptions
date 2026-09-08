@@ -332,7 +332,12 @@
               @touchend="handleSentenceTouchEnd"
               @touchcancel="handleSentenceTouchEnd"
             >
-              {{ annotationStore.corrections[s.id]?.corrected || s.text }}
+              <template v-for="(segment, segmentIndex) in sentenceSegments(s)" :key="`${s.id}-segment-${segmentIndex}`">
+                <span
+                  :class="{ 'verse-quote': segment.isVerse }"
+                  :title="segment.isVerse ? `根本頌第 ${segment.verseIds.join('、')} 頌（文字對照；音檔尚未獨立核驗）` : undefined"
+                >{{ segment.text }}</span>
+              </template>
               <!-- 待核定徽章 (對齊 V1) -->
               <span
                 v-if="s.reviewNeeded || s.uncertainty || (s.text && (s.text.includes('【存疑】') || s.text.includes('【待定】')))"
@@ -556,6 +561,7 @@ import { searchSentences, navigateMatch, type SearchMatch } from './composables/
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
+import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -639,6 +645,7 @@ const currentYoutubeVideoId = ref('');
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
+const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
 const mediaDuration = ref(0);
@@ -1230,6 +1237,20 @@ async function loadSession(sessionId: string) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    verseAnnotations.value = {};
+    try {
+      const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
+      if (verseRes.ok) {
+        const verseData = await verseRes.json();
+        if (verseData.sessionId === String(sessionId)) {
+          for (const item of verseData.annotations || []) {
+            (verseAnnotations.value[item.sentenceId] ||= []).push(item);
+          }
+        }
+      }
+    } catch (verseError) {
+      console.warn('偈頌標註載入失敗，保留一般逐字稿顯示:', verseError);
+    }
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
@@ -1247,6 +1268,7 @@ async function loadSession(sessionId: string) {
           start_time: s.start ?? s.start_time ?? 0,
           end_time: s.end ?? s.end_time ?? 0,
           text: s.text || '',
+          verseAnnotations: verseAnnotations.value[s.id] || [],
           reviewNeeded: s.reviewNeeded ?? false,
           uncertainty: s.uncertainty ?? null,
         })),
@@ -1289,6 +1311,11 @@ async function loadSession(sessionId: string) {
   } finally {
     isLoading.value = false;
   }
+}
+
+function sentenceSegments(sentence: any) {
+  const text = annotationStore.corrections[sentence.id]?.corrected || sentence.text || '';
+  return splitVerseText(text, sentence.verseAnnotations || []);
 }
 
 // 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart)
@@ -1958,6 +1985,11 @@ if (typeof window !== 'undefined') {
 
 .sentence:hover {
   background-color: rgba(154, 52, 18, 0.08);
+}
+
+.verse-quote {
+  color: #b91c1c;
+  font-weight: 600;
 }
 
 .sentence.active {
