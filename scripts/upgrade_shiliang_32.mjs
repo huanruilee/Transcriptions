@@ -153,10 +153,12 @@ function main() {
       let cat, title;
       if (m) {
         cat = m[1];
-        title = m[2];
+        // Normalize an already-numbered heading before matching. This makes
+        // the upgrade idempotent and prevents `一、一、...` on reruns.
+        title = stripTocOrdinal(m[2]);
       } else {
         cat = '';
-        title = h;
+        title = stripTocOrdinal(h);
       }
 
       let ordIdx;

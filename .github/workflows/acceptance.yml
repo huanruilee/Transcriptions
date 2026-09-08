@@ -37,3 +37,6 @@ jobs:
 
       - name: Run completion gate
         run: npm test
+
+      - name: Run Vue/Vitest regression gate
+        run: npm run test:v2
