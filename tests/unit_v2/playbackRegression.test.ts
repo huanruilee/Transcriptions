@@ -38,11 +38,12 @@ describe('Playback regressions', () => {
     const iframe = wrapper.find('#youtube-iframe').element;
     const toggle = wrapper.find('[data-testid="floating-video-toggle"]');
     expect(toggle.exists()).toBe(true);
-    await toggle.trigger('click');
     expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(true);
-    expect(wrapper.find('#youtube-iframe').element).toBe(iframe);
     await toggle.trigger('click');
     expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(false);
+    expect(wrapper.find('#youtube-iframe').element).toBe(iframe);
+    await toggle.trigger('click');
+    expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(true);
     window.dispatchEvent(new MessageEvent('message', { origin: 'https://www.youtube.com', data: { event: 'onStateChange', info: 0 } }));
     await flushPromises();
     expect(wrapper.find('.end-of-session-card').exists()).toBe(false);
