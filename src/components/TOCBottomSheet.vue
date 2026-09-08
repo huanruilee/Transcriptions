@@ -5,6 +5,7 @@ export interface TOCNodeData {
   id?: string;
   title: string;
   timestamp?: number;
+  start_time?: number;
   page?: number | string;
   sessionId?: string;
   sessionIds?: string[];
@@ -44,9 +45,17 @@ const sessionNodes = computed(() => {
 });
 
 function handleSeek(node: TOCNodeData) {
-  const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
+  const ts = getNodeTimestamp(node);
   emit('seek', props.activeSessionId, ts);
   emit('close');
+}
+
+// Canonical course TOC files use start_time; timestamp is retained for
+// backward-compatible generated review artifacts.
+function getNodeTimestamp(node: TOCNodeData): number {
+  if (typeof node.timestamp === 'number') return node.timestamp;
+  if (typeof node.start_time === 'number') return node.start_time;
+  return 0;
 }
 
 function formatTime(seconds: number): string {
@@ -110,15 +119,15 @@ function formatTime(seconds: number): string {
             </div>
 
             <button
-              v-if="node.timestamp && node.timestamp > 0"
+              v-if="getNodeTimestamp(node) > 0"
               type="button"
               class="sheet-timestamp-btn"
               :data-session-id="activeSessionId"
-              :data-timestamp="String(node.timestamp)"
-              :aria-label="'跳至 ' + formatTime(node.timestamp) + ' 播放'"
+              :data-timestamp="String(getNodeTimestamp(node))"
+              :aria-label="'跳至 ' + formatTime(getNodeTimestamp(node)) + ' 播放'"
               @click="handleSeek(node)"
             >
-              <span class="sheet-ts-icon">⏱️</span> {{ formatTime(node.timestamp) }}
+              <span class="sheet-ts-icon">⏱️</span> {{ formatTime(getNodeTimestamp(node)) }}
             </button>
             <span v-else class="sheet-ts-pending">待標註</span>
           </li>
