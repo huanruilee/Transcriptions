@@ -1259,10 +1259,11 @@ async function loadSession(sessionId: string) {
       const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
       if (verseRes.ok) {
         const verseData = await verseRes.json();
-        if (verseData.sessionId === String(sessionId)) {
-          for (const item of verseData.annotations || []) {
-            (verseAnnotations.value[item.sentenceId] ||= []).push(item);
-          }
+        const annotations = Array.isArray(verseData.manifests)
+          ? (verseData.manifests.find((manifest: any) => String(manifest.sessionId) === String(sessionId))?.annotations || [])
+          : (verseData.sessionId === String(sessionId) ? (verseData.annotations || []) : []);
+        for (const item of annotations) {
+          (verseAnnotations.value[item.sentenceId] ||= []).push(item);
         }
       }
     } catch (verseError) {
