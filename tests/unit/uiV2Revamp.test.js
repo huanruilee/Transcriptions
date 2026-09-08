@@ -26,12 +26,16 @@ describe('🎨 UI V2 Revamp: Desktop & Mobile UX Specifications', () => {
   let mainCssContent = '';
   let drawerCssContent = '';
   let playerCssContent = '';
+  let appVueContent = '';
+  let tocAccordionContent = '';
 
   before(() => {
     htmlContent = fs.readFileSync(path.join(ROOT, 'src/index.html'), 'utf-8');
     mainCssContent = fs.readFileSync(path.join(ROOT, 'src/css/main.css'), 'utf-8');
     drawerCssContent = fs.readFileSync(path.join(ROOT, 'src/css/drawer.css'), 'utf-8');
     playerCssContent = fs.readFileSync(path.join(ROOT, 'src/css/playerV2.css'), 'utf-8');
+    appVueContent = fs.readFileSync(path.join(ROOT, 'src/App.vue'), 'utf-8');
+    tocAccordionContent = fs.readFileSync(path.join(ROOT, 'src/components/TOCAccordion.vue'), 'utf-8');
   });
 
   test('1. DOM & CSS Contract: 780px Reading Container & 3-Segment Navbar', () => {
@@ -119,6 +123,17 @@ describe('🎨 UI V2 Revamp: Desktop & Mobile UX Specifications', () => {
   test('6. Return-to-Playing FAB Contract', () => {
     assert.ok(htmlContent.includes('id="fab-return-playing"'), 'HTML must include #fab-return-playing');
     assert.ok(playerCssContent.includes('.fab-return-playing'), 'playerV2.css must style .fab-return-playing');
+  });
+
+  test('7. Separate TOC-position button contract', () => {
+    assert.match(appVueContent, /id="fab-open-toc-position"/, 'App must provide a separate TOC-position button');
+    assert.match(appVueContent, /function openCurrentTOCPosition/, 'TOC-position button must have its own action');
+    assert.match(appVueContent, /@click="returnToPlaying"/, 'Original return-to-playing action must remain independent');
+    assert.match(appVueContent, /ref="tocAccordionRef"/, 'App must keep a ref to the TOC accordion');
+    assert.match(appVueContent, /openCurrentTOCPosition/, 'TOC-position button must reveal the current TOC position');
+    assert.match(tocAccordionContent, /defineExpose\(\{ revealCurrentPosition \}\)/, 'TOC must expose its reveal action');
+    assert.match(tocAccordionContent, /start_time \?\? 0/, 'TOC position detection must support start_time anchors');
+    assert.match(tocAccordionContent, /toc-current-position/, 'Current TOC position must have a dedicated visual marker');
   });
 
 });
