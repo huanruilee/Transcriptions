@@ -240,6 +240,7 @@
 
         <!-- 雙視角科判手風琴 (對齊 V1) -->
         <TOCAccordion
+          ref="tocAccordionRef"
           id="toc-accordion-root"
           :toc-nodes="courseStore.tocTree || []"
           :active-session-id="currentSessionId"
@@ -387,9 +388,24 @@
       v-if="playerStore.isUserScrolling"
       id="fab-return-playing"
       class="floating-fab"
+      type="button"
+      aria-label="回到目前播放處"
+      title="回到目前播放處"
       @click="returnToPlaying"
     >
       🎯 回到播放處
+    </button>
+
+    <button
+      v-if="playerStore.isUserScrolling"
+      id="fab-open-toc-position"
+      class="floating-fab floating-fab-toc"
+      type="button"
+      aria-label="展開目錄並跳到目前提綱位置"
+      title="展開目錄並跳到目前提綱位置"
+      @click="openCurrentTOCPosition"
+    >
+      📑 跳到提綱位置
     </button>
 
     <!-- 置底播放列 -->
@@ -574,6 +590,7 @@ const sidebarFilter = ref('');
 const currentSessionId = ref('01');
 const sidebarWidth = ref(280);
 const searchInputRef = ref<HTMLInputElement | null>(null);
+const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | null>(null);
 
 // 彈窗狀態
 // Keep the player visible while the transcript scrolls; users can restore it
@@ -1432,6 +1449,10 @@ function returnToPlaying() {
   }
 }
 
+function openCurrentTOCPosition() {
+  void tocAccordionRef.value?.revealCurrentPosition?.();
+}
+
 function formatTime(secs: number): string {
   const m = Math.floor(secs / 60);
   const s = Math.floor(secs % 60);
@@ -2111,6 +2132,10 @@ if (typeof window !== 'undefined') {
 
 .floating-fab:hover {
   transform: scale(1.05);
+}
+
+.floating-fab-toc {
+  bottom: calc(var(--player-height) + 62px);
 }
 
 /* 置底固定播放器 */
