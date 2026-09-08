@@ -570,7 +570,9 @@ const sidebarWidth = ref(280);
 const searchInputRef = ref<HTMLInputElement | null>(null);
 
 // 彈窗狀態
-const isVideoFloating = ref(false);
+// Keep the player visible while the transcript scrolls; users can restore it
+// inline with the same toggle whenever they prefer the embedded layout.
+const isVideoFloating = ref(true);
 const hasMediaEnded = ref(false);
 const isSyncModalOpen = ref(false);
 const isReviewModalOpen = ref(false);
