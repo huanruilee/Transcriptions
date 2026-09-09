@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { selectVerseAnnotations } from '../../src/utils/verseAnnotations.js';
 
 // Contract for 釋量論第二品 verse annotation coverage across all 32 sessions.
 // Source of truth: verse_annotations.json manifest + session JSON sentence ids.
@@ -11,8 +12,6 @@ const COURSE_DIR = path.join(process.cwd(), 'courses/釋量論第二品');
 const COURSE_PATH = path.join(COURSE_DIR, 'course.json');
 const SESSIONS_DIR = path.join(COURSE_DIR, 'sessions');
 const ANNOTATIONS_PATH = path.join(COURSE_DIR, 'verse_annotations.json');
-const APP_PATH = path.join(process.cwd(), 'src/App.vue');
-
 const EXPECTED_SESSION_COUNT = 32;
 const ALLOWED_STATUSES = new Set(['source_match', 'partial_match', 'UNVERIFIED']);
 
@@ -115,11 +114,16 @@ test('contract: every annotation sentenceId exists in its session transcript', (
 });
 
 test('contract: frontend selects the current v2 manifest and preserves v1 fallback', () => {
-  const app = fs.readFileSync(APP_PATH, 'utf8');
-  assert.match(app, /Array\.isArray\(verseData\.manifests\)/,
-    'App.vue must recognize the v2 manifest collection');
-  assert.match(app, /manifests\.find\(\(manifest: any\) => String\(manifest\.sessionId\) === String\(sessionId\)\)/,
-    'App.vue must select annotations by the active session id');
-  assert.match(app, /verseData\.sessionId === String\(sessionId\)/,
-    'App.vue must retain the legacy v1 session guard');
+  const v2 = {
+    manifests: [
+      { sessionId: '01', annotations: [{ sentenceId: 'sent-1' }] },
+      { sessionId: '02', annotations: [{ sentenceId: 'sent-2' }] },
+    ],
+  };
+  const legacy = { sessionId: '1', annotations: [{ sentenceId: 'sent-1' }] };
+
+  assert.deepEqual(selectVerseAnnotations(v2, '01'), [{ sentenceId: 'sent-1' }]);
+  assert.deepEqual(selectVerseAnnotations(v2, '03'), []);
+  assert.deepEqual(selectVerseAnnotations(legacy, '01'), [{ sentenceId: 'sent-1' }]);
+  assert.deepEqual(selectVerseAnnotations(legacy, '02'), []);
 });

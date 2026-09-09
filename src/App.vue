@@ -578,6 +578,7 @@ import { getPrevNextSessions, naturalSortSessions } from './composables/useSessi
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
+import { selectVerseAnnotations } from './utils/verseAnnotations';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -1259,9 +1260,7 @@ async function loadSession(sessionId: string) {
       const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
       if (verseRes.ok) {
         const verseData = await verseRes.json();
-        const annotations = Array.isArray(verseData.manifests)
-          ? (verseData.manifests.find((manifest: any) => String(manifest.sessionId) === String(sessionId))?.annotations || [])
-          : (verseData.sessionId === String(sessionId) ? (verseData.annotations || []) : []);
+        const annotations = selectVerseAnnotations(verseData, sessionId);
         for (const item of annotations) {
           (verseAnnotations.value[item.sentenceId] ||= []).push(item);
         }
