@@ -117,7 +117,9 @@ Based on the full 219-session production rollout and continuous calibration:
    - **Historical Filter Invariant**: Preserve required filter tokens in early session summaries (e.g. `歸敬頌` in 01, `釋禮敬` in 02A) to satisfy `tests/unit/sidebarFilterBehavior.test.js`.
 4. **Cluster Pipeline Execution**:
    - Execute calibration in 8 structured clusters (`scripts/gx10_calibrate_kepan.py --cluster {1..8}`).
-   - Verify 100% pass across all 279 unit and acceptance tests before opening PR with auto-merge enabled.
+   - Run the repository's current unit and acceptance commands and record the
+     observed pass, fail, and skip counts. Do not hard-code a historical test
+     total or grant merge authority from the worker prompt.
 
 ### M1: Establish the workspace
 
@@ -167,9 +169,10 @@ must never share the production checkout with another worker.
 3. Run a smoke gate first. The Agent must print its working directory, read the
    manifest, create one named evidence file, and return `PASS` or `BLOCKED`.
    A clean exit without that artifact is a runner failure.
-4. Start the real task with explicit read/write boundaries, no network, no
-   production edits, no invented transcript text, a fixed output schema, and a
-   finite `--run-budget` or turn/time limit.
+4. Start the real task with explicit read/write boundaries, no production
+   edits, no invented transcript text, a fixed output schema, and a finite
+   `--run-budget` or turn/time limit. Only manifest-listed endpoints may be
+   accessed; external network access is forbidden unless separately authorized.
 5. Treat the Agent as an evidence producer, not the decision-maker. Mechanically
    validate JSON syntax, exact ID coverage, source-hash equality, and the rule
    that `CONFIRMED` entries contain cited evidence and ranges while `UNCERTAIN`
@@ -228,7 +231,9 @@ When commissioning a missing session (e.g. `03B`, `04B`):
 When fixing homophones or adjusting headings in an existing session (e.g. `30B`):
 - Run `npm run audit:transcript` with `--report` and `--apply-confirmed`.
 - Use `scripts/active_learning_manager.py` for ambiguity arbitration.
-- Preserve raw ASR and timestamps; do not blindly overwrite spoken words.
+- Raw ASR timestamps are immutable. Published sentence timestamps may change
+  only from `CONFIRMED` audio/alignment evidence; do not blindly overwrite
+  spoken words or inferred boundaries.
 
 ### M3.5: Freeze the editorial input
 
@@ -246,7 +251,9 @@ Use separate preparation and editorial tasks:
    produces the manifest. It may not edit published transcript content.
 2. Editorial consumes the manifest, edits only the allowed published layer,
    and produces the correction ledger and samples. It may not change raw ASR,
-   timestamps, source files, inventory, or tests.
+   raw ASR timestamps, source files, inventory, or tests. Published sentence
+   timestamps may change only when the manifest authorizes alignment work and
+   the ledger marks the supporting evidence `CONFIRMED`.
 
 The preparation task is not complete until every manifest path exists and its
 hash can be recomputed. A manifest mismatch is BLOCKED, not an invitation for
@@ -266,10 +273,13 @@ acceptance. Give the worker these four separate obligations:
 3. **Punctuation**: add Chinese punctuation to the published `text` while
    preserving the spoken wording. Every substantive published sentence should
    end with an appropriate punctuation mark; `rawText` must remain unchanged.
-4. **Paragraphing**: split paragraphs at a real discourse/topic boundary,
-   preserve sentence timestamps, and attach headings only when the source or
-   audio supports the boundary. A paragraph count or average size wildly
-   outside neighboring sessions is a review failure, not a formatting choice.
+4. **Paragraphing**: split paragraphs at a real discourse/topic boundary and
+   attach headings only when the source or audio supports the boundary. Keep
+   published sentence timestamps unchanged unless alignment is explicitly in
+   scope. After an authorized timestamp change, recompute paragraph start and
+   end from the first and last sentence. A paragraph count or average size
+   wildly outside neighboring sessions is a review failure, not a formatting
+   choice.
 
 For uncertainty, use an explicit review ledger with `CONFIRMED`, `LIKELY`, or
 `UNCERTAIN`. `UNCERTAIN` means retain the raw wording, flag the timestamp, and
@@ -319,7 +329,8 @@ For editorial content, additionally require:
   sessions;
 - a list of every unresolved phrase and its timestamp;
 - source citations for doctrinal and Tibetan-term corrections;
-- proof that `rawText` and timestamps were not rewritten by the editor;
+- proof that `rawText` and raw ASR timestamps were not rewritten, plus ledger
+  evidence for every authorized published timestamp change;
 - independent review of representative passages, not just JSON shape.
 
 Health checks, CUDA availability, image digests, and successful HTTP requests
@@ -644,7 +655,7 @@ before accepting the reviewer's semantic conclusions.
 ```text
 You are the implementation worker (小法). Work only on transcribing and indexing session <SID>.
 
-Workspace: /home/henry/.gx10/xiaofa/workspace/Transcriptions
+Workspace: <TEMP_WORKSPACE>
 Evidence directory: reviews/evidence/<SID>_transcription
 Allowed paths:
 - courses/入中論善顯密意疏/sessions/session_<SID>.json
@@ -655,7 +666,7 @@ Allowed paths:
 Forbidden: No fake/placeholder JSON, no invented words, no modifying unrelated sessions, no editing tests.
 
 Step 0 (Preflight):
-1. `cd /home/henry/.gx10/xiaofa/workspace/Transcriptions` and verify `pwd`.
+1. `cd <TEMP_WORKSPACE>` and verify `pwd` and the frozen manifest hash.
 2. Check Whisper GPU: `curl -s http://127.0.0.1:8010/health`
 3. Check Qwen vLLM: `curl -s http://192.168.122.1:8001/v1/models`
    If either fails, stop immediately with BLOCKED.
@@ -720,13 +731,14 @@ Execution:
    `python3 scripts/gx10_calibrate_kepan.py --cluster <N>`
 3. Run complete test suite:
    `npm test`
-   Invariant: Must pass 100% (279 passed, 0 failed).
+   Record the observed pass, fail, and skip counts. Any relevant failure blocks
+   integration; an unrelated environment failure must be identified separately.
 
 Integration & Deployment:
 1. Commit: `git commit -m "remediate(cluster-<N>): calibrate kepan and session headings via gx10 Qwen3.8-27B"`
 2. Push & open PR: `gh pr create --title "..." --body "..."`
-3. Enable auto-merge: `gh pr merge <PR_NUMBER> --squash --auto`
-4. Confirm merge and GitHub Pages deployment workflow.
+3. Wait for independent review and explicit integration authorization.
+4. After an authorized merge, confirm the GitHub Pages deployment workflow.
 ```
 
 ## Orchestrator closeout checklist
