@@ -38,3 +38,34 @@ export function findTimestampViolations(sentences) {
   }
   return violations;
 }
+
+export function validateDecisionLedger(ledger, { first, last }) {
+  const decisions = Array.isArray(ledger?.decisions) ? ledger.decisions : [];
+  const expected = Array.from({ length: last - first + 1 }, (_, index) => `sent-${first + index}`);
+  const seen = new Set();
+  const errors = [];
+  for (const decision of decisions) {
+    if (seen.has(decision.sentenceId)) errors.push(`duplicate sentenceId: ${decision.sentenceId}`);
+    seen.add(decision.sentenceId);
+  }
+  for (const id of expected) {
+    if (!seen.has(id)) errors.push(`missing sentenceId: ${id}`);
+  }
+  for (const id of seen) {
+    if (!expected.includes(id)) errors.push(`out-of-range sentenceId: ${id}`);
+  }
+  const counts = {
+    total: decisions.length,
+    confirmed: decisions.filter(x => x.confidence === 'CONFIRMED').length,
+    likely: decisions.filter(x => x.confidence === 'LIKELY').length,
+    uncertain: decisions.filter(x => x.confidence === 'UNCERTAIN').length,
+  };
+  if (counts.total !== counts.confirmed + counts.likely + counts.uncertain) {
+    errors.push('invalid confidence value');
+  }
+  const canAutoApply = errors.length === 0
+    && counts.uncertain === 0
+    && counts.likely === 0
+    && ledger.minimumWindow !== null;
+  return { errors, counts, canAutoApply };
+}

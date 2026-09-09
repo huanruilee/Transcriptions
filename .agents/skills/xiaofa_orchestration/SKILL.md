@@ -580,6 +580,11 @@ review queue.
 Keep stdout compact: IDs, ranges, counts, hashes, verdicts, and paths only.
 Full transcript excerpts belong in evidence files, not the orchestrator chat.
 
+Apply the same evidence rule to the independent reviewer. Reject a review that
+claims counts or duplicate IDs contradicted by the ledger, or that has no tool
+record proving it opened the inputs. Run the deterministic ledger validator
+before accepting the reviewer's semantic conclusions.
+
 ### Better patterns
 
 - One issue, one owner, one isolated workspace, one evidence directory.

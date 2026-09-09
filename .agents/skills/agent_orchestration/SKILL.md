@@ -209,6 +209,12 @@ working invocation is `HERMES_HOME=/home/henry/.hermes/profiles/<profile>
 hermes chat ...`; an environment variable named `HERMES_PROFILE` may be ignored
 by the CLI. Treat any unexpected provider fallback as a failed smoke gate.
 
+A reviewer verdict is invalid when its claimed counts disagree with the input
+artifact or its run record contains no actual reads. Validate ledger coverage,
+unique IDs, confidence totals, and cited samples deterministically before
+considering semantic reviewer prose. A blocked reviewer is replaced; its
+verdict never becomes evidence about the implementation.
+
 ## Transcription-specific evidence split
 
 Keep these claims separate:
