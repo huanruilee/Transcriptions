@@ -19,13 +19,13 @@ if (!outputRoot) {
   console.error('Usage: audit_shiliang_course.mjs --output-root PATH [--baseline COMMIT]');
   process.exit(2);
 }
-const headCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+const minimumBaseline = '86c5b5a';
 try {
-  const resolvedBaseline = execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, encoding: 'utf8' }).trim();
-  const parentCommit = execFileSync('git', ['rev-parse', 'HEAD^'], { cwd: root, encoding: 'utf8' }).trim();
-  if (![headCommit, parentCommit].includes(resolvedBaseline)) throw new Error('stale baseline');
+  execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, stdio: 'ignore' });
+  execFileSync('git', ['merge-base', '--is-ancestor', minimumBaseline, baselineCommit], { cwd: root, stdio: 'ignore' });
+  execFileSync('git', ['merge-base', '--is-ancestor', baselineCommit, 'HEAD'], { cwd: root, stdio: 'ignore' });
 } catch {
-  console.error(`Baseline must equal the current HEAD or its direct parent: ${baselineCommit}`);
+  console.error(`Baseline must be between quality floor ${minimumBaseline} and HEAD: ${baselineCommit}`);
   process.exit(2);
 }
 
