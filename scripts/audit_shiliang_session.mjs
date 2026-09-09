@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { normalizeOfficialTranscript as normalize } from './lib/shiliangAudit.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sid = process.argv[2] || '27';
@@ -15,12 +16,6 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const read = p => fs.readFileSync(p, 'utf8');
 const sha256 = p => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-const normalize = s => s
-  .replace(/[\u000c\r\n\t ]/g, '')
-  .replace(/[「」『』“”‘’]/g, '')
-  .replace(/[，。！？；：、,.!?;:]/g, '')
-  .replace(/[（()）【】《》〈〉]/g, '');
-
 const session = JSON.parse(read(sessionPath));
 const paragraphs = session.paragraphs || [];
 const sentences = paragraphs.flatMap(p => p.sentences || []);

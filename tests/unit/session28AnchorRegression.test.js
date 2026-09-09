@@ -146,23 +146,9 @@ describe('session28 anchor regression (釋量論第二品/sessions/session_28.js
 
   test('monotonicity: every sentence.start >= previous sentence.end over whole stream', () => {
     const sentences = loadSentences();
-    // Pre-existing discontinuity between sent-194 and sent-195:
-    //   sent-194 sits at 2355.22-2359.15 in the published JSON, which is ~100s
-    //   later than the raw ASR timestamp for that content (ID 1028-1029,
-    //   2247.14-2250.47). The raw ASR also lacks a clean match for sent-193
-    //   (the text is an editorial restatement of sent-189, which sits at raw
-    //   2240.78-2247.14). Anchoring sent-195 at its raw-ASR-true start
-    //   (2258.83) is a demonstrably-correct correction, but it necessarily
-    //   crosses sent-194.end because sent-194 itself is mis-anchored in the
-    //   published JSON. This boundary is therefore a known, pre-existing
-    //   issue that this fix does not attempt to resolve (it is also
-    //   explicitly out of the 2386-2465s scope defined by the task body).
-    const KNOWN_DISCONTINUITIES = new Set(['sent-194->sent-195']);
     for (let i = 1; i < sentences.length; i++) {
       const prev = sentences[i - 1];
       const cur = sentences[i];
-      const key = `${prev.id}->${cur.id}`;
-      if (KNOWN_DISCONTINUITIES.has(key)) continue;
       assert.ok(
         cur.start >= prev.end,
         `monotonicity broken between ${prev.id} (end=${prev.end}) and ${cur.id} (start=${cur.start}); Δ=${ROUND(cur.start - prev.end)}`
