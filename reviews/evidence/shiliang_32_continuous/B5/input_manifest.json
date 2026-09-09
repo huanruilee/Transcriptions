@@ -1,0 +1,104 @@
+{
+  "schema": "shiliang-quality-input/v1",
+  "course": "釋量論第二品",
+  "batch": "B5",
+  "baselineCommit": "86c5b5a",
+  "sessions": [
+    {
+      "id": "17",
+      "files": {
+        "session": {
+          "path": "courses/釋量論第二品/sessions/session_17.json",
+          "sha256": "f7d7e31a39e27a188d41779e06be6a6021b6eb87da0ca5221088adf799d8a05d"
+        },
+        "officialRaw": {
+          "path": "courses/釋量論第二品/source_text/session_17_official_raw.txt",
+          "sha256": "98d0da2bfbb020573775ee6e0bebf8c9b90e0b6b2401a29573d877c6a5175038"
+        }
+      },
+      "counts": {
+        "paragraphs": 68,
+        "sentences": 477
+      },
+      "timestampViolations": []
+    },
+    {
+      "id": "18",
+      "files": {
+        "session": {
+          "path": "courses/釋量論第二品/sessions/session_18.json",
+          "sha256": "4a2f00de5dca71671f5392e5a2896007e89d42fd4a3cfc6848135bfe5ff22106"
+        },
+        "officialRaw": {
+          "path": "courses/釋量論第二品/source_text/session_18_official_raw.txt",
+          "sha256": "7ad3fe14ee4a571dd7632dc8401dceb50e6b337ca2ffaf82a4d98fea24667f91"
+        }
+      },
+      "counts": {
+        "paragraphs": 80,
+        "sentences": 537
+      },
+      "timestampViolations": []
+    },
+    {
+      "id": "19",
+      "files": {
+        "session": {
+          "path": "courses/釋量論第二品/sessions/session_19.json",
+          "sha256": "91932e9f4fc5c4fe8a6ce839cfb838372a838a00cd17b01bce7d65ba74c56926"
+        },
+        "officialRaw": {
+          "path": "courses/釋量論第二品/source_text/session_19_official_raw.txt",
+          "sha256": "22c2d097156c5ba4482fd461c187cd263fd888d339ad13fa8aed48c3ad6b9b36"
+        }
+      },
+      "counts": {
+        "paragraphs": 75,
+        "sentences": 579
+      },
+      "timestampViolations": []
+    },
+    {
+      "id": "20",
+      "files": {
+        "session": {
+          "path": "courses/釋量論第二品/sessions/session_20.json",
+          "sha256": "a547ab58eaeb349cb273b3c20b50513da4cbc9c1e449ab864f18af151824fca0"
+        },
+        "officialRaw": {
+          "path": "courses/釋量論第二品/source_text/session_20_official_raw.txt",
+          "sha256": "165cfc6afdb6a7910afb610e2753f405aa24bfc860a91acd26cd44d3d06924bd"
+        }
+      },
+      "counts": {
+        "paragraphs": 71,
+        "sentences": 413
+      },
+      "timestampViolations": []
+    }
+  ],
+  "sharedFiles": {
+    "audioMap": {
+      "path": "courses/釋量論第二品/audio_map.json",
+      "sha256": "4867f89b90581fd22650604afad8091855aa70e1a680dcc97381a1e589523df3"
+    },
+    "rootVerses": {
+      "path": "courses/釋量論第二品/source_text/pramana_chapter2_root_verses.txt",
+      "sha256": "f8ac26b9bdec8d2e8ee5ff12b110ed8316da4be84139b7519038f8bc3155bbf3"
+    }
+  },
+  "allowedPaths": [
+    "courses/釋量論第二品/sessions/session_17.json",
+    "courses/釋量論第二品/sessions/session_18.json",
+    "courses/釋量論第二品/sessions/session_19.json",
+    "courses/釋量論第二品/sessions/session_20.json",
+    "reviews/evidence/shiliang_32_continuous/B5/"
+  ],
+  "forbidden": [
+    "raw ASR mutation",
+    "test relaxation",
+    "merge",
+    "deploy",
+    "unlisted session edits"
+  ]
+}
