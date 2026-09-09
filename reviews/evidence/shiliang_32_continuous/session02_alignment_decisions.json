@@ -1,0 +1,17 @@
+{
+  "schema": "session02-source-alignment/v1",
+  "rawAsrSha256": "0e07273c9c628136247a548e642483ba623fd5fe69a36862e51bb4fe88ef8d78",
+  "status": "UNCERTAIN",
+  "entries": [
+    {"sentenceId":"sent-16","status":"UNCERTAIN","sourceSegmentIds":[32],"reason":"Current range overlaps raw speech, but source window includes adjacent words and needs boundary adjudication."},
+    {"sentenceId":"sent-17","status":"UNCERTAIN","sourceSegmentIds":[38,39,40,41,42,43,44,45,46],"reason":"Published sentence is a long editorial span and raw source window contains a different sequence."},
+    {"sentenceId":"sent-147","status":"UNCERTAIN","sourceSegmentIds":[571],"reason":"Published text does not match the raw text at the current timestamp."},
+    {"sentenceId":"sent-148","status":"UNCERTAIN","sourceSegmentIds":[586,587,588,589,590,591,592,593,594,595],"reason":"Current window contains adjacent discussion and requires source-grounded re-anchoring."},
+    {"sentenceId":"sent-262","status":"UNCERTAIN","sourceSegmentIds":[969,970],"reason":"Raw source at current range is not the published question."},
+    {"sentenceId":"sent-263","status":"UNCERTAIN","sourceSegmentIds":[981,982,983],"reason":"Raw window includes adjacent answer text; boundary is not confirmed."},
+    {"sentenceId":"sent-270","status":"UNCERTAIN","sourceSegmentIds":[985,986,987],"reason":"Published question is not aligned to the current raw window."},
+    {"sentenceId":"sent-271","status":"UNCERTAIN","sourceSegmentIds":[997,998,999,1000,1001],"reason":"Window contains extra adjacent speech; requires adjudication."},
+    {"sentenceId":"sent-380","status":"UNCERTAIN","sourceSegmentIds":[1497,1498,1499,1500],"reason":"Raw text differs in wording and includes an adjacent continuation."},
+    {"sentenceId":"sent-381","status":"UNCERTAIN","sourceSegmentIds":[1514,1515,1516,1517,1518,1519,1520,1521],"reason":"Published text is an editorial restatement and cannot be auto-applied from raw ASR."}
+  ]
+}
