@@ -1,0 +1,525 @@
+{
+  "schema": "transcript-web-refactor-baseline/v1",
+  "repository": {
+    "root": "/Users/henry/Documents/huanruilee-github-repos/Transcriptions",
+    "branch": "codex/transcript-web-refactor",
+    "commit": "3937a9bb5faf54a9092bd246b85537c0e70a0875",
+    "dirty": false
+  },
+  "course": {
+    "path": "courses/釋量論第二品",
+    "sessionCount": 32
+  },
+  "canonicalization": {
+    "encoding": "UTF-8",
+    "serialization": "JSON.stringify array with fixed field order",
+    "absentFieldEncoding": {
+      "__fieldState": "ABSENT"
+    },
+    "immutableFields": [
+      "id",
+      "rawText",
+      "start",
+      "end",
+      "sourceSegmentId"
+    ],
+    "note": "Published sentence text is intentionally mutable and excluded."
+  },
+  "keyFiles": {
+    "courses/釋量論第二品/course.json": {
+      "sha256": "6c75169c172400c12c19e6c0ec51ca58ec02e9e2efe298c46001fbb29f9ab043",
+      "bytes": 20161
+    },
+    "courses/釋量論第二品/toc.json": {
+      "sha256": "a4563d954827ce1007e8354f1e94449d2649a7fff059f8a3ec2a4b5ed4616987",
+      "bytes": 61816
+    },
+    "courses/釋量論第二品/verse_annotations.json": {
+      "sha256": "dc15e77bef156ffd7ed4755cdadb7d760bb7462a5d5722416c3a6fe16feba3e9",
+      "bytes": 329394
+    }
+  },
+  "sessions": [
+    {
+      "sessionId": "01",
+      "file": "courses/釋量論第二品/sessions/session_01.json",
+      "fileSha256": "4e4b7c15270af56e5e7929d1f45665f05971fa551feb2119d7d41d98ea1a7cd6",
+      "paragraphs": 44,
+      "sentences": 402,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "08744dcfeb3d8a9aebbf8a308a5101b6a45978f3626c38ab17e3a55412c4c9a3"
+    },
+    {
+      "sessionId": "02",
+      "file": "courses/釋量論第二品/sessions/session_02.json",
+      "fileSha256": "d6b07cb028b9ececbab454900fd5cc6701892fc08c768337e222b9600a4b1aa0",
+      "paragraphs": 49,
+      "sentences": 437,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "12e14ff5d67d07e59d64f98c7f57232b100c5eb078ae0bc6207ab8d3735c07b6"
+    },
+    {
+      "sessionId": "03",
+      "file": "courses/釋量論第二品/sessions/session_03.json",
+      "fileSha256": "260bc828d00b76cd8d21eb6ebae07647cf12cdb7715bfa6ac1eaa38489b0f4c2",
+      "paragraphs": 54,
+      "sentences": 416,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "a5a1619db65bdf927ca440acaca143329d1a7a9097fb61bed0bf8b897bbdf45b"
+    },
+    {
+      "sessionId": "04",
+      "file": "courses/釋量論第二品/sessions/session_04.json",
+      "fileSha256": "e0e4ee28f8b016b07dc94938730d2024aeacc37f8b8bf1cbb48aebd4f012387c",
+      "paragraphs": 74,
+      "sentences": 682,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "d1d869ac672a2db15fc78cb429ee849495f23c97e0abf5bcca5e93cd99a98a05"
+    },
+    {
+      "sessionId": "05",
+      "file": "courses/釋量論第二品/sessions/session_05.json",
+      "fileSha256": "ca5ceaf80df06384e27a1ea3a809d35af5d765c9e6fb828df75e7e01db7825d4",
+      "paragraphs": 67,
+      "sentences": 561,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "778570dbe0b92c6442164223254de1bf384c12eb673e94c208722021176747bf"
+    },
+    {
+      "sessionId": "06",
+      "file": "courses/釋量論第二品/sessions/session_06.json",
+      "fileSha256": "ba067c130450219b7b40633ec574691739207747d6027655180ade710894ce1b",
+      "paragraphs": 75,
+      "sentences": 588,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "de8fd28f7dbfeeaff1f1ff7650a2626d35bb7e490cffcea756c0b03200ad869b"
+    },
+    {
+      "sessionId": "07",
+      "file": "courses/釋量論第二品/sessions/session_07.json",
+      "fileSha256": "312f4d6b9259b8e5190c5d27c035e34e764ff9334104b4039d15d191ff603574",
+      "paragraphs": 57,
+      "sentences": 447,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "35d034e786ac7ee489c5948f7546c0aeda2cd670292127e6206a55a8dc6a7b25"
+    },
+    {
+      "sessionId": "08",
+      "file": "courses/釋量論第二品/sessions/session_08.json",
+      "fileSha256": "924515c9b57aa9464883f8cf443e3fbcb945802babe9426e38d1af5f93a7c19f",
+      "paragraphs": 63,
+      "sentences": 563,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "ad2d71ffbaf34bf0299c060ff3e96b1c7c91ada9cba3e84c33ac2eb18a6e7222"
+    },
+    {
+      "sessionId": "09",
+      "file": "courses/釋量論第二品/sessions/session_09.json",
+      "fileSha256": "3a43431a02ada5cdabf8093445aabf3d07ca3d977eeb6205c2c594a268080a89",
+      "paragraphs": 89,
+      "sentences": 721,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "aded6726f24783ee08bf5d323a08ef1521b2666c51a5f1a658d6626e53130eae"
+    },
+    {
+      "sessionId": "10",
+      "file": "courses/釋量論第二品/sessions/session_10.json",
+      "fileSha256": "c778c7b8e729c83bd07a41ee79776ad85c01ee63faaeae085e73423716133c8f",
+      "paragraphs": 70,
+      "sentences": 527,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "fe6506d9e9767f49b4591933e987680342f1a675495c361a8fd45f5614d071ed"
+    },
+    {
+      "sessionId": "11",
+      "file": "courses/釋量論第二品/sessions/session_11.json",
+      "fileSha256": "201725d6cc8332a5c1250ea0c27439afb9fdedd8f83ab7be469f5163c1777fea",
+      "paragraphs": 83,
+      "sentences": 644,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "37025d30765ea990eb71a17f12055104e3717606b68b53873fcbc12281fd7f14"
+    },
+    {
+      "sessionId": "12",
+      "file": "courses/釋量論第二品/sessions/session_12.json",
+      "fileSha256": "5f6998e8fd25f4e5f4d5719e2b02c1370bf98f37dd3fe0e54471cf74bb55ce5c",
+      "paragraphs": 73,
+      "sentences": 514,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "331eda049c79f29400902e3b963a5d8e840f0b215c5cc9e6f495ce1c6643364a"
+    },
+    {
+      "sessionId": "13",
+      "file": "courses/釋量論第二品/sessions/session_13.json",
+      "fileSha256": "39e176c8584e5eb0814d4ca52dd78ece76c9efc317296580dfc4d143c362e962",
+      "paragraphs": 88,
+      "sentences": 579,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "3cab1b1a2607517ad6c272b59b02354be155bb80b293b9ce16476034b66f8cee"
+    },
+    {
+      "sessionId": "14",
+      "file": "courses/釋量論第二品/sessions/session_14.json",
+      "fileSha256": "ffcc122241c33710cd39237d30e7c3093b7c0875dea6612c2bdd0a8854139f84",
+      "paragraphs": 70,
+      "sentences": 489,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "a3cccf9f56b0ae4cdf6a1a2ce85784847054f0ae3e8fb2327c19708aed61e8ef"
+    },
+    {
+      "sessionId": "15",
+      "file": "courses/釋量論第二品/sessions/session_15.json",
+      "fileSha256": "bec52c9a8f8adc9808d7604ddab37692371f2878de7d3a6c3fadd89a8324a5dd",
+      "paragraphs": 72,
+      "sentences": 468,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "6ac16e36c3feba27d00203110951423b6d957012e4e88aa743e71733756e131a"
+    },
+    {
+      "sessionId": "16",
+      "file": "courses/釋量論第二品/sessions/session_16.json",
+      "fileSha256": "e96ce3f620b04dbc263432a33f9023df380fbca27ccf3727fdb778a8b33b0e45",
+      "paragraphs": 74,
+      "sentences": 498,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "f01cb31820c0de9c07b12a88c74841ed8a5e49e0280bf9b8ef5f0f15e1af89b9"
+    },
+    {
+      "sessionId": "17",
+      "file": "courses/釋量論第二品/sessions/session_17.json",
+      "fileSha256": "5747a91da9673761edd4cfea52f39bc7da877c76dea834ac4858b8eac93c162b",
+      "paragraphs": 68,
+      "sentences": 477,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "59a226dd83a89b3ddcbf204ec557bce078bbeda4a00530d448819879521203f6"
+    },
+    {
+      "sessionId": "18",
+      "file": "courses/釋量論第二品/sessions/session_18.json",
+      "fileSha256": "4a2f00de5dca71671f5392e5a2896007e89d42fd4a3cfc6848135bfe5ff22106",
+      "paragraphs": 80,
+      "sentences": 537,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "8af82b25673744ebad6cffca7dbbc94fafe3d3f362f9258365d51df3db968269"
+    },
+    {
+      "sessionId": "19",
+      "file": "courses/釋量論第二品/sessions/session_19.json",
+      "fileSha256": "bac1749cabb775dc8e32d2bf07d10102fda0b400e3874133195df462bcf013a5",
+      "paragraphs": 76,
+      "sentences": 579,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "2a8ea1d6756d92994f82c9e86b6cad618e5b214eed146243ef8704cb64afa9d7"
+    },
+    {
+      "sessionId": "20",
+      "file": "courses/釋量論第二品/sessions/session_20.json",
+      "fileSha256": "a547ab58eaeb349cb273b3c20b50513da4cbc9c1e449ab864f18af151824fca0",
+      "paragraphs": 71,
+      "sentences": 413,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "242f375bb303a2bc20aab846fb9f59bd678b027b85a202163e9d1491e73d91c9"
+    },
+    {
+      "sessionId": "21",
+      "file": "courses/釋量論第二品/sessions/session_21.json",
+      "fileSha256": "e6d9dd61a70ef0ee2628a504bfc9f3296852e405852eb6fbcaba1dc5c8ba1a5d",
+      "paragraphs": 64,
+      "sentences": 449,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "5c692cb3499b8a0b637673546cbef9476334d0dc04ad212d1ec1b7930dead83b"
+    },
+    {
+      "sessionId": "22",
+      "file": "courses/釋量論第二品/sessions/session_22.json",
+      "fileSha256": "7f80d29ee4f8560f99f2f8a7a0065ce074aeb41adc36af0e8810908f7ab378a9",
+      "paragraphs": 62,
+      "sentences": 442,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "827fb5e12d8615c6e6cff6413c123374e762d74b74bddde6561996031e23551a"
+    },
+    {
+      "sessionId": "23",
+      "file": "courses/釋量論第二品/sessions/session_23.json",
+      "fileSha256": "3a501096991a4d2ae0b0cae5750f7178497810beb6a75808665861aee4d5d247",
+      "paragraphs": 88,
+      "sentences": 564,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "270ede0bc544aae28705c2c07a4eeb555875e10d0dd79ed567e9f6f7a53179db"
+    },
+    {
+      "sessionId": "24",
+      "file": "courses/釋量論第二品/sessions/session_24.json",
+      "fileSha256": "138f19c85d4c861453e83b7bef86c5d56ab01a9f457fa9962298283284dcf8f5",
+      "paragraphs": 85,
+      "sentences": 658,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "479f37d48a0c2b450b268e3890afc03064cb02e2b36b70442ea1459ec1829e2d"
+    },
+    {
+      "sessionId": "25",
+      "file": "courses/釋量論第二品/sessions/session_25.json",
+      "fileSha256": "7837737993f83229f36a923370962c874bee0a11d21d302c0e3c8e7f3ec9d36b",
+      "paragraphs": 75,
+      "sentences": 537,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "8f97f0d925fa4b231e429307fb99ac10c785fa14fd33f746fe4a93676bace771"
+    },
+    {
+      "sessionId": "26",
+      "file": "courses/釋量論第二品/sessions/session_26.json",
+      "fileSha256": "a961260d3a2e4659101a597ce21a1826cf3cb8163f864d505e94335050d85f01",
+      "paragraphs": 76,
+      "sentences": 482,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "f8e151f5c43ae26c3b0087b5d53bc2448cb7934590f929ec55fdb829216cec61"
+    },
+    {
+      "sessionId": "27",
+      "file": "courses/釋量論第二品/sessions/session_27.json",
+      "fileSha256": "27944b2ce8ff3d53da52c1b672d92673e5463da2dcecd74f6f79a5c64d884437",
+      "paragraphs": 71,
+      "sentences": 466,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "a51ebaa3e10943f024d0d60533a45b2e8064ab28522e9ab51e91587a839db3e9"
+    },
+    {
+      "sessionId": "28",
+      "file": "courses/釋量論第二品/sessions/session_28.json",
+      "fileSha256": "6fda80e75ce156080fd3d30397eaa427e86843268bb20110fc5169d21b9cd792",
+      "paragraphs": 89,
+      "sentences": 487,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "3b70b2aca427f5debd13b7fcb333fedcd18f9fa11829d4f3da2b1d432ca3c15b"
+    },
+    {
+      "sessionId": "29",
+      "file": "courses/釋量論第二品/sessions/session_29.json",
+      "fileSha256": "731cde29bf845c16c0ff0cdfc69a6cc87d172d27b981609961d5a52a4fcc39d0",
+      "paragraphs": 67,
+      "sentences": 458,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "5ede91bd0791f4c8d3c3debec85e1efed5459c7cf3eb9a6bb52db6a4b7cd7c01"
+    },
+    {
+      "sessionId": "30",
+      "file": "courses/釋量論第二品/sessions/session_30.json",
+      "fileSha256": "3070a89296546f50de86a3315260f95d4d04d98db6fc3d60509abc06bb3ef16c",
+      "paragraphs": 77,
+      "sentences": 546,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "a404aaf19e4536dd76cabf541a3823e85b6b3b75f4b1239fccef5121ec91a48b"
+    },
+    {
+      "sessionId": "31",
+      "file": "courses/釋量論第二品/sessions/session_31.json",
+      "fileSha256": "ecd0e9aa85bd45e13bd53e3a1b75307853b5e9efdb8a08703736e8cbeb219d42",
+      "paragraphs": 92,
+      "sentences": 545,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "15c3b0b01a3774ba33bd5a7c1a515c963bd89a642a993e2efa207a182c0f3570"
+    },
+    {
+      "sessionId": "32",
+      "file": "courses/釋量論第二品/sessions/session_32.json",
+      "fileSha256": "b454411fea96cfb4a1674a4cc296784297189d6346a705a1b62f2c89bb69c341",
+      "paragraphs": 58,
+      "sentences": 287,
+      "immutableFields": [
+        "id",
+        "rawText",
+        "start",
+        "end",
+        "sourceSegmentId"
+      ],
+      "immutableSha256": "c51f7e8c5a17c69bc23c31753323cae89d3258262cc645568accdbd0548a8bc2"
+    }
+  ],
+  "aggregateImmutableSha256": "63b1e6afb4a64be702c74ffc23cf724313207fd1ffa47df2b9c6e99c7bcb6913"
+}
