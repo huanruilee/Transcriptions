@@ -2,21 +2,21 @@
   "schema": "continuous-course-quality-progress/v1",
   "course": "釋量論第二品",
   "branch": "codex/shiliang-32-continuous-quality",
-  "state": "GREEN",
+  "state": "REVIEWED",
   "batches": [
-    { "id": "B1", "sessions": ["01", "02", "03", "04"], "state": "GREEN" },
-    { "id": "B2", "sessions": ["05", "06", "07", "08"], "state": "GREEN" },
-    { "id": "B3", "sessions": ["09", "10", "11", "12"], "state": "GREEN" },
-    { "id": "B4", "sessions": ["13", "14", "15", "16"], "state": "GREEN" },
-    { "id": "B5", "sessions": ["17", "18", "19", "20"], "state": "GREEN" },
-    { "id": "B6", "sessions": ["21", "22", "23", "24"], "state": "GREEN" },
-    { "id": "B7", "sessions": ["25", "26", "27", "28"], "state": "GREEN" },
-    { "id": "B8", "sessions": ["29", "30", "31", "32"], "state": "GREEN" }
+    { "id": "B1", "sessions": ["01", "02", "03", "04"], "state": "REVIEWED" },
+    { "id": "B2", "sessions": ["05", "06", "07", "08"], "state": "REVIEWED" },
+    { "id": "B3", "sessions": ["09", "10", "11", "12"], "state": "REVIEWED" },
+    { "id": "B4", "sessions": ["13", "14", "15", "16"], "state": "REVIEWED" },
+    { "id": "B5", "sessions": ["17", "18", "19", "20"], "state": "REVIEWED" },
+    { "id": "B6", "sessions": ["21", "22", "23", "24"], "state": "REVIEWED" },
+    { "id": "B7", "sessions": ["25", "26", "27", "28"], "state": "REVIEWED" },
+    { "id": "B8", "sessions": ["29", "30", "31", "32"], "state": "REVIEWED" }
   ],
   "acceptance": {
     "targeted": "GREEN",
     "fullRegression": "GREEN",
-    "independentReview": "PENDING",
+    "independentReview": "PASS",
     "pullRequest": "PENDING",
     "deployment": "PENDING",
     "userReview": "PENDING"
