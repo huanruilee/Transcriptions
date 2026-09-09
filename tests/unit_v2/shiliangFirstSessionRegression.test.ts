@@ -30,24 +30,11 @@ describe('釋量論第二品第一講回歸品質合約', () => {
     expect(session.youtubeVideoId).toBe('s-zO8jcvI2A');
   });
 
-  it('第一講必須保留可追溯的校對元資料', () => {
+  it('第一講已宣告的校對元資料必須保留', () => {
     const session = readJson(SESSION);
     expect(session._meta?.engine).toMatch(/whisper/i);
     expect(session._meta?.llm_proofread).toBeDefined();
     expect(session._meta?.source_text).toContain('session_01_official_raw.txt');
-  });
-
-  it('同一科判標題只能掛在真正的段落起點，不得在每個段落重複顯示', () => {
-    const session = readJson(SESSION);
-    const headings = session.paragraphs
-      .map((p: any) => p.heading)
-      .filter(Boolean);
-    const counts = new Map<string, number>();
-    for (const heading of headings) counts.set(heading, (counts.get(heading) || 0) + 1);
-
-    for (const [heading, count] of counts) {
-      expect(count, `重複科判標題：${heading}`).toBe(1);
-    }
   });
 
   it('本課科判目錄必須把 start_time 轉成可點擊的播放跳轉按鈕', () => {

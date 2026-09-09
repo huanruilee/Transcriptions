@@ -536,6 +536,55 @@ handoff over one "finish the whole session" prompt. The orchestrator owns
 interpretation of a failed result; the worker must not self-upgrade
 PENDING, BLOCKED, or GREEN to ACCEPTED.
 
+### Profile loading and model-route gate
+
+For direct Hermes CLI runs, load a named profile with its actual home, not an
+unverified convenience variable:
+
+```sh
+HERMES_HOME=/home/henry/.hermes/profiles/xiaofa \
+  /home/henry/.hermes/hermes-agent/venv/bin/hermes chat ...
+```
+
+`HERMES_PROFILE=xiaofa` alone is not proof that the CLI loaded Xiaofa's
+configuration. Before content work, run a bounded model smoke and inspect its
+output for authentication failures or an unexpected fallback. Record the
+effective provider/model in `worker.json`. A response that happens to contain
+the requested words is insufficient when the runtime identity is wrong.
+
+Prefer Xiaofa's local Qwen provider for repository discovery and deterministic
+evidence work; keep a cloud model as a single explicit fallback. Do not repeat
+the same logical `primary` route in both the main provider and fallback list.
+Change shared smart-router priority only with a router-level RED/GREEN test,
+because it affects every profile using that endpoint.
+
+### Weak-model task shaping
+
+Do not ask a weaker worker to discover inputs, adjudicate ambiguous evidence,
+edit content, design tests, commit, and publish in one run. Use these bounded
+handoffs:
+
+1. `PREPARE`: a deterministic script writes paths, hashes, IDs, and compact
+   excerpts to `input_manifest.json`.
+2. `ADJUDICATE`: the worker returns decisions only; it cannot edit files.
+3. `APPLY`: a deterministic script applies only `CONFIRMED` ledger entries.
+4. `VERIFY`: targeted and all-course tests run without transcript text in
+   stdout.
+
+If text and timestamp evidence disagree, the worker must return `BLOCKED`.
+Never instruct it to "make the test pass" by assigning convenient raw segment
+boundaries. Overlapping intervals, reordered utterances, partial-word anchors,
+or a sentence that spans non-contiguous raw segments require a human/audio
+review queue.
+
+Keep stdout compact: IDs, ranges, counts, hashes, verdicts, and paths only.
+Full transcript excerpts belong in evidence files, not the orchestrator chat.
+
+Apply the same evidence rule to the independent reviewer. Reject a review that
+claims counts or duplicate IDs contradicted by the ledger, or that has no tool
+record proving it opened the inputs. Run the deterministic ledger validator
+before accepting the reviewer's semantic conclusions.
+
 ### Better patterns
 
 - One issue, one owner, one isolated workspace, one evidence directory.
