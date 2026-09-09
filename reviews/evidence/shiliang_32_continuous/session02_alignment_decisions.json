@@ -3,7 +3,7 @@
   "rawAsrSha256": "0e07273c9c628136247a548e642483ba623fd5fe69a36862e51bb4fe88ef8d78",
   "status": "CONFIRMED",
   "entries": [
-    {"sentenceId":"sent-16","status":"CONFIRMED","sourceSegmentIds":[32],"proposedStart":166.14,"proposedEnd":171.86,"reason":"Independent read-only review: raw segment 32 contains the published answer and overlaps the corrected range."},
+    {"sentenceId":"sent-16","status":"CONFIRMED","sourceSegmentIds":[32],"proposedStart":168.59,"proposedEnd":171.86,"reason":"Independent read-only review: raw segment 32 contains the published answer and overlaps the corrected range; start is clamped to the preceding published boundary."},
     {"sentenceId":"sent-17","status":"CONFIRMED","sourceSegmentIds":[33,34,35,36,37,38],"proposedStart":171.86,"proposedEnd":195.84,"reason":"Independent read-only review: raw segments 33-38 cover the published sentence in order."},
     {"sentenceId":"sent-147","status":"CONFIRMED","sourceSegmentIds":[575],"proposedStart":1443.53,"proposedEnd":1445.97,"reason":"Independent read-only review: segment 575 says 可以吧; the published 可以 is a supported edited form."},
     {"sentenceId":"sent-148","status":"CONFIRMED","sourceSegmentIds":[582,584,585,586,587,588,589,590],"proposedStart":1460.38,"proposedEnd":1479.11,"reason":"Independent read-only review: the contiguous raw span supports the published compressed explanation."},
@@ -11,7 +11,7 @@
     {"sentenceId":"sent-263","status":"CONFIRMED","sourceSegmentIds":[981],"proposedStart":2396.84,"proposedEnd":2400.04,"reason":"Independent read-only review: raw segment 981 exactly supports the published question."},
     {"sentenceId":"sent-270","status":"CONFIRMED","sourceSegmentIds":[995,996],"proposedStart":2422.66,"proposedEnd":2425.65,"reason":"Independent read-only review: segments 995-996 support the published question."},
     {"sentenceId":"sent-271","status":"CONFIRMED","sourceSegmentIds":[997,998,999],"proposedStart":2425.65,"proposedEnd":2431.73,"reason":"Independent read-only review: raw segments 997-999 match the published question."},
-    {"sentenceId":"sent-380","status":"CONFIRMED","sourceSegmentIds":[1495,1496,1497,1498],"proposedStart":3682.59,"proposedEnd":3691.72,"reason":"Independent read-only review: raw segments 1495-1498 support the published edited sentence."},
+    {"sentenceId":"sent-380","status":"CONFIRMED","sourceSegmentIds":[1495,1496,1497,1498],"proposedStart":3683.46,"proposedEnd":3691.72,"reason":"Independent read-only review: raw segments 1495-1498 support the published edited sentence; start is clamped to the preceding published boundary."},
     {"sentenceId":"sent-381","status":"CONFIRMED","sourceSegmentIds":[1499,1500,1501,1502,1503,1507,1508,1509,1510,1511,1512,1513,1514],"proposedStart":3691.72,"proposedEnd":3721.3,"reason":"Independent read-only review: the contiguous raw span supports the published compressed sentence."}
   ]
 }
