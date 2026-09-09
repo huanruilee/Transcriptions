@@ -2,6 +2,10 @@
 
 本文件記錄 `Transcriptions` 平台之階段性開發任務清單與完成狀態。小法 (gx10 Agent) 依此追蹤與更新進度。
 
+目前的逐字稿整理與網頁呈現重構，依
+[`TRANSCRIPT_WEB_REFACTOR_RUNBOOK.md`](TRANSCRIPT_WEB_REFACTOR_RUNBOOK.md)
+執行。該計畫目前狀態為 `SPECIFIED`，必須從 M0 baseline 開始，逐一通過 milestone gate。
+
 ---
 
 ## 🚩 Milestone 1: 基礎架構與 Schema 規範 (Foundation & Data Standards)
