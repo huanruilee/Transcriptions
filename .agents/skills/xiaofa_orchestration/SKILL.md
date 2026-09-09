@@ -153,6 +153,46 @@ outside that workspace. A profile's remembered checkout, skill example,
 task workspace. Any write outside the assigned workspace is an immediate
 runner failure and must be reported with the path.
 
+### M1.5: Temporary Agent Dispatch
+
+Use this procedure for a short-lived GX10 Agent used for investigation,
+candidate extraction, or read-only review. A temporary Agent is disposable and
+must never share the production checkout with another worker.
+
+1. Create a unique absolute task directory, such as
+   `/home/henry/.gx10/tasks/session02-review-<date>/`.
+2. Copy only frozen inputs into it. Include a manifest with target IDs, allowed
+   files, expected output, source hashes, and scope. Do not expose the whole
+   repository when a bounded slice is sufficient.
+3. Run a smoke gate first. The Agent must print its working directory, read the
+   manifest, create one named evidence file, and return `PASS` or `BLOCKED`.
+   A clean exit without that artifact is a runner failure.
+4. Start the real task with explicit read/write boundaries, no network, no
+   production edits, no invented transcript text, a fixed output schema, and a
+   finite `--run-budget` or turn/time limit.
+5. Treat the Agent as an evidence producer, not the decision-maker. Mechanically
+   validate JSON syntax, exact ID coverage, source-hash equality, and the rule
+   that `CONFIRMED` entries contain cited evidence and ranges while `UNCERTAIN`
+   entries do not invent ranges.
+6. Dispatch a second read-only Agent against the first artifact in a separate
+   task directory. It must return `PASS`, `FAIL`, or `BLOCKED` with evidence.
+7. If the Agent stalls or fails to write its artifact before the limit, reclaim
+   it and record the failure. Do not restart the same broad prompt in the same
+   workspace; reduce the input slice or split exploration from adjudication.
+8. Only the orchestrator applies confirmed changes in the clean local checkout,
+   runs RED/GREEN and regression tests, commits with an identifiable author,
+   and pushes to GitHub. Preserve manifests, logs, hashes, and review results;
+   keep raw ASR or other sensitive evidence out of GitHub unless explicitly
+   approved for publication.
+
+Preferred chain:
+
+`FROZEN_INPUT -> SMOKE_PASS -> CANDIDATE_ARTIFACT -> MACHINE_CHECK -> READ_ONLY_REVIEW -> ORCHESTRATOR_APPLY`
+
+For timestamp alignment, first generate bounded candidate windows, then run a
+small adjudication task. Do not ask one large Agent turn to discover files,
+infer all boundaries, edit production data, and self-approve the result.
+
 ### M2: Write and run the RED test
 
 The test must fail on the baseline for the intended reason. For a TOC/session
