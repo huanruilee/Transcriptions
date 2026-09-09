@@ -3,7 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { normalizeOfficialTranscript as normalize } from './lib/shiliangAudit.js';
+import {
+  findTimestampViolations,
+  normalizeOfficialTranscript as normalize,
+} from './lib/shiliangAudit.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sid = process.argv[2] || '27';
@@ -25,6 +28,7 @@ const verseLines = read(versesPath).split(/\n/)
   .map(x => { const m = x.match(/^(\d{2})\s+(.+)$/); return { id: Number(m[1]), text: m[2] }; });
 
 const officialNorm = normalize(official);
+const timestampViolations = findTimestampViolations(sentences);
 let cursor = 0;
 const sentenceResults = [];
 for (const s of sentences) {
@@ -66,10 +70,10 @@ const report = {
     sentenceOfficialMatches: sentenceResults.filter(x => x.officialMatch).length, sentenceOfficialMisses: sentenceResults.filter(x => !x.officialMatch).length,
     paragraphOfficialMatches: paragraphResults.filter(x => x.officialContiguousMatch).length, paragraphOfficialMisses: paragraphResults.filter(x => !x.officialContiguousMatch).length,
     verseCandidates: verseCandidates.length },
-  invariants: { timestampsMonotonic: sentences.every((s, i) => i === 0 || Number(s.start) >= Number(sentences[i-1].end) - 0.05),
+  invariants: { timestampsMonotonic: timestampViolations.length === 0,
     paragraphBoundsConsistent: paragraphs.every(p => p.sentences?.length && Math.abs(p.start - p.sentences[0].start) < 0.06 && Math.abs(p.end - p.sentences.at(-1).end) < 0.06),
     officialSequentialCoverage: sentenceResults.every(x => x.officialMatch) },
-  sentenceResults, paragraphResults, verseCandidates,
+  timestampViolations, sentenceResults, paragraphResults, verseCandidates,
   unresolved: { audioVerification: 'REQUIRED', semanticParagraphReview: 'REQUIRED', verseHumanConfirmation: verseCandidates.length ? 'REQUIRED' : 'NONE' }
 };
 fs.writeFileSync(path.join(outDir, 'audit.json'), JSON.stringify(report, null, 2) + '\n');

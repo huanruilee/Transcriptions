@@ -42,12 +42,17 @@ SPECIFIED -> RED -> IMPLEMENTED -> GREEN -> REVIEWED -> INTEGRATED -> DEPLOYED -
 5. `GREEN`：該講 targeted tests 與全課 hard gates 通過。
 6. `LEARN`：將新模式分類為單講 regression、全課 hard gate 或 heuristic review candidate。
 
+Agent 工作拆成 `PREPARE -> ADJUDICATE -> APPLY -> VERIFY` 四張小卡；較弱模型
+只判讀已凍結的 manifest，不同時探索 repo、改檔和設計測試。若文字順序與 raw
+ASR 時間順序不一致，直接進人工音檔 queue，不以可通過測試的時間值硬配。
+
 ## Hard Gates 與 Heuristics
 
 Hard gate 必須掃過全部 32 講並為綠燈：
 
 - 宣告講次、session JSON、官方稿、TOC 與影音身分一致。
 - sentence ID 唯一，起訖時間有效且不倒退。
+- 時間單調必須跨 paragraph 邊界檢查，不得以「已知例外」跳過。
 - paragraph 起訖對齊句子，科判編號、順序與 TOC 一致。
 - 講者括號全講成對、不倒置。
 - 每筆 `source_match` 偈頌同時存在於指定句子與指定頌號。
@@ -67,6 +72,7 @@ Heuristic 不得以「候選為零」當 hard gate：
 - `decision_ledger.json`：每筆決策、置信度、來源與修正前後。
 - `red.txt` / `green.txt`：命令、exit code 與完整輸出。
 - `worker.json`：workspace、branch、commit、changed files。
+- `worker.json` 另須記錄有效的 profile home、provider/model 與 fallback 狀態。
 - `review.json`：獨立 reviewer 結果與抽樣。
 
 ## 學習與更新規則

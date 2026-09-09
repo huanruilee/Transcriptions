@@ -44,15 +44,23 @@ for (let n = 1; n <= 32; n += 1) {
 test('32 講 sentence invariants remain valid', () => {
   for (const { id, data: session } of sessions) {
     const ids = new Set();
+    let previousSentence = null;
     for (const p of session.paragraphs) {
-      let previousEnd = -Infinity;
       for (const s of p.sentences) {
         assert.ok(s.id && s.text, `${id} missing sentence identity/text`);
         assert.ok(!ids.has(s.id), `${id} duplicate sentence id ${s.id}`);
         ids.add(s.id);
-        assert.ok(s.start >= previousEnd, `${id} timestamp regression at ${s.id}`);
-        previousEnd = s.end;
+        assert.ok(Number.isFinite(s.start) && Number.isFinite(s.end), `${id} invalid timestamp at ${s.id}`);
+        assert.ok(s.end >= s.start, `${id} negative duration at ${s.id}`);
+        if (previousSentence) {
+          assert.ok(
+            s.start >= previousSentence.end,
+            `${id} timestamp regression at ${previousSentence.id}->${s.id}`,
+          );
+        }
+        previousSentence = s;
       }
+      assert.equal(p.start, p.sentences[0]?.start, `${id} ${p.id} start mismatch`);
       assert.equal(p.end, p.sentences.at(-1)?.end, `${id} ${p.id} end mismatch`);
     }
   }

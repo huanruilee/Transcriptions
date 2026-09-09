@@ -204,6 +204,11 @@ Do not assume that a different profile is independent merely because its name
 differs: independence requires a new task context, read-only posture, separate
 workspace, and a review result that cites the artifacts directly.
 
+For Hermes CLI profile selection, prove the effective configuration. A known
+working invocation is `HERMES_HOME=/home/henry/.hermes/profiles/<profile>
+hermes chat ...`; an environment variable named `HERMES_PROFILE` may be ignored
+by the CLI. Treat any unexpected provider fallback as a failed smoke gate.
+
 ## Transcription-specific evidence split
 
 Keep these claims separate:
