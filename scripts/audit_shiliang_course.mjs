@@ -21,9 +21,12 @@ if (!outputRoot) {
 }
 const minimumBaseline = '86c5b5a';
 try {
-  execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, stdio: 'ignore' });
-  execFileSync('git', ['merge-base', '--is-ancestor', minimumBaseline, baselineCommit], { cwd: root, stdio: 'ignore' });
-  execFileSync('git', ['merge-base', '--is-ancestor', baselineCommit, 'HEAD'], { cwd: root, stdio: 'ignore' });
+  const resolvedBaseline = execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, encoding: 'utf8' }).trim();
+  const headCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+  if (resolvedBaseline !== headCommit) {
+    execFileSync('git', ['merge-base', '--is-ancestor', minimumBaseline, baselineCommit], { cwd: root, stdio: 'ignore' });
+    execFileSync('git', ['merge-base', '--is-ancestor', baselineCommit, 'HEAD'], { cwd: root, stdio: 'ignore' });
+  }
 } catch {
   console.error(`Baseline must be between quality floor ${minimumBaseline} and HEAD: ${baselineCommit}`);
   process.exit(2);
