@@ -30,10 +30,17 @@ test('course audit emits compact evidence for all 8 batches and 32 sessions', ()
   assert.deepEqual(all.flatMap(x => x.timestampViolations), []);
 });
 
-test('course audit rejects a missing or non-ancestor baseline', () => {
+test('course audit rejects a missing or stale baseline', () => {
   const run = spawnSync(process.execPath, [
     'scripts/audit_shiliang_course.mjs', '--output-root', os.tmpdir(), '--baseline', 'definitely-not-a-commit',
   ], { encoding: 'utf8' });
   assert.equal(run.status, 2);
-  assert.match(run.stderr, /existing ancestor/);
+  assert.match(run.stderr, /equal the current HEAD/);
+
+  const parent = spawnSync('git', ['rev-parse', 'HEAD^'], { encoding: 'utf8' }).stdout.trim();
+  const stale = spawnSync(process.execPath, [
+    'scripts/audit_shiliang_course.mjs', '--output-root', os.tmpdir(), '--baseline', parent,
+  ], { encoding: 'utf8' });
+  assert.equal(stale.status, 2);
+  assert.match(stale.stderr, /equal the current HEAD/);
 });

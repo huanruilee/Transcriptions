@@ -19,11 +19,12 @@ if (!outputRoot) {
   console.error('Usage: audit_shiliang_course.mjs --output-root PATH [--baseline COMMIT]');
   process.exit(2);
 }
+const headCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 try {
-  execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, stdio: 'ignore' });
-  execFileSync('git', ['merge-base', '--is-ancestor', baselineCommit, 'HEAD'], { cwd: root, stdio: 'ignore' });
+  const resolvedBaseline = execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, encoding: 'utf8' }).trim();
+  if (resolvedBaseline !== headCommit) throw new Error('stale baseline');
 } catch {
-  console.error(`Baseline must be an existing ancestor of HEAD: ${baselineCommit}`);
+  console.error(`Baseline must equal the current HEAD: ${baselineCommit}`);
   process.exit(2);
 }
 
