@@ -1,0 +1,14 @@
+{
+  "schema": "independent-review/v1",
+  "reviewedCommit": "34f1c2ef833c62b416031a47e18b49e8c305f3cc",
+  "result": "PASS",
+  "scope": "session_28 sent-142..197 timing acceptance and regression contracts",
+  "checks": {
+    "finalLedgerCoverage": "PASS: 56 unique sequential sentence IDs",
+    "sessionMatchesFinalLedger": "PASS",
+    "boundedResolutionAdjacency": "PASS: sent-159, sent-167, sent-194",
+    "textPreservation": "PASS: d43773499f4453e2d5b2d38f50fa7b6cf58659b57ef96d07126eee7232ffa03c",
+    "targetedTests": "PASS: 10 passed, 0 failed"
+  },
+  "residualRisk": "Repository evidence proves boundary consistency; raw-ASR truth still depends on the recorded external raw-ASR hash."
+}

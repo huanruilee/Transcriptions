@@ -19,6 +19,13 @@ if (!outputRoot) {
   console.error('Usage: audit_shiliang_course.mjs --output-root PATH [--baseline COMMIT]');
   process.exit(2);
 }
+try {
+  execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, stdio: 'ignore' });
+  execFileSync('git', ['merge-base', '--is-ancestor', baselineCommit, 'HEAD'], { cwd: root, stdio: 'ignore' });
+} catch {
+  console.error(`Baseline must be an existing ancestor of HEAD: ${baselineCommit}`);
+  process.exit(2);
+}
 
 const courseRoot = path.join(root, 'courses', '釋量論第二品');
 const sha256 = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
