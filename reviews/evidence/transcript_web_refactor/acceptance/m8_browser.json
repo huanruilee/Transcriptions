@@ -1,0 +1,29 @@
+{
+  "schema": "transcript-web-refactor-browser-acceptance/v1",
+  "milestone": "M8",
+  "status": "PASS",
+  "url": "http://127.0.0.1:3000/",
+  "sessions": [
+    { "sessionId": "01", "paragraphs": 44, "verseSpans": 0 },
+    { "sessionId": "05", "paragraphs": 67, "verseSpans": 48 },
+    { "sessionId": "22", "paragraphs": 62, "verseSpans": 33 },
+    { "sessionId": "27", "paragraphs": 71, "verseSpans": 24 },
+    { "sessionId": "32", "paragraphs": 57, "verseSpans": 40 }
+  ],
+  "desktop": {
+    "allSessionsLoaded": true,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "allSessionsLoaded": true,
+    "mobileTabsVisible": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "boundarySpotChecks": {
+    "sameParagraph": true,
+    "headingsPreserved": true,
+    "sessions": ["04", "06", "26", "32"]
+  }
+}

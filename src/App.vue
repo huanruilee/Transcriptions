@@ -2257,13 +2257,17 @@ if (typeof window !== 'undefined') {
 }
 
 /* 響應式佈局適配 */
-@media (max-width: 768px) {
-  .app-header {
-    padding: 0 10px;
-  }
-  .header-btn {
-    display: none;
-  }
+    @media (max-width: 768px) {
+      .app-header {
+        padding: 0 10px;
+      }
+      .header-btn {
+        display: none;
+      }
+      .theme-selector,
+      .font-controls {
+        display: none;
+      }
   .search-box {
     max-width: 140px;
   }
@@ -2312,10 +2316,29 @@ if (typeof window !== 'undefined') {
   .main-reader {
     padding: 16px 16px 48px;
   }
-  .native-audio {
-    width: 160px;
-  }
-}
+      .native-audio {
+        width: 160px;
+      }
+      .fixed-player {
+        padding: 0 8px;
+      }
+      .player-info {
+        display: none;
+      }
+      .player-controls {
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+        gap: 6px;
+      }
+      .custom-media-controls {
+        min-width: 0;
+        gap: 6px;
+      }
+      .custom-time-readout {
+        display: none;
+      }
+    }
 
 /* 全域 Toast Banner 樣式 */
 .global-toast-banner {
