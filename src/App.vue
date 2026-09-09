@@ -593,6 +593,8 @@ import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExpo
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 import { selectVerseAnnotations } from './utils/verseAnnotations';
+import { seekAndPlayAudio } from './js/audioPlayback';
+import { toPlayableAudioUrl } from './js/remoteAudioProxy';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -791,8 +793,9 @@ function playMedia() {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-        audioEl.src = currentAudioUrl.value;
+      const playableUrl = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
+      if (audioEl.getAttribute('src') !== playableUrl) {
+        audioEl.src = playableUrl;
         audioEl.load();
       }
       audioEl.play().catch(() => {});
@@ -861,12 +864,15 @@ function seekToTime(time: number) {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-        audioEl.src = currentAudioUrl.value;
+      const playableUrl = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
+      if (audioEl.getAttribute('src') !== playableUrl) {
+        audioEl.src = playableUrl;
         audioEl.load();
       }
-      audioEl.currentTime = time;
-      audioEl.play().catch(() => {});
+      seekAndPlayAudio(audioEl, time).catch(() => {
+        uiStore.showToast('音檔載入失敗，請稍後再試。', 'error');
+        isMediaPlaying.value = false;
+      });
     }
   }
 
@@ -1329,7 +1335,7 @@ async function loadSession(sessionId: string) {
     if (audioEl) {
       audioEl.pause();
       if (courseStore.currentMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
-        audioEl.src = currentAudioUrl.value;
+        audioEl.src = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
         audioEl.load();
       } else {
         audioEl.removeAttribute('src');

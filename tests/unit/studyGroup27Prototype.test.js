@@ -37,6 +37,7 @@ test('27下 prototype uses question TOC and remote Google Drive audio only', () 
   assert.equal(audioMap['27B'].source, 'google-drive');
   assert.equal(audioMap['27B'].fileId, DRIVE_FILE_ID);
   assert.match(audioMap['27B'].url, /^https:\/\/drive(?:\.usercontent)?\.google\.com\//);
+  assert.match(audioMap['27B'].url, /[?&]export=open(?:&|$)/, 'Drive audio must use the inline playback response');
   assert.ok(!audioMap['27B'].url.startsWith('/'), 'audio must not be a local asset');
 
   assert.equal(toc.tocMode, 'discussion-questions');
@@ -54,6 +55,7 @@ test('27下 transcript is timestamped and every question ends with an unlinked t
   assert.equal(session.transcriptStatus, 'review-ready');
   assert.equal(session.alignmentStatus, 'sampled');
   assert.match(session.audioUrl, new RegExp(DRIVE_FILE_ID));
+  assert.match(session.audioUrl, /[?&]export=open(?:&|$)/, 'session audio must be browser-streamable');
   assert.ok(Array.isArray(session.paragraphs) && session.paragraphs.length > 0);
   assert.ok(Array.isArray(session.discussionQuestions) && session.discussionQuestions.length > 0);
 

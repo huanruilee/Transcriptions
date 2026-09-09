@@ -10,7 +10,7 @@ from pathlib import Path
 COURSE_ID = "shi-liang-lun-study-group-2025"
 COURSE_TITLE = "2025《釋量論・第二品》大組共學"
 DRIVE_FILE_ID = "1H_w9wP0Gi7zpXKO8NVO95Zvm2Iy5N6Wq"
-DRIVE_URL = f"https://drive.usercontent.google.com/download?id={DRIVE_FILE_ID}&export=download&confirm=t"
+DRIVE_URL = f"https://drive.usercontent.google.com/download?id={DRIVE_FILE_ID}&export=open"
 
 
 def apply_review_fixes(sentences, questions):
