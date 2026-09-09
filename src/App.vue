@@ -260,7 +260,7 @@
                 🕒 最後校正更新：{{ currentLastUpdated }}
               </span>
               <span class="meta-tag status-tag">
-                ✅ 已校勘核定
+                {{ currentTranscriptStatus === 'review-ready' ? '待審閱 Prototype' : '✅ 已校勘核定' }}
               </span>
               <span v-if="currentSessionInfo?.page" class="meta-tag page-tag">
                 📖 底本頁碼：{{ currentSessionInfo.page }}
@@ -358,6 +358,19 @@
                 📌 筆記
               </span>
             </span>
+
+            <section
+              v-if="p.teacherSummary && p.teacherSummary.linkedToAudio === false"
+              class="teacher-summary"
+              aria-label="法師開示摘要"
+            >
+              <h4>法師開示摘要</h4>
+              <ul>
+                <li v-for="(item, index) in p.teacherSummary.items" :key="index">
+                  {{ item }}
+                </li>
+              </ul>
+            </section>
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
@@ -458,6 +471,7 @@
           id="audio-element"
           class="native-audio"
           v-show="courseStore.currentMediaType === 'audio/mp3'"
+          crossorigin="anonymous"
           controls
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
@@ -662,6 +676,7 @@ const currentAudioUrl = ref('');
 const currentYoutubeVideoId = ref('');
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const currentLastUpdated = ref('');
+const currentTranscriptStatus = ref('');
 const paragraphs = ref<any[]>([]);
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
@@ -1255,6 +1270,7 @@ async function loadSession(sessionId: string) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    const discussionQuestions = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
     verseAnnotations.value = {};
     try {
       const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
@@ -1271,6 +1287,7 @@ async function loadSession(sessionId: string) {
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentTranscriptStatus.value = data.transcriptStatus || '';
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
@@ -1280,6 +1297,8 @@ async function loadSession(sessionId: string) {
         id: p.id || `para-${sentCounter}`,
         heading: p.heading || null,
         tocAnchorNode: anchorNode,
+        question: discussionQuestions.find((question: any) => question.id === p.questionId) || null,
+        teacherSummary: p.teacherSummary || null,
         sentences: (p.sentences || []).map((s: any) => ({
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
@@ -1957,6 +1976,31 @@ if (typeof window !== 'undefined') {
   color: var(--accent-color);
   margin: 20px 0 10px;
   font-weight: 700;
+}
+
+.teacher-summary {
+  margin: 18px 0 28px;
+  padding: 14px 18px;
+  background: var(--sidebar-bg);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 4px;
+  color: var(--text-main);
+}
+
+.teacher-summary h4 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: var(--accent-color);
+}
+
+.teacher-summary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.teacher-summary li {
+  margin: 5px 0;
+  line-height: 1.65;
 }
 
 .toc-anchor-card {

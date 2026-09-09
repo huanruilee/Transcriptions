@@ -1,0 +1,49 @@
+{
+  "courseId": "shi-liang-lun-study-group-2025",
+  "sessionId": "27B",
+  "prototypeStatus": "review-ready",
+  "source": {
+    "provider": "google-drive",
+    "fileId": "1H_w9wP0Gi7zpXKO8NVO95Zvm2Iy5N6Wq",
+    "bytes": 81620544,
+    "durationSeconds": 10202.544,
+    "sha256": "7a608caa1128026cd89829a152f10e743c86034c1ea9e40cedba9e1d6a706ada",
+    "committedLocally": false
+  },
+  "asr": {
+    "worker": "GX10 temporary isolated agent",
+    "engine": "faster-whisper-large-v3-turbo",
+    "chunks": 6,
+    "rawSegments": 5093,
+    "reviewUnits": 371,
+    "rawTextPreservedInSession": true
+  },
+  "review": {
+    "independentAgentInitialVerdict": "FAIL",
+    "questionsFound": 4,
+    "fixesApplied": [
+      "依緣假立 corrected to 依蘊假立",
+      "question 3 grounded to Pramanavarttika chapter 2 verses 192-193",
+      "自信 corrected to 自性 in the cited liberation phrase",
+      "question 2 teacher-teaching span extended through sent-0258"
+    ],
+    "remainingHumanReview": [
+      "One sentence is visibly marked for review because model proofreading removed more than 12 percent of Han characters",
+      "Audio playback and sentence-level alignment require confirmation on the deployed review page"
+    ]
+  },
+  "privacy": {
+    "privateNameListUsed": false,
+    "privateNameListCommitted": false
+  },
+  "cleanup": {
+    "status": "PASS",
+    "verifiedDeleted": [
+      "/tmp/study27-agent-W9VKyu",
+      "/tmp/study27-review-NuGNnT",
+      "/tmp/check_resp.sh",
+      "/tmp/validate_and_manifest.py",
+      "/tmp/test_resp.json"
+    ]
+  }
+}
