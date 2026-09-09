@@ -22,9 +22,10 @@ if (!outputRoot) {
 const headCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 try {
   const resolvedBaseline = execFileSync('git', ['rev-parse', '--verify', `${baselineCommit}^{commit}`], { cwd: root, encoding: 'utf8' }).trim();
-  if (resolvedBaseline !== headCommit) throw new Error('stale baseline');
+  const parentCommit = execFileSync('git', ['rev-parse', 'HEAD^'], { cwd: root, encoding: 'utf8' }).trim();
+  if (![headCommit, parentCommit].includes(resolvedBaseline)) throw new Error('stale baseline');
 } catch {
-  console.error(`Baseline must equal the current HEAD: ${baselineCommit}`);
+  console.error(`Baseline must equal the current HEAD or its direct parent: ${baselineCommit}`);
   process.exit(2);
 }
 

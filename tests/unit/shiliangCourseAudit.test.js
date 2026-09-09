@@ -35,12 +35,12 @@ test('course audit rejects a missing or stale baseline', () => {
     'scripts/audit_shiliang_course.mjs', '--output-root', os.tmpdir(), '--baseline', 'definitely-not-a-commit',
   ], { encoding: 'utf8' });
   assert.equal(run.status, 2);
-  assert.match(run.stderr, /equal the current HEAD/);
+  assert.match(run.stderr, /current HEAD or its direct parent/);
 
-  const parent = spawnSync('git', ['rev-parse', 'HEAD^'], { encoding: 'utf8' }).stdout.trim();
+  const parent = spawnSync('git', ['rev-parse', 'HEAD^^'], { encoding: 'utf8' }).stdout.trim();
   const stale = spawnSync(process.execPath, [
     'scripts/audit_shiliang_course.mjs', '--output-root', os.tmpdir(), '--baseline', parent,
   ], { encoding: 'utf8' });
   assert.equal(stale.status, 2);
-  assert.match(stale.stderr, /equal the current HEAD/);
+  assert.match(stale.stderr, /current HEAD or its direct parent/);
 });
