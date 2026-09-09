@@ -2,6 +2,7 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveBoundedTimestampGaps } from '../../scripts/lib/shiliangAudit.js';
 
 /**
  * session28 anchor regression.
@@ -114,6 +115,25 @@ describe('session28 anchor regression (釋量論第二品/sessions/session_28.js
         Math.abs(ROUND(s.end) - expectedEnd) < TOL,
         `${id}.end expected ${expectedEnd}, got ${s.end} (Δ=${ROUND(s.end - expectedEnd)})`
       );
+    }
+  });
+
+  test('sent-142 through sent-197 match the reviewed boundary ledger', () => {
+    const table = JSON.parse(fs.readFileSync(
+      'reviews/evidence/shiliang_32_continuous/B7/pilot28/boundary_table.json',
+      'utf8',
+    ));
+    const resolutions = JSON.parse(fs.readFileSync(
+      'reviews/evidence/shiliang_32_continuous/B7/pilot28/bounded_resolutions.json',
+      'utf8',
+    ));
+    const expected = resolveBoundedTimestampGaps(table.entries, resolutions);
+    const byId = new Map(loadSentences().map(sentence => [sentence.id, sentence]));
+    for (const anchor of expected) {
+      const sentence = byId.get(anchor.sentenceId);
+      assert.ok(sentence, `missing ${anchor.sentenceId}`);
+      assert.ok(Math.abs(sentence.start - anchor.proposedStart) <= TOL, `${anchor.sentenceId}.start drift`);
+      assert.ok(Math.abs(sentence.end - anchor.proposedEnd) <= TOL, `${anchor.sentenceId}.end drift`);
     }
   });
 

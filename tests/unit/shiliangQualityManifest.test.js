@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-test('quality manifest is compact, hashed, and exposes session 28 rollback', () => {
+test('quality manifest is compact, hashed, and reports current timestamp violations', () => {
   const out = path.join(os.tmpdir(), `shiliang-manifest-${process.pid}.json`);
   const run = spawnSync(process.execPath, [
     'scripts/prepare_shiliang_quality_manifest.mjs',
@@ -22,14 +22,7 @@ test('quality manifest is compact, hashed, and exposes session 28 rollback', () 
   assert.deepEqual(manifest.sessions.map(x => x.id), ['28']);
   assert.match(manifest.sessions[0].files.session.sha256, /^[a-f0-9]{64}$/);
   assert.match(manifest.sessions[0].files.officialRaw.sha256, /^[a-f0-9]{64}$/);
-  assert.deepEqual(manifest.sessions[0].timestampViolations, [{
-    type: 'ROLLBACK',
-    previousId: 'sent-194',
-    sentenceId: 'sent-195',
-    previousEnd: 2359.15,
-    start: 2258.83,
-    delta: -100.32,
-  }]);
+  assert.deepEqual(manifest.sessions[0].timestampViolations, []);
   assert.ok(!JSON.stringify(manifest).includes('對於這個質疑'));
   assert.deepEqual(manifest.allowedPaths, [
     'courses/釋量論第二品/sessions/session_28.json',

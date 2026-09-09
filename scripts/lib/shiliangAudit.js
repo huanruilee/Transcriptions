@@ -69,3 +69,31 @@ export function validateDecisionLedger(ledger, { first, last }) {
     && ledger.minimumWindow !== null;
   return { errors, counts, canAutoApply };
 }
+
+export function resolveBoundedTimestampGaps(entries, resolutions) {
+  const byId = new Map(resolutions.map(item => [item.sentenceId, item]));
+  return entries.map((entry, index) => {
+    const resolution = byId.get(entry.sentenceId);
+    if (!resolution) return { ...entry };
+    if (entry.proposedStart !== null || entry.proposedEnd !== null || entry.confidence !== 'UNCERTAIN') {
+      throw new Error(`${entry.sentenceId} is not an unresolved gap`);
+    }
+    const left = entries[index - 1];
+    const right = entries[index + 1];
+    if (!left || left.proposedEnd !== resolution.start) {
+      throw new Error(`${entry.sentenceId} does not meet left anchor`);
+    }
+    if (!right || right.proposedStart !== resolution.end) {
+      throw new Error(`${entry.sentenceId} does not meet right anchor`);
+    }
+    return {
+      ...entry,
+      rawSegmentStartId: resolution.rawSegmentStartId,
+      rawSegmentEndId: resolution.rawSegmentEndId,
+      proposedStart: resolution.start,
+      proposedEnd: resolution.end,
+      confidence: 'BOUNDED_CONFIRMED',
+      evidencePhrase: `${entry.evidencePhrase}; bounded by adjacent confirmed anchors`,
+    };
+  });
+}
