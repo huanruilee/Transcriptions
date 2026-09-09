@@ -43,6 +43,30 @@ test('same ledger is idempotent after the merge is already present', () => {
   assert.deepEqual(second.sessions, first.sessions);
 });
 
+test('heading boundary shifts the trailing sentence and preserves the heading', () => {
+  const input = session();
+  input.paragraphs[0].sentences.unshift({ id: 'sent-0', rawText: '前句', text: '前句。', start: 0, end: 1 });
+  input.paragraphs[0].start = 0;
+  input.paragraphs[1].heading = '【科判】一、標題';
+  const result = applyDecisionLedger({ sessions: { '01': input }, ledger: ledger(), ...options });
+  assert.deepEqual(result.sessions['01'].paragraphs.map(p => p.id), ['p_1', 'p_2', 'p_3']);
+  assert.deepEqual(result.sessions['01'].paragraphs[0].sentences.map(s => s.id), ['sent-0']);
+  assert.deepEqual(result.sessions['01'].paragraphs[1].sentences.map(s => s.id), ['sent-1', 'sent-2']);
+  assert.equal(result.sessions['01'].paragraphs[1].heading, '【科判】一、標題');
+  assert.equal(result.sessions['01'].paragraphs[0].end, 1);
+  assert.equal(result.sessions['01'].paragraphs[1].start, 1);
+});
+
+test('heading boundary removes the source paragraph when its only sentence moves', () => {
+  const input = session();
+  input.paragraphs[1].heading = '【科判】一、標題';
+  const result = applyDecisionLedger({ sessions: { '01': input }, ledger: ledger(), ...options });
+  assert.deepEqual(result.sessions['01'].paragraphs.map(p => p.id), ['p_2', 'p_3']);
+  assert.deepEqual(result.sessions['01'].paragraphs[0].sentences.map(s => s.id), ['sent-1', 'sent-2']);
+  assert.equal(result.sessions['01'].paragraphs[0].heading, '【科判】一、標題');
+  assert.equal(result.sessions['01'].paragraphs[0].start, 1);
+});
+
 test('stale baseline or manifest blocks before mutation', () => {
   assert.throws(() => applyDecisionLedger({
     sessions: { '01': session() }, ledger: ledger(), ...options, expectedBaselineCommit: 'other',
