@@ -12,6 +12,7 @@ const COURSE_DIR = path.join(process.cwd(), 'courses/釋量論第二品');
 const COURSE_PATH = path.join(COURSE_DIR, 'course.json');
 const SESSIONS_DIR = path.join(COURSE_DIR, 'sessions');
 const ANNOTATIONS_PATH = path.join(COURSE_DIR, 'verse_annotations.json');
+const VERSE_SOURCE_PATH = path.join(COURSE_DIR, 'source_text', 'pramana_chapter2_root_verses.txt');
 const EXPECTED_SESSION_COUNT = 32;
 const ALLOWED_STATUSES = new Set(['source_match', 'partial_match', 'UNVERIFIED']);
 
@@ -111,6 +112,62 @@ test('contract: every annotation sentenceId exists in its session transcript', (
     }
   }
   assert.deepEqual(failures, [], 'annotation sentenceIds must resolve against the session transcript');
+});
+
+test('contract: every source_match annotation is present in both its sentence and canonical verse', () => {
+  const annotationsDoc = readJson(ANNOTATIONS_PATH);
+  const canonical = value => String(value).replace(/[^\p{Script=Han}]/gu, '');
+  const verses = new Map();
+  for (const line of fs.readFileSync(VERSE_SOURCE_PATH, 'utf8').split(/\r?\n/)) {
+    const match = /^(\d+)\s+(.+)$/.exec(line);
+    if (!match) continue;
+    const verseId = Number(match[1]);
+    verses.set(verseId, `${verses.get(verseId) || ''}${canonical(match[2])}`);
+  }
+  const failures = [];
+
+  for (const manifest of annotationsDoc.manifests || []) {
+    const sid = canonicalSessionId(manifest.sessionId);
+    const padded = sid.padStart(2, '0');
+    const session = readJson(path.join(SESSIONS_DIR, `session_${padded}.json`));
+    const sentences = new Map(
+      session.paragraphs.flatMap(paragraph => paragraph.sentences || []).map(sentence => [sentence.id, sentence.text]),
+    );
+    for (const annotation of manifest.annotations || []) {
+      if (annotation.status !== 'source_match') continue;
+      const location = `${padded}/${annotation.sentenceId}/verse-${annotation.verseId}`;
+      if (!sentences.get(annotation.sentenceId)?.includes(annotation.quoteText)) {
+        failures.push(`${location}: quote absent from sentence`);
+      }
+      if (!verses.get(Number(annotation.verseId))?.includes(canonical(annotation.quoteText))) {
+        failures.push(`${location}: quote absent from canonical verse source`);
+      }
+    }
+  }
+
+  assert.deepEqual(failures, [], failures.join('\n'));
+});
+
+test('regression: session 29 preserves every spoken fragment of split verses 206 and 207', () => {
+  const annotationsDoc = readJson(ANNOTATIONS_PATH);
+  const manifest = annotationsDoc.manifests.find(
+    item => canonicalSessionId(item.sessionId) === '29',
+  );
+  const actual = new Set((manifest?.annotations || []).map(
+    annotation => `${annotation.sentenceId}|${annotation.verseId}|${annotation.quoteText}`,
+  ));
+  const requiredFragments = [
+    'sent-12|206|修彼已說道',
+    'sent-12|206|轉依',
+    'sent-18|206|雖轉依',
+    'sent-18|207|如道過復起',
+  ];
+
+  assert.deepEqual(
+    requiredFragments.filter(fragment => !actual.has(fragment)),
+    [],
+    'split verse fragments must each remain annotated with their canonical verse id',
+  );
 });
 
 test('contract: frontend selects the current v2 manifest and preserves v1 fallback', () => {
