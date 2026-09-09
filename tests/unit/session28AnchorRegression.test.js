@@ -1,8 +1,8 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { resolveBoundedTimestampGaps } from '../../scripts/lib/shiliangAudit.js';
 
 /**
  * session28 anchor regression.
@@ -120,14 +120,12 @@ describe('session28 anchor regression (釋量論第二品/sessions/session_28.js
 
   test('sent-142 through sent-197 match the reviewed boundary ledger', () => {
     const table = JSON.parse(fs.readFileSync(
-      'reviews/evidence/shiliang_32_continuous/B7/pilot28/boundary_table.json',
+      'reviews/evidence/shiliang_32_continuous/B7/pilot28/boundary_table.final.json',
       'utf8',
     ));
-    const resolutions = JSON.parse(fs.readFileSync(
-      'reviews/evidence/shiliang_32_continuous/B7/pilot28/bounded_resolutions.json',
-      'utf8',
-    ));
-    const expected = resolveBoundedTimestampGaps(table.entries, resolutions);
+    const expected = table.entries;
+    assert.equal(expected.length, 56);
+    assert.deepEqual(expected.map(x => x.sentenceId), Array.from({ length: 56 }, (_, i) => `sent-${i + 142}`));
     const byId = new Map(loadSentences().map(sentence => [sentence.id, sentence]));
     for (const anchor of expected) {
       const sentence = byId.get(anchor.sentenceId);
@@ -135,6 +133,18 @@ describe('session28 anchor regression (釋量論第二品/sessions/session_28.js
       assert.ok(Math.abs(sentence.start - anchor.proposedStart) <= TOL, `${anchor.sentenceId}.start drift`);
       assert.ok(Math.abs(sentence.end - anchor.proposedEnd) <= TOL, `${anchor.sentenceId}.end drift`);
     }
+  });
+
+  test('sent-142 through sent-197 preserve the reviewed transcript text', () => {
+    const selected = loadSentences().filter(sentence => {
+      const number = Number(sentence.id.slice(5));
+      return number >= 142 && number <= 197;
+    });
+    const digest = crypto.createHash('sha256')
+      .update(selected.map(sentence => `${sentence.id}\0${sentence.text}`).join('\n'))
+      .digest('hex');
+    assert.equal(selected.length, 56);
+    assert.equal(digest, 'd43773499f4453e2d5b2d38f50fa7b6cf58659b57ef96d07126eee7232ffa03c');
   });
 
   test('sent-198 / sent-199 / sent-208 are no longer collapsed to 0.5s', () => {
