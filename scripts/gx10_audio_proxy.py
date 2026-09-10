@@ -45,6 +45,7 @@ class AudioProxyHandler(BaseHTTPRequestHandler):
         if origin == ALLOWED_ORIGIN:
             self.send_header("Access-Control-Allow-Origin", ALLOWED_ORIGIN)
             self.send_header("Vary", "Origin")
+            self.send_header("Access-Control-Expose-Headers", "Accept-Ranges, Content-Length, Content-Range")
 
     def do_OPTIONS(self):
         if self.headers.get("Origin") != ALLOWED_ORIGIN:
@@ -54,6 +55,8 @@ class AudioProxyHandler(BaseHTTPRequestHandler):
         self._cors()
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Range")
+        if self.headers.get("Access-Control-Request-Private-Network") == "true":
+            self.send_header("Access-Control-Allow-Private-Network", "true")
         self.send_header("Access-Control-Max-Age", "86400")
         self.end_headers()
 
