@@ -92,3 +92,12 @@ test('web reader renders question headings and non-seekable teacher-summary bull
   assert.match(app, /法師開示摘要/);
   assert.match(app, /linkedToAudio/);
 });
+
+test('audio click exposes a polite loading indicator until playback starts', () => {
+  const app = fs.readFileSync(path.join(ROOT, 'src/App.vue'), 'utf8');
+  assert.match(app, /isAudioLoading/);
+  assert.match(app, /role="status"/);
+  assert.match(app, /aria-live="polite"/);
+  assert.match(app, /音檔載入中/);
+  assert.match(app, /seekAndPlayAudio\(audioEl, time\)\s*\.then/);
+});

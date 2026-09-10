@@ -476,8 +476,18 @@
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
-          @play="hasMediaEnded = false"
+          @play="onNativePlay"
         ></audio>
+
+        <span
+          v-if="courseStore.currentMediaType === 'audio/mp3' && isAudioLoading"
+          class="audio-loading-status"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="audio-loading-spinner" aria-hidden="true"></span>
+          音檔載入中…
+        </span>
 
         <button
           id="next-session-btn"
@@ -683,6 +693,7 @@ const paragraphs = ref<any[]>([]);
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
+const isAudioLoading = ref(false);
 const mediaDuration = ref(0);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
@@ -864,15 +875,22 @@ function seekToTime(time: number) {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
+      isAudioLoading.value = true;
       const playableUrl = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
       if (audioEl.getAttribute('src') !== playableUrl) {
         audioEl.src = playableUrl;
         audioEl.load();
       }
-      seekAndPlayAudio(audioEl, time).catch(() => {
-        uiStore.showToast('音檔載入失敗，請稍後再試。', 'error');
-        isMediaPlaying.value = false;
-      });
+      seekAndPlayAudio(audioEl, time)
+        .then(() => {
+          isAudioLoading.value = false;
+          isMediaPlaying.value = true;
+        })
+        .catch(() => {
+          isAudioLoading.value = false;
+          uiStore.showToast('音檔載入失敗，請稍後再試。', 'error');
+          isMediaPlaying.value = false;
+        });
     }
   }
 
@@ -1464,6 +1482,12 @@ function onNativeTimeUpdate(e: any) {
   if (audio) {
     playerStore.updateTime(audio.currentTime);
   }
+}
+
+function onNativePlay() {
+  hasMediaEnded.value = false;
+  isAudioLoading.value = false;
+  isMediaPlaying.value = true;
 }
 
 function returnToPlaying() {
@@ -2243,6 +2267,29 @@ if (typeof window !== 'undefined') {
 
 .native-audio {
   height: 36px;
+}
+
+.audio-loading-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 112px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.audio-loading-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: audio-loading-spin 0.8s linear infinite;
+}
+
+@keyframes audio-loading-spin {
+  to { transform: rotate(360deg); }
 }
 
 .custom-media-controls {
