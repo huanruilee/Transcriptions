@@ -1299,3 +1299,35 @@ test('prototype-41 preserves source identity and passes the machine ASR gate', (
     assert.equal(candidate.segments[index].text, raw.segments[index].text);
   }
 });
+
+test('prototype-44 fails closed when the only available source audio is silent', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-44');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const diagnostics = JSON.parse(fs.readFileSync(path.join(evidence, 'source_diagnostics.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  assert.equal(candidate.source.videoId, 'lBOiFeGQblw');
+  assert.equal(candidate.source.playlistIndex, 44);
+  assert.equal(candidate.segments.length, 0);
+  assert.equal(raw.segments.length, 0);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.equal(candidate.exclusions[0].reason, 'source audio is silent');
+  assert.equal(manifest.videoId, 'lBOiFeGQblw');
+  assert.equal(manifest.status, 'ASR_FAILED_HALLUCINATION_GUARD');
+  assert.equal(manifest.checks.segmentsNonEmpty, false);
+  assert.equal(manifest.checks.audioCoveragePct, 0);
+  assert.equal(manifest.checks.repeatedCharacterSegments, 0);
+  assert.equal(diagnostics.source.format, '18');
+  assert.equal(diagnostics.source.audioCodec, 'aac');
+  assert.equal(diagnostics.volumeDiagnostic.meanVolumeDb, -90.3);
+  assert.equal(diagnostics.volumeDiagnostic.maxVolumeDb, -90.3);
+  assert.equal(diagnostics.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.deepEqual(manifest.cleanup.removedPaths, ['audio/source.mp4', 'audio']);
+  assert.match(review, /mean_volume: -90\.3 dB/);
+  assert.match(manifest.artifacts.sourceDiagnosticsPath, /prototype-44\/source_diagnostics\.json$/);
+  assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
+});

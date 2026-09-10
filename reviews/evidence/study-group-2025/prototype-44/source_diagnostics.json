@@ -1,0 +1,22 @@
+{
+  "schema": "transcriptions/source_diagnostics/v1",
+  "source": {
+    "playlistIndex": 44,
+    "videoId": "lBOiFeGQblw",
+    "format": "18",
+    "container": "mp4",
+    "audioCodec": "aac",
+    "sampleRate": 44100,
+    "channels": 2,
+    "durationSeconds": 10231.547937,
+    "bytes": 236882235,
+    "sha256": "9d9779fc08344ee036b48500a8bce6abfb78733b7883d1c920c870ddb7a3b917"
+  },
+  "availableFormats": ["18"],
+  "volumeDiagnostic": {
+    "command": "ffmpeg -i audio/source.mp4 -af volumedetect -f null -",
+    "meanVolumeDb": -90.3,
+    "maxVolumeDb": -90.3
+  },
+  "temporaryAudioDeleted": true
+}

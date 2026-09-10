@@ -1,0 +1,75 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-44",
+  "playlistIndex": 44,
+  "videoId": "lBOiFeGQblw",
+  "sourceUrl": "https://www.youtube.com/watch?v=lBOiFeGQblw",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper-service",
+    "model": "large-v3-turbo",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": false,
+    "beam_size": 5,
+    "condition_on_previous_text": false,
+    "repetition_penalty": 1.15,
+    "compression_ratio_threshold": 1.8,
+    "no_speech_threshold": 0.5,
+    "vad_filter": true,
+    "vad_min_silence_duration_ms": 600,
+    "vad_speech_pad_ms": 400
+  },
+  "commands": [
+    {
+      "cmd": "yt-dlp --skip-download --print duration",
+      "exit_code": 0
+    },
+    {
+      "cmd": "yt-dlp -f 18 -o audio/source.mp4 (player_client=android)",
+      "exit_code": 0
+    },
+    {
+      "cmd": "POST /v1/audio/transcriptions (GPU service, hallucination guard)",
+      "exit_code": 0,
+      "note": "segments=0 repeatedCharacterSegments=0"
+    },
+    {
+      "cmd": "sha256sum/ffprobe",
+      "exit_code": 0,
+      "note": "sha256=9d9779fc08344ee036b48500a8bce6abfb78733b7883d1c920c870ddb7a3b917 bytes=236882235 duration=10231.547937"
+    },
+    {
+      "cmd": "ffmpeg -i audio/source.mp4 -af volumedetect -f null -",
+      "exit_code": 0,
+      "note": "mean_volume=-90.3dB max_volume=-90.3dB"
+    }
+  ],
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-44/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-44/candidate.json",
+    "sourceDiagnosticsPath": "reviews/evidence/study-group-2025/prototype-44/source_diagnostics.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "audio/source.mp4",
+      "audio"
+    ]
+  },
+  "status": "ASR_FAILED_HALLUCINATION_GUARD",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": false,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 0.0,
+    "totalWordTokens": 0,
+    "repeatedCharacterSegments": 0,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}
