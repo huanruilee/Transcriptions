@@ -107,3 +107,29 @@ test('prototype-02 preserves ASR evidence while failing closed before speaker at
     assert.ok(Math.abs(actual.end - expected.end) < 0.01);
   }
 });
+
+test('prototype-02 question candidates remain explicitly unresolved for human audio review', () => {
+  const questionPath = path.join(PROTOTYPE_02, 'question_candidates.json');
+  const questionReviewPath = path.join(PROTOTYPE_02, 'question_candidates_review.md');
+  const candidate = JSON.parse(fs.readFileSync(path.join(PROTOTYPE_02, 'candidate.json'), 'utf8'));
+  const questions = JSON.parse(fs.readFileSync(questionPath, 'utf8'));
+  assert.equal(fs.existsSync(questionReviewPath), true);
+  assert.equal(questions.videoId, 'bO2f8SL6czc');
+  assert.equal(questions.status, 'BLOCKED');
+  assert.equal(questions.candidates.length, questions.summary.totalCandidates);
+  assert.equal(questions.excluded.length, 44);
+  const segmentIds = new Set(candidate.segments.map((segment) => segment.id));
+  const ids = new Set();
+  for (const question of questions.candidates) {
+    assert.match(question.candidateId, /^qc-\d{4}$/);
+    assert.equal(ids.has(question.candidateId), false, 'candidate IDs must be unique');
+    ids.add(question.candidateId);
+    assert.ok(question.segmentIds.length > 0);
+    assert.ok(question.segmentIds.every((id) => segmentIds.has(id)));
+    assert.equal(question.speakerRole, 'unresolved');
+    assert.equal(question.reviewStatus, 'human_audio_review_required');
+    assert.ok(['low', 'medium'].includes(question.confidence));
+    assert.ok(question.end >= question.start);
+  }
+  assert.match(fs.readFileSync(questionReviewPath, 'utf8'), /Status:\s+\*\*BLOCKED\*\*/);
+});

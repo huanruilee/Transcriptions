@@ -1,0 +1,2708 @@
+{
+  "schema": "transcriptions/question_candidates/v1",
+  "videoId": "bO2f8SL6czc",
+  "sourceUrl": "https://www.youtube.com/watch?v=bO2f8SL6czc",
+  "rawTitle": "第1講 調整學法的動機（下）｜2025《釋量論・第二品》大組共學",
+  "provenance": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-02/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-02/candidate.json",
+    "asrEngine": "faster-whisper",
+    "asrModel": "medium",
+    "asrComputeType": "int8",
+    "extractedAt": "2026-09-10T10:30:00Z",
+    "extractor": "prototype-02/question_candidates extraction (conservative textual-cue pass, no audio)"
+  },
+  "detectionMethod": {
+    "cues": [
+      "segment text ending with ？ or ?",
+      "segment text containing any wh-word (什麼/為什麼/為何/如何/怎麼/哪裡/哪個/哪些/哪位/誰/什麼樣/怎樣/哪)",
+      "segment text ending with question-tag (是嗎/是吧/好嗎/行嗎/可以嗎/知道嗎/記得嗎/懂嗎/會嗎/對嗎/對不對/是不是/可不可以/能不能/會不會/是否)"
+    ],
+    "mergePolicy": "contiguous question-segments merged into runs with up to 1 bridging non-question segment (ASR micro-split tolerance, capped at span_len 20)",
+    "worksheetExpansion": "runs falling inside a worksheet-reading block (teacher reading prompt from slide) are expanded to the full contiguous worksheet-reading segment range",
+    "rawQuestionSegments": 243,
+    "runsBeforeExclusion": 201,
+    "runsAfterExclusion": 157,
+    "excludedCount": 44
+  },
+  "exclusionRules": {
+    "A_bare_confirmation_tag": "text is just a confirmation tag (是嗎/對嗎/對不對/是不是/這樣可以嗎) with no recoverable question content",
+    "B_declarative_false_positive": "segment contains a wh-word but is syntactically declarative (no ？/? and no terminal question particle)",
+    "C_incomplete_asr_fragment": "segment begins a question but is cut off mid-clause without a terminal question cue",
+    "D_short_rhetorical": "short rhetorical phrase that adds no TOC value",
+    "E_meta_narration": "meta-comment about asking a question without stating one"
+  },
+  "candidates": [
+    {
+      "candidateId": "qc-0001",
+      "segmentIds": [
+        "seg-0039",
+        "seg-0040"
+      ],
+      "start": 162.22,
+      "end": 171.4,
+      "text": "我們就要思維為什麼我整天想著我 難道我所追求的快樂不是源自於其他的眾生嗎?",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0002",
+      "segmentIds": [
+        "seg-0125"
+      ],
+      "start": 476.92,
+      "end": 478.8,
+      "text": "有哪些優缺點",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0003",
+      "segmentIds": [
+        "seg-0129"
+      ],
+      "start": 485.66,
+      "end": 488.08,
+      "text": "那這樣我們還有辦法了解真相嗎?",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0004",
+      "segmentIds": [
+        "seg-0136",
+        "seg-0137"
+      ],
+      "start": 502.74,
+      "end": 508.76,
+      "text": "到底是不是正義、合理嗎? 那我們應該要怎樣做",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0005",
+      "segmentIds": [
+        "seg-0158"
+      ],
+      "start": 574.78,
+      "end": 579.4,
+      "text": "才能認識自己過去有哪些錯誤的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0006",
+      "segmentIds": [
+        "seg-0166"
+      ],
+      "start": 599.4,
+      "end": 602.82,
+      "text": "但你要說一下說你不認同的地方在哪裡",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0009",
+      "segmentIds": [
+        "seg-0197"
+      ],
+      "start": 722.08,
+      "end": 724.54,
+      "text": "一你不認同的地方到底在哪裡",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0010",
+      "segmentIds": [
+        "seg-0263"
+      ],
+      "start": 877.42,
+      "end": 879.72,
+      "text": "哪一些類型的惡業吧",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0011",
+      "segmentIds": [
+        "seg-0267"
+      ],
+      "start": 887.02,
+      "end": 888.52,
+      "text": "你怎麼理解說",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0012",
+      "segmentIds": [
+        "seg-0272"
+      ],
+      "start": 898.78,
+      "end": 901.78,
+      "text": "你是怎麼理解那個可以淨除的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0014",
+      "segmentIds": [
+        "seg-0320"
+      ],
+      "start": 999.78,
+      "end": 1001.76,
+      "text": "這個地方是什麼理解",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0015",
+      "segmentIds": [
+        "seg-0385"
+      ],
+      "start": 1160.89,
+      "end": 1164.03,
+      "text": "然後還有產生一個追悔心是嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0016",
+      "segmentIds": [
+        "seg-0404"
+      ],
+      "start": 1190.85,
+      "end": 1194.45,
+      "text": "你怎麼認同法",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0017",
+      "segmentIds": [
+        "seg-0424"
+      ],
+      "start": 1229.41,
+      "end": 1231.47,
+      "text": "那為什麼要勢力懺悔",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0018",
+      "segmentIds": [
+        "seg-0461"
+      ],
+      "start": 1312.25,
+      "end": 1315.55,
+      "text": "他怎麼可能這樣子就可以淨除呢",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0020",
+      "segmentIds": [
+        "seg-0526"
+      ],
+      "start": 1460.33,
+      "end": 1462.49,
+      "text": "為什麼認同二呢",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0021",
+      "segmentIds": [
+        "seg-0541"
+      ],
+      "start": 1487.81,
+      "end": 1489.59,
+      "text": "會有一個什麼樣的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0022",
+      "segmentIds": [
+        "seg-0547"
+      ],
+      "start": 1499.43,
+      "end": 1501.29,
+      "text": "但是你用什麼樣的動機",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0024",
+      "segmentIds": [
+        "seg-0572"
+      ],
+      "start": 1538.09,
+      "end": 1540.23,
+      "text": "我用什麼樣的一個方法",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0025",
+      "segmentIds": [
+        "seg-0579"
+      ],
+      "start": 1552.75,
+      "end": 1554.47,
+      "text": "那如何去實踐",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0026",
+      "segmentIds": [
+        "seg-0602"
+      ],
+      "start": 1596.51,
+      "end": 1598.43,
+      "text": "他怎麼能夠去參除",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0027",
+      "segmentIds": [
+        "seg-0614"
+      ],
+      "start": 1618.13,
+      "end": 1620.67,
+      "text": "以什麼樣的新色詞念周敗場",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0028",
+      "segmentIds": [
+        "seg-0627"
+      ],
+      "start": 1640.87,
+      "end": 1642.79,
+      "text": "它讓惡業不再趕過是嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0033",
+      "segmentIds": [
+        "seg-0711",
+        "seg-0712"
+      ],
+      "start": 1779.23,
+      "end": 1782.05,
+      "text": "什麼業障啊 或是什麼之類的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0034",
+      "segmentIds": [
+        "seg-0727"
+      ],
+      "start": 1800.55,
+      "end": 1801.81,
+      "text": "為什麼你覺得",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0035",
+      "segmentIds": [
+        "seg-0731"
+      ],
+      "start": 1806.69,
+      "end": 1808.27,
+      "text": "這個理由是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0036",
+      "segmentIds": [
+        "seg-0740"
+      ],
+      "start": 1820.85,
+      "end": 1821.87,
+      "text": "了解是什麼意思",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0037",
+      "segmentIds": [
+        "seg-0781"
+      ],
+      "start": 1903.23,
+      "end": 1904.71,
+      "text": "我過去造什麼惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0038",
+      "segmentIds": [
+        "seg-0794",
+        "seg-0795"
+      ],
+      "start": 1925.21,
+      "end": 1927.45,
+      "text": "你覺得可以嗎 對不對",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0039",
+      "segmentIds": [
+        "seg-0804"
+      ],
+      "start": 1945.29,
+      "end": 1946.99,
+      "text": "很近的 什麼意思啊",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0040",
+      "segmentIds": [
+        "seg-0816"
+      ],
+      "start": 1963.21,
+      "end": 1964.43,
+      "text": "歸一三寶是不是",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0041",
+      "segmentIds": [
+        "seg-0840"
+      ],
+      "start": 2014.49,
+      "end": 2017.13,
+      "text": "過去曾經造下什麼惡業啊",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0042",
+      "segmentIds": [
+        "seg-0846"
+      ],
+      "start": 2029.59,
+      "end": 2031.07,
+      "text": "你能說出哪一種惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0043",
+      "segmentIds": [
+        "seg-0858",
+        "seg-0859"
+      ],
+      "start": 2055.07,
+      "end": 2061.01,
+      "text": "上一世我造了哪些惡業 上上一世我造了哪些惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0044",
+      "segmentIds": [
+        "seg-0864"
+      ],
+      "start": 2073.37,
+      "end": 2074.45,
+      "text": "什麼程度呢",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0045",
+      "segmentIds": [
+        "seg-0949"
+      ],
+      "start": 2310.39,
+      "end": 2312.03,
+      "text": "怎麼選會比較合理",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0046",
+      "segmentIds": [
+        "seg-0961"
+      ],
+      "start": 2339.51,
+      "end": 2343.13,
+      "text": "做那件事情的效果如何",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0047",
+      "segmentIds": [
+        "seg-0978",
+        "seg-0979",
+        "seg-0980"
+      ],
+      "start": 2379.57,
+      "end": 2388.93,
+      "text": "前後是真正想要表達的內涵為何 他也不太清楚 所謂的淨除過往的惡業是什麼意思",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0048",
+      "segmentIds": [
+        "seg-1008",
+        "seg-1009"
+      ],
+      "start": 2465.41,
+      "end": 2471.27,
+      "text": "為什麼皈依發心能夠淨除過往的惡業 關鍵是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0049",
+      "segmentIds": [
+        "seg-1015",
+        "seg-1016",
+        "seg-1017",
+        "seg-1018",
+        "seg-1019"
+      ],
+      "start": 2488.85,
+      "end": 2506.21,
+      "text": "那為什麼不能淨除過往所造的惡業 所以應該要先想的是 為什麼皈依三寶能夠淨除往昔所造的惡業 理由是什麼 為什麼發起菩提心",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0051",
+      "segmentIds": [
+        "seg-1073"
+      ],
+      "start": 2675.93,
+      "end": 2681.23,
+      "text": "他都會覺得我原先的想法怎麼會是那個樣子的呢",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0054",
+      "segmentIds": [
+        "seg-1169"
+      ],
+      "start": 2999.68,
+      "end": 3001.56,
+      "text": "你覺得這個是正對峙是不是",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0055",
+      "segmentIds": [
+        "seg-1179"
+      ],
+      "start": 3034.06,
+      "end": 3035.14,
+      "text": "這是什麼意思",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0057",
+      "segmentIds": [
+        "seg-1190"
+      ],
+      "start": 3065.6,
+      "end": 3071.52,
+      "text": "淨化的方式是將它完全清除掉是不是",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0058",
+      "segmentIds": [
+        "seg-1198",
+        "seg-1199"
+      ],
+      "start": 3091.46,
+      "end": 3097.18,
+      "text": "為什麼不一樣 那時候哪裡不一樣",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0061",
+      "segmentIds": [
+        "seg-1290"
+      ],
+      "start": 3361.22,
+      "end": 3362.8,
+      "text": "就是怎麼懺悔還有區別",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0063",
+      "segmentIds": [
+        "seg-1298"
+      ],
+      "start": 3378.8,
+      "end": 3380.9,
+      "text": "就是它怎麼刪都刪不盡嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0064",
+      "segmentIds": [
+        "seg-1312",
+        "seg-1313",
+        "seg-1314"
+      ],
+      "start": 3418.8,
+      "end": 3431.74,
+      "text": "不是啊這個是怎麼辦到的 這個是怎麼辦到的 這個是怎麼辦到的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0065",
+      "segmentIds": [
+        "seg-1317"
+      ],
+      "start": 3437.32,
+      "end": 3442.8,
+      "text": "那過去所造的惡業全部都一筆勾銷是嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0066",
+      "segmentIds": [
+        "seg-1321"
+      ],
+      "start": 3450.2,
+      "end": 3451.96,
+      "text": "造下了什麼樣的惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0067",
+      "segmentIds": [
+        "seg-1333"
+      ],
+      "start": 3479.86,
+      "end": 3483.98,
+      "text": "才能認識自己過去有哪些錯誤的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0068",
+      "segmentIds": [
+        "seg-1346",
+        "seg-1347",
+        "seg-1348"
+      ],
+      "start": 3513.56,
+      "end": 3521.5,
+      "text": "才能認識自己過去有哪些錯誤 是是 那你現在覺得這個不合理是不是",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0069",
+      "segmentIds": [
+        "seg-1351"
+      ],
+      "start": 3526.32,
+      "end": 3530.02,
+      "text": "即便認識自己過去有哪些錯誤",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0070",
+      "segmentIds": [
+        "seg-1360"
+      ],
+      "start": 3553.68,
+      "end": 3557.98,
+      "text": "認識自己過去有哪些錯誤的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0071",
+      "segmentIds": [
+        "seg-1366"
+      ],
+      "start": 3571.88,
+      "end": 3576.98,
+      "text": "那為什麼認識自己過去有哪些錯誤的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0072",
+      "segmentIds": [
+        "seg-1370"
+      ],
+      "start": 3588.32,
+      "end": 3591.24,
+      "text": "然後他為什麼能夠淨化惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0073",
+      "segmentIds": [
+        "seg-1400"
+      ],
+      "start": 3683.88,
+      "end": 3689.04,
+      "text": "如果後面認識自己過去有哪些錯誤的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0074",
+      "segmentIds": [
+        "seg-1407"
+      ],
+      "start": 3711.84,
+      "end": 3718.22,
+      "text": "或是從中認識到自己過去有哪些錯誤的行為也好",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0075",
+      "segmentIds": [
+        "seg-1466"
+      ],
+      "start": 3923.48,
+      "end": 3924.84,
+      "text": "為什麼不會認同",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0076",
+      "segmentIds": [
+        "seg-1473"
+      ],
+      "start": 3947.82,
+      "end": 3951.5,
+      "text": "到底會對自己產生哪些傷害",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0077",
+      "segmentIds": [
+        "seg-1479"
+      ],
+      "start": 3971.56,
+      "end": 3974.46,
+      "text": "我跟眾生誰比較重要",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0078",
+      "segmentIds": [
+        "seg-1488"
+      ],
+      "start": 4000.14,
+      "end": 4001.78,
+      "text": "為什麼掙扎",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0080",
+      "segmentIds": [
+        "seg-1514"
+      ],
+      "start": 4073.62,
+      "end": 4075.9,
+      "text": "為什麼在生起無我會之前",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0081",
+      "segmentIds": [
+        "seg-1517",
+        "seg-1518",
+        "seg-1519",
+        "seg-1520"
+      ],
+      "start": 4080.16,
+      "end": 4092.16,
+      "text": "我們心中有哪些錯誤的想法 這個想法到底錯在哪裡 我們心中 到底是怎麼看待那個我",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0082",
+      "segmentIds": [
+        "seg-1563"
+      ],
+      "start": 4228.4,
+      "end": 4231.4,
+      "text": "不夠強那有什麼問題嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0083",
+      "segmentIds": [
+        "seg-1575"
+      ],
+      "start": 4258.16,
+      "end": 4260.02,
+      "text": "怎麼會沒有菩提心",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0084",
+      "segmentIds": [
+        "seg-1579"
+      ],
+      "start": 4272.06,
+      "end": 4274.4,
+      "text": "但他當下的焦點是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0085",
+      "segmentIds": [
+        "seg-1610"
+      ],
+      "start": 4374.02,
+      "end": 4375.64,
+      "text": "什麼叫做一指力",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0086",
+      "segmentIds": [
+        "seg-1619"
+      ],
+      "start": 4404.48,
+      "end": 4410.18,
+      "text": "也就是你造惡業的對象是誰",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0087",
+      "segmentIds": [
+        "seg-1635"
+      ],
+      "start": 4459.16,
+      "end": 4461.54,
+      "text": "不就是天大的惡行嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0088",
+      "segmentIds": [
+        "seg-1639"
+      ],
+      "start": 4467.88,
+      "end": 4469.94,
+      "text": "這就是為什麼生起猶豫之眼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0089",
+      "segmentIds": [
+        "seg-1684"
+      ],
+      "start": 4583.16,
+      "end": 4587.2,
+      "text": "這個摧壞三有你怎麼理解",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0095",
+      "segmentIds": [
+        "seg-1878"
+      ],
+      "start": 4986.1,
+      "end": 4986.88,
+      "text": "要怎麼說",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0096",
+      "segmentIds": [
+        "seg-1963"
+      ],
+      "start": 5197.34,
+      "end": 5201.46,
+      "text": "要升起猶豫知道什麼樣的程度",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0097",
+      "segmentIds": [
+        "seg-1996"
+      ],
+      "start": 5300.24,
+      "end": 5301.86,
+      "text": "說了你哪些事情",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0098",
+      "segmentIds": [
+        "seg-2011"
+      ],
+      "start": 5351.84,
+      "end": 5352.48,
+      "text": "為什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0099",
+      "segmentIds": [
+        "seg-2032"
+      ],
+      "start": 5423.7,
+      "end": 5425.84,
+      "text": "為什麼要思考這個問題",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0101",
+      "segmentIds": [
+        "seg-2060"
+      ],
+      "start": 5507.66,
+      "end": 5508.22,
+      "text": "為什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0102",
+      "segmentIds": [
+        "seg-2066"
+      ],
+      "start": 5524.86,
+      "end": 5528.3,
+      "text": "我們要用哪一個理由說有我是存在的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0103",
+      "segmentIds": [
+        "seg-2077"
+      ],
+      "start": 5547.22,
+      "end": 5549.28,
+      "text": "我們的這個想法對不對",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0104",
+      "segmentIds": [
+        "seg-2087",
+        "seg-2088",
+        "seg-2089"
+      ],
+      "start": 5574.38,
+      "end": 5580.42,
+      "text": "為什麼 它才有足夠的力道摧壞三有 它摧壞三有的方式是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0105",
+      "segmentIds": [
+        "seg-2101"
+      ],
+      "start": 5625.54,
+      "end": 5628.1,
+      "text": "為什麼師長要講無我的道理",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0107",
+      "segmentIds": [
+        "seg-2114"
+      ],
+      "start": 5662.78,
+      "end": 5668.4,
+      "text": "我們要認識自己過去有哪些錯誤的行為",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0109",
+      "segmentIds": [
+        "seg-2131"
+      ],
+      "start": 5713.96,
+      "end": 5717.26,
+      "text": "要到達什麼狀態",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0110",
+      "segmentIds": [
+        "seg-2136"
+      ],
+      "start": 5728.14,
+      "end": 5730.56,
+      "text": "剛剛講的是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0111",
+      "segmentIds": [
+        "seg-2149"
+      ],
+      "start": 5784.0,
+      "end": 5787.66,
+      "text": "所以真正使得我們造惡的關鍵是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0112",
+      "segmentIds": [
+        "seg-2166"
+      ],
+      "start": 5832.26,
+      "end": 5833.6,
+      "text": "切入進去我不知道是對不對",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0113",
+      "segmentIds": [
+        "seg-2180",
+        "seg-2181",
+        "seg-2182",
+        "seg-2183"
+      ],
+      "start": 5862.88,
+      "end": 5876.88,
+      "text": "為什麼我們要對無我產生關注 為什麼我們要對這個議題產生關注 需要關注的真相這麼多 為什麼一定要對於無我產生關注",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0116",
+      "segmentIds": [
+        "seg-2214"
+      ],
+      "start": 5974.3,
+      "end": 5975.36,
+      "text": "這表示什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0117",
+      "segmentIds": [
+        "seg-2227"
+      ],
+      "start": 6007.04,
+      "end": 6010.2,
+      "text": "所以為什麼這個題目會用一個更",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0118",
+      "segmentIds": [
+        "seg-2268",
+        "seg-2269",
+        "seg-2270",
+        "seg-2271",
+        "seg-2272"
+      ],
+      "start": 6133.02,
+      "end": 6153.12,
+      "text": "請問為何多數學法者傾向於以示意之學習 而不是採用猶豫之學習 請結合自身經驗分析 並說明兩種學習方式的優缺點 好那我先請嘉儀",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "worksheet_reading",
+      "notes": [
+        "A: 第4提綱 worksheet prompt about 事一之 vs 猶豫之 learning",
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0121",
+      "segmentIds": [
+        "seg-2287"
+      ],
+      "start": 6185.98,
+      "end": 6187.52,
+      "text": "為什麼多數人",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0127",
+      "segmentIds": [
+        "seg-2389"
+      ],
+      "start": 6393.04,
+      "end": 6395.3,
+      "text": "很少去問為什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0128",
+      "segmentIds": [
+        "seg-2445"
+      ],
+      "start": 6517.9,
+      "end": 6519.88,
+      "text": "還有多問自己幾個為什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0129",
+      "segmentIds": [
+        "seg-2469"
+      ],
+      "start": 6577.52,
+      "end": 6579.54,
+      "text": "所以事一之就沒有辦法辦到對不對",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0130",
+      "segmentIds": [
+        "seg-2481"
+      ],
+      "start": 6611.04,
+      "end": 6614.14,
+      "text": "就是用事一之學習大多數人是什麼原因",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0132",
+      "segmentIds": [
+        "seg-2502"
+      ],
+      "start": 6674.4,
+      "end": 6677.42,
+      "text": "這個時候不管你是什麼性格什麼習性",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0133",
+      "segmentIds": [
+        "seg-2511"
+      ],
+      "start": 6702.34,
+      "end": 6704.62,
+      "text": "重要的是你怎麼看待這個法",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0135",
+      "segmentIds": [
+        "seg-2547",
+        "seg-2548",
+        "seg-2549",
+        "seg-2550",
+        "seg-2551"
+      ],
+      "start": 6820.02,
+      "end": 6837.2,
+      "text": "首先初期是指什麼階段 後期又是指什麼階段 到底要學到哪種程度才是以猶豫之為主 在還沒有達到那個標準前 為什麼一定要以四一之為主",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0136",
+      "segmentIds": [
+        "seg-2563"
+      ],
+      "start": 6870.7,
+      "end": 6873.34,
+      "text": "升起四一之是什麼狀態",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0137",
+      "segmentIds": [
+        "seg-2568"
+      ],
+      "start": 6884.66,
+      "end": 6886.46,
+      "text": "升起猶豫之是什麼狀態",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0138",
+      "segmentIds": [
+        "seg-2572",
+        "seg-2573",
+        "seg-2574",
+        "seg-2575",
+        "seg-2576"
+      ],
+      "start": 6896.04,
+      "end": 6903.82,
+      "text": "到底在講什麼 什麼是同意 什麼是相違 什麼是三據 什麼是四據",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0139",
+      "segmentIds": [
+        "seg-2584"
+      ],
+      "start": 6920.46,
+      "end": 6925.26,
+      "text": "然後再解釋什麼叫做同意",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0140",
+      "segmentIds": [
+        "seg-2594"
+      ],
+      "start": 6950.78,
+      "end": 6953.5,
+      "text": "什麼是八種周變",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0141",
+      "segmentIds": [
+        "seg-2597"
+      ],
+      "start": 6959.54,
+      "end": 6961.14,
+      "text": "交集的意思是什麼意思",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0142",
+      "segmentIds": [
+        "seg-2609",
+        "seg-2610",
+        "seg-2611"
+      ],
+      "start": 6989.36,
+      "end": 6996.36,
+      "text": "什麼是差納性 聽懂了之後 為什麼差納性是無常的現象",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0143",
+      "segmentIds": [
+        "seg-2617"
+      ],
+      "start": 7012.9,
+      "end": 7015.48,
+      "text": "因為這個時候我什麼都聽不懂",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0144",
+      "segmentIds": [
+        "seg-2620",
+        "seg-2621"
+      ],
+      "start": 7019.92,
+      "end": 7025.86,
+      "text": "就是因為你什麼都聽不懂 才應該要以猶豫之為主不是嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0145",
+      "segmentIds": [
+        "seg-2624",
+        "seg-2625",
+        "seg-2626",
+        "seg-2627"
+      ],
+      "start": 7029.66,
+      "end": 7038.8,
+      "text": "這到底在講什麼 這是什麼意思 為什麼是這個樣子的 為什麼一定是同意相違三句四句",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0146",
+      "segmentIds": [
+        "seg-2637"
+      ],
+      "start": 7062.22,
+      "end": 7063.92,
+      "text": "我們怎麼會生起猶豫",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0147",
+      "segmentIds": [
+        "seg-2645"
+      ],
+      "start": 7086.06,
+      "end": 7089.36,
+      "text": "這時候才應該生起猶豫之不是嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0148",
+      "segmentIds": [
+        "seg-2650",
+        "seg-2651",
+        "seg-2652"
+      ],
+      "start": 7098.4,
+      "end": 7113.7,
+      "text": "請問什麼時候要生起猶豫之 所以所謂的以四一之學習 強調的是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0149",
+      "segmentIds": [
+        "seg-2657"
+      ],
+      "start": 7122.9,
+      "end": 7126.08,
+      "text": "什麼樣的狀態是以四一之在學習",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0150",
+      "segmentIds": [
+        "seg-2660"
+      ],
+      "start": 7133.6,
+      "end": 7137.16,
+      "text": "以猶豫之的方式學習指的是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0151",
+      "segmentIds": [
+        "seg-2664",
+        "seg-2665",
+        "seg-2666"
+      ],
+      "start": 7146.72,
+      "end": 7154.08,
+      "text": "這個到底是怎麼推出來的 第一步、第二步、第三步 為什麼是這樣",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0152",
+      "segmentIds": [
+        "seg-2670"
+      ],
+      "start": 7167.6,
+      "end": 7170.86,
+      "text": "我們的認知當中怎麼可能出現這樣的情況",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0153",
+      "segmentIds": [
+        "seg-2675",
+        "seg-2676"
+      ],
+      "start": 7178.76,
+      "end": 7183.1,
+      "text": "這時候我會生起什麼樣的猶豫之 我到底要吃什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0154",
+      "segmentIds": [
+        "seg-2683"
+      ],
+      "start": 7200.08,
+      "end": 7202.6,
+      "text": "只是說以什麼樣的認知",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0155",
+      "segmentIds": [
+        "seg-2686"
+      ],
+      "start": 7210.4,
+      "end": 7212.28,
+      "text": "它呈現的狀態是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0158",
+      "segmentIds": [
+        "seg-2803"
+      ],
+      "start": 7550.0,
+      "end": 7553.0,
+      "text": "你可不可以推薦我買哪一支股票",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0159",
+      "segmentIds": [
+        "seg-2807"
+      ],
+      "start": 7560.04,
+      "end": 7563.0,
+      "text": "你只要告訴我投資哪支股票就好",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0160",
+      "segmentIds": [
+        "seg-2811",
+        "seg-2812",
+        "seg-2813"
+      ],
+      "start": 7571.38,
+      "end": 7577.78,
+      "text": "你為什麼要買這一支不要買這一支 你到底要買多少錢 你應該在什麼時間買",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0161",
+      "segmentIds": [
+        "seg-2817"
+      ],
+      "start": 7586.12,
+      "end": 7589.06,
+      "text": "你當初為什麼要叫我買這支股票",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0162",
+      "segmentIds": [
+        "seg-2821",
+        "seg-2822"
+      ],
+      "start": 7599.34,
+      "end": 7602.74,
+      "text": "所以他為什麼會賠錢 他為什麼會苦",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0163",
+      "segmentIds": [
+        "seg-2841"
+      ],
+      "start": 7669.84,
+      "end": 7672.42,
+      "text": "至於效果如何",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0164",
+      "segmentIds": [
+        "seg-2858"
+      ],
+      "start": 7726.5,
+      "end": 7729.8,
+      "text": "抄寫經文為什麼能夠淨除過往的惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0165",
+      "segmentIds": [
+        "seg-2864"
+      ],
+      "start": 7749.8,
+      "end": 7750.84,
+      "text": "為什麼抄寫經文",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0166",
+      "segmentIds": [
+        "seg-2871"
+      ],
+      "start": 7766.58,
+      "end": 7769.04,
+      "text": "它需要具備哪些情況",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0167",
+      "segmentIds": [
+        "seg-2875"
+      ],
+      "start": 7778.88,
+      "end": 7781.14,
+      "text": "為什麼能夠淨化惡業",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0168",
+      "segmentIds": [
+        "seg-2949"
+      ],
+      "start": 8008.44,
+      "end": 8009.92,
+      "text": "為什麼這樣說",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0169",
+      "segmentIds": [
+        "seg-2983"
+      ],
+      "start": 8108.44,
+      "end": 8110.94,
+      "text": "要如何善用由於知",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0170",
+      "segmentIds": [
+        "seg-2992"
+      ],
+      "start": 8140.6,
+      "end": 8143.74,
+      "text": "這個時候要怎麼用肆意知來跟自己對話",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0171",
+      "segmentIds": [
+        "seg-2997"
+      ],
+      "start": 8153.6,
+      "end": 8156.1,
+      "text": "但你怎麼確定佛法說的是對的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0172",
+      "segmentIds": [
+        "seg-3024"
+      ],
+      "start": 8222.5,
+      "end": 8224.14,
+      "text": "你想了什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0173",
+      "segmentIds": [
+        "seg-3053"
+      ],
+      "start": 8301.06,
+      "end": 8304.74,
+      "text": "例如常一自主的我存在指的是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0174",
+      "segmentIds": [
+        "seg-3056",
+        "seg-3057"
+      ],
+      "start": 8309.8,
+      "end": 8315.38,
+      "text": "他為什麼會那樣想 他為什麼會那樣主張",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0175",
+      "segmentIds": [
+        "seg-3061"
+      ],
+      "start": 8322.3,
+      "end": 8324.58,
+      "text": "我憑什麼說他是外道",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0177",
+      "segmentIds": [
+        "seg-3122"
+      ],
+      "start": 8456.3,
+      "end": 8459.3,
+      "text": "他憑什麼相信淨土是存在的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0178",
+      "segmentIds": [
+        "seg-3139"
+      ],
+      "start": 8494.16,
+      "end": 8497.38,
+      "text": "所以重點不在於他學習什麼法類",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0179",
+      "segmentIds": [
+        "seg-3171",
+        "seg-3172",
+        "seg-3173"
+      ],
+      "start": 8559.3,
+      "end": 8565.38,
+      "text": "關於為何學習時遇到困難 會想放棄 請問以下想法何者合理",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "worksheet_reading",
+      "notes": [
+        "B: 學法遇到困難放棄 worksheet prompt (intro + question)",
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0180",
+      "segmentIds": [
+        "seg-3200",
+        "seg-3201"
+      ],
+      "start": 8631.56,
+      "end": 8635.1,
+      "text": "為什麼學習的時候會遇到困難 就想放棄",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "worksheet_reading",
+      "notes": [
+        "B: 學法遇到困難放棄 worksheet prompt (paraphrase back)",
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0182",
+      "segmentIds": [
+        "seg-3301"
+      ],
+      "start": 8891.46,
+      "end": 8893.76,
+      "text": "您說是哪個",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0183",
+      "segmentIds": [
+        "seg-3324"
+      ],
+      "start": 8953.36,
+      "end": 8954.94,
+      "text": "都一直在賭博 是嗎",
+      "speakerRole": "unresolved",
+      "confidence": "medium",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0184",
+      "segmentIds": [
+        "seg-3336"
+      ],
+      "start": 8981.1,
+      "end": 8984.64,
+      "text": "他為什麼不選擇遇到困難就放棄",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0185",
+      "segmentIds": [
+        "seg-3339"
+      ],
+      "start": 8996.0,
+      "end": 8998.86,
+      "text": "所以你覺得他過去生經常賭博是不是",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0186",
+      "segmentIds": [
+        "seg-3346"
+      ],
+      "start": 9015.0,
+      "end": 9016.82,
+      "text": "他想要去賭博是不是",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0187",
+      "segmentIds": [
+        "seg-3361",
+        "seg-3362",
+        "seg-3363",
+        "seg-3364",
+        "seg-3365"
+      ],
+      "start": 9051.18,
+      "end": 9066.8,
+      "text": "這樣慢慢慢慢賭上去是不是 對的 他為什麼不第一次賭輸之後就選擇放棄 我覺得那個是因為他對於追求現實安樂這個時期在 哪是追求現實",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0189",
+      "segmentIds": [
+        "seg-3378"
+      ],
+      "start": 9093.78,
+      "end": 9095.36,
+      "text": "他心裡是怎麼想的",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0190",
+      "segmentIds": [
+        "seg-3404",
+        "seg-3405",
+        "seg-3406"
+      ],
+      "start": 9151.98,
+      "end": 9157.24,
+      "text": "不是吧 是因為他很在意一件事情 哪件事情",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0191",
+      "segmentIds": [
+        "seg-3427"
+      ],
+      "start": 9213.96,
+      "end": 9216.08,
+      "text": "至於死後是什麼狀態",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0192",
+      "segmentIds": [
+        "seg-3452"
+      ],
+      "start": 9276.44,
+      "end": 9279.18,
+      "text": "他為什麼會選擇進到賭場",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0193",
+      "segmentIds": [
+        "seg-3459"
+      ],
+      "start": 9296.9,
+      "end": 9299.16,
+      "text": "所以真正吸引他的是什麼",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0194",
+      "segmentIds": [
+        "seg-3469",
+        "seg-3470",
+        "seg-3471"
+      ],
+      "start": 9325.2,
+      "end": 9333.42,
+      "text": "這時候的籌碼應該怎麼理解 即便我們學法的條件不夠好 但再怎麼說",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0195",
+      "segmentIds": [
+        "seg-3504"
+      ],
+      "start": 9422.7,
+      "end": 9423.7,
+      "text": "哪件事情",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0197",
+      "segmentIds": [
+        "seg-3513",
+        "seg-3514"
+      ],
+      "start": 9443.84,
+      "end": 9447.7,
+      "text": "我們怎麼可能會選擇放棄 怎麼可能",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": [
+        "multi-segment ASR run, exact boundary depends on human review"
+      ]
+    },
+    {
+      "candidateId": "qc-0198",
+      "segmentIds": [
+        "seg-3532"
+      ],
+      "start": 9481.76,
+      "end": 9484.6,
+      "text": "我為什麼要選擇放棄",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    },
+    {
+      "candidateId": "qc-0200",
+      "segmentIds": [
+        "seg-3558"
+      ],
+      "start": 9549.1,
+      "end": 9552.72,
+      "text": "應該要設定什麼樣的目標",
+      "speakerRole": "unresolved",
+      "confidence": "low",
+      "reviewStatus": "human_audio_review_required",
+      "sourceKind": "spoken_in_session",
+      "notes": []
+    }
+  ],
+  "excluded": [
+    {
+      "segmentIds": [
+        "seg-0177"
+      ],
+      "text": "不然就是怎麼會這麼容易就能夠消除那個業障",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-0182"
+      ],
+      "text": "我是不覺得有什麼影響",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-0289"
+      ],
+      "text": "應該是吧",
+      "reason": "D_short_rhetorical"
+    },
+    {
+      "segmentIds": [
+        "seg-0475"
+      ],
+      "text": "是嗎",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-0564"
+      ],
+      "text": "我們會有什麼樣的行為",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-0633"
+      ],
+      "text": "聲音這樣可以嗎",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-0647"
+      ],
+      "text": "為什麼理由是因為",
+      "reason": "C_incomplete_asr_fragment"
+    },
+    {
+      "segmentIds": [
+        "seg-0686"
+      ],
+      "text": "還是有什麼依據",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-0691"
+      ],
+      "text": "還是你有什麼依據",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-1053"
+      ],
+      "text": "是不是",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1158"
+      ],
+      "text": "是不是",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1163"
+      ],
+      "text": "是不是",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1183"
+      ],
+      "text": "是不是",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1205"
+      ],
+      "text": "對不對",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1228"
+      ],
+      "text": "是的我想不出來有什麼區別",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-1295"
+      ],
+      "text": "難道還會有什麼",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-1491"
+      ],
+      "text": "二來怎麼想都覺得卡卡的",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-1704"
+      ],
+      "text": "是嗎",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1708"
+      ],
+      "text": "對不對",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-1749"
+      ],
+      "text": "我就有疑問哪",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-1761"
+      ],
+      "text": "誰的力量強的時候",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-1862"
+      ],
+      "text": "是嗎",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-2045"
+      ],
+      "text": "我之所支持的勁為何",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2104"
+      ],
+      "text": "跟我有什麼關聯",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2128"
+      ],
+      "text": "它到底有什麼正向的力道",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2189"
+      ],
+      "text": "那不了解真相有什麼問題",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2200"
+      ],
+      "text": "這樣可以嗎",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-2274"
+      ],
+      "text": "就是為什麼大家都傾向",
+      "reason": "C_incomplete_asr_fragment"
+    },
+    {
+      "segmentIds": [
+        "seg-2279"
+      ],
+      "text": "然後只要別人說什麼",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2296"
+      ],
+      "text": "同學說什麼法師說什麼",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2336"
+      ],
+      "text": "那有兩個有什麼差別",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2340"
+      ],
+      "text": "反正老師說什麼就記什麼",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2348"
+      ],
+      "text": "佳穎學習效果有什麼差別",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2362"
+      ],
+      "text": "認為別人講什麼你就相信",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2492"
+      ],
+      "text": "或者怎麼樣",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2521"
+      ],
+      "text": "我還沒有想到什麼好處",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-2692"
+      ],
+      "text": "為何多數學法者傾向於",
+      "reason": "C_incomplete_asr_fragment"
+    },
+    {
+      "segmentIds": [
+        "seg-2766"
+      ],
+      "text": "我怎麼都沒有進步",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-3081"
+      ],
+      "text": "到底有什麼意義",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-3246"
+      ],
+      "text": "對嗎",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-3372"
+      ],
+      "text": "對不對",
+      "reason": "A_bare_confirmation_tag"
+    },
+    {
+      "segmentIds": [
+        "seg-3509"
+      ],
+      "text": "到底是如何義大",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-3543"
+      ],
+      "text": "想那麼多做什麼",
+      "reason": "B_declarative_false_positive"
+    },
+    {
+      "segmentIds": [
+        "seg-3570"
+      ],
+      "text": "講這麼多次做什麼",
+      "reason": "B_declarative_false_positive"
+    }
+  ],
+  "status": "BLOCKED",
+  "statusReason": "speaker roles (teacher vs. student) and question boundaries cannot be confirmed from transcript alone; every candidate is flagged human_audio_review_required. Worksheet-reading segments were tagged sourceKind=worksheet_reading with low confidence. Excluded items are documented in `excluded[]` with reason codes for auditability.",
+  "limitations": [
+    "no diarization: teacher vs. student cannot be inferred from text alone",
+    "no audio access: intonation, register, audience address cannot be verified",
+    "ASR fidelity: faster-whisper medium int8, VAD off; homophone risks flagged in review.md (seg-3593 回項/回向, seg-0001 禮靜/禮敬)",
+    "TOC ordering not derived here — candidates are flat, time-anchored, awaiting human review",
+    "worksheet-reading question text is paraphrased from a slide and may differ from the printed form",
+    "faster-whisper micro-segments are aggressive; some question spans are stitched from 3-5 segments"
+  ],
+  "summary": {
+    "totalCandidates": 157,
+    "byConfidence": {
+      "low": 141,
+      "medium": 16
+    },
+    "bySourceKind": {
+      "spoken_in_session": 154,
+      "worksheet_reading": 3
+    },
+    "excludedByReason": {
+      "A_bare_confirmation_tag": 13,
+      "B_declarative_false_positive": 27,
+      "C_incomplete_asr_fragment": 3,
+      "D_short_rhetorical": 1
+    },
+    "worksheetBlocksIdentified": [
+      "A: 第4提綱 worksheet prompt about 事一之 vs 猶豫之 learning",
+      "B: 學法遇到困難放棄 worksheet prompt (intro + question)",
+      "B: 學法遇到困難放棄 worksheet prompt (paraphrase back)"
+    ]
+  }
+}
