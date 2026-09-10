@@ -1,0 +1,32 @@
+{
+  "schema": "study-group-speaker-probe-v2",
+  "sourceVideoId": "7QA1k4uxxV0",
+  "questionCount": 22,
+  "method": {
+    "embedding": "Resemblyzer VoiceEncoder, bundled pretrained GE2E model, 256 dimensions",
+    "clips": "22 question clips and 22 cited-response clips, with 5 second context padding",
+    "clustering": ["average-link cosine clustering", "k-means k=2..6"],
+    "audioSource": "YouTube format 140 downloaded temporarily on GX10 and converted to 16 kHz mono WAV"
+  },
+  "findings": {
+    "embeddingsComputed": 44,
+    "ahcThreshold030To060Clusters": 1,
+    "ahcThreshold020Clusters": 2,
+    "kmeansK2": "17 questions + 18 responses in the main cluster; 5 questions + 4 responses in the secondary cluster",
+    "medianQuestionQuestionCosine": 0.877,
+    "medianResponseResponseCosine": 0.872,
+    "medianOffPairCosine": 0.874,
+    "selfPairCosineRange": [0.772, 0.980],
+    "teacherOnlyCluster": false,
+    "q01Observation": "The moderator says 謝謝蓮海兄 before the cited response, and the cited text reads like a participant restatement rather than a teacher answer."
+  },
+  "limitations": [
+    "ASR output has no speaker labels.",
+    "Voice embeddings do not reliably distinguish teacher from participants in this recording.",
+    "A speaker role cannot be assigned from acoustic clustering alone."
+  ],
+  "temporaryAudioDeleted": true,
+  "disposableEnvironmentDeleted": true,
+  "status": "BLOCKED",
+  "publicationDecision": "Do not publish teacher summaries until role attribution is independently verified."
+}
