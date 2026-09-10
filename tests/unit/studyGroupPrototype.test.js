@@ -8,6 +8,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const EVIDENCE = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-01');
 const CANDIDATE = path.join(EVIDENCE, 'candidate.json');
 const RAW_ASR = path.join(EVIDENCE, 'raw_asr.json');
+const PROTOTYPE_02 = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-02');
 
 test('study-group prototype has source-grounded candidate structure', () => {
   assert.equal(fs.existsSync(CANDIDATE), true, 'prototype candidate is required');
@@ -64,6 +65,40 @@ test('candidate timing remains aligned with the immutable raw ASR segments', () 
     const expected = raw.segments[index];
     const actual = candidate.segments[index];
     assert.equal(actual.id, `seg-${String(index + 1).padStart(4, '0')}`);
+    assert.ok(Math.abs(actual.start - expected.start) < 0.01);
+    assert.ok(Math.abs(actual.end - expected.end) < 0.01);
+  }
+});
+
+test('prototype-02 preserves ASR evidence while failing closed before speaker attribution', () => {
+  const candidatePath = path.join(PROTOTYPE_02, 'candidate.json');
+  const rawPath = path.join(PROTOTYPE_02, 'raw_asr.json');
+  const manifestPath = path.join(PROTOTYPE_02, 'run_manifest.json');
+  const reviewPath = path.join(PROTOTYPE_02, 'review.md');
+  for (const filePath of [candidatePath, rawPath, manifestPath, reviewPath]) {
+    assert.equal(fs.existsSync(filePath), true, `prototype-02 evidence is required: ${filePath}`);
+  }
+
+  const candidate = JSON.parse(fs.readFileSync(candidatePath, 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(rawPath, 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  assert.equal(candidate.source.videoId, 'bO2f8SL6czc');
+  assert.equal(candidate.source.playlistIndex, 2);
+  assert.equal(candidate.provenance.rawAsrPath, 'raw_asr.json');
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.ok(candidate.exclusions.length > 0, 'blocked attribution must be recorded');
+  assert.equal(manifest.videoId, 'bO2f8SL6czc');
+  assert.equal(manifest.status, 'ASR_OK');
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.match(fs.readFileSync(reviewPath, 'utf8'), /Status:\s+\*\*BLOCKED\*\*/);
+
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    const expected = raw.segments[index];
+    const actual = candidate.segments[index];
+    assert.equal(actual.id, expected.id);
     assert.ok(Math.abs(actual.start - expected.start) < 0.01);
     assert.ok(Math.abs(actual.end - expected.end) < 0.01);
   }

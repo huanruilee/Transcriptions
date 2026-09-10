@@ -1,0 +1,68 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-02",
+  "playlistIndex": 2,
+  "videoId": "bO2f8SL6czc",
+  "sourceUrl": "https://www.youtube.com/watch?v=bO2f8SL6czc",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第1講 調整學法的動機（下）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper",
+    "model": "medium",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": true,
+    "vad_filter": false,
+    "beam_size": 5
+  },
+  "commands": [
+    {
+      "cmd": "sha256sum /tmp/proto02_audio/source.mp4",
+      "exit_code": 0,
+      "duration_s": 0.0,
+      "note": "sha256=c1c18d488aa4dd016a83d5eb360c718a40e7bafa3fb6130af5b983542bfcfd11 bytes=289454609"
+    },
+    {
+      "cmd": "ffprobe duration",
+      "exit_code": 0,
+      "duration_s": 0.071,
+      "note": "actual_duration_seconds=9641.946848"
+    },
+    {
+      "cmd": "faster-whisper transcribe",
+      "exit_code": 0,
+      "duration_s": 477.974,
+      "note": "segments=3594 word_tokens=26574 rtf=0.04957235961879603"
+    }
+  ],
+  "timing": {
+    "startIso": "2026-09-10T09:53:51Z",
+    "startEpoch": 1789034031.5101297,
+    "endIso": "2026-09-10T10:01:53Z",
+    "endEpoch": 1789034513.49334
+  },
+  "artifacts": {
+    "rawAsrPath": "/home/henry/.gx10/xiaofa/workspace/Transcriptions/reviews/evidence/study-group-2025/prototype-02/raw_asr.json",
+    "candidatePath": "/home/henry/.gx10/xiaofa/workspace/Transcriptions/reviews/evidence/study-group-2025/prototype-02/candidate.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "/tmp/proto02_audio/source.mp4",
+      "/tmp/proto02_audio"
+    ]
+  },
+  "status": "ASR_OK",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": true,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 99.9029,
+    "totalWordTokens": 26574,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}
