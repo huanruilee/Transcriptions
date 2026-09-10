@@ -300,3 +300,32 @@ test('prototype-08 preserves sentence ASR evidence and fails closed without word
     assert.equal(candidate.segments[index].text, raw.segments[index].text);
   }
 });
+
+test('prototype-09 preserves sentence ASR evidence and fails closed without word timestamps', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-09');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  assert.equal(candidate.source.videoId, 'WjcwStayz2Q');
+  assert.equal(candidate.source.playlistIndex, 9);
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.equal(candidate.exclusions[0].reason, 'speaker role is not proven');
+  assert.equal(candidate.provenance.temporaryAudioDeleted, true);
+  assert.equal(manifest.videoId, 'WjcwStayz2Q');
+  assert.equal(manifest.status, 'ASR_OK');
+  assert.equal(manifest.checks.totalWordTokens, 0);
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/prototype-09\//);
+  assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/prototype-09\//);
+  assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    assert.equal(candidate.segments[index].id, raw.segments[index].id);
+    assert.equal(candidate.segments[index].start, raw.segments[index].start);
+    assert.equal(candidate.segments[index].end, raw.segments[index].end);
+    assert.equal(candidate.segments[index].text, raw.segments[index].text);
+  }
+});
