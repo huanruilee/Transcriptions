@@ -1,5 +1,34 @@
 <template>
   <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
+    <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
+      <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
+        <header class="course-chooser-header">
+          <p class="course-chooser-kicker">研讀平台</p>
+          <h1 id="course-chooser-title">請選擇課程</h1>
+          <p>選定後會進入該課程的第一講。</p>
+        </header>
+        <div class="course-choice-list">
+          <button
+            v-for="course in courseStore.catalog"
+            :key="course.id"
+            class="course-choice"
+            :disabled="isChoosingCourse"
+            @click="chooseInitialCourse(course.id)"
+          >
+            <span class="course-choice-icon" aria-hidden="true">
+              {{ course.mediaType === 'video/youtube' ? '▶' : '♪' }}
+            </span>
+            <span class="course-choice-copy">
+              <strong>{{ course.title }}</strong>
+              <span>{{ course.master }} · {{ course.mediaType === 'video/youtube' ? '影音課程' : '音訊課程' }}</span>
+            </span>
+            <span class="course-choice-arrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <template v-else>
     <!-- 頂部 3 段式導航欄 (Sticky Header) -->
     <header class="app-header">
       <div class="header-left">
@@ -580,6 +609,7 @@
         <button class="toast-close" @click="uiStore.toast.visible = false">✕</button>
       </div>
     </Transition>
+    </template>
   </div>
 </template>
 
@@ -694,6 +724,8 @@ const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
 const isAudioLoading = ref(false);
+const isCourseChooserOpen = ref(false);
+const isChoosingCourse = ref(false);
 const mediaDuration = ref(0);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
@@ -1200,6 +1232,9 @@ onMounted(async () => {
     const courseParam = urlParams.get('course');
     if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
       courseStore.currentCourseId = courseParam;
+    } else {
+      isCourseChooserOpen.value = true;
+      return;
     }
   }
 
@@ -1219,6 +1254,23 @@ onMounted(async () => {
   await loadSession(targetId);
   isInitialMounted = true;
 });
+
+async function chooseInitialCourse(courseId: string) {
+  if (isChoosingCourse.value) return;
+  isChoosingCourse.value = true;
+  courseStore.currentCourseId = courseId;
+  const url = new URL(window.location.href);
+  url.searchParams.set('course', courseId);
+  url.hash = '';
+  window.history.replaceState({}, '', url.toString());
+
+  await loadRealCourseData();
+  const firstSession = courseStore.sessions[0]?.id || (courseId === 'shi-liang-lun-er' ? '01' : '02A');
+  await loadSession(firstSession);
+  isInitialMounted = true;
+  isCourseChooserOpen.value = false;
+  isChoosingCourse.value = false;
+}
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onUserScroll);
@@ -1555,6 +1607,68 @@ if (typeof window !== 'undefined') {
 </script>
 
 <style scoped>
+.course-chooser {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: var(--bg-color);
+  color: var(--text-main);
+}
+
+.course-chooser-inner { width: min(680px, 100%); }
+.course-chooser-header { margin-bottom: 24px; }
+.course-chooser-kicker { margin: 0 0 8px; color: var(--accent-color); font-size: 0.85rem; font-weight: 700; }
+.course-chooser-header h1 { margin: 0 0 8px; font-size: 2rem; letter-spacing: 0; }
+.course-chooser-header p:last-child { margin: 0; color: var(--text-muted); }
+.course-choice-list { display: grid; gap: 10px; }
+
+.course-choice {
+  width: 100%;
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.course-choice:hover,
+.course-choice:focus-visible {
+  border-color: var(--accent-color);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.course-choice-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sidebar-bg);
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.course-choice-copy { min-width: 0; display: grid; gap: 5px; }
+.course-choice-copy strong { font-size: 1rem; }
+.course-choice-copy span { color: var(--text-muted); font-size: 0.85rem; }
+.course-choice-arrow { color: var(--text-muted); font-size: 1.5rem; }
+
+@media (max-width: 480px) {
+  .course-chooser { place-items: start center; padding-top: 56px; }
+  .course-chooser-header h1 { font-size: 1.65rem; }
+}
+
 .app-root {
   display: flex;
   flex-direction: column;
