@@ -62,7 +62,7 @@ test('27下 prototype registers an independent remote-audio course', () => {
   assert.match(store, new RegExp(COURSE_ID), 'Vue course selector must expose the prototype');
 });
 
-test('27下 prototype uses question TOC and remote Google Drive audio only', () => {
+test('27下 prototype uses question TOC and Tailnet audio while preserving Drive provenance', () => {
   const course = readJson(`${COURSE_PATH}/course.json`);
   const audioMap = readJson(`${COURSE_PATH}/audio_map.json`);
   const toc = readJson(`${COURSE_PATH}/toc.json`);
@@ -73,8 +73,11 @@ test('27下 prototype uses question TOC and remote Google Drive audio only', () 
   assert.equal(course.sessions[0].status, 'review-ready');
   assert.equal(audioMap['27B'].source, 'google-drive');
   assert.equal(audioMap['27B'].fileId, DRIVE_FILE_ID);
-  assert.match(audioMap['27B'].url, /^https:\/\/drive(?:\.usercontent)?\.google\.com\//);
-  assert.match(audioMap['27B'].url, /[?&]export=open(?:&|$)/, 'Drive audio must use the inline playback response');
+  assert.equal(audioMap['27B'].accessScope, 'tailnet');
+  assert.equal(audioMap['27B'].proxy, 'gx10');
+  assert.match(audioMap['27B'].sourceUrl, /^https:\/\/drive\.usercontent\.google\.com\//);
+  assert.match(audioMap['27B'].sourceUrl, /[?&]export=open(?:&|$)/, 'Drive source must use the inline response');
+  assert.match(audioMap['27B'].url, /^https:\/\/gx10-2887\.tail378c21\.ts\.net:9443\/audio\//);
   assert.ok(!audioMap['27B'].url.startsWith('/'), 'audio must not be a local asset');
 
   assert.equal(toc.tocMode, 'discussion-questions');
@@ -91,8 +94,8 @@ test('27下 transcript is timestamped and every question ends with an unlinked t
   assert.equal(session.sessionId, '27B');
   assert.equal(session.transcriptStatus, 'review-ready');
   assert.equal(session.alignmentStatus, 'sampled');
-  assert.match(session.audioUrl, new RegExp(DRIVE_FILE_ID));
-  assert.match(session.audioUrl, /[?&]export=open(?:&|$)/, 'session audio must be browser-streamable');
+  assert.equal(session._meta.sourceFileId, DRIVE_FILE_ID);
+  assert.match(session.audioUrl, /^https:\/\/gx10-2887\.tail378c21\.ts\.net:9443\/audio\//);
   assert.ok(Array.isArray(session.paragraphs) && session.paragraphs.length > 0);
   assert.ok(Array.isArray(session.discussionQuestions) && session.discussionQuestions.length > 0);
 

@@ -920,7 +920,10 @@ function seekToTime(time: number) {
         })
         .catch(() => {
           isAudioLoading.value = false;
-          uiStore.showToast('音檔載入失敗，請稍後再試。', 'error');
+          const message = currentAudioUrl.value.includes('.tail378c21.ts.net')
+            ? '無法連接音訊服務，請確認已連上 GX10 VPN。'
+            : '音檔載入失敗，請稍後再試。';
+          uiStore.showToast(message, 'error');
           isMediaPlaying.value = false;
         });
     }

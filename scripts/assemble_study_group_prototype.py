@@ -11,6 +11,7 @@ COURSE_ID = "shi-liang-lun-study-group-2025"
 COURSE_TITLE = "2025《釋量論・第二品》大組共學"
 DRIVE_FILE_ID = "1H_w9wP0Gi7zpXKO8NVO95Zvm2Iy5N6Wq"
 DRIVE_URL = f"https://drive.usercontent.google.com/download?id={DRIVE_FILE_ID}&export=open"
+AUDIO_URL = "https://gx10-2887.tail378c21.ts.net:9443/audio/shi-liang-lun-study-group-2025/27B.mp3"
 
 
 def apply_review_fixes(sentences, questions):
@@ -116,7 +117,7 @@ def main():
     session = {
         "sessionId": "27B",
         "title": "第 27 講（下）大組共學",
-        "audioUrl": DRIVE_URL,
+        "audioUrl": AUDIO_URL,
         "mediaType": "audio/mp3",
         "lastUpdated": "2026-09-10",
         "transcriptStatus": "review-ready",
@@ -146,7 +147,7 @@ def main():
             "periodLabel": "下",
             "title": "第 27 講（下）大組共學",
             "status": "review-ready",
-            "audioUrl": DRIVE_URL,
+            "audioUrl": AUDIO_URL,
         }],
     }
     toc = {
@@ -164,7 +165,10 @@ def main():
         "27B": {
             "source": "google-drive",
             "fileId": DRIVE_FILE_ID,
-            "url": DRIVE_URL,
+            "sourceUrl": DRIVE_URL,
+            "url": AUDIO_URL,
+            "proxy": "gx10",
+            "accessScope": "tailnet",
             "temporaryDownloadOnly": True,
         }
     }
