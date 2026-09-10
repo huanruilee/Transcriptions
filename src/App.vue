@@ -1,5 +1,34 @@
 <template>
   <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
+    <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
+      <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
+        <header class="course-chooser-header">
+          <p class="course-chooser-kicker">研讀平台</p>
+          <h1 id="course-chooser-title">請選擇課程</h1>
+          <p>選定後會進入該課程的第一講。</p>
+        </header>
+        <div class="course-choice-list">
+          <button
+            v-for="course in courseStore.catalog"
+            :key="course.id"
+            class="course-choice"
+            :disabled="isChoosingCourse"
+            @click="chooseInitialCourse(course.id)"
+          >
+            <span class="course-choice-icon" aria-hidden="true">
+              {{ course.mediaType === 'video/youtube' ? '▶' : '♪' }}
+            </span>
+            <span class="course-choice-copy">
+              <strong>{{ course.title }}</strong>
+              <span>{{ course.master }} · {{ course.mediaType === 'video/youtube' ? '影音課程' : '音訊課程' }}</span>
+            </span>
+            <span class="course-choice-arrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <template v-else>
     <!-- 頂部 3 段式導航欄 (Sticky Header) -->
     <header class="app-header">
       <div class="header-left">
@@ -260,7 +289,7 @@
                 🕒 最後校正更新：{{ currentLastUpdated }}
               </span>
               <span class="meta-tag status-tag">
-                ✅ 已校勘核定
+                {{ currentTranscriptStatus === 'review-ready' ? '待審閱 Prototype' : '✅ 已校勘核定' }}
               </span>
               <span v-if="currentSessionInfo?.page" class="meta-tag page-tag">
                 📖 底本頁碼：{{ currentSessionInfo.page }}
@@ -358,6 +387,19 @@
                 📌 筆記
               </span>
             </span>
+
+            <section
+              v-if="p.teacherSummary && p.teacherSummary.linkedToAudio === false"
+              class="teacher-summary"
+              aria-label="法師開示摘要"
+            >
+              <h4>法師開示摘要</h4>
+              <ul>
+                <li v-for="(item, index) in p.teacherSummary.items" :key="index">
+                  {{ item }}
+                </li>
+              </ul>
+            </section>
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
@@ -458,12 +500,23 @@
           id="audio-element"
           class="native-audio"
           v-show="courseStore.currentMediaType === 'audio/mp3'"
+          crossorigin="anonymous"
           controls
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
-          @play="hasMediaEnded = false"
+          @play="onNativePlay"
         ></audio>
+
+        <span
+          v-if="courseStore.currentMediaType === 'audio/mp3' && isAudioLoading"
+          class="audio-loading-status"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="audio-loading-spinner" aria-hidden="true"></span>
+          音檔載入中…
+        </span>
 
         <button
           id="next-session-btn"
@@ -556,6 +609,7 @@
         <button class="toast-close" @click="uiStore.toast.visible = false">✕</button>
       </div>
     </Transition>
+    </template>
   </div>
 </template>
 
@@ -579,6 +633,8 @@ import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExpo
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 import { selectVerseAnnotations } from './utils/verseAnnotations';
+import { seekAndPlayAudio } from './js/audioPlayback';
+import { toPlayableAudioUrl } from './js/remoteAudioProxy';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -662,10 +718,14 @@ const currentAudioUrl = ref('');
 const currentYoutubeVideoId = ref('');
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const currentLastUpdated = ref('');
+const currentTranscriptStatus = ref('');
 const paragraphs = ref<any[]>([]);
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
+const isAudioLoading = ref(false);
+const isCourseChooserOpen = ref(false);
+const isChoosingCourse = ref(false);
 const mediaDuration = ref(0);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
@@ -776,8 +836,9 @@ function playMedia() {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-        audioEl.src = currentAudioUrl.value;
+      const playableUrl = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
+      if (audioEl.getAttribute('src') !== playableUrl) {
+        audioEl.src = playableUrl;
         audioEl.load();
       }
       audioEl.play().catch(() => {});
@@ -846,12 +907,22 @@ function seekToTime(time: number) {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
-        audioEl.src = currentAudioUrl.value;
+      isAudioLoading.value = true;
+      const playableUrl = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
+      if (audioEl.getAttribute('src') !== playableUrl) {
+        audioEl.src = playableUrl;
         audioEl.load();
       }
-      audioEl.currentTime = time;
-      audioEl.play().catch(() => {});
+      seekAndPlayAudio(audioEl, time)
+        .then(() => {
+          isAudioLoading.value = false;
+          isMediaPlaying.value = true;
+        })
+        .catch(() => {
+          isAudioLoading.value = false;
+          uiStore.showToast('音檔載入失敗，請稍後再試。', 'error');
+          isMediaPlaying.value = false;
+        });
     }
   }
 
@@ -1161,6 +1232,9 @@ onMounted(async () => {
     const courseParam = urlParams.get('course');
     if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
       courseStore.currentCourseId = courseParam;
+    } else {
+      isCourseChooserOpen.value = true;
+      return;
     }
   }
 
@@ -1180,6 +1254,23 @@ onMounted(async () => {
   await loadSession(targetId);
   isInitialMounted = true;
 });
+
+async function chooseInitialCourse(courseId: string) {
+  if (isChoosingCourse.value) return;
+  isChoosingCourse.value = true;
+  courseStore.currentCourseId = courseId;
+  const url = new URL(window.location.href);
+  url.searchParams.set('course', courseId);
+  url.hash = '';
+  window.history.replaceState({}, '', url.toString());
+
+  await loadRealCourseData();
+  const firstSession = courseStore.sessions[0]?.id || (courseId === 'shi-liang-lun-er' ? '01' : '02A');
+  await loadSession(firstSession);
+  isInitialMounted = true;
+  isCourseChooserOpen.value = false;
+  isChoosingCourse.value = false;
+}
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onUserScroll);
@@ -1255,6 +1346,7 @@ async function loadSession(sessionId: string) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    const discussionQuestions = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
     verseAnnotations.value = {};
     try {
       const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
@@ -1271,6 +1363,7 @@ async function loadSession(sessionId: string) {
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentTranscriptStatus.value = data.transcriptStatus || '';
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
@@ -1280,6 +1373,8 @@ async function loadSession(sessionId: string) {
         id: p.id || `para-${sentCounter}`,
         heading: p.heading || null,
         tocAnchorNode: anchorNode,
+        question: discussionQuestions.find((question: any) => question.id === p.questionId) || null,
+        teacherSummary: p.teacherSummary || null,
         sentences: (p.sentences || []).map((s: any) => ({
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
@@ -1310,7 +1405,7 @@ async function loadSession(sessionId: string) {
     if (audioEl) {
       audioEl.pause();
       if (courseStore.currentMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
-        audioEl.src = currentAudioUrl.value;
+        audioEl.src = toPlayableAudioUrl(currentAudioUrl.value, import.meta.env.BASE_URL);
         audioEl.load();
       } else {
         audioEl.removeAttribute('src');
@@ -1441,6 +1536,12 @@ function onNativeTimeUpdate(e: any) {
   }
 }
 
+function onNativePlay() {
+  hasMediaEnded.value = false;
+  isAudioLoading.value = false;
+  isMediaPlaying.value = true;
+}
+
 function returnToPlaying() {
   playerStore.resetScrollLock();
   if (playerStore.activeSentenceId) {
@@ -1506,6 +1607,68 @@ if (typeof window !== 'undefined') {
 </script>
 
 <style scoped>
+.course-chooser {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: var(--bg-color);
+  color: var(--text-main);
+}
+
+.course-chooser-inner { width: min(680px, 100%); }
+.course-chooser-header { margin-bottom: 24px; }
+.course-chooser-kicker { margin: 0 0 8px; color: var(--accent-color); font-size: 0.85rem; font-weight: 700; }
+.course-chooser-header h1 { margin: 0 0 8px; font-size: 2rem; letter-spacing: 0; }
+.course-chooser-header p:last-child { margin: 0; color: var(--text-muted); }
+.course-choice-list { display: grid; gap: 10px; }
+
+.course-choice {
+  width: 100%;
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.course-choice:hover,
+.course-choice:focus-visible {
+  border-color: var(--accent-color);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.course-choice-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sidebar-bg);
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.course-choice-copy { min-width: 0; display: grid; gap: 5px; }
+.course-choice-copy strong { font-size: 1rem; }
+.course-choice-copy span { color: var(--text-muted); font-size: 0.85rem; }
+.course-choice-arrow { color: var(--text-muted); font-size: 1.5rem; }
+
+@media (max-width: 480px) {
+  .course-chooser { place-items: start center; padding-top: 56px; }
+  .course-chooser-header h1 { font-size: 1.65rem; }
+}
+
 .app-root {
   display: flex;
   flex-direction: column;
@@ -1959,6 +2122,31 @@ if (typeof window !== 'undefined') {
   font-weight: 700;
 }
 
+.teacher-summary {
+  margin: 18px 0 28px;
+  padding: 14px 18px;
+  background: var(--sidebar-bg);
+  border-left: 3px solid var(--accent-color);
+  border-radius: 4px;
+  color: var(--text-main);
+}
+
+.teacher-summary h4 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: var(--accent-color);
+}
+
+.teacher-summary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.teacher-summary li {
+  margin: 5px 0;
+  line-height: 1.65;
+}
+
 .toc-anchor-card {
   display: inline-flex;
   align-items: center;
@@ -2193,6 +2381,29 @@ if (typeof window !== 'undefined') {
 
 .native-audio {
   height: 36px;
+}
+
+.audio-loading-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 112px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.audio-loading-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: audio-loading-spin 0.8s linear infinite;
+}
+
+@keyframes audio-loading-spin {
+  to { transform: rotate(360deg); }
 }
 
 .custom-media-controls {
