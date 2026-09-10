@@ -159,3 +159,30 @@ test('prototype-03 keeps ASR evidence portable and fails closed before attributi
     assert.ok(Math.abs(candidate.segments[index].end - raw.segments[index].end) < 0.01);
   }
 });
+
+test('prototype-04 preserves the one-download evidence contract and fails closed', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-04');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  assert.equal(candidate.source.videoId, '__8WjGF3hhw');
+  assert.equal(candidate.source.playlistIndex, 4);
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.ok(candidate.exclusions.length > 0);
+  assert.equal(manifest.videoId, '__8WjGF3hhw');
+  assert.equal(manifest.status, 'ASR_OK');
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.equal(manifest.commands.filter((command) => command.cmd.includes('download')).length, 1);
+  assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/prototype-04\//);
+  assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/prototype-04\//);
+  assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    assert.equal(candidate.segments[index].id, raw.segments[index].id);
+    assert.ok(Math.abs(candidate.segments[index].start - raw.segments[index].start) < 0.01);
+    assert.ok(Math.abs(candidate.segments[index].end - raw.segments[index].end) < 0.01);
+  }
+});
