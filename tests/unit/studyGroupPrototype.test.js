@@ -260,6 +260,7 @@ test('prototype-07 preserves sentence ASR evidence and fails closed without word
   assert.equal(manifest.checks.totalWordTokens, 0);
   assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
   assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.equal(candidate.provenance.temporaryAudioDeleted, true);
   assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/prototype-07\//);
   assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/prototype-07\//);
   assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
