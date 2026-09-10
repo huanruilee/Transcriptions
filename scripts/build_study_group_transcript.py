@@ -7,24 +7,33 @@ import re
 import urllib.request
 from pathlib import Path
 
-from opencc import OpenCC
-
-
-def load_segments(raw_dir: Path, manifest_path: Path):
+def load_segments(raw_dir: Path, manifest_path: Path, source_duration: float):
     segments = []
-    for item in json.loads(manifest_path.read_text()):
+    manifest = sorted(json.loads(manifest_path.read_text()), key=lambda item: float(item["offset_seconds"]))
+    for index, item in enumerate(manifest):
         offset = float(item["offset_seconds"])
+        chunk_end = (
+            float(manifest[index + 1]["offset_seconds"])
+            if index + 1 < len(manifest)
+            else source_duration
+        )
         payload = json.loads((raw_dir / item["response_file"]).read_text())
         for segment in payload["segments"]:
+            start = max(offset, offset + float(segment["start"]))
+            end = min(chunk_end, source_duration, offset + float(segment["end"]))
+            if end <= start:
+                continue
             segments.append({
-                "start": round(offset + float(segment["start"]), 3),
-                "end": round(offset + float(segment["end"]), 3),
+                "start": round(start, 3),
+                "end": round(end, 3),
                 "text": segment["text"].strip(),
             })
     return segments
 
 
 def merge_units(segments, target_chars=90, max_seconds=32):
+    from opencc import OpenCC
+
     units = []
     current = []
     for segment in segments:
@@ -105,12 +114,13 @@ def main():
     parser.add_argument("--raw-dir", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--duration-seconds", type=float, required=True)
     parser.add_argument("--endpoint", default="http://127.0.0.1:8001/v1/chat/completions")
     parser.add_argument("--model", default="Qwen3.8-27B")
     parser.add_argument("--skip-model", action="store_true")
     args = parser.parse_args()
 
-    units = merge_units(load_segments(args.raw_dir, args.manifest))
+    units = merge_units(load_segments(args.raw_dir, args.manifest, args.duration_seconds))
     metrics = {"unitCount": len(units), "accepted": 0, "fallbacks": len(units)}
     if not args.skip_model:
         metrics = {"unitCount": len(units), **proofread(units, args.endpoint, args.model)}

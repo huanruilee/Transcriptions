@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
+import { spawnSync } from 'node:child_process';
 
 const ROOT = process.cwd();
 const COURSE_ID = 'shi-liang-lun-study-group-2025';
@@ -11,6 +13,41 @@ const DRIVE_FILE_ID = '1H_w9wP0Gi7zpXKO8NVO95Zvm2Iy5N6Wq';
 function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
 }
+
+test('chunk assembler clips overlap padding and source-duration overflow', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'study-group-chunks-'));
+  try {
+    fs.writeFileSync(path.join(tempDir, 'manifest.json'), JSON.stringify([
+      { offset_seconds: 0, response_file: 'a.json' },
+      { offset_seconds: 10, response_file: 'b.json' },
+    ]));
+    fs.writeFileSync(path.join(tempDir, 'a.json'), JSON.stringify({ segments: [
+      { start: 8, end: 12, text: 'first' },
+    ] }));
+    fs.writeFileSync(path.join(tempDir, 'b.json'), JSON.stringify({ segments: [
+      { start: 0, end: 4, text: 'second' },
+      { start: 4, end: 8, text: 'tail' },
+    ] }));
+    const code = [
+      'import json, sys',
+      'from pathlib import Path',
+      'from scripts.build_study_group_transcript import load_segments',
+      'print(json.dumps(load_segments(Path(sys.argv[1]), Path(sys.argv[2]), 15)))',
+    ].join('; ');
+    const result = spawnSync('python3', ['-c', code, tempDir, path.join(tempDir, 'manifest.json')], {
+      cwd: ROOT,
+      encoding: 'utf8',
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout), [
+      { start: 8, end: 10, text: 'first' },
+      { start: 10, end: 14, text: 'second' },
+      { start: 14, end: 15, text: 'tail' },
+    ]);
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+});
 
 test('27下 prototype registers an independent remote-audio course', () => {
   const catalog = readJson('courses/catalog.json');
@@ -66,7 +103,8 @@ test('27下 transcript is timestamped and every question ends with an unlinked t
     assert.ok(sentence.id && sentence.text.trim(), 'every sentence needs stable id and text');
     assert.ok(Number.isFinite(sentence.start) && Number.isFinite(sentence.end));
     assert.ok(sentence.end > sentence.start, 'sentence interval must be positive');
-    if (index > 0) assert.ok(sentence.start >= sentences[index - 1].start, 'timestamps must be monotonic');
+    if (index > 0) assert.ok(sentence.start >= sentences[index - 1].end, 'sentence intervals must not overlap');
+    assert.ok(sentence.end <= session._meta.durationSeconds, 'sentence must not exceed source duration');
   }
 
   const sentenceIds = new Set(sentences.map((sentence) => sentence.id));
@@ -82,6 +120,18 @@ test('27下 transcript is timestamped and every question ends with an unlinked t
     assert.equal(question.teacherSummary?.status, 'candidate');
     assert.ok(question.teacherSummary.items.length >= 1, 'teacher teaching needs a bullet summary');
     assert.ok(question.teacherSummary.items.every((item) => typeof item === 'string' && item.trim()));
+  }
+
+  const summaryOwners = new Map(session.discussionQuestions.map((question) => [
+    JSON.stringify(question.teacherSummary),
+    question.id,
+  ]));
+  for (const paragraph of session.paragraphs.filter((item) => item.teacherSummary)) {
+    assert.equal(
+      paragraph.questionId,
+      summaryOwners.get(JSON.stringify(paragraph.teacherSummary)),
+      'teacher summary must remain attached to its own question',
+    );
   }
 });
 

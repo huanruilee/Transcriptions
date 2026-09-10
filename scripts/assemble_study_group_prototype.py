@@ -53,6 +53,7 @@ def make_paragraphs(sentences, questions, size=4):
     paragraphs = []
     active_question = None
     current = []
+    attached_summary_ends = set()
 
     def flush():
         nonlocal current
@@ -68,7 +69,7 @@ def make_paragraphs(sentences, questions, size=4):
         if current[0]["id"] in question_starts:
             paragraph["heading"] = question_starts[current[0]["id"]]["displayQuestion"]
         ending = teaching_ends.get(current[-1]["id"])
-        if ending:
+        if ending and current[-1]["id"] not in attached_summary_ends:
             paragraph["teacherSummary"] = ending["teacherSummary"]
         paragraphs.append(paragraph)
         current = []
@@ -76,6 +77,10 @@ def make_paragraphs(sentences, questions, size=4):
     for sentence in sentences:
         if sentence["id"] in question_starts:
             flush()
+            outgoing = teaching_ends.get(sentence["id"])
+            if outgoing and paragraphs:
+                paragraphs[-1]["teacherSummary"] = outgoing["teacherSummary"]
+                attached_summary_ends.add(sentence["id"])
             active_question = question_starts[sentence["id"]]
         current.append({
             "id": sentence["id"],
