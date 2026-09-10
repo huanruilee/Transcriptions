@@ -1,0 +1,47 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-03",
+  "playlistIndex": 3,
+  "videoId": "_mEd_2G8glg",
+  "sourceUrl": "https://www.youtube.com/watch?v=_mEd_2G8glg",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第2講 如何探究真相（上）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper",
+    "model": "medium",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": true,
+    "vad_filter": false,
+    "beam_size": 5
+  },
+  "commands": [
+    {"cmd": "yt-dlp format 18 download", "exit_code": 0, "note": "audioBytes=319444053 audioSha256=171a409adeadc68228bbabb6288b83ce37ff239be421f8fbefdbb68abed82d83"},
+    {"cmd": "ffprobe duration", "exit_code": 0, "note": "actual_duration_seconds=9902.381875"},
+    {"cmd": "faster-whisper transcribe", "exit_code": 0, "duration_s": 505.637, "note": "segments=4533 word_tokens=26396 rtf=0.051062"}
+  ],
+  "timing": {
+    "startIso": "2026-09-10T10:29:44Z",
+    "endIso": "2026-09-10T10:38:12Z"
+  },
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-03/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-03/candidate.json"
+  },
+  "checks": {
+    "segments": 4533,
+    "totalWordTokens": 26396,
+    "audioCoveragePct": 99.8215,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "allSegmentIdsUnique": true,
+    "sourceIdentityMatches": true
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": ["temporary audio and scratch directory on GX10"]
+  },
+  "status": "ASR_OK"
+}

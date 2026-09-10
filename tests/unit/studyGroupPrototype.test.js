@@ -133,3 +133,29 @@ test('prototype-02 question candidates remain explicitly unresolved for human au
   }
   assert.match(fs.readFileSync(questionReviewPath, 'utf8'), /Status:\s+\*\*BLOCKED\*\*/);
 });
+
+test('prototype-03 keeps ASR evidence portable and fails closed before attribution', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-03');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  assert.equal(candidate.source.videoId, '_mEd_2G8glg');
+  assert.equal(candidate.source.playlistIndex, 3);
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.ok(candidate.exclusions.length > 0);
+  assert.equal(manifest.videoId, '_mEd_2G8glg');
+  assert.equal(manifest.status, 'ASR_OK');
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/prototype-03\//);
+  assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/prototype-03\//);
+  assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    assert.equal(candidate.segments[index].id, raw.segments[index].id);
+    assert.ok(Math.abs(candidate.segments[index].start - raw.segments[index].start) < 0.01);
+    assert.ok(Math.abs(candidate.segments[index].end - raw.segments[index].end) < 0.01);
+  }
+});
