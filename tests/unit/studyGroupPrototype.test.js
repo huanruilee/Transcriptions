@@ -1,0 +1,70 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const EVIDENCE = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-01');
+const CANDIDATE = path.join(EVIDENCE, 'candidate.json');
+const RAW_ASR = path.join(EVIDENCE, 'raw_asr.json');
+
+test('study-group prototype has source-grounded candidate structure', () => {
+  assert.equal(fs.existsSync(CANDIDATE), true, 'prototype candidate is required');
+  const candidate = JSON.parse(fs.readFileSync(CANDIDATE, 'utf8'));
+  assert.equal(candidate.schema, 'study-group-transcript-candidate/v1');
+  assert.equal(candidate.source.playlistIndex, 1);
+  assert.equal(candidate.source.videoId, '7QA1k4uxxV0');
+  assert.equal(candidate.source.playable, true);
+  assert.equal(candidate.provenance.rawAsrPath, 'raw_asr.json');
+  assert.ok(Array.isArray(candidate.segments) && candidate.segments.length > 0);
+  let previousEnd = -1;
+  for (const segment of candidate.segments) {
+    assert.match(segment.id, /^seg-\d+$/);
+    assert.equal(typeof segment.start, 'number');
+    assert.equal(typeof segment.end, 'number');
+    assert.ok(segment.start >= previousEnd);
+    assert.ok(segment.end > segment.start);
+    assert.ok(segment.text.trim().length > 0);
+    previousEnd = segment.end;
+  }
+  assert.ok(Array.isArray(candidate.questionIndex));
+  assert.ok(Array.isArray(candidate.teacherSummaries));
+  const questionIds = new Set(candidate.questionIndex.map((question) => question.id));
+  const summaryIds = new Set(candidate.teacherSummaries.map((summary) => summary.questionId));
+  assert.deepEqual(summaryIds, questionIds, 'every spoken question needs a teacher summary');
+  const segmentsById = new Map(candidate.segments.map((segment) => [segment.id, segment.text]));
+  for (const summary of candidate.teacherSummaries) {
+    assert.ok(summary.bullets.length > 0, `${summary.questionId} needs non-empty guidance`);
+    assert.ok(summary.sourceSegmentIds.length > 0, `${summary.questionId} needs source segments`);
+    const sourceText = summary.sourceSegmentIds.map((id) => segmentsById.get(id) || '').join('');
+    for (const bullet of summary.bullets) {
+      assert.ok(
+        sourceText.includes(bullet),
+        `${summary.questionId} guidance must be recoverable from cited source segments`,
+      );
+    }
+  }
+});
+
+test('study-group prototype keeps raw ASR and review evidence beside the candidate', () => {
+  assert.equal(fs.existsSync(path.join(EVIDENCE, 'raw_asr.json')), true);
+  assert.equal(fs.existsSync(path.join(EVIDENCE, 'review.md')), true);
+  const candidate = JSON.parse(fs.readFileSync(CANDIDATE, 'utf8'));
+  assert.match(candidate.provenance.sourceUrl, /^https:\/\/www\.youtube\.com\/watch\?v=7QA1k4uxxV0$/);
+  assert.match(candidate.provenance.audioSha256, /^[a-f0-9]{64}$/);
+  assert.ok(candidate.qualityGates && candidate.qualityGates.rawAsrPresent);
+});
+
+test('candidate timing remains aligned with the immutable raw ASR segments', () => {
+  const candidate = JSON.parse(fs.readFileSync(CANDIDATE, 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(RAW_ASR, 'utf8'));
+  assert.equal(candidate.segments.length, raw.segments.length);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    const expected = raw.segments[index];
+    const actual = candidate.segments[index];
+    assert.equal(actual.id, `seg-${String(index + 1).padStart(4, '0')}`);
+    assert.ok(Math.abs(actual.start - expected.start) < 0.01);
+    assert.ok(Math.abs(actual.end - expected.end) < 0.01);
+  }
+});
