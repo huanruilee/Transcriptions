@@ -387,3 +387,42 @@ test('prototype-11 preserves sentence ASR evidence and fails closed without word
     assert.equal(candidate.segments[index].text, raw.segments[index].text);
   }
 });
+
+test('prototype-12 keeps the guarded rerun and records the hallucination failure', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-12');
+  const failed = path.join(evidence, 'failed-attempt-01');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  const failedRaw = JSON.parse(fs.readFileSync(path.join(failed, 'raw_asr.json'), 'utf8'));
+  const failedManifest = JSON.parse(fs.readFileSync(path.join(failed, 'run_manifest.json'), 'utf8'));
+  assert.equal(candidate.source.videoId, '9ew8eXJc2Nk');
+  assert.equal(candidate.source.playlistIndex, 12);
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.equal(candidate.provenance.temporaryAudioDeleted, true);
+  assert.equal(manifest.status, 'ASR_OK');
+  const repeatedCharacterSegments = raw.segments.filter((segment) => /(.)\1{9,}/u.test(segment.text));
+  assert.equal(repeatedCharacterSegments.length, 0);
+  assert.equal(manifest.checks.repeatedCharacterSegments, repeatedCharacterSegments.length);
+  assert.equal(raw.segments.length, 4144);
+  assert.equal(manifest.checks.audioCoveragePct, 98.375);
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.equal(manifest.asr.condition_on_previous_text, false);
+  assert.equal(manifest.asr.repetition_penalty, 1.15);
+  assert.equal(manifest.asr.compression_ratio_threshold, 1.8);
+  assert.equal(manifest.asr.no_speech_threshold, 0.5);
+  assert.match(review, /lower measured[\s\S]*BLOCKED/);
+  assert.equal(failedRaw.segments.length, 896);
+  assert.equal(failedManifest.checks.repeatedCharacterSegments, 231);
+  assert.match(fs.readFileSync(path.join(failed, 'review.md'), 'utf8'), /negative[\s\S]*evidence/);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    assert.equal(candidate.segments[index].id, raw.segments[index].id);
+    assert.equal(candidate.segments[index].start, raw.segments[index].start);
+    assert.equal(candidate.segments[index].end, raw.segments[index].end);
+    assert.equal(candidate.segments[index].text, raw.segments[index].text);
+  }
+});
