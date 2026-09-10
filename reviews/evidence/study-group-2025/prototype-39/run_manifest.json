@@ -1,0 +1,69 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-39",
+  "playlistIndex": 39,
+  "videoId": "lu1dedE3Ncs",
+  "sourceUrl": "https://www.youtube.com/watch?v=lu1dedE3Ncs",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第25講 集諦的前三種行相（上）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper-service",
+    "model": "large-v3-turbo",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": false,
+    "beam_size": 5,
+    "condition_on_previous_text": false,
+    "repetition_penalty": 1.15,
+    "compression_ratio_threshold": 1.8,
+    "no_speech_threshold": 0.5,
+    "vad_filter": true,
+    "vad_min_silence_duration_ms": 600,
+    "vad_speech_pad_ms": 400
+  },
+  "commands": [
+    {
+      "cmd": "yt-dlp --skip-download --print duration",
+      "exit_code": 0
+    },
+    {
+      "cmd": "yt-dlp -f 18 -o audio/source.mp4 (player_client=android)",
+      "exit_code": 0
+    },
+    {
+      "cmd": "POST /v1/audio/transcriptions (GPU service, hallucination guard)",
+      "exit_code": 0,
+      "note": "segments=4179 repeatedCharacterSegments=0"
+    },
+    {
+      "cmd": "sha256sum/ffprobe",
+      "exit_code": 0,
+      "note": "sha256=ed22c5ace1cd62b20f62f50d3d685a9424836f2b4c64982767eeeaac14c20226 bytes=261491379 duration=9791.947755"
+    }
+  ],
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-39/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-39/candidate.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "audio/source.mp4",
+      "audio"
+    ]
+  },
+  "status": "ASR_OK",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": true,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 98.3484,
+    "totalWordTokens": 0,
+    "repeatedCharacterSegments": 0,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}
