@@ -15,5 +15,7 @@ test('GX10 audio proxy remains loopback-only and never caches source audio', () 
   const source = fs.readFileSync('scripts/gx10_audio_proxy.py', 'utf8');
   assert.match(source, /ThreadingHTTPServer\(\("127\.0\.0\.1"/);
   assert.match(source, /Cache-Control", "no-store"/);
+  assert.match(source, /Access-Control-Allow-Private-Network/);
+  assert.match(source, /Access-Control-Expose-Headers/);
   assert.doesNotMatch(source, /open\([^\n]+["']wb["']/);
 });
