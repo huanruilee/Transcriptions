@@ -57,6 +57,40 @@ test('study-group prototype keeps raw ASR and review evidence beside the candida
   assert.ok(candidate.qualityGates && candidate.qualityGates.rawAsrPresent);
 });
 
+test('playlist index 01 preserves source identity and passes the machine ASR gate', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/playlist-01');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  assert.equal(candidate.source.videoId, '7QA1k4uxxV0');
+  assert.equal(candidate.source.playlistIndex, 1);
+  assert.equal(candidate.segments.length, 3669);
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.equal(candidate.provenance.temporaryAudioDeleted, true);
+  assert.equal(manifest.videoId, '7QA1k4uxxV0');
+  assert.equal(manifest.task, 'playlist-01');
+  assert.equal(manifest.status, 'ASR_OK');
+  assert.equal(manifest.checks.audioCoveragePct, 99.127);
+  assert.equal(manifest.checks.totalWordTokens, 0);
+  assert.equal(manifest.checks.repeatedCharacterSegments, 0);
+  assert.equal(raw.segments.filter((segment) => /(.)\1{9,}/u.test(segment.text)).length, 0);
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.deepEqual(manifest.cleanup.removedPaths, ['audio/source.mp4', 'audio']);
+  assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/playlist-01\//);
+  assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/playlist-01\//);
+  assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    assert.equal(candidate.segments[index].id, raw.segments[index].id);
+    assert.equal(candidate.segments[index].start, raw.segments[index].start);
+    assert.equal(candidate.segments[index].end, raw.segments[index].end);
+    assert.equal(candidate.segments[index].text, raw.segments[index].text);
+  }
+});
+
 test('candidate timing remains aligned with the immutable raw ASR segments', () => {
   const candidate = JSON.parse(fs.readFileSync(CANDIDATE, 'utf8'));
   const raw = JSON.parse(fs.readFileSync(RAW_ASR, 'utf8'));
