@@ -93,6 +93,10 @@ test('prototype-02 preserves ASR evidence while failing closed before speaker at
   assert.equal(manifest.status, 'ASR_OK');
   assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
   assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/prototype-02\//);
+  assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/prototype-02\//);
+  assert.equal(manifest.artifacts.rawAsrPath.includes('/home/'), false);
+  assert.equal(manifest.artifacts.candidatePath.includes('/home/'), false);
   assert.match(fs.readFileSync(reviewPath, 'utf8'), /Status:\s+\*\*BLOCKED\*\*/);
 
   for (let index = 0; index < raw.segments.length; index += 1) {
