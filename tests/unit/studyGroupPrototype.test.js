@@ -803,3 +803,32 @@ test('prototype-25 preserves source identity and passes the machine ASR gate', (
     assert.equal(candidate.segments[index].text, raw.segments[index].text);
   }
 });
+
+test('prototype-26 preserves source identity and passes the machine ASR gate', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-26');
+  const candidate = JSON.parse(fs.readFileSync(path.join(evidence, 'candidate.json'), 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(path.join(evidence, 'raw_asr.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.join(evidence, 'run_manifest.json'), 'utf8'));
+  const review = fs.readFileSync(path.join(evidence, 'review.md'), 'utf8');
+  assert.equal(candidate.source.videoId, 'uFmVc19pIqs');
+  assert.equal(candidate.source.playlistIndex, 26);
+  assert.equal(candidate.segments.length, raw.segments.length);
+  assert.equal(candidate.questionIndex.length, 0);
+  assert.equal(candidate.teacherSummaries.length, 0);
+  assert.equal(candidate.provenance.temporaryAudioDeleted, true);
+  assert.equal(manifest.videoId, 'uFmVc19pIqs');
+  assert.equal(manifest.status, 'ASR_OK');
+  assert.equal(manifest.checks.repeatedCharacterSegments, 0);
+  assert.equal(raw.segments.filter((segment) => /(.)\1{9,}/u.test(segment.text)).length, 0);
+  assert.equal(manifest.cleanup.temporaryAudioDeleted, true);
+  assert.equal(manifest.cleanup.disposableEnvironmentDeleted, true);
+  assert.match(manifest.artifacts.rawAsrPath, /^reviews\/evidence\/study-group-2025\/prototype-26\//);
+  assert.match(manifest.artifacts.candidatePath, /^reviews\/evidence\/study-group-2025\/prototype-26\//);
+  assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
+  for (let index = 0; index < raw.segments.length; index += 1) {
+    assert.equal(candidate.segments[index].id, raw.segments[index].id);
+    assert.equal(candidate.segments[index].start, raw.segments[index].start);
+    assert.equal(candidate.segments[index].end, raw.segments[index].end);
+    assert.equal(candidate.segments[index].text, raw.segments[index].text);
+  }
+});
