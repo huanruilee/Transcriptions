@@ -67,7 +67,9 @@ def make_paragraphs(segments: list[dict], questions: list[dict], summaries: list
             "end": segment["end"],
             "rawText": segment["text"],
             "text": segment["text"],
-            "reviewNeeded": True,
+            # The course-level candidate state is shown separately. A sentence
+            # is pending only when an independent review records a sentence-level flag.
+            "reviewNeeded": bool(segment.get("reviewNeeded", False)),
         })
         if len(current) >= 8 or segment["id"] in summary_ends:
             flush()

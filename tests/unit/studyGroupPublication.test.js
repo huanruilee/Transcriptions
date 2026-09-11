@@ -28,8 +28,13 @@ test('study-group publication exposes every processed playlist entry', () => {
     assert.equal(fs.existsSync(sessionPath), true, `missing published session ${session.sessionId}`);
     const payload = JSON.parse(fs.readFileSync(sessionPath, 'utf8'));
     assert.equal(payload.sessionId, session.sessionId);
+    assert.ok(['candidate', 'review-ready'].includes(payload.transcriptStatus));
     assert.ok(payload.paragraphs.length > 0, `empty transcript ${session.sessionId}`);
     assert.ok(payload.audioUrl || payload.youtubeVideoId, `missing media source ${session.sessionId}`);
+    if (session.sessionId !== '27B') {
+      const sentences = payload.paragraphs.flatMap((paragraph) => paragraph.sentences);
+      assert.ok(sentences.some((sentence) => sentence.reviewNeeded === false), `all sentences incorrectly flagged ${session.sessionId}`);
+    }
   }
 });
 
