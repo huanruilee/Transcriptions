@@ -9,6 +9,7 @@ const COURSE_DIR = path.join(ROOT, 'courses/2025釋量論第二品大組共學')
 const CATALOG_PATH = path.join(ROOT, 'courses/catalog.json');
 const COURSE_STORE_PATH = path.join(ROOT, 'src/stores/course.ts');
 const APP_PATH = path.join(ROOT, 'src/App.vue');
+const SOURCE_OUTLINE_PATH = path.join(COURSE_DIR, 'source_outlines/32-08.json');
 
 test('study-group publication exposes every processed playlist entry', () => {
   const catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, 'utf8'));
@@ -68,4 +69,15 @@ test('study-group presentation exposes quote and teacher-summary contracts', () 
   const summaries = session14.paragraphs.map((paragraph) => paragraph.teacherSummary).filter(Boolean);
   assert.ok(summaries.length > 0, 'session 14 should contain teacher summaries');
   assert.ok(summaries.every((summary) => summary.heading === '法師開示摘要'));
+});
+
+test('session 14 source outline is preserved as a separate, traceable index', () => {
+  assert.equal(fs.existsSync(SOURCE_OUTLINE_PATH), true, 'source outline artifact must exist');
+  const outline = JSON.parse(fs.readFileSync(SOURCE_OUTLINE_PATH, 'utf8'));
+  assert.equal(outline.sourceId, '32-08');
+  assert.deepEqual(outline.sessionIds, ['14', '15']);
+  assert.equal(outline.courseOutline.length, 7);
+  assert.equal(outline.discussionOutline.length, 13);
+  assert.equal(outline.provenance.type, 'curated-source-outline');
+  assert.match(fs.readFileSync(APP_PATH, 'utf8'), /sourceOutline/);
 });

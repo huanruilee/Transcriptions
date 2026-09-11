@@ -248,6 +248,14 @@
           @seek="handleTOCSeek"
         />
 
+        <section v-if="sourceOutline" class="source-outline" aria-label="原始課程提綱">
+          <h2 class="source-outline-heading">原始課程提綱</h2>
+          <ol class="source-outline-list">
+            <li v-for="item in sourceOutline.courseOutline" :key="item">{{ item }}</li>
+          </ol>
+          <span class="source-outline-note">研討問題 {{ sourceOutline.discussionOutline.length }} 題，逐字稿對應仍需校準</span>
+        </section>
+
         <!-- 逐字稿本文 (文章自然排版) -->
         <article class="transcript-article">
           <!-- 文章開頭：講次標題與校勘時間標記 -->
@@ -598,6 +606,7 @@ const currentSessionId = ref('01');
 const sidebarWidth = ref(280);
 const searchInputRef = ref<HTMLInputElement | null>(null);
 const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | null>(null);
+const sourceOutline = ref<any>(null);
 
 // 彈窗狀態
 // Keep the player visible while the transcript scrolls; users can restore it
@@ -1262,6 +1271,11 @@ async function loadSession(sessionId: string) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    sourceOutline.value = null;
+    if (data.sourceOutlineId) {
+      const outlineRes = await fetch(`${baseUrl}${cPath}/source_outlines/${data.sourceOutlineId}.json`);
+      if (outlineRes.ok) sourceOutline.value = await outlineRes.json();
+    }
     verseAnnotations.value = {};
     try {
       const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
@@ -1972,6 +1986,32 @@ if (typeof window !== 'undefined') {
   color: var(--accent-color);
   margin: 20px 0 10px;
   font-weight: 700;
+}
+
+.source-outline {
+  margin: 16px 0 24px;
+  padding: 12px 16px;
+  border-left: 3px solid #356859;
+  background: rgba(53, 104, 89, 0.07);
+}
+
+.source-outline-heading {
+  margin: 0 0 8px;
+  color: #285344;
+  font-size: 1rem;
+}
+
+.source-outline-list {
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.6;
+}
+
+.source-outline-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
 }
 
 .toc-anchor-card {

@@ -99,6 +99,7 @@ def build_session(index: int) -> tuple[dict, dict]:
     session = {
         "sessionId": session_id,
         "displaySessionId": display_session_id(source["title"], index),
+        "sourceOutlineId": "32-08" if index in (14, 15) else None,
         "title": source["title"],
         "mediaType": "video/youtube",
         "youtubeVideoId": source["videoId"],
