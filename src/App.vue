@@ -253,7 +253,11 @@
           <ol class="source-outline-list">
             <li v-for="item in sourceOutline.courseOutline" :key="item">{{ item }}</li>
           </ol>
-          <span class="source-outline-note">研討問題 {{ sourceOutline.discussionOutline.length }} 題，逐字稿對應仍需校準</span>
+          <h3 class="source-outline-questions-heading">研討問題索引</h3>
+          <ol class="source-outline-questions">
+            <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
+          </ol>
+          <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
         </section>
 
         <!-- 逐字稿本文 (文章自然排版) -->
@@ -2012,6 +2016,21 @@ if (typeof window !== 'undefined') {
   margin-top: 8px;
   color: var(--text-muted);
   font-size: 0.8rem;
+}
+
+.source-outline-questions-heading {
+  margin: 14px 0 8px;
+  color: #285344;
+  font-size: 0.95rem;
+}
+
+.source-outline-questions {
+  max-height: 18rem;
+  overflow-y: auto;
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.55;
+  font-size: 0.88rem;
 }
 
 .toc-anchor-card {

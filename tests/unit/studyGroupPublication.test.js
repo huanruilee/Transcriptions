@@ -80,4 +80,5 @@ test('session 14 source outline is preserved as a separate, traceable index', ()
   assert.equal(outline.discussionOutline.length, 13);
   assert.equal(outline.provenance.type, 'curated-source-outline');
   assert.match(fs.readFileSync(APP_PATH, 'utf8'), /sourceOutline/);
+  assert.match(fs.readFileSync(APP_PATH, 'utf8'), /source-outline-questions/);
 });
