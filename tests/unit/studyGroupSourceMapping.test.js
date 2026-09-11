@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COURSE = path.join(ROOT, 'courses/2025釋量論第二品大組共學');
 const CANDIDATE = path.join(ROOT, 'reviews/evidence/study-group-source-20260912/question_mapping_candidate.json');
+const CANDIDATE_15 = path.join(ROOT, 'reviews/evidence/study-group-source-20260912/question_mapping_15_candidate.json');
 
 test('source-question mapping is complete, grounded, and remains candidate-only', () => {
   const candidate = JSON.parse(fs.readFileSync(CANDIDATE, 'utf8'));
@@ -20,5 +21,15 @@ test('source-question mapping is complete, grounded, and remains candidate-only'
   assert.ok(mappings.every((mapping) => mapping.sessionQuestionId === null || knownIds.has(mapping.sessionQuestionId)));
   assert.ok(mappings.filter((mapping) => mapping.sessionQuestionId === null).every((mapping) => mapping.evidence));
   assert.equal(candidate.status, 'candidate');
+  assert.equal(candidate.reviewRequired, true);
+});
+
+test('session 15 source-question mapping remains an explicit partial candidate', () => {
+  const candidate = JSON.parse(fs.readFileSync(CANDIDATE_15, 'utf8'));
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE, 'sessions/session_15.json'), 'utf8'));
+  const knownIds = new Set(session.discussionQuestions.map((question) => question.id));
+  assert.deepEqual(candidate.mappings.map((mapping) => mapping.sourceQuestionNo), Array.from({ length: 13 }, (_, i) => i + 1));
+  assert.ok(candidate.mappings.every((mapping) => mapping.sessionQuestionId === null || knownIds.has(mapping.sessionQuestionId)));
+  assert.equal(candidate.status, 'partial');
   assert.equal(candidate.reviewRequired, true);
 });
