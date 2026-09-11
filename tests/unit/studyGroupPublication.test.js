@@ -82,3 +82,15 @@ test('session 14 source outline is preserved as a separate, traceable index', ()
   assert.match(fs.readFileSync(APP_PATH, 'utf8'), /sourceOutline/);
   assert.match(fs.readFileSync(APP_PATH, 'utf8'), /source-outline-questions/);
 });
+
+test('session 16 and 17 share the next source outline index', () => {
+  const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-09.json'), 'utf8'));
+  assert.equal(outline.sourceId, '32-09');
+  assert.deepEqual(outline.sessionIds, ['16', '17']);
+  assert.equal(outline.courseOutline.length, 6);
+  assert.equal(outline.discussionOutline.length, 13);
+  for (const sessionId of ['16', '17']) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, `sessions/session_${sessionId}.json`), 'utf8'));
+    assert.equal(session.sourceOutlineId, '32-09');
+  }
+});
