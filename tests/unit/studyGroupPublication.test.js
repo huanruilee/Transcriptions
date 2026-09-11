@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COURSE_DIR = path.join(ROOT, 'courses/2025釋量論第二品大組共學');
 const CATALOG_PATH = path.join(ROOT, 'courses/catalog.json');
+const COURSE_STORE_PATH = path.join(ROOT, 'src/stores/course.ts');
 
 test('study-group publication exposes every processed playlist entry', () => {
   const catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, 'utf8'));
@@ -39,4 +40,10 @@ test('study-group publication records unavailable playlist entries instead of hi
     { playlistIndex: 43, reason: 'youtube_private' },
     { playlistIndex: 44, reason: 'source_audio_silent' },
   ]);
+});
+
+test('Vue course selector knows the published study-group course', () => {
+  const source = fs.readFileSync(COURSE_STORE_PATH, 'utf8');
+  assert.match(source, /shi-liang-lun-study-group-2025/);
+  assert.match(source, /2025釋量論第二品大組共學/);
 });
