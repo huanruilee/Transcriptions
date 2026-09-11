@@ -32,7 +32,10 @@ for summary in review['teacherSummaries']:
     summary['sourceSegmentIds'] = [sid for sid in summary['sourceSegmentIds'] if number(sid) > end]
 
 raw_path = root / 'input/raw_asr.json'
-reference_path = root / 'input/session_01_official_raw.txt'
+reference_path = root / 'input/reference.txt'
+if not reference_path.exists():
+    references = sorted((root / 'input').glob('session_*_official_raw.txt'))
+    reference_path = references[0] if references else reference_path
 if raw_path.exists() and reference_path.exists():
     review['provenance']['rawAsrSha256'] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
     review['provenance']['referenceSha256'] = hashlib.sha256(reference_path.read_bytes()).hexdigest()
