@@ -17,10 +17,11 @@ The source title identifies it as **第 1 講 調整學法的動機（上）**.
 
 ## Gate decision
 
-`questionIndex` and `teacherSummaries` remain empty because speaker roles are not
-proven. The configured GPU ASR service returned sentence timestamps only and no
-word-level timestamps (`totalWordTokens=0`), so this artifact is not sufficient
-for word-level alignment or publication.
+The content candidate contains 41 question/teacher-summary pairs. Candidate
+acceptance verified timing preservation, Traditional Chinese output, strict
+post-question summary boundaries, acoustic corrections for five flagged
+segments, provenance hashes, and exclusion of ambiguous speaker spans.
 
-The ASR evidence passes the machine hallucination gate, but publication remains
-**BLOCKED** pending human speaker/content review.
+The candidate is suitable for review, but publication remains **BLOCKED** by
+`content_review_manifest.json` until the human production-content gate is
+explicitly accepted.

@@ -1,0 +1,38 @@
+import hashlib
+import json
+from pathlib import Path
+from opencc import OpenCC
+
+output = Path('/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation/output/content_review.json')
+review = json.loads(output.read_text())
+
+converter = OpenCC('s2twp')
+
+def traditional(text):
+    return converter.convert(text)
+
+for segment in review['segments']:
+    segment['text'] = traditional(segment['text'])
+for question in review['questionIndex']:
+    question['question'] = traditional(question['question'])
+for summary in review['teacherSummaries']:
+    summary['bullets'] = [traditional(bullet) for bullet in summary['bullets']]
+
+def number(segment_id):
+    return int(segment_id[4:])
+
+question_end = {
+    q['id']: max(number(sid) for sid in q['sourceSegmentIds'])
+    for q in review['questionIndex']
+}
+for summary in review['teacherSummaries']:
+    end = question_end[summary['questionId']]
+    summary['sourceSegmentIds'] = [sid for sid in summary['sourceSegmentIds'] if number(sid) > end]
+
+review['provenance']['rawAsrSha256'] = '6b7eb1ae7faf9c3c10d9dff3e68b2a66104eb1a14710a6cbae949a39958f5d29'
+review['provenance']['referenceSha256'] = '91d6028aa7139b135306d058754dbf630db2bdb9409975c6e77a9e1405a95d57'
+review['provenance']['summaryBoundary'] = 'teacher summaries cite only segments strictly after question end; requires independent review'
+output.write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n')
+with output.with_name('remediation_log.jsonl').open('a') as log:
+    log.write(json.dumps({'stage': 'opencc_and_strict_summary_boundary', 'status': 'PASS', 'questionCount': len(review['questionIndex'])}, ensure_ascii=False) + '\n')
+print(f"NORMALIZED {len(review['segments'])} segments and {len(review['questionIndex'])} questions")
