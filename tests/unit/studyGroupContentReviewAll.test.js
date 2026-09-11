@@ -13,7 +13,7 @@ const BARE_ACKNOWLEDGEMENT = /^(?:對|是的|好的|好|嗯|OK)[。！!，,、 ]
 
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
-for (const playlistIndex of Array.from({ length: 36 }, (_, index) => index + 1)) {
+for (const playlistIndex of Array.from({ length: 39 }, (_, index) => index + 1)) {
   test(`playlist-${String(playlistIndex).padStart(2, '0')} content contract`, () => {
     const dir = path.join(EVIDENCE, `playlist-${String(playlistIndex).padStart(2, '0')}`);
     const raw = JSON.parse(fs.readFileSync(path.join(dir, 'raw_asr.json'), 'utf8'));
