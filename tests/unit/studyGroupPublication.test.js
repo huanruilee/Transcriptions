@@ -8,6 +8,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const COURSE_DIR = path.join(ROOT, 'courses/2025釋量論第二品大組共學');
 const CATALOG_PATH = path.join(ROOT, 'courses/catalog.json');
 const COURSE_STORE_PATH = path.join(ROOT, 'src/stores/course.ts');
+const APP_PATH = path.join(ROOT, 'src/App.vue');
 
 test('study-group publication exposes every processed playlist entry', () => {
   const catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, 'utf8'));
@@ -36,6 +37,10 @@ test('study-group publication exposes every processed playlist entry', () => {
       assert.ok(sentences.some((sentence) => sentence.reviewNeeded === false), `all sentences incorrectly flagged ${session.sessionId}`);
     }
   }
+
+  assert.equal(course.sessions.find((session) => session.sessionId === '14').displaySessionId, '8上');
+  assert.equal(course.sessions.find((session) => session.sessionId === '27').displaySessionId, '14下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '27B').displaySessionId, '27下');
 });
 
 test('study-group publication records unavailable playlist entries instead of hiding them', () => {
@@ -51,4 +56,16 @@ test('Vue course selector knows the published study-group course', () => {
   const source = fs.readFileSync(COURSE_STORE_PATH, 'utf8');
   assert.match(source, /shi-liang-lun-study-group-2025/);
   assert.match(source, /2025釋量論第二品大組共學/);
+});
+
+test('study-group presentation exposes quote and teacher-summary contracts', () => {
+  const app = fs.readFileSync(APP_PATH, 'utf8');
+  assert.match(app, /displaySessionId/);
+  assert.match(app, /treatise-quote/);
+  assert.match(app, /teacher-summary-heading/);
+
+  const session14 = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_14.json'), 'utf8'));
+  const summaries = session14.paragraphs.map((paragraph) => paragraph.teacherSummary).filter(Boolean);
+  assert.ok(summaries.length > 0, 'session 14 should contain teacher summaries');
+  assert.ok(summaries.every((summary) => summary.heading === '法師開示摘要'));
 });

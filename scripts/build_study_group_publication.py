@@ -2,6 +2,7 @@
 """Build the public study-group course from reviewed evidence artifacts."""
 
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -10,6 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "reviews/evidence/study-group-2025"
 COURSE_DIR = ROOT / "courses/2025釋量論第二品大組共學"
 COURSE_ID = "shi-liang-lun-study-group-2025"
+
+
+def display_session_id(title: str, playlist_index: int) -> str:
+    """Use the lecture number in the title, while keeping playlist ids stable for routes."""
+    match = re.search(r"第\s*(\d+)\s*講[^（(]*[（(](上|下)[）)]", title)
+    if match:
+        return f"{match.group(1)}{match.group(2)}"
+    match = re.search(r"第\s*(\d+)\s*講", title)
+    return match.group(1) if match else str(playlist_index)
 
 
 def write_json(path: Path, value: object) -> None:
@@ -50,6 +60,7 @@ def make_paragraphs(segments: list[dict], questions: list[dict], summaries: list
             paragraph["heading"] = question_starts[current[0]["id"]]["question"]
         if current[-1]["id"] in summary_ends:
             paragraph["teacherSummary"] = {
+                "heading": "法師開示摘要",
                 "items": summary_ends[current[-1]["id"]]["bullets"],
                 "linkedToAudio": False,
                 "status": "candidate",
@@ -87,6 +98,7 @@ def build_session(index: int) -> tuple[dict, dict]:
     session_id = f"{index:02d}"
     session = {
         "sessionId": session_id,
+        "displaySessionId": display_session_id(source["title"], index),
         "title": source["title"],
         "mediaType": "video/youtube",
         "youtubeVideoId": source["videoId"],
@@ -102,6 +114,7 @@ def build_session(index: int) -> tuple[dict, dict]:
                 "sentenceId": question["sourceSegmentIds"][0],
                 "start": next(s["start"] for s in review["segments"] if s["id"] == question["sourceSegmentIds"][0]),
                 "teacherSummary": {
+                    "heading": "法師開示摘要",
                     "items": next(s["bullets"] for s in summaries if s["questionId"] == question["id"]),
                     "linkedToAudio": False,
                     "status": "candidate",
@@ -121,6 +134,7 @@ def build_session(index: int) -> tuple[dict, dict]:
     }
     catalog_entry = {
         "sessionId": session_id,
+        "displaySessionId": display_session_id(source["title"], index),
         "id": session_id,
         "sessionNum": index,
         "title": source["title"],
@@ -150,6 +164,10 @@ def main() -> None:
             })
 
     prototype = read_main_prototype()
+    prototype["displaySessionId"] = "27下"
+    for paragraph in prototype.get("paragraphs", []):
+        if paragraph.get("teacherSummary"):
+            paragraph["teacherSummary"].setdefault("heading", "法師開示摘要")
     sessions.append(prototype)
     catalog_sessions.append({
         "sessionId": "27B",
@@ -157,6 +175,7 @@ def main() -> None:
         "sessionNum": 27,
         "subSession": "B",
         "periodLabel": "下",
+        "displaySessionId": "27下",
         "title": prototype["title"],
         "status": prototype.get("transcriptStatus", "review-ready"),
         "mediaType": prototype["mediaType"],

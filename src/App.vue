@@ -192,7 +192,7 @@
             @click="selectSession(s.id)"
           >
             <div class="session-main">
-              <span class="session-id">{{ s.id }}</span>
+              <span class="session-id">{{ s.displaySessionId || s.id }}</span>
               <span class="session-title">{{ s.title }}</span>
             </div>
             <div v-if="s.page" class="session-meta">
@@ -222,7 +222,7 @@
         <nav class="reader-breadcrumb">
           <span class="crumb-home" @click="isOverviewModalOpen = true">🏠 {{ currentCourseTitle }}</span>
           <span class="crumb-sep">/</span>
-          <span class="crumb-current">第 {{ currentSessionId }} 講 {{ currentSessionInfo?.title || '' }}</span>
+          <span class="crumb-current">{{ currentSessionInfo?.displaySessionId || currentSessionId }} {{ currentSessionInfo?.title || '' }}</span>
         </nav>
 
         <!-- 動態即時科判祖先鏈 (Sticky Doctrinal Bar) -->
@@ -335,8 +335,8 @@
             >
               <template v-for="(segment, segmentIndex) in sentenceSegments(s)" :key="`${s.id}-segment-${segmentIndex}`">
                 <span
-                  :class="{ 'verse-quote': segment.isVerse }"
-                  :title="segment.isVerse ? `根本頌第 ${segment.verseIds.join('、')} 頌（文字對照；音檔尚未獨立核驗）` : undefined"
+                  :class="{ 'verse-quote': segment.isVerse, 'treatise-quote': segment.isTreatiseQuote }"
+                  :title="segment.isTreatiseQuote ? '《釋量論》原文引用（依逐字稿引號標示）' : (segment.isVerse ? `根本頌第 ${segment.verseIds.join('、')} 頌（文字對照；音檔尚未獨立核驗）` : undefined)"
                 >{{ segment.text }}</span>
               </template>
               <!-- 待核定徽章 (對齊 V1) -->
@@ -358,6 +358,12 @@
                 📌 筆記
               </span>
             </span>
+            <section v-if="p.teacherSummary" class="teacher-summary">
+              <h4 class="teacher-summary-heading">{{ p.teacherSummary.heading || '法師開示摘要' }}</h4>
+              <ul class="teacher-summary-list">
+                <li v-for="(item, itemIndex) in p.teacherSummary.items" :key="`${p.id}-summary-${itemIndex}`">{{ item }}</li>
+              </ul>
+            </section>
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
@@ -1203,6 +1209,7 @@ async function loadRealCourseData() {
       const data = await resCourse.json();
       const sessions = (data.sessions || []).map((s: any) => ({
         id: s.sessionId,
+        displaySessionId: s.displaySessionId || s.sessionId,
         title: s.title || `第 ${s.sessionId} 講`,
         page: s.pageRange || '',
         summary: s.summary || '',
@@ -1279,12 +1286,14 @@ async function loadSession(sessionId: string) {
       return {
         id: p.id || `para-${sentCounter}`,
         heading: p.heading || null,
+        teacherSummary: p.teacherSummary || null,
         tocAnchorNode: anchorNode,
         sentences: (p.sentences || []).map((s: any) => ({
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
           end_time: s.end ?? s.end_time ?? 0,
           text: s.text || '',
+          treatiseQuote: s.treatiseQuote ?? false,
           verseAnnotations: verseAnnotations.value[s.id] || [],
           reviewNeeded: s.reviewNeeded ?? false,
           uncertainty: s.uncertainty ?? null,
@@ -1332,7 +1341,13 @@ async function loadSession(sessionId: string) {
 
 function sentenceSegments(sentence: any) {
   const text = annotationStore.corrections[sentence.id]?.corrected || sentence.text || '';
-  return splitVerseText(text, sentence.verseAnnotations || []);
+  return splitVerseText(text, sentence.verseAnnotations || []).flatMap((segment: any) => {
+    return segment.text.split(/(「[^」]*」|『[^』]*』)/g).filter(Boolean).map((part: string) => ({
+      ...segment,
+      text: part,
+      isTreatiseQuote: Boolean(sentence.treatiseQuote || /^「[^」]*」$/.test(part) || /^『[^』]*』$/.test(part)),
+    }));
+  });
 }
 
 // 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart)
@@ -2011,6 +2026,33 @@ if (typeof window !== 'undefined') {
 .verse-quote {
   color: #b91c1c;
   font-weight: 600;
+}
+
+.treatise-quote {
+  color: #7c2d5a;
+  background: rgba(124, 45, 90, 0.09);
+  border-bottom: 2px solid rgba(124, 45, 90, 0.45);
+  font-weight: 650;
+}
+
+.teacher-summary {
+  margin: 14px 0 4px;
+  padding: 12px 16px;
+  border-left: 4px solid #b7791f;
+  background: rgba(183, 121, 31, 0.09);
+  border-radius: 0 6px 6px 0;
+}
+
+.teacher-summary-heading {
+  margin: 0 0 6px;
+  color: #8a5a12;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.teacher-summary-list {
+  margin: 0;
+  padding-left: 1.25rem;
 }
 
 .sentence.active {
