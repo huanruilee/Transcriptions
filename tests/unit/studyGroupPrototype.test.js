@@ -1365,3 +1365,14 @@ test('prototype-44 fails closed when the only available source audio is silent',
   assert.match(manifest.artifacts.sourceDiagnosticsPath, /prototype-44\/source_diagnostics\.json$/);
   assert.match(review, /Status:\s+\*\*BLOCKED\*\*/);
 });
+
+test('prototype-44 alternate audio format is independently confirmed silent', () => {
+  const evidence = path.join(ROOT, 'reviews/evidence/study-group-2025/prototype-44/alternate_audio_check.json');
+  const alternate = JSON.parse(fs.readFileSync(evidence, 'utf8'));
+  assert.equal(alternate.formatId, '140');
+  assert.equal(alternate.asrSegments, 0);
+  assert.equal(alternate.meanVolumeDb, -91);
+  assert.equal(alternate.maxVolumeDb, -91);
+  assert.equal(alternate.decision, 'BLOCKED_SOURCE_AUDIO_SILENT');
+  assert.equal(alternate.temporaryAudioDeleted, true);
+});
