@@ -16,7 +16,12 @@ match = re.search(r'playlist-(\d+)$', str(root))
 if match:
     index = int(match.group(1))
     review['provenance']['rawAsrPath'] = f'reviews/evidence/study-group-2025/playlist-{index:02d}/raw_asr.json'
-    review['provenance']['referencePath'] = f'courses/釋量論第二品/source_text/session_{index:02d}_official_raw.txt'
+    reference = Path(f'courses/釋量論第二品/source_text/session_{index:02d}_official_raw.txt')
+    if reference.exists():
+        review['provenance']['referencePath'] = str(reference)
+    else:
+        review['provenance']['referencePath'] = 'courses/釋量論第二品/source_text/session_32_official_raw.txt'
+        review['provenance']['referenceFallback'] = 'shared_treatise_source: lesson-specific reference unavailable'
 output_path.write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n')
 manifest_path = root / 'output/content_review_manifest.json'
 manifest = json.loads(manifest_path.read_text())

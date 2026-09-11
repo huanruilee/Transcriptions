@@ -13,7 +13,7 @@ const BARE_ACKNOWLEDGEMENT = /^(?:對|是的|好的|好|嗯|OK)[。！!，,、 ]
 
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
-for (const playlistIndex of Array.from({ length: 32 }, (_, index) => index + 1)) {
+for (const playlistIndex of Array.from({ length: 33 }, (_, index) => index + 1)) {
   test(`playlist-${String(playlistIndex).padStart(2, '0')} content contract`, () => {
     const dir = path.join(EVIDENCE, `playlist-${String(playlistIndex).padStart(2, '0')}`);
     const raw = JSON.parse(fs.readFileSync(path.join(dir, 'raw_asr.json'), 'utf8'));
@@ -66,5 +66,8 @@ for (const playlistIndex of Array.from({ length: 32 }, (_, index) => index + 1))
     }
     assert.equal(output.provenance.rawAsrSha256, sha256(path.join(dir, 'raw_asr.json')));
     assert.equal(output.provenance.referenceSha256.length, 64);
+    if (playlistIndex >= 33) {
+      assert.equal(output.provenance.referenceFallback, 'shared_treatise_source: lesson-specific reference unavailable');
+    }
   });
 }
