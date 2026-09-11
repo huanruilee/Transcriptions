@@ -8,8 +8,8 @@
   },
   "provenance": {
     "model": "Qwen3.8-27B",
-    "rawAsrPath": "input/raw_asr.json",
-    "referencePath": "input/session_01_official_raw.txt",
+    "rawAsrPath": "reviews/evidence/study-group-2025/playlist-01/raw_asr.json",
+    "referencePath": "courses/釋量論第二品/source_text/session_01_official_raw.txt",
     "temporaryInputsDeleted": false,
     "remediationModel": "Qwen3.8-27B",
     "questionIdsGloballyScoped": true,
@@ -22,7 +22,12 @@
     "acousticVerificationSha256": "b36d8618301103db4ee875fd7c2ac3e875321f98ec1ad2d83e3381b1325b0e3a",
     "acousticEngine": "gx10-whisper-8010",
     "speakerPurityGate": "ambiguous short replies and non-diarized source spans excluded",
-    "weakBulletGate": "bare acknowledgements excluded"
+    "weakBulletGate": "bare acknowledgements excluded",
+    "questionOverlapGate": "teacher summary references cannot overlap any question source range",
+    "questionIndexEmptyByDesign": false,
+    "teacherSummariesAbsentByDesign": false,
+    "contentReviewSchema": "study-group-content-review/v1",
+    "bareAcknowledgementRefGate": "bare acknowledgement segments excluded from teacher summary citations"
   },
   "segments": [
     {
@@ -22295,15 +22300,6 @@
       "id": "q-13-02"
     },
     {
-      "localIndex": 1,
-      "question": "為什麼增加信心跟毅力需要透過祈求？",
-      "sourceSegmentIds": [
-        "seg-1589",
-        "seg-1590"
-      ],
-      "id": "q-14-01"
-    },
-    {
       "localIndex": 2,
       "question": "如果要督促自己持續去健身房健身，也需要祈求釋迦牟尼佛嗎？",
       "sourceSegmentIds": [
@@ -22599,8 +22595,7 @@
         "seg-0213",
         "seg-0214",
         "seg-0215",
-        "seg-0216",
-        "seg-0217"
+        "seg-0216"
       ],
       "questionId": "q-02-01"
     },
@@ -22652,19 +22647,16 @@
         "seg-0798",
         "seg-0799",
         "seg-0800",
-        "seg-0801",
         "seg-0802",
         "seg-0803",
         "seg-0804",
-        "seg-0805",
         "seg-0806",
         "seg-0807",
         "seg-0808",
         "seg-0809",
         "seg-0810",
         "seg-0811",
-        "seg-0812",
-        "seg-0813"
+        "seg-0812"
       ],
       "questionId": "q-07-01"
     },
@@ -23019,9 +23011,7 @@
       ],
       "sourceSegmentIds": [
         "seg-1383",
-        "seg-1384",
-        "seg-1385",
-        "seg-1386"
+        "seg-1384"
       ],
       "questionId": "q-12-04"
     },
@@ -23130,19 +23120,6 @@
         "seg-1551"
       ],
       "questionId": "q-13-02"
-    },
-    {
-      "localIndex": 1,
-      "bullets": [
-        "法師以健身為例進行反問，指出若僅為督促自己健身，並不需要祈求釋迦牟尼佛。"
-      ],
-      "sourceSegmentIds": [
-        "seg-1592",
-        "seg-1593",
-        "seg-1594",
-        "seg-1595"
-      ],
-      "questionId": "q-14-01"
     },
     {
       "localIndex": 2,
@@ -23353,7 +23330,6 @@
       ],
       "sourceSegmentIds": [
         "seg-2035",
-        "seg-2036",
         "seg-2037",
         "seg-2038",
         "seg-2039",
@@ -23411,7 +23387,6 @@
         "seg-2276",
         "seg-2277",
         "seg-2278",
-        "seg-2279",
         "seg-2280"
       ],
       "questionId": "q-19-01"
@@ -23436,7 +23411,6 @@
         "seg-2372",
         "seg-2373",
         "seg-2374",
-        "seg-2375",
         "seg-2376",
         "seg-2377",
         "seg-2378",
@@ -23445,14 +23419,12 @@
         "seg-2381",
         "seg-2382",
         "seg-2383",
-        "seg-2384",
         "seg-2385",
         "seg-2386",
         "seg-2387",
         "seg-2388",
         "seg-2389",
         "seg-2390",
-        "seg-2391",
         "seg-2392",
         "seg-2393",
         "seg-2394",
@@ -23534,8 +23506,6 @@
         "seg-2543",
         "seg-2544",
         "seg-2545",
-        "seg-2546",
-        "seg-2547",
         "seg-2548",
         "seg-2549",
         "seg-2550",
@@ -23585,7 +23555,6 @@
         "因為你想要說的是就算了解了真相，我依舊做不到。"
       ],
       "sourceSegmentIds": [
-        "seg-2590",
         "seg-2591",
         "seg-2592",
         "seg-2593",

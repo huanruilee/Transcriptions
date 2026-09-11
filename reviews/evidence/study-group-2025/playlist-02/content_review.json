@@ -1,5 +1,5 @@
 {
-  "schema": "transcriptions/candidate/v1",
+  "schema": "study-group-content-review/v1",
   "source": {
     "playlistIndex": 2,
     "videoId": "bO2f8SL6czc",
@@ -10,7 +10,7 @@
   },
   "provenance": {
     "sourceUrl": "https://www.youtube.com/watch?v=bO2f8SL6czc",
-    "rawAsrPath": "raw_asr.json",
+    "rawAsrPath": "reviews/evidence/study-group-2025/playlist-02/raw_asr.json",
     "audioSha256": "c1c18d488aa4dd016a83d5eb360c718a40e7bafa3fb6130af5b983542bfcfd11",
     "audioBytes": 289454609,
     "temporaryAudioDeleted": true,
@@ -27,7 +27,12 @@
     "rawAsrSha256": "249e04ede11ef8afdd7baa5cdf5b552487ec9b5fc881476193c71c41bbcf4405",
     "referenceSha256": "8af16e3bc20f2e61d9c9e774dcd731c52a86698ac0ec60737a8325b0326243e9",
     "summaryBoundary": "teacher summaries cite only segments strictly after question end; requires independent review",
-    "weakBulletGate": "bare acknowledgements excluded"
+    "weakBulletGate": "bare acknowledgements excluded",
+    "questionIndexEmptyByDesign": false,
+    "teacherSummariesAbsentByDesign": false,
+    "contentReviewSchema": "study-group-content-review/v1",
+    "referencePath": "courses/釋量論第二品/source_text/session_02_official_raw.txt",
+    "bareAcknowledgementRefGate": "bare acknowledgement segments excluded from teacher summary citations"
   },
   "questionIndex": [
     {
@@ -950,7 +955,6 @@
         "seg-0387",
         "seg-0388",
         "seg-0389",
-        "seg-0390",
         "seg-0391",
         "seg-0392"
       ],
@@ -1118,8 +1122,7 @@
         "seg-0771",
         "seg-0772",
         "seg-0773",
-        "seg-0774",
-        "seg-0775"
+        "seg-0774"
       ],
       "questionId": "q-07-02"
     },
@@ -1159,8 +1162,7 @@
       "sourceSegmentIds": [
         "seg-0819",
         "seg-0820",
-        "seg-0821",
-        "seg-0822"
+        "seg-0821"
       ],
       "questionId": "q-07-04"
     },
@@ -1173,8 +1175,7 @@
       "sourceSegmentIds": [
         "seg-0830",
         "seg-0831",
-        "seg-0832",
-        "seg-0833"
+        "seg-0832"
       ],
       "questionId": "q-07-05"
     },
@@ -1188,7 +1189,6 @@
         "seg-0869",
         "seg-0870",
         "seg-0871",
-        "seg-0872",
         "seg-0873",
         "seg-0874",
         "seg-0875",
@@ -1307,7 +1307,6 @@
         "seg-1108",
         "seg-1109",
         "seg-1110",
-        "seg-1111",
         "seg-1112"
       ],
       "questionId": "q-10-01"
@@ -1336,27 +1335,22 @@
         "seg-1161",
         "seg-1162",
         "seg-1163",
-        "seg-1164",
         "seg-1165",
         "seg-1166",
         "seg-1167",
-        "seg-1168",
         "seg-1169",
-        "seg-1170",
         "seg-1171",
         "seg-1172",
         "seg-1173",
         "seg-1174",
         "seg-1175",
         "seg-1176",
-        "seg-1177",
         "seg-1178",
         "seg-1179",
         "seg-1180",
         "seg-1181",
         "seg-1182",
         "seg-1183",
-        "seg-1184",
         "seg-1185",
         "seg-1186",
         "seg-1187",
@@ -1415,7 +1409,6 @@
         "seg-1240",
         "seg-1241",
         "seg-1242",
-        "seg-1243",
         "seg-1244",
         "seg-1245",
         "seg-1246",
@@ -1425,7 +1418,6 @@
         "seg-1250",
         "seg-1251",
         "seg-1252",
-        "seg-1253",
         "seg-1254",
         "seg-1255",
         "seg-1256",
@@ -1538,7 +1530,6 @@
         "seg-1390",
         "seg-1391",
         "seg-1392",
-        "seg-1393",
         "seg-1394",
         "seg-1395",
         "seg-1396",
@@ -1756,7 +1747,6 @@
         "seg-1604",
         "seg-1605",
         "seg-1606",
-        "seg-1607",
         "seg-1608",
         "seg-1609",
         "seg-1610",
@@ -1778,7 +1768,6 @@
         "seg-1626",
         "seg-1627",
         "seg-1628",
-        "seg-1629",
         "seg-1630",
         "seg-1631",
         "seg-1632",
@@ -2008,7 +1997,6 @@
         "seg-2213",
         "seg-2214",
         "seg-2215",
-        "seg-2216",
         "seg-2217",
         "seg-2218",
         "seg-2219",
@@ -2084,7 +2072,6 @@
         "seg-2356",
         "seg-2357",
         "seg-2358",
-        "seg-2359",
         "seg-2360",
         "seg-2361",
         "seg-2362",
@@ -2557,7 +2544,6 @@
         "seg-3331",
         "seg-3332",
         "seg-3333",
-        "seg-3334",
         "seg-3335",
         "seg-3336",
         "seg-3337",
@@ -2572,9 +2558,7 @@
         "seg-3346",
         "seg-3347",
         "seg-3348",
-        "seg-3349",
         "seg-3350",
-        "seg-3351",
         "seg-3352",
         "seg-3353",
         "seg-3354",
@@ -24238,15 +24222,5 @@
       "text": "請大家合掌"
     }
   ],
-  "qualityGates": {
-    "rawAsrPresent": true,
-    "monotonicTimestamps": true,
-    "nonEmptyText": true,
-    "audioCoveragePct": 99.9029,
-    "sourceIdentity": "bO2f8SL6czc",
-    "temporaryAudioDeleted": true,
-    "questionIndexEmptyByDesign": true,
-    "teacherSummariesAbsentByDesign": true
-  },
   "status": "CANDIDATE"
 }

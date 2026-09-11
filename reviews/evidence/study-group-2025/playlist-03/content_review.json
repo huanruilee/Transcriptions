@@ -1,5 +1,5 @@
 {
-  "schema": "transcriptions/candidate/v1",
+  "schema": "study-group-content-review/v1",
   "source": {
     "playlistIndex": 3,
     "videoId": "_mEd_2G8glg",
@@ -10,7 +10,7 @@
   },
   "provenance": {
     "sourceUrl": "https://www.youtube.com/watch?v=_mEd_2G8glg",
-    "rawAsrPath": "raw_asr.json",
+    "rawAsrPath": "reviews/evidence/study-group-2025/playlist-03/raw_asr.json",
     "audioSha256": "171a409adeadc68228bbabb6288b83ce37ff239be421f8fbefdbb68abed82d83",
     "audioBytes": 319444053,
     "temporaryAudioDeleted": true,
@@ -27,7 +27,13 @@
     "rawAsrSha256": "d321feb50f9f186c4a869215272edca335904ebfbf0c6ead3be45c38d392a6b0",
     "referenceSha256": "acb2968baa62b481cd4ba7e66a80fda993c2678bbf49b7645e7dd5fa9c3cfa34",
     "summaryBoundary": "teacher summaries cite only segments strictly after question end; requires independent review",
-    "weakBulletGate": "bare acknowledgements excluded"
+    "weakBulletGate": "bare acknowledgements excluded",
+    "questionOverlapGate": "teacher summary references cannot overlap any question source range",
+    "questionIndexEmptyByDesign": false,
+    "teacherSummariesAbsentByDesign": false,
+    "contentReviewSchema": "study-group-content-review/v1",
+    "referencePath": "courses/釋量論第二品/source_text/session_03_official_raw.txt",
+    "bareAcknowledgementRefGate": "bare acknowledgement segments excluded from teacher summary citations"
   },
   "questionIndex": [
     {
@@ -462,19 +468,6 @@
       "id": "q-25-02"
     },
     {
-      "localIndex": 3,
-      "question": "在這樣的情況下，中、陰、玉三者當中何者重要？",
-      "sourceSegmentIds": [
-        "seg-2916",
-        "seg-2917",
-        "seg-2918",
-        "seg-2919",
-        "seg-2920",
-        "seg-2921"
-      ],
-      "id": "q-25-03"
-    },
-    {
       "localIndex": 4,
       "question": "那這個時候為什麼是陰重要？",
       "sourceSegmentIds": [
@@ -835,7 +828,6 @@
         "seg-0285",
         "seg-0286",
         "seg-0287",
-        "seg-0288",
         "seg-0289",
         "seg-0290",
         "seg-0291",
@@ -850,7 +842,6 @@
         "seg-0300",
         "seg-0301",
         "seg-0302",
-        "seg-0303",
         "seg-0304",
         "seg-0305",
         "seg-0306",
@@ -897,7 +888,6 @@
         "seg-0285",
         "seg-0286",
         "seg-0287",
-        "seg-0288",
         "seg-0289",
         "seg-0290",
         "seg-0291",
@@ -912,7 +902,6 @@
         "seg-0300",
         "seg-0301",
         "seg-0302",
-        "seg-0303",
         "seg-0304",
         "seg-0305",
         "seg-0306",
@@ -955,7 +944,6 @@
         "seg-0464",
         "seg-0465",
         "seg-0466",
-        "seg-0467",
         "seg-0468",
         "seg-0469",
         "seg-0470",
@@ -963,7 +951,6 @@
         "seg-0472",
         "seg-0473",
         "seg-0474",
-        "seg-0475",
         "seg-0476",
         "seg-0477",
         "seg-0478",
@@ -995,7 +982,6 @@
         "seg-0499",
         "seg-0500",
         "seg-0501",
-        "seg-0502",
         "seg-0503",
         "seg-0504",
         "seg-0505",
@@ -1011,8 +997,7 @@
         "seg-0515",
         "seg-0516",
         "seg-0517",
-        "seg-0518",
-        "seg-0519"
+        "seg-0518"
       ],
       "questionId": "q-05-01"
     },
@@ -1098,7 +1083,6 @@
         "seg-0583",
         "seg-0584",
         "seg-0585",
-        "seg-0586",
         "seg-0587",
         "seg-0588",
         "seg-0589",
@@ -1341,7 +1325,6 @@
         "法師舉例：就像山下的人不一定要透過邏輯推理，爬山上去就知道山上到底有沒有火。"
       ],
       "sourceSegmentIds": [
-        "seg-1780",
         "seg-1781",
         "seg-1782",
         "seg-1783",
@@ -1380,7 +1363,6 @@
         "seg-2146",
         "seg-2147",
         "seg-2148",
-        "seg-2149",
         "seg-2150",
         "seg-2151",
         "seg-2152",
@@ -1560,18 +1542,6 @@
       "questionId": "q-25-02"
     },
     {
-      "localIndex": 3,
-      "bullets": [
-        "如果是這樣的話，應該就是陰。"
-      ],
-      "sourceSegmentIds": [
-        "seg-2922",
-        "seg-2923",
-        "seg-2924"
-      ],
-      "questionId": "q-25-03"
-    },
-    {
       "localIndex": 4,
       "bullets": [
         "因為在中的基礎上面討論問題要判別。",
@@ -1582,7 +1552,6 @@
         "seg-2926",
         "seg-2927",
         "seg-2928",
-        "seg-2929",
         "seg-2930",
         "seg-2931",
         "seg-2932",
@@ -1591,7 +1560,6 @@
         "seg-2935",
         "seg-2936",
         "seg-2937",
-        "seg-2938",
         "seg-2939",
         "seg-2940",
         "seg-2941"
@@ -29596,15 +29564,5 @@
       "text": "那這種請合掌"
     }
   ],
-  "qualityGates": {
-    "rawAsrPresent": true,
-    "monotonicTimestamps": true,
-    "nonEmptyText": true,
-    "audioCoveragePct": 99.8215,
-    "sourceIdentity": "_mEd_2G8glg",
-    "temporaryAudioDeleted": true,
-    "questionIndexEmptyByDesign": true,
-    "teacherSummariesAbsentByDesign": true
-  },
   "status": "CANDIDATE"
 }

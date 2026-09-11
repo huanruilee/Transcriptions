@@ -11,7 +11,7 @@ review = json.loads(output.read_text())
 converter = OpenCC('s2twp')
 
 def traditional(text):
-    return converter.convert(text)
+    return converter.convert(text).replace('痴', '癡')
 
 for segment in review['segments']:
     segment['text'] = traditional(segment['text'])

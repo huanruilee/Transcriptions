@@ -1,5 +1,5 @@
 {
-  "schema": "transcriptions/candidate/v1",
+  "schema": "study-group-content-review/v1",
   "source": {
     "playlistIndex": 4,
     "videoId": "__8WjGF3hhw",
@@ -10,7 +10,7 @@
   },
   "provenance": {
     "sourceUrl": "https://www.youtube.com/watch?v=__8WjGF3hhw",
-    "rawAsrPath": "raw_asr.json",
+    "rawAsrPath": "reviews/evidence/study-group-2025/playlist-04/raw_asr.json",
     "audioSha256": "73f4a7a3d67f2c7ef408ef4fc6dc79ea1df250e974dac8a8ea078149380a6563",
     "audioBytes": 292926807,
     "temporaryAudioDeleted": true,
@@ -27,7 +27,13 @@
     "rawAsrSha256": "570e8899ead77e8aa85b52f81ff740dd9bbd4365354e8927fd74c710c4fd91b8",
     "referenceSha256": "af2121d2f52ad6c683d385f3907d8027d3a852a2f7c5cc6db24eb20d8c6e7332",
     "summaryBoundary": "teacher summaries cite only segments strictly after question end; requires independent review",
-    "weakBulletGate": "bare acknowledgements excluded"
+    "weakBulletGate": "bare acknowledgements excluded",
+    "questionOverlapGate": "teacher summary references cannot overlap any question source range",
+    "questionIndexEmptyByDesign": false,
+    "teacherSummariesAbsentByDesign": false,
+    "contentReviewSchema": "study-group-content-review/v1",
+    "referencePath": "courses/釋量論第二品/source_text/session_04_official_raw.txt",
+    "bareAcknowledgementRefGate": "bare acknowledgement segments excluded from teacher summary citations"
   },
   "questionIndex": [
     {
@@ -436,16 +442,6 @@
       "id": "q-26-01"
     },
     {
-      "localIndex": 2,
-      "question": "那你這個承許前後事是一種是一支嗎？還是你覺得你已經有足夠的理由，而且非常堅定的相信有前後事了？",
-      "sourceSegmentIds": [
-        "seg-3031",
-        "seg-3032",
-        "seg-3033"
-      ],
-      "id": "q-26-02"
-    },
-    {
       "localIndex": 3,
       "question": "就是想要問的原因是因為，你會覺得因為這個描述說，前後事又確實是真相，我是不是在想說，是不是應該要想清楚，到底是因為別人這麼說，或是我是佛教徒，所以我認為前後事是真相，而且如果不信的話好像不對這樣？然後但是我又沒有辦法去反駁理工科人士的想法，那如果我再沒有辦法去反駁的狀況下，是不是代表我自己在想前後事的那個，成立前後事的那個想法，並不是這麼的理由，並不是這麼充足，所以才會被，所以才沒有辦法去反駁別人這樣？",
       "sourceSegmentIds": [
@@ -831,7 +827,6 @@
         "seg-1391",
         "seg-1392",
         "seg-1393",
-        "seg-1394",
         "seg-1395",
         "seg-1429",
         "seg-1430",
@@ -1422,8 +1417,7 @@
         "如果按照我剛才的想法。"
       ],
       "sourceSegmentIds": [
-        "seg-2590",
-        "seg-2591"
+        "seg-2590"
       ],
       "questionId": "q-22-02"
     },
@@ -1451,11 +1445,9 @@
       ],
       "sourceSegmentIds": [
         "seg-2600",
-        "seg-2601",
         "seg-2602",
         "seg-2603",
-        "seg-2604",
-        "seg-2605"
+        "seg-2604"
       ],
       "questionId": "q-22-04"
     },
@@ -1628,33 +1620,6 @@
         "seg-3030"
       ],
       "questionId": "q-26-01"
-    },
-    {
-      "localIndex": 2,
-      "bullets": [
-        "法師釐清玉琳對前後事的承許狀態，詢問是屬於「一支」（初步認知）還是已有充足理由且堅定相信。"
-      ],
-      "sourceSegmentIds": [
-        "seg-3034",
-        "seg-3035",
-        "seg-3036",
-        "seg-3037",
-        "seg-3038",
-        "seg-3039",
-        "seg-3040",
-        "seg-3041",
-        "seg-3042",
-        "seg-3043",
-        "seg-3044",
-        "seg-3045",
-        "seg-3046",
-        "seg-3047",
-        "seg-3048",
-        "seg-3049",
-        "seg-3050",
-        "seg-3051"
-      ],
-      "questionId": "q-26-02"
     },
     {
       "localIndex": 3,
@@ -22692,15 +22657,5 @@
       "text": "願成善事攝受因"
     }
   ],
-  "qualityGates": {
-    "rawAsrPresent": true,
-    "monotonicTimestamps": true,
-    "nonEmptyText": true,
-    "audioCoveragePct": 99.9982,
-    "sourceIdentity": "__8WjGF3hhw",
-    "temporaryAudioDeleted": true,
-    "questionIndexEmptyByDesign": true,
-    "teacherSummariesAbsentByDesign": true
-  },
   "status": "CANDIDATE"
 }
