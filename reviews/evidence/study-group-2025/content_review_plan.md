@@ -17,6 +17,12 @@ and provide reviewed Traditional Chinese text. It must contain a non-empty
 speaker attribution or unsupported doctrinal claims remain explicitly flagged,
 never silently invented.
 
+The full reviewed transcript intentionally retains learner and moderator speech.
+Speaker purity is required for `teacherSummaries.sourceSegmentIds`, not for the
+complete `segments` array; learner utterances outside summary citations are valid
+transcript content and must not be deleted merely because they are not teacher
+speech.
+
 ## Gates
 
 1. RED: `npm run test:study-group-content` fails because the prototype output is

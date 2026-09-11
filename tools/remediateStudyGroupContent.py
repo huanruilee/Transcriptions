@@ -1,6 +1,6 @@
-import json, pathlib, re, urllib.request
+import json, os, pathlib, re, urllib.request
 
-ROOT=pathlib.Path('/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation')
+ROOT=pathlib.Path(os.environ.get('GX10_CONTENT_TASK_ROOT', '/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation'))
 IN=ROOT/'input'; OUT=ROOT/'output'; MODEL='Qwen3.8-27B'; URL='http://127.0.0.1:8001/v1/chat/completions'
 SIMP_TO_TRAD=dict(zip('为这样个说体经论门从对么后变实证觉关开边过问题时间还会点现显义极胜广当无师发与见随应处观摄识别业释难车声闻缘执许计总种听讲话导读记诵传辩净谛'.replace('量',''), '為這樣個說體經論門從對麼後變實證覺關開邊過問題時間還會點現顯義極勝廣當無師發與見隨應處觀攝識別業釋難車聲聞緣執許計總種聽講話導讀記誦傳辯淨諦'.replace('量','')))
 def traditional(s): return ''.join(SIMP_TO_TRAD.get(c,c) for c in s)

@@ -1,9 +1,11 @@
 import hashlib
 import json
+import os
 from pathlib import Path
 from opencc import OpenCC
 
-output = Path('/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation/output/content_review.json')
+root = Path(os.environ.get('GX10_CONTENT_TASK_ROOT', '/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation'))
+output = root / 'output/content_review.json'
 review = json.loads(output.read_text())
 
 converter = OpenCC('s2twp')
@@ -29,8 +31,14 @@ for summary in review['teacherSummaries']:
     end = question_end[summary['questionId']]
     summary['sourceSegmentIds'] = [sid for sid in summary['sourceSegmentIds'] if number(sid) > end]
 
-review['provenance']['rawAsrSha256'] = '6b7eb1ae7faf9c3c10d9dff3e68b2a66104eb1a14710a6cbae949a39958f5d29'
-review['provenance']['referenceSha256'] = '91d6028aa7139b135306d058754dbf630db2bdb9409975c6e77a9e1405a95d57'
+raw_path = root / 'input/raw_asr.json'
+reference_path = root / 'input/session_01_official_raw.txt'
+if raw_path.exists() and reference_path.exists():
+    review['provenance']['rawAsrSha256'] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+    review['provenance']['referenceSha256'] = hashlib.sha256(reference_path.read_bytes()).hexdigest()
+else:
+    review['provenance']['rawAsrSha256'] = '6b7eb1ae7faf9c3c10d9dff3e68b2a66104eb1a14710a6cbae949a39958f5d29'
+    review['provenance']['referenceSha256'] = '91d6028aa7139b135306d058754dbf630db2bdb9409975c6e77a9e1405a95d57'
 review['provenance']['summaryBoundary'] = 'teacher summaries cite only segments strictly after question end; requires independent review'
 output.write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n')
 with output.with_name('remediation_log.jsonl').open('a') as log:

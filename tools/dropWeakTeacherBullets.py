@@ -1,7 +1,8 @@
 import json
+import os
 import pathlib
 
-root = pathlib.Path('/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation/output')
+root = pathlib.Path(os.environ.get('GX10_CONTENT_TASK_ROOT', '/home/henry/.gx10/tasks/study-group-content-playlist-01-remediation')) / 'output'
 path = root / 'content_review.json'
 review = json.loads(path.read_text())
 removed = []
