@@ -501,15 +501,6 @@
       "id": "q-24-01"
     },
     {
-      "localIndex": 2,
-      "question": "請以自身經驗分析學法或研討前，有做好前行與沒做前行對於正行有何影響？",
-      "sourceSegmentIds": [
-        "seg-2851",
-        "seg-2852"
-      ],
-      "id": "q-24-02"
-    },
-    {
       "localIndex": 1,
       "question": "針對前行這個部分有不同的想法或你的經驗是什麼",
       "sourceSegmentIds": [
@@ -538,32 +529,6 @@
         "seg-2987"
       ],
       "id": "q-25-03"
-    },
-    {
-      "localIndex": 1,
-      "question": "以你的經驗你平常是用什麼樣的方法來調整動機",
-      "sourceSegmentIds": [
-        "seg-3064",
-        "seg-3065"
-      ],
-      "id": "q-26-01"
-    },
-    {
-      "localIndex": 2,
-      "question": "你覺得這樣有幫助是嗎?",
-      "sourceSegmentIds": [
-        "seg-3075"
-      ],
-      "id": "q-26-02"
-    },
-    {
-      "localIndex": 3,
-      "question": "所以你是為了利益眾生而來學法的是嗎",
-      "sourceSegmentIds": [
-        "seg-3106",
-        "seg-3107"
-      ],
-      "id": "q-26-03"
     },
     {
       "localIndex": 4,
@@ -1794,35 +1759,6 @@
       "questionId": "q-24-01"
     },
     {
-      "localIndex": 2,
-      "bullets": [
-        "法師未直接回答此題，而是由同學（梅嬌）分享自身經驗。",
-        "同學指出若學法前未做準備（前行），討論時會緊張、答得不順。",
-        "若有準備並查資料，則回答較順、敢於發言且較有信心。",
-        "法師確認同學所指的「前行」是對討論內容有無做好準備。"
-      ],
-      "sourceSegmentIds": [
-        "seg-2858",
-        "seg-2859",
-        "seg-2860",
-        "seg-2861",
-        "seg-2862",
-        "seg-2863",
-        "seg-2864",
-        "seg-2865",
-        "seg-2866",
-        "seg-2867",
-        "seg-2868",
-        "seg-2869",
-        "seg-2870",
-        "seg-2871",
-        "seg-2873",
-        "seg-2874",
-        "seg-2875"
-      ],
-      "questionId": "q-24-02"
-    },
-    {
       "localIndex": 1,
       "bullets": [
         "法師確認妙玉師姐認為前行強調的是大臣的發心。",
@@ -1890,55 +1826,6 @@
         "seg-3000"
       ],
       "questionId": "q-25-03"
-    },
-    {
-      "localIndex": 1,
-      "bullets": [
-        "學生回答以前沒有好好調整動機，只念一句「請發無上殊勝的菩提心」。",
-        "經過法師開示後，現在會觀想三成本師，祈求釋迦牟尼佛加持，讓自己在課程中能瞭解法義密義。"
-      ],
-      "sourceSegmentIds": [
-        "seg-3066",
-        "seg-3067",
-        "seg-3068",
-        "seg-3069",
-        "seg-3070",
-        "seg-3071",
-        "seg-3072",
-        "seg-3073",
-        "seg-3074"
-      ],
-      "questionId": "q-26-01"
-    },
-    {
-      "localIndex": 2,
-      "bullets": [
-        "學生確認有幫助，因為在祈求佛陀時，感覺自己聽得更認真。"
-      ],
-      "sourceSegmentIds": [
-        "seg-3076",
-        "seg-3077"
-      ],
-      "questionId": "q-26-02"
-    },
-    {
-      "localIndex": 3,
-      "bullets": [
-        "學生說明這是造作的心，最終目的是為了利益眾生，並透過提升對佛法的認識來達成。",
-        "學生表示最主要的目標是希望能夠利益眾生。"
-      ],
-      "sourceSegmentIds": [
-        "seg-3108",
-        "seg-3109",
-        "seg-3110",
-        "seg-3111",
-        "seg-3112",
-        "seg-3113",
-        "seg-3114",
-        "seg-3115",
-        "seg-3116"
-      ],
-      "questionId": "q-26-03"
     },
     {
       "localIndex": 4,
@@ -22570,5 +22457,27 @@
       "text": "大家請合掌"
     }
   ],
-  "status": "CANDIDATE"
+  "status": "CANDIDATE",
+  "exclusions": [
+    {
+      "questionId": "q-24-02",
+      "reason": "Agent adjudication: non-teacher discussion content",
+      "detail": "文字證據顯示為學生邀請、學生分享/回答或學生確認，未見教師實質教學內容；依規則僅在此明確情形移除。"
+    },
+    {
+      "questionId": "q-26-01",
+      "reason": "Agent adjudication: non-teacher discussion content",
+      "detail": "文字證據顯示為學生邀請、學生分享/回答或學生確認，未見教師實質教學內容；依規則僅在此明確情形移除。"
+    },
+    {
+      "questionId": "q-26-02",
+      "reason": "Agent adjudication: non-teacher discussion content",
+      "detail": "文字證據顯示為學生邀請、學生分享/回答或學生確認，未見教師實質教學內容；依規則僅在此明確情形移除。"
+    },
+    {
+      "questionId": "q-26-03",
+      "reason": "Agent adjudication: non-teacher discussion content",
+      "detail": "文字證據顯示為學生邀請、學生分享/回答或學生確認，未見教師實質教學內容；依規則僅在此明確情形移除。"
+    }
+  ]
 }
