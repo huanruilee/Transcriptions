@@ -1,0 +1,14 @@
+{
+  "schema": "study-group-content-review-remediation/v1",
+  "decision": "REMOVED_NON_TEACHER_SUMMARY_INDEXES",
+  "items": [
+    {"playlistIndex": 14, "questionId": "q-16-04", "reason": "response was a participant acknowledgement, not teacher instruction"},
+    {"playlistIndex": 22, "questionId": "q-11-01", "reason": "response was only acknowledgement and thanks"},
+    {"playlistIndex": 30, "questionId": "q-16-01", "reason": "source explicitly says the question was not answered"},
+    {"playlistIndex": 30, "questionId": "q-16-02", "reason": "source explicitly says the question was not answered"},
+    {"playlistIndex": 36, "questionId": "q-31-03", "reason": "question calls on another participant; response is not teacher instruction"}
+  ],
+  "retainedChange": {"playlistIndex": 5, "questionId": "q-23-01", "change": "removed two acknowledgement bullets before the teacher's opening"},
+  "limitations": ["Classification used transcript context; no new audio diarization was performed."],
+  "remediatedAt": "2026-09-12"
+}

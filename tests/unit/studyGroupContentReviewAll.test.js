@@ -64,6 +64,19 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
     for (const id of forbiddenNonQuestionIds) {
       assert.equal(output.questionIndex.some((question) => question.id === id), false);
     }
+    const forbiddenNoTeacherResponseIds = {
+      14: ['q-16-04'],
+      22: ['q-11-01'],
+      30: ['q-16-01', 'q-16-02'],
+      36: ['q-31-03'],
+    }[playlistIndex] ?? [];
+    for (const id of forbiddenNoTeacherResponseIds) {
+      assert.equal(output.questionIndex.some((question) => question.id === id), false);
+    }
+    if (playlistIndex === 5) {
+      const summary = output.teacherSummaries.find((item) => item.questionId === 'q-23-01');
+      assert.equal(summary.bullets.some((bullet) => bullet.includes('可以了這樣我明白')), false);
+    }
     for (const question of output.questionIndex) {
       assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
       const summary = summaries.get(question.id);
