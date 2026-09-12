@@ -399,14 +399,6 @@
       "id": "q-17-07"
     },
     {
-      "localIndex": 8,
-      "question": "那隻能是聲音所要表達的內容嗎",
-      "sourceSegmentIds": [
-        "seg-1952"
-      ],
-      "id": "q-17-08"
-    },
-    {
       "localIndex": 10,
       "question": "兔子頭上有長腳，這件事嗎",
       "sourceSegmentIds": [
@@ -1104,7 +1096,6 @@
         "seg-1182",
         "seg-1183",
         "seg-1184",
-        "seg-1185",
         "seg-1186",
         "seg-1187",
         "seg-1188",
@@ -1516,16 +1507,6 @@
       "questionId": "q-17-07"
     },
     {
-      "localIndex": 8,
-      "bullets": [
-        "法師確認「對對」，同意只能是聲音所要表達的內容。"
-      ],
-      "sourceSegmentIds": [
-        "seg-1953"
-      ],
-      "questionId": "q-17-08"
-    },
-    {
       "localIndex": 10,
       "bullets": [
         "法師回答「嗯不是」，否定兔子頭上有長角這件事是聲音的所緣。"
@@ -1542,8 +1523,7 @@
       ],
       "sourceSegmentIds": [
         "seg-1962",
-        "seg-1963",
-        "seg-1964"
+        "seg-1963"
       ],
       "questionId": "q-17-11"
     },
@@ -1576,8 +1556,7 @@
       ],
       "sourceSegmentIds": [
         "seg-1986",
-        "seg-1987",
-        "seg-1988"
+        "seg-1987"
       ],
       "questionId": "q-17-15"
     },
@@ -1657,7 +1636,6 @@
         "seg-2083",
         "seg-2084",
         "seg-2085",
-        "seg-2086",
         "seg-2087",
         "seg-2088"
       ],
@@ -1783,7 +1761,6 @@
         "seg-2253",
         "seg-2254",
         "seg-2255",
-        "seg-2256",
         "seg-2257",
         "seg-2258",
         "seg-2259",
@@ -1830,8 +1807,7 @@
         "seg-2362",
         "seg-2363",
         "seg-2364",
-        "seg-2365",
-        "seg-2366"
+        "seg-2365"
       ],
       "questionId": "q-20-01"
     },
@@ -1885,7 +1861,6 @@
         "seg-2458",
         "seg-2459",
         "seg-2460",
-        "seg-2461",
         "seg-2462",
         "seg-2463",
         "seg-2464",
@@ -2048,8 +2023,7 @@
         "seg-2954",
         "seg-2955",
         "seg-2956",
-        "seg-2958",
-        "seg-2960"
+        "seg-2958"
       ],
       "questionId": "q-25-01"
     },
@@ -2389,6 +2363,11 @@
     {
       "reason": "speaker role is not proven",
       "detail": "BLOCKED: ASR-only prototype; questionIndex and teacherSummaries require human-confirmed speaker attribution."
+    },
+    {
+      "questionId": "q-17-08",
+      "reason": "teacher response source was non-substantive acknowledgement/closing thanks",
+      "detail": "Removed from candidate index pending human audio review."
     }
   ],
   "segments": [

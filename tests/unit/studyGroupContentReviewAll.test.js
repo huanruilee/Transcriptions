@@ -11,6 +11,15 @@ const SIMPLIFIED = /[为这样个说体经论门从对么后变实证觉关开�
 const AMBIGUOUS_SPEECH = /謝謝法師|我知道了|我可不可以這麼理解|這是我的理解/u;
 const BARE_ACKNOWLEDGEMENT = /^(?:對|是的|好的|好|嗯|OK)[。！!，,、 ]*$/iu;
 
+function isNonSubstantiveSummarySource(text) {
+  const normalized = text.replace(/[\s，。！？、,.!?:：]/gu, '');
+  const acknowledgementOnly = /^(?:(?:對|對啊|對的|對對對|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題)+)$/iu;
+  if (acknowledgementOnly.test(normalized)) return true;
+  if (!/(?:謝謝|感謝)/u.test(normalized)) return false;
+  const remainder = normalized.replace(/(?:對|對啊|對的|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題|謝謝|感謝|法師|老師|師兄|師姐|同學|大家|非常|很|我|了)/giu, '');
+  return remainder.length <= 2;
+}
+
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
 for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1)) {
@@ -94,6 +103,7 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
       assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
       const summary = summaries.get(question.id);
       assert.ok(summary);
+      assert.ok(summary.sourceSegmentIds.length > 0, `empty teacher summary source at ${question.id}`);
       assert.ok(summary.bullets.length > 0);
       summary.sourceSegmentIds.forEach((id) => assert.equal(allQuestionRefs.has(id), false, `summary overlaps a question source at ${question.id}`));
       const questionEnd = Math.max(...question.sourceSegmentIds.map(number));
@@ -104,6 +114,7 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
         assert.ok(byId.has(id));
         assert.equal(AMBIGUOUS_SPEECH.test(byId.get(id).text), false, `ambiguous source ${id}`);
         assert.equal(BARE_ACKNOWLEDGEMENT.test(byId.get(id).text.trim()), false, `bare acknowledgement source ${id}`);
+        assert.equal(isNonSubstantiveSummarySource(byId.get(id).text.trim()), false, `non-substantive summary source ${id}`);
       }
       for (const bullet of summary.bullets) {
         assert.equal(SIMPLIFIED.test(bullet), false);

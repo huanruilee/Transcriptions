@@ -474,14 +474,6 @@
       "id": "q-15-06"
     },
     {
-      "localIndex": 7,
-      "question": "這樣可以認同嗎",
-      "sourceSegmentIds": [
-        "seg-1799"
-      ],
-      "id": "q-15-07"
-    },
-    {
       "localIndex": 1,
       "question": "您剛才說士尊不會對不追求解脫的眾生宣說解脫之道，這樣的觀點是不是有點過於絕對？因為如果有的外道持有我見，但和士尊辯論後被折服進入內道，這算不算反例？另外，對於很執著有我的人，士尊會為他宣說有我的道理還是無我的道理？如果宣說有我的道理，這能稱為解脫之道嗎？",
       "sourceSegmentIds": [
@@ -729,18 +721,6 @@
         "seg-2448"
       ],
       "id": "q-21-03"
-    },
-    {
-      "localIndex": 1,
-      "question": "我要如何斷除我的煩惱？所以佛講了四聖諦，逆次帝強調的是小聖的解脫之道，這樣可以理解嗎？",
-      "sourceSegmentIds": [
-        "seg-2521",
-        "seg-2522",
-        "seg-2523",
-        "seg-2524",
-        "seg-2525"
-      ],
-      "id": "q-22-01"
     },
     {
       "localIndex": 2,
@@ -1037,8 +1017,7 @@
         "seg-0654",
         "seg-0655",
         "seg-0656",
-        "seg-0657",
-        "seg-0658"
+        "seg-0657"
       ],
       "questionId": "q-06-01"
     },
@@ -1085,8 +1064,7 @@
         "seg-0713",
         "seg-0714",
         "seg-0715",
-        "seg-0716",
-        "seg-0717"
+        "seg-0716"
       ],
       "questionId": "q-06-02"
     },
@@ -1717,16 +1695,6 @@
       "questionId": "q-15-06"
     },
     {
-      "localIndex": 7,
-      "bullets": [
-        "聖元表示可以認同。"
-      ],
-      "sourceSegmentIds": [
-        "seg-1800"
-      ],
-      "questionId": "q-15-07"
-    },
-    {
       "localIndex": 1,
       "bullets": [
         "對於堅持有我的人，士尊會先說有我的道理，但那個階段所說的道理不能稱為解脫之道。",
@@ -2217,16 +2185,6 @@
         "seg-2520"
       ],
       "questionId": "q-21-03"
-    },
-    {
-      "localIndex": 1,
-      "bullets": [
-        "法師確認該理解是可以的。"
-      ],
-      "sourceSegmentIds": [
-        "seg-2526"
-      ],
-      "questionId": "q-22-01"
     },
     {
       "localIndex": 2,
@@ -24714,5 +24672,17 @@
       "text": "請大家合掌"
     }
   ],
-  "status": "CANDIDATE"
+  "status": "CANDIDATE",
+  "exclusions": [
+    {
+      "questionId": "q-15-07",
+      "reason": "teacher response source was non-substantive acknowledgement/closing thanks",
+      "detail": "Removed from candidate index pending human audio review."
+    },
+    {
+      "questionId": "q-22-01",
+      "reason": "teacher response source was non-substantive acknowledgement/closing thanks",
+      "detail": "Removed from candidate index pending human audio review."
+    }
+  ]
 }

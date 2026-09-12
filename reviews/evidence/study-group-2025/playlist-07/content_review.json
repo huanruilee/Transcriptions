@@ -299,14 +299,6 @@
       "id": "q-20-02"
     },
     {
-      "localIndex": 3,
-      "question": "可不可以讓你選擇堅定地走下去？",
-      "sourceSegmentIds": [
-        "seg-2314"
-      ],
-      "id": "q-20-03"
-    },
-    {
       "localIndex": 4,
       "question": "你剛剛所說的那些利益，在沒有歸一世尊的情況下，依舊辦得到吧？",
       "sourceSegmentIds": [
@@ -1033,8 +1025,7 @@
         "seg-1725",
         "seg-1726",
         "seg-1727",
-        "seg-1728",
-        "seg-1729"
+        "seg-1728"
       ],
       "questionId": "q-15-01"
     },
@@ -1208,8 +1199,7 @@
         "seg-2094",
         "seg-2095",
         "seg-2096",
-        "seg-2097",
-        "seg-2098"
+        "seg-2097"
       ],
       "questionId": "q-18-01"
     },
@@ -1227,7 +1217,6 @@
         "seg-2211",
         "seg-2212",
         "seg-2213",
-        "seg-2214",
         "seg-2215",
         "seg-2216",
         "seg-2217",
@@ -1262,16 +1251,6 @@
         "seg-2313"
       ],
       "questionId": "q-20-02"
-    },
-    {
-      "localIndex": 3,
-      "bullets": [
-        "法師確認只學法可以讓人選擇堅定地走下去。"
-      ],
-      "sourceSegmentIds": [
-        "seg-2315"
-      ],
-      "questionId": "q-20-03"
     },
     {
       "localIndex": 4,
@@ -2059,7 +2038,6 @@
         "seg-4279",
         "seg-4280",
         "seg-4281",
-        "seg-4282",
         "seg-4283",
         "seg-4284",
         "seg-4285",
@@ -2306,6 +2284,11 @@
     {
       "reason": "speaker role is not proven",
       "detail": "BLOCKED: ASR-only prototype; questionIndex and teacherSummaries require human-confirmed speaker attribution."
+    },
+    {
+      "questionId": "q-20-03",
+      "reason": "teacher response source was non-substantive acknowledgement/closing thanks",
+      "detail": "Removed from candidate index pending human audio review."
     }
   ],
   "segments": [
