@@ -1,0 +1,20 @@
+{
+  "schema": "study-group-publication-audit/v1",
+  "courseId": "shi-liang-lun-study-group-2025",
+  "totalSessions": 42,
+  "decision": "PASS_WITH_EXPLICIT_UNBOUND",
+  "checks": {
+    "noMedia": [],
+    "invalidTimestamps": [],
+    "allSentencesPending": [],
+    "noQuestions": [],
+    "noTeacherSummaries": [],
+    "unbound": ["34", "27B"]
+  },
+  "notes": [
+    "Timestamp validation uses the published sentence fields start and end.",
+    "Question indexes are question-level and teacher summaries are paragraph-level; their counts are intentionally not compared.",
+    "Session 34 is explicitly unbound by independent source audit; 27B is an ancillary lower-part session without a separate source outline."
+  ],
+  "auditedAt": "2026-09-12"
+}
