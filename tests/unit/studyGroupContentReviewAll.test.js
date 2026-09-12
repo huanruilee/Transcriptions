@@ -53,6 +53,17 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
     const duplicateIds = [...duplicateQuestions.values()].filter((ids) => ids.length > 1);
     const allowedRepeatedQuestionIds = playlistIndex === 7 ? [['q-12-01', 'q-22-01']] : [];
     assert.deepEqual(duplicateIds, allowedRepeatedQuestionIds);
+    const forbiddenNonQuestionIds = {
+      2: ['q-28-01'],
+      8: ['q-24-03'],
+      15: ['q-09-01'],
+      17: ['q-30-01'],
+      36: ['q-07-02'],
+      40: ['q-18-01'],
+    }[playlistIndex] ?? [];
+    for (const id of forbiddenNonQuestionIds) {
+      assert.equal(output.questionIndex.some((question) => question.id === id), false);
+    }
     for (const question of output.questionIndex) {
       assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
       const summary = summaries.get(question.id);
