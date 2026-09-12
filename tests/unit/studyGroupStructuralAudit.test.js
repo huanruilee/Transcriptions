@@ -40,3 +40,10 @@ test('question and teacher-summary counts are not treated as the same data layer
   assert.notEqual(session.discussionQuestions.length, summaryCount);
   assert.ok(summaryCount > 0);
 });
+
+test('published 27B text is traditional Chinese while raw ASR remains untouched', () => {
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_27B.json'), 'utf8'));
+  const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
+  assert.equal(sentences.some((sentence) => /能够|有关聯/u.test(sentence.text)), false);
+  assert.equal(sentences.some((sentence) => /能够|有关聯/u.test(sentence.rawText)), true);
+});
