@@ -1,0 +1,39 @@
+{
+  "schema": "study-group-content-review-audit/v1",
+  "batch": [34, 35],
+  "decision": "PASS_STRUCTURAL_CANDIDATE_ONLY",
+  "method": "Deterministic JSON audit of the content_review layer used by the publication builder.",
+  "items": [
+    {
+      "playlistIndex": 34,
+      "status": "CANDIDATE",
+      "segments": 3573,
+      "questions": 19,
+      "summaries": 19,
+      "missingSegmentRefs": 0,
+      "boundaryViolations": 0,
+      "emptyFields": 0,
+      "duplicateQuestions": 0,
+      "prayerLikeBullets": 0,
+      "note": "The only lexical hit was 菩提心 in a doctrinal summary, not a closing prayer."
+    },
+    {
+      "playlistIndex": 35,
+      "status": "CANDIDATE",
+      "segments": 4198,
+      "questions": 48,
+      "summaries": 48,
+      "missingSegmentRefs": 0,
+      "boundaryViolations": 0,
+      "emptyFields": 0,
+      "duplicateQuestions": 0,
+      "prayerLikeBullets": 0
+    }
+  ],
+  "limitations": [
+    "No audio fidelity, speaker diarization, or doctrinal correctness was verified.",
+    "YouTube chapter metadata was used as context, not as proof of exact speaker boundaries.",
+    "CANDIDATE status remains a publication blocker."
+  ],
+  "auditedAt": "2026-09-12"
+}
