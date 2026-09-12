@@ -36,9 +36,50 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
     last_dedication = None
     for index, segment in enumerate(segments):
         text = segment.get("text", "")
-        if any(marker.search(text) for marker in dedication_markers):
-            last_dedication = index
-    return segments if last_dedication is None else segments[: last_dedication + 1]
+        matches = [match for marker in dedication_markers if (match := marker.search(text))]
+        if matches:
+            last_dedication = (index, max(match.end() for match in matches))
+    if last_dedication is None:
+        return segments
+
+    index, end = last_dedication
+    trimmed = [dict(segment) for segment in segments[: index + 1]]
+    closing = trimmed[-1]
+    for field in ("text", "rawText"):
+        if field not in closing:
+            continue
+        value = closing[field][:end]
+        if end < len(closing[field]) and closing[field][end] in "。！？!?,，、":
+            value += closing[field][end]
+        closing[field] = value
+    return trimmed
+
+
+def trim_paragraphs_after_dedication(paragraphs: list[dict]) -> list[dict]:
+    """Apply the same boundary to a pre-paragraphed prototype transcript."""
+    sentences = [sentence for paragraph in paragraphs for sentence in paragraph.get("sentences", [])]
+    trimmed_sentences = trim_after_dedication(sentences)
+    if len(trimmed_sentences) == len(sentences) and all(
+        before.get("text") == after.get("text") and before.get("rawText") == after.get("rawText")
+        for before, after in zip(sentences, trimmed_sentences)
+    ):
+        return paragraphs
+    by_id = {sentence["id"]: sentence for sentence in trimmed_sentences}
+    result = []
+    for paragraph in paragraphs:
+        kept = []
+        for sentence in paragraph.get("sentences", []):
+            if sentence["id"] not in by_id:
+                break
+            kept.append(by_id[sentence["id"]])
+        if kept:
+            updated = dict(paragraph)
+            updated["sentences"] = kept
+            updated["end"] = kept[-1]["end"]
+            result.append(updated)
+        if len(kept) < len(paragraph.get("sentences", [])):
+            break
+    return result
 
 
 def read_main_prototype() -> dict:
@@ -204,6 +245,7 @@ def main() -> None:
 
     prototype = read_main_prototype()
     prototype["displaySessionId"] = "27下"
+    prototype["paragraphs"] = trim_paragraphs_after_dedication(prototype.get("paragraphs", []))
     for paragraph in prototype.get("paragraphs", []):
         if paragraph.get("teacherSummary"):
             paragraph["teacherSummary"].setdefault("heading", "法師開示摘要")

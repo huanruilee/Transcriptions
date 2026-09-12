@@ -60,3 +60,10 @@ test('27B only closes the paragraph whose final sentence is complete', () => {
   assert.equal(finalText('p_029').endsWith('蘊體。'), false);
   assert.equal(finalText('p_030').endsWith('嗎？'), true);
 });
+
+test('study-group publication ends inside a combined closing segment after the dedication', () => {
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_27B.json'), 'utf8'));
+  const finalText = session.paragraphs.at(-1).sentences.at(-1).text;
+  assert.equal(finalText.endsWith('色受陰。'), true);
+  assert.equal(finalText.includes('我們下期見'), false);
+});
