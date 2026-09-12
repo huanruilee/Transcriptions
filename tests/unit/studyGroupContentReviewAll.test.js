@@ -59,12 +59,14 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
       15: ['q-09-01'],
       17: ['q-30-01'],
       36: ['q-07-02'],
+      38: ['q-22-01'],
       40: ['q-18-01'],
     }[playlistIndex] ?? [];
     for (const id of forbiddenNonQuestionIds) {
       assert.equal(output.questionIndex.some((question) => question.id === id), false);
     }
     const forbiddenNoTeacherResponseIds = {
+      5: ['q-14-01'],
       14: ['q-16-04'],
       22: ['q-11-01'],
       30: ['q-16-01', 'q-16-02'],
@@ -77,6 +79,11 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
       const summary = output.teacherSummaries.find((item) => item.questionId === 'q-23-01');
       assert.equal(summary.bullets.some((bullet) => bullet.includes('可以了這樣我明白')), false);
     }
+    const summaryStartsWithHandoff = output.teacherSummaries.filter((summary) => {
+      const segment = byId.get(summary.sourceSegmentIds[0]);
+      return /^(?:謝謝.*(?:師兄|師姐|老師|法師)|好的?(?:\s|,|，)*(?:晚安|大家好))$/u.test(segment?.text?.trim() ?? '');
+    });
+    assert.deepEqual(summaryStartsWithHandoff.map((summary) => summary.questionId), []);
     for (const question of output.questionIndex) {
       assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
       const summary = summaries.get(question.id);
