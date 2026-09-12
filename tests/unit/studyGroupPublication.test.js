@@ -83,6 +83,18 @@ test('session 14 source outline is preserved as a separate, traceable index', ()
   assert.match(fs.readFileSync(APP_PATH, 'utf8'), /source-outline-questions/);
 });
 
+test('session 34 remains explicitly unbound after independent source audit', () => {
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_34.json'), 'utf8'));
+  const audit = JSON.parse(fs.readFileSync(path.join(ROOT, 'reviews/evidence/study-group-source-20260912/session34_source_binding_audit.json'), 'utf8'));
+  const review = JSON.parse(fs.readFileSync(path.join(ROOT, 'reviews/evidence/study-group-source-20260912/session34_source_binding_review.json'), 'utf8'));
+  assert.equal(session.sourceOutlineId, null);
+  assert.equal(audit.result, 'UNBOUND');
+  assert.equal(audit.selectedSourceId, null);
+  assert.equal(review.decision, 'PASS');
+  assert.equal(review.acceptedResult, 'UNBOUND');
+  assert.equal(review.acceptedSourceId, null);
+});
+
 test('session 16 and 17 share the next source outline index', () => {
   const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-09.json'), 'utf8'));
   assert.equal(outline.sourceId, '32-09');
