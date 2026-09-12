@@ -1,0 +1,25 @@
+{
+  "schema": "study-group-content-batch-audit-review/v1",
+  "batch": [34, 35],
+  "decision": "FAIL_EMPTY_INDEXES",
+  "reviewer": "gx10-independent-reviewer",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "sessions": [
+    {"playlistIndex": 34, "videoId": "-m6sV_rS1bU", "segments": 3573, "questions": 0, "teacherSummaries": 0},
+    {"playlistIndex": 35, "videoId": "Kfrn27RgpXo", "segments": 4198, "questions": 0, "teacherSummaries": 0}
+  ],
+  "acceptedChecks": [
+    "schema is valid",
+    "both entries have source identity, playable=true, and positive segment counts"
+  ],
+  "findings": [
+    "Both question indexes are empty.",
+    "Both teacher summary indexes are empty.",
+    "The batch is not publishable until question extraction and teacher-summary indexing are completed."
+  ],
+  "limitations": [
+    "The audit verified aggregate counts only; no audio fidelity, transcript accuracy, semantic, or doctrinal review was performed.",
+    "No source availability fetch or raw-audio re-derivation was performed."
+  ],
+  "reviewedAt": "2026-09-12"
+}
