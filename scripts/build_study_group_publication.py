@@ -99,7 +99,7 @@ def build_session(index: int) -> tuple[dict, dict]:
     session = {
         "sessionId": session_id,
         "displaySessionId": display_session_id(source["title"], index),
-        "sourceOutlineId": "32-08" if index in (14, 15) else ("32-09" if index in (16, 17) else ("32-10" if index in (18, 19) else ("32-11" if index in (20, 21) else ("32-28" if index in (22, 23) else ("32-13" if index in (24, 25) else ("32-14" if index in (26, 27) else ("32-15" if index in (28, 29) else ("32-16" if index in (30, 31) else ("32-17" if index in (32, 33) else ("32-20" if index in (35, 36) else ("32-24" if index in (37, 38) else ("32-25" if index in (39, 40) else ("32-26" if index == 41 else None))))))))))))),
+        "sourceOutlineId": "32-02" if index in (3, 4) else ("32-08" if index in (14, 15) else ("32-09" if index in (16, 17) else ("32-10" if index in (18, 19) else ("32-11" if index in (20, 21) else ("32-28" if index in (22, 23) else ("32-13" if index in (24, 25) else ("32-14" if index in (26, 27) else ("32-15" if index in (28, 29) else ("32-16" if index in (30, 31) else ("32-17" if index in (32, 33) else ("32-20" if index in (35, 36) else ("32-24" if index in (37, 38) else ("32-25" if index in (39, 40) else ("32-26" if index == 41 else None))))))))))))))),
         "title": source["title"],
         "mediaType": "video/youtube",
         "youtubeVideoId": source["videoId"],

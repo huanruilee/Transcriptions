@@ -235,3 +235,15 @@ test('session 41 uses the 32-26 source outline index', () => {
   const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_41.json'), 'utf8'));
   assert.equal(session.sourceOutlineId, '32-26');
 });
+
+test('session 03 and 04 share the 32-02 source outline index', () => {
+  const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-02.json'), 'utf8'));
+  assert.equal(outline.sourceId, '32-02');
+  assert.deepEqual(outline.sessionIds, ['03', '04']);
+  assert.equal(outline.courseOutline.length, 6);
+  assert.equal(outline.discussionOutline.length, 14);
+  for (const sessionId of ['03', '04']) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, `sessions/session_${sessionId}.json`), 'utf8'));
+    assert.equal(session.sourceOutlineId, '32-02');
+  }
+});
