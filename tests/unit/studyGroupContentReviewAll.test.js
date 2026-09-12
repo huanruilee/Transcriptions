@@ -32,16 +32,38 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
     assert.equal(output.status, 'CANDIDATE');
     assert.equal(output.schema, 'study-group-content-review/v1');
     assert.equal(manifest.status, 'BLOCKED_REVIEW_REQUIRED');
-    assert.equal(output.segments.length, raw.segments.length);
+    assert.ok(output.segments.length >= raw.segments.length);
+    assert.equal(manifest.segments, output.segments.length);
     assert.equal(output.source.videoId, candidate.source.videoId);
     assert.equal(fs.existsSync(path.join(ROOT, output.provenance.rawAsrPath)), true);
     assert.equal(fs.existsSync(path.join(ROOT, output.provenance.referencePath)), true);
-    assert.deepEqual(output.segments.map((s) => s.id), raw.segments.map((s) => s.id));
+    assert.deepEqual(output.segments.slice(0, raw.segments.length).map((s) => s.id), raw.segments.map((s) => s.id));
     for (let i = 0; i < raw.segments.length; i += 1) {
       assert.equal(output.segments[i].start, raw.segments[i].start);
       assert.equal(output.segments[i].end, raw.segments[i].end);
       assert.ok(output.segments[i].text.length > 0);
       assert.equal(SIMPLIFIED.test(output.segments[i].text), false, `simplified text at ${output.segments[i].id}`);
+    }
+    const supplementalSegments = output.segments.slice(raw.segments.length);
+    if (supplementalSegments.length > 0) {
+      const evidencePath = path.join(ROOT, output.provenance.supplementalAudioEvidencePath ?? '');
+      assert.equal(fs.existsSync(evidencePath), true, 'supplemental segments require an audio evidence artifact');
+      const evidence = JSON.parse(fs.readFileSync(evidencePath, 'utf8'));
+      assert.equal(evidence.status, 'CONFIRMED');
+      assert.equal(output.provenance.supplementalAudioSha256, evidence.source.sha256);
+      assert.equal(supplementalSegments.length, evidence.audioConfirmedSegments.length);
+      let previousId = Number(raw.segments.at(-1).id.slice(4));
+      let previousEnd = raw.segments.at(-1).end;
+      supplementalSegments.forEach((segment, index) => {
+        const source = evidence.audioConfirmedSegments[index];
+        assert.equal(Number(segment.id.slice(4)), previousId + 1);
+        assert.equal(segment.start, source.publicationStart ?? source.start);
+        assert.equal(segment.end, source.end);
+        assert.equal(segment.text, source.publishedText);
+        assert.ok(segment.start >= previousEnd);
+        previousId += 1;
+        previousEnd = segment.end;
+      });
     }
     const byId = new Map(output.segments.map((s) => [s.id, s]));
     const number = (id) => Number(id.slice(4));

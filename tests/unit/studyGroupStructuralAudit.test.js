@@ -67,3 +67,14 @@ test('study-group publication ends inside a combined closing segment after the d
   assert.equal(finalText.endsWith('色受陰。'), true);
   assert.equal(finalText.includes('我們下期見'), false);
 });
+
+test('audio-confirmed dedication is not dropped after the hand-clasp cue', () => {
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_33.json'), 'utf8'));
+  const finalSentences = session.paragraphs.at(-1).sentences.map((sentence) => sentence.text);
+  assert.deepEqual(finalSentences.slice(-4), [
+    '遇此無上大師教',
+    '皆由上師生恩故',
+    '此善迴向諸眾生',
+    '願成善士攝受因。',
+  ]);
+});

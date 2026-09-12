@@ -1,0 +1,34 @@
+{
+  "schema": "independent-tail-review/v1",
+  "reviewer": "guxia",
+  "runtime": {
+    "host": "gx10",
+    "provider": "vllm-local",
+    "model": "Qwen3.8-27B",
+    "sessionId": "20260912_223546_6fcff2"
+  },
+  "posture": "read-only",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "id": "audio-evidence",
+      "pass": true
+    },
+    {
+      "id": "raw-prefix-and-supplement",
+      "pass": true
+    },
+    {
+      "id": "candidate-status",
+      "pass": true
+    },
+    {
+      "id": "published-session-tail",
+      "pass": true
+    },
+    {
+      "id": "test-contracts",
+      "pass": true
+    }
+  ]
+}

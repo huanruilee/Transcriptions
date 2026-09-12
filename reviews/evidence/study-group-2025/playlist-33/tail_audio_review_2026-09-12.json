@@ -1,0 +1,72 @@
+{
+  "schema": "study-group-tail-audio-review/v1",
+  "status": "CONFIRMED",
+  "sessionId": "33",
+  "source": {
+    "provider": "google-drive",
+    "fileId": "10gYPacDIXHF9Kqw_WQMozEPTxzuvjonN",
+    "title": "2025年《釋量論・第二品》第17講大組共學音檔（下） .mp3",
+    "mimeType": "audio/mpeg",
+    "bytes": 83042112,
+    "durationSeconds": 10380.24,
+    "sha256": "81802e8ecf4683852357c4d23328239ae13cc241b89e43511cb17acd32b7bda6"
+  },
+  "tailClip": {
+    "absoluteStartSeconds": 10350.24,
+    "durationSeconds": 30,
+    "sha256": "92b7300328368c3093d85625db7efda654581ce2d79fec196984265ed9cf80e6"
+  },
+  "asrRuntime": {
+    "host": "gx10",
+    "endpoint": "http://127.0.0.1:8010",
+    "engine": "faster-whisper",
+    "model": "large-v3-turbo",
+    "device": "cuda",
+    "computeType": "int8"
+  },
+  "audioConfirmedSegments": [
+    {
+      "start": 10365.32,
+      "end": 10369.69,
+      "publicationStart": 10365.42,
+      "rawAsr": "遇此無上大師教",
+      "publishedText": "遇此無上大師教"
+    },
+    {
+      "start": 10369.69,
+      "end": 10371.85,
+      "rawAsr": "皆由上師生恩故",
+      "publishedText": "皆由上師生恩故"
+    },
+    {
+      "start": 10371.85,
+      "end": 10374.27,
+      "rawAsr": "此上回向諸眾生",
+      "publishedText": "此善迴向諸眾生"
+    },
+    {
+      "start": 10374.27,
+      "end": 10376.73,
+      "rawAsr": "願成善事設受因",
+      "publishedText": "願成善士攝受因。"
+    }
+  ],
+  "normalizationEvidence": {
+    "repeatedCourseCorpus": [
+      "遇此無上大師教",
+      "皆由上師生恩故",
+      "此善迴向諸眾生"
+    ],
+    "learnedCorrection": {
+      "path": "courses/入中論善顯密意疏/learned_corrections.json",
+      "original": "願成善事設受陰",
+      "proposed": "願成善士攝受因",
+      "confidence": 0.9,
+      "use": "The tail ASR confirms the spoken syllables; this existing correction supplies the normalized Buddhist wording despite the ASR final-character variation."
+    }
+  },
+  "cleanup": {
+    "temporaryFullAudioDeleted": true,
+    "temporaryTailClipDeleted": true
+  }
+}
