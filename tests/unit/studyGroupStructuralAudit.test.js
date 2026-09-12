@@ -47,3 +47,12 @@ test('published 27B text is traditional Chinese while raw ASR remains untouched'
   assert.equal(sentences.some((sentence) => /能够|有关聯/u.test(sentence.text)), false);
   assert.equal(sentences.some((sentence) => /能够|有关聯/u.test(sentence.rawText)), true);
 });
+
+test('27B only closes the paragraph whose final sentence is complete', () => {
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_27B.json'), 'utf8'));
+  const finalText = (id) => session.paragraphs.find((paragraph) => paragraph.id === id).sentences.at(-1).text;
+  assert.equal(finalText('p_007').endsWith('疑惑。'), false);
+  assert.equal(finalText('p_008').endsWith('同學。'), false);
+  assert.equal(finalText('p_029').endsWith('蘊體。'), false);
+  assert.equal(finalText('p_030').endsWith('嗎？'), true);
+});
