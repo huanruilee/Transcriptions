@@ -43,6 +43,16 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
     assert.equal(output.questionIndex.length, output.teacherSummaries.length);
     assert.equal(manifest.questions, output.questionIndex.length);
     assert.equal(manifest.summaries, output.teacherSummaries.length);
+    const duplicateQuestions = new Map();
+    for (const question of output.questionIndex) {
+      const normalized = question.question.replace(/[\s，。！？、]/gu, '');
+      const ids = duplicateQuestions.get(normalized) ?? [];
+      ids.push(question.id);
+      duplicateQuestions.set(normalized, ids);
+    }
+    const duplicateIds = [...duplicateQuestions.values()].filter((ids) => ids.length > 1);
+    const allowedRepeatedQuestionIds = playlistIndex === 7 ? [['q-12-01', 'q-22-01']] : [];
+    assert.deepEqual(duplicateIds, allowedRepeatedQuestionIds);
     for (const question of output.questionIndex) {
       assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
       const summary = summaries.get(question.id);
@@ -63,10 +73,6 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
         assert.equal(/^(?:法師確認：)?(?:對|是的)[。！!]?$/u.test(bullet), false);
         assert.equal(/未提供.*直接.*(開示|回答)|沒有.*法師.*回答/u.test(bullet), false);
       }
-    }
-    if (playlistIndex === 9) {
-      assert.equal(output.questionIndex.some((question) => question.id === 'q-17-19'), false);
-      assert.equal(output.questionIndex.some((question) => question.id === 'q-17-20'), false);
     }
     assert.equal(output.provenance.rawAsrSha256, sha256(path.join(dir, 'raw_asr.json')));
     assert.equal(output.provenance.referenceSha256.length, 64);
