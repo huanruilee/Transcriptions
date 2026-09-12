@@ -9,6 +9,7 @@ const COURSE = path.join(ROOT, 'courses/2025釋量論第二品大組共學');
 const CANDIDATE = path.join(ROOT, 'reviews/evidence/study-group-source-20260912/question_mapping_candidate.json');
 const CANDIDATE_15 = path.join(ROOT, 'reviews/evidence/study-group-source-20260912/question_mapping_15_candidate.json');
 const CANDIDATE_10 = path.join(ROOT, 'reviews/evidence/study-group-source-20260912/session10_mapping_candidate.json');
+const CANDIDATE_11 = path.join(ROOT, 'reviews/evidence/study-group-source-20260912/session11_mapping_candidate.json');
 
 test('source-question mapping is complete, grounded, and remains candidate-only', () => {
   const candidate = JSON.parse(fs.readFileSync(CANDIDATE, 'utf8'));
@@ -42,6 +43,21 @@ test('session 10 source-question mapping preserves explicit unmatched candidates
   assert.deepEqual(candidate.mappings.map((mapping) => mapping.sourceQuestionNo), Array.from({ length: 10 }, (_, i) => i + 1));
   assert.ok(candidate.mappings.every((mapping) => mapping.confidence === 'unmatched'));
   assert.ok(candidate.mappings.every((mapping) => mapping.sessionId === null && mapping.sessionQuestionId === null && mapping.evidence === null));
+  assert.equal(candidate.status, 'candidate');
+  assert.equal(candidate.reviewRequired, true);
+});
+
+test('session 11 source-question mapping keeps uncertain matches candidate-only', () => {
+  const candidate = JSON.parse(fs.readFileSync(CANDIDATE_11, 'utf8'));
+  const knownIds = new Map();
+  for (const sessionId of ['20', '21']) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE, `sessions/session_${sessionId}.json`), 'utf8'));
+    knownIds.set(sessionId, new Set(session.discussionQuestions.map((question) => question.id)));
+  }
+  assert.equal(candidate.sourceId, '32-11');
+  assert.deepEqual(candidate.mappings.map((mapping) => mapping.sourceQuestionNo), Array.from({ length: 13 }, (_, i) => i + 1));
+  assert.ok(candidate.mappings.every((mapping) => mapping.sessionQuestionId === null || knownIds.get(mapping.sessionId)?.has(mapping.sessionQuestionId)));
+  assert.ok(candidate.mappings.filter((mapping) => mapping.confidence === 'unmatched').every((mapping) => mapping.sessionId === null && mapping.sessionQuestionId === null));
   assert.equal(candidate.status, 'candidate');
   assert.equal(candidate.reviewRequired, true);
 });
