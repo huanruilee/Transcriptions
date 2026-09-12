@@ -64,6 +64,10 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
         assert.equal(/未提供.*直接.*(開示|回答)|沒有.*法師.*回答/u.test(bullet), false);
       }
     }
+    if (playlistIndex === 9) {
+      assert.equal(output.questionIndex.some((question) => question.id === 'q-17-19'), false);
+      assert.equal(output.questionIndex.some((question) => question.id === 'q-17-20'), false);
+    }
     assert.equal(output.provenance.rawAsrSha256, sha256(path.join(dir, 'raw_asr.json')));
     assert.equal(output.provenance.referenceSha256.length, 64);
     if (playlistIndex >= 33) {

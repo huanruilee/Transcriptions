@@ -96,10 +96,33 @@ def build_session(index: int) -> tuple[dict, dict]:
     questions = review["questionIndex"]
     summaries = review["teacherSummaries"]
     session_id = f"{index:02d}"
+    source_outline_by_index = {
+        **dict.fromkeys((1, 2), "32-01"),
+        **dict.fromkeys((3, 4), "32-02"),
+        **dict.fromkeys((5, 6), "32-03"),
+        **dict.fromkeys((7, 8), "32-04"),
+        **dict.fromkeys((9, 10), "32-05"),
+        **dict.fromkeys((11, 12), "32-06"),
+        13: "32-07",
+        **dict.fromkeys((14, 15), "32-08"),
+        **dict.fromkeys((16, 17), "32-09"),
+        **dict.fromkeys((18, 19), "32-10"),
+        **dict.fromkeys((20, 21), "32-11"),
+        **dict.fromkeys((22, 23), "32-28"),
+        **dict.fromkeys((24, 25), "32-13"),
+        **dict.fromkeys((26, 27), "32-14"),
+        **dict.fromkeys((28, 29), "32-15"),
+        **dict.fromkeys((30, 31), "32-16"),
+        **dict.fromkeys((32, 33), "32-17"),
+        **dict.fromkeys((35, 36), "32-20"),
+        **dict.fromkeys((37, 38), "32-24"),
+        **dict.fromkeys((39, 40), "32-25"),
+        41: "32-26",
+    }
     session = {
         "sessionId": session_id,
         "displaySessionId": display_session_id(source["title"], index),
-        "sourceOutlineId": "32-01" if index in (1, 2) else ("32-02" if index in (3, 4) else ("32-03" if index in (5, 6) else ("32-04" if index in (7, 8) else ("32-05" if index in (9, 10) else ("32-06" if index in (11, 12) else ("32-07" if index == 13 else ("32-08" if index in (14, 15) else ("32-09" if index in (16, 17) else ("32-10" if index in (18, 19) else ("32-11" if index in (20, 21) else ("32-28" if index in (22, 23) else ("32-13" if index in (24, 25) else ("32-14" if index in (26, 27) else ("32-15" if index in (28, 29) else ("32-16" if index in (30, 31) else ("32-17" if index in (32, 33) else ("32-20" if index in (35, 36) else ("32-24" if index in (37, 38) else ("32-25" if index in (39, 40) else ("32-26" if index == 41 else None))))))))))))))))))),
+        "sourceOutlineId": source_outline_by_index.get(index),
         "title": source["title"],
         "mediaType": "video/youtube",
         "youtubeVideoId": source["videoId"],
