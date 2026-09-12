@@ -69,6 +69,7 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
       5: ['q-14-01'],
       14: ['q-16-04'],
       22: ['q-11-01'],
+      27: ['q-28-01'],
       30: ['q-16-01', 'q-16-02'],
       36: ['q-31-03'],
     }[playlistIndex] ?? [];
@@ -84,6 +85,11 @@ for (const playlistIndex of Array.from({ length: 41 }, (_, index) => index + 1))
       return /^(?:謝謝.*(?:師兄|師姐|老師|法師)|好的?(?:\s|,|，)*(?:晚安|大家好))$/u.test(segment?.text?.trim() ?? '');
     });
     assert.deepEqual(summaryStartsWithHandoff.map((summary) => summary.questionId), []);
+    const summaryEndsWithHandoff = output.teacherSummaries.filter((summary) => {
+      const segment = byId.get(summary.sourceSegmentIds.at(-1));
+      return /^(?:謝謝|好謝謝|好的謝謝|謝謝法師|謝謝老師|以上)[。！!，,、 ]*$/u.test(segment?.text?.trim() ?? '');
+    });
+    assert.deepEqual(summaryEndsWithHandoff.map((summary) => summary.questionId), []);
     for (const question of output.questionIndex) {
       assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
       const summary = summaries.get(question.id);
