@@ -12,7 +12,7 @@ test('all study-group sessions satisfy structural transcript contracts', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
   const intentionallyUnbound = new Set(['34', '27B']);
 
-  assert.equal(course.sessions.length, 42);
+  assert.equal(course.sessions.length, 43);
   for (const entry of course.sessions) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
     const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
@@ -72,6 +72,17 @@ test('audio-confirmed dedication is not dropped after the hand-clasp cue', () =>
   const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_33.json'), 'utf8'));
   const finalSentences = session.paragraphs.at(-1).sentences.map((sentence) => sentence.text);
   assert.deepEqual(finalSentences.slice(-4), [
+    '遇此無上大師教',
+    '皆由上師生恩故',
+    '此善迴向諸眾生',
+    '願成善士攝受因。',
+  ]);
+});
+
+test('session 44 keeps a dedication split across adjacent ASR segments', () => {
+  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_44.json'), 'utf8'));
+  const finalText = session.paragraphs.at(-1).sentences.map((sentence) => sentence.text);
+  assert.deepEqual(finalText.slice(-4), [
     '遇此無上大師教',
     '皆由上師生恩故',
     '此善迴向諸眾生',

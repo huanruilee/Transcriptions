@@ -34,11 +34,29 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
         re.compile(r"願成善"),
     )
     last_dedication = None
+    pending_dedication = None
     for index, segment in enumerate(segments):
         text = segment.get("text", "")
         matches = [match for marker in dedication_markers if (match := marker.search(text))]
         if matches:
             last_dedication = (index, max(match.end() for match in matches))
+            pending_dedication = index if any(match.end() >= len(text) - 2 for match in matches) else None
+        elif pending_dedication is not None:
+            joined = "".join(item.get("text", "") for item in segments[pending_dedication:index + 1])
+            if re.search(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)", joined):
+                merged = dict(segments[index])
+                merged["start"] = segments[pending_dedication].get("start", merged.get("start"))
+                for field in ("text", "rawText"):
+                    if field in merged:
+                        merged[field] = "".join(item.get(field, "") for item in segments[pending_dedication:index + 1])
+                segments = segments[:pending_dedication] + [merged] + segments[index + 1:]
+                index = pending_dedication
+                text = merged.get("text", "")
+                if text and text[-1] not in "。！？!?,，、":
+                    merged["text"] = text + "。"
+                    text = merged["text"]
+                last_dedication = (index, len(text))
+                pending_dedication = None
     if last_dedication is None:
         return segments
 
@@ -174,6 +192,7 @@ def build_session(index: int) -> tuple[dict, dict]:
         **dict.fromkeys((37, 38), "32-24"),
         **dict.fromkeys((39, 40), "32-25"),
         41: "32-26",
+        44: "32-26",
     }
     session = {
         "sessionId": session_id,
@@ -230,7 +249,7 @@ def main() -> None:
     sessions = []
     catalog_sessions = []
     toc_nodes = []
-    for index in range(1, 42):
+    for index in [*range(1, 42), 44]:
         session, catalog_entry = build_session(index)
         sessions.append(session)
         catalog_sessions.append(catalog_entry)
@@ -284,7 +303,6 @@ def main() -> None:
         "unavailableSessions": [
             {"playlistIndex": 42, "reason": "youtube_unavailable"},
             {"playlistIndex": 43, "reason": "youtube_private"},
-            {"playlistIndex": 44, "reason": "source_audio_silent"},
         ],
     })
     write_json(COURSE_DIR / "toc.json", {

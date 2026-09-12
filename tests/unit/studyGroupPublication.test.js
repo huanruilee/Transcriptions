@@ -16,13 +16,13 @@ test('study-group publication exposes every processed playlist entry', () => {
   const entry = catalog.courses.find((course) => course.id === 'shi-liang-lun-study-group-2025');
   assert.ok(entry, 'study-group course must be registered in the catalog');
   assert.equal(entry.path, 'courses/2025釋量論第二品大組共學');
-  assert.equal(entry.totalSessions, 42);
+  assert.equal(entry.totalSessions, 43);
 
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.equal(course.sessions.length, 42);
+  assert.equal(course.sessions.length, 43);
   assert.deepEqual(
     course.sessions.map((session) => session.sessionId),
-    [...Array.from({ length: 41 }, (_, index) => String(index + 1).padStart(2, '0')), '27B'],
+    [...Array.from({ length: 41 }, (_, index) => String(index + 1).padStart(2, '0')), '44', '27B'],
   );
 
   for (const session of course.sessions) {
@@ -49,7 +49,6 @@ test('study-group publication records unavailable playlist entries instead of hi
   assert.deepEqual(course.unavailableSessions, [
     { playlistIndex: 42, reason: 'youtube_unavailable' },
     { playlistIndex: 43, reason: 'youtube_private' },
-    { playlistIndex: 44, reason: 'source_audio_silent' },
   ]);
 });
 
