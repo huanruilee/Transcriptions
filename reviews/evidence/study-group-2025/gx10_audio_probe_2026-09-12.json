@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "agent": "xiaofa",
+  "host": "gx10-2887",
+  "checkedAt": "2026-09-12T11:01:04+08:00",
+  "source": "YouTube playlist PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "checks": {
+    "youtubePage": "HTTP/2 200",
+    "audioRangeRequest": "HTTP/1.1 206 Partial Content",
+    "audioContentType": "audio/webm",
+    "rangeSupport": true,
+    "ytDlp": "available",
+    "ffprobe": "available",
+    "persistedSignedMediaUrl": false
+  },
+  "constraints": [
+    "Use range streaming for processing where possible.",
+    "Do not persist short-lived googlevideo URLs."
+  ],
+  "hermesSession": "20260912_110104_cd4d2e"
+}
