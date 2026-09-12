@@ -13,7 +13,7 @@ const BARE_ACKNOWLEDGEMENT = /^(?:對|是的|好的|好|嗯|OK)[。！!，,、 ]
 
 function isNonSubstantiveSummarySource(text) {
   const normalized = text.replace(/[\s，。！？、,.!?:：]/gu, '');
-  const acknowledgementOnly = /^(?:(?:對|對啊|對的|對對對|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題|以上)+)$/iu;
+  const acknowledgementOnly = /^(?:(?:對|對啊|對的|對對對|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題|以上|大家晚安)+)$/iu;
   if (acknowledgementOnly.test(normalized)) return true;
   if (!/(?:謝謝|感謝)/u.test(normalized)) return false;
   const remainder = normalized.replace(/(?:對|對啊|對的|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題|謝謝|感謝|法師|老師|師兄|師姐|同學|大家|非常|很|我|了)/giu, '');
