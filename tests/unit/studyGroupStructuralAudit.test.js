@@ -25,6 +25,10 @@ test('all study-group sessions satisfy structural transcript contracts', () => {
     }
     assert.ok(session.discussionQuestions.length > 0, `missing questions ${entry.sessionId}`);
     assert.ok(session.paragraphs.some((paragraph) => paragraph.teacherSummary), `missing teacher summary ${entry.sessionId}`);
+    const finalText = sentences.at(-1).text;
+    if (sentences.some((sentence) => /願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)/u.test(sentence.text))) {
+      assert.equal(/^(?:謝謝|感謝|好謝謝|謝謝大家|大家晚安)[。！!，,、 ]*$/u.test(finalText), false);
+    }
     const sourceOutlineId = session.sourceOutlineId ?? null;
     if (sourceOutlineId === null) {
       assert.equal(intentionallyUnbound.has(entry.sessionId), true, `unexpected unbound source ${entry.sessionId}`);

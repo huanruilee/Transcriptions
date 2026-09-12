@@ -27,6 +27,20 @@ def write_json(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
+def trim_after_dedication(segments: list[dict]) -> list[dict]:
+    """Keep the transcript through the final dedication verse, excluding sign-off noise."""
+    dedication_markers = (
+        re.compile(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)") ,
+        re.compile(r"願成善"),
+    )
+    last_dedication = None
+    for index, segment in enumerate(segments):
+        text = segment.get("text", "")
+        if any(marker.search(text) for marker in dedication_markers):
+            last_dedication = index
+    return segments if last_dedication is None else segments[: last_dedication + 1]
+
+
 def read_main_prototype() -> dict:
     path = "courses/2025釋量論第二品大組共學/sessions/session_27B.json"
     raw = subprocess.check_output(["git", "show", f"main:{path}"], cwd=ROOT)
@@ -34,6 +48,7 @@ def read_main_prototype() -> dict:
 
 
 def make_paragraphs(segments: list[dict], questions: list[dict], summaries: list[dict]) -> list[dict]:
+    segments = trim_after_dedication(segments)
     by_segment = {segment["id"]: segment for segment in segments}
     question_starts = {question["sourceSegmentIds"][0]: question for question in questions}
     summary_ends = {
