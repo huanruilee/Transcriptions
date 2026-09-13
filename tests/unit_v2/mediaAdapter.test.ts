@@ -62,6 +62,7 @@ describe('MediaAdapter Test Pattern (TDD)', () => {
     const { useCourseStore } = await import('../../src/stores/course');
     const App = (await import('../../src/App.vue')).default;
 
+    window.history.replaceState({}, '', '/?course=ru-zhong-lun');
     setActivePinia(createPinia());
     const wrapper = mount(App);
     const courseStore = useCourseStore();

@@ -40,7 +40,7 @@ export const useCourseStore = defineStore('course', {
         title: '2025《釋量論・第二品》大組共學',
         master: '大組共學',
         path: 'courses/2025釋量論第二品大組共學',
-        mediaType: 'video/youtube',
+        mediaType: 'audio/mp3',
       },
     ],
     sessions: [] as SessionMeta[],
