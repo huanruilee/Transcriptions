@@ -104,6 +104,19 @@ describe('釋量論第二品第一講 UI 路由與影音回歸合約', () => {
 
     expect((wrapper.find('#course-select').element as HTMLSelectElement).value).toBe('shi-liang-lun-er');
     expect(wrapper.find('.brand-title').text()).toContain('釋量論第二品');
+    expect(wrapper.find('#course-chooser').exists()).toBe(false);
+  });
+
+  it('沒有 course 參數時必須先顯示課程選擇，不得直接載入入中論', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://example.test/') as any;
+    const wrapper = mount(App);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(wrapper.find('#course-chooser').exists()).toBe(true);
+    expect(wrapper.findAll('.course-choice')).toHaveLength(3);
+    expect(wrapper.find('#course-chooser').text()).toContain('請選擇課程');
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 
   it('釋量論第一講必須使用 YouTube iframe，不得把 Drive URL 塞入原生 audio', async () => {

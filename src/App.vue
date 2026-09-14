@@ -1,5 +1,16 @@
 <template>
   <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
+    <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
+      <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
+        <h1 id="course-chooser-title">請選擇課程</h1>
+        <div class="course-choice-list">
+          <button v-for="course in courseStore.catalog" :key="course.id" class="course-choice" @click="chooseInitialCourse(course.id)">
+            <strong>{{ course.title }}</strong>
+          </button>
+        </div>
+      </section>
+    </main>
+    <template v-else>
     <!-- 頂部 3 段式導航欄 (Sticky Header) -->
     <header class="app-header">
       <div class="header-left">
@@ -594,6 +605,7 @@
         <button class="toast-close" @click="uiStore.toast.visible = false">✕</button>
       </div>
     </Transition>
+    </template>
   </div>
 </template>
 
@@ -634,6 +646,18 @@ const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | nu
 const sourceOutline = ref<any>(null);
 const currentDiscussionQuestions = ref<any[]>([]);
 const isAudioLoading = ref(false);
+const isCourseChooserOpen = ref(false);
+const isChoosingCourse = ref(false);
+
+function chooseInitialCourse(courseId: string) {
+  isChoosingCourse.value = true;
+  courseStore.currentCourseId = courseId;
+  const url = new URL(window.location.href);
+  url.searchParams.set('course', courseId);
+  window.history.replaceState({}, '', url);
+  isCourseChooserOpen.value = false;
+  window.location.reload();
+}
 
 // 彈窗狀態
 // Keep the player visible while the transcript scrolls; users can restore it
@@ -818,11 +842,12 @@ function playMedia() {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
+      isAudioLoading.value = true;
       if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
-      audioEl.play().catch(() => {});
+      audioEl.play().then(() => { isAudioLoading.value = false; }).catch(() => { isAudioLoading.value = false; });
     }
   }
 
@@ -1223,6 +1248,9 @@ onMounted(async () => {
     const courseParam = urlParams.get('course');
     if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
       courseStore.currentCourseId = courseParam;
+    } else {
+      isCourseChooserOpen.value = true;
+      return;
     }
   }
 

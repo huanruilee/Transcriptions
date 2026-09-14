@@ -49,7 +49,7 @@ test('chunk assembler clips overlap padding and source-duration overflow', () =>
   }
 });
 
-test('27下 prototype registers an independent remote-audio course', () => {
+test('27下 remains addressable inside the published study-group course', () => {
   const catalog = readJson('courses/catalog.json');
   const course = catalog.courses.find((item) => item.id === COURSE_ID);
 
@@ -64,12 +64,21 @@ test('27下 prototype registers an independent remote-audio course', () => {
 
 test('27下 study-group course uses question TOC and preserves 27B provenance', () => {
   const course = readJson(`${COURSE_PATH}/course.json`);
+  const audioMap = readJson(`${COURSE_PATH}/audio_map.json`);
   const toc = readJson(`${COURSE_PATH}/toc.json`);
 
   assert.equal(course.courseId, COURSE_ID);
   assert.equal(course.tocMode, 'discussion-questions');
   assert.ok(course.sessions.some((item) => item.sessionId === '27B'));
   assert.equal(course.sessions.find((item) => item.sessionId === '27B').status, 'review-ready');
+  assert.equal(audioMap['27B'].source, 'google-drive');
+  assert.equal(audioMap['27B'].fileId, DRIVE_FILE_ID);
+  assert.equal(audioMap['27B'].accessScope, 'tailnet');
+  assert.equal(audioMap['27B'].proxy, 'gx10');
+  assert.match(audioMap['27B'].sourceUrl, /^https:\/\/drive\.usercontent\.google\.com\//);
+  assert.match(audioMap['27B'].sourceUrl, /[?&]export=open(?:&|$)/);
+  assert.match(audioMap['27B'].url, /^https:\/\/gx10-2887\.tail378c21\.ts\.net:9443\/audio\//);
+  assert.ok(!audioMap['27B'].url.startsWith('/'));
 
   assert.equal(toc.tocMode, 'discussion-questions');
   const questionNodes = toc.nodes.filter((node) => node.sessionId === '27B');
@@ -130,12 +139,14 @@ test('27下 transcript is timestamped and every question has an unlinked teacher
   }
 });
 
-test('web reader renders question headings and non-seekable teacher-summary bullets', () => {
+test('web reader renders question headings, summary provenance, and route components', () => {
   const app = fs.readFileSync(path.join(ROOT, 'src/App.vue'), 'utf8');
   assert.match(app, /discussionQuestions/);
   assert.match(app, /teacher-summary/);
   assert.match(app, /法師開示摘要/);
   assert.match(app, /linkedToAudio/);
+  assert.match(app, /TOCAccordion/);
+  assert.match(app, /courseStore\.currentCourse/);
 });
 
 test('audio click exposes a polite loading indicator until playback starts', () => {
