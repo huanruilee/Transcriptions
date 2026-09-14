@@ -177,13 +177,13 @@ test('publication builder merges a dedication split across adjacent segments', (
   const code = [
     'from scripts.build_study_group_publication import trim_after_dedication',
     'print(trim_after_dedication([',
-    " {'id': 'a', 'start': 0, 'end': 1, 'text': '願成善'},",
-    " {'id': 'b', 'start': 1, 'end': 2, 'text': '事。謝謝大家'},",
+    " {'id': 'a', 'start': 0, 'end': 1, 'text': '願成善事'},",
+    " {'id': 'b', 'start': 1, 'end': 2, 'text': '受陰。謝謝大家'},",
     "]))",
-  ].join('; ');
+  ].join('\n');
   const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const output = result.stdout.trim();
-  assert.match(output, /願成善事。/);
+  assert.match(output, /願成善事受陰。/);
   assert.doesNotMatch(output, /謝謝大家/);
 });

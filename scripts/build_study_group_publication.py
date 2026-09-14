@@ -58,7 +58,12 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
                 if text and text[-1] not in "。！？!?,，、":
                     merged["text"] = text + "。"
                     text = merged["text"]
-                last_dedication = (index, len(text))
+                dedication_end = max(
+                    match.end()
+                    for marker in dedication_markers
+                    if (match := marker.search(text))
+                )
+                last_dedication = (index, dedication_end)
                 pending_dedication = None
         index += 1
     if last_dedication is None:
