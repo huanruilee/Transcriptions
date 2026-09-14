@@ -260,6 +260,21 @@
           <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
         </section>
 
+        <section
+          v-if="currentDiscussionQuestions.length"
+          class="discussion-question-index"
+          aria-label="本講討論問題"
+        >
+          <h2>本講討論問題</h2>
+          <ol>
+            <li v-for="question in currentDiscussionQuestions" :key="question.id">
+              <button type="button" @click="seekToSentence(question.sentenceId)">
+                {{ question.displayQuestion }}
+              </button>
+            </li>
+          </ol>
+        </section>
+
         <!-- 逐字稿本文 (文章自然排版) -->
         <article class="transcript-article">
           <!-- 文章開頭：講次標題與校勘時間標記 -->
@@ -309,6 +324,10 @@
             :key="p.id"
             class="paragraph-block"
           >
+            <div v-if="p.questionId && isQuestionStart(p)" class="discussion-question-heading">
+              <span>討論問題</span>
+              <h3>{{ questionFor(p.questionId)?.displayQuestion }}</h3>
+            </div>
             <!-- 科判導讀小標題 -->
             <h3 v-if="p.heading" class="transcript-heading">
               {{ p.heading }}
@@ -370,7 +389,7 @@
                 📌 筆記
               </span>
             </span>
-            <section v-if="p.teacherSummary" class="teacher-summary">
+            <section v-if="p.teacherSummary" class="teacher-summary" :data-linked-to-audio="p.teacherSummary.linkedToAudio">
               <h4 class="teacher-summary-heading">{{ p.teacherSummary.heading || '法師開示摘要' }}</h4>
               <ul class="teacher-summary-list">
                 <li v-for="(item, itemIndex) in p.teacherSummary.items" :key="`${p.id}-summary-${itemIndex}`">{{ item }}</li>
@@ -482,6 +501,7 @@
           @ended="hasMediaEnded = true"
           @play="hasMediaEnded = false"
         ></audio>
+        <span v-if="isAudioLoading" class="audio-loading-status" role="status" aria-live="polite">音檔載入中…</span>
 
         <button
           id="next-session-btn"
@@ -597,6 +617,7 @@ import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExpo
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 import { selectVerseAnnotations } from './utils/verseAnnotations';
+import { seekAndPlayAudio } from './js/audioPlayback.js';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -611,6 +632,8 @@ const sidebarWidth = ref(280);
 const searchInputRef = ref<HTMLInputElement | null>(null);
 const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | null>(null);
 const sourceOutline = ref<any>(null);
+const currentDiscussionQuestions = ref<any[]>([]);
+const isAudioLoading = ref(false);
 
 // 彈窗狀態
 // Keep the player visible while the transcript scrolls; users can restore it
@@ -856,6 +879,24 @@ function onSeekSliderChange(e: Event) {
   seekToTime(time);
 }
 
+function questionFor(questionId: string | null) {
+  return currentDiscussionQuestions.value.find((question) => question.id === questionId) || null;
+}
+
+function isQuestionStart(paragraph: any) {
+  const index = paragraphs.value.findIndex((item) => item.id === paragraph.id);
+  return index === 0 || paragraphs.value[index - 1]?.questionId !== paragraph.questionId;
+}
+
+function seekToSentence(sentenceId: string) {
+  const sentence = playerStore.sentences.find((item) => item.id === sentenceId);
+  if (sentence) {
+    playerStore.activeSentenceId = sentence.id;
+    seekToTime(sentence.start_time);
+    document.getElementById(sentence.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
@@ -865,12 +906,14 @@ function seekToTime(time: number) {
   if (courseStore.currentMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
+      isAudioLoading.value = true;
       if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
-      audioEl.currentTime = time;
-      audioEl.play().catch(() => {});
+      seekAndPlayAudio(audioEl, time)
+        .then(() => {}, () => {})
+        .finally(() => { isAudioLoading.value = false; });
     }
   }
 
@@ -1296,6 +1339,7 @@ async function loadSession(sessionId: string) {
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
@@ -1303,6 +1347,7 @@ async function loadSession(sessionId: string) {
       const anchorNode = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
       return {
         id: p.id || `para-${sentCounter}`,
+        questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
         tocAnchorNode: anchorNode,
