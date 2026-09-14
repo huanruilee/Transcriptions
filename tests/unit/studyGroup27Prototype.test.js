@@ -147,6 +147,9 @@ test('web reader renders question headings, summary provenance, and route compon
   assert.match(app, /linkedToAudio/);
   assert.match(app, /TOCAccordion/);
   assert.match(app, /courseStore\.currentCourse/);
+  assert.match(app, /currentTranscriptLabel/);
+  assert.match(app, /currentPublicationState/);
+  assert.doesNotMatch(app, /<span class="meta-tag status-tag">\s*✅ 已校勘核定/);
 });
 
 test('audio click exposes a polite loading indicator until playback starts', () => {
@@ -155,5 +158,8 @@ test('audio click exposes a polite loading indicator until playback starts', () 
   assert.match(app, /role="status"/);
   assert.match(app, /aria-live="polite"/);
   assert.match(app, /音檔載入中/);
-  assert.match(app, /seekAndPlayAudio\(audioEl, time\)\s*\.then/);
+  assert.match(app, /seekAndPlayAudio\(audioEl, time\)\s*\.catch/);
+  assert.match(app, /onNativeAudioError/);
+  assert.match(app, /GX10 音訊服務/);
+  assert.match(app, /audio-loading-spin/);
 });

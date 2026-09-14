@@ -297,8 +297,8 @@
               <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
                 🕒 最後校正更新：{{ currentLastUpdated }}
               </span>
-              <span class="meta-tag status-tag">
-                ✅ 已校勘核定
+              <span class="meta-tag status-tag" :class="`status-${currentTranscriptStatus}`">
+                {{ currentTranscriptLabel }}
               </span>
               <span v-if="currentSessionInfo?.page" class="meta-tag page-tag">
                 📖 底本頁碼：{{ currentSessionInfo.page }}
@@ -510,7 +510,9 @@
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
-          @play="hasMediaEnded = false"
+          @play="onNativePlay"
+          @pause="onNativePause"
+          @error="onNativeAudioError"
         ></audio>
         <span v-if="isAudioLoading" class="audio-loading-status" role="status" aria-live="polite">音檔載入中…</span>
 
@@ -656,7 +658,16 @@ function chooseInitialCourse(courseId: string) {
   url.searchParams.set('course', courseId);
   window.history.replaceState({}, '', url);
   isCourseChooserOpen.value = false;
-  window.location.reload();
+  void (async () => {
+    try {
+      await loadRealCourseData();
+      const firstSession = courseStore.sessions[0]?.id || '01';
+      await loadSession(firstSession);
+      isInitialMounted = true;
+    } finally {
+      isChoosingCourse.value = false;
+    }
+  })();
 }
 
 // 彈窗狀態
@@ -706,8 +717,24 @@ const navInfo = computed(() => {
   return getPrevNextSessions(sortedAllSessions.value, currentSessionId.value);
 });
 
+const currentPublicationState = ref('');
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
+});
+
+const currentTranscriptStatus = computed(() =>
+  currentSessionInfo.value?.transcriptStatus || currentPublicationState.value || 'unmarked'
+);
+
+const currentTranscriptLabel = computed(() => {
+  const labels: Record<string, string> = {
+    approved: '✅ 已校勘核定',
+    'review-ready': '🟡 待審閱',
+    candidate: '🟡 候選稿',
+    'candidate-review-required': '🟡 待審閱候選稿',
+    unmarked: '⚪ 尚未標示校勘狀態',
+  };
+  return labels[currentTranscriptStatus.value] || `⚪ ${currentTranscriptStatus.value}`;
 });
 
 const overviewSessions = computed(() => {
@@ -847,7 +874,10 @@ function playMedia() {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
-      audioEl.play().then(() => { isAudioLoading.value = false; }).catch(() => { isAudioLoading.value = false; });
+      audioEl.play().then(() => { isAudioLoading.value = false; }).catch(() => {
+        isAudioLoading.value = false;
+        uiStore.showToast('音檔無法播放；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+      });
     }
   }
 
@@ -937,7 +967,9 @@ function seekToTime(time: number) {
         audioEl.load();
       }
       seekAndPlayAudio(audioEl, time)
-        .then(() => {}, () => {})
+        .catch(() => {
+          uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+        })
         .finally(() => { isAudioLoading.value = false; });
     }
   }
@@ -1291,6 +1323,7 @@ async function loadRealCourseData() {
     const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
     if (resCourse.ok) {
       const data = await resCourse.json();
+      currentPublicationState.value = data.transcriptPublicationState || '';
       const sessions = (data.sessions || []).map((s: any) => ({
         id: s.sessionId,
         displaySessionId: s.displaySessionId || s.sessionId,
@@ -1299,6 +1332,7 @@ async function loadRealCourseData() {
         summary: s.summary || '',
         date: s.date || '',
         lastUpdated: s.lastUpdated || '',
+        transcriptStatus: s.transcriptStatus || s.status || '',
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
         youtubeVideoId: s.youtubeVideoId,
@@ -1348,8 +1382,12 @@ async function loadSession(sessionId: string) {
     const data = await res.json();
     sourceOutline.value = null;
     if (data.sourceOutlineId) {
-      const outlineRes = await fetch(`${baseUrl}${cPath}/source_outlines/${data.sourceOutlineId}.json`);
-      if (outlineRes.ok) sourceOutline.value = await outlineRes.json();
+      try {
+        const outlineRes = await fetch(`${baseUrl}${cPath}/source_outlines/${data.sourceOutlineId}.json`);
+        if (outlineRes.ok) sourceOutline.value = await outlineRes.json();
+      } catch (outlineError) {
+        console.warn('原始課程提綱載入失敗，保留逐字稿顯示:', outlineError);
+      }
     }
     verseAnnotations.value = {};
     try {
@@ -1545,6 +1583,22 @@ function onNativeTimeUpdate(e: any) {
   if (audio) {
     playerStore.updateTime(audio.currentTime);
   }
+}
+
+function onNativePlay() {
+  hasMediaEnded.value = false;
+  isAudioLoading.value = false;
+  isMediaPlaying.value = true;
+}
+
+function onNativePause() {
+  isMediaPlaying.value = false;
+}
+
+function onNativeAudioError() {
+  isAudioLoading.value = false;
+  isMediaPlaying.value = false;
+  uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
 }
 
 function returnToPlaying() {
@@ -1999,6 +2053,43 @@ if (typeof window !== 'undefined') {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.3);
   font-weight: 500;
+}
+
+.status-review-ready,
+.status-candidate,
+.status-candidate-review-required {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.status-unmarked {
+  color: var(--text-muted);
+  background: var(--surface-bg);
+  border-color: var(--border-color);
+}
+
+.audio-loading-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.audio-loading-status::before {
+  content: '';
+  width: 0.8em;
+  height: 0.8em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: audio-loading-spin 0.8s linear infinite;
+}
+
+@keyframes audio-loading-spin {
+  to { transform: rotate(360deg); }
 }
 
 .youtube-player-container {
