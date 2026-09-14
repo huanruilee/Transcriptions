@@ -149,6 +149,9 @@ test('web reader renders question headings, summary provenance, and route compon
   assert.match(app, /courseStore\.currentCourse/);
   assert.match(app, /currentTranscriptLabel/);
   assert.match(app, /currentPublicationState/);
+  assert.match(app, /activeMediaType/);
+  assert.match(app, /seekToTime\(sentence\.start \?\? sentence\.start_time/);
+  assert.match(app, /:disabled="isChoosingCourse"/);
   assert.doesNotMatch(app, /<span class="meta-tag status-tag">\s*✅ 已校勘核定/);
 });
 

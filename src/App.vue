@@ -4,7 +4,7 @@
       <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
         <h1 id="course-chooser-title">請選擇課程</h1>
         <div class="course-choice-list">
-          <button v-for="course in courseStore.catalog" :key="course.id" class="course-choice" @click="chooseInitialCourse(course.id)">
+          <button v-for="course in courseStore.catalog" :key="course.id" class="course-choice" :disabled="isChoosingCourse" @click="chooseInitialCourse(course.id)">
             <strong>{{ course.title }}</strong>
           </button>
         </div>
@@ -307,7 +307,7 @@
 
             <!-- YouTube 影片嵌入視窗 (釋量論課程影音同步) -->
             <div
-              v-if="courseStore.currentMediaType === 'video/youtube' && currentYoutubeVideoId"
+              v-if="activeMediaType === 'video/youtube' && currentYoutubeVideoId"
               class="youtube-player-container"
               :class="{ 'is-floating': isVideoFloating }"
             >
@@ -476,7 +476,7 @@
 
         <!-- YouTube 影音控制器 (當課程為 video/youtube 時顯示) -->
         <div
-          v-if="courseStore.currentMediaType === 'video/youtube'"
+          v-if="activeMediaType === 'video/youtube'"
           class="custom-media-controls"
         >
           <button
@@ -505,8 +505,9 @@
         <audio
           id="audio-element"
           class="native-audio"
-          v-show="courseStore.currentMediaType === 'audio/mp3'"
+          v-show="activeMediaType === 'audio/mp3'"
           controls
+          crossorigin="anonymous"
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
@@ -652,6 +653,7 @@ const isCourseChooserOpen = ref(false);
 const isChoosingCourse = ref(false);
 
 function chooseInitialCourse(courseId: string) {
+  if (isChoosingCourse.value) return;
   isChoosingCourse.value = true;
   courseStore.currentCourseId = courseId;
   const url = new URL(window.location.href);
@@ -721,6 +723,10 @@ const currentPublicationState = ref('');
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
 });
+
+const activeMediaType = computed(() =>
+  currentSessionInfo.value?.mediaType || courseStore.currentMediaType
+);
 
 const currentTranscriptStatus = computed(() =>
   currentSessionInfo.value?.transcriptStatus || currentPublicationState.value || 'unmarked'
@@ -850,7 +856,7 @@ function handleExportNotes() {
 
 // 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
 function toggleMediaPlay() {
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (isMediaPlaying.value) {
       pauseMedia();
     } else {
@@ -866,7 +872,7 @@ function toggleMediaPlay() {
 }
 
 function playMedia() {
-  if (courseStore.currentMediaType === 'audio/mp3') {
+  if (activeMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
@@ -881,7 +887,7 @@ function playMedia() {
     }
   }
 
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -905,12 +911,12 @@ function playMedia() {
 }
 
 function pauseMedia() {
-  if (courseStore.currentMediaType === 'audio/mp3') {
+  if (activeMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) audioEl.pause();
   }
 
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
       try {
         ytPlayer.pauseVideo();
@@ -947,7 +953,7 @@ function seekToSentence(sentenceId: string) {
   const sentence = playerStore.sentences.find((item) => item.id === sentenceId);
   if (sentence) {
     playerStore.activeSentenceId = sentence.id;
-    seekToTime(sentence.start_time);
+    seekToTime(sentence.start ?? sentence.start_time ?? 0);
     document.getElementById(sentence.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
@@ -958,7 +964,7 @@ function seekToTime(time: number) {
   playerStore.updateTime(time);
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
-  if (courseStore.currentMediaType === 'audio/mp3') {
+  if (activeMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
@@ -975,7 +981,7 @@ function seekToTime(time: number) {
   }
 
   // 2. YouTube 影音同步跳轉 (同時支援 YouTube API 物件與 postMessage 雙通道)
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -1333,6 +1339,7 @@ async function loadRealCourseData() {
         date: s.date || '',
         lastUpdated: s.lastUpdated || '',
         transcriptStatus: s.transcriptStatus || s.status || '',
+        mediaType: s.mediaType || '',
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
         youtubeVideoId: s.youtubeVideoId,
@@ -1447,7 +1454,7 @@ async function loadSession(sessionId: string) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) {
       audioEl.pause();
-      if (courseStore.currentMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+      if (activeMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       } else {
@@ -1456,7 +1463,7 @@ async function loadSession(sessionId: string) {
       }
     }
 
-    if (courseStore.currentMediaType === 'video/youtube') {
+    if (activeMediaType === 'video/youtube') {
       setTimeout(() => {
         setupYouTubePlayer();
       }, 100);
@@ -1621,7 +1628,7 @@ function formatTime(secs: number): string {
 
 // 監聽播放倍率變更
 watch(() => playerStore.playbackRate, (rate) => {
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.setPlaybackRate === 'function') {
       try {
         ytPlayer.setPlaybackRate(rate);
