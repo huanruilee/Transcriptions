@@ -33,23 +33,26 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
         re.compile(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)") ,
         re.compile(r"願成善"),
     )
+    working = [dict(segment) for segment in segments]
     last_dedication = None
     pending_dedication = None
-    for index, segment in enumerate(segments):
+    index = 0
+    while index < len(working):
+        segment = working[index]
         text = segment.get("text", "")
         matches = [match for marker in dedication_markers if (match := marker.search(text))]
         if matches:
             last_dedication = (index, max(match.end() for match in matches))
             pending_dedication = index if any(match.end() >= len(text) - 2 for match in matches) else None
         elif pending_dedication is not None:
-            joined = "".join(item.get("text", "") for item in segments[pending_dedication:index + 1])
+            joined = "".join(item.get("text", "") for item in working[pending_dedication:index + 1])
             if re.search(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)", joined):
-                merged = dict(segments[index])
-                merged["start"] = segments[pending_dedication].get("start", merged.get("start"))
+                merged = dict(working[index])
+                merged["start"] = working[pending_dedication].get("start", merged.get("start"))
                 for field in ("text", "rawText"):
                     if field in merged:
-                        merged[field] = "".join(item.get(field, "") for item in segments[pending_dedication:index + 1])
-                segments = segments[:pending_dedication] + [merged] + segments[index + 1:]
+                        merged[field] = "".join(item.get(field, "") for item in working[pending_dedication:index + 1])
+                working = working[:pending_dedication] + [merged] + working[index + 1:]
                 index = pending_dedication
                 text = merged.get("text", "")
                 if text and text[-1] not in "。！？!?,，、":
@@ -57,11 +60,12 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
                     text = merged["text"]
                 last_dedication = (index, len(text))
                 pending_dedication = None
+        index += 1
     if last_dedication is None:
-        return segments
+        return working
 
     index, end = last_dedication
-    trimmed = [dict(segment) for segment in segments[: index + 1]]
+    trimmed = [dict(segment) for segment in working[: index + 1]]
     closing = trimmed[-1]
     for field in ("text", "rawText"):
         if field not in closing:

@@ -172,3 +172,18 @@ test('publication builder does not attach a wrong source outline to lecture 12',
   assert.doesNotMatch(source, /dict\.fromkeys\(\(22, 23\), "32-28"\)/);
   assert.match(source, /Playlist 22\/23 are lecture 12/);
 });
+
+test('publication builder merges a dedication split across adjacent segments', () => {
+  const code = [
+    'from scripts.build_study_group_publication import trim_after_dedication',
+    'print(trim_after_dedication([',
+    " {'id': 'a', 'start': 0, 'end': 1, 'text': '願成善'},",
+    " {'id': 'b', 'start': 1, 'end': 2, 'text': '事。謝謝大家'},",
+    "]))",
+  ].join('; ');
+  const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const output = result.stdout.trim();
+  assert.match(output, /願成善事。/);
+  assert.doesNotMatch(output, /謝謝大家/);
+});
