@@ -166,3 +166,9 @@ test('audio click exposes a polite loading indicator until playback starts', () 
   assert.match(app, /GX10 音訊服務/);
   assert.match(app, /audio-loading-spin/);
 });
+
+test('publication builder does not attach a wrong source outline to lecture 12', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/build_study_group_publication.py'), 'utf8');
+  assert.doesNotMatch(source, /dict\.fromkeys\(\(22, 23\), "32-28"\)/);
+  assert.match(source, /Playlist 22\/23 are lecture 12/);
+});

@@ -32,6 +32,7 @@
 - Unavailable/private items: `2`
 - One executable review entry has no lecture number and remains unnumbered.
 - The visible numbering jumps from lecture 17 to lecture 23; lectures 18–22 are not present in this playlist manifest and must remain an explicit gap.
+- The 27B audio candidate is intentionally tailnet-only during review. Its GX10 URL must be replaced by a same-origin production proxy before public deployment; this candidate status is not public-audio acceptance.
 
 ## Agent instructions
 

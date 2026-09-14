@@ -182,7 +182,8 @@ def build_session(index: int) -> tuple[dict, dict]:
         **dict.fromkeys((16, 17), "32-09"),
         **dict.fromkeys((18, 19), "32-10"),
         **dict.fromkeys((20, 21), "32-11"),
-        **dict.fromkeys((22, 23), "32-28"),
+        # Playlist 22/23 are lecture 12, but no 32-12 outline artifact exists;
+        # leave them unlinked rather than attaching the wrong source outline.
         **dict.fromkeys((24, 25), "32-13"),
         **dict.fromkeys((26, 27), "32-14"),
         **dict.fromkeys((28, 29), "32-15"),
