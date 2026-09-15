@@ -1,0 +1,80 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-04",
+  "playlistIndex": 4,
+  "videoId": "__8WjGF3hhw",
+  "sourceUrl": "https://www.youtube.com/watch?v=__8WjGF3hhw",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第2講 如何探究真相（下）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper",
+    "model": "medium",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": true,
+    "vad_filter": false,
+    "beam_size": 5
+  },
+  "commands": [
+    {
+      "cmd": "yt-dlp --skip-download --print duration",
+      "exit_code": 0,
+      "duration_s": 1.068,
+      "note": "duration=9926"
+    },
+    {
+      "cmd": "yt-dlp -f 18 -o source.mp4 (player_client=android)",
+      "exit_code": 0,
+      "duration_s": 141.054,
+      "note": "WARNING: [youtube] __8WjGF3hhw: Some android client https formats have been skipped as they are missing a URL. YouTube may have enabled the SABR-only streaming experiment for the current session. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details\n"
+    },
+    {
+      "cmd": "sha256sum /tmp/proto04_audio/source.mp4",
+      "exit_code": 0,
+      "duration_s": 0.0,
+      "note": "sha256=73f4a7a3d67f2c7ef408ef4fc6dc79ea1df250e974dac8a8ea078149380a6563 bytes=292926807"
+    },
+    {
+      "cmd": "ffprobe duration",
+      "exit_code": 0,
+      "duration_s": 0.064,
+      "note": "actual_duration_seconds=9925.578594"
+    },
+    {
+      "cmd": "faster-whisper transcribe",
+      "exit_code": 0,
+      "duration_s": 482.046,
+      "note": "segments=3466 word_tokens=26645 rtf=0.04856607486564171"
+    }
+  ],
+  "timing": {
+    "startIso": "2026-09-10T10:47:34Z",
+    "startEpoch": 1789037254.414242,
+    "endIso": "2026-09-10T10:58:01Z",
+    "endEpoch": 1789037881.526397
+  },
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-04/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-04/candidate.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "/tmp/proto04_audio/source.mp4",
+      "/tmp/proto04_audio"
+    ]
+  },
+  "status": "ASR_OK",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": true,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 99.9982,
+    "totalWordTokens": 26645,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}

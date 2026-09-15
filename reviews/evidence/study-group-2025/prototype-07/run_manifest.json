@@ -1,0 +1,61 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-07",
+  "playlistIndex": 7,
+  "videoId": "V_1vh1memNo",
+  "sourceUrl": "https://www.youtube.com/watch?v=V_1vh1memNo",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第4講 皈依世尊前的省思（上）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper-service",
+    "model": "large-v3-turbo",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": false,
+    "beam_size": 5
+  },
+  "commands": [
+    {
+      "cmd": "yt-dlp --skip-download --print duration",
+      "exit_code": 0
+    },
+    {
+      "cmd": "yt-dlp -f 18 -o audio/source.mp4 (player_client=android)",
+      "exit_code": 0
+    },
+    {
+      "cmd": "POST /v1/audio/transcriptions (GPU service)",
+      "exit_code": 0,
+      "note": "segments=5358 word_tokens=0 rtf=0.06960085545855753"
+    },
+    {
+      "cmd": "sha256sum/ffprobe",
+      "exit_code": 0,
+      "note": "sha256=b04ee4b16fa6604dc29f03846b022515c90c51b8403cd2d0db81422ba4f3719e bytes=318368275 duration=10762.17034"
+    }
+  ],
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-07/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-07/candidate.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "audio/source.mp4",
+      "audio"
+    ]
+  },
+  "status": "ASR_OK",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": true,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 99.7749,
+    "totalWordTokens": 0,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}

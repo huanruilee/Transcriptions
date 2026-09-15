@@ -1,0 +1,27 @@
+{
+  "schema": "session-quality-review/v1",
+  "sessionId": "27B",
+  "decision": "PASS_WITH_MINIMAL_FIX",
+  "agentScan": {
+    "paragraphs": 97,
+    "sentences": 371,
+    "questions": 4,
+    "teacherSummaries": 4,
+    "timestampOrTextIssues": 1,
+    "questionReferenceIssues": 0,
+    "paragraphsWithoutTerminalPunctuation": 4,
+    "repeatedCharacterSegments": 2
+  },
+  "applied": [
+    "published sent-0060 text: 能够 -> 能夠",
+    "published sent-0062 text: 有关聯 -> 有關聯"
+  ],
+  "notApplied": [
+    "No cross-sentence text movement.",
+    "No guessed completion of the swallowed phrase in sent-0062.",
+    "No paragraph re-segmentation without audio evidence.",
+    "No removal of raw ASR filler from rawText."
+  ],
+  "reviewerDecision": "The proposed broad rewrite was rejected; only the two deterministic character corrections were accepted.",
+  "reviewedAt": "2026-09-12"
+}

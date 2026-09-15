@@ -1,0 +1,34 @@
+{
+  "schema": "study-group-content-batch-audit/v2",
+  "batch": [2, 3],
+  "decision": "PASS",
+  "sessions": [
+    {
+      "playlistIndex": 2,
+      "videoId": "bO2f8SL6czc",
+      "segments": 3594,
+      "questions": 51,
+      "teacherSummaries": 51,
+      "issues": []
+    },
+    {
+      "playlistIndex": 3,
+      "videoId": "_mEd_2G8glg",
+      "segments": 4533,
+      "questions": 51,
+      "teacherSummaries": 51,
+      "issues": []
+    }
+  ],
+  "checks": [
+    "all question and summary segment references exist",
+    "summary segment ranges begin after question ranges",
+    "question and summary bullets are non-empty",
+    "display questions and summary bullets pass the existing simplified-character gate"
+  ],
+  "limitations": [
+    "This is a structural audit, not audio fidelity or doctrinal acceptance.",
+    "It does not replace an audio-capable human review of uncertain ASR terms."
+  ],
+  "auditedAt": "2026-09-12"
+}
