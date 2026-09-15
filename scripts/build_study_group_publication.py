@@ -2,6 +2,7 @@
 """Build the public study-group course from reviewed evidence artifacts."""
 
 import json
+import argparse
 import re
 import subprocess
 from pathlib import Path
@@ -29,10 +30,11 @@ def write_json(path: Path, value: object) -> None:
 
 def trim_after_dedication(segments: list[dict]) -> list[dict]:
     """Keep the transcript through the final dedication verse, excluding sign-off noise."""
-    dedication_markers = (
-        re.compile(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)") ,
-        re.compile(r"願成善"),
+    dedication_pattern = re.compile(
+        r"[願愿][^。！？!?]{0,4}成[^。！？!?]{0,4}善"
+        r"[^。！？!?]{0,12}(?:因|義|义|持|應|应|壽|寿|陰|阴|悟|醫|医)"
     )
+    dedication_start_pattern = re.compile(r"[願愿][^。！？!?]{0,4}成[^。！？!?]{0,4}善")
     working = [dict(segment) for segment in segments]
     last_dedication = None
     pending_dedication = None
@@ -40,13 +42,17 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
     while index < len(working):
         segment = working[index]
         text = segment.get("text", "")
-        matches = [match for marker in dedication_markers if (match := marker.search(text))]
+        matches = list(dedication_pattern.finditer(text))
+        starts = list(dedication_start_pattern.finditer(text))
         if matches:
             last_dedication = (index, max(match.end() for match in matches))
-            pending_dedication = index if any(match.end() >= len(text) - 2 for match in matches) else None
+        if starts and any(match.end() >= len(text) - 2 for match in starts):
+            pending_dedication = index
+        if matches and pending_dedication == index:
+            pending_dedication = None
         elif pending_dedication is not None:
             joined = "".join(item.get("text", "") for item in working[pending_dedication:index + 1])
-            if re.search(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)", joined):
+            if dedication_pattern.search(joined):
                 merged = dict(working[index])
                 merged["start"] = working[pending_dedication].get("start", merged.get("start"))
                 for field in ("text", "rawText"):
@@ -58,11 +64,11 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
                 if text and text[-1] not in "。！？!?,，、":
                     merged["text"] = text + "。"
                     text = merged["text"]
-                dedication_end = max(
-                    match.end()
-                    for marker in dedication_markers
-                    if (match := marker.search(text))
-                )
+                merged_matches = list(dedication_pattern.finditer(text))
+                if not merged_matches:
+                    index += 1
+                    continue
+                dedication_end = max(match.end() for match in merged_matches)
                 last_dedication = (index, dedication_end)
                 pending_dedication = None
         index += 1
@@ -337,5 +343,13 @@ def main() -> None:
     write_json(catalog_path, catalog)
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build the reviewed 2025 study-group publication artifacts."
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    parse_args()
     main()

@@ -856,7 +856,7 @@ function handleExportNotes() {
 
 // 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
 function toggleMediaPlay() {
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (isMediaPlaying.value) {
       pauseMedia();
     } else {
@@ -872,7 +872,7 @@ function toggleMediaPlay() {
 }
 
 function playMedia() {
-  if (activeMediaType === 'audio/mp3') {
+  if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
@@ -887,7 +887,7 @@ function playMedia() {
     }
   }
 
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -911,12 +911,12 @@ function playMedia() {
 }
 
 function pauseMedia() {
-  if (activeMediaType === 'audio/mp3') {
+  if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) audioEl.pause();
   }
 
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
       try {
         ytPlayer.pauseVideo();
@@ -964,7 +964,7 @@ function seekToTime(time: number) {
   playerStore.updateTime(time);
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
-  if (activeMediaType === 'audio/mp3') {
+  if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
@@ -981,7 +981,7 @@ function seekToTime(time: number) {
   }
 
   // 2. YouTube 影音同步跳轉 (同時支援 YouTube API 物件與 postMessage 雙通道)
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -1454,7 +1454,7 @@ async function loadSession(sessionId: string) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) {
       audioEl.pause();
-      if (activeMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+      if (activeMediaType.value === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       } else {
@@ -1463,7 +1463,7 @@ async function loadSession(sessionId: string) {
       }
     }
 
-    if (activeMediaType === 'video/youtube') {
+    if (activeMediaType.value === 'video/youtube') {
       setTimeout(() => {
         setupYouTubePlayer();
       }, 100);
@@ -1628,7 +1628,7 @@ function formatTime(secs: number): string {
 
 // 監聽播放倍率變更
 watch(() => playerStore.playbackRate, (rate) => {
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.setPlaybackRate === 'function') {
       try {
         ytPlayer.setPlaybackRate(rate);

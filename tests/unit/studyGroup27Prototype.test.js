@@ -187,3 +187,27 @@ test('publication builder merges a dedication split across adjacent segments', (
   assert.match(output, /願成善事受陰。/);
   assert.doesNotMatch(output, /謝謝大家/);
 });
+
+test('dedication trimming supports simplified ASR and keeps the complete closing phrase', () => {
+  const code = [
+    'import json',
+    'from scripts.build_study_group_publication import trim_after_dedication',
+    "segments = [{'id': 'a', 'start': 0, 'end': 1, 'text': '愿成善事设'}, {'id': 'b', 'start': 1, 'end': 2, 'text': '受应。尾端闲聊'}]",
+    'print(json.dumps(trim_after_dedication(segments), ensure_ascii=False))',
+  ].join('\n');
+  const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const segments = JSON.parse(result.stdout);
+  assert.equal(segments.length, 1);
+  assert.match(segments[0].text, /愿成善事设受应。/);
+  assert.doesNotMatch(segments[0].text, /尾端闲聊/);
+});
+
+test('publication builder --help exits without running the mutating build', () => {
+  const result = spawnSync('python3', ['scripts/build_study_group_publication.py', '--help'], {
+    cwd: ROOT,
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /usage:/i);
+});
