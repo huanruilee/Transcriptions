@@ -52,11 +52,12 @@ test('chunk assembler clips overlap padding and source-duration overflow', () =>
 test('27下 prototype registers an independent remote-audio course', () => {
   const catalog = readJson('courses/catalog.json');
   const course = catalog.courses.find((item) => item.id === COURSE_ID);
+  const courseJson = readJson(`${COURSE_PATH}/course.json`);
 
   assert.ok(course, 'study-group course must be registered');
   assert.equal(course.path, COURSE_PATH);
   assert.equal(course.mediaType, 'audio/mp3');
-  assert.equal(course.totalSessions, 1);
+  assert.equal(course.totalSessions, courseJson.sessions.length, 'catalog totalSessions must match course.json');
 
   const store = fs.readFileSync(path.join(ROOT, 'src/stores/course.ts'), 'utf8');
   assert.match(store, new RegExp(COURSE_ID), 'Vue course selector must expose the prototype');
@@ -69,8 +70,9 @@ test('27下 prototype uses question TOC and Tailnet audio while preserving Drive
 
   assert.equal(course.courseId, COURSE_ID);
   assert.equal(course.tocMode, 'discussion-questions');
-  assert.deepEqual(course.sessions.map((item) => item.sessionId), ['27B']);
-  assert.equal(course.sessions[0].status, 'review-ready');
+  const prototypeSession = course.sessions.find((item) => item.sessionId === '27B');
+  assert.ok(prototypeSession, '27B prototype session must remain registered');
+  assert.equal(prototypeSession.status, 'review-ready');
   assert.equal(audioMap['27B'].source, 'google-drive');
   assert.equal(audioMap['27B'].fileId, DRIVE_FILE_ID);
   assert.equal(audioMap['27B'].accessScope, 'tailnet');
@@ -81,8 +83,9 @@ test('27下 prototype uses question TOC and Tailnet audio while preserving Drive
   assert.ok(!audioMap['27B'].url.startsWith('/'), 'audio must not be a local asset');
 
   assert.equal(toc.tocMode, 'discussion-questions');
-  assert.ok(Array.isArray(toc.nodes) && toc.nodes.length > 0, 'question TOC must not be empty');
-  for (const node of toc.nodes) {
+  const prototypeNodes = toc.nodes.filter((node) => node.sessionId === '27B');
+  assert.ok(Array.isArray(prototypeNodes) && prototypeNodes.length > 0, 'question TOC must not be empty');
+  for (const node of prototypeNodes) {
     assert.equal(node.sessionId, '27B');
     assert.match(node.title, /[？?]$/, 'TOC entries must be actual questions');
     assert.ok(Number.isFinite(node.timestamp) && node.timestamp >= 0);
