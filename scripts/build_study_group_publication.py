@@ -29,63 +29,41 @@ def write_json(path: Path, value: object) -> None:
 
 
 def trim_after_dedication(segments: list[dict]) -> list[dict]:
-    """Keep the transcript through the final dedication verse, excluding sign-off noise."""
+    """Trim display text after the final verse without changing source alignment.
+
+    Match across adjacent ASR segments, but retain each segment's ID, timing and
+    rawText. A marker identifies the verse; punctuation (or the segment boundary)
+    determines its end, so a recognised syllable cannot truncate the closing line.
+    """
     dedication_pattern = re.compile(
         r"[願愿][^。！？!?]{0,4}成[^。！？!?]{0,4}善"
-        r"[^。！？!?]{0,12}(?:因|義|义|持|應|应|壽|寿|陰|阴|悟|醫|医)"
+        r"[^。！？!?]{0,12}(?:因|義|义|持|應|应|壽|寿|陰|阴|悟|醫|医|命)"
     )
-    dedication_start_pattern = re.compile(r"[願愿][^。！？!?]{0,4}成[^。！？!?]{0,4}善")
-    working = [dict(segment) for segment in segments]
-    last_dedication = None
-    pending_dedication = None
-    index = 0
-    while index < len(working):
-        segment = working[index]
-        text = segment.get("text", "")
-        matches = list(dedication_pattern.finditer(text))
-        starts = list(dedication_start_pattern.finditer(text))
-        if matches:
-            last_dedication = (index, max(match.end() for match in matches))
-        if starts and any(match.end() >= len(text) - 2 for match in starts):
-            pending_dedication = index
-        if matches and pending_dedication == index:
-            pending_dedication = None
-        elif pending_dedication is not None:
-            joined = "".join(item.get("text", "") for item in working[pending_dedication:index + 1])
-            if dedication_pattern.search(joined):
-                merged = dict(working[index])
-                merged["start"] = working[pending_dedication].get("start", merged.get("start"))
-                for field in ("text", "rawText"):
-                    if field in merged:
-                        merged[field] = "".join(item.get(field, "") for item in working[pending_dedication:index + 1])
-                working = working[:pending_dedication] + [merged] + working[index + 1:]
-                index = pending_dedication
-                text = merged.get("text", "")
-                if text and text[-1] not in "。！？!?,，、":
-                    merged["text"] = text + "。"
-                    text = merged["text"]
-                merged_matches = list(dedication_pattern.finditer(text))
-                if not merged_matches:
-                    index += 1
-                    continue
-                dedication_end = max(match.end() for match in merged_matches)
-                last_dedication = (index, dedication_end)
-                pending_dedication = None
-        index += 1
-    if last_dedication is None:
-        return working
+    texts = [segment.get("text", "") for segment in segments]
+    joined = "".join(texts)
+    matches = list(dedication_pattern.finditer(joined))
+    if not matches:
+        return [dict(segment) for segment in segments]
 
-    index, end = last_dedication
-    trimmed = [dict(segment) for segment in working[: index + 1]]
-    closing = trimmed[-1]
-    for field in ("text", "rawText"):
-        if field not in closing:
-            continue
-        value = closing[field][:end]
-        if end < len(closing[field]) and closing[field][end] in "。！？!?,，、":
-            value += closing[field][end]
-        closing[field] = value
-    return trimmed
+    end = matches[-1].end()
+    offset = 0
+    for index, text in enumerate(texts):
+        if offset < end <= offset + len(text):
+            local_end = end - offset
+            # Preserve suffixes after a marker such as 受持, up to the complete
+            # clause. Recognise an explicit unpunctuated sign-off separately.
+            boundary = re.search(r"[。！？!?，,、；;]|謝謝|谢谢|感謝|感谢", text[local_end:])
+            if boundary:
+                local_end += boundary.start()
+                if len(boundary.group()) == 1:
+                    local_end += 1
+            else:
+                local_end = len(text)
+            trimmed = [dict(segment) for segment in segments[:index + 1]]
+            trimmed[-1]["text"] = text[:local_end]
+            return trimmed
+        offset += len(text)
+    return [dict(segment) for segment in segments]
 
 
 def trim_paragraphs_after_dedication(paragraphs: list[dict]) -> list[dict]:
