@@ -1,0 +1,147 @@
+# RED run: node --test tests/unit/studyGroupSampleManifest.test.js
+# date: 2026-09-16T12:41:02+08:00  commit: f4b95414188ae79727b6ce8158f8bf0731f56679
+# purpose: prove the study-group sample manifest test fails before the manifest exists
+
+TAP version 13
+# Subtest: sample manifest exists with runner and baseline identity
+not ok 1 - sample manifest exists with runner and baseline identity
+  ---
+  duration_ms: 0.718417
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:34:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    sample manifest is missing: run scripts/build_study_group_sample_manifest.py to generate reviews/evidence/study-group-2025/sample_manifest.json
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    loadManifest (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:18:10)
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:35:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: sample manifest covers exactly the 42 playable candidate sessions
+not ok 2 - sample manifest covers exactly the 42 playable candidate sessions
+  ---
+  duration_ms: 0.184461
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:45:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    sample manifest is missing: run scripts/build_study_group_sample_manifest.py to generate reviews/evidence/study-group-2025/sample_manifest.json
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    loadManifest (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:18:10)
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:46:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: sample manifest session identity comes from course data with no duplicate ids
+not ok 3 - sample manifest session identity comes from course data with no duplicate ids
+  ---
+  duration_ms: 0.109566
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:68:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    sample manifest is missing: run scripts/build_study_group_sample_manifest.py to generate reviews/evidence/study-group-2025/sample_manifest.json
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    loadManifest (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:18:10)
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:69:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: every sample manifest session carries exactly five valid roles grounded in content review
+not ok 4 - every sample manifest session carries exactly five valid roles grounded in content review
+  ---
+  duration_ms: 0.151005
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:87:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    sample manifest is missing: run scripts/build_study_group_sample_manifest.py to generate reviews/evidence/study-group-2025/sample_manifest.json
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    loadManifest (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:18:10)
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:88:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: sample manifest is hash-only: no text or rawText fields anywhere
+not ok 5 - sample manifest is hash-only: no text or rawText fields anywhere
+  ---
+  duration_ms: 0.157501
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:144:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    sample manifest is missing: run scripts/build_study_group_sample_manifest.py to generate reviews/evidence/study-group-2025/sample_manifest.json
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    loadManifest (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:18:10)
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-sample-manifest-runner-20260916/repo/tests/unit/studyGroupSampleManifest.test.js:145:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 0
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 35.433418
