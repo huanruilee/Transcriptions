@@ -1,0 +1,39 @@
+# RED run: node --test tests/unit/studyGroupGpuAuditIndex.test.js
+# date: 2026-09-16T16:53:44+08:00  commit: a7f695f178df377f283223ee28158c8ff31f08f7
+# purpose: prove the study-group GPU audit index test fails before the audit index file exists (RED)
+
+TAP version 13
+# Subtest: study-group GPU audit index satisfies study-group-gpu-audit-index/v1 contract
+not ok 1 - study-group GPU audit index satisfies study-group-gpu-audit-index/v1 contract
+  ---
+  duration_ms: 0.633347
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-gpu-audit-red-retry-20260916/repo/tests/unit/studyGroupGpuAuditIndex.test.js:54:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    audit index is missing: generate reviews/evidence/study-group-2025/sample_audit_index.json conforming to study-group-gpu-audit-index/v1
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    loadIndex (file:///home/henry/.gx10/tasks/study-group-gpu-audit-red-retry-20260916/repo/tests/unit/studyGroupGpuAuditIndex.test.js:34:10)
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-gpu-audit-red-retry-20260916/repo/tests/unit/studyGroupGpuAuditIndex.test.js:55:17)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 32.921443
