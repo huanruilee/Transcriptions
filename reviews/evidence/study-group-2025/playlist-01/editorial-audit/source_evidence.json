@@ -1,0 +1,65 @@
+{
+  "schema": "study-group-session01-source-evidence/v1",
+  "inputManifestSha256": "f63497d0508ed4f4623d75bd7edeb0cbbf58da79f9fafb886f12b9f4f2014a9c",
+  "artifacts": [
+    {
+      "name": "raw_asr.json",
+      "repoPath": "reviews/evidence/study-group-2025/playlist-01/raw_asr.json",
+      "sha256": "6b7eb1ae7faf9c3c10d9dff3e68b2a66104eb1a14710a6cbae949a39958f5d29",
+      "role": "manifest-frozen input"
+    },
+    {
+      "name": "candidate.json",
+      "repoPath": "reviews/evidence/study-group-2025/playlist-01/candidate.json",
+      "sha256": "07958c5a0da888edbc52869944f338fd2b0fcb4c0682f863ec1de9bdd57911a2",
+      "role": "manifest-frozen input"
+    },
+    {
+      "name": "content_review.json",
+      "repoPath": "reviews/evidence/study-group-2025/playlist-01/content_review.json",
+      "sha256": "a27ae4f2d2d976f91b388097b23b8e812f16bffa470ec46dcf5bfd8355a79567",
+      "role": "manifest-frozen input"
+    },
+    {
+      "name": "content_review_manifest.json",
+      "repoPath": "reviews/evidence/study-group-2025/playlist-01/content_review_manifest.json",
+      "sha256": "a7bb3107b109cd741666bade2b08042451d1e974c4df51223b72d002067f5834",
+      "role": "manifest-frozen input"
+    }
+  ],
+  "privateEvidence": {
+    "directory": "/home/henry/.gx10/tasks/study-group-session01-gpu-anchors-20260916/evidence",
+    "indexSha256": "729702998c28df88b645ef178d75761159787eacc6e7e44844b5be97c0bed650",
+    "clipBinariesRetained": false,
+    "cleanupNote": {
+      "temporary_media_deleted": true
+    }
+  },
+  "crossChecks": [
+    {
+      "check": "manifest file hashes vs on-disk sha256",
+      "result": "PASS"
+    },
+    {
+      "check": "private anchor_index responseSha256 vs *.asr.json file hashes",
+      "result": "PASS"
+    },
+    {
+      "check": "private anchor_index textSha256 vs sha256(response.text)",
+      "result": "PASS"
+    },
+    {
+      "check": "private clipSha256 vs *.clip.sha256 sidecars (binaries deleted per cleanup.json)",
+      "result": "PASS"
+    },
+    {
+      "check": "anchor segmentId/start/end vs raw_asr.json",
+      "result": "PASS"
+    },
+    {
+      "check": "question/teacher-summary anchors appear in content_review.json sourceSegmentIds",
+      "result": "PASS"
+    }
+  ],
+  "notes": "Only manifest-referenced candidate.json/content_review.json/raw_asr.json/content_review_manifest.json consulted. No external sources, no audio access."
+}

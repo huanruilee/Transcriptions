@@ -1,0 +1,161 @@
+{
+  "schema": "study-group-session01-editorial-review/v1",
+  "status": "READY_FOR_INDEPENDENT_REVIEW",
+  "baselineCommit": "b69d71fde25f52f86fafb4bd0e89a77ab4fa33f7",
+  "taskHeadCommit": "28748fbd9021ffb5b73a326606af749f13c79327",
+  "inputManifestSha256": "f63497d0508ed4f4623d75bd7edeb0cbbf58da79f9fafb886f12b9f4f2014a9c",
+  "videoId": "7QA1k4uxxV0",
+  "sessionId": "01",
+  "playlistIndex": 1,
+  "anchors": [
+    {
+      "role": "opening",
+      "evidenceRole": "opening",
+      "segmentId": "seg-0001",
+      "start": 2.22,
+      "end": 4.72,
+      "publishedTextSha256": "723f3833f470d2755bd7b5cbc7366ac580d992a9ba2bdfbe610de0acba2e8fd3",
+      "audioTextSha256": "1be5427ab0e5246052e45f071a2001856d07916f38a244fa2744bf48f6c9fb3a",
+      "verdict": "LIKELY",
+      "rationale": "Private GPU ASR (garbled, adjacent-span) renders \"离法师都会同学大家晚安\"; published \"敬禮法師，各位同學大家晚安。\" matches on 法師/同學大家晚安 but 各位 is only phonetically approximate to ASR 都会, and the prostration phrase is not clearly audible. Contextually plausible; not exact.",
+      "correction": {
+        "decision": "none",
+        "applied": false,
+        "note": "Published text preserved; private audio and manifest-referenced source artifacts do not jointly support an automatic replacement."
+      },
+      "textSha256": "ce7ae0941e8a2b934ad6be0c90188d92fb9c40e6ce957f54b34fc789560716f2"
+    },
+    {
+      "role": "middle",
+      "evidenceRole": "middle",
+      "segmentId": "seg-1806",
+      "start": 4438.8,
+      "end": 4440.66,
+      "publishedTextSha256": "37604a439db0f4e0edc518fe876d82b80338fdc9f836567b724f33cc2ff4ec33",
+      "audioTextSha256": "b444754886a7866bbe8ecb4cb72f5ae228f656208bf3949da088d22bbdddf0a1",
+      "verdict": "UNCERTAIN",
+      "rationale": "Published \"就是釋迦牟尼佛之師裡面\" expands ASR/raw \"就是欺佛之师里面\" (4 syllables vs 6). The clip audio does not audibly contain 釋迦牟尼佛; the expansion matches topic context (neighboring seg-1808 mentions 释迦牟尼佛) but the audio itself cannot confirm it.",
+      "correction": {
+        "decision": "none",
+        "applied": false,
+        "note": "Published text preserved; private audio and manifest-referenced source artifacts do not jointly support an automatic replacement."
+      },
+      "textSha256": "a46f91c82be8f54cbfaefdfc8781b04808bc809d717670e1e4876540445a2181"
+    },
+    {
+      "role": "ending",
+      "evidenceRole": "ending",
+      "segmentId": "seg-3669",
+      "start": 8875.33,
+      "end": 8878.17,
+      "publishedTextSha256": "3655cf0920bbcfe5ca173240a0dd5818714f56256262cf7613fa6739e35af892",
+      "audioTextSha256": "725a20646e9a02072bc3b6b58ac3e7e105ff9144152de526dd9f432ba1ae680c",
+      "verdict": "UNCERTAIN",
+      "rationale": "Published \"願成善逝受持義。\" differs from private ASR \"愿成善事赦受医\" (homophones 善事/善逝; 赦受医/受持义 only approximate). No repository-internal source artifact independently verifies the verse wording; audio does not confirm the published reading.",
+      "correction": {
+        "decision": "none",
+        "applied": false,
+        "note": "Published text preserved; private audio and manifest-referenced source artifacts do not jointly support an automatic replacement."
+      },
+      "textSha256": "95b64ceb4cb39578e4480f67a8f9a214f9b5118d0cddf521cac5f7f90580f810"
+    },
+    {
+      "role": "question",
+      "evidenceRole": "discussion-question source (q-02-01)",
+      "segmentId": "seg-0145",
+      "start": 448.82,
+      "end": 452.68,
+      "publishedTextSha256": "f268b496b085d302e2f60849647186dd9487727c4034fb231d888bf26e000f59",
+      "audioTextSha256": "9930537ea760d855b10849b0cb7ac1d7f9871a745034112f6ff9437e90c4209e",
+      "verdict": "UNCERTAIN",
+      "rationale": "Private clip [448.82–452.68] transcribes only \"第一题\", which corresponds to seg-0144 content; the clip did not capture the published segment text \"有些人發現自己欠缺智慧時\". Audio evidence is insufficient to confirm or refute the published wording at this anchor.",
+      "correction": {
+        "decision": "none",
+        "applied": false,
+        "note": "Published text preserved; private audio and manifest-referenced source artifacts do not jointly support an automatic replacement."
+      },
+      "textSha256": "a1cc74c660297ec46d9199729e0eb0773a8e92bc2d13de61e2b704b58ac65dce"
+    },
+    {
+      "role": "teacher-summary",
+      "evidenceRole": "teacher-summary source (q-02-01 summary)",
+      "segmentId": "seg-0208",
+      "start": 603.34,
+      "end": 605.46,
+      "publishedTextSha256": "a627851be2ff1b8d449bc26cb169351c0acbb5a155285c2dd777407ecc82e44c",
+      "audioTextSha256": "0f7ec42e68d2f41eb780b39de0d9c3d8e824da4672cc95e50ed252c5ded1138f",
+      "verdict": "CONFIRMED",
+      "rationale": "Private ASR contains the exact phrase \"OK您刚刚讲过\", which the published \"OK，您剛剛講過\" reproduces verbatim modulo punctuation and traditional conversion. Neighboring ASR (\"以上分享\", \"感觉起来跟文书菩萨\") matches adjacent segments, confirming anchor placement.",
+      "correction": {
+        "decision": "none",
+        "applied": false,
+        "note": "Published text preserved; private audio and manifest-referenced source artifacts do not jointly support an automatic replacement."
+      },
+      "textSha256": "9b9d9f07ff1130fbd6c6d540fee3b53b6f933f9f87ba645daee60464964052a0"
+    }
+  ],
+  "audioEvidence": [
+    {
+      "role": "opening",
+      "clipSha256": "d71652bc7d7df0406b0c7734e2c59d37a60a2f0ea15026d0c1e66c792e9f772b",
+      "responseSha256": "fa1ed949f0ea419add138a7efa08e5c9e7749bb3f3a7442e16b52e311bdc9eeb",
+      "textSha256": "1be5427ab0e5246052e45f071a2001856d07916f38a244fa2744bf48f6c9fb3a",
+      "serverElapsedSeconds": 0.2864106571068987,
+      "runtime": {
+        "asr": "http://127.0.0.1:8010/v1/audio/transcriptions",
+        "model": "faster-whisper-large-v3-turbo",
+        "device": "cuda-int8"
+      }
+    },
+    {
+      "role": "middle",
+      "clipSha256": "e61e11bee46778981cbd5c7b24f8babbcab3a1ce4de483506592a593159234ac",
+      "responseSha256": "1a2aa74488723b40640c21b34eaeb660c3f20843b13857bfd7c5c9dd50666937",
+      "textSha256": "b444754886a7866bbe8ecb4cb72f5ae228f656208bf3949da088d22bbdddf0a1",
+      "serverElapsedSeconds": 0.2975281060207635,
+      "runtime": {
+        "asr": "http://127.0.0.1:8010/v1/audio/transcriptions",
+        "model": "faster-whisper-large-v3-turbo",
+        "device": "cuda-int8"
+      }
+    },
+    {
+      "role": "ending",
+      "clipSha256": "18a49f30d2e1cf259a0df59c7a9fd0601331a491dc0246128aaad4b846943aa0",
+      "responseSha256": "bd0e3f7b71f6f47fa0fd23c3dd66f88513eeb42bb58d030550e7a67d557639ca",
+      "textSha256": "725a20646e9a02072bc3b6b58ac3e7e105ff9144152de526dd9f432ba1ae680c",
+      "serverElapsedSeconds": 0.2835844390792772,
+      "runtime": {
+        "asr": "http://127.0.0.1:8010/v1/audio/transcriptions",
+        "model": "faster-whisper-large-v3-turbo",
+        "device": "cuda-int8"
+      }
+    },
+    {
+      "role": "question",
+      "clipSha256": "177b4efa18d9a576a74c882234ecd3df1582888e8a0c92acdfb2525f40fb0732",
+      "responseSha256": "b0fd4a9328d40e128b20f8af152f2a50e89b931a1a488927609df1a1543c8f91",
+      "textSha256": "9930537ea760d855b10849b0cb7ac1d7f9871a745034112f6ff9437e90c4209e",
+      "serverElapsedSeconds": 0.25734388397540897,
+      "runtime": {
+        "asr": "http://127.0.0.1:8010/v1/audio/transcriptions",
+        "model": "faster-whisper-large-v3-turbo",
+        "device": "cuda-int8"
+      }
+    },
+    {
+      "role": "teacher-summary",
+      "clipSha256": "23faaf11273199d5eba0c0966acffdf6fdba21f0035efcdb57916f11dc3f7e52",
+      "responseSha256": "65a94e6ece7b0c17e9d662315969f42ce4eae405d2f1a2919bde3587292c556f",
+      "textSha256": "0f7ec42e68d2f41eb780b39de0d9c3d8e824da4672cc95e50ed252c5ded1138f",
+      "serverElapsedSeconds": 0.3162324669538066,
+      "runtime": {
+        "asr": "http://127.0.0.1:8010/v1/audio/transcriptions",
+        "model": "faster-whisper-large-v3-turbo",
+        "device": "cuda-int8"
+      }
+    }
+  ],
+  "correctionPolicy": "Corrections are proposals with SHA256 before/after only; applied=false always. No session JSON or transcript content modified by this ledger.",
+  "notes": "Anchors recorded as hashes only. No raw transcript text stored in repository evidence."
+}
