@@ -1,0 +1,43 @@
+{
+  "schema": "study-group-session01-editorial-ledger-fix-receipt/v1",
+  "task": "study-group-session01-ledger-fix-20260916",
+  "workspace": "/home/henry/.gx10/tasks/study-group-session01-ledger-fix-20260916/repo",
+  "branch": "codex/study-group-session01-ledger",
+  "baseCommit": "5e938dc1adedfc23b8e31f7623f65df816dfca00",
+  "reviewedCommit": "5e938dc1adedfc23b8e31f7623f65df816dfca00",
+  "priorReceiptHead": "28748fbd9021ffb5b73a326606af749f13c79327",
+  "priorReceiptHeadNote": "Independent review finding F2 (info): receipt.json head pins the task baseline 28748fb, the parent of the commit under review 5e938dc; consistent with evidence stacking, not a discrepancy. This fix receipt pins the exact commit under review.",
+  "independentReviewEvidence": "/home/henry/.gx10/tasks/session01-ledger-review-20260916/evidence/review.json",
+  "independentReviewEvidenceSha256": "61c904e0f3e16b2310f3f214cab10d2f188e3c8dd746b21c13dc901a77df62d0",
+  "findingsAddressed": [
+    {
+      "id": "F1",
+      "severity": "minor",
+      "fix": "Anchor rationale strings in review.json no longer embed verbatim public/ASR wording; prose snippets replaced with structured evidence references (SHA256 field references + evidence codes). Verdicts and correction decisions (decision=none, applied=false) unchanged. The 'hash-only' statements in review.json notes and summary.md corrected to state precisely what the ledger contains."
+    },
+    {
+      "id": "F2",
+      "severity": "info",
+      "fix": "This receipt pins the exact commit under review (5e938dc) as baseCommit/reviewedCommit and records the relationship to the prior receipt head 28748fb."
+    }
+  ],
+  "inputManifestSha256": "f63497d0508ed4f4623d75bd7edeb0cbbf58da79f9fafb886f12b9f4f2014a9c",
+  "privateEvidenceDir": "/home/henry/.gx10/tasks/study-group-session01-gpu-anchors-20260916/evidence",
+  "privateRolesPresent": [
+    "opening",
+    "middle",
+    "ending",
+    "question",
+    "teacher-summary"
+  ],
+  "smokeResult": "PASS",
+  "smokeLog": "smoke_fix.txt",
+  "createdAt": "2026-09-16T03:02:29Z",
+  "constraints": {
+    "no_audio_download": true,
+    "no_asr_calls": true,
+    "no_external_sources": true,
+    "no_transcript_content_modification": true,
+    "no_merge_or_deploy": true
+  }
+}

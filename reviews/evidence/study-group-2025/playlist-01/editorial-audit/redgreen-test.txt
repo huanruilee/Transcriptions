@@ -1,0 +1,65 @@
+== environment note ==
+smoke_check.mjs pins the original ledger-task workspace/branch/HEAD (28748fb on .../study-group-session01-ledger-20260916/repo) and FAILs only those 3 environment checks from this fix clone; content checks pass. The fix-run smoke (fix_run_smoke: same coverage, pins base commit 5e938dc) PASSes 18/18 — see smoke_fix.txt.
+
+TAP version 13
+# Subtest: study-group playlist-01 editorial audit ledger invariants
+ok 1 - study-group playlist-01 editorial audit ledger invariants
+  ---
+  duration_ms: 8.213984
+  type: 'test'
+  ...
+# Subtest: study-group playlist-01 ledger rationale is hash-only (no embedded anchor transcript fragments)
+not ok 2 - study-group playlist-01 ledger rationale is hash-only (no embedded anchor transcript fragments)
+  ---
+  duration_ms: 0.532674
+  type: 'test'
+  location: '/home/henry/.gx10/tasks/study-group-session01-ledger-fix-20260916/repo/tests/unit/studyGroupEditorialReview.test.js:172:1'
+  failureType: 'testCodeFailure'
+  error: 'review.json embeds transcript wording (CJK characters found in free text): Private GPU ASR (garbled, adjacent-span)...'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/henry/.gx10/tasks/study-group-session01-ledger-fix-20260916/repo/tests/unit/studyGroupEditorialReview.test.js:180:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 55.538324
+
+== GREEN: node --test tests/unit/studyGroupEditorialReview.test.js ==
+TAP version 13
+# Subtest: study-group playlist-01 editorial audit ledger invariants
+ok 1 - study-group playlist-01 editorial audit ledger invariants
+  ---
+  duration_ms: 9.34095
+  type: 'test'
+  ...
+# Subtest: study-group playlist-01 ledger rationale is hash-only (no embedded anchor transcript fragments)
+ok 2 - study-group playlist-01 ledger rationale is hash-only (no embedded anchor transcript fragments)
+  ---
+  duration_ms: 5.243366
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 57.735741

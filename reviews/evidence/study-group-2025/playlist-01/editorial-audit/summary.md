@@ -5,7 +5,11 @@ Status: READY_FOR_INDEPENDENT_REVIEW
 Scope: bounded editorial adjudication of five GPU audio anchors for video
 7QA1k4uxxV0 (session 01). No audio was downloaded, no ASR was called, no
 external sources were accessed, and no transcript/session content was
-modified. All transcript evidence in this directory is hash-only.
+modified. Transcript evidence in this directory is recorded as SHA256 hashes
+and structured evidence codes only; no published or ASR transcript wording is
+quoted (an earlier revision of this ledger embedded short anchor-level
+fragments in rationale prose — corrected per independent-review finding F1,
+see fix_receipt.json).
 
 ## Provenance
 
@@ -23,13 +27,13 @@ and source_evidence.json for the full cross-check table.
 
 Published wording classification. Details (hashes, rationale) in review.json.
 
-| role | segment | verdict | basis |
+| role | segment | verdict | basis (evidence code; hashes in review.json) |
 |---|---|---|---|
-| opening | seg-0001 | LIKELY | ASR matches 法師/同學大家晚安; 各位 only phonetically approximates garbled ASR |
-| middle | seg-1806 | UNCERTAIN | audio has 4-syllable 欺佛之师; published expands to 6-syllable 釋迦牟尼佛之師 — context-supported, audio-unverifiable |
-| ending | seg-3669 | UNCERTAIN | ASR homophones 善事赦受医 vs published 善逝受持義; no internal source artifact verifies the verse |
-| question | seg-0145 | UNCERTAIN | clip captured adjacent seg-0144 content (第一题) instead of the published segment text |
-| teacher-summary | seg-0208 | CONFIRMED | published text reproduces the private ASR phrase verbatim (punctuation/traditional-conversion only) |
+| opening | seg-0001 | LIKELY | OPENING-PARTIAL-MATCH: 2 token matches vs garbled adjacent-span ASR, 1 token only phonetically approximate |
+| middle | seg-1806 | UNCERTAIN | MIDDLE-SYLLABLE-EXPANSION: published expands ASR proper-noun phrase 4->6 syllables; context-supported, audio-unverifiable |
+| ending | seg-3669 | UNCERTAIN | ENDING-HOMOPHONE-DIVERGENCE: 2 divergent homophone/approximate token pairs; no internal source artifact verifies the verse |
+| question | seg-0145 | UNCERTAIN | QUESTION-ADJACENT-SPAN: clip captured adjacent seg-0144 cue content instead of the published segment text |
+| teacher-summary | seg-0208 | CONFIRMED | VERBATIM-PHRASE-MATCH: published text reproduces an exact 7-char private ASR phrase (punctuation/traditional-conversion only) |
 
 ## Corrections
 

@@ -138,10 +138,85 @@ test('study-group playlist-01 editorial audit ledger invariants', () => {
     `status must be READY_FOR_INDEPENDENT_REVIEW or BLOCKED, got ${review.status}`);
 
   // 8. Companion artifacts referenced by the ledger must exist.
-  for (const name of ['source_evidence.json', 'summary.md', 'receipt.json', 'smoke.txt']) {
+  for (const name of ['source_evidence.json', 'summary.md', 'receipt.json', 'smoke.txt', 'fix_receipt.json']) {
     assert.ok(fs.existsSync(path.join(AUDIT_DIR, name)), `editorial-audit/${name} must exist`);
   }
   const sourceEvidence = JSON.parse(fs.readFileSync(path.join(AUDIT_DIR, 'source_evidence.json'), 'utf8'));
   assert.equal(sourceEvidence.inputManifestSha256, MANIFEST_SHA256);
   assertNoRawTranscript(sourceEvidence);
+});
+
+// F1 guard: the ledger advertises hash-only transcript evidence, so no committed
+// evidence string may embed anchor transcript wording. Rationale text must use
+// structured evidence codes and SHA256 field references instead of quoted
+// snippets. This is the value-level complement of assertNoRawTranscript (which
+// only guards keys).
+const CJK = /[\u3000-\u303f\u3400-\u9fff\uf900-\ufaff\uff00-\uffef]/;
+
+function collectStrings(node, found = []) {
+  if (typeof node === 'string') found.push(node);
+  else if (node !== null && typeof node === 'object') {
+    for (const value of Object.values(node)) collectStrings(value, found);
+  }
+  return found;
+}
+
+// True if `haystack` contains any window of `min` consecutive chars of `needle`.
+function sharesFragment(haystack, needle, min = 4) {
+  for (let i = 0; i + min <= needle.length; i++) {
+    if (haystack.includes(needle.slice(i, i + min))) return needle.slice(i, i + min);
+  }
+  return null;
+}
+
+test('study-group playlist-01 ledger rationale is hash-only (no embedded anchor transcript fragments)', () => {
+  const reviewPath = path.join(AUDIT_DIR, 'review.json');
+  const review = JSON.parse(fs.readFileSync(reviewPath, 'utf8'));
+
+  // (a) No committed ledger string may contain CJK transcript wording — the
+  // published/ASR text of this project is Chinese, so hash-and-code-only
+  // rationale is necessarily ASCII.
+  for (const str of collectStrings(review)) {
+    assert.ok(!CJK.test(str),
+      `review.json embeds transcript wording (CJK characters found in free text): ${str.slice(0, 40)}...`);
+  }
+
+  // (b) Rationale strings must not share a 4+ char fragment with any anchor's
+  // published segment text (frozen manifest input) or private ASR response text.
+  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+  const contentReview = JSON.parse(fs.readFileSync(
+    path.join(ROOT, manifest.files['content_review.json'].repoPath), 'utf8'));
+  const crSegs = new Map(contentReview.segments.map((s) => [s.id, s]));
+  for (const anchor of review.anchors) {
+    const sources = [crSegs.get(anchor.segmentId)?.text ?? ''];
+    const respFile = path.join(PRIVATE_DIR, `${anchor.role}.asr.json`);
+    if (fs.existsSync(respFile)) sources.push(JSON.parse(fs.readFileSync(respFile, 'utf8')).text);
+    for (const src of sources) {
+      const frag = sharesFragment(anchor.rationale, src);
+      assert.equal(frag, null,
+        `${anchor.role}: rationale embeds anchor transcript fragment "${frag}"; use structured evidence codes / hash references instead`);
+    }
+  }
+
+  // (c) The fix must preserve every verdict and the no-auto-edit decision.
+  const EXPECTED_ANCHOR_VERDICTS = {
+    'opening': 'LIKELY',
+    'middle': 'UNCERTAIN',
+    'ending': 'UNCERTAIN',
+    'question': 'UNCERTAIN',
+    'teacher-summary': 'CONFIRMED',
+  };
+  for (const anchor of review.anchors) {
+    assert.equal(anchor.verdict, EXPECTED_ANCHOR_VERDICTS[anchor.role],
+      `${anchor.role}: verdict must be preserved by the F1 fix`);
+    assert.equal(anchor.correction.decision, 'none', `${anchor.role}: no-auto-edit decision must be preserved`);
+    assert.equal(anchor.correction.applied, false, `${anchor.role}: corrections must remain unapplied`);
+    assert.match(anchor.publishedTextSha256, HEX64);
+    assert.match(anchor.audioTextSha256, HEX64);
+  }
+
+  // (d) Directory prose must not embed transcript wording either (the summary
+  // claims hash-only evidence).
+  const summary = fs.readFileSync(path.join(AUDIT_DIR, 'summary.md'), 'utf8');
+  assert.ok(!CJK.test(summary), 'editorial-audit/summary.md embeds transcript wording; hash-only claim would be inaccurate');
 });

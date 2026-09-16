@@ -17,7 +17,7 @@
       "publishedTextSha256": "723f3833f470d2755bd7b5cbc7366ac580d992a9ba2bdfbe610de0acba2e8fd3",
       "audioTextSha256": "1be5427ab0e5246052e45f071a2001856d07916f38a244fa2744bf48f6c9fb3a",
       "verdict": "LIKELY",
-      "rationale": "Private GPU ASR (garbled, adjacent-span) renders \"离法师都会同学大家晚安\"; published \"敬禮法師，各位同學大家晚安。\" matches on 法師/同學大家晚安 but 各位 is only phonetically approximate to ASR 都会, and the prostration phrase is not clearly audible. Contextually plausible; not exact.",
+      "rationale": "CODE OPENING-PARTIAL-MATCH: private GPU ASR of the clip is garbled with adjacent-span contamination; published seg-0001 and clip text share two multi-character token matches, one token is only phonetically approximate, and the opening prostration clause is not clearly audible. Evidence refs: anchors[opening].publishedTextSha256, anchors[opening].audioTextSha256, audioEvidence[opening].clipSha256/responseSha256. Contextually plausible; not exact.",
       "correction": {
         "decision": "none",
         "applied": false,
@@ -34,7 +34,7 @@
       "publishedTextSha256": "37604a439db0f4e0edc518fe876d82b80338fdc9f836567b724f33cc2ff4ec33",
       "audioTextSha256": "b444754886a7866bbe8ecb4cb72f5ae228f656208bf3949da088d22bbdddf0a1",
       "verdict": "UNCERTAIN",
-      "rationale": "Published \"就是釋迦牟尼佛之師裡面\" expands ASR/raw \"就是欺佛之师里面\" (4 syllables vs 6). The clip audio does not audibly contain 釋迦牟尼佛; the expansion matches topic context (neighboring seg-1808 mentions 释迦牟尼佛) but the audio itself cannot confirm it.",
+      "rationale": "CODE MIDDLE-SYLLABLE-EXPANSION: published seg-1806 expands the private ASR/raw clip reading from 4 to 6 syllables at the proper-noun phrase; the clip audio does not audibly contain the expanded name, and the expansion is supported only by topic context (neighboring seg-1808 references the same figure), not by the audio. Evidence refs: anchors[middle].publishedTextSha256, anchors[middle].audioTextSha256, audioEvidence[middle].clipSha256/responseSha256.",
       "correction": {
         "decision": "none",
         "applied": false,
@@ -51,7 +51,7 @@
       "publishedTextSha256": "3655cf0920bbcfe5ca173240a0dd5818714f56256262cf7613fa6739e35af892",
       "audioTextSha256": "725a20646e9a02072bc3b6b58ac3e7e105ff9144152de526dd9f432ba1ae680c",
       "verdict": "UNCERTAIN",
-      "rationale": "Published \"願成善逝受持義。\" differs from private ASR \"愿成善事赦受医\" (homophones 善事/善逝; 赦受医/受持义 only approximate). No repository-internal source artifact independently verifies the verse wording; audio does not confirm the published reading.",
+      "rationale": "CODE ENDING-HOMOPHONE-DIVERGENCE: published seg-3669 differs from the private ASR clip reading by homophone substitutions and approximate renderings (2 divergent token pairs). No repository-internal source artifact independently verifies the verse wording; audio does not confirm the published reading. Evidence refs: anchors[ending].publishedTextSha256, anchors[ending].audioTextSha256, audioEvidence[ending].clipSha256/responseSha256.",
       "correction": {
         "decision": "none",
         "applied": false,
@@ -68,7 +68,7 @@
       "publishedTextSha256": "f268b496b085d302e2f60849647186dd9487727c4034fb231d888bf26e000f59",
       "audioTextSha256": "9930537ea760d855b10849b0cb7ac1d7f9871a745034112f6ff9437e90c4209e",
       "verdict": "UNCERTAIN",
-      "rationale": "Private clip [448.82–452.68] transcribes only \"第一题\", which corresponds to seg-0144 content; the clip did not capture the published segment text \"有些人發現自己欠缺智慧時\". Audio evidence is insufficient to confirm or refute the published wording at this anchor.",
+      "rationale": "CODE QUESTION-ADJACENT-SPAN: private clip [448.82-452.68] transcribes only a short adjacent-segment cue corresponding to seg-0144 content; the clip did not capture the published seg-0145 wording. Audio evidence is insufficient to confirm or refute the published wording at this anchor. Evidence refs: anchors[question].publishedTextSha256, anchors[question].audioTextSha256, audioEvidence[question].clipSha256/responseSha256.",
       "correction": {
         "decision": "none",
         "applied": false,
@@ -85,7 +85,7 @@
       "publishedTextSha256": "a627851be2ff1b8d449bc26cb169351c0acbb5a155285c2dd777407ecc82e44c",
       "audioTextSha256": "0f7ec42e68d2f41eb780b39de0d9c3d8e824da4672cc95e50ed252c5ded1138f",
       "verdict": "CONFIRMED",
-      "rationale": "Private ASR contains the exact phrase \"OK您刚刚讲过\", which the published \"OK，您剛剛講過\" reproduces verbatim modulo punctuation and traditional conversion. Neighboring ASR (\"以上分享\", \"感觉起来跟文书菩萨\") matches adjacent segments, confirming anchor placement.",
+      "rationale": "CODE VERBATIM-PHRASE-MATCH: private ASR contains an exact 7-character phrase that the published seg-0208 reproduces verbatim modulo punctuation and traditional-character conversion; neighboring ASR tokens match adjacent segments, confirming anchor placement. Evidence refs: anchors[teacher-summary].publishedTextSha256, anchors[teacher-summary].audioTextSha256, audioEvidence[teacher-summary].clipSha256/responseSha256.",
       "correction": {
         "decision": "none",
         "applied": false,
@@ -157,5 +157,5 @@
     }
   ],
   "correctionPolicy": "Corrections are proposals with SHA256 before/after only; applied=false always. No session JSON or transcript content modified by this ledger.",
-  "notes": "Anchors recorded as hashes only. No raw transcript text stored in repository evidence."
+  "notes": "Anchor text is recorded exclusively as SHA256 hashes and structured evidence codes; no published or ASR transcript wording is quoted in this ledger. Rationale strings describe comparisons structurally (evidence codes plus hash-field references) without embedding transcript fragments (F1 fix, 2026-09-16)."
 }
