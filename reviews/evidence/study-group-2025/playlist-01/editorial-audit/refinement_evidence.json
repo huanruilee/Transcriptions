@@ -1,0 +1,35 @@
+{
+  "schema": "study-group-session01-refinement/v1",
+  "baselineCommit": "fd0f6f87f93700064526f4fcad8a51c936e863e0",
+  "gpuRefinementIndexSha256": "3b4f58bd88d5b6cc81ac763498c517ad3036ef2b39094d3064b113d78aff3ace",
+  "adjudicationInputSha256": "eb1256a89e99e1b3c5d905116f602cb47892c793a7aa9261ce86461f5a52ed14",
+  "adjudicationResponseSha256": "de6332c686dfe5a54f4583208d32f71fd6781d25decbe858f20032ab4eb59677",
+  "runtime": {
+    "asr": "gx10-whisper-8010/cuda-int8",
+    "adjudicator": "Qwen3.8-27B",
+    "reasoningTokens": 0
+  },
+  "decisions": {
+    "middle": {
+      "decision": "UNCERTAIN",
+      "automaticEdit": false,
+      "reasonCode": "ASR_MISMATCH",
+      "inputSha256": "eb1256a89e99e1b3c5d905116f602cb47892c793a7aa9261ce86461f5a52ed14",
+      "adjudicationResponseSha256": "de6332c686dfe5a54f4583208d32f71fd6781d25decbe858f20032ab4eb59677"
+    },
+    "ending": {
+      "decision": "UNCERTAIN",
+      "automaticEdit": false,
+      "reasonCode": "ASR_MISMATCH",
+      "inputSha256": "eb1256a89e99e1b3c5d905116f602cb47892c793a7aa9261ce86461f5a52ed14",
+      "adjudicationResponseSha256": "de6332c686dfe5a54f4583208d32f71fd6781d25decbe858f20032ab4eb59677"
+    },
+    "question": {
+      "decision": "CONFIRMED",
+      "automaticEdit": false,
+      "reasonCode": "ASR_MATCH",
+      "inputSha256": "eb1256a89e99e1b3c5d905116f602cb47892c793a7aa9261ce86461f5a52ed14",
+      "adjudicationResponseSha256": "de6332c686dfe5a54f4583208d32f71fd6781d25decbe858f20032ab4eb59677"
+    }
+  }
+}

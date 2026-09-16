@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const EVIDENCE_DIR = 'reviews/evidence/study-group-2025/playlist-01';
 const AUDIT_DIR = path.join(ROOT, EVIDENCE_DIR, 'editorial-audit');
+const REFINEMENT_PATH = path.join(AUDIT_DIR, 'refinement_evidence.json');
 const MANIFEST_PATH = path.join(ROOT, EVIDENCE_DIR, 'acceptance-prep/input_manifest.json');
 const PRIVATE_DIR = '/home/henry/.gx10/tasks/study-group-session01-gpu-anchors-20260916/evidence';
 
@@ -219,4 +220,20 @@ test('study-group playlist-01 ledger rationale is hash-only (no embedded anchor 
   // claims hash-only evidence).
   const summary = fs.readFileSync(path.join(AUDIT_DIR, 'summary.md'), 'utf8');
   assert.ok(!CJK.test(summary), 'editorial-audit/summary.md embeds transcript wording; hash-only claim would be inaccurate');
+});
+
+test('study-group playlist-01 refinement evidence may confirm only the re-sampled question anchor', () => {
+  const refinement = JSON.parse(fs.readFileSync(REFINEMENT_PATH, 'utf8'));
+  assert.equal(refinement.schema, 'study-group-session01-refinement/v1');
+  assert.equal(refinement.baselineCommit, 'fd0f6f87f93700064526f4fcad8a51c936e863e0');
+  assert.equal(refinement.decisions.question.decision, 'CONFIRMED');
+  assert.equal(refinement.decisions.question.automaticEdit, false);
+  assert.equal(refinement.decisions.middle.decision, 'UNCERTAIN');
+  assert.equal(refinement.decisions.ending.decision, 'UNCERTAIN');
+  for (const item of Object.values(refinement.decisions)) {
+    assert.match(item.adjudicationResponseSha256, HEX64);
+    assert.match(item.inputSha256, HEX64);
+    assert.equal(typeof item.reasonCode, 'string');
+  }
+  assertNoRawTranscript(refinement);
 });
