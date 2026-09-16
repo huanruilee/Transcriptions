@@ -230,6 +230,9 @@ test('study-group playlist-01 refinement evidence may confirm only the re-sample
   assert.equal(refinement.decisions.question.automaticEdit, false);
   assert.equal(refinement.decisions.middle.decision, 'UNCERTAIN');
   assert.equal(refinement.decisions.ending.decision, 'UNCERTAIN');
+  assert.match(refinement.adjudicationEvidence.officialSourceResponseSha256, HEX64);
+  assert.match(refinement.adjudicationEvidence.crossSessionEndingResponseSha256, HEX64);
+  assert.equal(refinement.adjudicationEvidence.youtubeCaptionStatus, 'unavailable');
   for (const item of Object.values(refinement.decisions)) {
     assert.match(item.adjudicationResponseSha256, HEX64);
     assert.match(item.inputSha256, HEX64);
