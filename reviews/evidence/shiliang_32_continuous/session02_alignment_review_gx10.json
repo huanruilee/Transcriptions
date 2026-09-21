@@ -1,0 +1,57 @@
+{
+  "review": "shiliang_32_session02_text_time_alignment",
+  "status": "FAIL",
+  "source": {
+    "audio_path": "/tmp/shiliang_s02_gx10/session_02.mp3",
+    "audio_sha256": "de70a31945b2cfd3c3def432b7cd9a9b3b24c41894b981cf23fea3c365fd024e",
+    "audio_bytes": 68161200,
+    "audio_duration_seconds": 4260.0224375,
+    "raw_asr_sha256": "0e07273c9c628136247a548e642483ba623fd5fe69a36862e51bb4fe88ef8d78",
+    "raw_asr_segments": 1760,
+    "raw_asr_model": "GX10 local transcription endpoint, verbose_json"
+  },
+  "checks": {
+    "published_sentence_count": 437,
+    "published_paragraph_count": 49,
+    "internal_timestamp_regressions": 0,
+    "largest_gap": {"from": "sent-147", "to": "sent-148", "seconds": 44.32}
+  },
+  "findings": [
+    {
+      "sentenceId": "sent-147",
+      "publishedText": "可以。",
+      "publishedRange": [1427.1, 1427.44],
+      "rawTextAtRange": "但是眼根之并没有证得",
+      "rawRange": [1426.38, 1429.98],
+      "result": "FAIL"
+    },
+    {
+      "sentenceId": "sent-262",
+      "publishedText": "如果我們自己對於解脫是什麼狀態都不清楚，我們怎麼知道那個人解脫了？",
+      "publishedRange": [2364.95, 2368.38],
+      "rawTextAtRange": "这个理由合不合理不合理",
+      "rawRange": [2359.4, 2372.46],
+      "result": "FAIL"
+    },
+    {
+      "sentenceId": "sent-380",
+      "publishedText": "」這時他沒有動怒、沒有指責對方，反而大力地讚揚對方，這很不容易吧。",
+      "publishedRange": [3687.72, 3696.08],
+      "rawTextAtRange": "反而大力地赞扬他这很不容易吧对我们多数人而言如果你是跟我学的",
+      "rawRange": [3687.72, 3696.4],
+      "result": "FAIL"
+    }
+  ],
+  "testPattern": {
+    "name": "source-grounded sentence timestamp alignment",
+    "redContract": "For every published sentence, overlap its time range with raw-ASR segments, normalize both texts, and require a bounded text alignment score plus source hash/model metadata. Fail when the best matching source window is outside the published range or the score is below threshold.",
+    "negativeFixtures": [
+      "shift a sentence timestamp onto an adjacent sentence",
+      "replace a sentence with a same-length but different source span",
+      "remove raw-ASR provenance or source hash",
+      "leave a large unexplained inter-sentence gap"
+    ],
+    "failClosed": "missing audio/raw-ASR is BLOCKED; available source with text/time mismatch is FAIL; only source-grounded alignment may PASS"
+  },
+  "acceptance": "FAIL: session_02 timestamps are not source-grounded at sampled ranges; do not publish timestamp corrections until the RED test and adjudication ledger are added."
+}

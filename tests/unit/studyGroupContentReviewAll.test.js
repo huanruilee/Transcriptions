@@ -1,0 +1,153 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const EVIDENCE = path.join(ROOT, 'reviews/evidence/study-group-2025');
+const SIMPLIFIED = /[为这样个说体经论门从对么后变实证觉关开边过问题时间还会点现显义极胜广当无师发与见随应处观摄识别业释难车声闻缘执许计总种听讲话导读记诵传辩净萨诸圆满刚传输认痴]/u;
+const AMBIGUOUS_SPEECH = /謝謝法師|我知道了|我可不可以這麼理解|這是我的理解/u;
+const BARE_ACKNOWLEDGEMENT = /^(?:對|是的|好的|好|嗯|OK)[。！!，,、 ]*$/iu;
+
+function isNonSubstantiveSummarySource(text) {
+  const normalized = text.replace(/[\s，。！？、,.!?:：]/gu, '');
+  const acknowledgementOnly = /^(?:(?:對|對啊|對的|對對對|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題|以上|大家晚安)+)$/iu;
+  if (acknowledgementOnly.test(normalized)) return true;
+  if (!/(?:謝謝|感謝)/u.test(normalized)) return false;
+  const remainder = normalized.replace(/(?:對|對啊|對的|是的|好|好的|嗯|OK|可以|瞭解|了解|知道了|沒問題|謝謝|感謝|法師|老師|師兄|師姐|同學|大家|非常|很|我|了)/giu, '');
+  return remainder.length <= 2;
+}
+
+const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+
+for (const playlistIndex of [...Array.from({ length: 41 }, (_, index) => index + 1), 44]) {
+  test(`playlist-${String(playlistIndex).padStart(2, '0')} content contract`, () => {
+    const dir = path.join(EVIDENCE, `playlist-${String(playlistIndex).padStart(2, '0')}`);
+    const raw = JSON.parse(fs.readFileSync(path.join(dir, 'raw_asr.json'), 'utf8'));
+    const candidate = JSON.parse(fs.readFileSync(path.join(dir, 'candidate.json'), 'utf8'));
+    const output = JSON.parse(fs.readFileSync(path.join(dir, 'content_review.json'), 'utf8'));
+    const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'content_review_manifest.json'), 'utf8'));
+    assert.equal(output.status, 'CANDIDATE');
+    assert.equal(output.schema, 'study-group-content-review/v1');
+    assert.equal(manifest.status, 'BLOCKED_REVIEW_REQUIRED');
+    assert.ok(output.segments.length >= raw.segments.length);
+    assert.equal(manifest.segments, output.segments.length);
+    assert.equal(output.source.videoId, candidate.source.videoId);
+    assert.equal(fs.existsSync(path.join(ROOT, output.provenance.rawAsrPath)), true);
+    assert.equal(fs.existsSync(path.join(ROOT, output.provenance.referencePath)), true);
+    assert.deepEqual(output.segments.slice(0, raw.segments.length).map((s) => s.id), raw.segments.map((s) => s.id));
+    for (let i = 0; i < raw.segments.length; i += 1) {
+      assert.equal(output.segments[i].start, raw.segments[i].start);
+      assert.equal(output.segments[i].end, raw.segments[i].end);
+      assert.ok(output.segments[i].text.length > 0);
+      assert.equal(SIMPLIFIED.test(output.segments[i].text), false, `simplified text at ${output.segments[i].id}`);
+    }
+    const supplementalSegments = output.segments.slice(raw.segments.length);
+    if (supplementalSegments.length > 0) {
+      const evidencePath = path.join(ROOT, output.provenance.supplementalAudioEvidencePath ?? '');
+      assert.equal(fs.existsSync(evidencePath), true, 'supplemental segments require an audio evidence artifact');
+      const evidence = JSON.parse(fs.readFileSync(evidencePath, 'utf8'));
+      assert.equal(evidence.status, 'CONFIRMED');
+      assert.equal(output.provenance.supplementalAudioSha256, evidence.source.sha256);
+      assert.equal(supplementalSegments.length, evidence.audioConfirmedSegments.length);
+      let previousId = Number(raw.segments.at(-1).id.slice(4));
+      let previousEnd = raw.segments.at(-1).end;
+      supplementalSegments.forEach((segment, index) => {
+        const source = evidence.audioConfirmedSegments[index];
+        assert.equal(Number(segment.id.slice(4)), previousId + 1);
+        assert.equal(segment.start, source.publicationStart ?? source.start);
+        assert.equal(segment.end, source.end);
+        assert.equal(segment.text, source.publishedText);
+        assert.ok(segment.start >= previousEnd);
+        previousId += 1;
+        previousEnd = segment.end;
+      });
+    }
+    const byId = new Map(output.segments.map((s) => [s.id, s]));
+    const number = (id) => Number(id.slice(4));
+    const summaries = new Map(output.teacherSummaries.map((s) => [s.questionId, s]));
+    const allQuestionRefs = new Set(output.questionIndex.flatMap((q) => q.sourceSegmentIds));
+    assert.ok(output.questionIndex.length > 0, 'content review must contain at least one question');
+    assert.ok(output.teacherSummaries.length > 0, 'content review must contain at least one teacher summary');
+    assert.equal(output.questionIndex.length, output.teacherSummaries.length);
+    assert.equal(manifest.questions, output.questionIndex.length);
+    assert.equal(manifest.summaries, output.teacherSummaries.length);
+    const duplicateQuestions = new Map();
+    for (const question of output.questionIndex) {
+      const normalized = question.question.replace(/[\s，。！？、]/gu, '');
+      const ids = duplicateQuestions.get(normalized) ?? [];
+      ids.push(question.id);
+      duplicateQuestions.set(normalized, ids);
+    }
+    const duplicateIds = [...duplicateQuestions.values()].filter((ids) => ids.length > 1);
+    const allowedRepeatedQuestionIds = playlistIndex === 7 ? [['q-12-01', 'q-22-01']] : [];
+    assert.deepEqual(duplicateIds, allowedRepeatedQuestionIds);
+    const forbiddenNonQuestionIds = {
+      2: ['q-28-01'],
+      8: ['q-24-03'],
+      15: ['q-09-01'],
+      17: ['q-30-01'],
+      36: ['q-07-02'],
+      38: ['q-22-01'],
+      40: ['q-18-01'],
+    }[playlistIndex] ?? [];
+    for (const id of forbiddenNonQuestionIds) {
+      assert.equal(output.questionIndex.some((question) => question.id === id), false);
+    }
+    const forbiddenNoTeacherResponseIds = {
+      5: ['q-14-01'],
+      14: ['q-16-04'],
+      22: ['q-11-01'],
+      27: ['q-28-01'],
+      30: ['q-16-01', 'q-16-02'],
+      36: ['q-31-03'],
+    }[playlistIndex] ?? [];
+    for (const id of forbiddenNoTeacherResponseIds) {
+      assert.equal(output.questionIndex.some((question) => question.id === id), false);
+    }
+    if (playlistIndex === 5) {
+      const summary = output.teacherSummaries.find((item) => item.questionId === 'q-23-01');
+      assert.equal(summary.bullets.some((bullet) => bullet.includes('可以了這樣我明白')), false);
+    }
+    const summaryStartsWithHandoff = output.teacherSummaries.filter((summary) => {
+      const segment = byId.get(summary.sourceSegmentIds[0]);
+      return /^(?:謝謝.*(?:師兄|師姐|老師|法師)|好的?(?:\s|,|，)*(?:晚安|大家好))$/u.test(segment?.text?.trim() ?? '');
+    });
+    assert.deepEqual(summaryStartsWithHandoff.map((summary) => summary.questionId), []);
+    const summaryEndsWithHandoff = output.teacherSummaries.filter((summary) => {
+      const segment = byId.get(summary.sourceSegmentIds.at(-1));
+      return /^(?:謝謝|好謝謝|好的謝謝|謝謝法師|謝謝老師|以上)[。！!，,、 ]*$/u.test(segment?.text?.trim() ?? '');
+    });
+    assert.deepEqual(summaryEndsWithHandoff.map((summary) => summary.questionId), []);
+    for (const question of output.questionIndex) {
+      assert.equal(SIMPLIFIED.test(question.question), false, `simplified question at ${question.id}`);
+      const summary = summaries.get(question.id);
+      assert.ok(summary);
+      assert.ok(summary.sourceSegmentIds.length > 0, `empty teacher summary source at ${question.id}`);
+      assert.ok(summary.bullets.length > 0);
+      summary.sourceSegmentIds.forEach((id) => assert.equal(allQuestionRefs.has(id), false, `summary overlaps a question source at ${question.id}`));
+      const questionEnd = Math.max(...question.sourceSegmentIds.map(number));
+      const summaryStart = Math.min(...summary.sourceSegmentIds.map(number));
+      assert.ok(summaryStart > questionEnd);
+      assert.ok(summaryStart - questionEnd <= 250);
+      for (const id of summary.sourceSegmentIds) {
+        assert.ok(byId.has(id));
+        assert.equal(AMBIGUOUS_SPEECH.test(byId.get(id).text), false, `ambiguous source ${id}`);
+        assert.equal(BARE_ACKNOWLEDGEMENT.test(byId.get(id).text.trim()), false, `bare acknowledgement source ${id}`);
+        assert.equal(isNonSubstantiveSummarySource(byId.get(id).text.trim()), false, `non-substantive summary source ${id}`);
+      }
+      for (const bullet of summary.bullets) {
+        assert.equal(SIMPLIFIED.test(bullet), false);
+        assert.equal(/^(?:法師確認：)?(?:對|是的)[。！!]?$/u.test(bullet), false);
+        assert.equal(/未提供.*直接.*(開示|回答)|沒有.*法師.*回答/u.test(bullet), false);
+      }
+    }
+    assert.equal(output.provenance.rawAsrSha256, sha256(path.join(dir, 'raw_asr.json')));
+    assert.equal(output.provenance.referenceSha256.length, 64);
+    if (playlistIndex >= 33 && playlistIndex !== 44) {
+      assert.equal(output.provenance.referenceFallback, 'shared_treatise_source: lesson-specific reference unavailable');
+    }
+  });
+}

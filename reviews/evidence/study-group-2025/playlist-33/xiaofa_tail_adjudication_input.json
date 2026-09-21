@@ -1,0 +1,40 @@
+{
+  "schema": "bounded-agent-adjudication/v1",
+  "taskId": "study-group-33-tail-20260912",
+  "scope": "Decide whether the four proposed dedication lines are supported by the frozen tail-audio evidence.",
+  "inputEvidence": "tail_audio_review_2026-09-12.json",
+  "existingLastSegment": {
+    "id": "seg-4129",
+    "start": 10364.48,
+    "end": 10365.42,
+    "text": "請大家合掌"
+  },
+  "proposedLines": [
+    "遇此無上大師教",
+    "皆由上師生恩故",
+    "此善迴向諸眾生",
+    "願成善士攝受因。"
+  ],
+  "publicationRanges": [
+    [10365.42, 10369.69],
+    [10369.69, 10371.85],
+    [10371.85, 10374.27],
+    [10374.27, 10376.73]
+  ],
+  "allowedVerdicts": [
+    "CONFIRMED",
+    "BLOCKED"
+  ],
+  "forbiddenActions": [
+    "Edit repository files",
+    "Fetch new evidence",
+    "Change timestamps",
+    "Promote the whole session to accepted or published"
+  ],
+  "requiredOutput": {
+    "taskId": "study-group-33-tail-20260912",
+    "verdict": "CONFIRMED or BLOCKED",
+    "lineDecisions": "Exactly four entries with line, verdict, and evidence time range",
+    "notes": "One short string"
+  }
+}

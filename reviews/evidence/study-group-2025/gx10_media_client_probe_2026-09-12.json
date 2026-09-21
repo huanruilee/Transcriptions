@@ -1,0 +1,18 @@
+{
+  "status": "PARTIAL",
+  "host": "gx10-2887",
+  "checkedAt": "2026-09-12T11:20:00+08:00",
+  "videoId": "bO2f8SL6czc",
+  "clients": {
+    "web": "media extraction failed",
+    "ios": "media extraction failed",
+    "tv_embedded": "Range probe PASS: HTTP 206, audio/mp4, 1024 bytes"
+  },
+  "downloadAttempts": {
+    "ytDlpTailSectionWithTvEmbedded": "ffmpeg exit 8",
+    "ytDlpFullAudioWithTvEmbedded": "HTTP 403",
+    "directCurlResult": "incomplete container; moov atom not found"
+  },
+  "conclusion": "Metadata and small Range probes work, but usable media bytes are not currently available for GX10 sentence-level audio review.",
+  "cleanup": "No audio file or signed media URL retained."
+}

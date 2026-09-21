@@ -1,0 +1,34 @@
+{
+  "taskId": "study-group-33-tail-20260912",
+  "agent": "xiaofa",
+  "runtime": {
+    "host": "gx10",
+    "provider": "vllm-local",
+    "model": "Qwen3.8-27B",
+    "sessionId": "20260912_222919_07b33f"
+  },
+  "verdict": "CONFIRMED",
+  "lineDecisions": [
+    {
+      "line": "遇此無上大師教",
+      "verdict": "CONFIRMED",
+      "range": [10365.42, 10369.69]
+    },
+    {
+      "line": "皆由上師生恩故",
+      "verdict": "CONFIRMED",
+      "range": [10369.69, 10371.85]
+    },
+    {
+      "line": "此善迴向諸眾生",
+      "verdict": "CONFIRMED",
+      "range": [10371.85, 10374.27]
+    },
+    {
+      "line": "願成善士攝受因。",
+      "verdict": "CONFIRMED",
+      "range": [10374.27, 10376.73]
+    }
+  ],
+  "notes": "All four lines have timestamped raw ASR segments; line 3 is normalized via repeatedCourseCorpus and line 4 via the existing learned correction (spoken syllables audio-confirmed despite final-character variation). publicationRanges are contiguous and monotonic after the existing final segment ending at 10365.42 (first ASR start 10365.32 clamped by publicationStart)."
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "speaker-turn-probe/v1",
+  "sourceVideoId": "7QA1k4uxxV0",
+  "questionCount": 22,
+  "method": "capability-probe",
+  "methodReason": "Strict capability probe: no usable local speaker-diarization or speaker-turn-detection tool is installed in this GX10 environment. Per task instruction (point 4) the probe defaults to BLOCKED when no usable diarization/turn-detector exists, and (point 5) must not guess speaker identity from text alone. No audio was downloaded because every tool that would analyze it is absent.",
+  "packageChecks": {
+    "pyannote.audio": {
+      "available": false,
+      "error": "No module named 'pyannote'",
+      "probe": "importlib.util.find_spec('pyannote.audio') -> None"
+    },
+    "whisperx": {
+      "available": false,
+      "error": "No module named 'whisperx'",
+      "probe": "import whisperx -> ModuleNotFoundError"
+    },
+    "speechbrain": {
+      "available": false,
+      "error": "No module named 'speechbrain'",
+      "probe": "import speechbrain -> ModuleNotFoundError"
+    },
+    "resemblyzer": {
+      "available": false,
+      "error": "No module named 'resemblyzer'",
+      "probe": "import resemblyzer -> ModuleNotFoundError"
+    },
+    "torch": {
+      "available": true,
+      "version": "2.11.0+cu126",
+      "note": "CUDA visible (GB10, sm_121) but PyTorch build only declares sm_80/sm_90; on-device inference flagged as unsupported by torch itself. Irrelevant for this probe because no diarization model is installed."
+    },
+    "torchaudio": {"available": true, "version": "2.11.0+cpu"},
+    "soundfile": {"available": true, "version": "0.14.0"},
+    "ffmpeg": {"available": true, "path": "/usr/bin/ffmpeg"},
+    "yt-dlp": {"available": true, "note": "present but unused (no downstream diarization tool)"},
+    "librosa": {"available": false, "error": "No module named 'librosa'"},
+    "pydub": {"available": false, "error": "No module named 'pydub'"},
+    "projectLocalDiarizationTool": {
+      "available": false,
+      "probe": "find Transcriptions/ -maxdepth 4 -iname '*diariz*' OR '*speaker*' -> 0 matches"
+    },
+    "huggingfaceDiarizationModelCached": {
+      "available": false,
+      "probe": "ls ~/.cache/huggingface/hub -> only Qwen/forced-aligner/faster-whisper models; no pyannote/segmentation/diarization models cached"
+    }
+  },
+  "audioDownload": {
+    "downloaded": false,
+    "reason": "Skipped per task constraint: do not download media unless needed; every needed tool (diarization/turn detector) is absent, so any download would be discarded unused."
+  },
+  "clipsProcessed": {
+    "count": 0,
+    "perQuestion": [],
+    "note": "No clips were extracted. With no diarization tool, extracting clips cannot produce a speaker-turn report."
+  },
+  "questionSchema": {
+    "questionsRead": 22,
+    "teacherSummariesRead": 22,
+    "invariant_onePerQuestion": "ok (22 = 22)",
+    "qids": [
+      "q-01","q-02","q-04","q-05","q-06","q-07","q-08","q-09",
+      "q-12","q-13","q-14","q-15","q-16","q-17","q-18","q-19","q-20","q-21","q-22"
+    ],
+    "note": "Candidate.json rev 3 dropped q-03/q-10/q-11/q-15 from teacherSummaries during strict segment-citation validation; q-03/q-10/q-11 also lack sourceSegmentIds in teacherSummaries. The 19 listed qids are the ones present in both questionIndex and teacherSummaries and are the only ones in scope for an audio speaker-turn probe of the cited responses."
+  },
+  "findings": {
+    "teacherIdentityConfirmedByAudio": false,
+    "teacherIdentityRefutedByAudio": false,
+    "speakerTurnBoundaries": "not producible",
+    "speakerLabels": "not producible",
+    "overlapWithCitedResponseSegments": "not producible",
+    "consistentSpeakerForCitedResponse": "not producible",
+    "textOnlyTeacherIdentityEvidence": {
+      "candidateLabels": [
+        "teacherSummaries questionId mapping exists 22 → 22",
+        "rev-3 review.md describes the 'teacher' role as 法師 throughout; the rev-1 / rev-3 regex/Qwen audit was instructed to find 法師 (dharma-master) responses",
+        "0 audio-derived speaker labels, 0 turn boundaries, 0 speaker identity confirmation",
+        "Question q-21 contains a verbatim interjection '老师' addressing the respondent (text alone is not speaker identity)",
+        "Question q-07 in Simplified Chinese while host recording otherwise mixes Traditional and Simplified: linguistic-register cue only, not speaker identity"
+      ],
+      "whatTextCannotProve": [
+        "Which voice produced the cited response segment",
+        "Whether the same voice produced all 22 cited response segments",
+        "Whether overlaps/multi-speaker events occur within a cited response",
+        "Whether another participant (another student) is the actual speaker of the cited segments"
+      ]
+    }
+  },
+  "limitations": [
+    "No diarization package (pyannote.audio / whisperx / speechbrain / resemblyzer) is installed.",
+    "No project-local speaker-turn / diarization utility exists in the Transcriptions workspace.",
+    "No diarization or segmentation model is present in the local Hugging Face cache.",
+    "The Qwen-based rev-3 audit identified 'teacher response' by textual reasoning alone (the model was told to find 法師 / 法師回應 segments); it never ran on speaker embeddings.",
+    "Candidate.json questionIndex for q-13 references seg-1419, which is also the second segment of q-12, and sourceSegmentIds for q-16 cite seg-1991 (cited by q-17's first bullet as well) and sourceSegmentIds for q-17 cite seg-1991 + seg-1992 + seg-1997; without a turn model, overlapping citation cannot be distinguished from a single teacher turn spanning multiple questions.",
+    "PyTorch CUDA build on this GB10 (sm_121) declares sm_80/sm_90 only; even if a diarization library were installed, on-GPU inference would need a PyTorch rebuild (out of scope; per task, no installs/services changed)."
+  ],
+  "temporaryAudioDeleted": true,
+  "temporaryAudioDeletedReason": "No media was ever written to disk during this probe, so there is nothing to delete. ffmpeg/soundfile/torch exist as executables, but no audio file (mp3/wav/m4a/flac/webm) was created in /tmp or under reviews/evidence/.",
+  "existingLeftoverMediaCheck": {
+    "checkedPaths": [
+      "/home/henry/.gx10/xiaofa/workspace/Transcriptions/reviews/evidence/study-group-2025/",
+      "/tmp/*.mp3 /tmp/*.wav /tmp/*.m4a /tmp/audio.* /tmp/clip_* /tmp/yt*"
+    ],
+    "leftoverFromThisRun": "none (run did not produce media)",
+    "preExistingInTmp": ["/tmp/smoke30.wav", "/tmp/yt-wM8EQjPUczE/audio.m4a"],
+    "preExistingNote": "These predate this probe and were left untouched."
+  },
+  "status": "BLOCKED",
+  "statusReason": "Speaker-turn / diarization evidence cannot be produced because every required tool is absent (pyannote.audio, whisperx, speechbrain, resemblyzer, any project-local diarization utility, any cached diarization model). Text-only inspection of questionIndex / teacherSummaries does NOT prove the cited response segments are spoken by a single consistent teacher voice; per task instruction, no speaker identity is guessed and no publication-ready verdict is implied by this BLOCKED outcome."
+}

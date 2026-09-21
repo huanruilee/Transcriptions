@@ -7,6 +7,7 @@ export interface SessionMeta {
   summary?: string;
   date?: string;
   lastUpdated?: string;
+  transcriptStatus?: string;
 }
 
 export interface TOCNode {

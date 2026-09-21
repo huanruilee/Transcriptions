@@ -1,0 +1,341 @@
+#!/usr/bin/env python3
+"""Build the public study-group course from reviewed evidence artifacts."""
+
+import json
+import re
+import subprocess
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+EVIDENCE = ROOT / "reviews/evidence/study-group-2025"
+COURSE_DIR = ROOT / "courses/2025釋量論第二品大組共學"
+COURSE_ID = "shi-liang-lun-study-group-2025"
+
+
+def display_session_id(title: str, playlist_index: int) -> str:
+    """Use the lecture number in the title, while keeping playlist ids stable for routes."""
+    match = re.search(r"第\s*(\d+)\s*講[^（(]*[（(](上|下)[）)]", title)
+    if match:
+        return f"{match.group(1)}{match.group(2)}"
+    match = re.search(r"第\s*(\d+)\s*講", title)
+    return match.group(1) if match else str(playlist_index)
+
+
+def write_json(path: Path, value: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+
+def trim_after_dedication(segments: list[dict]) -> list[dict]:
+    """Keep the transcript through the final dedication verse, excluding sign-off noise."""
+    dedication_markers = (
+        re.compile(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)") ,
+        re.compile(r"願成善"),
+    )
+    working = [dict(segment) for segment in segments]
+    last_dedication = None
+    pending_dedication = None
+    index = 0
+    while index < len(working):
+        segment = working[index]
+        text = segment.get("text", "")
+        matches = [match for marker in dedication_markers if (match := marker.search(text))]
+        if matches:
+            last_dedication = (index, max(match.end() for match in matches))
+            pending_dedication = index if any(match.end() >= len(text) - 2 for match in matches) else None
+        elif pending_dedication is not None:
+            joined = "".join(item.get("text", "") for item in working[pending_dedication:index + 1])
+            if re.search(r"願.{0,18}(?:成|善).{0,18}(?:因|義|受|持|應|壽|陰|悟)", joined):
+                merged = dict(working[index])
+                merged["start"] = working[pending_dedication].get("start", merged.get("start"))
+                for field in ("text", "rawText"):
+                    if field in merged:
+                        merged[field] = "".join(item.get(field, "") for item in working[pending_dedication:index + 1])
+                working = working[:pending_dedication] + [merged] + working[index + 1:]
+                index = pending_dedication
+                text = merged.get("text", "")
+                if text and text[-1] not in "。！？!?,，、":
+                    merged["text"] = text + "。"
+                    text = merged["text"]
+                dedication_end = max(
+                    match.end()
+                    for marker in dedication_markers
+                    if (match := marker.search(text))
+                )
+                last_dedication = (index, dedication_end)
+                pending_dedication = None
+        index += 1
+    if last_dedication is None:
+        return working
+
+    index, end = last_dedication
+    trimmed = [dict(segment) for segment in working[: index + 1]]
+    closing = trimmed[-1]
+    for field in ("text", "rawText"):
+        if field not in closing:
+            continue
+        value = closing[field][:end]
+        if end < len(closing[field]) and closing[field][end] in "。！？!?,，、":
+            value += closing[field][end]
+        closing[field] = value
+    return trimmed
+
+
+def trim_paragraphs_after_dedication(paragraphs: list[dict]) -> list[dict]:
+    """Apply the same boundary to a pre-paragraphed prototype transcript."""
+    sentences = [sentence for paragraph in paragraphs for sentence in paragraph.get("sentences", [])]
+    trimmed_sentences = trim_after_dedication(sentences)
+    if len(trimmed_sentences) == len(sentences) and all(
+        before.get("text") == after.get("text") and before.get("rawText") == after.get("rawText")
+        for before, after in zip(sentences, trimmed_sentences)
+    ):
+        return paragraphs
+    by_id = {sentence["id"]: sentence for sentence in trimmed_sentences}
+    result = []
+    for paragraph in paragraphs:
+        kept = []
+        for sentence in paragraph.get("sentences", []):
+            if sentence["id"] not in by_id:
+                break
+            kept.append(by_id[sentence["id"]])
+        if kept:
+            updated = dict(paragraph)
+            updated["sentences"] = kept
+            updated["end"] = kept[-1]["end"]
+            result.append(updated)
+        if len(kept) < len(paragraph.get("sentences", [])):
+            break
+    return result
+
+
+def read_main_prototype() -> dict:
+    path = "courses/2025釋量論第二品大組共學/sessions/session_27B.json"
+    raw = subprocess.check_output(["git", "show", f"main:{path}"], cwd=ROOT)
+    return json.loads(raw)
+
+
+def make_paragraphs(segments: list[dict], questions: list[dict], summaries: list[dict]) -> list[dict]:
+    segments = trim_after_dedication(segments)
+    by_segment = {segment["id"]: segment for segment in segments}
+    question_starts = {question["sourceSegmentIds"][0]: question for question in questions}
+    summary_ends = {
+        summary["sourceSegmentIds"][-1]: summary
+        for summary in summaries
+        if summary.get("sourceSegmentIds")
+    }
+    paragraphs = []
+    current = []
+    active_question = None
+
+    def flush() -> None:
+        nonlocal current
+        if not current:
+            return
+        paragraph = {
+            "id": f"p_{len(paragraphs) + 1:04d}",
+            "questionId": active_question["id"] if active_question else None,
+            "start": current[0]["start"],
+            "end": current[-1]["end"],
+            "sentences": current,
+        }
+        if current[0]["id"] in question_starts:
+            paragraph["heading"] = question_starts[current[0]["id"]]["question"]
+        if current[-1]["id"] in summary_ends:
+            paragraph["teacherSummary"] = {
+                "heading": "法師開示摘要",
+                "items": summary_ends[current[-1]["id"]]["bullets"],
+                "linkedToAudio": False,
+                "status": "candidate",
+            }
+        paragraphs.append(paragraph)
+        current = []
+
+    for segment in segments:
+        if segment["id"] in question_starts:
+            flush()
+            active_question = question_starts[segment["id"]]
+        current.append({
+            "id": segment["id"],
+            "start": segment["start"],
+            "end": segment["end"],
+            "rawText": segment["text"],
+            "text": segment["text"],
+            # The course-level candidate state is shown separately. A sentence
+            # is pending only when an independent review records a sentence-level flag.
+            "reviewNeeded": bool(segment.get("reviewNeeded", False)),
+        })
+        if len(current) >= 8 or segment["id"] in summary_ends:
+            flush()
+    flush()
+    return paragraphs
+
+
+def build_session(index: int) -> tuple[dict, dict]:
+    directory = EVIDENCE / f"playlist-{index:02d}"
+    candidate = json.loads((directory / "candidate.json").read_text())
+    review = json.loads((directory / "content_review.json").read_text())
+    source = candidate["source"]
+    questions = review["questionIndex"]
+    summaries = review["teacherSummaries"]
+    session_id = f"{index:02d}"
+    source_outline_by_index = {
+        **dict.fromkeys((1, 2), "32-01"),
+        **dict.fromkeys((3, 4), "32-02"),
+        **dict.fromkeys((5, 6), "32-03"),
+        **dict.fromkeys((7, 8), "32-04"),
+        **dict.fromkeys((9, 10), "32-05"),
+        **dict.fromkeys((11, 12), "32-06"),
+        13: "32-07",
+        **dict.fromkeys((14, 15), "32-08"),
+        **dict.fromkeys((16, 17), "32-09"),
+        **dict.fromkeys((18, 19), "32-10"),
+        **dict.fromkeys((20, 21), "32-11"),
+        # Playlist 22/23 are lecture 12, but no 32-12 outline artifact exists;
+        # leave them unlinked rather than attaching the wrong source outline.
+        **dict.fromkeys((24, 25), "32-13"),
+        **dict.fromkeys((26, 27), "32-14"),
+        **dict.fromkeys((28, 29), "32-15"),
+        **dict.fromkeys((30, 31), "32-16"),
+        **dict.fromkeys((32, 33), "32-17"),
+        **dict.fromkeys((35, 36), "32-20"),
+        **dict.fromkeys((37, 38), "32-24"),
+        **dict.fromkeys((39, 40), "32-25"),
+        41: "32-26",
+        44: "32-26",
+    }
+    session = {
+        "sessionId": session_id,
+        "displaySessionId": display_session_id(source["title"], index),
+        "sourceOutlineId": source_outline_by_index.get(index),
+        "title": source["title"],
+        "mediaType": "video/youtube",
+        "youtubeVideoId": source["videoId"],
+        "youtubeUrl": source["sourceUrl"],
+        "lastUpdated": "2026-09-11",
+        "transcriptStatus": "candidate",
+        "alignmentStatus": "candidate",
+        "tocMode": "discussion-questions",
+        "discussionQuestions": [
+            {
+                "id": question["id"],
+                "displayQuestion": question["question"],
+                "sentenceId": question["sourceSegmentIds"][0],
+                "start": next(s["start"] for s in review["segments"] if s["id"] == question["sourceSegmentIds"][0]),
+                "teacherSummary": {
+                    "heading": "法師開示摘要",
+                    "items": next(s["bullets"] for s in summaries if s["questionId"] == question["id"]),
+                    "linkedToAudio": False,
+                    "status": "candidate",
+                },
+                "status": "candidate",
+            }
+            for question in questions
+        ],
+        "paragraphs": make_paragraphs(review["segments"], questions, summaries),
+        "_meta": {
+            "playlistIndex": index,
+            "sourceUrl": source["sourceUrl"],
+            "rawAsrPath": f"reviews/evidence/study-group-2025/playlist-{index:02d}/raw_asr.json",
+            "contentReviewPath": f"reviews/evidence/study-group-2025/playlist-{index:02d}/content_review.json",
+            "publicationState": "candidate-review-required",
+        },
+    }
+    catalog_entry = {
+        "sessionId": session_id,
+        "displaySessionId": display_session_id(source["title"], index),
+        "id": session_id,
+        "sessionNum": index,
+        "title": source["title"],
+        "status": "candidate",
+        "mediaType": "video/youtube",
+        "youtubeVideoId": source["videoId"],
+        "youtubeUrl": source["sourceUrl"],
+    }
+    return session, catalog_entry
+
+
+def main() -> None:
+    sessions = []
+    catalog_sessions = []
+    toc_nodes = []
+    for index in [*range(1, 42), 44]:
+        session, catalog_entry = build_session(index)
+        sessions.append(session)
+        catalog_sessions.append(catalog_entry)
+        for question in session["discussionQuestions"]:
+            toc_nodes.append({
+                "id": question["id"],
+                "title": question["displayQuestion"],
+                "sessionId": session["sessionId"],
+                "sessionIds": [session["sessionId"]],
+                "timestamp": question["start"],
+            })
+
+    prototype = read_main_prototype()
+    prototype["displaySessionId"] = "27下"
+    prototype["paragraphs"] = trim_paragraphs_after_dedication(prototype.get("paragraphs", []))
+    for paragraph in prototype.get("paragraphs", []):
+        if paragraph.get("teacherSummary"):
+            paragraph["teacherSummary"].setdefault("heading", "法師開示摘要")
+    sessions.append(prototype)
+    catalog_sessions.append({
+        "sessionId": "27B",
+        "id": "27B",
+        "sessionNum": 27,
+        "subSession": "B",
+        "periodLabel": "下",
+        "displaySessionId": "27下",
+        "title": prototype["title"],
+        "status": prototype.get("transcriptStatus", "review-ready"),
+        "mediaType": prototype["mediaType"],
+        "audioUrl": prototype["audioUrl"],
+    })
+    for question in prototype["discussionQuestions"]:
+        toc_nodes.append({
+            "id": question["id"],
+            "title": question["displayQuestion"],
+            "sessionId": "27B",
+            "sessionIds": ["27B"],
+            "timestamp": question["start"],
+        })
+
+    for session in sessions:
+        write_json(COURSE_DIR / "sessions" / f"session_{session['sessionId']}.json", session)
+    write_json(COURSE_DIR / "course.json", {
+        "courseId": COURSE_ID,
+        "title": "2025《釋量論・第二品》大組共學",
+        "master": "大組共學",
+        "description": "依討論問題研讀《釋量論・第二品》，每題附法師開示摘要。",
+        "tocMode": "discussion-questions",
+        "transcriptPublicationState": "candidate-review-required",
+        "sessions": catalog_sessions,
+        "unavailableSessions": [
+            {"playlistIndex": 42, "reason": "youtube_unavailable"},
+            {"playlistIndex": 43, "reason": "youtube_private"},
+        ],
+    })
+    write_json(COURSE_DIR / "toc.json", {
+        "courseId": COURSE_ID,
+        "tocMode": "discussion-questions",
+        "nodes": toc_nodes,
+    })
+
+    catalog_path = ROOT / "courses/catalog.json"
+    catalog = json.loads(catalog_path.read_text())
+    catalog["courses"] = [course for course in catalog["courses"] if course["id"] != COURSE_ID]
+    catalog["courses"].append({
+        "id": COURSE_ID,
+        "title": "2025《釋量論・第二品》大組共學",
+        "master": "大組共學",
+        "description": "依討論問題研讀《釋量論・第二品》，每題附法師開示摘要。",
+        "path": "courses/2025釋量論第二品大組共學",
+        "mediaType": "video/youtube",
+        "totalSessions": len(sessions),
+        "publicationState": "candidate-review-required",
+    })
+    write_json(catalog_path, catalog)
+
+
+if __name__ == "__main__":
+    main()

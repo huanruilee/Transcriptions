@@ -1,0 +1,21 @@
+{
+  "schema": "study-group-content-input/v1",
+  "task": "playlist-01-content-review",
+  "source": {
+    "playlistIndex": 1,
+    "videoId": "7QA1k4uxxV0",
+    "rawAsrPath": "reviews/evidence/study-group-2025/playlist-01/raw_asr.json",
+    "rawAsrSha256": "6b7eb1ae7faf9c3c10d9dff3e68b2a66104eb1a14710a6cbae949a39958f5d29",
+    "candidatePath": "reviews/evidence/study-group-2025/playlist-01/candidate.json",
+    "candidateSha256": "07958c5a0da888edbc52869944f338fd2b0fcb4c0682f863ec1de9bdd57911a2",
+    "referencePath": "courses/釋量論第二品/source_text/session_01_official_raw.txt",
+    "referenceSha256": "91d6028aa7139b135306d058754dbf630db2bdb9409975c6e77a9e1405a95d57"
+  },
+  "allowedOutputs": [
+    "content_review.json",
+    "content_review_manifest.json",
+    "content_review_log.jsonl"
+  ],
+  "forbiddenChanges": ["raw_asr.json", "candidate.json", "course.json", "sessions/", "tests/"],
+  "status": "FROZEN_INPUT"
+}
