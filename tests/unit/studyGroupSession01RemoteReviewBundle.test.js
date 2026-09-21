@@ -39,3 +39,20 @@ test('session 01 remote-review bundle is public-safe, pinned, and reproducible',
     assert.equal(artifact.sha256, sha256(artifact.path));
   }
 });
+
+test('session 01 review states the same question-summary count as its machine manifest', () => {
+  const review = fs.readFileSync(
+    path.join(ROOT, 'reviews/evidence/study-group-2025/playlist-01/review.md'),
+    'utf8',
+  );
+  const manifest = readJson(
+    'reviews/evidence/study-group-2025/playlist-01/content_review_manifest.json',
+  );
+
+  assert.match(
+    review,
+    new RegExp(`${manifest.questions} question/teacher-summary pairs`),
+    'human-readable review count must agree with the machine manifest',
+  );
+  assert.equal(manifest.questions, manifest.summaries);
+});

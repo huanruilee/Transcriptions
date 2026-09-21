@@ -17,7 +17,7 @@ The source title identifies it as **第 1 講 調整學法的動機（上）**.
 
 ## Gate decision
 
-The content candidate contains 41 question/teacher-summary pairs. Candidate
+The content candidate contains 40 question/teacher-summary pairs. Candidate
 acceptance verified timing preservation, Traditional Chinese output, strict
 post-question summary boundaries, acoustic corrections for five flagged
 segments, provenance hashes, and exclusion of ambiguous speaker spans.
