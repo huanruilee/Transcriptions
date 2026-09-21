@@ -12,7 +12,7 @@ test('all study-group sessions satisfy structural transcript contracts', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
   const intentionallyUnbound = new Set(['34', '27B']);
 
-  assert.equal(course.sessions.length, 43);
+  assert.equal(course.sessions.length, 42);
   for (const entry of course.sessions) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
     const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
@@ -79,13 +79,11 @@ test('audio-confirmed dedication is not dropped after the hand-clasp cue', () =>
   ]);
 });
 
-test('session 44 keeps a dedication split across adjacent ASR segments', () => {
-  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_44.json'), 'utf8'));
-  const finalText = session.paragraphs.at(-1).sentences.map((sentence) => sentence.text);
-  assert.deepEqual(finalText.slice(-4), [
-    '遇此無上大師教',
-    '皆由上師生恩故',
-    '此善迴向諸眾生',
-    '願成善士攝受因。',
-  ]);
+test('silent playlist 44 is explicitly unavailable rather than published', () => {
+  const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
+  assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
+  assert.deepEqual(
+    course.unavailableSessions.find((item) => item.playlistIndex === 44),
+    { playlistIndex: 44, reason: 'source_audio_silent' },
+  );
 });
