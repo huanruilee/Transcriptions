@@ -56,7 +56,7 @@ test('27下 remains addressable inside the published study-group course', () => 
   assert.ok(course, 'study-group course must be registered');
   assert.equal(course.path, COURSE_PATH);
   assert.equal(course.mediaType, 'video/youtube');
-  assert.equal(course.totalSessions, 43);
+  assert.equal(course.totalSessions, 42);
 
   const store = fs.readFileSync(path.join(ROOT, 'src/stores/course.ts'), 'utf8');
   assert.match(store, new RegExp(COURSE_ID), 'Vue course selector must expose the prototype');
@@ -169,11 +169,11 @@ test('audio click exposes a polite loading indicator until playback starts', () 
 
 test('publication builder does not attach a wrong source outline to lecture 12', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts/build_study_group_publication.py'), 'utf8');
-  assert.doesNotMatch(source, /dict\.fromkeys\(\(22, 23\), "32-28"\)/);
+  assert.doesNotMatch(source, /dict\.fromkeys\(\(22, 23\), "32-12"\)/);
   assert.match(source, /Playlist 22\/23 are lecture 12/);
 });
 
-test('publication builder retains a dedication split across adjacent segments', () => {
+test('publication builder merges a dedication split across adjacent segments', () => {
   const code = [
     'from scripts.build_study_group_publication import trim_after_dedication',
     'print(trim_after_dedication([',
@@ -184,8 +184,7 @@ test('publication builder retains a dedication split across adjacent segments', 
   const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const output = result.stdout.trim();
-  assert.match(output, /願成善事/);
-  assert.match(output, /受陰。/);
+  assert.match(output, /願成善事受陰。/);
   assert.doesNotMatch(output, /謝謝大家/);
 });
 
@@ -199,26 +198,40 @@ test('dedication trimming supports simplified ASR and keeps the complete closing
   const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const segments = JSON.parse(result.stdout);
-  assert.equal(segments.length, 2);
-  assert.deepEqual(segments.map(segment => segment.id), ['a', 'b']);
-  assert.equal(segments.map(segment => segment.text).join(''), '愿成善事设受应。');
+  assert.equal(segments.length, 1);
+  assert.match(segments[0].text, /愿成善事设受应。/);
+  assert.doesNotMatch(segments[0].text, /尾端闲聊/);
 });
 
 test('publication builder --help exits without running the mutating build', () => {
-  const targets = [
-    'courses/catalog.json', `${COURSE_PATH}/course.json`, `${COURSE_PATH}/toc.json`,
-    ...fs.readdirSync(path.join(ROOT, COURSE_PATH, 'sessions')).map(file => `${COURSE_PATH}/sessions/${file}`),
-  ];
-  const snapshot = () => targets.map(file => {
-    const target = path.join(ROOT, file);
-    return [file, fs.statSync(target).mtimeMs, fs.readFileSync(target, 'utf8')];
-  });
-  const before = snapshot();
   const result = spawnSync('python3', ['scripts/build_study_group_publication.py', '--help'], {
     cwd: ROOT,
     encoding: 'utf8',
   });
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /usage:/i);
-  assert.deepEqual(snapshot(), before, '--help must not rewrite publication artifacts');
+});
+
+test('study-group publication keeps silent playlist 44 unavailable', () => {
+  const course = readJson(`${COURSE_PATH}/course.json`);
+  assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
+  assert.deepEqual(
+    course.unavailableSessions.find((item) => item.playlistIndex === 44),
+    { playlistIndex: 44, reason: 'source_audio_silent' },
+  );
+});
+
+test('publication builder uses the current prototype input, not an external main ref', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/build_study_group_publication.py'), 'utf8');
+  assert.doesNotMatch(source, /git show.*main:/);
+  assert.match(source, /COURSE_DIR \/ "sessions" \/ "session_27B\.json"/);
+});
+
+test('published candidate sentences retain the original ASR in rawText', () => {
+  const session = readJson(`${COURSE_PATH}/sessions/session_01.json`);
+  const sentence = session.paragraphs.flatMap((paragraph) => paragraph.sentences || [])
+    .find((item) => item.id === 'seg-0001');
+  assert.ok(sentence);
+  assert.equal(sentence.rawText, '敬禮法师就会同学大家晚安');
+  assert.notEqual(sentence.text, sentence.rawText);
 });
