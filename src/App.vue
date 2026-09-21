@@ -500,7 +500,6 @@
           id="audio-element"
           class="native-audio"
           v-show="courseStore.currentMediaType === 'audio/mp3'"
-          crossorigin="anonymous"
           controls
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
