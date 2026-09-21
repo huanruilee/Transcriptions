@@ -507,7 +507,6 @@
           class="native-audio"
           v-show="activeMediaType === 'audio/mp3'"
           controls
-          crossorigin="anonymous"
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
