@@ -43,6 +43,13 @@ export const useCourseStore = defineStore('course', {
         path: 'courses/2025釋量論第二品大組共學',
         mediaType: 'audio/mp3',
       },
+      {
+        id: 'si-nian-zhu',
+        title: '四念住',
+        master: '待審校',
+        path: 'courses/四念住',
+        mediaType: 'audio/mp3',
+      },
     ],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],
