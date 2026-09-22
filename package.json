@@ -35,7 +35,9 @@
     "sync-server": "python3 scripts/sync_server.py",
     "dev": "npx serve src -p 9090",
     "start": "npx serve src -p 9090",
-    "test:sinianzhu:release": "REQUIRE_SINIANZHU_RELEASE=1 node --test tests/unit/siNianZhuReleaseGate.test.js"
+    "test:sinianzhu:release": "REQUIRE_SINIANZHU_RELEASE=1 node --test tests/unit/siNianZhuReleaseGate.test.js",
+    "audit:sinianzhu": "python3 scripts/audit_sinianzhu_release.py",
+    "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check"
   },
   "repository": {
     "type": "git",
