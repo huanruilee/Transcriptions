@@ -1,0 +1,62 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-12",
+  "playlistIndex": 12,
+  "videoId": "9ew8eXJc2Nk",
+  "sourceUrl": "https://www.youtube.com/watch?v=9ew8eXJc2Nk",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第6講 探究有無世間造物主（下）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper-service",
+    "model": "large-v3-turbo",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": false,
+    "beam_size": 5
+  },
+  "commands": [
+    {
+      "cmd": "yt-dlp --skip-download --print duration",
+      "exit_code": 0
+    },
+    {
+      "cmd": "yt-dlp -f 18 -o audio/source.mp4 (player_client=android)",
+      "exit_code": 0
+    },
+    {
+      "cmd": "POST /v1/audio/transcriptions (GPU service)",
+      "exit_code": 0,
+      "note": "segments=896 rtf=0.07666669482964045"
+    },
+    {
+      "cmd": "sha256sum/ffprobe",
+      "exit_code": 0,
+      "note": "sha256=59588626433648d08636e94213a669c260088c675ad86c598dc41d524c02de77 bytes=209463743 duration=9725.863764"
+    }
+  ],
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-12/failed-attempt-01/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-12/failed-attempt-01/candidate.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "audio/source.mp4",
+      "audio"
+    ]
+  },
+  "status": "ASR_OK",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": true,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 99.4934,
+    "totalWordTokens": 0,
+    "repeatedCharacterSegments": 231,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}

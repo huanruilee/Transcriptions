@@ -171,14 +171,12 @@ test('📑 科判與課文位置對應完整性測試 (TOC & Transcript Position
   });
 
   await t.test('5. Strict Session Isolation Gate for Inline TOC Anchor Cards (Zero Cross-Session Leakage)', async () => {
-    const { JSDOM } = await import('jsdom');
-    const dom = new JSDOM('<div id="toc-container"></div>', { url: 'http://localhost/' });
-    globalThis.document = dom.window.document;
-    globalThis.window = dom.window;
-
-    // Import findTOCNodeAtParagraphStart and renderTOC
-    const { renderTOC, findTOCNodeAtParagraphStart } = await import('../../src/js/toc.js');
-    renderTOC(toc.sections, () => {});
+    // The resolver is pure; avoid importing jsdom here because its optional DOM
+    // runtime can hang in constrained CI environments. Rendering is covered by
+    // the browser/UI suite; this gate focuses on the cross-session invariant.
+    const { findTOCNodeAtParagraphStartInSections } = await import('../../src/js/toc.js');
+    const findTOCNodeAtParagraphStart = (time, sid, tolerance) =>
+      findTOCNodeAtParagraphStartInSections(time, sid, toc.sections, tolerance);
 
     // Specific Regression Check for Session 01
     const s01_0s = findTOCNodeAtParagraphStart(0.21, '01', 2);

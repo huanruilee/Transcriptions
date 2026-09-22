@@ -1,0 +1,26 @@
+{
+  "task": "session_27 paragraph fix: sent-400 / sent-401 must share one paragraph",
+  "file": "courses/釋量論第二品/sessions/session_27.json",
+  "fix": {
+    "action": "merged paragraph p_60 into p_59 (heading of p_60 was null; no sentence content changed)",
+    "paragraph_ids": {
+      "before": { "sent-400": "p_59", "sent-401": "p_60" },
+      "after": { "sent-400": "p_59", "sent-401": "p_59" },
+      "removed_paragraphs": ["p_60"],
+      "paragraph_count_before": 73,
+      "paragraph_count_after": 72
+    },
+    "changed_fields": {
+      "p_59.end": { "before": 4136.7, "after": 4164.3 },
+      "lastUpdated": "2026-09-08 13:11:09"
+    },
+    "unchanged": "all sentence id/text/rawText/start/end untouched (466 sentences total)"
+  },
+  "test": {
+    "command": "node --test tests/unit/paragraphBoundaryIntegrity.test.js",
+    "exit_code": 0,
+    "tests": 11,
+    "pass": 11,
+    "fail": 0
+  }
+}

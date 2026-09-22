@@ -1,0 +1,14 @@
+{
+  "schema": "independent-review/v1",
+  "reviewedCommit": "2f75222",
+  "result": "PASS",
+  "scope": "B1-B8 compact course audit contract and evidence",
+  "checks": {
+    "coverage": "PASS: unique 01..32 across eight four-session batches",
+    "compactSchema": "PASS: metadata whitelist; no transcript fields",
+    "timestampViolations": "PASS: 0",
+    "baselineReproduction": "PASS: f4a58fe reproduces all eight scan summaries byte-for-byte",
+    "rollbackGate": "PASS: b590039 rejected below quality floor",
+    "targetedTests": "PASS: 2 passed, 0 failed"
+  }
+}

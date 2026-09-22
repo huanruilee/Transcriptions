@@ -1,0 +1,599 @@
+{
+  "schema": "shiliang-decision-ledger/v1",
+  "batch": "B7",
+  "session": "28",
+  "range": "sent-160..sent-197",
+  "hashes": {
+    "rawAsr": "caeb546d440f5048740deef862d2f5e2935fc9d27a30642ff87dfa3efd407ba9",
+    "rawAsrVerified": "caeb546d440f5048740deef862d2f5e2935fc9d27a30642ff87dfa3efd407ba9",
+    "session28Expected": "6b283cd24c5e110da85ac49f78cf9f50147e2b1a34e97799805b229b9cfdc13c",
+    "session28Verified": "6b283cd24c5e110da85ac49f78cf9f50147e2b1a34e97799805b229b9cfdc13c",
+    "headCommit": "5a141aa"
+  },
+  "runtime": {
+    "provider": "custom",
+    "model": "Qwen3.8-27B"
+  },
+  "summary": {
+    "sentences": 38,
+    "confirmed": 6,
+    "uncertain": 32
+  },
+  "minimumWindow": null,
+  "blockedReasons": [
+    "raw window 880-1052 spans 1979.16-2305.35s; published sent-160..163 (~1894-1922s) and sent-194 end (2359.15s) fall outside the window and cannot be anchored from it",
+    "manifest ROLLBACK: sent-195 (2258.83) follows sent-194 end (2359.15) — published sentence order is non-monotonic vs raw in the rollback region"
+  ],
+  "decisions": [
+    {
+      "sentenceId": "sent-160",
+      "published": {
+        "start": 1893.99,
+        "end": 1897.73
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-161",
+      "published": {
+        "start": 1897.9,
+        "end": 1909.67
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-162",
+      "published": {
+        "start": 1909.67,
+        "end": 1915.88
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-163",
+      "published": {
+        "start": 1915.88,
+        "end": 1921.9
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-164",
+      "published": {
+        "start": 1928.23,
+        "end": 1942.1
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-165",
+      "published": {
+        "start": 1942.1,
+        "end": 1949.57
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-166",
+      "published": {
+        "start": 1949.57,
+        "end": 1957.17
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-167",
+      "published": {
+        "start": 1968.25,
+        "end": 1975.36
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-168",
+      "published": {
+        "start": 1986.68,
+        "end": 2011.33
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-169",
+      "published": {
+        "start": 2011.33,
+        "end": 2011.83
+      },
+      "rawSegmentStartId": 894,
+      "rawSegmentEndId": 897,
+      "proposed": {
+        "start": 2001.5,
+        "end": 2006.76
+      },
+      "confidence": "CONFIRMED",
+      "reason": "full sentence text matches consecutive raw segments 880-1052 (norm. t2s); monotonic with previous"
+    },
+    {
+      "sentenceId": "sent-170",
+      "published": {
+        "start": 2011.83,
+        "end": 2015.81
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-171",
+      "published": {
+        "start": 2024.2,
+        "end": 2031.88
+      },
+      "rawSegmentStartId": 906,
+      "rawSegmentEndId": 908,
+      "proposed": {
+        "start": 2024.2,
+        "end": 2031.35
+      },
+      "confidence": "CONFIRMED",
+      "reason": "full sentence text matches consecutive raw segments 880-1052 (norm. t2s); monotonic with previous"
+    },
+    {
+      "sentenceId": "sent-172",
+      "published": {
+        "start": 2036.34,
+        "end": 2042.74
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-173",
+      "published": {
+        "start": 2042.74,
+        "end": 2044.02
+      },
+      "rawSegmentStartId": 911,
+      "rawSegmentEndId": 913,
+      "proposed": {
+        "start": 2037.24,
+        "end": 2043.51
+      },
+      "confidence": "CONFIRMED",
+      "reason": "full sentence text matches consecutive raw segments 880-1052 (norm. t2s); monotonic with previous"
+    },
+    {
+      "sentenceId": "sent-174",
+      "published": {
+        "start": 2050.14,
+        "end": 2059.4
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-175",
+      "published": {
+        "start": 2124.54,
+        "end": 2139.04
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-176",
+      "published": {
+        "start": 2139.04,
+        "end": 2143.54
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-177",
+      "published": {
+        "start": 2143.54,
+        "end": 2144.52
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-178",
+      "published": {
+        "start": 2148.56,
+        "end": 2150.77
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-179",
+      "published": {
+        "start": 2150.77,
+        "end": 2161.39
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-180",
+      "published": {
+        "start": 2175.28,
+        "end": 2193.86
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-181",
+      "published": {
+        "start": 2193.86,
+        "end": 2199.97
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-182",
+      "published": {
+        "start": 2199.97,
+        "end": 2204.13
+      },
+      "rawSegmentStartId": 975,
+      "rawSegmentEndId": 976,
+      "proposed": {
+        "start": 2151.24,
+        "end": 2154.54
+      },
+      "confidence": "CONFIRMED",
+      "reason": "full sentence text matches consecutive raw segments 880-1052 (norm. t2s); monotonic with previous"
+    },
+    {
+      "sentenceId": "sent-183",
+      "published": {
+        "start": 2207.11,
+        "end": 2222.86
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-184",
+      "published": {
+        "start": 2222.86,
+        "end": 2224.18
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-185",
+      "published": {
+        "start": 2224.18,
+        "end": 2231.25
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-186",
+      "published": {
+        "start": 2250.32,
+        "end": 2258.62
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-187",
+      "published": {
+        "start": 2258.62,
+        "end": 2260.86
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-188",
+      "published": {
+        "start": 2262.67,
+        "end": 2265.82
+      },
+      "rawSegmentStartId": 1002,
+      "rawSegmentEndId": 1002,
+      "proposed": {
+        "start": 2199.58,
+        "end": 2203.11
+      },
+      "confidence": "CONFIRMED",
+      "reason": "full sentence text matches consecutive raw segments 880-1052 (norm. t2s); monotonic with previous"
+    },
+    {
+      "sentenceId": "sent-189",
+      "published": {
+        "start": 2265.82,
+        "end": 2266.32
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-190",
+      "published": {
+        "start": 2266.32,
+        "end": 2266.82
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-191",
+      "published": {
+        "start": 2266.82,
+        "end": 2272.44
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-192",
+      "published": {
+        "start": 2273.86,
+        "end": 2282.61
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-193",
+      "published": {
+        "start": 2330.42,
+        "end": 2355.22
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-194",
+      "published": {
+        "start": 2355.22,
+        "end": 2359.15
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-195",
+      "published": {
+        "start": 2258.83,
+        "end": 2280.98
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-196",
+      "published": {
+        "start": 2280.98,
+        "end": 2300.31
+      },
+      "rawSegmentStartId": null,
+      "rawSegmentEndId": null,
+      "proposed": {
+        "start": null,
+        "end": null
+      },
+      "confidence": "UNCERTAIN",
+      "reason": "no contiguous match in raw window 880-1052 (published time falls outside window span 1979-2305s, or text spans discontinuous raw)"
+    },
+    {
+      "sentenceId": "sent-197",
+      "published": {
+        "start": 2300.31,
+        "end": 2305.35
+      },
+      "rawSegmentStartId": 1052,
+      "rawSegmentEndId": 1052,
+      "proposed": {
+        "start": 2300.31,
+        "end": 2305.35
+      },
+      "confidence": "CONFIRMED",
+      "reason": "full sentence text matches consecutive raw segments 880-1052 (norm. t2s); monotonic with previous"
+    }
+  ]
+}

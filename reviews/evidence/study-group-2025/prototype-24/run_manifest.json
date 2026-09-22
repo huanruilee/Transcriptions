@@ -1,0 +1,69 @@
+{
+  "schema": "transcriptions/run_manifest/v1",
+  "task": "prototype-24",
+  "playlistIndex": 24,
+  "videoId": "M6gOg7dr6io",
+  "sourceUrl": "https://www.youtube.com/watch?v=M6gOg7dr6io",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "rawTitle": "第13講 分析有無前後世（上）｜2025《釋量論・第二品》大組共學",
+  "asr": {
+    "engine": "faster-whisper-service",
+    "model": "large-v3-turbo",
+    "compute_type": "int8",
+    "device": "cuda",
+    "language": "zh",
+    "word_timestamps": false,
+    "beam_size": 5,
+    "condition_on_previous_text": false,
+    "repetition_penalty": 1.15,
+    "compression_ratio_threshold": 1.8,
+    "no_speech_threshold": 0.5,
+    "vad_filter": true,
+    "vad_min_silence_duration_ms": 600,
+    "vad_speech_pad_ms": 400
+  },
+  "commands": [
+    {
+      "cmd": "yt-dlp --skip-download --print duration",
+      "exit_code": 0
+    },
+    {
+      "cmd": "yt-dlp -f 18 -o audio/source.mp4 (player_client=android)",
+      "exit_code": 0
+    },
+    {
+      "cmd": "POST /v1/audio/transcriptions (GPU service, hallucination guard)",
+      "exit_code": 0,
+      "note": "segments=4070 repeatedCharacterSegments=0"
+    },
+    {
+      "cmd": "sha256sum/ffprobe",
+      "exit_code": 0,
+      "note": "sha256=8826255bf52c65a7ef57e63b05c7b6682f2402af98fba5cae10064f69f24f2c6 bytes=198207692 duration=9281.480272"
+    }
+  ],
+  "artifacts": {
+    "rawAsrPath": "reviews/evidence/study-group-2025/prototype-24/raw_asr.json",
+    "candidatePath": "reviews/evidence/study-group-2025/prototype-24/candidate.json"
+  },
+  "cleanup": {
+    "temporaryAudioDeleted": true,
+    "disposableEnvironmentDeleted": true,
+    "removedPaths": [
+      "audio/source.mp4",
+      "audio"
+    ]
+  },
+  "status": "ASR_OK",
+  "error": null,
+  "checks": {
+    "segmentsNonEmpty": true,
+    "monotonicTimestamps": true,
+    "nonEmptyText": true,
+    "audioCoveragePct": 99.0733,
+    "totalWordTokens": 0,
+    "repeatedCharacterSegments": 0,
+    "sourceIdentityMatches": true,
+    "allSegmentIdsUnique": true
+  }
+}

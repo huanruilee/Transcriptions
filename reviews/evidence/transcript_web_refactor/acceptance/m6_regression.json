@@ -1,0 +1,23 @@
+{
+  "schema": "transcript-web-refactor-acceptance/v1",
+  "milestone": "M6",
+  "status": "PASS",
+  "targeted": {
+    "tests": 71,
+    "passed": 71,
+    "failed": 0
+  },
+  "buildV2": "PASS",
+  "fullRegression": {
+    "tests": 362,
+    "passed": 360,
+    "failed": 0,
+    "skipped": 2
+  },
+  "environmentNote": "syncServer.test.js requires permission to bind 127.0.0.1:19091; it passed with local loopback enabled.",
+  "commands": [
+    "node --test tests/unit/paragraphBoundaryIntegrity.test.js tests/unit/shiliangAllSessionsPatterns.test.js tests/unit/shiliangVerseCoverage.test.js tests/unit/tocTranscriptAlignment.test.js tests/unit/transcriptWebRefactorFoundation.test.js tests/unit/transcriptDetectors.test.js tests/unit/transcriptDecisionApplier.test.js",
+    "npm run build:v2",
+    "npm test"
+  ]
+}

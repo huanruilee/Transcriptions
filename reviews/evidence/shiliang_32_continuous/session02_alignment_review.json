@@ -1,0 +1,84 @@
+{
+  "review": "shiliang_32_session02_text_time_alignment",
+  "status": "BLOCKED",
+  "scope": "courses/釋量論第二品/session_02 JSON, official raw text, audio_map, existing raw-ASR evidence",
+  "read_only": true,
+  "git_context": {
+    "pwd": "/Users/henry/Documents/huanruilee-github-repos/Transcriptions",
+    "git_root": "/Users/henry/Documents/huanruilee-github-repos/Transcriptions",
+    "branch": "codex/shiliang-32-continuous-quality",
+    "preexisting_untracked": ["reviews/evidence/shiliang_28/"]
+  },
+  "sources": {
+    "session_json": {
+      "path": "courses/釋量論第二品/sessions/session_02.json",
+      "sha256": "d6b07cb028b9ececbab454900fd5cc6701892fc08c768337e222b9600a4b1aa0",
+      "content_type": "application/json",
+      "sentences": 437,
+      "paragraphs": 49,
+      "first_sentence": {"id": "sent-1", "start": 29.5, "end": 47.36},
+      "last_sentence": {"id": "sent-437", "start": 4248.88, "end": 4249.38}
+    },
+    "official_raw_text": {
+      "path": "courses/釋量論第二品/source_text/session_02_official_raw.txt",
+      "sha256": "8af16e3bc20f2e61d9c9e774dcd731c52a86698ac0ec60737a8325b0326243e9",
+      "content_type": "text/plain",
+      "text_check": "All 437 sentence texts were found as normalized substrings of the official raw text; this supports text presence only, not timing."
+    },
+    "audio_map": {
+      "path": "courses/釋量論第二品/audio_map.json",
+      "sha256": "4867f89b90581fd22650604afad8091855aa70e1a680dcc97381a1e589523df3",
+      "content_type": "application/json",
+      "session_key": "2",
+      "url": "https://drive.google.com/uc?export=download&id=1Pi21V4m1zEzVuOLJ5Toko1dP5KbTvuW9"
+    },
+    "audio_and_raw_asr": {
+      "audio_status": "BLOCKED",
+      "audio_probe": "curl DNS failure: Could not resolve host: drive.google.com",
+      "audio_content_type": null,
+      "audio_duration_seconds": null,
+      "audio_sha256": null,
+      "raw_asr_status": "NOT_FOUND",
+      "raw_asr_model": null,
+      "raw_asr_path_or_url": null,
+      "raw_asr_sha256": null
+    }
+  },
+  "deterministic_checks": {
+    "sentence_timestamp_regressions": 0,
+    "paragraph_boundary_mismatches": 0,
+    "sentence_gap_count_positive": 144,
+    "sentence_gap_max_seconds": 44.32,
+    "largest_gap_examples": [
+      {"from": "sent-147", "to": "sent-148", "gap_seconds": 44.32},
+      {"from": "sent-262", "to": "sent-263", "gap_seconds": 29.74},
+      {"from": "sent-380", "to": "sent-381", "gap_seconds": 24.1},
+      {"from": "sent-16", "to": "sent-17", "gap_seconds": 23.29},
+      {"from": "sent-270", "to": "sent-271", "gap_seconds": 22.02}
+    ],
+    "interpretation": "Internal monotonicity passes, but gaps and sentence intervals are not source-grounded without audio or timestamped raw-ASR."
+  },
+  "commands": [
+    {"command": "pwd; git rev-parse --show-toplevel; git branch --show-current; git status --short --branch", "exit_code": 0},
+    {"command": "sed -n '1,240p' courses/釋量論第二品/sessions/session_02.json", "exit_code": 0},
+    {"command": "sed -n '1,240p' courses/釋量論第二品/source_text/session_02_official_raw.txt", "exit_code": 0},
+    {"command": "cat courses/釋量論第二品/audio_map.json", "exit_code": 0},
+    {"command": "shasum -a 256 courses/釋量論第二品/sessions/session_02.json courses/釋量論第二品/source_text/session_02_official_raw.txt courses/釋量論第二品/audio_map.json", "exit_code": 0},
+    {"command": "curl -L -I --max-time 12 'https://drive.google.com/uc?export=download&id=1Pi21V4m1zEzVuOLJ5Toko1dP5KbTvuW9'", "exit_code": 6, "result": "Could not resolve host: drive.google.com"},
+    {"command": "find . -type f ( -iname '*02*' -o -iname '*session02*' ) | rg -i 'raw|asr|whisper|wav|mp3|m4a|json|txt'", "exit_code": 0, "result": "No session_02 raw-ASR/audio evidence found"}
+  ],
+  "red_test_contract": {
+    "status": "PROPOSED_RED_NOT_ADDED_TO_TEST_SUITE",
+    "name": "session_02 sentence text and timestamp must be source-grounded",
+    "contract": "For every sentence, require an independently retained raw-ASR segment or forced-alignment record whose source hash, ASR model identity, segment start/end, and normalized text match the published sentence within an explicit tolerance. Also require paragraph boundaries to be supported by contiguous source segments or an adjudicated pause marker.",
+    "baseline_expected_result": "RED/BLOCKED for session_02 because no audio or timestamped raw-ASR source is available; official text alone cannot satisfy time alignment.",
+    "generalization": "Parameterize by course/session; load published JSON, official text, audio_map, and raw-ASR manifest; fail closed when source is absent; distinguish PASS for source-grounded alignment from BLOCKED for unavailable source; never treat monotonic JSON timestamps as acoustic proof."
+  },
+  "residual_risks": [
+    "Official raw text can validate textual coverage but contains no acoustic timing.",
+    "The 44.32-second gap at sent-147 -> sent-148 may be a real pause/edit or a timestamp defect; it cannot be adjudicated without audio/raw-ASR.",
+    "The declared Google Drive URL has no verified content type, duration, or hash in this environment.",
+    "No ASR engine/model identity or decoding parameters are available for session_02."
+  ],
+  "acceptance": "BLOCKED: actual audio or timestamped raw-ASR must be read and hashed before any PASS decision."
+}

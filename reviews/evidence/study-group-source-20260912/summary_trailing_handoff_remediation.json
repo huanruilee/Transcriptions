@@ -1,0 +1,11 @@
+{
+  "schema": "study-group-content-review-remediation/v1",
+  "decision": "TRIMMED_TRAILING_HANDOFF_SEGMENTS",
+  "scope": "playlist-01 through playlist-41",
+  "trimmedSummaryCount": 41,
+  "removedSummaryAndQuestionCount": 1,
+  "removed": [{"playlistIndex": 27, "questionId": "q-28-01", "reason": "summary source contained only a closing acknowledgement"}],
+  "rule": "Remove trailing segments whose complete text is a closing acknowledgement such as 謝謝 or 以上; remove the paired index if no substantive source remains.",
+  "limitations": ["Text gate only; speaker identity and audio fidelity require separate review."],
+  "remediatedAt": "2026-09-12"
+}

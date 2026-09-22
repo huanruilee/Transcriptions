@@ -65,3 +65,38 @@ npm test
 4. **音訊連結**：`audioUrl` 與 `audio_map.json` 指向官方原始 Flyday 串流。
 5. **測試套件**：`npm test` 包含 148 項單元與驗收測試全數通過（PASS 綠燈；1 項品質測試預設跳過，可透過 `TRANSCRIPTIONS_RUN_QUALITY=1` 啟用）。
 
+---
+
+## 🧱 段落邊界（Paragraph Boundary）完整性規則
+
+段落劃分只服務「閱讀節奏」與「小標題主題切換」，不得切斷句法。下一段轉錄／校對／結構化步驟都必須遵守以下規則：
+
+1. **不得在未完成句、詞組或引用續文中建立 paragraph 邊界。** 當一個 paragraph 的最後一個 `sentence.text` 沒有句末標點（`。！？`）且下一個 paragraph 的首句是其語法續文（介詞、連詞、量詞、補語、名詞短語延續等），必須把下一段併入同一 paragraph，不得跨段。
+2. **檢出方式**：以 `paragraphs[].sentences` 為單位，比較「上一段末句的 `text` 末尾字元」與「下一段首句的 `text` 開頭字元」。若上一段末句不以句末標點收尾（`[。！？…」』]`），且滿足下列**全部**條件，則視為明確錯斷，須合併：
+   - 上一段末句長度 ≤ 14 字元（避免誤把一般段落切分當錯斷）；
+   - 上一段末句不以「的是了不在也都就還又但而之」等子句收束常見字元結尾；
+   - 下一段首句開頭不是新主題常見起首詞（`所這那一二三四五六七八九十某何為並另再接下不此外然雖當如果即就或乃豈寧`）；
+   - 合併後的串接文字語法上明顯比切開更順（例如 `我`+`們`=`我們`、`莊`+`嚴`=`莊嚴`、`所`+`以`=`所以`、`成`+`佛`=`成佛`、`簡`+`單`=`簡單` 等 mid-word / mid-quote 錯斷）。
+3. **修復手段**：只允許「把後續 paragraph 的 `sentences` 原順序併入上一段，並把上一段 `paragraphs[i].end` 更新為合併前最末段的 `end`」。**禁止**：
+   - 修改任何 `sentence.id`、`sentence.text`、`sentence.start`、`sentence.end`、`sentence.rawText` 或其他音檔對齊欄位。
+   - 把多句文字合併成單一 `sentence`（每個 `sentence` 仍須獨立存在）。
+   - 新增空白 placeholder sentence。
+   - 改動後續 paragraph 的 `id`、內容或順序。
+4. **可重現驗收**：`tests/unit/paragraphBoundaryIntegrity.test.js` 至少以 `session_27` 的 `sent-400` / `sent-401` 為 regression fixture，斷言兩者同 paragraph 且拼接後包含「他是在無漏蘊體的聚合體及續流上假立而有」。該測試須覆蓋**全部 32 講**（不限 session_27）：
+   - 每講 paragraph 內的 sentence 時間戳單調遞增；
+   - 每講 sentence id 不重複、無孤兒 sentence；
+   - 每講 paragraph 自身的 `.end` 等於其最末句 `.end`（合併後無殘留）；
+   - 每講每個 paragraph 的 `id` 與 `sentences[]` 中 sentence 順序皆未變動。
+
+   測試須可用 `node --test` 獨立執行（`node --test tests/unit/paragraphBoundaryIntegrity.test.js`），並納入 `npm test`。
+5. **可審計證據**：每次 paragraph 邊界修復必須在 `reviews/evidence/<course>_<session>_boundary/` 留下 `summary.md`、`before_after.json`、`commands.log`，記錄 baseline/after 雜湊、paragraph/sentence 計數、修改檔案清單與所有執行指令的 exit code。`session_NN` 全 32 講統一在 `reviews/evidence/shiliang_32/` 留下 `upgrade_evidence.json` 與 `summary.md`。
+
+## 🏷️ 科判編號（Heading Ordinal）一致性規則
+
+`paragraphs[].heading` 為閱讀索引、科判導讀、TOC 對齊的主要依據，須遵守以下規則：
+
+1. **權威來源**：`courses/<course>/toc.json` 的 `sections[].children` 為序位權威。每個 child 的 `title` 形如 `一、xxx` / `二、xxx` / …，其中 `一`～`十三` 為中文序位。
+2. **格式**：`paragraph.heading` 必須寫成「`【<原分類>】<序位>、<標題>`」格式。`<原分類>` 是 heading 中既有的 `【…】` 標籤（`法義深探`、`名相辨析`、`破邪顯正`、`正理修持`、`教誡結語`、`科判導讀`、`根本頌釋`、`重點總結` 等），不可改寫。`<標題>` 沿用 heading 既有標題文字；當 toc 與現存標題出現 Unicode 異體（例如 `今` vs `㉃今`、`下` vs `㆘`），以**現存 heading 文字為準**，不主動統一。
+3. **重複段處理**：同一講內若多個 paragraph 共用同一段標題文字，必須沿用同一序位；不得因重複出現而重新指派。
+4. **缺漏處理**：當 toc 的某個 child 在該講找不到任何匹配的 paragraph（標題文字模糊對應失敗），不要憑空補上該序位；改在 `reviews/evidence/shiliang_32/summary.md` 與 `upgrade_evidence.json` 留下 `missingTocOrdinals` 紀錄，待音檔／底本確認後再修。
+5. **可重現驗收**：`tests/unit/paragraphBoundaryIntegrity.test.js` 內「`全 32 講 paragraph.heading 必須符合【分類】<ordinal>、標題 格式`」與「`每講重複出現的相同 paragraph.title 必須使用同一 ordinal`」兩個斷言須通過；toc 與 heading 的對齊證據留在 `reviews/evidence/shiliang_32/upgrade_evidence.json`。

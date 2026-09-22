@@ -400,7 +400,14 @@ function nodeContainsSession(node, sessionId) {
  * @returns {{title: string, timestamp: number, page?: number, sessionId?: string}|null}
  */
 export function findTOCNodeAtParagraphStart(paragraphStart, sessionId, tolerance = 2) {
-  if (!_cachedSections) return null;
+  return findTOCNodeAtParagraphStartInSections(paragraphStart, sessionId, _cachedSections, tolerance);
+}
+
+/**
+ * Pure resolver used by regression tests and non-DOM consumers.
+ */
+export function findTOCNodeAtParagraphStartInSections(paragraphStart, sessionId, sections, tolerance = 2) {
+  if (!sections) return null;
 
   let match = null;
 
@@ -420,7 +427,7 @@ export function findTOCNodeAtParagraphStart(paragraphStart, sessionId, tolerance
     }
   }
 
-  walk(_cachedSections);
+  walk(sections);
   return match;
 }
 
@@ -781,4 +788,3 @@ if (typeof document !== 'undefined') {
     }
   });
 }
-

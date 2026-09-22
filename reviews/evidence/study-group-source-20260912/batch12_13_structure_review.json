@@ -1,0 +1,21 @@
+{
+  "schema": "study-group-content-batch-audit-review/v1",
+  "batch": [12, 13],
+  "decision": "PASS_STRUCTURAL_ONLY",
+  "reviewer": "gx10-independent-reviewer",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+  "sessions": [
+    {"playlistIndex": 12, "videoId": "9ew8eXJc2Nk", "segments": 4144, "questions": 57, "teacherSummaries": 57},
+    {"playlistIndex": 13, "videoId": "dT_f_FGivnU", "segments": 4285, "questions": 41, "teacherSummaries": 41}
+  ],
+  "acceptedChecks": [
+    "schema, source identity, playlist identity, and counts are consistent",
+    "both entries are marked playable",
+    "both issue arrays are empty"
+  ],
+  "limitations": [
+    "No audio fidelity, transcript accuracy, segment alignment, semantic, or doctrinal review was performed.",
+    "Counts were not independently re-derived from raw audio."
+  ],
+  "reviewedAt": "2026-09-12"
+}

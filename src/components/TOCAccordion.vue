@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, nextTick } from 'vue';
 
 export interface TOCNodeData {
   id?: string;
@@ -27,6 +27,26 @@ const emit = defineEmits<{
 const isOpen = ref(false);
 const currentScope = ref<'course' | 'book'>('course');
 
+function getNodeTime(node: TOCNodeData): number {
+  return typeof node.timestamp === 'number' ? node.timestamp : (node.start_time ?? 0);
+}
+
+const currentPositionNodeId = computed(() => {
+  const candidates: TOCNodeData[] = [];
+  function collect(nodes: TOCNodeData[]) {
+    for (const node of nodes || []) {
+      if (getNodeSessions(node).includes(props.activeSessionId)) candidates.push(node);
+      if (node.children?.length) collect(node.children);
+    }
+  }
+  collect(props.tocNodes);
+
+  const eligible = candidates
+    .filter((node) => getNodeTime(node) > 0 && getNodeTime(node) <= (props.currentTime ?? 0))
+    .sort((a, b) => getNodeTime(b) - getNodeTime(a));
+  return eligible[0]?.id || null;
+});
+
 // Popover state
 const popoverState = ref<{
   visible: boolean;
@@ -38,6 +58,19 @@ const popoverState = ref<{
 function toggleOpen() {
   isOpen.value = !isOpen.value;
 }
+
+async function revealCurrentPosition() {
+  isOpen.value = true;
+  currentScope.value = 'course';
+  await nextTick();
+  const target = currentPositionNodeId.value
+    ? Array.from(document.querySelectorAll('[data-toc-position-id]'))
+        .find((el) => el.getAttribute('data-toc-position-id') === currentPositionNodeId.value)
+    : null;
+  target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+defineExpose({ revealCurrentPosition });
 
 function handleNodeClick(node: TOCNodeData, e: MouseEvent) {
   e.preventDefault();
@@ -153,12 +186,14 @@ function getNodeSessions(node: TOCNodeData): string[] {
                               class="toc-link"
                               :class="{
                                 active: getNodeSessions(c2).includes(activeSessionId),
-                                'toc-timestamp-pending': !c2.timestamp || c2.timestamp === 0
+                                'toc-timestamp-pending': !c2.timestamp || c2.timestamp === 0,
+                                'toc-current-position': currentPositionNodeId === c2.id
                               }"
                               :href="'#session-' + activeSessionId + (c2.timestamp ? '-t' + c2.timestamp : '')"
                               :data-session-id="c2.sessionId || activeSessionId"
                               :data-timestamp="String(c2.timestamp || 0)"
                               :data-testid="'toc-node-' + c2.title.substring(0, 8).replace(/\s/g, '')"
+                              :data-toc-position-id="c2.id"
                               @click="handleNodeClick(c2, $event)"
                             >
                               {{ c2.title }}
@@ -195,12 +230,14 @@ function getNodeSessions(node: TOCNodeData): string[] {
                       class="toc-link"
                       :class="{
                         active: getNodeSessions(c1).includes(activeSessionId),
-                        'toc-timestamp-pending': !c1.timestamp || c1.timestamp === 0
+                        'toc-timestamp-pending': !c1.timestamp || c1.timestamp === 0,
+                        'toc-current-position': currentPositionNodeId === c1.id
                       }"
                       :href="'#session-' + (c1.sessionId || activeSessionId) + (c1.timestamp ? '-t' + c1.timestamp : '')"
                       :data-session-id="c1.sessionId || activeSessionId"
                       :data-timestamp="String(c1.timestamp || 0)"
                       :data-testid="'toc-node-' + c1.title.substring(0, 8).replace(/\s/g, '')"
+                      :data-toc-position-id="c1.id"
                       @click="handleNodeClick(c1, $event)"
                     >
                       {{ c1.title }}
@@ -241,12 +278,14 @@ function getNodeSessions(node: TOCNodeData): string[] {
               class="toc-link"
               :class="{
                 active: getNodeSessions(node).includes(activeSessionId),
-                'toc-timestamp-pending': !node.timestamp || node.timestamp === 0
+                'toc-timestamp-pending': !node.timestamp || node.timestamp === 0,
+                'toc-current-position': currentPositionNodeId === node.id
               }"
               :href="'#session-' + (node.sessionId || activeSessionId) + (node.timestamp ? '-t' + node.timestamp : '')"
               :data-session-id="node.sessionId || activeSessionId"
               :data-timestamp="String(node.timestamp || 0)"
               :data-testid="'toc-node-' + node.title.substring(0, 8).replace(/\s/g, '')"
+              :data-toc-position-id="node.id"
               @click="handleNodeClick(node, $event)"
             >
               {{ node.title }}
@@ -283,12 +322,14 @@ function getNodeSessions(node: TOCNodeData): string[] {
                     class="toc-link"
                     :class="{
                       active: getNodeSessions(child).includes(activeSessionId),
-                      'toc-timestamp-pending': !child.timestamp || child.timestamp === 0
+                      'toc-timestamp-pending': !child.timestamp || child.timestamp === 0,
+                      'toc-current-position': currentPositionNodeId === child.id
                     }"
                     :href="'#session-' + (child.sessionId || activeSessionId) + (child.timestamp ? '-t' + child.timestamp : '')"
                     :data-session-id="child.sessionId || activeSessionId"
                     :data-timestamp="String(child.timestamp || 0)"
                     :data-testid="'toc-node-' + child.title.substring(0, 8).replace(/\s/g, '')"
+                    :data-toc-position-id="child.id"
                     @click="handleNodeClick(child, $event)"
                   >
                     {{ child.title }}
@@ -323,12 +364,14 @@ function getNodeSessions(node: TOCNodeData): string[] {
                           class="toc-link"
                           :class="{
                             active: getNodeSessions(sub).includes(activeSessionId),
-                            'toc-timestamp-pending': !sub.timestamp || sub.timestamp === 0
+                            'toc-timestamp-pending': !sub.timestamp || sub.timestamp === 0,
+                            'toc-current-position': currentPositionNodeId === sub.id
                           }"
                           :href="'#session-' + (sub.sessionId || activeSessionId) + (sub.timestamp ? '-t' + sub.timestamp : '')"
                           :data-session-id="sub.sessionId || activeSessionId"
                           :data-timestamp="String(sub.timestamp || 0)"
                           :data-testid="'toc-node-' + sub.title.substring(0, 8).replace(/\s/g, '')"
+                          :data-toc-position-id="sub.id"
                           @click="handleNodeClick(sub, $event)"
                         >
                           {{ sub.title }}
@@ -468,6 +511,11 @@ function getNodeSessions(node: TOCNodeData): string[] {
   font-weight: 700;
   border-left: 3px solid var(--accent-color, #9a3412);
   padding-left: 8px;
+}
+.toc-link.toc-current-position {
+  outline: 2px solid var(--accent-color, #9a3412);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(154, 52, 18, 0.12);
 }
 .toc-timestamp-pending {
   color: #999999;

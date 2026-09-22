@@ -1,0 +1,25 @@
+{
+  "schema": "shiliang-session-review/v1",
+  "course": "釋量論第二品",
+  "sessionId": "27",
+  "baselineCommit": "a72d1b0e35fdb52e1f1658d2ae1f80cb5152fbf7",
+  "worker": "GX10 Xiaofa",
+  "reviewMode": "deterministic source comparison plus source-grounded annotation",
+  "inputs": {
+    "session": "courses/釋量論第二品/sessions/session_27.json",
+    "officialRaw": "courses/釋量論第二品/source_text/session_27_official_raw.txt",
+    "rootVerses": "courses/釋量論第二品/source_text/pramana_chapter2_root_verses.txt",
+    "sessionSha256": "ca6acebbc886b9070556ca683569e7b578645edb751978e9082a66888a4737b2",
+    "officialRawSha256": "7120c964627feced1194d3c1100f5d4581ff4269d1286cc4800364a8e2e95349",
+    "rootVersesSha256": "f8ac26b9bdec8d2e8ee5ff12b110ed8316da4be84139b7519038f8bc3155bbf3"
+  },
+  "evidence": {
+    "localAudit": "reviews/evidence/shiliang_27/audit.json",
+    "xiaofaSemantic": "reviews/evidence/shiliang_27/semantic_review_xiaofa.json",
+    "xiaofaParagraph": "reviews/evidence/shiliang_27/paragraph_review_xiaofa.json",
+    "xiaofaVerse": "reviews/evidence/shiliang_27/verse_review_xiaofa.json",
+    "verseAnnotations": "courses/釋量論第二品/verse_annotations.json"
+  },
+  "status": "SOURCE_REVIEW_GREEN_AUDIO_UNVERIFIED",
+  "audioVerification": "UNVERIFIED"
+}

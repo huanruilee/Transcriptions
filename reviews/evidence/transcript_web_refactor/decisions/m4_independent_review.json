@@ -1,0 +1,61 @@
+{
+  "schema": "transcript-independent-review/v1",
+  "reviewer": "xiaoyan",
+  "scope": "four Xiaofa UNVERIFIED paragraph boundaries",
+  "agentVerdicts": [
+    {
+      "candidateId": "1e4960a55ae29a1f",
+      "verdict": "MERGE",
+      "confidence": 0.9,
+      "reason": "lastText '生起大悲心' 與 firstText '的基礎不是來自於貪' 之間有明顯的承接關係，'的' 作為連接詞，表明這是一個完整的語意句群，應合併。"
+    },
+    {
+      "candidateId": "9f1ef614229376c7",
+      "verdict": "MERGE",
+      "confidence": 0.85,
+      "reason": "lastText '我們' 與 firstText '的心是不是就跟某一個軀體產生了連結' 之間有明顯的承接關係，'的' 作為連接詞，表明這是一個完整的語意句群，應合併。"
+    },
+    {
+      "candidateId": "6a56ff5120939a90",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "reason": "lastText '的情況下' 與 firstText '聖者會不會新造能引業' 可以各自形成完整的語意句群，'的情況下' 是一個完整的語意結束點，'聖者會不會新造能引業' 也是一個完整的提問。"
+    },
+    {
+      "candidateId": "a98e351dc954c25e",
+      "verdict": "MERGE",
+      "confidence": 0.9,
+      "reason": "lastText '的狀態' 與 firstText '他是不是應該設法讓自心先生起我執' 之間有明顯的承接關係，'的' 作為連接詞，表明這是一個完整的語意句群，應合併。"
+    }
+  ],
+  "orchestratorAdjudication": [
+    {
+      "candidateId": "1e4960a55ae29a1f",
+      "verdict": "MERGE",
+      "confidence": "CONFIRMED",
+      "sourceEvidence": "courses/釋量論第二品/source_text/session_19_official_raw.txt:352-356",
+      "note": "Official source page break preserves the same continuous sentence."
+    },
+    {
+      "candidateId": "9f1ef614229376c7",
+      "verdict": "MERGE",
+      "confidence": "CONFIRMED",
+      "sourceEvidence": "courses/釋量論第二品/source_text/session_24_official_raw.txt:270-275",
+      "note": "Official source page break preserves the same continuous sentence."
+    },
+    {
+      "candidateId": "6a56ff5120939a90",
+      "verdict": "MERGE",
+      "confidence": "CONFIRMED",
+      "sourceEvidence": "courses/釋量論第二品/source_text/session_26_official_raw.txt:64-66",
+      "note": "Reviewer shifted the boundary while reasoning; official source page break proves 這樣/的情況下 is continuous."
+    },
+    {
+      "candidateId": "a98e351dc954c25e",
+      "verdict": "MERGE",
+      "confidence": "CONFIRMED",
+      "sourceEvidence": "courses/釋量論第二品/source_text/session_29_official_raw.txt:207-212",
+      "note": "Official source page break preserves the same continuous sentence."
+    }
+  ]
+}

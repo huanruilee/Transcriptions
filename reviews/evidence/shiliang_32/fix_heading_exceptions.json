@@ -1,0 +1,59 @@
+{
+  "task": "fix unnumbered duplicate headings (session_17, session_19 only)",
+  "scope": "heading fields and lastUpdated only; sentence fields untouched",
+  "committed": false,
+  "workspace": "/home/henry/.gx10/xiaofa/workspace/Transcriptions",
+  "sessions": {
+    "session_17": {
+      "file": "courses/釋量論第二品/sessions/session_17.json",
+      "prefix": "二、",
+      "paragraph_ids": [
+        "p_6",
+        "p_8",
+        "p_10",
+        "p_12",
+        "p_14",
+        "p_16",
+        "p_18",
+        "p_20"
+      ],
+      "heading_pattern": "【名相辨析】二、48、49 個偈頌是在說明身體不是意知的增上緣；接著，從第 52 個偈頌開始提到身體",
+      "lastUpdated": "2026-09-08 12:43:08"
+    },
+    "session_19": {
+      "file": "courses/釋量論第二品/sessions/session_19.json",
+      "prefixes": {
+        "四、": {
+          "paragraph_ids": [
+            "p_23",
+            "p_25",
+            "p_27",
+            "p_29",
+            "p_31",
+            "p_33"
+          ],
+          "heading_pattern": "【法義深探】四、為何今我們仍舊不肯修行"
+        },
+        "十、": {
+          "paragraph_ids": [
+            "p_68",
+            "p_70",
+            "p_72",
+            "p_74",
+            "p_76",
+            "p_78"
+          ],
+          "heading_pattern": "【教誡結語】十、從今起下定決心開始修行"
+        }
+      },
+      "lastUpdated": "2026-09-08 12:43:08"
+    }
+  },
+  "verification": {
+    "method": "git show HEAD vs working tree; compared every paragraph field other than heading",
+    "non_sentence_fields_changed": false,
+    "headings_with_target_prefix_verified": true,
+    "original_category_and_title_text_preserved": true
+  },
+  "recorded_at": "2026-09-08 13:38:47"
+}

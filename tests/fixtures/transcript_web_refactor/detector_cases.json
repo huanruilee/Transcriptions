@@ -1,0 +1,48 @@
+{
+  "textCorrection": {
+    "sourceText": "此處說明比量與現量的差別。",
+    "corrections": [
+      { "from": "鼻量", "to": "比量" }
+    ],
+    "session": {
+      "sessionId": "01",
+      "paragraphs": [
+        { "id": "p_1", "sentences": [{ "id": "sent-1", "text": "這是鼻量的定義。", "start": 1, "end": 2 }] },
+        { "id": "p_2", "sentences": [{ "id": "sent-2", "text": "鼻量山是一個專名。", "start": 2, "end": 3 }] }
+      ]
+    }
+  },
+  "sentenceBoundary": {
+    "sessionId": "01",
+    "paragraphs": [
+      {
+        "id": "p_1",
+        "sentences": [
+          { "id": "sent-1", "text": "什麼是現量？接著說明比量。", "start": 1, "end": 4 },
+          { "id": "sent-2", "text": "這是完整的一句。", "start": 4, "end": 6 }
+        ]
+      }
+    ]
+  },
+  "paragraphBoundary": {
+    "sessionId": "27",
+    "paragraphs": [
+      { "id": "p_1", "sentences": [{ "id": "sent-1", "text": "他是在無漏蘊體的聚合", "start": 1, "end": 3 }] },
+      { "id": "p_2", "sentences": [{ "id": "sent-2", "text": "體及續流上假立而有。", "start": 3, "end": 5 }] },
+      { "id": "p_3", "sentences": [{ "id": "sent-3", "text": "接著討論另一個問題。", "start": 5, "end": 7 }] }
+    ]
+  },
+  "verseMapping": {
+    "sourceText": "現量離分別，無錯亂為性。",
+    "session": {
+      "sessionId": "05",
+      "paragraphs": [
+        { "id": "p_1", "sentences": [{ "id": "sent-1", "text": "根本頌說：現量離分別，無錯亂為性。", "start": 1, "end": 4 }] }
+      ]
+    },
+    "manifest": {
+      "sessionId": "05",
+      "annotations": [{ "sentenceId": "sent-1", "quoteText": "現量離分別，無錯亂為性。" }]
+    }
+  }
+}

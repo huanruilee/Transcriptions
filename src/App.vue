@@ -1,5 +1,16 @@
 <template>
   <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
+    <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
+      <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
+        <h1 id="course-chooser-title">請選擇課程</h1>
+        <div class="course-choice-list">
+          <button v-for="course in courseStore.catalog" :key="course.id" class="course-choice" :disabled="isChoosingCourse" @click="chooseInitialCourse(course.id)">
+            <strong>{{ course.title }}</strong>
+          </button>
+        </div>
+      </section>
+    </main>
+    <template v-else>
     <!-- 頂部 3 段式導航欄 (Sticky Header) -->
     <header class="app-header">
       <div class="header-left">
@@ -192,7 +203,7 @@
             @click="selectSession(s.id)"
           >
             <div class="session-main">
-              <span class="session-id">{{ s.id }}</span>
+              <span class="session-id">{{ s.displaySessionId || s.id }}</span>
               <span class="session-title">{{ s.title }}</span>
             </div>
             <div v-if="s.page" class="session-meta">
@@ -222,7 +233,7 @@
         <nav class="reader-breadcrumb">
           <span class="crumb-home" @click="isOverviewModalOpen = true">🏠 {{ currentCourseTitle }}</span>
           <span class="crumb-sep">/</span>
-          <span class="crumb-current">第 {{ currentSessionId }} 講 {{ currentSessionInfo?.title || '' }}</span>
+          <span class="crumb-current">{{ currentSessionInfo?.displaySessionId || currentSessionId }} {{ currentSessionInfo?.title || '' }}</span>
         </nav>
 
         <!-- 動態即時科判祖先鏈 (Sticky Doctrinal Bar) -->
@@ -240,12 +251,40 @@
 
         <!-- 雙視角科判手風琴 (對齊 V1) -->
         <TOCAccordion
+          ref="tocAccordionRef"
           id="toc-accordion-root"
           :toc-nodes="courseStore.tocTree || []"
           :active-session-id="currentSessionId"
           :current-time="playerStore.currentTime"
           @seek="handleTOCSeek"
         />
+
+        <section v-if="sourceOutline" class="source-outline" aria-label="原始課程提綱">
+          <h2 class="source-outline-heading">原始課程提綱</h2>
+          <ol class="source-outline-list">
+            <li v-for="item in sourceOutline.courseOutline" :key="item">{{ item }}</li>
+          </ol>
+          <h3 class="source-outline-questions-heading">研討問題索引</h3>
+          <ol class="source-outline-questions">
+            <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
+          </ol>
+          <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
+        </section>
+
+        <section
+          v-if="currentDiscussionQuestions.length"
+          class="discussion-question-index"
+          aria-label="本講討論問題"
+        >
+          <h2>本講討論問題</h2>
+          <ol>
+            <li v-for="question in currentDiscussionQuestions" :key="question.id">
+              <button type="button" @click="seekToSentence(question.sentenceId)">
+                {{ question.displayQuestion }}
+              </button>
+            </li>
+          </ol>
+        </section>
 
         <!-- 逐字稿本文 (文章自然排版) -->
         <article class="transcript-article">
@@ -258,8 +297,8 @@
               <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
                 🕒 最後校正更新：{{ currentLastUpdated }}
               </span>
-              <span class="meta-tag status-tag">
-                ✅ 已校勘核定
+              <span class="meta-tag status-tag" :class="`status-${currentTranscriptStatus}`">
+                {{ currentTranscriptLabel }}
               </span>
               <span v-if="currentSessionInfo?.page" class="meta-tag page-tag">
                 📖 底本頁碼：{{ currentSessionInfo.page }}
@@ -268,7 +307,7 @@
 
             <!-- YouTube 影片嵌入視窗 (釋量論課程影音同步) -->
             <div
-              v-if="courseStore.currentMediaType === 'video/youtube' && currentYoutubeVideoId"
+              v-if="activeMediaType === 'video/youtube' && currentYoutubeVideoId"
               class="youtube-player-container"
               :class="{ 'is-floating': isVideoFloating }"
             >
@@ -296,6 +335,10 @@
             :key="p.id"
             class="paragraph-block"
           >
+            <div v-if="p.questionId && isQuestionStart(p)" class="discussion-question-heading">
+              <span>討論問題</span>
+              <h3>{{ questionFor(p.questionId)?.displayQuestion }}</h3>
+            </div>
             <!-- 科判導讀小標題 -->
             <h3 v-if="p.heading" class="transcript-heading">
               {{ p.heading }}
@@ -332,7 +375,12 @@
               @touchend="handleSentenceTouchEnd"
               @touchcancel="handleSentenceTouchEnd"
             >
-              {{ annotationStore.corrections[s.id]?.corrected || s.text }}
+              <template v-for="(segment, segmentIndex) in sentenceSegments(s)" :key="`${s.id}-segment-${segmentIndex}`">
+                <span
+                  :class="{ 'verse-quote': segment.isVerse, 'treatise-quote': segment.isTreatiseQuote }"
+                  :title="segment.isTreatiseQuote ? '《釋量論》原文引用（依逐字稿引號標示）' : (segment.isVerse ? `根本頌第 ${segment.verseIds.join('、')} 頌（文字對照；音檔尚未獨立核驗）` : undefined)"
+                >{{ segment.text }}</span>
+              </template>
               <!-- 待核定徽章 (對齊 V1) -->
               <span
                 v-if="s.reviewNeeded || s.uncertainty || (s.text && (s.text.includes('【存疑】') || s.text.includes('【待定】')))"
@@ -352,6 +400,12 @@
                 📌 筆記
               </span>
             </span>
+            <section v-if="p.teacherSummary" class="teacher-summary" :data-linked-to-audio="p.teacherSummary.linkedToAudio">
+              <h4 class="teacher-summary-heading">{{ p.teacherSummary.heading || '法師開示摘要' }}</h4>
+              <ul class="teacher-summary-list">
+                <li v-for="(item, itemIndex) in p.teacherSummary.items" :key="`${p.id}-summary-${itemIndex}`">{{ item }}</li>
+              </ul>
+            </section>
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
@@ -382,9 +436,24 @@
       v-if="playerStore.isUserScrolling"
       id="fab-return-playing"
       class="floating-fab"
+      type="button"
+      aria-label="回到目前播放處"
+      title="回到目前播放處"
       @click="returnToPlaying"
     >
       🎯 回到播放處
+    </button>
+
+    <button
+      v-if="playerStore.isUserScrolling"
+      id="fab-open-toc-position"
+      class="floating-fab floating-fab-toc"
+      type="button"
+      aria-label="展開目錄並跳到目前提綱位置"
+      title="展開目錄並跳到目前提綱位置"
+      @click="openCurrentTOCPosition"
+    >
+      📑 跳到提綱位置
     </button>
 
     <!-- 置底播放列 -->
@@ -407,7 +476,7 @@
 
         <!-- YouTube 影音控制器 (當課程為 video/youtube 時顯示) -->
         <div
-          v-if="courseStore.currentMediaType === 'video/youtube'"
+          v-if="activeMediaType === 'video/youtube'"
           class="custom-media-controls"
         >
           <button
@@ -436,13 +505,16 @@
         <audio
           id="audio-element"
           class="native-audio"
-          v-show="courseStore.currentMediaType === 'audio/mp3'"
+          v-show="activeMediaType === 'audio/mp3'"
           controls
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
-          @play="hasMediaEnded = false"
+          @play="onNativePlay"
+          @pause="onNativePause"
+          @error="onNativeAudioError"
         ></audio>
+        <span v-if="isAudioLoading" class="audio-loading-status" role="status" aria-live="polite">音檔載入中…</span>
 
         <button
           id="next-session-btn"
@@ -535,6 +607,7 @@
         <button class="toast-close" @click="uiStore.toast.visible = false">✕</button>
       </div>
     </Transition>
+    </template>
   </div>
 </template>
 
@@ -556,6 +629,9 @@ import { searchSentences, navigateMatch, type SearchMatch } from './composables/
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
+import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
+import { selectVerseAnnotations } from './utils/verseAnnotations';
+import { seekAndPlayAudio } from './js/audioPlayback.js';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -568,6 +644,32 @@ const sidebarFilter = ref('');
 const currentSessionId = ref('01');
 const sidebarWidth = ref(280);
 const searchInputRef = ref<HTMLInputElement | null>(null);
+const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | null>(null);
+const sourceOutline = ref<any>(null);
+const currentDiscussionQuestions = ref<any[]>([]);
+const isAudioLoading = ref(false);
+const isCourseChooserOpen = ref(false);
+const isChoosingCourse = ref(false);
+
+function chooseInitialCourse(courseId: string) {
+  if (isChoosingCourse.value) return;
+  isChoosingCourse.value = true;
+  courseStore.currentCourseId = courseId;
+  const url = new URL(window.location.href);
+  url.searchParams.set('course', courseId);
+  window.history.replaceState({}, '', url);
+  isCourseChooserOpen.value = false;
+  void (async () => {
+    try {
+      await loadRealCourseData();
+      const firstSession = courseStore.sessions[0]?.id || '01';
+      await loadSession(firstSession);
+      isInitialMounted = true;
+    } finally {
+      isChoosingCourse.value = false;
+    }
+  })();
+}
 
 // 彈窗狀態
 // Keep the player visible while the transcript scrolls; users can restore it
@@ -616,8 +718,28 @@ const navInfo = computed(() => {
   return getPrevNextSessions(sortedAllSessions.value, currentSessionId.value);
 });
 
+const currentPublicationState = ref('');
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
+});
+
+const activeMediaType = computed(() =>
+  currentSessionInfo.value?.mediaType || courseStore.currentMediaType
+);
+
+const currentTranscriptStatus = computed(() =>
+  currentSessionInfo.value?.transcriptStatus || currentPublicationState.value || 'unmarked'
+);
+
+const currentTranscriptLabel = computed(() => {
+  const labels: Record<string, string> = {
+    approved: '✅ 已校勘核定',
+    'review-ready': '🟡 待審閱',
+    candidate: '🟡 候選稿',
+    'candidate-review-required': '🟡 待審閱候選稿',
+    unmarked: '⚪ 尚未標示校勘狀態',
+  };
+  return labels[currentTranscriptStatus.value] || `⚪ ${currentTranscriptStatus.value}`;
 });
 
 const overviewSessions = computed(() => {
@@ -639,6 +761,7 @@ const currentYoutubeVideoId = ref('');
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
+const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
 const mediaDuration = ref(0);
@@ -732,7 +855,7 @@ function handleExportNotes() {
 
 // 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
 function toggleMediaPlay() {
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (isMediaPlaying.value) {
       pauseMedia();
     } else {
@@ -748,18 +871,22 @@ function toggleMediaPlay() {
 }
 
 function playMedia() {
-  if (courseStore.currentMediaType === 'audio/mp3') {
+  if (activeMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
+      isAudioLoading.value = true;
       if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
-      audioEl.play().catch(() => {});
+      audioEl.play().then(() => { isAudioLoading.value = false; }).catch(() => {
+        isAudioLoading.value = false;
+        uiStore.showToast('音檔無法播放；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+      });
     }
   }
 
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -783,12 +910,12 @@ function playMedia() {
 }
 
 function pauseMedia() {
-  if (courseStore.currentMediaType === 'audio/mp3') {
+  if (activeMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) audioEl.pause();
   }
 
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
       try {
         ytPlayer.pauseVideo();
@@ -812,26 +939,48 @@ function onSeekSliderChange(e: Event) {
   seekToTime(time);
 }
 
+function questionFor(questionId: string | null) {
+  return currentDiscussionQuestions.value.find((question) => question.id === questionId) || null;
+}
+
+function isQuestionStart(paragraph: any) {
+  const index = paragraphs.value.findIndex((item) => item.id === paragraph.id);
+  return index === 0 || paragraphs.value[index - 1]?.questionId !== paragraph.questionId;
+}
+
+function seekToSentence(sentenceId: string) {
+  const sentence = playerStore.sentences.find((item) => item.id === sentenceId);
+  if (sentence) {
+    playerStore.activeSentenceId = sentence.id;
+    seekToTime(sentence.start ?? sentence.start_time ?? 0);
+    document.getElementById(sentence.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
   playerStore.updateTime(time);
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
-  if (courseStore.currentMediaType === 'audio/mp3') {
+  if (activeMediaType === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
+      isAudioLoading.value = true;
       if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
-      audioEl.currentTime = time;
-      audioEl.play().catch(() => {});
+      seekAndPlayAudio(audioEl, time)
+        .catch(() => {
+          uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+        })
+        .finally(() => { isAudioLoading.value = false; });
     }
   }
 
   // 2. YouTube 影音同步跳轉 (同時支援 YouTube API 物件與 postMessage 雙通道)
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -1136,6 +1285,9 @@ onMounted(async () => {
     const courseParam = urlParams.get('course');
     if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
       courseStore.currentCourseId = courseParam;
+    } else {
+      isCourseChooserOpen.value = true;
+      return;
     }
   }
 
@@ -1176,13 +1328,17 @@ async function loadRealCourseData() {
     const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
     if (resCourse.ok) {
       const data = await resCourse.json();
+      currentPublicationState.value = data.transcriptPublicationState || '';
       const sessions = (data.sessions || []).map((s: any) => ({
         id: s.sessionId,
+        displaySessionId: s.displaySessionId || s.sessionId,
         title: s.title || `第 ${s.sessionId} 講`,
         page: s.pageRange || '',
         summary: s.summary || '',
         date: s.date || '',
         lastUpdated: s.lastUpdated || '',
+        transcriptStatus: s.transcriptStatus || s.status || '',
+        mediaType: s.mediaType || '',
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
         youtubeVideoId: s.youtubeVideoId,
@@ -1230,9 +1386,32 @@ async function loadSession(sessionId: string) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
+    sourceOutline.value = null;
+    if (data.sourceOutlineId) {
+      try {
+        const outlineRes = await fetch(`${baseUrl}${cPath}/source_outlines/${data.sourceOutlineId}.json`);
+        if (outlineRes.ok) sourceOutline.value = await outlineRes.json();
+      } catch (outlineError) {
+        console.warn('原始課程提綱載入失敗，保留逐字稿顯示:', outlineError);
+      }
+    }
+    verseAnnotations.value = {};
+    try {
+      const verseRes = await fetch(`${baseUrl}${cPath}/verse_annotations.json`);
+      if (verseRes.ok) {
+        const verseData = await verseRes.json();
+        const annotations = selectVerseAnnotations(verseData, sessionId);
+        for (const item of annotations) {
+          (verseAnnotations.value[item.sentenceId] ||= []).push(item);
+        }
+      }
+    } catch (verseError) {
+      console.warn('偈頌標註載入失敗，保留一般逐字稿顯示:', verseError);
+    }
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
@@ -1240,13 +1419,17 @@ async function loadSession(sessionId: string) {
       const anchorNode = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
       return {
         id: p.id || `para-${sentCounter}`,
+        questionId: p.questionId || null,
         heading: p.heading || null,
+        teacherSummary: p.teacherSummary || null,
         tocAnchorNode: anchorNode,
         sentences: (p.sentences || []).map((s: any) => ({
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
           end_time: s.end ?? s.end_time ?? 0,
           text: s.text || '',
+          treatiseQuote: s.treatiseQuote ?? false,
+          verseAnnotations: verseAnnotations.value[s.id] || [],
           reviewNeeded: s.reviewNeeded ?? false,
           uncertainty: s.uncertainty ?? null,
         })),
@@ -1270,7 +1453,7 @@ async function loadSession(sessionId: string) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) {
       audioEl.pause();
-      if (courseStore.currentMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+      if (activeMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       } else {
@@ -1279,7 +1462,7 @@ async function loadSession(sessionId: string) {
       }
     }
 
-    if (courseStore.currentMediaType === 'video/youtube') {
+    if (activeMediaType === 'video/youtube') {
       setTimeout(() => {
         setupYouTubePlayer();
       }, 100);
@@ -1289,6 +1472,17 @@ async function loadSession(sessionId: string) {
   } finally {
     isLoading.value = false;
   }
+}
+
+function sentenceSegments(sentence: any) {
+  const text = annotationStore.corrections[sentence.id]?.corrected || sentence.text || '';
+  return splitVerseText(text, sentence.verseAnnotations || []).flatMap((segment: any) => {
+    return segment.text.split(/(「[^」]*」|『[^』]*』)/g).filter(Boolean).map((part: string) => ({
+      ...segment,
+      text: part,
+      isTreatiseQuote: Boolean(sentence.treatiseQuote || /^「[^」]*」$/.test(part) || /^『[^』]*』$/.test(part)),
+    }));
+  });
 }
 
 // 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart)
@@ -1397,12 +1591,32 @@ function onNativeTimeUpdate(e: any) {
   }
 }
 
+function onNativePlay() {
+  hasMediaEnded.value = false;
+  isAudioLoading.value = false;
+  isMediaPlaying.value = true;
+}
+
+function onNativePause() {
+  isMediaPlaying.value = false;
+}
+
+function onNativeAudioError() {
+  isAudioLoading.value = false;
+  isMediaPlaying.value = false;
+  uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+}
+
 function returnToPlaying() {
   playerStore.resetScrollLock();
   if (playerStore.activeSentenceId) {
     const el = document.getElementById(playerStore.activeSentenceId);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+}
+
+function openCurrentTOCPosition() {
+  void tocAccordionRef.value?.revealCurrentPosition?.();
 }
 
 function formatTime(secs: number): string {
@@ -1413,7 +1627,7 @@ function formatTime(secs: number): string {
 
 // 監聽播放倍率變更
 watch(() => playerStore.playbackRate, (rate) => {
-  if (courseStore.currentMediaType === 'video/youtube') {
+  if (activeMediaType === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.setPlaybackRate === 'function') {
       try {
         ytPlayer.setPlaybackRate(rate);
@@ -1847,6 +2061,43 @@ if (typeof window !== 'undefined') {
   font-weight: 500;
 }
 
+.status-review-ready,
+.status-candidate,
+.status-candidate-review-required {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.status-unmarked {
+  color: var(--text-muted);
+  background: var(--surface-bg);
+  border-color: var(--border-color);
+}
+
+.audio-loading-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.audio-loading-status::before {
+  content: '';
+  width: 0.8em;
+  height: 0.8em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: audio-loading-spin 0.8s linear infinite;
+}
+
+@keyframes audio-loading-spin {
+  to { transform: rotate(360deg); }
+}
+
 .youtube-player-container {
   position: relative;
   width: 100%;
@@ -1911,6 +2162,47 @@ if (typeof window !== 'undefined') {
   font-weight: 700;
 }
 
+.source-outline {
+  margin: 16px 0 24px;
+  padding: 12px 16px;
+  border-left: 3px solid #356859;
+  background: rgba(53, 104, 89, 0.07);
+}
+
+.source-outline-heading {
+  margin: 0 0 8px;
+  color: #285344;
+  font-size: 1rem;
+}
+
+.source-outline-list {
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.6;
+}
+
+.source-outline-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.source-outline-questions-heading {
+  margin: 14px 0 8px;
+  color: #285344;
+  font-size: 0.95rem;
+}
+
+.source-outline-questions {
+  max-height: 18rem;
+  overflow-y: auto;
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.55;
+  font-size: 0.88rem;
+}
+
 .toc-anchor-card {
   display: inline-flex;
   align-items: center;
@@ -1958,6 +2250,38 @@ if (typeof window !== 'undefined') {
 
 .sentence:hover {
   background-color: rgba(154, 52, 18, 0.08);
+}
+
+.verse-quote {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.treatise-quote {
+  color: #7c2d5a;
+  background: rgba(124, 45, 90, 0.09);
+  border-bottom: 2px solid rgba(124, 45, 90, 0.45);
+  font-weight: 650;
+}
+
+.teacher-summary {
+  margin: 14px 0 4px;
+  padding: 12px 16px;
+  border-left: 4px solid #b7791f;
+  background: rgba(183, 121, 31, 0.09);
+  border-radius: 0 6px 6px 0;
+}
+
+.teacher-summary-heading {
+  margin: 0 0 6px;
+  color: #8a5a12;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.teacher-summary-list {
+  margin: 0;
+  padding-left: 1.25rem;
 }
 
 .sentence.active {
@@ -2081,6 +2405,10 @@ if (typeof window !== 'undefined') {
   transform: scale(1.05);
 }
 
+.floating-fab-toc {
+  bottom: calc(var(--player-height) + 62px);
+}
+
 /* 置底固定播放器 */
 .fixed-player {
   position: fixed;
@@ -2200,13 +2528,17 @@ if (typeof window !== 'undefined') {
 }
 
 /* 響應式佈局適配 */
-@media (max-width: 768px) {
-  .app-header {
-    padding: 0 10px;
-  }
-  .header-btn {
-    display: none;
-  }
+    @media (max-width: 768px) {
+      .app-header {
+        padding: 0 10px;
+      }
+      .header-btn {
+        display: none;
+      }
+      .theme-selector,
+      .font-controls {
+        display: none;
+      }
   .search-box {
     max-width: 140px;
   }
@@ -2255,10 +2587,29 @@ if (typeof window !== 'undefined') {
   .main-reader {
     padding: 16px 16px 48px;
   }
-  .native-audio {
-    width: 160px;
-  }
-}
+      .native-audio {
+        width: 160px;
+      }
+      .fixed-player {
+        padding: 0 8px;
+      }
+      .player-info {
+        display: none;
+      }
+      .player-controls {
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+        gap: 6px;
+      }
+      .custom-media-controls {
+        min-width: 0;
+        gap: 6px;
+      }
+      .custom-time-readout {
+        display: none;
+      }
+    }
 
 /* 全域 Toast Banner 樣式 */
 .global-toast-banner {
