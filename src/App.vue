@@ -2,12 +2,34 @@
   <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
     <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
       <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
+        <p class="course-chooser-kicker"><span aria-hidden="true">研讀</span> 佛法研讀平台</p>
         <h1 id="course-chooser-title">請選擇課程</h1>
+        <p class="course-chooser-intro">以講次、科判與原典為線索，從正在關心的問題開始閱讀。</p>
+
         <div class="course-choice-list">
-          <button v-for="course in courseStore.catalog" :key="course.id" class="course-choice" :disabled="isChoosingCourse" @click="chooseInitialCourse(course.id)">
-            <strong>{{ course.title }}</strong>
+          <button
+            v-for="(course, index) in courseStore.catalog"
+            :key="course.id"
+            class="course-choice"
+            :class="`course-choice--${course.id}`"
+            :disabled="isChoosingCourse"
+            :aria-describedby="`course-choice-detail-${course.id}`"
+            @click="chooseInitialCourse(course.id)"
+          >
+            <span class="course-choice-index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span>
+            <span class="course-choice-content">
+              <span class="course-choice-eyebrow">{{ courseChooserDetails(course.id).eyebrow }}</span>
+              <strong>{{ course.title }}</strong>
+              <span class="course-choice-master">{{ course.master }}</span>
+              <span :id="`course-choice-detail-${course.id}`" class="course-choice-summary">
+                {{ courseChooserDetails(course.id).summary }}
+              </span>
+              <span class="course-choice-enter">進入課程 <span aria-hidden="true">→</span></span>
+            </span>
           </button>
         </div>
+
+        <p class="course-chooser-footer">可隨時在閱讀頁左側切換課程與講次。</p>
       </section>
     </main>
     <template v-else>
@@ -650,6 +672,32 @@ const currentDiscussionQuestions = ref<any[]>([]);
 const isAudioLoading = ref(false);
 const isCourseChooserOpen = ref(false);
 const isChoosingCourse = ref(false);
+
+const courseChooserCopy: Record<string, { eyebrow: string; summary: string }> = {
+  'ru-zhong-lun': {
+    eyebrow: '論典研讀',
+    summary: '循著《入中論》的章節、原典與講記，逐步辨明中觀見。',
+  },
+  'shi-liang-lun-er': {
+    eyebrow: '釋量論',
+    summary: '以如性法師的講解，研讀第二品的正理與修學次第。',
+  },
+  'shi-liang-lun-study-group-2025': {
+    eyebrow: '大組共學',
+    summary: '從討論問題出發，連結每題後的法師開示與研讀摘要。',
+  },
+  'si-nian-zhu': {
+    eyebrow: '止觀修學',
+    summary: '依四念住的次第，整理可回看、可持續校勘的學習記錄。',
+  },
+};
+
+function courseChooserDetails(courseId: string) {
+  return courseChooserCopy[courseId] || {
+    eyebrow: '佛法研讀',
+    summary: '開啟課程，從講次與原典開始研讀。',
+  };
+}
 
 function chooseInitialCourse(courseId: string) {
   if (isChoosingCourse.value) return;
@@ -1681,6 +1729,229 @@ if (typeof window !== 'undefined') {
   font-family: var(--font-serif);
   padding-bottom: var(--player-height);
   transition: var(--transition-smooth);
+}
+
+.course-chooser {
+  --chooser-ink: #16324f;
+  --chooser-muted: #5c6875;
+  --chooser-paper: #f6f7f4;
+  --chooser-line: #d7dcd6;
+  --chooser-rust: #a84f32;
+  --chooser-teal: #267c78;
+  --chooser-ochre: #a97918;
+  --chooser-plum: #85546d;
+  min-height: 100vh;
+  padding: clamp(32px, 7vh, 84px) clamp(20px, 5vw, 72px) 96px;
+  color: var(--chooser-ink);
+  background-color: var(--chooser-paper);
+  background-image: linear-gradient(90deg, rgba(22, 50, 79, 0.055) 1px, transparent 1px);
+  background-size: 96px 100%;
+}
+
+.course-chooser-inner {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.course-chooser-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  color: var(--chooser-muted);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.course-chooser-kicker span {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--chooser-ink);
+  border-radius: 50%;
+  color: var(--chooser-ink);
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+}
+
+.course-chooser h1 {
+  max-width: 620px;
+  margin: 0;
+  color: var(--chooser-ink);
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.course-chooser-intro {
+  max-width: 590px;
+  margin: 18px 0 42px;
+  color: var(--chooser-muted);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.course-choice-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--chooser-line);
+  border-left: 1px solid var(--chooser-line);
+}
+
+.course-choice {
+  --course-accent: var(--chooser-rust);
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  min-height: 238px;
+  padding: 26px 28px 24px;
+  overflow: hidden;
+  border: 0;
+  border-right: 1px solid var(--chooser-line);
+  border-bottom: 1px solid var(--chooser-line);
+  border-radius: 0;
+  color: var(--chooser-ink);
+  background: rgba(255, 255, 255, 0.64);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.course-choice::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--course-accent);
+  content: '';
+  transform: scaleY(0.25);
+  transform-origin: center;
+  transition: transform 160ms ease;
+}
+
+.course-choice:hover:not(:disabled),
+.course-choice:focus-visible {
+  z-index: 1;
+  background-color: #ffffff;
+  outline: 2px solid var(--course-accent);
+  outline-offset: -2px;
+  transform: translateY(-3px);
+}
+
+.course-choice:hover::before,
+.course-choice:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.course-choice:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.course-choice--shi-liang-lun-er { --course-accent: var(--chooser-teal); }
+.course-choice--shi-liang-lun-study-group-2025 { --course-accent: var(--chooser-ochre); }
+.course-choice--si-nian-zhu { --course-accent: var(--chooser-plum); }
+
+.course-choice-index {
+  color: var(--course-accent);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.course-choice-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.course-choice-eyebrow,
+.course-choice-master {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.course-choice-eyebrow {
+  color: var(--course-accent);
+  font-weight: 700;
+}
+
+.course-choice strong {
+  margin-top: 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.18rem, 2vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.course-choice-master {
+  margin-top: 7px;
+  color: var(--chooser-muted);
+}
+
+.course-choice-summary {
+  display: -webkit-box;
+  margin-top: 15px;
+  overflow: hidden;
+  color: var(--chooser-muted);
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.course-choice-enter {
+  margin-top: auto;
+  padding-top: 18px;
+  color: var(--course-accent);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.course-choice-enter span {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 160ms ease;
+}
+
+.course-choice:hover .course-choice-enter span { transform: translateX(4px); }
+
+.course-chooser-footer {
+  margin: 18px 0 0;
+  color: var(--chooser-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 680px) {
+  .course-chooser {
+    min-height: 100svh;
+    padding: 30px 18px 52px;
+    background-size: 48px 100%;
+  }
+
+  .course-chooser-intro { margin-bottom: 30px; }
+
+  .course-choice-list { grid-template-columns: 1fr; }
+
+  .course-choice {
+    grid-template-columns: 42px minmax(0, 1fr);
+    min-height: 205px;
+    padding: 22px 20px;
+  }
 }
 
 /* 頂部三段導航 */
