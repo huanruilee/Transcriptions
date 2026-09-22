@@ -14,7 +14,7 @@ def load_json(path):
     with path.open(encoding="utf-8") as handle:
         return json.load(handle)
 
-def audit_session(path):
+def audit_session(path, audio_manifest=None):
     data = load_json(path)
     sid = data.get("sessionId", path.stem)
     paragraphs = data.get("paragraphs", [])
@@ -42,6 +42,7 @@ def audit_session(path):
             else:
                 previous_end = sentence["end"]
     audio_url = data.get("audioUrl")
+    probe = (audio_manifest or {}).get(sid, {"status": "NOT_RUN"})
     audio_ready = (
         data.get("audioAvailable") is True
         and isinstance(audio_url, str)
@@ -78,6 +79,7 @@ def audit_session(path):
             "audioAvailable": data.get("audioAvailable", False),
             "audioUrlPresent": isinstance(audio_url, str) and bool(audio_url),
             "sourceAudioDeleted": data.get("_meta", {}).get("audioDeleted", False),
+            "verification": probe,
         },
         "semantic": {
             "status": "PASS" if semantic_ready else "BLOCKED",
@@ -96,7 +98,12 @@ def main():
     args = parser.parse_args()
     course_dir = Path(args.course_dir)
     course = load_json(course_dir / "course.json")
-    sessions = [audit_session(path) for path in sorted((course_dir / "sessions").glob("session_*.json"))]
+    manifest_path = Path("reviews/evidence/sinianzhu/audio_probe_manifest.json")
+    audio_manifest = {}
+    if manifest_path.exists():
+        manifest = load_json(manifest_path)
+        audio_manifest = {item["sessionId"]: item for item in manifest.get("sessions", [])}
+    sessions = [audit_session(path, audio_manifest) for path in sorted((course_dir / "sessions").glob("session_*.json"))]
     blockers = [item for item in sessions if item["releaseStatus"] != "READY"]
     ledger = {
         "schemaVersion": 1,
