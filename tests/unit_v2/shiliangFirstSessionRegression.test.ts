@@ -114,7 +114,7 @@ describe('釋量論第二品第一講 UI 路由與影音回歸合約', () => {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     expect(wrapper.find('#course-chooser').exists()).toBe(true);
-    expect(wrapper.findAll('.course-choice')).toHaveLength(3);
+    expect(wrapper.findAll('.course-choice')).toHaveLength(4);
     expect(wrapper.find('#course-chooser').text()).toContain('請選擇課程');
     expect(global.fetch).not.toHaveBeenCalled();
   });

@@ -1,0 +1,45 @@
+{
+  "schema": "study-group-remote-review-bundle/v1",
+  "reviewedCommit": "8b33793bc9e7079990defb90dfd8924efaa2487d",
+  "scope": {
+    "sessionId": "01",
+    "videoId": "7QA1k4uxxV0",
+    "operationalEvidenceOnly": true,
+    "editorialQualityVerdict": "NOT_ASSESSED"
+  },
+  "requiredArtifacts": [
+    {
+      "path": "reviews/evidence/study-group-2025/playlist-01/review.md",
+      "sha256": "a9e0d946a17c7ec12b8483b256a21b051a284d7d426a90d900236fb8410007a3",
+      "purpose": "Records source identity, ASR operational checks, cleanup, and the blocked publication gate."
+    },
+    {
+      "path": "reviews/evidence/study-group-2025/playlist-01/run_manifest.json",
+      "sha256": "77578d24b3f4e716096cbaf59fe0b7f63828d7a87daf12b1459bf0f3b63ef5de",
+      "purpose": "Pins the source video identity, CUDA ASR configuration, checks, and cleanup result."
+    },
+    {
+      "path": "reviews/evidence/study-group-2025/playlist-01/content_review_manifest.json",
+      "sha256": "a7bb3107b109cd741666bade2b08042451d1e974c4df51223b72d002067f5834",
+      "purpose": "Pins the candidate state and requires a separate production-content review."
+    },
+    {
+      "path": "courses/2025釋量論第二品大組共學/sessions/session_01.json",
+      "sha256": "a45ff80c82573c088994216fc6873847dda24620f2d43bab95b0c7b402f20a1f",
+      "purpose": "Provides the published session payload that the reviewer may inspect against the stated gate."
+    }
+  ],
+  "excludedArtifacts": [
+    "reviews/evidence/study-group-2025/playlist-01/raw_asr.json",
+    "reviews/evidence/study-group-2025/playlist-01/acoustic_verification.json"
+  ],
+  "reviewCommands": [
+    "node --test tests/unit/studyGroupSession01RemoteReviewBundle.test.js",
+    "node --test tests/unit/studyGroupContentReview.test.js"
+  ],
+  "acceptanceBoundary": {
+    "operationalChecks": "The listed evidence may support source identity, CUDA ASR execution, timestamp structure, and temporary-media cleanup claims.",
+    "notEstablished": "The listed evidence does not establish sentence-level editorial correctness, semantic fidelity, or production publication approval.",
+    "publicationState": "BLOCKED_REVIEW_REQUIRED"
+  }
+}
