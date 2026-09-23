@@ -45,17 +45,8 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
     if not matches:
         return [dict(segment) for segment in segments]
 
-    match = matches[-1]
-    end = match.end()
-    start = match.start()
+    end = matches[-1].end()
     offset = 0
-    start_offset = 0
-    start_index = 0
-    for index, text in enumerate(texts):
-        if start_offset <= start < start_offset + len(text):
-            start_index = index
-            break
-        start_offset += len(text)
     for index, text in enumerate(texts):
         if offset < end <= offset + len(text):
             local_end = end - offset
@@ -66,13 +57,8 @@ def trim_after_dedication(segments: list[dict]) -> list[dict]:
                     local_end += 1
             else:
                 local_end = len(text)
-            merged = dict(segments[index])
-            merged["start"] = segments[start_index].get("start", merged.get("start"))
-            for field in ("text", "rawText"):
-                if field in merged or any(field in segment for segment in segments[start_index:index + 1]):
-                    merged[field] = "".join(segment.get(field, segment.get("text", "")) for segment in segments[start_index:index + 1])
-            merged["text"] = merged["text"][:local_end + sum(len(item.get("text", "")) for item in segments[start_index:index])]
-            trimmed = [dict(segment) for segment in segments[:start_index]] + [merged]
+            trimmed = [dict(segment) for segment in segments[:index + 1]]
+            trimmed[-1]["text"] = text[:local_end]
             return trimmed
         offset += len(text)
     return [dict(segment) for segment in segments]

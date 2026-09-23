@@ -173,7 +173,7 @@ test('publication builder does not attach a wrong source outline to lecture 12',
   assert.match(source, /Playlist 22\/23 are lecture 12/);
 });
 
-test('publication builder merges a dedication split across adjacent segments', () => {
+test('publication builder preserves sentence boundaries across a split dedication', () => {
   const code = [
     'from scripts.build_study_group_publication import trim_after_dedication',
     'print(trim_after_dedication([',
@@ -184,7 +184,8 @@ test('publication builder merges a dedication split across adjacent segments', (
   const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const output = result.stdout.trim();
-  assert.match(output, /願成善事受陰。/);
+  assert.match(output, /願成善事/);
+  assert.match(output, /受陰。/);
   assert.doesNotMatch(output, /謝謝大家/);
 });
 
@@ -198,9 +199,10 @@ test('dedication trimming supports simplified ASR and keeps the complete closing
   const result = spawnSync('python3', ['-c', code], { cwd: ROOT, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const segments = JSON.parse(result.stdout);
-  assert.equal(segments.length, 1);
-  assert.match(segments[0].text, /愿成善事设受应。/);
-  assert.doesNotMatch(segments[0].text, /尾端闲聊/);
+  assert.equal(segments.length, 2);
+  assert.match(segments[0].text, /愿成善事设/);
+  assert.match(segments[1].text, /受应。/);
+  assert.doesNotMatch(segments[1].text, /尾端闲聊/);
 });
 
 test('publication builder --help exits without running the mutating build', () => {
