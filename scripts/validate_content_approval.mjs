@@ -29,7 +29,9 @@ function sha256(file) {
 }
 
 function isIsoDate(value) {
-  return typeof value === 'string' && !Number.isNaN(Date.parse(value));
+  return typeof value === 'string'
+    && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u.test(value)
+    && !Number.isNaN(Date.parse(value));
 }
 
 function hasAudioReviewSample(review) {
@@ -55,8 +57,8 @@ function validateApprovedSession(session, courseDir, evidenceDir) {
   if (!fs.existsSync(approvalFile)) return `session=${sessionId} missing content_review_approval.json`;
 
   const payload = readJson(sessionFile);
-  if (!['approved', 'published'].includes(payload.transcriptStatus)) {
-    return `session=${sessionId} session JSON transcriptStatus must be approved or published`;
+  if (payload.transcriptStatus !== session.status) {
+    return `session=${sessionId} session JSON transcriptStatus must match course.json status ${session.status}`;
   }
 
   const approval = readJson(approvalFile);
@@ -103,8 +105,34 @@ if (!args['course-dir'] || !args['evidence-dir']) {
     fail(`missing course.json at ${courseFile}`);
   } else {
     const course = readJson(courseFile);
-    const approved = (course.sessions ?? []).filter((session) => ['approved', 'published'].includes(session.status));
-    const errors = approved.map((session) => validateApprovedSession(session, courseDir, evidenceDir)).filter(Boolean);
+    const sessions = course.sessions ?? [];
+    const courseSessionsById = new Map(sessions.map((session) => [String(session.sessionId ?? ''), session]));
+    const sessionDir = path.join(courseDir, 'sessions');
+    const errors = [];
+
+    if (fs.existsSync(sessionDir)) {
+      for (const file of fs.readdirSync(sessionDir).filter((name) => /^session_.+\.json$/u.test(name))) {
+        const payload = readJson(path.join(sessionDir, file));
+        const fileSessionId = file.slice('session_'.length, -'.json'.length);
+        const sessionId = String(payload.sessionId ?? fileSessionId);
+        const status = payload.transcriptStatus;
+        if (sessionId !== fileSessionId) {
+          errors.push(`session=${fileSessionId} session JSON sessionId mismatch`);
+          continue;
+        }
+        if (['approved', 'published'].includes(status)) {
+          const courseSession = courseSessionsById.get(sessionId);
+          if (!courseSession) {
+            errors.push(`session=${sessionId} session JSON claims ${status} but course.json has no session entry`);
+          } else if (courseSession.status !== status) {
+            errors.push(`session=${sessionId} session JSON claims ${status} but course.json status is ${courseSession.status ?? 'unmarked'}`);
+          }
+        }
+      }
+    }
+
+    const approved = sessions.filter((session) => ['approved', 'published'].includes(session.status));
+    errors.push(...approved.map((session) => validateApprovedSession(session, courseDir, evidenceDir)).filter(Boolean));
     if (errors.length > 0) {
       errors.forEach(fail);
     } else if (approved.length === 0) {

@@ -17,13 +17,19 @@ function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-function createFixture({ includeApproval = true, mutateCandidateAfterApproval = false } = {}) {
+function createFixture({
+  includeApproval = true,
+  mutateCandidateAfterApproval = false,
+  courseStatus = 'approved',
+  sessionStatus = 'approved',
+  approvedAt = '2026-09-24T00:00:00.000Z',
+} = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'content-approval-'));
   const courseDir = path.join(root, 'course');
   const evidenceDir = path.join(root, 'evidence');
   const session = {
     sessionId: '01',
-    transcriptStatus: 'approved',
+    transcriptStatus: sessionStatus,
     paragraphs: [{ sentences: [{ id: 'seg-0001', start: 0, end: 1, text: '測試逐字稿。' }] }],
   };
   const candidate = {
@@ -43,7 +49,7 @@ function createFixture({ includeApproval = true, mutateCandidateAfterApproval = 
   writeJson(path.join(courseDir, 'course.json'), {
     courseId: 'test-course',
     publicationState: 'candidate-review-required',
-    sessions: [{ sessionId: '01', status: 'approved', reviewEvidenceId: '01' }],
+    sessions: [{ sessionId: '01', status: courseStatus, reviewEvidenceId: '01' }],
   });
 
   if (includeApproval) {
@@ -53,7 +59,7 @@ function createFixture({ includeApproval = true, mutateCandidateAfterApproval = 
       scope: 'full-session',
       sessionId: '01',
       approvedBy: 'github:reviewer',
-      approvedAt: '2026-09-24T00:00:00.000Z',
+      approvedAt,
       source: {
         contentReviewPath: 'playlist-01/content_review.json',
         contentReviewSha256: sha256(candidateText),
@@ -99,4 +105,18 @@ test('approved transcript fails closed when a reviewed artifact changes', () => 
   const result = validate(fixture);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /contentReviewSha256 mismatch/);
+});
+
+test('session JSON cannot claim approval when the course index leaves it as a candidate', () => {
+  const fixture = createFixture({ courseStatus: 'candidate', sessionStatus: 'approved' });
+  const result = validate(fixture);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /session JSON claims approved but course\.json status is candidate/);
+});
+
+test('approved transcript requires a strict ISO UTC approval time', () => {
+  const fixture = createFixture({ approvedAt: '09/24/2026' });
+  const result = validate(fixture);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /missing valid approvedAt/);
 });

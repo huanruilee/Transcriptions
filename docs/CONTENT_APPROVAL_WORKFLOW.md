@@ -38,7 +38,7 @@
 }
 ```
 
-在 `course.json` 中，講次必須同時設為 `status: "approved"` 或 `"published"`；對應的 session JSON 必須設為相同的 `transcriptStatus`。若 evidence 的 playlist 名稱不同，額外設定 `reviewEvidenceId`。
+在 `course.json` 中，講次必須同時設為 `status: "approved"` 或 `"published"`；對應的 session JSON 必須設為**完全相同**的 `transcriptStatus`。核准時間必須是 ISO UTC（例如 `2026-09-24T00:00:00.000Z`）。若 evidence 的 playlist 名稱不同，額外設定 `reviewEvidenceId`。
 
 ## 驗證與核准
 
