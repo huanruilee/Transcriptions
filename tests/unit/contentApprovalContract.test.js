@@ -86,7 +86,7 @@ function validate(fixture) {
   });
 }
 
-test('approved transcript requires a signed, hash-bound full-session approval record', () => {
+test('approved transcript requires a hash-bound full-session approval record', () => {
   const fixture = createFixture();
   const result = validate(fixture);
   assert.equal(result.status, 0, result.stderr || result.stdout);
