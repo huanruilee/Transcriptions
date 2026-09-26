@@ -1392,8 +1392,8 @@ async function loadSession(sessionId: string) {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
-    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json`;
-    const res = await fetch(url);
+    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json?review=agent-uncertainty-v2`;
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
