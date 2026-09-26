@@ -1,0 +1,17 @@
+npm notice run transcriptions-platform@1.1.0-dev build:v2
+npm notice run vite build
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 60 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.49 kB │ gzip:  0.38 kB
+dist/assets/index-DLGocLOQ.css   44.78 kB │ gzip:  8.35 kB
+dist/assets/index-rvfNOC4I.js   158.54 kB │ gzip: 56.87 kB
+
+✓ built in 191ms
+
+EXIT_CODE=0

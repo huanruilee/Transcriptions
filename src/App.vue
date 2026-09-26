@@ -313,6 +313,8 @@
               <strong>{{ currentAgentUncertainCount.toLocaleString() }} 句仍需人工判定</strong>
             </div>
 
+            <p v-if="isPrivateAudio" class="audio-access-notice">限內部網路預覽；公開訪客仍可閱讀逐字稿。</p>
+
             <!-- YouTube 影片嵌入視窗 (釋量論課程影音同步) -->
             <div
               v-if="activeMediaType === 'video/youtube' && currentYoutubeVideoId"
@@ -738,6 +740,19 @@ const activeMediaType = computed(() =>
   currentSessionInfo.value?.mediaType || courseStore.currentMediaType
 );
 
+const isPrivateAudio = computed(() => {
+  if (activeMediaType.value !== 'audio/mp3' || !currentAudioUrl.value) return false;
+  try {
+    return new URL(currentAudioUrl.value).hostname.endsWith('.ts.net');
+  } catch {
+    return false;
+  }
+});
+const audioUnavailableMessage = computed(() => isPrivateAudio.value
+  ? '此音訊限內部網路預覽；目前無法播放，您仍可閱讀逐字稿。'
+  : '音檔暫時無法播放，請稍後重試；您仍可閱讀逐字稿。'
+);
+
 const currentTranscriptStatus = computed(() =>
   currentSessionInfo.value?.transcriptStatus || currentPublicationState.value || 'unmarked'
 );
@@ -866,7 +881,7 @@ function handleExportNotes() {
 
 // 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
 function toggleMediaPlay() {
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (isMediaPlaying.value) {
       pauseMedia();
     } else {
@@ -882,7 +897,7 @@ function toggleMediaPlay() {
 }
 
 function playMedia() {
-  if (activeMediaType === 'audio/mp3') {
+  if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
@@ -892,12 +907,12 @@ function playMedia() {
       }
       audioEl.play().then(() => { isAudioLoading.value = false; }).catch(() => {
         isAudioLoading.value = false;
-        uiStore.showToast('音檔無法播放；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+        uiStore.showToast(audioUnavailableMessage.value, 'warning', 6000);
       });
     }
   }
 
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -921,12 +936,12 @@ function playMedia() {
 }
 
 function pauseMedia() {
-  if (activeMediaType === 'audio/mp3') {
+  if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) audioEl.pause();
   }
 
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
       try {
         ytPlayer.pauseVideo();
@@ -974,7 +989,7 @@ function seekToTime(time: number) {
   playerStore.updateTime(time);
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
-  if (activeMediaType === 'audio/mp3') {
+  if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
@@ -984,14 +999,14 @@ function seekToTime(time: number) {
       }
       seekAndPlayAudio(audioEl, time)
         .catch(() => {
-          uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+          uiStore.showToast(audioUnavailableMessage.value, 'warning', 6000);
         })
         .finally(() => { isAudioLoading.value = false; });
     }
   }
 
   // 2. YouTube 影音同步跳轉 (同時支援 YouTube API 物件與 postMessage 雙通道)
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
       try {
         if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
@@ -1471,7 +1486,7 @@ async function loadSession(sessionId: string) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) {
       audioEl.pause();
-      if (activeMediaType === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+      if (activeMediaType.value === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       } else {
@@ -1480,7 +1495,7 @@ async function loadSession(sessionId: string) {
       }
     }
 
-    if (activeMediaType === 'video/youtube') {
+    if (activeMediaType.value === 'video/youtube') {
       setTimeout(() => {
         setupYouTubePlayer();
       }, 100);
@@ -1622,7 +1637,7 @@ function onNativePause() {
 function onNativeAudioError() {
   isAudioLoading.value = false;
   isMediaPlaying.value = false;
-  uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
+  uiStore.showToast(audioUnavailableMessage.value, 'warning', 6000);
 }
 
 function returnToPlaying() {
@@ -1645,7 +1660,7 @@ function formatTime(secs: number): string {
 
 // 監聽播放倍率變更
 watch(() => playerStore.playbackRate, (rate) => {
-  if (activeMediaType === 'video/youtube') {
+  if (activeMediaType.value === 'video/youtube') {
     if (ytPlayer && typeof ytPlayer.setPlaybackRate === 'function') {
       try {
         ytPlayer.setPlaybackRate(rate);
@@ -2104,6 +2119,11 @@ if (typeof window !== 'undefined') {
   color: var(--text-muted);
   background: var(--surface-bg);
   border-color: var(--border-color);
+}
+
+.audio-access-notice {
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 .audio-loading-status {
