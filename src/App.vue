@@ -304,6 +304,14 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
+            <div
+              v-if="currentAgentReviewStatus === 'completed'"
+              class="agent-review-summary"
+              data-testid="agent-review-summary"
+            >
+              🤖 Agent 已審核 {{ currentAgentReviewedCount.toLocaleString() }} 句；
+              <strong>{{ currentAgentUncertainCount.toLocaleString() }} 句仍需人工判定</strong>
+            </div>
 
             <!-- YouTube 影片嵌入視窗 (釋量論課程影音同步) -->
             <div
@@ -719,6 +727,9 @@ const navInfo = computed(() => {
 });
 
 const currentPublicationState = ref('');
+const currentAgentReviewStatus = ref('');
+const currentAgentReviewedCount = ref(0);
+const currentAgentUncertainCount = ref(0);
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
 });
@@ -1411,6 +1422,11 @@ async function loadSession(sessionId: string) {
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentAgentReviewStatus.value = data._meta?.agentReviewStatus || '';
+    currentAgentReviewedCount.value = data._meta?.agentReviewTotalSentences
+      ? data._meta.agentReviewTotalSentences - (data._meta.agentReviewUncertainSentences || 0)
+      : 0;
+    currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
 
     let sentCounter = 0;
@@ -1432,6 +1448,8 @@ async function loadSession(sessionId: string) {
           verseAnnotations: verseAnnotations.value[s.id] || [],
           reviewNeeded: s.reviewNeeded ?? false,
           uncertainty: s.uncertainty ?? null,
+          agentReviewStatus: s.agentReviewStatus ?? null,
+          agentReviewConfidence: s.agentReviewConfidence ?? null,
         })),
       };
     });
@@ -2036,6 +2054,19 @@ if (typeof window !== 'undefined') {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+}
+
+.agent-review-summary {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid #0f766e;
+  border-radius: 6px;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+.agent-review-summary strong {
+  color: #b45309;
 }
 
 .meta-tag {
