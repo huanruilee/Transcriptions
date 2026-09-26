@@ -13,6 +13,12 @@ describe('CourseStore Test Pattern (TDD)', () => {
     expect(store.catalog).toBeDefined();
   });
 
+  it('四念住應路由到 YouTube 播放器以支援逐句定位', () => {
+    const store = useCourseStore();
+    const course = store.catalog.find((item) => item.id === 'si-nian-zhu');
+    expect(course?.mediaType).toBe('video/youtube');
+  });
+
   it('講次過濾應同時支援講次代碼、頁碼與關鍵字搜尋', () => {
     const store = useCourseStore();
     store.setSessions([
