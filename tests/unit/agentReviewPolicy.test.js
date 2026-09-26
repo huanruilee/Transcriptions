@@ -35,3 +35,22 @@ test('Vue review UI exposes Agent summary instead of implying every sentence is 
   assert.match(app, /currentAgentUncertainCount/);
   assert.match(app, /仍需人工判定/);
 });
+
+test('四念住 third-pass metadata matches the remaining human-review set', () => {
+  for (const id of SESSION_IDS) {
+    const data = JSON.parse(fs.readFileSync(path.join(COURSE, 'sessions', `${id}.json`), 'utf8'));
+    const sentences = data.paragraphs.flatMap((p) => p.sentences || []);
+    const humanNeeded = sentences.filter((s) => s.humanReviewNeeded === true);
+    const uncertain = sentences.filter((s) => s.agentReviewStatus === 'uncertain');
+    const resolved = sentences.filter((s) => s.agentThirdPassStatus === 'resolved');
+
+    assert.equal(data._meta?.agentThirdPassStatus, 'completed', id);
+    assert.equal(data._meta?.agentReviewHumanNeededSentences, humanNeeded.length, id);
+    assert.equal(data._meta?.agentReviewUncertainSentences, uncertain.length, id);
+    assert.equal(data._meta?.agentThirdPassHumanNeeded, humanNeeded.length, id);
+    assert.equal(data._meta?.agentThirdPassResolved, resolved.length, id);
+    assert.ok(resolved.length >= 0, id);
+    assert.ok(resolved.every((s) => !s.humanReviewNeeded && !s.reviewNeeded), id);
+    assert.ok(humanNeeded.every((s) => s.agentThirdPassStatus === 'human_needed'), id);
+  }
+});
