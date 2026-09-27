@@ -112,6 +112,7 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     expect(source).toMatch(/document\.head\.appendChild\(tag\)/);
     expect(source).toMatch(/!\(window as any\)\.YT \|\| !ytPlayer/);
     expect(source).toMatch(/youtubeIframeSrc/);
+    expect(source).toMatch(/playerStore\.activeSentenceId/);
     expect(source).toMatch(/activeMediaType\.value === 'video\/youtube'/);
     expect(source).toMatch(/currentYoutubeVideoId\.value &&/);
     expect(source).toMatch(/params\.set\('autoplay', '1'\)/);

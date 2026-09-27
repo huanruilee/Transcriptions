@@ -773,9 +773,14 @@ const youtubeAutoplayStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const youtubeIframeSrc = computed(() => {
   const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
-  if (youtubeAutoplayStart.value !== null) {
+  let start = youtubeAutoplayStart.value;
+  if (start === null && playerStore.activeSentenceId) {
+    const active = playerStore.sentences.find((sentence) => sentence.id === playerStore.activeSentenceId);
+    start = active ? Math.max(0, Math.floor(active.start_time ?? active.start ?? 0)) : null;
+  }
+  if (start !== null) {
     params.set('autoplay', '1');
-    params.set('start', String(youtubeAutoplayStart.value));
+    params.set('start', String(start));
     params.set('mute', '0');
   }
   return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
