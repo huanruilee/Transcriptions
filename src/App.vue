@@ -328,7 +328,7 @@
               <iframe
                 id="youtube-iframe"
                 class="youtube-iframe"
-                :src="`https://www.youtube.com/embed/${currentYoutubeVideoId}?enablejsapi=1&origin=${originUrl}`"
+                :src="youtubeIframeSrc"
                 title="YouTube 影音講記"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -769,7 +769,17 @@ const activeTOCChain = computed(() => {
 
 const currentAudioUrl = ref('');
 const currentYoutubeVideoId = ref('');
+const youtubeAutoplayStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
+const youtubeIframeSrc = computed(() => {
+  const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
+  if (youtubeAutoplayStart.value !== null) {
+    params.set('autoplay', '1');
+    params.set('start', String(youtubeAutoplayStart.value));
+    params.set('mute', '0');
+  }
+  return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
+});
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
@@ -909,13 +919,7 @@ function playMedia() {
     // reload the iframe from the user-gesture path with the requested start
     // time so YouTube itself owns autoplay and audio initialization.
     if (ytIframe && (!(window as any).YT || !ytPlayer)) {
-      try {
-        const url = new URL(ytIframe.src);
-        url.searchParams.set('autoplay', '1');
-        url.searchParams.set('start', String(Math.max(0, Math.floor(time))));
-        url.searchParams.set('mute', '0');
-        ytIframe.src = url.toString();
-      } catch (e) {}
+      youtubeAutoplayStart.value = Math.max(0, Math.floor(time));
     }
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
