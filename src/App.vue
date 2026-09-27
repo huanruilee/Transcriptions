@@ -770,6 +770,7 @@ const activeTOCChain = computed(() => {
 const currentAudioUrl = ref('');
 const currentYoutubeVideoId = ref('');
 const youtubeAutoplayStart = ref<number | null>(null);
+const youtubePendingStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const youtubeIframeSrc = computed(() => {
   const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
@@ -987,6 +988,10 @@ function seekToSentence(sentenceId: string) {
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
   playerStore.updateTime(time);
+  if (activeMediaType.value === 'video/youtube') {
+    youtubePendingStart.value = Math.max(0, Number(time) || 0);
+  }
+
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
   if (activeMediaType.value === 'audio/mp3') {
@@ -1150,6 +1155,15 @@ function setupYouTubePlayer() {
   }, 100);
 }
 
+function acceptYoutubeTime(time: number): boolean {
+  const pending = youtubePendingStart.value;
+  if (pending !== null) {
+    if (Math.abs(time - pending) > 0.75) return false;
+    youtubePendingStart.value = null;
+  }
+  return true;
+}
+
 function startYTTracker() {
   stopYTTracker();
   ytTrackerInterval = setInterval(() => {
@@ -1157,7 +1171,7 @@ function startYTTracker() {
       try {
         const t = ytPlayer.getCurrentTime();
         if (typeof t === 'number' && !isNaN(t)) {
-          playerStore.updateTime(t);
+          if (acceptYoutubeTime(t)) playerStore.updateTime(t);
         }
         const d = ytPlayer.getDuration();
         if (d && !isNaN(d) && d > 0) {
@@ -1183,7 +1197,7 @@ function onYouTubeMessage(event: MessageEvent) {
     if (!data) return;
     if (data.event === 'infoDelivery' && data.info) {
       if (typeof data.info.currentTime === 'number') {
-        playerStore.updateTime(data.info.currentTime);
+        if (acceptYoutubeTime(data.info.currentTime)) playerStore.updateTime(data.info.currentTime);
       }
       if (typeof data.info.duration === 'number' && data.info.duration > 0) {
         mediaDuration.value = data.info.duration;
@@ -1407,6 +1421,7 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 async function loadSession(sessionId: string) {
   hasMediaEnded.value = false;
   stopYTTracker();
+  youtubePendingStart.value = null;
   playerStore.setSentences([]);
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
