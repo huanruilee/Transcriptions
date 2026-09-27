@@ -110,6 +110,7 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     const source = fs.readFileSync('src/App.vue', 'utf8');
     expect(source).toMatch(/youtubeIframeApi/);
     expect(source).toMatch(/document\.head\.appendChild\(tag\)/);
+    expect(source).toMatch(/!\(window as any\)\.YT \|\| !ytPlayer/);
     expect(source).toMatch(/url\.searchParams\.set\('autoplay', '1'\)/);
     expect(source).toMatch(/url\.searchParams\.set\('start'/);
   });

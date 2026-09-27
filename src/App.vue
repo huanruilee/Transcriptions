@@ -908,7 +908,7 @@ function playMedia() {
     // Fallback for environments where the external IFrame API is unavailable:
     // reload the iframe from the user-gesture path with the requested start
     // time so YouTube itself owns autoplay and audio initialization.
-    if (ytIframe && !ytPlayer) {
+    if (ytIframe && (!(window as any).YT || !ytPlayer)) {
       try {
         const url = new URL(ytIframe.src);
         url.searchParams.set('autoplay', '1');
