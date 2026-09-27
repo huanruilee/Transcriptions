@@ -1158,7 +1158,7 @@ function setupYouTubePlayer() {
 function acceptYoutubeTime(time: number): boolean {
   const pending = youtubePendingStart.value;
   if (pending !== null) {
-    if (time + 0.25 < pending) return false;
+    if (Math.abs(time - pending) > 0.75) return false;
     youtubePendingStart.value = null;
   }
   return true;
@@ -1421,6 +1421,7 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 async function loadSession(sessionId: string) {
   hasMediaEnded.value = false;
   stopYTTracker();
+  youtubePendingStart.value = null;
   playerStore.setSentences([]);
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
