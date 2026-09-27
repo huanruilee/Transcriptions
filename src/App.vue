@@ -1036,11 +1036,13 @@ function setupYouTubePlayer() {
   if (typeof window === 'undefined') return;
 
   // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
-  if (!(window as any).YT) {
+  if (!(window as any).YT && !document.querySelector('script[data-youtube-iframe-api]')) {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScript = document.getElementsByTagName('script')[0];
-    firstScript?.parentNode?.insertBefore(tag, firstScript);
+    tag.dataset.youtubeIframeApi = 'true';
+    // Append directly to <head>; the bundle script may not have a usable
+    // parent node in every production/runtime context.
+    document.head.appendChild(tag);
   }
 
   const existingIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
