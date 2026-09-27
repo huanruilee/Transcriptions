@@ -115,6 +115,8 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     expect(source).toMatch(/playerStore\.activeSentenceId/);
     expect(source).toMatch(/activeMediaType\.value === 'video\/youtube'/);
     expect(source).toMatch(/currentYoutubeVideoId\.value &&/);
+    expect(source).toContain('const sentenceTime = Number(s.start_time ?? s.start ?? 0);')
+    expect(source).toContain('seekToTime(sentenceTime);')
     expect(source).toMatch(/params\.set\('autoplay', '1'\)/);
     expect(source).toMatch(/params\.set\('start'/);
   });

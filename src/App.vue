@@ -1610,12 +1610,13 @@ function handleSentenceClick(s: any) {
   freezeAutoScroll(600);
   playerStore.resetScrollLock();
   playerStore.activeSentenceId = s.id;
+  const sentenceTime = Number(s.start_time ?? s.start ?? 0);
   // Keep sentence clicks playable even when the external YouTube API has not
   // initialized yet; this assignment is reactive and survives Vue re-renders.
   if (currentYoutubeVideoId.value && !(window as any).YT) {
-    youtubeAutoplayStart.value = Math.max(0, Math.floor(s.start_time ?? s.start ?? 0));
+    youtubeAutoplayStart.value = Math.max(0, Math.floor(sentenceTime));
   }
-  seekToTime(s.start_time);
+  seekToTime(sentenceTime);
   const el = document.getElementById(s.id);
   if (el && !isAutoScrollFrozen()) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
