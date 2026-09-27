@@ -905,6 +905,18 @@ function playMedia() {
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    // Fallback for environments where the external IFrame API is unavailable:
+    // reload the iframe from the user-gesture path with the requested start
+    // time so YouTube itself owns autoplay and audio initialization.
+    if (ytIframe && !ytPlayer) {
+      try {
+        const url = new URL(ytIframe.src);
+        url.searchParams.set('autoplay', '1');
+        url.searchParams.set('start', String(Math.max(0, Math.floor(time))));
+        url.searchParams.set('mute', '0');
+        ytIframe.src = url.toString();
+      } catch (e) {}
+    }
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
         JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
