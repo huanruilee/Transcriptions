@@ -915,12 +915,6 @@ function playMedia() {
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
-    // Fallback for environments where the external IFrame API is unavailable:
-    // reload the iframe from the user-gesture path with the requested start
-    // time so YouTube itself owns autoplay and audio initialization.
-    if (ytIframe && (!(window as any).YT || !ytPlayer)) {
-      youtubeAutoplayStart.value = Math.max(0, Math.floor(time));
-    }
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
         JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
@@ -1016,6 +1010,12 @@ function seekToTime(time: number) {
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    // Fallback for environments where the external IFrame API is unavailable:
+    // let Vue update the iframe URL from this user-gesture path so YouTube
+    // owns autoplay and audio initialization at the requested timestamp.
+    if (ytIframe && (!(window as any).YT || !ytPlayer)) {
+      youtubeAutoplayStart.value = Math.max(0, Math.floor(time));
+    }
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
         JSON.stringify({
