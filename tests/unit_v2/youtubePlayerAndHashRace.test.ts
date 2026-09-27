@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { useCourseStore } from '../../src/stores/course';
 import App from '../../src/App.vue';
+import fs from 'node:fs';
 
 describe('YouTube Player & Hash Race Prevention Contract', () => {
   const originalFetch = global.fetch;
@@ -103,5 +104,11 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
 
     const audioEl = wrapper.find('#audio-element').element as HTMLAudioElement;
     expect(audioEl.src.includes('drive.google.com')).toBe(false);
+  });
+
+  it('4. YouTube API 未預先存在時仍會插入可載入的 API script', async () => {
+    const source = fs.readFileSync('src/App.vue', 'utf8');
+    expect(source).toMatch(/youtubeIframeApi/);
+    expect(source).toMatch(/document\.head\.appendChild\(tag\)/);
   });
 });
