@@ -1422,6 +1422,7 @@ async function loadSession(sessionId: string) {
   hasMediaEnded.value = false;
   stopYTTracker();
   youtubePendingStart.value = null;
+  youtubeAutoplayStart.value = null;
   playerStore.setSentences([]);
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
@@ -1625,10 +1626,11 @@ function handleSentenceClick(s: any) {
   freezeAutoScroll(600);
   playerStore.resetScrollLock();
   playerStore.activeSentenceId = s.id;
-  const sentenceTime = Number(s.start_time ?? s.start ?? 0);
+  const clickedSentence = playerStore.sentences.find((sentence) => sentence.id === s.id) || s;
+  const sentenceTime = Number(clickedSentence.start_time ?? clickedSentence.start ?? 0);
   // Keep sentence clicks playable even when the external YouTube API has not
   // initialized yet; this assignment is reactive and survives Vue re-renders.
-  if (currentYoutubeVideoId.value && !(window as any).YT) {
+  if (currentYoutubeVideoId.value) {
     youtubeAutoplayStart.value = Math.max(0, Math.floor(sentenceTime));
   }
   seekToTime(sentenceTime);
