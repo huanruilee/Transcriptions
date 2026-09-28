@@ -79,6 +79,16 @@
         </button>
 
         <button
+          id="download-transcript-btn"
+          class="header-btn"
+          title="下載目前講次的純文字逐字稿（含時間碼）"
+          :disabled="isLoading || paragraphs.length === 0"
+          @click="handleDownloadTranscript"
+        >
+          📄 逐字稿
+        </button>
+
+        <button
           id="review-modal-btn"
           class="header-btn"
           title="講次品質評分與回報"
@@ -304,6 +314,15 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
+            <button
+              id="download-transcript-mobile-btn"
+              class="session-download-btn"
+              title="下載目前講次的純文字逐字稿（含時間碼）"
+              :disabled="isLoading || paragraphs.length === 0"
+              @click="handleDownloadTranscript"
+            >
+              📄 下載逐字稿
+            </button>
             <div
               v-if="currentAgentReviewStatus === 'completed'"
               class="agent-review-summary"
@@ -642,6 +661,11 @@ import TouchContextMenu from './components/TouchContextMenu.vue';
 import { searchSentences, navigateMatch, type SearchMatch } from './composables/useSearchEngine';
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
+import {
+  buildTranscriptFilename,
+  downloadTranscriptFile,
+  formatTranscriptText,
+} from './composables/useExportTranscript';
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 import { selectVerseAnnotations } from './utils/verseAnnotations';
@@ -898,6 +922,29 @@ function handleExportNotes() {
   );
   const filename = `${currentCourseTitle.value}_第${currentSessionId.value}講_研讀筆記.md`;
   downloadMarkdownFile(filename, md);
+}
+
+function handleDownloadTranscript() {
+  if (isLoading.value || paragraphs.value.length === 0) {
+    uiStore.showToast('逐字稿尚未載入完成，請稍後再試。', 'warning');
+    return;
+  }
+
+  const sessionTitle = currentSessionInfo.value?.title || `第 ${currentSessionId.value} 講`;
+  const content = formatTranscriptText(
+    {
+      courseTitle: currentCourseTitle.value,
+      sessionId: currentSessionId.value,
+      sessionTitle,
+      pageRange: currentSessionInfo.value?.page || '',
+      lastUpdated: currentLastUpdated.value,
+      transcriptStatus: currentTranscriptStatus.value,
+    },
+    paragraphs.value,
+  );
+  const filename = buildTranscriptFilename(currentCourseTitle.value, currentSessionId.value);
+  downloadTranscriptFile(filename, content);
+  uiStore.showToast(`已下載「${sessionTitle}」逐字稿。`, 'success');
 }
 
 // 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
