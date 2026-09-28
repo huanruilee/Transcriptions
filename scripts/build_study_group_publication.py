@@ -12,10 +12,24 @@ EVIDENCE = ROOT / "reviews/evidence/study-group-2025"
 COURSE_DIR = ROOT / "courses/2025釋量論第二品大組共學"
 COURSE_ID = "shi-liang-lun-study-group-2025"
 PUBLISHED_PLAYLIST_INDICES = tuple(range(1, 42))
+VIDEO_ONLY_SESSIONS = [
+    {
+        "playlistIndex": 42,
+        "sessionId": "42",
+        "displaySessionId": "26下",
+        "title": "第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學",
+        "videoId": "lBOiFeGQblw",
+    },
+    {
+        "playlistIndex": 43,
+        "sessionId": "43",
+        "displaySessionId": "27上",
+        "title": "第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學",
+        "videoId": "8sDCFUj5E_c",
+    },
+]
 UNAVAILABLE_PLAYLISTS = [
-    {"playlistIndex": 42, "reason": "youtube_unavailable"},
-    {"playlistIndex": 43, "reason": "youtube_private"},
-    {"playlistIndex": 44, "reason": "source_audio_silent"},
+    {"playlistIndex": 44, "videoId": "C0yhUazs0CU", "reason": "youtube_private"},
 ]
 
 
@@ -199,7 +213,6 @@ def build_session(index: int) -> tuple[dict, dict]:
         **dict.fromkeys((37, 38), "32-24"),
         **dict.fromkeys((39, 40), "32-25"),
         41: "32-26",
-        44: "32-26",
     }
     session = {
         "sessionId": session_id,
@@ -252,6 +265,44 @@ def build_session(index: int) -> tuple[dict, dict]:
     return session, catalog_entry
 
 
+def build_video_only_session(source: dict) -> tuple[dict, dict]:
+    """Expose a verified public video without implying that a transcript exists."""
+    video_url = f"https://www.youtube.com/watch?v={source['videoId']}"
+    session = {
+        "sessionId": source["sessionId"],
+        "displaySessionId": source["displaySessionId"],
+        "sourceOutlineId": None,
+        "title": source["title"],
+        "mediaType": "video/youtube",
+        "youtubeVideoId": source["videoId"],
+        "youtubeUrl": video_url,
+        "lastUpdated": "2026-09-28",
+        "transcriptStatus": "not-transcribed",
+        "alignmentStatus": "not-started",
+        "tocMode": "discussion-questions",
+        "discussionQuestions": [],
+        "paragraphs": [],
+        "_meta": {
+            "playlistIndex": source["playlistIndex"],
+            "sourceUrl": video_url,
+            "sourceVerifiedAt": "2026-09-28",
+            "publicationState": "video-only-transcript-pending",
+        },
+    }
+    catalog_entry = {
+        "sessionId": source["sessionId"],
+        "displaySessionId": source["displaySessionId"],
+        "id": source["sessionId"],
+        "sessionNum": source["playlistIndex"],
+        "title": source["title"],
+        "status": "not-transcribed",
+        "mediaType": "video/youtube",
+        "youtubeVideoId": source["videoId"],
+        "youtubeUrl": video_url,
+    }
+    return session, catalog_entry
+
+
 def main() -> None:
     sessions = []
     catalog_sessions = []
@@ -268,6 +319,11 @@ def main() -> None:
                 "sessionIds": [session["sessionId"]],
                 "timestamp": question["start"],
             })
+
+    for source in VIDEO_ONLY_SESSIONS:
+        session, catalog_entry = build_video_only_session(source)
+        sessions.append(session)
+        catalog_sessions.append(catalog_entry)
 
     prototype = read_main_prototype()
     prototype["displaySessionId"] = "27下"
@@ -317,8 +373,7 @@ def main() -> None:
 
     catalog_path = ROOT / "courses/catalog.json"
     catalog = json.loads(catalog_path.read_text())
-    catalog["courses"] = [course for course in catalog["courses"] if course["id"] != COURSE_ID]
-    catalog["courses"].append({
+    catalog_entry = {
         "id": COURSE_ID,
         "title": "2025《釋量論・第二品》大組共學",
         "master": "大組共學",
@@ -327,7 +382,15 @@ def main() -> None:
         "mediaType": "video/youtube",
         "totalSessions": len(sessions),
         "publicationState": "candidate-review-required",
-    })
+    }
+    replaced = False
+    for index, course in enumerate(catalog["courses"]):
+        if course["id"] == COURSE_ID:
+            catalog["courses"][index] = catalog_entry
+            replaced = True
+            break
+    if not replaced:
+        catalog["courses"].append(catalog_entry)
     write_json(catalog_path, catalog)
 
 

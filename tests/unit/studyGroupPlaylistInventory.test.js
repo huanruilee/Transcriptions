@@ -24,7 +24,7 @@ test('study-group playlist inventory is a complete, source-grounded manifest', (
   );
   assert.equal(inventory.declaredCount, 44);
   assert.equal(inventory.visibleCount, 44);
-  assert.equal(inventory.hiddenOrUnavailableCount, 2);
+  assert.equal(inventory.hiddenOrUnavailableCount, 1);
   assert.equal(inventory.items.length, inventory.declaredCount);
   assert.deepEqual(
     inventory.items.map((item) => item.playlistIndex),
@@ -35,12 +35,11 @@ test('study-group playlist inventory is a complete, source-grounded manifest', (
 test('unavailable playlist entries fail closed and are excluded from execution', () => {
   const inventory = loadInventory();
   const unavailable = inventory.items.filter((item) => !item.playable);
-  assert.deepEqual(unavailable.map((item) => item.videoId), ['BGruVOFnFhI', '8sDCFUj5E_c']);
-  assert.deepEqual(unavailable.map((item) => item.availabilityStatus), ['unavailable', 'unavailable']);
-  assert.match(unavailable[0].availabilityDetail, /Video unavailable/i);
-  assert.match(unavailable[1].availabilityDetail, /Private video/i);
-  assert.equal(inventory.scopeDecision.executableTranscriptScope, 42);
-  assert.equal(inventory.scopeDecision.excludedCount, 2);
+  assert.deepEqual(unavailable.map((item) => item.videoId), ['C0yhUazs0CU']);
+  assert.deepEqual(unavailable.map((item) => item.availabilityStatus), ['unavailable']);
+  assert.match(unavailable[0].availabilityDetail, /Private video/i);
+  assert.equal(inventory.scopeDecision.executableTranscriptScope, 43);
+  assert.equal(inventory.scopeDecision.excludedCount, 1);
 });
 
 test('normalization never invents lecture numbers for the review-only entry', () => {

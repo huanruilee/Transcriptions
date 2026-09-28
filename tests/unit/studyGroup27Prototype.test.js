@@ -56,7 +56,7 @@ test('27下 remains addressable inside the published study-group course', () => 
   assert.ok(course, 'study-group course must be registered');
   assert.equal(course.path, COURSE_PATH);
   assert.equal(course.mediaType, 'video/youtube');
-  assert.equal(course.totalSessions, 42);
+  assert.equal(course.totalSessions, 44);
 
   const store = fs.readFileSync(path.join(ROOT, 'src/stores/course.ts'), 'utf8');
   assert.match(store, new RegExp(COURSE_ID), 'Vue course selector must expose the prototype');
@@ -214,12 +214,12 @@ test('publication builder --help exits without running the mutating build', () =
   assert.match(result.stdout, /usage:/i);
 });
 
-test('study-group publication keeps silent playlist 44 unavailable', () => {
+test('study-group publication keeps private playlist 44 unavailable', () => {
   const course = readJson(`${COURSE_PATH}/course.json`);
   assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
   assert.deepEqual(
     course.unavailableSessions.find((item) => item.playlistIndex === 44),
-    { playlistIndex: 44, reason: 'source_audio_silent' },
+    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
   );
 });
 

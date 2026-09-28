@@ -338,6 +338,10 @@
                 allowfullscreen
               ></iframe>
             </div>
+            <p
+              v-if="currentTranscriptStatus === 'not-transcribed'"
+              class="transcript-pending-notice"
+            >此影片已上架，逐字稿尚待製作。</p>
           </header>
 
           <div
@@ -763,6 +767,7 @@ const currentTranscriptLabel = computed(() => {
     'review-ready': '🟡 待審閱',
     candidate: '🟡 候選稿',
     'candidate-review-required': '🟡 待審閱候選稿',
+    'not-transcribed': '🎬 影片已上架・逐字稿待製作',
     unmarked: '⚪ 尚未標示校勘狀態',
   };
   return labels[currentTranscriptStatus.value] || `⚪ ${currentTranscriptStatus.value}`;
@@ -2161,6 +2166,12 @@ if (typeof window !== 'undefined') {
   border-color: rgba(245, 158, 11, 0.35);
 }
 
+.status-not-transcribed {
+  color: #1e40af;
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
 .status-unmarked {
   color: var(--text-muted);
   background: var(--surface-bg);
@@ -2170,6 +2181,12 @@ if (typeof window !== 'undefined') {
 .audio-access-notice {
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.transcript-pending-notice {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .audio-loading-status {
