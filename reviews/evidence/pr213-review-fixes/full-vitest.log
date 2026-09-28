@@ -1,0 +1,125 @@
+npm notice run transcriptions-platform@1.1.0-dev test:v2
+npm notice run vitest run
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /Users/henry/.codex/worktrees/f677/Transcriptions
+
+Error: connect EPERM 127.0.0.1:9091 - Local (0.0.0.0:0)
+    at internalConnect (node:net:1111:16)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at node:net:1357:9
+    at processTicksAndRejections (node:internal/process/task_queues:84:11) {
+  errno: -1,
+  code: 'EPERM',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 9091
+}
+AggregateError:
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError:
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+Error: getaddrinfo ENOTFOUND www.youtube.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'www.youtube.com'
+}
+DOMException [NetworkError]: Failed to execute "fetch()" on "Window" with URL "https://www.youtube.com/embed/yzSUab52m-8?enablejsapi=1&origin=http://localhost:3000": getaddrinfo ENOTFOUND www.youtube.com
+    at Fetch.onError (file:///Users/henry/.codex/worktrees/f677/Transcriptions/node_modules/happy-dom/lib/fetch/Fetch.js:540:21)
+    at ClientRequest.emit (node:events:519:28)
+    at emitErrorEvent (node:_http_client:108:11)
+    at TLSSocket.socketErrorListener (node:_http_client:575:5)
+    at TLSSocket.emit (node:events:519:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:89:21)
+Error: connect EPERM 127.0.0.1:9091 - Local (0.0.0.0:0)
+    at internalConnect (node:net:1111:16)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at node:net:1357:9
+    at processTicksAndRejections (node:internal/process/task_queues:84:11) {
+  errno: -1,
+  code: 'EPERM',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 9091
+}
+
+ Test Files  24 passed (24)
+      Tests  79 passed (79)
+   Start at  20:07:36
+   Duration  2.26s (environment 52%, transform 20%, tests 16%, import 11%, worker 1%)
+
+Environment  happy-dom was created 24 times · 8.14s total, 52% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT_CODE=0

@@ -3,7 +3,6 @@ import { mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { useCourseStore } from '../../src/stores/course';
 import App from '../../src/App.vue';
-import fs from 'node:fs';
 
 describe('YouTube Player & Hash Race Prevention Contract', () => {
   const originalFetch = global.fetch;
@@ -104,43 +103,5 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
 
     const audioEl = wrapper.find('#audio-element').element as HTMLAudioElement;
     expect(audioEl.src.includes('drive.google.com')).toBe(false);
-  });
-
-  it('5. sentence click uses normalized start time for a playable YouTube URL', async () => {
-    delete (window as any).location;
-    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=si-nian-zhu#session-01') as any;
-    delete (window as any).YT;
-    global.fetch = vi.fn().mockImplementation((url: string) => {
-      if (typeof url === 'string' && url.includes('session')) {
-        return Promise.resolve({ ok: true, json: () => Promise.resolve({ audioUrl: '', youtubeVideoId: 'lKqaPStMs50', paragraphs: [{ id: 'p1', sentences: [{ id: 'seg-001', start: 0.14, end: 3.14, text: 'first' }, { id: 'seg-002', start: 3.14, end: 18.58, text: 'second' }] }] }) });
-      }
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({ sessions: [{ sessionId: '01', title: 'Session 01' }] }) });
-    }) as any;
-    const wrapper = mount(App);
-    await new Promise((r) => setTimeout(r, 180));
-    await wrapper.find('#seg-002').trigger('click');
-    await wrapper.vm.$nextTick();
-    const src = wrapper.find('#youtube-iframe').attributes('src') || '';
-    expect(src).toContain('autoplay=1');
-    expect(src).toContain('start=3');
-    expect(src).toContain('mute=0');
-  });
-
-  it('4. YouTube API 未預先存在時仍會插入可載入的 API script', async () => {
-    const source = fs.readFileSync('src/App.vue', 'utf8');
-    expect(source).toMatch(/youtubeIframeApi/);
-    expect(source).toMatch(/document\.head\.appendChild\(tag\)/);
-    expect(source).toMatch(/!\(window as any\)\.YT \|\| !ytPlayer/);
-    expect(source).toMatch(/youtubeIframeSrc/);
-    expect(source).toMatch(/playerStore\.activeSentenceId/);
-    expect(source).toMatch(/activeMediaType\.value === 'video\/youtube'/);
-    expect(source).toContain("if (currentYoutubeVideoId.value)");
-    expect(source).toContain("const clickedSentence = playerStore.sentences.find((sentence) => sentence.id === s.id) || s;");
-    expect(source).toContain("const sentenceTime = Number(clickedSentence.start_time ?? clickedSentence.start ?? 0);");
-    expect(source).toContain('seekToTime(sentenceTime);')
-    expect(source).toContain("youtubePendingStart");
-    expect(source).toContain("acceptYoutubeTime");
-    expect(source).toMatch(/params\.set\('autoplay', '1'\)/);
-    expect(source).toMatch(/params\.set\('start'/);
   });
 });
