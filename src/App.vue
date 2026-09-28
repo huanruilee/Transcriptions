@@ -304,8 +304,14 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
-
-            <p v-if="isPrivateAudio" class="audio-access-notice">限內部網路預覽；公開訪客仍可閱讀逐字稿。</p>
+            <div
+              v-if="currentAgentReviewStatus === 'completed'"
+              class="agent-review-summary"
+              data-testid="agent-review-summary"
+            >
+              🤖 Agent 已審核 {{ currentAgentReviewedCount.toLocaleString() }} 句；
+              <strong>{{ currentAgentUncertainCount.toLocaleString() }} 句仍需人工判定</strong>
+            </div>
 
             <!-- YouTube 影片嵌入視窗 (釋量論課程影音同步) -->
             <div
@@ -322,7 +328,7 @@
               <iframe
                 id="youtube-iframe"
                 class="youtube-iframe"
-                :src="`https://www.youtube.com/embed/${currentYoutubeVideoId}?enablejsapi=1&origin=${originUrl}`"
+                :src="youtubeIframeSrc"
                 title="YouTube 影音講記"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -721,25 +727,15 @@ const navInfo = computed(() => {
 });
 
 const currentPublicationState = ref('');
+const currentAgentReviewStatus = ref('');
+const currentAgentReviewedCount = ref(0);
+const currentAgentUncertainCount = ref(0);
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
 });
 
 const activeMediaType = computed(() =>
   currentSessionInfo.value?.mediaType || courseStore.currentMediaType
-);
-
-const isPrivateAudio = computed(() => {
-  if (activeMediaType.value !== 'audio/mp3' || !currentAudioUrl.value) return false;
-  try {
-    return new URL(currentAudioUrl.value).hostname.endsWith('.ts.net');
-  } catch {
-    return false;
-  }
-});
-const audioUnavailableMessage = computed(() => isPrivateAudio.value
-  ? '此音訊限內部網路預覽；目前無法播放，您仍可閱讀逐字稿。'
-  : '音檔暫時無法播放，請稍後重試；您仍可閱讀逐字稿。'
 );
 
 const currentTranscriptStatus = computed(() =>
@@ -773,7 +769,23 @@ const activeTOCChain = computed(() => {
 
 const currentAudioUrl = ref('');
 const currentYoutubeVideoId = ref('');
+const youtubeAutoplayStart = ref<number | null>(null);
+const youtubePendingStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
+const youtubeIframeSrc = computed(() => {
+  const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
+  let start = youtubeAutoplayStart.value;
+  if (start === null && playerStore.activeSentenceId) {
+    const active = playerStore.sentences.find((sentence) => sentence.id === playerStore.activeSentenceId);
+    start = active ? Math.max(0, Math.floor(active.start_time ?? active.start ?? 0)) : null;
+  }
+  if (start !== null) {
+    params.set('autoplay', '1');
+    params.set('start', String(start));
+    params.set('mute', '0');
+  }
+  return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
+});
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
@@ -896,7 +908,7 @@ function playMedia() {
       }
       audioEl.play().then(() => { isAudioLoading.value = false; }).catch(() => {
         isAudioLoading.value = false;
-        uiStore.showToast(audioUnavailableMessage.value, 'warning', 6000);
+        uiStore.showToast('音檔無法播放；請確認已連上 GX10 音訊服務。', 'warning', 6000);
       });
     }
   }
@@ -976,6 +988,10 @@ function seekToSentence(sentenceId: string) {
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
   playerStore.updateTime(time);
+  if (activeMediaType.value === 'video/youtube') {
+    youtubePendingStart.value = Math.max(0, Number(time) || 0);
+  }
+
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
   if (activeMediaType.value === 'audio/mp3') {
@@ -988,7 +1004,7 @@ function seekToTime(time: number) {
       }
       seekAndPlayAudio(audioEl, time)
         .catch(() => {
-          uiStore.showToast(audioUnavailableMessage.value, 'warning', 6000);
+          uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
         })
         .finally(() => { isAudioLoading.value = false; });
     }
@@ -1004,6 +1020,12 @@ function seekToTime(time: number) {
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    // Fallback for environments where the external IFrame API is unavailable:
+    // let Vue update the iframe URL from this user-gesture path so YouTube
+    // owns autoplay and audio initialization at the requested timestamp.
+    if (ytIframe && (!(window as any).YT || !ytPlayer)) {
+      youtubeAutoplayStart.value = Math.max(0, Math.floor(time));
+    }
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
         JSON.stringify({
@@ -1040,11 +1062,13 @@ function setupYouTubePlayer() {
   if (typeof window === 'undefined') return;
 
   // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
-  if (!(window as any).YT) {
+  if (!(window as any).YT && !document.querySelector('script[data-youtube-iframe-api]')) {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScript = document.getElementsByTagName('script')[0];
-    firstScript?.parentNode?.insertBefore(tag, firstScript);
+    tag.dataset.youtubeIframeApi = 'true';
+    // Append directly to <head>; the bundle script may not have a usable
+    // parent node in every production/runtime context.
+    document.head.appendChild(tag);
   }
 
   const existingIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
@@ -1131,6 +1155,15 @@ function setupYouTubePlayer() {
   }, 100);
 }
 
+function acceptYoutubeTime(time: number): boolean {
+  const pending = youtubePendingStart.value;
+  if (pending !== null) {
+    if (Math.abs(time - pending) > 0.75) return false;
+    youtubePendingStart.value = null;
+  }
+  return true;
+}
+
 function startYTTracker() {
   stopYTTracker();
   ytTrackerInterval = setInterval(() => {
@@ -1138,7 +1171,7 @@ function startYTTracker() {
       try {
         const t = ytPlayer.getCurrentTime();
         if (typeof t === 'number' && !isNaN(t)) {
-          playerStore.updateTime(t);
+          if (acceptYoutubeTime(t)) playerStore.updateTime(t);
         }
         const d = ytPlayer.getDuration();
         if (d && !isNaN(d) && d > 0) {
@@ -1164,7 +1197,7 @@ function onYouTubeMessage(event: MessageEvent) {
     if (!data) return;
     if (data.event === 'infoDelivery' && data.info) {
       if (typeof data.info.currentTime === 'number') {
-        playerStore.updateTime(data.info.currentTime);
+        if (acceptYoutubeTime(data.info.currentTime)) playerStore.updateTime(data.info.currentTime);
       }
       if (typeof data.info.duration === 'number' && data.info.duration > 0) {
         mediaDuration.value = data.info.duration;
@@ -1388,6 +1421,8 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 async function loadSession(sessionId: string) {
   hasMediaEnded.value = false;
   stopYTTracker();
+  youtubePendingStart.value = null;
+  youtubeAutoplayStart.value = null;
   playerStore.setSentences([]);
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
@@ -1396,8 +1431,8 @@ async function loadSession(sessionId: string) {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
-    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json`;
-    const res = await fetch(url);
+    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json?review=agent-uncertainty-v2`;
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
@@ -1426,6 +1461,11 @@ async function loadSession(sessionId: string) {
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentAgentReviewStatus.value = data._meta?.agentReviewStatus || '';
+    currentAgentReviewedCount.value = data._meta?.agentReviewTotalSentences
+      ? data._meta.agentReviewTotalSentences - (data._meta.agentReviewUncertainSentences || 0)
+      : 0;
+    currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
 
     let sentCounter = 0;
@@ -1447,6 +1487,8 @@ async function loadSession(sessionId: string) {
           verseAnnotations: verseAnnotations.value[s.id] || [],
           reviewNeeded: s.reviewNeeded ?? false,
           uncertainty: s.uncertainty ?? null,
+          agentReviewStatus: s.agentReviewStatus ?? null,
+          agentReviewConfidence: s.agentReviewConfidence ?? null,
         })),
       };
     });
@@ -1468,7 +1510,7 @@ async function loadSession(sessionId: string) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl) {
       audioEl.pause();
-      if (activeMediaType.value === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
+  if (activeMediaType.value === 'audio/mp3' && currentAudioUrl.value && currentAudioUrl.value.startsWith('http')) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       } else {
@@ -1584,7 +1626,14 @@ function handleSentenceClick(s: any) {
   freezeAutoScroll(600);
   playerStore.resetScrollLock();
   playerStore.activeSentenceId = s.id;
-  seekToTime(s.start_time);
+  const clickedSentence = playerStore.sentences.find((sentence) => sentence.id === s.id) || s;
+  const sentenceTime = Number(clickedSentence.start_time ?? clickedSentence.start ?? 0);
+  // Keep sentence clicks playable even when the external YouTube API has not
+  // initialized yet; this assignment is reactive and survives Vue re-renders.
+  if (currentYoutubeVideoId.value) {
+    youtubeAutoplayStart.value = Math.max(0, Math.floor(sentenceTime));
+  }
+  seekToTime(sentenceTime);
   const el = document.getElementById(s.id);
   if (el && !isAutoScrollFrozen()) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1619,7 +1668,7 @@ function onNativePause() {
 function onNativeAudioError() {
   isAudioLoading.value = false;
   isMediaPlaying.value = false;
-  uiStore.showToast(audioUnavailableMessage.value, 'warning', 6000);
+  uiStore.showToast('音檔無法載入；請確認已連上 GX10 音訊服務。', 'warning', 6000);
 }
 
 function returnToPlaying() {
@@ -2053,6 +2102,19 @@ if (typeof window !== 'undefined') {
   align-items: center;
 }
 
+.agent-review-summary {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid #0f766e;
+  border-radius: 6px;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+.agent-review-summary strong {
+  color: #b45309;
+}
+
 .meta-tag {
   font-size: 0.82rem;
   padding: 3px 10px;
@@ -2088,11 +2150,6 @@ if (typeof window !== 'undefined') {
   color: var(--text-muted);
   background: var(--surface-bg);
   border-color: var(--border-color);
-}
-
-.audio-access-notice {
-  color: var(--text-muted);
-  font-size: 0.85rem;
 }
 
 .audio-loading-status {
