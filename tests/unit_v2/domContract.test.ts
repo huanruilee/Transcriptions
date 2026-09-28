@@ -21,6 +21,8 @@ describe('DOM Contract & Zero-Regression Test Pattern (TDD)', () => {
     expect(wrapper.find('#search-input').exists()).toBe(true);
     expect(wrapper.find('#sync-modal-btn').exists()).toBe(true);
     expect(wrapper.find('#export-notes-btn').exists()).toBe(true);
+    expect(wrapper.find('#download-transcript-btn').exists()).toBe(true);
+    expect(wrapper.find('#download-transcript-mobile-btn').exists()).toBe(true);
     expect(wrapper.find('#review-modal-btn').exists()).toBe(true);
 
     // 側邊欄與課程總覽
