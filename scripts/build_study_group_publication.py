@@ -12,7 +12,7 @@ EVIDENCE = ROOT / "reviews/evidence/study-group-2025"
 COURSE_DIR = ROOT / "courses/2025釋量論第二品大組共學"
 COURSE_ID = "shi-liang-lun-study-group-2025"
 PUBLISHED_PLAYLIST_INDICES = tuple(range(1, 42))
-VIDEO_ONLY_SESSIONS = [
+PENDING_VIDEO_SESSIONS = [
     {
         "playlistIndex": 42,
         "sessionId": "42",
@@ -265,31 +265,10 @@ def build_session(index: int) -> tuple[dict, dict]:
     return session, catalog_entry
 
 
-def build_video_only_session(source: dict) -> tuple[dict, dict]:
-    """Expose a verified public video without implying that a transcript exists."""
+def build_pending_video(source: dict) -> dict:
+    """Expose verified media metadata without creating a published transcript artifact."""
     video_url = f"https://www.youtube.com/watch?v={source['videoId']}"
-    session = {
-        "sessionId": source["sessionId"],
-        "displaySessionId": source["displaySessionId"],
-        "sourceOutlineId": None,
-        "title": source["title"],
-        "mediaType": "video/youtube",
-        "youtubeVideoId": source["videoId"],
-        "youtubeUrl": video_url,
-        "lastUpdated": "2026-09-28",
-        "transcriptStatus": "not-transcribed",
-        "alignmentStatus": "not-started",
-        "tocMode": "discussion-questions",
-        "discussionQuestions": [],
-        "paragraphs": [],
-        "_meta": {
-            "playlistIndex": source["playlistIndex"],
-            "sourceUrl": video_url,
-            "sourceVerifiedAt": "2026-09-28",
-            "publicationState": "video-only-transcript-pending",
-        },
-    }
-    catalog_entry = {
+    return {
         "sessionId": source["sessionId"],
         "displaySessionId": source["displaySessionId"],
         "id": source["sessionId"],
@@ -299,8 +278,9 @@ def build_video_only_session(source: dict) -> tuple[dict, dict]:
         "mediaType": "video/youtube",
         "youtubeVideoId": source["videoId"],
         "youtubeUrl": video_url,
+        "playlistIndex": source["playlistIndex"],
+        "sourceVerifiedAt": "2026-09-28",
     }
-    return session, catalog_entry
 
 
 def main() -> None:
@@ -320,10 +300,7 @@ def main() -> None:
                 "timestamp": question["start"],
             })
 
-    for source in VIDEO_ONLY_SESSIONS:
-        session, catalog_entry = build_video_only_session(source)
-        sessions.append(session)
-        catalog_sessions.append(catalog_entry)
+    pending_sessions = [build_pending_video(source) for source in PENDING_VIDEO_SESSIONS]
 
     prototype = read_main_prototype()
     prototype["displaySessionId"] = "27下"
@@ -363,6 +340,7 @@ def main() -> None:
         "tocMode": "discussion-questions",
         "transcriptPublicationState": "candidate-review-required",
         "sessions": catalog_sessions,
+        "pendingSessions": pending_sessions,
         "unavailableSessions": UNAVAILABLE_PLAYLISTS,
     })
     write_json(COURSE_DIR / "toc.json", {

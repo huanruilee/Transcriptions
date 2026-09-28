@@ -1,11 +1,19 @@
 export interface SessionNavItem {
   session_id: string;
+  displaySessionId?: string;
   title: string;
   [key: string]: any;
 }
 
-export function naturalSortSessions<T extends { session_id: string }>(sessions: T[]): T[] {
+export function naturalSortSessions<T extends { session_id: string; displaySessionId?: string }>(sessions: T[]): T[] {
   return [...sessions].sort((a, b) => {
+    const aKey = a.displaySessionId || a.session_id;
+    const bKey = b.displaySessionId || b.session_id;
+    const displayOrder = aKey.localeCompare(bKey, 'zh-Hant', {
+      numeric: true,
+      sensitivity: 'base',
+    });
+    if (displayOrder !== 0) return displayOrder;
     return a.session_id.localeCompare(b.session_id, undefined, {
       numeric: true,
       sensitivity: 'base',

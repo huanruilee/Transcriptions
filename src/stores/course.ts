@@ -2,12 +2,18 @@ import { defineStore } from 'pinia';
 
 export interface SessionMeta {
   id: string;
+  displaySessionId?: string;
   title: string;
   page?: string;
   summary?: string;
   date?: string;
   lastUpdated?: string;
   transcriptStatus?: string;
+  mediaType?: string;
+  audioUrl?: string;
+  youtubeVideoId?: string;
+  youtubeUrl?: string;
+  pendingTranscript?: boolean;
 }
 
 export interface TOCNode {

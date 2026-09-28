@@ -15,6 +15,19 @@ describe('SessionNavigation Test Pattern (TDD)', () => {
     expect(sorted.map(s => s.session_id)).toEqual(['01', '02A', '02B', '10A', '100']);
   });
 
+  it('應優先依顯示講次排序，使 26下 < 27上 < 27下', () => {
+    const sorted = naturalSortSessions([
+      { session_id: '27B', displaySessionId: '27下', title: '第 27 講（下）' },
+      { session_id: '42', displaySessionId: '26下', title: '第 26 講（下）' },
+      { session_id: '43', displaySessionId: '27上', title: '第 27 講（上）' },
+    ]);
+
+    expect(sorted.map(s => s.session_id)).toEqual(['42', '43', '27B']);
+    const nav = getPrevNextSessions(sorted, '43');
+    expect(nav.prev?.session_id).toBe('42');
+    expect(nav.next?.session_id).toBe('27B');
+  });
+
   it('應正確找出上一講與下一講', () => {
     const sorted = naturalSortSessions(sampleSessions);
     const nav = getPrevNextSessions(sorted, '02A');

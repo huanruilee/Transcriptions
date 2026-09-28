@@ -11,7 +11,7 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
 }
 
-test('newly public official YouTube videos are exposed without inventing transcripts', () => {
+test('newly public official YouTube videos are exposed as pending without publishing empty transcripts', () => {
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
   const expected = [
     {
@@ -29,7 +29,7 @@ test('newly public official YouTube videos are exposed without inventing transcr
   ];
 
   for (const item of expected) {
-    const entry = course.sessions.find((session) => session.sessionId === item.sessionId);
+    const entry = course.pendingSessions.find((session) => session.sessionId === item.sessionId);
     assert.ok(entry, `missing course entry ${item.sessionId}`);
     assert.equal(entry.displaySessionId, item.displaySessionId);
     assert.equal(entry.title, item.title);
@@ -38,13 +38,12 @@ test('newly public official YouTube videos are exposed without inventing transcr
     assert.equal(entry.youtubeUrl, `https://www.youtube.com/watch?v=${item.videoId}`);
     assert.equal(entry.status, 'not-transcribed');
 
-    const session = JSON.parse(
-      fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${item.sessionId}.json`), 'utf8'),
+    assert.equal(
+      fs.existsSync(path.join(COURSE_DIR, 'sessions', `session_${item.sessionId}.json`)),
+      false,
+      `pending session ${item.sessionId} must not have a synthetic transcript JSON`,
     );
-    assert.equal(session.youtubeVideoId, item.videoId);
-    assert.equal(session.transcriptStatus, 'not-transcribed');
-    assert.deepEqual(session.paragraphs, []);
-    assert.deepEqual(session.discussionQuestions, []);
+    assert.equal(course.sessions.some((session) => session.sessionId === item.sessionId), false);
   }
 });
 
@@ -56,7 +55,24 @@ test('current playlist inventory records only the still-private item as unavaila
 
   const catalog = readJson('courses/catalog.json');
   const entry = catalog.courses.find((item) => item.id === 'shi-liang-lun-study-group-2025');
-  assert.equal(entry.totalSessions, 44);
+  assert.equal(entry.totalSessions, 42);
+});
+
+test('historical prototype-44 evidence is explicitly remapped to current playlist item 42 by video identity', () => {
+  const currentInventory = readJson('reviews/evidence/study-group-2025/playlist_inventory.json');
+  const historicalManifest = readJson('reviews/evidence/study-group-2025/prototype-44/run_manifest.json');
+  const remap = fs.readFileSync(
+    path.join(ROOT, 'reviews/evidence/study-group-2025/playlist_index_remap_2026-09-28.md'),
+    'utf8',
+  );
+  const current = currentInventory.items.find((item) => item.videoId === historicalManifest.videoId);
+
+  assert.equal(historicalManifest.playlistIndex, 44);
+  assert.equal(current.playlistIndex, 42);
+  assert.match(remap, /historical playlist index \*\*44\*\*/i);
+  assert.match(remap, /current playlist index \*\*42\*\*/i);
+  assert.match(remap, /`lBOiFeGQblw`/);
+  assert.match(remap, /video ID is the stable identity/i);
 });
 
 test('reader has an explicit transcript-pending state for video-only sessions', () => {

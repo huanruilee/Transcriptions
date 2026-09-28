@@ -56,7 +56,7 @@ test('27下 remains addressable inside the published study-group course', () => 
   assert.ok(course, 'study-group course must be registered');
   assert.equal(course.path, COURSE_PATH);
   assert.equal(course.mediaType, 'video/youtube');
-  assert.equal(course.totalSessions, 44);
+  assert.equal(course.totalSessions, 42);
 
   const store = fs.readFileSync(path.join(ROOT, 'src/stores/course.ts'), 'utf8');
   assert.match(store, new RegExp(COURSE_ID), 'Vue course selector must expose the prototype');

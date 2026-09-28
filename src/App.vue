@@ -81,7 +81,7 @@
         <button
           id="download-transcript-btn"
           class="header-btn"
-          title="下載目前講次的純文字逐字稿（含時間碼）"
+          :title="downloadTranscriptTitle"
           :disabled="isLoading || paragraphs.length === 0"
           @click="handleDownloadTranscript"
         >
@@ -317,7 +317,7 @@
             <button
               id="download-transcript-mobile-btn"
               class="session-download-btn"
-              title="下載目前講次的純文字逐字稿（含時間碼）"
+              :title="downloadTranscriptTitle"
               :disabled="isLoading || paragraphs.length === 0"
               @click="handleDownloadTranscript"
             >
@@ -742,7 +742,10 @@ const currentCourseMaster = computed(() => {
 });
 
 const filteredSessions = computed(() => {
-  return courseStore.filterSessions(sidebarFilter.value);
+  return naturalSortSessions(courseStore.filterSessions(sidebarFilter.value).map(s => ({
+    ...s,
+    session_id: s.id,
+  })));
 });
 
 const sortedAllSessions = computed(() => {
@@ -795,6 +798,13 @@ const currentTranscriptLabel = computed(() => {
     unmarked: '⚪ 尚未標示校勘狀態',
   };
   return labels[currentTranscriptStatus.value] || `⚪ ${currentTranscriptStatus.value}`;
+});
+
+const downloadTranscriptTitle = computed(() => {
+  if (currentTranscriptStatus.value === 'not-transcribed') {
+    return '此講次尚無逐字稿可下載';
+  }
+  return '下載目前講次的純文字逐字稿（含時間碼）';
 });
 
 const overviewSessions = computed(() => {
@@ -925,8 +935,12 @@ function handleExportNotes() {
 }
 
 function handleDownloadTranscript() {
-  if (isLoading.value || paragraphs.value.length === 0) {
+  if (isLoading.value) {
     uiStore.showToast('逐字稿尚未載入完成，請稍後再試。', 'warning');
+    return;
+  }
+  if (paragraphs.value.length === 0) {
+    uiStore.showToast('此講次尚無逐字稿可下載。', 'warning');
     return;
   }
 
@@ -1444,7 +1458,13 @@ async function loadRealCourseData() {
     if (resCourse.ok) {
       const data = await resCourse.json();
       currentPublicationState.value = data.transcriptPublicationState || '';
-      const sessions = (data.sessions || []).map((s: any) => ({
+      const sessions = [
+        ...(data.sessions || []),
+        ...(data.pendingSessions || []).map((session: any) => ({
+          ...session,
+          pendingTranscript: true,
+        })),
+      ].map((s: any) => ({
         id: s.sessionId,
         displaySessionId: s.displaySessionId || s.sessionId,
         title: s.title || `第 ${s.sessionId} 講`,
@@ -1457,6 +1477,8 @@ async function loadRealCourseData() {
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
         youtubeVideoId: s.youtubeVideoId,
+        youtubeUrl: s.youtubeUrl,
+        pendingTranscript: Boolean(s.pendingTranscript),
       }));
       courseStore.setSessions(sessions);
     }
@@ -1494,6 +1516,30 @@ async function loadSession(sessionId: string) {
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
   isLoading.value = true;
+
+  const pendingSession = courseStore.sessions.find(
+    (session) => session.id === sessionId && session.pendingTranscript,
+  );
+  if (pendingSession) {
+    sourceOutline.value = null;
+    verseAnnotations.value = {};
+    currentAudioUrl.value = pendingSession.audioUrl || '';
+    currentYoutubeVideoId.value = pendingSession.youtubeVideoId || '';
+    currentLastUpdated.value = pendingSession.lastUpdated || '';
+    currentAgentReviewStatus.value = '';
+    currentAgentReviewedCount.value = 0;
+    currentAgentUncertainCount.value = 0;
+    currentDiscussionQuestions.value = [];
+    paragraphs.value = [];
+    mediaDuration.value = 0;
+    isMediaPlaying.value = false;
+    annotationStore.loadSessionAnnotations(sessionId);
+    isLoading.value = false;
+    if (pendingSession.mediaType === 'video/youtube') {
+      setTimeout(() => setupYouTubePlayer(), 100);
+    }
+    return;
+  }
 
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
