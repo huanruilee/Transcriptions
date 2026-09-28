@@ -1446,18 +1446,9 @@ async function loadSession(sessionId: string) {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
-    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json?review=agent-uncertainty-v2`;
-    let res: Response;
-    try {
-      res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    } catch (reviewFetchError) {
-      // Keep local/offline fixtures and older same-origin hosts usable when
-      // they do not accept the cache-busting review query string.
-      const fallbackUrl = `${baseUrl}${cPath}/sessions/session_${sessionId}.json`;
-      res = await fetch(fallbackUrl);
-      if (!res.ok) throw reviewFetchError;
-    }
+    const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json`;
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
     sourceOutline.value = null;
