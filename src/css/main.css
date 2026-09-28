@@ -92,6 +92,10 @@ body {
   flex-shrink: 0;
 }
 
+.session-download-btn {
+  display: none;
+}
+
 .mobile-tools-btn {
   display: none;
   background: var(--accent-color);
@@ -1140,6 +1144,27 @@ body.dark-mode .toc-anchor-ts { background: rgba(197, 155, 39, 0.12); color: #c5
     padding: 10px 14px;
   }
 
+  .session-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color, #fff);
+    color: var(--primary-color);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .session-download-btn:disabled {
+    cursor: wait;
+    opacity: 0.55;
+  }
+
   .app-header h1 {
     font-size: 1.05rem;
     text-align: center;
@@ -2163,5 +2188,4 @@ body.dark-mode .toc-anchor-ts { background: rgba(197, 155, 39, 0.12); color: #c5
     border-left-width: 3px;
   }
 }
-
 
