@@ -48,7 +48,7 @@ export const useCourseStore = defineStore('course', {
         title: '四念住',
         master: '待審校',
         path: 'courses/四念住',
-        mediaType: 'video/youtube',
+        mediaType: 'audio/mp3',
       },
     ],
     sessions: [] as SessionMeta[],

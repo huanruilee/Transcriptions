@@ -1,0 +1,3291 @@
+npm notice run transcriptions-platform@1.1.0-dev test
+npm notice run node --test tests/unit/*.test.js tests/acceptance/*.test.js tests/quality.test.js tests/alignment-pipeline.test.js tests/cross-artifact-consistency.test.js tests/required-set-not-truncated.test.js tests/unit/paragraphBoundaryIntegrity.test.js
+TAP version 13
+# Subtest: 🌟 End-to-End Annotation, Proofreading & Review Acceptance Suite
+    # Subtest: 1. Workflow: User proofreads a homophone mistake and saves to local storage
+    ok 1 - 1. Workflow: User proofreads a homophone mistake and saves to local storage
+      ---
+      duration_ms: 4.995917
+      type: 'test'
+      ...
+    # Subtest: 2. Workflow: User adds a study note with treatise page tag
+    ok 2 - 2. Workflow: User adds a study note with treatise page tag
+      ---
+      duration_ms: 1.50125
+      type: 'test'
+      ...
+    # Subtest: 3. Workflow: Generates full Markdown export with notes & corrections
+    ok 3 - 3. Workflow: Generates full Markdown export with notes & corrections
+      ---
+      duration_ms: 14.863209
+      type: 'test'
+      ...
+    # Subtest: 4. Workflow: Admin unlocks Review Console with Passkey and verifies 3s audio interval
+    ok 4 - 4. Workflow: Admin unlocks Review Console with Passkey and verifies 3s audio interval
+      ---
+      duration_ms: 0.232333
+      type: 'test'
+      ...
+    # Subtest: 5. Workflow: Admin applies approved correction to session JSON
+    ok 5 - 5. Workflow: Admin applies approved correction to session JSON
+      ---
+      duration_ms: 0.23175
+      type: 'test'
+      ...
+    1..5
+ok 1 - 🌟 End-to-End Annotation, Proofreading & Review Acceptance Suite
+  ---
+  duration_ms: 377.094417
+  type: 'test'
+  ...
+# Subtest: browser smoke (Issue \#10): Live URL renders a working learning platform
+ok 2 - browser smoke (Issue \#10): Live URL renders a working learning platform # SKIP Browser smoke requires explicit opt-in: set REQUIRE_BROWSER_SMOKE=1 (CLI tests use unit_v2/domContract instead)
+  ---
+  duration_ms: 0.783083
+  type: 'test'
+  ...
+# Subtest: completion acceptance: course index references complete session JSON and publishable audio URLs
+ok 3 - completion acceptance: course index references complete session JSON and publishable audio URLs
+  ---
+  duration_ms: 378.980875
+  type: 'test'
+  ...
+# Subtest: completion acceptance: every published session has monotonic usable timestamps
+ok 4 - completion acceptance: every published session has monotonic usable timestamps
+  ---
+  duration_ms: 212.359709
+  type: 'test'
+  ...
+# Subtest: completion acceptance: toc links target existing sessions and in-range timestamps
+ok 5 - completion acceptance: toc links target existing sessions and in-range timestamps
+  ---
+  duration_ms: 727.337791
+  type: 'test'
+  ...
+# Subtest: completion acceptance: session 99B is published and accessible in course index
+ok 6 - completion acceptance: session 99B is published and accessible in course index
+  ---
+  duration_ms: 0.811
+  type: 'test'
+  ...
+#   ℹ️ Found 217 sessions upgraded to 29A Golden Standard
+# Subtest: 🌟 29A Golden Benchmark Quality Standard Test Suite
+    # Subtest: Golden Standard Coverage: Identifies all active converted sessions
+    ok 1 - Golden Standard Coverage: Identifies all active converted sessions
+      ---
+      duration_ms: 3.075417
+      type: 'test'
+      ...
+    # Subtest: Pattern 1 (Metadata): Converted sessions have valid engine, proofread, and lastUpdated metadata
+    ok 2 - Pattern 1 (Metadata): Converted sessions have valid engine, proofread, and lastUpdated metadata
+      ---
+      duration_ms: 9.611542
+      type: 'test'
+      ...
+    # Subtest: Pattern 2 (Audio Stream): Converted sessions point directly to official Flyday MP3 streams
+    ok 3 - Pattern 2 (Audio Stream): Converted sessions point directly to official Flyday MP3 streams
+      ---
+      duration_ms: 0.481916
+      type: 'test'
+      ...
+    # Subtest: Pattern 3 (Structure & Headings): Converted sessions have 6~12 thematic headings with proper syntax
+    ok 4 - Pattern 3 (Structure & Headings): Converted sessions have 6~12 thematic headings with proper syntax
+      ---
+      duration_ms: 17.360042
+      type: 'test'
+      ...
+    # Subtest: Pattern 4 (Purity): Converted sessions are free from forbidden ASR homophone errors
+    ok 5 - Pattern 4 (Purity): Converted sessions are free from forbidden ASR homophone errors
+      ---
+      duration_ms: 46.488333
+      type: 'test'
+      ...
+    # Subtest: Pattern 5 (Acoustic Monotonicity): Sentence timestamps maintain strict forward monotonicity
+    ok 6 - Pattern 5 (Acoustic Monotonicity): Sentence timestamps maintain strict forward monotonicity
+      ---
+      duration_ms: 123.581667
+      type: 'test'
+      ...
+    # Subtest: Pattern 6 (Traditional Chinese Purity): Converted sessions contain 0 simplified characters
+    ok 7 - Pattern 6 (Traditional Chinese Purity): Converted sessions contain 0 simplified characters
+      ---
+      duration_ms: 462.749167
+      type: 'test'
+      ...
+    # Subtest: Pattern 7 (Acoustic Natural Variance): Converted sessions have authentic human speech variance, not synthetic uniform timestamps
+    ok 8 - Pattern 7 (Acoustic Natural Variance): Converted sessions have authentic human speech variance, not synthetic uniform timestamps
+      ---
+      duration_ms: 347.864542
+      type: 'test'
+      ...
+    1..8
+ok 7 - 🌟 29A Golden Benchmark Quality Standard Test Suite
+  ---
+  duration_ms: 1014.454
+  type: 'suite'
+  ...
+# Subtest: Local Model Headings & Semantic Segmentation Acceptance Tests
+    # Subtest: session_29A.json contains local model generated headings and metadata
+    ok 1 - session_29A.json contains local model generated headings and metadata
+      ---
+      duration_ms: 137.245834
+      type: 'test'
+      ...
+    # Subtest: All LLM-converted session JSONs must have at least 1 thematic subheadings
+    ok 2 - All LLM-converted session JSONs must have at least 1 thematic subheadings
+      ---
+      duration_ms: 407.693458
+      type: 'test'
+      ...
+    # Subtest: DOM rendering properly generates .transcript-heading elements for paragraphs with headings
+    ok 3 - DOM rendering properly generates .transcript-heading elements for paragraphs with headings
+      ---
+      duration_ms: 334.794042
+      type: 'test'
+      ...
+    # Subtest: All sentences in session_29A.json maintain strictly monotonic audio timestamps
+    ok 4 - All sentences in session_29A.json maintain strictly monotonic audio timestamps
+      ---
+      duration_ms: 2.899875
+      type: 'test'
+      ...
+    1..4
+ok 8 - Local Model Headings & Semantic Segmentation Acceptance Tests
+  ---
+  duration_ms: 911.697667
+  type: 'suite'
+  ...
+# Subtest: Issue \#11 v2: required v2 evidence files exist (hard fail if missing)
+ok 9 - Issue \#11 v2: required v2 evidence files exist (hard fail if missing)
+  ---
+  duration_ms: 44.18075
+  type: 'test'
+  ...
+# Subtest: Issue \#11 v2: 3-session alignment manifest lists all pilots
+ok 10 - Issue \#11 v2: 3-session alignment manifest lists all pilots
+  ---
+  duration_ms: 0.518
+  type: 'test'
+  ...
+# Subtest: [01]: sentence timestamps monotonic non-decreasing
+ok 11 - [01]: sentence timestamps monotonic non-decreasing
+  ---
+  duration_ms: 1.042791
+  type: 'test'
+  ...
+# Subtest: [01]: no chunk overlap (disjoint partition)
+ok 12 - [01]: no chunk overlap (disjoint partition)
+  ---
+  duration_ms: 5.279917
+  type: 'test'
+  ...
+# Subtest: [01]: identity-mapping diagnostics consistent (hard fail)
+ok 13 - [01]: identity-mapping diagnostics consistent (hard fail)
+  ---
+  duration_ms: 1.318625
+  type: 'test'
+  ...
+# Subtest: [01]: pilot payload preserves session + paragraph metadata
+ok 14 - [01]: pilot payload preserves session + paragraph metadata
+  ---
+  duration_ms: 3.427209
+  type: 'test'
+  ...
+# Subtest: [69A]: sentence timestamps monotonic non-decreasing
+ok 15 - [69A]: sentence timestamps monotonic non-decreasing
+  ---
+  duration_ms: 3.276875
+  type: 'test'
+  ...
+# Subtest: [69A]: no chunk overlap (disjoint partition)
+ok 16 - [69A]: no chunk overlap (disjoint partition)
+  ---
+  duration_ms: 6.182584
+  type: 'test'
+  ...
+# Subtest: [69A]: identity-mapping diagnostics consistent (hard fail)
+ok 17 - [69A]: identity-mapping diagnostics consistent (hard fail)
+  ---
+  duration_ms: 3.19225
+  type: 'test'
+  ...
+# Subtest: [69A]: pilot payload preserves session + paragraph metadata
+ok 18 - [69A]: pilot payload preserves session + paragraph metadata
+  ---
+  duration_ms: 10.41
+  type: 'test'
+  ...
+# Subtest: [110B]: sentence timestamps monotonic non-decreasing
+ok 19 - [110B]: sentence timestamps monotonic non-decreasing
+  ---
+  duration_ms: 5.2005
+  type: 'test'
+  ...
+# Subtest: [110B]: no chunk overlap (disjoint partition)
+ok 20 - [110B]: no chunk overlap (disjoint partition)
+  ---
+  duration_ms: 1.456375
+  type: 'test'
+  ...
+# Subtest: [110B]: identity-mapping diagnostics consistent (hard fail)
+ok 21 - [110B]: identity-mapping diagnostics consistent (hard fail)
+  ---
+  duration_ms: 1.632416
+  type: 'test'
+  ...
+# Subtest: [110B]: pilot payload preserves session + paragraph metadata
+ok 22 - [110B]: pilot payload preserves session + paragraph metadata
+  ---
+  duration_ms: 3.778375
+  type: 'test'
+  ...
+# Subtest: mapper: perfect 1:1 identity
+ok 23 - mapper: perfect 1:1 identity
+  ---
+  duration_ms: 0.32475
+  type: 'test'
+  ...
+# Subtest: mapper: aligner INSERTS a token (multi-token / 多字) — must skip it
+ok 24 - mapper: aligner INSERTS a token (multi-token / 多字) — must skip it
+  ---
+  duration_ms: 0.09675
+  type: 'test'
+  ...
+# Subtest: mapper: LEADING insertion is counted (reviewer requirement)
+ok 25 - mapper: LEADING insertion is counted (reviewer requirement)
+  ---
+  duration_ms: 0.042125
+  type: 'test'
+  ...
+# Subtest: mapper: MULTIPLE insertions in a run are all counted
+ok 26 - mapper: MULTIPLE insertions in a run are all counted
+  ---
+  duration_ms: 0.283916
+  type: 'test'
+  ...
+# Subtest: mapper: TRAILING insertion is counted (old m-wp bug regression)
+ok 27 - mapper: TRAILING insertion is counted (old m-wp bug regression)
+  ---
+  duration_ms: 0.174833
+  type: 'test'
+  ...
+# Subtest: mapper: LONG insertion run (> maxLookahead) fully counted
+ok 28 - mapper: LONG insertion run (> maxLookahead) fully counted
+  ---
+  duration_ms: 0.368083
+  type: 'test'
+  ...
+# Subtest: mapper: omission + insertion combined
+ok 29 - mapper: omission + insertion combined
+  ---
+  duration_ms: 0.202334
+  type: 'test'
+  ...
+# Subtest: mapper: multi-character EXTRA token classified as multi_char_token
+ok 30 - mapper: multi-character EXTRA token classified as multi_char_token
+  ---
+  duration_ms: 0.122417
+  type: 'test'
+  ...
+# Subtest: mapper: empty word classified as empty, counted as extra
+ok 31 - mapper: empty word classified as empty, counted as extra
+  ---
+  duration_ms: 0.110958
+  type: 'test'
+  ...
+# Subtest: mapper: n_extra invariant holds for all cases (reviewer formula)
+ok 32 - mapper: n_extra invariant holds for all cases (reviewer formula)
+  ---
+  duration_ms: 0.169875
+  type: 'test'
+  ...
+# Subtest: mapper: aligner OMITS a token (漏字) — must flag omission, not shift
+ok 33 - mapper: aligner OMITS a token (漏字) — must flag omission, not shift
+  ---
+  duration_ms: 0.054292
+  type: 'test'
+  ...
+# Subtest: mapper: aligner SUBSTITUTES a multi-char token (首字相同) — position kept, flagged
+ok 34 - mapper: aligner SUBSTITUTES a multi-char token (首字相同) — position kept, flagged
+  ---
+  duration_ms: 0.065208
+  type: 'test'
+  ...
+# Subtest: mapper: multi-character ASCII token stream aligns char-by-char
+ok 35 - mapper: multi-character ASCII token stream aligns char-by-char
+  ---
+  duration_ms: 0.70775
+  type: 'test'
+  ...
+# Subtest: mapper: monotonic invariant — word pointer never rewinds
+ok 36 - mapper: monotonic invariant — word pointer never rewinds
+  ---
+  duration_ms: 0.167458
+  type: 'test'
+  ...
+# Subtest: CER: stage3b uses Levenshtein/|ref|, not SequenceMatcher.ratio
+ok 37 - CER: stage3b uses Levenshtein/|ref|, not SequenceMatcher.ratio
+  ---
+  duration_ms: 0.993958
+  type: 'test'
+  ...
+# Subtest: CER: stage2v2 no longer presents forced-align CER as accuracy
+ok 38 - CER: stage2v2 no longer presents forced-align CER as accuracy
+  ---
+  duration_ms: 2.592166
+  type: 'test'
+  ...
+# Subtest: CER: stage3v2 labels integrity CER as not an accuracy signal
+ok 39 - CER: stage3v2 labels integrity CER as not an accuracy signal
+  ---
+  duration_ms: 0.451125
+  type: 'test'
+  ...
+# Subtest: ts: reference labelled legacy/coarse, not audio-grounded
+ok 40 - ts: reference labelled legacy/coarse, not audio-grounded
+  ---
+  duration_ms: 0.565209
+  type: 'test'
+  ...
+# Subtest: hard-fail: stage3v2 measurement sys.exit on missing evidence
+ok 41 - hard-fail: stage3v2 measurement sys.exit on missing evidence
+  ---
+  duration_ms: 1.184667
+  type: 'test'
+  ...
+# Subtest: hard-fail: stage3b transcribe passes model id (no global-before-use bug)
+ok 42 - hard-fail: stage3b transcribe passes model id (no global-before-use bug)
+  ---
+  duration_ms: 0.119375
+  type: 'test'
+  ...
+# Subtest: no silent synthetic-step fallback (source guard)
+ok 43 - no silent synthetic-step fallback (source guard)
+  ---
+  duration_ms: 0.145375
+  type: 'test'
+  ...
+# Subtest: synthetic fixture: zero-variance gaps classified as synthetic
+ok 44 - synthetic fixture: zero-variance gaps classified as synthetic
+  ---
+  duration_ms: 0.250333
+  type: 'test'
+  ...
+# Subtest: random-step fixture: monotonic but not audio-grounded
+ok 45 - random-step fixture: monotonic but not audio-grounded
+  ---
+  duration_ms: 0.199667
+  type: 'test'
+  ...
+# Subtest: runtime: pilot v2 payload is consumed and ratio=1.0 bypass wired
+ok 46 - runtime: pilot v2 payload is consumed and ratio=1.0 bypass wired
+  ---
+  duration_ms: 0.967167
+  type: 'test'
+  ...
+# Subtest: Cross-artifact consistency (hard fail on ANY drift)
+    # Subtest: evidence files exist (HARD FAIL if any missing)
+    ok 1 - evidence files exist (HARD FAIL if any missing)
+      ---
+      duration_ms: 0.958542
+      type: 'test'
+      ...
+    # Subtest: raw JSON: n_extra invariant holds for all 3 sessions
+    ok 2 - raw JSON: n_extra invariant holds for all 3 sessions
+      ---
+      duration_ms: 0.295458
+      type: 'test'
+      ...
+    # Subtest: raw JSON: insertion_breakdown_sum == n_extra_words
+    ok 3 - raw JSON: insertion_breakdown_sum == n_extra_words
+      ---
+      duration_ms: 0.127708
+      type: 'test'
+      ...
+    # Subtest: manifest: n_extra_words matches raw JSON for all sessions
+    ok 4 - manifest: n_extra_words matches raw JSON for all sessions
+      ---
+      duration_ms: 0.2605
+      type: 'test'
+      ...
+    # Subtest: manifest: n_content_chars + n_aligned_words match raw JSON
+    ok 5 - manifest: n_content_chars + n_aligned_words match raw JSON
+      ---
+      duration_ms: 0.120917
+      type: 'test'
+      ...
+    # Subtest: verification package: n_extra_words matches raw JSON
+    ok 6 - verification package: n_extra_words matches raw JSON
+      ---
+      duration_ms: 0.090459
+      type: 'test'
+      ...
+    # Subtest: verification package: insertion_breakdown matches raw JSON
+    ok 7 - verification package: insertion_breakdown matches raw JSON
+      ---
+      duration_ms: 0.17225
+      type: 'test'
+      ...
+    # Subtest: verification package: evidence_commit / reviewed_head / ci_head are valid SHAs and not stale
+    ok 8 - verification package: evidence_commit / reviewed_head / ci_head are valid SHAs and not stale
+      ---
+      duration_ms: 53.102833
+      type: 'test'
+      ...
+    # Subtest: brief: "n extra words" row matches raw JSON n_extra_words
+    ok 9 - brief: "n extra words" row matches raw JSON n_extra_words
+      ---
+      duration_ms: 1.128875
+      type: 'test'
+      ...
+    # Subtest: brief: "n content chars" row matches raw JSON
+    ok 10 - brief: "n content chars" row matches raw JSON
+      ---
+      duration_ms: 1.660792
+      type: 'test'
+      ...
+    # Subtest: brief: "n aligned words" row matches raw JSON
+    ok 11 - brief: "n aligned words" row matches raw JSON
+      ---
+      duration_ms: 0.9615
+      type: 'test'
+      ...
+    # Subtest: brief: "n omitted chars" row matches raw JSON
+    ok 12 - brief: "n omitted chars" row matches raw JSON
+      ---
+      duration_ms: 1.022083
+      type: 'test'
+      ...
+    # Subtest: brief: "char_coverage" row matches raw JSON
+    ok 13 - brief: "char_coverage" row matches raw JSON
+      ---
+      duration_ms: 0.938042
+      type: 'test'
+      ...
+    # Subtest: brief: "no_chunk_overlap" row is true for all
+    ok 14 - brief: "no_chunk_overlap" row is true for all
+      ---
+      duration_ms: 0.818875
+      type: 'test'
+      ...
+    # Subtest: brief: "extra = source_punctuation" row matches raw insertion_breakdown
+    ok 15 - brief: "extra = source_punctuation" row matches raw insertion_breakdown
+      ---
+      duration_ms: 3.59375
+      type: 'test'
+      ...
+    # Subtest: brief: "extra = unmatched" row is 0 (no genuine hallucination)
+    ok 16 - brief: "extra = unmatched" row is 0 (no genuine hallucination)
+      ---
+      duration_ms: 0.376625
+      type: 'test'
+      ...
+    1..16
+ok 47 - Cross-artifact consistency (hard fail on ANY drift)
+  ---
+  duration_ms: 69.083125
+  type: 'suite'
+  ...
+# Subtest: 27B 逐字稿品管測試
+ok 48 - 27B 逐字稿品管測試 # SKIP
+  ---
+  duration_ms: 0.767166
+  type: 'test'
+  ...
+# Subtest: [01] required set honored by strict audit (when audit_indices present)
+ok 49 - [01] required set honored by strict audit (when audit_indices present)
+  ---
+  duration_ms: 6.155875
+  type: 'test'
+  ...
+# Subtest: [01] required set honored by substitute audit (when queue present)
+ok 50 - [01] required set honored by substitute audit (when queue present)
+  ---
+  duration_ms: 5.200583
+  type: 'test'
+  ...
+# Subtest: [01] human_review_manifest.json contains every required sample
+ok 51 - [01] human_review_manifest.json contains every required sample
+  ---
+  duration_ms: 3.869542
+  type: 'test'
+  ...
+# Subtest: [69A] required set honored by strict audit (when audit_indices present)
+ok 52 - [69A] required set honored by strict audit (when audit_indices present)
+  ---
+  duration_ms: 3.93925
+  type: 'test'
+  ...
+# Subtest: [69A] required set honored by substitute audit (when queue present)
+ok 53 - [69A] required set honored by substitute audit (when queue present)
+  ---
+  duration_ms: 1.801958
+  type: 'test'
+  ...
+# Subtest: [69A] human_review_manifest.json contains every required sample
+ok 54 - [69A] human_review_manifest.json contains every required sample
+  ---
+  duration_ms: 4.560625
+  type: 'test'
+  ...
+# Subtest: [110B] required set honored by strict audit (when audit_indices present)
+ok 55 - [110B] required set honored by strict audit (when audit_indices present)
+  ---
+  duration_ms: 2.304875
+  type: 'test'
+  ...
+# Subtest: [110B] required set honored by substitute audit (when queue present)
+ok 56 - [110B] required set honored by substitute audit (when queue present)
+  ---
+  duration_ms: 7.372083
+  type: 'test'
+  ...
+# Subtest: [110B] human_review_manifest.json contains every required sample
+ok 57 - [110B] human_review_manifest.json contains every required sample
+  ---
+  duration_ms: 7.544125
+  type: 'test'
+  ...
+# Subtest: GATE: every committed audit carries round-3 fields (or is absent)
+ok 58 - GATE: every committed audit carries round-3 fields (or is absent)
+  ---
+  duration_ms: 9.707333
+  type: 'test'
+  ...
+# Subtest: human_review_manifest.json exists once built
+ok 59 - human_review_manifest.json exists once built
+  ---
+  duration_ms: 3.643833
+  type: 'test'
+  ...
+# Subtest: M6.3: formatAriaTime formats seconds as human-readable Chinese
+ok 60 - M6.3: formatAriaTime formats seconds as human-readable Chinese
+  ---
+  duration_ms: 1.003208
+  type: 'test'
+  ...
+# Subtest: M6.3: safePlay catches audio.play() rejection (no unhandled rejection)
+ok 61 - M6.3: safePlay catches audio.play() rejection (no unhandled rejection)
+  ---
+  duration_ms: 207.987542
+  type: 'test'
+  ...
+# Subtest: M6.3: safePlay does nothing when audio is null
+ok 62 - M6.3: safePlay does nothing when audio is null
+  ---
+  duration_ms: 0.303708
+  type: 'test'
+  ...
+# Subtest: M6.3: safePlay ignores non-promise play() return (sync success)
+ok 63 - M6.3: safePlay ignores non-promise play() return (sync success)
+  ---
+  duration_ms: 8.440625
+  type: 'test'
+  ...
+# Subtest: M6.3: rovingMove moves focus down and swaps tabindex (no Tab Flood)
+ok 64 - M6.3: rovingMove moves focus down and swaps tabindex (no Tab Flood)
+  ---
+  duration_ms: 5.424209
+  type: 'test'
+  ...
+# Subtest: M6.3: rovingMove moves focus up
+ok 65 - M6.3: rovingMove moves focus up
+  ---
+  duration_ms: 4.69975
+  type: 'test'
+  ...
+# Subtest: M6.3: rovingMove does not move past boundaries
+ok 66 - M6.3: rovingMove does not move past boundaries
+  ---
+  duration_ms: 4.615625
+  type: 'test'
+  ...
+# Subtest: M6.3: rovingMove calls onSeek with the newly focused element
+ok 67 - M6.3: rovingMove calls onSeek with the newly focused element
+  ---
+  duration_ms: 20.400125
+  type: 'test'
+  ...
+# Subtest: M6.3: app.js imports a11y helpers (no duplicate local definitions)
+ok 68 - M6.3: app.js imports a11y helpers (no duplicate local definitions)
+  ---
+  duration_ms: 2.631208
+  type: 'test'
+  ...
+# Subtest: 🎙️ Acoustic Timestamp Purity & Non-Uniformity Test Suite (真實聲學時間戳檢驗)
+    # Subtest: 1. Converted sessions must have authentic speech variance (stdev >= 0.35s, uniform ratio <= 0.35)
+    ok 1 - 1. Converted sessions must have authentic speech variance (stdev >= 0.35s, uniform ratio <= 0.35)
+      ---
+      duration_ms: 281.795917
+      type: 'test'
+      ...
+    # Subtest: 2. Sentence timestamps must be strictly monotonic (no backward time jumps)
+    ok 2 - 2. Sentence timestamps must be strictly monotonic (no backward time jumps)
+      ---
+      duration_ms: 389.54025
+      type: 'test'
+      ...
+    1..2
+ok 69 - 🎙️ Acoustic Timestamp Purity & Non-Uniformity Test Suite (真實聲學時間戳檢驗)
+  ---
+  duration_ms: 672.566542
+  type: 'test'
+  ...
+# Subtest: 🧠 Active Learning & Contextual Disambiguation Engine Test Suite
+    # Subtest: 1. Frontend Event Serialization Contract (exportCorrectionEventsJson)
+    ok 1 - 1. Frontend Event Serialization Contract (exportCorrectionEventsJson)
+      ---
+      duration_ms: 0.463833
+      type: 'test'
+      ...
+    # Subtest: 2. 3-Tier Disambiguation: Global Promotion for Unambiguous Term
+    ok 2 - 2. 3-Tier Disambiguation: Global Promotion for Unambiguous Term
+      ---
+      duration_ms: 271.929042
+      type: 'test'
+      ...
+    # Subtest: 3. 3-Tier Disambiguation: Homophone Isolation (CONTEXT_SPECIFIC for 二地)
+    ok 3 - 3. 3-Tier Disambiguation: Homophone Isolation (CONTEXT_SPECIFIC for 二地)
+      ---
+      duration_ms: 141.221875
+      type: 'test'
+      ...
+    # Subtest: 4. Dry-Run Full-Repository Scan Execution
+    ok 4 - 4. Dry-Run Full-Repository Scan Execution
+      ---
+      duration_ms: 1228.09625
+      type: 'test'
+      ...
+    1..4
+ok 70 - 🧠 Active Learning & Contextual Disambiguation Engine Test Suite
+  ---
+  duration_ms: 1645.863125
+  type: 'test'
+  ...
+# Subtest: Annotation & Proofreading Store Unit Tests
+    # Subtest: 1. Correction CRUD: saves and retrieves a sentence correction
+    ok 1 - 1. Correction CRUD: saves and retrieves a sentence correction
+      ---
+      duration_ms: 0.756042
+      type: 'test'
+      ...
+    # Subtest: 2. Diff Computation: calculates correct textual differences
+    ok 2 - 2. Diff Computation: calculates correct textual differences
+      ---
+      duration_ms: 0.148417
+      type: 'test'
+      ...
+    # Subtest: 3. Notes CRUD: saves, retrieves, and deletes study notes
+    ok 3 - 3. Notes CRUD: saves, retrieves, and deletes study notes
+      ---
+      duration_ms: 0.391375
+      type: 'test'
+      ...
+    # Subtest: 4. Markdown Export: formats session transcript with integrated notes & corrections
+    ok 4 - 4. Markdown Export: formats session transcript with integrated notes & corrections
+      ---
+      duration_ms: 51.540458
+      type: 'test'
+      ...
+    # Subtest: 5. Deletion: cleans up corrections properly
+    ok 5 - 5. Deletion: cleans up corrections properly
+      ---
+      duration_ms: 0.582834
+      type: 'test'
+      ...
+    1..5
+ok 71 - Annotation & Proofreading Store Unit Tests
+  ---
+  duration_ms: 55.593625
+  type: 'test'
+  ...
+# Subtest: 🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite
+    # Subtest: 1. JSON Schema & Data Structure Conformance (All Sessions)
+    ok 1 - 1. JSON Schema & Data Structure Conformance (All Sessions)
+      ---
+      duration_ms: 1128.087542
+      type: 'test'
+      ...
+    # Subtest: 2. Acoustic Timestamp Monotonicity & Boundary Alignment (Converted Sessions)
+    ok 2 - 2. Acoustic Timestamp Monotonicity & Boundary Alignment (Converted Sessions)
+      ---
+      duration_ms: 687.72625
+      type: 'test'
+      ...
+    # Subtest: 3. Text Purity: Zero Prompt Leakage & No Corrupt Tokens
+    ok 3 - 3. Text Purity: Zero Prompt Leakage & No Corrupt Tokens
+      ---
+      duration_ms: 1056.648416
+      type: 'test'
+      ...
+    # Subtest: 4. Non-Regression Gate: Phonetic Corruption & Garbage Token Blacklist
+    ok 4 - 4. Non-Regression Gate: Phonetic Corruption & Garbage Token Blacklist
+      ---
+      duration_ms: 1173.822917
+      type: 'test'
+      ...
+    # Subtest: 5. Status Lock Protection: APPROVED Baseline Text Integrity
+    ok 5 - 5. Status Lock Protection: APPROVED Baseline Text Integrity
+      ---
+      duration_ms: 218.470458
+      type: 'test'
+      ...
+    # Subtest: 6. Session 99B Integrity & Non-Regression Gate (Audio & Transcript Available)
+    ok 6 - 6. Session 99B Integrity & Non-Regression Gate (Audio & Transcript Available)
+      ---
+      duration_ms: 1.211583
+      type: 'test'
+      ...
+    1..6
+ok 72 - 🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite
+  ---
+  duration_ms: 4276.313584
+  type: 'test'
+  ...
+# Subtest: Audio Map and Remote Stream Resolution Tests
+    # Subtest: audio_map.json exists and contains 198 official Flyday audio mappings
+    ok 1 - audio_map.json exists and contains 198 official Flyday audio mappings
+      ---
+      duration_ms: 1.503625
+      type: 'test'
+      ...
+    # Subtest: resolveAudioUrl resolves session to original remote Flyday audio URL
+    ok 2 - resolveAudioUrl resolves session to original remote Flyday audio URL
+      ---
+      duration_ms: 0.296084
+      type: 'test'
+      ...
+    # Subtest: session_29A.json points audioUrl to original remote Flyday stream
+    ok 3 - session_29A.json points audioUrl to original remote Flyday stream
+      ---
+      duration_ms: 2.343542
+      type: 'test'
+      ...
+    # Subtest: audio_map.json: all Flyday URLs use uppercase .MP3 extension
+    ok 4 - audio_map.json: all Flyday URLs use uppercase .MP3 extension
+      ---
+      duration_ms: 1.910625
+      type: 'test'
+      ...
+    1..4
+ok 73 - Audio Map and Remote Stream Resolution Tests
+  ---
+  duration_ms: 9.227625
+  type: 'suite'
+  ...
+# Subtest: waits for metadata before seeking and playing an unloaded remote audio source
+ok 74 - waits for metadata before seeking and playing an unloaded remote audio source
+  ---
+  duration_ms: 1.1405
+  type: 'test'
+  ...
+# Subtest: seeks and plays immediately when metadata is already available
+ok 75 - seeks and plays immediately when metadata is already available
+  ---
+  duration_ms: 0.445375
+  type: 'test'
+  ...
+# Subtest: Verify course.json schema integrity
+ok 76 - Verify course.json schema integrity
+  ---
+  duration_ms: 5.273792
+  type: 'test'
+  ...
+# Subtest: Verify toc.json schema integrity
+ok 77 - Verify toc.json schema integrity
+  ---
+  duration_ms: 2.949333
+  type: 'test'
+  ...
+# Subtest: Verify session_02A.json schema integrity
+ok 78 - Verify session_02A.json schema integrity
+  ---
+  duration_ms: 1.174042
+  type: 'test'
+  ...
+# Subtest: GitHub governance: production deploy waits for successful main acceptance
+ok 79 - GitHub governance: production deploy waits for successful main acceptance
+  ---
+  duration_ms: 2.101917
+  type: 'test'
+  ...
+# Subtest: GitHub governance: acceptance is least-privilege and checks review drift
+ok 80 - GitHub governance: acceptance is least-privilege and checks review drift
+  ---
+  duration_ms: 0.334083
+  type: 'test'
+  ...
+# Subtest: GitHub governance: no-audio CI ignores clip fields but detects semantic drift
+ok 81 - GitHub governance: no-audio CI ignores clip fields but detects semantic drift
+  ---
+  duration_ms: 96.395
+  type: 'test'
+  ...
+# Subtest: GitHub governance: every workflow action is pinned to an immutable SHA
+ok 82 - GitHub governance: every workflow action is pinned to an immutable SHA
+  ---
+  duration_ms: 8.321458
+  type: 'test'
+  ...
+# Subtest: GitHub governance: collaboration and dependency policy files exist
+ok 83 - GitHub governance: collaboration and dependency policy files exist
+  ---
+  duration_ms: 0.705375
+  type: 'test'
+  ...
+# Subtest: GitHub governance: current documentation matches the canonical session count
+ok 84 - GitHub governance: current documentation matches the canonical session count
+  ---
+  duration_ms: 4.939584
+  type: 'test'
+  ...
+# Subtest: GX10 audio proxy passes its built-in Range and allowlist contract
+ok 85 - GX10 audio proxy passes its built-in Range and allowlist contract
+  ---
+  duration_ms: 180.628292
+  type: 'test'
+  ...
+# Subtest: GX10 audio proxy remains loopback-only and never caches source audio
+ok 86 - GX10 audio proxy remains loopback-only and never caches source audio
+  ---
+  duration_ms: 0.782708
+  type: 'test'
+  ...
+# Subtest: ⚡ Frontend Local Sync Module (localSync.js) Unit Tests
+    # Subtest: 1. getPendingSuggestionsCount calculates items in localStorage
+    ok 1 - 1. getPendingSuggestionsCount calculates items in localStorage
+      ---
+      duration_ms: 0.299625
+      type: 'test'
+      ...
+    # Subtest: 2. checkSyncServerStatus handles offline port gracefully
+    ok 2 - 2. checkSyncServerStatus handles offline port gracefully
+      ---
+      duration_ms: 69.615917
+      type: 'test'
+      ...
+    # Subtest: 3. syncCorrectionToLocalBackend returns error when backend is offline
+    ok 3 - 3. syncCorrectionToLocalBackend returns error when backend is offline
+      ---
+      duration_ms: 11.546916
+      type: 'test'
+      ...
+    1..3
+ok 87 - ⚡ Frontend Local Sync Module (localSync.js) Unit Tests
+  ---
+  duration_ms: 83.070625
+  type: 'test'
+  ...
+# Subtest: Multi-Course Catalog: courses/catalog.json exists and is valid
+ok 88 - Multi-Course Catalog: courses/catalog.json exists and is valid
+  ---
+  duration_ms: 1.464709
+  type: 'test'
+  ...
+# Subtest: Multi-Course Catalog: UI elements and app.js contract
+ok 89 - Multi-Course Catalog: UI elements and app.js contract
+  ---
+  duration_ms: 8.655125
+  type: 'test'
+  ...
+# Subtest: Multi-Course Catalog: scripts/init_course.py correctly scaffolds new course
+ok 90 - Multi-Course Catalog: scripts/init_course.py correctly scaffolds new course
+  ---
+  duration_ms: 136.604709
+  type: 'test'
+  ...
+# Subtest: 📖 課文口述「頁次」與「科判」自動化交叉核對門禁 (Oral References Audit Suite)
+    # Subtest: 1. Golden Page Anchor: Session 02A accurately captures p.63 & p.64 mentions
+    ok 1 - 1. Golden Page Anchor: Session 02A accurately captures p.63 & p.64 mentions
+      ---
+      duration_ms: 2.892375
+      type: 'test'
+      ...
+    # Subtest: 2. Golden TOC Anchor: Session 01 accurately captures "現前地" & "十地" outlines
+    ok 2 - 2. Golden TOC Anchor: Session 01 accurately captures "現前地" & "十地" outlines
+      ---
+      duration_ms: 0.49425
+      type: 'test'
+      ...
+    # Subtest: 3. Golden Page Anchor: Session 01 accurately captures p.6 & p.63 transitions
+    ok 3 - 3. Golden Page Anchor: Session 01 accurately captures p.6 & p.63 transitions
+      ---
+      duration_ms: 1.184416
+      type: 'test'
+      ...
+    # Subtest: 4. Golden Sub-heading Anchor: Session 103B accurately captures "庚二 離垢地" & sub-clauses
+    ok 4 - 4. Golden Sub-heading Anchor: Session 103B accurately captures "庚二 離垢地" & sub-clauses
+      ---
+      duration_ms: 0.345208
+      type: 'test'
+      ...
+    # Subtest: 5. Whole Corpus Audit Script Integrity: audit_oral_references.py exists & executable
+    ok 5 - 5. Whole Corpus Audit Script Integrity: audit_oral_references.py exists & executable
+      ---
+      duration_ms: 0.360584
+      type: 'test'
+      ...
+    1..5
+ok 91 - 📖 課文口述「頁次」與「科判」自動化交叉核對門禁 (Oral References Audit Suite)
+  ---
+  duration_ms: 22.926625
+  type: 'test'
+  ...
+# Subtest: session_27 sent-400 / sent-401 必須屬於同一個 paragraph
+ok 92 - session_27 sent-400 / sent-401 必須屬於同一個 paragraph
+  ---
+  duration_ms: 40.655875
+  type: 'test'
+  ...
+# Subtest: 拼接後必須包含「他是在無漏蘊體的聚合體及續流上假立而有」
+ok 93 - 拼接後必須包含「他是在無漏蘊體的聚合體及續流上假立而有」
+  ---
+  duration_ms: 13.243125
+  type: 'test'
+  ...
+# Subtest: sent-400 / sent-401 的禁改欄位必須非空且語意合理
+ok 94 - sent-400 / sent-401 的禁改欄位必須非空且語意合理
+  ---
+  duration_ms: 3.353875
+  type: 'test'
+  ...
+# Subtest: session_27 paragraph 內的 sentence 時間戳必須單調遞增
+ok 95 - session_27 paragraph 內的 sentence 時間戳必須單調遞增
+  ---
+  duration_ms: 1.599542
+  type: 'test'
+  ...
+# Subtest: session_27 句子總數應等於 paragraph 內 sentence 加總（無孤兒 sentence）
+ok 96 - session_27 句子總數應等於 paragraph 內 sentence 加總（無孤兒 sentence）
+  ---
+  duration_ms: 0.725958
+  type: 'test'
+  ...
+# Subtest: 全 32 講 paragraph.heading 必須符合【分類】<ordinal>、標題 格式
+ok 97 - 全 32 講 paragraph.heading 必須符合【分類】<ordinal>、標題 格式
+  ---
+  duration_ms: 42.896791
+  type: 'test'
+  ...
+# Subtest: 每講重複出現的相同 paragraph.title 必須使用同一 ordinal
+ok 98 - 每講重複出現的相同 paragraph.title 必須使用同一 ordinal
+  ---
+  duration_ms: 754.071125
+  type: 'test'
+  ...
+# Subtest: 全 32 講 paragraph 內的 sentence 時間戳必須單調遞增
+ok 99 - 全 32 講 paragraph 內的 sentence 時間戳必須單調遞增
+  ---
+  duration_ms: 38.048042
+  type: 'test'
+  ...
+# Subtest: 全 32 講 sentence id 不可重複
+ok 100 - 全 32 講 sentence id 不可重複
+  ---
+  duration_ms: 46.423458
+  type: 'test'
+  ...
+# Subtest: 全 32 講 sentence 禁改欄位健全性（id/text/start/end/rawText 非空）
+ok 101 - 全 32 講 sentence 禁改欄位健全性（id/text/start/end/rawText 非空）
+  ---
+  duration_ms: 106.158709
+  type: 'test'
+  ...
+# Subtest: 全 32 講 paragraph 自己的 end 必須等於最末句 end（合併後無殘留）
+ok 102 - 全 32 講 paragraph 自己的 end 必須等於最末句 end（合併後無殘留）
+  ---
+  duration_ms: 14.4855
+  type: 'test'
+  ...
+# Subtest: Proofreading Quality Gate: Outline & Doctrinal Rules in Pipeline
+ok 103 - Proofreading Quality Gate: Outline & Doctrinal Rules in Pipeline
+  ---
+  duration_ms: 1.984917
+  type: 'test'
+  ...
+# Subtest: Proofreading Quality Gate: Session 30B Text Purity and Conformance
+ok 104 - Proofreading Quality Gate: Session 30B Text Purity and Conformance
+  ---
+  duration_ms: 3.497375
+  type: 'test'
+  ...
+# Subtest: Proofreading Quality Gate: Session 31B Text Purity and Conformance
+ok 105 - Proofreading Quality Gate: Session 31B Text Purity and Conformance
+  ---
+  duration_ms: 1.874958
+  type: 'test'
+  ...
+# Subtest: Proofreading Quality Gate: Session 32A Text Purity and Review Markers
+ok 106 - Proofreading Quality Gate: Session 32A Text Purity and Review Markers
+  ---
+  duration_ms: 1.744416
+  type: 'test'
+  ...
+# Subtest: publication builder boundary and CLI runtime contracts
+ok 107 - publication builder boundary and CLI runtime contracts
+  ---
+  duration_ms: 453.0405
+  type: 'test'
+  ...
+# Subtest: routes Drive usercontent through the same-origin streaming bridge
+ok 108 - routes Drive usercontent through the same-origin streaming bridge
+  ---
+  duration_ms: 0.48475
+  type: 'test'
+  ...
+# Subtest: leaves ordinary audio sources unchanged
+ok 109 - leaves ordinary audio sources unchanged
+  ---
+  duration_ms: 0.060333
+  type: 'test'
+  ...
+# Subtest: development server and production worker both serve the streaming bridge
+ok 110 - development server and production worker both serve the streaming bridge
+  ---
+  duration_ms: 0.394
+  type: 'test'
+  ...
+# Subtest: resolveAudioUrl: leaves full http/https URLs unchanged
+ok 111 - resolveAudioUrl: leaves full http/https URLs unchanged
+  ---
+  duration_ms: 0.832125
+  type: 'test'
+  ...
+# Subtest: resolveAudioUrl: prepends custom/configured audio base URL to relative paths
+ok 112 - resolveAudioUrl: prepends custom/configured audio base URL to relative paths
+  ---
+  duration_ms: 0.211667
+  type: 'test'
+  ...
+# Subtest: resolveAudioUrl: looks up remote URL from audio map if sessionId matches
+ok 113 - resolveAudioUrl: looks up remote URL from audio map if sessionId matches
+  ---
+  duration_ms: 0.094417
+  type: 'test'
+  ...
+# Subtest: resolveAudioUrl: returns relative URL directly if no base is configured
+ok 114 - resolveAudioUrl: returns relative URL directly if no base is configured
+  ---
+  duration_ms: 0.08275
+  type: 'test'
+  ...
+# Subtest: 🤝 Review Collaborator Suite
+    # Subtest: 1. Markdown formatting contains structured review cues
+    ok 1 - 1. Markdown formatting contains structured review cues
+      ---
+      duration_ms: 71.737208
+      type: 'test'
+      ...
+    # Subtest: 2. Web review export produces valid review.html items with 3s audio window
+    ok 2 - 2. Web review export produces valid review.html items with 3s audio window
+      ---
+      duration_ms: 93.510958
+      type: 'test'
+      ...
+    1..2
+ok 115 - 🤝 Review Collaborator Suite
+  ---
+  duration_ms: 167.240125
+  type: 'test'
+  ...
+# Subtest: Web Review Console Engine Tests
+    # Subtest: 1. Passkey Authentication: validates master passkey
+    ok 1 - 1. Passkey Authentication: validates master passkey
+      ---
+      duration_ms: 2.027917
+      type: 'test'
+      ...
+    # Subtest: 2. Audio Slicing: calculates safe 3-second bounded interval around target sentence
+    ok 2 - 2. Audio Slicing: calculates safe 3-second bounded interval around target sentence
+      ---
+      duration_ms: 0.174125
+      type: 'test'
+      ...
+    # Subtest: 3. Patch Application: applies accepted corrections to session JSON structure
+    ok 3 - 3. Patch Application: applies accepted corrections to session JSON structure
+      ---
+      duration_ms: 0.397
+      type: 'test'
+      ...
+    1..3
+ok 116 - Web Review Console Engine Tests
+  ---
+  duration_ms: 3.318417
+  type: 'test'
+  ...
+# Subtest: ⭐ Review Rating Regression Suite: 1~10 Score Online Review System
+    # Subtest: 1. Static Template & CSS Contract Verification
+    ok 1 - 1. Static Template & CSS Contract Verification
+      ---
+      duration_ms: 3.404792
+      type: 'test'
+      ...
+    # Subtest: 2. Rating Storage & Acceptance Logic (Score >= 8 -> APPROVED)
+    ok 2 - 2. Rating Storage & Acceptance Logic (Score >= 8 -> APPROVED)
+      ---
+      duration_ms: 1.369334
+      type: 'test'
+      ...
+    # Subtest: 3. Needs Improvement Logic (Score < 8 -> NEEDS_IMPROVEMENT & Ticket)
+    ok 3 - 3. Needs Improvement Logic (Score < 8 -> NEEDS_IMPROVEMENT & Ticket)
+      ---
+      duration_ms: 0.7915
+      type: 'test'
+      ...
+    # Subtest: 4. Multi-Session Persistence & Export Structure
+    ok 4 - 4. Multi-Session Persistence & Export Structure
+      ---
+      duration_ms: 0.34575
+      type: 'test'
+      ...
+    1..4
+ok 117 - ⭐ Review Rating Regression Suite: 1~10 Score Online Review System
+  ---
+  duration_ms: 8.578708
+  type: 'test'
+  ...
+# Subtest: search: initSearch does not throw when search-input is null
+ok 118 - search: initSearch does not throw when search-input is null
+  ---
+  duration_ms: 0.519625
+  type: 'test'
+  ...
+# Subtest: search: finds matching sentences, marks hits, and sets current match
+ok 119 - search: finds matching sentences, marks hits, and sets current match
+  ---
+  duration_ms: 0.754
+  type: 'test'
+  ...
+# Subtest: search: shows "無相符結果" when query has no matches
+ok 120 - search: shows "無相符結果" when query has no matches
+  ---
+  duration_ms: 1.419291
+  type: 'test'
+  ...
+# Subtest: search: clearing input resets hits and hides status
+ok 121 - search: clearing input resets hits and hides status
+  ---
+  duration_ms: 0.442875
+  type: 'test'
+  ...
+# Subtest: search: Enter and Shift+Enter cycles through matches
+ok 122 - search: Enter and Shift+Enter cycles through matches
+  ---
+  duration_ms: 1.119
+  type: 'test'
+  ...
+# Subtest: search: Escape key clears query and blurs input
+ok 123 - search: Escape key clears query and blurs input
+  ---
+  duration_ms: 0.129791
+  type: 'test'
+  ...
+# Subtest: session 02 suspicious windows have source-grounded adjudication before publication
+ok 124 - session 02 suspicious windows have source-grounded adjudication before publication
+  ---
+  duration_ms: 1.347792
+  type: 'test'
+  ...
+# Subtest: session 02 published timestamps match the adjudicated raw-ASR spans
+ok 125 - session 02 published timestamps match the adjudicated raw-ASR spans
+  ---
+  duration_ms: 2.972458
+  type: 'test'
+  ...
+# Subtest: session_27 文章小標題保留一至九的科判編號
+ok 126 - session_27 文章小標題保留一至九的科判編號
+  ---
+  duration_ms: 3.034917
+  type: 'test'
+  ...
+# Subtest: session28 anchor regression (釋量論第二品/sessions/session_28.json)
+    # Subtest: course path resolves to 釋量論第二品 (NOT 入中論善顯密意疏)
+    ok 1 - course path resolves to 釋量論第二品 (NOT 入中論善顯密意疏)
+      ---
+      duration_ms: 0.488875
+      type: 'test'
+      ...
+    # Subtest: corrected anchors match raw ASR evidence within tolerance
+    ok 2 - corrected anchors match raw ASR evidence within tolerance
+      ---
+      duration_ms: 1.577083
+      type: 'test'
+      ...
+    # Subtest: sent-142 through sent-197 match the reviewed boundary ledger
+    ok 3 - sent-142 through sent-197 match the reviewed boundary ledger
+      ---
+      duration_ms: 1.508083
+      type: 'test'
+      ...
+    # Subtest: sent-142 through sent-197 preserve the reviewed transcript text
+    ok 4 - sent-142 through sent-197 preserve the reviewed transcript text
+      ---
+      duration_ms: 0.724625
+      type: 'test'
+      ...
+    # Subtest: sent-198 / sent-199 / sent-208 are no longer collapsed to 0.5s
+    ok 5 - sent-198 / sent-199 / sent-208 are no longer collapsed to 0.5s
+      ---
+      duration_ms: 2.862542
+      type: 'test'
+      ...
+    # Subtest: sent-207/sent-208 boundary: sent-207.end == sent-208.start (no gap, no overlap)
+    ok 6 - sent-207/sent-208 boundary: sent-207.end == sent-208.start (no gap, no overlap)
+      ---
+      duration_ms: 0.585333
+      type: 'test'
+      ...
+    # Subtest: monotonicity: every sentence.start >= previous sentence.end over whole stream
+    ok 7 - monotonicity: every sentence.start >= previous sentence.end over whole stream
+      ---
+      duration_ms: 0.684917
+      type: 'test'
+      ...
+    # Subtest: monotonicity: every sentence.end >= sentence.start
+    ok 8 - monotonicity: every sentence.end >= sentence.start
+      ---
+      duration_ms: 0.621333
+      type: 'test'
+      ...
+    # Subtest: text preserved for corrected anchors
+    ok 9 - text preserved for corrected anchors
+      ---
+      duration_ms: 0.6975
+      type: 'test'
+      ...
+    # Subtest: no review-only flag was added by this fix
+    ok 10 - no review-only flag was added by this fix
+      ---
+      duration_ms: 1.68
+      type: 'test'
+      ...
+    1..10
+ok 127 - session28 anchor regression (釋量論第二品/sessions/session_28.json)
+  ---
+  duration_ms: 12.312292
+  type: 'suite'
+  ...
+# Subtest: 30B published text has the punctuation quality of neighboring sessions
+ok 128 - 30B published text has the punctuation quality of neighboring sessions
+  ---
+  duration_ms: 10.799083
+  type: 'test'
+  ...
+# Subtest: 30B published text is divided into readable paragraphs
+ok 129 - 30B published text is divided into readable paragraphs
+  ---
+  duration_ms: 6.552041
+  type: 'test'
+  ...
+# Subtest: 30B published text does not punctuate standalone filler fragments
+ok 130 - 30B published text does not punctuate standalone filler fragments
+  ---
+  duration_ms: 4.637375
+  type: 'test'
+  ...
+# Subtest: 30B published text does not expose known unresolved ASR artifacts
+ok 131 - 30B published text does not expose known unresolved ASR artifacts
+  ---
+  duration_ms: 4.766916
+  type: 'test'
+  ...
+# Subtest: 30B preserves source-grounded high-confidence terminology corrections
+ok 132 - 30B preserves source-grounded high-confidence terminology corrections
+  ---
+  duration_ms: 3.638875
+  type: 'test'
+  ...
+# Subtest: 30B second-pass audit restores representative doctrinal phrases
+ok 133 - 30B second-pass audit restores representative doctrinal phrases
+  ---
+  duration_ms: 3.821167
+  type: 'test'
+  ...
+# Subtest: 30B records the first-pass adjudication for the final uncertain passage
+ok 134 - 30B records the first-pass adjudication for the final uncertain passage
+  ---
+  duration_ms: 4.911667
+  type: 'test'
+  ...
+# Subtest: 30B published metadata cannot claim acceptance while semantic review is incomplete
+ok 135 - 30B published metadata cannot claim acceptance while semantic review is incomplete
+  ---
+  duration_ms: 8.456
+  type: 'test'
+  ...
+# Subtest: 30B evidence ledger does not mark one source segment both applied and unresolved
+ok 136 - 30B evidence ledger does not mark one source segment both applied and unresolved
+  ---
+  duration_ms: 12.111459
+  type: 'test'
+  ...
+# Subtest: 30B keeps likely audio reconstructions out of the applied ledger
+ok 137 - 30B keeps likely audio reconstructions out of the applied ledger
+  ---
+  duration_ms: 5.595208
+  type: 'test'
+  ...
+# Subtest: 30B includes semantic headings for the source chapter outline
+ok 138 - 30B includes semantic headings for the source chapter outline
+  ---
+  duration_ms: 3.18825
+  type: 'test'
+  ...
+# Subtest: editorial punctuation gate rejects blanket punctuation padding
+ok 139 - editorial punctuation gate rejects blanket punctuation padding
+  ---
+  duration_ms: 0.078292
+  type: 'test'
+  ...
+# Subtest: editorial terminology gate rejects blind 世俗 homophone substitution
+ok 140 - editorial terminology gate rejects blind 世俗 homophone substitution
+  ---
+  duration_ms: 0.112708
+  type: 'test'
+  ...
+# Subtest: session inventory: required sessions are represented across all artifacts
+ok 141 - session inventory: required sessions are represented across all artifacts
+  ---
+  duration_ms: 4.532667
+  type: 'test'
+  ...
+# Subtest: session inventory: every indexed session has a matching session file
+ok 142 - session inventory: every indexed session has a matching session file
+  ---
+  duration_ms: 3.251333
+  type: 'test'
+  ...
+# Subtest: session inventory: 30B published transcript is non-empty and timestamped
+ok 143 - session inventory: 30B published transcript is non-empty and timestamped
+  ---
+  duration_ms: 8.18625
+  type: 'test'
+  ...
+# Subtest: session_01 科判 headings 對應 toc 且順序一致
+ok 144 - session_01 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 2.930084
+  type: 'test'
+  ...
+# Subtest: session_02 科判 headings 對應 toc 且順序一致
+ok 145 - session_02 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.137792
+  type: 'test'
+  ...
+# Subtest: session_03 科判 headings 對應 toc 且順序一致
+ok 146 - session_03 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.60825
+  type: 'test'
+  ...
+# Subtest: session_04 科判 headings 對應 toc 且順序一致
+ok 147 - session_04 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.95175
+  type: 'test'
+  ...
+# Subtest: session_05 科判 headings 對應 toc 且順序一致
+ok 148 - session_05 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.235166
+  type: 'test'
+  ...
+# Subtest: session_06 科判 headings 對應 toc 且順序一致
+ok 149 - session_06 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.154
+  type: 'test'
+  ...
+# Subtest: session_07 科判 headings 對應 toc 且順序一致
+ok 150 - session_07 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.499917
+  type: 'test'
+  ...
+# Subtest: session_08 科判 headings 對應 toc 且順序一致
+ok 151 - session_08 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.655584
+  type: 'test'
+  ...
+# Subtest: session_09 科判 headings 對應 toc 且順序一致
+ok 152 - session_09 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.796
+  type: 'test'
+  ...
+# Subtest: session_10 科判 headings 對應 toc 且順序一致
+ok 153 - session_10 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.675083
+  type: 'test'
+  ...
+# Subtest: session_11 科判 headings 對應 toc 且順序一致
+ok 154 - session_11 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.529541
+  type: 'test'
+  ...
+# Subtest: session_12 科判 headings 對應 toc 且順序一致
+ok 155 - session_12 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.290417
+  type: 'test'
+  ...
+# Subtest: session_13 科判 headings 對應 toc 且順序一致
+ok 156 - session_13 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.470833
+  type: 'test'
+  ...
+# Subtest: session_14 科判 headings 對應 toc 且順序一致
+ok 157 - session_14 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.386833
+  type: 'test'
+  ...
+# Subtest: session_15 科判 headings 對應 toc 且順序一致
+ok 158 - session_15 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.373792
+  type: 'test'
+  ...
+# Subtest: session_16 科判 headings 對應 toc 且順序一致
+ok 159 - session_16 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.384458
+  type: 'test'
+  ...
+# Subtest: session_17 科判 headings 對應 toc 且順序一致
+ok 160 - session_17 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.427209
+  type: 'test'
+  ...
+# Subtest: session_18 科判 headings 對應 toc 且順序一致
+ok 161 - session_18 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.429916
+  type: 'test'
+  ...
+# Subtest: session_19 科判 headings 對應 toc 且順序一致
+ok 162 - session_19 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.670417
+  type: 'test'
+  ...
+# Subtest: session_20 科判 headings 對應 toc 且順序一致
+ok 163 - session_20 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.0995
+  type: 'test'
+  ...
+# Subtest: session_21 科判 headings 對應 toc 且順序一致
+ok 164 - session_21 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.744166
+  type: 'test'
+  ...
+# Subtest: session_22 科判 headings 對應 toc 且順序一致
+ok 165 - session_22 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.544917
+  type: 'test'
+  ...
+# Subtest: session_23 科判 headings 對應 toc 且順序一致
+ok 166 - session_23 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.954625
+  type: 'test'
+  ...
+# Subtest: session_24 科判 headings 對應 toc 且順序一致
+ok 167 - session_24 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.8905
+  type: 'test'
+  ...
+# Subtest: session_25 科判 headings 對應 toc 且順序一致
+ok 168 - session_25 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.877333
+  type: 'test'
+  ...
+# Subtest: session_26 科判 headings 對應 toc 且順序一致
+ok 169 - session_26 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.921208
+  type: 'test'
+  ...
+# Subtest: session_27 科判 headings 對應 toc 且順序一致
+ok 170 - session_27 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 1.1795
+  type: 'test'
+  ...
+# Subtest: session_28 科判 headings 對應 toc 且順序一致
+ok 171 - session_28 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.448666
+  type: 'test'
+  ...
+# Subtest: session_29 科判 headings 對應 toc 且順序一致
+ok 172 - session_29 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 2.087959
+  type: 'test'
+  ...
+# Subtest: session_30 科判 headings 對應 toc 且順序一致
+ok 173 - session_30 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.785292
+  type: 'test'
+  ...
+# Subtest: session_31 科判 headings 對應 toc 且順序一致
+ok 174 - session_31 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.484791
+  type: 'test'
+  ...
+# Subtest: session_32 科判 headings 對應 toc 且順序一致
+ok 175 - session_32 科判 headings 對應 toc 且順序一致
+  ---
+  duration_ms: 0.25525
+  type: 'test'
+  ...
+# Subtest: 32 講 sentence invariants remain valid
+ok 176 - 32 講 sentence invariants remain valid
+  ---
+  duration_ms: 10.471
+  type: 'test'
+  ...
+# Subtest: 32 講都必須有官方文字稿，已宣告的 provenance 必須指向該稿
+ok 177 - 32 講都必須有官方文字稿，已宣告的 provenance 必須指向該稿
+  ---
+  duration_ms: 2.670208
+  type: 'test'
+  ...
+# Subtest: 32 講的講者括號在整講文字中必須成對且不可倒置
+ok 178 - 32 講的講者括號在整講文字中必須成對且不可倒置
+  ---
+  duration_ms: 51.968875
+  type: 'test'
+  ...
+# Subtest: official transcript normalization removes form-feed page-number artifacts
+ok 179 - official transcript normalization removes form-feed page-number artifacts
+  ---
+  duration_ms: 0.509833
+  type: 'test'
+  ...
+# Subtest: official transcript normalization preserves numbers inside spoken content
+ok 180 - official transcript normalization preserves numbers inside spoken content
+  ---
+  duration_ms: 0.214666
+  type: 'test'
+  ...
+# Subtest: timestamp audit catches rollback across paragraph boundaries without transcript text
+ok 181 - timestamp audit catches rollback across paragraph boundaries without transcript text
+  ---
+  duration_ms: 0.784292
+  type: 'test'
+  ...
+# Subtest: timestamp audit catches non-finite and negative-duration timestamps
+ok 182 - timestamp audit catches non-finite and negative-duration timestamps
+  ---
+  duration_ms: 0.39125
+  type: 'test'
+  ...
+# Subtest: course audit emits compact evidence for all 8 batches and 32 sessions
+ok 183 - course audit emits compact evidence for all 8 batches and 32 sessions
+  ---
+  duration_ms: 271.769541
+  type: 'test'
+  ...
+# Subtest: course audit rejects a missing or stale baseline
+ok 184 - course audit rejects a missing or stale baseline
+  ---
+  duration_ms: 205.967666
+  type: 'test'
+  ...
+# Subtest: session 28 adjudication ledger covers the requested range exactly once
+ok 185 - session 28 adjudication ledger covers the requested range exactly once
+  ---
+  duration_ms: 2.339708
+  type: 'test'
+  ...
+# Subtest: ledger validator rejects duplicate IDs and unsupported auto-apply
+ok 186 - ledger validator rejects duplicate IDs and unsupported auto-apply
+  ---
+  duration_ms: 0.393959
+  type: 'test'
+  ...
+# Subtest: session 28 boundary table resolves only three fully bounded raw gaps
+ok 187 - session 28 boundary table resolves only three fully bounded raw gaps
+  ---
+  duration_ms: 0.789959
+  type: 'test'
+  ...
+# Subtest: bounded-gap resolver rejects a range that does not meet adjacent anchors
+ok 188 - bounded-gap resolver rejects a range that does not meet adjacent anchors
+  ---
+  duration_ms: 0.211625
+  type: 'test'
+  ...
+# Subtest: quality manifest is compact, hashed, and reports current timestamp violations
+ok 189 - quality manifest is compact, hashed, and reports current timestamp violations
+  ---
+  duration_ms: 112.999959
+  type: 'test'
+  ...
+# Subtest: contract: course declares exactly 32 sessions
+ok 190 - contract: course declares exactly 32 sessions
+  ---
+  duration_ms: 1.852625
+  type: 'test'
+  ...
+# Subtest: contract: every one of the 32 sessions has an annotation manifest entry with sessionId
+ok 191 - contract: every one of the 32 sessions has an annotation manifest entry with sessionId
+  ---
+  duration_ms: 3.68575
+  type: 'test'
+  ...
+# Subtest: contract: every annotation has sentenceId, quoteText and an allowed status
+ok 192 - contract: every annotation has sentenceId, quoteText and an allowed status
+  ---
+  duration_ms: 2.361542
+  type: 'test'
+  ...
+# Subtest: contract: every annotation sentenceId exists in its session transcript
+ok 193 - contract: every annotation sentenceId exists in its session transcript
+  ---
+  duration_ms: 33.61125
+  type: 'test'
+  ...
+# Subtest: contract: every source_match annotation is present in both its sentence and canonical verse
+ok 194 - contract: every source_match annotation is present in both its sentence and canonical verse
+  ---
+  duration_ms: 53.739042
+  type: 'test'
+  ...
+# Subtest: regression: session 29 preserves every spoken fragment of split verses 206 and 207
+ok 195 - regression: session 29 preserves every spoken fragment of split verses 206 and 207
+  ---
+  duration_ms: 1.781667
+  type: 'test'
+  ...
+# Subtest: contract: frontend selects the current v2 manifest and preserves v1 fallback
+ok 196 - contract: frontend selects the current v2 manifest and preserves v1 fallback
+  ---
+  duration_ms: 0.58225
+  type: 'test'
+  ...
+# Subtest: Issue \#9: sidebar filter behavior — Course Overview bulk render
+    # Subtest: baseline: all 199 items render (198 + 99B unavailable)
+    ok 1 - baseline: all 199 items render (198 + 99B unavailable)
+      ---
+      duration_ms: 4.235084
+      type: 'test'
+      ...
+    # Subtest: filter "02A" narrows the list (substring match across all 2A sessions)
+    ok 2 - filter "02A" narrows the list (substring match across all 2A sessions)
+      ---
+      duration_ms: 10.621292
+      type: 'test'
+      ...
+    # Subtest: filter "歸敬頌" finds the first session (summary match)
+    ok 3 - filter "歸敬頌" finds the first session (summary match)
+      ---
+      duration_ms: 2.965834
+      type: 'test'
+      ...
+    # Subtest: clearing the filter restores the complete list
+    ok 4 - clearing the filter restores the complete list
+      ---
+      duration_ms: 33.898
+      type: 'test'
+      ...
+    # Subtest: filter "99B" matches published 99B session in the session list
+    ok 5 - filter "99B" matches published 99B session in the session list
+      ---
+      duration_ms: 4.845292
+      type: 'test'
+      ...
+    # Subtest: filter "99A" finds the 99A session
+    ok 6 - filter "99A" finds the 99A session
+      ---
+      duration_ms: 3.398625
+      type: 'test'
+      ...
+    # Subtest: filter "釋禮敬" (multi-character Chinese summary) locates 02A
+    ok 7 - filter "釋禮敬" (multi-character Chinese summary) locates 02A
+      ---
+      duration_ms: 1.17575
+      type: 'test'
+      ...
+    # Subtest: case-insensitive filter ("02a" narrows the same way as "02A")
+    ok 8 - case-insensitive filter ("02a" narrows the same way as "02A")
+      ---
+      duration_ms: 1.715
+      type: 'test'
+      ...
+    # Subtest: filter "p.63" (pageRange) matches multiple sessions
+    ok 9 - filter "p.63" (pageRange) matches multiple sessions
+      ---
+      duration_ms: 2.093292
+      type: 'test'
+      ...
+    # Subtest: unavailable session behavior intact: all sessions are published in v1.1
+    ok 10 - unavailable session behavior intact: all sessions are published in v1.1
+      ---
+      duration_ms: 22.113166
+      type: 'test'
+      ...
+    # Subtest: active session highlight survives a filter empty->empty round trip
+    ok 11 - active session highlight survives a filter empty->empty round trip
+      ---
+      duration_ms: 24.376084
+      type: 'test'
+      ...
+    1..11
+ok 197 - Issue \#9: sidebar filter behavior — Course Overview bulk render
+  ---
+  duration_ms: 1450.757167
+  type: 'test'
+  ...
+# Subtest: Treatise Ground Truth Source Text and Alignment Tests
+    # Subtest: catalog.json exists and specifies 285 total pages
+    ok 1 - catalog.json exists and specifies 285 total pages
+      ---
+      duration_ms: 4.419
+      type: 'test'
+      ...
+    # Subtest: all 285 page text files exist and are non-empty
+    ok 2 - all 285 page text files exist and are non-empty
+      ---
+      duration_ms: 99.650833
+      type: 'test'
+      ...
+    # Subtest: all_verses.json contains valid citations with valid page numbers
+    ok 3 - all_verses.json contains valid citations with valid page numbers
+      ---
+      duration_ms: 0.538541
+      type: 'test'
+      ...
+    # Subtest: every session in course.json with pageRange maps to existing source pages
+    ok 4 - every session in course.json with pageRange maps to existing source pages
+      ---
+      duration_ms: 3.249875
+      type: 'test'
+      ...
+    1..4
+ok 198 - Treatise Ground Truth Source Text and Alignment Tests
+  ---
+  duration_ms: 108.520125
+  type: 'suite'
+  ...
+# Subtest: chunk assembler clips overlap padding and source-duration overflow
+ok 199 - chunk assembler clips overlap padding and source-duration overflow
+  ---
+  duration_ms: 138.642583
+  type: 'test'
+  ...
+# Subtest: 27下 remains addressable inside the published study-group course
+ok 200 - 27下 remains addressable inside the published study-group course
+  ---
+  duration_ms: 0.740917
+  type: 'test'
+  ...
+# Subtest: 27下 study-group course uses question TOC and preserves 27B provenance
+ok 201 - 27下 study-group course uses question TOC and preserves 27B provenance
+  ---
+  duration_ms: 24.169334
+  type: 'test'
+  ...
+# Subtest: 27下 transcript is timestamped and every question has an unlinked teacher summary
+ok 202 - 27下 transcript is timestamped and every question has an unlinked teacher summary
+  ---
+  duration_ms: 2.818625
+  type: 'test'
+  ...
+# Subtest: web reader renders question headings, summary provenance, and route components
+ok 203 - web reader renders question headings, summary provenance, and route components
+  ---
+  duration_ms: 0.816959
+  type: 'test'
+  ...
+# Subtest: audio click exposes a polite loading indicator until playback starts
+ok 204 - audio click exposes a polite loading indicator until playback starts
+  ---
+  duration_ms: 0.815375
+  type: 'test'
+  ...
+# Subtest: publication builder does not attach a wrong source outline to lecture 12
+ok 205 - publication builder does not attach a wrong source outline to lecture 12
+  ---
+  duration_ms: 0.4495
+  type: 'test'
+  ...
+# Subtest: publication builder retains a dedication split across adjacent segments
+ok 206 - publication builder retains a dedication split across adjacent segments
+  ---
+  duration_ms: 71.485125
+  type: 'test'
+  ...
+# Subtest: dedication trimming supports simplified ASR and keeps the complete closing phrase
+ok 207 - dedication trimming supports simplified ASR and keeps the complete closing phrase
+  ---
+  duration_ms: 61.113792
+  type: 'test'
+  ...
+# Subtest: publication builder --help exits without running the mutating build
+ok 208 - publication builder --help exits without running the mutating build
+  ---
+  duration_ms: 591.7005
+  type: 'test'
+  ...
+# Subtest: playlist-01 content review preserves timing and grounds questions and summaries
+ok 209 - playlist-01 content review preserves timing and grounds questions and summaries
+  ---
+  duration_ms: 58.377417
+  type: 'test'
+  ...
+# Subtest: playlist-01 content contract
+ok 210 - playlist-01 content contract
+  ---
+  duration_ms: 44.118292
+  type: 'test'
+  ...
+# Subtest: playlist-02 content contract
+ok 211 - playlist-02 content contract
+  ---
+  duration_ms: 45.228458
+  type: 'test'
+  ...
+# Subtest: playlist-03 content contract
+ok 212 - playlist-03 content contract
+  ---
+  duration_ms: 106.651917
+  type: 'test'
+  ...
+# Subtest: playlist-04 content contract
+ok 213 - playlist-04 content contract
+  ---
+  duration_ms: 58.886791
+  type: 'test'
+  ...
+# Subtest: playlist-05 content contract
+ok 214 - playlist-05 content contract
+  ---
+  duration_ms: 29.690958
+  type: 'test'
+  ...
+# Subtest: playlist-06 content contract
+ok 215 - playlist-06 content contract
+  ---
+  duration_ms: 72.595375
+  type: 'test'
+  ...
+# Subtest: playlist-07 content contract
+ok 216 - playlist-07 content contract
+  ---
+  duration_ms: 17.1195
+  type: 'test'
+  ...
+# Subtest: playlist-08 content contract
+ok 217 - playlist-08 content contract
+  ---
+  duration_ms: 48.171333
+  type: 'test'
+  ...
+# Subtest: playlist-09 content contract
+ok 218 - playlist-09 content contract
+  ---
+  duration_ms: 17.498833
+  type: 'test'
+  ...
+# Subtest: playlist-10 content contract
+ok 219 - playlist-10 content contract
+  ---
+  duration_ms: 14.182375
+  type: 'test'
+  ...
+# Subtest: playlist-11 content contract
+ok 220 - playlist-11 content contract
+  ---
+  duration_ms: 12.115209
+  type: 'test'
+  ...
+# Subtest: playlist-12 content contract
+ok 221 - playlist-12 content contract
+  ---
+  duration_ms: 34.226208
+  type: 'test'
+  ...
+# Subtest: playlist-13 content contract
+ok 222 - playlist-13 content contract
+  ---
+  duration_ms: 13.597291
+  type: 'test'
+  ...
+# Subtest: playlist-14 content contract
+ok 223 - playlist-14 content contract
+  ---
+  duration_ms: 31.7515
+  type: 'test'
+  ...
+# Subtest: playlist-15 content contract
+ok 224 - playlist-15 content contract
+  ---
+  duration_ms: 13.981875
+  type: 'test'
+  ...
+# Subtest: playlist-16 content contract
+ok 225 - playlist-16 content contract
+  ---
+  duration_ms: 104.557083
+  type: 'test'
+  ...
+# Subtest: playlist-17 content contract
+ok 226 - playlist-17 content contract
+  ---
+  duration_ms: 79.900834
+  type: 'test'
+  ...
+# Subtest: playlist-18 content contract
+ok 227 - playlist-18 content contract
+  ---
+  duration_ms: 14.997667
+  type: 'test'
+  ...
+# Subtest: playlist-19 content contract
+ok 228 - playlist-19 content contract
+  ---
+  duration_ms: 13.884
+  type: 'test'
+  ...
+# Subtest: playlist-20 content contract
+ok 229 - playlist-20 content contract
+  ---
+  duration_ms: 31.46275
+  type: 'test'
+  ...
+# Subtest: playlist-21 content contract
+ok 230 - playlist-21 content contract
+  ---
+  duration_ms: 10.267917
+  type: 'test'
+  ...
+# Subtest: playlist-22 content contract
+ok 231 - playlist-22 content contract
+  ---
+  duration_ms: 14.560666
+  type: 'test'
+  ...
+# Subtest: playlist-23 content contract
+ok 232 - playlist-23 content contract
+  ---
+  duration_ms: 91.338958
+  type: 'test'
+  ...
+# Subtest: playlist-24 content contract
+ok 233 - playlist-24 content contract
+  ---
+  duration_ms: 17.592166
+  type: 'test'
+  ...
+# Subtest: playlist-25 content contract
+ok 234 - playlist-25 content contract
+  ---
+  duration_ms: 10.910958
+  type: 'test'
+  ...
+# Subtest: playlist-26 content contract
+ok 235 - playlist-26 content contract
+  ---
+  duration_ms: 10.150334
+  type: 'test'
+  ...
+# Subtest: playlist-27 content contract
+ok 236 - playlist-27 content contract
+  ---
+  duration_ms: 10.485209
+  type: 'test'
+  ...
+# Subtest: playlist-28 content contract
+ok 237 - playlist-28 content contract
+  ---
+  duration_ms: 14.384458
+  type: 'test'
+  ...
+# Subtest: playlist-29 content contract
+ok 238 - playlist-29 content contract
+  ---
+  duration_ms: 10.096042
+  type: 'test'
+  ...
+# Subtest: playlist-30 content contract
+ok 239 - playlist-30 content contract
+  ---
+  duration_ms: 13.322083
+  type: 'test'
+  ...
+# Subtest: playlist-31 content contract
+ok 240 - playlist-31 content contract
+  ---
+  duration_ms: 13.224209
+  type: 'test'
+  ...
+# Subtest: playlist-32 content contract
+ok 241 - playlist-32 content contract
+  ---
+  duration_ms: 147.526666
+  type: 'test'
+  ...
+# Subtest: playlist-33 content contract
+ok 242 - playlist-33 content contract
+  ---
+  duration_ms: 10.721375
+  type: 'test'
+  ...
+# Subtest: playlist-34 content contract
+ok 243 - playlist-34 content contract
+  ---
+  duration_ms: 9.695625
+  type: 'test'
+  ...
+# Subtest: playlist-35 content contract
+ok 244 - playlist-35 content contract
+  ---
+  duration_ms: 12.980042
+  type: 'test'
+  ...
+# Subtest: playlist-36 content contract
+ok 245 - playlist-36 content contract
+  ---
+  duration_ms: 92.031292
+  type: 'test'
+  ...
+# Subtest: playlist-37 content contract
+ok 246 - playlist-37 content contract
+  ---
+  duration_ms: 57.231625
+  type: 'test'
+  ...
+# Subtest: playlist-38 content contract
+ok 247 - playlist-38 content contract
+  ---
+  duration_ms: 9.231417
+  type: 'test'
+  ...
+# Subtest: playlist-39 content contract
+ok 248 - playlist-39 content contract
+  ---
+  duration_ms: 9.955084
+  type: 'test'
+  ...
+# Subtest: playlist-40 content contract
+ok 249 - playlist-40 content contract
+  ---
+  duration_ms: 9.845416
+  type: 'test'
+  ...
+# Subtest: playlist-41 content contract
+ok 250 - playlist-41 content contract
+  ---
+  duration_ms: 43.200417
+  type: 'test'
+  ...
+# Subtest: playlist-44 content contract
+ok 251 - playlist-44 content contract
+  ---
+  duration_ms: 16.8265
+  type: 'test'
+  ...
+# Subtest: study-group playlist inventory is a complete, source-grounded manifest
+ok 252 - study-group playlist inventory is a complete, source-grounded manifest
+  ---
+  duration_ms: 7.840708
+  type: 'test'
+  ...
+# Subtest: unavailable playlist entries fail closed and are excluded from execution
+ok 253 - unavailable playlist entries fail closed and are excluded from execution
+  ---
+  duration_ms: 1.412458
+  type: 'test'
+  ...
+# Subtest: normalization never invents lecture numbers for the review-only entry
+ok 254 - normalization never invents lecture numbers for the review-only entry
+  ---
+  duration_ms: 0.25525
+  type: 'test'
+  ...
+# Subtest: every executable source has a stable YouTube identity and duration
+ok 255 - every executable source has a stable YouTube identity and duration
+  ---
+  duration_ms: 1.003375
+  type: 'test'
+  ...
+# Subtest: study-group prototype has source-grounded candidate structure
+ok 256 - study-group prototype has source-grounded candidate structure
+  ---
+  duration_ms: 11.0675
+  type: 'test'
+  ...
+# Subtest: study-group prototype keeps raw ASR and review evidence beside the candidate
+ok 257 - study-group prototype keeps raw ASR and review evidence beside the candidate
+  ---
+  duration_ms: 2.514208
+  type: 'test'
+  ...
+# Subtest: playlist index 01 preserves source identity and passes the machine ASR gate
+ok 258 - playlist index 01 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 33.65725
+  type: 'test'
+  ...
+# Subtest: candidate timing remains aligned with the immutable raw ASR segments
+ok 259 - candidate timing remains aligned with the immutable raw ASR segments
+  ---
+  duration_ms: 34.515958
+  type: 'test'
+  ...
+# Subtest: prototype-02 preserves ASR evidence while failing closed before speaker attribution
+ok 260 - prototype-02 preserves ASR evidence while failing closed before speaker attribution
+  ---
+  duration_ms: 49.414334
+  type: 'test'
+  ...
+# Subtest: prototype-02 question candidates remain explicitly unresolved for human audio review
+ok 261 - prototype-02 question candidates remain explicitly unresolved for human audio review
+  ---
+  duration_ms: 7.377583
+  type: 'test'
+  ...
+# Subtest: prototype-03 keeps ASR evidence portable and fails closed before attribution
+ok 262 - prototype-03 keeps ASR evidence portable and fails closed before attribution
+  ---
+  duration_ms: 34.306042
+  type: 'test'
+  ...
+# Subtest: prototype-04 preserves the one-download evidence contract and fails closed
+ok 263 - prototype-04 preserves the one-download evidence contract and fails closed
+  ---
+  duration_ms: 46.020084
+  type: 'test'
+  ...
+# Subtest: prototype-05 preserves ASR evidence, cleanup, and unresolved attribution
+ok 264 - prototype-05 preserves ASR evidence, cleanup, and unresolved attribution
+  ---
+  duration_ms: 58.144208
+  type: 'test'
+  ...
+# Subtest: prototype-06 preserves ASR evidence even when the review writer is rate-limited
+ok 265 - prototype-06 preserves ASR evidence even when the review writer is rate-limited
+  ---
+  duration_ms: 110.541875
+  type: 'test'
+  ...
+# Subtest: prototype-07 preserves sentence ASR evidence and fails closed without word timestamps
+ok 266 - prototype-07 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 62.1225
+  type: 'test'
+  ...
+# Subtest: prototype-08 preserves sentence ASR evidence and fails closed without word timestamps
+ok 267 - prototype-08 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 6.563417
+  type: 'test'
+  ...
+# Subtest: prototype-09 preserves sentence ASR evidence and fails closed without word timestamps
+ok 268 - prototype-09 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 14.093625
+  type: 'test'
+  ...
+# Subtest: prototype-10 preserves sentence ASR evidence and fails closed without word timestamps
+ok 269 - prototype-10 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 29.480708
+  type: 'test'
+  ...
+# Subtest: prototype-11 preserves sentence ASR evidence and fails closed without word timestamps
+ok 270 - prototype-11 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 11.36725
+  type: 'test'
+  ...
+# Subtest: prototype-12 keeps the guarded rerun and records the hallucination failure
+ok 271 - prototype-12 keeps the guarded rerun and records the hallucination failure
+  ---
+  duration_ms: 12.720042
+  type: 'test'
+  ...
+# Subtest: prototype-13 preserves source identity and passes the machine ASR gate
+ok 272 - prototype-13 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 12.823709
+  type: 'test'
+  ...
+# Subtest: prototype-14 preserves source identity and passes the machine ASR gate
+ok 273 - prototype-14 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 13.909167
+  type: 'test'
+  ...
+# Subtest: prototype-15 preserves source identity and passes the machine ASR gate
+ok 274 - prototype-15 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 38.938541
+  type: 'test'
+  ...
+# Subtest: prototype-16 preserves source identity and passes the machine ASR gate
+ok 275 - prototype-16 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 11.28375
+  type: 'test'
+  ...
+# Subtest: prototype-17 preserves source identity and passes the machine ASR gate
+ok 276 - prototype-17 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 16.4685
+  type: 'test'
+  ...
+# Subtest: prototype-18 preserves source identity and passes the machine ASR gate
+ok 277 - prototype-18 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 10.767667
+  type: 'test'
+  ...
+# Subtest: prototype-19 preserves source identity and passes the machine ASR gate
+ok 278 - prototype-19 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 10.334083
+  type: 'test'
+  ...
+# Subtest: prototype-20 preserves source identity and passes the machine ASR gate
+ok 279 - prototype-20 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 57.512292
+  type: 'test'
+  ...
+# Subtest: prototype-21 preserves source identity and passes the machine ASR gate
+ok 280 - prototype-21 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 34.937084
+  type: 'test'
+  ...
+# Subtest: prototype-22 preserves source identity and passes the machine ASR gate
+ok 281 - prototype-22 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 11.938625
+  type: 'test'
+  ...
+# Subtest: prototype-23 preserves source identity and passes the machine ASR gate
+ok 282 - prototype-23 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 14.775792
+  type: 'test'
+  ...
+# Subtest: prototype-24 preserves source identity and passes the machine ASR gate
+ok 283 - prototype-24 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 9.550583
+  type: 'test'
+  ...
+# Subtest: prototype-25 preserves source identity and passes the machine ASR gate
+ok 284 - prototype-25 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.815541
+  type: 'test'
+  ...
+# Subtest: prototype-26 preserves source identity and passes the machine ASR gate
+ok 285 - prototype-26 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 13.538291
+  type: 'test'
+  ...
+# Subtest: prototype-27 preserves source identity and passes the machine ASR gate
+ok 286 - prototype-27 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 35.088375
+  type: 'test'
+  ...
+# Subtest: prototype-28 preserves source identity and passes the machine ASR gate
+ok 287 - prototype-28 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.834625
+  type: 'test'
+  ...
+# Subtest: prototype-29 preserves source identity and passes the machine ASR gate
+ok 288 - prototype-29 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.670709
+  type: 'test'
+  ...
+# Subtest: prototype-30 preserves source identity and passes the machine ASR gate
+ok 289 - prototype-30 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 8.82675
+  type: 'test'
+  ...
+# Subtest: prototype-31 preserves source identity and passes the machine ASR gate
+ok 290 - prototype-31 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 8.112792
+  type: 'test'
+  ...
+# Subtest: prototype-32 preserves source identity and passes the machine ASR gate
+ok 291 - prototype-32 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 35.513166
+  type: 'test'
+  ...
+# Subtest: prototype-33 preserves source identity and passes the machine ASR gate
+ok 292 - prototype-33 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.557333
+  type: 'test'
+  ...
+# Subtest: prototype-34 preserves source identity and passes the machine ASR gate
+ok 293 - prototype-34 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 63.753708
+  type: 'test'
+  ...
+# Subtest: prototype-35 preserves source identity and passes the machine ASR gate
+ok 294 - prototype-35 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.642375
+  type: 'test'
+  ...
+# Subtest: prototype-36 preserves source identity and passes the machine ASR gate
+ok 295 - prototype-36 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 10.259333
+  type: 'test'
+  ...
+# Subtest: prototype-37 preserves source identity and passes the machine ASR gate
+ok 296 - prototype-37 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 32.643417
+  type: 'test'
+  ...
+# Subtest: prototype-38 preserves source identity and passes the machine ASR gate
+ok 297 - prototype-38 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.969584
+  type: 'test'
+  ...
+# Subtest: prototype-39 preserves source identity and passes the machine ASR gate
+ok 298 - prototype-39 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.7925
+  type: 'test'
+  ...
+# Subtest: prototype-40 preserves source identity and passes the machine ASR gate
+ok 299 - prototype-40 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 29.26175
+  type: 'test'
+  ...
+# Subtest: prototype-41 preserves source identity and passes the machine ASR gate
+ok 300 - prototype-41 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 25.541708
+  type: 'test'
+  ...
+# Subtest: prototype-44 fails closed when the only available source audio is silent
+ok 301 - prototype-44 fails closed when the only available source audio is silent
+  ---
+  duration_ms: 1.2815
+  type: 'test'
+  ...
+# Subtest: prototype-44 alternate audio format is independently confirmed silent
+ok 302 - prototype-44 alternate audio format is independently confirmed silent
+  ---
+  duration_ms: 0.124708
+  type: 'test'
+  ...
+# Subtest: study-group publication exposes every processed playlist entry
+ok 303 - study-group publication exposes every processed playlist entry
+  ---
+  duration_ms: 662.276958
+  type: 'test'
+  ...
+# Subtest: study-group publication records unavailable playlist entries instead of hiding them
+ok 304 - study-group publication records unavailable playlist entries instead of hiding them
+  ---
+  duration_ms: 0.551833
+  type: 'test'
+  ...
+# Subtest: Vue course selector knows the published study-group course
+ok 305 - Vue course selector knows the published study-group course
+  ---
+  duration_ms: 0.186083
+  type: 'test'
+  ...
+# Subtest: study-group presentation exposes quote and teacher-summary contracts
+ok 306 - study-group presentation exposes quote and teacher-summary contracts
+  ---
+  duration_ms: 4.2145
+  type: 'test'
+  ...
+# Subtest: session 14 source outline is preserved as a separate, traceable index
+ok 307 - session 14 source outline is preserved as a separate, traceable index
+  ---
+  duration_ms: 0.490417
+  type: 'test'
+  ...
+# Subtest: session 34 remains explicitly unbound after independent source audit
+ok 308 - session 34 remains explicitly unbound after independent source audit
+  ---
+  duration_ms: 5.587334
+  type: 'test'
+  ...
+# Subtest: session 16 and 17 share the next source outline index
+ok 309 - session 16 and 17 share the next source outline index
+  ---
+  duration_ms: 9.215583
+  type: 'test'
+  ...
+# Subtest: session 18 and 19 share the 32-10 source outline index
+ok 310 - session 18 and 19 share the 32-10 source outline index
+  ---
+  duration_ms: 42.218209
+  type: 'test'
+  ...
+# Subtest: session 20 and 21 share the 32-11 source outline index
+ok 311 - session 20 and 21 share the 32-11 source outline index
+  ---
+  duration_ms: 9.703666
+  type: 'test'
+  ...
+# Subtest: session 22 and 23 share the 32-28 source outline index
+ok 312 - session 22 and 23 share the 32-28 source outline index
+  ---
+  duration_ms: 10.032958
+  type: 'test'
+  ...
+# Subtest: session 24 and 25 share the 32-13 source outline index
+ok 313 - session 24 and 25 share the 32-13 source outline index
+  ---
+  duration_ms: 8.366208
+  type: 'test'
+  ...
+# Subtest: session 26 and 27 share the 32-14 source outline index
+ok 314 - session 26 and 27 share the 32-14 source outline index
+  ---
+  duration_ms: 6.020541
+  type: 'test'
+  ...
+# Subtest: session 28 and 29 share the 32-15 source outline index
+ok 315 - session 28 and 29 share the 32-15 source outline index
+  ---
+  duration_ms: 19.816
+  type: 'test'
+  ...
+# Subtest: session 30 and 31 share the 32-16 source outline index
+ok 316 - session 30 and 31 share the 32-16 source outline index
+  ---
+  duration_ms: 7.831333
+  type: 'test'
+  ...
+# Subtest: session 32 and 33 share the 32-17 source outline index
+ok 317 - session 32 and 33 share the 32-17 source outline index
+  ---
+  duration_ms: 6.300833
+  type: 'test'
+  ...
+# Subtest: session 35 and 36 share the 32-20 source outline index
+ok 318 - session 35 and 36 share the 32-20 source outline index
+  ---
+  duration_ms: 11.601666
+  type: 'test'
+  ...
+# Subtest: session 39 and 40 share the 32-25 source outline index
+ok 319 - session 39 and 40 share the 32-25 source outline index
+  ---
+  duration_ms: 99.215417
+  type: 'test'
+  ...
+# Subtest: session 37 and 38 share the 32-24 source outline index
+ok 320 - session 37 and 38 share the 32-24 source outline index
+  ---
+  duration_ms: 8.055583
+  type: 'test'
+  ...
+# Subtest: session 41 uses the 32-26 source outline index
+ok 321 - session 41 uses the 32-26 source outline index
+  ---
+  duration_ms: 4.757584
+  type: 'test'
+  ...
+# Subtest: session 03 and 04 share the 32-02 source outline index
+ok 322 - session 03 and 04 share the 32-02 source outline index
+  ---
+  duration_ms: 9.83225
+  type: 'test'
+  ...
+# Subtest: session 09 and 10 share the 32-05 source outline index
+ok 323 - session 09 and 10 share the 32-05 source outline index
+  ---
+  duration_ms: 61.292416
+  type: 'test'
+  ...
+# Subtest: session 01 and 02 share the 32-01 source outline index
+ok 324 - session 01 and 02 share the 32-01 source outline index
+  ---
+  duration_ms: 42.077375
+  type: 'test'
+  ...
+# Subtest: session 05 and 06 share the 32-03 source outline index
+ok 325 - session 05 and 06 share the 32-03 source outline index
+  ---
+  duration_ms: 10.151375
+  type: 'test'
+  ...
+# Subtest: session 07 and 08 share the 32-04 source outline index
+ok 326 - session 07 and 08 share the 32-04 source outline index
+  ---
+  duration_ms: 6.630584
+  type: 'test'
+  ...
+# Subtest: session 11 and 12 share the 32-06 source outline index
+ok 327 - session 11 and 12 share the 32-06 source outline index
+  ---
+  duration_ms: 7.349875
+  type: 'test'
+  ...
+# Subtest: session 13 uses the 32-07 source outline index
+ok 328 - session 13 uses the 32-07 source outline index
+  ---
+  duration_ms: 3.054708
+  type: 'test'
+  ...
+# Subtest: source-question mapping is complete, grounded, and remains candidate-only
+ok 329 - source-question mapping is complete, grounded, and remains candidate-only
+  ---
+  duration_ms: 38.860041
+  type: 'test'
+  ...
+# Subtest: session 15 source-question mapping remains an explicit partial candidate
+ok 330 - session 15 source-question mapping remains an explicit partial candidate
+  ---
+  duration_ms: 3.605416
+  type: 'test'
+  ...
+# Subtest: session 10 source-question mapping preserves explicit unmatched candidates
+ok 331 - session 10 source-question mapping preserves explicit unmatched candidates
+  ---
+  duration_ms: 0.754
+  type: 'test'
+  ...
+# Subtest: session 11 source-question mapping keeps uncertain matches candidate-only
+ok 332 - session 11 source-question mapping keeps uncertain matches candidate-only
+  ---
+  duration_ms: 37.330792
+  type: 'test'
+  ...
+# Subtest: all study-group sessions satisfy structural transcript contracts
+ok 333 - all study-group sessions satisfy structural transcript contracts
+  ---
+  duration_ms: 660.243208
+  type: 'test'
+  ...
+# Subtest: question and teacher-summary counts are not treated as the same data layer
+ok 334 - question and teacher-summary counts are not treated as the same data layer
+  ---
+  duration_ms: 4.579917
+  type: 'test'
+  ...
+# Subtest: published 27B text is traditional Chinese while raw ASR remains untouched
+ok 335 - published 27B text is traditional Chinese while raw ASR remains untouched
+  ---
+  duration_ms: 2.033375
+  type: 'test'
+  ...
+# Subtest: 27B only closes the paragraph whose final sentence is complete
+ok 336 - 27B only closes the paragraph whose final sentence is complete
+  ---
+  duration_ms: 1.746
+  type: 'test'
+  ...
+# Subtest: study-group publication ends inside a combined closing segment after the dedication
+ok 337 - study-group publication ends inside a combined closing segment after the dedication
+  ---
+  duration_ms: 1.081916
+  type: 'test'
+  ...
+# Subtest: audio-confirmed dedication is not dropped after the hand-clasp cue
+ok 338 - audio-confirmed dedication is not dropped after the hand-clasp cue
+  ---
+  duration_ms: 4.061916
+  type: 'test'
+  ...
+# Subtest: session 44 keeps a dedication split across adjacent ASR segments
+ok 339 - session 44 keeps a dedication split across adjacent ASR segments
+  ---
+  duration_ms: 89.255459
+  type: 'test'
+  ...
+# Subtest: updateSession keeps one listener set when reusing the same audio element
+ok 340 - updateSession keeps one listener set when reusing the same audio element
+  ---
+  duration_ms: 2.564583
+  type: 'test'
+  ...
+# Subtest: highlightSentenceByTime activates the correct sentence element
+ok 341 - highlightSentenceByTime activates the correct sentence element
+  ---
+  duration_ms: 0.59475
+  type: 'test'
+  ...
+# Subtest: startSimulatedPlayback initiates simulation and stopSimulatedPlayback halts it
+ok 342 - startSimulatedPlayback initiates simulation and stopSimulatedPlayback halts it
+  ---
+  duration_ms: 1.485042
+  type: 'test'
+  ...
+# Subtest: ⚡ Local Sync & Active Learning Server Test Suite
+not ok 343 - ⚡ Local Sync & Active Learning Server Test Suite
+  ---
+  duration_ms: 3109.50225
+  type: 'test'
+  location: '/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/syncServer.test.js:11:1'
+  failureType: 'testCodeFailure'
+  error: 'Sync Server failed to start on port 19091'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/syncServer.test.js:48:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: segmentSentences breaks paragraphs on pause >= 1.5s
+ok 344 - segmentSentences breaks paragraphs on pause >= 1.5s
+  ---
+  duration_ms: 1.200208
+  type: 'test'
+  ...
+# Subtest: findSentenceIndexByTime finds correct index using O(log N) binary search
+ok 345 - findSentenceIndexByTime finds correct index using O(log N) binary search
+  ---
+  duration_ms: 0.218959
+  type: 'test'
+  ...
+# Subtest: timeAligner: findSentenceIndexByTime returns -1 for empty/invalid inputs
+ok 346 - timeAligner: findSentenceIndexByTime returns -1 for empty/invalid inputs
+  ---
+  duration_ms: 0.998334
+  type: 'test'
+  ...
+# Subtest: timeAligner: findSentenceIndexByTime accurately finds sentence during active interval
+ok 347 - timeAligner: findSentenceIndexByTime accurately finds sentence during active interval
+  ---
+  duration_ms: 0.172209
+  type: 'test'
+  ...
+# Subtest: timeAligner: smoothly holds previous sentence highlight during speech pause gap
+ok 348 - timeAligner: smoothly holds previous sentence highlight during speech pause gap
+  ---
+  duration_ms: 0.207292
+  type: 'test'
+  ...
+# Subtest: timeAligner: respects ratio scaling when audio duration differs from transcript duration
+ok 349 - timeAligner: respects ratio scaling when audio duration differs from transcript duration
+  ---
+  duration_ms: 0.137667
+  type: 'test'
+  ...
+# Subtest: timeAligner: returns -1 before beginning and after end
+ok 350 - timeAligner: returns -1 before beginning and after end
+  ---
+  duration_ms: 0.818375
+  type: 'test'
+  ...
+# Subtest: M6.2: TOC contains exactly the expected mix of timestamps
+ok 351 - M6.2: TOC contains exactly the expected mix of timestamps
+  ---
+  duration_ms: 9.052542
+  type: 'test'
+  ...
+# Subtest: M6.2: Every zero-timestamp node has a valid sessionId for fallback navigation
+ok 352 - M6.2: Every zero-timestamp node has a valid sessionId for fallback navigation
+  ---
+  duration_ms: 1.807709
+  type: 'test'
+  ...
+# Subtest: TOC remediation: nested children render inside their parent list item
+ok 353 - TOC remediation: nested children render inside their parent list item
+  ---
+  duration_ms: 225.546167
+  type: 'test'
+  ...
+# Subtest: TOC remediation: initial course scope can render only the active session
+ok 354 - TOC remediation: initial course scope can render only the active session
+  ---
+  duration_ms: 35.353375
+  type: 'test'
+  ...
+# Subtest: TOC remediation: timestamp=0 nodes are pending anchors, not precise seek links
+ok 355 - TOC remediation: timestamp=0 nodes are pending anchors, not precise seek links
+  ---
+  duration_ms: 20.563291
+  type: 'test'
+  ...
+# Subtest: TOC remediation: broad sessionIds spans must be marked for review
+ok 356 - TOC remediation: broad sessionIds spans must be marked for review
+  ---
+  duration_ms: 2.304083
+  type: 'test'
+  ...
+# Subtest: TOC remediation: published sessions without TOC anchors require explicit coverage status
+ok 357 - TOC remediation: published sessions without TOC anchors require explicit coverage status
+  ---
+  duration_ms: 1.824083
+  type: 'test'
+  ...
+# Subtest: 📱 TOC Responsive Refactor & Cross-Session Tag De-noising
+    # Subtest: Pattern 1: Desktop Tag Collapse pins active session and collapses remaining sessions into +N ghost badge
+    ok 1 - Pattern 1: Desktop Tag Collapse pins active session and collapses remaining sessions into +N ghost badge
+      ---
+      duration_ms: 91.175708
+      type: 'test'
+      ...
+    # Subtest: Pattern 2: Mobile Bottom Sheet displays current session outline and dispatches seek callback
+    ok 2 - Pattern 2: Mobile Bottom Sheet displays current session outline and dispatches seek callback
+      ---
+      duration_ms: 15.00875
+      type: 'test'
+      ...
+    # Subtest: Pattern 3: Touch Ergonomics - seek and close buttons satisfy WCAG 44x44px target
+    ok 3 - Pattern 3: Touch Ergonomics - seek and close buttons satisfy WCAG 44x44px target
+      ---
+      duration_ms: 4.1845
+      type: 'test'
+      ...
+    # Subtest: Pattern 4: Mobile First-Screen Space - hides inline accordion and presents drawer trigger
+    ok 4 - Pattern 4: Mobile First-Screen Space - hides inline accordion and presents drawer trigger
+      ---
+      duration_ms: 6.083875
+      type: 'test'
+      ...
+    # Subtest: Pattern 5: Keyboard Accessibility - Escape dismisses bottom sheet and popover
+    ok 5 - Pattern 5: Keyboard Accessibility - Escape dismisses bottom sheet and popover
+      ---
+      duration_ms: 16.141625
+      type: 'test'
+      ...
+    1..5
+ok 358 - 📱 TOC Responsive Refactor & Cross-Session Tag De-noising
+  ---
+  duration_ms: 133.730375
+  type: 'suite'
+  ...
+# Subtest: 📑 科判與課文位置對應完整性測試 (TOC & Transcript Position Alignment Suite)
+    # Subtest: 1. Session Reference Integrity (All TOC nodes point to valid published sessions)
+    ok 1 - 1. Session Reference Integrity (All TOC nodes point to valid published sessions)
+      ---
+      duration_ms: 120.492167
+      type: 'test'
+      ...
+    # Subtest: 2. Timestamp Range Safety (All positive timestamps are within session bounds)
+    ok 2 - 2. Timestamp Range Safety (All positive timestamps are within session bounds)
+      ---
+      duration_ms: 0.759375
+      type: 'test'
+      ...
+    # Subtest: 3. Exact Sentence Hit Resolution (Simulates audio seeking for every node)
+    ok 3 - 3. Exact Sentence Hit Resolution (Simulates audio seeking for every node)
+      ---
+      duration_ms: 7.246958
+      type: 'test'
+      ...
+    # Subtest: 4. Paragraph Auto-Scroll Resolution (Simulates UI findParagraphByTime)
+    ok 4 - 4. Paragraph Auto-Scroll Resolution (Simulates UI findParagraphByTime)
+      ---
+      duration_ms: 0.499
+      type: 'test'
+      ...
+    # Subtest: 5. Strict Session Isolation Gate for Inline TOC Anchor Cards (Zero Cross-Session Leakage)
+    ok 5 - 5. Strict Session Isolation Gate for Inline TOC Anchor Cards (Zero Cross-Session Leakage)
+      ---
+      duration_ms: 1275.38025
+      type: 'test'
+      ...
+    1..5
+ok 359 - 📑 科判與課文位置對應完整性測試 (TOC & Transcript Position Alignment Suite)
+  ---
+  duration_ms: 1410.244666
+  type: 'test'
+  ...
+# Subtest: 🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字檢驗)
+    # Subtest: 1. Structure: course.json and toc.json are 100% Traditional Chinese
+    ok 1 - 1. Structure: course.json and toc.json are 100% Traditional Chinese
+      ---
+      duration_ms: 4.351917
+      type: 'test'
+      ...
+    # Subtest: 2. Transcripts: All converted session JSON files contain 0 simplified characters
+    ok 2 - 2. Transcripts: All converted session JSON files contain 0 simplified characters
+      ---
+      duration_ms: 692.387542
+      type: 'test'
+      ...
+    1..2
+ok 360 - 🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字檢驗)
+  ---
+  duration_ms: 697.915208
+  type: 'test'
+  ...
+# Subtest: auditor proposes source-grounded corrections for real 30B ASR artifacts
+ok 361 - auditor proposes source-grounded corrections for real 30B ASR artifacts
+  ---
+  duration_ms: 2.871959
+  type: 'test'
+  ...
+# Subtest: auditor does not blindly rewrite numbered bodhisattva grounds
+ok 362 - auditor does not blindly rewrite numbered bodhisattva grounds
+  ---
+  duration_ms: 0.3925
+  type: 'test'
+  ...
+# Subtest: auditor corrects the eye-consciousness passage from audio and source context
+ok 363 - auditor corrects the eye-consciousness passage from audio and source context
+  ---
+  duration_ms: 0.171583
+  type: 'test'
+  ...
+# Subtest: auditor keeps residual ASR artifacts visible after a partial correction
+ok 364 - auditor keeps residual ASR artifacts visible after a partial correction
+  ---
+  duration_ms: 0.0695
+  type: 'test'
+  ...
+# Subtest: auditor uses bounded context for recurring 30B homophones
+ok 365 - auditor uses bounded context for recurring 30B homophones
+  ---
+  duration_ms: 1.151334
+  type: 'test'
+  ...
+# Subtest: auditor preserves ordinary non-doctrinal uses of similar words
+ok 366 - auditor preserves ordinary non-doctrinal uses of similar words
+  ---
+  duration_ms: 0.146583
+  type: 'test'
+  ...
+# Subtest: auditor restores source phrases instead of isolated characters
+ok 367 - auditor restores source phrases instead of isolated characters
+  ---
+  duration_ms: 0.165458
+  type: 'test'
+  ...
+# Subtest: auditor restores the remaining page 101 source phrases
+ok 368 - auditor restores the remaining page 101 source phrases
+  ---
+  duration_ms: 0.19525
+  type: 'test'
+  ...
+# Subtest: auditor flags ambiguous speech instead of auto-correcting it
+ok 369 - auditor flags ambiguous speech instead of auto-correcting it
+  ---
+  duration_ms: 0.228208
+  type: 'test'
+  ...
+# Subtest: audio-context proposals stay likely when no decoder emitted the exact wording
+ok 370 - audio-context proposals stay likely when no decoder emitted the exact wording
+  ---
+  duration_ms: 0.303916
+  type: 'test'
+  ...
+# Subtest: only confirmed candidates are auto-applied
+ok 371 - only confirmed candidates are auto-applied
+  ---
+  duration_ms: 0.120292
+  type: 'test'
+  ...
+# Subtest: session application preserves raw text and appends auditable ledger entries
+ok 372 - session application preserves raw text and appends auditable ledger entries
+  ---
+  duration_ms: 0.687458
+  type: 'test'
+  ...
+# Subtest: repeated session audits preserve a cumulative run history
+ok 373 - repeated session audits preserve a cumulative run history
+  ---
+  duration_ms: 0.351792
+  type: 'test'
+  ...
+# Subtest: session report is machine-readable and preserves segment identity
+ok 374 - session report is machine-readable and preserves segment identity
+  ---
+  duration_ms: 1.80625
+  type: 'test'
+  ...
+# Subtest: session audit honors an evidence-bearing accepted-as-spoken exception
+ok 375 - session audit honors an evidence-bearing accepted-as-spoken exception
+  ---
+  duration_ms: 0.095042
+  type: 'test'
+  ...
+# Subtest: session audit carries an unresolved manual queue into the blocking report
+ok 376 - session audit carries an unresolved manual queue into the blocking report
+  ---
+  duration_ms: 0.13375
+  type: 'test'
+  ...
+# Subtest: CLI accepts multiple source files and writes a JSON report
+ok 377 - CLI accepts multiple source files and writes a JSON report
+  ---
+  duration_ms: 43.617
+  type: 'test'
+  ...
+# Subtest: CLI resolves a source page range relative to the session path
+ok 378 - CLI resolves a source page range relative to the session path
+  ---
+  duration_ms: 60.909042
+  type: 'test'
+  ...
+# Subtest: CLI fails closed when review warnings remain
+ok 379 - CLI fails closed when review warnings remain
+  ---
+  duration_ms: 40.426542
+  type: 'test'
+  ...
+# Subtest: applier merges adjacent paragraphs and preserves sentence fields
+ok 380 - applier merges adjacent paragraphs and preserves sentence fields
+  ---
+  duration_ms: 0.860667
+  type: 'test'
+  ...
+# Subtest: same ledger is idempotent after the merge is already present
+ok 381 - same ledger is idempotent after the merge is already present
+  ---
+  duration_ms: 0.153833
+  type: 'test'
+  ...
+# Subtest: heading boundary shifts the trailing sentence and preserves the heading
+ok 382 - heading boundary shifts the trailing sentence and preserves the heading
+  ---
+  duration_ms: 1.169166
+  type: 'test'
+  ...
+# Subtest: heading boundary removes the source paragraph when its only sentence moves
+ok 383 - heading boundary removes the source paragraph when its only sentence moves
+  ---
+  duration_ms: 0.152334
+  type: 'test'
+  ...
+# Subtest: stale baseline or manifest blocks before mutation
+ok 384 - stale baseline or manifest blocks before mutation
+  ---
+  duration_ms: 0.188583
+  type: 'test'
+  ...
+# Subtest: non-adjacent merge fails closed without partial changes
+ok 385 - non-adjacent merge fails closed without partial changes
+  ---
+  duration_ms: 0.1895
+  type: 'test'
+  ...
+# Subtest: D1 emits only source-grounded known-term corrections
+ok 386 - D1 emits only source-grounded known-term corrections
+  ---
+  duration_ms: 0.700541
+  type: 'test'
+  ...
+# Subtest: D2 marks an internal question boundary UNVERIFIED when audio alignment is required
+ok 387 - D2 marks an internal question boundary UNVERIFIED when audio alignment is required
+  ---
+  duration_ms: 0.129209
+  type: 'test'
+  ...
+# Subtest: D3 finds a cross-paragraph broken word without flagging a natural boundary
+ok 388 - D3 finds a cross-paragraph broken word without flagging a natural boundary
+  ---
+  duration_ms: 0.116292
+  type: 'test'
+  ...
+# Subtest: D4 requires source text, sentence text, sentence id and active session to agree
+ok 389 - D4 requires source text, sentence text, sentence id and active session to agree
+  ---
+  duration_ms: 0.092208
+  type: 'test'
+  ...
+# Subtest: shared loader resolves all 32 declared sessions with canonical ids
+ok 390 - shared loader resolves all 32 declared sessions with canonical ids
+  ---
+  duration_ms: 24.33875
+  type: 'test'
+  ...
+# Subtest: sentence index rejects duplicate ids instead of silently overwriting
+ok 391 - sentence index rejects duplicate ids instead of silently overwriting
+  ---
+  duration_ms: 0.277667
+  type: 'test'
+  ...
+# Subtest: immutable hash ignores published text and JSON field order
+ok 392 - immutable hash ignores published text and JSON field order
+  ---
+  duration_ms: 0.685917
+  type: 'test'
+  ...
+# Subtest: immutable hash detects raw ASR mutation
+ok 393 - immutable hash detects raw ASR mutation
+  ---
+  duration_ms: 0.215709
+  type: 'test'
+  ...
+# Subtest: verse selector supports v2 manifests and isolates active session
+ok 394 - verse selector supports v2 manifests and isolates active session
+  ---
+  duration_ms: 0.189084
+  type: 'test'
+  ...
+# Subtest: verse selector supports guarded legacy documents
+ok 395 - verse selector supports guarded legacy documents
+  ---
+  duration_ms: 0.057583
+  type: 'test'
+  ...
+# Subtest: 🎨 UI V2 Revamp: Desktop & Mobile UX Specifications
+    # Subtest: 1. DOM & CSS Contract: 780px Reading Container & 3-Segment Navbar
+    ok 1 - 1. DOM & CSS Contract: 780px Reading Container & 3-Segment Navbar
+      ---
+      duration_ms: 0.346166
+      type: 'test'
+      ...
+    # Subtest: 2. Playback Rate Module Contract: 1.0x / 1.2x / 1.5x / 2.0x
+    ok 2 - 2. Playback Rate Module Contract: 1.0x / 1.2x / 1.5x / 2.0x
+      ---
+      duration_ms: 0.972083
+      type: 'test'
+      ...
+    # Subtest: 3. Mobile Navigation Drawer & Resizer Contract
+    ok 3 - 3. Mobile Navigation Drawer & Resizer Contract
+      ---
+      duration_ms: 0.116375
+      type: 'test'
+      ...
+    # Subtest: 4. Mobile Action Sheet (⋯ 更多功能) Contract
+    ok 4 - 4. Mobile Action Sheet (⋯ 更多功能) Contract
+      ---
+      duration_ms: 0.04825
+      type: 'test'
+      ...
+    # Subtest: 5. Touch Context Menu (Long-Press Bubble Menu) Contract
+    ok 5 - 5. Touch Context Menu (Long-Press Bubble Menu) Contract
+      ---
+      duration_ms: 0.054333
+      type: 'test'
+      ...
+    # Subtest: 6. Return-to-Playing FAB Contract
+    ok 6 - 6. Return-to-Playing FAB Contract
+      ---
+      duration_ms: 0.0405
+      type: 'test'
+      ...
+    # Subtest: 7. Separate TOC-position button contract
+    ok 7 - 7. Separate TOC-position button contract
+      ---
+      duration_ms: 0.213792
+      type: 'test'
+      ...
+    1..7
+ok 396 - 🎨 UI V2 Revamp: Desktop & Mobile UX Specifications
+  ---
+  duration_ms: 4.40925
+  type: 'suite'
+  ...
+# Subtest: UX P0-1: index.html has header + sidebar course count elements
+ok 397 - UX P0-1: index.html has header + sidebar course count elements
+  ---
+  duration_ms: 0.502666
+  type: 'test'
+  ...
+# Subtest: UX P0-1: app.js updates course count from courseData
+ok 398 - UX P0-1: app.js updates course count from courseData
+  ---
+  duration_ms: 0.059916
+  type: 'test'
+  ...
+# Subtest: UX P0-2: index.html has breadcrumb navigation
+ok 399 - UX P0-2: index.html has breadcrumb navigation
+  ---
+  duration_ms: 0.045417
+  type: 'test'
+  ...
+# Subtest: UX P0-2: app.js updates breadcrumb on session switch
+ok 400 - UX P0-2: app.js updates breadcrumb on session switch
+  ---
+  duration_ms: 0.108792
+  type: 'test'
+  ...
+# Subtest: UX P0-3: index.html has prev/next session buttons in player
+ok 401 - UX P0-3: index.html has prev/next session buttons in player
+  ---
+  duration_ms: 0.044541
+  type: 'test'
+  ...
+# Subtest: UX P0-3: app.js implements session navigation
+ok 402 - UX P0-3: app.js implements session navigation
+  ---
+  duration_ms: 0.078375
+  type: 'test'
+  ...
+# Subtest: UX P0-3: app.js appends end-of-session card
+ok 403 - UX P0-3: app.js appends end-of-session card
+  ---
+  duration_ms: 0.095917
+  type: 'test'
+  ...
+# Subtest: UX P1: index.html has course overview entry button
+ok 404 - UX P1: index.html has course overview entry button
+  ---
+  duration_ms: 0.034458
+  type: 'test'
+  ...
+# Subtest: UX P1: app.js implements course overview
+ok 405 - UX P1: app.js implements course overview
+  ---
+  duration_ms: 0.272417
+  type: 'test'
+  ...
+# Subtest: UX P2: index.html has sidebar filter input
+ok 406 - UX P2: index.html has sidebar filter input
+  ---
+  duration_ms: 0.25
+  type: 'test'
+  ...
+# Subtest: UX P2: app.js implements sidebar filter
+ok 407 - UX P2: app.js implements sidebar filter
+  ---
+  duration_ms: 0.104042
+  type: 'test'
+  ...
+# Subtest: UX P2: renderSidebar renders all sessions when no filter
+ok 408 - UX P2: renderSidebar renders all sessions when no filter
+  ---
+  duration_ms: 47.798875
+  type: 'test'
+  ...
+# Subtest: UX CSS: main.css has styles for new components
+ok 409 - UX CSS: main.css has styles for new components
+  ---
+  duration_ms: 0.093542
+  type: 'test'
+  ...
+# Subtest: 🔍 Web UI Review Confirmation Markers Contract
+ok 410 - 🔍 Web UI Review Confirmation Markers Contract
+  ---
+  duration_ms: 2.154167
+  type: 'test'
+  ...
+#   ==============================================================
+#   📊 [Web Source Completeness Audit Report]
+#   • 官方原始總講次 (Canonical Web): 219 講
+#   • 目前已轉寫講次 (Completed on Disk): 219 講
+#   • 目前缺失待補講次 (Missing Backlog): 0 講
+#   • 全庫轉譯涵蓋率 (Coverage Ratio): 100.00%
+#   --------------------------------------------------------------
+#   🎉 全 219 講音檔已 100% 全數轉寫完成！
+#   ==============================================================
+# Subtest: 🌐 Web Source Completeness & Inventory Audit Gate
+    # Subtest: 1. Canonical Web Catalog Matrix defines exactly 219 lecture sessions
+    ok 1 - 1. Canonical Web Catalog Matrix defines exactly 219 lecture sessions
+      ---
+      duration_ms: 1.490917
+      type: 'test'
+      ...
+    # Subtest: 2. Dynamic Gap Detection: Discovers, audits and reports all missing sessions
+    ok 2 - 2. Dynamic Gap Detection: Discovers, audits and reports all missing sessions
+      ---
+      duration_ms: 2.308083
+      type: 'test'
+      ...
+    # Subtest: 3. Full 219-Session Completeness Acceptance Gate
+    ok 3 - 3. Full 219-Session Completeness Acceptance Gate
+      ---
+      duration_ms: 0.593417
+      type: 'test'
+      ...
+    # Subtest: 4. Zero orphaned transcripts: all disk sessions registered in course.json and audio_map.json
+    ok 4 - 4. Zero orphaned transcripts: all disk sessions registered in course.json and audio_map.json
+      ---
+      duration_ms: 3.724792
+      type: 'test'
+      ...
+    # Subtest: 5. Remote Audio Provenance: all mapped URLs point to official Flyday repository
+    ok 5 - 5. Remote Audio Provenance: all mapped URLs point to official Flyday repository
+      ---
+      duration_ms: 0.349917
+      type: 'test'
+      ...
+    # Subtest: 6. Transcript Content Integrity: all completed sessions have non-empty text and monotonic timestamps
+    ok 6 - 6. Transcript Content Integrity: all completed sessions have non-empty text and monotonic timestamps
+      ---
+      duration_ms: 261.865708
+      type: 'test'
+      ...
+    # Subtest: 7. Treatise Source Text Coverage: all 285 pages are present
+    ok 7 - 7. Treatise Source Text Coverage: all 285 pages are present
+      ---
+      duration_ms: 0.933625
+      type: 'test'
+      ...
+    1..7
+ok 411 - 🌐 Web Source Completeness & Inventory Audit Gate
+  ---
+  duration_ms: 272.466958
+  type: 'suite'
+  ...
+# Subtest: Whisper Parameter Contract: batch_convert_all.py
+ok 412 - Whisper Parameter Contract: batch_convert_all.py
+  ---
+  duration_ms: 1.041
+  type: 'test'
+  ...
+# Subtest: Whisper Parameter Contract: run_whisper_gpu.py
+ok 413 - Whisper Parameter Contract: run_whisper_gpu.py
+  ---
+  duration_ms: 2.202958
+  type: 'test'
+  ...
+# Subtest: Xiaofa skill requires an isolated task workspace in every dispatch template
+ok 414 - Xiaofa skill requires an isolated task workspace in every dispatch template
+  ---
+  duration_ms: 0.47425
+  type: 'test'
+  ...
+# Subtest: Xiaofa skill does not hard-code test counts or grant auto-merge authority
+ok 415 - Xiaofa skill does not hard-code test counts or grant auto-merge authority
+  ---
+  duration_ms: 1.524333
+  type: 'test'
+  ...
+# Subtest: temporary Agent network access is allowlisted instead of absolutely forbidden
+ok 416 - temporary Agent network access is allowlisted instead of absolutely forbidden
+  ---
+  duration_ms: 0.190875
+  type: 'test'
+  ...
+# Subtest: raw and published timestamp permissions are explicitly separated
+ok 417 - raw and published timestamp permissions are explicitly separated
+  ---
+  duration_ms: 0.203042
+  type: 'test'
+  ...
+1..417
+# tests 530
+# suites 9
+# pass 527
+# fail 1
+# cancelled 0
+# skipped 2
+# todo 0
+# duration_ms 5618.816209
+EXIT_CODE=1

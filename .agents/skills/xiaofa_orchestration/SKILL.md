@@ -16,6 +16,12 @@ content, audio/ASR artifacts, and the web table of contents. It complements
 
 ## Core principle
 
+For playlist batches and low-token coordination, first read
+[Batch coordination](references/batch-coordination.md). It defines progress
+classification, baseline reconciliation, and the limits of mechanical review.
+Use those rules when interpreting the recovery guidance below: lack of output
+alone is not a stall, and worker test success is not content acceptance.
+
 Command the work as a sequence of proof-producing milestones, not as one large
 request to "finish the page". Every milestone must produce an artifact that a
 new agent can inspect without trusting a chat summary.
@@ -84,7 +90,9 @@ python3 scripts/prepare_session_manifest.py --list      # Inspect session invent
 ```
 
 ### Preflight: Verify local microservices health & SSH Tunnel
-All 219 sessions have been 100% transcribed. For ongoing calibration and proofreading, the system uses a **Zero-Token SSH Tunnel Decoupled Orchestration Architecture**:
+Verify current course coverage from its authoritative inventory; historical
+219-session counts do not describe a different playlist. For ongoing calibration
+and proofreading, the system supports an SSH tunnel architecture:
 * **Mac Orchestrator**: Maintains clean local git worktree, executes test suites (`npm test`), and dispatches batch tasks without burning cloud context tokens.
 * **Remote GX10 Host**: Headless GPU compute host hosting Whisper (Port 8010) and vLLM Qwen3.8-27B (Port 8001).
 
@@ -107,7 +115,9 @@ If either service is unresponsive, halt with `BLOCKED`.
 Based on the full 219-session production rollout and continuous calibration:
 1. **Decoupled Local/Remote Architecture**:
    - Do NOT run interactive git operations or maintain a shared dirty clone directly on gx10 (`/home/henry/.gx10/xiaofa/workspace`).
-   - Run Python drivers locally on Mac via port forwarding (`http://127.0.0.1:18001/v1`), keeping code edits and git history strictly local, clean, and testable.
+   - Use local drivers via port forwarding, or a task-owned clean GX10 clone
+     when remote agent execution is requested. Record its baseline and one
+     writer; never use a shared dirty checkout.
 2. **Zero-Token Orchestrator Invariant**:
    - The Orchestrator (Claude / Antigravity) must never load full session transcripts into the cloud conversation context. All heavy semantic diffing and parsing must be delegated to local scripts running against the local Qwen3.8-27B endpoint.
 3. **Mandatory Post-Processing Sanity Gates**:
@@ -179,9 +189,10 @@ must never share the production checkout with another worker.
    entries do not invent ranges.
 6. Dispatch a second read-only Agent against the first artifact in a separate
    task directory. It must return `PASS`, `FAIL`, or `BLOCKED` with evidence.
-7. If the Agent stalls or fails to write its artifact before the limit, reclaim
-   it and record the failure. Do not restart the same broad prompt in the same
-   workspace; reduce the input slice or split exploration from adjudication.
+7. If output is delayed, inspect the existing run and stage evidence first.
+   Use a documented stage deadline and confirmed process identity before any
+   permitted cancellation. Reconcile partial artifacts before retrying; do not
+   restart merely because a polling call timed out.
 8. Only the orchestrator applies confirmed changes in the clean local checkout,
    runs RED/GREEN and regression tests, commits with an identifiable author,
    and pushes to GitHub. Preserve manifests, logs, hashes, and review results;
@@ -430,6 +441,23 @@ For an ambiguous audio span, use this adjudication order:
    queue;
 6. send only the compact unresolved queue to a stronger or human reviewer.
 
+For bounded audio audits, put the permitted decoder, maximum clip count, and
+maximum clip duration in the frozen manifest. Use the existing GX10 GPU ASR
+service when it is available. A worker may not silently download a full source
+and load a local CPU `faster-whisper` model to inspect a few anchors: that is a
+resource-boundary failure, not an acceptable fallback. On that failure, stop,
+record the temporary-media paths, delete them, and retry only with short
+manifest-listed clips and an approved decoder.
+
+On the current GX10 host, the verified short-window chain is
+`/home/henry/.local/lib/yt-dlp-new/bin/yt-dlp` with
+`--js-runtimes node:/home/henry/.hermes/node/bin/node`, `/usr/bin/ffmpeg`, and
+`http://127.0.0.1:8010/v1/audio/transcriptions`. The ASR response currently
+returns `text` but not segment arrays, so evidence must record the clip hash,
+request/runtime identity, response hash, and bounded anchor range. Always use
+a task-specific temporary directory with an exit trap that deletes it, and
+verify its absence after the run.
+
 This makes weak-agent work efficient: deterministic scans handle the full
 transcript, while expensive reasoning is limited to timestamped exceptions.
 
@@ -492,10 +520,10 @@ For a new transcript/session, the final closeout requires:
 
 ## Recovery pattern for slow or ambiguous Agent runs
 
-When a full-session editor or reviewer stalls during initialization, do not
-retry the same broad prompt in the same workspace. Reclaim the process, keep
-the fixed manifest, and reduce the next task to a short audio window plus the
-smallest source-text span that can decide one issue. Run at least two decoding
+When a full-session editor or reviewer has a verified terminal failure, preserve
+the fixed manifest and completed artifacts. Diagnose the failed stage before
+retrying. For an unresolved editorial issue, reduce the next task to a short
+audio window plus the smallest source-text span that can decide it. Run at least two decoding
 settings when the phrase is acoustically uncertain, but treat agreement as
 ASR evidence rather than editorial proof.
 
@@ -602,6 +630,14 @@ configuration. Before content work, run a bounded model smoke and inspect its
 output for authentication failures or an unexpected fallback. Record the
 effective provider/model in `worker.json`. A response that happens to contain
 the requested words is insufficient when the runtime identity is wrong.
+
+GX10's non-interactive SSH shell may not expose `node` or `npm`, even though
+Hermes actions can use them. For repository test work, resolve and record the
+runtime before the RED gate. The verified runtime on GX10 is currently
+`/home/henry/.hermes/node/bin`; invoke tests with
+`PATH=/home/henry/.hermes/node/bin:$PATH` (or the newly verified equivalent).
+Treat a missing command on an unprepared shell as an environment-preflight
+failure, not as a failing repository test.
 
 Prefer Xiaofa's local Qwen provider for repository discovery and deterministic
 evidence work; keep a cloud model as a single explicit fallback. Do not repeat
