@@ -88,7 +88,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=8)
-    parser.add_argument("--batch", type=int, default=256)
+    parser.add_argument("--batch", type=int, default=64)
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     run_id = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -99,7 +99,7 @@ def main():
         path = COURSE / "sessions" / f"session_{number:02d}.json"
         data, records, clear, pending, changes = process(path, args.batch, args.apply)
         if args.apply:
-            shutil.copy2(path, out / path.name)
+            shutil.copy2(path, out / f"{path.stem}.before{path.suffix}")
             path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         report = {"sessionId": f"{number:02d}", "clear": clear, "pending": pending, "changedFlags": len(changes), "batches": records}
         (out / f"session_{number:02d}.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
