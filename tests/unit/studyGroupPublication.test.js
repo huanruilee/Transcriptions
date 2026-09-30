@@ -30,9 +30,9 @@ test('study-group publication exposes every processed playlist entry', () => {
     assert.equal(fs.existsSync(sessionPath), true, `missing published session ${session.sessionId}`);
     const payload = JSON.parse(fs.readFileSync(sessionPath, 'utf8'));
     assert.equal(payload.sessionId, session.sessionId);
+    assert.ok(payload.audioUrl || payload.youtubeVideoId, `missing media source ${session.sessionId}`);
     assert.ok(['candidate', 'review-ready'].includes(payload.transcriptStatus));
     assert.ok(payload.paragraphs.length > 0, `empty transcript ${session.sessionId}`);
-    assert.ok(payload.audioUrl || payload.youtubeVideoId, `missing media source ${session.sessionId}`);
     if (session.sessionId !== '27B') {
       const sentences = payload.paragraphs.flatMap((paragraph) => paragraph.sentences);
       assert.ok(sentences.some((sentence) => sentence.reviewNeeded === false), `all sentences incorrectly flagged ${session.sessionId}`);
@@ -42,14 +42,15 @@ test('study-group publication exposes every processed playlist entry', () => {
   assert.equal(course.sessions.find((session) => session.sessionId === '14').displaySessionId, '8上');
   assert.equal(course.sessions.find((session) => session.sessionId === '27').displaySessionId, '14下');
   assert.equal(course.sessions.find((session) => session.sessionId === '27B').displaySessionId, '27下');
+  assert.deepEqual(course.pendingSessions.map((session) => session.sessionId), ['42', '43']);
+  assert.equal(course.pendingSessions.find((session) => session.sessionId === '42').displaySessionId, '26下');
+  assert.equal(course.pendingSessions.find((session) => session.sessionId === '43').displaySessionId, '27上');
 });
 
 test('study-group publication records unavailable playlist entries instead of hiding them', () => {
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
   assert.deepEqual(course.unavailableSessions, [
-    { playlistIndex: 42, reason: 'youtube_unavailable' },
-    { playlistIndex: 43, reason: 'youtube_private' },
-    { playlistIndex: 44, reason: 'source_audio_silent' },
+    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
   ]);
 });
 

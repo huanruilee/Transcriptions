@@ -15,8 +15,8 @@ test('all study-group sessions satisfy structural transcript contracts', () => {
   assert.equal(course.sessions.length, 42);
   for (const entry of course.sessions) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
-    const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
     assert.ok(session.audioUrl || session.youtubeVideoId, `missing media ${entry.sessionId}`);
+    const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
     assert.ok(sentences.length > 0, `empty transcript ${entry.sessionId}`);
     for (const sentence of sentences) {
       assert.equal(typeof sentence.start, 'number', `missing start ${entry.sessionId}/${sentence.id}`);
@@ -79,11 +79,11 @@ test('audio-confirmed dedication is not dropped after the hand-clasp cue', () =>
   ]);
 });
 
-test('silent playlist 44 is explicitly unavailable rather than published', () => {
+test('private playlist 44 is explicitly unavailable rather than published', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
   assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
   assert.deepEqual(
     course.unavailableSessions.find((item) => item.playlistIndex === 44),
-    { playlistIndex: 44, reason: 'source_audio_silent' },
+    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
   );
 });

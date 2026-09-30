@@ -3,9 +3,9 @@
 - playlistUrl: https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh
 - playlistId: PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh
 - channel: 如理作意 (UC5KTc52arz3GOeHLPCag-vw)
-- declaredCount: 44  visibleCount: 44  hiddenOrUnavailableCount: 2
-- executableTranscriptScope: 42 / 44
-- retrievedAt: 2026-09-10T07:30:14Z
+- declaredCount: 44  visibleCount: 44  hiddenOrUnavailableCount: 1
+- executableTranscriptScope: 43 / 44
+- retrievedAt: 2026-09-28T15:25:29Z
 - schema: transcriptions/playlist_inventory/v1
 
 ## Items
@@ -53,14 +53,14 @@
 | 39 | `lu1dedE3Ncs` | 25 | 上 | 第25講 集諦的前三種行相（上）｜2025《釋量論・第二品》大組共學 | 2:43:12 | ✓ |  |
 | 40 | `_gPAgRMUgkA` | 25 | 下 | 第25講 集諦的前三種行相（下）｜2025《釋量論・第二品》大組共學 | 2:50:21 | ✓ |  |
 | 41 | `AtYqSdUIXDo` | 26 | 上 | 第26講 集諦與滅諦的行相（上）｜2025《釋量論・第二品》大組共學 | 2:37:16 | ✓ |  |
-| 42 | `BGruVOFnFhI` | None | — | NA | NA | ✗ | Video unavailable |
-| 43 | `8sDCFUj5E_c` | None | — | NA | NA | ✗ | Private video |
-| 44 | `lBOiFeGQblw` | 26 | 下 | 第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學 | 2:50:32 | ✓ |  |
+| 42 | `lBOiFeGQblw` | 26 | 下 | 第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學 | 2:50:32 | ✓ |  |
+| 43 | `8sDCFUj5E_c` | 27 | 上 | 第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學 | 2:46:22 | ✓ |  |
+| 44 | `C0yhUazs0CU` | — | — | NA | NA | ✗ | Private video |
 
 ## Scope Decision
 
-- Executable transcript scope: **42 / 44** items.
-- Excluded: **2** — entry 42 (BGruVOFnFhI, Video unavailable) and entry 43 (8sDCFUj5E_c, Private video).
+- Executable transcript scope: **43 / 44** items.
+- Excluded: **1** — entry 44 (C0yhUazs0CU, Private video).
 - Include criteria: playlistIndex present AND videoId resolvable AND status == playable.
 - Out-of-band note: entry 34 has no lecture number (前後世學習回顧與自我省思) — retained, normalized=False, lecture=null.
 - Out-of-band note: lecture numbering jumps from 17 → 23 between entries 33/34 → 35 (lectures 18–22 not present in this playlist).
@@ -68,9 +68,9 @@
 ## Evidence
 
 - Fetch: `yt-dlp --flat-playlist --print ... --skip-download --no-update <playlist_url>` (no media downloaded).
-- yt-dlp version: 2026.03.17.
+- yt-dlp version: 2026.07.04.
 - Playlist-level metadata verified via separate `--print` calls for `playlist_title`, `playlist_channel`, `playlist_channel_id`, `playlist_uploader`.
-- Per-item availability for entries 42 & 43 verified with `yt-dlp -F <watch_url>` — see `evidence.unplayableVerifications` in JSON.
+- Per-item availability for entry 44 verified with `yt-dlp -F <watch_url>` — see `evidence.unplayableVerifications` in JSON.
 
 ## Files
 
