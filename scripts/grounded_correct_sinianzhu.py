@@ -98,7 +98,7 @@ def ask(system, payload, endpoint=ENDPOINT, model=MODEL, api_key=API_KEY, max_to
     last_error = None
     for attempt in range(3):
         try:
-            request_timeout = 30 if endpoint.startswith("https://agents.eneural.ai") else 90
+            request_timeout = 30 if endpoint.startswith("https://agents.eneural.ai") else int(os.environ.get("LOCAL_REVIEW_TIMEOUT", "90"))
             with urllib.request.urlopen(req, timeout=request_timeout) as response:
                 content = json.load(response)["choices"][0]["message"].get("content", "")
             break
