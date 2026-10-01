@@ -116,6 +116,11 @@ describe('釋量論第二品第一講 UI 路由與影音回歸合約', () => {
     expect(wrapper.find('#course-chooser').exists()).toBe(true);
     expect(wrapper.findAll('.course-choice')).toHaveLength(4);
     expect(wrapper.find('#course-chooser').text()).toContain('請選擇課程');
+    expect(wrapper.find('.course-chooser-kicker').text()).toContain('佛法研讀平台');
+    expect(wrapper.findAll('.course-choice-eyebrow')).toHaveLength(4);
+    expect(wrapper.findAll('.course-choice-master')).toHaveLength(4);
+    expect(wrapper.findAll('.course-choice-summary')).toHaveLength(4);
+    expect(wrapper.findAll('.course-choice-enter')).toHaveLength(4);
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
