@@ -791,8 +791,9 @@ const currentTranscriptStatus = computed(() =>
 const currentTranscriptLabel = computed(() => {
   const labels: Record<string, string> = {
     approved: '✅ 已校勘核定',
+    published: '✅ 已發布',
     'review-ready': '🟡 待審閱',
-    candidate: '🟡 候選稿',
+    candidate: '🟡 候選稿，待內容核定',
     'candidate-review-required': '🟡 待審閱候選稿',
     'not-transcribed': '🎬 影片已上架・逐字稿待製作',
     unmarked: '⚪ 尚未標示校勘狀態',
