@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
 import { createPinia } from 'pinia';
 import fs from 'node:fs';
@@ -7,7 +7,16 @@ import App from '../../src/App.vue';
 // Exercise the real course/session JSON through App's actual fetch route.
 describe('四念住 reader', () => {
   let wrapper: ReturnType<typeof mount> | undefined;
-  afterEach(() => { wrapper?.unmount(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
+  });
+  afterEach(() => {
+    wrapper?.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
   it.each(['', '#session-08'])('loads candidate text and navigation at %s', async (hash) => {
     window.history.replaceState({}, '', `/?course=si-nian-zhu${hash}`);
     const requests: string[] = [];
@@ -29,5 +38,5 @@ describe('四念住 reader', () => {
     expect(wrapper.text()).toContain('玅境長老');
     expect(wrapper.find('#youtube-iframe').attributes('src')).toContain(data.youtubeVideoId);
     expect(window.location.hash).toBe(`#session-${id}`);
-  });
+  }, 15000); // Real 2,000-sentence fixtures need headroom under parallel CI load.
 });
