@@ -1,0 +1,60 @@
+
+> transcriptions-platform@1.1.0-dev test:v2
+> vitest run tests/unit_v2/sinianzhuReadability.test.ts
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /private/tmp/transcriptions-246-20261006
+
+stderr | tests/unit_v2/sinianzhuReadability.test.ts > 四念住 reader > loads candidate text and navigation at 
+載入講次 02A 逐字稿失敗: Error: HTTP 404
+    at loadSession (/private/tmp/transcriptions-246-20261006/src/App.vue:1549:24)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at /private/tmp/transcriptions-246-20261006/src/App.vue:1436:3
+
+ ❯ tests/unit_v2/sinianzhuReadability.test.ts (2 tests | 2 failed) 286ms
+   ❯ 四念住 reader (2)
+     × loads candidate text and navigation at  46ms
+     × loads candidate text and navigation at #session-08 240ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit_v2/sinianzhuReadability.test.ts > 四念住 reader > loads candidate text and navigation at 
+AssertionError: expected [ 'courses/四念住/course.json', …(2) ] to include 'courses/四念住/sessions/session_01.json'
+ ❯ tests/unit_v2/sinianzhuReadability.test.ts:24:22
+     22|     const id = hash ? '08' : '01';
+     23|     const data = JSON.parse(fs.readFileSync(`courses/四念住/sessions/sess…
+     24|     expect(requests).toContain(`courses/四念住/sessions/session_${id}.jso…
+       |                      ^
+     25|     expect(requests.some(p => p.includes('session_02A'))).toBe(false);
+     26|     expect(wrapper.findAll('.session-item')).toHaveLength(8);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit_v2/sinianzhuReadability.test.ts > 四念住 reader > loads candidate text and navigation at #session-08
+AssertionError: expected [] to have a length of 8 but got +0
+
+- Expected
++ Received
+
+- 8
++ 0
+
+ ❯ tests/unit_v2/sinianzhuReadability.test.ts:26:46
+     24|     expect(requests).toContain(`courses/四念住/sessions/session_${id}.jso…
+     25|     expect(requests.some(p => p.includes('session_02A'))).toBe(false);
+     26|     expect(wrapper.findAll('.session-item')).toHaveLength(8);
+       |                                              ^
+     27|     expect(wrapper.text()).toContain(data.paragraphs[0].sentences[0].t…
+     28|     expect(wrapper.text()).toContain('待審閱候選稿');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  11:25:27
+   Duration  1.04s (transform 36%, tests 30%, environment 25%, import 8%)
+

@@ -26,13 +26,31 @@ SPEC.loader.exec_module(correction)
 SYSTEM = """You are a conservative Buddhist transcript quality gatekeeper. Review every supplied sentence for semantic, doctrinal, homophone, proper-noun, quotation, or missing-word uncertainty. Return ONLY JSON of this exact form: {\"reviewed_count\": N, \"uncertain_ids\": [\"seg-id\", ...]}. N must equal the number of supplied items. List every sentence that needs audio/source or human confirmation. Do not list clear sentences. Do not rewrite text and do not omit review coverage."""
 
 
+def source_ids(items):
+    ids = [item.get("id") for item in items]
+    if any(not isinstance(sid, str) or not sid.strip() for sid in ids) or len(set(ids)) != len(ids):
+        raise ValueError("source IDs must be unique non-empty strings")
+    return set(ids)
+
+
+def positive_batch(value):
+    number = int(value)
+    if number <= 0:
+        raise argparse.ArgumentTypeError("batch must be positive")
+    return number
+
+
 def validate(result, chunk):
-    ids = {item["id"] for item in chunk}
+    ids = source_ids(chunk)
+    if not isinstance(result, dict):
+        raise ValueError("response must be an object")
     uncertain = result.get("uncertain_ids")
-    if result.get("reviewed_count") != len(chunk) or not isinstance(uncertain, list):
+    if type(result.get("reviewed_count")) is not int or result["reviewed_count"] != len(chunk) or not isinstance(uncertain, list):
         raise ValueError("coverage mismatch")
-    if any(item_id not in ids for item_id in uncertain):
+    if any(not isinstance(item_id, str) or item_id not in ids for item_id in uncertain):
         raise ValueError("unknown uncertain id")
+    if len(set(uncertain)) != len(uncertain):
+        raise ValueError("duplicate uncertain id")
     return set(uncertain)
 
 
@@ -43,8 +61,13 @@ def gate(chunk, endpoint, model, key):
 
 
 def process(path, batch_size, apply_changes):
+    if type(batch_size) is not int or batch_size <= 0:
+        raise ValueError("batch size must be a positive integer")
     data = json.loads(path.read_text(encoding="utf-8"))
     source = correction.items_for(data)
+    source_ids(source)
+    if not source:
+        raise ValueError("no sentences to review")
     chunks = [source[i:i + batch_size] for i in range(0, len(source), batch_size)]
     records = []
     def run(chunk):
@@ -88,7 +111,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=8)
-    parser.add_argument("--batch", type=int, default=64)
+    parser.add_argument("--batch", type=positive_batch, default=64)
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
     run_id = datetime.now().strftime("%Y%m%d-%H%M%S")
