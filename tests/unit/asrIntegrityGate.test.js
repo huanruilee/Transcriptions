@@ -77,6 +77,15 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
         schemaErrors.push(`${file}: 'paragraphs' must be an array`);
         return;
       }
+      if (data.transcriptStatus === 'not-transcribed') {
+        if (data.paragraphs.length !== 0) {
+          schemaErrors.push(`${file}: not-transcribed sessions must not contain transcript paragraphs`);
+        }
+        if (!data.audioUrl && !data.youtubeVideoId) {
+          schemaErrors.push(`${file}: not-transcribed sessions must retain a verified media source`);
+        }
+        return;
+      }
       if (data.paragraphs.length === 0) {
         schemaErrors.push(`${file}: 'paragraphs' must not be empty`);
         return;

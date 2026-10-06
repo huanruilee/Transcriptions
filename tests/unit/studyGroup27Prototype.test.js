@@ -214,12 +214,12 @@ test('publication builder --help exits without running the mutating build', () =
   assert.match(result.stdout, /usage:/i);
 });
 
-test('study-group publication keeps silent playlist 44 unavailable', () => {
+test('study-group publication keeps private playlist 44 unavailable', () => {
   const course = readJson(`${COURSE_PATH}/course.json`);
   assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
   assert.deepEqual(
     course.unavailableSessions.find((item) => item.playlistIndex === 44),
-    { playlistIndex: 44, reason: 'source_audio_silent' },
+    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
   );
 });
 
