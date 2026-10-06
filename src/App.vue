@@ -269,6 +269,11 @@
           @seek="handleTOCSeek"
         />
 
+        <TranscriptOverview
+          v-if="currentTranscriptOverview"
+          :overview="currentTranscriptOverview"
+        />
+
         <section v-if="sourceOutline" class="source-outline" aria-label="原始課程提綱">
           <h2 class="source-outline-heading">原始課程提綱</h2>
           <ol class="source-outline-list">
@@ -658,6 +663,7 @@ import TOCAccordion from './components/TOCAccordion.vue';
 import TOCBottomSheet from './components/TOCBottomSheet.vue';
 import EndOfSessionCard from './components/EndOfSessionCard.vue';
 import TouchContextMenu from './components/TouchContextMenu.vue';
+import TranscriptOverview from './components/TranscriptOverview.vue';
 import { searchSentences, navigateMatch, type SearchMatch } from './composables/useSearchEngine';
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
@@ -670,6 +676,10 @@ import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 import { selectVerseAnnotations } from './utils/verseAnnotations';
 import { seekAndPlayAudio } from './js/audioPlayback.js';
+import {
+  buildTranscriptOverview,
+  type TranscriptOverview as TranscriptOverviewData,
+} from './composables/useTranscriptOverview';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -685,6 +695,7 @@ const searchInputRef = ref<HTMLInputElement | null>(null);
 const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | null>(null);
 const sourceOutline = ref<any>(null);
 const currentDiscussionQuestions = ref<any[]>([]);
+const currentTranscriptOverview = ref<TranscriptOverviewData | null>(null);
 const isAudioLoading = ref(false);
 const isCourseChooserOpen = ref(false);
 const isChoosingCourse = ref(false);
@@ -955,6 +966,7 @@ function handleDownloadTranscript() {
       transcriptStatus: currentTranscriptStatus.value,
     },
     paragraphs.value,
+    currentTranscriptOverview.value,
   );
   const filename = buildTranscriptFilename(currentCourseTitle.value, currentSessionId.value);
   downloadTranscriptFile(filename, content);
@@ -1516,6 +1528,7 @@ async function loadSession(sessionId: string) {
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
   isLoading.value = true;
+  currentTranscriptOverview.value = null;
 
   const pendingSession = courseStore.sessions.find(
     (session) => session.id === sessionId && session.pendingTranscript,
@@ -1530,6 +1543,7 @@ async function loadSession(sessionId: string) {
     currentAgentReviewedCount.value = 0;
     currentAgentUncertainCount.value = 0;
     currentDiscussionQuestions.value = [];
+    currentTranscriptOverview.value = null;
     paragraphs.value = [];
     mediaDuration.value = 0;
     isMediaPlaying.value = false;
@@ -1580,6 +1594,7 @@ async function loadSession(sessionId: string) {
       : 0;
     currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
+    currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
