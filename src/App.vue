@@ -1457,7 +1457,7 @@ async function loadRealCourseData() {
     const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
     if (resCourse.ok) {
       const data = await resCourse.json();
-      currentPublicationState.value = data.transcriptPublicationState || '';
+      currentPublicationState.value = data.transcriptPublicationState || data.publicationState || '';
       const sessions = [
         ...(data.sessions || []),
         ...(data.pendingSessions || []).map((session: any) => ({

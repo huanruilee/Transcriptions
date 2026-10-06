@@ -1,0 +1,16 @@
+{
+  "reviewedSha": "f72eef9e2823fe132a0aa445c49e7cc60fe18878",
+  "baseSha": "33564e3054ef9b1be18b36672ff862f2e302fd50",
+  "workspace": "/tmp/transcriptions-246-review-20261006",
+  "verdict": "FAIL / DO NOT MERGE",
+  "scope": "Engineering triage safety and committed evidence consistency only; not semantic or audio approval",
+  "findings": [{"severity":"P1","file":"scripts/compact_sinianzhu_review.py","line":49,"title":"Reject nonpositive batch sizes before computing pending IDs","description":"CLI accepts --batch -1. range(0,len(source),-1) generates no batches, so both model review and coverage validation are bypassed. process clears every reviewNeeded flag, removes uncertainty, and sets candidateReviewRequired=false. --apply persists these unsupported clearances. Reproduced with two pending sentences: clear=2, pending=0, records=[]. Validate positive batch size in process and CLI; add a regression requiring rejection before mutation."}],
+  "commands": [
+    {"command":"python3 /tmp/pr246-independent-20261006/audit.py", "exit":0,"output":"audit.log"},
+    {"command":"python3 /tmp/pr246-independent-20261006/external_failure.py", "exit":0,"output":"external.log"},
+    {"command":"python3 -m unittest discover -s tests -p grounded_correct_sinianzhu_test.py -v", "exit":0,"output":"tests.log","tests":5},
+    {"command":"git status --short", "exit":0,"output":"empty; clean clone before and after review"}
+  ],
+  "verified": ["All eight report ID sequences exactly equal corresponding sentence ID sequences, with unique IDs per session", "All report counts and uncertainty unions agree with committed reviewNeeded flags", "Summary embeds exactly the same eight reports", "All fields except reviewNeeded, uncertainty, _meta.reviewTriage and _meta.candidateReviewRequired equal base SHA recursively, preserving text/rawText/timestamps/IDs/structure", "Malformed response and endpoint failures in either reviewer preserve entire affected batch as pending", "Uncertainty sets from both reviewers are unioned", "No model endpoints called; no source modified"],
+  "sessionCounts": [["01",1977,1023,954],["02",2024,942,1082],["03",2145,1169,976],["04",1912,793,1119],["05",2041,948,1093],["06",1845,804,1041],["07",2151,998,1153],["08",2136,1074,1062]]
+}

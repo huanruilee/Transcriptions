@@ -1,0 +1,133 @@
+
+> transcriptions-platform@1.1.0-dev test:v2
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /private/tmp/transcriptions-246-review-20261006
+
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///private/tmp/transcriptions-246-review-20261006/node_modules/vitest/dist/chunks/index.1_nbEjJY.js:1166:22)
+    at Object.teardown (file:///private/tmp/transcriptions-246-review-20261006/node_modules/vitest/dist/chunks/index.1_nbEjJY.js:1228:10)
+    at file:///private/tmp/transcriptions-246-review-20261006/node_modules/vitest/dist/chunks/base.BTS5G301.js:167:65
+    at Traces.$ (file:///private/tmp/transcriptions-246-review-20261006/node_modules/vitest/dist/traces.js:143:27)
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at afterConnectMultiple (node:net:1716:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:1679:14)
+        at afterConnectMultiple (node:net:1709:16) {
+      errno: -61,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.destroy (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:64:21)
+    at file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/browser/utilities/BrowserFrameFactory.js:43:22
+    at new Promise (<anonymous>)
+    at Function.destroyFrame (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/browser/utilities/BrowserFrameFactory.js:30:16)
+    at HTMLIFrameElement.#unloadPage (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:363:33)
+    at HTMLIFrameElement.[disconnectedFromDocument] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-iframe-element/HTMLIFrameElement.js:238:25)
+    at HTMLIFrameElement.[connectedToNode] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:804:58)
+DOMException [NetworkError]: Failed to execute "fetch()" on "Window" with URL "https://www.youtube.com/embed/yzSUab52m-8?enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000": The operation was aborted.
+    at Fetch.onError (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/fetch/Fetch.js:540:21)
+    at ClientRequest.emit (node:events:519:28)
+    at emitErrorEvent (node:_http_client:108:11)
+    at TLSSocket.socketErrorListener (node:_http_client:575:5)
+    at TLSSocket.emit (node:events:519:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:89:21)
+DOMException [NotSupportedError]: Failed to load script "https://www.youtube.com/iframe_api". JavaScript file loading is disabled.
+    at HTMLScriptElement.#loadScript (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:549:31)
+    at HTMLScriptElement.[connectedToDocument] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:315:33)
+    at HTMLScriptElement.[connectedToNode] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLHeadElement.appendChild (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:314:48)
+    at setupYouTubePlayer (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1152:19)
+    at Timeout._onTimeout (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1637:9)
+    at listOnTimeout (node:internal/timers:585:17)
+    at processTimers (node:internal/timers:521:7)
+Error: connect ECONNREFUSED 127.0.0.1:9091
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1638:16) {
+  errno: -61,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 9091
+}
+DOMException [NotSupportedError]: Failed to load script "https://www.youtube.com/iframe_api". JavaScript file loading is disabled.
+    at HTMLScriptElement.#loadScript (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:549:31)
+    at HTMLScriptElement.[connectedToDocument] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:315:33)
+    at HTMLScriptElement.[connectedToNode] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLHeadElement.appendChild (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:314:48)
+    at setupYouTubePlayer (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1152:19)
+    at Timeout._onTimeout (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1637:9)
+    at listOnTimeout (node:internal/timers:585:17)
+    at processTimers (node:internal/timers:521:7)
+ ❯ tests/unit_v2/sinianzhuReadability.test.ts (2 tests | 1 failed) 11965ms
+   ❯ 四念住 reader (2)
+     × loads candidate text and navigation at #session-08 7325ms
+Error: connect ECONNREFUSED 127.0.0.1:9091
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1638:16) {
+  errno: -61,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 9091
+}
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit_v2/sinianzhuReadability.test.ts > 四念住 reader > loads candidate text and navigation at #session-08
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/unit_v2/sinianzhuReadability.test.ts:11:31
+      9|   let wrapper: ReturnType<typeof mount> | undefined;
+     10|   afterEach(() => { wrapper?.unmount(); vi.unstubAllGlobals(); vi.rest…
+     11|   it.each(['', '#session-08'])('loads candidate text and navigation at…
+       |                               ^
+     12|     window.history.replaceState({}, '', `/?course=si-nian-zhu${hash}`);
+     13|     const requests: string[] = [];
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 25 passed (26)
+      Tests  1 failed | 86 passed (87)
+   Start at  11:29:50
+   Duration  17.66s (environment 64%, tests 19%, import 8%, transform 8%, worker 2%)
+
+Environment  happy-dom was created 26 times · 58.96s total, 64% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+

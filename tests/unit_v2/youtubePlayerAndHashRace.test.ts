@@ -1,13 +1,15 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { useCourseStore } from '../../src/stores/course';
 import App from '../../src/App.vue';
 
 describe('YouTube Player & Hash Race Prevention Contract', () => {
   const originalFetch = global.fetch;
+  let wrapper: ReturnType<typeof mount> | undefined;
 
   beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
     setActivePinia(createPinia());
     global.fetch = vi.fn().mockImplementation((url: string) => {
       if (typeof url === 'string' && url.includes('session')) {
@@ -33,6 +35,10 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
   });
 
   afterEach(() => {
+    wrapper?.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    delete (window as any).YT;
     global.fetch = originalFetch;
     vi.restoreAllMocks();
   });
@@ -41,11 +47,12 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     delete (window as any).location;
     window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-er#session-02') as any;
 
-    const wrapper = mount(App);
+    wrapper = mount(App);
     const courseStore = useCourseStore();
 
     await wrapper.vm.$nextTick();
-    await new Promise((r) => setTimeout(r, 60));
+    await flushPromises();
+    await vi.advanceTimersByTimeAsync(60);
 
     expect(courseStore.currentCourseId).toBe('shi-liang-lun-er');
     expect(window.location.hash).toBe('#session-02');
@@ -73,9 +80,10 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
       }),
     };
 
-    const wrapper = mount(App);
+    wrapper = mount(App);
     await wrapper.vm.$nextTick();
-    await new Promise((r) => setTimeout(r, 150));
+    await flushPromises();
+    await vi.advanceTimersByTimeAsync(150);
 
     const iframe = wrapper.find('#youtube-iframe');
     expect(iframe.exists()).toBe(true);
@@ -85,7 +93,8 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     const testApi = (window as any).__TEST_API__;
     if (testApi && typeof testApi.loadSession === 'function') {
       await testApi.loadSession('03');
-      await new Promise((r) => setTimeout(r, 150));
+      await flushPromises();
+      await vi.advanceTimersByTimeAsync(150);
       expect(destroySpy).not.toHaveBeenCalled();
     }
   });
@@ -94,12 +103,13 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     delete (window as any).location;
     window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-er#session-02') as any;
 
-    const wrapper = mount(App);
+    wrapper = mount(App);
     const courseStore = useCourseStore();
     courseStore.currentCourseId = 'shi-liang-lun-er';
 
     await wrapper.vm.$nextTick();
-    await new Promise((r) => setTimeout(r, 60));
+    await flushPromises();
+    await vi.advanceTimersByTimeAsync(60);
 
     const audioEl = wrapper.find('#audio-element').element as HTMLAudioElement;
     expect(audioEl.src.includes('drive.google.com')).toBe(false);
@@ -148,9 +158,10 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     });
     global.fetch = fetchMock as any;
 
-    const wrapper = mount(App);
+    wrapper = mount(App);
     await wrapper.vm.$nextTick();
-    await new Promise((r) => setTimeout(r, 80));
+    await flushPromises();
+    await vi.advanceTimersByTimeAsync(80);
 
     expect(useCourseStore().sessions.map((session) => session.id)).toEqual(['41', '27B', '42', '43']);
     expect(wrapper.findAll('.session-id').map((node) => node.text())).toEqual([

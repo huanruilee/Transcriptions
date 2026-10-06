@@ -1,0 +1,27 @@
+
+> transcriptions-platform@1.1.0-dev test:v2
+> vitest run tests/unit_v2/sinianzhuReadability.test.ts
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /private/tmp/transcriptions-246-review-20261006
+
+DOMException [NotSupportedError]: Failed to load script "https://www.youtube.com/iframe_api". JavaScript file loading is disabled.
+    at HTMLScriptElement.#loadScript (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:549:31)
+    at HTMLScriptElement.[connectedToDocument] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:315:33)
+    at HTMLScriptElement.[connectedToNode] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLHeadElement.appendChild (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:314:48)
+    at setupYouTubePlayer (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1152:19)
+    at Timeout._onTimeout (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1637:9)
+    at listOnTimeout (node:internal/timers:585:17)
+    at processTimers (node:internal/timers:521:7)
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  11:30:21
+   Duration  2.33s (transform 55%, tests 29%, environment 11%, import 6%)
+

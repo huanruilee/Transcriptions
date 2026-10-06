@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-06",
+  "workspace": "/private/tmp/transcriptions-246-20261006",
+  "baseSha": "33564e3054ef9b1be18b36672ff862f2e302fd50",
+  "originalPrSha": "0077b6716ba1667d95fbd93d822b41ed37ab2312",
+  "checks": [
+    {
+      "command": "node --test tests/unit/sinianzhuReadability.test.js",
+      "log": "readability-red.log",
+      "exitCode": 1
+    },
+    {
+      "command": "npm run test:v2 -- tests/unit_v2/sinianzhuReadability.test.ts",
+      "log": "reader-red.log",
+      "exitCode": 1
+    },
+    {
+      "command": "python3 tests/grounded_correct_sinianzhu_test.py (before hardening)",
+      "log": "gate-red.log",
+      "exitCode": 1
+    },
+    {
+      "command": "node --test tests/unit/sinianzhuReadability.test.js",
+      "log": "readability-green.log",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:v2 -- tests/unit_v2/sinianzhuReadability.test.ts",
+      "log": "reader-green.log",
+      "exitCode": 0
+    },
+    {
+      "command": "python3 tests/grounded_correct_sinianzhu_test.py",
+      "log": "python.log",
+      "exitCode": 0
+    },
+    {
+      "command": "npm test (local test server allowed)",
+      "log": "npm-test.log",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:v2",
+      "log": "vitest.log",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build:v2 -- --base=/Transcriptions/",
+      "log": "build.log",
+      "exitCode": 0
+    },
+    {
+      "command": "python3 scripts/build_human_review_package.py --check",
+      "log": "human-review.log",
+      "exitCode": 0
+    }
+  ],
+  "browser": {
+    "environment": "local Vite preview http://127.0.0.1:4317",
+    "session01Sentences": 1977,
+    "session08Sentences": 2136,
+    "sidebarEntries": 8,
+    "candidateLabelVisible": true,
+    "youtubeMappingVerified": true,
+    "videoPlaybackVerified": false
+  },
+  "deployment": "Not requested; no merge/deploy performed",
+  "scope": "Reader availability and engineering triage safety; not semantic/audio approval",
+  "remainingSentenceReviews": 8480,
+  "independentReview": {
+    "verdict": "PASS",
+    "reviewedSha": "411b61d83514d114e04824bcb9d3645989cfa276",
+    "report": "independent/review.json"
+  }
+}

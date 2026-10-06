@@ -1,0 +1,22 @@
+session 01: exact unique coverage=1977, clear=1023, pending=954, failures=0, all non-triage fields preserved
+session 02: exact unique coverage=2024, clear=942, pending=1082, failures=0, all non-triage fields preserved
+session 03: exact unique coverage=2145, clear=1169, pending=976, failures=0, all non-triage fields preserved
+session 04: exact unique coverage=1912, clear=793, pending=1119, failures=0, all non-triage fields preserved
+session 05: exact unique coverage=2041, clear=948, pending=1093, failures=0, all non-triage fields preserved
+session 06: exact unique coverage=1845, clear=804, pending=1041, failures=0, all non-triage fields preserved
+session 07: exact unique coverage=2151, clear=998, pending=1153, failures=0, all non-triage fields preserved
+session 08: exact unique coverage=2136, clear=1074, pending=1062, failures=0, all non-triage fields preserved
+fail-closed malformed: wrong_count local:ValueError
+fail-closed malformed: unknown local:ValueError
+fail-closed malformed: null local:ValueError
+fail-closed malformed: list local:ValueError
+fail-closed malformed: missing local:ValueError
+fail-closed malformed: bad_ids local:ValueError
+fail-closed endpoint failure: PASS
+invalid batch rejected: -1
+invalid batch rejected: 0
+invalid batch rejected: True
+invalid batch rejected: 1.0
+external/union: malformed [{'ids': ['a', 'b'], 'uncertain': None, 'error': 'external:ValueError'}]
+external/union: exception [{'ids': ['a', 'b'], 'uncertain': None, 'error': 'external:TimeoutError'}]
+external/union: union [{'ids': ['a', 'b'], 'uncertain': ['a', 'b'], 'error': None}]

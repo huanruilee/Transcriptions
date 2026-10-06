@@ -52,9 +52,9 @@ export const useCourseStore = defineStore('course', {
       {
         id: 'si-nian-zhu',
         title: '四念住',
-        master: '待審校',
+        master: '玅境長老',
         path: 'courses/四念住',
-        mediaType: 'audio/mp3',
+        mediaType: 'video/youtube',
       },
     ],
     sessions: [] as SessionMeta[],

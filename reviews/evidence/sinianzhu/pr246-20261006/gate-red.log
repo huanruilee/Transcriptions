@@ -1,0 +1,68 @@
+.FFF..FFF.F...
+======================================================================
+FAIL: test_compact_gate_rejects_ambiguous_response_types (__main__.GroundedCorrectionSafetyTest.test_compact_gate_rejects_ambiguous_response_types) (result={'reviewed_count': True, 'uncertain_ids': []})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 71, in test_compact_gate_rejects_ambiguous_response_types
+    with self.subTest(result=result), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_compact_gate_rejects_ambiguous_response_types (__main__.GroundedCorrectionSafetyTest.test_compact_gate_rejects_ambiguous_response_types) (result={'reviewed_count': 1.0, 'uncertain_ids': []})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 71, in test_compact_gate_rejects_ambiguous_response_types
+    with self.subTest(result=result), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_compact_gate_rejects_ambiguous_response_types (__main__.GroundedCorrectionSafetyTest.test_compact_gate_rejects_ambiguous_response_types) (result={'reviewed_count': 1, 'uncertain_ids': ['seg-1', 'seg-1']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 71, in test_compact_gate_rejects_ambiguous_response_types
+    with self.subTest(result=result), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_duplicate_or_empty_source_ids_are_rejected (__main__.GroundedCorrectionSafetyTest.test_duplicate_or_empty_source_ids_are_rejected) (ids=('same', 'same'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 64, in test_duplicate_or_empty_source_ids_are_rejected
+    with self.subTest(ids=ids), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_duplicate_or_empty_source_ids_are_rejected (__main__.GroundedCorrectionSafetyTest.test_duplicate_or_empty_source_ids_are_rejected) (ids=('', 'seg-2'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 64, in test_duplicate_or_empty_source_ids_are_rejected
+    with self.subTest(ids=ids), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_duplicate_or_empty_source_ids_are_rejected (__main__.GroundedCorrectionSafetyTest.test_duplicate_or_empty_source_ids_are_rejected) (ids=(None, 'seg-2'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 64, in test_duplicate_or_empty_source_ids_are_rejected
+    with self.subTest(ids=ids), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonpositive_batch_never_clears_without_review (__main__.GroundedCorrectionSafetyTest.test_nonpositive_batch_never_clears_without_review) (batch=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-246-20261006/tests/grounded_correct_sinianzhu_test.py", line 59, in test_nonpositive_batch_never_clears_without_review
+    with self.subTest(batch=batch), self.assertRaises(ValueError):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.020s
+
+FAILED (failures=7)
