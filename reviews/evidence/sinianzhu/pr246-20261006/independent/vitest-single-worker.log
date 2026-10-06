@@ -1,0 +1,148 @@
+
+> transcriptions-platform@1.1.0-dev test:v2
+> vitest run --maxWorkers=1
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /private/tmp/transcriptions-246-review-20261006
+
+Error: connect EPERM 127.0.0.1:9091 - Local (0.0.0.0:0)
+    at internalConnect (node:net:1111:16)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at node:net:1357:9
+    at processTicksAndRejections (node:internal/process/task_queues:84:11) {
+  errno: -1,
+  code: 'EPERM',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 9091
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+DOMException [NotSupportedError]: Failed to load script "https://www.youtube.com/iframe_api". JavaScript file loading is disabled.
+    at HTMLScriptElement.#loadScript (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:549:31)
+    at HTMLScriptElement.[connectedToDocument] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:315:33)
+    at HTMLScriptElement.[connectedToNode] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLHeadElement.appendChild (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:314:48)
+    at setupYouTubePlayer (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1152:19)
+    at Timeout._onTimeout (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1637:9)
+    at listOnTimeout (node:internal/timers:585:17)
+    at processTimers (node:internal/timers:521:7)
+DOMException [NotSupportedError]: Failed to load script "https://www.youtube.com/iframe_api". JavaScript file loading is disabled.
+    at HTMLScriptElement.#loadScript (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:549:31)
+    at HTMLScriptElement.[connectedToDocument] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:315:33)
+    at HTMLScriptElement.[connectedToNode] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLHeadElement.[appendChild] (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLHeadElement.appendChild (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/nodes/node/Node.js:314:48)
+    at setupYouTubePlayer (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1152:19)
+    at Timeout._onTimeout (/private/tmp/transcriptions-246-review-20261006/src/App.vue:1637:9)
+    at listOnTimeout (node:internal/timers:585:17)
+    at processTimers (node:internal/timers:521:7)
+Error: getaddrinfo ENOTFOUND www.youtube.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'www.youtube.com'
+}
+DOMException [NetworkError]: Failed to execute "fetch()" on "Window" with URL "https://www.youtube.com/embed/yzSUab52m-8?enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000": getaddrinfo ENOTFOUND www.youtube.com
+    at Fetch.onError (file:///private/tmp/transcriptions-246-review-20261006/node_modules/happy-dom/lib/fetch/Fetch.js:540:21)
+    at ClientRequest.emit (node:events:519:28)
+    at emitErrorEvent (node:_http_client:108:11)
+    at TLSSocket.socketErrorListener (node:_http_client:575:5)
+    at TLSSocket.emit (node:events:519:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:89:21)
+Error: connect EPERM 127.0.0.1:9091 - Local (0.0.0.0:0)
+    at internalConnect (node:net:1111:16)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at node:net:1357:9
+    at processTicksAndRejections (node:internal/process/task_queues:84:11) {
+  errno: -1,
+  code: 'EPERM',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 9091
+}
+
+ Test Files  26 passed (26)
+      Tests  87 passed (87)
+   Start at  11:30:30
+   Duration  11.89s (environment 56%, tests 30%, import 10%, transform 2%, worker 1%)
+
+Environment  happy-dom was created 26 times · 5.23s total, 56% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+

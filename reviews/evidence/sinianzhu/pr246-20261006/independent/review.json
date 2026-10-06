@@ -1,0 +1,166 @@
+{
+  "reviewedSha": "411b61d83514d114e04824bcb9d3645989cfa276",
+  "baseSha": "33564e3054ef9b1be18b36672ff862f2e302fd50",
+  "workspace": "/tmp/transcriptions-246-review-20261006",
+  "verdict": "PASS",
+  "scope": "Engineering triage safety, committed evidence consistency, candidate reader/navigation. Excludes full semantic/audio approval, final GitHub CI, and deployment acceptance.",
+  "findings": [],
+  "commands": [
+    {
+      "sha": "411b61d83514d114e04824bcb9d3645989cfa276",
+      "command": "python3 /tmp/pr246-independent-20261006/final/audit.py",
+      "exit": 0,
+      "output": "audit-411b61d.log"
+    },
+    {
+      "sha": "411b61d83514d114e04824bcb9d3645989cfa276",
+      "command": "python3 -m unittest discover -s tests -p grounded_correct_sinianzhu_test.py -v",
+      "exit": 0,
+      "output": "python-411b61d.log"
+    },
+    {
+      "sha": "411b61d83514d114e04824bcb9d3645989cfa276",
+      "command": "node --test tests/unit/sinianzhuReadability.test.js",
+      "exit": 0,
+      "output": "node-411b61d.log"
+    },
+    {
+      "sha": "411b61d83514d114e04824bcb9d3645989cfa276",
+      "command": "npm test",
+      "exit": 0,
+      "output": "npm-test-411b61d.log"
+    },
+    {
+      "sha": "411b61d83514d114e04824bcb9d3645989cfa276",
+      "command": "npm run test:v2",
+      "exit": 0,
+      "output": "vitest-411b61d.log"
+    },
+    {
+      "sha": "148fd08cd521b4e66f92a3df78764f732ee1e694",
+      "command": "npm run build:v2",
+      "exit": 0,
+      "output": "build.log",
+      "applicability": "Production code and build inputs unchanged in final SHA; only two Vue tests and recorded log changed."
+    }
+  ],
+  "verified": [
+    "All eight report ID sequences exactly equal corresponding sentence ID sequences, with unique IDs per session",
+    "All report counts and uncertainty unions agree with committed reviewNeeded flags",
+    "Summary embeds exactly the same eight reports",
+    "All fields except reviewNeeded, uncertainty, _meta.reviewTriage and _meta.candidateReviewRequired equal base SHA recursively, preserving text/rawText/timestamps/IDs/structure",
+    "Malformed response and endpoint failures in either reviewer preserve entire affected batch as pending",
+    "Uncertainty sets from both reviewers are unioned",
+    "No model endpoints called; no source modified",
+    "Course session inventory matches authoritative TOC and session video IDs",
+    "Reader tests load sessions 01 and 08 with eight navigation entries, candidate badge, teacher name and correct YouTube iframe",
+    "Final clone remains clean; source never edited by reviewer"
+  ],
+  "sessionCounts": [
+    [
+      "01",
+      1977,
+      1023,
+      954
+    ],
+    [
+      "02",
+      2024,
+      942,
+      1082
+    ],
+    [
+      "03",
+      2145,
+      1169,
+      976
+    ],
+    [
+      "04",
+      1912,
+      793,
+      1119
+    ],
+    [
+      "05",
+      2041,
+      948,
+      1093
+    ],
+    [
+      "06",
+      1845,
+      804,
+      1041
+    ],
+    [
+      "07",
+      2151,
+      998,
+      1153
+    ],
+    [
+      "08",
+      2136,
+      1074,
+      1062
+    ]
+  ],
+  "resolvedFindings": [
+    {
+      "severity": "P1",
+      "issue": "Negative batch cleared unreviewed sentences",
+      "resolution": "Process rejects nonpositive/noninteger batches before reading/mutating data; CLI rejects nonpositive batches before apply; independent regression and 11 Python tests pass."
+    },
+    {
+      "severity": "P2",
+      "issue": "Vue suite timer leakage and reader timeout under parallel load",
+      "resolution": "Explicit wrapper teardown, scoped fake timers and cleanup, deterministic timer advancement; reader timeout headroom. Final default full Vue suite exits 0, 87 tests pass; original failed runs preserved."
+    }
+  ],
+  "testResults": {
+    "python": {
+      "passed": 11
+    },
+    "targetedNode": {
+      "passed": 2
+    },
+    "fullNode": {
+      "passed": 545,
+      "skipped": 4,
+      "failed": 0
+    },
+    "fullVue": {
+      "files": 26,
+      "passed": 87,
+      "failed": 0
+    }
+  },
+  "priorRuns": [
+    {
+      "sha": "148fd08cd521b4e66f92a3df78764f732ee1e694",
+      "file": "vitest.log",
+      "exit": 1,
+      "reason": "4 uncaught document ReferenceErrors from preexisting race-test interval"
+    },
+    {
+      "sha": "148fd08cd521b4e66f92a3df78764f732ee1e694",
+      "file": "vitest-escalated.log",
+      "exit": 1,
+      "reason": "Reader 5000ms timeout while build concurrently consumed resources"
+    },
+    {
+      "file": "vitest-single-worker.log",
+      "exit": 0
+    },
+    {
+      "file": "vitest-default-idle.log",
+      "exit": 0
+    }
+  ],
+  "limitations": [
+    "Model response records contain union uncertainty and counts, not independently replayable semantic decisions. No model endpoints called.",
+    "All eight sessions retain candidate-review-required publication status. Engineering pass does not approve content semantics/audio.",
+    "Final GitHub CI and deployment evidence remain controller-owned and pending this review scope."
+  ]
+}
