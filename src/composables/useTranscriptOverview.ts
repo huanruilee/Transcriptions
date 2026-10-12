@@ -2,11 +2,25 @@ export interface TranscriptOverview {
   mainPoints: string[];
   discussionTopics: string[];
   referenceViews: string[];
-  source: 'reviewed' | 'derived';
+  source: 'reviewed' | 'ai-reviewed' | 'derived';
+}
+
+interface EvidenceBearingOverviewItem {
+  text?: string;
+  evidence?: Array<{ sentenceId?: string; quote?: string }>;
 }
 
 interface OverviewInput {
-  contentOverview?: Partial<Omit<TranscriptOverview, 'source'>>;
+  contentOverview?: {
+    schemaVersion?: number;
+    status?: string;
+    sourceTranscriptId?: string;
+    sourceDigest?: string;
+    generatedBy?: string;
+    mainPoints?: Array<string | EvidenceBearingOverviewItem>;
+    discussionTopics?: Array<string | EvidenceBearingOverviewItem>;
+    referenceViews?: Array<string | EvidenceBearingOverviewItem>;
+  };
   discussionQuestions?: Array<{
     displayQuestion?: string;
     rawQuestion?: string;
@@ -32,8 +46,11 @@ function normalizeItems(values: unknown[], limit = MAX_ITEMS): string[] {
   const result: string[] = [];
 
   for (const value of values) {
-    if (typeof value !== 'string') continue;
-    const text = value.replace(/\s+/g, ' ').trim();
+    const rawText = typeof value === 'string'
+      ? value
+      : (value && typeof value === 'object' && 'text' in value ? value.text : '');
+    if (typeof rawText !== 'string') continue;
+    const text = rawText.replace(/\s+/g, ' ').trim();
     if (!text || seen.has(text)) continue;
     seen.add(text);
     result.push(text);
@@ -120,6 +137,8 @@ export function buildTranscriptOverview(
     mainPoints,
     discussionTopics,
     referenceViews,
-    source: hasCompleteExplicit ? 'reviewed' : 'derived',
+    source: hasCompleteExplicit
+      ? (explicit?.status === 'ai-reviewed' ? 'ai-reviewed' : 'reviewed')
+      : 'derived',
   };
 }

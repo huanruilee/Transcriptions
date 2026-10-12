@@ -25,6 +25,43 @@ describe('transcript overview contract', () => {
     });
   });
 
+  it('renders evidence-bearing MiniMax summaries only as AI reviewed after pipeline review', () => {
+    const overview = buildTranscriptOverview({
+      contentOverview: {
+        schemaVersion: 1,
+        status: 'ai-reviewed',
+        sourceTranscriptId: 'si-nian-zhu/session_01',
+        sourceDigest: 'sha256:test',
+        generatedBy: 'MiniMax-M3',
+        mainPoints: [
+          {
+            text: '本講說明念是明記不忘，慧是如實觀察。',
+            evidence: [{ sentenceId: 'seg-014', quote: '慧是觀察的意思。' }],
+          },
+        ],
+        discussionTopics: [
+          {
+            text: '念與慧在修習四念住時如何配合？',
+            evidence: [{ sentenceId: 'seg-015', quote: '念是明記不忘的意思。' }],
+          },
+        ],
+        referenceViews: [
+          {
+            text: '以念令所緣不忘，再由慧加以觀察。',
+            evidence: [{ sentenceId: 'seg-015', quote: '念是明記不忘的意思。' }],
+          },
+        ],
+      },
+    });
+
+    expect(overview).toEqual({
+      mainPoints: ['本講說明念是明記不忘，慧是如實觀察。'],
+      discussionTopics: ['念與慧在修習四念住時如何配合？'],
+      referenceViews: ['以念令所緣不忘，再由慧加以觀察。'],
+      source: 'ai-reviewed',
+    });
+  });
+
   it('builds a source-grounded overview from headings, questions, and teacher summaries', () => {
     const overview = buildTranscriptOverview(
       {

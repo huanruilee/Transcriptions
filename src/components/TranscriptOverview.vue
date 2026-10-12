@@ -6,7 +6,7 @@
         <h2 id="transcript-overview-title">本講內容導讀</h2>
       </div>
       <span class="transcript-overview__source">
-        {{ overview.source === 'reviewed' ? '人工整理' : '依既有逐字稿資料整理' }}
+        {{ sourceLabel }}
       </span>
     </div>
 
@@ -36,11 +36,18 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { TranscriptOverview } from '../composables/useTranscriptOverview';
 
-defineProps<{
+const props = defineProps<{
   overview: TranscriptOverview;
 }>();
+
+const sourceLabel = computed(() => {
+  if (props.overview.source === 'ai-reviewed') return 'AI 摘要・已通過引證檢查';
+  if (props.overview.source === 'reviewed') return '人工整理';
+  return '依既有逐字稿資料整理';
+});
 </script>
 
 <style scoped>

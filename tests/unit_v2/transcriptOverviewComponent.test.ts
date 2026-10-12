@@ -28,4 +28,20 @@ describe('TranscriptOverview', () => {
       '參考觀點一',
     ]);
   });
+
+  it('labels independently reviewed model output transparently', () => {
+    const wrapper = mount(TranscriptOverview, {
+      props: {
+        overview: {
+          mainPoints: ['重點'],
+          discussionTopics: ['議題'],
+          referenceViews: ['觀點'],
+          source: 'ai-reviewed',
+        },
+      },
+    });
+
+    expect(wrapper.text()).toContain('AI 摘要・已通過引證檢查');
+    expect(wrapper.text()).not.toContain('人工整理');
+  });
 });

@@ -11,11 +11,35 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
 }
 
-function sha256(relativePath) {
-  return crypto
-    .createHash('sha256')
-    .update(fs.readFileSync(path.join(ROOT, relativePath)))
-    .digest('hex');
+function stableJson(value) {
+  if (Array.isArray(value)) return value.map(stableJson);
+  if (!value || typeof value !== 'object') return value;
+  return Object.fromEntries(
+    Object.keys(value)
+      .sort()
+      .map((key) => [key, stableJson(value[key])]),
+  );
+}
+
+function sha256(value) {
+  return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function artifactDigest(artifact) {
+  if (!artifact.hashScope || artifact.hashScope === 'full-file') {
+    return sha256(fs.readFileSync(path.join(ROOT, artifact.path)));
+  }
+
+  assert.equal(
+    artifact.hashScope,
+    'transcript-evidence/v1',
+    `unsupported hash scope for ${artifact.path}`,
+  );
+  const transcript = readJson(artifact.path);
+  delete transcript.contentOverview;
+  delete transcript.last_updated;
+  if (transcript._meta) delete transcript._meta.processed_at;
+  return sha256(JSON.stringify(stableJson(transcript)));
 }
 
 test('session 01 remote-review bundle is public-safe, pinned, and reproducible', () => {
@@ -36,8 +60,13 @@ test('session 01 remote-review bundle is public-safe, pinned, and reproducible',
   for (const artifact of bundle.requiredArtifacts) {
     assert.match(artifact.path, /^(courses|reviews|tests)\//);
     assert.doesNotMatch(artifact.path, /raw_asr|acoustic_verification/);
-    assert.equal(artifact.sha256, sha256(artifact.path));
+    assert.equal(artifact.sha256, artifactDigest(artifact));
   }
+
+  const transcriptArtifact = bundle.requiredArtifacts.find(({ path: artifactPath }) =>
+    artifactPath.endsWith('/sessions/session_01.json'),
+  );
+  assert.equal(transcriptArtifact?.hashScope, 'transcript-evidence/v1');
 });
 
 test('session 01 review states the same question-summary count as its machine manifest', () => {
