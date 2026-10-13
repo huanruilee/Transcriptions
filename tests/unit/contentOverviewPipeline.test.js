@@ -433,6 +433,53 @@ test('overview validation rejects duplicate claims across reading-guide groups',
   assert.ok(result.errors.some((error) => error.code === 'CROSS_GROUP_NEAR_DUPLICATE_BULLET'));
 });
 
+test('overview validation rejects paraphrased cross-group claims backed by the same evidence', () => {
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '若獨立自主的我存在，與蘊體非一即異；兩者皆被排除，故此我不存在。' },
+      { id: 's-2', text: '依蘊假立的我由分別心安立。' },
+      { id: 's-3', text: '如何區分獨立自主與依蘊假立？' },
+    ] }],
+  };
+  const overview = {
+    schemaVersion: 1,
+    status: 'candidate',
+    sourceTranscriptId: 'test/session_same_evidence_paraphrase',
+    sourceDigest: '',
+    generatedBy: 'MiniMax-M3',
+    mainPoints: [
+      {
+        text: '獨立自主的我若存在，與蘊體非一即異，兩種可能性皆被排除，故證成其不存在。',
+        evidence: [{ sentenceId: 's-1', quote: transcript.paragraphs[0].sentences[0].text }],
+      },
+      {
+        text: '依蘊假立的我由分別心安立。',
+        evidence: [{ sentenceId: 's-2', quote: transcript.paragraphs[0].sentences[1].text }],
+      },
+    ],
+    discussionTopics: [
+      {
+        text: '如何區分獨立自主與依蘊假立？',
+        evidence: [{ sentenceId: 's-3', quote: transcript.paragraphs[0].sentences[2].text }],
+      },
+    ],
+    referenceViews: [
+      {
+        text: '獨立自主的我若成立，與蘊體的關係非一即異；兩者既都不成立，便可判定此我不存在。',
+        evidence: [{ sentenceId: 's-1', quote: transcript.paragraphs[0].sentences[0].text }],
+      },
+    ],
+  };
+  overview.sourceDigest = validateContentOverview(overview, transcript, {
+    sourceTranscriptId: overview.sourceTranscriptId,
+  }).expectedSourceDigest;
+
+  const result = validateContentOverview(overview, transcript, {
+    sourceTranscriptId: overview.sourceTranscriptId,
+  });
+  assert.ok(result.errors.some((error) => error.code === 'CROSS_GROUP_NEAR_DUPLICATE_BULLET'));
+});
+
 test('hydrates evidence quotes from local source ids before independent review', () => {
   const transcript = {
     paragraphs: [{ sentences: [{ id: 's-1', text: '原文必須逐字保留。' }] }],

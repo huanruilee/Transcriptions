@@ -179,18 +179,33 @@ function semanticBulletFingerprint(value) {
     .replace(/關於|請問|何者正確|到底|想著|的直接境|直接境|是否|呢/g, '');
 }
 
-function isNearDuplicateBullet(first, second) {
+function semanticBulletOverlap(first, second) {
   const left = semanticBulletFingerprint(first);
   const right = semanticBulletFingerprint(second);
-  if (left === right) return left.length > 0;
-  if (Math.min(left.length, right.length) < 8) return false;
+  if (left === right) return left.length > 0 ? 1 : 0;
+  if (Math.min(left.length, right.length) < 8) return 0;
   const bigrams = (value) => new Set(
     Array.from({ length: value.length - 1 }, (_unused, index) => value.slice(index, index + 2)),
   );
   const leftBigrams = bigrams(left);
   const rightBigrams = bigrams(right);
   const overlap = [...leftBigrams].filter((gram) => rightBigrams.has(gram)).length;
-  return overlap / Math.min(leftBigrams.size, rightBigrams.size) >= 0.8;
+  return overlap / Math.min(leftBigrams.size, rightBigrams.size);
+}
+
+function isNearDuplicateBullet(first, second, threshold = 0.8) {
+  return semanticBulletOverlap(first, second) >= threshold;
+}
+
+function hasIdenticalEvidence(first, second) {
+  const evidenceIds = (item) => [...new Set((item?.evidence || [])
+    .map((evidence) => String(evidence?.sentenceId || '').trim())
+    .filter(Boolean))].sort();
+  const left = evidenceIds(first);
+  const right = evidenceIds(second);
+  return left.length > 0
+    && left.length === right.length
+    && left.every((sentenceId, index) => sentenceId === right[index]);
 }
 
 export function pruneNearDuplicateItems(candidate) {
@@ -326,15 +341,17 @@ export function validateContentOverview(
   for (const group of GROUPS) {
     for (const [index, item] of (Array.isArray(overview[group]) ? overview[group] : []).entries()) {
       const text = String(item?.text || '').replace(/\s+/g, ' ').trim();
-      const duplicate = priorCrossGroupItems.find((prior) =>
-        prior.group !== group && isNearDuplicateBullet(prior.text, text));
+      const duplicate = priorCrossGroupItems.find((prior) => prior.group !== group && (
+        isNearDuplicateBullet(prior.text, text)
+        || (hasIdenticalEvidence(prior.item, item) && isNearDuplicateBullet(prior.text, text, 0.25))
+      ));
       if (duplicate) {
         errors.push(makeError(
           'CROSS_GROUP_NEAR_DUPLICATE_BULLET',
           `${duplicate.group}:${duplicate.index}->${group}:${index}`,
         ));
       }
-      priorCrossGroupItems.push({ group, index, text });
+      priorCrossGroupItems.push({ group, index, text, item });
     }
   }
 
