@@ -241,6 +241,59 @@ test('overview validation requires grounded evidence snapshots and matching sour
   assert.ok(badQuote.errors.some((error) => error.code === 'EVIDENCE_QUOTE_MISMATCH'));
 });
 
+test('overview validation accepts a documented Codex manual exception when the provider blocks the source', () => {
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '第一句完整支持主要內容。' },
+      { id: 's-2', text: '第二句完整支持另一項主要內容。' },
+      { id: 's-3', text: '此處明確提出討論問題。' },
+      { id: 's-4', text: '講者明確提出參考觀點。' },
+      { id: 's-5', text: '補充另一項參考觀點。' },
+    ] }],
+  };
+  const sourceTranscriptId = 'test/session_01';
+  const digest = validateContentOverview({
+    schemaVersion: 1,
+    sourceTranscriptId,
+    sourceDigest: '',
+    generatedBy: 'MiniMax-M3',
+    mainPoints: [], discussionTopics: [], referenceViews: [],
+  }, transcript, { sourceTranscriptId }).expectedSourceDigest;
+  const overview = {
+    schemaVersion: 1,
+    status: 'ai-reviewed',
+    sourceTranscriptId,
+    sourceDigest: digest,
+    generatedBy: 'Codex-manual-exception',
+    generationException: 'MiniMax input new_sensitive (1026)',
+    generatedAt: '2026-10-13T00:00:00.000Z',
+    mainPoints: [
+      { text: '第一項主要內容。', evidence: [{ sentenceId: 's-1', quote: '第一句完整支持主要內容。' }] },
+      { text: '第二項主要內容。', evidence: [{ sentenceId: 's-2', quote: '第二句完整支持另一項主要內容。' }] },
+    ],
+    discussionTopics: [
+      { text: '討論的問題是什麼？', evidence: [{ sentenceId: 's-3', quote: '此處明確提出討論問題。' }] },
+    ],
+    referenceViews: [
+      { text: '講者提出第一項參考觀點。', evidence: [{ sentenceId: 's-4', quote: '講者明確提出參考觀點。' }] },
+      { text: '講者補充第二項參考觀點。', evidence: [{ sentenceId: 's-5', quote: '補充另一項參考觀點。' }] },
+    ],
+    review: {
+      reviewedBy: 'Codex',
+      items: [
+        { group: 'mainPoints', index: 0, verdict: 'supported', reason: 's-1 直接支持。' },
+        { group: 'mainPoints', index: 1, verdict: 'supported', reason: 's-2 直接支持。' },
+        { group: 'discussionTopics', index: 0, verdict: 'supported', reason: 's-3 直接支持。' },
+        { group: 'referenceViews', index: 0, verdict: 'supported', reason: 's-4 直接支持。' },
+        { group: 'referenceViews', index: 1, verdict: 'supported', reason: 's-5 直接支持。' },
+      ],
+    },
+    attemptCount: 1,
+  };
+
+  assert.deepEqual(validateContentOverview(overview, transcript, { sourceTranscriptId }).errors, []);
+});
+
 test('overview validation enforces a 5-8 point reading guide with at least two main points', () => {
   const transcript = {
     paragraphs: [{ sentences: [
@@ -289,6 +342,48 @@ test('overview validation enforces a 5-8 point reading guide with at least two m
   });
   assert.ok(badTerm.errors.some((error) =>
     error.code === 'OBVIOUS_ASR_TERM' && error.detail.includes('四帝->四諦')));
+});
+
+test('overview validation rejects near-duplicate discussion questions', () => {
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '大悲心的直接境是眾生的苦還是眾生離苦？' },
+      { id: 's-2', text: '救難隊員可比喻大悲心。' },
+      { id: 's-3', text: '大悲心是不忍眾生受苦。' },
+      { id: 's-4', text: '也可說希望眾生離苦。' },
+      { id: 's-5', text: '發心與行為應分開觀察。' },
+    ] }],
+  };
+  const overview = {
+    schemaVersion: 1,
+    status: 'candidate',
+    sourceTranscriptId: 'test/session_01',
+    sourceDigest: '',
+    generatedBy: 'MiniMax-M3',
+    mainPoints: [
+      { text: '救難隊員可比喻大悲心。', evidence: [{ sentenceId: 's-2', quote: '救難隊員可比喻大悲心。' }] },
+      { text: '發心與行為應分開觀察。', evidence: [{ sentenceId: 's-5', quote: '發心與行為應分開觀察。' }] },
+    ],
+    discussionTopics: [
+      { text: '大悲心的直接境是眾生的苦還是眾生離苦？', evidence: [{ sentenceId: 's-1', quote: '大悲心的直接境是眾生的苦還是眾生離苦？' }] },
+      { text: '關於大悲心的直接境，眾生的苦還是眾生離苦，何者正確？', evidence: [{ sentenceId: 's-1', quote: '大悲心的直接境是眾生的苦還是眾生離苦？' }] },
+      { text: '大悲心到底是想著眾生的苦，還是想著眾生離苦呢？', evidence: [{ sentenceId: 's-1', quote: '大悲心的直接境是眾生的苦還是眾生離苦？' }] },
+    ],
+    referenceViews: [
+      { text: '大悲心可從不忍受苦與希望離苦兩面解釋。', evidence: [
+        { sentenceId: 's-3', quote: '大悲心是不忍眾生受苦。' },
+        { sentenceId: 's-4', quote: '也可說希望眾生離苦。' },
+      ] },
+    ],
+  };
+  overview.sourceDigest = validateContentOverview(overview, transcript, {
+    sourceTranscriptId: overview.sourceTranscriptId,
+  }).expectedSourceDigest;
+
+  const result = validateContentOverview(overview, transcript, {
+    sourceTranscriptId: overview.sourceTranscriptId,
+  });
+  assert.ok(result.errors.some((error) => error.code === 'NEAR_DUPLICATE_BULLET'));
 });
 
 test('hydrates evidence quotes from local source ids before independent review', () => {
@@ -547,7 +642,10 @@ test('generation retries an invalid candidate and applies only a fully supported
     assert.ok(retryFeedback[1].validationErrors.some((error) => error.code === 'INVALID_GROUP_LENGTH'));
     assert.equal(result.attempts, 2);
     assert.equal(result.overview.status, 'ai-reviewed');
-    assert.equal(readJsonForTest(absolutePath).contentOverview.status, 'ai-reviewed');
+    const persisted = readJsonForTest(absolutePath);
+    assert.equal(persisted.contentOverview.status, 'ai-reviewed');
+    const { contentOverview: _contentOverview, ...persistedSource } = persisted;
+    assert.deepEqual(persistedSource, transcript);
     assert.equal(isTargetOverviewComplete(target), true);
   } finally {
     fs.rmSync(tempRoot, { recursive: true, force: true });
@@ -780,6 +878,87 @@ test('coverage repair reuses reviewed bullets and asks MiniMax only for the miss
       [result.overview.mainPoints.length, result.overview.discussionTopics.length, result.overview.referenceViews.length],
       [2, 2, 1],
     );
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('repair reuses supported bullets from a partially rejected existing review', () => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'content-overview-partial-existing-'));
+  const absolutePath = path.join(tempRoot, 'session_01.json');
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '第一個主要內容。' },
+      { id: 's-2', text: '錯誤的主要內容來源。' },
+      { id: 's-3', text: '修正後的第二個主要內容。' },
+      { id: 's-4', text: '第一個討論問題。' },
+      { id: 's-5', text: '第二個討論問題。' },
+      { id: 's-6', text: '參考觀點。' },
+    ] }],
+  };
+  const target = {
+    absolutePath,
+    sourceTranscriptId: 'test/session_01',
+    relativePath: 'session_01.json',
+    courseTitle: '測試',
+    sessionId: '01',
+  };
+  const digest = validateContentOverview({
+    schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: '', generatedBy: 'MiniMax-M3', mainPoints: [], discussionTopics: [], referenceViews: [],
+  }, transcript, target).expectedSourceDigest;
+  const item = (text, sentenceId, quote) => ({ text, evidence: [{ sentenceId, quote }] });
+  transcript.contentOverview = {
+    schemaVersion: 1,
+    status: 'needs-review',
+    sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: digest,
+    generatedBy: 'MiniMax-M3',
+    mainPoints: [
+      item('第一個主要內容', 's-1', '第一個主要內容。'),
+      item('應被替換的內容', 's-2', '錯誤的主要內容來源。'),
+    ],
+    discussionTopics: [
+      item('第一個討論問題', 's-4', '第一個討論問題。'),
+      item('第二個討論問題', 's-5', '第二個討論問題。'),
+    ],
+    referenceViews: [item('參考觀點', 's-6', '參考觀點。')],
+    review: {
+      reviewedBy: 'Codex',
+      items: [
+        { group: 'mainPoints', index: 0, verdict: 'supported', reason: '支持' },
+        { group: 'mainPoints', index: 1, verdict: 'unsupported', reason: '加入來源未支持內容' },
+        { group: 'discussionTopics', index: 0, verdict: 'supported', reason: '支持' },
+        { group: 'discussionTopics', index: 1, verdict: 'supported', reason: '支持' },
+        { group: 'referenceViews', index: 0, verdict: 'supported', reason: '支持' },
+      ],
+    },
+  };
+  fs.writeFileSync(absolutePath, JSON.stringify(transcript));
+
+  try {
+    const result = generateAndReviewTarget(tempRoot, target, {
+      retries: 0,
+      generateCandidateFn: (_target, _transcript, feedback) => {
+        assert.deepEqual(feedback.acceptedItems.mainPoints, ['第一個主要內容']);
+        assert.deepEqual(feedback.requestedGroups, ['mainPoints']);
+        return {
+          schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+          sourceDigest: digest, generatedBy: 'MiniMax-M3',
+          mainPoints: [item('修正後的第二個主要內容', 's-3', '修正後的第二個主要內容。')],
+          discussionTopics: [],
+          referenceViews: [],
+        };
+      },
+      reviewCandidateFn: () => ({
+        items: [{ group: 'mainPoints', index: 0, verdict: 'supported', reason: '支持' }],
+      }),
+    });
+    assert.equal(result.overview.status, 'ai-reviewed');
+    assert.deepEqual(result.overview.mainPoints.map((entry) => entry.text), [
+      '第一個主要內容',
+      '修正後的第二個主要內容',
+    ]);
   } finally {
     fs.rmSync(tempRoot, { recursive: true, force: true });
   }
