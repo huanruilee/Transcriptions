@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify transcript overview evidence and source digests
+        run: npm run summaries:audit
+
       - name: Verify committed human-review package semantics
         # Rebuilds the review queue in memory without local audio, ignores
         # local-only clip fields, and checks the committed HTML manifest.

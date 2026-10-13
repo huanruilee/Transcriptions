@@ -18,6 +18,12 @@ export interface TranscriptExportParagraph {
   sentences?: TranscriptExportSentence[];
 }
 
+export interface TranscriptExportOverview {
+  mainPoints: string[];
+  discussionTopics: string[];
+  referenceViews: string[];
+}
+
 function formatTimestamp(value: unknown): string {
   const totalSeconds = Math.max(0, Math.floor(Number(value) || 0));
   const hours = Math.floor(totalSeconds / 3600);
@@ -29,6 +35,7 @@ function formatTimestamp(value: unknown): string {
 export function formatTranscriptText(
   meta: TranscriptExportMeta,
   paragraphs: TranscriptExportParagraph[],
+  overview?: TranscriptExportOverview | null,
 ): string {
   const lines = [
     `《${meta.courseTitle}》逐字稿`,
@@ -40,7 +47,20 @@ export function formatTranscriptText(
   if (meta.pageRange) lines.push(`底本頁碼：${meta.pageRange}`);
   if (meta.transcriptStatus) lines.push(`逐字稿狀態：${meta.transcriptStatus}`);
   if (meta.lastUpdated) lines.push(`最後更新：${meta.lastUpdated}`);
-  lines.push('', '---', '');
+  if (overview) {
+    lines.push('', '本講內容導讀', '');
+    const groups: Array<[string, string[]]> = [
+      ['主要內容', overview.mainPoints],
+      ['討論議題', overview.discussionTopics],
+      ['參考答案／觀點', overview.referenceViews],
+    ];
+    for (const [heading, items] of groups) {
+      if (!items.length) continue;
+      lines.push(heading, ...items.map((item) => `- ${item}`), '');
+    }
+  }
+
+  lines.push('---', '');
 
   let sentenceCount = 0;
   for (const paragraph of paragraphs || []) {

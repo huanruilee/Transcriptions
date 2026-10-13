@@ -39705,5 +39705,112 @@
     "rawAsrPath": "reviews/evidence/study-group-2025/playlist-40/raw_asr.json",
     "contentReviewPath": "reviews/evidence/study-group-2025/playlist-40/content_review.json",
     "publicationState": "candidate-review-required"
+  },
+  "contentOverview": {
+    "schemaVersion": 1,
+    "status": "ai-reviewed",
+    "sourceTranscriptId": "shi-liang-lun-study-group-2025/session_40",
+    "sourceDigest": "sha256:8047041db7852ab5e61165c787035b57cb19b9e8f20fa0ae9e2df50645ca9caa",
+    "generatedBy": "MiniMax-M3",
+    "generatedAt": "2026-10-12T16:06:18.674Z",
+    "mainPoints": [
+      {
+        "text": "當整體是某法的直接因時，支分也會成為該法的直接因。",
+        "evidence": [
+          {
+            "sentenceId": "seg-1026",
+            "quote": "知分也會成為直接因"
+          },
+          {
+            "sentenceId": "seg-1068",
+            "quote": "這個例子是合理的"
+          }
+        ]
+      },
+      {
+        "text": "未組合的零件不是鬧鐘的支分，而是鬧鐘的因；組裝後零件才成為支分。",
+        "evidence": [
+          {
+            "sentenceId": "seg-1047",
+            "quote": "那些零件是鬧鐘的因"
+          },
+          {
+            "sentenceId": "seg-1054",
+            "quote": "那那些零件就是鬧鐘的支分"
+          }
+        ]
+      }
+    ],
+    "discussionTopics": [
+      {
+        "text": "鬧鐘的處是否為原鬧鐘眼根識的因？是直接因還是間接因？",
+        "evidence": [
+          {
+            "sentenceId": "seg-0319",
+            "quote": "鬧鐘的處是否為原鬧鐘眼根枝的因"
+          }
+        ]
+      },
+      {
+        "text": "欲愛、壞愛與有愛三者的關聯性為何？三者間是否有因果關係？",
+        "evidence": [
+          {
+            "sentenceId": "seg-3524",
+            "quote": "關於欲愛、壞愛、有愛三者之間的關聯性"
+          }
+        ]
+      }
+    ],
+    "referenceViews": [
+      {
+        "text": "法師認為鬧鐘的處真正直接幫助的對象是鬧鐘，使鬧鐘能成為眼根識的所緣緣，這種幫助是間接的。",
+        "evidence": [
+          {
+            "sentenceId": "seg-3235",
+            "quote": "因為鬧鐘的處真正幫到的物件是鬧鐘"
+          },
+          {
+            "sentenceId": "seg-3246",
+            "quote": "他使鬧鐘能成為眼根之的所源源"
+          }
+        ]
+      }
+    ],
+    "review": {
+      "reviewedBy": "Codex",
+      "items": [
+        {
+          "group": "mainPoints",
+          "index": 0,
+          "verdict": "supported",
+          "reason": "seg-1025與seg-1026相鄰句直接支持此因果主張"
+        },
+        {
+          "group": "mainPoints",
+          "index": 1,
+          "verdict": "supported",
+          "reason": "零件未組裝為因、組裝後為支分，與引句及上下文一致"
+        },
+        {
+          "group": "discussionTopics",
+          "index": 0,
+          "verdict": "supported",
+          "reason": "seg-0319明確提出此問題，seg-3234實質討論直接間接因"
+        },
+        {
+          "group": "discussionTopics",
+          "index": 1,
+          "verdict": "supported",
+          "reason": "seg-3524明確提出三者關聯性問題並展開討論"
+        },
+        {
+          "group": "referenceViews",
+          "index": 0,
+          "verdict": "supported",
+          "reason": "seg-3235、3245、3246及相鄰句共同支持直接與間接幫助的觀點"
+        }
+      ]
+    },
+    "attemptCount": 1
   }
 }

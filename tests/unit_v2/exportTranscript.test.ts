@@ -34,6 +34,12 @@ describe('Transcript download contract', () => {
           sentences: [{ start_time: 3661, text: '第三句。' }],
         },
       ],
+      {
+        mainPoints: ['量與所量的關係'],
+        discussionTopics: ['現量如何成立？'],
+        referenceViews: ['現量離分別且不錯亂。'],
+        source: 'reviewed',
+      },
     );
 
     expect(text).toContain('課程：釋量論第二品');
@@ -41,6 +47,10 @@ describe('Transcript download contract', () => {
     expect(text).toContain('底本頁碼：p.101-p.103');
     expect(text).toContain('逐字稿狀態：review-ready');
     expect(text).toContain('最後更新：2026-09-28 10:30:00');
+    expect(text).toContain('本講內容導讀');
+    expect(text).toContain('主要內容\n- 量與所量的關係');
+    expect(text).toContain('討論議題\n- 現量如何成立？');
+    expect(text).toContain('參考答案／觀點\n- 現量離分別且不錯亂。');
     expect(text.match(/【科判】正說量之建立/g)).toHaveLength(1);
     expect(text).toContain('[00:00:05] 第一句。');
     expect(text).toContain('[00:01:05] 第二句。');
