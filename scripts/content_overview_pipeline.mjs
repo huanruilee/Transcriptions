@@ -23,6 +23,7 @@ const OBVIOUS_ASR_TERMS = [
   ['進取因', '近取因'],
   ['耳根支', '耳根識'],
   ['自證支', '自證知'],
+  ['猶豫之', '猶豫知'],
   ['無耳觀', '無我觀'],
   ['賤煩惱', '見煩惱'],
   ['棋輪', '臍輪'],
@@ -318,6 +319,22 @@ export function validateContentOverview(
           errors.push(makeError('EVIDENCE_QUOTE_MISMATCH', `${group}:${index}:${evidence?.sentenceId}`));
         }
       }
+    }
+  }
+
+  const priorCrossGroupItems = [];
+  for (const group of GROUPS) {
+    for (const [index, item] of (Array.isArray(overview[group]) ? overview[group] : []).entries()) {
+      const text = String(item?.text || '').replace(/\s+/g, ' ').trim();
+      const duplicate = priorCrossGroupItems.find((prior) =>
+        prior.group !== group && isNearDuplicateBullet(prior.text, text));
+      if (duplicate) {
+        errors.push(makeError(
+          'CROSS_GROUP_NEAR_DUPLICATE_BULLET',
+          `${duplicate.group}:${duplicate.index}->${group}:${index}`,
+        ));
+      }
+      priorCrossGroupItems.push({ group, index, text });
     }
   }
 

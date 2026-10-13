@@ -86,8 +86,8 @@ h2 {
   padding: 3px 8px;
   border: 1px solid rgba(53, 104, 89, 0.24);
   border-radius: 999px;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.5);
+  color: var(--text-primary);
+  background: var(--surface-bg);
   font-size: 0.72rem;
 }
 

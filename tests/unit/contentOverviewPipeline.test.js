@@ -16,6 +16,7 @@ import {
   hydrateEvidenceQuotes,
   isMiniMaxQuotaError,
   isTargetOverviewComplete,
+  normalizeObviousAsrTerms,
   normalizeCandidateEvidence,
   pruneUnsupportedItems,
   selectStratifiedSample,
@@ -384,6 +385,52 @@ test('overview validation rejects near-duplicate discussion questions', () => {
     sourceTranscriptId: overview.sourceTranscriptId,
   });
   assert.ok(result.errors.some((error) => error.code === 'NEAR_DUPLICATE_BULLET'));
+});
+
+test('obvious Buddhist epistemology ASR terms are normalized in summary text', () => {
+  const candidate = {
+    mainPoints: [{ text: '即使只生起傾向事實的猶豫之，也能動搖三有。' }],
+    discussionTopics: [],
+    referenceViews: [],
+  };
+  const normalized = normalizeObviousAsrTerms(candidate);
+  assert.equal(normalized.mainPoints[0].text, '即使只生起傾向事實的猶豫知，也能動搖三有。');
+});
+
+test('overview validation rejects duplicate claims across reading-guide groups', () => {
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '皈依三寶能淨除往昔惡業。' },
+      { id: 's-2', text: '發起菩提心是淨除罪障最好的方法。' },
+      { id: 's-3', text: '應如何淨除罪障？' },
+    ] }],
+  };
+  const duplicated = '皈依三寶能淨除往昔惡業，發起菩提心是淨除罪障最好的方法。';
+  const overview = {
+    schemaVersion: 1,
+    status: 'candidate',
+    sourceTranscriptId: 'test/session_cross_group',
+    sourceDigest: '',
+    generatedBy: 'MiniMax-M3',
+    mainPoints: [
+      { text: duplicated, evidence: [{ sentenceId: 's-1' }, { sentenceId: 's-2' }] },
+      { text: '淨罪須結合皈依與菩提心。', evidence: [{ sentenceId: 's-1' }, { sentenceId: 's-2' }] },
+    ],
+    discussionTopics: [
+      { text: '應如何淨除罪障？', evidence: [{ sentenceId: 's-3' }] },
+    ],
+    referenceViews: [
+      { text: duplicated, evidence: [{ sentenceId: 's-1' }, { sentenceId: 's-2' }] },
+    ],
+  };
+  overview.sourceDigest = validateContentOverview(overview, transcript, {
+    sourceTranscriptId: overview.sourceTranscriptId,
+  }).expectedSourceDigest;
+
+  const result = validateContentOverview(overview, transcript, {
+    sourceTranscriptId: overview.sourceTranscriptId,
+  });
+  assert.ok(result.errors.some((error) => error.code === 'CROSS_GROUP_NEAR_DUPLICATE_BULLET'));
 });
 
 test('hydrates evidence quotes from local source ids before independent review', () => {
