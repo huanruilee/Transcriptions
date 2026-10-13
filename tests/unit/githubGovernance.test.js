@@ -41,6 +41,8 @@ test('GitHub governance: acceptance is least-privilege and checks review drift',
     'Acceptance workflow must explicitly use read-only repository permissions');
   assert.match(workflow, /build_human_review_package\.py --check/,
     'CI must verify review semantics without rewriting local audio evidence');
+  assert.match(workflow, /npm run summaries:audit/,
+    'Acceptance workflow must reject stale or digest-mismatched transcript overviews');
 });
 
 test('GitHub governance: no-audio CI ignores clip fields but detects semantic drift', () => {
