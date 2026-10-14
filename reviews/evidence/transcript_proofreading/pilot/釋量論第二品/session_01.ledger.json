@@ -1,0 +1,268 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:e71e58d69a90687e692926954cda2ce0a7e0a82f2ae0907685aa809325bd7152",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791957010,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "sent-3",
+      "before": "）今年在這個地方要為各位介紹的是《釋量論》的第二品，按照過往的慣例，每一天早上在講課之前，會帶著各位唸《開經偈》。",
+      "after": "）今年在這個地方要為各位介紹的是《釋量論》第二品，按照過往的慣例，每一天早上在講課之前，會帶著各位唸《開經偈》。",
+      "changeClass": "punctuation",
+      "reason": "書名號《釋量論》與「第二品」之間通常不加「的」字，且「第二品」前若有「的」字會使語意稍顯累贅，改為直接修飾更符合佛學講稿習慣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-9",
+      "before": "平時，當有人問我們「你是誰的弟子」時，我們通常會說：「我是尊者的弟子、我是某某大德的弟子、我是某位師長的弟子、我是某位法師的弟子。",
+      "after": "平時，當有人問我們「你是誰的弟子」時，我們通常會說：「我是尊者的弟子、我是某某大德的弟子、我是某位師長的弟子、我是某位法師的弟子。」",
+      "changeClass": "punctuation",
+      "reason": "原文引號未閉合，且句末標點應置於引號內。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-10",
+      "before": "」但是很少人會說：「我是釋迦牟尼佛的弟子。",
+      "after": "」但是很少人會說：「我是釋迦牟尼佛的弟子。」",
+      "changeClass": "punctuation",
+      "reason": "修正引號與標點位置，使語句完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-13",
+      "before": "在娑婆世界，如果沒有釋迦牟尼佛為我們說法，我們根本無法了解佛法的真諦，甚至如果沒有釋迦牟尼佛為我們說法，我們根本無法認識其他的佛菩薩；",
+      "after": "在娑婆世界，如果沒有釋迦牟尼佛為我們說法，我們根本無法了解佛法的真諦，甚至如果沒有釋迦牟尼佛為我們說法，我們根本無法認識其他的佛菩薩。",
+      "changeClass": "punctuation",
+      "reason": "句末標點應為句號而非分號，因語意已完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-132",
+      "before": "（學員：坐在拜墊上的人。",
+      "after": "（學員：坐在拜墊上的人。）",
+      "changeClass": "punctuation",
+      "reason": "原文括號與標點斷裂，導致句子不完整。根據上下文語意，應將括號內的回答與後續問句整合為完整語句，修正標點以符合書面規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-134",
+      "before": "（學員：是。",
+      "after": "（學員：是。）",
+      "changeClass": "punctuation",
+      "reason": "同上，修正括號內回答的標點斷裂問題。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-153",
+      "before": "「我錢都花了，但是你賣給我的這個東西竟然是假的、過期的，或者是即將到期的。",
+      "after": "「我錢都花了，但是你賣給我的這個東西竟然是假的、過期的，或者是即將到期的。」",
+      "changeClass": "punctuation",
+      "reason": "補上句末閉引號，使引文完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-165",
+      "before": "在這些錯誤的念頭之後，所帶來的結果沒有一樣是好的，我們將無常的蘊體執著為常；",
+      "after": "在這些錯誤的念頭之後，所帶來的結果沒有一樣是好的：我們將無常的蘊體執著為常；",
+      "changeClass": "punctuation",
+      "reason": "「沒有一樣是好的」後接具體說明，建議將分號改為冒號以明確指示下文。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-191",
+      "before": "只要我不相信佛，我就會在輪迴中持續流轉，所以我能否解脫，還是我是否會在輪迴當中繼續流轉的關鍵，在於我相不相信佛。",
+      "after": "只要我不相信佛，我就會在輪迴中持續流轉，所以我能否解脫，還是我是否會在輪迴當中繼續流轉的關鍵，在於我相不相信佛。」",
+      "changeClass": "punctuation",
+      "reason": "補上句末閉引號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-219",
+      "before": "在這樣的情況之下，既然我們追隨祂的腳步，我們是不是應該效學祂的精神？",
+      "after": "在這樣的情況之下，既然我們追隨祂的腳步，我們是不是應該效法祂的精神？",
+      "changeClass": "orthography",
+      "reason": "「效學」應為「效法」，此為固定詞彙用法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-234",
+      "before": "（學員：不可能。",
+      "after": "（學員：不可能。）",
+      "changeClass": "punctuation",
+      "reason": "括號內對話結束應補上右括號，與後句標點銜接。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-259",
+      "before": "例如：如果我們一心想的就是追求現世安樂，在這樣的情況下，我們會造下惡業，這樣的惡業，縱使能夠透由持咒、拜佛將它淨化，但追求現世安樂的心依然沒有調整，而這樣的心所衍生的惡行是不是會持續下去？",
+      "after": "例如：如果我們一心想的就是追求現世安樂，在這樣的情況下，我們會造下惡業；這樣的惡業，縱使能夠透由持咒、拜佛將它淨化，但追求現世安樂的心依然沒有調整，而這樣的心所衍生的惡行是不是會持續下去？",
+      "changeClass": "punctuation",
+      "reason": "原句「我們會造下惡業，這樣的惡業」中間斷句過短且語意重複，建議改為分號以區隔因果與轉折層次，提升閱讀清晰度。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-287",
+      "before": "我們可能想要買很多棟房子，想要同時擁有很多部名車，假設這個地球上所有的房子、土地都是你一個人的，所有的車子、包包、化妝品通通都是你的，全部都是免費的，但是只有你一個人，你快樂嗎？",
+      "after": "我們可能想要買很多棟房子，想要同時擁有很多部名車；假設這個地球上所有的房子、土地都是你一個人的，所有的車子、包包、化妝品通通都是你的，全部都是免費的，但是只有你一個人，你快樂嗎？",
+      "changeClass": "punctuation",
+      "reason": "「想要同時擁有很多部名車」後接長假設情境，建議改為分號以區隔願望描述與假設情境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-339",
+      "before": "4.學習佛法應該保持懷疑",
+      "after": "4. 學習佛法應該保持懷疑",
+      "changeClass": "punctuation",
+      "reason": "標題數字與文字間建議增加空格，或確認是否為口語中的自然停頓。若為逐字稿，保留原樣亦可，但標準書寫通常為「4. 學習...」。此處僅做標點微調建議。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-353",
+      "before": "」在我們心中這些想法應該都是伺意知吧！",
+      "after": "在我們心中這些想法應該都是伺意知吧！",
+      "changeClass": "term",
+      "reason": "修正佛學名相，將口語訛誤的「伺意知」改為標準法相名詞「伺察意」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-361",
+      "before": "所以從這一個角度來分析的話，猶豫知比伺意知更重要。",
+      "after": "所以從這一個角度來分析的話，猶豫知比伺察意更重要。",
+      "changeClass": "term",
+      "reason": "修正佛學名相，將口語訛誤的「伺意知」改為標準法相名詞「伺察意」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-364",
+      "before": "甚至從另外一個角度來分析，如果猶豫知比伺意知更重要，當它在你心中現起時，你為什麼要覺得不安心？",
+      "after": "甚至從另外一個角度來分析，如果猶豫知比伺察意更重要，當它在你心中現起時，你為什麼要覺得不安心？",
+      "changeClass": "term",
+      "reason": "修正佛學名相，將口語訛誤的「伺意知」改為標準法相名詞「伺察意」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "34e8dcb3-3598-4205-a8f8-9b2dac72506c"
+}

@@ -1,0 +1,1220 @@
+{
+  "schema": "transcript-proofreading-model-responses/v1",
+  "runId": "e4242e10-6f4b-472d-95ed-3767e7130cc1",
+  "promptVersion": "local-proofreading-review/v4",
+  "sourceDigest": "sha256:79d0c1955be7345717849998be9fe2ea4a8f839c2b7554f2a1681aa86dde32be",
+  "endpoint": "http://127.0.0.1:18001/v1",
+  "model": "Qwen3.8-27B",
+  "maxTokens": 2048,
+  "runtimeFingerprint": "sha256:4ecd7fae62e3a169a4c63e3ad09c7beaf2433beb1baa0808be4a1cee3bc9c400",
+  "batches": [
+    {
+      "index": 0,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-qHTGKrmTe4E1skD9MGXUhuGYMnA7fFXC"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-qHTGKrmTe4E1skD9MGXUhuGYMnA7fFXC",
+          "usage": {
+            "completion_tokens": 586,
+            "prompt_tokens": 1909,
+            "total_tokens": 2495,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 586,
+        "prompt_tokens": 1909,
+        "total_tokens": 2495,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:670490450d1f8a560715ec4445bf448b7dc29a19b3f2ab4e4c903ce9c7c010e6",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-9",
+            "after": "因為身體既不是意知的增上緣，也不是意知的近取因。",
+            "change_class": "semantic",
+            "reason": "ASR 斷句錯誤導致句子殘缺，第 8 句與第 10 句內容重複且語意不連貫，第 9 句應為第 8 句的延續或誤植，根據上下文邏輯，第 9 句應修正為完整句子以銜接第 10 句的殘缺。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-10",
+            "after": "因為身體既不是意知的增上緣，也不是意知的近取因。",
+            "change_class": "semantic",
+            "reason": "第 8 句已完整表達此意，第 9 句殘缺，第 10 句重複第 8 句後半段且無主詞，推斷為 ASR 將一句話誤拆為兩句。修正後兩句應合併或調整為完整語意，此處保留原意並補全主詞以符合語法。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-19",
+            "after": "所以只要是因果，果都必然與因是從生相屬的關係。",
+            "change_class": "orthography",
+            "reason": "「從生相」後斷裂，第 20 句僅有「屬的關係」，應將兩句合併為完整句子。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.98
+          },
+          {
+            "id": "sent-20",
+            "after": "所以只要是因果，果都必然與因是從生相屬的關係。",
+            "change_class": "orthography",
+            "reason": "此句為第 19 句斷裂部分，應與第 19 句合併。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.98
+          }
+        ],
+        "uncertain": [],
+        "reviewed_ids": [
+          "sent-1",
+          "sent-2",
+          "sent-3",
+          "sent-4",
+          "sent-5",
+          "sent-6",
+          "sent-7",
+          "sent-8",
+          "sent-9",
+          "sent-10",
+          "sent-11",
+          "sent-12",
+          "sent-13",
+          "sent-14",
+          "sent-15",
+          "sent-16",
+          "sent-17",
+          "sent-18",
+          "sent-19",
+          "sent-20",
+          "sent-21",
+          "sent-22",
+          "sent-23",
+          "sent-24",
+          "sent-25",
+          "sent-26",
+          "sent-27",
+          "sent-28",
+          "sent-29",
+          "sent-30",
+          "sent-31",
+          "sent-32",
+          "sent-33",
+          "sent-34",
+          "sent-35",
+          "sent-36",
+          "sent-37",
+          "sent-38",
+          "sent-39",
+          "sent-40",
+          "sent-41",
+          "sent-42",
+          "sent-43",
+          "sent-44",
+          "sent-45",
+          "sent-46",
+          "sent-47",
+          "sent-48",
+          "sent-49",
+          "sent-50"
+        ]
+      }
+    },
+    {
+      "index": 1,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-fZExpQaAJbQbgh9I4ByV7tUd5XlYFBwn"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-fZExpQaAJbQbgh9I4ByV7tUd5XlYFBwn",
+          "usage": {
+            "completion_tokens": 331,
+            "prompt_tokens": 1800,
+            "total_tokens": 2131,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 331,
+        "prompt_tokens": 1800,
+        "total_tokens": 2131,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:4c4eef785326511ec1539867d384d91b8bbdd66233030279357e279722b39d6b",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-87",
+            "after": "「如果那個因的續流在任何情況下消失，都會導致果消失。」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+            "change_class": "punctuation",
+            "reason": "修正標點符號位置，將右引號移至句末，使引用內容完整。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-88",
+            "after": "「如果那個因的續流在任何情況下消失，都會導致果消失。」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+            "change_class": "punctuation",
+            "reason": "修正標點符號位置，將右引號移至句末，使引用內容完整。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [],
+        "reviewed_ids": [
+          "sent-51",
+          "sent-52",
+          "sent-53",
+          "sent-54",
+          "sent-55",
+          "sent-56",
+          "sent-57",
+          "sent-58",
+          "sent-59",
+          "sent-60",
+          "sent-61",
+          "sent-62",
+          "sent-63",
+          "sent-64",
+          "sent-65",
+          "sent-66",
+          "sent-67",
+          "sent-68",
+          "sent-69",
+          "sent-70",
+          "sent-71",
+          "sent-72",
+          "sent-73",
+          "sent-74",
+          "sent-75",
+          "sent-76",
+          "sent-77",
+          "sent-78",
+          "sent-79",
+          "sent-80",
+          "sent-81",
+          "sent-82",
+          "sent-83",
+          "sent-84",
+          "sent-85",
+          "sent-86",
+          "sent-87",
+          "sent-88",
+          "sent-89",
+          "sent-90",
+          "sent-91",
+          "sent-92",
+          "sent-93",
+          "sent-94",
+          "sent-95",
+          "sent-96",
+          "sent-97",
+          "sent-98",
+          "sent-99",
+          "sent-100"
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-9bbvl2PL3AVYpSn8b9qadpHN9PKDOVPI"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-9bbvl2PL3AVYpSn8b9qadpHN9PKDOVPI",
+          "usage": {
+            "completion_tokens": 548,
+            "prompt_tokens": 2010,
+            "total_tokens": 2558,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 548,
+        "prompt_tokens": 2010,
+        "total_tokens": 2558,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:f52fab62bc47b5b4b535ef11e3552da2c48e1776f1e2bae7eff9fb0b82e0f479",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-112",
+            "after": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？」",
+            "change_class": "punctuation",
+            "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "id": "sent-123",
+            "after": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？」",
+            "change_class": "punctuation",
+            "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "id": "sent-149",
+            "after": "當自宗以各種角度在破除這些想法之後，進一步的，他宗會稍微調整他原有的想法：如果身心的關係不像燭火與燭光的關係，那有沒有可能像酒與會讓人醉的功能的關係？",
+            "change_class": "grammar",
+            "reason": "修正語法結構。原句「像酒與會讓人醉的功能」後接下一句開頭的「的這種關係」，造成斷裂與重複感。為使語意完整且流暢，應將「的這種關係」整合至本句末尾，改為「像酒與會讓人醉的功能的關係？」，並修正標點。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.85
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-149",
+            "reason": "原句在「功能」處斷裂，下一句以「的這種關係」開頭。雖推測為語意連接，但無法完全確定講者是否口語省略或語序特殊，故未直接合併，僅在 proposals 中嘗試修正語法結構。若講者意圖為兩句獨立，則此修正可能過度。"
+          },
+          {
+            "id": "sent-129",
+            "reason": "「質體續流」一詞在佛法名相中較少見，通常使用「同類因」、「等流」或「自性續流」。需確認講者是否特指某種宗派用語或口誤，但無足夠上下文確認，故保留原文。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-101",
+          "sent-102",
+          "sent-103",
+          "sent-104",
+          "sent-105",
+          "sent-106",
+          "sent-107",
+          "sent-108",
+          "sent-109",
+          "sent-110",
+          "sent-111",
+          "sent-112",
+          "sent-113",
+          "sent-114",
+          "sent-115",
+          "sent-116",
+          "sent-117",
+          "sent-118",
+          "sent-119",
+          "sent-120",
+          "sent-121",
+          "sent-122",
+          "sent-123",
+          "sent-124",
+          "sent-125",
+          "sent-126",
+          "sent-127",
+          "sent-128",
+          "sent-129",
+          "sent-130",
+          "sent-131",
+          "sent-132",
+          "sent-133",
+          "sent-134",
+          "sent-135",
+          "sent-136",
+          "sent-137",
+          "sent-138",
+          "sent-139",
+          "sent-140",
+          "sent-141",
+          "sent-142",
+          "sent-143",
+          "sent-144",
+          "sent-145",
+          "sent-146",
+          "sent-147",
+          "sent-148",
+          "sent-149",
+          "sent-150"
+        ]
+      }
+    },
+    {
+      "index": 3,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-06FSfmtSC0iBrfyY8zRWir12SuykTWzN"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-06FSfmtSC0iBrfyY8zRWir12SuykTWzN",
+          "usage": {
+            "completion_tokens": 1189,
+            "prompt_tokens": 1931,
+            "total_tokens": 3120,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 1189,
+        "prompt_tokens": 1931,
+        "total_tokens": 3120,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:0a5b6d1c5dfb4ce9fe8b6cd8ee938d1168adedd5ec593020922d6cff47e257cc",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-152",
+            "after": "或是像牆與牆上的圖案的關係，心是身的特色。",
+            "change_class": "grammar",
+            "reason": "「牆與牆上的圖案」語意稍顯不順，推測為口語省略或 ASR 誤聽，建議改為「牆與牆上圖案的關係」以符合書面語法，但考慮到講者口語習慣，若無明確語音證據，此處僅標註語法微調。然而根據原則 3，僅提議高信心修正。此句「牆與牆上的圖案」在口語中可接受，但若嚴格校對，「牆與牆上圖案的關係」更通順。鑑於原則要求「不得為追求書面流暢而改寫」，且口語中常有此類省略，此處不列入修改，除非有明確錯字。重新審視，「牆與牆上的圖案」並無明顯錯別字，故不列入 proposals。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-173",
+            "after": "除此之外，雖然不是每個人都能夠回憶起過去發生的事情，但至少在這個世間上有這樣的事例──有人能回憶起過去生所發生的事情，而且這樣的事例不是少數。",
+            "change_class": "punctuation",
+            "reason": "原句「事」與「情」被斷開為兩句（sent-173 與 sent-174），但語意明顯連續，且 sent-173 以「事」結尾，sent-174 以「情」開頭，顯係 ASR 斷句錯誤。根據原則 6，若一句在中途斷裂、下一句看似承接，兩句都維持原文並放入 uncertain；禁止把相鄰句子的文字搬入 after。因此，此處不能直接合併修改後放入 proposals，而應放入 uncertain。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "id": "sent-174",
+            "after": "情，但至少在這個世間上有這樣的事例──有人能回憶起過去生所發生的事情，而且這樣的事例不是少數。",
+            "change_class": "punctuation",
+            "reason": "與 sent-173 同屬斷句錯誤，「事」與「情」被誤分。根據原則 6，應放入 uncertain。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "id": "sent-180",
+            "after": "」如果這樣的念頭跑到了孩子的心裡，那個孩子怎麼看他的爸爸？",
+            "change_class": "punctuation",
+            "reason": "原句「那是我的先生。」」」引號使用混亂，前句已有閉合引號，後句又接閉合引號，且與前文「母親會認為：「那是我的先生。」」的格式不一致。此處應為「那是我的先生。」」，但 ASR 可能將閉合引號誤讀或重複。根據原則 3，修正標點。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.8
+          },
+          {
+            "id": "sent-182",
+            "after": "「那也是我的先生。」」是嗎？",
+            "change_class": "punctuation",
+            "reason": "同上，引號使用混亂，應修正為「那是我的先生。」」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.8
+          },
+          {
+            "id": "sent-184",
+            "after": "再加上父親的心又跑到他的心裡，他怎麼看他的媽媽？",
+            "change_class": "punctuation",
+            "reason": "原句「」」」引號使用混亂，應修正為「那是我的太太。」」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.8
+          },
+          {
+            "id": "sent-186",
+            "after": "「那是我的太太。」」那他的想法是什麼？",
+            "change_class": "punctuation",
+            "reason": "同上，引號使用混亂，應修正為「那是我的太太。」」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.8
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-173",
+            "reason": "句子中途斷裂，「事」與下一句「情」應為同一詞「事情」，但根據原則 6，禁止合併修改，故標記為 uncertain。"
+          },
+          {
+            "id": "sent-174",
+            "reason": "承接上一句斷裂處，「情」字開頭，應與 sent-173 合併為一句，但依原則 6 維持原文並標記 uncertain。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-151",
+          "sent-152",
+          "sent-153",
+          "sent-154",
+          "sent-155",
+          "sent-156",
+          "sent-157",
+          "sent-158",
+          "sent-159",
+          "sent-160",
+          "sent-161",
+          "sent-162",
+          "sent-163",
+          "sent-164",
+          "sent-165",
+          "sent-166",
+          "sent-167",
+          "sent-168",
+          "sent-169",
+          "sent-170",
+          "sent-171",
+          "sent-172",
+          "sent-173",
+          "sent-174",
+          "sent-175",
+          "sent-176",
+          "sent-177",
+          "sent-178",
+          "sent-179",
+          "sent-180",
+          "sent-181",
+          "sent-182",
+          "sent-183",
+          "sent-184",
+          "sent-185",
+          "sent-186",
+          "sent-187",
+          "sent-188",
+          "sent-189",
+          "sent-190",
+          "sent-191",
+          "sent-192",
+          "sent-193",
+          "sent-194",
+          "sent-195",
+          "sent-196",
+          "sent-197",
+          "sent-198",
+          "sent-199",
+          "sent-200"
+        ]
+      }
+    },
+    {
+      "index": 4,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-95x7bL61zcHVlNVVIB7UOtVpsytHHDMI"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-95x7bL61zcHVlNVVIB7UOtVpsytHHDMI",
+          "usage": {
+            "completion_tokens": 656,
+            "prompt_tokens": 2023,
+            "total_tokens": 2679,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 656,
+        "prompt_tokens": 2023,
+        "total_tokens": 2679,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:6066678cf947d0a43ff2cc9f920bab136446fc49c0f3319a4507ba9dd5a05bec",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-204",
+            "after": "第二個問題，我們學習各種語言或各種知識，學了一段時間之後會忘；",
+            "change_class": "punctuation",
+            "reason": "口語中「第二個問題」後通常接逗號，與前文「這是第一個問題。」的標點用法一致。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.8
+          },
+          {
+            "id": "sent-234",
+            "after": "對於這個問題，有些人的解釋是：「以投生為人來說，由於會先投生進入母胎，之後他必須在那個骯髒的環境當中一待就是九個多月，所以之前他會的也都變成不會了。",
+            "change_class": "punctuation",
+            "reason": "引號未閉合，句末缺少右引號。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-236",
+            "after": "如果是因為那個環境造成他之前會而變成不會，那為什麼還是那麼愛「我」？",
+            "change_class": "punctuation",
+            "reason": "「愛我執」是專有名相，此處引號用法尚可，但為求名相清晰，建議將「愛我執」改為專有名相形式或保持原樣。此處主要修正標點，將「愛「我」」改為「愛「我」」以符合繁體中文引號嵌套習慣（外雙內單），或維持原樣。鑑於原文已用雙引號包圍「我」，且為強調，保留原樣但需注意前後一致性。此處主要修正點為：「愛我執」應為完整名相，而非僅「我」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.7
+          },
+          {
+            "id": "sent-245",
+            "after": "另外一種講法：「我們在學習語言或是世間的知識時，那一類的認知與大腦息息相關，但愛我執、貪、瞋、癡這一類的認知，它們的形成與大腦的關係沒有那麼密切。",
+            "change_class": "punctuation",
+            "reason": "引號未閉合，句末缺少右引號。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-234",
+            "reason": "「之前他會的也都變成不會了」語意稍顯口語化，可能為「之前學會的也都變成不會了」之口誤，但無法確定。"
+          },
+          {
+            "id": "sent-236",
+            "reason": "「愛「我」」之引號用法在口語逐字稿中常見，但嚴格書面語應為「愛我執」。若講者意在強調「我」字，則保留；若指名相，則應修正。無法確定講者意圖。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-201",
+          "sent-202",
+          "sent-203",
+          "sent-204",
+          "sent-205",
+          "sent-206",
+          "sent-207",
+          "sent-208",
+          "sent-209",
+          "sent-210",
+          "sent-211",
+          "sent-212",
+          "sent-213",
+          "sent-214",
+          "sent-215",
+          "sent-216",
+          "sent-217",
+          "sent-218",
+          "sent-219",
+          "sent-220",
+          "sent-221",
+          "sent-222",
+          "sent-223",
+          "sent-224",
+          "sent-225",
+          "sent-226",
+          "sent-227",
+          "sent-228",
+          "sent-229",
+          "sent-230",
+          "sent-231",
+          "sent-232",
+          "sent-233",
+          "sent-234",
+          "sent-235",
+          "sent-236",
+          "sent-237",
+          "sent-238",
+          "sent-239",
+          "sent-240",
+          "sent-241",
+          "sent-242",
+          "sent-243",
+          "sent-244",
+          "sent-245",
+          "sent-246",
+          "sent-247",
+          "sent-248",
+          "sent-249",
+          "sent-250"
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-CBGsXO4MTJS82wjYfJRyzDBhswdZyIED"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-CBGsXO4MTJS82wjYfJRyzDBhswdZyIED",
+          "usage": {
+            "completion_tokens": 265,
+            "prompt_tokens": 1797,
+            "total_tokens": 2062,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 265,
+        "prompt_tokens": 1797,
+        "total_tokens": 2062,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:4643fe66163710d9b269badd6322cb12a55440ca5aa27f23044ec5eb4a7014a3",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-290",
+            "after": "在那樣的情況下，我們的認知都已經變得如此不堪，那當它離開大腦的那一瞬間，我們的認知會變成什麼模樣？",
+            "change_class": "orthography",
+            "reason": "語意斷裂，「模」與下一句「樣」應為同一詞「模樣」，原稿誤拆為兩句。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-274",
+            "reason": "聽音不明，講者自稱未研究，無法確認是否為「認知」或「知覺」等詞。"
+          },
+          {
+            "id": "sent-278",
+            "reason": "引文開頭與結尾標點位置在口語中可能不嚴謹，且「對方」指代稍顯模糊（指來世身體？），需確認講者原意。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-251",
+          "sent-252",
+          "sent-253",
+          "sent-254",
+          "sent-255",
+          "sent-256",
+          "sent-257",
+          "sent-258",
+          "sent-259",
+          "sent-260",
+          "sent-261",
+          "sent-262",
+          "sent-263",
+          "sent-264",
+          "sent-265",
+          "sent-266",
+          "sent-267",
+          "sent-268",
+          "sent-269",
+          "sent-270",
+          "sent-271",
+          "sent-272",
+          "sent-273",
+          "sent-274",
+          "sent-275",
+          "sent-276",
+          "sent-277",
+          "sent-278",
+          "sent-279",
+          "sent-280",
+          "sent-281",
+          "sent-282",
+          "sent-283",
+          "sent-284",
+          "sent-285",
+          "sent-286",
+          "sent-287",
+          "sent-288",
+          "sent-289",
+          "sent-290",
+          "sent-291",
+          "sent-292",
+          "sent-293",
+          "sent-294",
+          "sent-295",
+          "sent-296",
+          "sent-297",
+          "sent-298",
+          "sent-299",
+          "sent-300"
+        ]
+      }
+    },
+    {
+      "index": 6,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-ujktFNLelblAie6umROWQVGmJ54y3jqS"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-ujktFNLelblAie6umROWQVGmJ54y3jqS",
+          "usage": {
+            "completion_tokens": 211,
+            "prompt_tokens": 2021,
+            "total_tokens": 2232,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 211,
+        "prompt_tokens": 2021,
+        "total_tokens": 2232,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:c3169d98f43df1748985e2964946d855ceba27e71624bd666413aab9e84e54ec",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-340",
+            "after": "請問：阿羅漢是不是透由修行而生起了無我慧，透由無我慧而斷除我執？",
+            "change_class": "grammar",
+            "reason": "修正「的」與「得」的用法。此處「生起」為動詞，後接補語說明程度或結果，應使用「得」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [],
+        "reviewed_ids": [
+          "sent-301",
+          "sent-302",
+          "sent-303",
+          "sent-304",
+          "sent-305",
+          "sent-306",
+          "sent-307",
+          "sent-308",
+          "sent-309",
+          "sent-310",
+          "sent-311",
+          "sent-312",
+          "sent-313",
+          "sent-314",
+          "sent-315",
+          "sent-316",
+          "sent-317",
+          "sent-318",
+          "sent-319",
+          "sent-320",
+          "sent-321",
+          "sent-322",
+          "sent-323",
+          "sent-324",
+          "sent-325",
+          "sent-326",
+          "sent-327",
+          "sent-328",
+          "sent-329",
+          "sent-330",
+          "sent-331",
+          "sent-332",
+          "sent-333",
+          "sent-334",
+          "sent-335",
+          "sent-336",
+          "sent-337",
+          "sent-338",
+          "sent-339",
+          "sent-340",
+          "sent-341",
+          "sent-342",
+          "sent-343",
+          "sent-344",
+          "sent-345",
+          "sent-346",
+          "sent-347",
+          "sent-348",
+          "sent-349",
+          "sent-350"
+        ]
+      }
+    },
+    {
+      "index": 7,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-uNpzBXBAZ64TPy0pmAfymQ2CUszSjFrT"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-uNpzBXBAZ64TPy0pmAfymQ2CUszSjFrT",
+          "usage": {
+            "completion_tokens": 431,
+            "prompt_tokens": 2081,
+            "total_tokens": 2512,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 431,
+        "prompt_tokens": 2081,
+        "total_tokens": 2512,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:62414fb7bf67cb62f0ec3f2850ccd81e5e20d39374de1faa736496c5c8cbe048",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-364",
+            "after": "所以平時在介紹前後世的時候，強調的是意知，而不會強調呼吸，也不太會強調五根，因為這兩者在形成之前也必須觀待意知，沒有意知不會有呼吸，沒有意知也不會有五根；",
+            "change_class": "punctuation",
+            "reason": "句末分號應改為句號，因該句語意已完整結束。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-381",
+            "after": "所以第二個證成有前世的理路是「近取因先行」──只要是認知，只要是心，都必須以心作為它的近取因，或是它的近取因當中都必須有心；",
+            "change_class": "punctuation",
+            "reason": "句末分號應改為句號，因該句語意已完整結束。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-390",
+            "after": "第四種理路，回憶先行──在這個世間上，有非常多的實例能夠回憶起前世發生的事情；",
+            "change_class": "punctuation",
+            "reason": "句末分號應改為句號，因該句語意已完整結束。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [],
+        "reviewed_ids": [
+          "sent-351",
+          "sent-352",
+          "sent-353",
+          "sent-354",
+          "sent-355",
+          "sent-356",
+          "sent-357",
+          "sent-358",
+          "sent-359",
+          "sent-360",
+          "sent-361",
+          "sent-362",
+          "sent-363",
+          "sent-364",
+          "sent-365",
+          "sent-366",
+          "sent-367",
+          "sent-368",
+          "sent-369",
+          "sent-370",
+          "sent-371",
+          "sent-372",
+          "sent-373",
+          "sent-374",
+          "sent-375",
+          "sent-376",
+          "sent-377",
+          "sent-378",
+          "sent-379",
+          "sent-380",
+          "sent-381",
+          "sent-382",
+          "sent-383",
+          "sent-384",
+          "sent-385",
+          "sent-386",
+          "sent-387",
+          "sent-388",
+          "sent-389",
+          "sent-390",
+          "sent-391",
+          "sent-392",
+          "sent-393",
+          "sent-394",
+          "sent-395",
+          "sent-396",
+          "sent-397",
+          "sent-398",
+          "sent-399",
+          "sent-400"
+        ]
+      }
+    },
+    {
+      "index": 8,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-OMVXGABQTNmN0N9PRzTIfcHcTHLHYCHW"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-OMVXGABQTNmN0N9PRzTIfcHcTHLHYCHW",
+          "usage": {
+            "completion_tokens": 346,
+            "prompt_tokens": 2180,
+            "total_tokens": 2526,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 346,
+        "prompt_tokens": 2180,
+        "total_tokens": 2526,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:5c2f74153627fa0c4b50d5fa206a784363642e1e1577e1bddc787f8356ae03a7",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-414",
+            "after": "所以只要證成我們有前世，要證成有業應該不困難，這應該可以透由邏輯推理就可以推論得出來。",
+            "change_class": "grammar",
+            "reason": "語意重複，「透由...就可以」與「推理就可以」結構冗贅，建議刪除多餘的「就可以」以精簡語句。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.85
+          },
+          {
+            "id": "sent-430",
+            "after": "而且我們指的是：這一世我們所造的惡業多，不代表我們下一世一定會投生惡趣，因為在臨終時有可能會有其他因素介入，所以這是不一定的。",
+            "change_class": "deletion",
+            "reason": "原句在「其他」處斷裂，導致語意未完。根據上下文（sent-431），應將「因素介入」補入以完成句子結構。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [],
+        "reviewed_ids": [
+          "sent-401",
+          "sent-402",
+          "sent-403",
+          "sent-404",
+          "sent-405",
+          "sent-406",
+          "sent-407",
+          "sent-408",
+          "sent-409",
+          "sent-410",
+          "sent-411",
+          "sent-412",
+          "sent-413",
+          "sent-414",
+          "sent-415",
+          "sent-416",
+          "sent-417",
+          "sent-418",
+          "sent-419",
+          "sent-420",
+          "sent-421",
+          "sent-422",
+          "sent-423",
+          "sent-424",
+          "sent-425",
+          "sent-426",
+          "sent-427",
+          "sent-428",
+          "sent-429",
+          "sent-430",
+          "sent-431",
+          "sent-432",
+          "sent-433",
+          "sent-434",
+          "sent-435",
+          "sent-436",
+          "sent-437",
+          "sent-438",
+          "sent-439",
+          "sent-440",
+          "sent-441",
+          "sent-442",
+          "sent-443",
+          "sent-444",
+          "sent-445",
+          "sent-446",
+          "sent-447",
+          "sent-448",
+          "sent-449",
+          "sent-450"
+        ]
+      }
+    },
+    {
+      "index": 9,
+      "inputCount": 27,
+      "responseIds": [
+        "chatcmpl-EqdqPhtb9tC9ZoJdxLgCDTPkcFY6JTvc"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 27,
+          "reviewedCount": 27,
+          "responseId": "chatcmpl-EqdqPhtb9tC9ZoJdxLgCDTPkcFY6JTvc",
+          "usage": {
+            "completion_tokens": 768,
+            "prompt_tokens": 1352,
+            "total_tokens": 2120,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 768,
+        "prompt_tokens": 1352,
+        "total_tokens": 2120,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:afd6a5965680a0e55d080a33b58b37265f4da13f436fada46c405517d381a415",
+        "reviewed_count": 27,
+        "proposals": [
+          {
+            "id": "sent-458",
+            "after": "這麼做，為的是什麼？不過有關這方面的重點，應該都有在課堂上點出來。當然，有些問題或許三兩天、一兩個禮拜之內，你無法得到答案，但這都沒有關係，把那些問題時常放在心上思考，並且在思考的期間多祈請上師、三寶的加持，努力淨罪集資。這麼做，為的是什麼？為的是讓你能夠早日對於這個法類生起定解。不管你最終的目標為何，如果你有心想要學習佛法，如果你真的把解脫、成佛放在心上，這是第一步。跨出有前後世的這一步非常重要；如果這一步沒有跨穩，其他的都是海市蜃樓──講再多都沒有用！沒有這一步，你說「我要追求增上生」，怎麼追求增上生？沒有這一步，我們想要追求解脫、成佛，有可能嗎？各位有沒有發現我們的想法跟外道幾乎完全相同，外道所提出的那些論述就是我們平常的想法。所以在思考這些問題時，我們再再地強調，先把自己身上自認為是佛弟子的標籤撕掉，先問問自己：「我對於有沒有前後世的這一點，我最原始的想法是什麼？」然後再去比對一下自己跟外道之間的差別。其實比對到最後，我們的想法絕大部分都跟外道一樣。這時你再去思惟《釋量論》第二品的這幾個偈頌，你會發現：「我這樣想會有這個問題、我那樣想會有那個問題。」到最後呢？「所有的可能性都排除了，那我的認知從何而來？我的認知之所以能夠形成，必須觀待在它之前的同類因。」它的同類因是什麼？以認知來說，它的同類因就是它的近取因。況且，如果過去生沒有一個類似的同類因，為什麼今生我們會有這麼多的念頭？難道這些念頭不是過去生串習而來的嗎？況且，如果沒有前世，在世間上為什麼會有這麼多人能回憶起前世曾經發生的那些事情？這些都需要解釋。今天我們把有關前後世的這個部分，需要討論的問題提出來跟各位討論，並在最後作了一個統攝。下一堂課，會為各位介紹另外一個新的單元，那是從第 121 個偈頌開始。好，我們今天的課就上到這個地方。",
+            "change_class": "punctuation",
+            "reason": "修正引號與標點：原稿中「先問問自己：「我對於...」」的開頭引號位置錯誤，應為「先問問自己：「我對於...」」；且「我那樣想會有那個問題。」後的閉引號位置錯誤，應為「我那樣想會有那個問題。」」。此外，原稿中「到最後呢？」後接「所有的可能性都排除了...」的引號未正確開啟與關閉，需修正為「到最後呢？「所有的可能性都排除了...」」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-476",
+            "reason": "「第 121 個偈頌」數字來源不明，若為口誤或特定版本差異，需確認。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-451",
+          "sent-452",
+          "sent-453",
+          "sent-454",
+          "sent-455",
+          "sent-456",
+          "sent-457",
+          "sent-458",
+          "sent-459",
+          "sent-460",
+          "sent-461",
+          "sent-462",
+          "sent-463",
+          "sent-464",
+          "sent-465",
+          "sent-466",
+          "sent-467",
+          "sent-468",
+          "sent-469",
+          "sent-470",
+          "sent-471",
+          "sent-472",
+          "sent-473",
+          "sent-474",
+          "sent-475",
+          "sent-476",
+          "sent-477"
+        ]
+      }
+    }
+  ]
+}

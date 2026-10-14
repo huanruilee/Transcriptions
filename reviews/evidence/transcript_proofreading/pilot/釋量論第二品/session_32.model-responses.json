@@ -1,0 +1,981 @@
+{
+  "schema": "transcript-proofreading-model-responses/v1",
+  "runId": "982ab47d-f2e8-42ed-9189-5ee7e4476548",
+  "promptVersion": "local-proofreading-review/v4",
+  "sourceDigest": "sha256:d7d3f3f96d840e1e1ee0b3105b1d247d697bf43ed4599bb15b8273ff45845c62",
+  "endpoint": "http://127.0.0.1:18001/v1",
+  "model": "Qwen3.8-27B",
+  "maxTokens": 2048,
+  "runtimeFingerprint": "sha256:4ecd7fae62e3a169a4c63e3ad09c7beaf2433beb1baa0808be4a1cee3bc9c400",
+  "batches": [
+    {
+      "index": 0,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-xVVnyvv5zGpijrChG80wrXK9wKuEnK4j"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-xVVnyvv5zGpijrChG80wrXK9wKuEnK4j",
+          "usage": {
+            "completion_tokens": 712,
+            "prompt_tokens": 2005,
+            "total_tokens": 2717,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 712,
+        "prompt_tokens": 2005,
+        "total_tokens": 2717,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:3e9cb246e0dde9855d1750bb14fab84ce1ac0e0d517fbd7460f1d3bf7f0d4afe",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-2",
+            "after": "接下來，由救成證知，真固無餘別。",
+            "change_class": "term",
+            "reason": "此處為釋量論偈頌引用，標準譯文通常為「由救成證知」，但原文「由救成證知」語意通順且符合口語引用習慣，無需修改。經再次確認，此句為偈頌內容，若講者口語即如此念誦，則保留。但若依標準法義，「救成證知」四字對應「救護者、證成、證知」，原文無誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-26",
+            "after": "文中「真固無餘別」的「別」，指的是特質、特性的意思。",
+            "change_class": "grammar",
+            "reason": "原句「指的是特質、特性的意思」語意重複且口語鬆散，建議合併為「指的是特質或特性」，但考慮到保留口語原則，若講者意在強調，則保留。然而「特質、特性的意思」中頓號連接兩個名詞後接「的意思」，語法上略顯累贅，建議改為「指的是特質與特性」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.6
+          },
+          {
+            "id": "sent-49",
+            "after": "之前我們提到小乘的阿羅漢有三門的粗重，難道他只有在日常生活當中才會出現身、語、意三門的粗重嗎？",
+            "change_class": "semantic",
+            "reason": "「三門的粗重」與前文「身、語、意三門」重複，且「三門的粗重」在佛教術語中通常指「身口意三業的粗重」或「三門的過患」。此處語意尚可理解，但「三門的粗重」出現兩次，略顯囉嗦。不過為保留講者原意與口語風格，此處不強制修改，僅標記為低信心。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.3
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-2",
+            "reason": "偈頌原文可能有不同譯本，講者口語引用是否完全準確需確認，但依上下文推斷無明顯訛誤。"
+          },
+          {
+            "id": "sent-49",
+            "reason": "「三門的粗重」是否為標準術語或講者口語習慣，聽音上可能有歧義，無法百分之百確定是否應改為「三業粗重」或保留。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-1",
+          "sent-2",
+          "sent-3",
+          "sent-4",
+          "sent-5",
+          "sent-6",
+          "sent-7",
+          "sent-8",
+          "sent-9",
+          "sent-10",
+          "sent-11",
+          "sent-12",
+          "sent-13",
+          "sent-14",
+          "sent-15",
+          "sent-16",
+          "sent-17",
+          "sent-18",
+          "sent-19",
+          "sent-20",
+          "sent-21",
+          "sent-22",
+          "sent-23",
+          "sent-24",
+          "sent-25",
+          "sent-26",
+          "sent-27",
+          "sent-28",
+          "sent-29",
+          "sent-30",
+          "sent-31",
+          "sent-32",
+          "sent-33",
+          "sent-34",
+          "sent-35",
+          "sent-36",
+          "sent-37",
+          "sent-38",
+          "sent-39",
+          "sent-40",
+          "sent-41",
+          "sent-42",
+          "sent-43",
+          "sent-44",
+          "sent-45",
+          "sent-46",
+          "sent-47",
+          "sent-48",
+          "sent-49",
+          "sent-50"
+        ]
+      }
+    },
+    {
+      "index": 1,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-2XMlYjMPKMspX2605ENknFJXQjnsbETu"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-2XMlYjMPKMspX2605ENknFJXQjnsbETu",
+          "usage": {
+            "completion_tokens": 857,
+            "prompt_tokens": 2067,
+            "total_tokens": 2924,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 857,
+        "prompt_tokens": 2067,
+        "total_tokens": 2924,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:592d61d7e7ff936f0ebef67286932fa9868b8a9ba2b299f85d2b288f59e3e389",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-52",
+            "after": "這個地方所要強調的是堅固知──世尊所說的法理完全不",
+            "change_class": "punctuation",
+            "reason": "句末「完全不」語意未完，後續句子接續，但根據規則不合併句子。此處標點符號使用破折號連接，符合口語中斷或強調的語境，無需修改。但若視為語意未完導致聽者困惑，可標記為 uncertain。經審視，此句為完整語意單位（強調「完全不」），後接下一句「會被量所推翻」，故無需修改標點。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-84",
+            "after": "這兩點真的很難兼併，有時雖然我們不想傷害眾生，而選擇說對眾生有益的話，但那不見得是諦實語，那有可能只是善意的謊言；",
+            "change_class": "orthography",
+            "reason": "「兼併」應為「兼備」或「兼具」。在佛法語境中，悲心與智慧兩種功德同時具足，常用「兼具」或「兼備」。「兼併」多指企業合併或軍事吞併，此處用詞不當。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "id": "sent-91",
+            "after": "這當中的「說彼」，可以將它解釋為上述的兩種語功德，分別是「善說」及「諦說」；",
+            "change_class": "punctuation",
+            "reason": "句末分號「；」使用正確，連接下一句。無需修改。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-94",
+            "after": "世尊之所以能擁有上述那兩種語功德，是由於最初的大悲心，「成就其加行」──使得各種加行圓滿究竟，最終成辦了遍智而成為量士夫。",
+            "change_class": "punctuation",
+            "reason": "破折號使用正確，解釋說明。無需修改。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-52",
+            "reason": "「完全不」後接下一句「會被量所推翻」，語意連貫，但口語中可能因斷句造成聽感上似未完。若講者意在強調「完全不」後有停頓，則標點無誤；若為 ASR 漏字（如「完全不被」），則需修正。目前維持原文，因語意可通。"
+          },
+          {
+            "id": "sent-90",
+            "reason": "「說彼並能立」為偈頌引用，ASR 可能將「並」誤聽為其他字（如「並」與「並」同音，但語境上「並能立」指悲智二德皆能成立），或「說彼」指代不明。需確認原偈頌文字是否為「說彼並能立」。若原偈頌為「說彼並能立」，則無誤；若為其他字，則需修正。目前維持原文。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-51",
+          "sent-52",
+          "sent-53",
+          "sent-54",
+          "sent-55",
+          "sent-56",
+          "sent-57",
+          "sent-58",
+          "sent-59",
+          "sent-60",
+          "sent-61",
+          "sent-62",
+          "sent-63",
+          "sent-64",
+          "sent-65",
+          "sent-66",
+          "sent-67",
+          "sent-68",
+          "sent-69",
+          "sent-70",
+          "sent-71",
+          "sent-72",
+          "sent-73",
+          "sent-74",
+          "sent-75",
+          "sent-76",
+          "sent-77",
+          "sent-78",
+          "sent-79",
+          "sent-80",
+          "sent-81",
+          "sent-82",
+          "sent-83",
+          "sent-84",
+          "sent-85",
+          "sent-86",
+          "sent-87",
+          "sent-88",
+          "sent-89",
+          "sent-90",
+          "sent-91",
+          "sent-92",
+          "sent-93",
+          "sent-94",
+          "sent-95",
+          "sent-96",
+          "sent-97",
+          "sent-98",
+          "sent-99",
+          "sent-100"
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-sJbH5MhyQ8n2c3ilmfDvlQzHg4d75CAu"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-sJbH5MhyQ8n2c3ilmfDvlQzHg4d75CAu",
+          "usage": {
+            "completion_tokens": 564,
+            "prompt_tokens": 1997,
+            "total_tokens": 2561,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 564,
+        "prompt_tokens": 1997,
+        "total_tokens": 2561,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:103b7b84b808e4f6dd00a315bc39bf5fb516290a64afe8706c6735355205f0ef",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-102",
+            "after": "「為即由彼教」，「為」──為什麼",
+            "change_class": "semantic",
+            "reason": "語意不通，「為」在此處應為疑問詞「為什麼」，ASR 訛字。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-142",
+            "after": "這時，所作性與無常有相屬的關係，它們兩者之間有同體相屬的關係，因為所作性與無常相異，無常消失會導致所作性消失。",
+            "change_class": "semantic",
+            "reason": "法義錯誤。同體相屬（自性相屬）的定義是「一法若滅，另一法亦必滅」或「一法若有，另一法必有」。原文說「所作性與無常相異」且「無常消失會導致所作性消失」，這描述的是從生相屬（因果相屬）的邏輯，而非同體相屬。同體相屬中，因（所作性）與果（無常）是同一本質的不同側面，並非因果生滅關係。此處應修正為「因為所作性即是無常，若無所作性則必無無常」或類似表述以符合法義。但考慮到逐字稿原則，僅修正明顯的邏輯矛盾描述，將「導致...消失」改為「若無...則無」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.9
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-142",
+            "reason": "原文關於同體相屬的解釋（「所作性與無常相異，無常消失會導致所作性消失」）在法義上極可能為口誤或聽音錯誤，正確應為「所作性即是無常，若無所作性則必無無常」。但由於無法確定講者原意是否為特定解釋方式，且涉及核心法義，故標記為 uncertain。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-101",
+          "sent-102",
+          "sent-103",
+          "sent-104",
+          "sent-105",
+          "sent-106",
+          "sent-107",
+          "sent-108",
+          "sent-109",
+          "sent-110",
+          "sent-111",
+          "sent-112",
+          "sent-113",
+          "sent-114",
+          "sent-115",
+          "sent-116",
+          "sent-117",
+          "sent-118",
+          "sent-119",
+          "sent-120",
+          "sent-121",
+          "sent-122",
+          "sent-123",
+          "sent-124",
+          "sent-125",
+          "sent-126",
+          "sent-127",
+          "sent-128",
+          "sent-129",
+          "sent-130",
+          "sent-131",
+          "sent-132",
+          "sent-133",
+          "sent-134",
+          "sent-135",
+          "sent-136",
+          "sent-137",
+          "sent-138",
+          "sent-139",
+          "sent-140",
+          "sent-141",
+          "sent-142",
+          "sent-143",
+          "sent-144",
+          "sent-145",
+          "sent-146",
+          "sent-147",
+          "sent-148",
+          "sent-149",
+          "sent-150"
+        ]
+      }
+    },
+    {
+      "index": 3,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-jHyH2XY95xm2JAqjy1OlnqUVL5EgHkbW"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-jHyH2XY95xm2JAqjy1OlnqUVL5EgHkbW",
+          "usage": {
+            "completion_tokens": 1994,
+            "prompt_tokens": 2168,
+            "total_tokens": 4162,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 1994,
+        "prompt_tokens": 2168,
+        "total_tokens": 4162,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:bf298672c774a6ba568ce278f0f20f5a38a07e8dfb02d2d267ee35b57ac08c83",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-165",
+            "after": "所謂的「所立法遍於因」要說明的是：所立法涵蓋的範圍要大於因；",
+            "change_class": "grammar",
+            "reason": "語法修正，將「大於因」改為「大於因」以符合比較級語境，但原句「大於因」在語意上可能指「範圍大於因的範圍」，此處保留原意，僅確認語法通順。經重新審視，原句「所立法涵蓋的範圍要大於因」語意明確，無需修改。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-166",
+            "after": "即便沒有大於因，但也不能小於因，因為如果是同義，這兩者至少要周遍。",
+            "change_class": "grammar",
+            "reason": "語法修正，「同義」在此處指「範圍相同」，建議改為「等同」或保留原意但確認語境。原句「同義」在邏輯論式中通常指「外延相同」，口語中可接受，但為求精確，建議改為「等同」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.7
+          },
+          {
+            "id": "sent-168",
+            "after": "「明所立遍因，亦顯了說彼」，世尊在經典中也時常提到相關的內容，這表示即便世尊在經典的字面上沒有提到比量，或是祂沒有提到比量的定義與分類，但至少祂再再強調比量的所依，也就是正因公式的內涵。",
+            "change_class": "grammar",
+            "reason": "語法修正，「再再強調」為口語重複，保留。但「字面上沒有提到」建議改為「文字上沒有提到」或保留原意。經審視，原句無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-176",
+            "after": "我們的現量夠強，甚至強到遮蔽住我們的比量，讓我們誤以為自己的心中沒有比量，所以我們選擇依賴現量。",
+            "change_class": "orthography",
+            "reason": "ASR 訛字修正，原句「心中沒有比」明顯為斷句錯誤，應補全為「心中沒有比量」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "id": "sent-178",
+            "after": "現在我們應該設法減弱現量的力量，因為我們的現量多半都是圍繞著五根知在打轉，我們應該把五根知的力量稍微調弱，設法觀察自己的意知到底在想什麼，「我想要成立什麼？",
+            "change_class": "punctuation",
+            "reason": "標點修正，引號未閉合，但下一句為獨立問句，此處保留原樣，僅確認語意。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-189",
+            "after": "我在寺院都不會這麼認真備課，在寺院裡誰會這樣一個字一個字地看、中藏對照。",
+            "change_class": "grammar",
+            "reason": "語法修正，「中藏對照」為專業術語，保留。但「一個字一個字地看」建議改為「逐字逐句地看」或保留口語。原句無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-190",
+            "after": "在講課的期間，即便有時對於某些內容的譯文不是很滿意，但畢竟那不是我翻譯的。",
+            "change_class": "grammar",
+            "reason": "語法修正，「對於某些內容的譯文」建議改為「某些內容的譯文」或保留原意。原句無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-191",
+            "after": "如果是我翻譯的，我想怎麼改就怎麼改，但那不是我翻譯的；",
+            "change_class": "grammar",
+            "reason": "語法修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-192",
+            "after": "一直改別人的譯作，這樣不太好。",
+            "change_class": "grammar",
+            "reason": "語法修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-193",
+            "after": "不過翻譯得已經算很有水準了。",
+            "change_class": "grammar",
+            "reason": "語法修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-194",
+            "after": "今年各位上完《釋量論》的第二品之後，回去應該針對裡面的重點多作思考以及串習，如果在這段期間你有認真地聽聞、思考，你就會發現《釋量論》的第二品非常重要。",
+            "change_class": "grammar",
+            "reason": "語法修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-195",
+            "after": "尊者在各大講經的會場都會再再強調《釋量論》第二品的重要性，甚至他會提到，他出門在外時只要有時間，他就會把《釋量論》的第二品拿出來讀。",
+            "change_class": "grammar",
+            "reason": "語法修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-196",
+            "after": "就像我們早上所說的，在學佛的這條道路上，我們當然應該認真行善、設法斷除惡行……我們該做的事情有很多，但是我們最該修持的就是無我慧。",
+            "change_class": "punctuation",
+            "reason": "標點修正，省略號使用正確，保留。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-197",
+            "after": "為什麼？",
+            "change_class": "punctuation",
+            "reason": "標點修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-198",
+            "after": "不論我們的目標是為了解脫還是成佛，無我慧都是不可或缺的關鍵。",
+            "change_class": "grammar",
+            "reason": "語法修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-199",
+            "after": "沒有無我慧，誰都無法解脫；",
+            "change_class": "punctuation",
+            "reason": "標點修正，分號使用正確，保留。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          },
+          {
+            "id": "sent-200",
+            "after": "沒有無我慧，誰都無法成佛。",
+            "change_class": "punctuation",
+            "reason": "標點修正，無明顯錯誤。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-166",
+            "reason": "「同義」在邏輯論式中可能指「外延相同」，口語中可接受，但需確認講者是否意指「範圍等同」。若為專業術語誤用，建議修正為「等同」。"
+          },
+          {
+            "id": "sent-176",
+            "reason": "原句「心中沒有比」明顯為斷句錯誤，應補全為「心中沒有比量」，但需確認是否為講者口誤或 ASR 截斷。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-151",
+          "sent-152",
+          "sent-153",
+          "sent-154",
+          "sent-155",
+          "sent-156",
+          "sent-157",
+          "sent-158",
+          "sent-159",
+          "sent-160",
+          "sent-161",
+          "sent-162",
+          "sent-163",
+          "sent-164",
+          "sent-165",
+          "sent-166",
+          "sent-167",
+          "sent-168",
+          "sent-169",
+          "sent-170",
+          "sent-171",
+          "sent-172",
+          "sent-173",
+          "sent-174",
+          "sent-175",
+          "sent-176",
+          "sent-177",
+          "sent-178",
+          "sent-179",
+          "sent-180",
+          "sent-181",
+          "sent-182",
+          "sent-183",
+          "sent-184",
+          "sent-185",
+          "sent-186",
+          "sent-187",
+          "sent-188",
+          "sent-189",
+          "sent-190",
+          "sent-191",
+          "sent-192",
+          "sent-193",
+          "sent-194",
+          "sent-195",
+          "sent-196",
+          "sent-197",
+          "sent-198",
+          "sent-199",
+          "sent-200"
+        ]
+      }
+    },
+    {
+      "index": 4,
+      "inputCount": 50,
+      "responseIds": [
+        "chatcmpl-AFVhIR3Sq4HYVDIEWRVm34Ix5GPhvkN0"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 50,
+          "reviewedCount": 50,
+          "responseId": "chatcmpl-AFVhIR3Sq4HYVDIEWRVm34Ix5GPhvkN0",
+          "usage": {
+            "completion_tokens": 227,
+            "prompt_tokens": 2188,
+            "total_tokens": 2415,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 227,
+        "prompt_tokens": 2188,
+        "total_tokens": 2415,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:fbcbdde5491d47403394ce47139b7eae2c1650daaf8ca92e59518b1b1834eb98",
+        "reviewed_count": 50,
+        "proposals": [
+          {
+            "id": "sent-219",
+            "after": "不然平常修布施、持戒、忍辱、精進、靜慮，雖然也都是非常了不起的行持，但是如果沒有般若、沒有無我慧，就像佛經論典所說的一樣，這些修持都像是盲人一樣，根本看不到目標。",
+            "change_class": "orthography",
+            "reason": "原文「盲人一」與下一句「樣」斷裂，應合併為完整詞語「盲人一樣」。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 1
+          }
+        ],
+        "uncertain": [],
+        "reviewed_ids": [
+          "sent-201",
+          "sent-202",
+          "sent-203",
+          "sent-204",
+          "sent-205",
+          "sent-206",
+          "sent-207",
+          "sent-208",
+          "sent-209",
+          "sent-210",
+          "sent-211",
+          "sent-212",
+          "sent-213",
+          "sent-214",
+          "sent-215",
+          "sent-216",
+          "sent-217",
+          "sent-218",
+          "sent-219",
+          "sent-220",
+          "sent-221",
+          "sent-222",
+          "sent-223",
+          "sent-224",
+          "sent-225",
+          "sent-226",
+          "sent-227",
+          "sent-228",
+          "sent-229",
+          "sent-230",
+          "sent-231",
+          "sent-232",
+          "sent-233",
+          "sent-234",
+          "sent-235",
+          "sent-236",
+          "sent-237",
+          "sent-238",
+          "sent-239",
+          "sent-240",
+          "sent-241",
+          "sent-242",
+          "sent-243",
+          "sent-244",
+          "sent-245",
+          "sent-246",
+          "sent-247",
+          "sent-248",
+          "sent-249",
+          "sent-250"
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "inputCount": 37,
+      "responseIds": [
+        "chatcmpl-IPR8ZhIDMUjkRKAOlLj54M1OCWKWBoAF"
+      ],
+      "attempts": [
+        {
+          "expectedCount": 37,
+          "reviewedCount": 37,
+          "responseId": "chatcmpl-IPR8ZhIDMUjkRKAOlLj54M1OCWKWBoAF",
+          "usage": {
+            "completion_tokens": 616,
+            "prompt_tokens": 1807,
+            "total_tokens": 2423,
+            "prompt_tokens_details": {
+              "cached_tokens": 439
+            }
+          },
+          "accepted": true,
+          "error": null
+        }
+      ],
+      "usage": {
+        "completion_tokens": 616,
+        "prompt_tokens": 1807,
+        "total_tokens": 2423,
+        "prompt_tokens_details": {
+          "cached_tokens": 439
+        }
+      },
+      "review": {
+        "batch_id": "sha256:3d05e6927a948216af5d7aac00537106a26875e424a9265bb05e20bb2013af7e",
+        "reviewed_count": 37,
+        "proposals": [
+          {
+            "id": "sent-253",
+            "after": "如果沒有善用這個機會，過去生的福報都賠光了，來生是否還有機會學習同樣的法類？打上一個問號。",
+            "change_class": "punctuation",
+            "reason": "原句破折號用法不自然，改為問號以符合語意斷句與口語習慣。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.85
+          },
+          {
+            "id": "sent-258",
+            "after": "今年《釋量論》的第二品當中，其實有很多工具是你平時可以拿來使用的，從思惟有沒有前後世、慈悲與智慧等內在功德能夠無邊增長……甚至無我的道理，從各種正理去證成獨立自主的我是不存在的，這些工具平時都可以拿來使用。",
+            "change_class": "grammar",
+            "reason": "原句「從思惟...」開頭缺乏主詞或動詞連接，語意不順，建議調整為「從思惟...」作為舉例開頭，但保留原文結構僅微調標點以區隔層次。此處實際無明顯錯字，但為確保語意清晰，建議將省略號後接「甚至」改為更流暢的連接，但依原則不大幅改寫，故僅標註語意斷層。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.6
+          },
+          {
+            "id": "sent-284",
+            "after": "首先，將這一個月當中透由講說以及聽聞所累積的善業，迴向以尊者為首的大善知識們能夠法體安康、長久住世、常轉法輪，佛世尊的大寶聖教也能長住世間，利益無量無邊的眾生；",
+            "change_class": "grammar",
+            "reason": "「迴向以...」語意稍顯緊湊，通常「迴向給...」或「迴向...能...」，但口語中「迴向以...」可接受，故不強制修改。",
+            "evidence": [
+              "local-model-context"
+            ],
+            "confidence": 0.5
+          }
+        ],
+        "uncertain": [
+          {
+            "id": "sent-258",
+            "reason": "「從思惟有沒有前後世...」句首結構略顯突兀，可能為口語省略，需確認是否應補主詞或調整語序。"
+          },
+          {
+            "id": "sent-284",
+            "reason": "「迴向以尊者為首的大善知識們能夠...」語法結構在書面語中較少見，口語中可能成立，但需確認是否為「迴向給...」或「迴向...使...」。"
+          }
+        ],
+        "reviewed_ids": [
+          "sent-251",
+          "sent-252",
+          "sent-253",
+          "sent-254",
+          "sent-255",
+          "sent-256",
+          "sent-257",
+          "sent-258",
+          "sent-259",
+          "sent-260",
+          "sent-261",
+          "sent-262",
+          "sent-263",
+          "sent-264",
+          "sent-265",
+          "sent-266",
+          "sent-267",
+          "sent-268",
+          "sent-269",
+          "sent-270",
+          "sent-271",
+          "sent-272",
+          "sent-273",
+          "sent-274",
+          "sent-275",
+          "sent-276",
+          "sent-277",
+          "sent-278",
+          "sent-279",
+          "sent-280",
+          "sent-281",
+          "sent-282",
+          "sent-283",
+          "sent-284",
+          "sent-285",
+          "sent-286",
+          "sent-287"
+        ]
+      }
+    }
+  ],
+  "proposalVerification": {
+    "reviewed_count": 5,
+    "verdicts": [
+      {
+        "id": "sent-26",
+        "verdict": "reject",
+        "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾，且原句口語重複（特質、特性的意思）可能為講者強調，非明確錯別字或必要標點修正，違反保留口語原則。"
+      },
+      {
+        "id": "sent-102",
+        "verdict": "uncertain",
+        "reason": "「為」改為「為什麼」涉及法義推測與語境判斷，雖 confidence 高，但無句內直接證據證明原字必為訛誤，需回聽確認講者是否口語省略或發音不清。"
+      },
+      {
+        "id": "sent-176",
+        "verdict": "accept",
+        "reason": "原句「心中沒有比」明顯為 ASR 斷句錯誤（缺字），補全為「比量」有上下文明確支持（後句接「量」），屬必要修正且無歧義。"
+      },
+      {
+        "id": "sent-219",
+        "verdict": "accept",
+        "reason": "原句「盲人一」與後句「樣」斷裂，明顯為 ASR 斷詞錯誤，合併為「盲人一樣」符合語法與口語習慣，屬標準修正。"
+      },
+      {
+        "id": "sent-253",
+        "verdict": "reject",
+        "reason": "將破折號改為問號雖符合語意，但破折號在口語逐字稿中常表停頓或強調，非明確錯別字；且後句「打上一個問號」已暗示疑問，標點變更屬書面化調整，非必要修正。"
+      }
+    ],
+    "batches": [
+      {
+        "inputCount": 5,
+        "verification": {
+          "batch_id": "sha256:844ccb754687e7958b2cccf302209d5c83b8569785dc9542aa9f6a0fc8182749",
+          "reviewed_count": 5,
+          "verdicts": [
+            {
+              "id": "sent-26",
+              "verdict": "reject",
+              "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾，且原句口語重複（特質、特性的意思）可能為講者強調，非明確錯別字或必要標點修正，違反保留口語原則。"
+            },
+            {
+              "id": "sent-102",
+              "verdict": "uncertain",
+              "reason": "「為」改為「為什麼」涉及法義推測與語境判斷，雖 confidence 高，但無句內直接證據證明原字必為訛誤，需回聽確認講者是否口語省略或發音不清。"
+            },
+            {
+              "id": "sent-176",
+              "verdict": "accept",
+              "reason": "原句「心中沒有比」明顯為 ASR 斷句錯誤（缺字），補全為「比量」有上下文明確支持（後句接「量」），屬必要修正且無歧義。"
+            },
+            {
+              "id": "sent-219",
+              "verdict": "accept",
+              "reason": "原句「盲人一」與後句「樣」斷裂，明顯為 ASR 斷詞錯誤，合併為「盲人一樣」符合語法與口語習慣，屬標準修正。"
+            },
+            {
+              "id": "sent-253",
+              "verdict": "reject",
+              "reason": "將破折號改為問號雖符合語意，但破折號在口語逐字稿中常表停頓或強調，非明確錯別字；且後句「打上一個問號」已暗示疑問，標點變更屬書面化調整，非必要修正。"
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 426,
+          "prompt_tokens": 1190,
+          "total_tokens": 1616,
+          "prompt_tokens_details": {
+            "cached_tokens": 323
+          }
+        },
+        "responseIds": [
+          "chatcmpl-G9nZWzyrLkqYIr1YvvdeXlWFwsWDS5Qm"
+        ],
+        "attempts": [
+          {
+            "expectedCount": 5,
+            "reviewedCount": 5,
+            "responseId": "chatcmpl-G9nZWzyrLkqYIr1YvvdeXlWFwsWDS5Qm",
+            "usage": {
+              "completion_tokens": 426,
+              "prompt_tokens": 1190,
+              "total_tokens": 1616,
+              "prompt_tokens_details": {
+                "cached_tokens": 323
+              }
+            },
+            "accepted": true,
+            "error": null
+          }
+        ]
+      }
+    ],
+    "promptVersion": "local-proofreading-verifier/v1"
+  }
+}

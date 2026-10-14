@@ -1,0 +1,200 @@
+{
+  "schema": "transcript-proofreading-review-queue/v2",
+  "runId": "982ab47d-f2e8-42ed-9189-5ee7e4476548",
+  "sourceDigest": "sha256:d7d3f3f96d840e1e1ee0b3105b1d247d697bf43ed4599bb15b8273ff45845c62",
+  "items": [
+    {
+      "itemId": "sha256:07d84e64e61720e6d65550c8d557ab4889a7d37f817b2a7dd3a983ca327d3261",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-2",
+      "reason": "偈頌原文可能有不同譯本，講者口語引用是否完全準確需確認，但依上下文推斷無明顯訛誤。"
+    },
+    {
+      "itemId": "sha256:77108a9004b93e57fd3eed4139d54371ba29be5e3676c56b45b3eaa45dcb0561",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-49",
+      "reason": "「三門的粗重」是否為標準術語或講者口語習慣，聽音上可能有歧義，無法百分之百確定是否應改為「三業粗重」或保留。"
+    },
+    {
+      "itemId": "sha256:3d3879c85634125d7801961d99a30ce6475b1b185eb0e3a6531db57ad7638153",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-52",
+      "reason": "「完全不」後接下一句「會被量所推翻」，語意連貫，但口語中可能因斷句造成聽感上似未完。若講者意在強調「完全不」後有停頓，則標點無誤；若為 ASR 漏字（如「完全不被」），則需修正。目前維持原文，因語意可通。"
+    },
+    {
+      "itemId": "sha256:41b3af084f13fcc548e677c0d608d4c4ce00817b63c95603dee46f7911cb44f9",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-90",
+      "reason": "「說彼並能立」為偈頌引用，ASR 可能將「並」誤聽為其他字（如「並」與「並」同音，但語境上「並能立」指悲智二德皆能成立），或「說彼」指代不明。需確認原偈頌文字是否為「說彼並能立」。若原偈頌為「說彼並能立」，則無誤；若為其他字，則需修正。目前維持原文。"
+    },
+    {
+      "itemId": "sha256:cd427c9e0d8fbf97184e366846b2972f6c081543e3ffb3e8a031fc1458219fde",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-142",
+      "reason": "原文關於同體相屬的解釋（「所作性與無常相異，無常消失會導致所作性消失」）在法義上極可能為口誤或聽音錯誤，正確應為「所作性即是無常，若無所作性則必無無常」。但由於無法確定講者原意是否為特定解釋方式，且涉及核心法義，故標記為 uncertain。"
+    },
+    {
+      "itemId": "sha256:b0c8517ad68b70b2657212ceb8eefe52dad94d4a209ac6be946cf02c21fdcc76",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-166",
+      "reason": "「同義」在邏輯論式中可能指「外延相同」，口語中可接受，但需確認講者是否意指「範圍等同」。若為專業術語誤用，建議修正為「等同」。"
+    },
+    {
+      "itemId": "sha256:861adc235f2700627473f4f5b6027c9cbf45a7d7534832465d442e74b80a90ea",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-176",
+      "reason": "原句「心中沒有比」明顯為斷句錯誤，應補全為「心中沒有比量」，但需確認是否為講者口誤或 ASR 截斷。"
+    },
+    {
+      "itemId": "sha256:92950bffe2568e6f84223cc6c23e6759ec376fdd2eb4e32ce06a02123742356b",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-258",
+      "reason": "「從思惟有沒有前後世...」句首結構略顯突兀，可能為口語省略，需確認是否應補主詞或調整語序。"
+    },
+    {
+      "itemId": "sha256:d914c48ddd87e4e75c6237e6cde56cfca31849217e85925d61e1bd267927a3cd",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-284",
+      "reason": "「迴向以尊者為首的大善知識們能夠...」語法結構在書面語中較少見，口語中可能成立，但需確認是否為「迴向給...」或「迴向...使...」。"
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-26",
+      "before": "文中「真固無餘別」的「別」，指的是特質、",
+      "after": "文中「真固無餘別」的「別」，指的是特質、特性的意思。",
+      "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾，且原句口語重複（特質、特性的意思）可能為講者強調，非明確錯別字或必要標點修正，違反保留口語原則。",
+      "proposal": {
+        "id": "sent-26",
+        "after": "文中「真固無餘別」的「別」，指的是特質、特性的意思。",
+        "change_class": "grammar",
+        "reason": "原句「指的是特質、特性的意思」語意重複且口語鬆散，建議合併為「指的是特質或特性」，但考慮到保留口語原則，若講者意在強調，則保留。然而「特質、特性的意思」中頓號連接兩個名詞後接「的意思」，語法上略顯累贅，建議改為「指的是特質與特性」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.6
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "sent-102",
+      "before": "「為即由彼教」，「為」──為",
+      "after": "「為即由彼教」，「為」──為什麼",
+      "reason": "「為」改為「為什麼」涉及法義推測與語境判斷，雖 confidence 高，但無句內直接證據證明原字必為訛誤，需回聽確認講者是否口語省略或發音不清。",
+      "proposal": {
+        "id": "sent-102",
+        "after": "「為即由彼教」，「為」──為什麼",
+        "change_class": "semantic",
+        "reason": "語意不通，「為」在此處應為疑問詞「為什麼」，ASR 訛字。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-253",
+      "before": "如果沒有善用這個機會，過去生的福報都賠光了，來生是否還有機會學習同樣的法類──打上一個問號。",
+      "after": "如果沒有善用這個機會，過去生的福報都賠光了，來生是否還有機會學習同樣的法類？打上一個問號。",
+      "reason": "將破折號改為問號雖符合語意，但破折號在口語逐字稿中常表停頓或強調，非明確錯別字；且後句「打上一個問號」已暗示疑問，標點變更屬書面化調整，非必要修正。",
+      "proposal": {
+        "id": "sent-253",
+        "after": "如果沒有善用這個機會，過去生的福報都賠光了，來生是否還有機會學習同樣的法類？打上一個問號。",
+        "change_class": "punctuation",
+        "reason": "原句破折號用法不自然，改為問號以符合語意斷句與口語習慣。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "itemId": "sha256:0b506808191067e545c26c17f911298a5d1309c49b43532c89051cf659596b7a",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "validator-rejected",
+      "sentenceId": "sent-176",
+      "reason": "candidate copied content from another sentence sent-177",
+      "proposal": {
+        "id": "sent-176",
+        "after": "我們的現量夠強，甚至強到遮蔽住我們的比量，讓我們誤以為自己的心中沒有比量，所以我們選擇依賴現量。",
+        "change_class": "orthography",
+        "reason": "ASR 訛字修正，原句「心中沒有比」明顯為斷句錯誤，應補全為「心中沒有比量」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "itemId": "sha256:662e9dc5564417254e1453b685d54a4c5b467b00d2a919c0e8082a8ef10e5d66",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "validator-rejected",
+      "sentenceId": "sent-219",
+      "reason": "proposal reason admits moving content across sentence boundaries",
+      "proposal": {
+        "id": "sent-219",
+        "after": "不然平常修布施、持戒、忍辱、精進、靜慮，雖然也都是非常了不起的行持，但是如果沒有般若、沒有無我慧，就像佛經論典所說的一樣，這些修持都像是盲人一樣，根本看不到目標。",
+        "change_class": "orthography",
+        "reason": "原文「盲人一」與下一句「樣」斷裂，應合併為完整詞語「盲人一樣」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:e2da268afb39c57f5538311d0e02493c81c936e04b0cfe0581f75214e291b892",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "@p014-s000",
+      "before": "二邊，對不對，長邊跟斷邊，對，那佛教就是很厲害，就是既不在長邊也不在。",
+      "after": "二邊，對不對，常邊跟斷邊，對，那佛教就是很厲害，就是既不在常邊也不在。",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「長邊」應為「常邊」（常與斷），指常見與斷見二邊。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p014-s001",
+      "before": "怎麼講的。",
+      "after": "怎麼講的？",
+      "changeClass": "punctuation",
+      "reason": "標點修正：疑問句應使用問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p015-s001",
+      "before": "不多於長也不多於斷，是長嗎？不是。是斷嗎？也不是。就很厲害這樣。",
+      "after": "不多於常也不多於斷，是常嗎？不是。是斷嗎？也不是。就很厲害這樣。",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「長」應為「常」（常見），與後文「斷」相對。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p018-s000",
+      "before": "對，那空性是屬於長，還是不是長，還有就是我們的那個不生不滅。",
+      "after": "對，那空性是屬於常，還是不是常，還有就是我們的那個不生不滅。",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「長」應為「常」（常見），指空性非斷非常。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p064-s000",
+      "before": "這是一個麻煩的事情，嗯，接著大家可能要翻譯到，翻到了一個。",
+      "after": "這是一個麻煩的事情，嗯，接著大家可能要翻到了一個。",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「翻譯」在此語境下應為「翻到」（翻閱經書）",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p085-s001",
+      "before": "這樣一個狀態，對，那講法上面的話，就是唯明安立的設法，這樣，那唯明安立的設法。",
+      "after": "這樣一個狀態，對，那講法上面的話，就是唯名安立的設法，這樣，那唯名安立的設法。",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'唯明安立'應為'唯名安立'（prajñapti-matra），指僅依名稱假立而無自性。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p091-s000",
+      "before": "管待或者說，什麼的。",
+      "after": "相待或者說，什麼的。",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'管待'應為'相待'（pratītya-samutpāda 或相對概念），指相互依存。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p103-s000",
+      "before": "對，因為有內心有內心，這個一定是名言量，透過名言量而瞭解它是有。",
+      "after": "對，因為有內心、有內心，這個一定是名言量，透由名言量而瞭解它是有。",
+      "changeClass": "orthography",
+      "reason": "口語重複「有內心」應加頓號區隔；專案政策保留「透由」不改為「透過」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p112-s001",
+      "before": "為什麼承認外境的話，就不可以承認阿賴眼色。",
+      "after": "為什麼承認外境的話，就不可以承認阿賴耶識。",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'阿賴眼色' 應為唯識宗名相 '阿賴耶識'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p113-s001",
+      "before": "就不能承認有外在的索取。如果承認有外在的索取的話，就不能承認。",
+      "after": "就不能承認有外在的所取。如果承認有外在的所取的話，就不能承認。",
+      "changeClass": "term",
+      "reason": "ASR 訛字/佛學名相。'索取' 應為 '所取'（grāhya），與前文 '能取' 相對。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p118-s001",
+      "before": "無外索取，這樣可以嗎？這個就算是講清楚了，就是那個字講清楚了。無色這個的話。",
+      "after": "無外色，這樣可以嗎？這個就算是講清楚了，就是那個字講清楚了。無色這個的話。",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「無外索取」在佛法語境中不通，應為「無外色」，與前句「無外色」呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p136-s000",
+      "before": "對，所以這個應該是，我應成，應該也是可以吧，對，反正就是說，別人的話。",
+      "after": "對，所以這個應該是，我應成派，應該也是可以吧，對，反正就是說，別人的話。",
+      "changeClass": "term",
+      "reason": "「我應成」應為「我應成派」，指中觀應成派。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p148-s000",
+      "before": "若為是中，不許有色。如果這樣的話，則為是中成立阿賴耶識的時候，色大神論。",
+      "after": "若為是中，不許有色。如果這樣的話，則為是中成立阿賴耶識的時候，色大種論。",
+      "changeClass": "term",
+      "reason": "「色大神論」應為「色大種論」，指四大種（地水火風）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p166-s000",
+      "before": "那邊 就剛剛講的那句 討討論的那句。",
+      "after": "那邊 就剛剛講的那句 討論的那句。",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「討討論」應為「討論」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p173-s000",
+      "before": "因為你在說 因為那個 是 是裡面 講說 為字 不破 比為字 就是實地 經裡面。",
+      "after": "因為你在說，因為那個是裡面講說為字不破，比為字就是實地經裡面。",
+      "changeClass": "punctuation",
+      "reason": "補上標點符號以區分語意層次與句子邊界。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p174-s000",
+      "before": "是不是 為字 不能破 所知 那 換言之 你如果 依字面 去解釋 我們真的是。",
+      "after": "是不是為字不能破所知？那換言之，你如果依字面去解釋，我們真的是。",
+      "changeClass": "punctuation",
+      "reason": "「是不是...」為疑問句，應加問號。「那換言之」為連接詞，後加逗號區隔語氣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p180-s000",
+      "before": "破外境如果不是這樣子的話，那你如果依照文字這樣子純文字這樣子。",
+      "after": "破外境如果不是這樣子的話，那你如果依照文字這樣子、純文字這樣子。",
+      "changeClass": "punctuation",
+      "reason": "口語中「這樣子」重複出現時，宜加頓號區隔，使語意層次更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "3f950ffb-c7a3-4ade-b005-79f1ea593cf1"
+}

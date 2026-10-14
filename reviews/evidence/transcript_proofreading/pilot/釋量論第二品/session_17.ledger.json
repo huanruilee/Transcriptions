@@ -1,0 +1,136 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:79d0c1955be7345717849998be9fe2ea4a8f839c2b7554f2a1681aa86dde32be",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791957200,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "sent-112",
+      "before": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？",
+      "after": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？」",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-123",
+      "before": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？",
+      "after": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？」",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-149",
+      "before": "當自宗以各種角度在破除這些想法之後，進一步的，他宗會稍微調整他原有的想法：如果身心的關係不像燭火與燭光的關係，那有沒有可能像酒與會讓人醉的功能",
+      "after": "當自宗以各種角度在破除這些想法之後，進一步的，他宗會稍微調整他原有的想法：如果身心的關係不像燭火與燭光的關係，那有沒有可能像酒與會讓人醉的功能的關係？",
+      "changeClass": "grammar",
+      "reason": "修正語法結構。原句「像酒與會讓人醉的功能」後接下一句開頭的「的這種關係」，造成斷裂與重複感。為使語意完整且流暢，應將「的這種關係」整合至本句末尾，改為「像酒與會讓人醉的功能的關係？」，並修正標點。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-182",
+      "before": "「那也是我的先生。",
+      "after": "「那也是我的先生。」」是嗎？",
+      "changeClass": "punctuation",
+      "reason": "同上，引號使用混亂，應修正為「那是我的先生。」」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-186",
+      "before": "」那他的想法是什麼？",
+      "after": "「那是我的太太。」」那他的想法是什麼？",
+      "changeClass": "punctuation",
+      "reason": "同上，引號使用混亂，應修正為「那是我的太太。」」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-290",
+      "before": "在那樣的情況下，我們的認知都已經變得如此不堪，那當它離開大腦的那一瞬間，我們的認知會變成什麼模",
+      "after": "在那樣的情況下，我們的認知都已經變得如此不堪，那當它離開大腦的那一瞬間，我們的認知會變成什麼模樣？",
+      "changeClass": "orthography",
+      "reason": "語意斷裂，「模」與下一句「樣」應為同一詞「模樣」，原稿誤拆為兩句。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "e4242e10-6f4b-472d-95ed-3767e7130cc1"
+}
