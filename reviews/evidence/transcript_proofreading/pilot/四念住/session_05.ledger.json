@@ -42,7 +42,7 @@
           ],
           "tags": [],
           "object": "model",
-          "created": 1791959264,
+          "created": 1791970633,
           "owned_by": "llamacpp",
           "meta": {
             "vocab_type": 2,
@@ -72,30 +72,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-055",
-      "before": "但也包括了貪心同類的秤心",
-      "after": "但也包括了貪心同類的瞋心",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。佛學中與「貪」同類的根本煩惱為「瞋」，「秤」為同音誤植。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-056",
-      "before": "有貪心一定是有秤心",
-      "after": "有貪心一定是有瞋心",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。同上，應為「瞋心」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-065",
       "before": "也會逼腦他人",
       "after": "也會逼迫他人",
@@ -117,30 +93,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-068",
-      "before": "這個貪有貪神痴的煩惱",
-      "after": "這個貪有貪瞋痴的煩惱",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。三毒為「貪瞋痴」，「神」應為「瞋」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-071",
-      "before": "所以是有變騷腦",
-      "after": "所以是有變壞",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。佛學名相「變壞」指無常敗壞，「騷腦」為聽音錯誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
       "reviewRequired": true
     },
     {
@@ -192,18 +144,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-079",
-      "before": "由於我對內外諸敬舍相發起貪慾",
-      "after": "由於我對內外諸境界相發起貪慾",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。佛經常語為「內外諸境界」，「敬舍」應為「境界」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-099",
       "before": "在第六意思的苦",
       "after": "在第六意識的苦",
@@ -225,90 +165,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-155",
-      "before": "對愛照性也就不悽了",
-      "after": "對愛照性也就不執了",
-      "changeClass": "orthography",
-      "reason": "同音 ASR 訛字。'悽'（qī）在此語境下語意不通，佛法修習中對治貪愛應為'執'（zhí，執著），音近致誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-173",
-      "before": "告訴我們修復進觀的",
-      "after": "告訴我們修不淨觀的",
-      "changeClass": "term",
-      "reason": "同音 ASR 訛字及法義修正。'修復進觀'非佛法名相，依上下文'不靜'（即不淨）之觀法，應為'修不淨觀'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-176",
-      "before": "是變無如實隨觀",
-      "after": "變無如實隨觀",
-      "changeClass": "term",
-      "reason": "法義修正。'變無'語意不明，依《清淨道論》或相關經論對治顛倒之次第，應為'遍無'（遍觀無常、苦、無我）或'變'為'遍'之訛，但考慮到'如實隨觀'前多接'遍'字，且'變'與'遍'音近。若講者口語確為'變'，則保留；但依標準法義'遍無'（或'遍觀'）較合理。此處推測為'遍'之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-209",
-      "before": "遊漏的生老病死的事情了",
-      "after": "這個能滅當來生老病死的事情，就不再有遊漏的生老病死的事情了",
-      "changeClass": "semantic",
-      "reason": "語意重複與斷句不清，原句「這個能滅當來生老病死」與後文「遊漏的生老病死」似為同一概念，建議調整語序以符合法義邏輯。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.6,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-214",
-      "before": "乃至種種的咬腦",
-      "after": "乃至種種的煩惱",
-      "changeClass": "orthography",
-      "reason": "「咬腦」極可能為 ASR 同音訛字，法義上應為「煩惱」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-216",
-      "before": "藥株黑瓶",
-      "after": "藥叉黑瓶",
-      "changeClass": "term",
-      "reason": "「藥株黑瓶」應為佛教名相「藥叉黑瓶」（Yaksha），指代特定鬼神或象徵。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-226",
-      "before": "額經預備",
-      "after": "經預備",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「額」應為「經」，指經典或經教。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
       "reviewRequired": true
     },
     {
@@ -336,42 +192,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-234",
-      "before": "應斷 應錢",
-      "after": "應斷、應滅",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「應錢」應為「應滅」，對應佛法中「應斷、應滅」的修持。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-235",
-      "before": "應該切斷這個黑瓶",
-      "after": "應該切斷這個黑品",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「黑瓶」應為「黑品」，指不善法或惡品。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-236",
-      "before": "應該排測內心的這些眨眼的事情",
-      "after": "應該排解內心的這些煩惱的事情",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「排測」應為「排解」或「排除」，「眨眼」應為「煩惱」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-237",
       "before": "斷和錢應該是一種意義",
       "after": "斷和滅應該是一種意義",
@@ -393,42 +213,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-239",
-      "before": "潛似內心來說也可以",
-      "after": "就似內心來說也可以",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「潛似」應為「就似」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-242",
-      "before": "要如白品額金與筆",
-      "after": "要如白品額金與彼",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「白品額金」應為「白品」或「白法」，「筆」應為「彼」。此句聽音不明，保留部分修正。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.7,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-243",
-      "before": "衛生應生生已令入",
-      "after": "未生應生已令入",
-      "changeClass": "semantic",
-      "reason": "語意不通，「衛生」應為「未生」，「生生」應為「已生」。此句結構混亂，維持原文並標記。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.6,
       "reviewRequired": true
     },
     {
@@ -456,18 +240,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-253",
-      "before": "生意令住",
-      "after": "令心住",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「生意」應為「令心」，符合佛法修習中「令心安住」的語境。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-255",
       "before": "無貪 無臣 無痴",
       "after": "無貪 無瞋 無痴",
@@ -477,42 +249,6 @@
         "local-model-context"
       ],
       "confidence": 0.98,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-276",
-      "before": "那就需要自己的清靜心、的力量",
-      "after": "那就需要自己的清淨心的力量",
-      "changeClass": "grammar",
-      "reason": "語法修正，「清靜心、的力量」多餘標點且語意不通，應為「清淨心的力量」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-280",
-      "before": "是焦翻波堤準大了患",
-      "after": "是焦沸波堤阿羅漢患",
-      "changeClass": "term",
-      "reason": "嚴重 ASR 訛字，此處應為《大智度論》中「焦沸波堤阿羅漢」的故事，「準大了患」聽音錯誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-286",
-      "before": "獻出來不淨觀",
-      "after": "現出來不淨觀",
-      "changeClass": "term",
-      "reason": "同音 ASR 訛字，「獻」應為「現」，指修習不淨觀的現前。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.92,
       "reviewRequired": true
     },
     {
@@ -540,18 +276,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-292",
-      "before": "但是可以沒有掩護性",
-      "after": "但是可以沒有障礙性",
-      "changeClass": "semantic",
-      "reason": "聽音不明，「掩護性」語意不通，推測為「障礙性」或「覆蔽性」，此處依上下文推測為「障礙性」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.75,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-293",
       "before": "龍叔夫說一個比喻",
       "after": "龍樹菩薩說一個比喻",
@@ -561,54 +285,6 @@
         "local-model-context"
       ],
       "confidence": 0.98,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-296",
-      "before": "有慎福 不慎不服的境界",
-      "after": "有勝福 不勝不服的境界",
-      "changeClass": "semantic",
-      "reason": "聽音不明，「有慎福 不慎不服」語意不清，推測為「有勝力 不勝不服」或類似表達角力勝負的詞彙。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.65,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-297",
-      "before": "所以是要額堅於比衛生應生",
-      "after": "所以是要堅忍於比對應生",
-      "changeClass": "semantic",
-      "reason": "聽音不明，「額堅於比衛生應生」完全無法理解，推測為「所以要堅忍於彼，應生...」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.6,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-298",
-      "before": "生以令助 增長廣大",
-      "after": "生已令住 增長廣大",
-      "changeClass": "term",
-      "reason": "聽音不明，「生以令助」應為「生已令住」，與前文「令心住」及後文「增長廣大」呼應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-299",
-      "before": "所以這個清靜心",
-      "after": "所以這個清淨心",
-      "changeClass": "orthography",
-      "reason": "用字修正，「清靜」在佛法修持中多指「清淨」（無染），雖可通用，但前文已用「清淨心」，此處統一為「清淨」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
       "reviewRequired": true
     },
     {
@@ -624,42 +300,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-303",
-      "before": "所以是令柱 生意令柱 振展廣大",
-      "after": "所以是令諸生意令諸展轉廣大",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「柱」應為「諸」，「振展」應為「展轉」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-304",
-      "before": "如是名為薰絲比貧",
-      "after": "如是名為熏習毗缽舍那",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「薰絲比貧」應為「熏習毗缽舍那」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-311",
-      "before": "俄金與比、衛生應生、生以令諸正常廣大",
-      "after": "如金與比、衛生應生、生以令諸正智廣大",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「俄」應為「如」，「正常」應為「正智」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-312",
       "before": "一定是包括四種念珠才可以",
       "after": "一定是包括四種念住才可以",
@@ -669,42 +309,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-313",
-      "before": "這個深念珠也應該包括瘦武念珠、心念珠、法念珠",
-      "after": "這個四念住也應該包括身念住、心念住、法念住",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「深」應為「四」，「瘦武」應為「身」，「念珠」應為「念住」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-314",
-      "before": "關心無常、關法惡",
-      "after": "觀無常、觀法義",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「關心」應為「觀」，「惡」應為「義」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-315",
-      "before": "才能使命這個不儘管究竟圓滿的",
-      "after": "才能使命這個不究竟圓滿的",
-      "changeClass": "semantic",
-      "reason": "語意修正，「儘管」應為「究竟」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
       "reviewRequired": true
     },
     {
@@ -732,119 +336,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-320",
-      "before": "那這個叛御心",
-      "after": "那這個遍行心",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「叛御」應為「遍行」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-322",
-      "before": "是雲和名為尋師彼師",
-      "after": "云何名為尋伺彼師",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「雲和」應為「云何」，「尋師彼師」應為「尋伺彼師」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-324",
-      "before": "前面是尋師彼品",
-      "after": "前面是尋伺彼品",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「尋師彼」應為「尋伺彼」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-325",
-      "before": "在底下徐世比的十斤",
-      "after": "在底下修習毗缽舍那的十種",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「徐世比」應為「修習毗缽舍那」，「十斤」應為「十種」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-351",
-      "before": "說到過去是曾經攝像",
-      "after": "說到過去是曾經淨相",
-      "changeClass": "term",
-      "reason": "ASR 訛字。佛法修習四念住（不淨觀）中，對比「不淨」與「清淨」的影像，應為「淨相」（清淨的影像），而非「攝像」（攝影）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-352",
-      "before": "所以現在是不靜攝像",
-      "after": "所以現在是不淨相",
-      "changeClass": "term",
-      "reason": "ASR 訛字。對應前句「淨相」，此處應為「不淨相」（不清淨的影像），而非「不靜攝像」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-354",
-      "before": "這些不靜攝像",
-      "after": "這些不淨相",
-      "changeClass": "term",
-      "reason": "ASR 訛字。同上，應為「不淨相」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-356",
       "before": "它還是靜攝像",
       "after": "它還是淨相",
       "changeClass": "term",
       "reason": "ASR 訛字。應為「淨相」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-357",
-      "before": "那些不靜攝像沒有現出來",
-      "after": "那些不淨相沒有現出來",
-      "changeClass": "term",
-      "reason": "ASR 訛字。應為「不淨相」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-358",
-      "before": "曾經是清淨的攝像",
-      "after": "曾經是清淨的相",
-      "changeClass": "term",
-      "reason": "ASR 訛字。應為「清淨的相」。",
       "evidence": [
         "local-model-context"
       ],
@@ -864,18 +360,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-360",
-      "before": "比那個不映象在過去的時候",
-      "after": "比那個不影像在過去的時候",
-      "changeClass": "term",
-      "reason": "ASR 訛字。應為「不影像」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-364",
       "before": "種種地不清靜的像獻出來",
       "after": "種種地不清靜的相現出來",
@@ -885,30 +369,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-366",
-      "before": "是指著外邊的不敬舍相的情況",
-      "after": "是指著外邊的不淨舍相的情況",
-      "changeClass": "term",
-      "reason": "ASR 訛字。應為「不淨相」，「敬」為音近訛字。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-367",
-      "before": "諸現在是遏制所有適境舍相",
-      "after": "諸現在是遏制所有適境相",
-      "changeClass": "term",
-      "reason": "ASR 訛字。語意不明，「適境舍相」極可能為「所緣境相」或「不淨相」之誤聽，但考慮到上下文多處提及「不淨」，此處「適境」疑為「所緣」或「不淨」之誤，且「舍」字可能多餘或為「相」之誤。鑑於語意斷裂嚴重，先修正為較通順的「所緣境相」或保留原字但標記 uncertain。此處推測為「諸現在是遏制所有所緣境相」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.6,
       "reviewRequired": true
     },
     {
@@ -929,18 +389,6 @@
       "after": "此境所向於現在是隨意也是清淨的相",
       "changeClass": "term",
       "reason": "ASR 訛字。應為「清淨相」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-371",
-      "before": "與未來是不當不敬",
-      "after": "與未來是不當不淨",
-      "changeClass": "term",
-      "reason": "ASR 訛字。應為「不淨」。",
       "evidence": [
         "local-model-context"
       ],
@@ -996,42 +444,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-396",
-      "before": "不過如是不進發行",
-      "after": "不過如是不淨法性",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。前文 seg-387 已出現「不淨法性」，此處應為「不淨」，而非「不進」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-399",
-      "before": "不進發行",
-      "after": "不淨法性",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。應為「不淨」，而非「不進」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-408",
-      "before": "雲和名為循師彼禮",
-      "after": "此處名為循師彼禮",
-      "changeClass": "orthography",
-      "reason": "「雲和」應為「此處」之同音訛字，語意方通。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-412",
       "before": "現在是最後一個尋世比例。",
       "after": "現在是最後一個尋思比例。",
@@ -1041,18 +453,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-414",
-      "before": "這個觀察呢,在裡邊這是第一段要聖意觀代的道理",
-      "after": "這個觀察呢，在裡邊這是第一段要聖意觀代的道理",
-      "changeClass": "term",
-      "reason": "「聖意觀代」應為「聖意觀待」或「聖意觀照」，「代」字聽音不明且法義不通，暫列uncertain。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.6,
       "reviewRequired": true
     },
     {
@@ -1080,18 +480,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-470",
-      "before": "為主事實",
-      "after": "為主實事",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「事實」應為「實事」（真實之事），符合佛法用語習慣。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-476",
       "before": "他的舍舍顯示",
       "after": "他的捨捨顯示",
@@ -1116,56 +504,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-478",
-      "before": "那裡邊沒有長恆序的",
-      "after": "那裡邊沒有長恆常的",
-      "changeClass": "orthography",
-      "reason": "「長恆序」語意不通，推測為「長恆常」之訛誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-479",
-      "before": "是沒有友情可得",
-      "after": "是沒有有情可得",
-      "changeClass": "term",
-      "reason": "「友情」在佛法語境中應為「有情」（sattva），指眾生。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-483",
-      "before": "這個詩啊 只要有的計論論者",
-      "after": "這個詩啊 只要有的計論者",
-      "changeClass": "orthography",
-      "reason": "「計論論者」應為「計論者」，多一「論」字屬 ASR 重複訛誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-495",
-      "before": "差挪生裂",
-      "after": "差無生滅",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。上下文論述因緣所生法與非因緣生法的對比，「差挪生裂」語意不通，應為佛學名相「差無生滅」（或指「差別無生滅」之意，但「差無」較符合語境對「有死」的否定，或為「常無生滅」之誤聽，考慮到 seg-493 提到「長壽不變意」，此處應為「常無生滅」或「差無生滅」。經審視，「差挪」極可能為「常無」或「差別」之誤，但最符合佛法對治「死可得」的語境是「常無生滅」或「非因緣生者無生滅」。若講者意指「（非因緣生法）沒有生滅」，則「差挪生裂」應為「常無生滅」或「無有生滅」。考慮到 seg-493 的「長壽不變意」，seg-495 應為「常無生滅」。但「差」與「常」音近，「挪」與「無」音近，「裂」與「滅」音近。故推測為「常無生滅」。若講者口語說「差別」，則「差別生滅」亦通，但 seg-493 強調「長壽不變」，故「常無生滅」更合邏輯。然而，若講者說的是「差無生滅」（意指「差別上沒有生滅」），則保留「差」。綜合判斷，「常無生滅」可能性最高，但「差無」亦可能。此處修正為「常無生滅」以符合法義，或「差無生滅」。鑑於「差」與「常」在部分口音可能混淆，且「常無生滅」是常見對治「生滅」的詞彙。若講者說的是「差別」，則應為「差別生滅」。但 seg-493 說「長壽不變意」，seg-495 應是否定生滅。故推測為「常無生滅」。若講者口語是「差無」，則保留。此處修正為「常無生滅」以確保法義通順。若講者確說「差挪」，則為 uncertain。但根據上下文「長壽不變意」，應為「常無生滅」。修正為「常無生滅」。",
-      "evidence": [
-        "context: seg-493 長壽不變意",
-        "context: seg-496 因緣所生的死",
-        "term: 生滅"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-502",
       "before": "是不可思美",
       "after": "是不可思議",
@@ -1183,78 +521,6 @@
       "after": "就是在這個聖默陀裡面",
       "changeClass": "term",
       "reason": "佛學名相修正，「聖摩陀」應為「聖默陀」（Samadhi 的音譯）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-504",
-      "before": "你要這樣示威",
-      "after": "你要這樣思維",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字，「示威」在佛法觀修語境下應為「思維」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-516",
-      "before": "想象師是必經空擊的",
-      "after": "想象師是必經空寂的",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字，「空擊」應為「空寂」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-528",
-      "before": "沒有友情可得",
-      "after": "沒有淨情可得",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字，「友情」應為「淨情」（或指「有情」之誤，但前文已有「有情」，此處可能指「淨」與「不淨」。若對照 seg-527「沒有惡可得」，seg-528 應為「沒有淨可得」或「沒有淨情可得」。但 seg-528 原文為「友情」，極可能為「淨情」之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-541",
-      "before": "他的心是無助",
-      "after": "他的心是無住",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「無助」應為「無住」（Vimukti 或 Anupadana 之意）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-542",
-      "before": "不助捨生心",
-      "after": "不住捨生心",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字，「不助」應為「不住」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-543",
-      "before": "不助身相位出發生心",
-      "after": "不住身相位出發生心",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字，「不助」應為「不住」。",
       "evidence": [
         "local-model-context"
       ],
@@ -1298,35 +564,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-575",
-      "before": "與眾假想失色言論",
-      "after": "就是與眾假想施捨言論",
-      "changeClass": "orthography",
-      "reason": "「失色言論」應為「施捨言論」，與 seg-585、seg-590 一致。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-597",
       "before": "就是方便安利的",
       "after": "就是方便安立的",
       "changeClass": "orthography",
       "reason": "「安利」應為「安立」，符合佛法用語。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-610",
-      "before": "所以安利那名字是他的一個假想",
-      "after": "所以阿那名字是他的一個假想",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「安利」應為「阿那」（Ananda），指阿難尊者。",
       "evidence": [
         "local-model-context"
       ],
@@ -1343,18 +585,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-615",
-      "before": "隨時假想施捨的言論",
-      "after": "隨時假想施捨的語言",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「言論」應為「語言」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -1391,18 +621,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-657",
-      "before": "有業力的奢侈",
-      "after": "有業力的資糧",
-      "changeClass": "semantic",
-      "reason": "語意不通，「奢侈」應為「資糧」，指業力所積聚的條件。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -1495,18 +713,6 @@
       "after": "唯識說是",
       "changeClass": "term",
       "reason": "ASR 訛字，「江財」應為「唯識」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-715",
-      "before": "離子刺而過就是沒有阿賴耶識",
-      "after": "唯識說而過就是沒有阿賴耶識",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「離子」應為「唯識」。",
       "evidence": [
         "local-model-context"
       ],
@@ -1634,42 +840,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-738",
-      "before": "這是死俗地的境界",
-      "after": "這是死寂的境界",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'死俗地'應為'死寂'，形容死亡狀態。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-739",
-      "before": "這是一個寄宋",
-      "after": "這是一個註解",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'寄宋'應為'註解'，指對前文的解釋。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-742",
-      "before": "即死莫已",
-      "after": "即死沒已",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'莫已'應為'沒已'，意指死亡沒有結束或指死亡之相。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-745",
       "before": "你見此變壞份位可知",
       "after": "見此變壞分位可知",
@@ -1687,18 +857,6 @@
       "after": "先是青淤",
       "changeClass": "orthography",
       "reason": "ASR 同音訛字。'清淤'應為'青淤'，指屍體腐壞變色的過程（青瘀）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-748",
-      "before": "然後能讓乃至到最後",
-      "after": "然後爛壞乃至到最後",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'能讓'應為'爛壞'，描述屍體腐爛過程。",
       "evidence": [
         "local-model-context"
       ],
@@ -1754,30 +912,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-860",
-      "before": "種種不敬物充滿於深淚",
-      "after": "種種不淨物充滿於深淚",
-      "changeClass": "orthography",
-      "reason": "「不敬」應為「不淨」；「深淚」聽音不明，疑似「身內」或特定經文用詞，但「不淨」修正信心較高。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-861",
-      "before": "常留出不止如漏囊成物",
-      "after": "常流出物不止如漏囊成物",
-      "changeClass": "orthography",
-      "reason": "經文原意應為「充滿於身內，常流出物不止」，ASR 將「身內」誤聽為「深淚」或類似音，且「成物」語意不通，疑似「盛物」或「漏物」。此句與 seg-863 重複度高，但 seg-861 的「深淚」與 seg-860 相同，推測為「身內」之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.75,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-862",
       "before": "種種不敬物充滿於身內",
       "after": "種種不淨物充滿於身內",
@@ -1790,90 +924,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-915",
-      "before": "就是你內心裡面又有攝摩托 要有披不捨挪",
-      "after": "就是你內心裡面又有攝摩訶要有披不捨挪",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「攝摩托」應為「攝摩訶」（Mahā）或「奢摩他」（Samatha，止），「披不捨挪」應為「毗缽舍那」（Vipassanā，觀）。此處講止觀雙運，音譯詞誤聽嚴重。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-916",
-      "before": "在子裡邊修披不捨挪",
-      "after": "在子裡邊修毗缽舍那",
-      "changeClass": "term",
-      "reason": "ASR 訛字。承接前句，「子」應為「止」（奢摩他）之誤，「披不捨挪」應為「毗缽舍那」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-917",
-      "before": "披不捨挪之後又修子",
-      "after": "毗缽舍那之後又修止",
-      "changeClass": "term",
-      "reason": "ASR 訛字。承接前句，「披不捨挪」應為「毗缽舍那」，「子」應為「止」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-918",
-      "before": "子而後觀 觀而後止",
-      "after": "止而後觀 觀而後止",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「子」應為「止」。佛法修習次第常云「由止生觀，由觀入止」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-919",
-      "before": "你能這樣子去修不進觀呢",
-      "after": "你能這樣子去修止觀呢",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「不進觀」應為「止觀」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-922",
-      "before": "不斷地去這樣修,就叫做息",
-      "after": "不斷地去這樣修，就叫做習",
-      "changeClass": "term",
-      "reason": "ASR 訛字。前文 seg-913 提到「叫做修」，此處對應「習」，「息」應為「習」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-924",
-      "before": "是善多休息",
-      "after": "善者能休息",
-      "changeClass": "term",
-      "reason": "ASR 訛字。前文 seg-901 為「善多休息」，seg-925 解釋「善者能也」，故 seg-924 應為「善者能休息」或「善多休息」之誤聽，依 seg-925 解釋邏輯，「善多」應為「善者」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-929",
       "before": "能斷玉碳就能把自己無死皆來所燻悉的這個玉碳這種煩惱就能夠除滅了",
       "after": "能斷欲貪就能把自己無始劫來所熏習的這個欲貪這種煩惱就能夠除滅了",
@@ -1883,30 +933,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-947",
-      "before": "錢一生是舍戒天上的人",
-      "after": "若是一個人呢，一生是捨戒天上的人",
-      "changeClass": "term",
-      "reason": "ASR 訛字與語法修正。'誰要是一個人呢'應為'若是一個人呢'；'錢一生'應為'若一生'或'若是一生'；'舍戒天上'應為'捨戒天'（Suddhāvāsa，五淨居天之一，阿那含果聖者所生處）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-948",
-      "before": "錢一生你是舍戒天上的人",
-      "after": "若一生你是捨戒天上的人",
-      "changeClass": "term",
-      "reason": "ASR 訛字修正。'錢一生'應為'若一生'；'舍戒天上'應為'捨戒天'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -1946,18 +972,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-957",
-      "before": "因為你升到舍界天",
-      "after": "因為你升到欲界天",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「舍界天」應為「欲界天」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-960",
       "before": "只是把玉降服了",
       "after": "只是把欲降服了",
@@ -1975,18 +989,6 @@
       "after": "欲的種子沒有斷",
       "changeClass": "orthography",
       "reason": "ASR 訛字，「玉」應為「欲」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-962",
-      "before": "所以從舍界天再回到玉節來",
-      "after": "所以從欲界天再回到欲界來",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「舍界天」、「玉節」應為「欲界天」、「欲界」。",
       "evidence": [
         "local-model-context"
       ],
@@ -2042,30 +1044,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-970",
-      "before": "相撲這個欲的時候",
-      "after": "相剋這個欲的時候",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「相撲」語意不通，應為「相剋」或「對治」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-982",
-      "before": "能否癮消滅了",
-      "after": "由於癮消滅了",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'能否'在此語境下語意不通，應為'癮'（貪欲）的動詞化或名詞化用法，意指'癮被消滅了'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-989",
       "before": "就不容易調普",
       "after": "就不容易調伏",
@@ -2075,18 +1053,6 @@
         "local-model-context"
       ],
       "confidence": 0.98,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-994",
-      "before": "要能如是善修善息 善多修習能斷欲貪",
-      "after": "要能如是善修善息、善多修習能斷欲貪",
-      "changeClass": "punctuation",
-      "reason": "標點修正。'善修善息'與'善多修習'為並列結構，中間應加頓號以區分層次，符合經文引用習慣。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
       "reviewRequired": true
     },
     {
@@ -2102,59 +1068,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1010",
-      "before": "只要他是一元生法",
-      "after": "只要他是一緣生法",
-      "changeClass": "term",
-      "reason": "「一元生法」應為佛學名相「一緣生法」（或「因緣生法」），ASR 同音訛誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1013",
-      "before": "要非音樂生法",
-      "after": "要非因緣生法",
-      "changeClass": "term",
-      "reason": "「非音樂生法」語意不通，應為「非因緣生法」或「非一緣生法」，ASR 同音訛誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1015",
-      "before": "它是音樂生法",
-      "after": "它是生滅法",
-      "changeClass": "term",
-      "reason": "ASR 同音訛誤，佛法名相應為「生滅法」而非「音樂生法」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1101",
       "before": "我的身體裡有很多不敬",
       "after": "我的身體裡有很多不淨",
       "changeClass": "orthography",
       "reason": "ASR 同音訛字，佛法名相應為「不淨」而非「不敬」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1104",
-      "before": "也就如足不敬的相貌",
-      "after": "也就如足不淨的相貌",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字，「不敬」應為「不淨」；「如足」語意不明，推測為「如是」或「如實」之訛，但考慮到上下文「如是如是」的語氣，且「足」與「是」在某些口音可能混淆，此處保留「如足」並標記 uncertain 較妥，但根據 seg-1101 和 seg-1103 的語境，「不敬」必為「不淨」。若「如足」為「如是」之訛，則後文應修正。此處僅修正確定的「不敬」為「不淨」，「如足」因聽音不明保留原文並放入 uncertain。",
       "evidence": [
         "local-model-context"
       ],
@@ -2222,18 +1140,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1118",
-      "before": "這個禪是禪咬你",
-      "after": "這個禪是禪定你",
-      "changeClass": "orthography",
-      "reason": "「禪咬」語意不通，推測為「禪定」之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1119",
       "before": "你不能卸脫",
       "after": "你不能解脫",
@@ -2258,18 +1164,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1124",
-      "before": "不限期了",
-      "after": "就解脫了",
-      "changeClass": "orthography",
-      "reason": "「不限期了」語意不通，推測為「就解脫了」或「便解脫了」之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1126",
       "before": "煉獄貪殘,衛生不生",
       "after": "煉獄貪殘，衛生不生",
@@ -2279,18 +1173,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1177",
-      "before": "說是建一安",
-      "after": "說是見一安",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。上下文為「見火」、「見角」、「見腳」，推斷此處應為「見一安」（看見一個安詳/安立的狀態或物體），而非「建一安」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
       "reviewRequired": true
     },
     {
@@ -2330,18 +1212,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1184",
-      "before": "現在我們修部靖觀",
-      "after": "現在我們修毗缽舍那",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。佛法名相「毗缽舍那」（Vipassanā，觀）被誤聽為「部靖觀」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1185",
       "before": "用筆度量法",
       "after": "用比度量法",
@@ -2354,18 +1224,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1188",
-      "before": "你畏著修行的時候",
-      "after": "你修著修行的時候",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。語意不通，應為「修著」或「修到」，推斷為「修著」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1190",
       "before": "雲和今者作義思維",
       "after": "云何今者作義思維",
@@ -2375,18 +1233,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1191",
-      "before": "能對自法可語",
-      "after": "能對治法可語",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。應為「能對治法可說」或「能對治法可語」，此處「語」通「說」，但「可語」較少見，若為「可說」則更順，但保留「語」亦通。考慮到後文有「誰是能對治法呢?」，此處可能是「能對治法可說」。修正為「可說」以符合常規表達。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.75,
       "reviewRequired": true
     },
     {
@@ -2423,42 +1269,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1226",
-      "before": "另比貪餐未生地不生了",
-      "after": "另比貪欲未生地不生了",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「貪餐」應為「貪欲」，語意方通。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1227",
-      "before": "如是明以正誠道理",
-      "after": "如是明以正理道理",
-      "changeClass": "term",
-      "reason": "「正誠」應為「正理」，佛法中常言「正理」，且與後文「道理」呼應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1234",
-      "before": "正誠修部靜觀可以成功的道理",
-      "after": "正理修部靜觀可以成功的道理",
-      "changeClass": "term",
-      "reason": "「正誠」應為「正理」，與前文一致。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
       "reviewRequired": true
     },
     {
@@ -2570,18 +1380,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1273",
-      "before": "未修不敬能與玉灘作斷對峙",
-      "after": "未修不淨觀能與欲貪作斷對峙",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字，「不敬」應為「不淨」，「玉灘」應為「欲貪」，「斷對峙」語意不通，應為「作斷對峙」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1276",
       "before": "他要肯修不敬觀你",
       "after": "他要肯修不淨觀你",
@@ -2630,59 +1428,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1311",
-      "before": "屁股設諾",
-      "after": "修四念處",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「屁股設諾」應為「修四念處」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1312",
-      "before": "就是在聖瓦頭裡面",
-      "after": "就是在聖教裡面",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「聖瓦頭」應為「聖教」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1314",
-      "before": "屁股設諾",
-      "after": "修四念處",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「屁股設諾」應為「修四念處」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1320",
       "before": "第三是相 自相共相",
       "after": "第四是行",
       "changeClass": "orthography",
       "reason": "ASR 訛字，「平」應為「行」（四念處之四：身、受、心、行）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1328",
-      "before": "從這個六個方面修皮膚",
-      "after": "從這個六個方面修習",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「修皮膚」應為「修習」。",
       "evidence": [
         "local-model-context"
       ],
@@ -2714,35 +1464,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1337",
-      "before": "修聖念初的古手觀 白骨觀",
-      "after": "修聖念處的古手觀 白骨觀",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「初的古手觀」應為「處的古手觀」（或指「修聖念處」之誤，但「古手觀」應為「白骨觀」之重複或誤聽，此處推斷為「修聖念處」）。修正為：修聖念處的白骨觀。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1338",
       "before": "第三段呢 就是我們講過這一段是《玉切實體論》",
       "after": "第三段呢 就是我們講過這一段是《瑜伽師地論》",
       "changeClass": "term",
       "reason": "ASR 訛字，「玉切實體論」應為「瑜伽師地論」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1342",
-      "before": "徐家印要應該修佛靜觀",
-      "after": "出家眾要應該修不淨觀",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「徐家印」應為「出家眾」，「佛靜觀」應為「不淨觀」。",
       "evidence": [
         "local-model-context"
       ],
@@ -2786,30 +1512,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1357",
-      "before": "我修這個清餘的這個不經觀",
-      "after": "我修這個清淨的不淨觀",
-      "changeClass": "term",
-      "reason": "「清餘」應為「清淨」，「不經觀」應為「不淨觀」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1358",
-      "before": "一開始修清餘不經",
-      "after": "一開始修清淨不淨",
-      "changeClass": "term",
-      "reason": "「清餘不經」應為「清淨不淨」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1360",
       "before": "你一定把這蓮花去排洩",
       "after": "你一定把這蓮花去排泄",
@@ -2822,95 +1524,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1382",
-      "before": "我現在修了不經",
-      "after": "我現在修了不淨",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。佛法修持中常見「不淨觀」，「不經」語意不通。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1383",
-      "before": "一定把這個不經獻出來",
-      "after": "一定把這個不淨獻出來",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。承接上一句修正為「不淨」，且「獻」應為「捨」或「放」之意，但考慮到口語發音「xian」與「捨」在某些口音可能混淆，或講者意指「將不淨觀獻出（作為所緣）」，此處保留「獻」字但修正名相為「不淨」。若講者意指「捨」，則為語義修正。基於高信心修正名相，先改「不經」為「不淨」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1387",
-      "before": "我們菩提道士的廣論、廖論說是",
-      "after": "我們菩提道次第的廣論、道論說是",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。「菩提道士」應為「菩提道次第」，「廖論」應為「道論」（或指《菩提道次第廣論》與相關論典）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1388",
-      "before": "修聖摩陀的所緣鏡",
-      "after": "修聖觀音的所緣境",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。「聖摩陀」應為「聖觀音」或「聖度母」，但結合後文「佛像」，「聖觀音」可能性高；「鏡」應為「境」（所緣境）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1389",
       "before": "以佛像為所緣鏡",
       "after": "以佛像為所緣境",
       "changeClass": "term",
       "reason": "ASR 同音訛字。「鏡」應為「境」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1392",
-      "before": "我現在修的每一件白蠔像",
-      "after": "我現在修的每一件白蓮像",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。「白蠔」應為「白蓮」（白蓮花像常見於觀修）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1394",
-      "before": "我要關白蠔",
-      "after": "我要觀白蓮",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。「關」應為「觀」，「白蠔」應為「白蓮」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1395",
-      "before": "一定白蠔像線",
-      "after": "一定白蓮像境",
-      "changeClass": "term",
-      "reason": "ASR 同音訛字。「白蠔」應為「白蓮」，「線」應為「境」。",
       "evidence": [
         "local-model-context"
       ],
@@ -2927,18 +1545,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1399",
-      "before": "你這個神文託、屁股手都這樣修復境管 你才能安全",
-      "after": "你這個身文託、屁股手都這樣修復境管 你才能安全",
-      "changeClass": "term",
-      "reason": "ASR 嚴重訛字。此句語意混亂，「神文託」應為「身文托」或「身文所」？極可能為「身、口、意」或「身、心」相關詞彙的嚴重誤聽。「屁股手」應為「身、口、意」或「手、腳」等身體部位，但結合「修復境管」，整句聽音不明且語法破碎，無法高信心修正為特定佛學術語，故列入 uncertain。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.3,
       "reviewRequired": true
     },
     {
@@ -2966,30 +1572,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1415",
-      "before": "雲和遇生 助尋生觀",
-      "after": "云何遇生 助尋生觀",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「雲和」應為「云何」，「遇生」應為「受生」（四念住中第二念住為受念住）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1416",
-      "before": "雲和惟念 雲和念住",
-      "after": "云何惟念 云何念住",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「雲和」應為「云何」，「惟念」應為「心念」（第三念住）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1418",
       "before": "這是在《玉琪詞德論》裡面",
       "after": "這是在《瑜伽師地論》裡面",
@@ -2999,30 +1581,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1430",
-      "before": "雲和餘身住燻身觀",
-      "after": "云何餘身住燻身觀",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「雲和」應為「云何」，「餘身住」應為「受念住」（第四念住為法念住，但此處講四問，第二問通常對應受念住，原文可能是「云何受念住」或「云何為受」，但根據 seg-1430 的聽音，「餘身」極可能為「受身」或「受念」之誤，「燻身觀」應為「修習觀」或「修習」。若依《瑜伽師地論》四問結構：云何為生、云何為受、云何為心、云何為法。此處 seg-1430 聽音似「云何受念住」，但文字為「餘身住燻身觀」，推測為「云何受念住」或「云何為受」。考慮到 seg-1415 有「遇生」（受生），此處 seg-1430 應為對應受念住的解釋。修正為「云何受念住」較為合理，但「燻身觀」聽音像「修習觀」。若嚴格對照 seg-1415 的「遇生」，seg-1430 可能是「云何受念住」。然而 seg-1430 原文是「雲和餘身住燻身觀」，推測應為「云何受念住」。若保留「觀」字，可能是「云何受念住修習觀」。但最標準的問法是「云何受念住」。此處修正為「云何受念住」或「云何受念住修習」。鑑於 seg-1415 是「遇生」（受生），seg-1430 應為「受念住」。修正為「云何受念住」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1432",
-      "before": "怎麼樣學習這個餘身住燻身觀",
-      "after": "怎麼樣學習這個受念住修習觀",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「餘身住燻身觀」應為「受念住修習觀」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -3050,30 +1608,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1456",
-      "before": "所以也就是深深地趕腳到施主恩了",
-      "after": "所以也就是深深地趕覺到施主恩了",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「趕腳」應為「感覺」或「感觸」，此處語意不通。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1458",
-      "before": "你修行很不用意",
-      "after": "你修行很不用心",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「不用意」應為「不用心」，與後文「修行是不用意的」口語重複或誤聽，但「不用心」更符合語境。若講者確說「不用意」則保留，但高機率為「不用心」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.7,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1464",
       "before": "但是釋遷柱裡面不只是對付欲",
       "after": "但是四念住裡面不只是對付欲",
@@ -3086,47 +1620,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1474",
-      "before": "雲和維生略說",
-      "after": "云何維生略說",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「雲和」應為「云何」，為經文問句。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1491",
-      "before": "比如說插杯",
-      "after": "比如說茶杯",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「插杯」應為「茶杯」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1497",
       "before": "所以我們銀呢",
       "after": "所以我們人呢",
       "changeClass": "orthography",
       "reason": "ASR 訛字，「銀」應為「人」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1507",
-      "before": "牙耳鼻子伸一根的",
-      "after": "牙耳鼻舌伸一根的",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。佛學名相中，五根為眼、耳、鼻、舌、身，原文「子」應為「舌」。",
       "evidence": [
         "local-model-context"
       ],
@@ -3155,162 +1653,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1528",
-      "before": "所以這裡面說非根所說",
-      "after": "所以這裡面說非根所攝",
-      "changeClass": "term",
-      "reason": "佛學名相修正。前文多次提及「非根所攝身」，此處「非根所說」應為「非根所攝」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1529",
-      "before": "就包括這個福根層在內的",
-      "after": "就包括這個浮根層在內的",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。前文已確立「浮根層」為正字，此處「福根層」應修正為「浮根層」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1534",
-      "before": "這個有情樹身就是福根塵和根",
-      "after": "這個有情浮根身就是浮根塵和根",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。前文已確立「浮根層」，此處「有情樹身」應為「有情浮根身」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1536",
-      "before": "這是有情樹",
-      "after": "這是有情身",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。前文皆為「有情樹身」，此處「有情樹」應為「有情身」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1537",
-      "before": "都是有青絲的",
-      "after": "都是有情識的",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。佛學語境中，有情眾生具有「情識」，「青絲」應為「情識」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1538",
-      "before": "非有情樹身",
-      "after": "非有情身",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。前文皆為「有情樹身」，此處「非有情樹身」應修正為「非有情身」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1541",
-      "before": "初衷居心身,清安居心身",
-      "after": "粗重居心身，清安居心身",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。佛學名相為「粗重」與「輕安」（或清淨安適），原文「初衷居心身」應為「粗重居心身」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1546",
-      "before": "剛叫做粗烈、沉重",
-      "after": "剛叫做粗重、沉重",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。對應前文「粗重」，此處「粗烈」應為「粗重」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1548",
-      "before": "那個身體是初衷的",
-      "after": "那個身體是粗重的",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。前文已確立「粗重」為正字，此處「初衷」應修正為「粗重」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1551",
-      "before": "所以說得了禪定以後和魅德禪定",
-      "after": "所以說得了禪定以後和未得禪定",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛誤。'魅德'應為'未得'，語意為對比已得與未得禪定者。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1553",
-      "before": "所以魅德禪定的人這個身體就是初衷",
-      "after": "所以未得禪定的人這個身體就是粗重",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛誤。'初衷'應為'粗重'，為佛法中描述未得禪定者身體特徵的標準名相（與後文'輕快'相對）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1554",
-      "before": "居心身這個初衷與你身體在一塊活動",
-      "after": "居心身這個粗重與你身體在一塊活動",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛誤。'初衷'應為'粗重'，保持名相一致性。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1572",
-      "before": "魅德禪唸的人都是有慾的",
-      "after": "未得禪定的人都是有慾的",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛誤。'魅德禪唸'應為'未得禪定'，與前文及後文邏輯一致。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
       "reviewRequired": true
     },
     {
@@ -3350,95 +1692,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1591",
-      "before": "就是受想行思",
-      "after": "就是受想行識",
-      "changeClass": "term",
-      "reason": "佛學名相修正。'思'應為'識'，四蘊（受想行識）或五蘊（色受想行識），此處對應'名身'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1592",
-      "before": "這無運",
-      "after": "這無明",
-      "changeClass": "term",
-      "reason": "ASR 訛字。'運'應為'明'，'無明'為佛教核心名相，且與後文'舍'（受）等名相不符，推測為'無明'或'無'字誤聽，但'無明'最合語境。若講者意指'無'則保留，但'運'極可能是'明'之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1593",
-      "before": "第一個是舍運",
-      "after": "第一個是舍受",
-      "changeClass": "term",
-      "reason": "ASR 訛字與名相修正。'舍運'應為'舍受'（捨受），與後文'捨身'（可能指色蘊或受蘊之誤）對應，且'受想行識'中第一為'受'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1594",
-      "before": "舍運就是捨身",
-      "after": "舍受就是捨受",
-      "changeClass": "term",
-      "reason": "佛學名相與用字修正。'舍'通'捨'，但為求名相清晰，建議統一為'捨受'，或確認講者口語習慣。此處推測'舍運'為'舍受'之訛，故修正後句。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1595",
-      "before": "受想行思就是鳴身",
-      "after": "受想行識就是名身",
-      "changeClass": "term",
-      "reason": "ASR 訛字與名相修正。'鳴'應為'名'，'思'應為'識'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1597",
       "before": "心法不是舌身相外處的",
       "after": "心法不是色身相外處的",
       "changeClass": "term",
       "reason": "ASR 訛字。'舌身'應為'色身'，與前文'所造身'（色法）相對，且'心法'非'色身'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1599",
-      "before": "清荒慈白的",
-      "after": "清淨慈悲的",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字。'荒慈白'應為'淨慈悲'，形容心法或四無量心（慈、悲、喜、捨）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1604",
-      "before": "奈洛家神",
-      "after": "餓鬼道神",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「奈洛家神」應為「餓鬼道神」或「餓鬼道」，此處語境為六道輪迴中的鬼道。",
       "evidence": [
         "local-model-context"
       ],
@@ -3455,18 +1713,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1607",
-      "before": "苦氣",
-      "after": "苦器",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「苦氣」應為「苦器」，指受苦之處或容器，符合佛法名相。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
       "reviewRequired": true
     },
     {
@@ -3494,30 +1740,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1613",
-      "before": "不像顏色頂天立地",
-      "after": "不像人頂天立地",
-      "changeClass": "semantic",
-      "reason": "語意修正，「顏色頂天立地」聽音不明且語意不通，推測為「不像人頂天立地」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.7,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1614",
-      "before": "祖父國神",
-      "after": "餓鬼道神",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「祖父國神」應為「餓鬼道神」或「餓鬼道」，與 seg-1616 語境一致。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1615",
       "before": "祖父國神",
       "after": "餓鬼道神",
@@ -3542,78 +1764,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1633",
-      "before": "也解釋這個主婦國神",
-      "after": "也解釋這個祖父鬼神",
-      "changeClass": "term",
-      "reason": "「主婦國神」應為「祖父鬼神」之訛，前後文意需一致。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1639",
-      "before": "翻到中國話就翻個主婦國神",
-      "after": "翻到中國話就翻個祖父鬼神",
-      "changeClass": "term",
-      "reason": "「主婦國神」應為「祖父鬼神」之訛，與前文對應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1640",
-      "before": "翻個主婦國神",
-      "after": "翻個祖父鬼神",
-      "changeClass": "term",
-      "reason": "「主婦國神」應為「祖父鬼神」之訛。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1642",
-      "before": "或者查到了他不說這個祖父國 就放鬼",
-      "after": "或者查到了他不說這個祖父鬼神，就放鬼",
-      "changeClass": "term",
-      "reason": "「祖父國」應為「祖父鬼神」之訛，且需補標點。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1643",
-      "before": "所以這個學習佛法真是不用意",
-      "after": "所以這個學習佛法真是不容易",
-      "changeClass": "semantic",
-      "reason": "「不用意」語意不通，依上下文推斷應為「不容易」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.75,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1644",
-      "before": "很不用意 你很不用意的",
-      "after": "很不容易 你很不容易的",
-      "changeClass": "semantic",
-      "reason": "同上，「不用意」應為「不容易」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.75,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1647",
       "before": "天上的身 欲界天 舍界天 無捨界天",
       "after": "天上的身 欲界天、色界天、無色界天",
@@ -3635,18 +1785,6 @@
         "local-model-context"
       ],
       "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1664",
-      "before": "死掉了的人就是無時生",
-      "after": "死掉了的人就是無常生",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。佛法語境中，「無時生」不通，應為「無常生」（或指無常之理），且與前文「死掉」對應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
       "reviewRequired": true
     },
     {
@@ -3746,30 +1884,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1728",
-      "before": "這時候在天空裡看著一個天鷹",
-      "after": "這時候在天空裡看著一個天人",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「天鷹」應為「天人」，後文提到是夫人昇天。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1730",
-      "before": "說我就是你的夫人的友相",
-      "after": "說我就是你的夫人的有相",
-      "changeClass": "orthography",
-      "reason": "ASR 訛字，「友相」應為人名「有相」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1742",
       "before": "有像說說不可以",
       "after": "有相說說不可以",
@@ -3794,18 +1908,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1752",
-      "before": "顏伏提值多少錢呢 天一指甲就能支那麼多錢",
-      "after": "閻浮提值多少錢呢 天一指甲就能支那麼多錢",
-      "changeClass": "term",
-      "reason": "「顏伏提」應為「閻浮提」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1779",
       "before": "就是微落所迷 壽命到了就死掉了",
       "after": "就是微細所迷 壽命到了就死掉了",
@@ -3815,150 +1917,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1784",
-      "before": "所以不如還是修相佛法",
-      "after": "所以不如還是修習佛法",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字，「相佛法」應為「習佛法」（修習），語意通順。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1785",
-      "before": "多佔賠善根",
-      "after": "多植善根",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字，「佔賠」應為「植」（種植、培植），「佔賠」無義。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1788",
-      "before": "它們在斷除我知的深廣程度上面有什麼不同",
-      "after": "它們在斷除我執的深廣程度上面有什麼不同",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「我知」應為「我執」（Atman-graha），此處討論斷除對象。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1789",
-      "before": "這個觀心無常是破除惡的體性",
-      "after": "觀心無常是破除我執的體性",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「惡」應為「我執」，與後文「觀法無我」及「破除我執的作用」對應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1790",
-      "before": "觀法無惡 修無惡觀",
-      "after": "觀法無我 修無我觀",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「惡」應為「我」，對應四念住中「觀法無我」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1791",
-      "before": "是破除去惡的作用",
-      "after": "是破除我執的作用",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「除去惡」應為「破除我執」，與前句體性對應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1796",
-      "before": "觀心無常是破除惡",
-      "after": "觀心無常是破除我執",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「惡」應為「我執」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1798",
-      "before": "觀法無惡",
-      "after": "觀法無我",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「惡」應為「我」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1800",
-      "before": "一切法也是無惡",
-      "after": "一切法也是無我",
-      "changeClass": "term",
-      "reason": "佛學名相修正，「惡」應為「我」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1823",
-      "before": "就是,雖然是一個破俄治,一個破法治,先應該破俄治。",
-      "after": "就是，雖然是一個破我執，一個破法執，先應該破我執。",
-      "changeClass": "term",
-      "reason": "ASR 訛字與佛學名相修正。'破俄治'應為'破我執'，'破法治'應為'破法執'。後文提到'先應該破俄治'，應為'先應該破我執'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1824",
-      "before": "龍叔父有這樣的意思,先應該破俄治。",
-      "after": "龍樹菩薩有這樣的意思，先應該破我執。",
-      "changeClass": "term",
-      "reason": "ASR 訛字與人名修正。'龍叔父'應為'龍樹菩薩'（或龍樹），'俄治'應為'我執'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1825",
-      "before": "而讀阿漢經的時候啊,佛的意思,你觀一些法空啊,破除去法不知遭,但是你要沒有破俄治,你還是生死凡夫。",
-      "after": "而讀阿含經的時候啊，佛的意思，你觀一些法空啊，破除去法不知執，但是你要沒有破我執，你還是生死凡夫。",
-      "changeClass": "term",
-      "reason": "ASR 訛字與佛學名相修正。'阿漢經'應為'阿含經'，'法不知遭'應為'法執'（或'法不知'為'法執'之誤），'破俄治'應為'破我執'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -3979,42 +1937,6 @@
       "after": "就是一切法都空了，唯一我獨存",
       "changeClass": "term",
       "reason": "ASR 訛字。'耳獨存'應為'我獨存'，與後文'唯我獨存'呼應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1847",
-      "before": "真生不滅 什麼是生",
-      "after": "真我不灭 什麼是生",
-      "changeClass": "term",
-      "reason": "ASR 訛字。'真生不滅'應為'真我不滅'，與前句'真身不滅'呼應，且後文解釋'生就是惡'，意指'真我'不滅。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1849",
-      "before": "這是真惡不滅",
-      "after": "這是真我不滅",
-      "changeClass": "term",
-      "reason": "ASR 訛字。'真惡不滅'應為'真我不滅'，與前文邏輯一致。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1869",
-      "before": "沉殺活 無名活",
-      "after": "沉殺活 無明活",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'無名活'應為'無明'，指無明煩惱。",
       "evidence": [
         "local-model-context"
       ],
@@ -4046,30 +1968,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1886",
-      "before": "有違法的有落法",
-      "after": "有為法的有漏法",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'有違法的有落法'應為'有為法的有漏法'，符合佛法名相。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1887",
-      "before": "有落法都是不禁",
-      "after": "有漏法都是不淨",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'有落法都是不禁'應為'有漏法都是不淨'，與前文'觀身不淨'呼應。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1888",
       "before": "也包括這個不禁在內",
       "after": "也包括這個不淨在內",
@@ -4079,42 +1977,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1891",
-      "before": "那麼由無常無惡的觀慶觀察",
-      "after": "那麼由無常無我的觀想觀察",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'無惡'應為'無我'，'觀慶'應為'觀想'或'觀照'，此處推測為'觀想觀察'或'觀照觀察'，但'無惡'明顯為'無我'之誤。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1894",
-      "before": "無常無我有沒有哪一個先後痴病",
-      "after": "無常無我有沒有哪一個先後次第",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'先後痴病'應為'先後次第'，指修行的順序。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1895",
-      "before": "先關無常 先關心無常",
-      "after": "先觀無常 先觀心無常",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。'先關無常 先關心無常'應為'先觀無常 先觀心無常'或類似語意，'關'應為'觀'。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -4139,102 +2001,6 @@
         "local-model-context"
       ],
       "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1946",
-      "before": "初開始的人一樣也是會腿子痛",
-      "after": "初開始的人一樣也是會腿肚子痛",
-      "changeClass": "orthography",
-      "reason": "口語「腿子痛」應為「腿肚子痛」，指小腿肚疼痛，為常見錯字。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1952",
-      "before": "院長 像這樣跟赤摩佛",
-      "after": "院長 像這樣跟釋摩佛",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「赤摩佛」應為佛教名相「釋摩佛」（或釋迦牟尼佛之簡稱/誤聽）",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.85,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1953",
-      "before": "跟善姐弟沒有什麼關係?",
-      "after": "跟善姐弟沒有什麼關係？",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「善姐弟」應為「善知識」或「善男子」，此處語境為佛法修持對象，「姐弟」極可能為誤聽。若指「善男子」則更常見於此類對話。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.8,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1954",
-      "before": "有關係 如果你舍摩陀和屁股舌諾修的相應",
-      "after": "有關係 如果你捨摩陀和毗婆舍那修的相應",
-      "changeClass": "term",
-      "reason": "ASR 訛字與佛學名相修正。「舍摩陀」應為「奢摩他」（Samatha，止）；「屁股舌諾修」應為「毗婆舍那」（Vipassana，觀）。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1955",
-      "before": "你的引力強 就是痛不大感覺有問題 不大妨礙",
-      "after": "你的定力強 就是痛不大感覺有問題 不大妨礙",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「引力」在禪修語境下應為「定力」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1956",
-      "before": "引力強了 你也很快這個腿就痛逐漸逐漸就不痛了",
-      "after": "定力強了 你也很快這個腿就痛逐漸逐漸就不痛了",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「引力」應為「定力」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1957",
-      "before": "要是舍摩陀和屁股舌諾修的不相應",
-      "after": "要是奢摩他和毗婆舍那修的不相應",
-      "changeClass": "term",
-      "reason": "ASR 訛字與佛學名相修正，同 seg-1954。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1958",
-      "before": "你的引力不強",
-      "after": "你的定力不強",
-      "changeClass": "term",
-      "reason": "ASR 訛字，「引力」應為「定力」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
       "reviewRequired": true
     },
     {
@@ -4334,35 +2100,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1978",
-      "before": "我們看不見天眼",
-      "after": "我們看不見天獄",
-      "changeClass": "term",
-      "reason": "ASR 訛字。後文多次提及「天獄」，且「天眼」與「看不見」搭配在語意上不通順，此處應指無法看見或進入天獄境界。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.9,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1980",
       "before": "把我們的玉對滯了",
       "after": "把我們的欲對治了",
       "changeClass": "term",
       "reason": "ASR 訛字。「玉」應為「欲」，「滯」應為「治」。不淨觀的目的在於對治貪欲。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1982",
-      "before": "那麼這個時候 關壽事故 關營無常管無惡",
-      "after": "那麼這個時候 觀諸事故 觀諸無常觀無我",
-      "changeClass": "term",
-      "reason": "ASR 訛字。關壽/關營應為「觀諸」，無惡應為「無我」。此處為佛法修行的核心名相（諸行無常、諸法無我）。",
       "evidence": [
         "local-model-context"
       ],
@@ -4442,30 +2184,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-1991",
-      "before": "要是得了出國的人",
-      "after": "要是得了果位的人",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「出國」應為「果位」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-1992",
-      "before": "在陰間得了出國的人",
-      "after": "在陰間得了果位的人",
-      "changeClass": "term",
-      "reason": "ASR 訛字。「出國」應為「果位」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-1993",
       "before": "他們能進步到三國",
       "after": "他們能進步到三果",
@@ -4490,30 +2208,6 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-2004",
-      "before": "你又來到雲間",
-      "after": "你又來到人間",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。上下文討論修行場所，「雲間」應為「人間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-2009",
-      "before": "所以雲間死了",
-      "after": "所以人間死了",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。上下文對比天上與人間，「雲間」應為「人間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-2012",
       "before": "我都把阿羅換過了",
       "after": "我都把阿羅漢換過了",
@@ -4526,83 +2220,11 @@
       "reviewRequired": true
     },
     {
-      "sentenceId": "seg-2021",
-      "before": "所以多數是在陰間成道",
-      "after": "所以多數是在人間成道",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。佛教教義中凡夫多在「人間」修行成道，非「陰間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-2023",
-      "before": "要是陰間有佛的時候",
-      "after": "要是人間有佛的時候",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。同上，指「人間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-2024",
-      "before": "陰間的佛教徒沒得聖道",
-      "after": "人間的佛教徒沒得聖道",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。同上，指「人間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-2031",
-      "before": "要是陰間沒有佛 陰間的佛教都升到天上去",
-      "after": "要是人間沒有佛 人間的佛教都升到天上去",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。同上，指「人間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-2034",
-      "before": "不過天下有彌勒菩薩",
-      "after": "不過人間有彌勒菩薩",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。同上，指「人間」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
       "sentenceId": "seg-2035",
       "before": "不過我看只要是凡佛都有相同的情形",
       "after": "不過我看只要是凡夫都有相同的情形",
       "changeClass": "orthography",
       "reason": "ASR 同音訛字。「凡佛」應為「凡夫」。",
-      "evidence": [
-        "local-model-context"
-      ],
-      "confidence": 0.95,
-      "reviewRequired": true
-    },
-    {
-      "sentenceId": "seg-2036",
-      "before": "就是陰間的人",
-      "after": "就是人間的人",
-      "changeClass": "orthography",
-      "reason": "ASR 同音訛字。同上，指「人間」。",
       "evidence": [
         "local-model-context"
       ],
@@ -4658,5 +2280,5 @@
       "reviewRequired": true
     }
   ],
-  "runId": "90e5ae6d-8c01-4539-b6b4-47baf00f4241"
+  "runId": "f34d725d-5196-44b3-ad2f-0cca7bfcbaa5"
 }
