@@ -1,6 +1,6 @@
 {
   "schema": "transcript-proofreading-model-responses/v1",
-  "runId": "34e8dcb3-3598-4205-a8f8-9b2dac72506c",
+  "runId": "0f60b4b4-1320-4394-9cf1-64ee02c39582",
   "promptVersion": "local-proofreading-review/v4",
   "sourceDigest": "sha256:e71e58d69a90687e692926954cda2ce0a7e0a82f2ae0907685aa809325bd7152",
   "endpoint": "http://127.0.0.1:18001/v1",
@@ -1411,5 +1411,240 @@
         ]
       }
     }
-  ]
+  ],
+  "proposalVerification": {
+    "reviewed_count": 19,
+    "verdicts": [
+      {
+        "id": "sent-3",
+        "verdict": "reject",
+        "reason": "刪除「的」字改變了原句語氣與節奏，且口語中「第二品」前加「的」並非錯誤，僅是風格差異，不符合「只限有上下文明確支持、幾乎無歧義」之 accept 標準。"
+      },
+      {
+        "id": "sent-9",
+        "verdict": "accept",
+        "reason": "修正未閉合引號及標點位置，屬明顯 ASR 或輸入疏失，符合語法規範且未改變原意。"
+      },
+      {
+        "id": "sent-10",
+        "verdict": "accept",
+        "reason": "修正未閉合引號及標點位置，屬明顯 ASR 或輸入疏失，符合語法規範且未改變原意。"
+      },
+      {
+        "id": "sent-13",
+        "verdict": "accept",
+        "reason": "將分號改為句號，因該處語意已完整結束，屬標準標點修正。"
+      },
+      {
+        "id": "sent-132",
+        "verdict": "reject",
+        "reason": "理由提及「整合為完整語句」，但 after 僅在括號內補右括號，未實際整合前後句內容，且若需整合應屬大幅改寫，不符合 accept 標準。"
+      },
+      {
+        "id": "sent-134",
+        "verdict": "accept",
+        "reason": "修正括號內回答的標點斷裂問題，屬明顯疏失修正。"
+      },
+      {
+        "id": "sent-153",
+        "verdict": "accept",
+        "reason": "補上句末閉引號，屬明顯疏失修正。"
+      },
+      {
+        "id": "sent-162",
+        "verdict": "reject",
+        "reason": "將分號改為逗號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且理由「符合口語流暢度」主觀性過強，不符合 accept 標準。"
+      },
+      {
+        "id": "sent-165",
+        "verdict": "reject",
+        "reason": "將分號改為冒號屬於語意邏輯層次的改動，非明顯錯別字或必要標點，且原句分號用法在口語轉寫中可接受，不符合 accept 標準。"
+      },
+      {
+        "id": "sent-191",
+        "verdict": "accept",
+        "reason": "補上句末閉引號，屬明顯疏失修正。"
+      },
+      {
+        "id": "sent-219",
+        "verdict": "reject",
+        "reason": "將「效學」改為「效法」雖為常用詞彙，但「效學」在口語中並非絕對錯誤，且理由未提供確鑿的佛典依據證明此處必為訛字，屬推測性改寫。"
+      },
+      {
+        "id": "sent-234",
+        "verdict": "accept",
+        "reason": "修正括號內對話結束應補上右括號，屬明顯疏失修正。"
+      },
+      {
+        "id": "sent-259",
+        "verdict": "reject",
+        "reason": "將逗號改為分號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且原句逗號用法在口語中可接受，不符合 accept 標準。"
+      },
+      {
+        "id": "sent-287",
+        "verdict": "reject",
+        "reason": "將逗號改為分號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且原句逗號用法在口語中可接受，不符合 accept 標準。"
+      },
+      {
+        "id": "sent-339",
+        "verdict": "reject",
+        "reason": "增加空格屬於排版格式調整，非內容修正，且理由自承「保留原樣亦可」，不符合 accept 標準。"
+      },
+      {
+        "id": "sent-353",
+        "verdict": "uncertain",
+        "reason": "將「伺意知」改為「伺察意」涉及佛學名相專業判斷，雖極可能正確，但需回聽確認口語發音或查證原典以確保無誤，符合 uncertain 標準。"
+      },
+      {
+        "id": "sent-361",
+        "verdict": "uncertain",
+        "reason": "同上，涉及佛學名相專業判斷，需回聽確認口語發音或查證原典以確保無誤。"
+      },
+      {
+        "id": "sent-364",
+        "verdict": "uncertain",
+        "reason": "同上，涉及佛學名相專業判斷，需回聽確認口語發音或查證原典以確保無誤。"
+      },
+      {
+        "id": "sent-376",
+        "verdict": "reject",
+        "reason": "after 內容大幅擴充，將原本未包含的長句（「如果是因為...完全掌握它？」）直接插入引號內，違反「不得補寫未出現在本句的內容」及「不得搬用前後句」之規則。"
+      }
+    ],
+    "batches": [
+      {
+        "inputCount": 19,
+        "verification": {
+          "batch_id": "sha256:8990725869c0f18ba38cfd60e569b0630735325618ff1fbf52cd085bbbb33b43",
+          "reviewed_count": 19,
+          "verdicts": [
+            {
+              "id": "sent-3",
+              "verdict": "reject",
+              "reason": "刪除「的」字改變了原句語氣與節奏，且口語中「第二品」前加「的」並非錯誤，僅是風格差異，不符合「只限有上下文明確支持、幾乎無歧義」之 accept 標準。"
+            },
+            {
+              "id": "sent-9",
+              "verdict": "accept",
+              "reason": "修正未閉合引號及標點位置，屬明顯 ASR 或輸入疏失，符合語法規範且未改變原意。"
+            },
+            {
+              "id": "sent-10",
+              "verdict": "accept",
+              "reason": "修正未閉合引號及標點位置，屬明顯 ASR 或輸入疏失，符合語法規範且未改變原意。"
+            },
+            {
+              "id": "sent-13",
+              "verdict": "accept",
+              "reason": "將分號改為句號，因該處語意已完整結束，屬標準標點修正。"
+            },
+            {
+              "id": "sent-132",
+              "verdict": "reject",
+              "reason": "理由提及「整合為完整語句」，但 after 僅在括號內補右括號，未實際整合前後句內容，且若需整合應屬大幅改寫，不符合 accept 標準。"
+            },
+            {
+              "id": "sent-134",
+              "verdict": "accept",
+              "reason": "修正括號內回答的標點斷裂問題，屬明顯疏失修正。"
+            },
+            {
+              "id": "sent-153",
+              "verdict": "accept",
+              "reason": "補上句末閉引號，屬明顯疏失修正。"
+            },
+            {
+              "id": "sent-162",
+              "verdict": "reject",
+              "reason": "將分號改為逗號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且理由「符合口語流暢度」主觀性過強，不符合 accept 標準。"
+            },
+            {
+              "id": "sent-165",
+              "verdict": "reject",
+              "reason": "將分號改為冒號屬於語意邏輯層次的改動，非明顯錯別字或必要標點，且原句分號用法在口語轉寫中可接受，不符合 accept 標準。"
+            },
+            {
+              "id": "sent-191",
+              "verdict": "accept",
+              "reason": "補上句末閉引號，屬明顯疏失修正。"
+            },
+            {
+              "id": "sent-219",
+              "verdict": "reject",
+              "reason": "將「效學」改為「效法」雖為常用詞彙，但「效學」在口語中並非絕對錯誤，且理由未提供確鑿的佛典依據證明此處必為訛字，屬推測性改寫。"
+            },
+            {
+              "id": "sent-234",
+              "verdict": "accept",
+              "reason": "修正括號內對話結束應補上右括號，屬明顯疏失修正。"
+            },
+            {
+              "id": "sent-259",
+              "verdict": "reject",
+              "reason": "將逗號改為分號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且原句逗號用法在口語中可接受，不符合 accept 標準。"
+            },
+            {
+              "id": "sent-287",
+              "verdict": "reject",
+              "reason": "將逗號改為分號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且原句逗號用法在口語中可接受，不符合 accept 標準。"
+            },
+            {
+              "id": "sent-339",
+              "verdict": "reject",
+              "reason": "增加空格屬於排版格式調整，非內容修正，且理由自承「保留原樣亦可」，不符合 accept 標準。"
+            },
+            {
+              "id": "sent-353",
+              "verdict": "uncertain",
+              "reason": "將「伺意知」改為「伺察意」涉及佛學名相專業判斷，雖極可能正確，但需回聽確認口語發音或查證原典以確保無誤，符合 uncertain 標準。"
+            },
+            {
+              "id": "sent-361",
+              "verdict": "uncertain",
+              "reason": "同上，涉及佛學名相專業判斷，需回聽確認口語發音或查證原典以確保無誤。"
+            },
+            {
+              "id": "sent-364",
+              "verdict": "uncertain",
+              "reason": "同上，涉及佛學名相專業判斷，需回聽確認口語發音或查證原典以確保無誤。"
+            },
+            {
+              "id": "sent-376",
+              "verdict": "reject",
+              "reason": "after 內容大幅擴充，將原本未包含的長句（「如果是因為...完全掌握它？」）直接插入引號內，違反「不得補寫未出現在本句的內容」及「不得搬用前後句」之規則。"
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 1047,
+          "prompt_tokens": 3510,
+          "total_tokens": 4557,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "responseIds": [
+          "chatcmpl-zhqEQW4P7Q7xUF7iq35CI9S10almoGmR"
+        ],
+        "attempts": [
+          {
+            "expectedCount": 19,
+            "reviewedCount": 19,
+            "responseId": "chatcmpl-zhqEQW4P7Q7xUF7iq35CI9S10almoGmR",
+            "usage": {
+              "completion_tokens": 1047,
+              "prompt_tokens": 3510,
+              "total_tokens": 4557,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "accepted": true,
+            "error": null
+          }
+        ]
+      }
+    ],
+    "promptVersion": "local-proofreading-verifier/v1"
+  }
 }

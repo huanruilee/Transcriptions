@@ -1,6 +1,6 @@
 # 全庫逐字稿校稿交接紀錄
 
-最後更新：2026-10-14 19:12 CST
+最後更新：2026-10-15 07:00 CST
 
 ## 工作位置
 
@@ -19,23 +19,17 @@
 - 固定分層試點涵蓋四門課各首、中、末三堂，共 12 堂。
 - 第一階段 Qwen 候選已完成 12/12；`npm run proofread:evidence:audit` 最近一次結果為 12/12 valid。
 - 因內容抽查發現不可靠修正，已新增第二階段逐項 verifier：只有 `accept` 可進候選；`reject`、`uncertain` 與跨句搬字一律進覆核佇列或 quarantine。
-- 第二階段 verifier 已完成 9/12：
+- 第二階段 verifier 已完成 12/12：
   - `2025釋量論第二品大組共學`：01、22、41
   - `入中論善顯密意疏`：01、56A、110B
-  - `四念住`：01、05
-  - `釋量論第二品`：32（曾單獨覆核）
+  - `四念住`：01、05、08
+  - `釋量論第二品`：01、17、32
 - 聚焦測試最近一次為 25/25 通過；新增 verifier 之前的完整 `npm test` 為 599 tests、0 fail、4 skipped。第二階段全部完成後必須再跑完整測試。
 - `courses/` 目前零修改。
 
 ## 執行中
 
-2026-10-14 19:12 CST 的本機程序正在覆核 `四念住/08`，最近進度 25/453 proposals。其後尚待：
-
-1. `釋量論第二品/01`
-2. `釋量論第二品/17`
-3. `釋量論第二品/32`（主流程會再確認一次）
-
-不要啟動重疊的模型批次。先用 `ps aux | rg 'run_local_proofreading_pilot|Qwen3.8-27B'` 確認程序。
+2026-10-15 07:00 CST 檢查：第二階段 verifier 已完成 12/12，GX10 SSH tunnel 已關閉，沒有需要續跑的模型批次。`npm run proofread:evidence:audit` 為 12/12 valid，聚焦測試為 25/25 通過。現在進入 verifier `accept` 候選的來源對照抽查；在此 gate 通過前禁止啟動 302 堂全庫批次。
 
 ## 續跑指令
 
@@ -52,7 +46,6 @@ node --test tests/unit/transcriptProofreadingPipeline.test.js tests/unit/transcr
 
 ## 尚未通過的 gate
 
-- 第二階段 verifier 尚未完成全部 12 堂。
 - 尚未逐項抽查 verifier 接受的候選是否真的有來源支持。
 - 尚未重跑完整 `npm test`、build 與全域稽核。
 - 試點內容 gate 尚未通過，因此禁止啟動 302 堂全庫批次。
@@ -60,11 +53,9 @@ node --test tests/unit/transcriptProofreadingPipeline.test.js tests/unit/transcr
 
 ## 下一步
 
-1. 等目前 verifier 完成，不重疊呼叫模型。
-2. 重跑 evidence audit 與聚焦測試。
-3. 程式化列出所有 verifier `accept`，由 Codex 做來源對照抽查；發現一例不可靠就修 gate 並重跑受影響 session。
-4. 完整測試與 build 全綠後，才判斷試點是否允許進入 302 堂候選生成。
-5. 每完成一個 gate，就更新本文件並在 Draft PR 留一則包含 commit、測試與下一步的交接留言。
+1. 程式化列出所有 verifier `accept`，由 Codex 做來源對照抽查；發現一例不可靠就修 gate 並重跑受影響 session。
+2. 完整測試與 build 全綠後，才判斷試點是否允許進入 302 堂候選生成。
+3. 每完成一個 gate，就更新本文件並在 Draft PR 留一則包含 commit、測試與下一步的交接留言。
 
 ## 重要品質邊界
 

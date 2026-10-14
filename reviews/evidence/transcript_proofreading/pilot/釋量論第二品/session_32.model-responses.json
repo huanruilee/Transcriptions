@@ -1,6 +1,6 @@
 {
   "schema": "transcript-proofreading-model-responses/v1",
-  "runId": "982ab47d-f2e8-42ed-9189-5ee7e4476548",
+  "runId": "8ded2f9f-9604-4e6a-97c0-391a591cb80b",
   "promptVersion": "local-proofreading-review/v4",
   "sourceDigest": "sha256:d7d3f3f96d840e1e1ee0b3105b1d247d697bf43ed4599bb15b8273ff45845c62",
   "endpoint": "http://127.0.0.1:18001/v1",
@@ -889,27 +889,27 @@
       {
         "id": "sent-26",
         "verdict": "reject",
-        "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾，且原句口語重複（特質、特性的意思）可能為講者強調，非明確錯別字或必要標點修正，違反保留口語原則。"
+        "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾；且原句口語鬆散若為講者強調則應保留，此改動改變了原句的語氣與結構，不符合保留口語原則。"
       },
       {
         "id": "sent-102",
         "verdict": "uncertain",
-        "reason": "「為」改為「為什麼」涉及法義推測與語境判斷，雖 confidence 高，但無句內直接證據證明原字必為訛誤，需回聽確認講者是否口語省略或發音不清。"
+        "reason": "「為」改為「為什麼」雖符合語意邏輯（疑問詞），但單字「為」在口語中可能為「為何」之省略或特定語境用法，無句內直接證據證明必為 ASR 訛字，需回聽確認講者是否口誤或省略。"
       },
       {
         "id": "sent-176",
         "verdict": "accept",
-        "reason": "原句「心中沒有比」明顯為 ASR 斷句錯誤（缺字），補全為「比量」有上下文明確支持（後句接「量」），屬必要修正且無歧義。"
+        "reason": "原句「心中沒有比」明顯為斷句錯誤（ASR 訛字），補全為「比量」有上下文明確支持（後句接「量」），且未改變原意，符合標準修正。"
       },
       {
         "id": "sent-219",
         "verdict": "accept",
-        "reason": "原句「盲人一」與後句「樣」斷裂，明顯為 ASR 斷詞錯誤，合併為「盲人一樣」符合語法與口語習慣，屬標準修正。"
+        "reason": "原文「盲人一」與下一句「樣」斷裂，屬明顯的 ASR 斷句錯誤，合併為「盲人一樣」有前後句直接證據支持，未改變原意。"
       },
       {
         "id": "sent-253",
         "verdict": "reject",
-        "reason": "將破折號改為問號雖符合語意，但破折號在口語逐字稿中常表停頓或強調，非明確錯別字；且後句「打上一個問號」已暗示疑問，標點變更屬書面化調整，非必要修正。"
+        "reason": "將破折號改為問號雖符合語意，但破折號在口語中常表示停頓或強調，此改動屬於標點符號的書面化調整，且「打上一個問號」本身已含疑問意，改標點可能過度干預原口語節奏，理由與 after 不一致（後者未說明為何破折號絕對錯誤）。"
       }
     ],
     "batches": [
@@ -922,50 +922,50 @@
             {
               "id": "sent-26",
               "verdict": "reject",
-              "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾，且原句口語重複（特質、特性的意思）可能為講者強調，非明確錯別字或必要標點修正，違反保留口語原則。"
+              "reason": "after 將「特質、」改為「特質、特性的意思」，雖語意通順但屬書面化修飾；且原句口語鬆散若為講者強調則應保留，此改動改變了原句的語氣與結構，不符合保留口語原則。"
             },
             {
               "id": "sent-102",
               "verdict": "uncertain",
-              "reason": "「為」改為「為什麼」涉及法義推測與語境判斷，雖 confidence 高，但無句內直接證據證明原字必為訛誤，需回聽確認講者是否口語省略或發音不清。"
+              "reason": "「為」改為「為什麼」雖符合語意邏輯（疑問詞），但單字「為」在口語中可能為「為何」之省略或特定語境用法，無句內直接證據證明必為 ASR 訛字，需回聽確認講者是否口誤或省略。"
             },
             {
               "id": "sent-176",
               "verdict": "accept",
-              "reason": "原句「心中沒有比」明顯為 ASR 斷句錯誤（缺字），補全為「比量」有上下文明確支持（後句接「量」），屬必要修正且無歧義。"
+              "reason": "原句「心中沒有比」明顯為斷句錯誤（ASR 訛字），補全為「比量」有上下文明確支持（後句接「量」），且未改變原意，符合標準修正。"
             },
             {
               "id": "sent-219",
               "verdict": "accept",
-              "reason": "原句「盲人一」與後句「樣」斷裂，明顯為 ASR 斷詞錯誤，合併為「盲人一樣」符合語法與口語習慣，屬標準修正。"
+              "reason": "原文「盲人一」與下一句「樣」斷裂，屬明顯的 ASR 斷句錯誤，合併為「盲人一樣」有前後句直接證據支持，未改變原意。"
             },
             {
               "id": "sent-253",
               "verdict": "reject",
-              "reason": "將破折號改為問號雖符合語意，但破折號在口語逐字稿中常表停頓或強調，非明確錯別字；且後句「打上一個問號」已暗示疑問，標點變更屬書面化調整，非必要修正。"
+              "reason": "將破折號改為問號雖符合語意，但破折號在口語中常表示停頓或強調，此改動屬於標點符號的書面化調整，且「打上一個問號」本身已含疑問意，改標點可能過度干預原口語節奏，理由與 after 不一致（後者未說明為何破折號絕對錯誤）。"
             }
           ]
         },
         "usage": {
-          "completion_tokens": 426,
+          "completion_tokens": 464,
           "prompt_tokens": 1190,
-          "total_tokens": 1616,
+          "total_tokens": 1654,
           "prompt_tokens_details": {
             "cached_tokens": 323
           }
         },
         "responseIds": [
-          "chatcmpl-G9nZWzyrLkqYIr1YvvdeXlWFwsWDS5Qm"
+          "chatcmpl-3JZ1te51N9IbyXWixGYaDN1djVT2skEe"
         ],
         "attempts": [
           {
             "expectedCount": 5,
             "reviewedCount": 5,
-            "responseId": "chatcmpl-G9nZWzyrLkqYIr1YvvdeXlWFwsWDS5Qm",
+            "responseId": "chatcmpl-3JZ1te51N9IbyXWixGYaDN1djVT2skEe",
             "usage": {
-              "completion_tokens": 426,
+              "completion_tokens": 464,
               "prompt_tokens": 1190,
-              "total_tokens": 1616,
+              "total_tokens": 1654,
               "prompt_tokens_details": {
                 "cached_tokens": 323
               }

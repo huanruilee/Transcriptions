@@ -1,6 +1,6 @@
 {
   "schema": "transcript-proofreading-model-responses/v1",
-  "runId": "e4242e10-6f4b-472d-95ed-3767e7130cc1",
+  "runId": "1c16db03-d76b-496c-9446-87ee3d567aca",
   "promptVersion": "local-proofreading-review/v4",
   "sourceDigest": "sha256:79d0c1955be7345717849998be9fe2ea4a8f839c2b7554f2a1681aa86dde32be",
   "endpoint": "http://127.0.0.1:18001/v1",
@@ -1216,5 +1216,210 @@
         ]
       }
     }
-  ]
+  ],
+  "proposalVerification": {
+    "reviewed_count": 16,
+    "verdicts": [
+      {
+        "id": "sent-9",
+        "verdict": "reject",
+        "reason": "after 補入前句（sent-8）內容，違反規則 2（不得搬用前後句）。且原句「第」為殘缺，無法僅憑上下文直接確定完整內容。"
+      },
+      {
+        "id": "sent-10",
+        "verdict": "reject",
+        "reason": "after 補入前句內容並改變原句結構，違反規則 2。且原句無主詞，補全後可能改變原意或引入未出現的推測。"
+      },
+      {
+        "id": "sent-19",
+        "verdict": "reject",
+        "reason": "after 補入後句（sent-20）內容「屬的關係」，違反規則 2（不得搬用前後句）。雖為斷句錯誤，但應由兩句合併處理，而非單句直接補全。"
+      },
+      {
+        "id": "sent-20",
+        "verdict": "reject",
+        "reason": "after 補入前句（sent-19）內容，違反規則 2。且原句僅為斷裂部分，無法單獨作為完整句子接受。"
+      },
+      {
+        "id": "sent-87",
+        "verdict": "reject",
+        "reason": "after 補入後句（sent-88）內容「這是衍生出來的想法...」，違反規則 2。標點修正不應包含後續語意內容。"
+      },
+      {
+        "id": "sent-88",
+        "verdict": "reject",
+        "reason": "after 補入前句（sent-87）內容，違反規則 2。且原句以左引號開頭，若僅修正標點不應直接合併前後句內容。"
+      },
+      {
+        "id": "sent-112",
+        "verdict": "accept",
+        "reason": "僅修正標點位置（問號移入引號內）並補上右引號，符合規則 1（保留口語、標點修正），無增刪字或改變原意。"
+      },
+      {
+        "id": "sent-123",
+        "verdict": "accept",
+        "reason": "僅修正標點位置（問號移入引號內）並補上右引號，符合規則 1，無增刪字或改變原意。"
+      },
+      {
+        "id": "sent-149",
+        "verdict": "reject",
+        "reason": "after 補入後句（sent-150）內容「的這種關係」，違反規則 2。且將「功能」改為「功能的關係」可能涉及語義微調，非單純標點修正。"
+      },
+      {
+        "id": "sent-173",
+        "verdict": "uncertain",
+        "reason": "涉及斷句錯誤與文字拆分（事/情），需回聽確認是否為 ASR 誤判或口語停頓，且後句內容明顯承接，無法單憑句內證據確定。"
+      },
+      {
+        "id": "sent-180",
+        "verdict": "reject",
+        "reason": "after 補入後句（sent-182）內容「如果這樣的念頭...」，違反規則 2。且原句引號混亂，修正後若包含後續語意則屬搬用前後句。"
+      },
+      {
+        "id": "sent-182",
+        "verdict": "reject",
+        "reason": "after 補入前句內容並改變標點結構，違反規則 2。且「是嗎？」為新增語氣詞或推測，非單純標點修正。"
+      },
+      {
+        "id": "sent-186",
+        "verdict": "reject",
+        "reason": "after 補入後句內容「那他的想法是什麼？」，違反規則 2。且引號修正不應包含後續問句。"
+      },
+      {
+        "id": "sent-290",
+        "verdict": "reject",
+        "reason": "after 補入後句（sent-291）內容「樣？」，違反規則 2。雖為同音斷裂，但應由兩句合併處理，而非單句直接補全。"
+      },
+      {
+        "id": "sent-430",
+        "verdict": "reject",
+        "reason": "after 補入後句（sent-431）內容「因素介入，所以這是不一定的」，違反規則 2。且涉及推測缺字，無句內直接證據。"
+      },
+      {
+        "id": "sent-458",
+        "verdict": "reject",
+        "reason": "after 大幅擴寫並補入大量前後句內容（從「這麼做，為的是什麼？」到結尾），嚴重違反規則 2（不得搬用前後句、不得補寫未出現在本句的內容）。"
+      }
+    ],
+    "batches": [
+      {
+        "inputCount": 16,
+        "verification": {
+          "batch_id": "sha256:7c83a20aebb49c1a01fef64a514609c3fc0100690fc3c67ce229e1e0ed423202",
+          "reviewed_count": 16,
+          "verdicts": [
+            {
+              "id": "sent-9",
+              "verdict": "reject",
+              "reason": "after 補入前句（sent-8）內容，違反規則 2（不得搬用前後句）。且原句「第」為殘缺，無法僅憑上下文直接確定完整內容。"
+            },
+            {
+              "id": "sent-10",
+              "verdict": "reject",
+              "reason": "after 補入前句內容並改變原句結構，違反規則 2。且原句無主詞，補全後可能改變原意或引入未出現的推測。"
+            },
+            {
+              "id": "sent-19",
+              "verdict": "reject",
+              "reason": "after 補入後句（sent-20）內容「屬的關係」，違反規則 2（不得搬用前後句）。雖為斷句錯誤，但應由兩句合併處理，而非單句直接補全。"
+            },
+            {
+              "id": "sent-20",
+              "verdict": "reject",
+              "reason": "after 補入前句（sent-19）內容，違反規則 2。且原句僅為斷裂部分，無法單獨作為完整句子接受。"
+            },
+            {
+              "id": "sent-87",
+              "verdict": "reject",
+              "reason": "after 補入後句（sent-88）內容「這是衍生出來的想法...」，違反規則 2。標點修正不應包含後續語意內容。"
+            },
+            {
+              "id": "sent-88",
+              "verdict": "reject",
+              "reason": "after 補入前句（sent-87）內容，違反規則 2。且原句以左引號開頭，若僅修正標點不應直接合併前後句內容。"
+            },
+            {
+              "id": "sent-112",
+              "verdict": "accept",
+              "reason": "僅修正標點位置（問號移入引號內）並補上右引號，符合規則 1（保留口語、標點修正），無增刪字或改變原意。"
+            },
+            {
+              "id": "sent-123",
+              "verdict": "accept",
+              "reason": "僅修正標點位置（問號移入引號內）並補上右引號，符合規則 1，無增刪字或改變原意。"
+            },
+            {
+              "id": "sent-149",
+              "verdict": "reject",
+              "reason": "after 補入後句（sent-150）內容「的這種關係」，違反規則 2。且將「功能」改為「功能的關係」可能涉及語義微調，非單純標點修正。"
+            },
+            {
+              "id": "sent-173",
+              "verdict": "uncertain",
+              "reason": "涉及斷句錯誤與文字拆分（事/情），需回聽確認是否為 ASR 誤判或口語停頓，且後句內容明顯承接，無法單憑句內證據確定。"
+            },
+            {
+              "id": "sent-180",
+              "verdict": "reject",
+              "reason": "after 補入後句（sent-182）內容「如果這樣的念頭...」，違反規則 2。且原句引號混亂，修正後若包含後續語意則屬搬用前後句。"
+            },
+            {
+              "id": "sent-182",
+              "verdict": "reject",
+              "reason": "after 補入前句內容並改變標點結構，違反規則 2。且「是嗎？」為新增語氣詞或推測，非單純標點修正。"
+            },
+            {
+              "id": "sent-186",
+              "verdict": "reject",
+              "reason": "after 補入後句內容「那他的想法是什麼？」，違反規則 2。且引號修正不應包含後續問句。"
+            },
+            {
+              "id": "sent-290",
+              "verdict": "reject",
+              "reason": "after 補入後句（sent-291）內容「樣？」，違反規則 2。雖為同音斷裂，但應由兩句合併處理，而非單句直接補全。"
+            },
+            {
+              "id": "sent-430",
+              "verdict": "reject",
+              "reason": "after 補入後句（sent-431）內容「因素介入，所以這是不一定的」，違反規則 2。且涉及推測缺字，無句內直接證據。"
+            },
+            {
+              "id": "sent-458",
+              "verdict": "reject",
+              "reason": "after 大幅擴寫並補入大量前後句內容（從「這麼做，為的是什麼？」到結尾），嚴重違反規則 2（不得搬用前後句、不得補寫未出現在本句的內容）。"
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 993,
+          "prompt_tokens": 3513,
+          "total_tokens": 4506,
+          "prompt_tokens_details": {
+            "cached_tokens": 323
+          }
+        },
+        "responseIds": [
+          "chatcmpl-HSHd0ngYkE7EoQBbHpDCwAp3nyfPkWHX"
+        ],
+        "attempts": [
+          {
+            "expectedCount": 16,
+            "reviewedCount": 16,
+            "responseId": "chatcmpl-HSHd0ngYkE7EoQBbHpDCwAp3nyfPkWHX",
+            "usage": {
+              "completion_tokens": 993,
+              "prompt_tokens": 3513,
+              "total_tokens": 4506,
+              "prompt_tokens_details": {
+                "cached_tokens": 323
+              }
+            },
+            "accepted": true,
+            "error": null
+          }
+        ]
+      }
+    ],
+    "promptVersion": "local-proofreading-verifier/v1"
+  }
 }
