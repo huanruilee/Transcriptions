@@ -1,6 +1,6 @@
 # 全庫逐字稿校稿交接紀錄
 
-最後更新：2026-10-15 07:00 CST
+最後更新：2026-10-15 07:15 CST
 
 ## 工作位置
 
@@ -29,7 +29,9 @@
 
 ## 執行中
 
-2026-10-15 07:00 CST 檢查：第二階段 verifier 已完成 12/12，GX10 SSH tunnel 已關閉，沒有需要續跑的模型批次。`npm run proofread:evidence:audit` 為 12/12 valid，聚焦測試為 25/25 通過。現在進入 verifier `accept` 候選的來源對照抽查；在此 gate 通過前禁止啟動 302 堂全庫批次。
+2026-10-15 檢查：第二階段 verifier 已完成 12/12，GX10 SSH tunnel 已關閉，沒有需要續跑的模型批次。`npm run proofread:evidence:audit` 為 12/12 valid，聚焦測試為 25/25 通過。
+
+依使用者要求，本輪完成 `四念住/session_08` 後暫停並交接。該堂全部 169 個 verifier accept 已做 before/after 掃描，並對 14 組高風險候選展開相鄰來源核對。內容 gate 結果為 **FAIL / DO NOT SCALE**；詳見 `reviews/evidence/transcript_proofreading/pilot/四念住/session_08.codex-audit.md`。禁止啟動 302 堂全庫批次。
 
 ## 續跑指令
 
@@ -46,16 +48,18 @@ node --test tests/unit/transcriptProofreadingPipeline.test.js tests/unit/transcr
 
 ## 尚未通過的 gate
 
-- 尚未逐項抽查 verifier 接受的候選是否真的有來源支持。
+- `四念住/session_08` 內容抽查已完成但 FAIL；其餘 11 堂尚未做同等 Codex 內容抽查。
 - 尚未重跑完整 `npm test`、build 與全域稽核。
 - 試點內容 gate 尚未通過，因此禁止啟動 302 堂全庫批次。
 - 尚未進入正式套用、人工音訊／論義覆核、合併或部署階段。
 
 ## 下一步
 
-1. 程式化列出所有 verifier `accept`，由 Codex 做來源對照抽查；發現一例不可靠就修 gate 並重跑受影響 session。
-2. 完整測試與 build 全綠後，才判斷試點是否允許進入 302 堂候選生成。
-3. 每完成一個 gate，就更新本文件並在 Draft PR 留一則包含 commit、測試與下一步的交接留言。
+1. 先為 `session_08.codex-audit.md` 中的阻擋案例新增 RED 測試並收緊 verifier gate。
+2. 重跑 `四念住/session_08` verifier，直到內容抽查通過；不得直接刪除失敗案例來規避測試。
+3. 再對其餘 11 堂做同等來源對照抽查。
+4. 完整測試與 build 全綠後，才判斷試點是否允許進入 302 堂候選生成。
+5. 每完成一個 gate，就更新本文件並在 Draft PR 留一則包含 commit、測試與下一步的交接留言。
 
 ## 重要品質邊界
 
