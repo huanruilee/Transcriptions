@@ -18,6 +18,9 @@ import {
   bindProductionReviewerVerdicts,
   buildProductionReviewProposals,
   buildProductionReviewerEvidence,
+  buildAudioEvidenceRequests,
+  buildAdjudicationReviewItems,
+  bindAdjudicationSuggestions,
   executeCoverageBoundBatch,
   classifyProposalRisk,
   combineIndependentVerdicts,
@@ -732,6 +735,25 @@ test('coverage-bound batch execution splits invalid responses without losing ite
   ]);
 });
 
+test('coverage-bound batch execution also splits provider parse failures', async () => {
+  const items = [reviewProposal('one', '甲', '乙'), reviewProposal('two', '丙', '丁')];
+  const attempts = [];
+  const result = await executeCoverageBoundBatch({
+    items,
+    attempts,
+    call: async (batch) => {
+      if (batch.length > 1) throw new SyntaxError('truncated provider JSON');
+      return { response: { items: [{ id: batch[0].id, verdict: 'accept', code: '可判定' }] }, rawDigest: 'sha256:raw' };
+    },
+    bind: (batch, call) => bindProductionReviewerVerdicts({
+      proposals: batch, response: call.response, provider: 'gx10-qwen',
+      model: 'Qwen3.8-27B', runtimeFingerprint: 'sha256:qwen-runtime',
+    }),
+  });
+  assert.deepEqual(result.map((item) => item.proposalId), ['one', 'two']);
+  assert.deepEqual(attempts.map((item) => item.accepted), [false, true, true]);
+});
+
 test('production reviewer verdict binding requires exact unique coverage', () => {
   const proposals = [
     reviewProposal('one', '甲', '乙'),
@@ -772,6 +794,70 @@ test('production reviewer evidence is advisory unless actual model and runtime a
   });
   assert.equal(attested.attested, true);
   assert.equal(attested.authority, 'quorum-eligible');
+});
+
+test('audio evidence requests bind every proposal to source timestamps and digest', () => {
+  const sourceDigest = computeSourceDigest(SOURCE);
+  const packet = {
+    sourceDigest,
+    runId: REVIEW_RUN_ID,
+    items: [{ proposal: {
+      id: 'seg-001', before: SOURCE.paragraphs[0].sentences[0].text,
+      sourceDigest, runId: REVIEW_RUN_ID,
+    } }],
+  };
+  const requests = buildAudioEvidenceRequests({ source: SOURCE, packet, paddingSeconds: 1.5 });
+  assert.deepEqual(requests, [{
+    id: 'seg-001', start: 0, end: 2.4, snippetStart: 0, snippetDuration: 3.9,
+    sourceText: SOURCE.paragraphs[0].sentences[0].text,
+  }]);
+  assert.throws(() => buildAudioEvidenceRequests({
+    source: SOURCE, packet: { ...packet, sourceDigest: 'sha256:fake' },
+  }), /source digest mismatch/u);
+  assert.throws(() => buildAudioEvidenceRequests({
+    source: SOURCE,
+    packet: { ...packet, items: [{ proposal: { ...packet.items[0].proposal, id: 'ghost' } }] },
+  }), /missing source sentence/u);
+});
+
+test('adjudication suggestions require source/audio binding and exact ID coverage', () => {
+  const sourceDigest = computeSourceDigest(SOURCE);
+  const proposal = reviewProposal('seg-001', SOURCE.paragraphs[0].sentences[0].text, '候選句', {
+    sourceDigest,
+    context: { previous: null, current: SOURCE.paragraphs[0].sentences[0].text, next: null, start: 0, end: 2.4 },
+    changeClass: 'term',
+  });
+  const packet = {
+    sourceDigest, runId: REVIEW_RUN_ID,
+    items: [{ proposal, risk: { level: 'high' }, verdicts: [] }],
+  };
+  const audioEvidence = {
+    schema: 'transcript-proofreading-audio-evidence/v1',
+    sourceDigest, runId: REVIEW_RUN_ID, audioSha256: 'sha256:audio',
+    items: [{ id: 'seg-001', sourceText: proposal.before, asrText: '候選句', rawResponseDigest: 'sha256:asr' }],
+  };
+  const items = buildAdjudicationReviewItems({ source: SOURCE, packet, audioEvidence });
+  assert.equal(items[0].audioAsrText, '候選句');
+  const bound = bindAdjudicationSuggestions({
+    items,
+    response: { items: [{ id: 'seg-001', decision: 'approve', proposedText: '', code: '音訊與文義相符' }] },
+    sourceDigest, runId: REVIEW_RUN_ID, audioSha256: audioEvidence.audioSha256,
+    packetDigest: 'sha256:packet',
+  });
+  assert.equal(bound.authority, 'advisory');
+  assert.equal(bound.decisions[0].audioRawResponseDigest, 'sha256:asr');
+  assert.throws(() => bindAdjudicationSuggestions({
+    items, response: { items: [] }, sourceDigest,
+    runId: REVIEW_RUN_ID, audioSha256: audioEvidence.audioSha256, packetDigest: 'sha256:packet',
+  }), /coverage mismatch/);
+  const equivalent = bindAdjudicationSuggestions({
+    items,
+    response: { items: [{ id: 'seg-001', decision: 'replace', proposedText: '候選句', code: '非第三答案' }] },
+    sourceDigest, runId: REVIEW_RUN_ID, audioSha256: audioEvidence.audioSha256,
+    packetDigest: 'sha256:packet',
+  });
+  assert.equal(equivalent.decisions[0].decision, 'approve');
+  assert.equal('proposedText' in equivalent.decisions[0], false);
 });
 
 test('risk classifier distinguishes punctuation, approved mappings, and suspicious rewrites', () => {
@@ -906,6 +992,10 @@ test('runtime fingerprint ignores volatile server timestamps but binds model met
   assert.equal(computeRuntimeFingerprint(first, 'Qwen3.8-27B'), computeRuntimeFingerprint(second, 'Qwen3.8-27B'));
   second.data[0].meta.n_ctx = 65536;
   assert.notEqual(computeRuntimeFingerprint(first, 'Qwen3.8-27B'), computeRuntimeFingerprint(second, 'Qwen3.8-27B'));
+});
+
+test('runtime fingerprint rejects a catalog that does not advertise the requested model', () => {
+  assert.throws(() => computeRuntimeFingerprint({ data: [], models: [] }, 'Qwen3.8-27B'), /does not advertise/u);
 });
 
 test('saved checkpoint batches are revalidated before resume', () => {

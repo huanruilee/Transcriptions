@@ -133,20 +133,21 @@ export function computeSourceDigest(source) {
 }
 
 export function computeRuntimeFingerprint(runtime, modelId) {
-  const model = (runtime?.data ?? []).find((item) => item.id === modelId) ?? {};
-  const catalog = (runtime?.models ?? []).find((item) => item.name === modelId || item.model === modelId) ?? {};
+  const model = (runtime?.data ?? []).find((item) => item.id === modelId);
+  const catalog = (runtime?.models ?? []).find((item) => item.name === modelId || item.model === modelId);
+  if (!model && !catalog) throw new Error(`runtime does not advertise requested model: ${modelId}`);
   const stable = {
-    id: model.id ?? modelId,
-    ownedBy: model.owned_by ?? null,
-    aliases: [...(model.aliases ?? [])].sort(),
+    id: model?.id ?? catalog?.name ?? catalog?.model,
+    ownedBy: model?.owned_by ?? null,
+    aliases: [...(model?.aliases ?? [])].sort(),
     meta: {
-      nCtx: model.meta?.n_ctx ?? null,
-      nCtxTrain: model.meta?.n_ctx_train ?? null,
-      nParams: model.meta?.n_params ?? null,
-      size: model.meta?.size ?? null,
-      ftype: model.meta?.ftype ?? null,
+      nCtx: model?.meta?.n_ctx ?? null,
+      nCtxTrain: model?.meta?.n_ctx_train ?? null,
+      nParams: model?.meta?.n_params ?? null,
+      size: model?.meta?.size ?? null,
+      ftype: model?.meta?.ftype ?? null,
     },
-    digest: model.digest || model.revision || catalog.digest || catalog.revision || null,
+    digest: model?.digest || model?.revision || catalog?.digest || catalog?.revision || null,
   };
   return `sha256:${createHash('sha256').update(stableStringify(stable)).digest('hex')}`;
 }
@@ -498,8 +499,9 @@ export function buildProductionReviewProposals({ source, ledger, contextsById = 
 export async function executeCoverageBoundBatch({
   items, call, bind, attempts = [], depth = 0, onSplit = () => {},
 }) {
-  const response = await call(items);
+  let response = null;
   try {
+    response = await call(items);
     const bound = bind(items, response);
     attempts.push({
       inputCount: items.length, depth, accepted: true,
@@ -523,6 +525,146 @@ export async function executeCoverageBoundBatch({
       }),
     ];
   }
+}
+
+export function buildAudioEvidenceRequests({ source, packet, paddingSeconds = 1.5 }) {
+  if (!source || computeSourceDigest(source) !== packet?.sourceDigest) {
+    throw new Error('audio evidence source digest mismatch');
+  }
+  if (!Number.isFinite(paddingSeconds) || paddingSeconds < 0 || paddingSeconds > 10) {
+    throw new Error('paddingSeconds must be from 0 to 10');
+  }
+  if (!Array.isArray(packet.items) || packet.items.length === 0) {
+    throw new Error('audio evidence requires non-empty packet items');
+  }
+  const sourceById = new Map(listTranscriptSentences(source).map((sentence) => [sentence.id, sentence]));
+  const ids = packet.items.map((item) => item?.proposal?.id);
+  if (ids.some((id) => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) {
+    throw new Error('audio evidence requires unique proposal IDs');
+  }
+  return packet.items.map(({ proposal }) => {
+    const sentence = sourceById.get(proposal.id);
+    if (!sentence) throw new Error(`missing source sentence for ${proposal.id}`);
+    if (proposal.sourceDigest !== packet.sourceDigest || proposal.runId !== packet.runId
+      || proposal.before !== sentence.text) throw new Error(`proposal binding mismatch for ${proposal.id}`);
+    if (!Number.isFinite(sentence.start) || !Number.isFinite(sentence.end) || sentence.end < sentence.start) {
+      throw new Error(`invalid source timestamps for ${proposal.id}`);
+    }
+    const snippetStart = Math.max(0, sentence.start - paddingSeconds);
+    const snippetEnd = sentence.end + paddingSeconds;
+    return {
+      id: proposal.id,
+      start: sentence.start,
+      end: sentence.end,
+      snippetStart,
+      snippetDuration: snippetEnd - snippetStart,
+      sourceText: sentence.text,
+    };
+  });
+}
+
+const ALLOWED_ADJUDICATION_DECISIONS = new Set([
+  'approve', 'reject', 'replace', 'audio-required',
+]);
+
+export function buildAdjudicationReviewItems({ source, packet, audioEvidence }) {
+  if (!source || computeSourceDigest(source) !== packet?.sourceDigest) {
+    throw new Error('adjudication source digest mismatch');
+  }
+  if (audioEvidence?.schema !== 'transcript-proofreading-audio-evidence/v1'
+    || audioEvidence.sourceDigest !== packet.sourceDigest
+    || audioEvidence.runId !== packet.runId
+    || !String(audioEvidence.audioSha256 ?? '').startsWith('sha256:')) {
+    throw new Error('adjudication audio evidence binding mismatch');
+  }
+  if (!Array.isArray(packet.items) || !Array.isArray(audioEvidence.items)
+    || packet.items.length !== audioEvidence.items.length) {
+    throw new Error('adjudication evidence coverage mismatch');
+  }
+  const audioById = new Map(audioEvidence.items.map((item) => [item?.id, item]));
+  if (audioById.size !== audioEvidence.items.length) {
+    throw new Error('adjudication audio evidence IDs must be unique');
+  }
+  return packet.items.map((item) => {
+    const proposal = item?.proposal;
+    const audio = audioById.get(proposal?.id);
+    if (!proposal || proposal.sourceDigest !== packet.sourceDigest || proposal.runId !== packet.runId
+      || !audio || audio.sourceText !== proposal.before
+      || !String(audio.rawResponseDigest ?? '').startsWith('sha256:')) {
+      throw new Error(`adjudication evidence mismatch for ${proposal?.id ?? 'unknown'}`);
+    }
+    return {
+      id: proposal.id,
+      before: proposal.before,
+      after: proposal.after,
+      context: proposal.context,
+      changeClass: proposal.changeClass,
+      risk: item.risk,
+      reviewerVerdicts: item.verdicts.map(({ provider, verdict, code }) => ({ provider, verdict, code })),
+      audioAsrText: audio.asrText,
+      audioRawResponseDigest: audio.rawResponseDigest,
+    };
+  });
+}
+
+export function bindAdjudicationSuggestions({
+  items, response, sourceDigest, runId, audioSha256, packetDigest,
+}) {
+  if (!Array.isArray(items) || items.length === 0
+    || !String(sourceDigest ?? '').startsWith('sha256:')
+    || !String(runId ?? '').trim()
+    || !String(audioSha256 ?? '').startsWith('sha256:')
+    || !String(packetDigest ?? '').startsWith('sha256:')) {
+    throw new Error('adjudication binding metadata is required');
+  }
+  if (!Array.isArray(response?.items) || response.items.length !== items.length) {
+    throw new Error(`adjudication ID coverage mismatch: expected ${items.length}, received ${response?.items?.length}`);
+  }
+  const expected = new Map(items.map((item) => [item.id, item]));
+  if (expected.size !== items.length) throw new Error('adjudication input IDs must be unique');
+  const responseIds = response.items.map((item) => item?.id);
+  if (new Set(responseIds).size !== items.length || responseIds.some((id) => !expected.has(id))) {
+    throw new Error('adjudication ID coverage mismatch');
+  }
+  const decisions = response.items.map((item) => {
+    const input = expected.get(item.id);
+    const allowedKeys = ['id', 'decision', 'proposedText', 'code'];
+    if (!ALLOWED_ADJUDICATION_DECISIONS.has(item.decision)
+      || typeof item.code !== 'string' || item.code.length < 1 || item.code.length > 40
+      || Object.keys(item).some((key) => !allowedKeys.includes(key))) {
+      throw new Error(`invalid adjudication suggestion for ${item?.id ?? 'unknown'}`);
+    }
+    let decision = item.decision;
+    if (decision === 'replace' && item.proposedText === input.after) decision = 'approve';
+    if (decision === 'replace' && item.proposedText === input.before) decision = 'reject';
+    if (decision === 'replace') {
+      if (typeof item.proposedText !== 'string' || !item.proposedText.trim()) {
+        throw new Error(`replace requires a distinct proposedText for ${item.id}`);
+      }
+    } else if (item.decision !== 'replace'
+      && item.proposedText !== undefined && item.proposedText !== null
+      && String(item.proposedText).trim() !== '') {
+      throw new Error(`proposedText is only allowed for replace: ${item.id}`);
+    }
+    return {
+      id: item.id,
+      decision,
+      ...(decision === 'replace' ? { proposedText: item.proposedText } : {}),
+      code: item.code,
+      audioRawResponseDigest: input.audioRawResponseDigest,
+      inputDigest: `sha256:${createHash('sha256').update(stableStringify(input)).digest('hex')}`,
+    };
+  });
+  return {
+    schema: 'transcript-proofreading-adjudication-candidate/v1',
+    authority: 'advisory',
+    sourceDigest,
+    runId,
+    audioSha256,
+    packetDigest,
+    itemCount: decisions.length,
+    decisions,
+  };
 }
 
 export function bindProductionReviewerVerdicts({
