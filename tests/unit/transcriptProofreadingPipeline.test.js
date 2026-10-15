@@ -15,6 +15,10 @@ import {
   applyModelReview,
   buildValidatedModelCandidate,
   buildCompactReviewPacket,
+  bindProductionReviewerVerdicts,
+  buildProductionReviewProposals,
+  buildProductionReviewerEvidence,
+  executeCoverageBoundBatch,
   classifyProposalRisk,
   combineIndependentVerdicts,
   mergeModelReviews,
@@ -42,9 +46,9 @@ function clone(value) {
 const REVIEW_SOURCE_DIGEST = 'sha256:test-source';
 const REVIEW_RUN_ID = 'review-run-1';
 const REVIEW_PROVIDER_MANIFEST = {
-  'gx10-qwen': { model: 'Qwen3.8-27B', runtimeFingerprint: 'sha256:qwen-runtime' },
-  'minimax-m3': { model: 'MiniMax-M3', runtimeFingerprint: 'sha256:minimax-runtime' },
-  'eneural-deepseek': { model: 'deepseek-v4.1-flash', runtimeFingerprint: 'sha256:eneural-runtime' },
+  'gx10-qwen': { model: 'Qwen3.8-27B', runtimeFingerprint: 'sha256:qwen-runtime', attested: true, status: 'completed' },
+  'minimax-m3': { model: 'MiniMax-M3', runtimeFingerprint: 'sha256:minimax-runtime', attested: true, status: 'completed' },
+  'eneural-deepseek': { model: 'deepseek-v4.1-flash', runtimeFingerprint: 'sha256:eneural-runtime', attested: true, status: 'completed' },
 };
 
 function reviewProposal(id, before, after, extra = {}) {
@@ -519,22 +523,25 @@ test('compact review packet clusters unanimous medium-risk mappings without auto
   assert.notEqual(changedPacket.clusterSidecars[0].clusterId, packet.clusterSidecars[0].clusterId);
 });
 
-test('compact review packet preserves rejected IDs for audit without spending review tokens on text', () => {
+test('compact review packet keeps high-risk rejects visible and only sidecars low-risk rejects', () => {
+  const rejectedVotes = (id) => reviewVerdicts(id).map((vote, index) => (
+    index === 0 ? { ...vote, verdict: 'reject' } : vote
+  ));
   const packet = buildCompactReviewPacket({
     items: [{
       proposal: reviewProposal('rejected-1', '原文', '猜測改寫'),
-      verdicts: [{
-        provider: 'minimax-m3', verdict: 'reject', proposalId: 'rejected-1',
-        sourceDigest: REVIEW_SOURCE_DIGEST, runId: REVIEW_RUN_ID,
-        ...REVIEW_PROVIDER_MANIFEST['minimax-m3'],
-      }],
+      verdicts: rejectedVotes('rejected-1'),
+    }, {
+      proposal: reviewProposal('rejected-low', '原句', '原句。'),
+      verdicts: rejectedVotes('rejected-low'),
     }], providerManifest: REVIEW_PROVIDER_MANIFEST,
   });
-  assert.equal(packet.summary.rejected, 1);
-  assert.deepEqual(packet.summary.rejectedIds, ['rejected-1']);
-  assert.deepEqual(packet.items, []);
+  assert.equal(packet.summary.rejected, 2);
+  assert.deepEqual(packet.summary.rejectedIds, ['rejected-1', 'rejected-low']);
+  assert.deepEqual(packet.items.map((item) => item.proposal.id), ['rejected-1']);
+  assert.equal(packet.items[0].quarantined, true);
   assert.equal(packet.rejectedSidecar[0].proposal.before, '原文');
-  assert.equal(packet.rejectedSidecar[0].verdicts[0].provider, 'minimax-m3');
+  assert.equal(packet.rejectedSidecar[0].verdicts[0].provider, 'gx10-qwen');
 });
 
 test('compact review packet rejects duplicate IDs and never clusters across runs', () => {
@@ -617,6 +624,20 @@ test('provider quorum is fixed, unique, and bound to proposal, digest, and run',
   assert.equal(combineIndependentVerdicts({
     proposal, verdicts: wrongRuntime, approvedMappings, providerManifest: REVIEW_PROVIDER_MANIFEST,
   }).outcome, 'review');
+
+  const unattestedManifest = clone(REVIEW_PROVIDER_MANIFEST);
+  unattestedManifest['minimax-m3'].attested = false;
+  const unattestedReject = [{
+    provider: 'minimax-m3', verdict: 'reject', proposalId: 'bound-1',
+    sourceDigest: REVIEW_SOURCE_DIGEST, runId: REVIEW_RUN_ID,
+    model: 'MiniMax-M3', runtimeFingerprint: 'sha256:minimax-runtime',
+  }];
+  const unattested = combineIndependentVerdicts({
+    proposal, verdicts: unattestedReject, approvedMappings,
+    providerManifest: unattestedManifest,
+  });
+  assert.equal(unattested.outcome, 'review');
+  assert.equal(unattested.providerCount, 0);
 });
 
 test('reviewer evaluation rejects malformed output and marks dangerous false accepts failed', () => {
@@ -656,6 +677,101 @@ test('reviewer evaluation rejects malformed output and marks dangerous false acc
     { id: 'same', verdict: 'accept', code: '一' },
     { id: 'same', verdict: 'reject', code: '二' },
   ] }), /fixture schema/u);
+});
+
+test('production reviewer proposals reuse the existing ledger and bind every item to source and run', () => {
+  const sourceDigest = computeSourceDigest(SOURCE);
+  const ledger = {
+    schema: 'transcript-proofreading-ledger/v1',
+    sourceDigest,
+    runId: REVIEW_RUN_ID,
+    entries: [
+      { sentenceId: 'seg-001', before: '昏塵', after: '昏沉', changeClass: 'term', reason: '訛字', evidence: ['context'] },
+      { sentenceId: 'seg-002', before: '原句', after: '原句。', changeClass: 'punctuation', reason: '標點', evidence: ['context'] },
+    ],
+  };
+  const proposals = buildProductionReviewProposals({ source: SOURCE, ledger, contextsById: new Map([
+    ['seg-001', { previous: '前句', current: '昏塵', next: '後句' }],
+    ['seg-002', { previous: '甲', current: '原句', next: '乙' }],
+  ]) });
+  assert.equal(proposals.length, 2);
+  assert.deepEqual(proposals.map((item) => item.id), ['seg-001', 'seg-002']);
+  assert.ok(proposals.every((item) => item.sourceDigest === sourceDigest));
+  assert.ok(proposals.every((item) => item.runId === REVIEW_RUN_ID));
+  assert.equal(proposals[0].context.previous, '前句');
+  assert.throws(() => buildProductionReviewProposals({
+    source: SOURCE, ledger: { ...ledger, runId: null }, contextsById: new Map(),
+  }), /sourceDigest and runId/u);
+  assert.throws(() => buildProductionReviewProposals({
+    source: SOURCE, ledger: { ...ledger, sourceDigest: 'sha256:fake' }, contextsById: new Map(),
+  }), /source digest mismatch/u);
+  assert.throws(() => buildProductionReviewProposals({
+    source: SOURCE,
+    ledger: { ...ledger, entries: [{ ...ledger.entries[0], sentenceId: 'ghost' }] },
+    contextsById: new Map(),
+  }), /missing source context/u);
+});
+
+test('coverage-bound batch execution splits invalid responses without losing items', async () => {
+  const items = ['a', 'b', 'c', 'd'];
+  const attempts = [];
+  const result = await executeCoverageBoundBatch({
+    items,
+    attempts,
+    call: async (batch) => ({ ids: batch.length === 4 ? [...batch, 'extra'] : [...batch] }),
+    bind: (batch, response) => {
+      if (response.ids.length !== batch.length) throw new Error('coverage mismatch');
+      return response.ids;
+    },
+  });
+  assert.deepEqual(result, items);
+  assert.deepEqual(attempts.map(({ inputCount, depth, accepted }) => ({ inputCount, depth, accepted })), [
+    { inputCount: 4, depth: 0, accepted: false },
+    { inputCount: 2, depth: 1, accepted: true },
+    { inputCount: 2, depth: 1, accepted: true },
+  ]);
+});
+
+test('production reviewer verdict binding requires exact unique coverage', () => {
+  const proposals = [
+    reviewProposal('one', '甲', '乙'),
+    reviewProposal('two', '丙', '丁'),
+  ];
+  const response = { items: [
+    { id: 'one', verdict: 'accept', code: '明確訛字' },
+    { id: 'two', verdict: 'uncertain', code: '需要回聽' },
+  ] };
+  const verdicts = bindProductionReviewerVerdicts({
+    proposals, response, provider: 'gx10-qwen', model: 'Qwen3.8-27B',
+    runtimeFingerprint: 'sha256:qwen-runtime',
+  });
+  assert.equal(verdicts.length, 2);
+  assert.deepEqual(verdicts[0], {
+    provider: 'gx10-qwen', model: 'Qwen3.8-27B', runtimeFingerprint: 'sha256:qwen-runtime',
+    proposalId: 'one', sourceDigest: REVIEW_SOURCE_DIGEST, runId: REVIEW_RUN_ID,
+    verdict: 'accept', code: '明確訛字',
+  });
+  assert.throws(() => bindProductionReviewerVerdicts({
+    proposals, response: { items: [response.items[0], response.items[0]] },
+    provider: 'gx10-qwen', model: 'Qwen3.8-27B', runtimeFingerprint: 'sha256:qwen-runtime',
+  }), /ID coverage mismatch/u);
+});
+
+test('production reviewer evidence is advisory unless actual model and runtime are attested', () => {
+  const proposals = [reviewProposal('one', '甲', '乙')];
+  const advisory = buildProductionReviewerEvidence({
+    provider: 'minimax-m3', requestedModel: 'MiniMax-M3', actualModel: null,
+    runtimeFingerprint: null, proposals, verdicts: [], rawResponseDigests: ['sha256:raw'],
+  });
+  assert.equal(advisory.attested, false);
+  assert.equal(advisory.authority, 'advisory');
+  const attested = buildProductionReviewerEvidence({
+    provider: 'gx10-qwen', requestedModel: 'Qwen3.8-27B', actualModel: 'Qwen3.8-27B',
+    runtimeFingerprint: 'sha256:qwen-runtime', proposals, verdicts: [],
+    rawResponseDigests: ['sha256:raw'],
+  });
+  assert.equal(attested.attested, true);
+  assert.equal(attested.authority, 'quorum-eligible');
 });
 
 test('risk classifier distinguishes punctuation, approved mappings, and suspicious rewrites', () => {

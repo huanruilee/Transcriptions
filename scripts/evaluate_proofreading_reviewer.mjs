@@ -78,6 +78,25 @@ async function openAiCall(endpoint, model, apiKey = '', local = false) {
   };
 }
 
+function remoteEneuralCall(endpoint, model, body) {
+  const remoteCode = String.raw`
+import json, os, pathlib, sys, urllib.request
+for line in pathlib.Path.home().joinpath('.config/eneural.env').read_text().splitlines():
+    if line.strip() and not line.lstrip().startswith('#') and '=' in line:
+        key, value = line.split('=', 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+payload = json.load(sys.stdin)
+request = urllib.request.Request(payload['endpoint'], data=json.dumps(payload['body'], ensure_ascii=False).encode(), headers={'Content-Type':'application/json','Authorization':'Bearer '+os.environ['ENEURAL_API_KEY'],'User-Agent':'Transcriptions-reviewer-eval/1.0'})
+with urllib.request.urlopen(request, timeout=120) as response:
+    sys.stdout.buffer.write(response.read())
+`;
+  const encoded = Buffer.from(remoteCode).toString('base64');
+  const command = `python3 -c "import base64;exec(base64.b64decode('${encoded}'))"`;
+  return execFileSync('ssh', [process.env.ENEURAL_SSH_HOST, command], {
+    input: JSON.stringify({ endpoint, body }), encoding: 'utf8', timeout: 150000, maxBuffer: 4_000_000,
+  });
+}
+
 let result;
 let provenance;
 if (provider === 'qwen') {
@@ -110,13 +129,27 @@ if (provider === 'qwen') {
     runtimeObserved: false,
   };
 } else {
-  if (!process.env.ENEURAL_API_KEY) throw new Error('ENEURAL_API_KEY is required');
-  const call = await openAiCall(
-    process.env.ENEURAL_ENDPOINT || 'https://agents.eneural.ai/v1/chat/completions',
-    process.env.ENEURAL_MODEL || 'deepseek-v4.1-flash', process.env.ENEURAL_API_KEY, false,
-  );
-  result = call.verdicts;
-  provenance = call.provenance;
+  const endpoint = process.env.ENEURAL_ENDPOINT || 'https://agents.eneural.ai/v1/chat/completions';
+  const model = process.env.ENEURAL_MODEL || 'deepseek-v4.1-flash';
+  if (process.env.ENEURAL_SSH_HOST) {
+    const rawText = remoteEneuralCall(endpoint, model, {
+      model, messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
+      temperature: 0, max_tokens: 1024,
+    });
+    const raw = JSON.parse(rawText);
+    result = extractJson(raw.choices?.[0]?.message?.content || '');
+    provenance = {
+      endpoint, requestedModel: model, actualModel: raw.model || null, responseId: raw.id || null,
+      created: raw.created || null,
+      rawResponseDigest: `sha256:${createHash('sha256').update(rawText).digest('hex')}`,
+      runtimeFingerprint: null, runtimeObserved: false, transport: `ssh://${process.env.ENEURAL_SSH_HOST}`,
+    };
+  } else {
+    if (!process.env.ENEURAL_API_KEY) throw new Error('ENEURAL_API_KEY or ENEURAL_SSH_HOST is required');
+    const call = await openAiCall(endpoint, model, process.env.ENEURAL_API_KEY, false);
+    result = call.verdicts;
+    provenance = call.provenance;
+  }
 }
 
 const evaluation = evaluateReviewerVerdicts(fixture.items, result);

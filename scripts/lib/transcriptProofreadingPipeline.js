@@ -456,6 +456,141 @@ const EXPECTED_REVIEW_PROVIDERS = Object.freeze([
 ]);
 const ALLOWED_REVIEW_VERDICTS = new Set(['accept', 'reject', 'uncertain']);
 
+export function buildProductionReviewProposals({ source, ledger, contextsById = new Map() }) {
+  if (ledger?.schema !== 'transcript-proofreading-ledger/v1') {
+    throw new Error('production review requires transcript-proofreading-ledger/v1');
+  }
+  if (!String(ledger.sourceDigest ?? '').startsWith('sha256:') || !String(ledger.runId ?? '').trim()) {
+    throw new Error('production review requires sourceDigest and runId');
+  }
+  if (!source || computeSourceDigest(source) !== ledger.sourceDigest) {
+    throw new Error('production review source digest mismatch');
+  }
+  if (!Array.isArray(ledger.entries) || ledger.entries.length === 0) {
+    throw new Error('production review requires non-empty ledger entries');
+  }
+  const ids = ledger.entries.map((entry) => entry?.sentenceId);
+  if (ids.some((id) => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) {
+    throw new Error('production review requires unique sentence IDs');
+  }
+  return ledger.entries.map((entry) => {
+    const context = contextsById.get(entry.sentenceId) ?? null;
+    if (!context) throw new Error(`missing source context for ${entry.sentenceId}`);
+    if (context?.current !== undefined && context.current !== entry.before) {
+      throw new Error(`context mismatch for ${entry.sentenceId}`);
+    }
+    return {
+      id: entry.sentenceId,
+      sourceDigest: ledger.sourceDigest,
+      runId: ledger.runId,
+      before: entry.before,
+      after: entry.after,
+      changeClass: entry.changeClass ?? 'unspecified',
+      reason: entry.reason ?? '',
+      evidence: Array.isArray(entry.evidence) ? entry.evidence : [],
+      confidence: entry.confidence ?? null,
+      labels: Array.isArray(entry.labels) ? entry.labels : [],
+      context,
+    };
+  });
+}
+
+export async function executeCoverageBoundBatch({
+  items, call, bind, attempts = [], depth = 0, onSplit = () => {},
+}) {
+  const response = await call(items);
+  try {
+    const bound = bind(items, response);
+    attempts.push({
+      inputCount: items.length, depth, accepted: true,
+      rawResponseDigest: response?.rawDigest ?? null,
+    });
+    return bound;
+  } catch (error) {
+    attempts.push({
+      inputCount: items.length, depth, accepted: false,
+      rawResponseDigest: response?.rawDigest ?? null, error: error.message,
+    });
+    if (items.length === 1) throw error;
+    const middle = Math.ceil(items.length / 2);
+    onSplit({ inputCount: items.length, left: middle, right: items.length - middle, error });
+    return [
+      ...await executeCoverageBoundBatch({
+        items: items.slice(0, middle), call, bind, attempts, depth: depth + 1, onSplit,
+      }),
+      ...await executeCoverageBoundBatch({
+        items: items.slice(middle), call, bind, attempts, depth: depth + 1, onSplit,
+      }),
+    ];
+  }
+}
+
+export function bindProductionReviewerVerdicts({
+  proposals, response, provider, model, runtimeFingerprint = null,
+}) {
+  if (!EXPECTED_REVIEW_PROVIDERS.includes(provider)) throw new Error(`unknown provider: ${provider}`);
+  if (!String(model ?? '').trim()) throw new Error('reviewer model is required');
+  if (!Array.isArray(proposals) || proposals.length === 0) throw new Error('non-empty proposals are required');
+  if (!Array.isArray(response?.items) || response.items.length !== proposals.length) {
+    throw new Error(`ID coverage mismatch: expected ${proposals.length}, received ${response?.items?.length}`);
+  }
+  const proposalById = new Map(proposals.map((proposal) => [proposal.id, proposal]));
+  if (proposalById.size !== proposals.length) throw new Error('proposal IDs must be unique');
+  const responseIds = response.items.map((item) => item?.id);
+  if (new Set(responseIds).size !== proposals.length
+    || responseIds.some((id) => !proposalById.has(id))) throw new Error('ID coverage mismatch');
+  return response.items.map((item) => {
+    if (!ALLOWED_REVIEW_VERDICTS.has(item.verdict)
+      || typeof item.code !== 'string' || item.code.length < 1 || item.code.length > 24
+      || Object.keys(item).some((key) => !['id', 'verdict', 'code'].includes(key))) {
+      throw new Error(`invalid reviewer verdict for ${item?.id ?? 'unknown'}`);
+    }
+    const proposal = proposalById.get(item.id);
+    return {
+      provider,
+      model,
+      runtimeFingerprint,
+      proposalId: proposal.id,
+      sourceDigest: proposal.sourceDigest,
+      runId: proposal.runId,
+      verdict: item.verdict,
+      code: item.code,
+    };
+  });
+}
+
+export function buildProductionReviewerEvidence({
+  provider, requestedModel, actualModel = null, runtimeFingerprint = null,
+  proposals, verdicts, rawResponseDigests = [], provenance = {},
+}) {
+  if (!EXPECTED_REVIEW_PROVIDERS.includes(provider)) throw new Error(`unknown provider: ${provider}`);
+  if (!Array.isArray(proposals) || proposals.length === 0) throw new Error('non-empty proposals are required');
+  const sourceDigests = new Set(proposals.map((item) => item.sourceDigest));
+  const runIds = new Set(proposals.map((item) => item.runId));
+  if (sourceDigests.size !== 1 || runIds.size !== 1) {
+    throw new Error('production evidence cannot mix source digests or run IDs');
+  }
+  const attested = Boolean(actualModel && actualModel === requestedModel && runtimeFingerprint);
+  return {
+    schema: 'transcript-proofreading-production-review/v1',
+    provider,
+    requestedModel,
+    actualModel,
+    runtimeFingerprint,
+    attested,
+    authority: attested ? 'quorum-eligible' : 'advisory',
+    sourceDigest: proposals[0].sourceDigest,
+    runId: proposals[0].runId,
+    proposalCount: proposals.length,
+    proposalDigest: `sha256:${createHash('sha256').update(stableStringify(proposals)).digest('hex')}`,
+    proposals,
+    verdictCount: Array.isArray(verdicts) ? verdicts.length : 0,
+    rawResponseDigests,
+    provenance,
+    verdicts,
+  };
+}
+
 function editFragments(before, after) {
   const left = [...before];
   const right = [...after];
@@ -544,7 +679,10 @@ export function combineIndependentVerdicts({
   }
   for (const provider of EXPECTED_REVIEW_PROVIDERS) {
     const expected = providerManifest?.[provider];
-    if (!expected?.model || !expected?.runtimeFingerprint) quorumIssues.push(`incomplete-provider-manifest:${provider}`);
+    if (!expected?.model || !expected?.runtimeFingerprint
+      || expected.attested !== true || expected.status !== 'completed') {
+      quorumIssues.push(`incomplete-provider-manifest:${provider}`);
+    }
   }
   for (const verdict of verdicts) {
     providerCounts.set(verdict.provider, (providerCounts.get(verdict.provider) || 0) + 1);
@@ -574,12 +712,15 @@ export function combineIndependentVerdicts({
     && verdict.sourceDigest === proposal.sourceDigest
     && verdict.runId === proposal.runId
     && verdict.model === providerManifest?.[verdict.provider]?.model
+    && Boolean(providerManifest?.[verdict.provider]?.runtimeFingerprint)
+    && providerManifest?.[verdict.provider]?.attested === true
+    && providerManifest?.[verdict.provider]?.status === 'completed'
     && verdict.runtimeFingerprint === providerManifest?.[verdict.provider]?.runtimeFingerprint
   ));
   const unanimousAccept = quorumValid
     && boundExpectedVerdicts.every((verdict) => verdict.verdict === 'accept');
   let outcome = 'review';
-  if (boundExpectedVerdicts.some((verdict) => verdict.verdict === 'reject')) outcome = 'rejected';
+  if (quorumValid && boundExpectedVerdicts.some((verdict) => verdict.verdict === 'reject')) outcome = 'rejected';
   else if (unanimousAccept && risk.level === 'low') outcome = 'eligible';
   return {
     outcome,
@@ -626,7 +767,10 @@ export function buildCompactReviewPacket({
   const eligibleClusters = new Map();
   const reviewClusters = new Map();
   for (const item of enriched) {
-    if (item.outcome === 'rejected') continue;
+    if (item.outcome === 'rejected') {
+      if (item.risk.level === 'high') packet.push({ ...item, clusterSize: 1, quarantined: true });
+      continue;
+    }
     if (item.outcome === 'eligible' && item.risk.level === 'low') {
       const clusterKey = stableStringify({
         mappingSignature: item.mappingSignature,

@@ -34,6 +34,8 @@
 
 ## 執行中
 
+2026-10-15 production-review checkpoint：已對 `四念住/session_08` 既有 169 筆候選完成 Qwen 169/169 與 MiniMax-M3 169/169 判決；Qwen 有 runtime attestation，MiniMax 僅 advisory。Eneural 固定評測通過，但 169 筆 production 批次因可能含未公開內容且缺少外部 Eneural 雲端傳輸的明確授權而未執行，manifest 為 `not-run`。獨立 review 發現缺三方 quorum 時單一 Qwen reject 仍可能排除低／中風險項目；已新增 RED 測試並修正為 169/169 全數保留人工覆核，同時要求 manifest `attested=true`、`status=completed`，runner 重算 source digest、拒絕 ghost ID，並測試 coverage mismatch 二分重試不漏項。`courses/` 仍為零修改，內容 gate 尚未解除。詳見 `reviews/evidence/transcript_proofreading/production/四念住/session_08.status.md`。
+
 2026-10-15 檢查：第二階段 verifier 已完成 12/12，GX10 SSH tunnel 已關閉，沒有需要續跑的模型批次。`npm run proofread:evidence:audit` 為 12/12 valid，聚焦測試為 25/25 通過。
 
 依使用者要求，本輪完成 `四念住/session_08` 後暫停並交接。該堂全部 169 個 verifier accept 已做 before/after 掃描，並對 14 組高風險候選展開相鄰來源核對。內容 gate 結果為 **FAIL / DO NOT SCALE**；詳見 `reviews/evidence/transcript_proofreading/pilot/四念住/session_08.codex-audit.md`。禁止啟動 302 堂全庫批次。
