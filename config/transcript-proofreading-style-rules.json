@@ -1,0 +1,37 @@
+{
+  "schema": "transcript-proofreading-style-rules/v1",
+  "locale": "zh-TW",
+  "sourcePolicy": "Rules are derived from user-supplied editorial references but reviewed independently before activation.",
+  "deterministicRules": [
+    {
+      "id": "TW-ORTH-001",
+      "description": "Normalize the legacy glyph 説 to Taiwan-standard 說.",
+      "pattern": "説",
+      "replacement": "說"
+    },
+    {
+      "id": "TW-PUNCT-001",
+      "description": "Normalize six ASCII periods to the Chinese ellipsis.",
+      "pattern": "\\.{6}",
+      "replacement": "……"
+    }
+  ],
+  "reviewOnlyFamilies": [
+    {
+      "id": "TW-GRAMMAR-DE-DI-DE",
+      "description": "的／地／得 depends on syntax and must not be replaced globally."
+    },
+    {
+      "id": "TW-GRAMMAR-ZUO",
+      "description": "做／作 depends on lexical context and must not be replaced globally."
+    },
+    {
+      "id": "TW-BUDDHIST-HOMOPHONE",
+      "description": "Buddhist homophones require source or audio grounding."
+    },
+    {
+      "id": "TW-REPETITION",
+      "description": "Repeated speech is preserved unless audio and editorial policy prove it is removable filler."
+    }
+  ]
+}

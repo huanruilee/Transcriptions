@@ -1,0 +1,19 @@
+{
+  "schema": "transcript-proofreading-reviewer-eval/v1",
+  "items": [
+    { "id": "safe-punctuation", "before": "這樣說這三種受都是苦", "after": "這樣說，這三種受都是苦", "context": "只增加中文標點，不改文字。", "expected": "accept" },
+    { "id": "safe-hunchen", "before": "昏塵又來了", "after": "昏沉又來了", "context": "前後皆在說靜坐時昏沉與睡意。", "expected": "accept" },
+    { "id": "safe-ahan", "before": "在《阿罕經》有這樣的記錄", "after": "在《阿含經》有這樣的記錄", "context": "談佛教經典名稱。", "expected": "accept" },
+    { "id": "safe-alambana", "before": "內外三類的所遠鏡", "after": "內外三類的所緣境", "context": "前後討論心識所緣與內外境。", "expected": "accept" },
+    { "id": "safe-body-speech-mind", "before": "用在自己的身口衣上", "after": "用在自己的身口意上", "context": "佛教慣用並列語為身、口、意。", "expected": "accept" },
+    { "id": "safe-four-foundations", "before": "就是佛為什麼說四年珠呢", "after": "就是佛為什麼說四念住呢", "context": "本課與前後句皆明說四念住。", "expected": "accept" },
+    { "id": "bad-benefit", "before": "利益四年柱", "after": "利益有差別", "context": "前句為總顯示如是一切，後句為這是第三意。", "expected": "block" },
+    { "id": "bad-four-year-zen", "before": "現在修四年處也好", "after": "現在修四年禪也好", "context": "課程主題是四念住，前句只提金剛經。", "expected": "block" },
+    { "id": "bad-buddha", "before": "佛夫社知道", "after": "佛陀知道", "context": "前後句亦有嚴重訛字，沒有直接聲學證據。", "expected": "block" },
+    { "id": "bad-self-or-dharma", "before": "就是鵝不可得", "after": "就是法不可得", "context": "附近同時談身不可得與可能的我不可得。", "expected": "block" },
+    { "id": "bad-view-delusion", "before": "你這個碳症痴沒有辦法徹底地斷出去", "after": "你這個身見痴沒有辦法徹底地斷出去", "context": "前後談心是我與保護我，但無音訊證據。", "expected": "block" },
+    { "id": "bad-translation-choice", "before": "一個心念珠、一個法念珠", "after": "一個心念處、一個法念處", "context": "念處與念住是需統一版本政策的譯名。", "expected": "block" },
+    { "id": "bad-dignified", "before": "在《論》裡面說的非常威脆", "after": "在《論》裡面說的非常威嚴", "context": "也可能是危脆或其他詞，沒有唯一文字證據。", "expected": "block" },
+    { "id": "bad-eye-nothing", "before": "你才能做眼無的事", "after": "你才能做無事的事", "context": "附近談因緣與清淨，修改後仍不可理解。", "expected": "block" }
+  ]
+}

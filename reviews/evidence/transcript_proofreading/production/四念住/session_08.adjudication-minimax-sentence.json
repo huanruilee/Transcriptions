@@ -1,0 +1,1275 @@
+{
+  "schema": "transcript-proofreading-adjudication-candidate/v1",
+  "authority": "advisory",
+  "sourceDigest": "sha256:db195c090b447954f0c1a29674a0c79d074b00955b42f908ea717ff322a80686",
+  "runId": "c663d1c6-4946-4d5c-8cd1-3ecd01c24844",
+  "audioSha256": "sha256:72b8d87d74b8ba7164555e1879758fae60156b469e8345f2ce94440182203f86",
+  "packetDigest": "sha256:be17e8264126047ec5a195b5688679de7929a1fea4250cc902944813e028e2e3",
+  "itemCount": 169,
+  "model": {
+    "provider": "minimax-m3",
+    "requestedModel": "MiniMax-M3",
+    "actualModel": null,
+    "runtimeFingerprint": null,
+    "attested": false
+  },
+  "promptDigest": "sha256:9ace6eac5899ee3ffdf66755a37b199fb02639838169d7d4e203633efca86fae",
+  "rawResponseDigests": [
+    "sha256:daf921453912c3f01394788dda0f3a80c32707a96908902009ea47c9c46f4430",
+    "sha256:8ac1a52162a55e50a3194e9c4ad511cc131589486d4750239736829afe066f66",
+    "sha256:34eb8ee0940ae496e82ec5855fb21ffbd5dded50fb7df98f2b5a03d9549139fe",
+    "sha256:4c272f05661d8cd3c13c9fb82d93acdfd090d65b61fe36800e260d45994bcc47",
+    "sha256:fae34deb5bd39626becbe21955bd763cfbbf738919cf4772fae66ab7d2f291ca",
+    "sha256:e2bc43129b6ceba254c869ecb84e6c34c9ac1c092fe4ecc1e6e7bf3acc9cedfb",
+    "sha256:996fb475deb11920ddf29fce0d2e2cbcbd9722b221c677f09d29e159c8e66974",
+    "sha256:2b3a523eca4d7ca6fecf601242ceff459880bcf5aaf8685f669ea6be820f1dc0",
+    "sha256:59b7ceb9dd35baa5b94e2af6b7234a28be157354458ad57fcc76ceb22dab1b16"
+  ],
+  "attempts": [
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:daf921453912c3f01394788dda0f3a80c32707a96908902009ea47c9c46f4430"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:8ac1a52162a55e50a3194e9c4ad511cc131589486d4750239736829afe066f66"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:34eb8ee0940ae496e82ec5855fb21ffbd5dded50fb7df98f2b5a03d9549139fe"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:4c272f05661d8cd3c13c9fb82d93acdfd090d65b61fe36800e260d45994bcc47"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:fae34deb5bd39626becbe21955bd763cfbbf738919cf4772fae66ab7d2f291ca"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:e2bc43129b6ceba254c869ecb84e6c34c9ac1c092fe4ecc1e6e7bf3acc9cedfb"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:996fb475deb11920ddf29fce0d2e2cbcbd9722b221c677f09d29e159c8e66974"
+    },
+    {
+      "inputCount": 20,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:2b3a523eca4d7ca6fecf601242ceff459880bcf5aaf8685f669ea6be820f1dc0"
+    },
+    {
+      "inputCount": 9,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:59b7ceb9dd35baa5b94e2af6b7234a28be157354458ad57fcc76ceb22dab1b16"
+    }
+  ],
+  "generatedAt": "2026-10-15T16:08:46.370Z",
+  "transport": "mmx://external-minimax",
+  "authorization": {
+    "scope": "user-authorized-2026-10-12-transcripts-to-minimax-m3",
+    "acknowledgedAt": "2026-10-15T16:08:46.371Z"
+  },
+  "decisions": [
+    {
+      "id": "seg-007",
+      "decision": "approve",
+      "code": "所緣境名相確立",
+      "audioRawResponseDigest": "sha256:9dd53178a191d9a541df7b486e0387aadef3a36ee867e3505b87b95e52a094dc",
+      "inputDigest": "sha256:b43250ec6611051ae9849e841517b8f9014ce887ad96ce86be3c9a773e513380"
+    },
+    {
+      "id": "seg-012",
+      "decision": "approve",
+      "code": "諸差別門上下文一致",
+      "audioRawResponseDigest": "sha256:34b715129c837dafa39019785965a5706abd404d2af80bcac0ce461dcd63b510",
+      "inputDigest": "sha256:75cb5015523e32f35b6cc6281bd3dfa18516f00eda9bff98a0fba367ad0dadb9"
+    },
+    {
+      "id": "seg-013",
+      "decision": "audio-required",
+      "code": "云何語音不清",
+      "audioRawResponseDigest": "sha256:344e7f53d6fce1e8b47bc0db0795a73176dfeabf0b97fb1508e71c89da249f2c",
+      "inputDigest": "sha256:af2ba3aeeb3dcc64ce026f627ee4a958fc2d1854687c9070442fe948fd7b29fb"
+    },
+    {
+      "id": "seg-027",
+      "decision": "approve",
+      "code": "題象→體相音證支持",
+      "audioRawResponseDigest": "sha256:73456635d7c9f371d3b83f988657e2e36297a60e47cdc57c78875ee8f95bed71",
+      "inputDigest": "sha256:9b73bf08ec9352e3d2546bc61dadd0cb6f65b7ec9ea2d70635b6b2ffb1be411a"
+    },
+    {
+      "id": "seg-045",
+      "decision": "audio-required",
+      "code": "聖念住vs聖念珠音不清",
+      "audioRawResponseDigest": "sha256:433aa268a980018cef61e27d12d47369a2cc11771eb35b67c818e8d0c9a4e425",
+      "inputDigest": "sha256:9535f00e6763c37d77000cb830d9a5b060a433214cf7c05a4c3ffce10337faa8"
+    },
+    {
+      "id": "seg-047",
+      "decision": "audio-required",
+      "code": "念住vs念珠音證不足",
+      "audioRawResponseDigest": "sha256:d5962cfdf20ae5883407f56657bc546b4a8564eef1890ac5b2b64f8a7d16eb5c",
+      "inputDigest": "sha256:86bb262cc55bc733b84d3e5497270c66494329c35b3f7c8cfcbbd4a0f8a5ee8a"
+    },
+    {
+      "id": "seg-052",
+      "decision": "approve",
+      "code": "四念住名相+上下文",
+      "audioRawResponseDigest": "sha256:0beeccffc96ee738c5cd174abb777c2c9ba46e4bf272c2960d792dd074f1e8e0",
+      "inputDigest": "sha256:00d121878a0fc6147eaa704bfdceaf902c7b77fd605b11014cbf6157c3b3c989"
+    },
+    {
+      "id": "seg-055",
+      "decision": "audio-required",
+      "code": "念著vs念住音不清",
+      "audioRawResponseDigest": "sha256:f6c2b5e5f9f50e9a7e98776c1288638882597e3b083d0bfc01c6afe2bf209c12",
+      "inputDigest": "sha256:06f54b000345bb1c4161509e85d0ad9592cb6a76de48afc46fd283264c9c2dc3"
+    },
+    {
+      "id": "seg-056",
+      "decision": "audio-required",
+      "code": "連續念住音證不足",
+      "audioRawResponseDigest": "sha256:996489ef83eae3faa95c4c85a886c55c10cd8f362822ec7ea4469729ca9ee94d",
+      "inputDigest": "sha256:e8a2f83ac2c2fd389bf57e195b95446323d7b4ffb230cbf235f8e46c73828ce2"
+    },
+    {
+      "id": "seg-057",
+      "decision": "audio-required",
+      "code": "念著vs念住音不清",
+      "audioRawResponseDigest": "sha256:49b0be98b92b020e04bfce35b19383ff84e0b3bd301329645a7573f49deff7d1",
+      "inputDigest": "sha256:34733f319207f92377d8ae9dbb62fdaa51823b66d6d40389a6e127062108ba3d"
+    },
+    {
+      "id": "seg-058",
+      "decision": "audio-required",
+      "code": "念著vs念住音不清",
+      "audioRawResponseDigest": "sha256:c43fc6793e53a53da638640c5c417b69541c31de90111a5e20381ff2ab77e29f",
+      "inputDigest": "sha256:6eba199280d5c397d54d0b4b9091bd57d2bfc2e41e2ca84a951490d0c381942c"
+    },
+    {
+      "id": "seg-062",
+      "decision": "reject",
+      "code": "臭穢無唯一音證",
+      "audioRawResponseDigest": "sha256:9c5f9ebd54668a7bcddbece38b40fc930273a0b2fb50253f6d827eb6067d4e4b",
+      "inputDigest": "sha256:e33eb2adf4bac35ede0204ce1ee1b884d144cd20ec1d2a04a260b88afe479471"
+    },
+    {
+      "id": "seg-1010",
+      "decision": "audio-required",
+      "code": "是鵝vs是我音證不足",
+      "audioRawResponseDigest": "sha256:ec2327b3bfbd6269434fe3a7ff26d9de526ab32b508b2fff6c405f36873712e3",
+      "inputDigest": "sha256:d6f192f534fdbd2331e963457abdafffaf0f386d81db883713f8437acf9bc93b"
+    },
+    {
+      "id": "seg-1012",
+      "decision": "audio-required",
+      "code": "鵝論者vs我論者音不清",
+      "audioRawResponseDigest": "sha256:bdd61dd371205a037a1133739a8ce7497adcb63334247af4b6fe823b81feb470",
+      "inputDigest": "sha256:e9d3dfb60ead84cc78988223d4cbaa7accecdbbfba38245bda15850e3949c32f"
+    },
+    {
+      "id": "seg-1019",
+      "decision": "audio-required",
+      "code": "惡論者vs我論者音不清",
+      "audioRawResponseDigest": "sha256:2dd370455d5d15305c9e552e3332b6673f830a7d8e615437d976f6ebc9349fb5",
+      "inputDigest": "sha256:b140b04c3063ff318f0946cf1fa84a9a099116c43f4b8fc936d6797d8310fe86"
+    },
+    {
+      "id": "seg-1064",
+      "decision": "approve",
+      "code": "標點規範",
+      "audioRawResponseDigest": "sha256:099919057adf80d900c5ed896722302c3eccaa7951a2088739521450ab45facc",
+      "inputDigest": "sha256:296b5c9ed930099280b9a4ee0695e52e8ce887348355a9951fd149fff7743d64"
+    },
+    {
+      "id": "seg-1127",
+      "decision": "audio-required",
+      "code": "劉轉vs流轉音證不足",
+      "audioRawResponseDigest": "sha256:a2f59bf4bb2d877f11bb6026302a3c389195479a3b3053ddb69e7f4b8c2dccd2",
+      "inputDigest": "sha256:68ab249648a14cdb42b38582718911f78ae5a67fb74614d1056e1936726dbb01"
+    },
+    {
+      "id": "seg-1128",
+      "decision": "audio-required",
+      "code": "德尼凡vs涅槃音證不足",
+      "audioRawResponseDigest": "sha256:c73652b1b0020714f845cad396059965c1764aaa39dec8702be8eda57c510f07",
+      "inputDigest": "sha256:3ee16069b562570c95425f33006e816b9ec5560bac9f215abd96f6454bc7205d"
+    },
+    {
+      "id": "seg-1133",
+      "decision": "approve",
+      "code": "標點規範",
+      "audioRawResponseDigest": "sha256:f3ac39baed00403b8a76e79537908ebc2c8742948fff791ff467e754c25015dd",
+      "inputDigest": "sha256:4e2222eb2da3e8e62c1fe2dccbd73c8b88f63bd871d98dfa721ce7f71dc15306"
+    },
+    {
+      "id": "seg-1135",
+      "decision": "approve",
+      "code": "法音證明確+法義",
+      "audioRawResponseDigest": "sha256:564d659c92275a47ae1e2ff375a15266c4675f3c0d952622e88336335eed31a0",
+      "inputDigest": "sha256:0ea5407f6a2faeb3214b3656fbb8b9b269b29c1f6c851c0c1fe9287fd14f736d"
+    },
+    {
+      "id": "seg-1138",
+      "decision": "approve",
+      "code": "標點規範",
+      "audioRawResponseDigest": "sha256:60ad528bc58e140879a13429a3b2cbd69e9e20097b4d036746e1281b07c8b384",
+      "inputDigest": "sha256:b269ba3c420a3cac991dad2dbbe3bec394306d647866ab049c4bc954e89f1af2"
+    },
+    {
+      "id": "seg-1139",
+      "decision": "reject",
+      "code": "稱→成需原典確認",
+      "audioRawResponseDigest": "sha256:ee9085c7b840f061aa731a0530664f60499607aead89c74c85ebb65452e5a5d1",
+      "inputDigest": "sha256:da987e899ea1d208d1cfde274429e4d5b0798caec630afb04e5f9ee76f64cb95"
+    },
+    {
+      "id": "seg-1157",
+      "decision": "audio-required",
+      "code": "原典名相未驗證",
+      "audioRawResponseDigest": "sha256:af0357299a71ba6ad592e7eaed4429c9c61554ee3e47adcfaf61207868943cee",
+      "inputDigest": "sha256:c02d26f7c9b938fdfb1854c4def9d9875c966a37613b7ce0126ae4dd5f84c937"
+    },
+    {
+      "id": "seg-1164",
+      "decision": "audio-required",
+      "code": "主義/諸業需原典驗證",
+      "audioRawResponseDigest": "sha256:09ea78bfa0fe305da5ab61d23047e1de8503f0841a73ec6a90ceb72765eeb656",
+      "inputDigest": "sha256:1dbbdebe0e20d7348cdaa271d0738fffefe35946512a1ec9e309111164125041"
+    },
+    {
+      "id": "seg-1168",
+      "decision": "audio-required",
+      "code": "主業/諸業需原典驗證",
+      "audioRawResponseDigest": "sha256:20bf383bc01a4ba317637eb416651ee1ae97244c7cfff91d26471c329f331b94",
+      "inputDigest": "sha256:423311715e55bc876c37f961a6bf923e19a9c3331bf2ad0748af8c06ee455df4"
+    },
+    {
+      "id": "seg-1171",
+      "decision": "audio-required",
+      "code": "整詞重建需原典確認",
+      "audioRawResponseDigest": "sha256:4cd71c6aed3fcd0e7fe51bb0d21b744974dfa7aa3fdb1901257af249c8ee50f0",
+      "inputDigest": "sha256:ffa19765c909d38429be789ff443afec52170d2935d35294af4c560ee3748f3a"
+    },
+    {
+      "id": "seg-1175",
+      "decision": "audio-required",
+      "code": "瘦/受需原典驗證",
+      "audioRawResponseDigest": "sha256:1c38799d5b559c2e5985604760d5ec9003c4692ea06e7a9cb389fd3e4a60422d",
+      "inputDigest": "sha256:0a235e9c098355805baedb7d2c80f8ffb5eb50fe145a6607b008c33dbe3dab17"
+    },
+    {
+      "id": "seg-1186",
+      "decision": "audio-required",
+      "code": "主義/主業需原典確認",
+      "audioRawResponseDigest": "sha256:3573575efca01d7ac30281535244bd494819cb6a31bd92754e720737cb4bb7b3",
+      "inputDigest": "sha256:4f02c4c62ec8164b60204dff31d9bb5d5d6b6eddfbb0d6fdd9611dd5a8328fde"
+    },
+    {
+      "id": "seg-1187",
+      "decision": "audio-required",
+      "code": "主義/主業需原典確認",
+      "audioRawResponseDigest": "sha256:954e96ca32e23490446cbbc9e5c9405bf9da7e4367379fa42f2b6f9c25af7df7",
+      "inputDigest": "sha256:f7a91cbedf371610d93b2660964b8da765c07c64427ac67578c4a9d8c5893463"
+    },
+    {
+      "id": "seg-1199",
+      "decision": "approve",
+      "code": "純標點修正",
+      "audioRawResponseDigest": "sha256:8c27e44dabe0d86935815ab826b445f63fe8e2d78a7e2c53d2b1531eb09077a5",
+      "inputDigest": "sha256:f60b972b1ffe941b3df8dc898bdec35b190f06a817218be55773e9b946176d1a"
+    },
+    {
+      "id": "seg-1220",
+      "decision": "audio-required",
+      "code": "整詞重建需原典確認",
+      "audioRawResponseDigest": "sha256:c60cdefb52e78fe22829dbaab38fb9d199bb4976e4f0d2d17e3104a1c6fbc889",
+      "inputDigest": "sha256:b13cf34f578302b5b22d5570bf0d5fe39551205a431d94962056f9bd0d75e203"
+    },
+    {
+      "id": "seg-1261",
+      "decision": "audio-required",
+      "code": "眼無/無事未確定",
+      "audioRawResponseDigest": "sha256:5a4390933657003f4dd7b3d077b6787a2d111ed004cd54e3d70ec9e265d7094c",
+      "inputDigest": "sha256:7d0a39e807a68831d283ef84e69979f0c0c4cd1e5f9b39c19a05a91a8d74fde9"
+    },
+    {
+      "id": "seg-1263",
+      "decision": "audio-required",
+      "code": "法念住/法念量需原典",
+      "audioRawResponseDigest": "sha256:a90ee7992640837f47272303605b2b8d7c54989078fceb15fd80b3bee8a63d24",
+      "inputDigest": "sha256:fc51ba88a45ab16c5a82171fde99be517e844b81524d83c72b3ebdf4891e707c"
+    },
+    {
+      "id": "seg-1265",
+      "decision": "audio-required",
+      "code": "整詞重建需原典確認",
+      "audioRawResponseDigest": "sha256:c8b0bf1a15ef98e2862eef76d45e447f5197d0d75e3d12274397aab39a845daf",
+      "inputDigest": "sha256:d8c732f00a114164452f0c3b6b387676645e90cfe048e90cc8d8a7519957e2e4"
+    },
+    {
+      "id": "seg-1267",
+      "decision": "audio-required",
+      "code": "念著/念住需原典驗證",
+      "audioRawResponseDigest": "sha256:dac9420473e73dbd1ff4a5674bd0af6c9d964cb380998078df91cea2697c21e5",
+      "inputDigest": "sha256:cbbf024cd65edb118f61b3f369422bd92f5cb31f847e0573ea9e1995a9e870f3"
+    },
+    {
+      "id": "seg-1269",
+      "decision": "audio-required",
+      "code": "念著/念住需原典驗證",
+      "audioRawResponseDigest": "sha256:93d9003b84d0883a34234723889c2ce85e75b0f58606705bfaccc65e3661db21",
+      "inputDigest": "sha256:5a86865c7a286031ade395e5707b5ff9999a1e096f569e6fa474f839d8281356"
+    },
+    {
+      "id": "seg-1272",
+      "decision": "audio-required",
+      "code": "律師念著/念住需原典",
+      "audioRawResponseDigest": "sha256:fcaf6a65525906a635e4686074dcf1d255662b4cdf93f4e161ee1a1421a868d3",
+      "inputDigest": "sha256:8a5fce2e320105e0f234abc27364f8b62a778c59d8e2e27f455ae6068102467d"
+    },
+    {
+      "id": "seg-1273",
+      "decision": "audio-required",
+      "code": "念著/念住需原典驗證",
+      "audioRawResponseDigest": "sha256:aad0339ca9cf75a240d2b8577dc34c81b70e3d5da0f5c303500cc38ff2e39950",
+      "inputDigest": "sha256:d681341e570a97eb4b6a6e45fdb3926552a539e9dd1523c83d0673541514ab27"
+    },
+    {
+      "id": "seg-1274",
+      "decision": "audio-required",
+      "code": "念著/念住需原典驗證",
+      "audioRawResponseDigest": "sha256:c1b84fbc2255130f6168c9ad98da4b25d60387fde56b00d32a5296fb7f8e4fb7",
+      "inputDigest": "sha256:b4c58f3817cdba745f549a0e63203840729b11bc74fc9337efab5e1274cf79f9"
+    },
+    {
+      "id": "seg-1310",
+      "decision": "audio-required",
+      "code": "奢摩他/奢侈需原典驗證",
+      "audioRawResponseDigest": "sha256:d8c7dd45d536e3ff6573d1bebb6406b89376b8c2cca1577f34120b87944b5dad",
+      "inputDigest": "sha256:bee7ec288adffe613ef4b101f1b7b83404336f3c6f7c6d0a36f3cd64b4d417b6"
+    },
+    {
+      "id": "seg-1315",
+      "decision": "reject",
+      "code": "奢侈非定學名相",
+      "audioRawResponseDigest": "sha256:ef303516c9321f7035fae344cd53ce7ce4a22466e9dcc47dcf9fc652455bea51",
+      "inputDigest": "sha256:b55f03649ec454386f8a54dc0674eadedd7c84ddc1f9a95b780a4517c0ee6c0a"
+    },
+    {
+      "id": "seg-1320",
+      "decision": "reject",
+      "code": "顛倒缺音訊佐證",
+      "audioRawResponseDigest": "sha256:fd1b410d6ff1fa4993c645c0991d5dab8f3481c67f3e5d1185cbcfbf3e94898d",
+      "inputDigest": "sha256:b6b126af2449ff0339f0938868df5a6ec2e1f84e827aa3f49c242544abf24ec8"
+    },
+    {
+      "id": "seg-1326",
+      "decision": "reject",
+      "code": "名相缺乏充分音訊支持",
+      "audioRawResponseDigest": "sha256:72ee25a2123f91c2334e697a534348dfdcb50eb42518e9c28ac5c15a143437c1",
+      "inputDigest": "sha256:09efaee0f5a3fdb4ce223025d16e4c834ee47ad6c9a2294e98602c390991a7fc"
+    },
+    {
+      "id": "seg-1327",
+      "decision": "reject",
+      "code": "名相缺乏充分音訊支持",
+      "audioRawResponseDigest": "sha256:32956b0e14bd30d710d66acb3b82e7fab40e8fe70f2710c207c0426d0bb30eba",
+      "inputDigest": "sha256:351d69f6c0af83a83065e7be0959a2155eb435eca92e1162e09f31780599cb19"
+    },
+    {
+      "id": "seg-1328",
+      "decision": "reject",
+      "code": "名相缺乏充分音訊支持",
+      "audioRawResponseDigest": "sha256:df5bf8c58cd5b6901d23e14b9347a4a1e6b0bc68bdea0246be88878964e1184e",
+      "inputDigest": "sha256:0cb6927fa1dcaeebfcaef9717252c4cd1d49b834da3998e1723248edfcd501b1"
+    },
+    {
+      "id": "seg-1329",
+      "decision": "reject",
+      "code": "名相缺乏充分音訊支持",
+      "audioRawResponseDigest": "sha256:a273306e358892f3930000eed9061bae55a83951111aeee5fe7c783e159bfe8a",
+      "inputDigest": "sha256:e1fb5b48b04270d1aaf52759924e428426049822d6dc7df614349936e4cf5b6b"
+    },
+    {
+      "id": "seg-1389",
+      "decision": "reject",
+      "code": "音訊會字無破",
+      "audioRawResponseDigest": "sha256:35281a27b1e89376881fc4b3217176133fd2e2e922997bcaffcc66bcc292ef83",
+      "inputDigest": "sha256:c22788bd2f739a210ad65a6b013878b04d9a15922df2279ac43495bcbaaa9bab"
+    },
+    {
+      "id": "seg-1390",
+      "decision": "reject",
+      "code": "音訊會字無破",
+      "audioRawResponseDigest": "sha256:edd04680834298d3aa3aaad1763de844d2c7b1264ae956651b76d122b26cf87e",
+      "inputDigest": "sha256:87e05497e75654dbeb898493852ced4ca742ffcc0d5f3c35af05e8baa49cbb4d"
+    },
+    {
+      "id": "seg-1394",
+      "decision": "reject",
+      "code": "音訊會字無破",
+      "audioRawResponseDigest": "sha256:67af8960e468a3bf862180eeaf7878edc84bc590b2860135fcef9a5d4535463e",
+      "inputDigest": "sha256:6313945e3e84db2aa509bf46be162e65b59a1095bb9e2e8d8d4c1137f1ff8213"
+    },
+    {
+      "id": "seg-1396",
+      "decision": "reject",
+      "code": "音訊兩讀皆可",
+      "audioRawResponseDigest": "sha256:fff3f6cd5d86f7538143cd32ca81fa65e78fe87f86bc9208345b2883a3798792",
+      "inputDigest": "sha256:5e061eb10144c6da1905bc7c7b93f8488c6a9c18ab5b9aa4c3cedc7c667907a3"
+    },
+    {
+      "id": "seg-1397",
+      "decision": "reject",
+      "code": "音訊兩讀皆可",
+      "audioRawResponseDigest": "sha256:79b67218a50aa0bf93ed745baf49671976c1a51d6461b97fb7b011a88b6d6445",
+      "inputDigest": "sha256:38701aff304786d442f1fd8c5174ab5aa13cac58ec858f8840a63e51c554c8fb"
+    },
+    {
+      "id": "seg-1432",
+      "decision": "reject",
+      "code": "音訊會字無破",
+      "audioRawResponseDigest": "sha256:ee93a4aa1ed676fd487158e72f4224d726950eef85c6d652abdf4391f5dfccbe",
+      "inputDigest": "sha256:9b8f1a8afdb32ae15679a3023c14711172e988c19ec4c24fb1b6fdd86d677fe4"
+    },
+    {
+      "id": "seg-1441",
+      "decision": "reject",
+      "code": "音訊會字無破",
+      "audioRawResponseDigest": "sha256:35e7c60079c5497643d01805cfb284448b6c05fc526237dcf0fa0c5ee98b2bcd",
+      "inputDigest": "sha256:e586055d0af0a9f06c503997bc8b5878e76cb26432a3fb468d9f7dc956d79e2e"
+    },
+    {
+      "id": "seg-1450",
+      "decision": "reject",
+      "code": "音訊會字無破",
+      "audioRawResponseDigest": "sha256:a2feb55129ab9d8b6309ebff1cc9b005ef6c8d0404b38cffa2bc541189187730",
+      "inputDigest": "sha256:eed35731ba7fff0d38ce96b89f29b70c0c8e5c94220fcc17b47eaa0f9e084961"
+    },
+    {
+      "id": "seg-1478",
+      "decision": "reject",
+      "code": "斷惑證真缺音訊佐證",
+      "audioRawResponseDigest": "sha256:415c1e35d95adde3cea09c3b052d14059ff0c2e3c1fd8d051ec6362345e15c67",
+      "inputDigest": "sha256:05885fed2d4270cdc73e0e55dbf873024af821b1fa0307e3fe935b2c1ff74fe8"
+    },
+    {
+      "id": "seg-1487",
+      "decision": "reject",
+      "code": "四念住缺音訊佐證",
+      "audioRawResponseDigest": "sha256:6c2ccbbade00fdb4594b3d9edaa7e3939be079c330d78a8f0e9324b807f0cce8",
+      "inputDigest": "sha256:ff4886813997cda3710270060962329fabf9117387f37264a4b9faa77cf2737e"
+    },
+    {
+      "id": "seg-1490",
+      "decision": "reject",
+      "code": "斷惑證缺音訊佐證",
+      "audioRawResponseDigest": "sha256:c4f388b048277bc5acb185c3afa9a85fe7d252c428f2ae11c7528c5694b36461",
+      "inputDigest": "sha256:4eb3511324b5abcbc85d363cc1838b3d6a93a29e3508179f162949c5ee8852a7"
+    },
+    {
+      "id": "seg-1494",
+      "decision": "approve",
+      "code": "純標點",
+      "audioRawResponseDigest": "sha256:5d74e78084fb224bd85a29aab29223b963498598f12f2356035913bbe5f512ad",
+      "inputDigest": "sha256:6667e1535ef81a583504bb2ac09ce44487d442dcfff0ea3dccfaae7436b0dd23"
+    },
+    {
+      "id": "seg-1497",
+      "decision": "reject",
+      "code": "音訊兩讀皆可",
+      "audioRawResponseDigest": "sha256:09ab5b754440a5eeb8fc43b31224ba7a1f61ce289fdb9353c1f3000e5e69dcb0",
+      "inputDigest": "sha256:824aa9e8cced279fee0aaf9802560fdf4884c66b1b4ddb4bdce54ee8601e96e1"
+    },
+    {
+      "id": "seg-1498",
+      "decision": "reject",
+      "code": "音訊兩讀皆可",
+      "audioRawResponseDigest": "sha256:4fcc70a4255eca9dbcd358023c0f0e8afde9a40b7a40c1560315f953ab99a1e4",
+      "inputDigest": "sha256:9fd9a6b99564fe0e813f2db9a7f41a1179bc2843c95ff78359696a837ab99a07"
+    },
+    {
+      "id": "seg-1500",
+      "decision": "audio-required",
+      "code": "念著/念住名相需音訊確認",
+      "audioRawResponseDigest": "sha256:19387d299cf2d91b8f898448a221f7988757713dfbca58008853d56828577899",
+      "inputDigest": "sha256:05c5ea48597c30ae468bcac2d44e0cd447d5dbbe5c8e0d2c8c89e2437b480d5e"
+    },
+    {
+      "id": "seg-1505",
+      "decision": "audio-required",
+      "code": "四念住為專有名相需音訊",
+      "audioRawResponseDigest": "sha256:a988e38d42c6d2dc4b90dffdc15cb5e5805ca47fbd9e1041ce7dbb1ce356fc1a",
+      "inputDigest": "sha256:b52808116ce6e508c9952a3e5dfd51992dbf52dec9b4c3909087a98ef98f2955"
+    },
+    {
+      "id": "seg-1507",
+      "decision": "audio-required",
+      "code": "不淨觀為法義名相需音訊",
+      "audioRawResponseDigest": "sha256:ed915a47fa2af1caad9ca1baad93185d5dfa9952cf4898449b575be175d69bf2",
+      "inputDigest": "sha256:8dd372caea7fa6e3a00fc746d985b128fbaeb756d8a09951f00627219d9b5426"
+    },
+    {
+      "id": "seg-1525",
+      "decision": "reject",
+      "code": "藏經修正無音訊佐證",
+      "audioRawResponseDigest": "sha256:1f5848ec905f707db4932d51a4ba35c4400457e6e208053bdc212738c36596b3",
+      "inputDigest": "sha256:e2b12e8bf59c930bf3336c89f9986e360a44a12434fa972cf22b67f955318d22"
+    },
+    {
+      "id": "seg-1536",
+      "decision": "reject",
+      "code": "思惟修正無音訊佐證",
+      "audioRawResponseDigest": "sha256:3a2678d2fbaa31740e10949fdb77bff19ad5d8e84be351828a1d093422f6602e",
+      "inputDigest": "sha256:e5e18f2e2581266326c6c3b8ff406fb1df79cb5730cecf567a1e4757491c33d4"
+    },
+    {
+      "id": "seg-1553",
+      "decision": "reject",
+      "code": "音訊為快樂非低落",
+      "audioRawResponseDigest": "sha256:282b8b47041b2cf22acb795a46540370f66696f8a1ae01e4100fe83e60265a88",
+      "inputDigest": "sha256:f7c75a18e139056c1c59d25aa2a3b4f9d4fbb9eea7951fb45d7d9a85d667e7dd"
+    },
+    {
+      "id": "seg-1570",
+      "decision": "approve",
+      "code": "白骨觀為定名同音訛字",
+      "audioRawResponseDigest": "sha256:f42e6c66cbb14cd69b57beeea1ed583f6700b9ea8e1a8b3331d830e1e41c760f",
+      "inputDigest": "sha256:57c7e88114b6d58f63d2e1ad14e58c5772e8ba8360e86b292fb50c9176b97189"
+    },
+    {
+      "id": "seg-1571",
+      "decision": "approve",
+      "code": "白骨觀為定名同音訛字",
+      "audioRawResponseDigest": "sha256:442c5d3a80e943c347f414b01b5d689bcf29eda7866bbabc4ab939e6f542db81",
+      "inputDigest": "sha256:d9d8aa4ba06c77ede26b848258b0b17f2e815935dc5060d701a6532be5dfe8d5"
+    },
+    {
+      "id": "seg-1575",
+      "decision": "reject",
+      "code": "文要熟修正無音訊佐證",
+      "audioRawResponseDigest": "sha256:a9525932ef078afe6d233676f7e1234dd81f60b54c8841b14d6b161ea0e297ae",
+      "inputDigest": "sha256:a7d7b132d32656f3e78beb41048cfb7fda578acdf5ee86de953ae110866308c4"
+    },
+    {
+      "id": "seg-1634",
+      "decision": "audio-required",
+      "code": "昏沉名相需音訊確認",
+      "audioRawResponseDigest": "sha256:8f6f24ff51c0815eee0cc316d33658c90f87485ddf56efbbc21f46319ef10980",
+      "inputDigest": "sha256:d58fb475f92722a3c52943fd7dff680871bddd15538b04dfdd3f0c5f0910c4b1"
+    },
+    {
+      "id": "seg-1640",
+      "decision": "audio-required",
+      "code": "昏沉名相需音訊確認",
+      "audioRawResponseDigest": "sha256:5ddc6a38eeebf0e9aabd12477507789e51ac4e2e3f6223e960319c37b21f3887",
+      "inputDigest": "sha256:2f62f364c86ff052f1e719159346622624cdf7ef43da5805cbe7e430aaaa08f8"
+    },
+    {
+      "id": "seg-1667",
+      "decision": "audio-required",
+      "code": "昏沉名相需音訊確認",
+      "audioRawResponseDigest": "sha256:931f5e2be258026729c1c538f26071411204c00a95359f3030e72bd8249e41b2",
+      "inputDigest": "sha256:447f126273d5d1ead4f4ac85e9fc8cfb7c747791fd85fc0c4f9ed23a95f68672"
+    },
+    {
+      "id": "seg-1671",
+      "decision": "audio-required",
+      "code": "止觀雙運為核心名相需音訊",
+      "audioRawResponseDigest": "sha256:c80638f98fe493c9664b350d0c12f3523e267dc891f0de74967fb35d3ff30cad",
+      "inputDigest": "sha256:b188e764c2a6f473328ee82293d423173099e2ce28eb0a074a26a1b0cf312b62"
+    },
+    {
+      "id": "seg-1673",
+      "decision": "audio-required",
+      "code": "昏沉名相需音訊確認",
+      "audioRawResponseDigest": "sha256:891c1f3d25ea31c6db2d94b2382d3dc454fab04195f3fd7ef0be6b960c1cac7c",
+      "inputDigest": "sha256:ea5ab31fd6334f5477296cf54d20debce029e14ad9713dc8d3c40e41d4ab87ac"
+    },
+    {
+      "id": "seg-1678",
+      "decision": "reject",
+      "code": "靜坐修正無明確音訊佐證",
+      "audioRawResponseDigest": "sha256:1000c2a606f558a200db853065ad04b82f86a305eeeacae72bf36e1b2140f477",
+      "inputDigest": "sha256:3aa49367bbb530bc4b2f582e666908d296ab9b7ce151983378bfa92d7f4cbc2a"
+    },
+    {
+      "id": "seg-1731",
+      "decision": "approve",
+      "code": "開藥為語境唯一解",
+      "audioRawResponseDigest": "sha256:13d84b41fcaa6610cfe63251b8ea94b8bb8eff121f5d3ca090754066ee1a9761",
+      "inputDigest": "sha256:f9f93ce7197ee7b400d9b0b752a7ce539d8eb6d53fb4c2f7b9e185f1d66b2786"
+    },
+    {
+      "id": "seg-1759",
+      "decision": "audio-required",
+      "code": "茅棚修行術語需音訊確認",
+      "audioRawResponseDigest": "sha256:66bd5fd68083e5b00d3bddee636f8e50afb194e4d1c6ff6012e60b1941fce326",
+      "inputDigest": "sha256:b835ac3a39a8e275f0912f7d5eaef8c48d19ee0003d03d7a71ea03283b5e48c6"
+    },
+    {
+      "id": "seg-1764",
+      "decision": "audio-required",
+      "code": "寮房為叢林術語需音訊確認",
+      "audioRawResponseDigest": "sha256:cad85cad219cdaf8629754dbc4e775d874f8b21e56539f1cb3668340bb93d99f",
+      "inputDigest": "sha256:f9e0b93551468869ca6893ef41826e723de574a65d9df955b96e6299d73827b6"
+    },
+    {
+      "id": "seg-1790",
+      "decision": "audio-required",
+      "code": "昏沉名相需音訊確認",
+      "audioRawResponseDigest": "sha256:2c28581818c73d6096d0e2aa8ec5d858e1538901618412ee65a3912f45f905f1",
+      "inputDigest": "sha256:3e4a299a4d3c1a5ac3d1fc2154f872223e9d9d27153eaa7836ea25a37e0e27b3"
+    },
+    {
+      "id": "seg-1805",
+      "decision": "audio-required",
+      "code": "昏沉名相需音訊確認",
+      "audioRawResponseDigest": "sha256:a45114c1ceb1d1cb36695898ceb5c0251991e9152a7a9eab4378ab9fc5e08088",
+      "inputDigest": "sha256:b68b6051aa8d48daaff6dfe374fa087c7023d852a785270b30541d5bfaa294d8"
+    },
+    {
+      "id": "seg-1806",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:22637a959a6cd562060ccfbea6f0bc0463583c4bf6db8f8ad7a442389988abd9",
+      "inputDigest": "sha256:ffaa623b5c4d4dfcd892bbead5463aca8612f1cb19eeef823ee0f595f259b58a"
+    },
+    {
+      "id": "seg-1807",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:a638c0cd154a45e03ce84aea776e0714ffd99c1f2228566e0a818a24e1c12f15",
+      "inputDigest": "sha256:86da99a160177733f9c53ef22f43b11f84992d8770dbbb88515154abe0681328"
+    },
+    {
+      "id": "seg-1809",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:4e14053abd2e6539ac93b42402074e9c7b813359d1f181dcea004a86abd81331",
+      "inputDigest": "sha256:bd43a1baaa2dc7a4c55e37c2335f3668545e9ff118568593d51ca3269a5a05b2"
+    },
+    {
+      "id": "seg-1810",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:f6363dc34addbc2f43a966131abb0b8f8c8f10356541914446a045ae72e73a17",
+      "inputDigest": "sha256:7c63cd26cb424206319a551d5ef79a61923aaa8b03a5bf3cfc3af8afd9baadc1"
+    },
+    {
+      "id": "seg-1813",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:e331c529f556719d18aaa3c6bc91689dd528110b9b44f4584d8e4694e5122482",
+      "inputDigest": "sha256:92091e48024827ae84b0980782592cff65bd20dfa79702647a5d434289fc9a20"
+    },
+    {
+      "id": "seg-1815",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:77a1425e5f830dcc2daedc2295630e5444eca353720e4a9512e80a0d31b3e193",
+      "inputDigest": "sha256:70018e661f253d8af0d322f5c833435a1929b69c5dd8b64d7914f5886b777709"
+    },
+    {
+      "id": "seg-1820",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:e413ce0cd5478f66391dd42c81c2525dfb7cde77a3d20308dab4a6b39a6a8475",
+      "inputDigest": "sha256:b970dbd8351549087e24218721b4d0b617ca8df15492616be246f074936b1b5d"
+    },
+    {
+      "id": "seg-1822",
+      "decision": "audio-required",
+      "code": "打相伴／打瞌睡仍需音證",
+      "audioRawResponseDigest": "sha256:1ea1017e47f9d62277b5db82cdb2b1947fbebb0db0c1ca560530c63418a8c386",
+      "inputDigest": "sha256:9acae53b74f6b892e77bf8178bce447f9f79165faad1f2bdbb7db6650eb749da"
+    },
+    {
+      "id": "seg-1834",
+      "decision": "audio-required",
+      "code": "矯醒／覺醒音證不清",
+      "audioRawResponseDigest": "sha256:c67b15f2f0ee1f56f94966d6b4bff3841bc593920efe44b411779b4f19e48308",
+      "inputDigest": "sha256:9364d3227cd86a76abbd90263c0a8f7a5343c1a56965fde6ca18fd6a65b16ed3"
+    },
+    {
+      "id": "seg-1839",
+      "decision": "approve",
+      "code": "昏塵→昏沉，音證上下文一致",
+      "audioRawResponseDigest": "sha256:b524f55955a76f50706af693ae3ffdbd4f4c802a545d19aec856f91c79de6642",
+      "inputDigest": "sha256:6e0e06f0eb6b140a75e5ddd1b7fbc6499435c3184142ee710a3b3363d1728dbb"
+    },
+    {
+      "id": "seg-1858",
+      "decision": "audio-required",
+      "code": "婚禎／昏沉音證不清",
+      "audioRawResponseDigest": "sha256:84bdffb07396203b4fb0c727d202c41406a86881b441becfcb3b959934cc0d6a",
+      "inputDigest": "sha256:1ba62efa682eb2c718589270fa1404e262a2fa4627694b64305b96fc5bfb8ade"
+    },
+    {
+      "id": "seg-1865",
+      "decision": "audio-required",
+      "code": "餐器／瞌睡音證不清",
+      "audioRawResponseDigest": "sha256:c58658e0537b4c7bc2747459ad738e6bb4c06b3cf6e3520357f12e1a88ce594a",
+      "inputDigest": "sha256:845f7a5b790cb4b9519b8a53127846aa10ff57ad420920a288087a5646b94eb5"
+    },
+    {
+      "id": "seg-1910",
+      "decision": "approve",
+      "code": "禮服→禮佛，法義音證支持",
+      "audioRawResponseDigest": "sha256:7729082f6ae7fb0716bf3771d4f16c090fe6855267d97e16ff6c349e52ee0626",
+      "inputDigest": "sha256:85a810c825c4fec6746d2360c3e280f0483ce802ea1fdaf311702c2b3bd98438"
+    },
+    {
+      "id": "seg-1944",
+      "decision": "audio-required",
+      "code": "隔岸／隔閡音證不清",
+      "audioRawResponseDigest": "sha256:e49a5954443732f9de8932a97b291ba0a7ed4f8f30e9d3a55dc5fa9baa052f84",
+      "inputDigest": "sha256:a2f9a0b120ad8de5b22e8f600231c1214a489d7519ad5bbe15d949b197a6a79e"
+    },
+    {
+      "id": "seg-1955",
+      "decision": "reject",
+      "code": "姐→結無聲學證據，原句亦通",
+      "audioRawResponseDigest": "sha256:d80623156de62607e0272e08efed300ed7cad9d0943ae3b7fc0bd76b4dd2a2a6",
+      "inputDigest": "sha256:bb466f167bebb048d5e178935f98e6d5ebc9b5b389844f3b367ad2eba80a918f"
+    },
+    {
+      "id": "seg-1978",
+      "decision": "audio-required",
+      "code": "用功手／用功修音證不清",
+      "audioRawResponseDigest": "sha256:1532e60bd83ed352a81b4504ca6a5f43508b2da7f71523fd6c87bddc69f022a7",
+      "inputDigest": "sha256:dcab2b7587501286e4507e826bac35be1131242a9cb4555d509029c74f29aedd"
+    },
+    {
+      "id": "seg-1988",
+      "decision": "audio-required",
+      "code": "印何／任何音證不清",
+      "audioRawResponseDigest": "sha256:dcba2e01952a7593ca42574f10d3a34d5f24a8e1736029701ea6da06745b0ad3",
+      "inputDigest": "sha256:e1d62251cb0de11ec380d452bfff1233ae7938d3fb77b63057ee2de9c68006f3"
+    },
+    {
+      "id": "seg-1989",
+      "decision": "audio-required",
+      "code": "印何／任何音證不清",
+      "audioRawResponseDigest": "sha256:838af7f096316131341cd687b0ff1942ad9f2a7f866a73dea75558e74b7ec2f5",
+      "inputDigest": "sha256:e91735bc99079fdb4d6230999f2a01b713fc6ea3af92fa89bb75691c35130fc5"
+    },
+    {
+      "id": "seg-1992",
+      "decision": "reject",
+      "code": "印錯→道歉無聲學證據",
+      "audioRawResponseDigest": "sha256:349b91b7f0a032c69edaf797449ce1a0ff2354a52453fd4069f5d0b712cf6d8d",
+      "inputDigest": "sha256:1e296d644f3780a2214cc9b2d6ee1201fd262c82432b192ed0522e0b3731ff0d"
+    },
+    {
+      "id": "seg-1999",
+      "decision": "audio-required",
+      "code": "四年處／四年禪音證不清",
+      "audioRawResponseDigest": "sha256:55e69f46dc9a8e6cff95e0b0a664c417161eee954252b699fa7e627301721b59",
+      "inputDigest": "sha256:b4c49eeeddcda75c578964829c39d233bc8b6d179f01b224f82fedb187ab4f0a"
+    },
+    {
+      "id": "seg-2009",
+      "decision": "audio-required",
+      "code": "音訊佛福社讀音近似但非標準名相",
+      "audioRawResponseDigest": "sha256:2852cf02b8408f4f16f689ca150e3ed298bef3ad7db7237c039c944e2915bcf2",
+      "inputDigest": "sha256:eca4cb7cd5e5496e7eb8be0283aef71b3711d3f3fed14b64c82b7601127f3f45"
+    },
+    {
+      "id": "seg-2010",
+      "decision": "audio-required",
+      "code": "音訊不清且涉佛陀譯名政策",
+      "audioRawResponseDigest": "sha256:56c519efdb64b841688643f0f2f744d4591339564330496677d1fad054b1bc97",
+      "inputDigest": "sha256:09400c62209f93db6bd5013b51b1a1200f35354704d8c040eb35b9a3165c6c31"
+    },
+    {
+      "id": "seg-2017",
+      "decision": "audio-required",
+      "code": "打搶打擾音訊未唯一支持",
+      "audioRawResponseDigest": "sha256:242073dfd26395ef81d0de83896014bb891d693794a78484e860a937e7aa1d71",
+      "inputDigest": "sha256:130c853fd71e31b77dbd1c6928dff2004c0ee545d0ec20330f65ba177175b95e"
+    },
+    {
+      "id": "seg-2020",
+      "decision": "approve",
+      "code": "金剛經原句音訊支持",
+      "audioRawResponseDigest": "sha256:6351a72f6637e847ace5a8b151f5916a143c52daec1ebf6b55a13afa4b176472",
+      "inputDigest": "sha256:6f8e24c27d9bfff6edf320f26cb6a869b64cbdc6feb42259d36a282e24bf94be"
+    },
+    {
+      "id": "seg-2025",
+      "decision": "audio-required",
+      "code": "身口衣身口意音訊液未唯一判定",
+      "audioRawResponseDigest": "sha256:62b5583e17a6bb1fbac500e6cf81d032823ab2e9092b9f377302e3678f76555a",
+      "inputDigest": "sha256:5cef6bb279635416cbc85f688bdb6d64e4ac353864130e0e1c0ea06534c3220c"
+    },
+    {
+      "id": "seg-2031",
+      "decision": "audio-required",
+      "code": "威脆威嚴音訊微細威脅需確認",
+      "audioRawResponseDigest": "sha256:6dcde170c18239ad4fa8cd0164ae411bbc1d6c17e35444190cce4724485895fe",
+      "inputDigest": "sha256:aded85efa52db860227a264b7c79f8ba52b65eff3f98292653ac311dc1dbdfc3"
+    },
+    {
+      "id": "seg-2035",
+      "decision": "audio-required",
+      "code": "威脆威嚴音訊微細需確認",
+      "audioRawResponseDigest": "sha256:85be680359c80341b05301db16940afcf64320ed53448d0af7b4c2be877da345",
+      "inputDigest": "sha256:4fbc1543b664ffaefad89d996e5ec5245f861defa644cbdcc959bdf79adbdad2"
+    },
+    {
+      "id": "seg-205",
+      "decision": "audio-required",
+      "code": "壽受名相需原典驗證",
+      "audioRawResponseDigest": "sha256:e2f89f6afe1f9e6795ddbf7895bfe1c4d68c9b854a755bf1a98a8db6057fb105",
+      "inputDigest": "sha256:9b203dcaa6d1740f76b7caa595a0b2c4a9db44131a2f02933d9977e77e92a531"
+    },
+    {
+      "id": "seg-2051",
+      "decision": "audio-required",
+      "code": "中觀論觀法品需原典篇名確認",
+      "audioRawResponseDigest": "sha256:dd1bb8ad6383c97ae280d1cc8b5a7953ce43e4a303a6514bf8892957b42ce933",
+      "inputDigest": "sha256:33d3eae317caad295b95a2a7e66be7485a38ed29a1539849f6ebeb7699457e17"
+    },
+    {
+      "id": "seg-2056",
+      "decision": "audio-required",
+      "code": "額法音訊不清需唯一判定",
+      "audioRawResponseDigest": "sha256:5f498df9675da7b763df7403d8d938779bb40a7b7e928e1db46251370a9390ce",
+      "inputDigest": "sha256:64eb2c453160505ec504a5f4a58cc8b00bc07c396cf826c55c69474a2fabbc47"
+    },
+    {
+      "id": "seg-2060",
+      "decision": "audio-required",
+      "code": "鵝法音訊熱非唯一支持",
+      "audioRawResponseDigest": "sha256:e2a05ba3eca2d1cea8d9ec56a4d8c9c8481dce433ac9eba291e4cb290b6b0565",
+      "inputDigest": "sha256:e4c931cc437eb228bdf2981cbd94899a8c9c7e356e9066d045943d84c393c4ad"
+    },
+    {
+      "id": "seg-207",
+      "decision": "audio-required",
+      "code": "皆悉是苦名相需音訊確認",
+      "audioRawResponseDigest": "sha256:f6326a4e26a3a7ce6abeeaeeba1ad4acd07b89eeae9bff2c6b719178e6519468",
+      "inputDigest": "sha256:106002ad974568f3ffc26d64bba15ee310065e7e9284dad33a121da51bbf8a8a"
+    },
+    {
+      "id": "seg-210",
+      "decision": "audio-required",
+      "code": "感受名相需音訊確認",
+      "audioRawResponseDigest": "sha256:35137da5f152a33aa1c48ac1c47642d19872a0b05587736284391c8a0bc35d3c",
+      "inputDigest": "sha256:832ecef807ec7a77d32efd3e86183da64eb18d95b47c199aa57317ea419900b3"
+    },
+    {
+      "id": "seg-220",
+      "decision": "audio-required",
+      "code": "觀察受名相需音訊確認",
+      "audioRawResponseDigest": "sha256:49d11cc260bc6cab5396be1edac4b692f5f0de1a369c1153d915e62e034e0ad8",
+      "inputDigest": "sha256:9dfce22924e973e1a9ab843279369d606cdc06bb1c6e5acf94fc77e8e050264e"
+    },
+    {
+      "id": "seg-224",
+      "decision": "audio-required",
+      "code": "皆悉是苦名相需音訊確認",
+      "audioRawResponseDigest": "sha256:7bbaf97d3fd2b817c8d6b7e02cfe1dbbab698ce5fab328a61688a42a97101a5e",
+      "inputDigest": "sha256:73e3510feff69c4b459bfadb687587f984f0fd389aab2e3c8de69533044b7acb"
+    },
+    {
+      "id": "seg-228",
+      "decision": "audio-required",
+      "code": "樂受名相需音訊確認",
+      "audioRawResponseDigest": "sha256:f249d4d3d2a05aabf28dc21ea6e8531f3b6634aa2bdf0d0e043d6f8aaaa27427",
+      "inputDigest": "sha256:c6f6a259a12664344d28589590b692aae3709d6fe9e5a48b535385ffe27cf473"
+    },
+    {
+      "id": "seg-230",
+      "decision": "audio-required",
+      "code": "三受名相需音訊確認",
+      "audioRawResponseDigest": "sha256:1fb9e1a2faeb72d4f1f51bd5ab43860fae575c0da117a36c3f5965826189c961",
+      "inputDigest": "sha256:03dd26b850a8baf1fb81b79b8a1cdd680b9797d4b29ef9aa0c13cea07f55cb19"
+    },
+    {
+      "id": "seg-234",
+      "decision": "audio-required",
+      "code": "樂受名相需音訊確認",
+      "audioRawResponseDigest": "sha256:28ed79bc60056c4a0cdfd0f98cb51fadbda3ff21806cd31d7fb8a62b30e76c77",
+      "inputDigest": "sha256:c5e375bd0b94a3ded89527b609b1e1e48ee17c2ab1d4b428a3b2210addcf14e4"
+    },
+    {
+      "id": "seg-240",
+      "decision": "audio-required",
+      "code": "洛壽樂受需音訊及原典驗證",
+      "audioRawResponseDigest": "sha256:444f96f650f8a5f9b1840b0a6bc0be8d4bfb1102ced5e2f90f247df210970d53",
+      "inputDigest": "sha256:e04cf01dd7a26a7506805b28d472decec2bf79fd56df4a6c877c741736a35f35"
+    },
+    {
+      "id": "seg-245",
+      "decision": "audio-required",
+      "code": "落受樂受音訊不清需驗證",
+      "audioRawResponseDigest": "sha256:f761ec917d43fcac83f9069848c5cc889c36c6e9a2a52d223fc65bc428b41559",
+      "inputDigest": "sha256:354e8671cddc5598a38f97740d004563355c49fdf008f1120c7dd6e75300a751"
+    },
+    {
+      "id": "seg-250",
+      "decision": "audio-required",
+      "code": "樂/落音訊需覆核",
+      "audioRawResponseDigest": "sha256:ec24b71d2c7e4b302055bbbaad3bf7a6dbcca42ba19438298c1d6c944242d3e5",
+      "inputDigest": "sha256:5135fb100aed0609fa0e14fca9dcf823fecbdb656d355695bccd2a718ce8858c"
+    },
+    {
+      "id": "seg-400",
+      "decision": "audio-required",
+      "code": "受/壽需音檔確認",
+      "audioRawResponseDigest": "sha256:5484e51e231d90021f6a0ca6018c8fe305fddbbc60fa9f7ac19618d93e22117e",
+      "inputDigest": "sha256:5fb73ac98ed3a1971a726516b61f83dfcf8063bce20d84335021b85797d31c27"
+    },
+    {
+      "id": "seg-416",
+      "decision": "audio-required",
+      "code": "獸/受音訊需覆核",
+      "audioRawResponseDigest": "sha256:463d88c22ab4a2b133841e575c9ee8756392b0e2c86873668cfce68128f0fdfa",
+      "inputDigest": "sha256:19d3cbd1960a7cdeb5b63f8c9afdb62eb164d1392468582570ef278dac70ab37"
+    },
+    {
+      "id": "seg-436",
+      "decision": "audio-required",
+      "code": "時/實 音與名相皆需驗證",
+      "audioRawResponseDigest": "sha256:4275603f92bf39dd8c9c2ffcafd8ceabc9e1789e9c34a9b64aa44c758b50dd35",
+      "inputDigest": "sha256:de510c098af9ede526bb12f153eecddac682940717690f0ab874f2cf47291c4b"
+    },
+    {
+      "id": "seg-518",
+      "decision": "audio-required",
+      "code": "譯名政策與音檔皆不明",
+      "audioRawResponseDigest": "sha256:a1d0c8fca2967f9babb1e978adecccb96472a8f88b3f7ef9e53ede9e0445a317",
+      "inputDigest": "sha256:83c5d9c0e7f5ee955402eaf027acc98750e9cc43020c71d818c0136c9f7742a8"
+    },
+    {
+      "id": "seg-534",
+      "decision": "audio-required",
+      "code": "處/珠需音檔判斷",
+      "audioRawResponseDigest": "sha256:6968dc53dc7eb7ce897884fafd24245d82c1fa9e8f0961c749ed79913e8f0dd8",
+      "inputDigest": "sha256:88095ac01f86cad8687ae13463d16e05c08845a603774651f075badbe8b13f82"
+    },
+    {
+      "id": "seg-537",
+      "decision": "audio-required",
+      "code": "處/珠需音檔判斷",
+      "audioRawResponseDigest": "sha256:539d905eedec7c634a8fb1d2e2712618eeab00df713963ce1a03e06db56658a5",
+      "inputDigest": "sha256:66b902b96c3d9f9c28a29d6c515a232615a34406f1bc4bc55ba86e248874c310"
+    },
+    {
+      "id": "seg-540",
+      "decision": "audio-required",
+      "code": "斷常顛倒需原典驗證",
+      "audioRawResponseDigest": "sha256:1d41c7661b0c9c0c9000e1cb1b05d83c88e03c42d5830e2a7860ce6ab3a226b9",
+      "inputDigest": "sha256:2a7f800eb73d0dab9f47989dad59e4d3301fe5caf7e3e824fa344830e56d0525"
+    },
+    {
+      "id": "seg-597",
+      "decision": "approve",
+      "code": "所緣同音訛字修正",
+      "audioRawResponseDigest": "sha256:d0da0d29c599d5dfd46b8d2cda2a900e3151de6a19559401c283da4084c4ef85",
+      "inputDigest": "sha256:1c7e88fbc1025b47bf696594c8112a7967fb0e8255278aed7f4044dcbc425afb"
+    },
+    {
+      "id": "seg-638",
+      "decision": "approve",
+      "code": "標點修正",
+      "audioRawResponseDigest": "sha256:ba15a6efa2cea33150e0ea50ddb6067c55017750e72453b3c25a18c16584ff5b",
+      "inputDigest": "sha256:a953c74a1f7c406d755d3d863765c8de10eed8396b70cb18cced0525e25d8d82"
+    },
+    {
+      "id": "seg-677",
+      "decision": "audio-required",
+      "code": "四分律疏/史需原典證據",
+      "audioRawResponseDigest": "sha256:b8d0913433c73361c2acc5ce22a713ecf6f5bd038b9b405a7a27814dfc7b92ac",
+      "inputDigest": "sha256:3464a0794915ca27369b441ebb4f90631be340de6b9c4d4758d41325c9d76479"
+    },
+    {
+      "id": "seg-687",
+      "decision": "audio-required",
+      "code": "笑/就音訊模糊",
+      "audioRawResponseDigest": "sha256:1255caeb0950180724cd1b44406ebf52a00e0fe11570cd79d3afa7f1455fa487",
+      "inputDigest": "sha256:d38b58eb8c24a1d99fd75e7e2c4a2d9424eba26f8990e3999880c1fd4052859d"
+    },
+    {
+      "id": "seg-729",
+      "decision": "audio-required",
+      "code": "邦尼佛跨句重建",
+      "audioRawResponseDigest": "sha256:62ac91b95e6ee0531dc1cb9a79969b3e72513e4946aba3d863a02a802f8b6dac",
+      "inputDigest": "sha256:65248992765e3296a2480b676976b0c83ae72f8729bea944c3bb00a58fffb220"
+    },
+    {
+      "id": "seg-732",
+      "decision": "audio-required",
+      "code": "罕/含需音訊確認",
+      "audioRawResponseDigest": "sha256:4f7ac20f4493728281343e6361feade71b7d3e827f8e26baf7f8e4d3b751d3a4",
+      "inputDigest": "sha256:262325604ce540ae8d658512dfb8f9d7ddf374f10821788bdeb15ddd549870a9"
+    },
+    {
+      "id": "seg-735",
+      "decision": "approve",
+      "code": "標點統一",
+      "audioRawResponseDigest": "sha256:b28e8964163dd13532a2121824e5f25b7be7f83ff6f97e48873fd177134277dd",
+      "inputDigest": "sha256:d11e36f113985ff2fa0291fd05e326271a29b504be496ecdbc3e218eb3a6b15b"
+    },
+    {
+      "id": "seg-736",
+      "decision": "audio-required",
+      "code": "罕/含需音訊確認",
+      "audioRawResponseDigest": "sha256:12a7d43351da4cfbb9c05e18d7b1f1aeb0d83b58d507d631ce5a2c919f93ce4d",
+      "inputDigest": "sha256:2980dfa7904da2ba5192b00794ab771a2314555cc86c73178ef25479ff44af61"
+    },
+    {
+      "id": "seg-741",
+      "decision": "audio-required",
+      "code": "見/賤音訊不明",
+      "audioRawResponseDigest": "sha256:19d4d9ec6b7ef572c4cda28f1cc1857a6369cd1d68efc73e6b3bf4a8491230dc",
+      "inputDigest": "sha256:f3cd4c042a2b0ea2f587c9079119bd8f91c56ca84accff1fa66a746a029d3db6"
+    },
+    {
+      "id": "seg-744",
+      "decision": "audio-required",
+      "code": "見/賤音訊不明",
+      "audioRawResponseDigest": "sha256:fe743a485d78483a2073e6c2225a99fd162a18a5d032a9311df4ecec3c1169eb",
+      "inputDigest": "sha256:ab91684610b6701f40e324f80bd62a93e5604e2649ada43b00fb7670b4c22327"
+    },
+    {
+      "id": "seg-748",
+      "decision": "audio-required",
+      "code": "見/賤需音檔確認",
+      "audioRawResponseDigest": "sha256:a04a841566dc6e90de6f6f030987f3a08f36736126fbec51a4c1137eb18d8343",
+      "inputDigest": "sha256:27147d4748546bdc5ac669392ac76fef79e23cc8045199f0af33c08e90f79b66"
+    },
+    {
+      "id": "seg-749",
+      "decision": "audio-required",
+      "code": "見/賤需音檔確認",
+      "audioRawResponseDigest": "sha256:6ca28d9eb9e9b7f7e3b6a04bde5126827c92fb711b4bbd53776755a7117fdbc6",
+      "inputDigest": "sha256:8ddf9ae73bb02f583c85914102605f91048e038f1be967c561e00ec951836f3f"
+    },
+    {
+      "id": "seg-757",
+      "decision": "audio-required",
+      "code": "無惡/無我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:1f949c9ca7f5332e075befe0926d4479d8cb5667a2a62f794c5d67a2f336cf2a",
+      "inputDigest": "sha256:b7c394a57164482ead517d3b3c29f2ece2b4903f6328d1974b5015c077ac7a8d"
+    },
+    {
+      "id": "seg-759",
+      "decision": "audio-required",
+      "code": "無惡/無我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:a489377e6e88c886691d01786d15238667559167aa6e748fd0f79ee735f7e646",
+      "inputDigest": "sha256:e1feba72fa3a8860689fc65a02eea8dfebcdb07f3a818fb7f6cf7c8cbbb766f2"
+    },
+    {
+      "id": "seg-770",
+      "decision": "approve",
+      "code": "純標點補逗號",
+      "audioRawResponseDigest": "sha256:f8224749c46b7e2589bfc2bd181a4755497ca269cc1f16a0aadd7b7e9f9a473f",
+      "inputDigest": "sha256:454b3c7ab668ab67a534a04c373219f5439fa3b8d273b4d5b0024c9a5db81d1f"
+    },
+    {
+      "id": "seg-775",
+      "decision": "approve",
+      "code": "純標點補逗號",
+      "audioRawResponseDigest": "sha256:65ee007f3002dd7e35f3e48b1d778a3075af20d7d7ac2c911c628c4beb4a58f8",
+      "inputDigest": "sha256:c6ad564c0c82de5949d05920467f4e8cbfe770eb1748727e5c4b206ca8e0170c"
+    },
+    {
+      "id": "seg-789",
+      "decision": "reject",
+      "code": "斷出去為口語不應擅改",
+      "audioRawResponseDigest": "sha256:46aa464dcad0c5b7c28e2a3ed0e77fef525fcc86851c39ecc2761315dab4eede",
+      "inputDigest": "sha256:b746592cf78bdf573e8079c75d4def982942f423b94303f20a81c062580c308d"
+    },
+    {
+      "id": "seg-803",
+      "decision": "audio-required",
+      "code": "無鵝/無我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:84fe291822bc8698782bf0b3a40493cb51f46c54590dd84e362335ba990f4d36",
+      "inputDigest": "sha256:2146dfeb62cb58db969156d753f82d088711513840bed11d0ab9cd93e6ecd283"
+    },
+    {
+      "id": "seg-809",
+      "decision": "audio-required",
+      "code": "俄/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:3b50510834eae6485f8dec00c9b2f3999c19f1e003e6d266474516dfa65103e9",
+      "inputDigest": "sha256:29c0d27166b846d985327432dece9cad18db234a1d0ee0c18ec6a9db8d1cee0c"
+    },
+    {
+      "id": "seg-811",
+      "decision": "audio-required",
+      "code": "俄/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:390d79792796cd8544a013722fae94b9e471a1ceab892fd5f7c8b7979e663c73",
+      "inputDigest": "sha256:e45bdbac6b3907aace5e1e7a60e7a7e359b2673913a3c1252e8eda1861fa54ec"
+    },
+    {
+      "id": "seg-812",
+      "decision": "audio-required",
+      "code": "違/為讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:ea3fc86b829b399079a0dedcb56e784ed902c8996dfea4b8df18e1935405623c",
+      "inputDigest": "sha256:d0cc8da548894065e89334e59a3b0c54be1c3d55d3c04b54300851957aca0592"
+    },
+    {
+      "id": "seg-847",
+      "decision": "audio-required",
+      "code": "舍/捨讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:7e20cf2b568bacf7ea56d237efa6f815368346c66b66179977bd1dd74e607099",
+      "inputDigest": "sha256:26647b8bc4c1c1bf5aca61bab8cd6f3f638affec1531f342f013fab51da70399"
+    },
+    {
+      "id": "seg-858",
+      "decision": "audio-required",
+      "code": "五月/五蘊讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:9d86f97fe88d92913db3913a548cf135db974893f853c5ddf684956efdc60394",
+      "inputDigest": "sha256:d06e6bac28eb1a18c955e71c280940ddd3526bd5c342b80c278003edbe7a431c"
+    },
+    {
+      "id": "seg-860",
+      "decision": "audio-required",
+      "code": "惡/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:7df95f85bf851d271a6779bbb23f19dee1e84d0d63b3e987cc7a7976e1944da2",
+      "inputDigest": "sha256:d004152c3f32153886c78c1fa4f44913074b853b3e1f951bfb9e6f40003fccb8"
+    },
+    {
+      "id": "seg-861",
+      "decision": "audio-required",
+      "code": "惡/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:224e4346c98415680c93d78c33e98e06af24bd3a2ecca9aaa7c650ed8d2f52ba",
+      "inputDigest": "sha256:66d0d4e1894b682bbdfef8bbc768daf8bc674150c24c06781f929b8561015d98"
+    },
+    {
+      "id": "seg-862",
+      "decision": "audio-required",
+      "code": "惡/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:5dcf7e3970e7344687803f7c26be9c5083fbdd76b6879975fd4f7ab11384eb1a",
+      "inputDigest": "sha256:5143691c370c2c36ea5a9ce14b310339bdd0f413fb4dca67745394e2f6973e8f"
+    },
+    {
+      "id": "seg-863",
+      "decision": "audio-required",
+      "code": "冥/名讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:6455696a3f416f33c77945054f69fe01df4aa72f8e5dcc3eb456fda5562cc8ef",
+      "inputDigest": "sha256:01bcfaeccd4654bd78e81c8b7931a610be489f70e5c8d121f3b4e39e9f4f324b"
+    },
+    {
+      "id": "seg-864",
+      "decision": "audio-required",
+      "code": "惡/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:1f5e88fbf80cd3ff9e7d0925556b4179b51ae9ae82155610c2309a74a297f774",
+      "inputDigest": "sha256:5fa7269c8c68118a499390ff16933361ea5557f51a29e4a6fecd457dbfe01045"
+    },
+    {
+      "id": "seg-867",
+      "decision": "audio-required",
+      "code": "惡/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:3466ca5f53149af190b9209aa67d1f4573d6e4892d0c1ab43f439cadf2d9eb90",
+      "inputDigest": "sha256:eadd88dc25e623ef5ba466e23528cdfb70721efc470cf9737322e949490c44ab"
+    },
+    {
+      "id": "seg-868",
+      "decision": "audio-required",
+      "code": "惡/我讀音不清需音訊確認",
+      "audioRawResponseDigest": "sha256:2876f2ba82db698ff07f79272d71527902527bfc48437c951e7b40e89f3c7692",
+      "inputDigest": "sha256:9de9fccb7e5fa44bf6e63f3ea0c0426d981ccee04295db32b41726613cd55fd7"
+    },
+    {
+      "id": "seg-875",
+      "decision": "approve",
+      "code": "不淨觀為標準名相可唯一判定",
+      "audioRawResponseDigest": "sha256:40f8f54691c6742c3de8caf72d439ac80d71334faf37bc23de6643447a0d1392",
+      "inputDigest": "sha256:7b6a6f5ca11eae89c2242ae2e9bae8c08b8720214bc39436233d8ee2ad28b56d"
+    },
+    {
+      "id": "seg-882",
+      "decision": "approve",
+      "code": "不淨觀為標準名相可唯一判定",
+      "audioRawResponseDigest": "sha256:4237ca2076df4fa4da7ebebbaf2d8cee71d77e257bc7086eb15b4c98a87638cc",
+      "inputDigest": "sha256:356fab25199d7299e85d8ebbdfd38abdb10eafeb93d044a46c12cb4c2528cae3"
+    },
+    {
+      "id": "seg-884",
+      "decision": "approve",
+      "code": "觀受是苦為標準名相",
+      "audioRawResponseDigest": "sha256:01579a1a8dda1f65800ca37ac572e831b4edc5de67158e70c675b81b31f3bab2",
+      "inputDigest": "sha256:4ceeb633f113e72ab1c0c277e0fe92d3affb93944c8dfe291b1d053a2c37dd6f"
+    },
+    {
+      "id": "seg-885",
+      "decision": "approve",
+      "code": "修無常觀修無我觀為標準名相",
+      "audioRawResponseDigest": "sha256:4adc1b1fb0b18151f996f11a1aa643e16aedeff923601ff67b97f6cceb2b9e09",
+      "inputDigest": "sha256:9fd5f9c5811aeb7a86852e1f57c3d1241fde62f6295baea6a7233da45f9a6587"
+    },
+    {
+      "id": "seg-908",
+      "decision": "audio-required",
+      "code": "諸孕或諸有或諸人需音訊確認",
+      "audioRawResponseDigest": "sha256:f656a5f6b7216f4912485f6203bb00794ef71db4c5e78ccb94ce83968a665b4e",
+      "inputDigest": "sha256:869c9b00cd2ebd8b505c1459afc77f24bed346e7f6c0d5ba8a5b5b1e5652c940"
+    },
+    {
+      "id": "seg-924",
+      "decision": "reject",
+      "code": "口語逐字稿不必加逗點",
+      "audioRawResponseDigest": "sha256:b5966150cf249dcc79ad39439274a085c0d7a5cb27766975b02319e6edb659e4",
+      "inputDigest": "sha256:173c9bfd370f75408e85c34835c279ac60166b0d9b3bc4257e1dcca12eef1833"
+    },
+    {
+      "id": "seg-955",
+      "decision": "reject",
+      "code": "口語逐字稿不必加逗點",
+      "audioRawResponseDigest": "sha256:cb7ca6ea5d5d903abbafe10b771269aa885a0340b22902390e44b0a364ddaa0d",
+      "inputDigest": "sha256:829c4a50428f7764a95c963840943e227b6446c965fbefff8185eb23c22233bf"
+    },
+    {
+      "id": "seg-956",
+      "decision": "reject",
+      "code": "口語逐字稿不必加逗點",
+      "audioRawResponseDigest": "sha256:b40703ff38d01d1f645ad502709b1feb82bed9483e1c956a0ca2a5836163731a",
+      "inputDigest": "sha256:81255270c37057e59a60f4a5e37ab5e8e3db78bc688682d44f942ff9aa663f30"
+    },
+    {
+      "id": "seg-964",
+      "decision": "approve",
+      "code": "因緣所生法為標準名相",
+      "audioRawResponseDigest": "sha256:a80f5f6dbc0cf62b33c63e48bb94e14312118eefba7e5ba590e24cbe921a5215",
+      "inputDigest": "sha256:d80786e5ad57c217dfe2f0fe868159669ea09b047ed38e64ce93396a8ac7d259"
+    },
+    {
+      "id": "seg-968",
+      "decision": "approve",
+      "code": "句末問號標點",
+      "audioRawResponseDigest": "sha256:19010addc477e138122e5fe5fc9de7f00123c8650af780b1c11644b4c931d28e",
+      "inputDigest": "sha256:66a101de4c1228fd35a8a7a6d9cfc1d7ef93f274ae3bfd7dc42dd354503f1465"
+    },
+    {
+      "id": "seg-985",
+      "decision": "reject",
+      "code": "口語逐字稿不必加逗點",
+      "audioRawResponseDigest": "sha256:74dbb737451fe89b20603c9ad7a83cdaf37ae4d0389589c8fe5007706d365a5a",
+      "inputDigest": "sha256:f1bced50f439f9f9e94045db1b82ca1211166bb803acc11028db804974878429"
+    }
+  ]
+}
