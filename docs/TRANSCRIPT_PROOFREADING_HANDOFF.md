@@ -1,6 +1,6 @@
 # 全庫逐字稿校稿交接紀錄
 
-最後更新：2026-10-15 07:15 CST
+最後更新：2026-10-15 CST
 
 ## 工作位置
 
@@ -9,6 +9,7 @@
 - 隔離 worktree：`/Users/henry/.codex/worktrees/transcript-proofreading-quality/Transcriptions`
 - GX10：`100.113.144.100`
 - vLLM 模型：`Qwen3.8-27B`
+- 獨立分類器：`MiniMax-M3`、Eneural `deepseek-v4.1-flash`
 - 本機轉送端點：`http://127.0.0.1:18001/v1`
 
 不得在共享 dirty checkout 工作，也不得直接修改或提交 `courses/` 來源逐字稿。現階段只產生候選、ledger、覆核佇列與稽核證據。
@@ -24,8 +25,12 @@
   - `入中論善顯密意疏`：01、56A、110B
   - `四念住`：01、05、08
   - `釋量論第二品`：01、17、32
-- 聚焦測試最近一次為 25/25 通過；新增 verifier 之前的完整 `npm test` 為 599 tests、0 fail、4 skipped。第二階段全部完成後必須再跑完整測試。
+- 聚焦 pipeline 測試最近一次為 35/35 通過；最後的 sidecar hash／fixture schema 修正後，完整 `npm test` 為 613 tests、0 fail、4 skipped。
 - `courses/` 目前零修改。
+- 新增三 provider 固定小型評測與保守風險路由。14 個案例中，Qwen 回應實際模型為 Qwen3.8-27B、Eneural 回應實際模型為 deepseek-v4.1-flash；MiniMax 經 `mmx --model MiniMax-M3` 路由但回應未提供可驗證 actual model。三條路徑皆為危險案例 8/8 阻擋、明確安全案例 6/6 接受；這只是路由器回歸測試，不代表全庫內容正確，也不能直接形成 production quorum。
+- 中風險的三模型一致重複映射現在可壓成一個覆核群組，但仍是 `review`，且預設保留首尾兩個代表、全部 member IDs 與 hash-bound 完整 sidecar；高風險與分歧項目不聚類。
+- 三票 quorum 固定為 Qwen、MiniMax、Eneural，並對照程式擁有的 provider manifest，綁定 proposal ID、`sourceDigest`、`runId`、模型名稱與 runtime fingerprint；未知、重複、缺少或綁定不符都 fail closed。
+- 修正獨立 review 發現的 `changeClass` 漏判後，`四念住/session_08` 的靜態風險盤點為 169 筆：高風險 116、一般新映射 39、純標點 14。若一般新映射之後取得三模型一致結果，以每群組最多兩個代表計算，保守閱讀上限為 148 個單位（169 的 87.6%，約省 12.4%）；尚未實際對 169 筆跑三模型，不能把此上限當成已達成數字。
 
 ## 執行中
 
@@ -49,17 +54,18 @@ node --test tests/unit/transcriptProofreadingPipeline.test.js tests/unit/transcr
 ## 尚未通過的 gate
 
 - `四念住/session_08` 內容抽查已完成但 FAIL；其餘 11 堂尚未做同等 Codex 內容抽查。
-- 尚未重跑完整 `npm test`、build 與全域稽核。
+- 本輪完整 `npm test`、build 與 12/12 evidence audit 已通過；302 堂全庫內容稽核尚未開始。
 - 試點內容 gate 尚未通過，因此禁止啟動 302 堂全庫批次。
 - 尚未進入正式套用、人工音訊／論義覆核、合併或部署階段。
 
 ## 下一步
 
-1. 先為 `session_08.codex-audit.md` 中的阻擋案例新增 RED 測試並收緊 verifier gate。
-2. 重跑 `四念住/session_08` verifier，直到內容抽查通過；不得直接刪除失敗案例來規避測試。
-3. 再對其餘 11 堂做同等來源對照抽查。
-4. 完整測試與 build 全綠後，才判斷試點是否允許進入 302 堂候選生成。
-5. 每完成一個 gate，就更新本文件並在 Draft PR 留一則包含 commit、測試與下一步的交接留言。
+1. 使用 `npm run proofread:reviewer:eval -- --provider=...` 重跑三模型固定評測；任何危險案例誤接受即停止擴大。
+2. 對 `四念住/session_08` 的既有 169 筆候選產生三模型獨立 verdict；不得重做候選來掩蓋既有失敗。
+3. 以 compact review packet 讓 Codex 逐條看高風險／分歧項目，只按映射群組審查三模型一致的中風險重複項目。
+4. 重跑 `四念住/session_08` verifier，直到內容抽查通過；不得直接刪除失敗案例來規避測試。
+5. 再對其餘 11 堂做同等來源對照抽查；完整測試與 build 全綠後，才判斷是否允許進入 302 堂候選生成。
+6. 每完成一個 gate，就更新本文件並在 Draft PR 留一則包含 commit、測試與下一步的交接留言。
 
 ## 重要品質邊界
 

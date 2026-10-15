@@ -33,15 +33,25 @@
 
 只處理不依上下文也不改義的字形與標點。規則列於 `config/transcript-proofreading-style-rules.json`，必須具備虛構正例、反例與冪等測試。
 
-### B. GX10 Qwen3.8-27B 候選
+### B. 本地／私有模型候選與交叉審查
 
-- 端點：使用者私人 GX10 的本地 vLLM。
-- `enable_thinking=false`，小批量處理，保留前後文。
+- 候選產生以使用者私人 GX10 的 Qwen3.8-27B 為主；MiniMax-M3 與 Eneural 模型可作獨立分類器。
+- Qwen 使用 `enable_thinking=false`；各模型皆採小批量、固定 JSON schema、短理由代碼，保留必要前後文。
 - 只回傳結構化候選，不得合併、刪除或重排句子。
 - 看不清楚就維持原文並標記 `reviewRequired=true`。
 - 原典、課程詞庫和既有人工核定詞優先於模型直覺。
+- 模型彼此一致不等於事實正確；三模型只能協助拒絕、排序與聚類，不能核准新名相、整詞重建或論義修改。
 
-### C. 音訊／人工覆核
+### C. 低 token 覆核路由
+
+1. 先用確定性規則驗證 digest、句子邊界及不可破壞欄位，不把已失效候選送入模型。
+2. 固定的 Qwen、MiniMax、Eneural 三個 provider 各自只回傳 `accept|reject|uncertain` 與短理由代碼；每票必須對照程式擁有的 provider manifest，綁定 proposal ID、`sourceDigest`、`runId`、模型名稱與 runtime fingerprint。未知、重複、缺少或綁定不符皆不成立 quorum。任一有效 `reject` 即淘汰候選，但另存完整 rejected sidecar 與 ID 稽核索引。
+3. 只有「純標點」或人工已核定的精確單次映射，且三模型一致接受，才可成為低風險 eligible；正式套用仍須通過 ledger 與來源稽核。
+4. 三模型一致的中風險重複映射可合併成覆核群組；預設至少看群組首尾兩個代表、保留全部 member IDs，並另存 hash-bound sidecar（每位成員的 before/after、風險與三票證據）。只能由 Codex／人工明確核定映射後，再讓每位成員重新通過 deterministic exclusions。
+5. 高風險、模型分歧、`uncertain`、未知證據及 digest 不符一律逐條覆核或 fail closed。
+6. Codex 優先讀高風險、分歧與群組代表，不重讀模型已處理的整份逐字稿；但模型輸出不能替代音訊、原典與人工論義判斷。
+
+### D. 音訊／人工覆核
 
 以下類別不得自動核准：佛學名相、數字、否定詞、引文、人名、梵藏音譯、刪句、大幅縮短、語意補字、講者自我修正，以及任何模型低信心項目。
 

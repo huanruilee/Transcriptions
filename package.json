@@ -38,6 +38,7 @@
     "proofread:pilot": "node scripts/transcript_proofreading_quality.mjs --pilot",
     "proofread:pilot:local": "node scripts/run_local_proofreading_pilot.mjs",
     "proofread:evidence:audit": "node scripts/verify_transcript_proofreading_evidence.mjs",
+    "proofread:reviewer:eval": "node scripts/evaluate_proofreading_reviewer.mjs",
     "test:rating": "node --test tests/unit/reviewRating.test.js",
     "audit:oral": "python3 scripts/audit_oral_references.py",
     "audit:transcript": "node scripts/transcript_candidate_auditor.mjs",

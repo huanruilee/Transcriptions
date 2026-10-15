@@ -1,0 +1,45 @@
+{
+  "schema": "transcript-proofreading-reviewer-eval-result/v1",
+  "provider": "eneural",
+  "model": "deepseek-v4.1-flash",
+  "fixtureDigest": "sha256:10069cf26d2fbc82d5f20df5b87233c9f94feec215d8e2f24a71cc055b49353f",
+  "promptDigest": "sha256:c3042263620e521ec94b009675b1f5a4ddbe9a718cf76ffb956e53d5bdfd480f",
+  "executedAt": "2026-10-15T02:46:43.158021Z",
+  "provenance": {
+    "endpoint": "https://agents.eneural.ai/v1/chat/completions",
+    "requestedModel": "deepseek-v4.1-flash",
+    "actualModel": "deepseek-v4.1-flash",
+    "responseId": "chatcmpl-9f69eb04f88b02d1",
+    "created": 1792032398,
+    "rawResponseDigest": "sha256:65b09556e50157f69690d3d193c55b9a51fd62dd0c079b49614521b3fb86c997",
+    "runtimeFingerprint": null,
+    "runtimeObserved": false
+  },
+  "passed": true,
+  "metrics": {
+    "total": 14,
+    "unsafeTotal": 8,
+    "unsafeBlocked": 8,
+    "falseAccepts": [],
+    "safeTotal": 6,
+    "safeAccepted": 6,
+    "safeAccepts": ["safe-punctuation", "safe-hunchen", "safe-ahan", "safe-alambana", "safe-body-speech-mind", "safe-four-foundations"],
+    "outputChars": 931
+  },
+  "items": [
+    { "id": "safe-punctuation", "expected": "accept", "verdict": "accept", "code": "僅增標點" },
+    { "id": "safe-hunchen", "expected": "accept", "verdict": "accept", "code": "昏沉正字" },
+    { "id": "safe-ahan", "expected": "accept", "verdict": "accept", "code": "阿含經正名" },
+    { "id": "safe-alambana", "expected": "accept", "verdict": "accept", "code": "所緣境正字" },
+    { "id": "safe-body-speech-mind", "expected": "accept", "verdict": "accept", "code": "身口意正字" },
+    { "id": "safe-four-foundations", "expected": "accept", "verdict": "accept", "code": "四念住正字" },
+    { "id": "bad-benefit", "expected": "block", "verdict": "reject", "code": "無據整詞改" },
+    { "id": "bad-four-year-zen", "expected": "block", "verdict": "reject", "code": "無據改禪" },
+    { "id": "bad-buddha", "expected": "block", "verdict": "reject", "code": "無據改佛陀" },
+    { "id": "bad-self-or-dharma", "expected": "block", "verdict": "uncertain", "code": "我法難定" },
+    { "id": "bad-view-delusion", "expected": "block", "verdict": "reject", "code": "無據整詞改" },
+    { "id": "bad-translation-choice", "expected": "block", "verdict": "uncertain", "code": "譯名政策未定" },
+    { "id": "bad-dignified", "expected": "block", "verdict": "uncertain", "code": "威脆待考" },
+    { "id": "bad-eye-nothing", "expected": "block", "verdict": "reject", "code": "改後仍不通" }
+  ]
+}

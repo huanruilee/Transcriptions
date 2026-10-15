@@ -97,8 +97,11 @@ function hasSemanticRisk(entry) {
   const after = String(entry.after ?? '');
   const lexicalBefore = lexicalText(before);
   const lexicalAfter = lexicalText(after);
-  const highRiskClasses = new Set(['semantic', 'term', 'numeric', 'deletion', 'quotation']);
-  if (highRiskClasses.has(entry.changeClass)) return true;
+  const highRiskClasses = new Set([
+    'semantic', 'term', 'numeric', 'deletion', 'quotation', 'proper-noun', 'person-name',
+  ]);
+  const changeClasses = String(entry.changeClass ?? '').split('|').filter(Boolean);
+  if (changeClasses.some((value) => highRiskClasses.has(value))) return true;
   if (stableStringify(collectTokens(before, /(?:不|無|非|未|莫|勿)/g)) !== stableStringify(collectTokens(after, /(?:不|無|非|未|莫|勿)/g))) return true;
   if (stableStringify(collectTokens(before, /\d+(?:\.\d+)?/g)) !== stableStringify(collectTokens(after, /\d+(?:\.\d+)?/g))) return true;
   if (lexicalBefore.length > 0 && lexicalAfter.length / lexicalBefore.length < 0.8) return true;
@@ -444,6 +447,334 @@ function gateReviewsByVerification(source, reviews, proposalVerification) {
       }, index);
     });
   return { reviews: gatedReviews, queue, verdicts: [...verdictById.values()] };
+}
+
+const PUNCTUATION_OR_SPACE_RE = /[\p{P}\p{Z}\s]/gu;
+const DOCTRINAL_SENSITIVE_RE = /(無|不|我|法|空|有|佛|菩薩|阿羅漢|涅槃|因果|業|四念|念住|念處|禪|定|慧|戒)/u;
+const EXPECTED_REVIEW_PROVIDERS = Object.freeze([
+  'gx10-qwen', 'minimax-m3', 'eneural-deepseek',
+]);
+const ALLOWED_REVIEW_VERDICTS = new Set(['accept', 'reject', 'uncertain']);
+
+function editFragments(before, after) {
+  const left = [...before];
+  const right = [...after];
+  let prefix = 0;
+  while (prefix < left.length && prefix < right.length && left[prefix] === right[prefix]) prefix += 1;
+  let suffix = 0;
+  while (suffix < left.length - prefix
+    && suffix < right.length - prefix
+    && left[left.length - 1 - suffix] === right[right.length - 1 - suffix]) suffix += 1;
+  return {
+    before: left.slice(prefix, left.length - suffix || left.length).join(''),
+    after: right.slice(prefix, right.length - suffix || right.length).join(''),
+  };
+}
+
+function exactApprovedMapping(before, after, approvedMappings) {
+  return approvedMappings.find((mapping) => {
+    if (typeof mapping?.before !== 'string' || typeof mapping?.after !== 'string' || !mapping.before) return false;
+    const first = before.indexOf(mapping.before);
+    if (first < 0 || before.indexOf(mapping.before, first + mapping.before.length) >= 0) return false;
+    const replaced = `${before.slice(0, first)}${mapping.after}${before.slice(first + mapping.before.length)}`;
+    return replaced === after;
+  }) || null;
+}
+
+export function classifyProposalRisk(proposal) {
+  const {
+    before, after, approvedMappings = [], labels = [],
+  } = proposal;
+  if (typeof before !== 'string' || typeof after !== 'string' || before === after) {
+    return { level: 'high', reasons: ['invalid-or-noop'], mappingSignature: 'invalid-or-noop' };
+  }
+  const fragments = editFragments(before, after);
+  const mappingSignature = `${fragments.before || '∅'}→${fragments.after || '∅'}`;
+  if (hasSemanticRisk(proposal)) {
+    return { level: 'high', reasons: ['semantic-risk'], mappingSignature };
+  }
+  if ((proposal.evidence || []).some((value) => ['unknown', 'unsupported'].includes(value))) {
+    return { level: 'high', reasons: ['unknown-evidence'], mappingSignature };
+  }
+  const normalizedBefore = before.replace(PUNCTUATION_OR_SPACE_RE, '');
+  const normalizedAfter = after.replace(PUNCTUATION_OR_SPACE_RE, '');
+  if (normalizedBefore === normalizedAfter) {
+    return { level: 'low', reasons: ['punctuation-only'], mappingSignature: 'punctuation-only' };
+  }
+  const approvedMapping = exactApprovedMapping(before, after, approvedMappings);
+  if (approvedMapping) {
+    return {
+      level: 'low',
+      reasons: ['approved-mapping'],
+      mappingSignature: `${approvedMapping.before}→${approvedMapping.after}`,
+    };
+  }
+
+  const reasons = [];
+  const beforeLength = [...before].length;
+  const afterLength = [...after].length;
+  const changedBefore = [...fragments.before].length;
+  const changedAfter = [...fragments.after].length;
+  const ratio = Math.max(
+    changedBefore / Math.max(1, beforeLength),
+    changedAfter / Math.max(1, afterLength),
+  );
+  if (changedBefore > 4 || changedAfter > 4 || ratio > 0.35) reasons.push('large-rewrite');
+  if (DOCTRINAL_SENSITIVE_RE.test(`${fragments.before}${fragments.after}`)) reasons.push('doctrinal-sensitive');
+  if (labels.includes('still-unintelligible')) reasons.push('still-unintelligible');
+  if (labels.includes('cross-sentence') || labels.includes('unsupported-rewrite')) reasons.push('unsupported-rewrite');
+  return {
+    level: reasons.length > 0 ? 'high' : 'medium',
+    reasons: reasons.length > 0 ? reasons : ['novel-unapproved-mapping'],
+    mappingSignature,
+  };
+}
+
+export function combineIndependentVerdicts({
+  proposal, verdicts = [], approvedMappings = [], providerManifest = null,
+}) {
+  const risk = classifyProposalRisk({ ...proposal, approvedMappings, labels: proposal.labels || [] });
+  const expectedProviders = new Set(EXPECTED_REVIEW_PROVIDERS);
+  const providerCounts = new Map();
+  const quorumIssues = [];
+  if (!proposal.id || !proposal.sourceDigest || !proposal.runId) quorumIssues.push('unbound-proposal');
+  if (!providerManifest || typeof providerManifest !== 'object') quorumIssues.push('missing-provider-manifest');
+  for (const provider of Object.keys(providerManifest || {})) {
+    if (!expectedProviders.has(provider)) quorumIssues.push(`unknown-provider-manifest:${provider}`);
+  }
+  for (const provider of EXPECTED_REVIEW_PROVIDERS) {
+    const expected = providerManifest?.[provider];
+    if (!expected?.model || !expected?.runtimeFingerprint) quorumIssues.push(`incomplete-provider-manifest:${provider}`);
+  }
+  for (const verdict of verdicts) {
+    providerCounts.set(verdict.provider, (providerCounts.get(verdict.provider) || 0) + 1);
+    if (!expectedProviders.has(verdict.provider)) quorumIssues.push(`unknown-provider:${verdict.provider || 'missing'}`);
+    if (!ALLOWED_REVIEW_VERDICTS.has(verdict.verdict)) quorumIssues.push(`invalid-verdict:${verdict.provider || 'missing'}`);
+    if (verdict.proposalId !== proposal.id
+      || verdict.sourceDigest !== proposal.sourceDigest
+      || verdict.runId !== proposal.runId) quorumIssues.push(`binding-mismatch:${verdict.provider || 'missing'}`);
+    const expected = providerManifest?.[verdict.provider];
+    if (!expected || verdict.model !== expected.model) quorumIssues.push(`model-mismatch:${verdict.provider || 'missing'}`);
+    if (!expected || verdict.runtimeFingerprint !== expected.runtimeFingerprint) {
+      quorumIssues.push(`runtime-mismatch:${verdict.provider || 'missing'}`);
+    }
+  }
+  for (const provider of EXPECTED_REVIEW_PROVIDERS) {
+    const count = providerCounts.get(provider) || 0;
+    if (count === 0) quorumIssues.push(`missing-provider:${provider}`);
+    if (count > 1) quorumIssues.push(`duplicate-provider:${provider}`);
+  }
+  if (verdicts.length !== EXPECTED_REVIEW_PROVIDERS.length) quorumIssues.push('unexpected-verdict-count');
+  const uniqueIssues = [...new Set(quorumIssues)];
+  const quorumValid = uniqueIssues.length === 0;
+  const boundExpectedVerdicts = verdicts.filter((verdict) => (
+    expectedProviders.has(verdict.provider)
+    && ALLOWED_REVIEW_VERDICTS.has(verdict.verdict)
+    && verdict.proposalId === proposal.id
+    && verdict.sourceDigest === proposal.sourceDigest
+    && verdict.runId === proposal.runId
+    && verdict.model === providerManifest?.[verdict.provider]?.model
+    && verdict.runtimeFingerprint === providerManifest?.[verdict.provider]?.runtimeFingerprint
+  ));
+  const unanimousAccept = quorumValid
+    && boundExpectedVerdicts.every((verdict) => verdict.verdict === 'accept');
+  let outcome = 'review';
+  if (boundExpectedVerdicts.some((verdict) => verdict.verdict === 'reject')) outcome = 'rejected';
+  else if (unanimousAccept && risk.level === 'low') outcome = 'eligible';
+  return {
+    outcome,
+    risk,
+    providerCount: new Set(boundExpectedVerdicts.map((item) => item.provider)).size,
+    quorumValid,
+    quorumIssues: uniqueIssues,
+    unanimousAccept,
+    verdicts,
+  };
+}
+
+function selectClusterRepresentatives(cluster, count) {
+  const take = Math.min(Math.max(1, count), cluster.length);
+  if (take === 1) return [cluster[0]];
+  const indexes = Array.from({ length: take }, (_, index) => (
+    Math.round((index * (cluster.length - 1)) / (take - 1))
+  ));
+  return indexes.map((index) => cluster[index]);
+}
+
+export function buildCompactReviewPacket({
+  items, approvedMappings = [], representativesPerCluster = 2, providerManifest = null,
+}) {
+  const proposalIds = items.map((item) => item.proposal?.id);
+  if (proposalIds.some((id) => typeof id !== 'string' || !id)
+    || new Set(proposalIds).size !== proposalIds.length) {
+    throw new Error('compact review packet requires unique proposal IDs');
+  }
+  const enriched = items.map((item) => {
+    const combined = combineIndependentVerdicts({
+      proposal: item.proposal,
+      verdicts: item.verdicts,
+      approvedMappings,
+      providerManifest,
+    });
+    return {
+      ...item,
+      ...combined,
+      mappingSignature: combined.risk.mappingSignature,
+    };
+  });
+  const packet = [];
+  const eligibleClusters = new Map();
+  const reviewClusters = new Map();
+  for (const item of enriched) {
+    if (item.outcome === 'rejected') continue;
+    if (item.outcome === 'eligible' && item.risk.level === 'low') {
+      const clusterKey = stableStringify({
+        mappingSignature: item.mappingSignature,
+        sourceDigest: item.proposal.sourceDigest,
+        runId: item.proposal.runId,
+      });
+      const cluster = eligibleClusters.get(clusterKey) || [];
+      cluster.push(item);
+      eligibleClusters.set(clusterKey, cluster);
+      continue;
+    }
+    const unanimousMedium = item.risk.level === 'medium' && item.unanimousAccept;
+    if (unanimousMedium) {
+      const clusterKey = stableStringify({
+        mappingSignature: item.mappingSignature,
+        sourceDigest: item.proposal.sourceDigest,
+        runId: item.proposal.runId,
+      });
+      const cluster = reviewClusters.get(clusterKey) || [];
+      cluster.push(item);
+      reviewClusters.set(clusterKey, cluster);
+      continue;
+    }
+    {
+      packet.push({ ...item, clusterSize: 1 });
+    }
+  }
+  const clusterSidecars = [];
+  const clusterMetadata = (cluster, outcome) => {
+    const sidecarPayload = {
+      outcome,
+      mappingSignature: cluster[0].mappingSignature,
+      sourceDigest: cluster[0].proposal.sourceDigest,
+      runId: cluster[0].proposal.runId,
+      members: cluster.map((item) => ({
+        proposal: item.proposal,
+        verdicts: item.verdicts,
+        risk: item.risk,
+        quorumIssues: item.quorumIssues,
+      })),
+    };
+    const clusterId = `sha256:${createHash('sha256').update(stableStringify(sidecarPayload)).digest('hex')}`;
+    clusterSidecars.push({
+      clusterId,
+      ...sidecarPayload,
+    });
+    return clusterId;
+  };
+  for (const cluster of eligibleClusters.values()) {
+    const clusterId = clusterMetadata(cluster, 'eligible');
+    packet.push(...selectClusterRepresentatives(cluster, representativesPerCluster)
+      .map((item) => ({
+        ...item,
+        clusterId,
+        clusterSize: cluster.length,
+        memberIds: cluster.map((member) => member.proposal.id),
+      })));
+  }
+  for (const cluster of reviewClusters.values()) {
+    const clusterId = clusterMetadata(cluster, 'review');
+    packet.push(...selectClusterRepresentatives(cluster, representativesPerCluster)
+      .map((item) => ({
+        ...item,
+        clusterId,
+        clusterSize: cluster.length,
+        memberIds: cluster.map((member) => member.proposal.id),
+        requiresClusterApproval: true,
+      })));
+  }
+  packet.sort((left, right) => left.proposal.id.localeCompare(right.proposal.id, 'zh-Hant'));
+  return {
+    schema: 'transcript-proofreading-compact-review/v1',
+    summary: {
+      total: enriched.length,
+      included: packet.length,
+      rejected: enriched.filter((item) => item.outcome === 'rejected').length,
+      rejectedIds: enriched
+        .filter((item) => item.outcome === 'rejected')
+        .map((item) => item.proposal.id),
+      eligibleClusters: eligibleClusters.size,
+      reviewClusters: reviewClusters.size,
+      compressionRatio: enriched.length === 0 ? 0 : packet.length / enriched.length,
+    },
+    items: packet,
+    clusterSidecars,
+    rejectedSidecar: enriched
+      .filter((item) => item.outcome === 'rejected')
+      .map((item) => ({
+        proposal: item.proposal,
+        verdicts: item.verdicts,
+        risk: item.risk,
+        quorumIssues: item.quorumIssues,
+      })),
+  };
+}
+
+export function evaluateReviewerVerdicts(fixtureItems, result) {
+  if (!Array.isArray(fixtureItems) || fixtureItems.length === 0) {
+    throw new Error('reviewer fixture must be a non-empty array');
+  }
+  const fixtureIds = fixtureItems.map((item) => item?.id);
+  if (fixtureIds.some((id) => typeof id !== 'string' || !id)
+    || new Set(fixtureIds).size !== fixtureIds.length
+    || fixtureItems.some((item) => !['accept', 'block'].includes(item.expected))) {
+    throw new Error('reviewer fixture schema is invalid');
+  }
+  if (!fixtureItems.some((item) => item.expected === 'block')) {
+    throw new Error('reviewer fixture requires at least one dangerous case');
+  }
+  if (!Array.isArray(result?.items) || result.items.length !== fixtureItems.length) {
+    throw new Error(`coverage mismatch: expected ${fixtureItems.length}, received ${result?.items?.length}`);
+  }
+  const allowedKeys = new Set(['id', 'verdict', 'code']);
+  if (result.items.some((item) => typeof item?.id !== 'string'
+    || !ALLOWED_REVIEW_VERDICTS.has(item.verdict)
+    || typeof item.code !== 'string'
+    || item.code.length < 1
+    || item.code.length > 24
+    || Object.keys(item).some((key) => !allowedKeys.has(key)))) {
+    throw new Error('provider returned an invalid verdict item');
+  }
+  const verdictById = new Map(result.items.map((item) => [item.id, item]));
+  if (verdictById.size !== fixtureItems.length
+    || fixtureItems.some((item) => !verdictById.has(item.id))) throw new Error('ID coverage mismatch');
+  const safe = fixtureItems.filter((item) => item.expected === 'accept');
+  const unsafe = fixtureItems.filter((item) => item.expected === 'block');
+  const falseAccepts = unsafe
+    .filter((item) => verdictById.get(item.id).verdict === 'accept')
+    .map((item) => item.id);
+  const safeAccepts = safe
+    .filter((item) => verdictById.get(item.id).verdict === 'accept')
+    .map((item) => item.id);
+  return {
+    passed: falseAccepts.length === 0,
+    metrics: {
+      total: fixtureItems.length,
+      unsafeTotal: unsafe.length,
+      unsafeBlocked: unsafe.length - falseAccepts.length,
+      falseAccepts,
+      safeTotal: safe.length,
+      safeAccepted: safeAccepts.length,
+      safeAccepts,
+      outputChars: JSON.stringify(result).length,
+    },
+    items: fixtureItems.map((item) => ({
+      id: item.id, expected: item.expected, ...verdictById.get(item.id),
+    })),
+  };
 }
 
 export function buildValidatedModelCandidate({ source, reviews, model, proposalVerification = null }) {

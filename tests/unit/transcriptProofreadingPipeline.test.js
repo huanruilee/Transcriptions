@@ -10,9 +10,13 @@ import {
   computeSourceDigest,
   checkpointMatchesRun,
   discoverTranscriptSessions,
+  evaluateReviewerVerdicts,
   parseModelReview,
   applyModelReview,
   buildValidatedModelCandidate,
+  buildCompactReviewPacket,
+  classifyProposalRisk,
+  combineIndependentVerdicts,
   mergeModelReviews,
   normalizeBatchReview,
   normalizeProposalVerification,
@@ -33,6 +37,29 @@ const SOURCE = JSON.parse(readFileSync(
 
 function clone(value) {
   return structuredClone(value);
+}
+
+const REVIEW_SOURCE_DIGEST = 'sha256:test-source';
+const REVIEW_RUN_ID = 'review-run-1';
+const REVIEW_PROVIDER_MANIFEST = {
+  'gx10-qwen': { model: 'Qwen3.8-27B', runtimeFingerprint: 'sha256:qwen-runtime' },
+  'minimax-m3': { model: 'MiniMax-M3', runtimeFingerprint: 'sha256:minimax-runtime' },
+  'eneural-deepseek': { model: 'deepseek-v4.1-flash', runtimeFingerprint: 'sha256:eneural-runtime' },
+};
+
+function reviewProposal(id, before, after, extra = {}) {
+  return { id, before, after, sourceDigest: REVIEW_SOURCE_DIGEST, runId: REVIEW_RUN_ID, ...extra };
+}
+
+function reviewVerdicts(id, verdict = 'accept') {
+  return ['gx10-qwen', 'minimax-m3', 'eneural-deepseek'].map((provider) => ({
+    provider,
+    verdict,
+    proposalId: id,
+    sourceDigest: REVIEW_SOURCE_DIGEST,
+    runId: REVIEW_RUN_ID,
+    ...REVIEW_PROVIDER_MANIFEST[provider],
+  }));
 }
 
 function candidateWithText(sentenceId, text) {
@@ -387,6 +414,260 @@ test('proposal verification parser and normalizer require exact unique coverage'
     }, { batchId: 'verify:1', proposalIds: ['seg-001', 'seg-002'] }),
     /duplicate verdict/u,
   );
+});
+
+test('three-model agreement cannot approve an unsupported or doctrinally sensitive rewrite', () => {
+  const unsupported = combineIndependentVerdicts({
+    proposal: reviewProposal('seg-1157', '利益四年柱', '利益有差別'),
+    verdicts: reviewVerdicts('seg-1157'),
+    approvedMappings: [],
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(unsupported.outcome, 'review');
+  assert.ok(unsupported.risk.reasons.includes('large-rewrite'));
+
+  const doctrinal = combineIndependentVerdicts({
+    proposal: reviewProposal('seg-2060', '就是鵝不可得', '就是法不可得'),
+    verdicts: reviewVerdicts('seg-2060'),
+    approvedMappings: [],
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(doctrinal.outcome, 'review');
+  assert.ok(doctrinal.risk.reasons.includes('doctrinal-sensitive'));
+});
+
+test('only an approved exact mapping with unanimous support can become low-risk eligible', () => {
+  const proposal = reviewProposal('seg-1634', '昏塵又來了', '昏沉又來了');
+  const verdicts = reviewVerdicts('seg-1634');
+  assert.equal(combineIndependentVerdicts({
+    proposal, verdicts, approvedMappings: [], providerManifest: REVIEW_PROVIDER_MANIFEST,
+  }).outcome, 'review');
+  const approved = combineIndependentVerdicts({
+    proposal, verdicts, approvedMappings: [{ before: '昏塵', after: '昏沉' }],
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(approved.outcome, 'eligible');
+  assert.equal(approved.risk.level, 'low');
+});
+
+test('compact review packet keeps every high-risk item while clustering repeated mappings', () => {
+  const repeated = Array.from({ length: 10 }, (_, index) => ({
+    proposal: {
+      id: `safe-${index}`,
+      before: `第${index}次昏塵又來了`,
+      after: `第${index}次昏沉又來了`,
+      sourceDigest: REVIEW_SOURCE_DIGEST,
+      runId: REVIEW_RUN_ID,
+    },
+    verdicts: reviewVerdicts(`safe-${index}`),
+  }));
+  const dangerous = [
+    ['bad-1', '利益四年柱', '利益有差別'],
+    ['bad-2', '現在修四年處也好', '現在修四年禪也好'],
+    ['bad-3', '佛夫社知道', '佛陀知道'],
+    ['bad-4', '就是鵝不可得', '就是法不可得'],
+  ].map(([id, before, after]) => ({
+    proposal: reviewProposal(id, before, after),
+    verdicts: reviewVerdicts(id),
+  }));
+  const packet = buildCompactReviewPacket({
+    items: [...repeated, ...dangerous],
+    approvedMappings: [{ before: '昏塵', after: '昏沉' }],
+    representativesPerCluster: 1,
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(packet.summary.total, 14);
+  assert.equal(packet.summary.included, 5);
+  assert.equal(packet.items.filter((item) => item.risk.level === 'high').length, 4);
+  assert.equal(packet.items.filter((item) => item.mappingSignature === '昏塵→昏沉').length, 1);
+  assert.ok(packet.summary.compressionRatio < 0.4);
+});
+
+test('compact review packet clusters unanimous medium-risk mappings without auto-approving them', () => {
+  const repeated = Array.from({ length: 10 }, (_, index) => ({
+    proposal: {
+      id: `medium-${index}`,
+      before: `第${index}次威脆出現`,
+      after: `第${index}次威嚴出現`,
+      sourceDigest: REVIEW_SOURCE_DIGEST,
+      runId: REVIEW_RUN_ID,
+    },
+    verdicts: reviewVerdicts(`medium-${index}`),
+  }));
+  const packet = buildCompactReviewPacket({ items: repeated, providerManifest: REVIEW_PROVIDER_MANIFEST });
+  assert.equal(packet.summary.total, 10);
+  assert.equal(packet.summary.included, 2);
+  assert.equal(packet.summary.reviewClusters, 1);
+  assert.equal(packet.items[0].outcome, 'review');
+  assert.equal(packet.items[0].risk.level, 'medium');
+  assert.equal(packet.items[0].requiresClusterApproval, true);
+  assert.equal(packet.items[0].clusterSize, 10);
+  assert.equal(packet.items[0].proposal.id, 'medium-0');
+  assert.equal(packet.items[1].proposal.id, 'medium-9');
+  assert.deepEqual(packet.items[0].memberIds, repeated.map((item) => item.proposal.id));
+  assert.deepEqual(packet.items[1].memberIds, repeated.map((item) => item.proposal.id));
+  assert.equal(packet.clusterSidecars.length, 1);
+  assert.equal(packet.clusterSidecars[0].clusterId, packet.items[0].clusterId);
+  assert.equal(packet.clusterSidecars[0].members.length, 10);
+  assert.equal(packet.clusterSidecars[0].members[9].proposal.before, '第9次威脆出現');
+  assert.equal(packet.clusterSidecars[0].members[9].verdicts.length, 3);
+  const changedContext = clone(repeated);
+  changedContext[9].proposal.context = '篡改後的不同上下文';
+  const changedPacket = buildCompactReviewPacket({
+    items: changedContext, providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.notEqual(changedPacket.clusterSidecars[0].clusterId, packet.clusterSidecars[0].clusterId);
+});
+
+test('compact review packet preserves rejected IDs for audit without spending review tokens on text', () => {
+  const packet = buildCompactReviewPacket({
+    items: [{
+      proposal: reviewProposal('rejected-1', '原文', '猜測改寫'),
+      verdicts: [{
+        provider: 'minimax-m3', verdict: 'reject', proposalId: 'rejected-1',
+        sourceDigest: REVIEW_SOURCE_DIGEST, runId: REVIEW_RUN_ID,
+        ...REVIEW_PROVIDER_MANIFEST['minimax-m3'],
+      }],
+    }], providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(packet.summary.rejected, 1);
+  assert.deepEqual(packet.summary.rejectedIds, ['rejected-1']);
+  assert.deepEqual(packet.items, []);
+  assert.equal(packet.rejectedSidecar[0].proposal.before, '原文');
+  assert.equal(packet.rejectedSidecar[0].verdicts[0].provider, 'minimax-m3');
+});
+
+test('compact review packet rejects duplicate IDs and never clusters across runs', () => {
+  const item = (id, runId) => {
+    const proposal = reviewProposal(id, '威脆出現', '威嚴出現', { runId });
+    const verdicts = reviewVerdicts(id).map((verdict) => ({ ...verdict, runId }));
+    return { proposal, verdicts };
+  };
+  assert.throws(() => buildCompactReviewPacket({
+    items: [item('duplicate', 'run-a'), item('duplicate', 'run-b')],
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  }), /unique proposal IDs/u);
+  const packet = buildCompactReviewPacket({
+    items: [item('run-a-item', 'run-a'), item('run-b-item', 'run-b')],
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(packet.summary.reviewClusters, 2);
+  assert.equal(packet.clusterSidecars.length, 2);
+});
+
+test('uncertain or incomplete quorum stays individually reviewable with all evidence', () => {
+  const proposal = reviewProposal('uncertain-1', '威脆出現', '威嚴出現');
+  const verdicts = reviewVerdicts('uncertain-1');
+  verdicts[1] = { ...verdicts[1], verdict: 'uncertain' };
+  const packet = buildCompactReviewPacket({
+    items: [{ proposal, verdicts }], providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(packet.items.length, 1);
+  assert.equal(packet.items[0].clusterSize, 1);
+  assert.equal(packet.items[0].outcome, 'review');
+  assert.equal(packet.items[0].verdicts.length, 3);
+  assert.equal(packet.clusterSidecars.length, 0);
+});
+
+test('semantic-risk classes, negation, and numbers always stay high-risk', () => {
+  assert.equal(classifyProposalRisk(reviewProposal(
+    'term-ledger', '這個碳症痴', '這個身見痴', { changeClass: 'term' },
+  )).level, 'high');
+  assert.equal(classifyProposalRisk(reviewProposal(
+    'semantic', '已經成立', '尚未成立', { changeClass: 'semantic' },
+  )).level, 'high');
+  assert.equal(classifyProposalRisk(reviewProposal(
+    'numeric', '第三項', '第四項', { changeClass: 'numeric' },
+  )).level, 'high');
+  assert.equal(classifyProposalRisk(reviewProposal(
+    'quotation', '原文修學', '原文修習', { changeClass: 'quotation' },
+  )).level, 'high');
+});
+
+test('provider quorum is fixed, unique, and bound to proposal, digest, and run', () => {
+  const proposal = reviewProposal('bound-1', '昏塵', '昏沉');
+  const approvedMappings = [{ before: '昏塵', after: '昏沉' }];
+  assert.equal(combineIndependentVerdicts({
+    proposal, verdicts: reviewVerdicts('bound-1'), approvedMappings,
+    providerManifest: REVIEW_PROVIDER_MANIFEST,
+  }).outcome, 'eligible');
+
+  const unknown = reviewVerdicts('bound-1');
+  unknown[2] = { ...unknown[2], provider: 'unknown-provider' };
+  assert.equal(combineIndependentVerdicts({
+    proposal, verdicts: unknown, approvedMappings, providerManifest: REVIEW_PROVIDER_MANIFEST,
+  }).outcome, 'review');
+
+  const duplicate = reviewVerdicts('bound-1');
+  duplicate[2] = { ...duplicate[2], provider: 'gx10-qwen' };
+  assert.equal(combineIndependentVerdicts({
+    proposal, verdicts: duplicate, approvedMappings, providerManifest: REVIEW_PROVIDER_MANIFEST,
+  }).outcome, 'review');
+
+  const wrongDigest = reviewVerdicts('bound-1');
+  wrongDigest[1] = { ...wrongDigest[1], sourceDigest: 'sha256:wrong' };
+  const combined = combineIndependentVerdicts({
+    proposal, verdicts: wrongDigest, approvedMappings, providerManifest: REVIEW_PROVIDER_MANIFEST,
+  });
+  assert.equal(combined.outcome, 'review');
+  assert.equal(combined.quorumValid, false);
+
+  const wrongRuntime = reviewVerdicts('bound-1');
+  wrongRuntime[0] = { ...wrongRuntime[0], runtimeFingerprint: 'sha256:other-runtime' };
+  assert.equal(combineIndependentVerdicts({
+    proposal, verdicts: wrongRuntime, approvedMappings, providerManifest: REVIEW_PROVIDER_MANIFEST,
+  }).outcome, 'review');
+});
+
+test('reviewer evaluation rejects malformed output and marks dangerous false accepts failed', () => {
+  const fixtureItems = [
+    { id: 'safe', expected: 'accept' },
+    { id: 'danger', expected: 'block' },
+  ];
+  assert.throws(() => evaluateReviewerVerdicts(fixtureItems, {
+    items: [
+      { id: 'safe', verdict: 'accept', code: '明確' },
+      { id: 'danger', verdict: 'foo', code: '非法' },
+    ],
+  }), /invalid verdict/u);
+  assert.throws(() => evaluateReviewerVerdicts(fixtureItems, {
+    items: [
+      { id: 'safe', verdict: 'accept', code: '明確', extra: true },
+      { id: 'danger', verdict: 'reject', code: '阻擋' },
+    ],
+  }), /invalid verdict/u);
+  const evaluation = evaluateReviewerVerdicts(fixtureItems, {
+    items: [
+      { id: 'safe', verdict: 'accept', code: '明確' },
+      { id: 'danger', verdict: 'accept', code: '錯誤接受' },
+    ],
+  });
+  assert.equal(evaluation.passed, false);
+  assert.deepEqual(evaluation.metrics.falseAccepts, ['danger']);
+  assert.throws(() => evaluateReviewerVerdicts([
+    { id: 'danger', expected: 'blok' },
+  ], { items: [{ id: 'danger', verdict: 'accept', code: '誤收' }] }), /fixture schema/u);
+  assert.throws(() => evaluateReviewerVerdicts([
+    { id: 'safe-only', expected: 'accept' },
+  ], { items: [{ id: 'safe-only', verdict: 'accept', code: '安全' }] }), /dangerous case/u);
+  assert.throws(() => evaluateReviewerVerdicts([
+    { id: 'same', expected: 'accept' }, { id: 'same', expected: 'block' },
+  ], { items: [
+    { id: 'same', verdict: 'accept', code: '一' },
+    { id: 'same', verdict: 'reject', code: '二' },
+  ] }), /fixture schema/u);
+});
+
+test('risk classifier distinguishes punctuation, approved mappings, and suspicious rewrites', () => {
+  assert.equal(classifyProposalRisk({
+    before: '這樣說', after: '這樣說。', approvedMappings: [],
+  }).level, 'low');
+  assert.equal(classifyProposalRisk({
+    before: '昏塵又來了', after: '昏沉又來了', approvedMappings: [{ before: '昏塵', after: '昏沉' }],
+  }).level, 'low');
+  assert.equal(classifyProposalRisk({
+    before: '佛夫社知道', after: '佛陀知道', approvedMappings: [],
+  }).level, 'high');
 });
 
 test('review queue item IDs remain unique for repeated uncertainty text', () => {
