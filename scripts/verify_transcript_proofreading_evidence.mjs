@@ -29,6 +29,7 @@ function walk(directory) {
 
 const failures = [];
 const productionManifests = walk(EVIDENCE).filter((item) => item.endsWith('.production-manifest.json')).sort();
+const promotionManifests = walk(EVIDENCE).filter((item) => item.endsWith('.promotion-manifest.json')).sort();
 const suffixes = ['complete.json', ...Object.values(mappings)];
 const groups = new Map();
 for (const file of walk(EVIDENCE).filter((item) => item.endsWith('.json'))) {
@@ -135,10 +136,49 @@ for (const manifestPath of productionManifests) {
   }
 }
 
+for (const manifestPath of promotionManifests) {
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const directory = path.dirname(manifestPath);
+  if (manifest.schema !== 'transcript-proofreading-promotion/v1'
+    || manifest.runId !== path.basename(directory)
+    || manifest.validation?.valid !== true) {
+    failures.push(`${path.relative(ROOT, manifestPath)} invalid promotion schema or binding`);
+    continue;
+  }
+  const records = {
+    candidateDigest: 'session_08.final-candidate.json',
+    ledgerDigest: 'session_08.final-ledger.json',
+    reviewQueueDigest: 'session_08.final-review-queue.json',
+    completionDigest: 'session_08.final-complete.json',
+    independentReviewDigest: 'session_08.independent-review.json',
+    preSourceFileDigest: 'session_08.pre-promotion-source.json',
+  };
+  for (const [field, filename] of Object.entries(records)) {
+    const artifactPath = path.join(directory, filename);
+    if (!existsSync(artifactPath) || sha256(readFileSync(artifactPath)) !== manifest[field]) {
+      failures.push(`${path.relative(ROOT, manifestPath)} invalid promotion artifact: ${filename}`);
+    }
+  }
+  const reviewPath = path.join(directory, records.independentReviewDigest);
+  if (existsSync(reviewPath)) {
+    const review = JSON.parse(readFileSync(reviewPath, 'utf8'));
+    if (review.runId !== manifest.runId || review.outcome !== 'PASS') {
+      failures.push(`${path.relative(ROOT, manifestPath)} independent review is not PASS`);
+    }
+  }
+  const promotedPath = path.resolve(ROOT, manifest.promotedPath || '');
+  if (!promotedPath.startsWith(`${ROOT}${path.sep}`) || !existsSync(promotedPath)
+    || sha256(readFileSync(promotedPath)) !== manifest.promotedSourceFileDigest
+    || manifest.promotedSourceFileDigest !== manifest.candidateDigest) {
+    failures.push(`${path.relative(ROOT, manifestPath)} promoted source binding mismatch`);
+  }
+}
+
 console.log(JSON.stringify({
   schema: 'transcript-proofreading-evidence-audit/v1',
   manifests: manifests.length,
   productionManifests: productionManifests.length,
+  promotionManifests: promotionManifests.length,
   valid: failures.length === 0,
   failures,
 }, null, 2));

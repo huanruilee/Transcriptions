@@ -8,7 +8,10 @@ import {
   validateProofreadingCandidate,
 } from '../../scripts/lib/transcriptProofreadingPipeline.js';
 
-const source = JSON.parse(readFileSync('courses/四念住/sessions/session_08.json', 'utf8'));
+const source = JSON.parse(readFileSync(
+  'reviews/evidence/transcript_proofreading/production/四念住/runs/e153a10f-c521-44b3-b300-82cd349bb207/session_08.pre-promotion-source.json',
+  'utf8',
+));
 const candidate = JSON.parse(readFileSync(
   'reviews/evidence/transcript_proofreading/production/四念住/session_08.final-candidate.json', 'utf8',
 ));
@@ -54,6 +57,18 @@ test('session 08 final candidate preserves paired punctuation balance', () => {
       [...text].filter((character) => character === close).length,
       `${open}${close} must remain balanced`);
   }
+});
+
+test('session 08 candidate keeps every edit inside the strict length guard', () => {
+  const before = byId(source);
+  const after = byId(candidate);
+  const exceptions = [];
+  for (const [id, text] of after) {
+    if (text === before.get(id)) continue;
+    const ratio = text.length / Math.max(1, before.get(id).length);
+    if (ratio < 0.5 || ratio > 1.6) exceptions.push([id, ratio]);
+  }
+  assert.deepEqual(exceptions, []);
 });
 
 test('session 08 independent-review regressions stay corrected', () => {
@@ -177,6 +192,78 @@ test('session 08 independent-review regressions stay corrected', () => {
     'seg-2071': '可以這樣去',
     'seg-2079': '不知道那位同學講的「心不障人之法」',
     'seg-2102': '所以請示「心不障人之法」',
+    'seg-040': '這個第一科說的有四個原因',
+    'seg-053': '安立這個法門',
+    'seg-087': '有四憺怕路',
+    'seg-091': '這個「外」是對「內」說的',
+    'seg-093': '外就是對死屍',
+    'seg-094': '這個死屍已經朽穢了',
+    'seg-111': '這個「變赤」的含義就是',
+    'seg-112': '離皮肉血，筋脈纏裹',
+    'seg-113': '這叫做「變赤」',
+    'seg-148': '這個死屍的地方',
+    'seg-191': '計樂顛倒，立受念住',
+    'seg-299': '這個「行」在這裡的意思',
+    'seg-398': '說是「以於諸受住循受觀」',
+    'seg-506': '性淨明體嘛',
+    'seg-531': '沒有辦法斷，那麼你沒辦法得解脫',
+    'seg-539': '亦能了知有貪心等種種差別，經歷彼彼日夜剎那瞬息須臾',
+    'seg-570': '這是《瑜伽師地論》',
+    'seg-622': '為欲對治',
+    'seg-639': '《大智度論》、像《瑜伽師地論》',
+    'seg-640': '《顯揚聖教論》這些',
+    'seg-685': '繼續聽的師父是哪位律師？',
+    'seg-710': '我怎麼怎麼地、你怎麼怎麼地，有這麼一個字',
+    'seg-797': '以於諸法住循法觀',
+    'seg-799': '無常是有為法',
+    'seg-847': '色受想行識',
+    'seg-901': '由法非法，有染有淨',
+    'seg-912': '不如實，橫計',
+    'seg-951': '我在想，這是我的虛妄分別',
+    'seg-1038': '為欲除遣我所依事愚故',
+    'seg-1031': '立受念住',
+    'seg-1039': '為欲破除去',
+    'seg-1055': '這個受啊，計我論者是說',
+    'seg-1080': '有差別，這個識是面向外的',
+    'seg-1083': '這個意是識的依止處',
+    'seg-1119': '就是除遣這個我',
+    'seg-1160': '復有差別，還有不同的理由',
+    'seg-1184': '造業要由善法的因緣去造作諸業',
+    'seg-1225': '若為此故，起染起淨',
+    'seg-1226': '若染淨者，若由此故，成染成淨',
+    'seg-1227': '總為顯示如是一切',
+    'seg-1228': '立四念住',
+    'seg-1233': '會有染污的業',
+    'seg-1237': '享受，起染污、起清淨',
+    'seg-1249': '有染有淨',
+    'seg-1268': '答：於此、由此住念',
+    'seg-1286': '謂所緣念住，所以叫做念住',
+    'seg-1295': '謂若慧、若念攝持於定',
+    'seg-1404': '就是前面所說的若慧、若念',
+    'seg-1405': '攝持於定，是自性念住',
+    'seg-1493': '所以這裡解釋：由身受心法增上所生',
+    'seg-1528': '那個《法蘊足論》的《四念住》',
+    'seg-1558': '我們現在這個四念住',
+    'seg-1560': '下一個星期就開始講《攝大乘論》',
+    'seg-1621': '這件問題我剛才說',
+    'seg-1716': '也要對治',
+    'seg-1717': '對治',
+    'seg-1819': '昏沉是重了一點',
+    'seg-1892': '障礙的障',
+    'seg-1898': '石頭的石加文章的章',
+    'seg-1902': '是那個阜，左阜右邑',
+    'seg-1914': '現在說是心不障人之法',
+    'seg-2007': '你不清除',
+    'seg-2039': '所以請示',
+    'seg-056': '四念住，每一個念住',
+    'seg-066': '立身念住',
+    'seg-538': '觀察其餘的一切法',
+    'seg-809': '「我」的定義有二義',
+    'seg-1043': '這個身念住就是色受想行識',
+    'seg-1266': '原因',
+    'seg-1683': '昏沉老半天還是不能',
+    'seg-1729': '所以說',
+    'seg-1897': '你這個是石頭的石字',
   };
   for (const [id, text] of Object.entries(expected)) assert.equal(actual.get(id), text, id);
 });
