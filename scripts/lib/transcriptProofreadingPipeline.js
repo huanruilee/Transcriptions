@@ -198,6 +198,53 @@ export function applyDeterministicStyleRules(input) {
   return { text, changes };
 }
 
+const SESSION_08_GLOSSARY_RULES = Object.freeze([
+  [/念著/gu, '念住'],
+  [/深念住/gu, '身念住'],
+  [/森念住/gu, '身念住'],
+  [/思念住/gu, '四念住'],
+  [/聖念住/gu, '四念住'],
+  [/世念住/gu, '四念住'],
+  [/自信念住|自行念住/gu, '自性念住'],
+  [/詳雜念住/gu, '相雜念住'],
+  [/揭明念住|皆明念住/gu, '皆名念住'],
+  [/靜顛倒/gu, '淨顛倒'],
+  [/不靜中/gu, '不淨中'],
+  [/不靜的所緣鏡/gu, '不淨的所緣境'],
+  [/修這不靜的顛倒/gu, '修這不淨的顛倒'],
+  [/但是不靜觀/gu, '但是不淨觀'],
+  [/安利/gu, '安立'],
+  [/淡伯祿|彈伯露|淡薄路|淡伯露|彈部路/gu, '憺怕路'],
+  [/熟慧/gu, '朽穢'],
+  [/臭慧/gu, '臭穢'],
+  [/不敬差別/gu, '不淨差別'],
+  [/利益身念住/gu, '立以身念住'],
+  [/這個靜啊 不清靜啊/gu, '這個淨啊，不清淨啊'],
+  [/所以「世尊建立四種念住/gu, '所以世尊建立四種念住'],
+  [/四尊/gu, '世尊'],
+  [/四年諸/gu, '四念住'],
+  [/不盡觀/gu, '不淨觀'],
+  [/落壽/gu, '樂受'],
+  [/無取蘊/gu, '五取蘊'],
+  [/所遠鏡/gu, '所緣境'],
+  [/十四隊/gu, '十四對'],
+  [/七隊/gu, '七對'],
+]);
+
+export function applySession08GroundedGlossary(input) {
+  let text = String(input);
+  const applied = [];
+  for (const [pattern, replacement] of SESSION_08_GLOSSARY_RULES) {
+    pattern.lastIndex = 0;
+    if (!pattern.test(text)) continue;
+    pattern.lastIndex = 0;
+    const before = text;
+    text = text.replace(pattern, replacement);
+    applied.push({ before, after: text, replacement });
+  }
+  return { text, applied };
+}
+
 export function buildProofreadingLedger({ source, candidate, model, proposals = [] }) {
   const sourceById = new Map(flattenSentences(source).map((sentence) => [sentence.key, sentence]));
   const candidateById = new Map(flattenSentences(candidate).map((sentence) => [sentence.key, sentence]));
@@ -563,6 +610,44 @@ export function buildAudioEvidenceRequests({ source, packet, paddingSeconds = 1.
   });
 }
 
+export function alignFullContextAsrEvidence({ requests, segments, paddingSeconds = 0.5 }) {
+  if (!Array.isArray(requests) || requests.length === 0) {
+    throw new Error('full-context ASR alignment requires non-empty requests');
+  }
+  const requestIds = requests.map((item) => item?.id);
+  if (requestIds.some((id) => typeof id !== 'string' || !id)
+    || new Set(requestIds).size !== requestIds.length) {
+    throw new Error('full-context ASR alignment requires unique request IDs');
+  }
+  if (!Array.isArray(segments)
+    || !Number.isFinite(paddingSeconds) || paddingSeconds < 0 || paddingSeconds > 10) {
+    throw new Error('full-context ASR alignment requires segments and valid padding');
+  }
+  for (const segment of segments) {
+    if (!Number.isFinite(segment?.start) || !Number.isFinite(segment?.end)
+      || segment.end < segment.start || typeof segment.text !== 'string') {
+      throw new Error('invalid ASR segment');
+    }
+  }
+  return requests.map((request) => {
+    if (!Number.isFinite(request.start) || !Number.isFinite(request.end)
+      || request.end < request.start || typeof request.sourceText !== 'string') {
+      throw new Error(`invalid ASR request for ${request.id}`);
+    }
+    const start = Math.max(0, request.start - paddingSeconds);
+    const end = request.end + paddingSeconds;
+    const overlapping = segments.filter((segment) => segment.end >= start && segment.start <= end);
+    return {
+      id: request.id,
+      sourceText: request.sourceText,
+      start: request.start,
+      end: request.end,
+      asrText: overlapping.map((segment) => segment.text.trim()).filter(Boolean).join(' '),
+      segmentIds: overlapping.map((segment) => segment.id),
+    };
+  });
+}
+
 const ALLOWED_ADJUDICATION_DECISIONS = new Set([
   'approve', 'reject', 'replace', 'audio-required',
 ]);
@@ -571,7 +656,11 @@ export function buildAdjudicationReviewItems({ source, packet, audioEvidence }) 
   if (!source || computeSourceDigest(source) !== packet?.sourceDigest) {
     throw new Error('adjudication source digest mismatch');
   }
-  if (audioEvidence?.schema !== 'transcript-proofreading-audio-evidence/v1'
+  const allowedAudioSchemas = new Set([
+    'transcript-proofreading-audio-evidence/v1',
+    'transcript-proofreading-full-context-asr/v1',
+  ]);
+  if (!allowedAudioSchemas.has(audioEvidence?.schema)
     || audioEvidence.sourceDigest !== packet.sourceDigest
     || audioEvidence.runId !== packet.runId
     || !String(audioEvidence.audioSha256 ?? '').startsWith('sha256:')) {
@@ -662,6 +751,74 @@ export function bindAdjudicationSuggestions({
     runId,
     audioSha256,
     packetDigest,
+    itemCount: decisions.length,
+    decisions,
+  };
+}
+
+export function bindReferenceRiskRepairs({
+  clusters, response, sourceDigest, alignmentDigest,
+}) {
+  if (!Array.isArray(clusters) || clusters.length === 0
+    || !String(sourceDigest ?? '').startsWith('sha256:')
+    || !String(alignmentDigest ?? '').startsWith('sha256:')) {
+    throw new Error('reference risk repair binding metadata is required');
+  }
+  if (!Array.isArray(response?.clusters) || response.clusters.length !== clusters.length) {
+    throw new Error('reference risk repair cluster coverage mismatch');
+  }
+  const expectedClusters = new Map(clusters.map((cluster) => [cluster.clusterId, cluster]));
+  const responseClusterIds = response.clusters.map((cluster) => cluster?.clusterId);
+  if (expectedClusters.size !== clusters.length
+    || new Set(responseClusterIds).size !== clusters.length
+    || responseClusterIds.some((id) => !expectedClusters.has(id))) {
+    throw new Error('reference risk repair cluster coverage mismatch');
+  }
+  const allowedDecisions = new Set(['unchanged', 'replace', 'uncertain']);
+  const decisions = [];
+  for (const responseCluster of response.clusters) {
+    const cluster = expectedClusters.get(responseCluster.clusterId);
+    const expectedItems = new Map(cluster.sourceItems.map((item) => [item.id, item]));
+    if (!Array.isArray(responseCluster.items)
+      || responseCluster.items.length !== expectedItems.size) {
+      throw new Error(`reference risk repair item coverage mismatch for ${cluster.clusterId}`);
+    }
+    const responseIds = responseCluster.items.map((item) => item?.id);
+    if (new Set(responseIds).size !== expectedItems.size
+      || responseIds.some((id) => !expectedItems.has(id))) {
+      throw new Error(`reference risk repair item coverage mismatch for ${cluster.clusterId}`);
+    }
+    for (const item of responseCluster.items) {
+      const sourceItem = expectedItems.get(item.id);
+      if (!allowedDecisions.has(item.decision)
+        || typeof item.code !== 'string' || item.code.length < 1 || item.code.length > 40
+        || Object.keys(item).some((key) => !['id', 'decision', 'proposedText', 'code'].includes(key))) {
+        throw new Error(`invalid reference risk repair for ${item?.id ?? 'unknown'}`);
+      }
+      if (item.decision === 'replace') {
+        if (typeof item.proposedText !== 'string' || !item.proposedText.trim()
+          || item.proposedText === sourceItem.text) {
+          throw new Error(`reference risk replacement must differ for ${item.id}`);
+        }
+      } else if (item.proposedText !== undefined && item.proposedText !== null
+        && String(item.proposedText).trim() !== '') {
+        throw new Error(`reference risk proposedText only allowed for replace: ${item.id}`);
+      }
+      decisions.push({
+        id: item.id,
+        clusterId: cluster.clusterId,
+        decision: item.decision,
+        ...(item.decision === 'replace' ? { proposedText: item.proposedText } : {}),
+        code: item.code,
+        inputDigest: `sha256:${createHash('sha256').update(stableStringify({ cluster, sourceItem })).digest('hex')}`,
+      });
+    }
+  }
+  return {
+    schema: 'transcript-reference-risk-repair/v1',
+    authority: 'advisory',
+    sourceDigest,
+    alignmentDigest,
     itemCount: decisions.length,
     decisions,
   };
@@ -1170,8 +1327,15 @@ export function validateProofreadingCandidate({ source, candidate, ledger }) {
     }
     const addedRuns = insertedRuns(beforeLexical, afterLexical).filter((run) => run.length >= 4);
     if (addedRuns.length === 0) continue;
-    for (const other of sourceSentences) {
+    // Cross-sentence moves are local boundary errors. Searching the whole lecture
+    // incorrectly quarantines legitimate terminology corrections merely because
+    // the corrected Buddhist term occurs again much later in the same lecture.
+    for (let otherIndex = Math.max(0, sourceIndex - 2);
+      otherIndex <= Math.min(sourceSentences.length - 1, sourceIndex + 2);
+      otherIndex += 1) {
+      const other = sourceSentences[otherIndex];
       if (other.key === sourceSentence.key) continue;
+      if (other.paragraphIndex !== sourceSentence.paragraphIndex) continue;
       const neighborLexical = lexicalText(other.text);
       if (neighborLexical.length < 4) continue;
       if (addedRuns.some((run) => neighborLexical.includes(run))) {

@@ -1,43 +1,45 @@
-# 四念住第 8 講 production review 狀態
+# 四念住第 8 講完整校稿狀態
 
 日期：2026-10-16（Asia/Taipei）
 
 ## 結論
 
-**IN PROGRESS / CONTENT FAIL 尚未解除 / 不得套用至 `courses/`。**
+**IN PROGRESS / immutable candidate ready / 尚未套用至 `courses/`。**
 
-既有 169 筆候選已保持原 `sourceDigest` 與 `runId`，完成 GX10 Qwen、MiniMax-M3、Whisper 音訊片段與兩輪整句檢查。Eneural 固定 14 案例評測通過，但 169 筆可能含未公開內容；目前沒有足以涵蓋外部 Eneural 雲端傳輸的明確授權，因此 production 批次未執行，manifest 明確標示 `not-run`。
+目前 hash-bound 候選為 runId `9e1c7764-b6dc-4ec6-b62b-86e8e48cc825`，不可覆寫快照位於：
 
-## 證據
+`reviews/evidence/transcript_proofreading/production/四念住/runs/9e1c7764-b6dc-4ec6-b62b-86e8e48cc825/`
 
-- Qwen：169/169，實際模型 `Qwen3.8-27B`，有 `/v1/models` runtime fingerprint，`quorum-eligible`。
-- MiniMax-M3：169/169，API 未回報 actual model／runtime fingerprint，僅 `advisory`。
-- Eneural：production `not-run`；固定安全評測為危險案例 8/8 阻擋、安全案例 6/6 接受。
-- Qwen 批次驗證 exact ID coverage。MiniMax 的一次較大批次曾回傳 23/20，舊 runner 當場 fail closed，該失敗回應未納入最終 artifact；改以 10 筆批次後完成 169/169。現行 runner 已把 coverage mismatch 二分重試抽成具 deterministic test 的共用函式，後續成功證據會保存每次 attempt。
-- compact packet：總數 169、納入人工覆核 169。因缺少有效三方 quorum，沒有任何候選可被自動接受或拒絕；模型 reject 只供排序參考，不能排除人工判定。
-- 音訊：Whisper 169/169；runner 每次從指定 YouTube URL 全新下載暫存音檔，直接以該 bytes 產生音檔 SHA-256 與全部片段，完成後刪除暫存檔。YouTube video ID、來源 URL、yt-dlp 版本、下載命令、metadata digest、來源／音檔時長均寫入 acquisition evidence。音訊 ASR 只作近似讀音證據，不直接證明漢字。
-- Qwen 裁決：實際模型與 runtime fingerprint 已 attested；一般輪為 approve 37／audio-required 90／reject 42，整句輪為 approve 105／audio-required 39／reject 25。
-- MiniMax-M3 裁決：保留為 advisory；一般輪為 approve 33／audio-required 105／reject 31，整句輪為 approve 34／audio-required 102／reject 33。Runner 要求明示 external-data authorization，artifact 保存本次授權 scope。
-- 每筆裁決均綁定 `packetDigest`、完整輸入 `inputDigest`、`audioSha256` 與片段 response digest。`session_08.production-manifest.json` 再以 byte digest 綁定 8 份 production artifacts；`npm run proofread:evidence:audit` 為 12 個 pilot manifests + 1 個 production manifest 全數 valid。
-- 正式 `courses/` 修改：0。
+這一講以公開正式講記、完整音訊 ASR、GX10 Qwen3.8-27B、MiniMax-M3 與獨立 reviewer 交叉處理。模型只提供候選或排序；正式講記、音訊、digest、程式門檻與獨立抽查才是採納依據。
+
+## 現況
+
+- 來源句數：2,136；ID、順序、時間戳與非文字 metadata 保持不變。
+- 候選已套用：1,460 句；尚留 unresolved：222 項。
+- 52/52 聚焦測試通過；成對標點、ledger、source digest、禁錯詞與 immutable snapshot gate 均通過。
+- 最近完整驗證：Node 631 tests／627 pass／0 fail／4 skip；前端 93/93；Vite production build 成功；evidence audit 12 manifests + 1 production manifest valid。
+- 第八輪獨立 reviewer 正逐項檢查 222 個 unresolved；未取得 PASS 前不得升級正式逐字稿。
+- `courses/` 修改：0。
+
+## 關鍵證據
+
+- 正式 PDF SHA-256：`sha256:4f9033175f6d5635f7fbbe47438265edf1112c35fe9e37b5f75581526099d6ba`
+- 正式 PDF 抽取文字 SHA-256：`sha256:6d6c09ba1bcdb4febc63b4ed35bbf7c4db8e6c05546ef272a3187bbcab15e07e`
+- 原始逐字稿檔案 SHA-256：`sha256:a2b41bba0b5613196004c252c7ad2d5aeb081478c84942c2cde20170dd104860`
+- 音訊 SHA-256：`sha256:72b8d87d74b8ba7164555e1879758fae60156b469e8345f2ce94440182203f86`
+- GX10 Qwen runtime fingerprint：`sha256:4ecd3da1ec720103df2825333dab42518df6d78e4accd2d321c7d81d60e7c400`
+- MiniMax 證據保持 advisory；未宣稱為 attested quorum。
 
 ## 品質邊界
 
-- `null` runtime fingerprint 絕不因兩邊同為 `null` 而算作有效綁定。
-- 缺少 Eneural production 票時沒有三模型 quorum，任何項目都不得自動 eligible。
-- 缺少完整有效 quorum 時，任何風險層級的模型 reject 都保留在人工 review packet，以免犧牲校稿召回率。
-- 本檔僅證明模型分流與證據綁定完成，不證明文字、音訊或論義正確。
+- `rawText` 保留原始 ASR 作追溯；品質掃描只判定發布用 `text`。
+- 模型結論不能直接覆蓋 transcript；不確定項目保留 unresolved。
+- 任何新 run 必須寫入 `runs/<runId>/`；不得只依會被覆寫的 latest 檔驗收。
+- 不得把相鄰句內容搬入本句；跨句 guard 保留在同段落前後兩句範圍，避免遠處重複佛典術語造成假陽性。
 
-## 下一步
+## 下一個 gate
 
-1. Codex 逐項裁決 169 筆，先處理模型分歧、法義敏感、整詞重建與修改後仍不通的項目；整句輪已辨認 `after` 仍殘留錯字的案例，不能只套用局部差異。
-2. 對純標點與重複、唯一對應的名相修正做群組抽查；任何異常即展開全組。
-3. 無法從文字唯一判定者保留 `audio-required`，不得推測核准。
-4. 重建本堂 ledger／review queue 證據，重跑 evidence audit、聚焦測試、完整測試與 build。
-5. 本堂內容 gate 通過前，不得開始 302 堂全庫批次。
-
-## 2026-10-16 獨立 review 修復
-
-獨立 reviewer 曾判定 DO NOT APPLY，指出裁決未綁定候選文字、空模型目錄可能被誤認為 attested、音訊來源證據不足、MiniMax 缺明示授權 gate、production evidence 未納入 audit，以及 audio producer 未比對 exact ID set。上述機械與 provenance 缺口已全部修復並由 45 個聚焦測試與 production audit 覆蓋。這只解除 evidence-chain blocker；內容本身仍未完成裁決，因此本檔結論仍是不得套用。
-
-完整 Node suite 在允許測試寫入暫存檔與開啟本機測試 port 的環境下為 622 tests／618 pass／0 fail／4 skip；sandbox 內先前的 2 個失敗分別是 `EPERM` 寫入測試暫存檔與無法啟動 local sync test port，非產品回歸。
+1. 收回第八輪 unresolved 全檢結果；若 FAIL，只增量修正精確 ID 並建立新 immutable run。
+2. 取得 hash-bound 獨立 PASS 後，將該 run 的 candidate 升級為 `courses/四念住/sessions/session_08.json`。
+3. 建立 promotion manifest，綁定原來源、候選、ledger、review queue、獨立 review 與升級後 digest。
+4. 重跑聚焦、完整 Node、前端、build、evidence audit；再 commit/push 更新 PR。

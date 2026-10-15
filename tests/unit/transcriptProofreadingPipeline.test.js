@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   applyDeterministicStyleRules,
+  applySession08GroundedGlossary,
   buildProofreadingLedger,
   computeSourceDigest,
   checkpointMatchesRun,
@@ -19,8 +20,10 @@ import {
   buildProductionReviewProposals,
   buildProductionReviewerEvidence,
   buildAudioEvidenceRequests,
+  alignFullContextAsrEvidence,
   buildAdjudicationReviewItems,
   bindAdjudicationSuggestions,
+  bindReferenceRiskRepairs,
   executeCoverageBoundBatch,
   classifyProposalRisk,
   combineIndependentVerdicts,
@@ -88,6 +91,13 @@ test('deterministic style rules only apply unambiguous Taiwan editorial fixes', 
   ]);
   assert.equal(result.text.includes('做與作'), true, 'ambiguous 做／作 must not be replaced blindly');
   assert.equal(result.text.includes('的地得'), true, 'ambiguous 的／地／得 must not be replaced blindly');
+});
+
+test('session 08 grounded glossary fixes repeated ASR terms without changing legitimate 不靜坐', () => {
+  const fixed = applySession08GroundedGlossary('身念著、落壽、無取蘊、十四隊，但是我們不靜坐的人');
+  assert.equal(fixed.text, '身念住、樂受、五取蘊、十四對，但是我們不靜坐的人');
+  assert.ok(fixed.applied.length >= 4);
+  assert.equal(applySession08GroundedGlossary('但是不靜觀').text, '但是不淨觀');
 });
 
 test('candidate validation preserves IDs, ordering, timestamps, speaker, and source digest', () => {
@@ -225,6 +235,26 @@ test('candidate validation does not call a one-character term correction a cross
   const source = clone(SOURCE);
   source.paragraphs[0].sentences[0].text = '接著說十二緣氣。';
   source.paragraphs[0].sentences[2].text = '十二緣起是重要法義。';
+  const candidate = structuredClone(source);
+  candidate.paragraphs[0].sentences[0].text = '接著說十二緣起。';
+  const ledger = buildProofreadingLedger({
+    source, candidate, model: {}, proposals: [{ sentenceId: 'seg-001', changeClass: 'term',
+      reason: '名相校正', evidence: ['fixture'], confidence: 0.9, reviewRequired: true }],
+  });
+  assert.equal(validateProofreadingCandidate({ source, candidate, ledger }).errors
+    .some((error) => error.code === 'CROSS_SENTENCE_CONTENT_MOVE'), false);
+});
+
+test('candidate validation does not treat a distant repeated canonical term as a boundary move', () => {
+  const source = clone(SOURCE);
+  source.paragraphs.push({
+    sentences: [
+      { id: 'seg-004', start: 9, end: 10, text: '隔開的句子。' },
+      { id: 'seg-005', start: 10, end: 11, text: '繼續隔開。' },
+      { id: 'seg-006', start: 11, end: 12, text: '十二緣起是重要法義。' },
+    ],
+  });
+  source.paragraphs[0].sentences[0].text = '接著說十二緣氣。';
   const candidate = structuredClone(source);
   candidate.paragraphs[0].sentences[0].text = '接著說十二緣起。';
   const ledger = buildProofreadingLedger({
@@ -820,6 +850,35 @@ test('audio evidence requests bind every proposal to source timestamps and diges
   }), /missing source sentence/u);
 });
 
+test('full-context ASR alignment preserves exact proposal coverage and overlapping evidence', () => {
+  const requests = [
+    { id: 'seg-001', start: 10, end: 12, sourceText: '第一句' },
+    { id: 'seg-002', start: 20, end: 22, sourceText: '第二句' },
+  ];
+  const segments = [
+    { id: 0, start: 9.5, end: 10.8, text: '前半' },
+    { id: 1, start: 10.8, end: 12.5, text: '後半' },
+    { id: 2, start: 19.8, end: 22.2, text: '第二句辨識' },
+  ];
+  const aligned = alignFullContextAsrEvidence({ requests, segments, paddingSeconds: 0.5 });
+  assert.deepEqual(aligned, [
+    {
+      id: 'seg-001', sourceText: '第一句', start: 10, end: 12,
+      asrText: '前半 後半', segmentIds: [0, 1],
+    },
+    {
+      id: 'seg-002', sourceText: '第二句', start: 20, end: 22,
+      asrText: '第二句辨識', segmentIds: [2],
+    },
+  ]);
+  assert.throws(() => alignFullContextAsrEvidence({
+    requests: [requests[0], requests[0]], segments,
+  }), /unique request IDs/u);
+  assert.throws(() => alignFullContextAsrEvidence({
+    requests, segments: [{ id: 0, start: 12, end: 11, text: '壞時間' }],
+  }), /invalid ASR segment/u);
+});
+
 test('adjudication suggestions require source/audio binding and exact ID coverage', () => {
   const sourceDigest = computeSourceDigest(SOURCE);
   const proposal = reviewProposal('seg-001', SOURCE.paragraphs[0].sentences[0].text, '候選句', {
@@ -838,6 +897,15 @@ test('adjudication suggestions require source/audio binding and exact ID coverag
   };
   const items = buildAdjudicationReviewItems({ source: SOURCE, packet, audioEvidence });
   assert.equal(items[0].audioAsrText, '候選句');
+  const fullContextItems = buildAdjudicationReviewItems({
+    source: SOURCE,
+    packet,
+    audioEvidence: {
+      ...audioEvidence,
+      schema: 'transcript-proofreading-full-context-asr/v1',
+    },
+  });
+  assert.equal(fullContextItems[0].audioAsrText, '候選句');
   const bound = bindAdjudicationSuggestions({
     items,
     response: { items: [{ id: 'seg-001', decision: 'approve', proposedText: '', code: '音訊與文義相符' }] },
@@ -858,6 +926,32 @@ test('adjudication suggestions require source/audio binding and exact ID coverag
   });
   assert.equal(equivalent.decisions[0].decision, 'approve');
   assert.equal('proposedText' in equivalent.decisions[0], false);
+});
+
+test('reference risk repairs bind exact cluster and sentence coverage', () => {
+  const clusters = [{
+    clusterId: 'risk-001',
+    sourceItems: [{ id: 'seg-001', text: '身念著' }, { id: 'seg-002', text: '下一句' }],
+    referenceText: '身念住下一句',
+  }];
+  const bound = bindReferenceRiskRepairs({
+    clusters,
+    response: { clusters: [{
+      clusterId: 'risk-001',
+      items: [
+        { id: 'seg-001', decision: 'replace', proposedText: '身念住', code: '正式講記唯一對應' },
+        { id: 'seg-002', decision: 'unchanged', code: '原文一致' },
+      ],
+    }] },
+    sourceDigest: 'sha256:source', alignmentDigest: 'sha256:alignment',
+  });
+  assert.equal(bound.decisions.length, 2);
+  assert.equal(bound.decisions[0].proposedText, '身念住');
+  assert.throws(() => bindReferenceRiskRepairs({
+    clusters,
+    response: { clusters: [{ clusterId: 'risk-001', items: [] }] },
+    sourceDigest: 'sha256:source', alignmentDigest: 'sha256:alignment',
+  }), /coverage mismatch/u);
 });
 
 test('risk classifier distinguishes punctuation, approved mappings, and suspicious rewrites', () => {
