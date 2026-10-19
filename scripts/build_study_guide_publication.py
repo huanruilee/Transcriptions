@@ -57,14 +57,63 @@ def load_source_pages(page_range_str: str) -> str:
             texts.append(p_path.read_text(encoding="utf-8"))
     return "\n".join(texts)
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from render_study_guide_html import md_to_html
+
+def build_publication_for_session(session_id: str) -> Path:
+    PUBLICATIONS_DIR.mkdir(parents=True, exist_ok=True)
+    session_data = load_session(session_id)
+    sid = str(session_id).zfill(2) if session_id.isdigit() else str(session_id)
+    md_file = PUBLICATIONS_DIR / f"lecture_{sid}_study_guide.md"
+    
+    if not md_file.exists():
+        # Generate initial template from session metadata if md does not exist yet
+        title = session_data.get("title", f"第 {sid} 講")
+        audio_url = session_data.get("audioUrl", "")
+        template = f"""# 《入中論善顯密意疏》講記
+
+* **論著**：月稱論師 造《入中論》 ｜ 宗喀巴大師 造《善顯密意疏》
+* **漢譯**：法尊法師
+* **講授**：見悲青增格西
+* **講次**：第 {sid} 講
+* **音訊來源**：[官方原聲 MP3 廣播流]({audio_url})
+
+---
+
+## 【本講導讀與研讀大綱】
+
+### 一、 本講宗旨提要
+（待研討補充）
+
+### 二、 義理研讀綱要
+1. **核心要旨**
+   * （研讀綱要待補）
+
+---
+
+## 【經論講記本文】
+
+"""
+        for p in session_data.get("paragraphs", []):
+            start_sec = p.get("start", 0.0)
+            text = "".join(s.get("text", "") for s in p.get("sentences", []))
+            template += f"[▶ {format_timestamp(start_sec)[1:-1]}]({audio_url}#t={int(start_sec)}) {text}\n\n"
+        md_file.write_text(template, encoding="utf-8")
+        print(f"已建立初版導讀講記 Markdown: {md_file}")
+
+    html_file = md_to_html(md_file)
+    print(f"已生成對應獨立播放網頁: {html_file}")
+    return html_file
+
 def main():
     parser = argparse.ArgumentParser(description="生成高水準研讀版講記")
-    parser.add_argument("session_id", help="例如 01, 02A, 02B")
+    parser.add_argument("session_id", help="例如 01, 02A, 02B, 29A")
     args = parser.parse_args()
 
-    PUBLICATIONS_DIR.mkdir(parents=True, exist_ok=True)
     session_data = load_session(args.session_id)
     print(f"成功加載 Session: {args.session_id}, 包含 {len(session_data.get('paragraphs', []))} 個原始段落。")
+    out_html = build_publication_for_session(args.session_id)
+    print(f"已成功完成發布版本構建：{out_html}")
 
 if __name__ == "__main__":
     main()

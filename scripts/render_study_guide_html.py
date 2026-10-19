@@ -16,8 +16,10 @@ from pathlib import Path
 def md_to_html(md_path: Path) -> Path:
     text = md_path.read_text(encoding="utf-8")
 
-    # Extract audio URL
-    audio_match = re.search(r'\((https://buddha\.flyday\.com\.tw/[^)]+\.MP3[^)]*)\)', text)
+    # Extract audio URL - handle URLs containing parens e.g. p97(29).MP3
+    audio_match = re.search(r'\]\((https?://buddha\.flyday\.com\.tw/[^\s]+?\.MP3)\)', text, re.IGNORECASE)
+    if not audio_match:
+        audio_match = re.search(r'(https?://buddha\.flyday\.com\.tw/[^\s)>]+?\.MP3)', text, re.IGNORECASE)
     audio_url = audio_match.group(1).split('#')[0] if audio_match else ""
 
     # Title extraction
@@ -25,14 +27,13 @@ def md_to_html(md_path: Path) -> Path:
     title = title_match.group(1) if title_match else md_path.stem
 
     # Replace timestamp links: [▶ 01:46](...#t=106) -> <button class="ts-btn" onclick="playAt(106, this)">▶ 01:46</button>
+    # Match through to #t=(\d+) so that parenthesized audio URLs in markdown links don't truncate
     def replace_ts(m):
         ts_text = m.group(1)
-        url = m.group(2)
-        sec_match = re.search(r'#t=(\d+)', url)
-        seconds = sec_match.group(1) if sec_match else "0"
+        seconds = m.group(2)
         return f'<button class="ts-btn" onclick="playAt({seconds}, this)">{ts_text}</button>'
 
-    content = re.sub(r'\[(▶\s*\d{2}:\d{2})\]\(([^)]+)\)', replace_ts, text)
+    content = re.sub(r'\[(▶\s*\d{2}:\d{2})\]\((?:.+?)#t=(\d+)\)', replace_ts, text)
 
     # Process blockquotes
     lines = content.split('\n')
@@ -54,7 +55,8 @@ def md_to_html(md_path: Path) -> Path:
 
     content = '\n'.join(new_lines)
 
-    # Convert headings
+    # Convert headings - ensure double newlines around them so following lines aren't fused
+    content = re.sub(r'^(#{1,3})\s+(.+)$', r'\n\n\1 \2\n\n', content, flags=re.MULTILINE)
     content = re.sub(r'^###\s+(.+)$', r'<h3>\1</h3>', content, flags=re.MULTILINE)
     content = re.sub(r'^##\s+(.+)$', r'<h2>\1</h2>', content, flags=re.MULTILINE)
     content = re.sub(r'^#\s+(.+)$', r'<h1>\1</h1>', content, flags=re.MULTILINE)
@@ -71,9 +73,30 @@ def md_to_html(md_path: Path) -> Path:
             continue
         if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr'):
             paragraphs.append(block)
-        elif block.startswith('* ') or block.startswith('- '):
-            items = [f'<li>{line[2:].strip()}</li>' for line in block.split('\n') if line.startswith(('* ', '- '))]
-            paragraphs.append(f'<ul class="meta-list">{"".join(items)}</ul>')
+        elif any(line.strip().startswith(('* ', '- ')) for line in block.split('\n')):
+            # Handle nested list
+            list_html = ['<ul class="meta-list">']
+            in_nested = False
+            for line in block.split('\n'):
+                stripped = line.strip()
+                if not stripped:
+                    continue
+                is_indented = line.startswith(('  ', '\t'))
+                item_content = re.sub(r'^[\*\-\s]+', '', stripped)
+                if is_indented:
+                    if not in_nested:
+                        list_html.append('<ul class="nested-list">')
+                        in_nested = True
+                    list_html.append(f'<li>{item_content}</li>')
+                else:
+                    if in_nested:
+                        list_html.append('</ul>')
+                        in_nested = False
+                    list_html.append(f'<li>{item_content}</li>')
+            if in_nested:
+                list_html.append('</ul>')
+            list_html.append('</ul>')
+            paragraphs.append('\n'.join(list_html))
         elif re.match(r'^\d+\.\s', block):
             items = [f'<li>{re.sub(r"^\d+\.\s*", "", line).strip()}</li>' for line in block.split('\n') if re.match(r'^\d+\.\s', line)]
             paragraphs.append(f'<ol class="ordered-list">{"".join(items)}</ol>')
