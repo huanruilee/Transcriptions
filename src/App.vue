@@ -79,6 +79,16 @@
         </button>
 
         <button
+          id="download-transcript-btn"
+          class="header-btn"
+          :title="downloadTranscriptTitle"
+          :disabled="isLoading || paragraphs.length === 0"
+          @click="handleDownloadTranscript"
+        >
+          📄 逐字稿
+        </button>
+
+        <button
           id="review-modal-btn"
           class="header-btn"
           title="講次品質評分與回報"
@@ -259,6 +269,11 @@
           @seek="handleTOCSeek"
         />
 
+        <TranscriptOverview
+          v-if="currentTranscriptOverview"
+          :overview="currentTranscriptOverview"
+        />
+
         <section v-if="sourceOutline" class="source-outline" aria-label="原始課程提綱">
           <h2 class="source-outline-heading">原始課程提綱</h2>
           <ol class="source-outline-list">
@@ -304,6 +319,23 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
+            <button
+              id="download-transcript-mobile-btn"
+              class="session-download-btn"
+              :title="downloadTranscriptTitle"
+              :disabled="isLoading || paragraphs.length === 0"
+              @click="handleDownloadTranscript"
+            >
+              📄 下載逐字稿
+            </button>
+            <div
+              v-if="currentAgentReviewStatus === 'completed'"
+              class="agent-review-summary"
+              data-testid="agent-review-summary"
+            >
+              🤖 Agent 已審核 {{ currentAgentReviewedCount.toLocaleString() }} 句；
+              <strong>{{ currentAgentUncertainCount.toLocaleString() }} 句仍需人工判定</strong>
+            </div>
 
             <p v-if="isPrivateAudio" class="audio-access-notice">限內部網路預覽；公開訪客仍可閱讀逐字稿。</p>
 
@@ -322,7 +354,7 @@
               <iframe
                 id="youtube-iframe"
                 class="youtube-iframe"
-                :src="`https://www.youtube.com/embed/${currentYoutubeVideoId}?enablejsapi=1&origin=${originUrl}`"
+                :src="youtubeIframeSrc"
                 title="YouTube 影音講記"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -330,6 +362,10 @@
                 allowfullscreen
               ></iframe>
             </div>
+            <p
+              v-if="currentTranscriptStatus === 'not-transcribed'"
+              class="transcript-pending-notice"
+            >此影片已上架，逐字稿尚待製作。</p>
           </header>
 
           <div
@@ -627,13 +663,23 @@ import TOCAccordion from './components/TOCAccordion.vue';
 import TOCBottomSheet from './components/TOCBottomSheet.vue';
 import EndOfSessionCard from './components/EndOfSessionCard.vue';
 import TouchContextMenu from './components/TouchContextMenu.vue';
+import TranscriptOverview from './components/TranscriptOverview.vue';
 import { searchSentences, navigateMatch, type SearchMatch } from './composables/useSearchEngine';
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
+import {
+  buildTranscriptFilename,
+  downloadTranscriptFile,
+  formatTranscriptText,
+} from './composables/useExportTranscript';
 import { handleGlobalKeyDown } from './composables/useKeyboardShortcuts';
 import { splitVerseText, type VerseAnnotation } from './composables/useVerseHighlight';
 import { selectVerseAnnotations } from './utils/verseAnnotations';
 import { seekAndPlayAudio } from './js/audioPlayback.js';
+import {
+  buildTranscriptOverview,
+  type TranscriptOverview as TranscriptOverviewData,
+} from './composables/useTranscriptOverview';
 
 const playerStore = usePlayerStore();
 const courseStore = useCourseStore();
@@ -649,6 +695,7 @@ const searchInputRef = ref<HTMLInputElement | null>(null);
 const tocAccordionRef = ref<{ revealCurrentPosition?: () => Promise<void> } | null>(null);
 const sourceOutline = ref<any>(null);
 const currentDiscussionQuestions = ref<any[]>([]);
+const currentTranscriptOverview = ref<TranscriptOverviewData | null>(null);
 const isAudioLoading = ref(false);
 const isCourseChooserOpen = ref(false);
 const isChoosingCourse = ref(false);
@@ -706,7 +753,10 @@ const currentCourseMaster = computed(() => {
 });
 
 const filteredSessions = computed(() => {
-  return courseStore.filterSessions(sidebarFilter.value);
+  return naturalSortSessions(courseStore.filterSessions(sidebarFilter.value).map(s => ({
+    ...s,
+    session_id: s.id,
+  })));
 });
 
 const sortedAllSessions = computed(() => {
@@ -721,6 +771,9 @@ const navInfo = computed(() => {
 });
 
 const currentPublicationState = ref('');
+const currentAgentReviewStatus = ref('');
+const currentAgentReviewedCount = ref(0);
+const currentAgentUncertainCount = ref(0);
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
 });
@@ -752,9 +805,17 @@ const currentTranscriptLabel = computed(() => {
     'review-ready': '🟡 待審閱',
     candidate: '🟡 候選稿',
     'candidate-review-required': '🟡 待審閱候選稿',
+    'not-transcribed': '🎬 影片已上架・逐字稿待製作',
     unmarked: '⚪ 尚未標示校勘狀態',
   };
   return labels[currentTranscriptStatus.value] || `⚪ ${currentTranscriptStatus.value}`;
+});
+
+const downloadTranscriptTitle = computed(() => {
+  if (currentTranscriptStatus.value === 'not-transcribed') {
+    return '此講次尚無逐字稿可下載';
+  }
+  return '下載目前講次的純文字逐字稿（含時間碼）';
 });
 
 const overviewSessions = computed(() => {
@@ -773,7 +834,23 @@ const activeTOCChain = computed(() => {
 
 const currentAudioUrl = ref('');
 const currentYoutubeVideoId = ref('');
+const youtubeAutoplayStart = ref<number | null>(null);
+const youtubePendingStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
+const youtubeIframeSrc = computed(() => {
+  const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
+  let start = youtubeAutoplayStart.value;
+  if (start === null && playerStore.activeSentenceId) {
+    const active = playerStore.sentences.find((sentence) => sentence.id === playerStore.activeSentenceId);
+    start = active ? Math.max(0, Math.floor(active.start_time ?? active.start ?? 0)) : null;
+  }
+  if (start !== null) {
+    params.set('autoplay', '1');
+    params.set('start', String(start));
+    params.set('mute', '0');
+  }
+  return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
+});
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
@@ -866,6 +943,34 @@ function handleExportNotes() {
   );
   const filename = `${currentCourseTitle.value}_第${currentSessionId.value}講_研讀筆記.md`;
   downloadMarkdownFile(filename, md);
+}
+
+function handleDownloadTranscript() {
+  if (isLoading.value) {
+    uiStore.showToast('逐字稿尚未載入完成，請稍後再試。', 'warning');
+    return;
+  }
+  if (paragraphs.value.length === 0) {
+    uiStore.showToast('此講次尚無逐字稿可下載。', 'warning');
+    return;
+  }
+
+  const sessionTitle = currentSessionInfo.value?.title || `第 ${currentSessionId.value} 講`;
+  const content = formatTranscriptText(
+    {
+      courseTitle: currentCourseTitle.value,
+      sessionId: currentSessionId.value,
+      sessionTitle,
+      pageRange: currentSessionInfo.value?.page || '',
+      lastUpdated: currentLastUpdated.value,
+      transcriptStatus: currentTranscriptStatus.value,
+    },
+    paragraphs.value,
+    currentTranscriptOverview.value,
+  );
+  const filename = buildTranscriptFilename(currentCourseTitle.value, currentSessionId.value);
+  downloadTranscriptFile(filename, content);
+  uiStore.showToast(`已下載「${sessionTitle}」逐字稿。`, 'success');
 }
 
 // 播放/暫停雙模控制 (支援原生 Audio 與 YouTube Video)
@@ -976,6 +1081,10 @@ function seekToSentence(sentenceId: string) {
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
   playerStore.updateTime(time);
+  if (activeMediaType.value === 'video/youtube') {
+    youtubePendingStart.value = Math.max(0, Number(time) || 0);
+  }
+
   
   // 1. 原生音訊跳轉播放 (僅針對 audio/mp3 課程，避免 video/youtube 依賴 Google Drive 產生 format error)
   if (activeMediaType.value === 'audio/mp3') {
@@ -1004,6 +1113,12 @@ function seekToTime(time: number) {
       } catch (e) {}
     }
     const ytIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
+    // Fallback for environments where the external IFrame API is unavailable:
+    // let Vue update the iframe URL from this user-gesture path so YouTube
+    // owns autoplay and audio initialization at the requested timestamp.
+    if (ytIframe && (!(window as any).YT || !ytPlayer)) {
+      youtubeAutoplayStart.value = Math.max(0, Math.floor(time));
+    }
     if (ytIframe && ytIframe.contentWindow) {
       ytIframe.contentWindow.postMessage(
         JSON.stringify({
@@ -1040,11 +1155,13 @@ function setupYouTubePlayer() {
   if (typeof window === 'undefined') return;
 
   // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
-  if (!(window as any).YT) {
+  if (!(window as any).YT && !document.querySelector('script[data-youtube-iframe-api]')) {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScript = document.getElementsByTagName('script')[0];
-    firstScript?.parentNode?.insertBefore(tag, firstScript);
+    tag.dataset.youtubeIframeApi = 'true';
+    // Append directly to <head>; the bundle script may not have a usable
+    // parent node in every production/runtime context.
+    document.head.appendChild(tag);
   }
 
   const existingIframe = document.getElementById('youtube-iframe') as HTMLIFrameElement;
@@ -1131,6 +1248,15 @@ function setupYouTubePlayer() {
   }, 100);
 }
 
+function acceptYoutubeTime(time: number): boolean {
+  const pending = youtubePendingStart.value;
+  if (pending !== null) {
+    if (Math.abs(time - pending) > 0.75) return false;
+    youtubePendingStart.value = null;
+  }
+  return true;
+}
+
 function startYTTracker() {
   stopYTTracker();
   ytTrackerInterval = setInterval(() => {
@@ -1138,7 +1264,7 @@ function startYTTracker() {
       try {
         const t = ytPlayer.getCurrentTime();
         if (typeof t === 'number' && !isNaN(t)) {
-          playerStore.updateTime(t);
+          if (acceptYoutubeTime(t)) playerStore.updateTime(t);
         }
         const d = ytPlayer.getDuration();
         if (d && !isNaN(d) && d > 0) {
@@ -1164,7 +1290,7 @@ function onYouTubeMessage(event: MessageEvent) {
     if (!data) return;
     if (data.event === 'infoDelivery' && data.info) {
       if (typeof data.info.currentTime === 'number') {
-        playerStore.updateTime(data.info.currentTime);
+        if (acceptYoutubeTime(data.info.currentTime)) playerStore.updateTime(data.info.currentTime);
       }
       if (typeof data.info.duration === 'number' && data.info.duration > 0) {
         mediaDuration.value = data.info.duration;
@@ -1344,7 +1470,13 @@ async function loadRealCourseData() {
     if (resCourse.ok) {
       const data = await resCourse.json();
       currentPublicationState.value = data.transcriptPublicationState || '';
-      const sessions = (data.sessions || []).map((s: any) => ({
+      const sessions = [
+        ...(data.sessions || []),
+        ...(data.pendingSessions || []).map((session: any) => ({
+          ...session,
+          pendingTranscript: true,
+        })),
+      ].map((s: any) => ({
         id: s.sessionId,
         displaySessionId: s.displaySessionId || s.sessionId,
         title: s.title || `第 ${s.sessionId} 講`,
@@ -1357,6 +1489,8 @@ async function loadRealCourseData() {
         jsonUrl: s.jsonUrl,
         audioUrl: s.audioUrl,
         youtubeVideoId: s.youtubeVideoId,
+        youtubeUrl: s.youtubeUrl,
+        pendingTranscript: Boolean(s.pendingTranscript),
       }));
       courseStore.setSessions(sessions);
     }
@@ -1388,16 +1522,44 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 async function loadSession(sessionId: string) {
   hasMediaEnded.value = false;
   stopYTTracker();
+  youtubePendingStart.value = null;
+  youtubeAutoplayStart.value = null;
   playerStore.setSentences([]);
   currentSessionId.value = sessionId;
   window.location.hash = `session-${sessionId}`;
   isLoading.value = true;
+  currentTranscriptOverview.value = null;
+
+  const pendingSession = courseStore.sessions.find(
+    (session) => session.id === sessionId && session.pendingTranscript,
+  );
+  if (pendingSession) {
+    sourceOutline.value = null;
+    verseAnnotations.value = {};
+    currentAudioUrl.value = pendingSession.audioUrl || '';
+    currentYoutubeVideoId.value = pendingSession.youtubeVideoId || '';
+    currentLastUpdated.value = pendingSession.lastUpdated || '';
+    currentAgentReviewStatus.value = '';
+    currentAgentReviewedCount.value = 0;
+    currentAgentUncertainCount.value = 0;
+    currentDiscussionQuestions.value = [];
+    currentTranscriptOverview.value = null;
+    paragraphs.value = [];
+    mediaDuration.value = 0;
+    isMediaPlaying.value = false;
+    annotationStore.loadSessionAnnotations(sessionId);
+    isLoading.value = false;
+    if (pendingSession.mediaType === 'video/youtube') {
+      setTimeout(() => setupYouTubePlayer(), 100);
+    }
+    return;
+  }
 
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
     const url = `${baseUrl}${cPath}/sessions/session_${sessionId}.json`;
-    const res = await fetch(url);
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
@@ -1426,7 +1588,13 @@ async function loadSession(sessionId: string) {
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
+    currentAgentReviewStatus.value = data._meta?.agentReviewStatus || '';
+    currentAgentReviewedCount.value = data._meta?.agentReviewTotalSentences
+      ? data._meta.agentReviewTotalSentences - (data._meta.agentReviewUncertainSentences || 0)
+      : 0;
+    currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
+    currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
 
     let sentCounter = 0;
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
@@ -1447,6 +1615,8 @@ async function loadSession(sessionId: string) {
           verseAnnotations: verseAnnotations.value[s.id] || [],
           reviewNeeded: s.reviewNeeded ?? false,
           uncertainty: s.uncertainty ?? null,
+          agentReviewStatus: s.agentReviewStatus ?? null,
+          agentReviewConfidence: s.agentReviewConfidence ?? null,
         })),
       };
     });
@@ -1584,7 +1754,14 @@ function handleSentenceClick(s: any) {
   freezeAutoScroll(600);
   playerStore.resetScrollLock();
   playerStore.activeSentenceId = s.id;
-  seekToTime(s.start_time);
+  const clickedSentence = playerStore.sentences.find((sentence) => sentence.id === s.id) || s;
+  const sentenceTime = Number(clickedSentence.start_time ?? clickedSentence.start ?? 0);
+  // Keep sentence clicks playable even when the external YouTube API has not
+  // initialized yet; this assignment is reactive and survives Vue re-renders.
+  if (currentYoutubeVideoId.value) {
+    youtubeAutoplayStart.value = Math.max(0, Math.floor(sentenceTime));
+  }
+  seekToTime(sentenceTime);
   const el = document.getElementById(s.id);
   if (el && !isAutoScrollFrozen()) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2053,6 +2230,19 @@ if (typeof window !== 'undefined') {
   align-items: center;
 }
 
+.agent-review-summary {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid #0f766e;
+  border-radius: 6px;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+.agent-review-summary strong {
+  color: #b45309;
+}
+
 .meta-tag {
   font-size: 0.82rem;
   padding: 3px 10px;
@@ -2084,6 +2274,12 @@ if (typeof window !== 'undefined') {
   border-color: rgba(245, 158, 11, 0.35);
 }
 
+.status-not-transcribed {
+  color: #1e40af;
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
 .status-unmarked {
   color: var(--text-muted);
   background: var(--surface-bg);
@@ -2093,6 +2289,12 @@ if (typeof window !== 'undefined') {
 .audio-access-notice {
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.transcript-pending-notice {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .audio-loading-status {
