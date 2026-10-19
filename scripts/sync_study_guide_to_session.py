@@ -29,7 +29,7 @@ def compute_source_digest(transcript: dict) -> str:
     """計算與 scripts/content_overview_pipeline.mjs 等價的 sourceDigest"""
     sentences = []
     for pi, p in enumerate(transcript.get("paragraphs", [])):
-        heading = p.get("heading")
+        heading = str(p.get("heading") or "").strip()
         for si, s in enumerate(p.get("sentences", [])):
             text = re.sub(r"\s+", " ", str(s.get("text", "")).strip())
             if not text:
@@ -138,6 +138,7 @@ def sync_session(sid: str):
     orig_end = session.get("paragraphs", [{}])[-1].get("end", 3915.0)
 
     new_paragraphs = []
+    last_heading = None
     for i, rp in enumerate(raw_paras):
         p_id = f"p_{i + 1}"
         start_t = float(rp["start"])
@@ -168,7 +169,12 @@ def sync_session(sid: str):
             })
             cur_t = s_end
 
-        h_val = f"【科判】{rp['heading']}" if rp["heading"] else None
+        if rp["heading"] and rp["heading"] != last_heading:
+            h_val = f"【科判】{rp['heading']}"
+            last_heading = rp["heading"]
+        else:
+            h_val = None
+
         new_paragraphs.append({
             "id": p_id,
             "heading": h_val,

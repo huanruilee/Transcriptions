@@ -394,6 +394,17 @@
               <span class="toc-anchor-ts">{{ formatTime(p.tocAnchorNode.timestamp) }}</span>
             </div>
 
+            <!-- 段首原音時間標籤 -->
+            <button
+              v-if="typeof p.start === 'number' && p.start >= 0"
+              type="button"
+              class="paragraph-ts-badge"
+              :title="'跳轉至此段原音 ' + formatTime(p.start)"
+              @click.stop="seekParagraph(p)"
+            >
+              ▶ {{ formatTime(p.start) }}
+            </button>
+
             <span
               v-for="s in p.sentences"
               :id="s.id"
@@ -1077,6 +1088,18 @@ function seekToSentence(sentenceId: string) {
   }
 }
 
+function seekParagraph(paragraph: any) {
+  const firstSentence = paragraph.sentences?.[0];
+  const targetTime = typeof paragraph.start === 'number'
+    ? paragraph.start
+    : (firstSentence?.start_time ?? firstSentence?.start ?? 0);
+  if (firstSentence?.id) {
+    playerStore.activeSentenceId = firstSentence.id;
+    document.getElementById(firstSentence.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  seekToTime(targetTime);
+}
+
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
@@ -1606,6 +1629,7 @@ async function loadSession(sessionId: string) {
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
         tocAnchorNode: anchorNode,
+        start: typeof p.start === 'number' ? p.start : firstStart,
         sentences: (p.sentences || []).map((s: any) => ({
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
@@ -2460,6 +2484,33 @@ if (typeof window !== 'undefined') {
   font-size: 0.72rem;
   font-weight: 600;
   font-family: monospace;
+}
+
+.paragraph-ts-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-color, #8b1e1e);
+  background: rgba(139, 30, 30, 0.08);
+  border: 1px solid rgba(139, 30, 30, 0.22);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-right: 6px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: 0.08em;
+  line-height: 1.25;
+  transition: all 0.15s ease;
+}
+
+.paragraph-ts-badge:hover {
+  background: var(--accent-color, #8b1e1e);
+  color: #fff;
+  border-color: var(--accent-color, #8b1e1e);
+  transform: translateY(-1px);
 }
 
 .sentence {
