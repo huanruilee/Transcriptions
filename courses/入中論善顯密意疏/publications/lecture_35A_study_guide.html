@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《入中論善顯密意疏》講記</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《入中論善顯密意疏》講記</h1>
+<ul class="meta-list">
+<li><strong>論著</strong>：月稱論師 造《入中論》 ｜ 宗喀巴大師 造《善顯密意疏》</li>
+<li><strong>漢譯</strong>：法尊法師</li>
+<li><strong>講授</strong>：見悲青增格西</li>
+<li><strong>講次</strong>：第 35A 堂 (上節)</li>
+<li><strong>日期</strong>：2017 年 3 月 25 日</li>
+<li><strong>音訊來源</strong>：[官方原聲 MP3 廣播流](https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170325-A%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p108(35).MP3)</li>
+<li><strong>底本頁碼</strong>：第 108 頁倒數第 6 行至第 110 頁初</li>
+<li><strong>科判對應</strong>：己二、釋第六現前地 ➔ 戊二、破他生 ➔ 申三、別釋二諦體（酉二、釋勝義諦續；戌二、證成以不見為見） ➔ 申四、明破他生無世妨難</li>
+</ul>
+<blockquote class="verse-quote">
+<p>💡 <strong>聽讀小提示</strong>：點擊每個段落開頭的「`[▶ 分:秒]`」時間戳，即可直接在瀏覽器中跳轉至格西該段錄音的原聲點播放！</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【本講導讀與研讀大綱】</h2>
+<h3>一、 本講宗旨提要</h3>
+<p class="reading-para">本講研析宗喀巴大師《善顯密意疏》卷六「別釋二諦體」中「證成以不見為見」之深細義理，並正式開啟「申四、明破他生無世妨難」。格西首先藉由生動生活之喻──「洗眼鏡」與「見虛空」，剖析佛陀現證勝義諦時「以不見為見」的真實義涵：所謂不見並非全無所知之斷滅，而是如所有智徹底遠離五蘊二取戲論，唯覺法性，名為見法。隨後深入解讀《入二諦經》聖教量，闡明真勝義諦超出身語意行境、超出分別言說、遠離能知所知二相，乃至超過具一切勝相之智境，以一切二取法皆是虛妄欺誑故。在此基礎上，格西剖析論敵（實事師）辯論受挫後訴諸世間常識「事實勝於雄辯」之頑固心理，精闢指出：世間凡夫從無正量通達自性他生，凡夫口言他生如同醉漢胡言，非正量所成立；親因果（種芽、父子）在世間俱生共知中從不執為自相孤立之他體。篇末格西依月稱頌文「若許世間是正量，世見真實聖何為，所修聖道復何用，愚人為量亦非理。世間一切非正量，故真實時無世難」，嚴正破斥世間於真實義為量之四大過患，並澄清「世間常見於真實義一切非量」絕非全盤否定世間名言量，引《顯句論》奠定觀待安立能量所量之正見基石。</p>
+<h3>二、 義理研讀綱要</h3>
+<ul class="meta-list">
+<li>1. <strong>洗眼鏡喻與「以不見為見」之正確認識（108 頁末）</strong>：</li>
+<ul class="nested-list">
+<li>佛現證勝義諦之「見」：如同檢視鏡片時，絲毫塵垢戲論不存即名為乾淨；如所有智不觸有法（不見五蘊世俗相），唯覺法性真實義，即名為見勝義諦。</li>
+<li>《般若攝頌》虛空喻：虛空本質為「唯遮質礙」；見虛空者，若有所遮質礙理應可見而不可見，以不見質礙即名見虛空，絕非如眼見藍色之有實法可見。</li>
+</ul>
+<li>2. <strong>《入二諦經》深義：真勝義諦超出一切言說與二相（108 頁末～109 頁）</strong>：</li>
+<ul class="nested-list">
+<li>若勝義諦是身語意所行境，則未離戲論，反成世俗諦；真勝義諦無眾多差別，不生不滅，離能說所說、離能知所知。</li>
+<li>能知所知唯於名言識前安立：現見真實義之根本智雖可假立為能知、真勝義為所知，但在根本智現前親證時，心境一如，如水注水，全無能所二相之分別。</li>
+</ul>
+<li>3. <strong>超過一切智境與二取相法之欺誑性（109 頁中）</strong>：</li>
+<ul class="nested-list">
+<li>經云「真勝義諦超過具一切勝相一切智境，一切諸法皆是虛妄欺誑之法」：隨逐言說分別便現起心境二相，二取法皆欺誑；唯見真實義之不欺誑智離一切二相戲論。</li>
+<li>結論：說真實義時，唯諸聖者根本智乃親證之量，餘非聖者皆非親證之量，故約聖者智破他生時，全無世間妨難。</li>
+</ul>
+<li>4. <strong>實事師「事實勝於雄辯」抗辯與醉漢之喻（109 頁下）</strong>：</li>
+<ul class="nested-list">
+<li>論敵辯論難敵中觀正理，遂退守世間常情，以「世人現見他生、事實勝於雄辯」抗衡。</li>
+<li>格西辨析：世人言「有他生」如同醉漢譫語，世間未曾有現量或比量正量親證自性他生。世間指大樹云「我所栽」、指高兒云「我所生」，俱生常態從不執親因果為自相異體之他；自性他生唯是分別邪宗教理洗腦之妄執。</li>
+</ul>
+<li>5. <strong>科判申四：明破他生無世妨難與四過破斥（109 頁末～110 頁初）</strong>：</li>
+<ul class="nested-list">
+<li>頌曰：「若許世間是正量，世見真實聖何為，所修聖道復何用，愚人為量亦非理。世間一切非正量，故真實時無世難。」</li>
+<li>四大過患：若世間於真實義為正量，(1) 世間凡夫無始以來即已現見真實義；(2) 凡夫應已自斷無明解脫；(3) 現證真實何須更求其餘聖者；(4) 勤修無上聖道復何所用？許愚夫於真實為量非理。</li>
+<li>辨正：「世間常見於真實義一切非量」是觀待真實義而言，非否定世間名言量；引《顯句論》安立觀待之能量所量。</li>
+</ul>
+</ul>
+<h3>三、 重點法相辨析</h3>
+<ul class="meta-list">
+<li><strong>【以不見為見】</strong>：非全無知覺或斷滅盲無所見，而是根本智徹照法性時，無明所增益之自相戲論全無所得，以不見自相戲論立為見離戲論真理。</li>
+<li><strong>【真勝義諦離能知所知】</strong>：在世俗名言觀察中，可立根本智為能知心、勝義法性為所知境；然在聖者根本定親證實相之當下，心境無二，超越能取所取二相。</li>
+<li><strong>【事實勝於雄辯之陷阱】</strong>：實事師自知正理難通，轉而以世俗多數人之感覺習慣為擋箭牌。然無明錯亂之直覺非量，不能成立自相實有。</li>
+<li><strong>【親因果法非自相他】</strong>：世間父殖兒生、撒種成樹，常人於親因果自然相續受用，俱生不執為絕緣異體；唯有自續派及外道以分別心強立自性他生。</li>
+<li><strong>【世間常見於真實義一切非量】</strong>：宗大師精確解經：月稱論師並非全盤推翻世間名言量（如見瓶知瓶、種田收穀皆具名言量），而是指世間常態感官對於「諸法自性空之真實義」全無抉擇正量。</li>
+</ul>
+<h3>四、 課後思考與研討問題</h3>
+<ol class="ordered-list"><li>佛陀及聖者現證勝義諦時「以不見為見」，宗大師為何以「虛空唯遮質礙」及「洗眼鏡」為喻？這與凡夫「無所見」有何本質差別？</li><li>《入二諦經》云勝義諦「離能知所知、超出一切智境」，若勝義諦離能知，為何聖者又能通達空性？名言安立與根本定實證應如何融會？</li><li>當論敵以「世間常人都看見他生，事實勝於雄辯」向中觀宗發難時，格西如何以「醉漢與清醒者」為喻瓦解論敵的立足點？</li><li>月稱菩薩在頌文中提出若許世間是真實義正量，將招致哪四大邏輯過患？這如何徹底斷絕實事師的避難所？</li><li>後代部分學者將頌文「世間一切非正量」解讀為中觀宗全盤否定世間有一切正量，宗大師如何破斥這種偏執並引《顯句論》安立觀待之能量所量？</li></ol>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>1. 洗眼鏡之喻與「以不見為見」之深意</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1, this)">▶ 00:01</button> 我們今天從底本第 108 頁倒數第 6 行看起。這裡疏文正討論到一個極為深邃的問題：「證成以不見為見」。前面論敵質難說：既然根本智現證真實義時，滅盡一切能取、所取二相，體性豈非全無可見？那諸佛究竟是如何見勝義諦的呢？宗大師回答：真實見前二取皆滅，實不以二取相見，然而「無可見即名曰見」。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(89, this)">▶ 01:29</button> 初地菩薩現證空性時，在根本定中已能漸次遠離戲論，但唯有成佛之時，才能徹底究竟熄滅一切二取習氣。佛智通達勝義諦時，是完全沒有任何戲論，以「完全不見世俗二取相」的方式而證見真理。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(153, this)">▶ 02:33</button> 這就像我們洗眼鏡：當你把眼鏡拿去沖洗擦拭，檢查鏡片乾不乾淨時，你是在看眼鏡上有沒有污垢、斑點；當鏡片上「什麼斑點都沒有」的時候，這副眼鏡就是最乾淨、最完美的狀態！現證勝義諦也是如此，根本智照了法性，沒有絲毫自性二取妄相顯現，這種「不見戲論」，就是最清淨的「見離戲論真理」。底本引《般若攝頌》之虛空喻：世人說見虛空，虛空乃唯遮質礙，若有質礙理應可見而不可見，以不見質礙即名見虛空，絕非像眼睛看見藍色那樣有一個實體法可見。</p>
+<h3>2. 《入二諦經》引證：真勝義諦超出言說與身語意境</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(232, this)">▶ 03:52</button> 為了證成「以不見為見」，宗大師引《入二諦經》說：「天子，若勝義中，真勝義諦是身語意所行境性者，則彼不入勝義諦數，成世俗諦性。天子，然勝義中，真勝義諦超出一切言說，無有差別，不生、不滅，離於能說、所說、能知、所知。」這段經文分量極重，開示出二諦的分水嶺。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(316, this)">▶ 05:16</button> 西藏各大教派在探討這段時常區分「真勝義」與「順勝義（相似勝義）」。有些宗派認為，唯有無間道、解脫道根本智現前照了的勝義才是真勝義諦，比量所通達的只是順勝義；而我們格魯派宗喀巴大師則釐清：就所通達的「空性境」本質而言，比量通達的空性與現量現證的空性完全是一模一樣的法性，並無二致。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(414, this)">▶ 06:53</button> 所謂「超出言說、無差別、不生不滅」，是指在「現證當下的心識狀態」：比量通達時帶有義總分別戲論，而現證空性之根本智則徹底超出分別言說之網；在勝義法性前，既無瓶空與桌空之實體差別，亦無生滅來去之相，如水注水，一味無別。</p>
+<h3>3. 現見真實義智不見蘊等世俗戲論</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(550, this)">▶ 09:10</button> 疏文進一步剖析經義：如果現見勝義之智不是以「不見蘊等世俗相」而見，倘若五蘊世俗境相仍舊能在聖智前顯現如身語意所行之境，那麼此智就根本沒有脫離戲論！既然未離戲論，所見者就不是真勝義諦，反而墮入世俗戲論之中。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(642, this)">▶ 10:41</button> 這就明確建立了中觀應成派的不共宗規：通達瓶子空性的根本智，在正現證空性時，決定見不到瓶子！以「不見瓶子世俗相、不見二取戲論」，方能立為最高之真見。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(709, this)">▶ 11:49</button> 那麼經中所說的「離於能知、所知」，又該如何理解？宗大師精準化解此諍：現見真實義之根本智，在名言觀察中固然可以假立為「能知之智」，真勝義諦亦可假立為「所知之境」；但在根本智現親證時，心境二取之相唯於世間名言識前安立，根本智自身絕不現起能知所知之對立分別。</p>
+<h3>4. 超過一切智境與二取相法之虛妄欺誑</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(805, this)">▶ 13:25</button> 經文接著開示：「天子，真勝義諦，乃至超過具一切勝相一切智境，非如所言真勝義諦。一切諸法皆是虛妄欺誑之法。」這裡的「境」字以上，明示勝義諦超過一切智境；「非如所言真勝義諦」，說明何以超過彼境之理。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(871, this)">▶ 14:31</button> 如果凡夫口說「這是勝義諦」，心裡隨逐言說分別，便立刻生起心與境各自分立的二相。一切二取相法本質皆是虛妄欺誑，而如所有智親證真實義時，絲毫不與欺誑二相相觸，唯專注於離戲法性，故說真勝義諦超乎言說分別境界。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(961, this)">▶ 16:01</button> 佛陀通達空性時，若不能正確理解離戲無分別之理，便會陷入斷見或常見：有人妄說佛無空性智，有人妄說佛無盡所有智。宗大師此處正本清源：二智同體相續，於一剎那智周遍所知輪，根本智不見世俗二相，乃是為了清淨證悟諸法實相。</p>
+<h3>5. 聖者為親證真理之量與破他生無世難</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1050, this)">▶ 17:30</button> 疏文歸結道：這一切經教皆是「現見真實義之智不見蘊等世俗法」之堅強佐證。因此在根本智前，有事、無事等一切二取法之戲論皆定非有，自性不可得故。由此當知：說真實義時，唯諸聖者根本智乃是親證之量，其餘非聖者皆非親證之量！</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1120, this)">▶ 18:40</button> 這個結論是貫通下文破他生爭辯的樞紐！論敵一直想用世間凡夫的感覺來質難中觀宗，但論師嚴正立定界線：真實義唯以聖智為量，世間凡夫根本未證真實，故約聖者見勝義智破他生時，全無世間妨難可言。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1258, this)">▶ 20:58</button> 前面破他生時，中觀宗以深密正理一一遮破自性他生，論敵在因明辯論上理屈詞窮，自知雄辯辯不過中觀宗，於是轉向世俗常情尋求寄託。</p>
+<h3>6. 實事師之抗辯：事實勝於雄辯與世間執他生之心理</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1330, this)">▶ 22:10</button> 論敵心裡想：「我雖然辯才比不過你龍樹、月稱，但事實勝於雄辯！天下凡夫誰不親眼看到種子生出芽來？世間人都承許有他生，你中觀宗說無他生，就是違背全天下世間人的共識，自招世間正量的妨難！」</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1437, this)">▶ 23:57</button> 格西在此帶領大家深入思維：世人真的執著他生嗎？世人口中所說的「他生」，究竟是不是成立事物的正量？如果中觀宗破他生真的違背了世間正量，那中觀宗就無法立足；因此我們必須徹底追究：世間人到底有沒有通達「自性他生」的正量！</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1536, this)">▶ 25:36</button> 格西打了一個極其生動的譬喻：這就像在台北街頭做民調，有人說「台北市民都主張某種謬論」，仔細一查，原來都是深夜在路邊喝醉酒的醉漢在那裡胡言亂語，神智清醒的常人根本不會這樣講！醉漢的胡話能代表台北人的正量嗎？世間凡夫在無明覆蔽下口說他生，亦同於醉漢醉語，根本沒有量識支持。</p>
+<h3>7. 醉漢喻與俱生執：世間常人俱生不執親因果為自相異體</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1630, this)">▶ 27:10</button> 更深一層觀察：世間未受哲學宗派洗腦的常人，在俱生常態中，到底會不會把親因果執著為「自相相異的他體」？事實上完全不會！</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1720, this)">▶ 28:39</button> 農人種下一粒麥種，長成參天大樹，農人會指著大樹高興地說：「這棵樹是我親手栽的！」父親生了兒子，會指著高大的兒子說：「這是我生的孩子！」如果世間人把種子跟樹、父身跟兒子當成自性各別、毫無干連的異體他物，就像張三跟李四一樣彼此孤立，父親怎麼可能說「這是我生的」？</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1802, this)">▶ 30:02</button> 因此，在世間常態經驗中，因與果之間具有親密的相續受用感，俱生從不執為「自相實體之他」。所謂執著自相他生者，純粹是中觀自續派、唯識派等哲學宗教派系，以分別邪執妄加增益的教理執著，根本不是世間俱生常態的正量。</p>
+<h3>8. 科判申四：明破他生無世妨難與世間為量之四大過患</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(1911, this)">▶ 31:51</button> 論敵既然把自相他生當作真實不欺誑的真理，在邏輯上他就必須把「他生」歸類到勝義諦的範疇；但他自己又不敢承認他生是勝義法，口口聲聲說是世俗諦。世俗諦一切皆是虛妄欺誑，自相實體與世俗假法水火不容。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(2083, this)">▶ 34:43</button> 世人看見有他生，如同患白內障、飛蚊症的眼疾患者看見空中亂髮飄浮，這是眼疾錯亂識所現，絕非清淨正量所見。因此論敵以世間眼見來抗拒中觀破勝義他生，完全站不住腳。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(2229, this)">▶ 37:09</button> 底本第 109 頁末，科判正式進入：<strong>申四、明破他生無世妨難</strong>。宗大師揭示：如果論敵在破勝義他生時想要舉世間經驗來作妨難，就必須先承認「世間常見於真實義亦是正量」！</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(2669, this)">▶ 44:29</button> 頌曰：「<strong>若許世間是正量，世見真實聖何為，所修聖道復何用，愚人為量亦非理。世間一切非正量，故真實時無世難。</strong>」這首頌文展現了極其犀利的辯證鋒芒！</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(2799, this)">▶ 46:39</button> 月稱論師指出四大不可挽回的謬誤：假若世間常人看見真實義是正量，第一、世間凡夫從無始生死以來早就現見真實義了；第二、凡夫既然無始見真實，理應早已斷除根本無明成佛；第三、若凡夫自能知真實，何須更求佛陀與聖者開導；第四、菩薩歷劫辛勞勤求聖道復有何用？承認世間愚夫在真實義上是正量，於理絕難成立！</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(2906, this)">▶ 48:26</button> 結論斬釘截鐵：在觀察真實義（勝義實相）時，世間常見於真實義全非正量。既然世間常識對真實義非量，中觀宗依勝義正理抉擇諸法無他生時，便絲毫沒有世間妨難之可言！</p>
+<h3>9. 辨析「世間常見於真實義一切非量」與安立觀待之能量所量</h3>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(3002, this)">▶ 50:02</button> 翻到第 110 頁，宗大師特別針對後代學者在此處所犯的兩種極端偏差進行糾正。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(3101, this)">▶ 51:41</button> 疏文云：「有說此宗既云『世間一切非正量』，是全不許為量，故非善宗。有說此宗極為善哉。二俱未解論師所許，妄為解說徒自現醜！」第一派人誹謗中觀宗，以為中觀宗連世間吃飯穿衣、眼見瓶柱的正量都全部否定，批評中觀是不講道理的惡宗；第二派人反倒拍手叫好，自以為中觀宗撥無一切量，墮入大斷滅見。大師直斥這兩派都完全未解月稱論師真義。</p>
+<p class="reading-para"><button class="ts-btn" onclick="playAt(3187, this)">▶ 53:07</button> 月稱菩薩所說的「世間一切非正量」，是指「世間常見於真實義一切非量」，是指世間感官在觀待宇宙究竟實相時完全不是量，絕不是在總相上全盤否定世間名言量！大師引《顯句論》明示：「破有自性，安立觀待之能量所量。」中觀宗破的是自性實有的能量所量，而在緣起世俗名言中，觀待安立的眼識能見、瓶柱所見，秩序井然，毫無紊亂。下一節我們將繼續探討世間妨難之真正成立條件與卷六圓滿教理。</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊文字前時間戳跳轉</div>
+    <audio id="main-audio" controls src="https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170325-A%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p108(35).MP3">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActive = null;
+
+    function playAt(seconds, btn) {
+      if (currentActive) {
+        currentActive.closest('.reading-para')?.classList.remove('active-para');
+      }
+      currentActive = btn;
+      const para = btn.closest('.reading-para');
+      if (para) {
+        para.classList.add('active-para');
+      }
+      audio.currentTime = seconds;
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>
