@@ -61,6 +61,12 @@
       padding: 8px 12px;
       border-radius: 6px;
     }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
     .reading-para.active-para {
       background: #fef9c3;
     }
@@ -202,8 +208,8 @@
 <hr class="divider"/>
 <h2>【正文講記】</h2>
 <h3>1. 課堂開場與底本誦讀</h3>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(14, this)">▶ 00:14</button> 請大家翻開《入中論善顯密意疏》底本第 6 頁。在正式研讀正文之前，首先是宗喀巴大師所造的卷首禮讚文。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(29, this)">▶ 00:29</button> 我們大家一起合掌念誦這段禮讚偈頌：</p>
+<p class="reading-para clickable-para" onclick="playPara(14, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(14, this)">▶ 00:14</button> 請大家翻開《入中論善顯密意疏》底本第 6 頁。在正式研讀正文之前，首先是宗喀巴大師所造的卷首禮讚文。</p>
+<p class="reading-para clickable-para" onclick="playPara(29, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(29, this)">▶ 00:29</button> 我們大家一起合掌念誦這段禮讚偈頌：</p>
 <blockquote class="verse-quote">
 <p>**「我敬禮皈依恩師妙音與聖者父子足，</p>
 <p>一切深廣善說藏，普為世間不請友。</p>
@@ -225,45 +231,45 @@
 </blockquote>
 <hr class="divider"/>
 <h3>2. 宗喀巴大師降誕之功勳與中觀修學次第</h3>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(133, this)">▶ 02:13</button> 宗喀巴大師示現降誕於世間，對於如來教法有著不可磨滅的廣大貢獻。首先在密續方面，密法的修持極為深奧，若要將其整理成一套條理井然、層次分明的實修系統，是一件極其困難之事；而宗大師撰述了大量的密法論著，使得密乘行者有了最清淨可靠的修學軌則。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(170, this)">▶ 02:50</button> 其次在顯教方面，尤其是中觀甚深正見的抉擇，雖歷代大德亦多有著述，但能如宗大師解析得如此細密透徹、無微不至者，實屬罕見。對於修學者而言，《中論》是通達空性最為核心的一部論典。總體而言，欲修學空性，其根本依憑是佛陀所宣說的《般若經》；然而要正確理解《般若經》的甚深密意，唯有透過龍樹菩薩的《中論》，此外別無第二條道路。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(232, this)">▶ 03:52</button> 宗大師正是基於此一宗旨，撰述了闡釋《中論》的巨著《中論釋·正理海》。然而《中論》文義高深險遠，初學者難以直接趨入；為此，月稱菩薩特別造了《入中論》作為導引階梯。宗大師為令後世學者能無倒通達月稱菩薩的究竟意趣，便進一步撰述了我們當前所研讀的這部《入中論善顯密意疏》。</p>
+<p class="reading-para clickable-para" onclick="playPara(133, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(133, this)">▶ 02:13</button> 宗喀巴大師示現降誕於世間，對於如來教法有著不可磨滅的廣大貢獻。首先在密續方面，密法的修持極為深奧，若要將其整理成一套條理井然、層次分明的實修系統，是一件極其困難之事；而宗大師撰述了大量的密法論著，使得密乘行者有了最清淨可靠的修學軌則。</p>
+<p class="reading-para clickable-para" onclick="playPara(170, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(170, this)">▶ 02:50</button> 其次在顯教方面，尤其是中觀甚深正見的抉擇，雖歷代大德亦多有著述，但能如宗大師解析得如此細密透徹、無微不至者，實屬罕見。對於修學者而言，《中論》是通達空性最為核心的一部論典。總體而言，欲修學空性，其根本依憑是佛陀所宣說的《般若經》；然而要正確理解《般若經》的甚深密意，唯有透過龍樹菩薩的《中論》，此外別無第二條道路。</p>
+<p class="reading-para clickable-para" onclick="playPara(232, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(232, this)">▶ 03:52</button> 宗大師正是基於此一宗旨，撰述了闡釋《中論》的巨著《中論釋·正理海》。然而《中論》文義高深險遠，初學者難以直接趨入；為此，月稱菩薩特別造了《入中論》作為導引階梯。宗大師為令後世學者能無倒通達月稱菩薩的究竟意趣，便進一步撰述了我們當前所研讀的這部《入中論善顯密意疏》。</p>
 <hr class="divider"/>
 <h3>3. 卷首禮讚文義解與宗大師五部中觀論著</h3>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(320, this)">▶ 05:20</button> 在卷首禮讚文中，第一句「我敬禮皈依恩師妙音與聖者父子足」──這當中的「妙音」，指的是本尊文殊師利菩薩；「聖者父子」，指的則是龍樹菩薩及其嫡傳法嗣聖天（提婆）菩薩。聖天菩薩完整繼承了龍樹菩薩的甚深中觀密意，於法義傳承上如同父子相承，故尊稱為「聖者父子」。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(372, this)">▶ 06:12</button> 頌文云：「一切深廣善說藏，普為世間不請友。」諸佛菩薩不待眾生啟請，便以無緣大悲主動拔濟有情，此即「不請友」。宗大師隨後依序頂禮開顯龍樹不共關要的佛護論師、月稱論師以及寂天論師，明確標示出應成中觀的正統血脈。頌末更道出造論動機：「此間欲宣彼宗者，我為除其惡說垢，因眾請故以淨語，當即廣釋入中論。」宗大師是為了掃除當時西藏各地對中觀見的錯謬偏執，應清淨善士之殷重祈請，以清淨之語開演此疏。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(796, this)">▶ 13:16</button> 宗大師一生抉擇空性正見，留下了五部極為關鍵的大作：除《菩提道次第廣論》與《略論》中的毗缽舍那章之外，尚有《中論釋·正理海》、《入中論善顯密意疏》以及《辨了不了義善說藏》。這幾部論著相輔相成，是修學中觀正見不可或缺的指南。</p>
+<p class="reading-para clickable-para" onclick="playPara(320, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(320, this)">▶ 05:20</button> 在卷首禮讚文中，第一句「我敬禮皈依恩師妙音與聖者父子足」──這當中的「妙音」，指的是本尊文殊師利菩薩；「聖者父子」，指的則是龍樹菩薩及其嫡傳法嗣聖天（提婆）菩薩。聖天菩薩完整繼承了龍樹菩薩的甚深中觀密意，於法義傳承上如同父子相承，故尊稱為「聖者父子」。</p>
+<p class="reading-para clickable-para" onclick="playPara(372, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(372, this)">▶ 06:12</button> 頌文云：「一切深廣善說藏，普為世間不請友。」諸佛菩薩不待眾生啟請，便以無緣大悲主動拔濟有情，此即「不請友」。宗大師隨後依序頂禮開顯龍樹不共關要的佛護論師、月稱論師以及寂天論師，明確標示出應成中觀的正統血脈。頌末更道出造論動機：「此間欲宣彼宗者，我為除其惡說垢，因眾請故以淨語，當即廣釋入中論。」宗大師是為了掃除當時西藏各地對中觀見的錯謬偏執，應清淨善士之殷重祈請，以清淨之語開演此疏。</p>
+<p class="reading-para clickable-para" onclick="playPara(796, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(796, this)">▶ 13:16</button> 宗大師一生抉擇空性正見，留下了五部極為關鍵的大作：除《菩提道次第廣論》與《略論》中的毗缽舍那章之外，尚有《中論釋·正理海》、《入中論善顯密意疏》以及《辨了不了義善說藏》。這幾部論著相輔相成，是修學中觀正見不可或缺的指南。</p>
 <hr class="divider"/>
 <h3>4. 切入第六「現前地」之科判結構與名義訓釋</h3>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1250, this)">▶ 20:50</button> 接著我們看底本第 63 頁，科判正式進入：<strong>己二、釋第六現前地</strong>。本章分為四個部分：庚一、明此地訓釋與慧度增勝；庚二、讚慧度功德；庚三、觀甚深緣起真實；庚四、結述此地功德。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1274, this)">▶ 21:14</button> 首先看到庚一的頌文：</p>
+<p class="reading-para clickable-para" onclick="playPara(1250, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1250, this)">▶ 20:50</button> 接著我們看底本第 63 頁，科判正式進入：<strong>己二、釋第六現前地</strong>。本章分為四個部分：庚一、明此地訓釋與慧度增勝；庚二、讚慧度功德；庚三、觀甚深緣起真實；庚四、結述此地功德。</p>
+<p class="reading-para clickable-para" onclick="playPara(1274, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1274, this)">▶ 21:14</button> 首先看到庚一的頌文：</p>
 <blockquote class="verse-quote">
 <p>**「現前住於正定心，正等覺法皆現前，</p>
 <p>現見緣起真實性，由住般若得滅定。」**</p>
 </blockquote>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1295, this)">▶ 21:35</button> 第六地為何命名為「現前地」？疏文提出了兩種深層理由：<br/>第一種理由：「正等覺法皆現前」──因為此地菩薩的般若波羅蜜多極為增勝，智慧產生了重大躍升，距離佛果之正等覺法愈發接近，此「現前」作「接近、臨近」解釋。<br/>第二種理由：「現見緣起真實性」──此地菩薩於殊勝定中，能現量照見順逆十二因緣之無自性真空實性。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1714, this)">▶ 28:34</button> 此處學者或有疑問：初地菩薩早已現證空性，乃至二地、三地、四地、五地亦皆現證空性，何以唯獨第六地特別冠以「現前」之名？這必須明白：凡夫入見道初地，是由分別心比量通達跨入無分別現證，那固然是一次巨大的飛躍；但到了第六地，行者圓滿獲得了最勝般若波羅蜜多，此時現證空性的深度、廣度與力量，與前諸地不可同日而語，這是一次智慧本質上的質變，故特以「現前」彰顯其殊勝。</p>
+<p class="reading-para clickable-para" onclick="playPara(1295, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1295, this)">▶ 21:35</button> 第六地為何命名為「現前地」？疏文提出了兩種深層理由：<br/>第一種理由：「正等覺法皆現前」──因為此地菩薩的般若波羅蜜多極為增勝，智慧產生了重大躍升，距離佛果之正等覺法愈發接近，此「現前」作「接近、臨近」解釋。<br/>第二種理由：「現見緣起真實性」──此地菩薩於殊勝定中，能現量照見順逆十二因緣之無自性真空實性。</p>
+<p class="reading-para clickable-para" onclick="playPara(1714, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1714, this)">▶ 28:34</button> 此處學者或有疑問：初地菩薩早已現證空性，乃至二地、三地、四地、五地亦皆現證空性，何以唯獨第六地特別冠以「現前」之名？這必須明白：凡夫入見道初地，是由分別心比量通達跨入無分別現證，那固然是一次巨大的飛躍；但到了第六地，行者圓滿獲得了最勝般若波羅蜜多，此時現證空性的深度、廣度與力量，與前諸地不可同日而語，這是一次智慧本質上的質變，故特以「現前」彰顯其殊勝。</p>
 <hr class="divider"/>
 <h3>5. 讚歎慧度功德：如目導盲之喻</h3>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1602, this)">▶ 26:42</button> 請見底本第 64 頁，科判來到：<strong>庚二、讚慧度功德</strong>。此處說明布施、持戒、忍辱、精進、靜慮等前五度資糧，必須依賴般若波羅蜜多，方能趣向無上佛果。頌曰：</p>
+<p class="reading-para clickable-para" onclick="playPara(1602, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1602, this)">▶ 26:42</button> 請見底本第 64 頁，科判來到：<strong>庚二、讚慧度功德</strong>。此處說明布施、持戒、忍辱、精進、靜慮等前五度資糧，必須依賴般若波羅蜜多，方能趣向無上佛果。頌曰：</p>
 <blockquote class="verse-quote">
 <p>**「如有目者能引導，無量盲人到止境，</p>
 <p>如是智慧能攝取，無眼功德趣勝果。」**</p>
 </blockquote>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1625, this)">▶ 27:05</button> 如同世間一位雙目完好、視力明澈的壯士，能夠帶領成百上千位雙目失明的盲人，平安穿越險道抵達目的地；修道之時亦復如是。布施、持戒等前五度，本質上猶如「無眼」之功德，自身缺乏明辨解脫正道與非道的能力；唯有在般若智慧的攝持與導引之下，前五度的萬行功德才能不墮世間福報，真正轉向究竟佛果聖位。如《般若攝頌》所云：「無量盲人無引導，不能見道入城廓；闕慧五度無眼導，無力能證菩提果。」</p>
+<p class="reading-para clickable-para" onclick="playPara(1625, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1625, this)">▶ 27:05</button> 如同世間一位雙目完好、視力明澈的壯士，能夠帶領成百上千位雙目失明的盲人，平安穿越險道抵達目的地；修道之時亦復如是。布施、持戒等前五度，本質上猶如「無眼」之功德，自身缺乏明辨解脫正道與非道的能力；唯有在般若智慧的攝持與導引之下，前五度的萬行功德才能不墮世間福報，真正轉向究竟佛果聖位。如《般若攝頌》所云：「無量盲人無引導，不能見道入城廓；闕慧五度無眼導，無力能證菩提果。」</p>
 <hr class="divider"/>
 <h3>6. 甚深難題剖析：第六地「圓滿三種慧學」之密意</h3>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1895, this)">▶ 31:35</button> 接下來疏文提到一句極為關鍵之語：<strong>「如是當知此地圓滿三種慧學。」</strong>此處所謂的「三種慧學」，在歷來諸大講承中有著極多不同的解說，甚至常有牽強附會之處。格西在此為我們揭櫫了一種極為合乎論典次第的殊勝會通：</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(1959, this)">▶ 32:39</button> 我們回顧前幾地的修學重點：<br/>首先，在第四地（焰慧地）時，菩薩精勤修持三十七菩提分法，較前諸地尤為增上，此時成就了對<strong>粗細三十七道品</strong>精通圓滿的智慧。<br/>其次，在第五地（難勝地）時，經云菩薩「極善善巧諸諦」，達到了對<strong>粗細四聖諦</strong>通達無礙的智慧，並且在第五地圓滿了最勝靜慮波羅蜜多（修所成奢摩他徹底清淨）。<br/>最後，來到第六地（現前地），菩薩依止前五地清淨之最勝定心，進一步圓滿了對<strong>順逆十二因緣</strong>之甚深空性智慧。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(2161, this)">▶ 36:01</button> 如此一來：第四地圓滿三十七道品之慧、第五地圓滿四諦之慧、第六地圓滿緣起甚深空性之慧；三種慧學至第六地全數齊備無缺！同時，第五地已成就最高之靜慮（奢摩他），止越殊勝，觀（毗缽舍那）亦隨之水漲船高。正因定慧雙運達到極致，第六地菩薩才能由此趣入不共聲聞、獨覺的大乘甚深「滅盡定」。</p>
-<p class="reading-para"><button class="ts-btn" onclick="playAt(2411, this)">▶ 40:11</button> 此三種慧學之承接次第，將前幾地之地相、波羅蜜多與智慧增勝絲絲入扣地融為一體，展現出中觀見修次第無與倫比的嚴謹與圓滿。本堂課先為大家引導第六現前地之總體規模，下一堂課我們將繼續深入消釋疏文，逐句解開深意。</p>
+<p class="reading-para clickable-para" onclick="playPara(1895, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1895, this)">▶ 31:35</button> 接下來疏文提到一句極為關鍵之語：<strong>「如是當知此地圓滿三種慧學。」</strong>此處所謂的「三種慧學」，在歷來諸大講承中有著極多不同的解說，甚至常有牽強附會之處。格西在此為我們揭櫫了一種極為合乎論典次第的殊勝會通：</p>
+<p class="reading-para clickable-para" onclick="playPara(1959, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1959, this)">▶ 32:39</button> 我們回顧前幾地的修學重點：<br/>首先，在第四地（焰慧地）時，菩薩精勤修持三十七菩提分法，較前諸地尤為增上，此時成就了對<strong>粗細三十七道品</strong>精通圓滿的智慧。<br/>其次，在第五地（難勝地）時，經云菩薩「極善善巧諸諦」，達到了對<strong>粗細四聖諦</strong>通達無礙的智慧，並且在第五地圓滿了最勝靜慮波羅蜜多（修所成奢摩他徹底清淨）。<br/>最後，來到第六地（現前地），菩薩依止前五地清淨之最勝定心，進一步圓滿了對<strong>順逆十二因緣</strong>之甚深空性智慧。</p>
+<p class="reading-para clickable-para" onclick="playPara(2161, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2161, this)">▶ 36:01</button> 如此一來：第四地圓滿三十七道品之慧、第五地圓滿四諦之慧、第六地圓滿緣起甚深空性之慧；三種慧學至第六地全數齊備無缺！同時，第五地已成就最高之靜慮（奢摩他），止越殊勝，觀（毗缽舍那）亦隨之水漲船高。正因定慧雙運達到極致，第六地菩薩才能由此趣入不共聲聞、獨覺的大乘甚深「滅盡定」。</p>
+<p class="reading-para clickable-para" onclick="playPara(2411, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2411, this)">▶ 40:11</button> 此三種慧學之承接次第，將前幾地之地相、波羅蜜多與智慧增勝絲絲入扣地融為一體，展現出中觀見修次第無與倫比的嚴謹與圓滿。本堂課先為大家引導第六現前地之總體規模，下一堂課我們將繼續深入消釋疏文，逐句解開深意。</p>
 <hr class="divider"/>
 <p class="reading-para"><em>（本講結束，第 01 講完）</em></p>
   </div>
 
   <div class="sticky-player">
-    <div class="info" id="player-status">🎧 隨選隨聽：點擊文字前時間戳跳轉</div>
-    <audio id="main-audio" controls src="https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20160521%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p63(1).MP3">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20160521%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p63(1).MP3">
       您的瀏覽器不支援 HTML5 音訊標籤。
     </audio>
   </div>
@@ -271,18 +277,37 @@
   <script>
     const audio = document.getElementById('main-audio');
     const status = document.getElementById('player-status');
-    let currentActive = null;
+    let currentActivePara = null;
 
-    function playAt(seconds, btn) {
-      if (currentActive) {
-        currentActive.closest('.reading-para')?.classList.remove('active-para');
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
       }
-      currentActive = btn;
-      const para = btn.closest('.reading-para');
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
       if (para) {
+        currentActivePara = para;
         para.classList.add('active-para');
       }
-      audio.currentTime = seconds;
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
       audio.play().then(() => {
         const m = Math.floor(seconds / 60);
         const s = Math.floor(seconds % 60);
