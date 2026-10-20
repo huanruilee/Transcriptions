@@ -31,7 +31,7 @@ def md_to_html(md_path: Path) -> Path:
     def replace_ts(m):
         ts_text = m.group(1)
         seconds = m.group(2)
-        return f'<button class="ts-btn" onclick="playAt({seconds}, this)">{ts_text}</button>'
+        return f'<button class="ts-btn" onclick="event.stopPropagation(); playAt({seconds}, this)">{ts_text}</button>'
 
     content = re.sub(r'\[(▶\s*\d{2}:\d{2})\]\((?:.+?)#t=(\d+)\)', replace_ts, text)
 
@@ -103,7 +103,12 @@ def md_to_html(md_path: Path) -> Path:
         elif block.startswith('---'):
             paragraphs.append('<hr class="divider"/>')
         else:
-            paragraphs.append(f'<p class="reading-para">{block.replace(chr(10), "<br/>")}</p>')
+            ts_match = re.search(r'playAt\((\d+),\s*this\)', block)
+            if ts_match:
+                sec = ts_match.group(1)
+                paragraphs.append(f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
+            else:
+                paragraphs.append(f'<p class="reading-para">{block.replace(chr(10), "<br/>")}</p>')
 
     body_html = '\n'.join(paragraphs)
 
@@ -169,6 +174,12 @@ def md_to_html(md_path: Path) -> Path:
       transition: background 0.3s ease;
       padding: 8px 12px;
       border-radius: 6px;
+    }}
+    .reading-para.clickable-para {{
+      cursor: pointer;
+    }}
+    .reading-para.clickable-para:hover {{
+      background: #f5f5f4;
     }}
     .reading-para.active-para {{
       background: #fef9c3;
@@ -251,8 +262,8 @@ def md_to_html(md_path: Path) -> Path:
   </div>
 
   <div class="sticky-player">
-    <div class="info" id="player-status">🎧 隨選隨聽：點擊文字前時間戳跳轉</div>
-    <audio id="main-audio" controls src="{audio_url}">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="{audio_url}">
       您的瀏覽器不支援 HTML5 音訊標籤。
     </audio>
   </div>
@@ -260,18 +271,37 @@ def md_to_html(md_path: Path) -> Path:
   <script>
     const audio = document.getElementById('main-audio');
     const status = document.getElementById('player-status');
-    let currentActive = null;
+    let currentActivePara = null;
 
-    function playAt(seconds, btn) {{
-      if (currentActive) {{
-        currentActive.closest('.reading-para')?.classList.remove('active-para');
+    function playPara(seconds, paraEl, evt) {{
+      if (evt) {{
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
       }}
-      currentActive = btn;
-      const para = btn.closest('.reading-para');
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }}
+
+    function playAt(seconds, btnOrPara) {{
+      if (currentActivePara) {{
+        currentActivePara.classList.remove('active-para');
+      }}
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
       if (para) {{
+        currentActivePara = para;
         para.classList.add('active-para');
       }}
-      audio.currentTime = seconds;
+      const applySeek = () => {{
+        try {{
+          audio.currentTime = seconds;
+        }} catch (e) {{}}
+      }};
+      if (audio.readyState >= 1) {{
+        applySeek();
+      }} else {{
+        audio.addEventListener('loadedmetadata', applySeek, {{ once: true }});
+        audio.load();
+      }}
       audio.play().then(() => {{
         const m = Math.floor(seconds / 60);
         const s = Math.floor(seconds % 60);

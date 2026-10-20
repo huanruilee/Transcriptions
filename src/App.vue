@@ -556,6 +556,7 @@
           class="native-audio"
           v-show="activeMediaType === 'audio/mp3'"
           controls
+          preload="metadata"
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
@@ -1001,12 +1002,24 @@ function toggleMediaPlay() {
   }
 }
 
+function isSameAudioSrc(audioEl: HTMLAudioElement, url: string): boolean {
+  if (!url) return false;
+  const attr = audioEl.getAttribute('src');
+  if (attr === url) return true;
+  if (!audioEl.src) return false;
+  try {
+    return decodeURIComponent(audioEl.src) === decodeURIComponent(url);
+  } catch {
+    return audioEl.src.toLowerCase().includes(url.toLowerCase());
+  }
+}
+
 function playMedia() {
   if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+      if (!isSameAudioSrc(audioEl, currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
@@ -1114,7 +1127,7 @@ function seekToTime(time: number) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+      if (!isSameAudioSrc(audioEl, currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
