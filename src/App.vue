@@ -483,7 +483,7 @@
               :data-testid="`verbatim-drawer-${p.id}`"
             >
               <div class="verbatim-drawer-header">
-                <span class="verbatim-drawer-title">💬 課堂原話對照（適度潤飾口語逐字稿・點擊單句聽原音、連擊兩下可校對）</span>
+                <span class="verbatim-drawer-title">💬 課堂原話對照（逐字忠實原話・僅校錯別字與語氣詞・點擊單句聽原音、連擊兩下可校對）</span>
                 <button
                   type="button"
                   class="verbatim-drawer-close"
