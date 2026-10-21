@@ -9,12 +9,30 @@ render_study_guide_html.py
 3. 嚴格比照法師講記排版美學（紅字大標題、典雅襯線字體、偈頌引言框、研讀大綱專區）。
 """
 
+import json
 import re
 import sys
 from pathlib import Path
 
+def format_mmss(seconds: float) -> str:
+    sec = max(0, int(seconds))
+    return f"{sec // 60:02d}:{sec % 60:02d}"
+
+def highlight_quotes(text: str) -> str:
+    return re.sub(
+        r'(「[^」]+」|『[^』]+』)',
+        r'<span class="treatise-quote">\1</span>',
+        text
+    )
+
 def md_to_html(md_path: Path) -> Path:
     text = md_path.read_text(encoding="utf-8")
+    sid = md_path.stem.replace("lecture_", "").replace("_study_guide", "")
+    verbatim_path = md_path.parent.parent / "verbatim" / f"verbatim_{sid}.json"
+    verbatim_map = {}
+    if verbatim_path.exists():
+        vdata = json.loads(verbatim_path.read_text(encoding="utf-8"))
+        verbatim_map = vdata.get("paragraphs", {})
 
     # Extract audio URL - handle URLs containing parens e.g. p97(29).MP3
     audio_match = re.search(r'\]\((https?://buddha\.flyday\.com\.tw/[^\s]+?\.MP3)\)', text, re.IGNORECASE)
@@ -67,12 +85,23 @@ def md_to_html(md_path: Path) -> Path:
 
     # Paragraphs
     paragraphs = []
+    para_counter = 0
     for block in content.split('\n\n'):
         block = block.strip()
         if not block:
             continue
         if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr'):
-            paragraphs.append(block)
+            if block.startswith('<h2>【正文講記】</h2>') and verbatim_map:
+                paragraphs.append(
+                    '<div class="body-header-row">'
+                    '<h2>【正文講記】</h2>'
+                    '<button type="button" id="toggle-all-verbatim" class="verbatim-global-btn" onclick="toggleAllVerbatim(this)">'
+                    '💬 展開全部課堂原話'
+                    '</button>'
+                    '</div>'
+                )
+            else:
+                paragraphs.append(block)
         elif any(line.strip().startswith(('* ', '- ')) for line in block.split('\n')):
             # Handle nested list
             list_html = ['<ul class="meta-list">']
@@ -106,7 +135,52 @@ def md_to_html(md_path: Path) -> Path:
             ts_match = re.search(r'playAt\((\d+),\s*this\)', block)
             if ts_match:
                 sec = ts_match.group(1)
-                paragraphs.append(f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
+                para_counter += 1
+                p_id = f"p_{para_counter}"
+                v_sents = verbatim_map.get(p_id, [])
+                if v_sents:
+                    toggle_btn = (
+                        f'<button type="button" class="verbatim-toggle-btn" '
+                        f'data-target="drawer-{p_id}" '
+                        f'onclick="event.stopPropagation(); toggleVerbatimDrawer(\'drawer-{p_id}\', this)">'
+                        f'💬 對照課堂原話 ({len(v_sents)}句) ▾</button>'
+                    )
+                    block_with_btn = re.sub(
+                        r'(<button class="ts-btn"[^>]+>[^<]+</button>)',
+                        r'\1' + toggle_btn,
+                        block,
+                        count=1
+                    )
+                    v_items = []
+                    for vs in v_sents:
+                        v_start = vs.get("start", 0)
+                        v_mmss = format_mmss(v_start)
+                        v_spk = vs.get("speaker", "")
+                        spk_cls = "spk-student" if "學員" in v_spk else "spk-geshe"
+                        spk_html = f'<span class="v-spk {spk_cls}">【{v_spk}】</span>' if v_spk else ''
+                        v_txt = highlight_quotes(vs.get("text", ""))
+                        v_items.append(
+                            f'<div class="v-item" onclick="event.stopPropagation(); playAt({v_start}, this)">'
+                            f'<span class="v-ts">[{v_mmss}]</span>{spk_html}<span class="v-txt">{v_txt}</span>'
+                            f'</div>'
+                        )
+                    drawer_html = (
+                        f'<div id="drawer-{p_id}" class="verbatim-drawer" hidden>'
+                        f'<div class="verbatim-drawer-head">'
+                        f'<span>💬 課堂原話對照（適度潤飾之逐句口語稿・點擊單句跳轉原音）</span>'
+                        f'<button type="button" class="verbatim-close-btn" onclick="event.stopPropagation(); toggleVerbatimDrawer(\'drawer-{p_id}\')">收合 ▴</button>'
+                        f'</div>'
+                        f'{"".join(v_items)}'
+                        f'</div>'
+                    )
+                    paragraphs.append(
+                        f'<div class="para-group">'
+                        f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block_with_btn.replace(chr(10), "<br/>")}</p>'
+                        f'{drawer_html}'
+                        f'</div>'
+                    )
+                else:
+                    paragraphs.append(f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
             else:
                 paragraphs.append(f'<p class="reading-para">{block.replace(chr(10), "<br/>")}</p>')
 
@@ -205,6 +279,118 @@ def md_to_html(md_path: Path) -> Path:
     .ts-btn:active {{
       transform: scale(0.95);
     }}
+    .body-header-row {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }}
+    .body-header-row h2 {{
+      margin: 0;
+    }}
+    .verbatim-global-btn {{
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }}
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {{
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }}
+    .verbatim-toggle-btn {{
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }}
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {{
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }}
+    .verbatim-drawer {{
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }}
+    .verbatim-drawer-head {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }}
+    .verbatim-close-btn {{
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }}
+    .v-item {{
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }}
+    .v-item:hover {{
+      background: #e0e7ff;
+    }}
+    .v-ts {{
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }}
+    .v-spk {{
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }}
+    .spk-geshe {{
+      color: #9a3412;
+      background: #ffedd5;
+    }}
+    .spk-student {{
+      color: #0369a1;
+      background: #e0f2fe;
+    }}
+    .treatise-quote {{
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }}
     .verse-quote {{
       background: #fffbeb;
       border-left: 4px solid #f59e0b;
@@ -280,6 +466,51 @@ def md_to_html(md_path: Path) -> Path:
       }}
       const btn = paraEl.querySelector('.ts-btn');
       playAt(seconds, btn || paraEl);
+    }}
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {{
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${{drawerId}}"]`);
+      if (isHidden) {{
+        drawer.removeAttribute('hidden');
+        if (btn) {{
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }}
+      }} else {{
+        drawer.setAttribute('hidden', '');
+        if (btn) {{
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }}
+      }}
+    }}
+
+    function toggleAllVerbatim(masterBtn) {{
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {{
+        const btn = document.querySelector(`[data-target="${{d.id}}"]`);
+        if (allOpen) {{
+          d.setAttribute('hidden', '');
+          if (btn) {{
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }}
+        }} else {{
+          d.removeAttribute('hidden');
+          if (btn) {{
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }}
+        }}
+      }});
+      if (masterBtn) {{
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }}
     }}
 
     function playAt(seconds, btnOrPara) {{
