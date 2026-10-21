@@ -1580,7 +1580,13 @@ function setupKeyboardShortcuts() {
   });
 }
 
-function onUserScroll() {
+function isEventInsideSidebar(e?: Event): boolean {
+  const target = e?.target as HTMLElement | null;
+  return Boolean(target && typeof target.closest === 'function' && target.closest('.sidebar'));
+}
+
+function onUserScroll(e?: Event) {
+  if (isEventInsideSidebar(e)) return;
   if (isAutoScrollFrozen()) return;
   playerStore.handleUserScroll(4000);
 }
@@ -2252,6 +2258,7 @@ if (typeof window !== 'undefined') {
   display: flex;
   flex: 1;
   position: relative;
+  align-items: flex-start;
 }
 
 /* 側邊欄 */
@@ -2262,7 +2269,11 @@ if (typeof window !== 'undefined') {
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-smooth);
-  position: relative;
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height) - var(--player-height));
+  max-height: calc(100vh - var(--header-height) - var(--player-height));
+  overflow: hidden;
   flex-shrink: 0;
 }
 
@@ -2294,6 +2305,7 @@ if (typeof window !== 'undefined') {
   margin: 0;
   padding: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   flex: 1;
 }
 
@@ -3164,6 +3176,8 @@ if (typeof window !== 'undefined') {
     top: var(--header-height);
     bottom: var(--player-height);
     left: 0;
+    height: auto;
+    max-height: none;
     z-index: 90;
     transform: translateX(-100%);
     width: 80% !important;
