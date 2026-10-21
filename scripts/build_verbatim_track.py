@@ -27,10 +27,9 @@ LEARNED_FILE = COURSE_DIR / "learned_corrections.json"
 STRICT_SIMP_REGEX = re.compile(
     r"[为这样个说体经论门从对么变实证觉关开边过问题时间还会点现显义极胜广当无师发与见随应处观摄识别业释难车声闻缘执许计总种听讲话导读记诵辩净谛]"
 )
-FILLERS_RE = re.compile(r"^[嗯啊呃哎呦喔哦\s，、。]+|[嗯啊呃哎呦]+(?=[，、。])")
-
-STUDENT_TRIGGER_RE = re.compile(
-    r"^(【?學員[】:：]|請問|我想問|剛剛|老師您剛才|法師您剛才|那個可以|腦袋有點打結|瓶是不是瓶子)"
+FORBIDDEN_HOMOPHONES = re.compile(
+    r"非紋症|肺紋症|至向有|自向有|損壞羹|損壞更|設法心法|不先一心法|"
+    r"生一地|生意地|七[狂況]法|執陽眼為水|羊眼|執那個正的是"
 )
 
 
@@ -57,9 +56,9 @@ def apply_learned_lexicon(text: str, learned: dict) -> str:
 def clean_verbatim_text(text: str, learned: dict) -> str:
     t = apply_learned_lexicon(text.strip(), learned)
     # 移除純語氣詞，但不刪除實詞
-    t = re.sub(r"\b(嗯|呃|哎呦)\b", "", t)
-    t = re.sub(r"^[嗯啊呃哎呦\s，、。]+", "", t)
-    t = re.sub(r"[，、\s]+$", "", t)
+    # 僅移除獨立的嗯／啊／呃，不得吃掉「啊難」等實詞。
+    t = re.sub(r"(^|[，、。？！\s])(?:[嗯啊呃]+)(?=[，、。？！\s]|$)", r"\1", t)
+    t = re.sub(r"^[，、\s]+|[，、\s]+$", "", t)
     # 清理殘留雙標點
     t = re.sub(r"[，、]{2,}", "，", t)
     if t and not re.search(r"[。？！…」』]$", t):
@@ -81,43 +80,43 @@ def build_verbatim_payload(
 
     paras_verbatim: dict[str, list[dict]] = {}
 
-    # 為每段依時間窗口指派句子
+    if sentences and not paragraphs_meta:
+        raise ValueError("有句子時必須提供段落時間範圍")
+    assignments = [[] for _ in paragraphs_meta]
+    for sentence in sentences:
+        t = float(sentence["start"])
+        candidates = [i for i, pm in enumerate(paragraphs_meta)
+                      if float(pm["start"]) <= t < float(pm["end"])]
+        # 缺口、片頭與片尾仍須收錄一次；待人工核對段落歸屬。
+        idx = candidates[0] if candidates else min(
+            range(len(paragraphs_meta)),
+            key=lambda i: min(abs(t - float(paragraphs_meta[i]["start"])),
+                              abs(t - float(paragraphs_meta[i]["end"]))))
+        row = dict(sentence)
+        if not candidates:
+            row.update(reviewNeeded=True, uncertainty="段落時間範圍外，歸屬待核對")
+        assignments[idx].append(row)
+
     for p_idx, pm in enumerate(paragraphs_meta):
         p_id = pm.get("id") or f"p_{p_idx + 1}"
         p_num = p_id.replace("p_", "p")
-        p_start = float(pm.get("start", 0))
-        p_end = float(pm.get("end", 999999))
-
-        assigned = [
-            s for s in sentences
-            if (s["start"] >= p_start - 0.2 and s["start"] < p_end - 0.1)
-        ]
-        # 若窗口無句子（邊界漂移），依時間落點保底
-        if not assigned and sentences:
-            assigned = [
-                s for s in sentences
-                if p_start <= s["start"] <= p_end
-            ]
-
         v_list = []
-        for s_idx, s in enumerate(assigned):
-            v_id = f"{p_num}-v{s_idx + 1}"
-            raw_t = s.get("text", "")
-            cleaned = clean_verbatim_text(raw_t, learned)
+        for s in assignments[p_idx]:
+            cleaned = clean_verbatim_text(s.get("text", ""), learned)
             if not cleaned:
                 continue
-
-            spk = s.get("speaker")
-            if not spk:
-                spk = "學員" if STUDENT_TRIGGER_RE.search(cleaned) else "格西"
-
-            v_list.append({
-                "id": v_id,
-                "start": round(float(s.get("start", 0)), 2),
-                "end": round(float(s.get("end", 0)), 2),
-                "speaker": spk,
+            row = {
+                "id": f"{p_num}-v{len(v_list) + 1}",
+                "start": round(float(s["start"]), 3),
+                "end": round(float(s["end"]), 3),
+                "speaker": s.get("speaker") or "格西",
                 "text": cleaned,
-            })
+            }
+            # 不憑「剛剛」等口頭用語猜測講者，保留來源標註與待審資訊。
+            for key in ("reviewNeeded", "uncertainty", "rawText", "llmProposal"):
+                if key in s:
+                    row[key] = s[key]
+            v_list.append(row)
         paras_verbatim[p_id] = v_list
 
     payload = {
@@ -131,7 +130,25 @@ def build_verbatim_payload(
     if simps:
         raise ValueError(f"Simplified characters detected in verbatim payload: {set(simps)}")
 
+    spoken_text = "".join(s["text"] for group in paras_verbatim.values() for s in group)
+    forbidden = FORBIDDEN_HOMOPHONES.findall(spoken_text)
+    if forbidden:
+        raise ValueError(f"逐字稿含禁止的同音錯字：{set(forbidden)}")
     return payload
+
+
+def validate_output_path(path):
+    target = Path(path).resolve()
+    protected = [COURSE_DIR / folder / name
+                 for sid in ("36A", "36B")
+                 for folder, name in (
+                     ("verbatim", f"verbatim_{sid}.json"),
+                     ("sessions", f"session_{sid}.json"),
+                     ("publications", f"lecture_{sid}_study_guide.md"),
+                     ("publications", f"lecture_{sid}_study_guide.html"))]
+    if target in [p.resolve() for p in protected]:
+        raise ValueError("36A/36B 為已發佈黃金樣本，不得覆寫，請指定沙盒輸出")
+    return target
 
 
 def main():
@@ -143,6 +160,9 @@ def main():
     args = parser.parse_args()
 
     sid = args.session_id.strip()
+    out_path = Path(args.out) if args.out else (VERBATIM_DIR / f"verbatim_{sid}.json")
+    if not args.dry_run:
+        validate_output_path(out_path)
     session_file = SESSIONS_DIR / f"session_{sid}.json"
     if not session_file.exists():
         print(f"❌ Session file not found: {session_file}")
@@ -160,13 +180,6 @@ def main():
         ]
 
     payload = build_verbatim_payload(sid, sents, paras_meta)
-    out_path = Path(args.out) if args.out else (VERBATIM_DIR / f"verbatim_{sid}.json")
-
-    # 嚴格防護：驗收標準第 4 條，不得覆寫 36A/36B 已發佈黃金樣本
-    if sid in ("36A", "36B") and not args.out and not args.dry_run:
-        print("🛑 嚴格保護：36A/36B 為已發佈黃金樣本，不得直接覆寫！請指定 --out tmp/pipeline_v2/...")
-        sys.exit(2)
-
     total_s = sum(len(v) for v in payload["paragraphs"].values())
     total_c = sum(len(x["text"]) for v in payload["paragraphs"].values() for x in v)
     print(f"✅ Generated verbatim track for {sid}: {len(payload['paragraphs'])} paras, {total_s} sentences, {total_c} chars.")

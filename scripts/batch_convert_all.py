@@ -19,6 +19,8 @@ import subprocess
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import requests
+from build_verbatim_track import clean_verbatim_text, load_learned_corrections, validate_output_path
+from lib.pipeline_evaluation import normalize_text
 
 # Constants & Endpoints
 ROUTER_URL = os.environ.get("ROUTER_URL", "http://127.0.0.1:4001/v1/chat/completions")
@@ -417,6 +419,7 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
     print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: {len(dynamic_terms or [])})...")
     merged_sents = []
     curr_chunk = []
+    learned = load_learned_corrections()
 
     for i, s in enumerate(raw_sentences):
         curr_chunk.append(s)
@@ -427,14 +430,9 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
 
         if should_split(combined_text, s["text"], gap, is_last):
             raw_text = " ".join(x["text"].strip() for x in curr_chunk if x["text"].strip())
-            # Apply regex glossary
-            for pat, repl in BUDDHIST_GLOSSARY:
-                raw_text = re.sub(pat, repl, raw_text)
-            
-            # Clean oral tokens & format punctuation
-            raw_text = re.sub(r'^[嗯啊喔哦呃，、\s]+', '', raw_text)
-            raw_text = re.sub(r'謝謝大家.*|感謝觀看.*|點讚.*|訂閱.*', '', raw_text).strip()
-            
+            # 僅套用已驗證的同音詞庫與允許的語氣詞清理。
+            raw_text = clean_verbatim_text(raw_text, learned)
+
             if raw_text:
                 if not re.search(r'[。？！…」』]$', raw_text):
                     if re.search(r'(嗎|呢|吧|對不對|是不是|如何|哪裡|怎麼|為什麼|何須|何故)[？\?]?$', raw_text):
@@ -540,7 +538,8 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
 【校對原則】：
 1. 【引用論疏原文時】：若法師在讀誦或引述論疏底本（如「頌曰：...」、「疏云：...」或經文），請嚴格依照上方底本字句校正 ASR 同音錯字。
 2. 【白話講述開示時】：請保持口語開示語氣自然流暢，僅精準校正佛學名相與錯別字，切勿將白話強行改寫為生硬文言。
-3. 【極重要】：輸入有 N 句話，輸出必須是剛好 N 句話的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併或刪減句子！100% 繁體中文（台灣正體）輸出。"""
+3. 不刪減或改寫任何實詞、重複、自我修正及口頭禪。只能校同音錯字、去除獨立的嗯／啊／呃、補標點與引號。
+4. 【極重要】：輸入有 N 句話，輸出必須是剛好 N 句話的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併或刪減句子！100% 繁體中文（台灣正體）輸出。"""
 
 
     # Optimized: Batch size increased from 12 -> 25 (reduces total LLM calls by 52%, speeds up by 2-3x, improves paragraph context)
@@ -560,7 +559,8 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
             match = re.search(r'\[\s*".*"\s*\]', content, re.DOTALL)
             if match:
                 corr_list = json.loads(match.group(0))
-                if len(corr_list) == len(texts):
+                if (isinstance(corr_list, list) and len(corr_list) == len(texts)
+                        and all(isinstance(c, str) and c.strip() for c in corr_list)):
                     return [c.replace("無明瞭", "無明了").replace("明瞭了", "明了了") for c in corr_list]
         except Exception as e:
             print(f"    ⚠️ LLM call failed ({len(texts)} sents): {e}")
@@ -570,7 +570,16 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
         """T4：句數不符時對半重試→單句重試；仍失敗才保留原文並標記待審，絕不靜默退回。"""
         fixed = llm_fix([s["text"] for s in batch])
         if fixed is not None:
-            return [dict(s, text=t) for s, t in zip(batch, fixed)]
+            rows = []
+            learned = load_learned_corrections()
+            for s, t in zip(batch, fixed):
+                expected = clean_verbatim_text(s["text"], learned)
+                if normalize_text(clean_verbatim_text(t, learned)) != normalize_text(expected):
+                    rows.append(dict(s, text=expected, llmProposal=t, reviewNeeded=True,
+                                     uncertainty="模型修改超出已驗證同音詞庫，保留原話待核對"))
+                else:
+                    rows.append(dict(s, text=t))
+            return rows
         if len(batch) > 1:
             mid = len(batch) // 2
             return proofread_with_retry(batch[:mid]) + proofread_with_retry(batch[mid:])
@@ -702,14 +711,33 @@ def step4_llm_structure(sentences, session_id, title):
 
     return paragraphs
 
-def process_single_session(session_id, audio_map, whisper_model=None, session_map=None):
+def process_single_session(session_id, audio_map, whisper_model=None, session_map=None,
+                           output_dir=None, audio_path=None):
+    root = Path(__file__).resolve().parent.parent
+    json_path = (Path(output_dir) if output_dir else SESSIONS_DIR) / f"session_{session_id}.json"
+    protected = [(root / SESSIONS_DIR / f"session_{sid}.json").resolve() for sid in ("36A", "36B")]
+    if json_path.resolve() in protected:
+        raise ValueError("36A/36B 已發佈檔案不得覆寫，請使用 --output-dir")
+    validate_output_path(json_path)
+    if output_dir:
+        resolved = Path(output_dir).resolve()
+        courses = (root / "courses").resolve()
+        if resolved == courses or courses in resolved.parents:
+            raise ValueError("實驗輸出不得放入正式 courses 目錄")
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    def checkpoint(name, data):
+        if output_dir:
+            target = validate_output_path(Path(output_dir) / name)
+            if (root / "courses").resolve() in target.parents:
+                raise ValueError("沙盒檔案不得連結至正式 courses 目錄")
+            target.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if session_id not in audio_map:
         raise ValueError(f"Session {session_id} not found in audio_map.json")
 
     audio_url = audio_map[session_id]
     session_title_info = (session_map or {}).get(session_id, {})
     title = session_title_info.get("title", f"第 {session_id} 堂")
-    grounding_data = get_session_source_text(session_id, session_map)
+    grounding_data = get_session_source_text(session_id, session_map or {})
     grounding_text = grounding_data[0]
     grounding_terms = grounding_data[1]
 
@@ -717,21 +745,35 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
     print(f"🚀 PROCESSING SESSION {session_id} — Grounded Pipeline Standard")
     print(f"=======================================================")
 
+    asr_health = {}
+    try:
+        health = requests.get(WHISPER_GPU_URL.replace("/v1/audio/transcriptions", "/health"), timeout=5)
+        health.raise_for_status()
+        asr_health = health.json()
+    except Exception:
+        pass
+    checkpoint("asr_service_health.json", asr_health)
+
     # Step 1: Whisper ASR (T2: dynamic per-session prompt)
     page_range = session_title_info.get("pageRange", "")
-    raw_sentences, duration = step1_asr_transcribe(session_id, download_audio_if_needed(session_id, audio_url), whisper_model, page_range=page_range)
+    raw_sentences, duration = step1_asr_transcribe(session_id, (Path(audio_path) if audio_path else download_audio_if_needed(session_id, audio_url)), whisper_model, page_range=page_range)
+
+    checkpoint("01_asr.json", {"duration": duration, "segments": raw_sentences})
 
     # Step 2: Pre-polish
     pre_polished = step2_pre_polish(raw_sentences, dynamic_terms=grounding_terms)
 
+    checkpoint("02_prepolished.json", pre_polished)
+
     # Step 3: LLM Proofreading
     proofread_sentences = step3_llm_proofread(pre_polished, session_id, source_text=grounding_text)
+
+    checkpoint("03_proofread.json", proofread_sentences)
 
     # Step 4: Semantic Structuring & Headings
     paragraphs = step4_llm_structure(proofread_sentences, session_id, title)
 
     # Calculate precise start and end for paragraphs
-    json_path = SESSIONS_DIR / f"session_{session_id}.json"
     prev_end = 0.0
     for p in paragraphs:
         for s in p["sentences"]:
@@ -750,8 +792,11 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
         "lastUpdated": today_date,
         "paragraphs": paragraphs,
         "_meta": {
-            "engine": "whisper-large-v3-turbo",
-            "llm_proofread": "Smart Router (MiniMax-M3 / Qwen3.8-27B Grounded)",
+            "engine": "whisper-service" if asr_health else f"whisper-{WHISPER_MODEL_NAME}-unverified",
+            "asr_requested_model": WHISPER_MODEL_NAME,
+            "asr_service_health": asr_health,
+            "vad_requested_ms": VAD_MIN_SILENCE_MS,
+            "llm_proofread": "Qwen3.8-27B Grounded（模型修改另列待審）",
             "last_updated": today_date,
             "grounding_source": "《入中論善顯密意疏》真值底本",
             "audio_duration": duration,
@@ -771,8 +816,14 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
             elif isinstance(o, dict): return {k: to_trad(v) for k, v in o.items()}
             return o
         payload = to_trad(payload)
-    except Exception as e:
-        pass
+    except ImportError as e:
+        raise RuntimeError("必須安裝 OpenCC 才能輸出正體中文") from e
+
+    if output_dir:
+        from build_verbatim_track import build_verbatim_payload
+        # 使用已轉正體的句子，保留聲學時間及待審標記。
+        rows = [s for p in payload["paragraphs"] for s in p["sentences"]]
+        checkpoint(f"verbatim_{session_id}.json", build_verbatim_payload(session_id, rows, payload["paragraphs"]))
 
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
@@ -786,7 +837,11 @@ def main():
     parser.add_argument("--all", action="store_true", help="Process all available sessions in audio_map.json")
     parser.add_argument("--resume", action="store_true", help="Resume from last completed session")
     parser.add_argument("--workers", type=int, default=2, help="Number of concurrent session workers (default: 2)")
+    parser.add_argument("--output-dir", type=Path, help="沙盒輸出根目錄，每講建立子目錄")
+    parser.add_argument("--audio-path", type=Path, help="單一講次使用本機音檔或切片")
     args = parser.parse_args()
+    if args.audio_path and (not args.sessions or len(args.sessions) != 1):
+        parser.error("--audio-path 必須搭配單一 --sessions")
 
     audio_map = load_audio_map()
     session_map = load_course_session_map()
@@ -799,6 +854,11 @@ def main():
     else:
         print("Usage: python3 scripts/batch_convert_all.py --sessions 29A 30A OR --all")
         sys.exit(0)
+
+    global PROGRESS_FILE
+    if args.output_dir:
+        args.output_dir.mkdir(parents=True, exist_ok=True)
+        PROGRESS_FILE = args.output_dir / "conversion_progress.json"
 
     # Check for Whisper Model (Optional local fallback)
     progress = {}
@@ -822,7 +882,7 @@ def main():
         if not hasattr(_local, "model"):
             try:
                 from faster_whisper import WhisperModel
-                _local.model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
+                _local.model = WhisperModel(WHISPER_MODEL_NAME, device="cpu", compute_type="int8", cpu_threads=8)
             except Exception:
                 _local.model = None
         return _local.model
@@ -831,7 +891,9 @@ def main():
         try:
             t0 = time.time()
             model = get_thread_model()
-            process_single_session(sid, audio_map, model, session_map=session_map)
+            process_single_session(sid, audio_map, model, session_map=session_map,
+                                   output_dir=args.output_dir / sid if args.output_dir else None,
+                                   audio_path=args.audio_path)
             elapsed = time.time() - t0
             res = {"status": "SUCCESS", "elapsed_seconds": round(elapsed, 1)}
         except Exception as e:
@@ -859,6 +921,8 @@ def main():
             worker_task(sid)
 
     print("\n🏁 Batch conversion execution completed!")
+    if any(progress.get(sid, {}).get("status") == "FAILED" for sid in pending_targets):
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
