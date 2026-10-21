@@ -238,6 +238,16 @@ def get_session_source_text(session_id, session_map):
     if not page_range:
         return "", []
 
+    # T2：擴大視窗（前 10 頁、後 3 頁），主頁優先
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from lib.session_prompt import build_source_context
+        combined_text = build_source_context(page_range)
+        if combined_text:
+            found_terms = set(re.findall(r'[「『《〈]([\u4e00-\u9fff]{2,8})[」』》〉]', combined_text))
+            return combined_text, list(found_terms)
+    except Exception as e:
+        print(f"  ⚠️ wide source window fallback: {e}")
     # Parse page numbers like "p.63", "p.97-p.100", "p.103-106", "P84"
     nums = [int(n) for n in re.findall(r'\d+', page_range)]
     if not nums:
@@ -285,9 +295,29 @@ BUDDHIST_WHISPER_INITIAL_PROMPT = (
     "阿賴耶識、空性、現觀、菩提心、見行、遮遣、所破、因明量論、名言有、勝義無、七相推求。"
 )
 
-def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
-    print(f"\n[Step 1/5] 🎙️ Running Whisper Large-v3 ASR on GPU (Port 8010 CUDA) for {session_id}...")
-    
+# T2：VAD 與模型可設定（以 36A 實測比較 600/900/1200）
+VAD_MIN_SILENCE_MS = int(os.environ.get("WHISPER_VAD_MIN_SILENCE_MS", "900"))
+WHISPER_MODEL_NAME = os.environ.get("WHISPER_MODEL", "large-v3")
+
+
+def build_whisper_prompt(page_range):
+    """T2：依當講頁碼動態產生 initial_prompt；失敗時退回通用 prompt。"""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from lib.session_prompt import build_initial_prompt
+        p = build_initial_prompt(page_range or "")
+        if p and len(p) > 40:
+            return p
+    except Exception as e:
+        print(f"  ⚠️ dynamic prompt fallback: {e}")
+    return BUDDHIST_WHISPER_INITIAL_PROMPT
+
+
+def step1_asr_transcribe(session_id, audio_path, whisper_model=None, page_range=""):
+    print(f"\n[Step 1/5] 🎙️ Running Whisper ({WHISPER_MODEL_NAME}) ASR on GPU (Port 8010 CUDA) for {session_id}...")
+    whisper_prompt = build_whisper_prompt(page_range)
+    print(f"  🧾 initial_prompt ({len(whisper_prompt)} chars): {whisper_prompt[:80]}…")
+
     # 1. First Priority: Dedicated GPU Whisper Microservice on Port 8010 (59x Realtime, CUDA int8 on GB10)
     try:
         with open(audio_path, "rb") as f:
@@ -295,12 +325,14 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
             data = {
                 "language": "zh",
                 "response_format": "verbose_json",
+                "model": WHISPER_MODEL_NAME,
                 "beam_size": "5",
-                "initial_prompt": BUDDHIST_WHISPER_INITIAL_PROMPT,
+                "initial_prompt": whisper_prompt,
                 "patience": "1.2",
                 "repetition_penalty": "1.08",
                 "condition_on_previous_text": "false",
-                "vad_min_silence_duration_ms": "600",
+                "word_timestamps": "true",
+                "vad_min_silence_duration_ms": str(VAD_MIN_SILENCE_MS),
                 "vad_speech_pad_ms": "400"
             }
             r = requests.post(WHISPER_GPU_URL, files=files, data=data, timeout=300)
@@ -331,9 +363,9 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
         segments, info = whisper_model.transcribe(
             str(audio_path),
             language="zh",
-            initial_prompt=BUDDHIST_WHISPER_INITIAL_PROMPT,
+            initial_prompt=whisper_prompt,
             vad_filter=True,
-            vad_parameters=dict(min_silence_duration_ms=600, speech_pad_ms=400),
+            vad_parameters=dict(min_silence_duration_ms=VAD_MIN_SILENCE_MS, speech_pad_ms=400),
             beam_size=5,
             patience=1.2,
             condition_on_previous_text=False,
@@ -361,6 +393,26 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None):
     
     raise RuntimeError("Neither GPU Whisper Service nor local model is available.")
 
+SENTENCE_END_RE = re.compile(r'[。？！?!]$|(嗎|呢|吧|對不對|是不是|這樣|大概這樣|對吧)$')
+SOFT_PAUSE_RE = re.compile(r'[，、,；;]$')
+GAP_SPLIT_SEC = 1.1
+SOFT_MAX_CHARS = 60
+HARD_MAX_CHARS = 120
+
+
+def should_split(chunk_text, last_text, gap, is_last):
+    """T3：以語意停頓斷句，取代舊的 28 字硬切。"""
+    if is_last or gap >= GAP_SPLIT_SEC:
+        return True
+    t = last_text.strip()
+    if SENTENCE_END_RE.search(t):
+        return True
+    n = len(chunk_text)
+    if n >= SOFT_MAX_CHARS and (SOFT_PAUSE_RE.search(t) or gap >= 0.4):
+        return True
+    return n >= HARD_MAX_CHARS
+
+
 def step2_pre_polish(raw_sentences, dynamic_terms=None):
     print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: {len(dynamic_terms or [])})...")
     merged_sents = []
@@ -373,14 +425,14 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
         gap = (next_s["start"] - s["end"]) if next_s else 999.0
         combined_text = "".join(x["text"] for x in curr_chunk)
 
-        if is_last or gap >= 1.1 or len(combined_text) >= 28 or re.search(r'[。？！]$', s["text"].strip()):
+        if should_split(combined_text, s["text"], gap, is_last):
             raw_text = " ".join(x["text"].strip() for x in curr_chunk if x["text"].strip())
             # Apply regex glossary
             for pat, repl in BUDDHIST_GLOSSARY:
                 raw_text = re.sub(pat, repl, raw_text)
             
             # Clean oral tokens & format punctuation
-            raw_text = re.sub(r'^[嗯啊喔對哦，、\s]+', '', raw_text)
+            raw_text = re.sub(r'^[嗯啊喔哦呃，、\s]+', '', raw_text)
             raw_text = re.sub(r'謝謝大家.*|感謝觀看.*|點讚.*|訂閱.*', '', raw_text).strip()
             
             if raw_text:
@@ -402,7 +454,13 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
     print(f"  ✅ Consolidated into {len(merged_sents)} readable full sentences.")
     return merged_sents
 
-def call_llm_completion(messages, temperature=0.05, timeout=60):
+def dynamic_max_tokens(texts):
+    """T4：依輸入字數動態估算輸出 token（約 ×2.5，介於 1024–8000）。"""
+    chars = sum(len(t) for t in texts)
+    return max(1024, min(8000, int(chars * 2.5) + 256))
+
+
+def call_llm_completion(messages, temperature=0.05, timeout=60, max_tokens=2048):
     """Call LLM via local vLLM (Qwen3.8-27B on GB10 GPU) with fallback to Smart Router."""
     # 1. First priority: Direct Local vLLM Qwen3.8-27B on GB10 GPU (Fast & Reliable)
     try:
@@ -410,7 +468,7 @@ def call_llm_completion(messages, temperature=0.05, timeout=60):
             "model": "Qwen3.8-27B",
             "messages": messages,
             "temperature": temperature,
-            "max_tokens": 2048,
+            "max_tokens": max_tokens,
             "chat_template_kwargs": {"enable_thinking": False}
         }
         r = requests.post(VLLM_FALLBACK_URL, json=payload, timeout=timeout)
@@ -426,7 +484,7 @@ def call_llm_completion(messages, temperature=0.05, timeout=60):
         "model": "primary",
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": 2048
+        "max_tokens": max_tokens
     }
     r = requests.post(ROUTER_URL, json=payload, headers=ROUTER_HEADERS, timeout=timeout)
     r.raise_for_status()
@@ -458,9 +516,9 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
 
     source_context_block = ""
     if source_text:
-        source_context_block = f"""\n\n【當前講次對應之《入中論善顯密意疏》底本參考原文】：
+        source_context_block = f"""\n\n【當前講次對應之《入中論善顯密意疏》底本參考原文（含前後緩衝頁）】：
 ---
-{source_text[:3000]}
+{source_text[:12000]}
 ---"""
 
     system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的頂級佛學專家與校對主編。
@@ -490,34 +548,37 @@ def step3_llm_proofread(sentences, session_id, source_text=""):
     total_sents = len(sentences)
     batches = [sentences[i:i + batch_size] for i in range(0, total_sents, batch_size)]
     
-    def process_batch(b_idx, batch):
-        input_texts = [s["text"] for s in batch]
-        prompt = f"請依據底本校對以下 {len(input_texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(input_texts, ensure_ascii=False, indent=2)
+    def llm_fix(texts):
+        """回傳等長校對結果或 None。"""
+        prompt = f"請依據底本校對以下 {len(texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(texts, ensure_ascii=False, indent=2)
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
         ]
         try:
-            content = call_llm_completion(messages, temperature=0.05, timeout=60)
+            content = call_llm_completion(messages, temperature=0.05, timeout=120, max_tokens=dynamic_max_tokens(texts))
             match = re.search(r'\[\s*".*"\s*\]', content, re.DOTALL)
             if match:
                 corr_list = json.loads(match.group(0))
-                if len(corr_list) == len(batch):
-                    res = []
-                    for idx, s in enumerate(batch):
-                        clean_c = corr_list[idx]
-                        clean_c = clean_c.replace("無明瞭", "無明了").replace("明瞭了", "明了了")
-                        res.append({
-                            "start": s["start"],
-                            "end": s["end"],
-                            "text": clean_c
-                        })
-                    return b_idx, res
+                if len(corr_list) == len(texts):
+                    return [c.replace("無明瞭", "無明了").replace("明瞭了", "明了了") for c in corr_list]
         except Exception as e:
-            print(f"    ⚠️ Batch {b_idx+1} LLM fallback: {e}")
+            print(f"    ⚠️ LLM call failed ({len(texts)} sents): {e}")
+        return None
 
-        # Fallback to raw batch
-        return b_idx, batch
+    def proofread_with_retry(batch):
+        """T4：句數不符時對半重試→單句重試；仍失敗才保留原文並標記待審，絕不靜默退回。"""
+        fixed = llm_fix([s["text"] for s in batch])
+        if fixed is not None:
+            return [dict(s, text=t) for s, t in zip(batch, fixed)]
+        if len(batch) > 1:
+            mid = len(batch) // 2
+            return proofread_with_retry(batch[:mid]) + proofread_with_retry(batch[mid:])
+        s = batch[0]
+        return [dict(s, reviewNeeded=True, uncertainty="LLM 句數不符，未校對")]
+
+    def process_batch(b_idx, batch):
+        return b_idx, proofread_with_retry(batch)
 
     results = [None] * len(batches)
     # Execute with 2 parallel threads per session (2 workers * 2 = 4 concurrent vLLM requests, perfectly matching vLLM max-num-seqs=4)
@@ -656,8 +717,9 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
     print(f"🚀 PROCESSING SESSION {session_id} — Grounded Pipeline Standard")
     print(f"=======================================================")
 
-    # Step 1: Whisper ASR
-    raw_sentences, duration = step1_asr_transcribe(session_id, download_audio_if_needed(session_id, audio_url), whisper_model)
+    # Step 1: Whisper ASR (T2: dynamic per-session prompt)
+    page_range = session_title_info.get("pageRange", "")
+    raw_sentences, duration = step1_asr_transcribe(session_id, download_audio_if_needed(session_id, audio_url), whisper_model, page_range=page_range)
 
     # Step 2: Pre-polish
     pre_polished = step2_pre_polish(raw_sentences, dynamic_terms=grounding_terms)
