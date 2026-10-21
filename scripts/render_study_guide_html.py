@@ -167,7 +167,7 @@ def md_to_html(md_path: Path) -> Path:
                     drawer_html = (
                         f'<div id="drawer-{p_id}" class="verbatim-drawer" hidden>'
                         f'<div class="verbatim-drawer-head">'
-                        f'<span>💬 課堂原話對照（適度潤飾之逐句口語稿・點擊單句跳轉原音）</span>'
+                        f'<span>💬 課堂原話對照（逐字忠實原話・僅校錯別字與語氣詞・點擊單句跳轉原音）</span>'
                         f'<button type="button" class="verbatim-close-btn" onclick="event.stopPropagation(); toggleVerbatimDrawer(\'drawer-{p_id}\')">收合 ▴</button>'
                         f'</div>'
                         f'{"".join(v_items)}'
