@@ -44,8 +44,12 @@ test('Whisper Parameter Contract: batch_convert_all.py', (t) => {
     );
   }
 
-  // 2. Request payload checks
-  assert.match(content, /"initial_prompt":\s*BUDDHIST_WHISPER_INITIAL_PROMPT/);
+  // 2. Request payload checks (T2: dynamic per-session prompt with generic fallback)
+  assert.match(content, /"initial_prompt":\s*(BUDDHIST_WHISPER_INITIAL_PROMPT|whisper_prompt)/);
+  assert.match(content, /return BUDDHIST_WHISPER_INITIAL_PROMPT/, 'must fall back to generic prompt');
+  assert.match(content, /"word_timestamps":\s*"true"/);
+  assert.doesNotMatch(content, /len\(combined_text\) >= 28/, 'T3: 28-char hard split must be removed');
+  assert.doesNotMatch(content, /# Fallback to raw batch/, 'T4: no silent fallback to unproofread batch');
   assert.match(content, /"beam_size":\s*"5"/);
   assert.match(content, /"patience":\s*"1\.2"/);
   assert.match(content, /"repetition_penalty":\s*"1\.08"/);

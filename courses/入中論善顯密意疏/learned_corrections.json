@@ -3,8 +3,8 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-09-05T15:01:53.186962+00:00",
-    "totalGlobalTerms": 129
+    "lastUpdated": "2026-10-21T10:37:45.748133+00:00",
+    "totalGlobalTerms": 151
   },
   "global_terms": {
     "明眼識": {
@@ -1036,6 +1036,182 @@
       "learned_from": "第 38B 堂",
       "confidence": 0.98,
       "reasoning": "讀者校對回饋修正：「續因 ➔ 相有」。"
+    },
+    "一百年事業": {
+      "corrected": "一百零四頁",
+      "category": "頁碼口述",
+      "safe_regex": "一百年事業",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "36A 開頭格西翻回第 104 頁，ASR 誤聽。"
+    },
+    "臥行常斷": {
+      "corrected": "苦行常斷",
+      "category": "佛傳典故",
+      "safe_regex": "臥行常斷",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "佛陀六年苦行，ASR 誤聽臥行。"
+    },
+    "臥行": {
+      "corrected": "苦行",
+      "category": "佛傳典故",
+      "safe_regex": "(?<=能夠)臥行|臥行(?=的話)",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "佛陀苦行，限語境避免誤傷。"
+    },
+    "另一方面的中庸": {
+      "corrected": "定方面的中庸",
+      "category": "三學名相",
+      "safe_regex": "另一方面的中庸",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "戒定慧三學之定學中道。"
+    },
+    "會方面的中庸": {
+      "corrected": "慧方面的中庸",
+      "category": "三學名相",
+      "safe_regex": "會方面的中[庸道]?",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "慧學中道，ASR 誤聽會。"
+    },
+    "蓄留異弊": {
+      "corrected": "續流亦必",
+      "category": "經論引文",
+      "safe_regex": "[蓄序]留[異亦][弊必]",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "法尊譯「種子續流亦必間斷無疑」。"
+    },
+    "無少億": {
+      "corrected": "無少益",
+      "category": "經論引文",
+      "safe_regex": "無少[億亦]",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "「於聖人自斷生死無少益也」。"
+    },
+    "樹說": {
+      "corrected": "數說",
+      "category": "經論引文",
+      "safe_regex": "樹說(?=\\s*芽)",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "「論中數說芽時種滅」。"
+    },
+    "色有四面": {
+      "corrected": "設有是念",
+      "category": "經論引文",
+      "safe_regex": "色有四面",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "「設有是念：若有芽生」。"
+    },
+    "應非理的種別生": {
+      "corrected": "應非離種別生",
+      "category": "經論引文",
+      "safe_regex": "非理的種別生",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "「應非離種別生」。"
+    },
+    "雙鋪耳邊": {
+      "corrected": "雙破二邊",
+      "category": "經論引文",
+      "safe_regex": "雙鋪耳邊",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "「如是雙破二邊」。"
+    },
+    "看人觀察": {
+      "corrected": "堪忍觀察",
+      "category": "中觀量論名相",
+      "safe_regex": "看人(?=\\s*(正理)?觀察)",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "堪忍正理觀察。"
+    },
+    "七款": {
+      "corrected": "欺誑",
+      "category": "中觀量論名相",
+      "safe_regex": "七款|棄狂|欺狂",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "不欺誑法／虛妄欺誑之法。"
+    },
+    "必知如必喜": {
+      "corrected": "棄之如敝屣",
+      "category": "口語成語",
+      "safe_regex": "必知如.{0,8}必喜",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "成語棄之如敝屣。"
+    },
+    "總道是沒有": {
+      "corrected": "宗大師沒有",
+      "category": "人名尊稱",
+      "safe_regex": "[總中]道是沒有",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "宗大師沒有這樣解釋。"
+    },
+    "志向有": {
+      "corrected": "自相有",
+      "category": "中觀量論名相",
+      "safe_regex": "志向有|有志向",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "自相有（svalakṣaṇa）。"
+    },
+    "勝儀": {
+      "corrected": "勝義",
+      "category": "中觀量論名相",
+      "safe_regex": "勝儀|聖意(?=[中上諦有觀])",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "勝義（paramārtha）。"
+    },
+    "明言諦": {
+      "corrected": "名言諦",
+      "category": "中觀量論名相",
+      "safe_regex": "明言(?=[諦上有法識的])",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "名言（vyavahāra），限語境避免誤傷。"
+    },
+    "限量": {
+      "corrected": "現量",
+      "category": "因明邏輯名相",
+      "safe_regex": "限量(?=[跟和與前])",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "現量與比量。"
+    },
+    "專破秩序": {
+      "corrected": "專破自續",
+      "category": "宗義名相",
+      "safe_regex": "破秩序",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "專破自續派。"
+    },
+    "盡是你常斷": {
+      "corrected": "即是離常斷",
+      "category": "經論引文",
+      "safe_regex": "盡是你常斷",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "「即顯彼芽性是離常斷之法性也」。"
+    },
+    "自信你動搖": {
+      "corrected": "自性離動搖",
+      "category": "經論引文",
+      "safe_regex": "自[信行]你?\\s*動搖|自行離動搖",
+      "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
+      "confidence": 0.95,
+      "reasoning": "《廣大遊戲經》「自性離動搖」。"
     }
   },
   "context_rules": [
