@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, defineComponent, h, type PropType } from 'vue';
 
 export interface TOCNodeData {
   id?: string;
@@ -31,20 +31,31 @@ function getNodeTime(node: TOCNodeData): number {
   return typeof node.timestamp === 'number' ? node.timestamp : (node.start_time ?? 0);
 }
 
+function getNodePositionKey(node: TOCNodeData): string {
+  return node.id || `${node.sessionId || ''}:${node.title}:${getNodeTime(node)}`;
+}
+
 const currentPositionNodeId = computed(() => {
-  const candidates: TOCNodeData[] = [];
+  const primaryCandidates: TOCNodeData[] = [];
+  const secondaryCandidates: TOCNodeData[] = [];
   function collect(nodes: TOCNodeData[]) {
     for (const node of nodes || []) {
-      if (getNodeSessions(node).includes(props.activeSessionId)) candidates.push(node);
+      if (node.sessionId === props.activeSessionId) {
+        primaryCandidates.push(node);
+      } else if (getNodeSessions(node).includes(props.activeSessionId)) {
+        secondaryCandidates.push(node);
+      }
       if (node.children?.length) collect(node.children);
     }
   }
   collect(props.tocNodes);
 
+  const candidates = primaryCandidates.length > 0 ? primaryCandidates : secondaryCandidates;
   const eligible = candidates
     .filter((node) => getNodeTime(node) > 0 && getNodeTime(node) <= (props.currentTime ?? 0))
     .sort((a, b) => getNodeTime(b) - getNodeTime(a));
-  return eligible[0]?.id || null;
+  const best = eligible[0] || candidates[0];
+  return best ? getNodePositionKey(best) : null;
 });
 
 // Popover state
@@ -133,6 +144,123 @@ function getNodeSessions(node: TOCNodeData): string[] {
   }
   return [];
 }
+
+const TOCNodeBranch: any = defineComponent({
+  name: 'TOCNodeBranch',
+  props: {
+    nodes: {
+      type: Array as PropType<TOCNodeData[]>,
+      required: true,
+    },
+  },
+  setup(branchProps) {
+    return () =>
+      (branchProps.nodes || []).map((node, idx) => {
+        const key = node.id || `${node.title}-${idx}`;
+        const hasChildren = Boolean(node.children && node.children.length > 0);
+        const sessions = getNodeSessions(node);
+        const matchesActive = sessions.includes(props.activeSessionId);
+        const containsActive = nodeContainsSession(node, props.activeSessionId);
+
+        // Course scope: 祖先節點本身不屬於本講，但子孫包含本講 -> 渲染為折疊祖先 toc-ancestor
+        if (props.currentScope === 'course' || currentScope.value === 'course') {
+          if (!matchesActive && containsActive && hasChildren) {
+            return h('li', { key }, [
+              h('details', { class: 'toc-sub', open: true }, [
+                h('summary', { class: 'toc-ancestor' }, node.title),
+                h('ul', { class: 'toc-tree' }, [
+                  h(TOCNodeBranch, { nodes: node.children! }),
+                ]),
+              ]),
+            ]);
+          }
+          if (!matchesActive && !containsActive) {
+            return null;
+          }
+        }
+
+        const primarySid = matchesActive ? props.activeSessionId : (sessions[0] || node.sessionId || props.activeSessionId);
+        const extraSessions = sessions.filter((s) => s !== primarySid);
+        const ts = getNodeTime(node);
+        const posKey = getNodePositionKey(node);
+
+        const linkChildren: any[] = [node.title];
+
+        if (sessions.length > 0) {
+          linkChildren.push(
+            h(
+              'span',
+              {
+                class: ['toc-session-badge', { active: primarySid === props.activeSessionId }],
+                onClick: (e: MouseEvent) => handleSessionBadgeClick(primarySid, e),
+              },
+              primarySid,
+            ),
+          );
+        }
+
+        if (extraSessions.length > 0) {
+          linkChildren.push(
+            h(
+              'button',
+              {
+                type: 'button',
+                class: 'toc-badge-collapsed',
+                'data-testid': 'toc-badge-collapsed',
+                onClick: (e: MouseEvent) => openPopover(sessions, e),
+              },
+              `+${extraSessions.length} 講 ▾`,
+            ),
+          );
+        }
+
+        if (node.page) {
+          linkChildren.push(
+            h('span', { class: 'toc-page-badge' }, `p.${node.page}`),
+          );
+        }
+
+        if (ts > 0 && (node.sessionId === props.activeSessionId || currentScope.value === 'book')) {
+          linkChildren.push(
+            h('span', { class: 'toc-timestamp-badge' }, formatTime(ts)),
+          );
+        }
+
+        const liChildren: any[] = [
+          h(
+            'a',
+            {
+              class: [
+                'toc-link',
+                {
+                  active: matchesActive,
+                  'toc-timestamp-pending': !ts || ts === 0,
+                  'toc-current-position': currentPositionNodeId.value === posKey,
+                },
+              ],
+              href: `#session-${node.sessionId || props.activeSessionId}${ts ? '-t' + ts : ''}`,
+              'data-session-id': node.sessionId || props.activeSessionId,
+              'data-timestamp': String(ts || 0),
+              'data-testid': 'toc-node-' + node.title.substring(0, 8).replace(/\s/g, ''),
+              'data-toc-position-id': posKey,
+              onClick: (e: MouseEvent) => handleNodeClick(node, e),
+            },
+            linkChildren,
+          ),
+        ];
+
+        if (hasChildren) {
+          liChildren.push(
+            h('ul', { class: 'toc-tree' }, [
+              h(TOCNodeBranch, { nodes: node.children! }),
+            ]),
+          );
+        }
+
+        return h('li', { key }, liChildren);
+      });
+  },
+});
 </script>
 
 <template>
@@ -166,236 +294,7 @@ function getNodeSessions(node: TOCNodeData): string[] {
       </div>
 
       <ul id="toc-tree-root" class="toc-tree">
-        <!-- 遞迴渲染節點 -->
-        <template v-for="(node, idx) in tocNodes" :key="node.id || idx">
-          <!-- Course scope: 如果不是本講，但子孫有本講，渲染為折疊祖先 toc-ancestor -->
-          <li
-            v-if="currentScope === 'course' && !getNodeSessions(node).includes(activeSessionId) && nodeContainsSession(node, activeSessionId)"
-          >
-            <details class="toc-sub" open>
-              <summary class="toc-ancestor">{{ node.title }}</summary>
-              <ul class="toc-tree">
-                <template v-for="(c1, c1Idx) in node.children" :key="c1.id || c1Idx">
-                  <li v-if="currentScope === 'course' && !getNodeSessions(c1).includes(activeSessionId) && nodeContainsSession(c1, activeSessionId)">
-                    <details class="toc-sub" open>
-                      <summary class="toc-ancestor">{{ c1.title }}</summary>
-                      <ul class="toc-tree">
-                        <template v-for="(c2, c2Idx) in c1.children" :key="c2.id || c2Idx">
-                          <li v-if="getNodeSessions(c2).includes(activeSessionId)">
-                            <a
-                              class="toc-link"
-                              :class="{
-                                active: getNodeSessions(c2).includes(activeSessionId),
-                                'toc-timestamp-pending': !c2.timestamp || c2.timestamp === 0,
-                                'toc-current-position': currentPositionNodeId === c2.id
-                              }"
-                              :href="'#session-' + activeSessionId + (c2.timestamp ? '-t' + c2.timestamp : '')"
-                              :data-session-id="c2.sessionId || activeSessionId"
-                              :data-timestamp="String(c2.timestamp || 0)"
-                              :data-testid="'toc-node-' + c2.title.substring(0, 8).replace(/\s/g, '')"
-                              :data-toc-position-id="c2.id"
-                              @click="handleNodeClick(c2, $event)"
-                            >
-                              {{ c2.title }}
-                              <span
-                                v-for="sid in (getNodeSessions(c2).includes(activeSessionId) ? [activeSessionId] : [getNodeSessions(c2)[0]])"
-                                :key="sid"
-                                class="toc-session-badge"
-                                :class="{ active: sid === activeSessionId }"
-                                @click="handleSessionBadgeClick(sid, $event)"
-                              >
-                                {{ sid }}
-                              </span>
-                              <button
-                                v-if="getNodeSessions(c2).filter(s => s !== activeSessionId).length > 0"
-                                type="button"
-                                class="toc-badge-collapsed"
-                                data-testid="toc-badge-collapsed"
-                                @click="openPopover(getNodeSessions(c2), $event)"
-                              >
-                                +{{ getNodeSessions(c2).filter(s => s !== activeSessionId).length }} 講 ▾
-                              </button>
-                              <span v-if="c2.page" class="toc-page-badge">p.{{ c2.page }}</span>
-                              <span v-if="c2.timestamp && c2.timestamp > 0" class="toc-timestamp-badge">
-                                {{ formatTime(c2.timestamp) }}
-                              </span>
-                            </a>
-                          </li>
-                        </template>
-                      </ul>
-                    </details>
-                  </li>
-                  <li v-else-if="currentScope === 'book' || getNodeSessions(c1).includes(activeSessionId)">
-                    <a
-                      class="toc-link"
-                      :class="{
-                        active: getNodeSessions(c1).includes(activeSessionId),
-                        'toc-timestamp-pending': !c1.timestamp || c1.timestamp === 0,
-                        'toc-current-position': currentPositionNodeId === c1.id
-                      }"
-                      :href="'#session-' + (c1.sessionId || activeSessionId) + (c1.timestamp ? '-t' + c1.timestamp : '')"
-                      :data-session-id="c1.sessionId || activeSessionId"
-                      :data-timestamp="String(c1.timestamp || 0)"
-                      :data-testid="'toc-node-' + c1.title.substring(0, 8).replace(/\s/g, '')"
-                      :data-toc-position-id="c1.id"
-                      @click="handleNodeClick(c1, $event)"
-                    >
-                      {{ c1.title }}
-                      <span
-                        v-for="sid in (getNodeSessions(c1).includes(activeSessionId) ? [activeSessionId] : [getNodeSessions(c1)[0]])"
-                        :key="sid"
-                        class="toc-session-badge"
-                        :class="{ active: sid === activeSessionId }"
-                        @click="handleSessionBadgeClick(sid, $event)"
-                      >
-                        {{ sid }}
-                      </span>
-                      <button
-                        v-if="getNodeSessions(c1).filter(s => s !== activeSessionId).length > 0"
-                        type="button"
-                        class="toc-badge-collapsed"
-                        data-testid="toc-badge-collapsed"
-                        @click="openPopover(getNodeSessions(c1), $event)"
-                      >
-                        +{{ getNodeSessions(c1).filter(s => s !== activeSessionId).length }} 講 ▾
-                      </button>
-                      <span v-if="c1.page" class="toc-page-badge">p.{{ c1.page }}</span>
-                      <span v-if="c1.timestamp && c1.timestamp > 0" class="toc-timestamp-badge">
-                        {{ formatTime(c1.timestamp) }}
-                      </span>
-                    </a>
-                  </li>
-                </template>
-              </ul>
-            </details>
-          </li>
-
-          <!-- 否則正常顯示節點 -->
-          <li
-            v-else-if="currentScope === 'book' || getNodeSessions(node).includes(activeSessionId)"
-          >
-            <a
-              class="toc-link"
-              :class="{
-                active: getNodeSessions(node).includes(activeSessionId),
-                'toc-timestamp-pending': !node.timestamp || node.timestamp === 0,
-                'toc-current-position': currentPositionNodeId === node.id
-              }"
-              :href="'#session-' + (node.sessionId || activeSessionId) + (node.timestamp ? '-t' + node.timestamp : '')"
-              :data-session-id="node.sessionId || activeSessionId"
-              :data-timestamp="String(node.timestamp || 0)"
-              :data-testid="'toc-node-' + node.title.substring(0, 8).replace(/\s/g, '')"
-              :data-toc-position-id="node.id"
-              @click="handleNodeClick(node, $event)"
-            >
-              {{ node.title }}
-              <!-- Pinned badge -->
-              <span
-                v-if="getNodeSessions(node).length > 0"
-                class="toc-session-badge"
-                :class="{ active: (getNodeSessions(node).includes(activeSessionId) ? activeSessionId : getNodeSessions(node)[0]) === activeSessionId }"
-                @click="handleSessionBadgeClick(getNodeSessions(node).includes(activeSessionId) ? activeSessionId : getNodeSessions(node)[0], $event)"
-              >
-                {{ getNodeSessions(node).includes(activeSessionId) ? activeSessionId : getNodeSessions(node)[0] }}
-              </span>
-              <!-- Ghost button -->
-              <button
-                v-if="getNodeSessions(node).filter(s => s !== (getNodeSessions(node).includes(activeSessionId) ? activeSessionId : getNodeSessions(node)[0])).length > 0"
-                type="button"
-                class="toc-badge-collapsed"
-                data-testid="toc-badge-collapsed"
-                @click="openPopover(getNodeSessions(node), $event)"
-              >
-                +{{ getNodeSessions(node).filter(s => s !== (getNodeSessions(node).includes(activeSessionId) ? activeSessionId : getNodeSessions(node)[0])).length }} 講 ▾
-              </button>
-              <span v-if="node.page" class="toc-page-badge">p.{{ node.page }}</span>
-              <span v-if="node.timestamp && node.timestamp > 0" class="toc-timestamp-badge">
-                {{ formatTime(node.timestamp) }}
-              </span>
-            </a>
-
-            <!-- 子層節點遞迴 -->
-            <ul v-if="node.children && node.children.length > 0" class="toc-tree">
-              <template v-for="(child, cIdx) in node.children" :key="child.id || cIdx">
-                <li v-if="currentScope === 'book' || getNodeSessions(child).includes(activeSessionId) || nodeContainsSession(child, activeSessionId)">
-                  <a
-                    class="toc-link"
-                    :class="{
-                      active: getNodeSessions(child).includes(activeSessionId),
-                      'toc-timestamp-pending': !child.timestamp || child.timestamp === 0,
-                      'toc-current-position': currentPositionNodeId === child.id
-                    }"
-                    :href="'#session-' + (child.sessionId || activeSessionId) + (child.timestamp ? '-t' + child.timestamp : '')"
-                    :data-session-id="child.sessionId || activeSessionId"
-                    :data-timestamp="String(child.timestamp || 0)"
-                    :data-testid="'toc-node-' + child.title.substring(0, 8).replace(/\s/g, '')"
-                    :data-toc-position-id="child.id"
-                    @click="handleNodeClick(child, $event)"
-                  >
-                    {{ child.title }}
-                    <span
-                      v-if="getNodeSessions(child).length > 0"
-                      class="toc-session-badge"
-                      :class="{ active: (getNodeSessions(child).includes(activeSessionId) ? activeSessionId : getNodeSessions(child)[0]) === activeSessionId }"
-                      @click="handleSessionBadgeClick(getNodeSessions(child).includes(activeSessionId) ? activeSessionId : getNodeSessions(child)[0], $event)"
-                    >
-                      {{ getNodeSessions(child).includes(activeSessionId) ? activeSessionId : getNodeSessions(child)[0] }}
-                    </span>
-                    <button
-                      v-if="getNodeSessions(child).filter(s => s !== (getNodeSessions(child).includes(activeSessionId) ? activeSessionId : getNodeSessions(child)[0])).length > 0"
-                      type="button"
-                      class="toc-badge-collapsed"
-                      data-testid="toc-badge-collapsed"
-                      @click="openPopover(getNodeSessions(child), $event)"
-                    >
-                      +{{ getNodeSessions(child).filter(s => s !== (getNodeSessions(child).includes(activeSessionId) ? activeSessionId : getNodeSessions(child)[0])).length }} 講 ▾
-                    </button>
-                    <span v-if="child.page" class="toc-page-badge">p.{{ child.page }}</span>
-                    <span v-if="child.timestamp && child.timestamp > 0" class="toc-timestamp-badge">
-                      {{ formatTime(child.timestamp) }}
-                    </span>
-                  </a>
-
-                  <!-- 深度 3 遞迴 -->
-                  <ul v-if="child.children && child.children.length > 0" class="toc-tree">
-                    <template v-for="(sub, sIdx) in child.children" :key="sub.id || sIdx">
-                      <li v-if="currentScope === 'book' || getNodeSessions(sub).includes(activeSessionId)">
-                        <a
-                          class="toc-link"
-                          :class="{
-                            active: getNodeSessions(sub).includes(activeSessionId),
-                            'toc-timestamp-pending': !sub.timestamp || sub.timestamp === 0,
-                            'toc-current-position': currentPositionNodeId === sub.id
-                          }"
-                          :href="'#session-' + (sub.sessionId || activeSessionId) + (sub.timestamp ? '-t' + sub.timestamp : '')"
-                          :data-session-id="sub.sessionId || activeSessionId"
-                          :data-timestamp="String(sub.timestamp || 0)"
-                          :data-testid="'toc-node-' + sub.title.substring(0, 8).replace(/\s/g, '')"
-                          :data-toc-position-id="sub.id"
-                          @click="handleNodeClick(sub, $event)"
-                        >
-                          {{ sub.title }}
-                          <span
-                            v-if="getNodeSessions(sub).length > 0"
-                            class="toc-session-badge"
-                            :class="{ active: (getNodeSessions(sub).includes(activeSessionId) ? activeSessionId : getNodeSessions(sub)[0]) === activeSessionId }"
-                            @click="handleSessionBadgeClick(getNodeSessions(sub).includes(activeSessionId) ? activeSessionId : getNodeSessions(sub)[0], $event)"
-                          >
-                            {{ getNodeSessions(sub).includes(activeSessionId) ? activeSessionId : getNodeSessions(sub)[0] }}
-                          </span>
-                          <span v-if="sub.page" class="toc-page-badge">p.{{ sub.page }}</span>
-                          <span v-if="sub.timestamp && sub.timestamp > 0" class="toc-timestamp-badge">
-                            {{ formatTime(sub.timestamp) }}
-                          </span>
-                        </a>
-                      </li>
-                    </template>
-                  </ul>
-                </li>
-              </template>
-            </ul>
-          </li>
-        </template>
+        <TOCNodeBranch :nodes="tocNodes" />
       </ul>
     </details>
 
@@ -478,17 +377,22 @@ function getNodeSessions(node: TOCNodeData): string[] {
   padding-left: 14px;
   list-style: none;
 }
-.toc-tree li {
+:deep(.toc-tree) {
+  margin-top: 8px;
+  padding-left: 14px;
+  list-style: none;
+}
+:deep(.toc-tree li) {
   margin: 6px 0;
 }
-.toc-ancestor {
+:deep(.toc-ancestor) {
   font-size: 0.88rem;
   color: var(--text-muted, #7c7267);
   font-weight: 600;
   cursor: pointer;
   margin: 4px 0;
 }
-.toc-link {
+:deep(.toc-link) {
   color: var(--accent-color, #9a3412);
   text-decoration: none;
   font-weight: 500;
@@ -501,27 +405,27 @@ function getNodeSessions(node: TOCNodeData): string[] {
   padding: 2px 4px;
   border-radius: 4px;
 }
-.toc-link:hover {
+:deep(.toc-link:hover) {
   text-decoration: underline;
   background-color: rgba(154, 52, 18, 0.05);
 }
-.toc-link.active {
+:deep(.toc-link.active) {
   background-color: rgba(154, 52, 18, 0.12);
   color: var(--accent-color, #9a3412);
   font-weight: 700;
   border-left: 3px solid var(--accent-color, #9a3412);
   padding-left: 8px;
 }
-.toc-link.toc-current-position {
+:deep(.toc-link.toc-current-position) {
   outline: 2px solid var(--accent-color, #9a3412);
   outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(154, 52, 18, 0.12);
 }
-.toc-timestamp-pending {
+:deep(.toc-timestamp-pending) {
   color: #999999;
   font-style: italic;
 }
-.toc-session-badge {
+:deep(.toc-session-badge) {
   display: inline-block;
   background: rgba(39, 174, 96, 0.12);
   color: #2e7d32;
@@ -533,12 +437,12 @@ function getNodeSessions(node: TOCNodeData): string[] {
   font-family: monospace;
   cursor: pointer;
 }
-.toc-session-badge.active {
+:deep(.toc-session-badge.active) {
   background: #2e7d32;
   color: #ffffff;
   border-color: #2e7d32;
 }
-.toc-badge-collapsed {
+:deep(.toc-badge-collapsed) {
   display: inline-flex;
   align-items: center;
   background: rgba(0, 0, 0, 0.04);
@@ -550,11 +454,11 @@ function getNodeSessions(node: TOCNodeData): string[] {
   font-weight: 600;
   cursor: pointer;
 }
-.toc-badge-collapsed:hover {
+:deep(.toc-badge-collapsed:hover) {
   background: rgba(0, 0, 0, 0.08);
   color: var(--text-main, #2b2520);
 }
-.toc-page-badge {
+:deep(.toc-page-badge) {
   display: inline-block;
   background: rgba(52, 152, 219, 0.12);
   color: #1976d2;
@@ -565,7 +469,7 @@ function getNodeSessions(node: TOCNodeData): string[] {
   font-weight: 600;
   font-family: monospace;
 }
-.toc-timestamp-badge {
+:deep(.toc-timestamp-badge) {
   display: inline-block;
   background: #e8f4fd;
   color: #1976d2;

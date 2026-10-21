@@ -133,6 +133,8 @@ export const useCourseStore = defineStore('course', {
 
       let bestChain: TOCNode[] = [];
       let bestTimestamp = -1;
+      let fallbackChain: TOCNode[] = [];
+      let fallbackTimestamp = Infinity;
 
       function walk(nodes: TOCNode[], chain: TOCNode[]) {
         if (!Array.isArray(nodes)) return;
@@ -141,20 +143,23 @@ export const useCourseStore = defineStore('course', {
             ? node.sessionIds
             : (node.sessionId ? [node.sessionId] : []);
 
-          if (sessionId && nodeSessions.length > 0 && !nodeSessions.includes(sessionId)) {
-            if (node.children && node.children.length > 0) {
-              walk(node.children, chain);
-            }
-            continue;
-          }
-
           const ts = typeof node.timestamp === 'number' ? node.timestamp : (node.start_time ?? 0);
           const currentChain = [...chain, node];
 
-          const isNodeAnchor = !sessionId || node.sessionId === sessionId || nodeSessions.includes(sessionId);
-          if (isNodeAnchor && ts <= time && ts > bestTimestamp) {
+          const isPrimaryAnchor = !sessionId || node.sessionId === sessionId;
+          const isSecondaryMatch = Boolean(sessionId && nodeSessions.includes(sessionId));
+
+          if (isPrimaryAnchor && ts <= time && ts >= bestTimestamp) {
             bestTimestamp = ts;
             bestChain = [...currentChain];
+          }
+
+          if ((isPrimaryAnchor || isSecondaryMatch) && fallbackChain.length === 0) {
+            fallbackChain = [...currentChain];
+            fallbackTimestamp = ts;
+          } else if (isPrimaryAnchor && ts < fallbackTimestamp) {
+            fallbackChain = [...currentChain];
+            fallbackTimestamp = ts;
           }
 
           if (node.children && node.children.length > 0) {
@@ -164,7 +169,7 @@ export const useCourseStore = defineStore('course', {
       }
 
       walk(this.tocTree, []);
-      return bestChain;
+      return bestChain.length > 0 ? bestChain : fallbackChain;
     },
   },
 });

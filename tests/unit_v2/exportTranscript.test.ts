@@ -57,6 +57,31 @@ describe('Transcript download contract', () => {
     expect(text).toContain('[01:01:01] 第三句。');
   });
 
+  it('prefers verbatimSentences (with speaker tags) when exporting calibrated oral transcripts', () => {
+    const text = formatTranscriptText(
+      {
+        courseTitle: '入中論善顯密意疏',
+        sessionId: '36B',
+        sessionTitle: '第 36B 講',
+        pageRange: 'p.114-p.115',
+      },
+      [
+        {
+          heading: '【科判】4. 課堂深度問答',
+          sentences: [{ start_time: 804, text: '精煉講記濃縮文字。' }],
+          verbatimSentences: [
+            { start: 804.82, speaker: '學員', text: '格西，我想請問瓶以瓶空是變成斷空嗎？' },
+            { start: 843.22, speaker: '格西', text: '如果有人知道它是斷空而棄之如敝屣，那是對的。' },
+          ],
+        },
+      ],
+    );
+
+    expect(text).toContain('[00:13:24] 【學員】格西，我想請問瓶以瓶空是變成斷空嗎？');
+    expect(text).toContain('[00:14:03] 【格西】如果有人知道它是斷空而棄之如敝屣，那是對的。');
+    expect(text).not.toContain('精煉講記濃縮文字。');
+  });
+
   it('keeps empty sessions explicit instead of creating a misleading transcript', () => {
     const text = formatTranscriptText(
       { courseTitle: '四念住', sessionId: '01', sessionTitle: '第一講' },

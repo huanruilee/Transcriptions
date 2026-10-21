@@ -24,6 +24,7 @@ COURSE_DIR = REPO_ROOT / "courses" / "入中論善顯密意疏"
 SESSIONS_DIR = COURSE_DIR / "sessions"
 OUTLINES_DIR = COURSE_DIR / "source_outlines"
 PUBLICATIONS_DIR = COURSE_DIR / "publications"
+VERBATIM_DIR = COURSE_DIR / "verbatim"
 
 def compute_source_digest(transcript: dict) -> str:
     """計算與 scripts/content_overview_pipeline.mjs 等價的 sourceDigest"""
@@ -136,6 +137,17 @@ def sync_session(sid: str):
 
     session = json.loads(session_file.read_text(encoding="utf-8"))
     orig_end = session.get("paragraphs", [{}])[-1].get("end", 3915.0)
+    existing_verbatim = {
+        p.get("id"): p.get("verbatimSentences")
+        for p in session.get("paragraphs", [])
+        if p.get("id") and p.get("verbatimSentences")
+    }
+    verbatim_file = VERBATIM_DIR / f"verbatim_{sid}.json"
+    file_verbatim = {}
+    if verbatim_file.exists():
+        vdata = json.loads(verbatim_file.read_text(encoding="utf-8"))
+        file_verbatim = vdata.get("paragraphs", {})
+        print(f"💬 載入精校口語逐字稿對照：{verbatim_file.name} ({len(file_verbatim)} 段落)")
 
     new_paragraphs = []
     last_heading = None
@@ -175,13 +187,18 @@ def sync_session(sid: str):
         else:
             h_val = None
 
-        new_paragraphs.append({
+        para_obj = {
             "id": p_id,
             "heading": h_val,
             "start": start_t,
             "end": end_t,
             "sentences": sent_objs
-        })
+        }
+        v_sents = file_verbatim.get(p_id) or existing_verbatim.get(p_id)
+        if v_sents:
+            para_obj["verbatimSentences"] = v_sents
+
+        new_paragraphs.append(para_obj)
 
     total_sentences = sum(len(p["sentences"]) for p in new_paragraphs)
     now_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

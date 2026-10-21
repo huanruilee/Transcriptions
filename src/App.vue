@@ -319,15 +319,28 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
-            <button
-              id="download-transcript-mobile-btn"
-              class="session-download-btn"
-              :title="downloadTranscriptTitle"
-              :disabled="isLoading || paragraphs.length === 0"
-              @click="handleDownloadTranscript"
-            >
-              📄 下載逐字稿
-            </button>
+            <div class="session-header-actions">
+              <button
+                id="download-transcript-mobile-btn"
+                class="session-download-btn"
+                :title="downloadTranscriptTitle"
+                :disabled="isLoading || paragraphs.length === 0"
+                @click="handleDownloadTranscript"
+              >
+                📄 下載逐字稿
+              </button>
+              <button
+                v-if="hasAnyVerbatim"
+                id="toggle-all-verbatim-btn"
+                type="button"
+                class="verbatim-global-toggle-btn"
+                :class="{ active: isAllVerbatimExpanded }"
+                data-testid="toggle-all-verbatim-btn"
+                @click="toggleAllVerbatim"
+              >
+                {{ isAllVerbatimExpanded ? '💬 收合全部課堂原話' : '💬 展開全部課堂原話' }}
+              </button>
+            </div>
             <div
               v-if="currentAgentReviewStatus === 'completed'"
               class="agent-review-summary"
@@ -405,6 +418,19 @@
               ▶ {{ formatTime(p.start) }}
             </button>
 
+            <!-- 內嵌精校口語逐字稿抽屜開關 -->
+            <button
+              v-if="p.verbatimSentences && p.verbatimSentences.length > 0"
+              type="button"
+              class="paragraph-verbatim-badge"
+              :class="{ open: Boolean(expandedVerbatimParagraphs[p.id]) }"
+              :data-testid="`verbatim-toggle-${p.id}`"
+              :title="expandedVerbatimParagraphs[p.id] ? '收合本段精校課堂原話' : '展開對照本段精校課堂原話（保留問答與口語脈絡）'"
+              @click.stop="toggleVerbatimParagraph(p.id)"
+            >
+              💬 對照課堂原話 ({{ p.verbatimSentences.length }}句) {{ expandedVerbatimParagraphs[p.id] ? '▴' : '▾' }}
+            </button>
+
             <span
               v-for="s in p.sentences"
               :id="s.id"
@@ -449,6 +475,70 @@
                 📌 筆記
               </span>
             </span>
+
+            <!-- 內嵌可展開「精校課堂原話」對照抽屜 -->
+            <div
+              v-if="p.verbatimSentences && p.verbatimSentences.length > 0 && expandedVerbatimParagraphs[p.id]"
+              class="verbatim-drawer"
+              :data-testid="`verbatim-drawer-${p.id}`"
+            >
+              <div class="verbatim-drawer-header">
+                <span class="verbatim-drawer-title">💬 課堂原話對照（適度潤飾口語逐字稿・點擊單句聽原音、連擊兩下可校對）</span>
+                <button
+                  type="button"
+                  class="verbatim-drawer-close"
+                  @click.stop="toggleVerbatimParagraph(p.id)"
+                >
+                  收合 ▴
+                </button>
+              </div>
+              <div class="verbatim-sentence-list">
+                <div
+                  v-for="vs in p.verbatimSentences"
+                  :id="vs.id"
+                  :key="vs.id"
+                  class="verbatim-sentence-item sentence"
+                  :class="{
+                    active: Boolean(
+                      (vs.id && playerStore.activeSentenceId === vs.id) ||
+                      (playerStore.currentTime > 0 && playerStore.currentTime >= vs.start_time && playerStore.currentTime < vs.end_time)
+                    ),
+                    'search-matched': Boolean(vs.id && searchMatches.length > 0 && searchMatches.some(m => m.sentenceId === vs.id)),
+                    'search-focused': Boolean(vs.id && searchMatches[currentMatchIndex]?.sentenceId && searchMatches[currentMatchIndex]?.sentenceId === vs.id),
+                    'has-correction': Boolean(annotationStore.corrections[vs.id]),
+                    'has-note': Boolean(annotationStore.notes[vs.id])
+                  }"
+                  :title="getSentenceTitle(vs)"
+                  @click.stop="handleSentenceClick(vs)"
+                  @touchstart="handleSentenceTouchStart($event, vs)"
+                  @touchend="handleSentenceTouchEnd"
+                  @touchcancel="handleSentenceTouchEnd"
+                >
+                  <span class="verbatim-ts">[{{ formatTime(vs.start_time) }}]</span>
+                  <span
+                    v-if="vs.speaker"
+                    class="verbatim-speaker-badge"
+                    :class="vs.speaker.includes('學員') ? 'speaker-student' : 'speaker-geshe'"
+                  >【{{ vs.speaker }}】</span>
+                  <span class="verbatim-text">
+                    <template v-for="(segment, segmentIndex) in sentenceSegments(vs)" :key="`${vs.id}-vseg-${segmentIndex}`">
+                      <span
+                        :class="{ 'verse-quote': segment.isVerse, 'treatise-quote': segment.isTreatiseQuote }"
+                      >{{ segment.text }}</span>
+                    </template>
+                  </span>
+                  <span
+                    v-if="annotationStore.notes[vs.id]"
+                    class="sentence-note-badge"
+                    :title="annotationStore.notes[vs.id]"
+                    @click.stop="openSentenceEditor(vs)"
+                  >
+                    📌 筆記
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <section v-if="p.teacherSummary" class="teacher-summary" :data-linked-to-audio="p.teacherSummary.linkedToAudio">
               <h4 class="teacher-summary-heading">{{ p.teacherSummary.heading || '法師開示摘要' }}</h4>
               <ul class="teacher-summary-list">
@@ -865,6 +955,7 @@ const youtubeIframeSrc = computed(() => {
 });
 const currentLastUpdated = ref('');
 const paragraphs = ref<any[]>([]);
+const expandedVerbatimParagraphs = ref<Record<string, boolean>>({});
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
@@ -873,6 +964,35 @@ let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
 let ytPlayerInitInterval: any = null;
 let isInitialMounted = false;
+
+const hasAnyVerbatim = computed(() =>
+  paragraphs.value.some((p) => Array.isArray(p.verbatimSentences) && p.verbatimSentences.length > 0),
+);
+
+const isAllVerbatimExpanded = computed(() => {
+  const withVerbatim = paragraphs.value.filter(
+    (p) => Array.isArray(p.verbatimSentences) && p.verbatimSentences.length > 0,
+  );
+  return withVerbatim.length > 0 && withVerbatim.every((p) => Boolean(expandedVerbatimParagraphs.value[p.id]));
+});
+
+function toggleVerbatimParagraph(paraId: string) {
+  expandedVerbatimParagraphs.value = {
+    ...expandedVerbatimParagraphs.value,
+    [paraId]: !expandedVerbatimParagraphs.value[paraId],
+  };
+}
+
+function toggleAllVerbatim() {
+  const nextState = !isAllVerbatimExpanded.value;
+  const nextMap: Record<string, boolean> = {};
+  for (const p of paragraphs.value) {
+    if (Array.isArray(p.verbatimSentences) && p.verbatimSentences.length > 0) {
+      nextMap[p.id] = nextState;
+    }
+  }
+  expandedVerbatimParagraphs.value = nextMap;
+}
 
 const totalSessionDuration = computed(() => {
   const all = paragraphs.value.flatMap(p => p.sentences);
@@ -889,9 +1009,12 @@ watch(() => playerStore.activeSentenceId, (newId) => {
   }
 });
 
-// 監聽全文搜尋
+// 監聽全文搜尋（同時穿透搜尋精煉講記與內嵌精校口語逐字稿）
 watch(searchQuery, (newQ) => {
-  const allSentences = paragraphs.value.flatMap(p => p.sentences);
+  const allSentences = paragraphs.value.flatMap((p) => [
+    ...(p.sentences || []),
+    ...(p.verbatimSentences || []),
+  ]);
   searchMatches.value = searchSentences(allSentences, newQ);
   currentMatchIndex.value = 0;
   if (searchMatches.value.length > 0) {
@@ -903,10 +1026,23 @@ function jumpToMatch(index: number) {
   if (index < 0 || index >= searchMatches.value.length) return;
   currentMatchIndex.value = index;
   const match = searchMatches.value[index];
-  const el = document.getElementById(match.sentenceId);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // 若命中的句子位於某一段的精校口語逐字稿抽屜內，自動展開該段抽屜再滾動定位
+  const parentPara = paragraphs.value.find((p) =>
+    Array.isArray(p.verbatimSentences) &&
+    p.verbatimSentences.some((vs: any) => vs.id === match.sentenceId),
+  );
+  if (parentPara && !expandedVerbatimParagraphs.value[parentPara.id]) {
+    expandedVerbatimParagraphs.value = {
+      ...expandedVerbatimParagraphs.value,
+      [parentPara.id]: true,
+    };
   }
+  setTimeout(() => {
+    const el = document.getElementById(match.sentenceId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 20);
 }
 
 function handleNextMatch() {
@@ -1633,11 +1769,14 @@ async function loadSession(sessionId: string) {
     currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
 
     let sentCounter = 0;
+    let verbatimCounter = 0;
+    expandedVerbatimParagraphs.value = {};
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
       const firstStart = p.sentences?.[0]?.start ?? p.sentences?.[0]?.start_time ?? 0;
       const anchorNode = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const paraId = p.id || `para-${sentCounter}`;
       return {
-        id: p.id || `para-${sentCounter}`,
+        id: paraId,
         questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
@@ -1655,6 +1794,17 @@ async function loadSession(sessionId: string) {
           agentReviewStatus: s.agentReviewStatus ?? null,
           agentReviewConfidence: s.agentReviewConfidence ?? null,
         })),
+        verbatimSentences: Array.isArray(p.verbatimSentences)
+          ? p.verbatimSentences.map((vs: any) => ({
+              id: vs.id || `v-${paraId}-${++verbatimCounter}`,
+              start_time: vs.start ?? vs.start_time ?? 0,
+              end_time: vs.end ?? vs.end_time ?? 0,
+              speaker: vs.speaker || null,
+              text: vs.text || '',
+              treatiseQuote: vs.treatiseQuote ?? false,
+              verseAnnotations: verseAnnotations.value[vs.id] || [],
+            }))
+          : [],
       };
     });
 
@@ -1707,17 +1857,14 @@ function sentenceSegments(sentence: any) {
   });
 }
 
-// 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart)
+// 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart：嚴格匹配 node.sessionId === sessionId)
 function findTOCNodeAtParagraphStart(paraStart: number, sessionId: string, tolerance = 2) {
   if (!courseStore.tocTree || courseStore.tocTree.length === 0) return null;
   let match: any = null;
   function walk(nodes: any[]) {
     if (!Array.isArray(nodes)) return;
     for (const node of nodes) {
-      const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
-        ? node.sessionIds
-        : (node.sessionId ? [node.sessionId] : []);
-      const sessionMatch = node.sessionId === sessionId || nodeSessions.includes(sessionId);
+      const sessionMatch = node.sessionId === sessionId;
       const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
       if (sessionMatch && ts > 0 && Math.abs(ts - paraStart) <= tolerance) {
         match = { title: node.title, timestamp: ts, page: node.page, sessionId: node.sessionId };
@@ -1808,9 +1955,17 @@ function handleSentenceClick(s: any) {
 function openSentenceEditor(s: any) {
   const allSentences = playerStore.sentences;
   const idx = allSentences.findIndex(x => x.id === s.id);
-  const prevSent = idx > 0 ? allSentences[idx - 1] : null;
-  const nextSent = idx >= 0 && idx < allSentences.length - 1 ? allSentences[idx + 1] : null;
-  annotationStore.openEditor(s, { prev: prevSent, next: nextSent });
+  if (idx >= 0) {
+    const prevSent = idx > 0 ? allSentences[idx - 1] : null;
+    const nextSent = idx < allSentences.length - 1 ? allSentences[idx + 1] : null;
+    annotationStore.openEditor(s, { prev: prevSent, next: nextSent });
+    return;
+  }
+  const allVerbatim = paragraphs.value.flatMap((p) => p.verbatimSentences || []);
+  const vIdx = allVerbatim.findIndex((x: any) => x.id === s.id);
+  const prevVerbatim = vIdx > 0 ? allVerbatim[vIdx - 1] : null;
+  const nextVerbatim = vIdx >= 0 && vIdx < allVerbatim.length - 1 ? allVerbatim[vIdx + 1] : null;
+  annotationStore.openEditor(s, { prev: prevVerbatim, next: nextVerbatim });
 }
 
 function onNativeTimeUpdate(e: any) {
@@ -2524,6 +2679,160 @@ if (typeof window !== 'undefined') {
   color: #fff;
   border-color: var(--accent-color, #8b1e1e);
   transform: translateY(-1px);
+}
+
+.session-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.verbatim-global-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e40af;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.verbatim-global-toggle-btn:hover,
+.verbatim-global-toggle-btn.active {
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.paragraph-verbatim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #3730a3;
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.22);
+  border-radius: 4px;
+  padding: 1px 7px;
+  margin-right: 6px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: 0.08em;
+  line-height: 1.25;
+  transition: all 0.15s ease;
+}
+
+.paragraph-verbatim-badge:hover,
+.paragraph-verbatim-badge.open {
+  background: #4338ca;
+  color: #ffffff;
+  border-color: #4338ca;
+}
+
+.verbatim-drawer {
+  margin: 10px 0 14px;
+  padding: 12px 16px;
+  background: rgba(248, 250, 252, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-left: 4px solid #4338ca;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.94em;
+  line-height: 1.7;
+}
+
+[data-theme='dark'] .verbatim-drawer,
+[data-theme='obsidian'] .verbatim-drawer {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: rgba(100, 116, 139, 0.4);
+  border-left-color: #818cf8;
+}
+
+.verbatim-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.35);
+}
+
+.verbatim-drawer-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #4338ca;
+}
+
+[data-theme='dark'] .verbatim-drawer-title,
+[data-theme='obsidian'] .verbatim-drawer-title {
+  color: #a5b4fc;
+}
+
+.verbatim-drawer-close {
+  background: none;
+  border: none;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.verbatim-drawer-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-main);
+}
+
+.verbatim-sentence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.verbatim-sentence-item {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.verbatim-sentence-item:hover {
+  background: rgba(79, 70, 229, 0.06);
+}
+
+.verbatim-ts {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-right: 6px;
+}
+
+.verbatim-speaker-badge {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin-right: 4px;
+}
+
+.verbatim-speaker-badge.speaker-geshe {
+  color: #9a3412;
+  background: rgba(154, 52, 18, 0.1);
+}
+
+.verbatim-speaker-badge.speaker-student {
+  color: #0369a1;
+  background: rgba(3, 105, 161, 0.1);
 }
 
 .sentence {
