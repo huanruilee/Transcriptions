@@ -113,7 +113,7 @@ def build_verbatim_payload(
                 "text": cleaned,
             }
             # 不憑「剛剛」等口頭用語猜測講者，保留來源標註與待審資訊。
-            for key in ("reviewNeeded", "uncertainty", "rawText", "llmProposal"):
+            for key in ("reviewNeeded", "uncertainty", "rawText", "llmProposal", "editAudit", "sourceMatches"):
                 if key in s:
                     row[key] = s[key]
             v_list.append(row)
