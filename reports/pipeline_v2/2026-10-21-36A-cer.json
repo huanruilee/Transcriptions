@@ -1,0 +1,245 @@
+{
+  "manifest": {
+    "created_at": "2026-10-21T18:51:07+0800",
+    "baseline_sha": "44a23af22c4dc504cc40fbe78b9a5c28ea1e7b96",
+    "candidate_head": "f2d97587a8f459faf90af258f38b1cac30e417b3",
+    "candidate_code_sha256": {
+      "scripts/batch_convert_all.py": "aef3fb6fb569fe55341cdad878b073e3329858363aaf6d49420d669669a72698",
+      "scripts/build_verbatim_track.py": "5218d5233841ca3fab20a4e14051af991ef0226a8b2ad1d0d9ef38b41b22ae6e",
+      "scripts/lib/session_prompt.py": "0c255473d689b0daa2d8d48c0cddc3f323166f93895dd23b1d58d6bbfd0a1539",
+      "scripts/lib/pipeline_evaluation.py": "642e77e5f31fb9a5b33d5786541595ee722b03f9fabfd52e73825b9db3a7a452",
+      "scripts/evaluate_pipeline_v2.py": "adfcef28140dc3cc32a6b50d2a26570d6e25d0277b8b0c6a056c865f1f07f05e",
+      "courses/入中論善顯密意疏/learned_corrections.json": "6ba9466fbd6643150d0be7d54388985df07f80d42622f7bed6be70cc5ce84b75"
+    },
+    "audio_sha256": "7d5e16632bb171a6bf378f5b1609b792b4ed807b4cee52cb10782f7e42a3fd1b",
+    "golden_sha256": "49e7ddd8e120e4fcc87c4c7b129ab0cfe27440b9dae1557d708a6eb8f61a7224",
+    "clip_start": 0,
+    "clip_end": 330.18,
+    "golden_sentences": 18,
+    "whisper_health": {
+      "backend": "cuda",
+      "compute_type": "int8",
+      "device": "cuda",
+      "gpu_count": 1,
+      "model": "/root/.cache/huggingface/hub/models--mobiuslabsgmbh--faster-whisper-large-v3-turbo/snapshots/0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+      "model_loaded": true,
+      "status": "ok"
+    },
+    "llm_models": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1792579867,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    },
+    "scope": "切片評估，不代表全講驗收",
+    "normalization": "NFC、小寫、移除空白與標點；保留所有實詞、重複及語氣詞；假說以 OpenCC s2twp 轉正體",
+    "protected_before": {
+      "courses/入中論善顯密意疏/verbatim/verbatim_36A.json": "49e7ddd8e120e4fcc87c4c7b129ab0cfe27440b9dae1557d708a6eb8f61a7224",
+      "courses/入中論善顯密意疏/verbatim/verbatim_36B.json": "3f90844bcd99ce983711ffc9014759670f102850ee91ef73e2034e8bbf14a24f",
+      "courses/入中論善顯密意疏/publications/lecture_36A_study_guide.md": "2ee710ea8c5d9ae255a952d37de2e74e80eb13a9e3dc0869e0a66f229ae5c82a",
+      "courses/入中論善顯密意疏/publications/lecture_36B_study_guide.md": "c4de1bde7d6efa6997332de5dce0ad4fcbf06ebe9b1e4265fffdb5057bbf3e3d",
+      "courses/入中論善顯密意疏/publications/lecture_36A_study_guide.html": "be627ca6877c7a068e938252238f376bc63e70dabbde004c8cb35fe48d6b7369",
+      "courses/入中論善顯密意疏/publications/lecture_36B_study_guide.html": "4e217b3d583506486927e365c3eb015c3145bbe92cb620cf382b7d552c550aee",
+      "courses/入中論善顯密意疏/sessions/session_36A.json": "b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+      "courses/入中論善顯密意疏/sessions/session_36B.json": "6eef2ee087c57b17a721da31bf9c51a4f90ac6175fc7e75c29d27e120eda7b25"
+    },
+    "protected_after": {
+      "courses/入中論善顯密意疏/verbatim/verbatim_36A.json": "49e7ddd8e120e4fcc87c4c7b129ab0cfe27440b9dae1557d708a6eb8f61a7224",
+      "courses/入中論善顯密意疏/verbatim/verbatim_36B.json": "3f90844bcd99ce983711ffc9014759670f102850ee91ef73e2034e8bbf14a24f",
+      "courses/入中論善顯密意疏/publications/lecture_36A_study_guide.md": "2ee710ea8c5d9ae255a952d37de2e74e80eb13a9e3dc0869e0a66f229ae5c82a",
+      "courses/入中論善顯密意疏/publications/lecture_36B_study_guide.md": "c4de1bde7d6efa6997332de5dce0ad4fcbf06ebe9b1e4265fffdb5057bbf3e3d",
+      "courses/入中論善顯密意疏/publications/lecture_36A_study_guide.html": "be627ca6877c7a068e938252238f376bc63e70dabbde004c8cb35fe48d6b7369",
+      "courses/入中論善顯密意疏/publications/lecture_36B_study_guide.html": "4e217b3d583506486927e365c3eb015c3145bbe92cb620cf382b7d552c550aee",
+      "courses/入中論善顯密意疏/sessions/session_36A.json": "b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+      "courses/入中論善顯密意疏/sessions/session_36B.json": "6eef2ee087c57b17a721da31bf9c51a4f90ac6175fc7e75c29d27e120eda7b25"
+    },
+    "protected_unchanged": true
+  },
+  "runs": [
+    {
+      "baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 899,
+        "errors": 223,
+        "cer": 0.24805339265850945
+      },
+      "candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 895,
+        "errors": 247,
+        "cer": 0.27474972191323693
+      },
+      "relative_reduction": -0.10762331838565024,
+      "target_met": false,
+      "vad_requested": 600,
+      "review_needed": 11,
+      "asr_baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 893,
+        "errors": 261,
+        "cer": 0.2903225806451613
+      },
+      "asr_candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 894,
+        "errors": 258,
+        "cer": 0.28698553948832034
+      }
+    },
+    {
+      "baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 899,
+        "errors": 223,
+        "cer": 0.24805339265850945
+      },
+      "candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 907,
+        "errors": 251,
+        "cer": 0.27919911012235815
+      },
+      "relative_reduction": -0.12556053811659185,
+      "target_met": false,
+      "vad_requested": 900,
+      "review_needed": 10,
+      "asr_baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 893,
+        "errors": 261,
+        "cer": 0.2903225806451613
+      },
+      "asr_candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 907,
+        "errors": 269,
+        "cer": 0.2992213570634038
+      }
+    },
+    {
+      "baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 899,
+        "errors": 223,
+        "cer": 0.24805339265850945
+      },
+      "candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 940,
+        "errors": 225,
+        "cer": 0.25027808676307006
+      },
+      "relative_reduction": -0.008968609865470798,
+      "target_met": false,
+      "vad_requested": 1200,
+      "review_needed": 13,
+      "asr_baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 893,
+        "errors": 261,
+        "cer": 0.2903225806451613
+      },
+      "asr_candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 941,
+        "errors": 256,
+        "cer": 0.28476084538375973
+      }
+    }
+  ],
+  "quality": {
+    "600": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sentences": 12,
+      "verbatim_sha256": "fcf134bfe94c7c1d566e9289ce63d2de6a3675ceef22d300ec21c65189abd7cd"
+    },
+    "900": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sentences": 11,
+      "verbatim_sha256": "85d28d4e98c9558b918cadf5bf51939762fe7bac7831ad2af4c7ead589ba9e53"
+    },
+    "1200": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sentences": 13,
+      "verbatim_sha256": "ddf6105d0e4b469a2bb1cfb64d640039ce836f05bcd9b2ae86e89c8620d9247a"
+    }
+  },
+  "source_audio_sha256": "24c177f3a2806c7a298dde94cf4a91ad0158b0887169269e70a429463d0f23b0",
+  "service_source_sha256": "7253d59ee06737d4644ef64420b97c85e5f96007a668c155cc6bb0b7e7039de4",
+  "artifact_sha256": {
+    "final-benchmark/baseline/01_asr.json": "21642d9a0ef8de213a713d190fb3429472adc49488de7a1f920bc1759289b9a1",
+    "final-benchmark/baseline/02_prepolished.json": "e941083e4c10914df88f041d39b692d5d0828c9e83e8461e422767b2ac25d71b",
+    "final-benchmark/baseline/03_proofread.json": "e4f8728dbb7b3c4382030e01384b916c56b82c47bc4794f998943cbb6a770c2d",
+    "final-benchmark/cer_report.json": "32735cae51e0a835a9ea7e58c94665ec4cde1e2a2327026fb81804281a25305a",
+    "final-benchmark/manifest.json": "8d9f61ff84b4fa1c5581fdd640840aa8aec5bc66e481add254124dce975115fe",
+    "final-benchmark/reference.json": "aa19c513f5db1372ccbc22afda3b1901df1f8e707a07179a5b816c45a9e7fb4d",
+    "final-benchmark/vad_1200/01_asr.json": "57ee2cda72ed8bb7e4fdbf6b712fc6cfe0271e7280401a2eeae416547c2b0d2e",
+    "final-benchmark/vad_1200/02_prepolished.json": "a64966a2ac25628bedbb0e3f81728265018a0dd021d0389f5fc62154ca077b94",
+    "final-benchmark/vad_1200/03_proofread.json": "6ab797bf8957c4da833ebbaf24a1598a2e3845f2f2cf3f9b78086ed0c77e9ab3",
+    "final-benchmark/vad_1200/asr_service_health.json": "2cd6fa5ad24c6fa8aa8b45d1622bd399eb6b490c3aba937f260cdd56a2748382",
+    "final-benchmark/vad_1200/session_36A.json": "4a0075fc4c68fa8655c4556edcd1c183b82c5801b1fcf3c32b81eb7606a3b872",
+    "final-benchmark/vad_1200/verbatim_36A.json": "ddf6105d0e4b469a2bb1cfb64d640039ce836f05bcd9b2ae86e89c8620d9247a",
+    "final-benchmark/vad_600/01_asr.json": "3544959ff1882b1c1853a3b0a5926b584e558360d1db6352b791f56f308087a5",
+    "final-benchmark/vad_600/02_prepolished.json": "cd4b89c5d5015d95901dd7e3154d7731b82008833e5717870d55d28dab1c6a27",
+    "final-benchmark/vad_600/03_proofread.json": "454afef3c14d366eb3c37859d5aab400268eb914d1cffb6a6fb51137ab67f833",
+    "final-benchmark/vad_600/asr_service_health.json": "2cd6fa5ad24c6fa8aa8b45d1622bd399eb6b490c3aba937f260cdd56a2748382",
+    "final-benchmark/vad_600/session_36A.json": "f0072d657b0cfeb9e59a4b8eedf8eef7ea865f03adff3e5e895dcc5ce55eef8f",
+    "final-benchmark/vad_600/verbatim_36A.json": "fcf134bfe94c7c1d566e9289ce63d2de6a3675ceef22d300ec21c65189abd7cd",
+    "final-benchmark/vad_900/01_asr.json": "e06dba96e034ff136d2833f06006f5525a8d78309d86fb93be401650a0fa839a",
+    "final-benchmark/vad_900/02_prepolished.json": "63e5a39ab0074764cc722d1170bc61cdcb044c0762bff966eda4f668a66cd1cf",
+    "final-benchmark/vad_900/03_proofread.json": "8f231af8b679b1cc6550ca3ee32666e9a4dfdb269eea8343adf2950a4b4b9dcd",
+    "final-benchmark/vad_900/asr_service_health.json": "2cd6fa5ad24c6fa8aa8b45d1622bd399eb6b490c3aba937f260cdd56a2748382",
+    "final-benchmark/vad_900/session_36A.json": "d9fc1fb8627d50423c755e10a95ddf56cb27ac4706a94035d5c49eac342fd3f7",
+    "final-benchmark/vad_900/verbatim_36A.json": "85d28d4e98c9558b918cadf5bf51939762fe7bac7831ad2af4c7ead589ba9e53"
+  }
+}

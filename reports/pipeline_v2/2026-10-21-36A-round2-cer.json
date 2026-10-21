@@ -1,0 +1,495 @@
+{
+  "provenance": {
+    "created_at": "2026-10-21T19:42:42+0800",
+    "code_sha256": {
+      "scripts/batch_convert_all.py": "fc5b7e62e376ccfda8bd7ad2fa69f261e272754515e85da3e93e04dba14b19ed",
+      "scripts/build_verbatim_track.py": "da6cb7a6ec231e4072ee50df3fae43db874d66a8803f394cb91440e21add7041",
+      "scripts/lib/guarded_edits.py": "476b2441d40c211e2b7f182edf162e5c9a342d15ec8e42e6584288f830d10f53",
+      "scripts/lib/source_alignment.py": "ca89b9bf96f828988428d820aaa03e4948665cae44131ee7cba7efdb2dd0e7a9",
+      "scripts/lib/session_prompt.py": "0c255473d689b0daa2d8d48c0cddc3f323166f93895dd23b1d58d6bbfd0a1539",
+      "scripts/lib/pipeline_evaluation.py": "642e77e5f31fb9a5b33d5786541595ee722b03f9fabfd52e73825b9db3a7a452",
+      "scripts/benchmark_whisper_isolated.py": "2c3850535449905af95279679424613bf0b1d4d329d9516a4e5374ddf02010aa",
+      "scripts/evaluate_pipeline_edits.py": "3520b28f58216492b035579b6219a5977c4ee6fb735cb7442b20999d79057525",
+      "scripts/requirements-pipeline-v2.txt": "95fbd4f5a33b8fd3660dbdea76ead481004f58d357228b8fb6931731ef192577"
+    },
+    "fixture_sha256": "4cffc2d4a73c1f935b30da92778195f9faed0b214104ba7027e86314b41f7ace",
+    "reference_sha256": "49e7ddd8e120e4fcc87c4c7b129ab0cfe27440b9dae1557d708a6eb8f61a7224",
+    "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+    "publication_accepted": false,
+    "reference_verified": false,
+    "baseline_sha": "44a23af22c4dc504cc40fbe78b9a5c28ea1e7b96",
+    "protected_unchanged": true
+  },
+  "results": [
+    {
+      "baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 899,
+        "errors": 223,
+        "cer": 0.24805339265850945
+      },
+      "candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 907,
+        "errors": 245,
+        "cer": 0.2725250278086763
+      },
+      "relative_reduction": -0.09865470852017945,
+      "clip": "development",
+      "split": "development",
+      "model": "service-replay",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 899,
+        "hypothesis_chars": 907,
+        "errors": 269,
+        "cer": 0.2992213570634038
+      },
+      "review_needed": 8,
+      "applied_edits": 3,
+      "rejected_edits": 20,
+      "raw_sha256": "3579ed3230358390fe07f2334e2e7486926e904e5fe762093d9855c4c6ed4f84",
+      "audio_sha256": "7d5e16632bb171a6bf378f5b1609b792b4ed807b4cee52cb10782f7e42a3fd1b"
+    },
+    {
+      "baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 899,
+        "errors": 223,
+        "cer": 0.24805339265850945
+      },
+      "candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 908,
+        "errors": 255,
+        "cer": 0.2836484983314794
+      },
+      "relative_reduction": -0.14349775784753366,
+      "clip": "development",
+      "split": "development",
+      "model": "turbo",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 899,
+        "hypothesis_chars": 907,
+        "errors": 272,
+        "cer": 0.3025583982202447
+      },
+      "review_needed": 21,
+      "applied_edits": 3,
+      "rejected_edits": 33,
+      "raw_sha256": "e767e538e09d4312dcdb48e4fe0635c70ade03b04803ab8be87cd3d6bbc69440",
+      "audio_sha256": "7d5e16632bb171a6bf378f5b1609b792b4ed807b4cee52cb10782f7e42a3fd1b"
+    },
+    {
+      "baseline": {
+        "reference_chars": 899,
+        "hypothesis_chars": 899,
+        "errors": 223,
+        "cer": 0.24805339265850945
+      },
+      "candidate": {
+        "reference_chars": 899,
+        "hypothesis_chars": 884,
+        "errors": 232,
+        "cer": 0.25806451612903225
+      },
+      "relative_reduction": -0.04035874439461881,
+      "clip": "development",
+      "split": "development",
+      "model": "large-v3",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 899,
+        "hypothesis_chars": 884,
+        "errors": 263,
+        "cer": 0.2925472747497219
+      },
+      "review_needed": 20,
+      "applied_edits": 4,
+      "rejected_edits": 29,
+      "raw_sha256": "78c75d5d73e6a46008ca2aa41cfa687bd286badb158065c52d2bf3e60d80dc3b",
+      "audio_sha256": "7d5e16632bb171a6bf378f5b1609b792b4ed807b4cee52cb10782f7e42a3fd1b"
+    },
+    {
+      "baseline": {
+        "reference_chars": 212,
+        "hypothesis_chars": 213,
+        "errors": 49,
+        "cer": 0.23113207547169812
+      },
+      "candidate": {
+        "reference_chars": 212,
+        "hypothesis_chars": 190,
+        "errors": 48,
+        "cer": 0.22641509433962265
+      },
+      "relative_reduction": 0.020408163265306117,
+      "clip": "heldout_dialogue",
+      "split": "holdout",
+      "model": "turbo",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 212,
+        "hypothesis_chars": 190,
+        "errors": 66,
+        "cer": 0.3113207547169811
+      },
+      "review_needed": 2,
+      "applied_edits": 0,
+      "rejected_edits": 2,
+      "raw_sha256": "3f7112f9bc41ccdbd469ace91859f88d11158e9be51c2b633645096b09f27343",
+      "audio_sha256": "ff8b4e9fe2bb8f2f5c5aa15a3b7c01832a21e5dc8f8b636958469995aec6c17c"
+    },
+    {
+      "baseline": {
+        "reference_chars": 212,
+        "hypothesis_chars": 213,
+        "errors": 49,
+        "cer": 0.23113207547169812
+      },
+      "candidate": {
+        "reference_chars": 212,
+        "hypothesis_chars": 216,
+        "errors": 38,
+        "cer": 0.1792452830188679
+      },
+      "relative_reduction": 0.2244897959183674,
+      "clip": "heldout_dialogue",
+      "split": "holdout",
+      "model": "large-v3",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 212,
+        "hypothesis_chars": 216,
+        "errors": 48,
+        "cer": 0.22641509433962265
+      },
+      "review_needed": 4,
+      "applied_edits": 1,
+      "rejected_edits": 5,
+      "raw_sha256": "a884f06e1d68929e36e1940bbb468766f93a173fa920eb9b1878b629434f1150",
+      "audio_sha256": "ff8b4e9fe2bb8f2f5c5aa15a3b7c01832a21e5dc8f8b636958469995aec6c17c"
+    },
+    {
+      "baseline": {
+        "reference_chars": 184,
+        "hypothesis_chars": 192,
+        "errors": 29,
+        "cer": 0.15760869565217392
+      },
+      "candidate": {
+        "reference_chars": 184,
+        "hypothesis_chars": 186,
+        "errors": 31,
+        "cer": 0.16847826086956522
+      },
+      "relative_reduction": -0.06896551724137927,
+      "clip": "heldout_recitation",
+      "split": "holdout",
+      "model": "turbo",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 184,
+        "hypothesis_chars": 186,
+        "errors": 35,
+        "cer": 0.19021739130434784
+      },
+      "review_needed": 10,
+      "applied_edits": 2,
+      "rejected_edits": 13,
+      "raw_sha256": "11d81812301a2fa3754f183ddebe23f767c7f3006b0f38faf0c81403ee093977",
+      "audio_sha256": "b706c25d49ccc4fe08e8c453b4df5b7dd9c597384c0fa1b7979faea710a00d76"
+    },
+    {
+      "baseline": {
+        "reference_chars": 184,
+        "hypothesis_chars": 192,
+        "errors": 29,
+        "cer": 0.15760869565217392
+      },
+      "candidate": {
+        "reference_chars": 184,
+        "hypothesis_chars": 105,
+        "errors": 94,
+        "cer": 0.5108695652173914
+      },
+      "relative_reduction": -2.2413793103448274,
+      "clip": "heldout_recitation",
+      "split": "holdout",
+      "model": "large-v3",
+      "numeric_target_met": false,
+      "publication_accepted": false,
+      "referenceStatus": "PUBLISHED_REFERENCE_NOT_AUDIO_VERIFIED",
+      "raw_cer": {
+        "reference_chars": 184,
+        "hypothesis_chars": 105,
+        "errors": 97,
+        "cer": 0.5271739130434783
+      },
+      "review_needed": 4,
+      "applied_edits": 2,
+      "rejected_edits": 5,
+      "raw_sha256": "fb050f70e77effe0e280f492696161587c98f3523ec7c756ae56b48d9f431bb4",
+      "audio_sha256": "b706c25d49ccc4fe08e8c453b4df5b7dd9c597384c0fa1b7979faea710a00d76"
+    }
+  ],
+  "quality": {
+    "development/service-replay": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "28985f40f39bdf59dadf90912df8f4ca6ded4eb19325d163b937e2aaa9fe23e8"
+    },
+    "development/turbo": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "75af4e643d5291b3952ea1af10eb5816fb095d3ff4b5b38e36e7b833ae313318"
+    },
+    "development/large-v3": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "fb6d58b6eb647d14b3293a52f975e5432eeaf8e2643227aa92319a7da17e6a59"
+    },
+    "heldout_dialogue/turbo": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "4cda08095fb43e638c425b73f7460aa6521db3595730af6837d493a06d3eac94"
+    },
+    "heldout_dialogue/large-v3": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "e7a40d156ffb02e47ef2e4b04b4da3dcc735a6986152538d91bf7beb11a99809"
+    },
+    "heldout_recitation/turbo": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "623f156ee00b9131bcfd13ede0b6fcd8880c8316ce182b198dbc096f07071d57"
+    },
+    "heldout_recitation/large-v3": {
+      "simplified": 0,
+      "forbidden_homophones": 0,
+      "sha256": "ba621a4d967c509f68734473126cfd8a286860385909392f676dc2eba6b2660b"
+    }
+  },
+  "reference_review": {
+    "count": 23,
+    "approved": 0,
+    "sha256": "c2e62ee4af5329c01b60a80029f893416833631c7b9d929b6f24f4a42a2b0b87"
+  },
+  "models": {
+    "large-v3-development": {
+      "provenance": {
+        "model_path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-large-v3/snapshots/edaa852ec7e145841d8ffdb056a99866b5f0a478",
+        "weights_sha256": "69f74147e3334731bc3a76048724833325d2ec74642fb52620eda87352e3d4f1",
+        "compute_type": "int8",
+        "device": "cuda",
+        "faster_whisper": "1.2.1",
+        "ctranslate2": "4.8.0",
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "beam_size": 5,
+        "temperature": 0.0,
+        "vad_ms": 900,
+        "initial_prompt": "以下是見悲青增格西講授宗喀巴大師《入中論善顯密意疏》的開示錄音，繁體中文。本講名相：釋論、明破他生之功德、世俗、故世亦無從他生、釋彼妨難、名言諦應堪正理觀察、四百論、顯句論、世間僅殖少種、便謂此兒是我、亦覺此樹是我、如世間人指一、此兒是我生、然此男人、非將彼男從自、身出納入母腹、是將此兒身之、不淨種子、注入母胎也、由父僅注兒身、便云生兒、人不執種子與、兒為自相之他、此是世間共知、故執種子與兒、麥種與芽、等為從他生、世間亦無也。",
+        "audio_sha256": "7d5e16632bb171a6bf378f5b1609b792b4ed807b4cee52cb10782f7e42a3fd1b"
+      },
+      "sha256": "78c75d5d73e6a46008ca2aa41cfa687bd286badb158065c52d2bf3e60d80dc3b",
+      "words": 728,
+      "elapsed_seconds": 30.494
+    },
+    "large-v3-heldout_dialogue": {
+      "provenance": {
+        "model_path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-large-v3/snapshots/edaa852ec7e145841d8ffdb056a99866b5f0a478",
+        "weights_sha256": "69f74147e3334731bc3a76048724833325d2ec74642fb52620eda87352e3d4f1",
+        "compute_type": "int8",
+        "device": "cuda",
+        "faster_whisper": "1.2.1",
+        "ctranslate2": "4.8.0",
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "beam_size": 5,
+        "temperature": 0.0,
+        "vad_ms": 900,
+        "initial_prompt": "以下是見悲青增格西講授宗喀巴大師《入中論善顯密意疏》的開示錄音，繁體中文。本講名相：釋論、明破他生之功德、世俗、故世亦無從他生、釋彼妨難、名言諦應堪正理觀察、四百論、顯句論、世間僅殖少種、便謂此兒是我、亦覺此樹是我、如世間人指一、此兒是我生、然此男人、非將彼男從自、身出納入母腹、是將此兒身之、不淨種子、注入母胎也、由父僅注兒身、便云生兒、人不執種子與、兒為自相之他、此是世間共知、故執種子與兒、麥種與芽、等為從他生、世間亦無也。",
+        "audio_sha256": "ff8b4e9fe2bb8f2f5c5aa15a3b7c01832a21e5dc8f8b636958469995aec6c17c"
+      },
+      "sha256": "a884f06e1d68929e36e1940bbb468766f93a173fa920eb9b1878b629434f1150",
+      "words": 182,
+      "elapsed_seconds": 12.745
+    },
+    "large-v3-heldout_recitation": {
+      "provenance": {
+        "model_path": "/root/.cache/huggingface/hub/models--Systran--faster-whisper-large-v3/snapshots/edaa852ec7e145841d8ffdb056a99866b5f0a478",
+        "weights_sha256": "69f74147e3334731bc3a76048724833325d2ec74642fb52620eda87352e3d4f1",
+        "compute_type": "int8",
+        "device": "cuda",
+        "faster_whisper": "1.2.1",
+        "ctranslate2": "4.8.0",
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "beam_size": 5,
+        "temperature": 0.0,
+        "vad_ms": 900,
+        "initial_prompt": "以下是見悲青增格西講授宗喀巴大師《入中論善顯密意疏》的開示錄音，繁體中文。本講名相：釋論、明破他生之功德、世俗、故世亦無從他生、釋彼妨難、名言諦應堪正理觀察、四百論、顯句論、世間僅殖少種、便謂此兒是我、亦覺此樹是我、如世間人指一、此兒是我生、然此男人、非將彼男從自、身出納入母腹、是將此兒身之、不淨種子、注入母胎也、由父僅注兒身、便云生兒、人不執種子與、兒為自相之他、此是世間共知、故執種子與兒、麥種與芽、等為從他生、世間亦無也。",
+        "audio_sha256": "b706c25d49ccc4fe08e8c453b4df5b7dd9c597384c0fa1b7979faea710a00d76"
+      },
+      "sha256": "fb050f70e77effe0e280f492696161587c98f3523ec7c756ae56b48d9f431bb4",
+      "words": 94,
+      "elapsed_seconds": 9.812
+    },
+    "turbo-development": {
+      "provenance": {
+        "model_path": "/root/.cache/huggingface/hub/models--mobiuslabsgmbh--faster-whisper-large-v3-turbo/snapshots/0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+        "weights_sha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+        "compute_type": "int8",
+        "device": "cuda",
+        "faster_whisper": "1.2.1",
+        "ctranslate2": "4.8.0",
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "beam_size": 5,
+        "temperature": 0.0,
+        "vad_ms": 900,
+        "initial_prompt": "以下是見悲青增格西講授宗喀巴大師《入中論善顯密意疏》的開示錄音，繁體中文。本講名相：釋論、明破他生之功德、世俗、故世亦無從他生、釋彼妨難、名言諦應堪正理觀察、四百論、顯句論、世間僅殖少種、便謂此兒是我、亦覺此樹是我、如世間人指一、此兒是我生、然此男人、非將彼男從自、身出納入母腹、是將此兒身之、不淨種子、注入母胎也、由父僅注兒身、便云生兒、人不執種子與、兒為自相之他、此是世間共知、故執種子與兒、麥種與芽、等為從他生、世間亦無也。",
+        "audio_sha256": "7d5e16632bb171a6bf378f5b1609b792b4ed807b4cee52cb10782f7e42a3fd1b"
+      },
+      "sha256": "e767e538e09d4312dcdb48e4fe0635c70ade03b04803ab8be87cd3d6bbc69440",
+      "words": 738,
+      "elapsed_seconds": 13.044
+    },
+    "turbo-heldout_dialogue": {
+      "provenance": {
+        "model_path": "/root/.cache/huggingface/hub/models--mobiuslabsgmbh--faster-whisper-large-v3-turbo/snapshots/0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+        "weights_sha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+        "compute_type": "int8",
+        "device": "cuda",
+        "faster_whisper": "1.2.1",
+        "ctranslate2": "4.8.0",
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "beam_size": 5,
+        "temperature": 0.0,
+        "vad_ms": 900,
+        "initial_prompt": "以下是見悲青增格西講授宗喀巴大師《入中論善顯密意疏》的開示錄音，繁體中文。本講名相：釋論、明破他生之功德、世俗、故世亦無從他生、釋彼妨難、名言諦應堪正理觀察、四百論、顯句論、世間僅殖少種、便謂此兒是我、亦覺此樹是我、如世間人指一、此兒是我生、然此男人、非將彼男從自、身出納入母腹、是將此兒身之、不淨種子、注入母胎也、由父僅注兒身、便云生兒、人不執種子與、兒為自相之他、此是世間共知、故執種子與兒、麥種與芽、等為從他生、世間亦無也。",
+        "audio_sha256": "ff8b4e9fe2bb8f2f5c5aa15a3b7c01832a21e5dc8f8b636958469995aec6c17c"
+      },
+      "sha256": "3f7112f9bc41ccdbd469ace91859f88d11158e9be51c2b633645096b09f27343",
+      "words": 164,
+      "elapsed_seconds": 7.228
+    },
+    "turbo-heldout_recitation": {
+      "provenance": {
+        "model_path": "/root/.cache/huggingface/hub/models--mobiuslabsgmbh--faster-whisper-large-v3-turbo/snapshots/0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+        "weights_sha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+        "compute_type": "int8",
+        "device": "cuda",
+        "faster_whisper": "1.2.1",
+        "ctranslate2": "4.8.0",
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "beam_size": 5,
+        "temperature": 0.0,
+        "vad_ms": 900,
+        "initial_prompt": "以下是見悲青增格西講授宗喀巴大師《入中論善顯密意疏》的開示錄音，繁體中文。本講名相：釋論、明破他生之功德、世俗、故世亦無從他生、釋彼妨難、名言諦應堪正理觀察、四百論、顯句論、世間僅殖少種、便謂此兒是我、亦覺此樹是我、如世間人指一、此兒是我生、然此男人、非將彼男從自、身出納入母腹、是將此兒身之、不淨種子、注入母胎也、由父僅注兒身、便云生兒、人不執種子與、兒為自相之他、此是世間共知、故執種子與兒、麥種與芽、等為從他生、世間亦無也。",
+        "audio_sha256": "b706c25d49ccc4fe08e8c453b4df5b7dd9c597384c0fa1b7979faea710a00d76"
+      },
+      "sha256": "11d81812301a2fa3754f183ddebe23f767c7f3006b0f38faf0c81403ee093977",
+      "words": 155,
+      "elapsed_seconds": 6.84
+    }
+  },
+  "coverage_gap_review": {
+    "clip": "heldout_recitation",
+    "model": "large-v3",
+    "gaps": [
+      {
+        "start": 14.49,
+        "end": 35.48,
+        "seconds": 20.99,
+        "other_model_segment_overlap_seconds": 18.03,
+        "status": "REVIEW_REQUIRED_ASR_COVERAGE_GAP"
+      }
+    ]
+  },
+  "artifact_sha256": {
+    "evaluation/cer_report.json": "f01b4475969d3044440699747694e7ad403236a4a0a8987b309affc212311db3",
+    "evaluation/development/baseline_proofread.json": "e4f8728dbb7b3c4382030e01384b916c56b82c47bc4794f998943cbb6a770c2d",
+    "evaluation/development/large-v3/01_asr.json": "91b71df4912f87017badd5ffde2bd0d420b8c1fc44a7fab2253b1c30528356d5",
+    "evaluation/development/large-v3/02_prepolished.json": "1bd332fe82e1b0a4caabc5be8b4d750cf508a2f7649a1019aeec1085f0bd4428",
+    "evaluation/development/large-v3/03_proofread.json": "b614491a1d6207691fd3273bc6234939e7a761d34a23c0d42c7fe3b0b3717079",
+    "evaluation/development/large-v3/asr_provenance.json": "ca402e3fddd4c65c80fd6b93419e94970085cbad60985b37cd8fb07702d6e19f",
+    "evaluation/development/large-v3/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/development/large-v3/session_36A.json": "d80e9d6b2e040a6062981fc14ba541626476fc0b501c0d40cd36ea200bbd2f0b",
+    "evaluation/development/large-v3/verbatim_36A.json": "fb6d58b6eb647d14b3293a52f975e5432eeaf8e2643227aa92319a7da17e6a59",
+    "evaluation/development/service-replay/01_asr.json": "e06dba96e034ff136d2833f06006f5525a8d78309d86fb93be401650a0fa839a",
+    "evaluation/development/service-replay/02_prepolished.json": "8d1de3f904dfe74872d6b155432e7b01d0f0263520b9f6da9f11bd8ca16027e2",
+    "evaluation/development/service-replay/03_proofread.json": "e42802eeb142fc6e40afeffe290002c063f9be29acf97f52183a66d3e07df9f2",
+    "evaluation/development/service-replay/asr_provenance.json": "b3aaaeff903640e131fab5490e9d2484157b52dd61fcf434101275638cdc6566",
+    "evaluation/development/service-replay/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/development/service-replay/session_36A.json": "edb79e275afd62567e3bdb03af9e3e61b36a00a4bcf6f357d278b4f71a4ac04c",
+    "evaluation/development/service-replay/verbatim_36A.json": "28985f40f39bdf59dadf90912df8f4ca6ded4eb19325d163b937e2aaa9fe23e8",
+    "evaluation/development/turbo/01_asr.json": "788ee7fa09ff04149a69375346475ab5079b68418b303797b5aa1fbde0da5282",
+    "evaluation/development/turbo/02_prepolished.json": "84d1c22d1702a592b00712ef63b55c11648c879ced7ac37a9bc40075a1110df7",
+    "evaluation/development/turbo/03_proofread.json": "a3ed6a83cd3c084fa9d3efa74a3e20169a5f07d74bc7188feb5f4db6a984b29e",
+    "evaluation/development/turbo/asr_provenance.json": "fa1f8a99dd81783ad585598f924d363fdaee720762779a2a85830cafa548cfa6",
+    "evaluation/development/turbo/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/development/turbo/session_36A.json": "c7dd7d2556401b5fb40776e360f838aad866de461a560623bdf72cc7e73c2803",
+    "evaluation/development/turbo/verbatim_36A.json": "75af4e643d5291b3952ea1af10eb5816fb095d3ff4b5b38e36e7b833ae313318",
+    "evaluation/heldout_dialogue/baseline_asr.json": "ca58ec8e61b09154b9453ea717d8e94fb3050c81f01a1710d9656c69366e5c90",
+    "evaluation/heldout_dialogue/baseline_proofread.json": "b430ec4b24386a29611197d2aa5d018ed1ab7ee9b9a724821d105105cc63c1d0",
+    "evaluation/heldout_dialogue/large-v3/01_asr.json": "7f8e4aaa5c9e430f474cba8cc308c0a5a4e9b8fae2751fda0b3132cbde4fb336",
+    "evaluation/heldout_dialogue/large-v3/02_prepolished.json": "4550f56e9dd953c172b8880dbbdda5bcad07d491af84fa13b3ebd8025e07c9bb",
+    "evaluation/heldout_dialogue/large-v3/03_proofread.json": "db9986069cedcaa525549bd6c7c97839685edadd1a558ff71f0b16e923e2fbcd",
+    "evaluation/heldout_dialogue/large-v3/asr_provenance.json": "53d5c97c8f6cac2abbabd4d78375ca9a2f72848e04db6aed7d07094362fd0e06",
+    "evaluation/heldout_dialogue/large-v3/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/heldout_dialogue/large-v3/session_36A.json": "334d492ee082f0dce2a89ee77e6364d1354d801580dcad5747c5d1633d85d423",
+    "evaluation/heldout_dialogue/large-v3/verbatim_36A.json": "e7a40d156ffb02e47ef2e4b04b4da3dcc735a6986152538d91bf7beb11a99809",
+    "evaluation/heldout_dialogue/turbo/01_asr.json": "0b535665de0a41a9569dd290c1e10dc045b565778c770a14ee31ea74e6630374",
+    "evaluation/heldout_dialogue/turbo/02_prepolished.json": "aa214284d97f93a8f27fde9fefc301df1586eece068516079924dfd8bd8b30e0",
+    "evaluation/heldout_dialogue/turbo/03_proofread.json": "086441672ae5e5d763c64183331783d24bd717f2e2c5c4627aebfedb29fa1c82",
+    "evaluation/heldout_dialogue/turbo/asr_provenance.json": "013daf8e4330bbe35ae891a8931b56799d3a7c2ea1a8ba77439e5dac81a33354",
+    "evaluation/heldout_dialogue/turbo/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/heldout_dialogue/turbo/session_36A.json": "fcb09ea9c8586524bcb6683481df5aab6b9a2a48bc1f827846c2628e65b7bc30",
+    "evaluation/heldout_dialogue/turbo/verbatim_36A.json": "4cda08095fb43e638c425b73f7460aa6521db3595730af6837d493a06d3eac94",
+    "evaluation/heldout_recitation/baseline_asr.json": "9ed1ff70fc015c4755dd3803620af0b27caa7b5a7f073c9b3b6192f07d296a5e",
+    "evaluation/heldout_recitation/baseline_proofread.json": "a68822de43001aef19f109da360da31784c8e0547e4f872944e37f144d81408f",
+    "evaluation/heldout_recitation/large-v3/01_asr.json": "ff7b8a6f270fe1613985654e9f2fc9056726ccb5a4123f1ceae32d89c4251755",
+    "evaluation/heldout_recitation/large-v3/02_prepolished.json": "f6da96649912fc8daca065ce8f4492fd681869818435f05c0ae077f33834563c",
+    "evaluation/heldout_recitation/large-v3/03_proofread.json": "8b89ecf951fee563545398182dcb6b73542de6a5a26daae1452a249629290629",
+    "evaluation/heldout_recitation/large-v3/asr_provenance.json": "027ce311332171fb6608453067ff1dac79c0d761007e31e903ddfc318ace712b",
+    "evaluation/heldout_recitation/large-v3/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/heldout_recitation/large-v3/session_36A.json": "ce93a8918b6b36936c703ec1eee7c4e27ca9c1985e1f3e57c6260454588fcdc3",
+    "evaluation/heldout_recitation/large-v3/verbatim_36A.json": "ba621a4d967c509f68734473126cfd8a286860385909392f676dc2eba6b2660b",
+    "evaluation/heldout_recitation/turbo/01_asr.json": "d24b002e5868c89415fa56402eafe7f1fda4238e091f57865f6a7a90853f77d6",
+    "evaluation/heldout_recitation/turbo/02_prepolished.json": "e91a340adda0b0e75c13279b5e8312fc00adb276274dfa733d859725f79ae7a2",
+    "evaluation/heldout_recitation/turbo/03_proofread.json": "544ff2e17ae41e6ba910c98545c1d64ebfcea669069774c41a2d52cc3388505d",
+    "evaluation/heldout_recitation/turbo/asr_provenance.json": "c80fc07123e43775d26cab294c09c580ac1576d8c573ca4e9b6a208131a0f992",
+    "evaluation/heldout_recitation/turbo/asr_service_health.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "evaluation/heldout_recitation/turbo/session_36A.json": "963f1e69ee1d81ffdbb5e022ed381a2f4df13ae2f56597599cfc0a11357f2384",
+    "evaluation/heldout_recitation/turbo/verbatim_36A.json": "623f156ee00b9131bcfd13ede0b6fcd8880c8316ce182b198dbc096f07071d57",
+    "evaluation/provenance.json": "59113f2ea3071b0dfd8c778ff70ded0978726b5556209718f0f3ba8de1c06e1f",
+    "evaluation/reference_review.json": "c2e62ee4af5329c01b60a80029f893416833631c7b9d929b6f24f4a42a2b0b87"
+  },
+  "service_continuity": {
+    "existing_gpu_processes": [
+      7385,
+      3626228
+    ],
+    "whisper_health": "ok",
+    "llm_health": "ok",
+    "isolated_containers_remaining": 0,
+    "log_sha256": "1998b1e60b585f2f0c33121ebfaf478d217dd9216af66bbb741bf30ecb8d1e3c"
+  }
+}

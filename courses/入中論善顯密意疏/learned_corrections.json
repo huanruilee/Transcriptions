@@ -3,7 +3,7 @@
     "description": "Centralized High-Precision Buddhist ASR Phonetic Error & Active Learning Lexicon",
     "course": "入中論善顯密意疏",
     "version": "3.1",
-    "lastUpdated": "2026-10-21T10:37:45.748133+00:00",
+    "lastUpdated": "2026-10-21T22:45:18.352991+08:00",
     "totalGlobalTerms": 151
   },
   "global_terms": {
@@ -796,11 +796,11 @@
     "長短": {
       "corrected": "常斷",
       "category": "佛學名相校訂",
-      "safe_regex": "長短",
+      "safe_regex": "(?<=遠離)長短|(?<=不墮)長短|(?<=偏向於)長短|長短(?=二邊)",
       "treatise_ref": "善顯密意疏 ",
       "learned_from": "第 36A 堂",
       "confidence": 0.98,
-      "reasoning": "讀者校對回饋修正：「長短 ➔ 常斷」。"
+      "reasoning": "讀者校對回饋修正：「長短 ➔ 常斷」。 僅限遠離／不墮／偏向於及二邊等語境，保留一般長短描述。"
     },
     "牙衰": {
       "corrected": "芽雖",
@@ -1176,10 +1176,10 @@
     "明言諦": {
       "corrected": "名言諦",
       "category": "中觀量論名相",
-      "safe_regex": "明言(?=[諦上有法識的])",
+      "safe_regex": "明言諦",
       "treatise_ref": "善顯密意疏 p.104-115（36A/36B 驗證）",
       "confidence": 0.95,
-      "reasoning": "名言（vyavahāra），限語境避免誤傷。"
+      "reasoning": "名言（vyavahāra），限語境避免誤傷。 僅匹配完整「明言諦」，避免補成「名言諦諦」及誤改一般「明言的理由」。"
     },
     "限量": {
       "corrected": "現量",

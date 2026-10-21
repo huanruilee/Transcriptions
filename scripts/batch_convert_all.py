@@ -15,10 +15,14 @@ import json
 import re
 import time
 import argparse
+import hashlib
+import math
 import subprocess
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import requests
+from build_verbatim_track import clean_verbatim_text, load_learned_corrections, validate_output_path
+from lib.pipeline_evaluation import normalize_text
 
 # Constants & Endpoints
 ROUTER_URL = os.environ.get("ROUTER_URL", "http://127.0.0.1:4001/v1/chat/completions")
@@ -350,7 +354,8 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None, page_range=
                     raw_sentences.append({
                         "start": start,
                         "end": end,
-                        "text": text
+                        "text": text,
+                        **({"words": seg["words"]} if seg.get("words") else {})
                     })
                     prev_end = end
                 print(f"  ⚡ Extracted {len(raw_sentences)} raw spoken sentences via GPU Whisper Service (Duration: {duration/60:.1f}m).")
@@ -384,7 +389,9 @@ def step1_asr_transcribe(session_id, audio_path, whisper_model=None, page_range=
             raw_sentences.append({
                 "start": start,
                 "end": end,
-                "text": text
+                "text": text,
+                **({"words": [{"start": w.start, "end": w.end, "word": w.word,
+                               "probability": w.probability} for w in seg.words]} if seg.words else {})
             })
             prev_end = end
 
@@ -414,9 +421,24 @@ def should_split(chunk_text, last_text, gap, is_last):
 
 
 def step2_pre_polish(raw_sentences, dynamic_terms=None):
+    # 只採用文字完整吻合且時間單調的詞級結果；不以不完整 words 覆蓋原段。
+    units = []
+    for segment in raw_sentences:
+        words = segment.get("words") or []
+        joined = "".join(word.get("word", "") for word in words)
+        times_valid = all(isinstance(w.get("start"), (int, float)) and isinstance(w.get("end"), (int, float))
+                          and w["end"] >= w["start"] for w in words)
+        monotonic = times_valid and all(words[i]["start"] >= words[i - 1]["end"] - .05 for i in range(1, len(words)))
+        if words and monotonic and normalize_text(joined) == normalize_text(segment["text"]):
+            units.extend({"start": w["start"], "end": w["end"], "text": w["word"]} for w in words)
+        else:
+            units.append(segment)
+    raw_sentences = units
     print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: {len(dynamic_terms or [])})...")
     merged_sents = []
     curr_chunk = []
+    from lib.guarded_edits import canonical_text
+    learned = load_learned_corrections()
 
     for i, s in enumerate(raw_sentences):
         curr_chunk.append(s)
@@ -426,15 +448,10 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
         combined_text = "".join(x["text"] for x in curr_chunk)
 
         if should_split(combined_text, s["text"], gap, is_last):
-            raw_text = " ".join(x["text"].strip() for x in curr_chunk if x["text"].strip())
-            # Apply regex glossary
-            for pat, repl in BUDDHIST_GLOSSARY:
-                raw_text = re.sub(pat, repl, raw_text)
-            
-            # Clean oral tokens & format punctuation
-            raw_text = re.sub(r'^[嗯啊喔哦呃，、\s]+', '', raw_text)
-            raw_text = re.sub(r'謝謝大家.*|感謝觀看.*|點讚.*|訂閱.*', '', raw_text).strip()
-            
+            raw_text = "".join(x["text"].strip() for x in curr_chunk if x["text"].strip())
+            # 僅套用已驗證的同音詞庫與允許的語氣詞清理。
+            raw_text = clean_verbatim_text(canonical_text(raw_text), learned)
+
             if raw_text:
                 if not re.search(r'[。？！…」』]$', raw_text):
                     if re.search(r'(嗎|呢|吧|對不對|是不是|如何|哪裡|怎麼|為什麼|何須|何故)[？\?]?$', raw_text):
@@ -492,108 +509,86 @@ def call_llm_completion(messages, temperature=0.05, timeout=60, max_tokens=2048)
 
 
 def step3_llm_proofread(sentences, session_id, source_text=""):
-    print(f"\n[Step 3/5] 🧠 Deep proofreading with Smart Router for {session_id} (Grounded: {len(source_text)} chars)...")
-    
-    # 1. Outline scaffolding from toc.json
+    """逐筆同音修正；繁簡統一後比較，保留所有非核准變動及實體時間。"""
+    from lib.guarded_edits import canonical_text, apply_patches, propose_diff
+    from lib.source_alignment import SourceAligner
+    print(f"\n[Step 3/5] 🧠 局部同音校對 {session_id}（底本 {len(source_text)} 字）...")
+    learned = load_learned_corrections()
     outline_context = ""
     toc_path = Path("courses/入中論善顯密意疏/toc.json")
     if toc_path.exists():
+        matching_titles = []
+        def search_sections(sections):
+            for section in sections:
+                if session_id in section.get("sessionIds", []) or section.get("sessionId") == session_id:
+                    matching_titles.append(section.get("title", ""))
+                search_sections(section.get("children", []))
+        search_sections(json.loads(toc_path.read_text(encoding="utf-8")).get("sections", []))
+        if matching_titles:
+            outline_context = "\n當前講次宗喀巴大師科判綱目（僅作名相參考，不得補寫）：\n" + "\n".join(matching_titles)
+    aligner = SourceAligner.from_context(canonical_text(source_text))
+    prepared = []
+    for sentence in sentences:
+        text = clean_verbatim_text(canonical_text(sentence["text"]), learned)
+        hits = aligner.retrieve(text)
+        auto = apply_patches(text, aligner.propose_patches(text, hits), learned, hits)
+        prepared.append(dict(sentence, rawText=sentence.get("rawText", sentence["text"]),
+                             text=auto["text"], sourceMatches=hits, editAudit=auto["edits"]))
+
+    system_prompt = """你是佛典錄音的逐字稿同音校對員。只提出局部修改，不重寫整句。
+嚴禁刪減實詞、重複、口頭禪、自我修正；不得根據底本補上沒有讀出的句子。
+只提同音錯字、獨立的嗯／啊／呃或標點修正。證據不足時不修改。
+輸入每句附有底本候選與實體頁碼行號；底本只是參考，不是可直接覆蓋的逐字稿。
+只輸出 JSON 物件：{"sentences":[{"index":0,"patches":[{"before":"隨意處","after":"隨一處","occurrence":0,"evidence":"若得隨一處"}]}]}。
+before 必須是輸入原文的精確子字串；occurrence 是該字串第幾次出現（從 0 開始）。
+evidence 必須逐字摘錄所附底本候選；沒有修改時 patches 為空陣列。
+輸出每個 index 恰好一次，繁體中文。""" + outline_context
+
+    def llm_fix(batch):
+        inputs = [{"index": i, "text": s["text"], "sourceCandidates": s["sourceMatches"]}
+                  for i, s in enumerate(batch)]
+        messages = [{"role": "system", "content": system_prompt},
+                    {"role": "user", "content": json.dumps(inputs, ensure_ascii=False)}]
         try:
-            with open(toc_path, "r", encoding="utf-8") as f:
-                toc_data = json.load(f)
-            matching_titles = []
-            def search_sections(sections):
-                for sec in sections:
-                    if session_id in sec.get("sessionIds", []) or sec.get("sessionId") == session_id:
-                        matching_titles.append(sec.get("title", ""))
-                    if "children" in sec:
-                        search_sections(sec["children"])
-            search_sections(toc_data.get("sections", []))
-            if matching_titles:
-                outline_context = "\n\n【當前講次宗喀巴大師科判綱目】：\n" + "\n".join(f"- {t}" for t in matching_titles)
-        except Exception:
-            pass
-
-    source_context_block = ""
-    if source_text:
-        source_context_block = f"""\n\n【當前講次對應之《入中論善顯密意疏》底本參考原文（含前後緩衝頁）】：
----
-{source_text[:12000]}
----"""
-
-    system_prompt = f"""你是一位精通藏傳佛教格魯派宗喀巴大師《入中論善顯密意疏》與月稱菩薩《入中論》的頂級佛學專家與校對主編。
-當前文本為【見悲青增格西】講授第 {session_id} 堂錄音口述逐字稿。{outline_context}{source_context_block}
-
-【佛法名相與同音錯字校對手冊】：
-- 科判代號與綱目：格西常念天干地支科判（如「戌一」、「亥一」），語音常誤為「物意/物一」，務必校為「戌一/亥一」；「明於何世俗前為諦」常誤為「民語/名言」，務必校為「明於何世俗前為諦」。
-- 佛陀尊稱：底本「能仁說名世俗諦」，語音常誤為「來人所為/人人說為/老人」，務必校為「能仁說為/能仁說名世俗諦」。
-- 障蔽（kun rdzob / 能障）：世俗諦之世俗即「障蔽真實性」之義，語音常誤為「藏幣/藏自性」，務必校為「障蔽/障自性」。
-- 增益（Samāropa）：語音常誤為「真意/爭議」，務必校正為「增益」（如「增益為有自性」）。
-- 自性（Svabhāva）：常誤為「自信」，凡涉中觀性空法理，務必校正為「自性」（如「無自性」、「自性空」）。
-- 經論引文：如《楞伽經》「無性而迷亂，許為真世俗」常誤為「無信而迷亂/虛為真世俗」，務必校為「無性而迷亂，許為真世俗」。
-- 補特伽羅（Pudgala）：語音常誤為「葡萄切勒/葡萄切熱/葡萄切了/普特伽羅」，務必校正為「補特伽羅」。
-- 此宗能諍 / 出過：語音常誤為「此宗有何能政治/能整/能政」，務必校正為「此宗有何能諍/能諍」。
-- 緣青色 / 見青之緣：語音常誤為「原青色/原青眼/相偽/見青為元」，務必校正為「緣青色/緣青眼識/相違/見青之緣」。
-- 聰叡智士：語音常誤為「充類知識/聰銳志士」，務必校正為「聰叡智士」。
-- 二諦正理：語音常誤為「生一地/生意諦/勝一地/世俗地/七狂法/陽眼/咒詩/古生/行止」，務必校正為「勝義諦/世俗諦/不欺誑法/陽焰/咒師/自相有/自證分/依他起/谷響/形質」。
-
-【校對原則】：
-1. 【引用論疏原文時】：若法師在讀誦或引述論疏底本（如「頌曰：...」、「疏云：...」或經文），請嚴格依照上方底本字句校正 ASR 同音錯字。
-2. 【白話講述開示時】：請保持口語開示語氣自然流暢，僅精準校正佛學名相與錯別字，切勿將白話強行改寫為生硬文言。
-3. 【極重要】：輸入有 N 句話，輸出必須是剛好 N 句話的 JSON 字串陣列 `["句子1", "句子2", ...]`，絕不可合併或刪減句子！100% 繁體中文（台灣正體）輸出。"""
-
-
-    # Optimized: Batch size increased from 12 -> 25 (reduces total LLM calls by 52%, speeds up by 2-3x, improves paragraph context)
-    batch_size = 25
-    total_sents = len(sentences)
-    batches = [sentences[i:i + batch_size] for i in range(0, total_sents, batch_size)]
-    
-    def llm_fix(texts):
-        """回傳等長校對結果或 None。"""
-        prompt = f"請依據底本校對以下 {len(texts)} 個句子，修正佛學名相與同音錯字，以 JSON 字串陣列輸出：\n" + json.dumps(texts, ensure_ascii=False, indent=2)
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt}
-        ]
-        try:
-            content = call_llm_completion(messages, temperature=0.05, timeout=120, max_tokens=dynamic_max_tokens(texts))
-            match = re.search(r'\[\s*".*"\s*\]', content, re.DOTALL)
-            if match:
-                corr_list = json.loads(match.group(0))
-                if len(corr_list) == len(texts):
-                    return [c.replace("無明瞭", "無明了").replace("明瞭了", "明了了") for c in corr_list]
-        except Exception as e:
-            print(f"    ⚠️ LLM call failed ({len(texts)} sents): {e}")
-        return None
+            content = call_llm_completion(messages, temperature=0.0, timeout=120,
+                                          max_tokens=dynamic_max_tokens([s["text"] for s in batch]))
+            content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip())
+            data = json.loads(content)
+            # 相容歷史整句提案，亦逐筆拆解審查，不整句退回。
+            if isinstance(data, list) and len(data) == len(batch) and all(isinstance(t, str) and t.strip() for t in data):
+                return [propose_diff(s["text"], t) for s, t in zip(batch, data)]
+            items = data.get("sentences") if isinstance(data, dict) else None
+            if (not isinstance(items, list) or len(items) != len(batch)
+                    or any(not isinstance(item, dict) or type(item.get("index")) is not int
+                           or not isinstance(item.get("patches"), list) for item in items)
+                    or sorted(item["index"] for item in items) != list(range(len(batch)))):
+                return None
+            return [item["patches"] for item in sorted(items, key=lambda item: item["index"])]
+        except Exception as error:
+            print(f"  ⚠️ 局部提案解析失敗：{error}")
+            return None
 
     def proofread_with_retry(batch):
-        """T4：句數不符時對半重試→單句重試；仍失敗才保留原文並標記待審，絕不靜默退回。"""
-        fixed = llm_fix([s["text"] for s in batch])
-        if fixed is not None:
-            return [dict(s, text=t) for s, t in zip(batch, fixed)]
-        if len(batch) > 1:
-            mid = len(batch) // 2
-            return proofread_with_retry(batch[:mid]) + proofread_with_retry(batch[mid:])
-        s = batch[0]
-        return [dict(s, reviewNeeded=True, uncertainty="LLM 句數不符，未校對")]
+        patches = llm_fix(batch)
+        if patches is None:
+            if len(batch) > 1:
+                middle = len(batch) // 2
+                return proofread_with_retry(batch[:middle]) + proofread_with_retry(batch[middle:])
+            return [dict(batch[0], reviewNeeded=True, uncertainty="LLM 句數不符，未校對")]
+        result = []
+        for sentence, proposals in zip(batch, patches):
+            checked = apply_patches(sentence["text"], proposals, learned, sentence["sourceMatches"])
+            row = dict(sentence, text=checked["text"], editAudit=sentence["editAudit"] + checked["edits"])
+            if checked["reviewNeeded"]:
+                row.update(reviewNeeded=True, uncertainty="部分局部修改無足夠依據，已保留原話待核對")
+            result.append(row)
+        return result
 
-    def process_batch(b_idx, batch):
-        return b_idx, proofread_with_retry(batch)
-
-    results = [None] * len(batches)
-    # Execute with 2 parallel threads per session (2 workers * 2 = 4 concurrent vLLM requests, perfectly matching vLLM max-num-seqs=4)
+    batches = [prepared[i:i + 8] for i in range(0, len(prepared), 8)]
     with ThreadPoolExecutor(max_workers=2) as executor:
-        futures = [executor.submit(process_batch, i, b) for i, b in enumerate(batches)]
-        for fut in futures:
-            b_idx, batch_res = fut.result()
-            results[b_idx] = batch_res
+        results = list(executor.map(proofread_with_retry, batches))
+    return [row for result in results for row in result]
 
-    corrected_sentences = []
-    for b_res in results:
-        corrected_sentences.extend(b_res)
-
-    print(f"  ✅ Completed LLM proofreading across {len(batches)} batches (Optimized 25-sentence batches, Smart Router / vLLM).")
-    return corrected_sentences
 
 def step4_llm_structure(sentences, session_id, title):
     print(f"\n[Step 4/5] 📑 Semantic structuring & subheading generation with Smart Router...")
@@ -702,14 +697,53 @@ def step4_llm_structure(sentences, session_id, title):
 
     return paragraphs
 
-def process_single_session(session_id, audio_map, whisper_model=None, session_map=None):
+def load_asr_result(path, audio_path):
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    actual = hashlib.sha256(Path(audio_path).read_bytes()).hexdigest()
+    if data.get("provenance", {}).get("audio_sha256") != actual:
+        raise ValueError("ASR 快取與指定音檔雜湊不符")
+    duration = data.get("duration")
+    segments = data.get("segments")
+    if not isinstance(duration, (int, float)) or not math.isfinite(duration) or duration <= 0 or not isinstance(segments, list) or not segments:
+        raise ValueError("ASR 快取缺少有效的時長與句段")
+    previous = 0
+    for row in segments:
+        if (not isinstance(row.get("text"), str) or not row["text"].strip()
+                or not all(isinstance(row.get(key), (int, float)) and math.isfinite(row[key]) for key in ("start", "end"))
+                or row["start"] < previous - .05 or row["end"] < row["start"]
+                or row["end"] > duration + .1):
+            raise ValueError("ASR 快取含無效文字或聲學時間")
+        previous = row["end"]
+    return data
+
+
+def process_single_session(session_id, audio_map, whisper_model=None, session_map=None,
+                           output_dir=None, audio_path=None, asr_json=None):
+    root = Path(__file__).resolve().parent.parent
+    json_path = (Path(output_dir) if output_dir else SESSIONS_DIR) / f"session_{session_id}.json"
+    protected = [(root / SESSIONS_DIR / f"session_{sid}.json").resolve() for sid in ("36A", "36B")]
+    if json_path.resolve() in protected:
+        raise ValueError("36A/36B 已發佈檔案不得覆寫，請使用 --output-dir")
+    validate_output_path(json_path)
+    if output_dir:
+        resolved = Path(output_dir).resolve()
+        courses = (root / "courses").resolve()
+        if resolved == courses or courses in resolved.parents:
+            raise ValueError("實驗輸出不得放入正式 courses 目錄")
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    def checkpoint(name, data):
+        if output_dir:
+            target = validate_output_path(Path(output_dir) / name)
+            if (root / "courses").resolve() in target.parents:
+                raise ValueError("沙盒檔案不得連結至正式 courses 目錄")
+            target.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if session_id not in audio_map:
         raise ValueError(f"Session {session_id} not found in audio_map.json")
 
     audio_url = audio_map[session_id]
     session_title_info = (session_map or {}).get(session_id, {})
     title = session_title_info.get("title", f"第 {session_id} 堂")
-    grounding_data = get_session_source_text(session_id, session_map)
+    grounding_data = get_session_source_text(session_id, session_map or {})
     grounding_text = grounding_data[0]
     grounding_terms = grounding_data[1]
 
@@ -717,21 +751,42 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
     print(f"🚀 PROCESSING SESSION {session_id} — Grounded Pipeline Standard")
     print(f"=======================================================")
 
-    # Step 1: Whisper ASR (T2: dynamic per-session prompt)
+    asr_health = {}
+    cached = load_asr_result(asr_json, audio_path) if asr_json and audio_path else None
+    if asr_json and cached is None:
+        raise ValueError("ASR 快取必須提供原始音檔")
+    if cached is None:
+        try:
+            health = requests.get(WHISPER_GPU_URL.replace("/v1/audio/transcriptions", "/health"), timeout=5)
+            health.raise_for_status()
+            asr_health = health.json()
+        except Exception:
+            pass
+    checkpoint("asr_service_health.json", asr_health)
+
     page_range = session_title_info.get("pageRange", "")
-    raw_sentences, duration = step1_asr_transcribe(session_id, download_audio_if_needed(session_id, audio_url), whisper_model, page_range=page_range)
+    if cached is not None:
+        raw_sentences, duration = cached["segments"], cached["duration"]
+        checkpoint("asr_provenance.json", cached["provenance"])
+    else:
+        raw_sentences, duration = step1_asr_transcribe(session_id, (Path(audio_path) if audio_path else download_audio_if_needed(session_id, audio_url)), whisper_model, page_range=page_range)
+
+    checkpoint("01_asr.json", {"duration": duration, "segments": raw_sentences})
 
     # Step 2: Pre-polish
     pre_polished = step2_pre_polish(raw_sentences, dynamic_terms=grounding_terms)
 
+    checkpoint("02_prepolished.json", pre_polished)
+
     # Step 3: LLM Proofreading
     proofread_sentences = step3_llm_proofread(pre_polished, session_id, source_text=grounding_text)
+
+    checkpoint("03_proofread.json", proofread_sentences)
 
     # Step 4: Semantic Structuring & Headings
     paragraphs = step4_llm_structure(proofread_sentences, session_id, title)
 
     # Calculate precise start and end for paragraphs
-    json_path = SESSIONS_DIR / f"session_{session_id}.json"
     prev_end = 0.0
     for p in paragraphs:
         for s in p["sentences"]:
@@ -750,8 +805,12 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
         "lastUpdated": today_date,
         "paragraphs": paragraphs,
         "_meta": {
-            "engine": "whisper-large-v3-turbo",
-            "llm_proofread": "Smart Router (MiniMax-M3 / Qwen3.8-27B Grounded)",
+            "engine": "whisper-isolated" if cached else ("whisper-service" if asr_health else f"whisper-{WHISPER_MODEL_NAME}-unverified"),
+            "asr_provenance": cached["provenance"] if cached else None,
+            "asr_requested_model": WHISPER_MODEL_NAME,
+            "asr_service_health": asr_health,
+            "vad_requested_ms": VAD_MIN_SILENCE_MS,
+            "llm_proofread": "Qwen3.8-27B Grounded（模型修改另列待審）",
             "last_updated": today_date,
             "grounding_source": "《入中論善顯密意疏》真值底本",
             "audio_duration": duration,
@@ -771,8 +830,14 @@ def process_single_session(session_id, audio_map, whisper_model=None, session_ma
             elif isinstance(o, dict): return {k: to_trad(v) for k, v in o.items()}
             return o
         payload = to_trad(payload)
-    except Exception as e:
-        pass
+    except ImportError as e:
+        raise RuntimeError("必須安裝 OpenCC 才能輸出正體中文") from e
+
+    if output_dir:
+        from build_verbatim_track import build_verbatim_payload
+        # 使用已轉正體的句子，保留聲學時間及待審標記。
+        rows = [s for p in payload["paragraphs"] for s in p["sentences"]]
+        checkpoint(f"verbatim_{session_id}.json", build_verbatim_payload(session_id, rows, payload["paragraphs"]))
 
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
@@ -786,7 +851,14 @@ def main():
     parser.add_argument("--all", action="store_true", help="Process all available sessions in audio_map.json")
     parser.add_argument("--resume", action="store_true", help="Resume from last completed session")
     parser.add_argument("--workers", type=int, default=2, help="Number of concurrent session workers (default: 2)")
+    parser.add_argument("--output-dir", type=Path, help="沙盒輸出根目錄，每講建立子目錄")
+    parser.add_argument("--audio-path", type=Path, help="單一講次使用本機音檔或切片")
+    parser.add_argument("--asr-json", type=Path, help="由同音檔產生且具雜湊的獨立 ASR 結果")
     args = parser.parse_args()
+    if args.asr_json and not args.audio_path:
+        parser.error("--asr-json 必須搭配 --audio-path")
+    if args.audio_path and (not args.sessions or len(args.sessions) != 1):
+        parser.error("--audio-path 必須搭配單一 --sessions")
 
     audio_map = load_audio_map()
     session_map = load_course_session_map()
@@ -799,6 +871,11 @@ def main():
     else:
         print("Usage: python3 scripts/batch_convert_all.py --sessions 29A 30A OR --all")
         sys.exit(0)
+
+    global PROGRESS_FILE
+    if args.output_dir:
+        args.output_dir.mkdir(parents=True, exist_ok=True)
+        PROGRESS_FILE = args.output_dir / "conversion_progress.json"
 
     # Check for Whisper Model (Optional local fallback)
     progress = {}
@@ -822,7 +899,7 @@ def main():
         if not hasattr(_local, "model"):
             try:
                 from faster_whisper import WhisperModel
-                _local.model = WhisperModel("large-v3-turbo", device="cpu", compute_type="int8", cpu_threads=8)
+                _local.model = WhisperModel(WHISPER_MODEL_NAME, device="cpu", compute_type="int8", cpu_threads=8)
             except Exception:
                 _local.model = None
         return _local.model
@@ -830,8 +907,10 @@ def main():
     def worker_task(sid):
         try:
             t0 = time.time()
-            model = get_thread_model()
-            process_single_session(sid, audio_map, model, session_map=session_map)
+            model = None if args.asr_json else get_thread_model()
+            process_single_session(sid, audio_map, model, session_map=session_map,
+                                   output_dir=args.output_dir / sid if args.output_dir else None,
+                                   audio_path=args.audio_path, asr_json=args.asr_json)
             elapsed = time.time() - t0
             res = {"status": "SUCCESS", "elapsed_seconds": round(elapsed, 1)}
         except Exception as e:
@@ -859,6 +938,8 @@ def main():
             worker_task(sid)
 
     print("\n🏁 Batch conversion execution completed!")
+    if any(progress.get(sid, {}).get("status") == "FAILED" for sid in pending_targets):
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

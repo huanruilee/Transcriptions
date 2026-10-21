@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install pipeline verification dependencies
+        run: python3 -m pip install -r scripts/requirements-pipeline-v2.txt
+
       - name: Verify transcript overview evidence and source digests
         run: npm run summaries:audit
 

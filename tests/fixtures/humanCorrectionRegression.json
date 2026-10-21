@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "course": "入中論善顯密意疏",
+  "purpose": "development_regression_not_unseen_audio_acceptance",
+  "reference_audio_verified": false,
+  "description": "讀者回饋詞條、原典與合成保護例。只有相夥案例使用完整既存句對；其餘上下文不冒充人工逐句聽核。",
+  "cases": [
+    {
+      "id": "reader-book-title",
+      "category": "讀者詞條",
+      "input": "三寫密意疏。",
+      "expected": "善顯密意疏。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "三寫",
+        "record_type": "reader_feedback",
+        "learned_from": "第 01 堂",
+        "corrected_term": "善顯"
+      }
+    },
+    {
+      "id": "reader-dependent-arising",
+      "category": "讀者詞條",
+      "input": "一切法都要關帶因緣。",
+      "expected": "一切法都要觀待因緣。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "關帶",
+        "record_type": "reader_feedback",
+        "learned_from": "第 22B 堂",
+        "corrected_term": "觀待"
+      }
+    },
+    {
+      "id": "reader-coarse-subtle",
+      "category": "讀者詞條",
+      "input": "四諦的出戲。",
+      "expected": "四諦的粗細。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "出戲",
+        "record_type": "reader_feedback",
+        "learned_from": "第 02A 堂",
+        "corrected_term": "粗細"
+      }
+    },
+    {
+      "id": "reader-repeated-incense",
+      "category": "原紀錄與重複保留",
+      "input": "反正有兒子 有女兒的話 就叫做那個嗎 有相夥 有相夥 對不對 那他就是他們的相夥嗎。",
+      "expected": "反正有兒子 有女兒的話 就叫做那個嗎 有香火 有香火 對不對 那他就是他們的香火嗎。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "recorded_context_and_reader_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "相夥",
+        "record_type": "reader_feedback",
+        "learned_from": "第 36A 堂",
+        "corrected_term": "香火",
+        "context_record_index": 56
+      }
+    },
+    {
+      "id": "reader-eternal-annihilation",
+      "category": "佛學語境",
+      "input": "這是遠離長短的緣起，對，對。",
+      "expected": "這是遠離常斷的緣起，對，對。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "長短",
+        "record_type": "reader_feedback",
+        "learned_from": "第 36A 堂",
+        "corrected_term": "常斷"
+      }
+    },
+    {
+      "id": "ordinary-lengths",
+      "category": "一般語境不得誤改",
+      "input": "這兩條線長短不同。",
+      "expected": "這兩條線長短不同。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "長短",
+        "record_type": "reader_feedback",
+        "learned_from": "第 36A 堂",
+        "corrected_term": "常斷"
+      }
+    },
+    {
+      "id": "conventional-truth",
+      "category": "完整詞條不得重複補字",
+      "input": "明言諦，對，對。",
+      "expected": "名言諦，對，對。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "明言諦",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "名言諦"
+      }
+    },
+    {
+      "id": "ordinary-explicit-statement",
+      "category": "一般語境不得誤改",
+      "input": "他已明言拒絕。",
+      "expected": "他已明言拒絕。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "明言諦",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "名言諦"
+      }
+    },
+    {
+      "id": "ordinary-explicit-reason",
+      "category": "一般語境不得誤改",
+      "input": "這是他明言的理由。",
+      "expected": "這是他明言的理由。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "明言諦",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "名言諦"
+      }
+    },
+    {
+      "id": "direct-perception",
+      "category": "佛學語境",
+      "input": "限量與比量，對，對。",
+      "expected": "現量與比量，對，對。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "限量",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "現量"
+      }
+    },
+    {
+      "id": "ordinary-limited-product",
+      "category": "一般語境不得誤改",
+      "input": "這是限量商品。",
+      "expected": "這是限量商品。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "限量",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "現量"
+      }
+    },
+    {
+      "id": "spoken-page-number",
+      "category": "口述頁碼",
+      "input": "一百年事業，對，對。",
+      "expected": "一百零四頁，對，對。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "一百年事業",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "一百零四頁"
+      }
+    },
+    {
+      "id": "source-continued-stream",
+      "category": "原典引文詞條",
+      "input": "蓄留異弊。",
+      "expected": "續流亦必。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "蓄留異弊",
+        "record_type": "source_grounded_term",
+        "learned_from": null,
+        "corrected_term": "續流亦必"
+      }
+    },
+    {
+      "id": "already-correct",
+      "category": "正確文字不得退化",
+      "input": "名言諦與現量，對，對。",
+      "expected": "名言諦與現量，對，對。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_protection_case",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false
+      }
+    },
+    {
+      "id": "isolated-fillers",
+      "category": "只清獨立語氣詞",
+      "input": "嗯，對，對，啊，呃，空性。",
+      "expected": "對，對，空性。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_protection_case",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false
+      }
+    },
+    {
+      "id": "substantive-prefix",
+      "category": "不得因語氣字刪實詞",
+      "input": "啊難說，對，對。",
+      "expected": "啊難說，對，對。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_protection_case",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false
+      }
+    },
+    {
+      "id": "repeated-source-recitation",
+      "category": "底本同音與重複",
+      "input": "若得隨意處，若得隨意處，對，對。",
+      "expected": "若得隨一處，若得隨一處，對，對。",
+      "mode": "source_alignment",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_protection_case",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false
+      },
+      "source_path": "courses/入中論善顯密意疏/source_text/page_104.txt",
+      "page": 104,
+      "source_anchor": "若得隨一處，即被惑蛇咬"
+    },
+    {
+      "id": "reject-wrong-context-edit",
+      "category": "錯誤範例不得升為正解",
+      "input": "菩薩從初地進趣二地。",
+      "expected": "菩薩從初地進趣二地。",
+      "mode": "guarded_proposal",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "intentional_wrong_edit_negative_control",
+        "source_path": "tests/unit/activeLearning.test.js",
+        "audio_verified": false
+      },
+      "proposed": "菩薩從初地進趣二諦。"
+    },
+    {
+      "id": "reject-dropped-repeat",
+      "category": "拒絕刪除實際重複",
+      "input": "對，對，空性。",
+      "expected": "對，對，空性。",
+      "mode": "guarded_proposal",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_protection_case",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false
+      },
+      "proposed": "對，空性。"
+    },
+    {
+      "id": "ordinary-distance-lengths",
+      "category": "一般語境不得誤改",
+      "input": "距離長短不同。",
+      "expected": "距離長短不同。",
+      "mode": "clean",
+      "split": "development_regression",
+      "provenance": {
+        "kind": "constructed_context_from_recorded_term",
+        "source_path": "courses/入中論善顯密意疏/learned_corrections.json",
+        "audio_verified": false,
+        "term_key": "長短",
+        "record_type": "reader_feedback",
+        "learned_from": "第 36A 堂",
+        "corrected_term": "常斷"
+      }
+    }
+  ]
+}

@@ -37,7 +37,8 @@ test('Proofreading Quality Gate: Outline & Doctrinal Rules in Pipeline', (t) => 
   assert.match(content, /影像自行空.*影像自性空/, 'Must map 影像自行空 -> 影像自性空');
 
   // 3. OpenCC Defensive Filter
-  assert.match(content, /\.replace\("無明瞭", "無明了"\)/, 'Must defend 無明了 from OpenCC over-conversion');
+  const guard = readFileSync(path.join(PROJECT_ROOT, 'scripts/lib/guarded_edits.py'), 'utf8');
+  assert.match(guard, /\.replace\(['"]無明瞭['"], ['"]無明了['"]\)/, 'Shared canonicalization must defend 無明了 from OpenCC over-conversion');
 });
 
 test('Proofreading Quality Gate: Session 30B Text Purity and Conformance', (t) => {

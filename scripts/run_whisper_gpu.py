@@ -68,7 +68,9 @@ def main():
         results.append({
             "start": start,
             "end": end,
-            "text": text
+            "text": text,
+            "words": [{"start": w.start, "end": w.end, "word": w.word,
+                       "probability": w.probability} for w in s.words or []]
         })
         prev_end = end
 
