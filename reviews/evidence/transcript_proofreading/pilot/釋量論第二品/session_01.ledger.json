@@ -1,0 +1,148 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:e71e58d69a90687e692926954cda2ce0a7e0a82f2ae0907685aa809325bd7152",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "sent-9",
+      "before": "平時，當有人問我們「你是誰的弟子」時，我們通常會說：「我是尊者的弟子、我是某某大德的弟子、我是某位師長的弟子、我是某位法師的弟子。",
+      "after": "平時，當有人問我們「你是誰的弟子」時，我們通常會說：「我是尊者的弟子、我是某某大德的弟子、我是某位師長的弟子、我是某位法師的弟子。」",
+      "changeClass": "punctuation",
+      "reason": "原文引號未閉合，且句末標點應置於引號內。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-10",
+      "before": "」但是很少人會說：「我是釋迦牟尼佛的弟子。",
+      "after": "」但是很少人會說：「我是釋迦牟尼佛的弟子。」",
+      "changeClass": "punctuation",
+      "reason": "修正引號與標點位置，使語句完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-13",
+      "before": "在娑婆世界，如果沒有釋迦牟尼佛為我們說法，我們根本無法了解佛法的真諦，甚至如果沒有釋迦牟尼佛為我們說法，我們根本無法認識其他的佛菩薩；",
+      "after": "在娑婆世界，如果沒有釋迦牟尼佛為我們說法，我們根本無法了解佛法的真諦，甚至如果沒有釋迦牟尼佛為我們說法，我們根本無法認識其他的佛菩薩。",
+      "changeClass": "punctuation",
+      "reason": "句末標點應為句號而非分號，因語意已完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-134",
+      "before": "（學員：是。",
+      "after": "（學員：是。）",
+      "changeClass": "punctuation",
+      "reason": "同上，修正括號內回答的標點斷裂問題。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-153",
+      "before": "「我錢都花了，但是你賣給我的這個東西竟然是假的、過期的，或者是即將到期的。",
+      "after": "「我錢都花了，但是你賣給我的這個東西竟然是假的、過期的，或者是即將到期的。」",
+      "changeClass": "punctuation",
+      "reason": "補上句末閉引號，使引文完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-191",
+      "before": "只要我不相信佛，我就會在輪迴中持續流轉，所以我能否解脫，還是我是否會在輪迴當中繼續流轉的關鍵，在於我相不相信佛。",
+      "after": "只要我不相信佛，我就會在輪迴中持續流轉，所以我能否解脫，還是我是否會在輪迴當中繼續流轉的關鍵，在於我相不相信佛。」",
+      "changeClass": "punctuation",
+      "reason": "補上句末閉引號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-234",
+      "before": "（學員：不可能。",
+      "after": "（學員：不可能。）",
+      "changeClass": "punctuation",
+      "reason": "括號內對話結束應補上右括號，與後句標點銜接。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "0f60b4b4-1320-4394-9cf1-64ee02c39582"
+}

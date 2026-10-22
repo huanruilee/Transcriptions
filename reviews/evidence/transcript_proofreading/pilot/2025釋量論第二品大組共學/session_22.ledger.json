@@ -1,0 +1,3508 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:ce56a0425a222b077c16caaadd0192b404cc7e8ae2260d87871cbace3c2a8d28",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "seg-0006",
+      "before": "大家請放長",
+      "after": "大家請放掌",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。合掌後應為「放掌」，「放長」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0008",
+      "before": "那我們今天的進度來到的第十二獎的上半部",
+      "after": "那我們今天的進度來到的第十二講的上半部",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。課程章節應為「講」，非「獎」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0011",
+      "before": "來幫我們做總社",
+      "after": "來幫我們做總結",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。會議流程中應為「總結」，非「總社」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0013",
+      "before": "現在由我對需要品第十二獎上進行收舍",
+      "after": "現在由我對需要品第十二講上進行收舍",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。課程章節應為「講」，非「獎」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0015",
+      "before": "修持大背心的重要性",
+      "after": "修持大悲心的重要性",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。佛學名相應為「大悲心」，非「大背心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0023",
+      "before": "分別心如何遠著一切友情呢",
+      "after": "分別心如何遠著一切有情呢",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。佛學名相應為「有情」，非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0043",
+      "before": "普通人的信念是否能夠緣起一切友情",
+      "after": "普通人的信念是否能夠緣起一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。佛學名相應為「有情」，非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0057",
+      "before": "我們頓於厭惡的人",
+      "after": "我們對於厭惡的人",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「頓於」應為「對於」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0068",
+      "before": "我們之所以難以對多數的友情生起悲心",
+      "after": "我們之所以難以對多數的有情生起悲心",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0069",
+      "before": "正是因為多數友情在我們心中不是樂意的對境",
+      "after": "正是因為多數有情在我們心中不是樂意的對境",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0073",
+      "before": "如何讓多數的友情在我們心中呈現樂意象呢",
+      "after": "如何讓多數的有情在我們心中呈現樂意象呢",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0075",
+      "before": "那本講中法師用了一個生痛的批語",
+      "after": "那本講中法師用了一個生痛的比喻",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「批語」應為「比喻」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0084",
+      "before": "但當所有的共評攤開後就會發現",
+      "after": "但當所有的供品攤開後就會發現",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「共評」應為「供品」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0086",
+      "before": "大家的共評大同小異",
+      "after": "大家的供品大同小異",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「共評」應為「供品」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0087",
+      "before": "那這個畢與恰恰的揭示",
+      "after": "那這個比喻恰恰的揭示",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「畢與恰恰」應為「比喻恰恰」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0093",
+      "before": "先生的他或許功德殊勝",
+      "after": "現生的他或許功德殊勝",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「先生」應為「現生」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0149",
+      "before": "其中一者所苦的友情",
+      "after": "其中一者所苦的有情",
+      "changeClass": "orthography",
+      "reason": "「友情」應為「有情」（眾生），符合大悲心所緣對象的法義。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0162",
+      "before": "小乘阿羅漢是大悲心的所云",
+      "after": "小乘阿羅漢是大悲心的所緣",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。前文 seg-0152 提及「所緣」，此處語意為阿羅漢是悲心觀照的對象（所緣境），「所云」應為「所緣」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0165",
+      "before": "先針對被三苦其中一者屬苦的友情",
+      "after": "先針對被三苦其中一者屬苦的有情",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。佛法用語為「有情」，非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0168",
+      "before": "真心惜成佛時",
+      "after": "真心欲成佛時",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。語意為「想要成佛」，「惜」應為「欲」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0170",
+      "before": "但尚未成佛的友情",
+      "after": "但尚未成佛的有情",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。佛法用語為「有情」，非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0187",
+      "before": "我承許是因為小稱阿羅漢雖然已經斷除煩惱",
+      "after": "我承許是因為小乘阿羅漢雖然已經斷除煩惱",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。「小稱」應為「小乘」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0188",
+      "before": "但是我認為這個不周片",
+      "after": "但是我認為這個不周延",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。邏輯用語「不周延」，非「不周片」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0199",
+      "before": "那第二個小問我承許的理由是",
+      "after": "那第二個小乘我承許的理由是",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。「小問」應為「小乘」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0247",
+      "before": "無魚內盤的那種狀態下",
+      "after": "無餘涅槃的那種狀態下",
+      "changeClass": "term",
+      "reason": "佛學術語修正。阿羅漢受盡後不再受生，稱為「無餘涅槃」，原文「無魚內盤」為同音 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0264",
+      "before": "他不會因為這個苦瘦",
+      "after": "他不會因為這個苦受",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語意為「苦受」，非「苦瘦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0265",
+      "before": "或者是熱瘦",
+      "after": "或者是熱受",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。對應前文「苦受」，此處應為「熱受」（熱惱之苦）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0267",
+      "before": "他只有那種瘦產生的",
+      "after": "他只有那種苦產生的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語意為「苦產生」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0268",
+      "before": "那種瘦而已",
+      "after": "那種苦而已",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語意為「那種苦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0269",
+      "before": "但是如果他瘦已盡之後",
+      "after": "但是如果他苦已盡之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語意為「苦已盡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0270",
+      "before": "瘦已盡之後",
+      "after": "苦已盡之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。重複口語修正為「苦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0374",
+      "before": "有所謂的苦瘦",
+      "after": "有所謂的苦受",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文討論苦樂感受（苦受、熱受），「苦瘦」應為「苦受」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0394",
+      "before": "身體所受的深苦",
+      "after": "身體所受的深重苦",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。形容痛苦程度深，「深苦」應為「深重苦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0455",
+      "before": "就表示他斷除了我職",
+      "after": "就表示他斷除了我執",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法名相為「我執」，指對自我的執著，原文「我職」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0458",
+      "before": "應該不會因為五孕而感覺到苦",
+      "after": "應該不會因為五蘊而感覺到苦",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法名相為「五蘊」（色受想行識），原文「五孕」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0462",
+      "before": "會執著這個有苦的孕體而感覺到苦",
+      "after": "會執著這個有苦的蘊體而感覺到苦",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前文已修正為「五蘊」，此處應為「蘊體」。原文「孕體」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0513",
+      "before": "那是一種瘦",
+      "after": "那是一種痛",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。前文多次提及「痛」，此處指跌倒受傷的感覺，應為「痛」而非「瘦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0552",
+      "before": "所以他就不是受三苦的友情",
+      "after": "所以他就不是受三苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法語境中，「友情」應為「有情」（眾生）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0561",
+      "before": "當我們對親中書的眾生",
+      "after": "當我們對親疏的眾生",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法語境中，「親中書」應為「親疏」（親人與疏遠者）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0582",
+      "before": "往昔夜和煩惱的產物",
+      "after": "往昔業和煩惱的產物",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法名相中，「夜」應為「業」（karma）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0588",
+      "before": "大悲心的所願",
+      "after": "大悲心的所緣",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法名相中，「所願」應為「所緣」（對象）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0654",
+      "before": "被三苦其中一者所苦的友情",
+      "after": "被三苦其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「友情」應為「有情」（眾生），此處指悲心所緣的對象，非人際關係之友誼。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0663",
+      "before": "也就是一切友情",
+      "after": "也就是一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0664",
+      "before": "跟被三苦其中一者所苦的友情",
+      "after": "跟被三苦其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0667",
+      "before": "就是因為有些友情",
+      "after": "就是因為有些有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0668",
+      "before": "他雖然被包含在一切友情當中",
+      "after": "他雖然被包含在一切有情當中",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0672",
+      "before": "如果是以一切友情來分析的話",
+      "after": "如果是以一切有情來分析的話",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0673",
+      "before": "一切友情的涵蓋面",
+      "after": "一切有情的涵蓋面",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0674",
+      "before": "一定是大於被三苦其中一者所苦的友情",
+      "after": "一定是大於被三苦其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0681",
+      "before": "反而是用被苦苦壞苦辛苦其中一者所苦的友情",
+      "after": "反而是用被苦苦壞苦辛苦其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0686",
+      "before": "小聖的阿羅漢是友情",
+      "after": "小聖的阿羅漢是有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0688",
+      "before": "那小聖的阿羅漢是不是被三苦其中一者所苦的友情",
+      "after": "那小聖的阿羅漢是不是被三苦其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0828",
+      "before": "等到阿羅漢市集之後",
+      "after": "等到阿羅漢滅度之後",
+      "changeClass": "term",
+      "reason": "「市集」應為「滅度」之同音訛誤，指阿羅漢入無餘涅槃。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0854",
+      "before": "他在還沒有市集之前",
+      "after": "他在還沒有入滅之前",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法語境中阿羅漢入涅槃稱為「入滅」，「市集」為明顯聽誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0857",
+      "before": "但他市集之後",
+      "after": "但他入滅之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。對應前句「入滅」，此處應為「入滅」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0860",
+      "before": "他市集之後",
+      "after": "他入滅之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。同上，應為「入滅」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0863",
+      "before": "也不會說他市集之後",
+      "after": "也不會說他入滅之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。同上，應為「入滅」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0870",
+      "before": "必重就輕",
+      "after": "避重就輕",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。成語應為「避重就輕」，指迴避重要問題。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0886",
+      "before": "一切友情與被三苦任意所苦的友情",
+      "after": "一切有情與被三苦任意所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0890",
+      "before": "他的回答我覺得是必重就輕",
+      "after": "他的回答我覺得是避重就輕",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。同上，應為「避重就輕」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0896",
+      "before": "受苦苦壞苦辛苦",
+      "after": "受苦苦、壞苦、行苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正。三苦標準譯名為「苦苦、壞苦、行苦」，「辛苦」為 ASR 誤聽。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0897",
+      "before": "其中一者所苦的友情",
+      "after": "其中一者所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法中眾生稱為「有情」，非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0900",
+      "before": "然而小盛的阿羅漢已斷除煩惱",
+      "after": "然而小聖的阿羅漢已斷除煩惱",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。應為「小聖」，非「小盛」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0921",
+      "before": "所以他並不是受到苦苦所苦的友情",
+      "after": "所以他並不是受到苦苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'友情'在此處語意不通，應為佛法名相'有情'（sentient beings）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0923",
+      "before": "但他不是受到苦苦所苦的友情",
+      "after": "但他不是受到苦苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0928",
+      "before": "小生的阿羅漢是友情",
+      "after": "小聖的阿羅漢是有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'小生'應為'小聖'（與前文 seg-0913, seg-0925 一致），'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0929",
+      "before": "他被涵蓋在一切友情當中",
+      "after": "他被涵蓋在一切有情當中",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0941",
+      "before": "也就是一切友情",
+      "after": "也就是一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0942",
+      "before": "跟被三苦任意所苦的友情",
+      "after": "跟被三苦任意所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0963",
+      "before": "不會執群那個苦",
+      "after": "不會執著那個苦",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字修正。'執群'應為'執著'，符合佛法語境中對苦的執取義。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1099",
+      "before": "我定義為取孕",
+      "after": "我定義為取蘊",
+      "changeClass": "term",
+      "reason": "「取孕」應為佛學名相「取蘊」（upādāna-skandha），指執取五蘊。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1112",
+      "before": "他只是會有苦苦和賢苦",
+      "after": "他只是會有苦苦和壞苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正。三苦為「苦苦、壞苦、行苦」，原文「賢苦」應為「壞苦」之同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1118",
+      "before": "至於討論苦苦壞苦辛苦",
+      "after": "至於討論苦苦壞苦行苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正。三苦為「苦苦、壞苦、行苦」，原文「辛苦」應為「行苦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1138",
+      "before": "沒有直接的關系",
+      "after": "沒有直接的關係",
+      "changeClass": "orthography",
+      "reason": "同音訛字修正。「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1174",
+      "before": "佛的狀態應該叫做視線",
+      "after": "佛的狀態應該叫做現量",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「視線」應為佛學名相「現量」（pratyakṣa），指無分別的直覺認知。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1192",
+      "before": "他現在強調的是他的孕體",
+      "after": "他現在強調的是他的業體",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「孕體」應為「業體」（karma-kaya），指由業力所感召的肉身。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1194",
+      "before": "他的孕體",
+      "after": "他的業體",
+      "changeClass": "term",
+      "reason": "ASR 訛字，同上，「孕體」應為「業體」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1195",
+      "before": "是往昔夜和煩惱的產物",
+      "after": "是往昔業和煩惱的產物",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「夜」應為「業」（karma），與後文「煩惱」並列。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1222",
+      "before": "那現在就要討",
+      "after": "那現在就要討論",
+      "changeClass": "orthography",
+      "reason": "語意不通，應為「討論」而非「討」，疑似 ASR 漏字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1288",
+      "before": "而我們自己也是友情",
+      "after": "而我們自己也是有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「友情」語意不通，應為「有情」（眾生）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1293",
+      "before": "那這樣就可以把它解",
+      "after": "那這樣就可以把它解釋",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。原文「解」應為「解釋」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1294",
+      "before": "大悲心就是大稱行者",
+      "after": "大悲心就是大乘行者",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「大稱」應為「大乘」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1297",
+      "before": "即便到阿羅納",
+      "after": "即便到阿羅漢",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「阿羅納」應為「阿羅漢」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1334",
+      "before": "這個時候它既可以是我們皈依的物件",
+      "after": "這個時候它既可以是我們皈依的對象",
+      "changeClass": "orthography",
+      "reason": "「物件」在此處語意不通，應為「對象」之同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1340",
+      "before": "這兩個星就沒法融合在一起",
+      "after": "這兩個境就沒法融合在一起",
+      "changeClass": "orthography",
+      "reason": "「星」為「境」之同音訛字，與前文一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1358",
+      "before": "有被三苦所苦的友情",
+      "after": "有被三苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'友情'在此處語意不通，佛法中悲心所緣為眾生，應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1361",
+      "before": "歸一境它是一個蹤崇的對境",
+      "after": "歸一境它是一個崇敬的對境",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'蹤崇'應為'崇敬'，與後文 seg-1362 呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1365",
+      "before": "這是對蹤崇的對境",
+      "after": "這是對崇敬的對境",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'蹤崇'應為'崇敬'，與前文 seg-1361、seg-1362 一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1386",
+      "before": "那悲心的所緣是為三苦任一所苦的友情",
+      "after": "那悲心的所緣是為三苦任一所苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'友情'應為'有情'，與 seg-1358 及佛法名相一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1408",
+      "before": "無法究竟地理他",
+      "after": "無法究竟地利他",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'理他'應為'利他'（利益他人）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1434",
+      "before": "所以詩姐可以這樣說",
+      "after": "所以師姐可以這樣說",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'詩姐'應為'師姐'（對女性法師或資深學員的稱呼）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1436",
+      "before": "他已經滅盤的那個阿羅漢",
+      "after": "他已經滅盡的那個阿羅漢",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'滅盤'應為'滅盡'（指煩惱已斷盡）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1442",
+      "before": "那他不是悲心的所願",
+      "after": "那他不是悲心的所緣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'所願'應為'所緣'（佛教名相，指心識所攀緣的對象）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1463",
+      "before": "這時候那我用不著發起承婆的心吧",
+      "after": "這時候那我用不著發起菩提心吧",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'承婆'應為'菩提'，符合佛法語境中'發起菩提心'的用法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1500",
+      "before": "為三苦任意所乎的友情",
+      "after": "為三苦任意所苦的友情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。'所乎'應為'所苦'，與前文'三苦任一所苦'一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1504",
+      "before": "那他怎麼後邊能稀求成佛呢",
+      "after": "那他怎麼後邊能希求成佛呢",
+      "changeClass": "orthography",
+      "reason": "「稀求」應為「希求」，ASR 同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1552",
+      "before": "應該是圓著一切友情",
+      "after": "應該是圓著一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法語境中，「一切有情」指所有眾生，「友情」為誤聽。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1555",
+      "before": "是三苦所緣的友情",
+      "after": "是三苦所緣的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前句已修正為「有情」，此處應一致，指被三苦所緣的眾生。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1558",
+      "before": "我們在談小生阿羅漢",
+      "after": "我們在談聲聞阿羅漢",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。佛法名相中，「聲聞」為解脫道聖者，「小生」非標準用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1561",
+      "before": "既然是在道賜地中強調的話",
+      "after": "既然是在道次第中強調的話",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前文提及「道次第」，此處應為「道次第」而非「道賜地」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1565",
+      "before": "先從被三苦其中之一所苦的友情來下手",
+      "after": "先從被三苦其中之一所苦的有情來下手",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前文已修正為「有情」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1567",
+      "before": "能夠通達到一切友情",
+      "after": "能夠通達到一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前文已修正為「有情」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1570",
+      "before": "再一個是從一切友情",
+      "after": "再一個是從一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前文已修正為「有情」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1572",
+      "before": "那因為小生阿羅漢呢",
+      "after": "那因為聲聞阿羅漢呢",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。前文已修正為「聲聞」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1582",
+      "before": "還是要能夠把小勝阿羅漢",
+      "after": "還是要能夠把小乘阿羅漢",
+      "changeClass": "term",
+      "reason": "「小勝」應為「小乘」，指聲聞乘，為常見佛學術語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1614",
+      "before": "但是我們可以用一種怨心",
+      "after": "但是我們可以用一種願心",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文為希望阿羅漢早日成佛，應為「願心」（發願之心），而非「怨心」（怨恨之心）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1621",
+      "before": "有餘涅槃市集之後",
+      "after": "有餘涅槃之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛教名相為「有餘涅槃」，「市集」顯係「之後」之誤聽。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1640",
+      "before": "如果是具備小聖種姓的小聖阿羅漢",
+      "after": "如果是具備小聖種性的小聖阿羅漢",
+      "changeClass": "orthography",
+      "reason": "同音訛字修正。前句 seg-1638 已確立「種性」用法，此處「種姓」應統一為「種性」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1661",
+      "before": "所以你不能夠住在虐盤裡面",
+      "after": "所以你不能夠住在涅槃裡面",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正：「虐盤」應為「涅槃」。",
+      "evidence": [
+        "佛學名相"
+      ],
+      "confidence": 0.99,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1711",
+      "before": "佛絕對不會棄捨任何一個不圓滿的友情",
+      "after": "佛絕對不會棄捨任何一個不圓滿的有情。",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。語境為佛法，指眾生應為「有情」，而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1740",
+      "before": "小聖阿羅漢是大悲心的所言",
+      "after": "小聖阿羅漢是大悲心的所緣。",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。佛學名相「所緣」（對象）誤聽為「所言」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1767",
+      "before": "我們被議和煩惱束縛",
+      "after": "我們被業和煩惱束縛",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語境為佛法，「被議」應為「被業」（karma），指被業力與煩惱所束縛。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1792",
+      "before": "他強調的是被三苦任一所苦的友情",
+      "after": "他強調的是被三苦任一所苦的有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。佛法名相為「有情」（sentient beings），非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1793",
+      "before": "而不是直接強調一切友情",
+      "after": "而不是直接強調一切有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。同上，應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1798",
+      "before": "我們就是圓著一切友情的話",
+      "after": "我們就是圓著一切有情的話",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。同上，應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1800",
+      "before": "雖然大悲心的所言是圓著一切友情",
+      "after": "雖然大悲心的所緣是圓著一切有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。法義上應為「所緣」（object）而非「所言」，且「有情」非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1803",
+      "before": "是源著一切友情",
+      "after": "是緣著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。'源著'應為'緣著'（依止、攀緣之意）；'友情'在佛法語境中應為'有情'（眾生）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1807",
+      "before": "被三苦任意所苦的友情",
+      "after": "被三苦任意所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1810",
+      "before": "先思考被苦苦所苦的友情",
+      "after": "先思考被苦苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1811",
+      "before": "再思考被壞苦所苦的友情",
+      "after": "再思考被壞苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。'友情'應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1866",
+      "before": "而不是隻是單純想著",
+      "after": "而不是只是單純想著",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正，「隻是」應為「只是」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1876",
+      "before": "嘴巴上說希望一切友情",
+      "after": "嘴巴上說希望一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正，「友情」在佛法語境中應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1886",
+      "before": "所苦的友情生起悲心",
+      "after": "所苦的有情生起悲心",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1900",
+      "before": "不然他怎麼會有卑無量心",
+      "after": "不然他怎麼會有悲無量心",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正，「卑無量心」應為「悲無量心」（四無量心之一）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1920",
+      "before": "處在無名的狀態",
+      "after": "處在無明的狀態",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「無名」應為「無明」，指愚癡。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1981",
+      "before": "被三苦任一所苦的友情",
+      "after": "被三苦任一所苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。'友情' 在此處語意不通，應為 '有情'（眾生）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2003",
+      "before": "也就是先對被三苦其中一者所苦的友情",
+      "after": "也就是先對被三苦其中一者所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「友情」應為佛法用語「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2009",
+      "before": "但尚未成佛的友情生起悲心",
+      "after": "但尚未成佛的有情生起悲心",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「友情」應為佛法用語「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2013",
+      "before": "只要是被三苦其中一者所苦的友情",
+      "after": "只要是被三苦其中一者所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「友情」應為佛法用語「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2016",
+      "before": "不一定是被三苦其中一者所苦的友情",
+      "after": "不一定是被三苦其中一者所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「友情」應為佛法用語「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2023",
+      "before": "其中一者所苦的友情",
+      "after": "其中一者所苦的有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「友情」應為佛法用語「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2041",
+      "before": "有些地方將一切友情",
+      "after": "有些地方將一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正。「友情」應為「有情」（眾生），與後文「大悲心所緣」語境相符。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2061",
+      "before": "為什麼有些地方是一切友情",
+      "after": "為什麼有些地方是一切有情",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「一切有情」，「友情」為同音錯誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2063",
+      "before": "是被三苦其中一者所苦的友情",
+      "after": "是被三苦其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「有情」，「友情」為同音錯誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2069",
+      "before": "小聖的阿羅漢他是友情",
+      "after": "小聖的阿羅漢他是有情",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「有情」，「友情」為同音錯誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2123",
+      "before": "原來我沒有斷除所之障",
+      "after": "原來我沒有斷除所知障",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「所之障」應為「所知障」（Kleshavarana），指煩惱障與所知障中的所知障。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2170",
+      "before": "可能是大小城共同要修的",
+      "after": "可能是大小乘共同要修的",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學語境中應為「大小乘」，指聲聞乘與菩薩乘。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2172",
+      "before": "有的人決定走大城的時候",
+      "after": "有的人決定走大乘的時候",
+      "changeClass": "term",
+      "reason": "ASR 訛字。對應前文「小聖」（聲聞），此處應為「大乘」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2173",
+      "before": "就進而對於小聖",
+      "after": "就進而對於小乘",
+      "changeClass": "term",
+      "reason": "ASR 訛字。對應前文「大聖」（菩薩），此處應為「小乘」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2183",
+      "before": "才決定修大成還是修小成的",
+      "after": "才決定修大乘還是修小乘的",
+      "changeClass": "term",
+      "reason": "ASR 訛字。對應前文「大小城」，應為「大乘」與「小乘」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2186",
+      "before": "七英國教授",
+      "after": "七因果教授",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學名相「七因果教授」，指修習菩提心的七種因緣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2194",
+      "before": "就是在處理性的階段",
+      "after": "就是在發心的階段",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學語境中應為「發心」（發菩提心），而非「處理性」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2196",
+      "before": "是為了利益有情而修處理性",
+      "after": "是為了利益有情而修發心",
+      "changeClass": "term",
+      "reason": "ASR 訛字。對應前文修正，應為「修發心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2197",
+      "before": "還是為了自己而修處理性",
+      "after": "還是為了自己而修發心",
+      "changeClass": "term",
+      "reason": "ASR 訛字。對應前文修正，應為「修發心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2217",
+      "before": "大小仲共修的這個說法",
+      "after": "大小乘共修的這個說法",
+      "changeClass": "term",
+      "reason": "'仲'為同音訛字，佛學名相應為'乘'（小乘、大乘）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2258",
+      "before": "要想這麼多友情",
+      "after": "要想這麼多有情",
+      "changeClass": "semantic",
+      "reason": "ASR 訛字，「友情」在佛法修持悲心的語境中應為「有情」（眾生）",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2281",
+      "before": "生起了雖然大悲心跟初離心",
+      "after": "生起了雖然大悲心跟出離心",
+      "changeClass": "term",
+      "reason": "「初離心」應為佛學名相「出離心」，屬同音 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2283",
+      "before": "應該先升起初離心",
+      "after": "應該先升起出離心",
+      "changeClass": "term",
+      "reason": "「初離心」應為佛學名相「出離心」，屬同音 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2286",
+      "before": "那等我升起初離心",
+      "after": "那等我升起出離心",
+      "changeClass": "term",
+      "reason": "「初離心」應為佛學名相「出離心」，屬同音 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2289",
+      "before": "如果等到升起初離心",
+      "after": "如果等到升起出離心",
+      "changeClass": "term",
+      "reason": "「初離心」應為佛學名相「出離心」，屬同音 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2322",
+      "before": "而不是三種形象同時限起",
+      "after": "而不是三種形象同時生起",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'限起' 應為 '生起'，指悲心的三種形象（苦、樂、無常等所緣）是次第生起，而非同時。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2324",
+      "before": "這三種形象厚厚比前前的更強烈",
+      "after": "這三種形象後後比前前的更強烈",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'厚厚' 應為 '後後'，指修習次第中後面的階段比前面的階段更強烈。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2334",
+      "before": "應該先思考的是被苦苦所苦的友情",
+      "after": "應該先思考的是被苦苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'友情' 應為 '有情'（sattva），指眾生，非朋友關係。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2335",
+      "before": "再來被壞苦所苦的友情",
+      "after": "再來被壞苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'友情' 應為 '有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2336",
+      "before": "再來被辛苦所苦的友情",
+      "after": "再來被行苦所苦的有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'辛苦' 應為 '行苦'（samskara-duhkha），佛教三苦之一，與前文苦苦、壞苦並列。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2338",
+      "before": "依序要在親友陌生人敵人身上休息",
+      "after": "依序要在親友陌生人敵人身上修習",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'休息' 應為 '修習'，指七因果教授中對不同對象修習悲心的次第。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2343",
+      "before": "休息悲心",
+      "after": "修習悲心",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'休息' 應為 '修習'，上下文皆在討論如何修持悲心。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2345",
+      "before": "休息悲心",
+      "after": "修習悲心",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'休息' 應為 '修習'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2353",
+      "before": "被三苦所苦的友情",
+      "after": "被三苦所苦的有情",
+      "changeClass": "term",
+      "reason": "佛法語境中，「友情」應為「有情」（眾生）之 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2354",
+      "before": "與一切友情",
+      "after": "與一切有情",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2363",
+      "before": "希望眾生離苦的目標",
+      "after": "希望有情離苦的目標",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2366",
+      "before": "其中一者所苦的友情",
+      "after": "其中一者所苦的有情",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2369",
+      "before": "他是不是就是希望一切友情都可以得到解脫的果位",
+      "after": "他是不是就是希望一切有情都可以得到解脫的果位",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2371",
+      "before": "希望一切友情都可以得到成佛的果位的時候",
+      "after": "希望一切有情都可以得到成佛的果位的時候",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2373",
+      "before": "就是希望一切友情包括阿羅漢都可以成佛",
+      "after": "就是希望一切有情包括阿羅漢都可以成佛",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2375",
+      "before": "希望一切友情都能夠獲得解脫啊",
+      "after": "希望一切有情都能夠獲得解脫啊",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2476",
+      "before": "圓著眼前的流浪漢",
+      "after": "緣著眼前的流浪漢",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「圓著」應為「緣著」（佛教用語，指心緣取對象）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2492",
+      "before": "從親中怨擴充套件至一切友情",
+      "after": "從親中怨擴充至一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「擴充套件」應為「擴充」（口語誤讀），「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2494",
+      "before": "此時圓著眼前的流浪漢",
+      "after": "此時緣著眼前的流浪漢",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「圓著」應為「緣著」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2495",
+      "before": "就等同圓著一切友情",
+      "after": "就等同緣著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「圓著」應為「緣著」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2512",
+      "before": "大悲心可以同時圓著某一個流汗",
+      "after": "大悲心可以同時圓著某一個有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'流汗'應為'有情'，符合佛法語境中悲心所緣對象。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2524",
+      "before": "比如說有一個經驗豐富的鐘表師傅",
+      "after": "比如說有一個經驗豐富的鐘錶師傅",
+      "changeClass": "orthography",
+      "reason": "修正'鐘表'為標準書寫'鐘錶'（或保留'鐘表'視專案規範，此處建議統一為'鐘錶'以符合繁體習慣，若專案接受'鐘表'則可忽略。此處依一般繁體習慣修正）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2541",
+      "before": "他雖然是看到是流浪汗",
+      "after": "他雖然是看到是流浪漢",
+      "changeClass": "orthography",
+      "reason": "修正'汗'為'漢'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2545",
+      "before": "所以我是選項醫",
+      "after": "所以我是選項一",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'醫'應為'一'，指選擇第一個選項或觀點。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2548",
+      "before": "因為分別是沒有辦法在同一時間對著兩個勁",
+      "after": "因為分別是沒有辦法在同一時間對著兩個境",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'勁'應為'境'，指所緣之境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2550",
+      "before": "我覺得他其實沒有辦法對著兩個勁",
+      "after": "我覺得他其實沒有辦法對著兩個境",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'勁'應為'境'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2551",
+      "before": "但他看到流浪汗的時候",
+      "after": "但他看到流浪漢的時候",
+      "changeClass": "orthography",
+      "reason": "「汗」應為「漢」，指流浪漢。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2667",
+      "before": "一切友情跟",
+      "after": "一切有情跟",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2669",
+      "before": "跟一切任意有",
+      "after": "跟一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「任意有」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2670",
+      "before": "任意友情來說的話",
+      "after": "有情來說的話",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「任意友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2678",
+      "before": "這個一切有形跟任意有形",
+      "after": "這個一切有情跟任意有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「有形」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2679",
+      "before": "是總別關系的",
+      "after": "是總別關係的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，應為「關係」而非「關系」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2684",
+      "before": "而不是整體跟支分的關系",
+      "after": "而不是整體跟支分的關係",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，應為「關係」而非「關系」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2688",
+      "before": "整體跟支分的關系",
+      "after": "整體跟支分的關係",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，應為「關係」而非「關系」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2692",
+      "before": "他說就是他認為一切友情是總",
+      "after": "他說就是他認為一切有情是總",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2693",
+      "before": "一些友情是任意友情是別",
+      "after": "一些有情是任意有情是別",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2697",
+      "before": "一切友情可以是總",
+      "after": "一切有情可以是總",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2698",
+      "before": "任意友情我覺得它",
+      "after": "任意有情我覺得它",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛學名相應為「有情」而非「友情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2710",
+      "before": "就是一切友情",
+      "after": "就是一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「友情」應為佛法名相「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2711",
+      "before": "跟任一友情",
+      "after": "跟任一有情",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「友情」應為佛法名相「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2717",
+      "before": "因為我圓的是一個總的",
+      "after": "因為我緣的是一個總的",
+      "changeClass": "orthography",
+      "reason": "「我圓」應為「我緣」（依止）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2730",
+      "before": "我對著單一友情",
+      "after": "我對著單一有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「友情」應為「有情」，符合佛法語境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2751",
+      "before": "那從分別之的角度來講話",
+      "after": "那從分別心的角度來講話",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「之」應為「心」，語意方通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2762",
+      "before": "不可能陷起一個異種",
+      "after": "不可能現起一個異種",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「陷」應為「現」，指心識現起。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2781",
+      "before": "就等於說我也想著一切友情",
+      "after": "就等於說我也想著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2784",
+      "before": "因為我們沒有辦法圓著一切友情",
+      "after": "因為我們沒有辦法圓著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2795",
+      "before": "擴充套件到這種一切友情的時候",
+      "after": "擴充到這種一切有情的時候",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2829",
+      "before": "應該是透遊",
+      "after": "應該是透由",
+      "changeClass": "orthography",
+      "reason": "「透遊」應為「透由」（透過、藉由之意），同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2862",
+      "before": "所以他應該不會是總別關系",
+      "after": "所以他應該不會是總別關係",
+      "changeClass": "orthography",
+      "reason": "修正錯別字，「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2977",
+      "before": "苦象嘛那所以呢",
+      "after": "苦相嘛那所以呢",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「苦象」應為「苦相」，指苦的特徵或現象。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2981",
+      "before": "那既然苦象都相同那為什麼",
+      "after": "那既然苦相都相同那為什麼",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「苦象」應為「苦相」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2982",
+      "before": "不能說此時我原的就是",
+      "after": "不能說此時我緣的就是",
+      "changeClass": "term",
+      "reason": "「原的」應為「緣的」（緣起之緣），指所緣境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2989",
+      "before": "所以我圓的應該",
+      "after": "所以我緣的應該",
+      "changeClass": "term",
+      "reason": "「圓的」應為「緣的」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2990",
+      "before": "也可以是眼前的流浪汗這樣",
+      "after": "也可以是眼前的流浪漢這樣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「流浪汗」應為「流浪漢」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3038",
+      "before": "那這時候你的疑問到是",
+      "after": "那這時候你的疑問倒是",
+      "changeClass": "orthography",
+      "reason": "「到是」應為「倒是」，屬同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3048",
+      "before": "是源著一切友情",
+      "after": "是緣著一切有情",
+      "changeClass": "term",
+      "reason": "「源著」應為「緣著」（依止、攀緣），屬同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3050",
+      "before": "就那個分別字來說的話",
+      "after": "就那個分別心來說的話",
+      "changeClass": "term",
+      "reason": "「分別字」應為「分別心」，屬同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3051",
+      "before": "他原著還是眼前流浪漫",
+      "after": "他原著還是眼前流浪漢",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「浪漫」應為「流浪漢」，與後文 seg-3068、seg-3090 等處一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3054",
+      "before": "講的是他的那個星亮",
+      "after": "講的是他的那個心量",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「星亮」應為「心量」，符合上下文討論心量與對境數量的語境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3056",
+      "before": "是源著一切友情的",
+      "after": "是緣著一切有情的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「源著」應為「緣著」（佛教用語，指心緣取對象），「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3057",
+      "before": "心去源著眼前的",
+      "after": "心去緣著眼前的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「源著」應為「緣著」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3058",
+      "before": "這一位友情",
+      "after": "這一位有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3067",
+      "before": "他是圓著一切友情",
+      "after": "他是緣著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「圓著」應為「緣著」，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3074",
+      "before": "又因為大背心",
+      "after": "又因為大悲心",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「大背心」應為「大悲心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3075",
+      "before": "必須圓著一切友情",
+      "after": "必須緣著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「圓著」應為「緣著」，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3077",
+      "before": "這個大悲心是圓著一切有情",
+      "after": "這個大悲心是緣著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「圓著」應為「緣著」，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3087",
+      "before": "首先我們的分別之",
+      "after": "首先我們的分別心",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「分別之」應為「分別心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3091",
+      "before": "又想著一切有錢",
+      "after": "又想著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「有錢」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3095",
+      "before": "我們就是不會想著一切有錢",
+      "after": "我們就是不會想著一切有情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「有錢」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3098",
+      "before": "就是因為我們的分別之",
+      "after": "就是因為我們的分別心",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「分別之」應為「分別心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3100",
+      "before": "只能想一個勁",
+      "after": "只能想一個境",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「一個勁」應為「一個境」（佛教用語，指所緣境）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3106",
+      "before": "還是圓著一切友情",
+      "after": "還是圓著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」（眾生），上下文皆指大悲心所緣對象。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3111",
+      "before": "已經設定為一切友情",
+      "after": "已經設定為一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3112",
+      "before": "而不是單一個友情",
+      "after": "而不是單一個有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3114",
+      "before": "可以是單一個友情的話",
+      "after": "可以是單一個有情的話",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3122",
+      "before": "大悲心的所緣必須圓著一切友情",
+      "after": "大悲心的所緣必須圓著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3123",
+      "before": "而不能只圓著一個友情",
+      "after": "而不能只圓著一個有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3125",
+      "before": "可以只圓著一個友情",
+      "after": "可以只圓著一個有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3126",
+      "before": "而且希望那個友情離苦",
+      "after": "而且希望那個有情離苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3130",
+      "before": "就是必須要圓著一切友情",
+      "after": "就是必須要圓著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3137",
+      "before": "一切友情是總",
+      "after": "一切有情是總",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3138",
+      "before": "任意友情是別",
+      "after": "任意有情是別",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3142",
+      "before": "一切友情呢",
+      "after": "一切有情呢",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3146",
+      "before": "是一切友情的例子",
+      "after": "是一切有情的例子",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3148",
+      "before": "他不是一切友情",
+      "after": "他不是一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3149",
+      "before": "他只是友情",
+      "after": "他只是有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3150",
+      "before": "但他不是一切友情",
+      "after": "但他不是一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3151",
+      "before": "所以這兩者之間沒有總別的關系",
+      "after": "所以這兩者之間沒有總別的關係",
+      "changeClass": "orthography",
+      "reason": "修正錯別字，「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3188",
+      "before": "就是同時圓著一切友情",
+      "after": "就是同時緣著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「友情」應為「有情」（眾生），與上下文「有情」一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3213",
+      "before": "鑿貨店就有賣了",
+      "after": "雜貨店就有賣了",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「鑿貨店」應為「雜貨店」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3218",
+      "before": "但金瓶跟瓶有總別關系",
+      "after": "但金瓶跟瓶有總別關係",
+      "changeClass": "orthography",
+      "reason": "「關系」應為「關係」，符合繁體中文規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3226",
+      "before": "兩者還沒有總別的關系",
+      "after": "兩者還沒有總別的關係",
+      "changeClass": "orthography",
+      "reason": "「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3285",
+      "before": "一切友情",
+      "after": "一切有情",
+      "changeClass": "term",
+      "reason": "同上，此處重複提及佛法名相，應修正為「一切有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3314",
+      "before": "一個友情",
+      "after": "一個有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」（眾生），此處語境為對眾生的悲心，非人際友誼。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3315",
+      "before": "一群友情",
+      "after": "一群有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」（眾生）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3316",
+      "before": "一個區域的友情生起大悲心",
+      "after": "一個區域的有情生起大悲心",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3318",
+      "before": "只能對著一切友情",
+      "after": "只能對著一切有情",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3321",
+      "before": "請問一切友情到底遭遇了什麼痛苦",
+      "after": "請問一切有情到底遭遇了什麼痛苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3322",
+      "before": "你該如何解決一切友情的痛苦",
+      "after": "你該如何解決一切有情的痛苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3325",
+      "before": "一切友情遭遇了什麼痛苦",
+      "after": "一切有情遭遇了什麼痛苦",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3358",
+      "before": "此時只能說大悲心原則的是一切友情",
+      "after": "此時只能說大悲心原則上是一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'友情'在此處語意不通，佛法中悲心所緣對象為'有情'（眾生），且前文 seg-3368 提及'一切有情'，推斷此處應為'有情'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3368",
+      "before": "但你說因為大悲心必須圓著一切有情",
+      "after": "但你說因為大悲心必須緣著一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'圓著'語意不明，佛法用語中悲心所緣對象常用'緣著'或'緣於'，且 seg-3358 修正後為'有情'，此處應為'緣著'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3370",
+      "before": "我覺得這個本末導致",
+      "after": "我覺得這個本末倒置",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'導致'語意不通，成語應為'本末倒置'，意指把根本和枝節弄反了。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3378",
+      "before": "那至於一切友情",
+      "after": "那至於一切有情",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。佛法語境中，悲心的所緣對象為「有情」（眾生），非「友情」(friendship)。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3404",
+      "before": "他的心量也沒有辦法擴充套件到那樣的程度",
+      "after": "他的心量也沒有辦法擴充到那樣的程度",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。'擴充套件'為電腦軟體術語，此處語境為心量擴大，應為'擴充'或'擴展'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3453",
+      "before": "這個時候他有想著一切友情嗎",
+      "after": "這個時候他有想著一切有情嗎",
+      "changeClass": "term",
+      "reason": "同上，「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3456",
+      "before": "既然沒有想著一切友情",
+      "after": "既然沒有想著一切有情",
+      "changeClass": "term",
+      "reason": "同上。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3460",
+      "before": "就已經涵蓋了一切友情",
+      "after": "就已經涵蓋了一切有情",
+      "changeClass": "term",
+      "reason": "同上。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3463",
+      "before": "有沒有辦法涵蓋一切友情",
+      "after": "有沒有辦法涵蓋一切有情",
+      "changeClass": "term",
+      "reason": "同上。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3471",
+      "before": "沒有辦法包含一切友情",
+      "after": "沒有辦法包含一切有情",
+      "changeClass": "term",
+      "reason": "同上。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3476",
+      "before": "選項三跟道次帝的論述",
+      "after": "選項三跟道次第的論述",
+      "changeClass": "orthography",
+      "reason": "「道次帝」為同音訛字，佛法名相應為「道次第」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3478",
+      "before": "為什麼要從親中願的角度",
+      "after": "為什麼要從親中怨的角度",
+      "changeClass": "term",
+      "reason": "「願」應為「怨」，修習悲心通常從親、中、怨三類眾生入手。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3485",
+      "before": "必須從親中願",
+      "after": "必須從親中怨",
+      "changeClass": "term",
+      "reason": "同上，「願」應為「怨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3500",
+      "before": "大到能夠涵蓋一切的友情",
+      "after": "大到能夠涵蓋一切有情",
+      "changeClass": "term",
+      "reason": "同上。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3533",
+      "before": "所以是不是還是要對勁",
+      "after": "所以是不是還是要對境",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法語境中應為「對境」而非「對勁」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3536",
+      "before": "真的面對一切友情",
+      "after": "真的面對一切有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」（眾生）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3537",
+      "before": "因為不會一切友情",
+      "after": "因為不會一切有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3540",
+      "before": "因為一切友情",
+      "after": "因為一切有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3543",
+      "before": "有這三者以外的友情嗎",
+      "after": "有這三者以外的有情嗎",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3545",
+      "before": "沒有就只有這三類的友情",
+      "after": "沒有就只有這三類的有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3546",
+      "before": "那如果他在休學的階段",
+      "after": "那如果他在修學的階段",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法語境中「休學」應為「修學」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3547",
+      "before": "分別對這三類的友情",
+      "after": "分別對這三類的有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3550",
+      "before": "不論是哪一個友情",
+      "after": "不論是哪一個有情",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字，佛法語境中「友情」應為「有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3559",
+      "before": "曾經出現在他串席的對境當中",
+      "after": "曾經出現在他串習的對境當中",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法修持語境中，指反覆練習使成習慣，應為「串習」，而非「串席」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3566",
+      "before": "就是說某些友情",
+      "after": "就是說某些眾生",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文討論對眾生的悲心與公案，「友情」應為「眾生」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3580",
+      "before": "天差地緣",
+      "after": "天差地遠",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。成語應為「天差地遠」，形容差距極大，而非「天差地緣」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3611",
+      "before": "應該也是在串席",
+      "after": "應該也是在串習",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正，「串席」應為「串習」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3638",
+      "before": "沒有直接的關系",
+      "after": "沒有直接的關係",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正，「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3667",
+      "before": "它本來就是反覆串洗",
+      "after": "它本來就是反覆串習",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法修持用語為「串習」而非「串洗」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3759",
+      "before": "那麼這個瓜胡依呢",
+      "after": "那麼這個瞋恨呢",
+      "changeClass": "term",
+      "reason": "ASR 訛字。上下文論述「傷害」、「加害者」及後續「被煩惱束縛」，應為佛法名相「瞋恨」（krodha），而非「瓜胡依」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3798",
+      "before": "然後對於瓜虎二",
+      "after": "然後對於瞋恨",
+      "changeClass": "term",
+      "reason": "ASR 訛字。同 seg-3759，應為佛法名相「瞋恨」，而非「瓜虎二」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3850",
+      "before": "至他平等的心嘛",
+      "after": "升起一個自他平等的心嘛",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'至他'應為'自他'，佛法名相'自他平等'（self and others equality）是修持大悲的重要基礎，'至'與'自'音近。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3887",
+      "before": "真愛自己",
+      "after": "珍愛自己",
+      "changeClass": "orthography",
+      "reason": "語境中'真愛自己'應統一為佛法常用詞'珍愛自己'，與 seg-3861 一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3934",
+      "before": "那種稱恨的感覺",
+      "after": "那種仇恨的感覺",
+      "changeClass": "orthography",
+      "reason": "「稱恨」為錯別字，應為「仇恨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3969",
+      "before": "反觀自信",
+      "after": "反觀自己",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文為「跟自己的內心對話」，此處應為「反觀自己」，而非「自信」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3971",
+      "before": "反觀自信",
+      "after": "反觀自己",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。與 seg-3969 相同，應為「反觀自己」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-4263",
+      "before": "而對眾生獻起悅意向",
+      "after": "而對眾生獻起悅意心",
+      "changeClass": "orthography",
+      "reason": "「向」應為「心」，同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "e654fd63-0d5e-4d81-a394-7ef0f6fbd6b4"
+}

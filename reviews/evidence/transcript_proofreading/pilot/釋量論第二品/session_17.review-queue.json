@@ -1,0 +1,423 @@
+{
+  "schema": "transcript-proofreading-review-queue/v2",
+  "runId": "1c16db03-d76b-496c-9446-87ee3d567aca",
+  "sourceDigest": "sha256:79d0c1955be7345717849998be9fe2ea4a8f839c2b7554f2a1681aa86dde32be",
+  "items": [
+    {
+      "itemId": "sha256:87cbe7e76729445e7251164796cc874830e777a7fcea59ac672e8b7c39640370",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-112",
+      "before": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？",
+      "after": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？」",
+      "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:cac7ab655b43ff7251b7b78d3fbebadd7b5cd7b0c8fb18c6f41ac66dcbd73ad8",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-123",
+      "before": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？",
+      "after": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？」",
+      "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:d1e27e49741f5a785b4db3c0b14739a7bbc79b697b8521d8fb5a5b58583b2deb",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-149",
+      "reason": "原句在「功能」處斷裂，下一句以「的這種關係」開頭。雖推測為語意連接，但無法完全確定講者是否口語省略或語序特殊，故未直接合併，僅在 proposals 中嘗試修正語法結構。若講者意圖為兩句獨立，則此修正可能過度。"
+    },
+    {
+      "itemId": "sha256:1e1b2d9b2b4f9e7e8830380356452d4d201607e96a78e672462c31855f95b3a5",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-129",
+      "reason": "「質體續流」一詞在佛法名相中較少見，通常使用「同類因」、「等流」或「自性續流」。需確認講者是否特指某種宗派用語或口誤，但無足夠上下文確認，故保留原文。"
+    },
+    {
+      "itemId": "sha256:e1fc447c1ef3cb2702496d92641ca77e6600c21832823ea79ed62d3ef321fb59",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-173",
+      "reason": "句子中途斷裂，「事」與下一句「情」應為同一詞「事情」，但根據原則 6，禁止合併修改，故標記為 uncertain。"
+    },
+    {
+      "itemId": "sha256:ffbe32bbe724c9281d4b742d184a111875db212d9a92a5d98d809561c219286b",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-174",
+      "reason": "承接上一句斷裂處，「情」字開頭，應與 sent-173 合併為一句，但依原則 6 維持原文並標記 uncertain。"
+    },
+    {
+      "itemId": "sha256:65df832ed877698214cfac8cd2cdd3ac6848a53c8f8e95015bd2a55314910cd7",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-234",
+      "reason": "「之前他會的也都變成不會了」語意稍顯口語化，可能為「之前學會的也都變成不會了」之口誤，但無法確定。"
+    },
+    {
+      "itemId": "sha256:10a754779f07355af6b3bcf4ea10bfeb70c3cf77c0659970ad111063d6ab6428",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-236",
+      "reason": "「愛「我」」之引號用法在口語逐字稿中常見，但嚴格書面語應為「愛我執」。若講者意在強調「我」字，則保留；若指名相，則應修正。無法確定講者意圖。"
+    },
+    {
+      "itemId": "sha256:06224bb08e5b9155270dee9d3c3f7d388c72f890dc6dfed7cc8dea47bf0abb9d",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-274",
+      "reason": "聽音不明，講者自稱未研究，無法確認是否為「認知」或「知覺」等詞。"
+    },
+    {
+      "itemId": "sha256:7156a7a7f5823421e4136d1429c7503412c5a3db24119645c2792c958b816212",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-278",
+      "reason": "引文開頭與結尾標點位置在口語中可能不嚴謹，且「對方」指代稍顯模糊（指來世身體？），需確認講者原意。"
+    },
+    {
+      "itemId": "sha256:101dcb4273b6df06d1d1d56b9fa7b336c0be5b9cf2f78056765af9f6711e0ee1",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-476",
+      "reason": "「第 121 個偈頌」數字來源不明，若為口誤或特定版本差異，需確認。"
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-9",
+      "before": "第",
+      "after": "因為身體既不是意知的增上緣，也不是意知的近取因。",
+      "reason": "after 補入前句（sent-8）內容，違反規則 2（不得搬用前後句）。且原句「第」為殘缺，無法僅憑上下文直接確定完整內容。",
+      "proposal": {
+        "id": "sent-9",
+        "after": "因為身體既不是意知的增上緣，也不是意知的近取因。",
+        "change_class": "semantic",
+        "reason": "ASR 斷句錯誤導致句子殘缺，第 8 句與第 10 句內容重複且語意不連貫，第 9 句應為第 8 句的延續或誤植，根據上下文邏輯，第 9 句應修正為完整句子以銜接第 10 句的殘缺。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-10",
+      "before": "也不是意知的近取因。",
+      "after": "因為身體既不是意知的增上緣，也不是意知的近取因。",
+      "reason": "after 補入前句內容並改變原句結構，違反規則 2。且原句無主詞，補全後可能改變原意或引入未出現的推測。",
+      "proposal": {
+        "id": "sent-10",
+        "after": "因為身體既不是意知的增上緣，也不是意知的近取因。",
+        "change_class": "semantic",
+        "reason": "第 8 句已完整表達此意，第 9 句殘缺，第 10 句重複第 8 句後半段且無主詞，推斷為 ASR 將一句話誤拆為兩句。修正後兩句應合併或調整為完整語意，此處保留原意並補全主詞以符合語法。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-19",
+      "before": "所以只要是因果，果都必然與因是從生相",
+      "after": "所以只要是因果，果都必然與因是從生相屬的關係。",
+      "reason": "after 補入後句（sent-20）內容「屬的關係」，違反規則 2（不得搬用前後句）。雖為斷句錯誤，但應由兩句合併處理，而非單句直接補全。",
+      "proposal": {
+        "id": "sent-19",
+        "after": "所以只要是因果，果都必然與因是從生相屬的關係。",
+        "change_class": "orthography",
+        "reason": "「從生相」後斷裂，第 20 句僅有「屬的關係」，應將兩句合併為完整句子。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.98
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-20",
+      "before": "屬的關係。",
+      "after": "所以只要是因果，果都必然與因是從生相屬的關係。",
+      "reason": "after 補入前句（sent-19）內容，違反規則 2。且原句僅為斷裂部分，無法單獨作為完整句子接受。",
+      "proposal": {
+        "id": "sent-20",
+        "after": "所以只要是因果，果都必然與因是從生相屬的關係。",
+        "change_class": "orthography",
+        "reason": "此句為第 19 句斷裂部分，應與第 19 句合併。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.98
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-87",
+      "before": "「如果那個因的續流在任何情況下消失，都會導致果消失。",
+      "after": "「如果那個因的續流在任何情況下消失，都會導致果消失。」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+      "reason": "after 補入後句（sent-88）內容「這是衍生出來的想法...」，違反規則 2。標點修正不應包含後續語意內容。",
+      "proposal": {
+        "id": "sent-87",
+        "after": "「如果那個因的續流在任何情況下消失，都會導致果消失。」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+        "change_class": "punctuation",
+        "reason": "修正標點符號位置，將右引號移至句末，使引用內容完整。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-88",
+      "before": "」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+      "after": "「如果那個因的續流在任何情況下消失，都會導致果消失。」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+      "reason": "after 補入前句（sent-87）內容，違反規則 2。且原句以左引號開頭，若僅修正標點不應直接合併前後句內容。",
+      "proposal": {
+        "id": "sent-88",
+        "after": "「如果那個因的續流在任何情況下消失，都會導致果消失。」這是衍生出來的想法，但實際上原文講的是那一果的形成，在任何時處都一定要跟隨在特殊因之後。",
+        "change_class": "punctuation",
+        "reason": "修正標點符號位置，將右引號移至句末，使引用內容完整。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-149",
+      "before": "當自宗以各種角度在破除這些想法之後，進一步的，他宗會稍微調整他原有的想法：如果身心的關係不像燭火與燭光的關係，那有沒有可能像酒與會讓人醉的功能",
+      "after": "當自宗以各種角度在破除這些想法之後，進一步的，他宗會稍微調整他原有的想法：如果身心的關係不像燭火與燭光的關係，那有沒有可能像酒與會讓人醉的功能的關係？",
+      "reason": "after 補入後句（sent-150）內容「的這種關係」，違反規則 2。且將「功能」改為「功能的關係」可能涉及語義微調，非單純標點修正。",
+      "proposal": {
+        "id": "sent-149",
+        "after": "當自宗以各種角度在破除這些想法之後，進一步的，他宗會稍微調整他原有的想法：如果身心的關係不像燭火與燭光的關係，那有沒有可能像酒與會讓人醉的功能的關係？",
+        "change_class": "grammar",
+        "reason": "修正語法結構。原句「像酒與會讓人醉的功能」後接下一句開頭的「的這種關係」，造成斷裂與重複感。為使語意完整且流暢，應將「的這種關係」整合至本句末尾，改為「像酒與會讓人醉的功能的關係？」，並修正標點。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "sent-173",
+      "before": "除此之外，雖然不是每個人都能夠回憶起過去發生的事",
+      "after": "除此之外，雖然不是每個人都能夠回憶起過去發生的事情，但至少在這個世間上有這樣的事例──有人能回憶起過去生所發生的事情，而且這樣的事例不是少數。",
+      "reason": "涉及斷句錯誤與文字拆分（事/情），需回聽確認是否為 ASR 誤判或口語停頓，且後句內容明顯承接，無法單憑句內證據確定。",
+      "proposal": {
+        "id": "sent-173",
+        "after": "除此之外，雖然不是每個人都能夠回憶起過去發生的事情，但至少在這個世間上有這樣的事例──有人能回憶起過去生所發生的事情，而且這樣的事例不是少數。",
+        "change_class": "punctuation",
+        "reason": "原句「事」與「情」被斷開為兩句（sent-173 與 sent-174），但語意明顯連續，且 sent-173 以「事」結尾，sent-174 以「情」開頭，顯係 ASR 斷句錯誤。根據原則 6，若一句在中途斷裂、下一句看似承接，兩句都維持原文並放入 uncertain；禁止把相鄰句子的文字搬入 after。因此，此處不能直接合併修改後放入 proposals，而應放入 uncertain。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-180",
+      "before": "從母親的角度，母親會認為：「那是我的先生。",
+      "after": "」如果這樣的念頭跑到了孩子的心裡，那個孩子怎麼看他的爸爸？",
+      "reason": "after 補入後句（sent-182）內容「如果這樣的念頭...」，違反規則 2。且原句引號混亂，修正後若包含後續語意則屬搬用前後句。",
+      "proposal": {
+        "id": "sent-180",
+        "after": "」如果這樣的念頭跑到了孩子的心裡，那個孩子怎麼看他的爸爸？",
+        "change_class": "punctuation",
+        "reason": "原句「那是我的先生。」」」引號使用混亂，前句已有閉合引號，後句又接閉合引號，且與前文「母親會認為：「那是我的先生。」」的格式不一致。此處應為「那是我的先生。」」，但 ASR 可能將閉合引號誤讀或重複。根據原則 3，修正標點。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.8
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-182",
+      "before": "「那也是我的先生。",
+      "after": "「那也是我的先生。」」是嗎？",
+      "reason": "after 補入前句內容並改變標點結構，違反規則 2。且「是嗎？」為新增語氣詞或推測，非單純標點修正。",
+      "proposal": {
+        "id": "sent-182",
+        "after": "「那也是我的先生。」」是嗎？",
+        "change_class": "punctuation",
+        "reason": "同上，引號使用混亂，應修正為「那是我的先生。」」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.8
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-186",
+      "before": "」那他的想法是什麼？",
+      "after": "「那是我的太太。」」那他的想法是什麼？",
+      "reason": "after 補入後句內容「那他的想法是什麼？」，違反規則 2。且引號修正不應包含後續問句。",
+      "proposal": {
+        "id": "sent-186",
+        "after": "「那是我的太太。」」那他的想法是什麼？",
+        "change_class": "punctuation",
+        "reason": "同上，引號使用混亂，應修正為「那是我的太太。」」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.8
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-290",
+      "before": "在那樣的情況下，我們的認知都已經變得如此不堪，那當它離開大腦的那一瞬間，我們的認知會變成什麼模",
+      "after": "在那樣的情況下，我們的認知都已經變得如此不堪，那當它離開大腦的那一瞬間，我們的認知會變成什麼模樣？",
+      "reason": "after 補入後句（sent-291）內容「樣？」，違反規則 2。雖為同音斷裂，但應由兩句合併處理，而非單句直接補全。",
+      "proposal": {
+        "id": "sent-290",
+        "after": "在那樣的情況下，我們的認知都已經變得如此不堪，那當它離開大腦的那一瞬間，我們的認知會變成什麼模樣？",
+        "change_class": "orthography",
+        "reason": "語意斷裂，「模」與下一句「樣」應為同一詞「模樣」，原稿誤拆為兩句。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-430",
+      "before": "而且我們指的是：這一世我們所造的惡業多，不代表我們下一世一定會投生惡趣，因為在臨終時有可能會有其他",
+      "after": "而且我們指的是：這一世我們所造的惡業多，不代表我們下一世一定會投生惡趣，因為在臨終時有可能會有其他因素介入，所以這是不一定的。",
+      "reason": "after 補入後句（sent-431）內容「因素介入，所以這是不一定的」，違反規則 2。且涉及推測缺字，無句內直接證據。",
+      "proposal": {
+        "id": "sent-430",
+        "after": "而且我們指的是：這一世我們所造的惡業多，不代表我們下一世一定會投生惡趣，因為在臨終時有可能會有其他因素介入，所以這是不一定的。",
+        "change_class": "deletion",
+        "reason": "原句在「其他」處斷裂，導致語意未完。根據上下文（sent-431），應將「因素介入」補入以完成句子結構。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-458",
+      "before": "如果這一步沒有跨穩，其他的都是海市蜃樓──講再多都沒有用！",
+      "after": "這麼做，為的是什麼？不過有關這方面的重點，應該都有在課堂上點出來。當然，有些問題或許三兩天、一兩個禮拜之內，你無法得到答案，但這都沒有關係，把那些問題時常放在心上思考，並且在思考的期間多祈請上師、三寶的加持，努力淨罪集資。這麼做，為的是什麼？為的是讓你能夠早日對於這個法類生起定解。不管你最終的目標為何，如果你有心想要學習佛法，如果你真的把解脫、成佛放在心上，這是第一步。跨出有前後世的這一步非常重要；如果這一步沒有跨穩，其他的都是海市蜃樓──講再多都沒有用！沒有這一步，你說「我要追求增上生」，怎麼追求增上生？沒有這一步，我們想要追求解脫、成佛，有可能嗎？各位有沒有發現我們的想法跟外道幾乎完全相同，外道所提出的那些論述就是我們平常的想法。所以在思考這些問題時，我們再再地強調，先把自己身上自認為是佛弟子的標籤撕掉，先問問自己：「我對於有沒有前後世的這一點，我最原始的想法是什麼？」然後再去比對一下自己跟外道之間的差別。其實比對到最後，我們的想法絕大部分都跟外道一樣。這時你再去思惟《釋量論》第二品的這幾個偈頌，你會發現：「我這樣想會有這個問題、我那樣想會有那個問題。」到最後呢？「所有的可能性都排除了，那我的認知從何而來？我的認知之所以能夠形成，必須觀待在它之前的同類因。」它的同類因是什麼？以認知來說，它的同類因就是它的近取因。況且，如果過去生沒有一個類似的同類因，為什麼今生我們會有這麼多的念頭？難道這些念頭不是過去生串習而來的嗎？況且，如果沒有前世，在世間上為什麼會有這麼多人能回憶起前世曾經發生的那些事情？這些都需要解釋。今天我們把有關前後世的這個部分，需要討論的問題提出來跟各位討論，並在最後作了一個統攝。下一堂課，會為各位介紹另外一個新的單元，那是從第 121 個偈頌開始。好，我們今天的課就上到這個地方。",
+      "reason": "after 大幅擴寫並補入大量前後句內容（從「這麼做，為的是什麼？」到結尾），嚴重違反規則 2（不得搬用前後句、不得補寫未出現在本句的內容）。",
+      "proposal": {
+        "id": "sent-458",
+        "after": "這麼做，為的是什麼？不過有關這方面的重點，應該都有在課堂上點出來。當然，有些問題或許三兩天、一兩個禮拜之內，你無法得到答案，但這都沒有關係，把那些問題時常放在心上思考，並且在思考的期間多祈請上師、三寶的加持，努力淨罪集資。這麼做，為的是什麼？為的是讓你能夠早日對於這個法類生起定解。不管你最終的目標為何，如果你有心想要學習佛法，如果你真的把解脫、成佛放在心上，這是第一步。跨出有前後世的這一步非常重要；如果這一步沒有跨穩，其他的都是海市蜃樓──講再多都沒有用！沒有這一步，你說「我要追求增上生」，怎麼追求增上生？沒有這一步，我們想要追求解脫、成佛，有可能嗎？各位有沒有發現我們的想法跟外道幾乎完全相同，外道所提出的那些論述就是我們平常的想法。所以在思考這些問題時，我們再再地強調，先把自己身上自認為是佛弟子的標籤撕掉，先問問自己：「我對於有沒有前後世的這一點，我最原始的想法是什麼？」然後再去比對一下自己跟外道之間的差別。其實比對到最後，我們的想法絕大部分都跟外道一樣。這時你再去思惟《釋量論》第二品的這幾個偈頌，你會發現：「我這樣想會有這個問題、我那樣想會有那個問題。」到最後呢？「所有的可能性都排除了，那我的認知從何而來？我的認知之所以能夠形成，必須觀待在它之前的同類因。」它的同類因是什麼？以認知來說，它的同類因就是它的近取因。況且，如果過去生沒有一個類似的同類因，為什麼今生我們會有這麼多的念頭？難道這些念頭不是過去生串習而來的嗎？況且，如果沒有前世，在世間上為什麼會有這麼多人能回憶起前世曾經發生的那些事情？這些都需要解釋。今天我們把有關前後世的這個部分，需要討論的問題提出來跟各位討論，並在最後作了一個統攝。下一堂課，會為各位介紹另外一個新的單元，那是從第 121 個偈頌開始。好，我們今天的課就上到這個地方。",
+        "change_class": "punctuation",
+        "reason": "修正引號與標點：原稿中「先問問自己：「我對於...」」的開頭引號位置錯誤，應為「先問問自己：「我對於...」」；且「我那樣想會有那個問題。」後的閉引號位置錯誤，應為「我那樣想會有那個問題。」」。此外，原稿中「到最後呢？」後接「所有的可能性都排除了...」的引號未正確開啟與關閉，需修正為「到最後呢？「所有的可能性都排除了...」」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    }
+  ]
+}

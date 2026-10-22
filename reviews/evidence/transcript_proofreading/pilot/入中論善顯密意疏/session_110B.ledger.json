@@ -1,0 +1,292 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:9e67c5b723c5b4e4f9f8bee1c4965c925171e61aea0bdf5d1a0a6d1b7842ae7a",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "@p019-s000",
+      "before": "又於有法上，遣除所破實性，即勝義諦，然勝義諦之所遣除者，非於所知決定非有。",
+      "after": "又於有法上，遣除所破實性，即勝義諦；然勝義諦之所遣除者，非於所知決定非有。",
+      "changeClass": "punctuation",
+      "reason": "分號用於分隔兩個獨立且對比的完整分句，增強語意層次。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p020-s000",
+      "before": "遣除實有性，遣除實有，那就是勝義諦，所以在瓶子裡面，否定諦實有，否定那個。",
+      "after": "遣除實有性、遣除實有，那就是勝義諦；所以在瓶子裡面，否定諦實有，否定那個。",
+      "changeClass": "punctuation",
+      "reason": "頓號連接並列短語，分號分隔因果關係的兩個分句。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p021-s000",
+      "before": "否定自相有，就是空性，這樣可以嗎。",
+      "after": "否定自相有，就是空性，這樣可以嗎？",
+      "changeClass": "punctuation",
+      "reason": "疑問句應使用問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p024-s000",
+      "before": "在瓶子裡面，當我們排除實有的時候，就叫做通達空性，這樣可以嗎。",
+      "after": "在瓶子裡面，當我們排除實有的時候，就叫做通達空性，這樣可以嗎？",
+      "changeClass": "punctuation",
+      "reason": "疑問句應使用問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p050-s000",
+      "before": "什麼然有諸法垢染漸淨。",
+      "after": "什麼然有諸法垢染漸淨？",
+      "changeClass": "punctuation",
+      "reason": "句末疑問語氣，應加問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p051-s000",
+      "before": "故於殊勝有法位，像瓶子這種的話，就一般的法，對不對。",
+      "after": "故於殊勝有法位，像瓶子這種的話，就一般的法，對不對？",
+      "changeClass": "punctuation",
+      "reason": "句末「對不對」為疑問語氣，應加問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p060-s001",
+      "before": "爭論，跟不是世俗所講的爭論，其中非世俗所講的爭論的時候，像現觀專業人所講的。",
+      "after": "爭論，跟不是世俗所講的爭論，其中非世俗所講的爭論的時候，像現觀莊嚴論人所講的。",
+      "changeClass": "term",
+      "reason": "「現觀專業人」應為佛學名相「現觀莊嚴論人」之 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p095-s000",
+      "before": "指導老，那個指導教授，陰錯陽差變成這樣的話，我還是要批，瞭解吧？",
+      "after": "指導老師，那個指導教授，陰錯陽差變成這樣的話，我還是要批，瞭解吧？",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「指導老」應為「指導老師」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p116-s001",
+      "before": "我們通常就是說，很多除障的時候，不是要修那個波羅經嗎？念波羅經。",
+      "after": "我們通常就是說，很多除障的時候，不是要修那個波羅蜜多嗎？念波羅蜜多。",
+      "changeClass": "term",
+      "reason": "「波羅經」應為「波羅蜜多」（Pāramitā），為佛法常見名相，ASR 誤聽為「經」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p117-s000",
+      "before": "波羅經可以除障這樣，這個其實蠻多，就是念。我們有一個，現在有沒有往生調。",
+      "after": "波羅蜜多可以除障這樣，這個其實蠻多，就是念。我們有一個，現在有沒有往生調。",
+      "changeClass": "term",
+      "reason": "同上，「波羅經」應為「波羅蜜多」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p126-s000",
+      "before": "就觀想無常，用《廣論》的話來說，小滿無常這些，思維這些，應該是進入中士道的這種。",
+      "after": "就觀想無常，用《廣論》的話來說，小乘無常這些，思維這些，應該是進入中士道的這種。",
+      "changeClass": "term",
+      "reason": "「小滿」應為「小乘」之 ASR 訛字，此處指小乘佛法對無常的觀修，與後文「中士道」相應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p142-s001",
+      "before": "這個就只能夠用無間道解脫道的那個遠離戲論，這個來做一個例子。",
+      "after": "這個就只能夠用無間道、解脫道的那個遠離戲論，這個來做一個例子。",
+      "changeClass": "punctuation",
+      "reason": "「無間道」與「解脫道」為並列名相，中間應加頓號以明確區隔。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p167-s001",
+      "before": "就是測得無影無蹤，對，原本要打擊的那個實有，你就把它攏到這個方便上來。",
+      "after": "就是滅得無影無蹤，對，原本要打擊的那個實有，你就把它攏到這個方便上來。",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'測得'應為'滅得'（滅除、消除之意），符合佛法語境中對治執著使其實有相消失的含義。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p187-s000",
+      "before": "要如何修，修五堂，如何修這些，自己規劃出一個版本。",
+      "after": "要如何修，修五加行，如何修這些，自己規劃出一個版本。",
+      "changeClass": "term",
+      "reason": "「五堂」應為佛法名相「五加行」之 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p191-s001",
+      "before": "對，所以聞文是一種修行，一種學習的方式，但思維，又是另外一種。",
+      "after": "對，所以聞思是一種修行，一種學習的方式，但思維，又是另外一種。",
+      "changeClass": "term",
+      "reason": "「聞文」應為「聞思」，與前句及佛法名相一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p192-s001",
+      "before": "對，所以就是變成，看就是一方面，聞文這些，一方面就是說，看從能不能從聞文。",
+      "after": "對，所以就是變成，看就是一方面，聞思這些，一方面就是說，看從能不能從聞思。",
+      "changeClass": "term",
+      "reason": "「聞文」應為「聞思」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p193-s000",
+      "before": "跨到那個一邊聞文，一邊就是稍微跨足到那個思維，這個部分，這個部分。",
+      "after": "跨到那個一邊聞思，一邊就是稍微跨足到那個思維，這個部分，這個部分。",
+      "changeClass": "term",
+      "reason": "「聞文」應為「聞思」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p198-s000",
+      "before": "其實這個就，就一直談那麼多地板，幹嘛，對不對，對，所以就變成，看那個。",
+      "after": "其實這個就，就一直談那麼多法門，幹嘛，對不對，對，所以就變成，看那個。",
+      "changeClass": "term",
+      "reason": "ASR 訛字：'地板' 在佛法語境中應為 '法門'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p199-s001",
+      "before": "怎麼講，畫出一個種子之圖。",
+      "after": "怎麼講，畫出一個種子之圖？",
+      "changeClass": "punctuation",
+      "reason": "句末為疑問語氣，應補上問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "7847805e-da30-440e-a40b-d8ab91334d6f"
+}
