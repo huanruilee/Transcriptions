@@ -23,6 +23,16 @@
 - [ ] 固定 commit 的獨立 review PASS，GitHub review threads 解決。
 - [ ] 合併、同 SHA CI／Pages 部署成功、實頁與下載驗證，提供使用者線上驗收連結。
 
+## 發布檢查與回復界線
+
+使用deploy-checklist規範：靜態網站無資料庫遷移、無新權限或feature flag。合併前必須最終commit獨立review及CI全綠；合併後Pages部署必須指向同一main SHA。正式實頁核對摘要、提醒、原話抽屜、30項原音清單及實際TXT下載。無伺服器端延遲／錯誤率監控，不能聲稱有此監測。
+
+回復觸發：36A無法載入、下載丟句、原話物件變動、摘要立場錯誤、節錄404或末句不能播。先保持PR未合併並修正；若部署後才出現，使用新revert PR回復本次merge，不force-push、不覆寫main、不動PR271。
+
+本地實頁已確認8點摘要、4個科判、提醒與原話抽屜；實際TXT下載全176句及閱讀提醒。發現官方MP3瀏覽器採短檔頭長度；已以完整解碼結果製作30段轉碼節錄（約5MB）供覆核，保留來源hash、原音區間及各檔hash，不提交完整音檔。最後p29-v11在瀏覽器duration24.947813秒，播放至24.801776秒後自動停止，沒有media error。原網站完整音軌仍指官方檔案，覆核頁另有官方連結。
+
+核心獨立review見independent-review-core.md：內容與同步PASS，淺層CI缺少baseline git物件P1已用獨立基準雜湊修正；最後還需新固定commit含音訊節錄的follow-up review。驗收目標是「可讓使用者線上驗收」，不是替使用者宣告人工聽核或全庫校稿完成。
+
 ## 模型與授權
 
 Qwen 為主要逐段稽核，MiniMax 僅處理五點摘要與分歧，Codex／獨立 reviewer 決定採納。已授權逐字稿傳送私人 GX10 與 MiniMax；不使用 Eneural production。實測 GX10 8001 回報 Qwen3.8-27B／llama.cpp Q4_K，8010 為 CUDA int8 large-v3-turbo，不宣稱完整 large-v3 或詞級時間戳。
