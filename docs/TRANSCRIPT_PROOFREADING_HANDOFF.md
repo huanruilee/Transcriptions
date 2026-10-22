@@ -1,6 +1,20 @@
 # 全庫逐字稿校稿交接紀錄
 
-最後更新：2026-10-15 CST
+最後更新：2026-10-22（Asia/Taipei）
+
+## 第 08 講獨立發布範圍
+
+本次 PR #252 發布校稿工具與四念住第 08 講；其餘 11 堂試點只保存候選證據，未套用正式逐字稿。全庫放行仍需 12/12 試點內容驗收，與本講單獨合併／部署分開。使用者已明確授權完整證據推送，並要求第 08 講完成合併與部署。
+
+- 正式內容：僅 `courses/四念住/sessions/session_08.json`。
+- 固定審查 run：`e153a10f-c521-44b3-b300-82cd349bb207`，獨立 PASS（11 輪），1,521 句修正，191 項未有唯一證據的疑點保守保留。
+- 摘要後續修復：`8939e30`，M3 五點支持性審查、11 處引句與 digest 更新；`overview-amendment.json` 綁定原候選與發布檔，正文不得漂移。
+- 最新驗證：摘要稽核 301/301 valid、校稿 evidence audit valid、Node 632 pass / 0 fail / 4 skipped、前端 93/93、build 通過；8939e30 GitHub CI 全綠。
+- GX10 不需公開 endpoint：來源／runtime fingerprint、固定 run、ledger、獨立 review 與 promotion 記錄供離線稽核；模型一致票數不能代替來源或人工核定。
+- 本講交接以 `reviews/evidence/transcript_proofreading/production/四念住/session_08.status.md` 與 `HANDOFF.md` 為準。以下 10-15 記錄保留為歷史；其中 FAIL、zero courses diff 與待授權狀態已被本段取代。
+- 回復方式：若發布後發現正文或摘要不符，使用新 revert PR 撤回此發布，保留原始證據及 Git 歷史，再由 main 的 acceptance／Pages 工作流程重新部署。
+
+## 2026-10-15 歷史 checkpoint（非目前發布狀態）
 
 ## 工作位置
 
