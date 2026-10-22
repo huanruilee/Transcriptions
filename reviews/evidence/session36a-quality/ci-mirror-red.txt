@@ -1,0 +1,68 @@
+TAP version 13
+# Subtest: CI acoustic bootstrap uses signed official HTTPS archive and bounded acquisition
+not ok 1 - CI acoustic bootstrap uses signed official HTTPS archive and bounded acquisition
+  ---
+  duration_ms: 109.661167
+  type: 'test'
+  location: '/Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions/tests/unit/ciAcousticBootstrap.test.js:25:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+      'Types: deb\n' +
+    +   'URIs: http://azure.archive.ubuntu.com/ubuntu\n' +
+    -   'URIs: https://archive.ubuntu.com/ubuntu\n' +
+        'Suites: noble noble-updates\n' +
+        'Components: main universe\n' +
+        'Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\n' +
+        '\n' +
+        'Types: deb\n' +
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: |-
+    Types: deb
+    URIs: https://archive.ubuntu.com/ubuntu
+    Suites: noble noble-updates
+    Components: main universe
+    Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+    Types: deb
+    URIs: https://security.ubuntu.com/ubuntu
+    Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+  actual: |-
+    Types: deb
+    URIs: http://azure.archive.ubuntu.com/ubuntu
+    Suites: noble noble-updates
+    Components: main universe
+    Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+    Types: deb
+    URIs: https://security.ubuntu.com/ubuntu
+    Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions/tests/unit/ciAcousticBootstrap.test.js:27:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: CI acquisition failures propagate without skipping decode verification
+ok 2 - CI acquisition failures propagate without skipping decode verification
+  ---
+  duration_ms: 104.887541
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 251.471209
