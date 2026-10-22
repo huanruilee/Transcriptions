@@ -1,0 +1,136 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:bb9ed0d051dc5aac53d0ea5b5de3ffac1c47fac73a6055b48dbb53ebb84a893f",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_17",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p17-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記稱《中論》「比較單純針對下部實事師」，原話僅說當時對手多為有部經部，未對《中論》全書範圍下定論。",
+            "evidenceIds": [
+              "p17-v1"
+            ],
+            "suggestion": "改為：「龍樹時代主要對治有部、經部等實事師，故《中論》多針對此類。」"
+          },
+          {
+            "sentenceId": "p17-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記斷言清辨、月稱時代「大乘內部出現唯識與自續派」，原話僅提及清辨、月稱時代內容變複雜，未明確界定宗派演變時間點。",
+            "evidenceIds": [
+              "p17-v2",
+              "p17-v3"
+            ],
+            "suggestion": "改為：「清辨、月稱時代，論典內容涵蓋唯識與自續派觀點，較《中論》複雜。」"
+          },
+          {
+            "sentenceId": "p17-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記稱月稱「特別把破斥名言有自相與破唯識理路一一明確點出」，原話僅說《入中論》將這些內容「一一地把它點出來」，未強調是月稱「特別」設計。",
+            "evidenceIds": [
+              "p17-v4",
+              "p17-v5"
+            ],
+            "suggestion": "改為：「因學者難舉一反三，故《入中論》將破唯識與破自續理路一一列舉。」"
+          }
+        ]
+      },
+      {
+        "id": "p_18",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p18-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記稱《四部宗義》有「四個正理」且包含「引經的一個正理」，原話僅說《入中論》三招、《四部宗義》多加一個共四招，未明確該第四招即為引經。",
+            "evidenceIds": [
+              "p18-v1",
+              "p18-v2"
+            ],
+            "suggestion": "改為：「《四部宗義》在《入中論》三正理外，另加一正理，共成四招。」"
+          },
+          {
+            "sentenceId": "p18-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記斷言宗大師將引經正理「直接歸入第一個科判」，原話僅說「好像在《入中論（疏）》把它擺到第一招裡面來了的感覺」，屬不確定語氣。",
+            "evidenceIds": [
+              "p18-v3"
+            ],
+            "suggestion": "改為：「宗大師似將《四部宗義》所加之一正理，歸入第一科判中。」"
+          }
+        ]
+      },
+      {
+        "id": "p_19",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p19-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記稱「大乘中唯有唯識宗承許實有」，原話僅說「大乘裡面還承認有實有的，就只有唯識」，未排除其他大乘宗派（如部分經部行中觀）的細微差別。",
+            "evidenceIds": [
+              "p19-v6"
+            ],
+            "suggestion": "改為：「在大乘宗派中，主要承許實有者為唯識宗。」"
+          },
+          {
+            "sentenceId": "p19-s5",
+            "kind": "unsupported-addition",
+            "detail": "講記稱「若破不了自相有，就同樣破不了勝義生」，原話僅說「假設有自相有的話，那就破不了勝義有」，未建立嚴格的邏輯等價關係。",
+            "evidenceIds": [
+              "p19-v8"
+            ],
+            "suggestion": "改為：「在應成派見地中，若有自相有，則等同於有實有（勝義有）。」"
+          }
+        ]
+      },
+      {
+        "id": "p_20",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p20-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記將科判標題解讀為「『不見』與『毀謗／破壞』之深層思辨」，原話僅提及「聖根本智應是破諸法之因」，未對「不見」與「毀謗」進行此類標題式歸納。",
+            "evidenceIds": [
+              "p20-v1"
+            ],
+            "suggestion": "改為：「解析第一招核心邏輯：為何若法有自相，聖智即成破壞諸法之因。」"
+          },
+          {
+            "sentenceId": "p20-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記推論「理應成為勝義識...所能見到的境」，原話僅說「它就會變成聖根本智的一個境吧？」，屬推測語氣而非定論。",
+            "evidenceIds": [
+              "p20-v2"
+            ],
+            "suggestion": "改為：「若法有自相，則理應成為聖根本智所見之境。」"
+          },
+          {
+            "sentenceId": "p20-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記斷言「不論應成派還是自續派，都共同承認...」，原話僅說「應成派和自續派應該都是共同認同的」，屬不確定語氣。",
+            "evidenceIds": [
+              "p20-v4"
+            ],
+            "suggestion": "改為：「應成與自續派似皆認同聖根本智遠離戲論，不見自相。」"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 1533,
+    "prompt_tokens": 6053,
+    "total_tokens": 7586,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:07:47.248Z"
+}

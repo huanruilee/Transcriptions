@@ -1,0 +1,134 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:b4fad8975e0f06e90dcc91ca3ebd728947501218a74cc5641d8f07e4c9d5fc6f",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_21",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p21-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記將「謗彼」具體化為「明明有做卻斷定沒做」的邏輯，底本僅說「謗毀諸法自性」，未展開此種世俗比喻。",
+            "evidenceIds": [
+              "p21-v3",
+              "p21-v4"
+            ],
+            "suggestion": "保留疑點，或明確標註為講者舉例說明，非底本直接論述。"
+          },
+          {
+            "sentenceId": "p21-s7",
+            "kind": "unsupported-addition",
+            "detail": "講記強調聖根本智「現前通達」自相無，底本僅說「根本智不見色等」，未明確使用「現前通達」一詞描述此過程。",
+            "evidenceIds": [
+              "p21-v9"
+            ],
+            "suggestion": "保守修法，改為「根本智不見自相」。"
+          },
+          {
+            "sentenceId": "p21-s8",
+            "kind": "stance",
+            "detail": "講記推論聖根本智若見自相無即成「毀謗」，此為講者對底本邏輯的演繹，非底本直接陳述。",
+            "evidenceIds": [
+              "p21-v6"
+            ],
+            "suggestion": "標註為講者推論，需核對是否過度解讀底本「謗彼」之義。"
+          }
+        ]
+      },
+      {
+        "id": "p_22",
+        "verdict": "supported",
+        "findings": [
+          {
+            "sentenceId": "p22-s5",
+            "kind": "root-quote",
+            "detail": "講記引用月稱論師語，與底本「論曰」及頌文內容一致，無實質增減。",
+            "evidenceIds": [
+              "p22-v1"
+            ],
+            "suggestion": "無。"
+          },
+          {
+            "sentenceId": "p22-s6",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「宗大師特別點出...絕不可顛倒胡說」，底本僅說「應說決定須許此義，不可倒說此宗全無所許」。",
+            "evidenceIds": [
+              "p22-v2"
+            ],
+            "suggestion": "刪去「宗大師特別點出」及「絕不可顛倒胡說」等修飾性語句。"
+          }
+        ]
+      },
+      {
+        "id": "p_23",
+        "verdict": "supported",
+        "findings": [
+          {
+            "sentenceId": "p23-s1",
+            "kind": "root-quote",
+            "detail": "講記直接引用底本疏文，內容完全一致。",
+            "evidenceIds": [
+              "p23-v1"
+            ],
+            "suggestion": "無。"
+          },
+          {
+            "sentenceId": "p23-s4",
+            "kind": "omission",
+            "detail": "講記省略底本中「如錘等是擊壞瓶等之因者」的比喻，僅保留結論。",
+            "evidenceIds": [
+              "p23-v1"
+            ],
+            "suggestion": "建議補回比喻以完整呈現論證邏輯。"
+          }
+        ]
+      },
+      {
+        "id": "p_24",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p24-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「見道位」一詞，底本僅說「修觀行者現證諸法自性空時」，未明確指定為見道位。",
+            "evidenceIds": [
+              "p24-v1"
+            ],
+            "suggestion": "刪去「見道位」或標註為講者推論。"
+          },
+          {
+            "sentenceId": "p24-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記將底本「如錘等是擊壞瓶等之因者」具體化為「鐵錘擊碎瓶子」，雖為通俗解釋，但屬講者增補。",
+            "evidenceIds": [
+              "p24-v4"
+            ],
+            "suggestion": "保留疑點，或改為「如錘擊瓶」。"
+          },
+          {
+            "sentenceId": "p24-s3",
+            "kind": "stance",
+            "detail": "講記斷言「絕對不合道理」，底本僅說「不應正理」，語氣強度略有差異。",
+            "evidenceIds": [
+              "p24-v5"
+            ],
+            "suggestion": "改為「不合正理」以貼近底本。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 1227,
+    "prompt_tokens": 6290,
+    "total_tokens": 7517,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:08:15.566Z"
+}

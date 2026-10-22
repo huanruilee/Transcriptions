@@ -1,0 +1,151 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:8036fdd465c60491d7145d6b327bdba3e5447f82331827a079fddbe8cf0f9578",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_9",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p9-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記引入「陳家香火」具體案例，底本僅提及「世間人指一男云：此兒是我生」，未展開家族姓氏與香火細節。",
+            "evidenceIds": [
+              "p9-v1"
+            ],
+            "suggestion": "保留原話中「世間人指一男」之概括表述，或明確標註為講者舉例延伸。"
+          },
+          {
+            "sentenceId": "p9-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記以「黃家兒孫滿堂」對比陳家，底本僅說「世間亦無從他生」，未涉及兩家對比之具體情境。",
+            "evidenceIds": [
+              "p9-v1"
+            ],
+            "suggestion": "刪減「黃家」對比細節，僅保留「非將彼男從自身出納入母腹」之原意。"
+          },
+          {
+            "sentenceId": "p9-s4",
+            "kind": "root-quote",
+            "detail": "講記「青牛與黃牛...毫無幫助」對應底本「如雖有青牛，於黃牛死已間斷全無少益」。",
+            "evidenceIds": [
+              "p9-v2"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          }
+        ]
+      },
+      {
+        "id": "p_10",
+        "verdict": "supported",
+        "findings": [
+          {
+            "sentenceId": "p10-s1",
+            "kind": "root-quote",
+            "detail": "講記「雖有異生，於聖人自斷生死無少益也」直接對應底本及原話。",
+            "evidenceIds": [
+              "p10-v1"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          },
+          {
+            "sentenceId": "p10-s2",
+            "kind": "root-quote",
+            "detail": "講記「自性有的他體」對應底本「離種子有自性之他」。",
+            "evidenceIds": [
+              "p10-v2"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          },
+          {
+            "sentenceId": "p10-s3",
+            "kind": "root-quote",
+            "detail": "講記「遠離斷邊」對應底本「遠離斷邊」。",
+            "evidenceIds": [
+              "p10-v3"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          }
+        ]
+      },
+      {
+        "id": "p_11",
+        "verdict": "supported",
+        "findings": [
+          {
+            "sentenceId": "p11-s1",
+            "kind": "root-quote",
+            "detail": "講記引用「論中數說芽時種滅...種子間斷」與底本及原話一致。",
+            "evidenceIds": [
+              "p11-v1"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          },
+          {
+            "sentenceId": "p11-s2",
+            "kind": "root-quote",
+            "detail": "講記「種子間斷是彼種類相續斷絕」對應底本及原話。",
+            "evidenceIds": [
+              "p11-v2"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          },
+          {
+            "sentenceId": "p11-s3",
+            "kind": "root-quote",
+            "detail": "講記「由芽種二法非一性故...亦破常邊」與底本及原話一致。",
+            "evidenceIds": [
+              "p11-v2"
+            ],
+            "suggestion": "此處為正確引用，可保留。"
+          }
+        ]
+      },
+      {
+        "id": "p_12",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p12-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記提出「質流（質體之流）」與「續流（相續之流）」之術語定義，底本僅說「種子間斷是彼種類相續斷絕」，未明確區分此二名詞。",
+            "evidenceIds": [
+              "p12-v2"
+            ],
+            "suggestion": "保留講者口語解釋，但需註明此為講者對經論之詮釋，非底本原文。"
+          },
+          {
+            "sentenceId": "p12-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記將「質流壞滅」與「破除常邊」直接掛鉤，底本僅說「破有芽時種子不滅...亦破常邊」，未使用「質流」一詞。",
+            "evidenceIds": [
+              "p12-v3"
+            ],
+            "suggestion": "修正為：講記以「質流」解釋底本之「種滅」，屬合理推論但非原文直述。"
+          },
+          {
+            "sentenceId": "p12-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記將「續流延續」與「破除斷邊」直接掛鉤，底本僅說「種子間斷是彼種類相續斷絕...遠離斷邊」。",
+            "evidenceIds": [
+              "p12-v3"
+            ],
+            "suggestion": "修正為：講記以「續流」解釋底本之「相續不間斷」，屬合理推論但非原文直述。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 1431,
+    "prompt_tokens": 5582,
+    "total_tokens": 7013,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:06:17.795Z"
+}

@@ -7,15 +7,15 @@ sync_study_guide_to_session.py
 1. courses/入中論善顯密意疏/sessions/session_{SID}.json (Web 主閱讀器正文)
 2. courses/入中論善顯密意疏/source_outlines/{SID}.json (Web 頂部導讀大綱)
 3. 自動維護 _meta 統計 (total_paragraphs, total_sentences, last_updated)
-4. 自動維護 contentOverview (sourceDigest 與 evidence 引用句)
-5. 執行本地前置審計檢查，確保符合 goldenStandard.test.js 與 summaries:audit。
+4. 以新正文驗證 contentOverview；失效時須提供獨立審核的 --overview-file。
+5. 驗證失敗時不寫入導讀大綱或講次資料。
 """
 
-import sys
-import os
 import json
 import re
 import hashlib
+import argparse
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
@@ -122,7 +122,56 @@ def parse_study_guide(md_path: Path):
 
     return outline_data, raw_paras
 
-def sync_session(sid: str):
+def validate_overview(session: dict, overview: dict, sid: str):
+    """Validate against the newly constructed source without repairing review evidence."""
+    validator = REPO_ROOT / 'scripts/content_overview_pipeline.mjs'
+    code = r'''
+import fs from 'node:fs';
+const {validateContentOverview, finalizeOverviewReview} = await import(process.argv[1]);
+const {session, overview, sid} = JSON.parse(fs.readFileSync(0, 'utf8'));
+const errors = validateContentOverview(overview, session, {
+  sourceTranscriptId: `ru-zhong-lun/session_${sid}`
+}).errors;
+const groups = ['mainPoints', 'discussionTopics', 'referenceViews'];
+const ids = session.paragraphs.flatMap(p => p.sentences.map(s => s.id));
+if (new Set(ids).size !== ids.length) errors.push({code: 'DUPLICATE_SENTENCE_ID'});
+const items = overview?.review?.items;
+if (!Array.isArray(items) || !overview?.review?.reviewedBy
+    || overview.status !== 'ai-reviewed'
+    || finalizeOverviewReview(overview, overview.review).status !== 'ai-reviewed') {
+  errors.push({code: 'INCOMPLETE_SUPPORTED_REVIEW'});
+}
+if (Array.isArray(items)) {
+  const keys = items.map(i => `${i.group}:${i.index}`);
+  if (new Set(keys).size !== keys.length) errors.push({code: 'DUPLICATE_REVIEW_ITEM'});
+  for (const item of items) {
+    if (!groups.includes(item.group) || !Number.isInteger(item.index)
+        || item.index < 0 || !overview[item.group]?.[item.index]
+        || item.verdict !== 'supported') errors.push({code: 'INVALID_REVIEW_ITEM'});
+  }
+}
+for (const group of groups) {
+  for (const item of overview?.[group] || []) {
+    const ids = (item.evidence || []).map(e => e.sentenceId);
+    if (new Set(ids).size !== ids.length) errors.push({code: 'DUPLICATE_EVIDENCE_ID'});
+  }
+}
+if (errors.length) { console.error(JSON.stringify(errors)); process.exit(1); }
+'''
+    try:
+        result = subprocess.run(
+            ['node', '--input-type=module', '-e', code, validator.as_uri()],
+            input=json.dumps({'session': session, 'overview': overview, 'sid': sid}, ensure_ascii=False),
+            text=True, capture_output=True, timeout=30, check=False)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError('Overview validation unavailable; no files written') from exc
+    if result.returncode:
+        raise ValueError('Overview invalid for NEW source; supply a separately reviewed '
+                         '--overview-file. No files written. ' + result.stderr.strip())
+
+
+def build_candidate(sid: str):
+    """Construct both outputs in memory, shared by preparation and application."""
     sid = str(sid).strip()
     md_file = PUBLICATIONS_DIR / f"lecture_{sid}_study_guide.md"
     if not md_file.exists():
@@ -133,6 +182,8 @@ def sync_session(sid: str):
         raise FileNotFoundError(f"Session JSON not found: {session_file}")
 
     outline_data, raw_paras = parse_study_guide(md_file)
+    if not raw_paras:
+        raise ValueError('Study guide has no body paragraphs; no files written')
     print(f"📖 解析 Markdown 完成：{len(outline_data['courseOutline'])} 個大綱項目，{len(raw_paras)} 個正文段落。")
 
     session = json.loads(session_file.read_text(encoding="utf-8"))
@@ -200,6 +251,11 @@ def sync_session(sid: str):
 
         new_paragraphs.append(para_obj)
 
+    # Refuse to drop existing audio-aligned verbatim data during paragraph rebuilding.
+    retained_verbatim = {p['id']: p.get('verbatimSentences') for p in new_paragraphs}
+    if any(retained_verbatim.get(pid) != sentences for pid, sentences in existing_verbatim.items()):
+        raise ValueError('Sync would change or drop existing verbatim sentences; no files written')
+
     total_sentences = sum(len(p["sentences"]) for p in new_paragraphs)
     now_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     now_date = datetime.now().strftime("%Y-%m-%d")
@@ -219,25 +275,48 @@ def sync_session(sid: str):
     if "llm_proofread" not in session["_meta"]:
         session["_meta"]["llm_proofread"] = "Smart Router (GX10 Qwen3.8-27B Grounded + Antigravity Tiered Review)"
 
-    # Build sentence map for evidence verification
-    sent_map = {s["id"]: s["text"] for p in new_paragraphs for s in p["sentences"]}
+    return session, outline_data
 
-    # Update contentOverview
-    co = session.get("contentOverview")
-    if co:
-        co["sourceDigest"] = compute_source_digest(session)
-        # Verify and re-anchor evidence quotes
-        for group in ["mainPoints", "discussionTopics", "referenceViews"]:
-            for item in co.get(group, []):
-                for ev in item.get("evidence", []):
-                    target_id = ev.get("sentenceId")
-                    if target_id in sent_map:
-                        ev["quote"] = sent_map[target_id]
-                    else:
-                        # Fallback to closest sentence or first sentence
-                        first_id = list(sent_map.keys())[0]
-                        ev["sentenceId"] = first_id
-                        ev["quote"] = sent_map[first_id]
+
+def sync_session(sid: str, overview_file=None, candidate_dir=None):
+    sid = str(sid).strip()
+    if not re.fullmatch(r'[0-9]+[AB]?', sid):
+        raise ValueError('Invalid session ID')
+    if candidate_dir is not None and overview_file is not None:
+        raise ValueError('--candidate-dir and --overview-file are mutually exclusive')
+    destination = None
+    if candidate_dir is not None:
+        destination = Path(candidate_dir).resolve()
+        # Resolve aliases before checking; scratch must never overlap course inputs/outputs.
+        protected = [REPO_ROOT / 'courses', COURSE_DIR, SESSIONS_DIR,
+                     OUTLINES_DIR, PUBLICATIONS_DIR, VERBATIM_DIR]
+        if any(destination.is_relative_to(p.resolve()) or p.resolve().is_relative_to(destination)
+               for p in protected):
+            raise ValueError('Candidate directory must be outside production course directories')
+        if destination.exists() and (not destination.is_dir() or any(destination.iterdir())):
+            raise ValueError('Candidate directory must be new or empty')
+
+    session, outline_data = build_candidate(sid)
+    if destination is not None:
+        co = session.get('contentOverview')
+        co = dict(co) if isinstance(co, dict) else {'schemaVersion': 1}
+        co.pop('review', None)
+        co['status'] = 'needs-review'
+        co['sourceTranscriptId'] = f'ru-zhong-lun/session_{sid}'
+        co['sourceDigest'] = compute_source_digest(session)
+        session['contentOverview'] = co
+        destination.mkdir(parents=True, exist_ok=True)
+        (destination / f'session_{sid}.json').write_text(
+            json.dumps(session, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        (destination / f'{sid}.json').write_text(
+            json.dumps(outline_data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        print(f'Candidate prepared in {destination}; overview needs independent review before application.')
+        return
+
+    co = (json.loads(Path(overview_file).read_text(encoding='utf-8'))
+          if overview_file is not None else session.get('contentOverview'))
+    validate_overview(session, co, sid)
+    session['contentOverview'] = co
 
     # Save outline JSON
     OUTLINES_DIR.mkdir(parents=True, exist_ok=True)
@@ -246,17 +325,22 @@ def sync_session(sid: str):
     print(f"✅ 已同步導讀大綱：{outline_path}")
 
     # Save session JSON
+    session_file = SESSIONS_DIR / f'session_{sid}.json'
     session_file.write_text(json.dumps(session, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"✅ 已同步講次資料：{session_file} ({len(new_paragraphs)} 段落，{total_sentences} 句子)")
+    print(f"✅ 已同步講次資料：{session_file}")
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 scripts/sync_study_guide_to_session.py <session_id> (e.g. 29A, 29B)")
-        sys.exit(1)
-    
-    sid = sys.argv[1]
-    sync_session(sid)
-    print("🎉 同步作業完成！請接續執行 npm run summaries:audit 與 node --test tests/acceptance/goldenStandard.test.js 進行驗證。")
+    parser = argparse.ArgumentParser(description='Sync only with overview review valid for the new source.')
+    parser.add_argument('session_id')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--overview-file', type=Path,
+                        help='Separately reviewed contentOverview JSON bound to the new source')
+    mode.add_argument('--candidate-dir', type=Path,
+                      help='Prepare session_<ID>.json and <ID>.json in a new/empty scratch directory; no production writes')
+    args = parser.parse_args()
+    sync_session(args.session_id, overview_file=args.overview_file, candidate_dir=args.candidate_dir)
+    if args.candidate_dir is None:
+        print("🎉 同步作業完成！請接續執行 npm run summaries:audit 與 node --test tests/acceptance/goldenStandard.test.js 進行驗證。")
 
 if __name__ == "__main__":
     main()

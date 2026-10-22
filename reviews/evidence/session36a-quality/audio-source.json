@@ -1,0 +1,82 @@
+{
+  "schema": "audio-source/v1",
+  "url": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170408-A%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p111(36).MP3",
+  "acquisition": "reused exact prior official-source download; not a fresh download",
+  "sha256": "sha256:24c177f3a2806c7a298dde94cf4a91ad0158b0887169269e70a429463d0f23b0",
+  "bytes": 28333456,
+  "duration": 3558.3478125,
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "mp3",
+        "codec_long_name": "MP3 (MPEG audio layer 3)",
+        "codec_type": "audio",
+        "codec_tag_string": "[0][0][0][0]",
+        "codec_tag": "0x0000",
+        "sample_fmt": "fltp",
+        "sample_rate": "22050",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/14112000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 49980018816,
+        "duration": "3541.668000",
+        "bit_rate": "64000",
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        }
+      }
+    ],
+    "format": {
+      "filename": "/Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions/tmp/session36a-quality/source_36A.mp3",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mp3",
+      "format_long_name": "MP2/3 (MPEG audio layer 2/3)",
+      "start_time": "0.000000",
+      "duration": "3541.668000",
+      "size": "28333456",
+      "bit_rate": "64000",
+      "probe_score": 51,
+      "tags": {
+        "title": "20170408-A 入中論善顯密意疏-第六現前地p111(36)",
+        "TLEN": "000003558243"
+      }
+    }
+  },
+  "containerDuration": "3541.668000",
+  "durationEvidence": {
+    "method": "full ffmpeg decode to mono 16000Hz signed 16-bit PCM; count bytes / 32000",
+    "pcmBytes": 113867130,
+    "sampleRate": 16000,
+    "channels": 1,
+    "bytesPerSample": 2,
+    "stderr": "",
+    "reason": "MP3 header estimate differs from full decoded audio; no change to source bytes or transcript time anchors"
+  }
+}

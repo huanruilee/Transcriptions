@@ -1,0 +1,121 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:3917ec4deceee2f4c35d97236ae0e9e9af65cc9a88b0dd3d5f4e00c50da3ae87",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_25",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p25-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記明確斷言「許有自相生之中觀師」即指「中觀自續派」。底本僅說「許有自相生之中觀師」，未直接點名自續派，雖上下文暗示，但講記將推論轉為定論。",
+            "evidenceIds": [
+              "p25-v1"
+            ],
+            "suggestion": "改為「此處所指之師，即前文所述自續派（或依上下文推斷為自續派）」以保留推論空間。"
+          },
+          {
+            "sentenceId": "p25-s7",
+            "kind": "unsupported-addition",
+            "detail": "講記聲稱「格西亦補充」，將疏文與頌文結合思考。底本無此「格西補充」之記錄，此為講者個人教學心得或課堂口語，非底本內容。",
+            "evidenceIds": [],
+            "suggestion": "刪除「格西亦補充」之敘述，或改為「講者提示：可結合...思考」。"
+          },
+          {
+            "sentenceId": "p25-s6",
+            "kind": "stance",
+            "detail": "講記將底本「前已解說」轉化為「這個道理前面已經解說過」，並強調「後面的正理也會繼續破斥」。底本僅陳述事實，講記強化了論證的必然性與結構感。",
+            "evidenceIds": [
+              "p25-v2"
+            ],
+            "suggestion": "保留原意，但避免過度強調「必然」或「繼續」的語氣，以免超出底本陳述範圍。"
+          }
+        ]
+      },
+      {
+        "id": "p_26",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p26-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記將此段定義為「《四部宗義》所列破自相的第四個正理」。底本僅引《釋論》引經，未提及此為「第四個正理」或出自《四部宗義》之特定編號。",
+            "evidenceIds": [
+              "p26-v1"
+            ],
+            "suggestion": "刪除「第四個正理」及「《四部宗義》所列」等具體歸類，僅稱「此處引經破斥」。"
+          },
+          {
+            "sentenceId": "p26-v1",
+            "kind": "uncertain",
+            "detail": "講者自述「我沒有好好地去看，所以不確定，但應該是」，顯示講記對底本出處（《釋論》或《四部宗義》）的判斷存在不確定性，卻在正式講記中確立。",
+            "evidenceIds": [
+              "p26-v1"
+            ],
+            "suggestion": "若講記需精確，應刪除不確定的歸類；若保留，應標註為「據講者推測」。"
+          }
+        ]
+      },
+      {
+        "id": "p_27",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p27-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「若無正觀即成邪中道」之解釋。底本僅云「中道正觀諸法者」，未對「非正觀」者進行定義或批評。",
+            "evidenceIds": [],
+            "suggestion": "刪除括號內補充說明，僅保留經文原意。"
+          },
+          {
+            "sentenceId": "p27-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記明確點出「自續派或唯識宗」作為反面例子。底本僅說「若有自相之體性...則違經說」，未指名具體宗派（雖上下文暗示唯識，但此處未明言）。",
+            "evidenceIds": [],
+            "suggestion": "改為「若諸法具有自相之體性...則違經說」，避免直接指責特定宗派。"
+          }
+        ]
+      },
+      {
+        "id": "p_28",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p28-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記引入「藏傳佛教裡覺囊派主張他空見，而格魯派自宗則破斥他空」之背景知識。底本僅論述「自空」與「他空」之理，未提及覺囊派或格魯派之名相。",
+            "evidenceIds": [],
+            "suggestion": "此為背景補充，若講記旨在解釋義理而非歷史，建議刪除宗派名稱，僅保留「他空見」概念。"
+          },
+          {
+            "sentenceId": "p28-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記使用「大寺院」、「出家人」、「佛像」之比喻來解釋他空。底本無此比喻，此為講者為闡明義理所加之方便說。",
+            "evidenceIds": [],
+            "suggestion": "標註此為「講者舉例說明」，以免讀者誤以為底本有此比喻。"
+          },
+          {
+            "sentenceId": "p28-s7",
+            "kind": "unsupported-addition",
+            "detail": "講記將「麻繩看成蛇」之喻歸為自空。底本無此喻，且「繩蛇喻」通常用於說明遍計所執（如唯識），此處直接定義為自空可能與底本邏輯有細微差異（底本強調「瓶子自相空」）。",
+            "evidenceIds": [],
+            "suggestion": "謹慎使用此比喻，或改為「指出繩子本身非蛇」之描述，避免過度解讀。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 1508,
+    "prompt_tokens": 6419,
+    "total_tokens": 7927,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:08:44.494Z"
+}

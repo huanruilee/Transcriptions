@@ -12,6 +12,7 @@ render_study_guide_html.py
 import json
 import re
 import sys
+from html import escape
 from pathlib import Path
 
 def format_mmss(seconds: float) -> str:
@@ -28,6 +29,9 @@ def highlight_quotes(text: str) -> str:
 def md_to_html(md_path: Path) -> Path:
     text = md_path.read_text(encoding="utf-8")
     sid = md_path.stem.replace("lecture_", "").replace("_study_guide", "")
+    session_path = md_path.parent.parent / "sessions" / f"session_{sid}.json"
+    quality = json.loads(session_path.read_text(encoding="utf-8")).get("qualityReview", {}) if session_path.exists() else {}
+    verbatim_label = escape(quality.get("verbatimLabel") or "逐字忠實原話・僅校錯別字與語氣詞")
     verbatim_path = md_path.parent.parent / "verbatim" / f"verbatim_{sid}.json"
     verbatim_map = {}
     if verbatim_path.exists():
@@ -167,7 +171,7 @@ def md_to_html(md_path: Path) -> Path:
                     drawer_html = (
                         f'<div id="drawer-{p_id}" class="verbatim-drawer" hidden>'
                         f'<div class="verbatim-drawer-head">'
-                        f'<span>💬 課堂原話對照（逐字忠實原話・僅校錯別字與語氣詞・點擊單句跳轉原音）</span>'
+                        f'<span>💬 課堂原話對照（{verbatim_label}・點擊單句跳轉原音）</span>'
                         f'<button type="button" class="verbatim-close-btn" onclick="event.stopPropagation(); toggleVerbatimDrawer(\'drawer-{p_id}\')">收合 ▴</button>'
                         f'</div>'
                         f'{"".join(v_items)}'
@@ -552,6 +556,6 @@ def md_to_html(md_path: Path) -> Path:
     return out_html
 
 if __name__ == "__main__":
-    pub_dir = Path("courses/入中論善顯密意疏/publications")
-    for md in pub_dir.glob("*.md"):
+    files = [Path(value) for value in sys.argv[1:]] if len(sys.argv) > 1 else Path("courses/入中論善顯密意疏/publications").glob("*.md")
+    for md in files:
         md_to_html(md)

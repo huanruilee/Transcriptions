@@ -6,6 +6,18 @@ import {
 } from '../../src/composables/useExportTranscript';
 
 describe('Transcript download contract', () => {
+  it('includes the reader notice before timestamped content only when supplied', () => {
+    const meta = { courseTitle: '入中論', sessionId: '36A', sessionTitle: '第36A講' };
+    const paragraphs = [{ sentences: [{ start: 12, text: '課程內容。' }] }];
+    const readerNotice = '導讀時間為估計，尚未逐句核對原音；請勿視為已驗證的語音對齊。';
+    const text = formatTranscriptText({ ...meta, readerNotice }, paragraphs);
+    expect(text).toContain(`閱讀提醒：${readerNotice}`);
+    expect(text.indexOf(readerNotice)).toBeLessThan(text.indexOf('[00:00:12]'));
+    expect(text.split(readerNotice)).toHaveLength(2);
+    expect(formatTranscriptText(meta, paragraphs)).not.toContain('閱讀提醒：');
+    expect(formatTranscriptText({ ...meta, readerNotice: '  ' }, paragraphs)).not.toContain('閱讀提醒：');
+  });
+
   afterEach(() => {
     vi.restoreAllMocks();
     document.body.innerHTML = '';
