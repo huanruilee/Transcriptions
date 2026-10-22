@@ -1,6 +1,6 @@
 {
   "session": "36A",
-  "scope": "Remove only four spurious 36A sessionIds entries; retain all primary sessionId values, other session references, ordering, hierarchy and timestamps.",
+  "scope": "Remove four spurious 36A sessionIds entries; add 己二 sibling under 戊二 and reparent exactly four existing 庚 nodes; correct one ancestor title 醜二 to 丑二. Retain all existing node fields, session references, timings and other relationships, with only the explicit title exception.",
   "verdict": "PASS: source-text and current session-data association audit; not independent audio timing certification",
   "rules": [
     ".agents/rules/study_guide_root_text_invariants.md:16-24 (cross-page verification and next-session cutoff)",
@@ -26,12 +26,30 @@
     "flashback": "p104 cross-reference retained in session content; no new TOC anchor invented. 亥二's existing references remain unchanged."
   },
   "preservation": {
-    "method": "SHA256 of parsed full TOC after filtering only 36A out of every sessionIds array, before and after identical; exact four retained associations separately asserted.",
-    "sha256": "610acea3d1bf08348ad0b707313babbbe75d96c92077f0ac3d1462f1b6693d12"
+    "method": "Sorted flattened existing-node field inventory and parent-child edge inventory captured after the approved four 36A reference removals, before ancestry edits. Exclude only the new 己二 node, normalize only its four direct child edges back to 己一 and the sole 丑二 title back to 醜二. Separately verify remaining child order, exactly one new parent, exactly four moved children, and four unchanged 36A associations.",
+    "fieldsSha256": "cba454d3f2fe1a03b92b9668fe0f50a7e5676d2ccd48cdd725c0a1dec1c76ffb",
+    "edgesSha256": "0e9aaa225470a87f6613883958542aeafceac17828bbf3f60f76d68e940f5ac0",
+    "remainingChildOrderSha256": "3373e736ada958f0bde7fc3556b4b4789f98c00ddb363285f37a07fc68b08ef7"
+  },
+  "ancestryReview": {
+    "sourceProof": [
+      "source_text/page_021.txt:21-24: 戊二 divides into 己一 (first five grounds), 己二 (sixth), 己三 (last four); 己二 is a sibling, not a child of 己一.",
+      "source_text/page_063.txt:17-18: 己二 explicitly lists exactly 庚一 明此地訓釋與慧度增勝, 庚二 讚慧度功德, 庚三 觀甚深緣起真實, 庚四 結述此地功德.",
+      "source_text/page_064.txt:12,24-25 confirms the standalone 庚二 and 庚三 headings; existing node page=63 reflects the p63 outline enumeration and is preserved.",
+      "source_text/page_240.txt:4-16 confirms 庚四 and explicitly discusses 第六地.",
+      "source_text/page_080.txt:25-26 spells 丑二、成立彼宗之正理 and lists 寅二、破他生; only that existing ancestor title is corrected."
+    ],
+    "before": "戊二 > 己一、釋極喜等五地 > 庚三、觀甚深緣起真實 > ... > 醜二、成立彼宗之正理 > 寅二、破他生 > ... > 巳三 or 巳四 > 36A",
+    "after": "戊二 > 己二、釋第六現前地 > 庚三、觀甚深緣起真實 > ... > 丑二、成立彼宗之正理 > 寅二、破他生 > ... > 巳三 or 巳四 > 36A",
+    "moved": ["庚一、明此地訓釋與慧度增勝", "庚二、讚慧度功德", "庚三、觀甚深緣起真實", "庚四、結述此地功德"],
+    "newParent": {"title": "己二、釋第六現前地", "sessionId": "01", "page": 63, "timestamp": 0, "needsReview": true, "reviewStatus": "needs_review"},
+    "newParentRationale": "session_01.json paragraph p_91 at 1259.76 contains 六三，第六，現前地，分四. Session identity is grounded in current text. Use timestamp=0 pending anchor rather than assert acoustic precision or copy the existing children 0.21 placeholder; no independent listening performed.",
+    "deferred": "Existing seventh-through-tenth-ground branches remain under 己一, and all descendants of the four moved nodes remain intact, including the pre-existing unexpected 巳三 beneath 庚四. These are outside the authorized pilot; no other title, body, reference, or timestamp changes.",
+    "red": "Ancestry baseline: 1 failed / 3 passed (missing 己二 sibling). After reparenting 4 passed. Separate 丑二 gate: 1 failed / 3 passed before the single title correction."
   },
   "tests": {
     "red": "node --test tests/unit/session36aToc.test.js: 1 failed, 2 passed; failure lists exactly the four spurious associations",
-    "green": "node --test tests/unit/session36aToc.test.js tests/unit/toc.test.js tests/unit/tocRemediation.test.js tests/unit/tocTranscriptAlignment.test.js: 16 passed, 0 failed",
+    "green": "node --test tests/unit/session36aToc.test.js tests/unit/toc.test.js tests/unit/tocRemediation.test.js tests/unit/tocTranscriptAlignment.test.js: 17 passed, 0 failed (including ancestry and 丑二 gates)",
     "diffCheck": "git diff --check: passed"
   },
   "limitations": "Timestamps confirmed against current loaded session data, including estimated study-guide timing; no model calls, audio inference, transcript edits, UI edits, commit or push."

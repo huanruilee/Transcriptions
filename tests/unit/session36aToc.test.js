@@ -26,14 +26,79 @@ test('36A associations contain actual lecture sections, not p100/109/110 or futu
   }
 });
 
-test('all other session references, ancestor structure and TOC fields remain identical', () => {
-  const copy = structuredClone(toc);
-  for (const node of flatten(copy.sections)) {
-    if (node.sessionIds) node.sessionIds = node.sessionIds.filter(s => s !== '36A');
+const movedTitles = ['庚一、明此地訓釋與慧度增勝', '庚二、讚慧度功德',
+  '庚三、觀甚深緣起真實', '庚四、結述此地功德'];
+const newTitle = '己二、釋第六現前地';
+const oldTitle = '己一、釋極喜等五地';
+const fields = ({ children, ...rest }) => rest;
+const digest = rows => createHash('sha256').update(JSON.stringify(rows.sort())).digest('hex');
+
+test('36A ancestry passes through authoritative sixth-ground sibling with exactly four existing children', () => {
+  const parent = nodes.find(n => n.title === '戊二、諸地各別建立');
+  assert.deepEqual(parent.children.map(n => n.title), [oldTitle, newTitle]);
+  const sixth = parent.children[1];
+  assert.equal(nodes.filter(n => n.title === newTitle).length, 1);
+  assert.equal(nodes.filter(n => n.title === '丑二、成立彼宗之正理').length, 1);
+  assert.deepEqual(sixth.children.map(n => n.title), movedTitles);
+  assert.deepEqual(fields(sixth), { title: newTitle, sessionId: '01', page: 63,
+    timestamp: 0, needsReview: true, reviewStatus: 'needs_review' });
+  const paths = [];
+  function walk(ns, ancestors = []) {
+    for (const n of ns) {
+      if (associated(n)) paths.push([...ancestors, n.title]);
+      walk(n.children || [], [...ancestors, n.title]);
+    }
   }
-  // Baseline captured before this bounded fix; excludes only 36A list membership.
-  assert.equal(createHash('sha256').update(JSON.stringify(copy)).digest('hex'),
-    '610acea3d1bf08348ad0b707313babbbe75d96c92077f0ac3d1462f1b6693d12');
+  walk(toc.sections);
+  assert.equal(paths.length, 4);
+  for (const path of paths) {
+    assert.ok(path.includes(newTitle));
+    assert.ok(!path.includes(oldTitle));
+    assert.ok(path.includes('庚三、觀甚深緣起真實'));
+    assert.ok(path.includes('丑二、成立彼宗之正理'));
+    assert.ok(!path.includes('醜二、成立彼宗之正理'));
+  }
+  const page = n => readFileSync(new URL(`source_text/page_${n}.txt`, root), 'utf8').split('\n');
+  assert.match(page('021')[20], /戊二.*己一.*己二、釋第六現前地/);
+  assert.match(page('063')[16], /己二、釋第六現前地。分四：庚一/);
+  assert.match(page('063')[17], /庚三.*庚四/);
+  assert.equal(page('064')[11], '庚二、讚慧度功德');
+  assert.match(page('064')[23], /庚三、觀甚深緣起真實/);
+  assert.equal(page('240')[3], '庚四、結述此地功德');
+  assert.match(page('080')[24], /丑二、成立彼宗之正理/);
+  assert.ok(read('sessions/session_01.json').paragraphs.flatMap(p => p.sentences || [])
+    .some(s => /六三，第六，現前地，分四/.test(s.text)));
+});
+
+test('flattened inventory preserves all fields and relationships except four reparentings and one 丑二 rename', () => {
+  const inventory = [], edges = [];
+  // Sole title exception: map the corrected source spelling back to the captured baseline.
+  const baselineFields = n => {
+    const value = fields(n);
+    if (value.title === '丑二、成立彼宗之正理') value.title = '醜二、成立彼宗之正理';
+    return value;
+  };
+  const oldKey = JSON.stringify(fields(nodes.find(n => n.title === oldTitle)));
+  function walk(ns, parentKey = 'ROOT') {
+    for (const n of ns) {
+      const key = JSON.stringify(baselineFields(n));
+      if (n.title !== newTitle) {
+        inventory.push(key);
+        edges.push(JSON.stringify([movedTitles.includes(n.title) ? oldKey : parentKey, key]));
+      }
+      walk(n.children || [], key);
+    }
+  }
+  walk(toc.sections);
+  // Captured before reparenting, after the four approved 36A membership removals.
+  // Sorted flat records preserve duplicate multiplicity; only the new parent is excluded.
+  assert.equal(digest(inventory), 'cba454d3f2fe1a03b92b9668fe0f50a7e5676d2ccd48cdd725c0a1dec1c76ffb');
+  assert.equal(digest(edges), '0e9aaa225470a87f6613883958542aeafceac17828bbf3f60f76d68e940f5ac0');
+  const orderRows = nodes.filter(n => n.title !== newTitle).map(n => JSON.stringify([
+    baselineFields(n), (n.children || []).filter(c => c.title !== newTitle && !movedTitles.includes(c.title))
+      .map(baselineFields),
+  ]));
+  assert.equal(digest(orderRows), '3373e736ada958f0bde7fc3556b4b4789f98c00ddb363285f37a07fc68b08ef7');
 });
 
 test('root-page boundaries distinguish p104 flashback and 36B continuation from future mentions', () => {
