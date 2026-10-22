@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { validateProofreadingCandidate } from './lib/transcriptProofreadingPipeline.js';
+import { validateContentOverview, finalizeOverviewReview } from './content_overview_pipeline.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const runId = process.argv[2] || 'e153a10f-c521-44b3-b300-82cd349bb207';
@@ -62,6 +63,13 @@ const validation = validateProofreadingCandidate({
 });
 if (!validation.valid || JSON.stringify(validation) !== JSON.stringify(complete.value.validation)) {
   throw new Error(`candidate validation mismatch: ${JSON.stringify(validation.errors)}`);
+}
+const overview = candidate.value.contentOverview;
+const overviewValidation = validateContentOverview(overview, candidate.value, {
+  sourceTranscriptId: 'si-nian-zhu/session_08',
+});
+if (overviewValidation.errors.length || finalizeOverviewReview(overview, overview?.review).status !== 'ai-reviewed') {
+  throw new Error('candidate overview must be reviewed against the proofread transcript before promotion');
 }
 
 writeAtomic(paths.preSource, source.bytes);

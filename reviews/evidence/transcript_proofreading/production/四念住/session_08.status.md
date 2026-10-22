@@ -1,5 +1,7 @@
 # 四念住第 8 講完整校稿狀態
 
+2026-10-22 更新：使用者已於 10-20 明確授權，384f8e7 與 83f3f45 均已推送 PR #252，下方舊「待推送同意」敘述已解除。此次僅修復第 08 講閱讀前摘要：更新 11 處引句與 source digest，修正「多分思惟／由依身故」，MiniMax-M3 重新覆核五點均 supported，Codex 核對全部引句及鄰句。正文及原 immutable run 不變；新增 session_08.overview-amendment.json 綁定原候選、更新後正式檔與摘要 digest。稽核只允許 contentOverview 更新，正文變動或 amendment 不符均失敗。摘要稽核恢復 301/301 valid；其餘講次未處理。
+
 日期：2026-10-16（Asia/Taipei）
 
 ## 結論

@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validateOverviewAmendment } from './lib/proofreadingOverviewAmendment.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const EVIDENCE = process.env.TRANSCRIPT_PROOFREADING_EVIDENCE_ROOT
@@ -167,8 +168,19 @@ for (const manifestPath of promotionManifests) {
     }
   }
   const promotedPath = path.resolve(ROOT, manifest.promotedPath || '');
+  const amendmentPath = path.join(directory, 'session_08.overview-amendment.json');
+  const safePromotedPath = promotedPath.startsWith(`${ROOT}${path.sep}`) && existsSync(promotedPath);
+  const amended = existsSync(amendmentPath) && safePromotedPath
+    && validateOverviewAmendment({
+      candidate: readFileSync(path.join(directory, records.candidateDigest)),
+      published: readFileSync(promotedPath), manifest,
+      amendment: JSON.parse(readFileSync(amendmentPath)),
+    }).length === 0;
+  if (existsSync(amendmentPath) && !amended) {
+    failures.push(`${path.relative(ROOT, manifestPath)} invalid overview amendment`);
+  }
   if (!promotedPath.startsWith(`${ROOT}${path.sep}`) || !existsSync(promotedPath)
-    || sha256(readFileSync(promotedPath)) !== manifest.promotedSourceFileDigest
+    || (!amended && sha256(readFileSync(promotedPath)) !== manifest.promotedSourceFileDigest)
     || manifest.promotedSourceFileDigest !== manifest.candidateDigest) {
     failures.push(`${path.relative(ROOT, manifestPath)} promoted source binding mismatch`);
   }

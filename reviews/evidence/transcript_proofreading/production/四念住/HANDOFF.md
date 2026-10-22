@@ -1,5 +1,7 @@
 # Transcriptions 全庫校稿交接
 
+2026-10-22 優先交接更新：第 08 講推送授權已解除，origin 已含 384f8e7 與 83f3f45。後續修復只更新 contentOverview，以 session_08.overview-amendment.json 保存更新前後 digest；原 PASS 正文快照不變。新增摘要回歸 gate，promotion 前驗證摘要來源與支持性。下文「先取得推送同意」已過期；此次範圍僅第 08 講，不啟動其餘試點。
+
 ## 可直接交給下一位 Agent 的 Prompt
 
 請接手 GitHub PR #252、分支 `codex/transcript-proofreading-quality`，只在隔離 worktree `/Users/henry/.codex/worktrees/transcript-proofreading-quality/Transcriptions` 工作，不要碰共享 dirty checkout。先讀 `reviews/evidence/transcript_proofreading/production/四念住/session_08.status.md`，並以 immutable run `e153a10f-c521-44b3-b300-82cd349bb207` 為第 08 講最終驗收基準。使用者已授權 repository 內 302 份逐字稿傳送至私人 GX10 `100.113.144.100` 的 Qwen3.8-27B，並授權逐字稿傳送至 MiniMax-M3；未授權將 production 內容送往 Eneural 外部服務。模型只可產生候選與品質稽核，不能作最終文字權威。
