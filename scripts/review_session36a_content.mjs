@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+const root=path.resolve(import.meta.dirname,'..');
+const dir=path.join(root,'reviews/evidence/session36a-quality');
+const course=path.join(root,'courses/入中論善顯密意疏');
+const source=process.argv[2] ? path.resolve(process.argv[2]) : path.join(course,'sessions/session_36A.json');
+const suffix=process.argv[3] || 'content';
+if(!/^[a-z0-9-]+$/.test(suffix))throw Error('Invalid run suffix');
+const output=path.join(dir,`minimax-${suffix}.json`);
+if(fs.existsSync(output))throw Error('Preserve existing review evidence; use a new run suffix');
+const t=JSON.parse(fs.readFileSync(source));
+const hash=x=>`sha256:${createHash('sha256').update(x).digest('hex')}`;
+const paragraphs=t.paragraphs.map(p=>({id:p.id,lecture:p.sentences.map(s=>({id:s.id,text:s.text})),verbatim:p.verbatimSentences.map(s=>({id:s.id,text:s.text}))}));
+const input={paragraphs,editorialPolicy:'講記可將同一段底本的完整引文集中列於解說之前，即使逐句消文跨相鄰段落；不得因段落切分不同就刪掉後段確已讀誦的引文。引文二句、四句依底本保留，不改第二句、第四句。課堂話語與底本引用不同來源，不能只因底本無老師比喻而刪除口語比喻。',sourcePages:[104,111,112,113,114].map(p=>({page:p,text:fs.readFileSync(path.join(course,`source_text/page_${p}.txt`),'utf8')})),nextSessionOpening:JSON.parse(fs.readFileSync(path.join(course,'sessions/session_36B.json'))).paragraphs[0]};
+const request={model:'MiniMax-M3',instructions:'你獨立稽核佛典雙軌講記。講記是整理版，可精煉和忠實釋義，不要求字面等同原話；老師口頭比喻只需原話支持，不要求底本出現。原典只能校對引用字句，不能補說老師未說的話。逐段核對講記是否扭曲原話、擴大立場、刪去重要問答、將猜測寫定論、引文不符。最後29段與下一講開頭核對截止。不要把單純修辭當實質改義。只輸出JSON {paragraphs:[{id,verdict:"supported|needs-fix|uncertain",reason:"40字內",changes:[{sentenceId,before,after,evidenceIds:[原話ID],evidenceQuote:"逐字引原話短句",reason:"40字內"}]}],cutoff:{verdict:"supported|uncertain",reason:"60字內"}}；每個段落恰好一筆。支持保留則changes空；需要修改時只能提出最小保守修正且要精確ID與原文，不能改課堂原話或補編教義。',input:JSON.stringify(input),temperature:0.1,max_output_tokens:8192,tool_choice:'none'};
+const response=spawnSync(process.execPath,[path.join(root,'scripts/minimax_responses_call.mjs')],{input:JSON.stringify(request),encoding:'utf8',maxBuffer:4*1024*1024});
+if(response.status!==0)throw Error(response.stderr);
+const raw=JSON.parse(response.stdout);
+const review=JSON.parse(raw.outputText.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));
+const ids=review.paragraphs?.map(p=>p.id);
+if(ids?.length!==paragraphs.length || new Set(ids).size!==ids.length || paragraphs.some(p=>!ids.includes(p.id)))throw Error('review coverage mismatch');
+const result={schema:'minimax-dual-track-review/v1',inputDigest:hash(JSON.stringify(input)),sourceFileDigest:hash(fs.readFileSync(source)),model:raw.model,usage:raw.usage,review,createdAt:new Date().toISOString()};
+fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify({paragraphs:ids.length,findings:review.paragraphs.filter(p=>p.verdict!=='supported'),cutoff:review.cutoff},null,2));

@@ -308,6 +308,10 @@
             <h1 class="session-article-title">
               {{ currentSessionInfo?.title || `第 ${currentSessionId} 講` }}
             </h1>
+            <p v-if="currentReaderNotice" class="session-reader-notice" role="note">
+              閱讀提醒：{{ currentReaderNotice }}
+              <a v-if="currentQualityReviewUrl" :href="currentQualityReviewUrl">原音抽查與待覆核清單</a>
+            </p>
             <div class="session-article-meta">
               <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
                 🕒 最後校正更新：{{ currentLastUpdated }}
@@ -483,7 +487,7 @@
               :data-testid="`verbatim-drawer-${p.id}`"
             >
               <div class="verbatim-drawer-header">
-                <span class="verbatim-drawer-title">💬 課堂原話對照（逐字忠實原話・僅校錯別字與語氣詞・點擊單句聽原音、連擊兩下可校對）</span>
+                <span class="verbatim-drawer-title">💬 課堂原話對照（{{ currentVerbatimLabel || '逐字忠實原話・僅校錯別字與語氣詞' }}・點擊單句聽原音、連擊兩下可校對）</span>
                 <button
                   type="button"
                   class="verbatim-drawer-close"
@@ -935,6 +939,9 @@ const activeTOCChain = computed(() => {
 });
 
 const currentAudioUrl = ref('');
+const currentReaderNotice = ref('');
+const currentVerbatimLabel = ref('');
+const currentQualityReviewUrl = ref('');
 const currentYoutubeVideoId = ref('');
 const youtubeAutoplayStart = ref<number | null>(null);
 const youtubePendingStart = ref<number | null>(null);
@@ -1112,6 +1119,7 @@ function handleDownloadTranscript() {
       pageRange: currentSessionInfo.value?.page || '',
       lastUpdated: currentLastUpdated.value,
       transcriptStatus: currentTranscriptStatus.value,
+      readerNotice: currentReaderNotice.value,
     },
     paragraphs.value,
     currentTranscriptOverview.value,
@@ -1698,6 +1706,9 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 });
 
 async function loadSession(sessionId: string) {
+  currentReaderNotice.value = '';
+  currentVerbatimLabel.value = '';
+  currentQualityReviewUrl.value = '';
   hasMediaEnded.value = false;
   stopYTTracker();
   youtubePendingStart.value = null;
@@ -1773,6 +1784,14 @@ async function loadSession(sessionId: string) {
     currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
     currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
+    currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
+      ? data.qualityReview.readerNotice.trim() : '';
+    currentVerbatimLabel.value = typeof data.qualityReview?.verbatimLabel === 'string'
+      ? data.qualityReview.verbatimLabel.trim() : '';
+    const reviewPage = data.qualityReview?.reviewPage;
+    currentQualityReviewUrl.value = typeof reviewPage === 'string'
+      && /^lecture_[0-9]+[AB]?_quality_review\.html$/.test(reviewPage)
+      ? `${baseUrl}${cPath}/publications/${reviewPage}` : '';
 
     let sentCounter = 0;
     let verbatimCounter = 0;
@@ -1846,6 +1865,9 @@ async function loadSession(sessionId: string) {
       }, 100);
     }
   } catch (err) {
+    currentReaderNotice.value = '';
+    currentVerbatimLabel.value = '';
+    currentQualityReviewUrl.value = '';
     console.error(`載入講次 ${sessionId} 逐字稿失敗:`, err);
   } finally {
     isLoading.value = false;

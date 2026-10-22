@@ -1,0 +1,104 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:978f4d366bcd6da60854c527c8b10e5624a90d191833692b1f425e02db85f989",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_1",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p1-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記將「一處」與「所住」直接定義為「自相有」或「實有」，底本僅解釋為「實執所緣之處」，未明確等同於自相有概念。",
+            "evidenceIds": [
+              "p1-v3",
+              "p1-v4"
+            ],
+            "suggestion": "建議改為「指實執所緣之處（即自相有之執著）」，以區分底本原意與講記推論。"
+          }
+        ]
+      },
+      {
+        "id": "p_2",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p2-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記斷言「只要...認為有絲毫自相有...就有了實執所安住的『那一處』」，底本僅說「得隨一實執所緣之處」，未詳述「絲毫」與「安住」的具體對應。",
+            "evidenceIds": [
+              "p2-v1",
+              "p2-v3"
+            ],
+            "suggestion": "保留疑點，或改為「若心有所住（即得隨一處），即生實執」。"
+          },
+          {
+            "sentenceId": "p2-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記推論「衍生出貪瞋等一切煩惱...生死痛苦無法避免」，底本僅說「被惑蛇咬」，未明列貪瞋或生死痛苦之具體後果。",
+            "evidenceIds": [
+              "p2-v1",
+              "p2-v3"
+            ],
+            "suggestion": "保守修法為「即被煩惱毒蛇所咬（喻生煩惱）」。"
+          }
+        ]
+      },
+      {
+        "id": "p_3",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p3-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記引入「中國傳統講『中庸之道』」及「印度人非常喜歡講中庸」，底本無此跨文化比較，屬額外添加。",
+            "evidenceIds": [
+              "p3-v3",
+              "p3-v4",
+              "p3-v5"
+            ],
+            "suggestion": "刪除關於中國中庸之道的比喻，僅保留中觀不墮常斷二邊之意。"
+          }
+        ]
+      },
+      {
+        "id": "p_4",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p4-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記詳述「釋迦牟尼佛最初六年苦行...戒學方面的中道」，底本僅提及「不墮常斷二邊之功德」，未涉及佛陀生平或戒定慧三學分類。",
+            "evidenceIds": [
+              "p4-v1",
+              "p4-v2"
+            ],
+            "suggestion": "刪除佛陀苦行與戒學之具體敘述，僅保留「遠離常斷即為功德」。"
+          },
+          {
+            "sentenceId": "p4-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記將中道細分為「戒學、定學、慧學」三類，底本未作此分類，屬講記自行整理之實質觀點。",
+            "evidenceIds": [
+              "p4-v4",
+              "p4-v5"
+            ],
+            "suggestion": "刪除三學分類，僅保留「自性空故遠離常斷二邊」。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 938,
+    "prompt_tokens": 5012,
+    "total_tokens": 5950,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "createdAt": "2026-10-22T11:05:02.273Z"
+}

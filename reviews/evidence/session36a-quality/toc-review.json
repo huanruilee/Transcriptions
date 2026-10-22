@@ -1,0 +1,38 @@
+{
+  "session": "36A",
+  "scope": "Remove only four spurious 36A sessionIds entries; retain all primary sessionId values, other session references, ordering, hierarchy and timestamps.",
+  "verdict": "PASS: source-text and current session-data association audit; not independent audio timing certification",
+  "rules": [
+    ".agents/rules/study_guide_root_text_invariants.md:16-24 (cross-page verification and next-session cutoff)",
+    ".agents/skills/buddhist_transcription_toolkit/SKILL.md:114-126 (physical root-text boundary)"
+  ],
+  "changes": [
+    {"title": "亥一、正義", "page": 100, "before36A": true, "after36A": false, "reason": "The opening p104 flashback is under 亥二, beginning source_text/page_103.txt:8; not 亥一 at page_100.txt:21. Flashback quotation: page_104.txt:15-18."},
+    {"title": "申四、明破他生無世妨難", "page": 109, "before": ["35A", "35B", "34B", "36A"], "after": ["35A", "35B", "34B"], "source": "source_text/page_109.txt:18", "reason": "Earlier section, not an ancestor of 巳三 or 巳四; main 36A resumes at p111 巳三."},
+    {"title": "申五、明世間妨難之理", "page": 110, "before": ["35B", "36A", "35A", "34B"], "after": ["35B", "35A", "34B"], "source": "source_text/page_110.txt:10", "reason": "Earlier section, not an ancestor of the actual 36A lecture sections."},
+    {"title": "午二、明世名言亦無他生釋世妨難", "page": 110, "before": ["35B", "36A", "35A", "34B"], "after": ["35B", "35A", "34B"], "source": "source_text/page_110.txt:22", "reason": "Earlier section ends before 巳三 at page_111.txt:25; no legitimate ancestor relationship removed."}
+  ],
+  "retained": [
+    {"title": "巳三、明破他生之功德", "page": 111, "timestamp": 127, "source": "source_text/page_111.txt:25-26", "sessionSentence": "36A p3-s1"},
+    {"title": "巳四、明全無自性生", "page": 113, "timestamp": 1609, "source": "source_text/page_113.txt:7", "sessionSentence": "36A p16-s1", "sessionIds": ["36A", "36B", "37A", "37B"]},
+    {"title": "午一、破計有自相", "page": 113, "timestamp": 1609, "source": "source_text/page_113.txt:7", "sessionSentence": "36A p16-s2", "sessionIds": ["36A", "36B", "37A", "37B"]},
+    {"title": "未一、聖根本智應是破諸法之因", "page": 113, "timestamp": 2105, "source": "source_text/page_113.txt:8-19", "sessionSentence": "36A p20-s1", "sessionIds": ["36A", "36B"]}
+  ],
+  "boundary": {
+    "p112": "page_112.txt:3-23 is 巳三 continuation, with no new heading.",
+    "36AEnd": "Final content: 36A p26-s1 explicitly references the last two lines of p113 through p114 line 5 and quotes the 寶積經 passage starting page_113.txt:23-24 (不以空性令諸法空，但法性自空); explanation discusses self/other emptiness. The final sentence ends 我們先休息一下，下節課繼續。 The unsupported next-lecture preview was removed and is not evidence for this boundary.",
+    "36BOpening": "36B p1-s1 resumes 尚不從自體破除自性 at page_114.txt:3-4; page overlap is real, so a simplistic exclusive page cutoff would be incorrect.",
+    "futureMention": "36A p16-s3 enumerates 未二/未三 as structure, not completed lecture coverage. 未二 remains 36B at 1398 (p14-s1), rooted at page_114.txt:22; no 36A association added.",
+    "flashback": "p104 cross-reference retained in session content; no new TOC anchor invented. 亥二's existing references remain unchanged."
+  },
+  "preservation": {
+    "method": "SHA256 of parsed full TOC after filtering only 36A out of every sessionIds array, before and after identical; exact four retained associations separately asserted.",
+    "sha256": "610acea3d1bf08348ad0b707313babbbe75d96c92077f0ac3d1462f1b6693d12"
+  },
+  "tests": {
+    "red": "node --test tests/unit/session36aToc.test.js: 1 failed, 2 passed; failure lists exactly the four spurious associations",
+    "green": "node --test tests/unit/session36aToc.test.js tests/unit/toc.test.js tests/unit/tocRemediation.test.js tests/unit/tocTranscriptAlignment.test.js: 16 passed, 0 failed",
+    "diffCheck": "git diff --check: passed"
+  },
+  "limitations": "Timestamps confirmed against current loaded session data, including estimated study-guide timing; no model calls, audio inference, transcript edits, UI edits, commit or push."
+}

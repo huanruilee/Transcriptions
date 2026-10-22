@@ -5,6 +5,7 @@ export interface TranscriptExportMeta {
   pageRange?: string;
   lastUpdated?: string;
   transcriptStatus?: string;
+  readerNotice?: string;
 }
 
 export interface TranscriptExportSentence {
@@ -49,6 +50,7 @@ export function formatTranscriptText(
   if (meta.pageRange) lines.push(`底本頁碼：${meta.pageRange}`);
   if (meta.transcriptStatus) lines.push(`逐字稿狀態：${meta.transcriptStatus}`);
   if (meta.lastUpdated) lines.push(`最後更新：${meta.lastUpdated}`);
+  if (meta.readerNotice?.trim()) lines.push('', `閱讀提醒：${meta.readerNotice}`);
   if (overview) {
     lines.push('', '本講內容導讀', '');
     const groups: Array<[string, string[]]> = [

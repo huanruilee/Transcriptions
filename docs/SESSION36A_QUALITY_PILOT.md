@@ -13,10 +13,10 @@
 ## 驗收清單
 
 - [x] 固定基準：29 段、147 句整理講記、176 句課堂原話、8 標題。
-- [ ] RED 重現失效 ID／同 ID 不同文字不可沿用已審查摘要；同步失敗不得部分寫入。
-- [ ] 共用同步 fail closed，僅接受與新來源綁定且重新審查的摘要，不把失效引證指到第一句。
-- [ ] 逐點重審導讀，區分自宗、他宗批評、引述與問答。
-- [ ] 全講兩軌比對、讀誦原文及 36A/36B 界線檢查；疑點逐項 ledger 與決策。
+- [x] RED 重現失效 ID／同 ID 不同文字不可沿用已審查摘要；同步失敗不得部分寫入。
+- [x] 共用同步 fail closed，僅接受與新來源綁定且重新審查的摘要，不把失效引證指到第一句。
+- [x] 逐點重審導讀，區分自宗、他宗批評、引述與問答（新8點，MiniMax獨立重審，Codex查引證）。
+- [x] 全講兩軌模型比對、讀誦原文及 36A/36B 界線檢查；ledger與分歧裁決保存。這不是逐字音訊人工驗收。
 - [ ] 音訊來源／runtime／ASR 證據、時間碼分級及代表性音訊獨立核對。
 - [ ] 網站、Markdown、HTML、大綱、課堂原話與下載一致；讀者看得見估算／已核驗的差異。
 - [ ] 摘要／校稿證據／goldenStandard／完整 Node／前端／build／瀏覽器驗證。
@@ -33,6 +33,12 @@ Qwen 為主要逐段稽核，MiniMax 僅處理五點摘要與分歧，Codex／�
 
 主 Agent：來源、音訊、逐段模型審查、36A 內容及最終發布。Darwin Agent：只改同步工具與測試，不改正式 36A。每個 gate 更新此文件或 PR checkpoint。
 
-目前執行 `node scripts/session36a_pilot_evidence.mjs --audio` 與 `--review`，各自保存證據。先以程序／session 確認是否仍在執行，不能因觀測 timeout 就重啟。`--baseline` 不得覆寫已固定的基準；`--review` 已完成批次沿用既有檔案。候選模型 verdict 不等於已驗收。
+音訊ASR與Qwen八批已完成，不要重跑。第二輪MiniMax候選覆核也已完成（29段，唯一p17模型分歧已按原話駁回，見review-decisions.md）。`overview-v1`是中間來源，不能套到最終正文；已使用`overview-v2`重新審查後同步。新正文29段150句，原話176句全部物件不變。
+
+音訊完整解碼3558.3478125秒，MP3檔頭估算3541.668秒不可靠；full-asr末句3557.34秒有效，不刪尾句。全176句ASR比較僅為聲學輔助，159句達文字覆蓋門檻、17句待聽核，全部humanListened=false。新線上清單含分層抽樣16句及待核17句，去重30句。保留疑點供使用者在線上聽核，不冒充人工確認。
+
+已重建Markdown／HTML／session／outline，移除四個與36A無關的TOC關聯，保留全部其他講次與節點。UI及TXT下載帶閱讀提醒；課堂原話抽屜不再對36A宣稱逐字忠實已驗收。`render_study_guide_html.py <path>`現在只處理明列檔案；無參數才沿用全資料夾模式。
+
+`scripts/plan_session36a_revision.mjs`是初輪一次性嚴格替換計劃，已套用後再次執行應失敗，不得藉此重套；後續三項保守修改另見content-followup.json。候選製作使用`sync_study_guide_to_session.py 36A --candidate-dir <new-empty-dir>`，正式同步必須附審查過的`--overview-file`，兩種模式不能混用。
 
 發現問題時，先修精確來源及測試，禁止只更新 digest 讓檢查通過。回復以新 revert PR 保留歷史。完成前按本清單逐項查證，不把結構全綠當成內容或聲學驗收。
