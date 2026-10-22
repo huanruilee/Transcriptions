@@ -150,30 +150,33 @@ export function applyActiveHighlight(sessionId) {
 export function findAncestorChain(t, sections, sessionId) {
   let bestChain = [];
   let bestTimestamp = -1;
+  let fallbackChain = [];
+  let fallbackTimestamp = Infinity;
 
   function walk(nodes, chain) {
     for (const node of nodes) {
-      // Only consider nodes that belong to the active session
       const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
         ? node.sessionIds
         : (node.sessionId ? [node.sessionId] : []);
-
-      if (sessionId && nodeSessions.length > 0 && !nodeSessions.includes(sessionId)) {
-        // Recurse into children that might belong to this session
-        if (node.children && node.children.length > 0) {
-          walk(node.children, chain);
-        }
-        continue;
-      }
 
       const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
       const currentChain = [...chain, { title: node.title, timestamp: ts, sessionId: node.sessionId }];
 
       // A node is "active" if its own acoustic timestamp belongs to this session and <= t
-      const isNodeAnchorForThisSession = node.sessionId === sessionId;
-      if (isNodeAnchorForThisSession && ts <= t && ts > bestTimestamp) {
+      const isNodeAnchorForThisSession = !sessionId || node.sessionId === sessionId;
+      const isSecondaryMatch = Boolean(sessionId && nodeSessions.includes(sessionId));
+
+      if (isNodeAnchorForThisSession && ts <= t && ts >= bestTimestamp) {
         bestTimestamp = ts;
         bestChain = [...currentChain];
+      }
+
+      if ((isNodeAnchorForThisSession || isSecondaryMatch) && fallbackChain.length === 0) {
+        fallbackChain = [...currentChain];
+        fallbackTimestamp = ts;
+      } else if (isNodeAnchorForThisSession && ts < fallbackTimestamp) {
+        fallbackChain = [...currentChain];
+        fallbackTimestamp = ts;
       }
 
       if (node.children && node.children.length > 0) {
@@ -183,7 +186,7 @@ export function findAncestorChain(t, sections, sessionId) {
   }
 
   walk(sections, []);
-  return bestChain;
+  return bestChain.length > 0 ? bestChain : fallbackChain;
 }
 
 /**

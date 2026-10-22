@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《入中論善顯密意疏》講記</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《入中論善顯密意疏》講記</h1>
+<ul class="meta-list">
+<li><strong>論著</strong>：月稱論師 造《入中論》 ｜ 宗喀巴大師 造《善顯密意疏》</li>
+<li><strong>漢譯</strong>：法尊法師</li>
+<li><strong>講授</strong>：見悲青增格西</li>
+<li><strong>講次</strong>：第 29B 講 (下節)</li>
+<li><strong>日期</strong>：2017 年 1 月 14 日</li>
+<li><strong>音訊來源</strong>：[官方原聲 MP3 廣播流](https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170114-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p99(29).MP3)</li>
+<li><strong>底本頁碼</strong>：本書第 98 頁末至第 100 頁</li>
+<li><strong>科判對應</strong>：己二、釋第六現前地 ➔ 戊二、破他生 ➔ 酉三、觀待世間釋俗諦差別（續釋難） ➔ 酉四、明名言中亦無亂心所著之境 ➔ 申二、正釋此處義 ➔ 申三、別釋二諦體</li>
+</ul>
+<blockquote class="verse-quote">
+<p>💡 <strong>聽讀小提示</strong>：點擊每個段落開頭的「`[▶ 分:秒]`」時間戳，即可直接在瀏覽器中跳轉至格西該段錄音的原聲點播放！</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【本講導讀與研讀大綱】</h2>
+<h3>一、 本講宗旨提要</h3>
+<p class="reading-para">本講研析宗喀巴大師《善顯密意疏》卷四「觀待世間釋俗諦差別」之難點問答，進而研析「酉四、明名言中亦無亂心所著之境」、「申二、正釋此處義」及「申三、別釋二諦體」。格西首先解開兩大核心疑難：第一、外道惡宗所妄計之自性神我，世間常人雖未察其謬，何以論師仍判為「唯由世間立為顛倒」？格西闡明：惡宗邪計非俱生我執，世間未證空性之常態名言量，經經驗觀察即可了知其顛倒；第二、中觀自宗既不許正世俗，何故不安立無明所損之心境為倒世俗？因為世俗法唯由世間名言量安立，而名言量自身皆在無明障蔽之下，不能自覺其錯亂。隨後，格西剖析頌文「無知睡擾諸外道...」，破斥「凡是亂識見為有者即立為世俗有」之通病，精闢辨析「所著境」（執自性、執幻象為實，名言中決定非有）與「所見境」（影像、谷響生眼耳識，名言中承許為色處）之界線，並引「有翳眼識不害無翳識」之喻，總結中觀宗破勝義他生時加勝義簡別，世間感官見他生絕不能損害聖者無漏真智。篇末格西引述宗喀巴大師至言：「其實世俗諦才是真正重要的，瞭解勝義諦正是為了世俗諦」，點明空性正見引導菩薩行者深契因果、善巧安立世俗之修行宗要。</p>
+<h3>二、 義理研讀綱要</h3>
+<ul class="meta-list">
+<li>1. <strong>名言量對惡宗妄計之自發判定（98 頁末～99 頁初問答）</strong>：</li>
+<ul class="nested-list">
+<li>惡宗妄計（如數論二十五諦之自性三德、大自在天造物）：非俱生我執，乃分別邪執。世間常識雖不知，但未證真實義之世間名言量，經觀察可破斥其無，故唯由世間立為顛倒。</li>
+<li>無明所損何不安立為倒世俗？世俗法由名言量安立，待名言量而立正倒；然世間名言量本身已被無明所染，無法成立無明習氣所損者為錯亂。</li>
+</ul>
+<li>2. <strong>名言中無亂心所著之境（酉四，99 頁）</strong>：</li>
+<ul class="nested-list">
+<li>頌曰：「無知睡擾諸外道，如彼所計自性等，及計幻事陽焰等，此於世間亦非有。」</li>
+<li>喻：外道欲超世間，自以為悟真實，如攀樹者未握後枝先放前枝，定墮惡見山澗。</li>
+<li>破斥「凡亂識見為有即立為世俗有」：名言中有必須由正量安立。亂心所著之境（執幻為實象馬、執陽焰為實水、執法有自相），世俗中決定非有。</li>
+</ul>
+<li>3. <strong>「所著之境」與「所見之境」之根本辨析</strong>：</li>
+<ul class="nested-list">
+<li>所著境（所執境）：外道所計之自性、亂識所執之自相實體，名言中決定非有（如兔角）。</li>
+<li>所見境（所現境）：影像、谷響雖無本質實體，但能作為色處、聲處生起見聞之識。如實質雖無而影像是有，自相雖無而青黃瓶柱是有。</li>
+<li>夢中人辨析：夢中之人雖非真實人，但夢中心識所緣仍有其因緣存在，非全然無因。</li>
+</ul>
+<li>4. <strong>正釋此處義：無翳眼識與無垢慧之喻（申二，100 頁）</strong>：</li>
+<ul class="nested-list">
+<li>頌曰：「如有翳眼所緣事，不能害於無翳識，如是諸離淨智識，非能害於無垢慧。」</li>
+<li>總結破他生：破他生加「勝義」簡別，中觀宗破的是勝義他生。異生世間根識見有他生，如同有眩翳者見空中毛輪，絲毫不能損害無眩翳眼識之明見；世間執他生亦絕不能妨害聖者無漏真智所證之無生。</li>
+</ul>
+<li>5. <strong>二諦體性與修持宗旨（申三，100 頁）</strong>：</li>
+<ul class="nested-list">
+<li>頌曰：「癡障性故名世俗，假法由彼現為諦，能仁說名世俗諦，所有假法唯世俗。」</li>
+<li>世俗諦之「世俗」即障蔽真實性之愚癡無明。凡夫由無明將虛妄假法顯現為真實，佛隨順凡夫說名「世俗諦」。</li>
+<li>格西引述宗喀巴大師教誡：修行不能偏廢世俗諦，修學勝義諦空性，終極目的是為了更純淨、更善巧地在世俗諦中承擔因果與利他行。</li>
+</ul>
+</ul>
+<h3>三、 重點法相辨析</h3>
+<ul class="meta-list">
+<li><strong>【所著境（所執境） vs 所見境（所現境）】</strong>：心識由執著而增益之對象為「所著境」，名言中非有（如陽焰之實水、萬法之自相）；心識當下顯現之境為「所見境」，中觀宗許影像為色處、能生眼識。</li>
+<li><strong>【攀樹墮澗之喻】</strong>：宗大師以攀樹者放開前枝卻未抓住後枝為喻，警示修學者若未真正悟入中道空性，即急於否定世間因果名言，必將墮入斷滅惡見深淵。</li>
+<li><strong>【名言量】</strong>：世間未經勝義哲學觀察、僅依常態感官與經驗所生起之正量標準。能破除陽焰實水、能破除外道邪計。</li>
+<li><strong>【世俗諦（Saṃvṛti-satya）】</strong>：藏文「ཀུན་རྫོབ་བདེན་པ」，「ཀུན་རྫོབ」意為全障、覆障，即無明愚癡障蔽法性真諦，於虛妄假法上錯覺為實有。</li>
+</ul>
+<h3>四、 課後思考與研討問題</h3>
+<ol class="ordered-list"><li>外道妄計之「自性三德」或「神我」，一般世間凡夫並不知其顛倒，為何月稱論師說此等計執「唯由世間立為顛倒」？</li><li>為什麼中觀應成派主張「無明所損之心境」不能安立為「倒世俗」？這與自續派的安立方式有何根本不同？</li><li>「所著之境」與「所見之境」的分別為何？中觀宗為何承認「鏡中影像」是色處，卻否定「所執的自相」於名言中有？</li><li>月稱論師以「眩翳眼識」與「無翳識」為喻，如何徹底化解論敵「世間現見有他生」對中觀宗破他生的難難？</li><li>宗喀巴大師為何提示「瞭解勝義諦正是為了世俗諦」？這對我們的修行有何深刻的啟發？</li></ol>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>1. 惡宗妄計非俱生執與世間名言量判定</h3>
+<p class="reading-para clickable-para" onclick="playPara(3, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3, this)">▶ 00:03</button> 我們繼續看底本第 98 頁末尾的問答。這裡論敵提出了一個非常敏銳的質難：色根有患所見的倒境（如眩翳見空花）、或者意識有睡眠等損害在夢中所見的人物、以及醒時執幻象為實象、執陽焰為實水，這些世間凡夫常識都能知道是顛倒；然而外道惡宗以邪理所建立的邪執（例如數論派主張的自性、大自在天造物），一般未學哲學的世間常人根本不知道它是顛倒的，那月稱論師憑什麼說惡宗的見解也是「唯由世間立為顛倒」呢？</p>
+<p class="reading-para clickable-para" onclick="playPara(45, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(45, this)">▶ 00:45</button> 宗喀巴大師在此明確回答：我們此處所觀察的錯亂損害因緣，並不是指「無始俱生我執」的損害，而是指今生暫時的分別邪執。外道惡宗所妄計的二十五諦自性等，世間未學宗派的人雖然當下不能立刻指出其顛倒，但是任何一個「未證空性的世間名言量」，只要透過因明與常態經驗的觀察，就能證實其無、了知其顛倒！因此，它仍然是屬於世間名言識所了知的顛倒，並不需要動用到證悟空性的聖者根本智。</p>
+<h3>2. 名言量無法自覺無明：無明何以不立倒世俗</h3>
+<p class="reading-para clickable-para" onclick="playPara(71, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(71, this)">▶ 01:11</button> 緊接著論敵又問第二個問題：既然應成自宗不承許正世俗，那被無明所損害的一切心境，何故不安立為「倒世俗」呢？大師回答：因為世俗法是由世間名言量所安立的；如果要在世俗中安立某個法是「倒」，也必須等待名言量來判定其錯亂。然而世間名言量本身全體都被無明習氣所蒙蔽，在尚未見道證空性之前，名言量根本沒有能力自覺、也不能成立自己所執的自相是錯亂的！因此在名言中，不能將無明所執安立為世間的倒世俗。</p>
+<h3>3. 科判酉四：明名言中亦無亂心所著之境</h3>
+<p class="reading-para clickable-para" onclick="playPara(138, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(138, this)">▶ 02:18</button> 請看第 99 頁頌文，進入科判：<strong>酉四、明名言中亦無亂心所著之境</strong>。頌文說：「<strong>無知睡擾諸外道，如彼所計自性等，及計幻事陽焰等，此於世間亦非有。</strong>」這首頌文非常重要，它以極為生動的譬喻，破斥了外道以及後代中觀學者容易犯的一種重大偏差。</p>
+<h3>4. 攀樹墮澗之喻與外道邪宗批判</h3>
+<p class="reading-para clickable-para" onclick="playPara(210, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(210, this)">▶ 03:30</button> 那些被無明睡眠所擾亂意識的外道，心中充斥著邪宗教理與似是而非的邪辯，自以為已經超越常人、悟入了宇宙真實。宗大師形容他們就像一個爬樹的人：還沒有抓住後面的樹枝，就急著放開前面抓牢的樹枝，結果必定跌落懸崖山澗！外道連牧童村婦都能正確了知的生滅世俗常識都無法無倒了知，卻狂妄地妄想超出世間，其所計執的自性三德、造物主，在世俗名言中也絕對是子虛烏有。</p>
+<p class="reading-para clickable-para" onclick="playPara(300, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(300, this)">▶ 05:00</button> 疏文中特別強調：有人主張「凡是錯亂心識所見為有的，就可以立為世俗有」，宗大師指出這完全是錯誤的邪說！如果錯亂心看見什麼就算世俗有，那麼把陽焰看成真水、把幻術變的木頭看成真象真馬，世俗中難道真有這樣的水和象馬嗎？絕對沒有！名言中承許某個法存在，必須要有「無損害的名言正量」所成立，絕非隨亂識的妄執而成立。</p>
+<h3>5. 所著境與所現境之根本辨析：自相無而青黃有</h3>
+<p class="reading-para clickable-para" onclick="playPara(390, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(390, this)">▶ 06:30</button> 這裡必須嚴格區分「<strong>所著之境</strong>」與「<strong>所見之境</strong>（所現之境）」。什麼叫所著之境？就是你心裡執著、認定的那個對象。當你把陽焰看作水的時候，你心中所執著的「真實的水」就是所著境，這個水在名言中像兔角一樣根本不存在；但陽焰本身作為眼識所看見的光影境象，它是客觀顯現的，這叫所現之境或所見之境。</p>
+<p class="reading-para clickable-para" onclick="playPara(510, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(510, this)">▶ 08:30</button> 同樣的道理，凡夫無明根識看見青色、黃色、瓶子、柱子時，眼中都會顯現為「自相成立、真實有自性」。我們心識所執著的那個「自相」，就是所著之境，在名言中乃至勝義中全無所有的；但是瓶子、柱子本身作為能起功用的緣起法，在名言量前是確實存在的。宗大師說得極其透徹：就像鏡中的臉面雖然沒有實質的人頭，但鏡中影像確實有；自相雖無，而青黃瓶柱是有！</p>
+<h3>6. 鏡中影像作為色處與夢境心所緣之安立</h3>
+<p class="reading-para clickable-para" onclick="playPara(610, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(610, this)">▶ 10:10</button> 既然許青色是外境，那麼中觀自宗亦許鏡中影像為「色處」所攝。下文月稱論師更說「影像能生見彼之識」，鏡中的影子能做為所緣緣，引生看見影子的眼識。這就是中觀應成派極為深細、不共其餘宗派的緣起建立。</p>
+<p class="reading-para clickable-para" onclick="playPara(680, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(680, this)">▶ 11:20</button> 這裡大家常會問到夢境：夢中的人存在嗎？夢中的人固然不是有血有肉的活人，但夢中的影像確實有其生起的心理習氣與緣起因緣。執夢中人為實人是倒識，但夢中顯現的境相作為意識所緣，在名言緣起中仍然可以被探討與安立。</p>
+<h3>7. 科判申二：正釋此處義與破勝義他生總結</h3>
+<p class="reading-para clickable-para" onclick="playPara(780, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(780, this)">▶ 13:00</button> 接著請大家看底本第 100 頁，科判進入：<strong>申二、正釋此處義</strong>。頌文說：「<strong>如有翳眼所緣事，不能害於無翳識，如是諸離淨智識，非能害於無垢慧。</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(880, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(880, this)">▶ 14:40</button> 這首頌文是整個「破他生」章節的關鍵總結！前面論敵一直以「世間人都親眼看見種子生芽，這就是現量可見的他生」來反駁中觀宗。月稱菩薩在此徹底斬斷其爭端：諸真實義是聖者無漏真智所見，不是凡夫名言識所能安立。中觀宗破他生，是「依勝義而破」，每一次破斥都加上了「勝義」的簡別！</p>
+<h3>8. 眩翳眼識不害無翳識之喻</h3>
+<p class="reading-para clickable-para" onclick="playPara(990, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(990, this)">▶ 16:30</button> 就如同患有白內障、眩翳病的人，眼前看見空中飄落毛輪；那個眼睛健全、沒有眩翳的人走過來說「空中根本沒有毛輪」，患翳病的人能以自己看見毛輪來妨害沒有翳病的人嗎？絕對不能！同樣的道理，世間未證空性的凡夫異生，被無明重障蔽障，在名言識前看見種子生芽貌似他生；這絲毫不能妨害已經遠離無明障蔽、證得諸法離言無生之無垢聖慧！</p>
+<p class="reading-para clickable-para" onclick="playPara(1100, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1100, this)">▶ 18:20</button> 所以論敵拿世間常識看見的他生來抗辯中觀宗破勝義他生，月稱菩薩在大疏裡毫不客氣地說：「當知彼難，實為智者所笑之處！」因為二者所在的觀察層次完全不同，以有病之識責難無病之見，純屬不講道理。</p>
+<h3>9. 科判申三：別釋二諦體與世俗諦定義</h3>
+<p class="reading-para clickable-para" onclick="playPara(1230, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1230, this)">▶ 20:30</button> 處理完破他生的爭辯之後，底本第 100 頁正式進入廣闊深邃的二諦建立：<strong>申三、別釋二諦體</strong>。科判分為「酉一、釋世俗諦」與「酉二、釋勝義諦」。釋世俗諦又分三段，第一段是「戌一、明於何世俗前為諦何前不諦」，正義頌文說：「<strong>癡障性故名世俗，假法由彼現為諦，能仁說名世俗諦，所有假法唯世俗。</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(1370, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1370, this)">▶ 22:50</button> 什麼叫做「世俗」？在梵語與藏語中，世俗（Saṃvṛti / ཀུན་རྫོབ）的本義就是「障礙、覆蔽」。正是因為無明愚癡障蔽了一切諸法的真實性（自性空），於本來無自性的虛妄假法之上，增益顯現為實有真實；佛陀隨順凡夫這種顛倒錯覺的執著，將此等被覆障心識執為真實的境界，方便稱之為「世俗諦」。因此在究竟意義上，一切世俗法本質唯是緣生假法。</p>
+<h3>10. 二諦互融之修持宗旨：宗大師教誡</h3>
+<p class="reading-para clickable-para" onclick="playPara(1510, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1510, this)">▶ 25:10</button> 很多學佛的人往往有一個迷思：以為世俗諦既然是虛妄欺誑，就把它看得一文不值，一味只追求勝義諦、追求空性，甚至走向撥無因果的斷滅見。一般凡夫終日浸泡在世俗層面中，以假為真，造業受苦；而如果沒有透達勝義諦的空性慧，你就永遠沒有辦法真正認識世俗諦的緣起本相。</p>
+<p class="reading-para clickable-para" onclick="playPara(1622, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1622, this)">▶ 27:02</button> 宗喀巴大師曾有一次極具啟發的開示。格西深情回憶道：宗大師說過，「其實世俗諦才是真正重要的，我們花這麼大的心血去瞭解勝義諦，最終正是為了能善巧地立足於世俗諦！」在未通達空性之前，我們在世俗中起心動念皆隨我執流轉，害己害人；而一旦真正藉由勝義諦照破實相，重回世俗名言時，行持六度萬行、積聚福德資糧，才能如幻如化、精純無染，這才是導向解脫與圓滿菩提的正道！</p>
+<p class="reading-para clickable-para" onclick="playPara(1800, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1800, this)">▶ 30:00</button> 二諦不是互相割裂的兩張皮，而是同一個緣起法的兩個維度：以勝義諦破自相實有，以世俗諦立如幻因果。如果執著世俗諦為實有，便墮入常邊；如果以空性否定世俗緣起，便墮入斷邊。唯有善解月稱論師在此建立的「名言中無亂心所著境、有正量所立境」，才能不墮兩邊，穩健行於中道。</p>
+<h3>11. 結語迴向：以空破實、善巧行於中道</h3>
+<p class="reading-para clickable-para" onclick="playPara(2010, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2010, this)">▶ 33:30</button> 下部宗派在理解法相時，往往要求一切存在必須實實在在地有一種自性自相的「實質」支撐；然而在中觀應成自宗看來，萬法越往究竟觀察，越如鏡中影像、空中谷響、水月幻事。不需要自相實體，絲毫不妨礙如幻如化的因果功用安立，這就是宗喀巴大師讚歎的「以空破實、依空立緣」的不共智慧。</p>
+<p class="reading-para clickable-para" onclick="playPara(2200, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2200, this)">▶ 36:40</button> 總結這半講的研討，格西期勉大家：二諦是佛法的根本樞紐，大家在研讀時務必反覆咀嚼法義。不要把因明與中觀當成純粹的學術概念，而是要拿來對照自己的內心──觀察自己在日常生活中，何時在執著「所著之境」，何時能善用「世俗之境」。唯有真正認識到世俗諦的善巧安立，通達勝義諦空性的無礙智慧，我們才能在菩提道上不被虛妄煩惱所轉，轉世俗為佛道！</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170114-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p99(29).MP3">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《入中論善顯密意疏》講記</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《入中論善顯密意疏》講記</h1>
+<ul class="meta-list">
+<li><strong>論著</strong>：月稱論師 造《入中論》 ｜ 宗喀巴大師 造《善顯密意疏》</li>
+<li><strong>漢譯</strong>：法尊法師</li>
+<li><strong>講授</strong>：見悲青增格西</li>
+<li><strong>講次</strong>：第 35B 堂 (下節)</li>
+<li><strong>日期</strong>：2017 年 3 月 25 日</li>
+<li><strong>音訊來源</strong>：[官方原聲 MP3 廣播流](https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170325-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p110(35).MP3)</li>
+<li><strong>底本頁碼</strong>：第 110 頁中至第 111 頁下（後半堂深入闡發第 108 頁「佛智如何遍知二諦」；第 111 頁末「巳三」留待第 36A 堂）</li>
+<li><strong>科判對應</strong>：己二、釋第六現前地 ➔ 戊二、破他生 ➔ 申五、明世間妨難之理 ➔ 午二、明世名言亦無他生釋世妨難 ➔ 專題深探：佛智如何同時遍知二諦（魚缸之喻與大圓鏡智）</li>
+</ul>
+<blockquote class="verse-quote">
+<p>💡 <strong>聽讀小提示</strong>：點擊每個段落開頭的「`[▶ 分:秒]`」時間戳，即可直接在瀏覽器中跳轉至格西該段錄音的原聲點播放！</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【本講導讀與研讀大綱】</h2>
+<h3>一、 本講宗旨提要</h3>
+<p class="reading-para">本講前半堂研析《善顯密意疏》第 110 頁中至第 111 頁下之兩大科判：「申五、明世間妨難之理」與「午二、明世名言亦無他生釋世妨難」；後半堂（32:43 起）則因學員於準備進入「巳三、明破他生之功德」前舉手請益第 108 頁「佛陀一剎那智如何同時遍知二諦」，格西遂傾注二十餘分鐘展開一場極為深刻透徹的法義思辨。在前半堂中，格西直指判定有無「世間妨難」的唯一核心標準在於「是否違背世間正量」：世間對他生毫無正量，故破他生絕無世難；反之，若不加勝義簡別，在名言中否定瓶被搶、否定田裡長苗（「若以世許除世義」），則直接違背世間名言正量而招致世難。接著依「午二」父殖生兒、手痛人癒之喻，闡明世間常人在「親因果」上連普通的異體感都不生起，故名言中亦無他生（然破除自性異體仍須待勝義正理），並引《顯句論》「唯此緣性許為世，非許四邊」確立名言緣起建立，同時解答學員關於「破自生不許一、破他生不許異」之語境拿捏。在後半堂專題問答中，格西以獨到的「六道魚缸之囿」與「全方位大圓鏡智」為喻，剖析凡夫受異熟與戲論框架侷限、唯佛以空性之劍破除一切框架而任運朗照萬象；面對學員追問「佛之智慧法身亦屬世俗諦，既無眾生能證，佛如何依他力自證智慧法身」，格西更精闢破除「眾生是錄音機、佛是播音器」之機械迷思，揭示佛智照見眾生實執顯現卻不染實執、如明鏡般全盤朗現法界一切所知的無上妙義。</p>
+<h3>二、 義理研讀綱要</h3>
+<ul class="meta-list">
+<li>1. <strong>判定「世間妨難」之唯一樞紐：是否違背世間正量（110 頁中）</strong>：</li>
+<ul class="nested-list">
+<li>許多人背誦「有世間妨難、無世間妨難」卻未觸及核心：關鍵全在「正量」。唯有違背了世間名言正量，才構成世間妨難；世間對「他生」既無現量亦無比量，故縱使世人隨順無明妄言有他生，亦不構成世間妨難。</li>
+</ul>
+<li>2. <strong>科判申五：明世間妨難之理──奪瓶（搶手機）與田苗之喻（110 頁中）</strong>：</li>
+<ul class="nested-list">
+<li>頌曰：「若以世許除世義，即說彼為世妨難。」</li>
+<li>譬如有人財物（瓶子或手機）被搶，旁人卻立量「瓶非是物，是所量故，如夢中瓶」；或農人說「我田上已生（田裡長出苗芽）」，旁人卻難云「芽無有生，是所知故，如夢中芽」。</li>
+<li>此處之「瓶存在、瓶是物、田裡長苗」皆為世間名言正量所通達成立，若在名言中直接否定，即是以世間共許破除世間共許，必然招致世間正量之妨難。反之，依聖人勝義見抉擇真實義，則全無世難。</li>
+</ul>
+<li>3. <strong>科判午二：明世名言亦無他生釋世妨難──殖種生兒、栽樹與手痛人癒之喻（110 頁末～111 頁中）</strong>：</li>
+<ul class="nested-list">
+<li>頌曰：「世間僅殖少種子，便謂此兒是我生，亦覺此樹是我栽，故世亦無從他生。」</li>
+<li>父親僅將不淨種子注入母胎（並非從自己腹中抓出一個成形男孩放入母腹），孩子長大後父親卻指著他說「這兒子是我生的」；種下樹種長成大樹後，亦說「這樹是我栽的」。如手痛痊癒可說「某人痛癒」。</li>
+<li>這證明世間人在「親因果」上根本不把種子與兒、樹執為「自相之他（異體）」，否則應如對待陌生人（他補特伽羅）般不可說是我生。</li>
+<li>重要辨析：世間名言中雖無他生，然世間名言量自身<strong>不能破除他生</strong>（破因果有自性異體必待觀真實義之勝義正理）。他宗所計他生是「有自性之他生」，而非單純「有體之他（他體）」──單純的他體（如瓶與柱）是世間名言量所能成立的，唯獨「自性他生」於名言中亦不成立。</li>
+</ul>
+<li>4. <strong>《釋論》與《顯句論》引證：世俗唯許「此緣性」而不許四邊生（111 頁下）</strong>：</li>
+<ul class="nested-list">
+<li>《顯句論》問答：若不許自、他、共、無因四邊生，世尊云何說「無明緣行」？答：「此是世俗，非真實義……唯此緣性許為世，非許四邊。」</li>
+<li>世俗名言中雖承許「依此緣有此法生（因生果）」，但絕不承許四邊生；故宣稱「應成派於世俗中不破他生」者，實未善解自宗。</li>
+</ul>
+<li>5. <strong>課堂問答一：破自生「不許一」與破他生「不許異」之親因果語境拿捏</strong>：</li>
+<ul class="nested-list">
+<li>學員提問：為何同一個「撒種長樹」的例子，破自生時用來證明世間不許種芽為一，此處又用來證明世間不許種芽為異？</li>
+<li>格西解答：當農人指著大樹說「這是我親手種的」、父親指著大兒子說「這是我懷胎十月生的」時，在該語境概念下，心裡將種與果視為連貫一體而毫無距離感（無異體感）；但若將父子兩人並排對比，或觀察種滅芽生，又知二者相異而非同一。</li>
+</ul>
+<li>6. <strong>課堂問答二（專題深探）：佛智如何同時遍知二諦？「魚缸之囿」與「全方位大圓鏡智」</strong>：</li>
+<ul class="nested-list">
+<li>學員於進入「巳三」前請益：佛陀根本智「不觸所作性法（完全不現瓶等世俗相）」而證法性，卻又在同一個智慧中如掌中庵摩羅果般現前遍知一切世俗法，二者如何相容？</li>
+<li><strong>魚缸之囿喻</strong>：人類、豬（視豬圈為天堂）、餓鬼（見陽光為寒冷）、中陰身，各有其受異熟業力侷限的封閉世界，猶如活在不同魚缸裡，彼此隔絕；十地以前雖斷諸多煩惱，魚缸框架仍未全破，唯有成佛時以空性之劍徹底擊碎一切魚缸框架！</li>
+<li><strong>全方位大圓鏡智喻</strong>：凡夫認識外境如同努力讀書認字，主動去抓取分別，既受框架侷限又會遺忘；佛陀遠離一切戲論後，心識化為「全方位的明鏡（大圓鏡智）」──不須主動造作分別，凡屬所知現象自然映現鏡中。</li>
+<li><strong>破除「錄音機與播音器」迷思</strong>：針對學員追問「佛之智慧法身亦是世俗諦，無眾生能證，佛如何依他力自證智慧法身」，格西闡明：(1) 在眾生分上，佛依他力照見眾生眼中的瓶子與「實執顯現」，故佛能完全了知眾生的錯亂顯現，卻不會令佛自己生起實執顯現與習氣種子；(2) 「依他力」絕非把眾生當錄音機、把佛當被動的播音器（眾生沒錄到的智慧法身佛就播不出），那不叫智慧！佛因修空性徹底突破框架，明鏡高懸，法界一切所知（包含佛自身的智慧法身）皆無所遁形、全盤朗現。</li>
+</ul>
+</ul>
+<h3>三、 重點法相辨析</h3>
+<ul class="meta-list">
+<li><strong>【若以世許除世義】</strong>：不加勝義簡別，直接在世俗名言層面否定世間名言正量所共許成立的事物（如否定瓶是財物、否定田裡生芽），此乃真正招致「世間妨難」之處。</li>
+<li><strong>【非但有體之他 vs 有自性之他】</strong>：世間名言量可以成立瓶與柱、父與子為「他體（有體之他）」；但實事師所計執的「他生」，是以「自性成立之異體（有自性之他）」為前提，此於勝義與世俗名言中皆不成立。</li>
+<li><strong>【唯此緣性（Idappaccayatā）】</strong>：《顯句論》揭示應成派世俗建立之核心──世俗中唯安立「依於此緣而有彼果生起」之緣起假名，徹底離於自、他、共、無因四邊生。</li>
+<li><strong>【不觸所作性法，唯現證自性】</strong>：引自第 108 頁《入中論釋》，謂諸佛見勝義之如所有智，絲毫不碰觸、不顯現有為所作性法（五蘊世俗相），唯獨現證諸法本性（空性）。</li>
+<li><strong>【依他力而證世俗 vs 大圓鏡智】</strong>：佛陀於自己根本智前雖不現起二取迷亂相，然觀待所化機與法界一切所知境，因徹底破除無明與所知障之「魚缸框架」，不須分別造作，如大圓鏡任運普現一切世俗法（含眾生之實執顯現及佛自身之智慧法身），且佛心絕不染著實執習氣。</li>
+</ul>
+<h3>四、 課後思考與研討問題</h3>
+<ol class="ordered-list"><li>為什麼格西強調判斷有無「世間妨難」的唯一標準就是「正量」？為什麼否定「瓶子被搶、田裡長苗」會遭遇世間妨難，而否定「他生」卻不會？</li><li>為什麼父親指著長大的兒子說「這是我生的」、農人指著大樹說「這是我種的」，能證明世間名言中也沒有「他生」？既然世間名言中無他生，為何世間名言量自己卻不能破除他生？</li><li>針對學員提問「同一個撒種長樹的例子，為何破自生時說世間不許因果為一，破他生時又說世間不許因果為異」，格西如何從日常語言的心理語境來解析？</li><li>格西如何用「不同魚缸裡的魚」與「打破魚缸化為全方位明鏡（大圓鏡智）」，來解釋佛陀為何能在同一剎那智中既「不見一切戲論」又「遍知一切世俗差別」？</li><li>學員提問：「佛的智慧法身也是世俗諦，若佛證世俗皆依他力（依眾生力），既無眾生能無誤證得佛的智慧法身，佛如何證得自己的智慧法身？」格西如何破除「錄音機與播音器」的錯誤想像來回答這個問題？</li></ol>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>1. 承前啟後：世間有無妨難之唯一判準──是否具備「正量」</h3>
+<p class="reading-para clickable-para" onclick="playPara(1, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1, this)">▶ 00:01</button> 好，我們繼續接著上一堂課講。上面在討論「破他生無世間妨難」時，反覆強調的核心是什麼？就是世間人對真實義與他生「不是正量、也不可以是正量」！如果說世間人對他生是正量，那就好比說世間人對夢中境也是正量一樣荒謬。接下來底本要進一步說明「何謂世間妨難」──到底在什麼情況下才真正構成世間妨難？這個問題如果不徹底弄清楚，讀這段文就會不知所云。很多人學中觀時，嘴上都很會講「這樣講會有世間妨難、那樣講沒有世間妨難」，聽起來好像都懂，但其實只是順著字面滑過去，並沒有抓到真正的判準。</p>
+<p class="reading-para clickable-para" onclick="playPara(85, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(85, this)">▶ 01:25</button> 判定有沒有世間妨難的唯一標準，點破了其實就是兩個字──<strong>「正量」</strong>！如果世間真的有通達「他生」的正量，那中觀宗說無他生就徹底完了；但只要世間對他生沒有正量，那不管世間人怎麼吵、怎麼批評你「破壞世間規矩」，全都不算數！大家想一想：什麼叫做「違背世間」？一定要違背了<strong>世間的正量</strong>，才叫做違背世間；如果不是正量，哪怕全街頭的醉漢都異口同聲反對你，那些錯誤的標準也完全不能算數！</p>
+<h3>2. 科判申五：明世間妨難之理──「若以世許除世義」與奪瓶、田苗之喻</h3>
+<p class="reading-para clickable-para" onclick="playPara(161, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(161, this)">▶ 02:40</button> 請看底本第 110 頁第 7 行，進入科判：<strong>申五、明世間妨難之理</strong>。論敵問：「<strong>若爾，何者有世間妨難？</strong>」既然照你中觀宗這樣講，破他生沒有世間妨難，那到底說什麼話才會被世間的事實給擊倒、才會構成世間妨難呢？頌曰：「<strong>若以世許除世義，即說彼為世妨難。</strong>」我們看疏文怎麼解釋：「<strong>若世間共許之義，以世間共許破除，即說彼有世間妨難。譬如有云：我物被劫。餘人問曰：為是何物？告曰是瓶。他若難曰：瓶非是物，是所量故，如夢中瓶。此等能破境，乃有世間妨難。若時依聖人勝義見，以善巧勝義之丈夫為定量，抉擇真實義，爾時全無世間妨難。</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(232, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(232, this)">▶ 03:52</button> 好比有人報案說：「我的東西被搶了！」別人問他：「你被搶了什麼東西？」他說：「我的瓶子（或者用現代話說：我的手機）被搶了！」結果旁邊有個人擺出龍樹菩薩的架勢跟他說：「手機為有法，不是財物，是所量故，如夢中的瓶子！」如果在世俗名言中講這種話，那就真的會遇到世間妨難了！反之，如果是依著聖人的勝義見、以善巧勝義的聖者作為定量來抉擇真實義，在那個時候就完全沒有世間妨難。</p>
+<p class="reading-para clickable-para" onclick="playPara(349, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(349, this)">▶ 05:49</button> 我們繼續往下讀疏文：「<strong>論曰：『智者當以此理，觀諸餘事。』現在許為中觀之正理者，如云：『我非瓶主，天授非奪者。』又云：『若云我田上已生。問曰：何生。若謂芽生，當難云：芽無有生，是所知故。』又云：『如夢中人及芽。』此即顯彼皆有世間妨難也。</strong>」智者應當用這個道理以此類推：當時有些自稱學中觀的人，在名言中亂立論式，例如說「我不是瓶子的主人，天授也不是搶奪瓶子的人」；或者農夫說「我田上已生」──注意這裡的中文，「我田上已生」是指「我的農田裡有東西長出來了」，別人問「長出了什麼？」回答說「長出了苗芽」，那人就駁斥說：「苗芽為有法，沒有生，是所知故，如夢中人及夢中芽！」（格西此處幽默提醒大家注意中文裡「生」字的用法：像「她生了」是指生孩子，「她生病了」不能隨便簡稱「她病了／她生了」，讀古譯文句時要把「我田上已生」的字面意思看準。）</p>
+<p class="reading-para clickable-para" onclick="playPara(545, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(545, this)">▶ 09:05</button> 為什麼說「瓶子不是財物、天授沒有搶瓶子、田裡沒有長苗」會遭到世間妨難呢？道理非常簡單：在沒有討論空性的世俗名言層面，請問世間有沒有通達「瓶子存在」的正量？有！有沒有通達「瓶子是我的財物」的正量？有！有沒有通達「強盜搶走瓶子」的正量？也有！既然世間名言對於「有瓶子、瓶子是財物、瓶子被搶」全都具有正量，你在不加勝義簡別的情況下，直接說「沒有瓶子、瓶子不是物」，這種言論就會正面撞上世間的正量，被世間的正量所難倒！同樣地，「世間有農田、農田裡長出苗芽」，這也全都是世間名言正量所能通達的事實；只要世間正量已經通達了苗芽的存在，任何在名言中宣稱「既沒有田、也沒有苗芽生長」的言論，就一定會遭到世間正量的妨難。把「有無世間正量」這個關鍵想通了，這段文就毫無困難。</p>
+<h3>3. 科判午二：明世名言亦無他生釋世妨難──殖種生兒與栽樹之喻</h3>
+<p class="reading-para clickable-para" onclick="playPara(692, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(692, this)">▶ 11:32</button> 接著看第 110 頁倒數第 2 行，進入大科判：<strong>午二、明世名言亦無他生釋世妨難</strong>。疏文說：「<strong>如是已依世間許有他生釋世間妨難，今當更說世間常見亦無他生，故住世間見破除他生亦無世間妨難。</strong>」大家看這兩句話的轉折非常精妙：如果沒讀懂，會覺得怎麼一會兒說「世間許有他生」，一會兒又說「世間亦無他生」？其實前面的段落是退一步說：就算因為宗派分別我執的影響，世間有一些人像醉漢說醉話一樣宣稱「有他生」，但因為那些醉話都不是正量，所以中觀宗破他生也不會碰到困難；而現在這一段則更進一步指出：其實連那些醉話都不用管，在真正的世間常態見解（世間常見）當中，本來就沒有「他生」這個概念！因此，即使站在世間見的角度來破除他生，也同樣沒有任何世間妨難。</p>
+<p class="reading-para clickable-para" onclick="playPara(827, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(827, this)">▶ 13:47</button> 請看第 111 頁第 1 行頌文：「<strong>世間僅殖少種子，便謂此兒是我生，亦覺此樹是我栽，故世亦無從他生。</strong>」疏文解釋：「<strong>如世間人指一男云：此兒是我生。然此男人，非將彼男從自身出納入母腹。是將此兒身之不淨種子，注入母胎也。由父僅注兒身之因，便云生兒。故世人不執種子與兒為自相之他，此是世間共知之事。故執種子與兒、麥種與芽等為從他生，世間亦無也。若執為自性之他者，應如他補特伽羅，不可說此兒是我所生。如是僅殖樹種，種生樹後，便覺此樹是我所栽。是故世間亦無他生，如上廣說。</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(902, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(902, this)">▶ 15:02</button> 世間做父親的人，只不過是播下了一點點種子，等孩子長大後，就會指著這個男孩說：「這兒子是我生的！」種樹的人只不過是埋下一顆小小的樹種，長成大樹後，也會覺得：「這棵樹是我栽種的！」但事實上，這位父親並不是從自己肚子裡抓出一個長大成形的男孩放進母親腹中，他只是把構成兒身之因的「不淨種子」注入母胎而已。正因為父親只是注入了種子之因，卻直接說「我生了這個兒子」，這就證明世間人在概念裡，根本不會把「兒子的種子」跟「兒子」、或者「樹的種子」跟「大樹」執著為彼此相異的他體（自相之他）！假若世間人把種子與兒子執為「自性之他」，那就應該像看待街上其他毫不相干的陌生人（他補特伽羅）一樣，絕對不可能指著他說「這兒子是我生的」！</p>
+<h3>4. 手痛人癒之喻與「名言雖無他生然世間常見不能破他生」</h3>
+<p class="reading-para clickable-para" onclick="playPara(970, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(970, this)">▶ 16:10</button> 疏文接著說：「<strong>所殖二種雖非彼樹、彼兒，然由殖彼二種乃生兒、樹，故指彼二可云是我所生。如痛愈之手，雖非補特伽羅，然手痛愈可說彼補特伽羅痛愈也。</strong>」當初所播下的兩種種子，雖然並不是後來那棵大樹或那個兒子本身，但因為是由播下那兩種種子才生出兒子與大樹，所以在世間名言中，指著兒子與大樹就可以說「這是我生的、我種的」；這就好比疼痛痊癒的「手」雖然不是補特伽羅（人），但當手痛痊癒時，世間人就會說「某某人病痛好了」。總而言之，世間之所以沒有他生，最根本的原因就是世間人在這類親因果之間，連普通的「他體（彼此相異）」想法都不會生起（不像看到風、牛、馬時，心裡一現起就是截然不同的異體）；既然連普通的異體想法都沒有，自然就更不會有「自性有的他生」之執了。</p>
+<p class="reading-para clickable-para" onclick="playPara(1065, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1065, this)">▶ 17:45</button> 接下來這段疏文極為重要，請仔細看：「<strong>如是世間名言中雖無他生，然世間常見不能破除他生，以破因果有自性異體，必待觀真實義之正理故。他宗所計他生，是有自性之他生，非但有體之他，以唯有此非是世間所不成故。言『故世亦無從他生』者，非謂世間常人，於種芽等親因果法，不執為有自性之他，當知是說於名言中亦無他生。</strong>」這裡講了第一層深意：「世間名言中沒有他生」跟「世間名言量能不能破除他生」是兩回事！雖然世間名言中沒有他生（名言量不能通達成立他生），但世間的名言量自己並沒有能力去「破除」他生；因為要破除「因果有自性異體」，必須依賴觀察真實義的勝義正理（勝義量）才能破除。</p>
+<p class="reading-para clickable-para" onclick="playPara(1122, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1122, this)">▶ 18:42</button> 接著看第二層深意：下部他宗所計執的他生，是「有自性之他生」，而不是單純指二法體性有別的「非但有體之他（單純的他體）」。為什麼疏文說「非但有體之他，以唯有此非是世間所不成故」？這句雙重否定的意思是：如果是單純的「他體（有體之他）」，這並不是世間名言所不能成立的──換句話說，「他體」在世間名言中是可以成立的，唯獨「自性他生」在世間名言中無法成立！而在種子與苗芽等「親因果法」上，世間常人連異體之他都不執著，藉此更彰顯名言中亦無他生。</p>
+<h3>5. 《釋論》與《顯句論》引證：世俗唯許「此緣性」而不許四邊生</h3>
+<p class="reading-para clickable-para" onclick="playPara(1216, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1216, this)">▶ 20:16</button> 疏文接著引月稱論師自己的兩部著作來印證「名言中亦無他生」：「<strong>如《釋論》破共生時云：『如上已說自生、他生於世間世俗及勝義中皆不應理。如是說是共生，即以前理亦定非有。』此說名言中亦無他生。《顯句論》中問曰：『若謂諸法自生、他生、共生、無因生皆非有者，云何世尊說無明緣行耶？』答曰：『此是世俗，非真實義。』此說無明生行等是約世俗，非於勝義。問曰：『何為世俗建立？』答曰：『唯此緣性許為世，非許四邊。』此說雖世俗中許依此緣有此法生，然不許四邊生，極為明顯。故有說此宗世俗中不破他生，是未善解此宗也。</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(1284, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1284, this)">▶ 21:24</button> 《入中論釋》明白說自生、他生在「世間世俗及勝義中」都不應理；《顯句論》更設問：如果自、他、共、無因四邊生都沒有，佛陀為什麼說「無明緣行」？月稱論師回答：無明生行是世俗建立，而在世俗建立中，只承許「唯此緣性（依此因緣而有彼果生起）」，絕不承許四邊生！如果承許四邊生，就會走向勝義生。所以總結一句話：<strong>中觀應成派在世俗名言中有「生（依此緣有此法生）」，但沒有「四邊生」！</strong>因此，有些學者聲稱「中觀應成派在世俗中不破他生」，這完全是沒有讀懂自宗意趣的錯誤說法。</p>
+<h3>6. 課堂深度問答：破自生「不許一」與破他生「不許異」之世間心理拿捏</h3>
+<p class="reading-para clickable-para" onclick="playPara(1372, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1372, this)">▶ 22:52</button> 此時課堂上有學員提問：「前面在破自生的時候，論師說種子滅時有果可見，故世間常人不許種芽體性為一；現在破他生的時候，卻又舉同樣『撒種長成大樹』的例子，說世間人不會把因果看成別別異體。為什麼同一個例子，前面說世間不許同體（一），這裡又說世間不許異體（他）？另外，若世間在親因果上不執為異，為何又說他體是世間所能成立的？」格西回應：確實，在「親因果法」的範圍裡，世間人既不會把因跟果執為同體為一，但在撒種長樹的當下，也確實沒有把二者割裂開來的距離感。</p>
+<p class="reading-para clickable-para" onclick="playPara(1619, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1619, this)">▶ 26:59</button> 我們仔細體會一下世間人說話時的心態：當一個人指著眼前的大樹說「這棵樹就是我親手種的！」種的時候明明只是種下一顆小種子，但他現在指著大樹說「這是我種的」，在這個概念當下，他心裡是把兩者連成一體看的，完全沒有「這是兩件別別相異之事」的想法！同樣地，母親指著長得高大的兒子說「這是我懷胎十月生的」，在這個概念中也不會把當年懷的胎與眼前的兒子當成相異的兩個人。可是換一個場景：當兒子跟爸爸兩個人並排站在那邊，大家一看就會覺得「他們父子倆雖然是因果，但是是相異的兩個人」！</p>
+<p class="reading-para clickable-para" onclick="playPara(1806, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1806, this)">▶ 30:06</button> 所以，世間心識對於「一」與「異」的拿捏，全看當下的概念與觀察角度，並不是像白紙黑字那樣死板固定。另一位學員接著追問：那論師在這裡舉種樹生兒的目的，究竟是要破什麼？格西點明：實事師總以為「世間人在日常觀察時也有具有自性的他生」，月稱論師為了破除這個藉口，才舉出種樹、生兒的日常語言，證明世間人在親因果上連異體感都不現起，哪裡會有實事師所幻想的「自性他生」？</p>
+<h3>7. 學員請益「佛智如何遍知二諦」：不觸所作性法與同智雙證二諦</h3>
+<p class="reading-para clickable-para" onclick="playPara(1963, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1963, this)">▶ 32:43</button> 正當讀誦者準備往下唸第 111 頁倒數第 2 行的「巳三、明破他生之功德」時，有學員舉手請益：「格西，在進入新科判前，可不可以再多說明一下前面（第 108 頁）所談到『佛陀的遍智如何同時現證二諦』的道理？」格西遂暫緩新科判（將「巳三」留待下一堂課第 36A 講），就此大問題展開深入開示：前面第 108 頁引《入中論釋》說「不觸所作性法，唯現證自性，由覺真實故曰佛陀」──意思是說，通達瓶子空性的根本智，在正現證空性時，完全不碰觸、完全一點都不會顯現瓶子等「所作性法（安立法）」，是以徹底遠離一切戲論的方式來通達空性；可是另一方面，這個智慧又是佛陀的遍智，它不僅要了解瓶子，而且必須像看手掌中的庵摩羅果一樣現前通達瓶子！</p>
+<p class="reading-para clickable-para" onclick="playPara(2079, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2079, this)">▶ 34:39</button> 為什麼這件事讓我們覺得很難想像、心裡有點彆扭呢？因為從初地到十地的菩薩，在入根本定（根本智）時，專注於勝義空性，一切世俗法就全部隱沒不現；等到出定（後得智）時，世俗法全部顯現，那種專注空性的根本定相就退縮了──入定不見世俗、出定現起世俗，這對我們來說覺得非常正常好懂。可是到了成佛的時候，佛陀入空性定入到了極點（無有出定），世俗法卻同時統統現前通達！而且是<strong>同一個智慧</strong>，既現證空性（不見一切世俗二取相），同時又現前證得瓶子等一切世俗法！我們心裡要怎樣才能打掉那種「既完全不見瓶子、又現前看清瓶子」的矛盾違和感呢？</p>
+<h3>8. 「魚缸之囿」之喻：六道有情業感世界的侷限與空性破框</h3>
+<p class="reading-para clickable-para" onclick="playPara(2161, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2161, this)">▶ 36:01</button> 格西分享了自己極為深刻的一個體會：我們每個人雖然各有不同的想法，但同為「人類」，我們的看法與世界基本上是差不多的；可是如果換成一頭「豬」呢？我們常笑說「豬圈是豬的天堂」，豬也有屬於牠自己的「食衣住行」與悲歡離合，但豬的那個世界跟我們人類的想像是徹底切開、完全不同的兩個世界！</p>
+<p class="reading-para clickable-para" onclick="playPara(2363, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2363, this)">▶ 39:23</button> 再看我們自己：現在活著時，我們有認為理所當然的人類食衣住行與愛憎追求；可是當我們往生、一進入「中陰身」的時候，現在這整套真實的世界瞬間就如夢般消失了，眼前出現的是完全不同的另一個世界！同樣地，地獄有地獄眾生的世界、餓鬼有餓鬼的世界（我們人類用中國傳統的判官、生死簿、鐵板燒煮去想像地獄，那只是用人類的方式去描繪，地獄眾生實際經歷的苦楚世界我們根本無法想像）。每一類有情，當他投生為那一類有情時，就被緊緊侷限在自己的那個環境裡，只要還沒離開這個領域，就完全看不到、也體會不到另一個領域的世界。</p>
+<p class="reading-para clickable-para" onclick="playPara(2492, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2492, this)">▶ 41:32</button> 這就是「世俗的各種差別」：同樣一道陽光，對人類來說是溫暖的，對鬼類來說卻是寒冷的；他看到的是真的，我們看到的也是真的，各自都有名言量。這一切凡夫有情，就好比活在<strong>大大小小不同的魚缸</strong>裡的魚：你被丟進這個魚缸，就永遠跳不出這個魚缸，也看不到別的魚缸裡發生的事；等你下輩子被丟進另一個魚缸，又看不到現在這個魚缸了。可是「佛陀」呢？佛陀必須把所有魚缸裡的一切全部看清楚！豬的食衣住行與苦樂，佛陀看得比豬還要清楚；人的食衣住行，佛陀看得比人還要清楚，因為那些在世俗名言中都是真實存在的現象。為什麼我們辦不到，而佛陀辦得到？因為我們被自己的異熟身障與實執戲論給侷限在魚缸裡了！菩薩從初地到十地，透過無間道、解脫道不斷修習空性、斷除煩惱，但直到十地最後心之前，那個微細的「魚缸之囿（二現戲論之框架）」始終還沒有完全打破；直到成佛的那一天，<strong>用空性之劍把所有「魚缸的框架」徹底打破</strong>，再也沒有任何異熟與戲論的侷限，一切所知就全都通透無礙了！</p>
+<h3>9. 全方位大圓鏡智之喻：依他力而證世俗與超越凡夫識認模式</h3>
+<p class="reading-para clickable-para" onclick="playPara(2694, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2694, this)">▶ 44:54</button> 換句我們聽得懂的話來說：當佛陀徹底遠離一切戲論、把所有框架都打破的時候，佛陀的智慧就變成了一面<strong>「全方位的鏡子（大圓鏡智）」</strong>！我們凡夫了解外境，就像努力讀書認字一樣──我努力讀了多少英文、多少藏文，就認得多少字，等到年紀大了得失憶症，又忘掉了多少；凡夫的心識總是一邊受框架侷限、一邊靠主動去「認出」外境。</p>
+<p class="reading-para clickable-para" onclick="playPara(2791, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2791, this)">▶ 46:31</button> 但佛陀的大圓鏡智完全不是這樣！鏡子本身不需要主動去「認」誰，而是因為遠離了一切戲論障礙，讓自己變成了一面全方位的明鏡──只要外在有任何所知、有任何一種現象，它就自然而然直接出現在這面鏡子裡！用這個「全方位明鏡」的概念，就能解開經教中許多看似奇特的說法：為什麼經論一方面說佛遍知一切，另一方面又說「佛陀以自力現證空性、以他力現證世俗（甚至說佛不自證世俗、不起有為造作）」？就像菩薩在十地以前一直在努力轉動六度萬行的金輪，等到成佛之後，因為先前的悲願力與空性圓滿，輪子即使沒有人再去刻意用力推轉，也會自然而然恆常運轉！</p>
+<h3>10. 破除「錄音機與播音器」之迷思：佛智照見實執顯現與自證智慧法身</h3>
+<p class="reading-para clickable-para" onclick="playPara(2946, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2946, this)">▶ 49:06</button> 此時一位學員提出了極為深入的法義詰問：「如果依格西剛才所說，佛陀了解世俗諦都是『依他力（依眾生之力）而證』，那麼佛陀的『智慧法身』也是世俗諦，佛陀自己證得自己的智慧法身也必須由他力而證嗎？問題是除了佛以外，沒有任何眾生能夠無誤地證得佛的智慧法身，其他的佛也跟這尊佛一樣，不能把責任推給別的佛；那佛陀總不能有誤地證得自己的智慧法身吧？請問誰能作為他力讓佛證得智慧法身呢？」</p>
+<p class="reading-para clickable-para" onclick="playPara(3073, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3073, this)">▶ 51:13</button> 格西讚許這個問題極好，並分兩層給予精闢解答：第一、先看為什麼祖師要說佛「依他力（觀待眾生）而知世俗」？舉例來說，當你（凡夫）在看瓶子的時候，你眼裡不僅會顯現瓶子，同時還會伴隨無明的「實執顯現（自相有之錯亂二現）」，甚至因為視力不好還會看成歪曲不清的樣子。因為你有這樣的顯現，佛陀「依你的力」也清清楚楚知道你眼中的瓶子與你所執著的「實執顯現」──就像錄音機錄進了聲音與電路雜音，播放時佛陀清楚知道這裡有雜音，但<strong>這絕不會導致佛陀自己有實執顯現與實執的習氣種子</strong>！假若說佛陀是「以自力」去分別顯現世俗，那就很難避免佛陀自己也產生實執二現的過失；說「依他力而現」，就能完美解釋為何佛陀遍知眾生的一切錯亂實執顯現，而佛陀自心卻毫無實執與二現染污！</p>
+<p class="reading-para clickable-para" onclick="playPara(3148, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3148, this)">▶ 52:28</button> 第二、再直接回答「佛陀如何無誤現證自身的智慧法身」：你剛才之所以覺得「依他力就無法證得智慧法身」，是因為你把「依他力」想像成機械式的「眾生是錄音機、佛陀是播音器」──以為一定要眾生先去認識了、錄下來了，佛陀才能接過去播放出來！如果是那樣，連凡夫認識一個普通瓶子時都夾雜了一大堆模糊不清的錯誤，佛陀怎麼可能比凡夫了解得更清楚？而且對於沒人認識的周遭一切微細所知、乃至於佛陀自身的智慧法身，如果沒有眾生先錄下來，難道佛陀就播不出來了嗎？<strong>如果是別人懂什麼你才播得出什麼，那根本不叫做智慧！</strong>所以我剛才最核心的比喻就是：眾生之所以有所不知，是因為被框在各自的框架（魚缸）裡；而修持空性到成佛時，真正就是<strong>徹底突破了那個框架，使智慧本身化為一面高懸的全方位明鏡</strong>！既然是一面毫無障礙的全方位明鏡掛在那裡，只要是法界中存在的現象（當然包含佛陀自身的智慧法身與一切微細所知），不需要等別人先去錄音，它在鏡子面前怎麼動都跑不掉，全都會比最高畫素的錄影機還要清晰地直接朗現於鏡中！把「突破框架化為明鏡」與「觀待他力不染實執」結合起來思惟，這個千古難題就能迎刃而解。好，感謝大家，今天這堂課就到這裡，謝謝大家！</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170325-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p110(35).MP3">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

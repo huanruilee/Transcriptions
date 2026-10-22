@@ -10,12 +10,14 @@ export interface TranscriptExportMeta {
 export interface TranscriptExportSentence {
   start?: number;
   start_time?: number;
+  speaker?: string | null;
   text?: string;
 }
 
 export interface TranscriptExportParagraph {
   heading?: string | null;
   sentences?: TranscriptExportSentence[];
+  verbatimSentences?: TranscriptExportSentence[];
 }
 
 export interface TranscriptExportOverview {
@@ -64,7 +66,11 @@ export function formatTranscriptText(
 
   let sentenceCount = 0;
   for (const paragraph of paragraphs || []) {
-    const sentences = (paragraph.sentences || []).filter((sentence) => sentence.text?.trim());
+    const sourceSentences =
+      Array.isArray(paragraph.verbatimSentences) && paragraph.verbatimSentences.length > 0
+        ? paragraph.verbatimSentences
+        : paragraph.sentences || [];
+    const sentences = sourceSentences.filter((sentence) => sentence.text?.trim());
     if (sentences.length === 0) continue;
 
     if (paragraph.heading?.trim()) {
@@ -73,7 +79,8 @@ export function formatTranscriptText(
 
     for (const sentence of sentences) {
       const start = sentence.start_time ?? sentence.start ?? 0;
-      lines.push(`[${formatTimestamp(start)}] ${sentence.text!.trim()}`);
+      const speakerPrefix = sentence.speaker?.trim() ? `【${sentence.speaker.trim()}】` : '';
+      lines.push(`[${formatTimestamp(start)}] ${speakerPrefix}${sentence.text!.trim()}`);
       sentenceCount += 1;
     }
     lines.push('');
