@@ -32,8 +32,12 @@ jobs:
 
       - name: Install acoustic verification tools
         run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends -y ffmpeg
+          sources_file="${APT_SOURCES_FILE:-/etc/apt/sources.list.d/ubuntu.sources}"
+          if [ -f "$sources_file" ]; then
+            sudo perl -pi -e 's{https?://azure\.archive\.ubuntu\.com/ubuntu}{https://archive.ubuntu.com/ubuntu}g' "$sources_file"
+          fi
+          sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
+          sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 install --no-install-recommends -y ffmpeg
           ffmpeg -version
           ffprobe -version
 
