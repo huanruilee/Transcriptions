@@ -181,7 +181,9 @@ for (const manifestPath of promotionManifests) {
   }
   if (!promotedPath.startsWith(`${ROOT}${path.sep}`) || !existsSync(promotedPath)
     || (!amended && sha256(readFileSync(promotedPath)) !== manifest.promotedSourceFileDigest)
-    || manifest.promotedSourceFileDigest !== manifest.candidateDigest) {
+    || (!amended && manifest.promotedSourceFileDigest !== manifest.candidateDigest)
+    || (amended && manifest.promotedSourceFileDigest !== manifest.candidateDigest
+      && manifest.promotedSourceFileDigest !== sha256(readFileSync(promotedPath)))) {
     failures.push(`${path.relative(ROOT, manifestPath)} promoted source binding mismatch`);
   }
 }

@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { validateProofreadingCandidate } from './lib/transcriptProofreadingPipeline.js';
 import { validateContentOverview, finalizeOverviewReview } from './content_overview_pipeline.mjs';
+import { validateOverviewAmendment } from './lib/proofreadingOverviewAmendment.js';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = process.env.TRANSCRIPT_PROOFREADING_ROOT
+  ? path.resolve(process.env.TRANSCRIPT_PROOFREADING_ROOT)
+  : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const runId = process.argv[2] || 'e153a10f-c521-44b3-b300-82cd349bb207';
 if (!/^[0-9a-f-]{36}$/u.test(runId)) throw new Error('invalid runId');
 const runRoot = path.join(
@@ -64,8 +67,20 @@ const validation = validateProofreadingCandidate({
 if (!validation.valid || JSON.stringify(validation) !== JSON.stringify(complete.value.validation)) {
   throw new Error(`candidate validation mismatch: ${JSON.stringify(validation.errors)}`);
 }
-const overview = candidate.value.contentOverview;
-const overviewValidation = validateContentOverview(overview, candidate.value, {
+const amendmentPath = path.join(runRoot, 'session_08.overview-amendment.json');
+let publication = candidate.value;
+let publicationBytes = candidate.bytes;
+if (existsSync(amendmentPath)) {
+  const amendment = readBound(amendmentPath).value;
+  publication = { ...candidate.value, contentOverview: amendment.overview };
+  publicationBytes = Buffer.from(`${JSON.stringify(publication, null, 2)}\n`);
+  const errors = validateOverviewAmendment({
+    candidate: candidate.bytes, published: publicationBytes, manifest: { runId }, amendment,
+  });
+  if (errors.length) throw new Error(`invalid overview amendment: ${errors.join(', ')}`);
+}
+const overview = publication.contentOverview;
+const overviewValidation = validateContentOverview(overview, publication, {
   sourceTranscriptId: 'si-nian-zhu/session_08',
 });
 if (overviewValidation.errors.length || finalizeOverviewReview(overview, overview?.review).status !== 'ai-reviewed') {
@@ -73,9 +88,9 @@ if (overviewValidation.errors.length || finalizeOverviewReview(overview, overvie
 }
 
 writeAtomic(paths.preSource, source.bytes);
-writeAtomic(sourcePath, candidate.bytes);
+writeAtomic(sourcePath, publicationBytes);
 const promotedBytes = readFileSync(sourcePath);
-if (sha256(promotedBytes) !== candidate.digest) throw new Error('promotion write verification failed');
+if (sha256(promotedBytes) !== sha256(publicationBytes)) throw new Error('promotion write verification failed');
 const manifest = {
   schema: 'transcript-proofreading-promotion/v1',
   runId,
