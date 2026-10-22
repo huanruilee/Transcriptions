@@ -166,6 +166,16 @@ for (const manifestPath of promotionManifests) {
     if (review.runId !== manifest.runId || review.outcome !== 'PASS') {
       failures.push(`${path.relative(ROOT, manifestPath)} independent review is not PASS`);
     }
+    for (const [name, field] of Object.entries({
+      candidate: 'candidateDigest', ledger: 'ledgerDigest',
+      reviewQueue: 'reviewQueueDigest', completion: 'completionDigest',
+    })) {
+      const artifactPath = path.join(directory, records[field]);
+      if (!existsSync(artifactPath)
+        || review.artifactDigests?.[name] !== sha256(readFileSync(artifactPath))) {
+        failures.push(`${path.relative(ROOT, manifestPath)} independent review artifact digest mismatch: ${name}`);
+      }
+    }
   }
   const promotedPath = path.resolve(ROOT, manifest.promotedPath || '');
   const amendmentPath = path.join(directory, 'session_08.overview-amendment.json');

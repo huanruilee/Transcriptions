@@ -231,6 +231,27 @@ test('candidate validation rejects newly copied content from the middle of anoth
     .some((error) => error.code === 'CROSS_SENTENCE_CONTENT_MOVE'));
 });
 
+test('candidate validation rejects copying across neighboring paragraph boundaries in both directions', () => {
+  for (const offset of [-2, -1, 1, 2]) {
+    const source = clone(SOURCE);
+    source.paragraphs = Array.from({ length: 5 }, (_, index) => ({ sentences: [{
+      id: `boundary-${index}`, start: index * 3, end: index * 3 + 2,
+      text: index === 2 ? '我們先說學習的態度。' : '甲乙丙丁中段搬移文字戊己庚辛。',
+    }] }));
+    const candidate = clone(source);
+    candidate.paragraphs[2].sentences[0].text = '我們先說學習的態度，中段搬移文字。';
+    for (let index = 0; index < 5; index++) {
+      if (index !== 2 && index !== 2 + offset) source.paragraphs[index].sentences[0].text = candidate.paragraphs[index].sentences[0].text = '普通的其他句子。';
+    }
+    const ledger = buildProofreadingLedger({ source, candidate, model: {}, proposals: [{
+      sentenceId: 'boundary-2', changeClass: 'semantic', reason: '測試邊界',
+      evidence: ['fixture'], confidence: 0.9, reviewRequired: true,
+    }] });
+    assert.ok(validateProofreadingCandidate({ source, candidate, ledger }).errors
+      .some((error) => error.code === 'CROSS_SENTENCE_CONTENT_MOVE'), `offset ${offset}`);
+  }
+});
+
 test('candidate validation does not call a one-character term correction a cross-sentence move', () => {
   const source = clone(SOURCE);
   source.paragraphs[0].sentences[0].text = '接著說十二緣氣。';

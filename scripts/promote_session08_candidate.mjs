@@ -56,6 +56,11 @@ if (complete.value.artifactDigests?.candidate !== candidate.digest
 if (review.value.runId !== runId || review.value.outcome !== 'PASS') {
   throw new Error('independent PASS is required');
 }
+for (const [name, artifact] of Object.entries({ candidate, ledger, reviewQueue: queue, completion: complete })) {
+  if (review.value.artifactDigests?.[name] !== artifact.digest) {
+    throw new Error(`independent review artifact digest mismatch: ${name}`);
+  }
+}
 if (source.digest !== complete.value.sourceFileDigest) {
   throw new Error('current source no longer matches the reviewed pre-promotion source');
 }

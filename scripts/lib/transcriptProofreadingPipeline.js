@@ -1335,7 +1335,6 @@ export function validateProofreadingCandidate({ source, candidate, ledger }) {
       otherIndex += 1) {
       const other = sourceSentences[otherIndex];
       if (other.key === sourceSentence.key) continue;
-      if (other.paragraphIndex !== sourceSentence.paragraphIndex) continue;
       const neighborLexical = lexicalText(other.text);
       if (neighborLexical.length < 4) continue;
       if (addedRuns.some((run) => neighborLexical.includes(run))) {
