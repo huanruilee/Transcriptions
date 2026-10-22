@@ -2429,10 +2429,17 @@ if (typeof window !== 'undefined') {
   font-size: 0.85rem;
   color: var(--primary-color);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   margin-bottom: 16px;
   backdrop-filter: blur(4px);
+}
+
+.chain-crumb {
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .session-article-header {
