@@ -41,28 +41,4 @@ test('Pipeline V2: T1 learned_corrections includes 36A/36B verified homophones',
   }
 });
 
-test('Pipeline V2: T2/T3/T4 batch_convert_all.py contracts', () => {
-  const p = path.join(ROOT, 'scripts/batch_convert_all.py');
-  const content = readFileSync(p, 'utf8');
-
-  // T2: Dynamic prompt integration with fallback
-  assert.match(content, /build_whisper_prompt/);
-  assert.match(content, /build_source_context/);
-
-  // T3: Dynamic split replacing hard 28 chars
-  assert.match(content, /def should_split/);
-  assert.doesNotMatch(content, /len\(combined_text\) >= 28/);
-
-  // T4: Retry mechanism & dynamic tokens
-  assert.match(content, /def proofread_with_retry/);
-  assert.match(content, /def dynamic_max_tokens/);
-  assert.doesNotMatch(content, /# Fallback to raw batch/);
-});
-
-test('Pipeline V2: T5 build_verbatim_track.py exists and handles 36A protection', () => {
-  const scriptPath = path.join(ROOT, 'scripts/build_verbatim_track.py');
-  assert.ok(existsSync(scriptPath));
-  const content = readFileSync(scriptPath, 'utf8');
-  assert.match(content, /build_verbatim_payload/);
-  assert.match(content, /36A.*已發佈黃金樣本/);
-});
+// T2–T5 executable behavior is covered by pipelineBehavior.test.js.

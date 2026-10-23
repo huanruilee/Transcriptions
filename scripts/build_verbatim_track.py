@@ -163,7 +163,11 @@ def main():
     out_path = Path(args.out) if args.out else (VERBATIM_DIR / f"verbatim_{sid}.json")
 
     # 嚴格防護：驗收標準第 4 條，不得覆寫 36A/36B 已發佈黃金樣本
-    if sid in ("36A", "36B") and not args.out and not args.dry_run:
+    protected_outputs = {
+        (VERBATIM_DIR / f"verbatim_{protected_sid}.json").resolve()
+        for protected_sid in ("36A", "36B")
+    }
+    if out_path.resolve() in protected_outputs and not args.dry_run:
         print("🛑 嚴格保護：36A/36B 為已發佈黃金樣本，不得直接覆寫！請指定 --out tmp/pipeline_v2/...")
         sys.exit(2)
 
