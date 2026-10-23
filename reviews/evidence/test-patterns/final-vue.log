@@ -6,7 +6,7 @@ Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
 
  RUN  v5.0.0 /private/tmp/transcriptions-test-patterns
 
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1135:18)
     at internalConnectMultiple (node:net:1211:5)
     at internalConnectMultiple (node:net:1211:5)
@@ -40,7 +40,7 @@ AggregateError:
     }
   ]
 }
-AggregateError: 
+AggregateError:
     at internalConnectMultiple (node:net:1135:18)
     at internalConnectMultiple (node:net:1211:5)
     at internalConnectMultiple (node:net:1211:5)
@@ -143,4 +143,3 @@ Error: connect EPERM 127.0.0.1:9091 - Local (0.0.0.0:0)
 Environment  happy-dom was created 27 times · 12.72s total, 49% of tracked time
              create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
              learn more: https://vitest.dev/guide/improving-performance#test-environments
-
