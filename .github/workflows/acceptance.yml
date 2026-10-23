@@ -33,7 +33,8 @@ jobs:
       - name: Install acoustic verification tools
         run: |
           sources_dir="${APT_SOURCES_DIR:-/etc/apt}"
-          for sources_file in "${APT_SOURCES_FILE:-$sources_dir/sources.list}" "$sources_dir"/sources.list.d/*.sources "$sources_dir"/sources.list.d/*.list; do
+          # Hosted runners use mirror+file indirection; rewriting sources alone is insufficient.
+          for sources_file in "${APT_SOURCES_FILE:-$sources_dir/sources.list}" "$sources_dir/apt-mirrors.txt" "$sources_dir"/sources.list.d/*.sources "$sources_dir"/sources.list.d/*.list; do
             if [ -f "$sources_file" ]; then
               sudo perl -pi -e 's{https?://azure\.archive\.ubuntu\.com/ubuntu}{https://archive.ubuntu.com/ubuntu}g' "$sources_file"
             fi
