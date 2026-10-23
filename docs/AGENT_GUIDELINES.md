@@ -1,5 +1,7 @@
 # AGENT_GUIDELINES.md — 小法 (gx10 Agent) GGF & QMS (ISO 9001) 雙重治理作業 SOP
 
+> **最新流程：[逐字稿標準流程](TRANSCRIPTION_WORKFLOW.md)**。所有 Agent 均須先讀，涉及逐字稿處理、分軌、待閱校發布及驗收時，以該文件為準。
+
 本指南乃小法 (gx10 Agent) 於 `Transcriptions` 儲存庫中自主執行任務時之核心原則與運作流程對齊規範，**完全符合 GGF (v1.1) 治理架構與 QMS (ISO 9001) 品質管理體系**。
 
 ---

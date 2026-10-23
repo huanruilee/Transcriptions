@@ -1,5 +1,7 @@
 # START HERE — Transcriptions Project Agent Entrance, GGF & QMS Governance Guide
 
+> 逐字稿、校字、導讀、講記、科判與發布任務，先完整閱讀 [最新版逐字稿流程](docs/TRANSCRIPTION_WORKFLOW.md)。其流程規則優先於本頁舊操作敘述；低 Token 流程仍維持 Draft。
+
 - Project ID: TRANSCRIPTIONS-CORE-001
 - Authority Owner: Henry Lee
 - Primary Agent Operator: 小法 (gx10 Agent)
@@ -40,6 +42,8 @@
 ---
 
 ## 3. 小法讀取順序 (Required Reading Order)
+
+逐字稿相關任務的前置必讀：[TRANSCRIPTION_WORKFLOW.md](docs/TRANSCRIPTION_WORKFLOW.md)。其餘治理與 Schema 文件仍依下列順序閱讀。
 
 1. `START_HERE.md`（本檔案：定位、GGF 與 QMS 原則）
 2. `docs/AGENT_GUIDELINES.md`（小法作業流程、GGF/QMS SOP 與自主權聲明）
