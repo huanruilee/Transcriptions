@@ -222,6 +222,8 @@
           </li>
         </ul>
 
+        <a class="header-btn" :href="correctionDatesUrl">📅 各講最後校訂日期（課程末頁）</a>
+
         <!-- 側邊欄拖曳調整把手 -->
         <div
           id="sidebar-resizer"
@@ -553,6 +555,7 @@
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
+          <p v-if="!navInfo.hasNext"><a :href="correctionDatesUrl">下一頁：各講最後校訂日期總表 →</a></p>
           <EndOfSessionCard
             v-if="navInfo.hasNext && hasMediaEnded"
             :key="currentSessionId"
@@ -854,6 +857,8 @@ const currentCourseTitle = computed(() => {
   const c = courseStore.catalog.find((item) => item.id === courseStore.currentCourseId);
   return c ? c.title : '大乘經典研讀';
 });
+
+const correctionDatesUrl = computed(() => `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/correction-dates.html`);
 
 const currentCourseMaster = computed(() => {
   const c = courseStore.catalog.find((item) => item.id === courseStore.currentCourseId);

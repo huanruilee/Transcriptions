@@ -10,18 +10,26 @@ const match=workflow.match(/- name: Install acoustic verification tools\n       
 assert.ok(match,'Acoustic bootstrap step must remain present');
 const shell=match[1].split('\n').map(l=>l.replace(/^          /,'')).join('\n');
 const source='Types: deb\nURIs: http://azure.archive.ubuntu.com/ubuntu\nSuites: noble noble-updates\nComponents: main universe\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\n\nTypes: deb\nURIs: https://security.ubuntu.com/ubuntu\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\n';
-function run(fail=''){
+function run(fail='',legacy=false,mirror=false){
  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'ci-acoustic-bootstrap-'));
  try{
   const bin=path.join(temp,'bin');fs.mkdirSync(bin);
-  const sources=path.join(temp,'ubuntu.sources'),log=path.join(temp,'commands.txt');
+  const sources=path.join(temp,mirror?'apt-mirrors.txt':legacy?'sources.list':'ubuntu.sources'),log=path.join(temp,'commands.txt');
   fs.writeFileSync(sources,source);
   const stubs={sudo:'#!/bin/sh\nexec "$@"\n','apt-get':'#!/bin/sh\nprintf "%s\\n" "$*" >> "$TASK_APT_LOG"\nif [ -n "$TASK_APT_FAIL" ]; then case " $* " in *" $TASK_APT_FAIL "*) exit 42;; esac; fi\n',ffmpeg:'#!/bin/sh\necho "ffmpeg $*" >> "$TASK_APT_LOG"\n',ffprobe:'#!/bin/sh\necho "ffprobe $*" >> "$TASK_APT_LOG"\n'};
   for(const [name,text] of Object.entries(stubs))fs.writeFileSync(path.join(bin,name),text,{mode:0o755});
-  const result=spawnSync('bash',['-e','-o','pipefail','-c',shell],{encoding:'utf8',env:{...process.env,PATH:bin+path.delimiter+process.env.PATH,APT_SOURCES_FILE:sources,TASK_APT_LOG:log,TASK_APT_FAIL:fail}});
+  const result=spawnSync('bash',['-e','-o','pipefail','-c',shell],{encoding:'utf8',env:{...process.env,PATH:bin+path.delimiter+process.env.PATH,APT_SOURCES_DIR:temp,APT_SOURCES_FILE:legacy||mirror?'':sources,TASK_APT_LOG:log,TASK_APT_FAIL:fail}});
   return {status:result.status,stderr:result.stderr,sources:fs.readFileSync(sources,'utf8'),log:fs.existsSync(log)?fs.readFileSync(log,'utf8'):''};
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 }
+test('hosted runner mirror-list indirection also replaces Azure',()=>{
+ const r=run('',false,true);assert.equal(r.status,0,r.stderr);
+ assert.ok(!r.sources.includes('azure.archive.ubuntu.com'));
+});
+test('legacy sources.list layout also replaces the Azure mirror',()=>{
+ const r=run('',true);assert.equal(r.status,0,r.stderr);
+ assert.ok(!r.sources.includes('azure.archive.ubuntu.com'));
+});
 test('CI acoustic bootstrap uses signed official HTTPS archive and bounded acquisition',()=>{
  const r=run();assert.equal(r.status,0,r.stderr);
  assert.equal(r.sources,source.replace('http://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu'));
