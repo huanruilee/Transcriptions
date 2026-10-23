@@ -1,5 +1,7 @@
 # 🔬 《入中論善顯密意疏》逐字稿可複現性指南 (Reproducibility Guide)
 
+> **歷史工具指南；執行前先讀 [最新版逐字稿流程](TRANSCRIPTION_WORKFLOW.md)。** 下文舊的 28 字斷句、服務型號／速度、固定總數與自動全庫修復敘述不可當成現行契約；以當次程式及 runtime 驗證為準，不直接對正式資料跑批次或 score:fix／learn:sync。
+
 > 本文件專為 **開發人員 (Humans)** 與 **AI Agents (Antigravity / 小法 / Hermes)** 撰寫，提供完整、確定性（Deterministic）的環境建置、GPU 推論服務配置、轉寫流水線執行、品質掃描與主動學習自進化之複現 SOP。
 
 ---

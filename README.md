@@ -1,5 +1,7 @@
 # Transcriptions (系列課程逐字稿多媒體學習平台)
 
+> **所有 Agent 的最新流程入口：[逐字稿標準流程](docs/TRANSCRIPTION_WORKFLOW.md)**。原話保真、精煉另軌及待閱校發布以此為準；歷史品質分數不等於人工聽核完成。
+
 [![100% Complete](https://img.shields.io/badge/Progress-219%2F219%20(100%25)-brightgreen.svg)](https://huanruilee.github.io/Transcriptions/)
 [![Quality Score](https://img.shields.io/badge/Quality%20Score-10.0%2F10.0%20(Full%20Pass)-blue.svg)](docs/ASR_M1_FINAL_CLOSURE_REPORT.md)
 [![ASR Gate Passed](https://img.shields.io/badge/ASR--M2%20Gate-6%2F6%20Passed-success.svg)](tests/unit/asrIntegrityGate.test.js)
