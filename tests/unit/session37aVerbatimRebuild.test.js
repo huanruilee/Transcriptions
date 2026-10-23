@@ -28,6 +28,13 @@ test('unknowns remain pending; no theological speaker replacement',()=>{
  assert.match(s.text,/應成派/);assert.equal(s.reviewNeeded,true);assert.equal(s.humanListened,false);
  assert.equal(b.status,'candidate-needs-audio-review');
 });
+test('word searching and trial pronunciations are not silently unified',()=>{
+ const b=buildVerbatimRebuild(bytes,plan),all=b.paragraphs.flatMap(p=>p.utterances);
+ for(const [id,term] of [['p4-v5','知業末節'],['p4-v6','智慧末節'],['p4-v7','知為末節']]){
+  const s=all.find(s=>s.id===id);assert.ok(s.text.includes(term));assert.equal(s.reviewNeeded,true);
+  assert.ok(s.pending.some(x=>x.includes('找詞')));
+ }
+});
 test('stale source or unmatched correction fails closed',()=>{
  assert.throws(()=>buildVerbatimRebuild(Buffer.from('{}'),plan),/digest/);
  const bad=structuredClone(plan);bad.corrections[0].from='not present';
