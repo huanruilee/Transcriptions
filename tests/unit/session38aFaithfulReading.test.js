@@ -188,3 +188,13 @@ test('HTML, Markdown and TXT expose the review warning and cover all sentences w
   const injectedAudioResult = build38A(injectedAudioBytes, { ...sourcePlan(), sourceDigest: injectedAudioDigest });
   assert.doesNotMatch(markdown38A(injectedAudioResult), /\]\(\s*javascript:/i);
 });
+
+test('bounded tail audio is disclosed as an excerpt and cannot load arbitrary URLs',()=>{
+ const {bytes,sourcePlan}=fixture();
+ const tailClip={url:'audio_38A_review/tail.mp3',sourceStart:4460,sourceEnd:4491.7028125};
+ const result=build38A(bytes,sourcePlan({tailClip}));
+ assert.deepEqual(result.session.qualityReview.tailClip,tailClip);
+ assert.match(render38A(result),/末段原音節錄/);
+ assert.match(render38A(result),/audio_38A_review\/tail.mp3/);
+ assert.throws(()=>build38A(bytes,sourcePlan({tailClip:{...tailClip,url:'https://evil.example/tail.mp3'}})),/tail clip/);
+});

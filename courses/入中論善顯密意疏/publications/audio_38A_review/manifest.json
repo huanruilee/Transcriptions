@@ -1,0 +1,17 @@
+{
+  "schema": "bounded-audio-excerpt/v1",
+  "sessionId": "38A",
+  "purpose": "末段原音檔頭時長不足以跳播；只提供末段31.70秒覆核，不提供整檔",
+  "sourceUrl": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170422-A%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p119(38).MP3",
+  "sourceSha256": "sha256:f3c81be298e9738aa685e4342be928cb4eb75a74535dd14c288bd90b58638c9b",
+  "sourceReferenceDigest": "sha256:220745d05a897e24a165e260e0f788686e97f522fc750e77d6f0eaa52b3ad567",
+  "sourceStart": 4460,
+  "sourceEnd": 4491.7028125,
+  "sourceDuration": 4491.7028125,
+  "filename": "tail.mp3",
+  "bytes": 254257,
+  "sha256": "sha256:26bfa56ed2bbde132cbd87539a89ac9fcadbe5664dfc3448381cb3032bf398e6",
+  "clipDuration": 31.738776,
+  "ffmpegCommand": "ffmpeg -v error -i <official-source> -ss 4460 -t 31.7028125 -ac 1 -ar 44100 -codec:a libmp3lame -b:a 64k -write_xing 1 <tail.mp3>",
+  "humanListened": false
+}

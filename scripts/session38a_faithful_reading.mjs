@@ -119,6 +119,15 @@ export function build38A(sourceBytes, plan) {
     processedAt: plan.processedAt,
     pendingItems: pending.map((item) => ({ locator: item.locator, reason: item.reason })),
   };
+  if(plan.tocProjection) {
+    if(plan.tocProjection.sourceDigest!==sourceDigest||plan.tocProjection.sessionId!=='38A')fail('invalid TOC source binding');
+    session.qualityReview.tocProjection=clone(plan.tocProjection);
+  }
+  if (plan.tailClip !== undefined) {
+    const clip=plan.tailClip;
+    if (clip?.url!=='audio_38A_review/tail.mp3'||!Number.isFinite(clip.sourceStart)||!Number.isFinite(clip.sourceEnd)||clip.sourceStart<0||clip.sourceEnd<=clip.sourceStart||clip.sourceEnd-clip.sourceStart>45) fail('invalid bounded tail clip');
+    session.qualityReview.tailClip=clone(clip);
+  }
   for (const item of pending) {
     const { paragraph, index } = sentences.get(item.locator);
     const sentence = session.paragraphs.find((candidate) => candidate.id === paragraph.id).sentences[index];
@@ -214,6 +223,7 @@ export function markdown38A(result) {
   const { rows, audioUrl } = flattened(result);
   const pending = new Map((result.session.qualityReview.pendingItems ?? []).map((item) => [item.locator, item.reason]));
   const output = [`> ${warnings().replaceAll('\n', '\n> ')}`, '', `[官方原音（完整音檔）](<${markdownDestination(audioUrl)}>)`, ''];
+  if(result.session.qualityReview.tailClip)output.push('[末段原音節錄（原檔檔頭時長偏短；僅含最後約32秒）](audio_38A_review/tail.mp3)','');
   let previous = null;
   for (const row of rows) {
     if (row.paragraph.id !== previous) {
@@ -232,7 +242,9 @@ export function markdown38A(result) {
 export function render38A(result) {
   const { rows, audioUrl } = flattened(result);
   const pending = new Map((result.session.qualityReview.pendingItems ?? []).map((item) => [item.locator, item.reason]));
-  const cards = rows.map((row) => {
+  const clip=result.session.qualityReview.tailClip;
+  const tail=clip?`<aside><h2>末段原音節錄</h2><p>原檔檔頭時長偏短；此節錄只涵蓋原音 ${timecode(clip.sourceStart)}–${timecode(clip.sourceEnd)}，供核對末句，未宣稱人工聽核。<a href="audio_38A_review/manifest.json">來源與雜湊</a></p><audio id="tail-audio" controls preload="metadata" src="audio_38A_review/tail.mp3"></audio></aside>`:'';
+  const cards = tail + rows.map((row) => {
     const locator = rowLocator(row);
     const at = Number(row.sentence.start ?? row.paragraph.start ?? 0);
     const sourceText = row.sentence.rawText ?? row.text;

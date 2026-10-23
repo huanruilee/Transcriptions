@@ -2,6 +2,8 @@
 
 ## 流程權威入口（2026-10-23）
 
+- [x] **SESSION38A-FAITHFUL-01**：依 v1.0 完成 38A 忠實原話待閱校候選、來源帳本、GX10 ASR／LLM 證據及閱讀頁支援；驗證與限制見 [38A 交付說明](SESSION38A_FAITHFUL_READING.md)。人工聽核尚未完成，發布狀態不得標為已確認。
+
 - [x] **WF-STANDARD-01**：統一 [逐字稿標準流程](TRANSCRIPTION_WORKFLOW.md) v1.0；接入根目錄 AGENTS、START_HERE、README 與舊文件導向，明確原話／精煉分軌及待閱校發布。交付驗證見 PR 證據；不代表已校訂任何新講次。
 - [ ] **WF-STANDARD-02**：指定下一講時，先核對現有 UI／下載能否顯示待閱校狀態及修改追溯；缺功能再另立小範圍實作。低 Token 流程仍為 Draft。
 
