@@ -263,7 +263,8 @@
         <TOCAccordion
           ref="tocAccordionRef"
           id="toc-accordion-root"
-          :toc-nodes="courseStore.tocTree || []"
+          :toc-nodes="currentTocTree"
+          :book-toc-nodes="courseStore.tocTree || []"
           :active-session-id="currentSessionId"
           :current-time="playerStore.currentTime"
           @seek="handleTOCSeek"
@@ -729,7 +730,7 @@
 
     <!-- Mobile Bottom Sheet TOC Drawer (對齊 V1) -->
     <TOCBottomSheet
-      :toc-nodes="courseStore.tocTree || []"
+      :toc-nodes="currentTocTree"
       :active-session-id="currentSessionId"
       :is-open="uiStore.isTOCSheetOpen"
       @close="uiStore.closeAllDrawers"
@@ -767,6 +768,7 @@ import ReviewRatingModal from './components/ReviewRatingModal.vue';
 import CourseOverviewModal from './components/CourseOverviewModal.vue';
 import TOCAccordion from './components/TOCAccordion.vue';
 import TOCBottomSheet from './components/TOCBottomSheet.vue';
+import {sessionTocProjection,projectionChain,type SessionAnchor} from './composables/sessionTocProjection';
 import EndOfSessionCard from './components/EndOfSessionCard.vue';
 import TouchContextMenu from './components/TouchContextMenu.vue';
 import TranscriptOverview from './components/TranscriptOverview.vue';
@@ -935,11 +937,14 @@ const overviewSessions = computed(() => {
 });
 
 const activeTOCChain = computed(() => {
+  if (currentTocProjection.value) return projectionChain(currentTocProjection.value,playerStore.currentTime);
   return courseStore.computeActiveTOCChain(playerStore.currentTime, currentSessionId.value);
 });
 
 const currentAudioUrl = ref('');
 const currentReaderNotice = ref('');
+const currentTocProjection = ref<SessionAnchor[]|null>(null);
+const currentTocTree = computed(()=>currentTocProjection.value || courseStore.tocTree || []);
 const currentVerbatimLabel = ref('');
 const currentQualityReviewUrl = ref('');
 const currentYoutubeVideoId = ref('');
@@ -1706,6 +1711,7 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 });
 
 async function loadSession(sessionId: string) {
+  currentTocProjection.value = null;
   currentReaderNotice.value = '';
   currentVerbatimLabel.value = '';
   currentQualityReviewUrl.value = '';
@@ -1784,6 +1790,7 @@ async function loadSession(sessionId: string) {
     currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
     currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
+    currentTocProjection.value = sessionTocProjection(data.qualityReview,sessionId);
     currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
       ? data.qualityReview.readerNotice.trim() : '';
     currentVerbatimLabel.value = typeof data.qualityReview?.verbatimLabel === 'string'
@@ -1887,7 +1894,7 @@ function sentenceSegments(sentence: any) {
 
 // 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart：嚴格匹配 node.sessionId === sessionId)
 function findTOCNodeAtParagraphStart(paraStart: number, sessionId: string, tolerance = 2) {
-  if (!courseStore.tocTree || courseStore.tocTree.length === 0) return null;
+  if (currentTocTree.value.length === 0) return null;
   let match: any = null;
   function walk(nodes: any[]) {
     if (!Array.isArray(nodes)) return;
@@ -1902,7 +1909,7 @@ function findTOCNodeAtParagraphStart(paraStart: number, sessionId: string, toler
       }
     }
   }
-  walk(courseStore.tocTree);
+  walk(currentTocTree.value);
   return match;
 }
 
