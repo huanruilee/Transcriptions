@@ -264,6 +264,7 @@
           ref="tocAccordionRef"
           id="toc-accordion-root"
           :toc-nodes="currentTocTree"
+          :book-toc-nodes="courseStore.tocTree || []"
           :active-session-id="currentSessionId"
           :current-time="playerStore.currentTime"
           @seek="handleTOCSeek"

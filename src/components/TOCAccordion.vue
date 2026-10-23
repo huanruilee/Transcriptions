@@ -16,6 +16,7 @@ export interface TOCNodeData {
 
 const props = defineProps<{
   tocNodes: TOCNodeData[];
+  bookTocNodes?: TOCNodeData[];
   activeSessionId: string;
   currentTime?: number;
 }>();
@@ -294,7 +295,7 @@ const TOCNodeBranch: any = defineComponent({
       </div>
 
       <ul id="toc-tree-root" class="toc-tree">
-        <TOCNodeBranch :nodes="tocNodes" />
+        <TOCNodeBranch :nodes="currentScope === 'book' ? (bookTocNodes || tocNodes) : tocNodes" />
       </ul>
     </details>
 
