@@ -21,7 +21,7 @@ export function buildVerbatimRebuild(bytes,plan){
    for(const c of plan.corrections.filter(c=>c.id===s.id)){
     if(!c.from||!c.to||!c.basis||text.split(c.from).length-1!==(c.count??1))throw Error('Correction match mismatch: '+s.id+' '+c.from);
     text=text.split(c.from).join(c.to);
-    if(c.from!==c.to)edits.push({from:c.from,to:c.to,basis:c.basis});
+    edits.push({from:c.from,to:c.to,basis:c.basis,...(c.from===c.to?{kind:'verification'}:{})});
    }
    const beforeFormatting=text;
    text=text.replace(/[ \t]+/g,'，').replace(/，([，。！？；：、])/g,'$1');
@@ -35,7 +35,7 @@ export function buildVerbatimRebuild(bytes,plan){
  });
  const url=new URL(t.audioUrl);
  if(url.protocol!=='https:'||url.hostname!=='buddha.flyday.com.tw')throw Error('Unverified audio URL');
- return {schema:'session37a-verbatim-rebuild/v1',sessionId:'37A',sourceDigest:hash(bytes),rawUtteranceDigest:hash(JSON.stringify(raw)),planDigest:hash(JSON.stringify(plan)),status:'candidate-needs-audio-review',humanListened:false,audioUrl:t.audioUrl,policy:plan.policy,paragraphs,corrections,overview:plan.overview,counts:{paragraphs:paragraphs.length,utterances:raw.length,correctedUtterances:corrections.length,pendingUtterances:plan.pending.length,rawCharacters:raw.reduce((n,s)=>n+[...s.text].length,0),correctedCharacters:paragraphs.flatMap(p=>p.utterances).reduce((n,s)=>n+[...s.text].length,0)}};
+ return {schema:'session37a-verbatim-rebuild/v1',sessionId:'37A',sourceDigest:hash(bytes),rawUtteranceDigest:hash(JSON.stringify(raw)),planDigest:hash(JSON.stringify(plan)),status:'candidate-needs-audio-review',humanListened:false,audioUrl:t.audioUrl,policy:plan.policy,paragraphs,corrections,overview:plan.overview,counts:{paragraphs:paragraphs.length,utterances:raw.length,correctedUtterances:corrections.filter(c=>c.edits.some(e=>e.kind!=="verification")).length,pendingUtterances:plan.pending.length,rawCharacters:raw.reduce((n,s)=>n+[...s.text].length,0),correctedCharacters:paragraphs.flatMap(p=>p.utterances).reduce((n,s)=>n+[...s.text].length,0)}};
 }
 export function renderVerbatimRebuild(b){
  const warning='⚠️ AI辨識整理，內容可能有誤，僅供參考，請小心辨別。尚未人工聽核；待核字句保留原字，不冒稱已確認。';

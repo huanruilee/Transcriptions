@@ -5,6 +5,15 @@ import {buildVerbatimRebuild,renderVerbatimRebuild} from '../../scripts/session3
 const root=new URL('../../',import.meta.url);
 const bytes=fs.readFileSync(new URL('courses/入中論善顯密意疏/sessions/session_37A.json',root));
 const plan=JSON.parse(fs.readFileSync(new URL('reviews/evidence/session37a-verbatim-rebuild/plan.json',root)));
+test('semantic headings are classified and no-op verification remains auditable',()=>{
+ const b=buildVerbatimRebuild(bytes,plan);
+ for(const p of b.paragraphs)assert.match(p.heading,/^【[^】]+】.+/);
+ for(const c of plan.corrections.filter(c=>c.from===c.to)){
+  const record=b.corrections.find(r=>r.id===c.id);
+  assert.ok(record?.edits.some(e=>e.kind==='verification'&&e.basis===c.basis));
+  assert.ok(renderVerbatimRebuild(b).includes(c.basis));
+ }
+});
 test('reading derives only from corrected utterances, p12 never reuses old lecture',()=>{
  const b=buildVerbatimRebuild(bytes,plan),t=JSON.parse(bytes);
  assert.deepEqual(b.paragraphs.map(p=>p.id),t.paragraphs.map(p=>p.id));
