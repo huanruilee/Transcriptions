@@ -1,5 +1,6 @@
 FAULT: published output protection
 COMMAND: /private/tmp/transcriptions-pipeline-v2-venv/bin/python -m unittest discover -s tests/python -p test_pipeline_behavior.py -k test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out -v
+CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)
 EXIT STATUS: 1 (expected nonzero; detected=True)
   FAIL: test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) (session='36A', output='verbatim_36A.json')
   AssertionError: 0 != 2 : ✅ Generated verbatim track for 36A: 0 paras, 0 sentences, 0 chars.
@@ -13,46 +14,50 @@ EXIT STATUS: 1 (expected nonzero; detected=True)
   AssertionError: 0 != 2 : ✅ Generated verbatim track for 36B: 0 paras, 0 sentences, 0 chars.
   FAIL: test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) (session='36A', output='verbatim_36A.json')
   AssertionError: 0 != 2 : ✅ Generated verbatim track for 36A: 0 paras, 0 sentences, 0 chars.
-  Ran 1 test in 0.302s
+  Ran 1 test in 0.303s
   FAILED (failures=6)
 
 FAULT: recursive LLM retry
 COMMAND: /private/tmp/transcriptions-pipeline-v2-venv/bin/python -m unittest discover -s tests/python -p test_pipeline_behavior.py -k test_llm_retry_splits_batch_then_returns_successful_single_sentence_results -v
+CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)
 EXIT STATUS: 1 (expected nonzero; detected=True)
   FAIL: test_llm_retry_splits_batch_then_returns_successful_single_sentence_results (test_pipeline_behavior.PipelineBehaviorTests.test_llm_retry_splits_batch_then_returns_successful_single_sentence_results)
   AssertionError: Lists differ: ['原句0'] != ['修訂：原句0', '修訂：原句1']
-  Ran 1 test in 0.059s
+  Ran 1 test in 0.056s
   FAILED (failures=1)
 
 FAULT: legacy 28-character splitting
 COMMAND: /private/tmp/transcriptions-pipeline-v2-venv/bin/python -m unittest discover -s tests/python -p test_pipeline_behavior.py -k test_prepolish_does_not_split_at_legacy_28_character_boundary -v
+CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)
 EXIT STATUS: 1 (expected nonzero; detected=True)
   FAIL: test_prepolish_does_not_split_at_legacy_28_character_boundary (test_pipeline_behavior.PipelineBehaviorTests.test_prepolish_does_not_split_at_legacy_28_character_boundary)
   AssertionError: 2 != 1
-  Ran 1 test in 0.058s
+  Ran 1 test in 0.060s
   FAILED (failures=1)
 
 FAULT: verbatim repetition preservation
 COMMAND: /private/tmp/transcriptions-pipeline-v2-venv/bin/python -m unittest discover -s tests/python -p test_pipeline_behavior.py -k test_verbatim_keeps_repetitions_speakers_and_sentence_timing -v
+CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)
 EXIT STATUS: 1 (expected nonzero; detected=True)
   FAIL: test_verbatim_keeps_repetitions_speakers_and_sentence_timing (test_pipeline_behavior.PipelineBehaviorTests.test_verbatim_keeps_repetitions_speakers_and_sentence_timing)
   AssertionError: '對，對' not found in '對，我剛才說自性，應該說無自性。'
-  Ran 1 test in 0.065s
+  Ran 1 test in 0.051s
   FAILED (failures=1)
 
 FAULT: verbatim timing preservation
 COMMAND: /private/tmp/transcriptions-pipeline-v2-venv/bin/python -m unittest discover -s tests/python -p test_pipeline_behavior.py -k test_verbatim_keeps_repetitions_speakers_and_sentence_timing -v
+CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)
 EXIT STATUS: 1 (expected nonzero; detected=True)
   FAIL: test_verbatim_keeps_repetitions_speakers_and_sentence_timing (test_pipeline_behavior.PipelineBehaviorTests.test_verbatim_keeps_repetitions_speakers_and_sentence_timing)
   AssertionError: Tuples differ: (2.23, 2.68, '格西') != (1.23, 2.68, '格西')
-  Ran 1 test in 0.061s
+  Ran 1 test in 0.051s
   FAILED (failures=1)
 
 FAULT: prompt max character budget
 COMMAND: /private/tmp/transcriptions-pipeline-v2-venv/bin/python -m unittest discover -s tests/python -p test_pipeline_behavior.py -k test_prompt_uses_real_page_window_and_terms_from_window -v
+CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)
 EXIT STATUS: 1 (expected nonzero; detected=True)
   FAIL: test_prompt_uses_real_page_window_and_terms_from_window (test_pipeline_behavior.PipelineBehaviorTests.test_prompt_uses_real_page_window_and_terms_from_window)
   AssertionError: 47 not less than or equal to 46
-  Ran 1 test in 0.061s
+  Ran 1 test in 0.052s
   FAILED (failures=1)
-

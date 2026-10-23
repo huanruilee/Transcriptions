@@ -56,14 +56,21 @@ def main() -> int:
             if text.count(old) != 1:
                 print(f"ERROR {label}: expected one mutation anchor, found {text.count(old)}")
                 return 2
-            target.write_text(text.replace(old, new, 1), encoding="utf-8")
             command = [sys.executable, "-m", "unittest", "discover", "-s", "tests/python",
                        "-p", TEST, "-k", method, "-v"]
-            result = subprocess.run(command, cwd=root, text=True, capture_output=True)
-            detected = result.returncode != 0
+            control = subprocess.run(command, cwd=root, text=True, capture_output=True, timeout=30)
+            if control.returncode != 0 or "Ran 1 test" not in control.stderr:
+                print(f"ERROR {label}: unmutated control did not pass exactly one test")
+                print(control.stdout + control.stderr)
+                return 2
+            target.write_text(text.replace(old, new, 1), encoding="utf-8")
+            result = subprocess.run(command, cwd=root, text=True, capture_output=True, timeout=30)
+            detected = (result.returncode == 1 and "AssertionError:" in result.stderr
+                        and "Ran 1 test" in result.stderr and "ERROR:" not in result.stderr)
             all_detected &= detected
             print(f"FAULT: {label}")
             print("COMMAND: " + " ".join(command))
+            print("CONTROL EXIT STATUS: 0 (exactly one unmutated test passed)")
             print(f"EXIT STATUS: {result.returncode} (expected nonzero; detected={detected})")
             for line in (result.stdout + result.stderr).splitlines():
                 if line.startswith(("FAIL:", "ERROR:", "Ran ", "FAILED ", "OK")) or "AssertionError:" in line:

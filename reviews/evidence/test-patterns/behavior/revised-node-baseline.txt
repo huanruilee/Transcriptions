@@ -7,20 +7,20 @@ not ok 1 - pipeline Python behavior contracts
   location: '/private/tmp/transcriptions-test-patterns/tests/unit/pipelineBehavior.test.js:6:1'
   failureType: 'testCodeFailure'
   error: |-
-    
-    
+
+
     [Step 3/5] 🧠 Deep proofreading with Smart Router for TST (Grounded: 0 chars)...
       ✅ Completed LLM proofreading across 1 batches (Optimized 25-sentence batches, Smart Router / vLLM).
-    
+
     [Step 3/5] 🧠 Deep proofreading with Smart Router for TST (Grounded: 0 chars)...
       ✅ Completed LLM proofreading across 1 batches (Optimized 25-sentence batches, Smart Router / vLLM).
-    
+
     [Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: 0)...
       ✅ Consolidated into 1 readable full sentences.
-    
+
     [Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: 0)...
       ✅ Consolidated into 2 readable full sentences.
-    
+
     test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) ... ok
     test_dynamic_output_budget_scales_and_clamps (test_pipeline_behavior.PipelineBehaviorTests.test_dynamic_output_budget_scales_and_clamps) ... ok
     test_llm_retry_splits_batch_then_returns_successful_single_sentence_results (test_pipeline_behavior.PipelineBehaviorTests.test_llm_retry_splits_batch_then_returns_successful_single_sentence_results) ... ok
@@ -29,7 +29,7 @@ not ok 1 - pipeline Python behavior contracts
     test_prepolish_splits_at_long_silence_boundary (test_pipeline_behavior.PipelineBehaviorTests.test_prepolish_splits_at_long_silence_boundary) ... ok
     test_prompt_uses_real_page_window_and_terms_from_window (test_pipeline_behavior.PipelineBehaviorTests.test_prompt_uses_real_page_window_and_terms_from_window) ... FAIL
     test_verbatim_keeps_repetitions_speakers_and_sentence_timing (test_pipeline_behavior.PipelineBehaviorTests.test_verbatim_keeps_repetitions_speakers_and_sentence_timing) ... ok
-    
+
     ======================================================================
     FAIL: test_prompt_uses_real_page_window_and_terms_from_window (test_pipeline_behavior.PipelineBehaviorTests.test_prompt_uses_real_page_window_and_terms_from_window)
     ----------------------------------------------------------------------
@@ -38,15 +38,15 @@ not ok 1 - pipeline Python behavior contracts
         self.assertLessEqual(len(bounded), char_limit)
         ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
     AssertionError: 47 not less than or equal to 46
-    
+
     ----------------------------------------------------------------------
     Ran 8 tests in 0.238s
-    
+
     FAILED (failures=1)
-    
-    
+
+
     1 !== 0
-    
+
   code: 'ERR_ASSERTION'
   name: 'AssertionError'
   expected: 0
