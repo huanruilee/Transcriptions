@@ -326,6 +326,7 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
+            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">原稿重整版：連續閱讀、校字與原稿對照（待聽核） →</a></p>
             <div class="session-header-actions">
               <button
                 id="download-transcript-mobile-btn"
@@ -889,6 +890,11 @@ const currentAgentReviewedCount = ref(0);
 const currentAgentUncertainCount = ref(0);
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
+});
+const currentRebuildUrl = computed(() => {
+  const page = currentSessionInfo.value?.sourceRebuildPage;
+  return page === `lecture_${currentSessionId.value}_verbatim_rebuild.html`
+    ? `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/publications/${page}` : '';
 });
 
 const activeMediaType = computed(() =>
@@ -1687,6 +1693,7 @@ async function loadRealCourseData() {
         youtubeVideoId: s.youtubeVideoId,
         youtubeUrl: s.youtubeUrl,
         pendingTranscript: Boolean(s.pendingTranscript),
+        sourceRebuildPage: s.sourceRebuildPage,
       }));
       courseStore.setSessions(sessions);
     }
