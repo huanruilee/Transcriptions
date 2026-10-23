@@ -43,16 +43,20 @@ function indexSource(source) {
 function validateLocator(locator, sentenceIndex, field) {
   if (typeof locator !== 'string' || !sentenceIndex.has(locator)) fail(`${field} references unknown locator ${String(locator)}`);
 }
-function occurrences(text, needle) {
-  if (!needle) return 0;
-  let count = 0, from = 0;
-  while ((from = text.indexOf(needle, from)) !== -1) { count++; from += needle.length; }
-  return count;
+function occurrenceSpans(text, needle) {
+  if (!needle) return [];
+  const spans = [];
+  let offset = 0;
+  while ((offset = text.indexOf(needle, offset)) !== -1) {
+    spans.push({ start: offset, end: offset + needle.length });
+    offset += needle.length;
+  }
+  return spans;
 }
 function validateAudioUrl(value) {
   let url;
   try { url = new URL(value); } catch { fail('audioUrl must be a valid HTTPS URL'); }
-  if (url.protocol !== 'https:' || url.hostname !== OFFICIAL_AUDIO_HOST) fail('audioUrl must use the official HTTPS audio host');
+  if (url.protocol !== 'https:' || url.hostname !== OFFICIAL_AUDIO_HOST || url.port || url.username || url.password) fail('audioUrl must use the official HTTPS audio host');
   return url.href;
 }
 
@@ -61,30 +65,32 @@ export function build38A(sourceBytes, plan) {
   const sourceDigest = hash(bytes);
   const { corrections, pending, headingCorrections } = validatePlan(plan, sourceDigest);
   const { paragraphs, sentences } = indexSource(source);
-  const occupied = new Set();
+  const spansByLocator = new Map();
   const corrected = new Map();
   const ledger = [];
 
   for (const edit of corrections) {
     validateLocator(edit?.locator, sentences, 'correction');
-    if (occupied.has(edit.locator)) fail(`duplicate or overlapping edit at ${edit.locator}`);
-    occupied.add(edit.locator);
     const { sentence } = sentences.get(edit.locator);
     if (typeof sentence.text !== 'string') fail(`source text missing at ${edit.locator}`);
     if (typeof edit.from !== 'string' || typeof edit.to !== 'string' || edit.from === edit.to) fail(`invalid from/to at ${edit.locator}`);
     if (edit.to === '' && !(edit.kind === 'metadata-extraction' && /^\[REVIEW:[\s\S]*\]$/.test(edit.from))) fail(`empty replacement requires explicit whole-block metadata-extraction at ${edit.locator}`);
-    if (!Number.isInteger(edit.count) || edit.count < 1 || occurrences(sentence.text, edit.from) !== edit.count) fail(`count mismatch at ${edit.locator}`);
+    const matches = occurrenceSpans(sentence.text, edit.from);
+    if (!Number.isInteger(edit.count) || edit.count < 1 || matches.length !== edit.count) fail(`count mismatch at ${edit.locator}`);
     if (typeof edit.basis !== 'string' || !edit.basis.trim()) fail(`basis required at ${edit.locator}`);
-    const newText = sentence.text.split(edit.from).join(edit.to);
-    corrected.set(edit.locator, newText);
-    ledger.push({ locator: edit.locator, before: sentence.text, after: newText, count: edit.count, basis: edit.basis, kind: edit.kind ?? 'text-correction', sourceDigest, humanListened: false });
+    const occupied = spansByLocator.get(edit.locator) ?? [];
+    for (const match of matches) {
+      if (occupied.some((span) => match.start < span.end && span.start < match.end)) fail(`overlapping source spans at ${edit.locator}`);
+      occupied.push({ ...match, from: edit.from, to: edit.to, basis: edit.basis, kind: edit.kind ?? 'text-correction' });
+      ledger.push({ locator: edit.locator, before: edit.from, after: edit.to, count: 1, basis: edit.basis, kind: edit.kind ?? 'text-correction', sourceDigest, humanListened: false, sourceSpan: { start: match.start, end: match.end } });
+    }
+    spansByLocator.set(edit.locator, occupied);
   }
 
   const pendingLocators = new Set();
   for (const item of pending) {
     validateLocator(item?.locator, sentences, 'pending item');
     if (pendingLocators.has(item.locator)) fail(`duplicate pending locator ${item.locator}`);
-    if (occupied.has(item.locator)) fail(`pending item overlaps edit at ${item.locator}`);
     if (typeof item.reason !== 'string' || !item.reason.trim()) fail(`pending reason required at ${item.locator}`);
     pendingLocators.add(item.locator);
   }
@@ -101,9 +107,8 @@ export function build38A(sourceBytes, plan) {
   }
 
   const session = clone(source);
-  session.sourceSnapshot = clone(source);
   session.lastUpdated = plan.processedAt;
-  session._meta = { ...(session._meta ?? {}), processedAt: plan.processedAt, updatedAt: plan.processedAt, sourceDigest };
+  session._meta = { ...(session._meta ?? {}), processed_at: plan.processedAt, last_updated: plan.processedAt, sourceDigest };
   session.transcriptPublicationState = 'review-ready';
   session.qualityReview = {
     readerNotice: `待閱校版：${READER_NOTICE.replace(/^待閱校版：/, '')}`,
@@ -114,14 +119,29 @@ export function build38A(sourceBytes, plan) {
     processedAt: plan.processedAt,
     pendingItems: pending.map((item) => ({ locator: item.locator, reason: item.reason })),
   };
-  for (const paragraph of session.paragraphs) {
-    for (let index = 0; index < paragraph.sentences.length; index++) {
-      const locator = `${paragraph.id}:${index}`;
-      if (!corrected.has(locator)) continue;
-      const sentence = paragraph.sentences[index];
-      if (!Object.hasOwn(sentence, 'rawText')) sentence.rawText = sentence.text;
-      sentence.text = corrected.get(locator);
+  for (const item of pending) {
+    const { paragraph, index } = sentences.get(item.locator);
+    const sentence = session.paragraphs.find((candidate) => candidate.id === paragraph.id).sentences[index];
+    sentence.reviewNeeded = true;
+    if (typeof sentence.uncertainty !== 'string' || !sentence.uncertainty.trim()) sentence.uncertainty = item.reason;
+  }
+  for (const [locator, sourceSpans] of spansByLocator) {
+    const { sentence } = sentences.get(locator);
+    let value = sentence.text;
+    for (const span of [...sourceSpans].sort((left, right) => right.start - left.start)) {
+      value = `${value.slice(0, span.start)}${span.to}${value.slice(span.end)}`;
     }
+    corrected.set(locator, value);
+  }
+  // Apply after all source spans have been resolved against immutable source text.
+  for (const paragraph of session.paragraphs) {
+    paragraph.sentences.forEach((sentence, index) => {
+      const locator = `${paragraph.id}:${index}`;
+      if (corrected.has(locator)) {
+        if (!Object.hasOwn(sentence, 'rawText')) sentence.rawText = sentences.get(locator).sentence.text;
+        sentence.text = corrected.get(locator);
+      }
+    });
   }
   for (const edit of headingCorrections) {
     session.paragraphs.find((paragraph) => paragraph.id === edit.paragraphId).heading = edit.to;
@@ -132,7 +152,7 @@ export function build38A(sourceBytes, plan) {
     verbatimParagraphs[paragraph.id] = paragraph.sentences.map((sentence, index) => {
       const locator = `${paragraph.id}:${index}`;
       const original = source.paragraphs.find((item) => item.id === paragraph.id).sentences[index];
-      const result = { ...clone(original), textcorrected: corrected.get(locator) ?? original.text, id: original.id ?? `${paragraph.id.replace('_', '')}-s${index + 1}`, sourceLocator: locator, rawText: original.rawText ?? original.text };
+      const result = { ...clone(original), text: corrected.get(locator) ?? original.text, id: original.id ?? `${paragraph.id.replace('_', '')}-s${index + 1}`, sourceLocator: locator, rawText: original.rawText ?? original.text };
       return result;
     });
   }
@@ -141,11 +161,17 @@ export function build38A(sourceBytes, plan) {
     status: 'published-pending-reading', humanListened: false, sourceDigest,
   };
   if (plan.overview !== undefined) session.contentOverview = clone(plan.overview);
-  return { session, verbatim, ledger };
+  return { session, verbatim, ledger, sourceSnapshot: clone(source) };
 }
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+function escapeMarkdown(value) {
+  return escapeHtml(value).replace(/([\\`*_{}\[\]()#+\-.!|>~])/g, '\\$1');
+}
+function markdownDestination(value) {
+  return value.replace(/[\[\]()]/g, (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`);
 }
 function timecode(seconds) {
   const safe = Math.max(0, Number(seconds) || 0);
@@ -159,7 +185,7 @@ function flattened(result) {
   for (const paragraph of session.paragraphs) {
     const items = verbatim.paragraphs[paragraph.id];
     if (!Array.isArray(items) || items.length !== paragraph.sentences.length) fail(`verbatim coverage mismatch at ${paragraph.id}`);
-    items.forEach((sentence, index) => rows.push({ paragraph, sentence, index, text: sentence.textcorrected }));
+    items.forEach((sentence, index) => rows.push({ paragraph, sentence, index, text: sentence.text }));
   }
   return { audioUrl, rows };
 }
@@ -168,6 +194,7 @@ function warnings() { return `${READER_NOTICE}\n\n待閱校・尚未人工聽核
 
 export function text38A(result) {
   const { rows } = flattened(result);
+  const pending = new Map((result.session.qualityReview.pendingItems ?? []).map((item) => [item.locator, item.reason]));
   const output = [warnings(), ''];
   let previous = null;
   for (const row of rows) {
@@ -175,8 +202,9 @@ export function text38A(result) {
       output.push(`\n${row.paragraph.id}${row.paragraph.heading ? ` ${row.paragraph.heading}` : ''}`);
       previous = row.paragraph.id;
     }
-    output.push(`[${row.sentence.id}] 校訂候選：${row.text}`);
-    output.push(`原有辨識文字：${row.sentence.rawText ?? row.text}`);
+    const at = Number(row.sentence.start ?? row.paragraph.start ?? 0);
+    const locator = rowLocator(row);
+    output.push(`[${row.sentence.id}] [${timecode(at)}] ${row.text}${pending.has(locator) ? ` 〔待核：${pending.get(locator)}〕` : ''}`);
   }
   output.push('', warnings());
   return `${output.join('\n')}\n`;
@@ -184,16 +212,18 @@ export function text38A(result) {
 
 export function markdown38A(result) {
   const { rows, audioUrl } = flattened(result);
-  const output = [`> ${warnings().replaceAll('\n', '\n> ')}`, '', `[官方原音（完整音檔）](${audioUrl})`, ''];
+  const pending = new Map((result.session.qualityReview.pendingItems ?? []).map((item) => [item.locator, item.reason]));
+  const output = [`> ${warnings().replaceAll('\n', '\n> ')}`, '', `[官方原音（完整音檔）](<${markdownDestination(audioUrl)}>)`, ''];
   let previous = null;
   for (const row of rows) {
     if (row.paragraph.id !== previous) {
-      output.push(`\n### ${escapeHtml(row.paragraph.id)}${row.paragraph.heading ? ` ${escapeHtml(row.paragraph.heading)}` : ''}`);
+      output.push(`\n### ${escapeMarkdown(row.paragraph.id)}${row.paragraph.heading ? ` ${escapeMarkdown(row.paragraph.heading)}` : ''}`);
       previous = row.paragraph.id;
     }
     const locator = rowLocator(row);
     const at = Number(row.sentence.start ?? row.paragraph.start ?? 0);
-    output.push(`- **${escapeHtml(row.sentence.id)}** 校訂候選：${escapeHtml(row.text)}  \n  原有辨識文字：${escapeHtml(row.sentence.rawText ?? row.text)} · [原音 ${timecode(at)}](${audioUrl}#t=${at}) · 定位 ${escapeHtml(locator)}`);
+    const pendingNote = pending.has(locator) ? ` · 待核：${escapeMarkdown(pending.get(locator))}` : '';
+    output.push(`- **${escapeMarkdown(row.sentence.id)}** 校訂候選：${escapeMarkdown(row.text)}  \n  原有辨識文字：${escapeMarkdown(row.sentence.rawText ?? row.text)} · [原音 ${timecode(at)}](<${markdownDestination(audioUrl)}#t=${at}>) · 定位 ${escapeMarkdown(locator)}${pendingNote}`);
   }
   output.push('', `> ${warnings().replaceAll('\n', '\n> ')}`);
   return `${output.join('\n')}\n`;
@@ -206,7 +236,7 @@ export function render38A(result) {
     const locator = rowLocator(row);
     const at = Number(row.sentence.start ?? row.paragraph.start ?? 0);
     const sourceText = row.sentence.rawText ?? row.text;
-    return `<article id="${escapeHtml(locator)}"><h2>${escapeHtml(row.sentence.id)}${pending.has(locator) ? ' · 待核對' : ''}</h2>${row.paragraph.heading ? `<p>${escapeHtml(row.paragraph.heading)}</p>` : ''}<p><strong>校訂候選：</strong>${escapeHtml(row.text)}</p><details><summary>查看原有辨識文字</summary><p>${escapeHtml(sourceText)}</p></details><p><a href="${escapeHtml(audioUrl)}#t=${encodeURIComponent(at)}">官方原音 ${timecode(at)}</a> · 定位 ${escapeHtml(locator)}</p>${pending.has(locator) ? `<p>待核對：${escapeHtml(pending.get(locator))}</p>` : ''}</article>`;
+    return `<article id="${escapeHtml(locator)}"><h2>${escapeHtml(row.sentence.id)}${pending.has(locator) ? ' · 待核對' : ''}</h2>${row.paragraph.heading ? `<p>${escapeHtml(row.paragraph.heading)}</p>` : ''}<p><strong>校訂候選：</strong>${escapeHtml(row.text)}</p><details><summary>查看原有辨識文字</summary><p>${escapeHtml(sourceText)}</p></details><p><a href="${escapeHtml(audioUrl)}#t=${encodeURIComponent(at)}">官方原音 ${timecode(at)}</a> · 定位 ${escapeHtml(locator)}</p>${pending.has(locator) ? `<p>待核：${escapeHtml(pending.get(locator))}</p>` : ''}</article>`;
   }).join('\n');
   const safeTextLiteral = JSON.stringify(text38A(result)).replaceAll('<', '\\u003c');
   const script = `document.getElementById('download-txt').addEventListener('click',()=>{const text=${safeTextLiteral};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));a.download='lecture_38A_verbatim.txt';a.click();URL.revokeObjectURL(a.href);});`;

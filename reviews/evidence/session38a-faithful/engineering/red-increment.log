@@ -1,0 +1,305 @@
+TAP version 13
+# Subtest: build preserves the full 38A source structure and only changes explicit locator text
+not ok 1 - build preserves the full 38A source structure and only changes explicit locator text
+  ---
+  duration_ms: 1.728208
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:27:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + undefined
+    - {
+    -   _meta: {
+    -     keep: true
+    -   },
+    -   audioUrl: 'https://buddha.flyday.com.tw/audio.mp3',
+    -   contentOverview: {
+    -     status: 'baseline'
+    -   },
+    -   lastUpdated: 'old',
+    -   paragraphs: [
+    -     {
+    -       custom: {
+    -         keep: 7
+    -       },
+    -       end: 5,
+    -       heading: '題目',
+    -       id: 'p_1',
+    -       sentences: [
+    -         {
+    -           confidence: 0.6,
+    -           end: 2,
+    -           id: 'source-1',
+    -           speaker: '講者A',
+    -           start: 1,
+    -           text: '甲甲，嗯，我是說甲。'
+    -         },
+    -         {
+    -           confidence: 0.7,
+    -           end: 5,
+    -           start: 3,
+    -           text: '乙 <script>alert(1)</script> [click](javascript:alert(1))'
+    -         }
+    -       ],
+    -       speaker: '講者A',
+    -       start: 1
+    -     }
+    -   ],
+    -   sessionId: '38A',
+    -   title: 'fixture'
+    - }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    sessionId: '38A'
+    title: 'fixture'
+    audioUrl: 'https://buddha.flyday.com.tw/audio.mp3'
+    lastUpdated: 'old'
+    _meta:
+      keep: true
+    contentOverview:
+      status: 'baseline'
+    paragraphs:
+      0:
+        id: 'p_1'
+        heading: '題目'
+        start: 1
+        end: 5
+        speaker: '講者A'
+        custom:
+          keep: 7
+        sentences:
+          0:
+            id: 'source-1'
+            start: 1
+            end: 2
+            text: '甲甲，嗯，我是說甲。'
+            speaker: '講者A'
+            confidence: 0.6
+          1:
+            start: 3
+            end: 5
+            text: '乙 <script>alert(1)</script> [click](javascript:alert(1))'
+            confidence: 0.7
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:35:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: full source output covers every source sentence in its original order
+not ok 2 - full source output covers every source sentence in its original order
+  ---
+  duration_ms: 4.535042
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:71:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '好，這種書的話少像是119頁。'
+    - undefined
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: '好，這種書的話少像是119頁。'
+  operator: 'strictEqual'
+  stack: |-
+    file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:82:12
+    Array.forEach (<anonymous>)
+    file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:78:64
+    Array.forEach (<anonymous>)
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:78:21)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+  ...
+# Subtest: metadata extraction may remove only a complete explicit review block and retains it in rawText
+not ok 3 - metadata extraction may remove only a complete explicit review block and retains it in rawText
+  ---
+  duration_ms: 0.260375
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:88:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '甲 [REVIEW: model annotation]'
+    - '甲 '
+         ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '甲 '
+  actual: '甲 [REVIEW: model annotation]'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:95:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: rejects wrong session, stale digest, unknown or overlapping locators, count mismatch and invalid headings
+not ok 4 - rejects wrong session, stale digest, unknown or overlapping locators, count mismatch and invalid headings
+  ---
+  duration_ms: 0.351792
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:100:1'
+  failureType: 'testCodeFailure'
+  error: '38A faithful reader: pending item overlaps edit at p_1:0'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    fail (file:///private/tmp/transcriptions-38a-builder-worker/scripts/session38a_faithful_reading.mjs:6:32)
+    build38A (file:///private/tmp/transcriptions-38a-builder-worker/scripts/session38a_faithful_reading.mjs:87:37)
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:108:29)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: allows multiple non-overlapping source replacements in one sentence and pending review beside a partial edit
+not ok 5 - allows multiple non-overlapping source replacements in one sentence and pending review beside a partial edit
+  ---
+  duration_ms: 0.108583
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:117:1'
+  failureType: 'testCodeFailure'
+  error: '38A faithful reader: duplicate or overlapping edit at p_1:0'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    fail (file:///private/tmp/transcriptions-38a-builder-worker/scripts/session38a_faithful_reading.mjs:6:32)
+    build38A (file:///private/tmp/transcriptions-38a-builder-worker/scripts/session38a_faithful_reading.mjs:70:37)
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:122:18)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: rejects overlapping source matches and never matches text introduced by a prior replacement
+not ok 6 - rejects overlapping source matches and never matches text introduced by a prior replacement
+  ---
+  duration_ms: 0.389709
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:134:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /overlapping source spans/. Input:
+    
+    'Error: 38A faithful reader: duplicate or overlapping edit at p_1:0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: '38A faithful reader: duplicate or overlapping edit at p_1:0'
+  stack: |-
+    fail (file:///private/tmp/transcriptions-38a-builder-worker/scripts/session38a_faithful_reading.mjs:6:32)
+    build38A (file:///private/tmp/transcriptions-38a-builder-worker/scripts/session38a_faithful_reading.mjs:70:37)
+    file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:138:23
+    getActual (node:assert:609:5)
+    Function.throws (node:assert:757:24)
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:138:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:138:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: pending flags preserve pre-existing uncertainty while setting reviewNeeded
+not ok 7 - pending flags preserve pre-existing uncertainty while setting reviewNeeded
+  ---
+  duration_ms: 0.188416
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:148:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:154:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: HTML, Markdown and TXT expose the review warning and cover all sentences with escaped content and official audio links
+not ok 8 - HTML, Markdown and TXT expose the review warning and cover all sentences with escaped content and official audio links
+  ---
+  duration_ms: 0.5125
+  type: 'test'
+  location: '/private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:159:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /待核：&lt;待確認&gt;/. Input:
+    
+    '<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>38A 忠實原話待閱校版</title><style>body{font:18px/1.8 system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#25312c;overflow-wrap:anywhere}header,footer{border:2px solid #9b5c00;background:#fff5df;padding:1rem}article{border-top:1px solid #bbb;padding:1rem 0}h2{font-size:1.05rem}audio{width:100%;max-width:100%}a{overflow-wrap:anywhere;color:#285f4a}button{font:inherit;padding:.5rem}</style></head><body><header><h1>38A 忠實原話閱讀版</h1><p>待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。\n' +
+      '\n' +
+      '待閱校・尚未人工聽核。</p><p>來源：既有機器校對稿 · 2 句 · sha256:fd63d582b8feb7aabb59cc3cb4b06e7bdb2d39700ab4042bfa23482211b31791</p></header><p><a href="https://buddha.flyday.com.tw/audio.mp3">開啟官方完整音檔</a></p><audio controls preload="none" src="https://buddha.flyday.com.tw/audio.mp3">瀏覽器不支援音訊播放。<a href="https://buddha.flyday.com.tw/audio.mp3">官方完整音檔</a></audio><p><button id="download-txt" type="button">下載忠實原話 TXT</button></p><article id="p_1:0"><h2>source-1</h2><p>題目</p><p><strong>校訂候選：</strong>甲甲，嗯，我是說甲。</p><details><summary>查看原有辨識文字</summary><p>甲甲，嗯，我是說甲。</p></details><p><a href="https://buddha.flyday.com.tw/audio.mp3#t=1">官方原音 0:01</a> · 定位 p_1:0</p></article>\n' +
+      '<article id="p_1:1"><h2>p1-s2 · 待核對</h2><p>題目</p><p><strong>校訂候選：</strong>乙 &lt;script&gt;alert(1)&lt;/script&gt; [click](javascript:alert(1))</p><details><summary>查看原有辨識文字</summary><p>乙 &lt;script&gt;alert(1)&lt;/script&gt; [click](javascript:alert(1))</p></details><p><a href="https://buddha.flyday.com.tw/audio.mp3#t=3">官方原音 0:03</a> · 定位 p_1:1</p><p>待核對：&lt;待確認&gt;</p></article><footer><p>待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。\n' +
+      '\n' +
+      `待閱校・尚未人工聽核。</p></footer><script>document.getElementById('download-txt').addEventListener('click',()=>{const text="待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。\\n\\n待閱校・尚未人工聽核。\\n\\n\\np_1 題目\\n[source-1] 校訂候選：甲甲，嗯，我是說甲。\\n原有辨識文字：甲甲，嗯，我是說甲。\\n[p1-s2] 校訂候選：乙 \\u003cscript>alert(1)\\u003c/script> [click](javascript:alert(1))\\n原有辨識文字：乙 \\u003cscript>alert(1)\\u003c/script> [click](javascript:alert(1))\\n\\n待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。\\n\\n待閱校・尚未人工聽核。\\n";const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));a.download='lecture_38A_verbatim.txt';a.click();URL.revokeObjectURL(a.href);});</script></body></html>`
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>38A 忠實原話待閱校版</title><style>body{font:18px/1.8 system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#25312c;overflow-wrap:anywhere}header,footer{border:2px solid #9b5c00;background:#fff5df;padding:1rem}article{border-top:1px solid #bbb;padding:1rem 0}h2{font-size:1.05rem}audio{width:100%;max-width:100%}a{overflow-wrap:anywhere;color:#285f4a}button{font:inherit;padding:.5rem}</style></head><body><header><h1>38A 忠實原話閱讀版</h1><p>待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。
+    
+    待閱校・尚未人工聽核。</p><p>來源：既有機器校對稿 · 2 句 · sha256:fd63d582b8feb7aabb59cc3cb4b06e7bdb2d39700ab4042bfa23482211b31791</p></header><p><a href="https://buddha.flyday.com.tw/audio.mp3">開啟官方完整音檔</a></p><audio controls preload="none" src="https://buddha.flyday.com.tw/audio.mp3">瀏覽器不支援音訊播放。<a href="https://buddha.flyday.com.tw/audio.mp3">官方完整音檔</a></audio><p><button id="download-txt" type="button">下載忠實原話 TXT</button></p><article id="p_1:0"><h2>source-1</h2><p>題目</p><p><strong>校訂候選：</strong>甲甲，嗯，我是說甲。</p><details><summary>查看原有辨識文字</summary><p>甲甲，嗯，我是說甲。</p></details><p><a href="https://buddha.flyday.com.tw/audio.mp3#t=1">官方原音 0:01</a> · 定位 p_1:0</p></article>
+    <article id="p_1:1"><h2>p1-s2 · 待核對</h2><p>題目</p><p><strong>校訂候選：</strong>乙 &lt;script&gt;alert(1)&lt;/script&gt; [click](javascript:alert(1))</p><details><summary>查看原有辨識文字</summary><p>乙 &lt;script&gt;alert(1)&lt;/script&gt; [click](javascript:alert(1))</p></details><p><a href="https://buddha.flyday.com.tw/audio.mp3#t=3">官方原音 0:03</a> · 定位 p_1:1</p><p>待核對：&lt;待確認&gt;</p></article><footer><p>待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。
+    
+    待閱校・尚未人工聽核。</p></footer><script>document.getElementById('download-txt').addEventListener('click',()=>{const text="待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。\n\n待閱校・尚未人工聽核。\n\n\np_1 題目\n[source-1] 校訂候選：甲甲，嗯，我是說甲。\n原有辨識文字：甲甲，嗯，我是說甲。\n[p1-s2] 校訂候選：乙 \u003cscript>alert(1)\u003c/script> [click](javascript:alert(1))\n原有辨識文字：乙 \u003cscript>alert(1)\u003c/script> [click](javascript:alert(1))\n\n待閱校版：來源基準為既有機器校對稿；新 ASR 僅供輔助核對，尚未人工完整校訂。疑義請配合原音核對。\n\n待閱校・尚未人工聽核。\n";const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));a.download='lecture_38A_verbatim.txt';a.click();URL.revokeObjectURL(a.href);});</script></body></html>
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-38a-builder-worker/tests/unit/session38aFaithfulReading.test.js:169:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 0
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 47.430416
