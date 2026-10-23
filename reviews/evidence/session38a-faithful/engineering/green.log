@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: build preserves the full 38A source structure and only changes explicit locator text
+ok 1 - build preserves the full 38A source structure and only changes explicit locator text
+  ---
+  duration_ms: 1.123625
+  type: 'test'
+  ...
+# Subtest: full source output covers every source sentence in its original order
+ok 2 - full source output covers every source sentence in its original order
+  ---
+  duration_ms: 5.333708
+  type: 'test'
+  ...
+# Subtest: metadata extraction may remove only a complete explicit review block and retains it in rawText
+ok 3 - metadata extraction may remove only a complete explicit review block and retains it in rawText
+  ---
+  duration_ms: 0.252625
+  type: 'test'
+  ...
+# Subtest: rejects wrong session, stale digest, unknown or overlapping locators, count mismatch and invalid headings
+ok 4 - rejects wrong session, stale digest, unknown or overlapping locators, count mismatch and invalid headings
+  ---
+  duration_ms: 0.541917
+  type: 'test'
+  ...
+# Subtest: HTML, Markdown and TXT expose the review warning and cover all sentences with escaped content and official audio links
+ok 5 - HTML, Markdown and TXT expose the review warning and cover all sentences with escaped content and official audio links
+  ---
+  duration_ms: 0.432333
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44.577416
