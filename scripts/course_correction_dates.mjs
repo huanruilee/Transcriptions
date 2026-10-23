@@ -5,7 +5,7 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 export function correctionDate(t){
  for(const [source,value] of [['lastUpdated',t.lastUpdated],['last_updated',t.last_updated],['_meta.processed_at',t._meta?.processed_at],['_meta.last_updated',t._meta?.last_updated]]){
   if(typeof value!=='string')continue;
-  const m=value.match(/^(\d{4}-\d{2}-\d{2})(?:[ T]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?)?$/);
+  const m=value.match(/^(\d{4}-\d{2}-\d{2})(?:[ T](?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?)?$/);
   if(m&&Number.isFinite(Date.parse(m[1]))&&new Date(m[1]).toISOString().slice(0,10)===m[1])return {value,source};
  }
  return {value:'未記錄',source:'無有效日期欄位'};
@@ -23,7 +23,11 @@ export function generateCorrectionDates(root=path.resolve(path.dirname(fileURLTo
   const entries=new Map([...(course.sessions||[]),...(course.pendingSessions||[])].map(s=>[s.sessionId,s]));
   const sessions=path.join(base,'sessions');
   if(fs.existsSync(sessions))for(const name of fs.readdirSync(sessions)){
-   const m=name.match(/^session_(.+)\.json$/);if(m&&!entries.has(m[1]))entries.set(m[1],{sessionId:m[1]});
+   const m=name.match(/^session_(\d+[AB]?)\.json$/);
+   if(m&&!entries.has(m[1])&&!course.sessions?.length){
+    const t=JSON.parse(fs.readFileSync(path.join(sessions,name)));
+    if(String(t.sessionId||'').replace(/^session_/,'')===m[1])entries.set(m[1],{sessionId:m[1]});
+   }
   }
   const rows=[...entries].sort(([a],[b])=>a.localeCompare(b,'en',{numeric:true})).map(([id,s])=>{
    const f=path.join(sessions,`session_${id}.json`);

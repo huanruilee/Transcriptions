@@ -1,11 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { correctionDate, renderCorrectionDates } from '../../scripts/course_correction_dates.mjs';
 test('only explicit valid transcript update dates are used',()=>{
+ for(const value of ['2026-10-23 99:99:99','2026-10-23T24:00:00','2026-10-23T12:00:00+24:00'])assert.equal(correctionDate({lastUpdated:value}).value,'未記錄');
  assert.equal(correctionDate({lastUpdated:'2026-10-23 12:30:00'}).value,'2026-10-23 12:30:00');
  assert.equal(correctionDate({_meta:{processed_at:'2026-09-04'}}).source,'_meta.processed_at');
  assert.equal(correctionDate({date:'2026-10-23',lastUpdated:'2026-02-30'}).value,'未記錄');
  assert.equal(correctionDate({}).value,'未記錄');
+});
+test('generated canonical course excludes intermediate session artifacts',()=>{
+ const html=fs.readFileSync('courses/入中論善顯密意疏/correction-dates.html','utf8');
+ assert.doesNotMatch(html,/18A_anchored/);assert.match(html,/共 219 講/);
+ assert.match(fs.readFileSync('courses/四念住/correction-dates.html','utf8'),/共 8 講/);
 });
 test('table is escaped, links back to course and does not claim listening approval',()=>{
  const html=renderCorrectionDates({courseId:'x',title:'<unsafe>'},[{id:'02A',title:'<script>',date:correctionDate({})}]);
