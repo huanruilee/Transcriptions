@@ -16,6 +16,7 @@ export interface SessionMeta {
   pendingTranscript?: boolean;
   sourceRebuildPage?: string;
   sourceRebuildStatus?: string;
+  sourceRebuildInReader?: boolean;
 }
 
 export interface TOCNode {
