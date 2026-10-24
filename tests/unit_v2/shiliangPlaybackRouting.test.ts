@@ -11,8 +11,10 @@ afterEach(()=>vi.restoreAllMocks());
 for (const sid of ['30','31']) for (const rapid of [false,true]) {
   it(`session ${sid} ${rapid?'rapidly routes different':'routes'} clicked approved sentence IDs to the same video and exact stored seconds`, async()=>{
     const settings=(window as any).happyDOM.settings;
-    const oldIframe=settings.disableIframePageLoading, oldScripts=settings.disableJavaScriptFileLoading;
-    settings.disableIframePageLoading=true;settings.disableJavaScriptFileLoading=true;
+    const oldIframe=settings.disableIframePageLoading, oldScripts=settings.disableJavaScriptFileLoading, oldSuccess=settings.handleDisabledFileLoadingAsSuccess;
+    settings.disableIframePageLoading=true;settings.disableJavaScriptFileLoading=true;settings.handleDisabledFileLoadingAsSuccess=true;
+    const frameWindow={postMessage:vi.fn()};
+    vi.spyOn(HTMLIFrameElement.prototype,'contentWindow','get').mockReturnValue(frameWindow as unknown as Window);
     const pinia=createPinia();setActivePinia(pinia);
     const annotation=useAnnotationStore(pinia);
     window.history.replaceState({},'',`/?course=shi-liang-lun-er#session-${sid}`);
@@ -47,6 +49,6 @@ for (const sid of ['30','31']) for (const rapid of [false,true]) {
       const last=rows.at(-1); now+=100;
       await wrapper.find(`.sentence[id="${last.id}"]`).trigger('click');
       expect(annotation.isEditorOpen).toBe(true);
-    } finally {wrapper.unmount();fetchMock.mockRestore();time.mockRestore();settings.disableIframePageLoading=oldIframe;settings.disableJavaScriptFileLoading=oldScripts;}
+    } finally {wrapper.unmount();fetchMock.mockRestore();time.mockRestore();settings.disableIframePageLoading=oldIframe;settings.disableJavaScriptFileLoading=oldScripts;settings.handleDisabledFileLoadingAsSuccess=oldSuccess;}
   });
 }

@@ -48,6 +48,29 @@ test(`session ${sessionId} original URL serves the approved release and actual d
   const local=fs.readFileSync('dist/'+asset.slice('/Transcriptions/'.length));
   expect(sha256(await response.body()),`release bytes ${asset}`).toBe(sha256(local));
  }
+ // Native hit testing on actual text, not the empty center of a wrapped inline span.
+ // This verifies command routing; external media is blocked and acoustic truth is a separate gate.
+ const clickedSentence=expectedSentences[34];
+ const sentenceTarget=page.locator(`.paragraph-block > .sentence[id="${clickedSentence.id}"]`);
+ await sentenceTarget.evaluate(element=>element.scrollIntoView({block:'center',behavior:'instant'}));
+ const point=await sentenceTarget.evaluate(element=>{
+  const range=document.createRange();range.selectNodeContents(element);
+  for(const r of Array.from(range.getClientRects())){
+   if(r.width<4||r.height<4)continue;
+   const x=r.left+Math.min(5,r.width/2),y=r.top+r.height/2;
+   const hit=document.elementFromPoint(x,y);
+   if(hit&&(hit===element||element.contains(hit)))return {x,y};
+  }
+  throw new Error('No visible sentence text hit target');
+ });
+ if(testInfo.project.name==='mobile')await page.touchscreen.tap(point.x,point.y);
+ else await page.mouse.click(point.x,point.y);
+ await expect.poll(async()=>{
+  const src=await page.locator('#youtube-iframe').getAttribute('src');
+  const url=new URL(src!);
+  return {video:url.pathname,start:Number(url.searchParams.get('start'))};
+ }).toEqual({video:`/embed/${source.youtubeVideoId}`,start:Math.floor(clickedSentence.start)});
+ await testInfo.attach('sentence-seek-routing-only',{body:JSON.stringify({id:clickedSentence.id,point,expectedSeconds:clickedSentence.start,iframeSrc:await page.locator('#youtube-iframe').getAttribute('src')}),contentType:'application/json'});
  // Center the control explicitly: nearest-edge auto-scroll can leave it behind
  // the fixed player on a mobile viewport. Keep normal pointer hit testing enabled.
  const downloadButton=page.locator('#download-transcript-mobile-btn');
