@@ -2203,6 +2203,7 @@ if (typeof window !== 'undefined') {
 }
 
 .header-center {
+  min-width: 0;
   flex: 1;
   max-width: 440px;
 }
@@ -2223,6 +2224,8 @@ if (typeof window !== 'undefined') {
 }
 
 .search-box input {
+  min-width: 0;
+  width: 100%;
   flex: 1;
   border: none;
   background: transparent;
