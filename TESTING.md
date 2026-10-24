@@ -105,7 +105,7 @@ npm test
 
 ## 閱讀器發布 Test Patterns（2026-10-24）
 
-來源：第 30 講重整版曾只新增獨立出版頁，主閱讀器仍載入舊 session。產物正確與 CI 通過，不代表使用者原入口已更新。以下六層須分別驗證：
+來源：第 30 講重整版曾只新增獨立出版頁，主閱讀器仍載入舊 session。產物正確與 CI 通過，不代表使用者原入口已更新。以下七層須分別驗證：
 
 | Pattern | 驗證契約 | 執行入口 |
 | --- | --- | --- |
@@ -114,6 +114,7 @@ npm test
 | 失敗回退 | 404、網路例外、過期來源及未核定內容：明示顯示原稿，保留末句與全句數，不顯示「本文已套用」或新版日期 | `tests/unit_v2/shiliangRebuildReader.test.ts` |
 | 畫面／下載一致 | 實際點擊下載，核對全部句子與原時間碼、標題及未逐句聽核提醒；formatter 單元測試不能取代下載驗收 | `tests/browser/readerRelease.spec.ts` |
 | 日期更新與追溯 | 主頁與實際下載的「重整版最後更新」須一致且等於本版核定日期；原日期另標「底稿校正日期」，不能以舊底稿日期冒充新版日期 | `tests/unit_v2/shiliangRebuildReader.test.ts`、`tests/browser/readerRelease.spec.ts` |
+| 音訊校準與點擊播放 | 音源同一性、全句聲學邊界及未解決風險；拒絕僅單調遞增的假校準 | `tests/unit/audioCalibrationGate.test.js`；聲學證據另驗證 |
 | 版本／部署驗收 | 在上傳前的相同 `_site` 及部署後原網址，以桌面／手機 Chromium 驗證預期 build 資產、已核定正文與標題、實際下載 | `.github/workflows/deploy.yml` |
 
 日期 pattern 的判定：
@@ -146,3 +147,11 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 同一個 `scripts/test_reader_artifact.sh` 亦在 PR／main 的 Completion Acceptance Linux browser job 執行，以免只在合併後才發現跨平台互動問題。手機案例使用正常觸控 `tap()`，桌面使用正常 `click()`；兩者皆保留 actionability／hit testing，並保存下載前 hit-target 診斷。
 
 手機案例另驗證 `innerWidth` 等於設定的viewport寬度，且document不得水平溢位；不同OS字型／表單intrinsic width導致的版面擴張亦須失敗，不以縮放或更改手機viewport隱藏問題。
+
+### 第七層：音訊校準與點擊播放
+
+- **指令層**：以真實文字 hit target 點擊／觸控，核對送給播放器的 video ID、seek 秒數及下載時間碼；測試預期值須來自已驗證的校準產物。不能只檢查進度條，或用同一份錯誤時間互相比對後宣稱聲學正確。
+- **聲學層**：完整音檔的 SHA-256、官方來源／影片對應、實際模型版本及聲學字級輸出均須保存。逐句 ID、順序、正文與核定版一致；每句都有可追溯聲學邊界及匹配覆蓋。未匹配、低匹配、越界、缺句或舊 digest 均拒絕標記為已校準。`tests/unit/audioCalibrationGate.test.js` 由 `npm test` 自動執行。
+- **反例**：第 30、31 講既有長句被壓成 0.5 秒；單調遞增仍不代表音文對齊。測試保留此真實失敗模式，並測試偽造完整 coverage、錯影片、缺音檔雜湊及過期來源。中文長句（至少 12 字）超過每秒 12 字或只有 0.51 秒以下，先列風險，不可用延長時間或整批平移把警報消掉。
+- **發布界線**：結構 gate 通過僅表示證據完整及基本合理，不代表已逐句人工聽核。ASR／強制對齊仍是機器候選；每個風險須有處理帳本。閱讀確認與音訊校準分開記錄，不修改既有 Henry 閱讀核定日期／digest 來替新時間背書。
+- **全講範圍**：30 講 546 句、31 講 545 句均須產出新舊時間比較與未解決清單，不能只抽查頭尾或以全局固定偏移替代校準。檔案來源不明、影片與音檔是否同時間軸未證明時，候選保留未核定；不得宣稱已上線完成。
