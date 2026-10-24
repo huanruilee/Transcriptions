@@ -326,7 +326,7 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
-            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">原稿重整版：連續閱讀、校字與原稿對照（待聽核） →</a></p>
+            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">{{ currentSessionInfo?.sourceRebuildStatus === 'reading-approved' ? '正式重整版（已閱讀確認，未逐句聽核）' : '原稿重整版：連續閱讀、校字與原稿對照（待聽核）' }} →</a></p>
             <div class="session-header-actions">
               <button
                 id="download-transcript-mobile-btn"
@@ -1694,6 +1694,7 @@ async function loadRealCourseData() {
         youtubeUrl: s.youtubeUrl,
         pendingTranscript: Boolean(s.pendingTranscript),
         sourceRebuildPage: s.sourceRebuildPage,
+        sourceRebuildStatus: s.sourceRebuildStatus,
       }));
       courseStore.setSessions(sessions);
     }

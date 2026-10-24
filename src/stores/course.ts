@@ -15,6 +15,7 @@ export interface SessionMeta {
   youtubeUrl?: string;
   pendingTranscript?: boolean;
   sourceRebuildPage?: string;
+  sourceRebuildStatus?: string;
 }
 
 export interface TOCNode {

@@ -44,7 +44,20 @@ export function buildRebuild(t,plan){
  for(const section of sections)section.sourceParagraphIds=[...new Set(section.sentences.map(s=>s.sourceParagraphId))];
  return {schema:'shiliang-source-rebuild/v1',sessionId:t.sessionId,title:t.title,youtubeVideoId:t.youtubeVideoId,sourceDigest:plan.sourceDigest||hash(JSON.stringify(t)),officialDigest:plan.officialDigest,sourceRole:'published-transcript-and-official-edited-reference-not-raw-ASR',status:'candidate-needs-audio-review',humanListened:false,sections,ledger,overview:t.contentOverview,counts:{sentences:all.length,sections:sections.length,corrected:ledger.length,pending:new Set(plan.pending.map(p=>p.id)).size,sourceCharacters:all.reduce((n,s)=>n+[...s.text].length,0),correctedCharacters:sections.reduce((n,p)=>n+[...p.reading].length,0)}};
 }
+export const readingContentDigest=b=>hash(JSON.stringify({sourceDigest:b.sourceDigest,sections:b.sections,ledger:b.ledger,overview:b.overview}));
+export function applyReadingApproval(b,a){
+ if(!a||a.type!=='reading-only'||a.humanListened!==false||a.sessionId!==b.sessionId||a.sourceDigest!==b.sourceDigest||a.contentDigest!==readingContentDigest(b)||a.approvedBy!=='Henry'||a.approvedAt!=='2026-10-24'||a.userStatement!=='30 31 講看完，可以上線了')throw Error('Invalid or stale reading approval');
+ return {...structuredClone(b),status:'reading-approved',humanListened:false,readingApproval:structuredClone(a)};
+}
 export function renderRebuild(b){
+ let html=renderCandidate(b);
+ if(b.status==='reading-approved'){
+  applyReadingApproval(b,b.readingApproval);
+  html=html.replace('｜原稿重整試閱</title>','｜原稿重整正式版</title>').replace('：原稿重整版</h1>','：原稿重整正式版</h1>').replace('本版未取代正式閱讀器。','已閱讀確認：Henry，2026-10-24。本重整閱讀版已正式發布；原有音文同步閱讀器保留。未逐句聽核。');
+ }
+ return html;
+}
+function renderCandidate(b){
  const warning='⚠️ AI辨識整理，內容可能有誤，僅供參考，請小心辨別。尚未人工聽核；本版以既有正式逐字稿及官方整編稿為文字底本，不冒稱原始 ASR。';
  const video=id=>'https://www.youtube.com/watch?v='+encodeURIComponent(b.youtubeVideoId)+'&t='+Math.floor(id)+'s';
  const groups=[['mainPoints','主要內容'],['discussionTopics','討論議題'],['referenceViews','參考觀點']];
@@ -70,10 +83,12 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   const plan=JSON.parse(fs.readFileSync(planFile));
   const source=fs.readFileSync(path.join(course,`sessions/session_${id}.json`));
   if(hash(source)!==plan.sourceDigest)throw Error('Source digest mismatch '+id);
-  const b=buildRebuild(JSON.parse(source),plan);
+  let b=buildRebuild(JSON.parse(source),plan);
   const official=fs.readFileSync(path.join(course,`source_text/session_${id}_official_raw.txt`),'utf8');
   if(hash(official)!==plan.officialDigest)throw Error('Official digest mismatch '+id);
   if(referenceBody(official,JSON.parse(source))!==normalizeText(b.sections.map(p=>p.reading).join('')))throw Error('Full reference coverage mismatch '+id);
+  const approvals=path.join(root,'reviews/evidence/shiliang-30-31-rebuild/reading-approval.json');
+  if(fs.existsSync(approvals))b=applyReadingApproval(b,JSON.parse(fs.readFileSync(approvals)).sessions.find(a=>a.sessionId===id));
   const prefix=path.join(course,`publications/lecture_${id}_verbatim_rebuild`);
   fs.writeFileSync(prefix+'.json',JSON.stringify(b,null,2)+'\n');fs.writeFileSync(prefix+'.html',renderRebuild(b));
   console.log(JSON.stringify({session:id,...b.counts}));
