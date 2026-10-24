@@ -1671,7 +1671,7 @@ async function loadRealCourseData() {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
-    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
+    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`, { cache: 'no-store' });
     if (resCourse.ok) {
       const data = await resCourse.json();
       currentPublicationState.value = data.transcriptPublicationState || '';

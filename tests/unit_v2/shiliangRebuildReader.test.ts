@@ -76,3 +76,27 @@ for (const failure of ['404', 'network', 'stale-source', 'altered-content'] as c
 }
 
 }
+
+it('refreshes course publication metadata when an older response is still cacheable',async()=>{
+ setActivePinia(createPinia());
+ window.history.replaceState({},'', '/?course=shi-liang-lun-er#session-31');
+ const mock=vi.spyOn(globalThis,'fetch').mockImplementation(async(input:any,options?:RequestInit)=>{
+  const url=String(input);
+  const file=url.includes('catalog') ? 'courses/catalog.json' : url.replace(/^\//,'');
+  if(!fs.existsSync(file)||!fs.statSync(file).isFile())return new Response('{}',{status:404});
+  let contents=fs.readFileSync(file,'utf8');
+  // Model a still-fresh browser HTTP cache from before the publication opt-in.
+  if(file===root+'course.json' && options?.cache!=='no-store'){
+   const cached=JSON.parse(contents);
+   delete cached.sessions.find((s:any)=>s.sessionId==='31').sourceRebuildInReader;
+   contents=JSON.stringify(cached);
+  }
+  return new Response(contents);
+ });
+ const wrapper=mount(App);
+ try{
+  await flushPromises();
+  await vi.waitFor(()=>expect(wrapper.text()).toContain('本文已套用'));
+  expect(wrapper.findAll('.transcript-heading')).toHaveLength(14);
+ }finally{wrapper.unmount();mock.mockRestore();}
+});
