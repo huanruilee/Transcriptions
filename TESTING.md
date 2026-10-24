@@ -117,7 +117,7 @@ npm test
 
 瀏覽器 gate 不得因缺 Chromium 或網址不可達而 skip；載入舊資產、舊正文或缺少正文皆失敗。預期值來自 checkout 的 build 與已核定 publication，不能從待驗證網站反推預期值。部署成功後 smoke 失敗，整個部署 workflow 仍為失敗，須修復或 revert，不以 deploy-pages 成功冒稱驗收完成。
 
-目前瀏覽器代表案例為釋量論第二品第 30 講；不代表全庫均已驗證。新增閱讀器來源或發布路徑時，需增加對應案例。測試攔截外部 YouTube 媒體與 Google Fonts 字型請求以降低外部服務干擾；本站 JS／CSS／JSON 維持真實載入。這是閱讀器與下載工程 gate，不是影音播放、聲學對齊或人工聽核。
+瀏覽器會從釋量論第二品 course metadata 自動列舉所有已發布且 sourceRebuildStatus 為 reading-approved 的講次，目前包含第 30、31 講；兩講主頁、核定正文與實際下載均須通過。已發布核定重整版若缺少主閱讀器啟用設定，Node 與 browser gate 都直接失敗，不能從案例清單靜默漏掉。此範圍仍不代表全庫均已驗證；新增其他課程或發布路徑時須增加案例。測試攔截外部 YouTube 媒體與 Google Fonts 字型請求以降低外部服務干擾；本站 JS／CSS／JSON 維持真實載入。這是閱讀器與下載工程 gate，不是影音播放、聲學對齊或人工聽核。
 
 ```bash
 # 既有快測與失敗回退
