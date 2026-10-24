@@ -1986,6 +1986,7 @@ function selectSession(id: string) {
 
 // 滾動防凍結機制 (對齊 V1 freezeAutoScroll: 點擊時凍結自動滾動，防止搶畫面與跳動)
 let lastClickTime = 0;
+let lastClickTarget = '';
 let singleClickTimer: any = null;
 let autoScrollFrozenUntil = 0;
 
@@ -2000,14 +2001,17 @@ function isAutoScrollFrozen(): boolean {
 // 單擊立即跳播 (保留瀏覽器 User Activation 用戶手勢，防止被 Autoplay 策略攔截) vs 雙擊編輯
 function handleSentenceClick(s: any) {
   const now = Date.now();
-  if (now - lastClickTime < 450 && lastClickTime > 0) {
-    // 450ms 內連續兩次點擊：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
+  const clickTarget = `${currentSessionId.value}:${s.id}`;
+  if (now - lastClickTime < 450 && lastClickTime > 0 && lastClickTarget === clickTarget) {
+    // 450ms 內連續點擊同講次同一句：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
     lastClickTime = 0;
+    lastClickTarget = '';
     freezeAutoScroll(1500);
     openSentenceEditor(s);
     return;
   }
   lastClickTime = now;
+  lastClickTarget = clickTarget;
 
   // 單擊：立即同步跳播，保留使用者主動點擊手勢權杖，聲音即點即播
   freezeAutoScroll(600);

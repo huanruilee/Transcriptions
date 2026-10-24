@@ -155,3 +155,7 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 - **反例**：第 30、31 講既有長句被壓成 0.5 秒；單調遞增仍不代表音文對齊。測試保留此真實失敗模式，並測試偽造完整 coverage、錯影片、缺音檔雜湊及過期來源。中文長句（至少 12 字）超過每秒 12 字或只有 0.51 秒以下，先列風險，不可用延長時間或整批平移把警報消掉。
 - **發布界線**：結構 gate 通過僅表示證據完整及基本合理，不代表已逐句人工聽核。ASR／強制對齊仍是機器候選；每個風險須有處理帳本。閱讀確認與音訊校準分開記錄，不修改既有 Henry 閱讀核定日期／digest 來替新時間背書。
 - **全講範圍**：30 講 546 句、31 講 545 句均須產出新舊時間比較與未解決清單，不能只抽查頭尾或以全局固定偏移替代校準。檔案來源不明、影片與音檔是否同時間軸未證明時，候選保留未核定；不得宣稱已上線完成。
+
+- **閱讀順序與聲音順序衝突**：正式整編稿可能調換相鄰句的順序。第 30 講 sent-101／102 已有此 ASR 診斷證據；builder 的倒序反例必須保留 review，不得推動秒數把它變成假單調成功。閱讀順序、播放器時間索引與聲學 coverage 應分開驗證；不能為了既有二分搜尋限制而改造聲學邊界。
+
+指令路由現有實作：`tests/unit_v2/shiliangPlaybackRouting.test.ts` 在 30、31 講各測一般點擊、100ms 內快速切到不同句，驗證 video ID、整秒 iframe fallback、保留小數的 seekTo postMessage；同句雙擊仍開啟編輯。`tests/browser/readerRelease.spec.ts` 以真實文字 rect／hit target 取得座標，桌面 mouse click、手機 touchscreen tap，驗證 iframe 的影片及起播秒數，不用 wrapped span 的空白中心或 force click。這些預期值目前來自既有核定資料，只證明指令送對；正式聲學時間更新時仍須通過完整校準 gate。
