@@ -319,6 +319,7 @@
               <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
                 🕒 最後校正更新：{{ currentLastUpdated }}
               </span>
+              <span v-if="currentReaderRebuiltAt" class="meta-tag rebuild-tag">📖 版面重整：{{ currentReaderRebuiltAt }}</span>
               <span class="meta-tag status-tag" :class="`status-${currentTranscriptStatus}`">
                 {{ currentTranscriptLabel }}
               </span>
@@ -326,7 +327,7 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
-            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">{{ currentSessionInfo?.sourceRebuildStatus === 'reading-approved' ? '正式重整版（已閱讀確認，未逐句聽核）' : '原稿重整版：連續閱讀、校字與原稿對照（待聽核）' }} →</a></p>
+            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">{{ currentSessionInfo?.sourceRebuildStatus === 'reading-approved' ? (currentReaderRebuiltAt ? '重整版原稿對照（本文已套用）' : '正式重整版（已閱讀確認，未逐句聽核）') : '原稿重整版：連續閱讀、校字與原稿對照（待聽核）' }} →</a></p>
             <div class="session-header-actions">
               <button
                 id="download-transcript-mobile-btn"
@@ -761,6 +762,7 @@
 </template>
 
 <script setup lang="ts">
+import { projectApprovedRebuild } from './utils/approvedRebuildReader.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { usePlayerStore } from './stores/player';
 import { useCourseStore } from './stores/course';
@@ -977,6 +979,7 @@ const youtubeIframeSrc = computed(() => {
   return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
 });
 const currentLastUpdated = ref('');
+const currentReaderRebuiltAt = ref('');
 const paragraphs = ref<any[]>([]);
 const expandedVerbatimParagraphs = ref<Record<string, boolean>>({});
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
@@ -1695,6 +1698,7 @@ async function loadRealCourseData() {
         pendingTranscript: Boolean(s.pendingTranscript),
         sourceRebuildPage: s.sourceRebuildPage,
         sourceRebuildStatus: s.sourceRebuildStatus,
+        sourceRebuildInReader: s.sourceRebuildInReader,
       }));
       courseStore.setSessions(sessions);
     }
@@ -1726,6 +1730,7 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 async function loadSession(sessionId: string) {
   currentTocProjection.value = null;
   currentReaderNotice.value = '';
+  currentReaderRebuiltAt.value = '';
   currentVerbatimLabel.value = '';
   currentQualityReviewUrl.value = '';
   hasMediaEnded.value = false;
@@ -1770,7 +1775,21 @@ async function loadSession(sessionId: string) {
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    const data = await res.json();
+    const useRebuild = currentSessionInfo.value?.sourceRebuildInReader && currentRebuildUrl.value;
+    const sourceText = useRebuild ? await res.text() : null;
+    let data = sourceText !== null ? JSON.parse(sourceText) : await res.json();
+    let rebuildFailed = false;
+    if (useRebuild) {
+      try {
+        const rebuildResponse = await fetch(currentRebuildUrl.value.replace(/\.html$/, '.json'), { cache: 'no-store' });
+        if (!rebuildResponse.ok) throw new Error(`HTTP ${rebuildResponse.status}`);
+        data = await projectApprovedRebuild(sourceText, await rebuildResponse.json());
+      } catch (error) {
+        rebuildFailed = true;
+        console.warn('重整版驗證失敗，保留原稿:', error);
+      }
+    }
+    currentReaderRebuiltAt.value = data.readerRebuiltAt || '';
     sourceOutline.value = null;
     if (data.sourceOutlineId) {
       try {
@@ -1806,6 +1825,7 @@ async function loadSession(sessionId: string) {
     currentTocProjection.value = sessionTocProjection(data.qualityReview,sessionId);
     currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
       ? data.qualityReview.readerNotice.trim() : '';
+    if (rebuildFailed) currentReaderNotice.value = '重整版暫時無法載入或來源版本不符，目前顯示原稿。請重新整理，或開啟下方重整版對照。';
     currentVerbatimLabel.value = typeof data.qualityReview?.verbatimLabel === 'string'
       ? data.qualityReview.verbatimLabel.trim() : '';
     const reviewPage = data.qualityReview?.reviewPage;
@@ -1886,6 +1906,7 @@ async function loadSession(sessionId: string) {
     }
   } catch (err) {
     currentReaderNotice.value = '';
+    currentReaderRebuiltAt.value = '';
     currentVerbatimLabel.value = '';
     currentQualityReviewUrl.value = '';
     console.error(`載入講次 ${sessionId} 逐字稿失敗:`, err);
