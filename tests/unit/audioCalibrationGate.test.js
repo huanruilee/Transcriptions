@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { auditAudioCalibration } from '../../scripts/lib/audioCalibrationGate.js';
 
 const source = { youtubeVideoId: 'video', paragraphs: [{ sentences: [{ id: 's1', text: '這是一段需要真實音訊對齊的測試句子', start: 10, end: 10.5 }] }] };
-const make = () => ({ schema: 'audio-calibration/v1', sourceDigest: 'sha256:source', videoId: 'video', audio: { sha256: `sha256:${'a'.repeat(64)}`, duration: 30, videoOffsetSeconds: 0, identityVerified: true }, engine: { name: 'acoustic-test', revision: 'fixed' }, humanListened: false, items: [{ id: 's1', text: source.paragraphs[0].sentences[0].text, start: 10, end: 17, status: 'aligned', evidence: { start: 10, end: 17, matchedCharacters: 18, totalCharacters: 18, artifactSha256: `sha256:${'b'.repeat(64)}` } }] });
+const make = () => ({ schema: 'audio-calibration/v1', sourceDigest: 'sha256:source', videoId: 'video', audio: { sha256: `sha256:${'a'.repeat(64)}`, duration: 30, videoOffsetSeconds: 0, identityVerified: true }, engine: { name: 'faster-whisper', revision: 'fixed', version: '1' }, humanListened: false, items: [{ id: 's1', text: source.paragraphs[0].sentences[0].text, start: 10, end: 17, status: 'aligned', evidence: { start: 10, end: 17, matchedCharacters: 18, totalCharacters: 18, artifactSha256: `sha256:${'b'.repeat(64)}` } }] });
 const audit = c => auditAudioCalibration(source, c, 'sha256:source');
 test('accepts evidence-bound full sentence coverage without claiming human listening', () => assert.equal(audit(make()).ok, true));
 test('rejects mechanically monotonic but compressed long sentence', () => { const c=make(); c.items[0].end=10.5; c.items[0].evidence.end=10.5; assert.ok(audit(c).errors.some(e=>e.code==='implausible-duration')); });
@@ -33,7 +33,8 @@ test('legacy 30/31 cannot be called calibrated just because timestamps are monot
 test('replays boundaries from actual acoustic words rather than trusting declared evidence', async () => {
   const { auditAcousticEvidence } = await import('../../scripts/lib/audioCalibrationGate.js');
   const c=make(); Object.assign(c.items[0].evidence,{firstWord:0,lastWord:1,unmatchedPrefix:0,unmatchedSuffix:0});
-  const evidence={audioSha256:c.audio.sha256,wordTimestamps:true,segments:[{words:[{start:10,end:12},{start:12,end:17}]}]};
+  const evidence={audioSha256:c.audio.sha256,wordTimestamps:true,duration:30,model:'fixed',fasterWhisperVersion:'1',segments:[{words:[{word:'這是一段需要真實',start:10,end:12},{word:'音訊對齊的測試句子',start:12,end:17}]}]};
+  c.items[0].evidence.totalCharacters=17;c.items[0].evidence.matchedCharacters=17;
   const sha=c.items[0].evidence.artifactSha256;
   assert.equal(auditAcousticEvidence(c,evidence,sha).ok,true);
   c.items[0].start=9; c.items[0].evidence.start=9;
@@ -41,4 +42,30 @@ test('replays boundaries from actual acoustic words rather than trusting declare
   assert.ok(auditAcousticEvidence(c,evidence,`sha256:${'c'.repeat(64)}`).errors.some(e=>e.code==='acoustic-reference'));
   evidence.audioSha256='wrong';
   assert.ok(auditAcousticEvidence(c,evidence,sha).errors.some(e=>e.code==='acoustic-identity'));
+});
+
+test('rejects forged coverage even when hashed acoustic words have matching timestamps', async()=>{
+  const {auditAcousticEvidence}=await import('../../scripts/lib/audioCalibrationGate.js');
+  const c=make();Object.assign(c.items[0].evidence,{firstWord:0,lastWord:1,unmatchedPrefix:0,unmatchedSuffix:0});
+  const e={audioSha256:c.audio.sha256,wordTimestamps:true,duration:30,model:'fixed',fasterWhisperVersion:'1',segments:[{words:[{word:'完全無關內容',start:10,end:12},{word:'沒有對應正文',start:12,end:17}]}]};
+  assert.equal(auditAcousticEvidence(c,e,c.items[0].evidence.artifactSha256).ok,false);
+  e.segments[0].words=[{}];c.items[0].evidence.lastWord=0;
+  assert.equal(auditAcousticEvidence(c,e,c.items[0].evidence.artifactSha256).ok,false);
+});
+
+test('rejects identity boolean unless bound to matching full-span audio evidence',async()=>{
+  const {auditAudioIdentity}=await import('../../scripts/lib/audioCalibrationGate.js');
+  const c=make(), sha=`sha256:${'d'.repeat(64)}`;
+  const records=[{videoId:'video',runtimeAudioSha256:c.audio.sha256,officialAudioSha256:sha,officialLinkPresentInVideoDescription:true,youtubeDuration:30,checks:[1,7,14,22,28].map(seconds=>({seconds,lagSeconds:0,correlation:.99}))}];
+  assert.equal(auditAudioIdentity(c,records,sha).ok,false);
+  c.audio.identityEvidenceSha256=sha;
+  assert.equal(auditAudioIdentity(c,records,sha).ok,true);
+  records[0].runtimeAudioSha256='wrong';
+  assert.equal(auditAudioIdentity(c,records,sha).ok,false);
+});
+test('rejects wrong model declarations and unsupported human listening claims',async()=>{
+  const {auditAcousticEvidence}=await import('../../scripts/lib/audioCalibrationGate.js');
+  const c=make();c.humanListened=true;
+  assert.ok(audit(c).errors.some(e=>e.code==='listening-claim'));
+  assert.ok(auditAcousticEvidence(c,{audioSha256:c.audio.sha256,wordTimestamps:true,model:'different',duration:30,segments:[]},c.items[0].evidence.artifactSha256).errors.some(e=>e.code==='acoustic-engine'));
 });

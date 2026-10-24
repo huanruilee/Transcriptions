@@ -32,9 +32,11 @@ GPU 服務實際為 faster-whisper 1.2.1。既有 HTTP API 忽略 `word_timestam
 node --test tests/unit/audioCalibration*.test.js
 # 繁簡匹配需 opencc-python-reimplemented；安裝在隔離環境。
 python3 scripts/build_audio_calibration_candidate.py --source SOURCE.json --evidence WORDS.json --output CANDIDATE.json
-node scripts/audit_audio_calibration.mjs SOURCE.json CANDIDATE.json WORDS.json
+node scripts/audit_audio_calibration.mjs SOURCE.json CANDIDATE.json WORDS.json AUDIO_IDENTITY.json
 ```
 
 `npm test` 自動執行反例、真實長句風險及 builder 的不插值契約。校準 audit 另外核對實際聲學檔 hash 與每句 word 邊界；缺少證據、錯影片、變更正文、缺句、低匹配或未解決風險都失敗。新建候選的 `identityVerified` 預設 false，不能因生成完成即發布。
+
+結構與聲學 replay 分開判定：後者從實際 ASR 文字以繁簡正規化及 LCS 獨立重算匹配與缺字，並核對模型 revision／版本／總長；identity manifest 亦須由 digest 綁定，不能只信 `identityVerified`。
 
 目前瀏覽器 CI 攔截 YouTube 音訊：只證明閱讀器工程行為，尚未加入以校準產物驅動的實際點擊秒數案例。聲學全句校準與該點擊案例未完成前，不能宣稱正式時間已修復。
