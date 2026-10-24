@@ -1,6 +1,6 @@
 # 逐字稿標準流程
 
-版本：1.1。更新：2026-10-24（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.2。更新：2026-10-24（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
@@ -102,7 +102,7 @@ npm run build:v2
 
 另跑本課程所需來源／ledger 稽核；不修改 gate 或測試預期來掩蓋正文錯誤。發現歷史 skip 或門檻只掃部分 engine，報告範圍，不宣稱全庫皆驗證。公開文字要求繁體中文、零適用禁止同音錯字；原始辨識證據則保留原貌。新訂正規則不能因湊零禁字而誤改實詞。
 
-瀏覽器確認閱讀頁、原話、導讀、待閱校標示、寬窄排版、下載完整性及末句音訊。獨立 reviewer 看固定 commit 與證據；工程 PASS、內容核定、發布與人工聽核分開記錄。
+瀏覽器確認閱讀頁、原話、導讀、待閱校標示、寬窄排版、下載完整性及末句音訊。閱讀器程式與發布路徑依 [閱讀器發布 Test Patterns](../TESTING.md#閱讀器發布-test-patterns2026-10-24) 分別驗證原入口、失敗回退、資料保真、實際下載與部署版本；Pages workflow 的 artifact／deployed smoke 皆通過才算工程部署驗收完成。獨立 reviewer 看固定 commit 與證據；工程 PASS、內容核定、發布與人工聽核分開記錄。
 
 使用新分支。建立 PR 必須帶明列 base、head 及 body 檔，避免互動卡住：
 
@@ -124,6 +124,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.2 | 2026-10-24 | 納入閱讀器發布五層測試契約與 artifact／deployed 瀏覽器 gate |
 | 1.1 | 2026-10-24 | 強制先尋找並核對參考資料；區分整編稿、字幕與人工聽核基準；增加 Benchmark 防洩漏、低 Token 分工及來源清單交接 |
 | 1.0 | 2026-10-23 | 統一原話優先、精煉另軌、待閱校可發布、保真追溯與驗證交接；取代舊 SOP 相衝突的流程敘述 |
 
