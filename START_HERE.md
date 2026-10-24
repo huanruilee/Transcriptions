@@ -2,6 +2,8 @@
 
 > 逐字稿、校字、導讀、講記、科判與發布任務，先完整閱讀 [最新版逐字稿流程](docs/TRANSCRIPTION_WORKFLOW.md)。其流程規則優先於本頁舊操作敘述；低 Token 流程仍維持 Draft。
 
+> 開始轉寫／校稿前，完成 [參考資料預檢與 Benchmark 分流](docs/REFERENCE_EVIDENCE_PROTOCOL.md)，留下已找到／查無來源、版本與使用範圍；不得把整編文字一致性宣稱成錄音忠實度。
+
 - Project ID: TRANSCRIPTIONS-CORE-001
 - Authority Owner: Henry Lee
 - Primary Agent Operator: 小法 (gx10 Agent)
