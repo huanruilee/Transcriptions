@@ -51,17 +51,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Verify original reader URL in the exact site artifact
-        env:
-          READER_BASE_URL: http://127.0.0.1:4173/Transcriptions/
-          READER_SMOKE_PHASE: artifact
-        run: |
-          mkdir -p "$RUNNER_TEMP/reader-site"
-          ln -s "$GITHUB_WORKSPACE/_site" "$RUNNER_TEMP/reader-site/Transcriptions"
-          python3 -m http.server 4173 --bind 127.0.0.1 --directory "$RUNNER_TEMP/reader-site" > "$RUNNER_TEMP/reader-server.log" 2>&1 &
-          reader_server_pid=$!
-          trap 'kill "$reader_server_pid"' EXIT
-          node -e 'const u=process.env.READER_BASE_URL; for(let i=0;i<30;i++){try{if((await fetch(u)).ok)process.exit(0)}catch{} await new Promise(r=>setTimeout(r,1000))}process.exit(1)' --input-type=module
-          npm run test:reader-smoke
+        run: bash scripts/test_reader_artifact.sh
 
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0

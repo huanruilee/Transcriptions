@@ -47,8 +47,19 @@ test('original session URL serves the expected release, approved body, and actua
  const downloadButton=page.locator('#download-transcript-mobile-btn');
  await downloadButton.evaluate(element=>element.scrollIntoView({block:'center',behavior:'instant'}));
  await expect(downloadButton).toBeInViewport({ratio:1});
+ await testInfo.attach('download-hit-target',{body:JSON.stringify(await downloadButton.evaluate(element=>{
+  const r=element.getBoundingClientRect();
+  const target=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+  return {rect:r.toJSON(),target:target?.outerHTML,viewport:{width:innerWidth,height:innerHeight,scale:visualViewport?.scale}};
+ })),contentType:'application/json'});
+ if(testInfo.project.name==='mobile'){
+  const viewport=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth}));
+  expect(viewport.width,'mobile layout viewport must match configured width').toBe(testInfo.project.use.viewport!.width);
+  expect(viewport.scrollWidth,'mobile page must not overflow horizontally').toBeLessThanOrEqual(testInfo.project.use.viewport!.width);
+ }
  const downloadPromise=page.waitForEvent('download');
- await downloadButton.click();
+ if(testInfo.project.name==='mobile')await downloadButton.tap();
+ else await downloadButton.click();
  const download=await downloadPromise;
  const downloadPath=await download.path();
  expect(downloadPath).toBeTruthy();
