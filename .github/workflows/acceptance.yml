@@ -30,6 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Python behavior-test dependencies
+        run: |
+          python3 -m venv .venv-test
+          .venv-test/bin/python -m pip install -r tests/python/requirements.txt
+          echo "PIPELINE_PYTHON=$GITHUB_WORKSPACE/.venv-test/bin/python" >> "$GITHUB_ENV"
+
       - name: Install acoustic verification tools
         run: |
           sources_dir="${APT_SOURCES_DIR:-/etc/apt}"

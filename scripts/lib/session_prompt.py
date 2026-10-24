@@ -79,14 +79,16 @@ def extract_terms(text: str, core_text: str = "") -> list[str]:
 
 
 def build_initial_prompt(page_range: str, source_dir: Path = SOURCE_DIR, max_chars: int = MAX_PROMPT_CHARS) -> str:
+    if max_chars <= 0:
+        return ""
     pages = load_pages(window_pages(page_range), source_dir)
     pr = parse_page_range(page_range)
     core = "".join(t for p, t in pages.items() if pr and pr[0] <= p <= pr[1])
     terms = extract_terms("\n".join(pages.values()), core)
-    prompt = PROMPT_HEAD
+    prompt = PROMPT_HEAD[:max_chars - 1]
     for t in terms:
         cand = prompt + ("" if prompt.endswith("：") else "、") + t
-        if len(cand) > max_chars:
+        if len(cand) + 1 > max_chars:
             break
         prompt = cand
     return prompt + "。"
