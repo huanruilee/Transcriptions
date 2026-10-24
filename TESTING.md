@@ -105,7 +105,7 @@ npm test
 
 ## 閱讀器發布 Test Patterns（2026-10-24）
 
-來源：第 30 講重整版曾只新增獨立出版頁，主閱讀器仍載入舊 session。產物正確與 CI 通過，不代表使用者原入口已更新。以下五層須分別驗證：
+來源：第 30 講重整版曾只新增獨立出版頁，主閱讀器仍載入舊 session。產物正確與 CI 通過，不代表使用者原入口已更新。以下六層須分別驗證：
 
 | Pattern | 驗證契約 | 執行入口 |
 | --- | --- | --- |
@@ -113,7 +113,16 @@ npm test
 | 資料保真 | ID、順序、時間、文字完整；source／approval digest 變動須拒絕投影；閱讀確認不冒稱聽核 | `tests/unit/shiliangRebuildReader.test.js` |
 | 失敗回退 | 404、網路例外、過期來源及未核定內容：明示顯示原稿，保留末句與全句數，不顯示「本文已套用」或新版日期 | `tests/unit_v2/shiliangRebuildReader.test.ts` |
 | 畫面／下載一致 | 實際點擊下載，核對全部句子與原時間碼、標題及未逐句聽核提醒；formatter 單元測試不能取代下載驗收 | `tests/browser/readerRelease.spec.ts` |
+| 日期更新與追溯 | 主頁與實際下載的「重整版最後更新」須一致且等於本版核定日期；原日期另標「底稿校正日期」，不能以舊底稿日期冒充新版日期 | `tests/unit_v2/shiliangRebuildReader.test.ts`、`tests/browser/readerRelease.spec.ts` |
 | 版本／部署驗收 | 在上傳前的相同 `_site` 及部署後原網址，以桌面／手機 Chromium 驗證預期 build 資產、已核定正文與標題、實際下載 | `.github/workflows/deploy.yml` |
+
+日期 pattern 的判定：
+
+- 新版主頁的主要更新日期及實際下載文檔，都必須取自該版 `readingApproval.approvedAt`；不可只驗證日期字串存在，也不可取測試當天日期自動充新。
+- 底稿 `lastUpdated` 原樣保留，僅以「底稿校正日期」呈現；不修改來源日期讓測試通過。未套用重整版的講次沿用原日期語意。
+- 若已套用新版卻仍以舊底稿日期顯示「最後校正更新／最後更新」，即使正文已更新，也判定 FAIL。主頁與下載日期不一致亦 FAIL。
+- 來源／核定驗證失敗而回退原稿時，不得顯示新版已套用或新版日期。原本開著的分頁重新載入時，應取得最新 publication metadata，不沿用舊入口設定。
+- 在 PR／main 的 App 測試及 Linux browser gate、部署前 artifact、部署後正式網址，均驗證此契約。目前涵蓋第 30、31 講的桌面／手機與真實下載；不是全庫日期校訂宣告。
 
 瀏覽器 gate 不得因缺 Chromium 或網址不可達而 skip；載入舊資產、舊正文或缺少正文皆失敗。預期值來自 checkout 的 build 與已核定 publication，不能從待驗證網站反推預期值。部署成功後 smoke 失敗，整個部署 workflow 仍為失敗，須修復或 revert，不以 deploy-pages 成功冒稱驗收完成。
 
