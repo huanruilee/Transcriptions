@@ -25,7 +25,7 @@ it(`session ${sessionId} loads the approved rebuild through actual course metada
   await vi.waitFor(()=>expect(wrapper.findAll('.transcript-heading')).toHaveLength(rebuild.sections.length));
   expect(wrapper.findAll('.transcript-heading')[0].text()).toContain('前行');
   expect(wrapper.findAll('.transcript-heading').map(h=>h.text())).toEqual(rebuild.sections.map((p:any)=>p.heading));
-  expect(wrapper.findAll('.paragraph-block > .sentence').map(s=>({id:s.attributes('id'),text:s.text()}))).toEqual(expectedSentences.map((s:any)=>({id:s.id,text:s.text}))); 
+  expect(wrapper.findAll('.paragraph-block > .sentence').map(s=>({id:s.attributes('id'),text:s.text()}))).toEqual(expectedSentences.map((s:any)=>({id:s.id,text:s.text})));
   expect(wrapper.text()).toContain('版面重整：2026-10-24');
   expect(wrapper.text()).toContain('本文已套用');
   expect(wrapper.text()).toContain('未逐句聽核');
