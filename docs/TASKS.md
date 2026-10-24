@@ -2,6 +2,8 @@
 
 ## 流程權威入口（2026-10-23）
 
+- [x] **READER-TEST-PATTERNS-01**：固定閱讀器入口整合、資料保真、失敗回退、實際下載一致性與部署版本 smoke 五層契約；補404／網路／過期來源／未核定內容UI測試，Pages上傳前與發布後執行桌面／手機Chromium，保存分階段驗收證據。範圍與命令見 [TESTING.md](../TESTING.md#閱讀器發布-test-patterns2026-10-24)。
+
 - [x] **SHILIANG30-READER-01**：主閱讀器套用已閱讀核定的第 30 講重整段落；來源 session 與 publication 核定檔不變，檢查來源與內容 digest，保留全部 546 句 ID／時間。獨立顯示版面重整日期、未逐句聽核限制；下載沿用投影後正文與閱讀提醒。
 
 - [x] **SESSION38A-FAITHFUL-01**：依 v1.0 完成 38A 忠實原話待閱校候選、來源帳本、GX10 ASR／LLM 證據及閱讀頁支援；驗證與限制見 [38A 交付說明](SESSION38A_FAITHFUL_READING.md)。人工聽核尚未完成，發布狀態不得標為已確認。

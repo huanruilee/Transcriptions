@@ -47,6 +47,22 @@ jobs:
           rm -rf _site/courses
           cp -r courses _site/courses
 
+      - name: Install release browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify original reader URL in the exact site artifact
+        env:
+          READER_BASE_URL: http://127.0.0.1:4173/Transcriptions/
+          READER_SMOKE_PHASE: artifact
+        run: |
+          mkdir -p "$RUNNER_TEMP/reader-site"
+          ln -s "$GITHUB_WORKSPACE/_site" "$RUNNER_TEMP/reader-site/Transcriptions"
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory "$RUNNER_TEMP/reader-site" > "$RUNNER_TEMP/reader-server.log" 2>&1 &
+          reader_server_pid=$!
+          trap 'kill "$reader_server_pid"' EXIT
+          node -e 'const u=process.env.READER_BASE_URL; for(let i=0;i<30;i++){try{if((await fetch(u)).ok)process.exit(0)}catch{} await new Promise(r=>setTimeout(r,1000))}process.exit(1)' --input-type=module
+          npm run test:reader-smoke
+
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
@@ -58,3 +74,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+      - name: Verify published original reader URL
+        env:
+          READER_BASE_URL: ${{ steps.deployment.outputs.page_url }}
+          READER_SMOKE_PHASE: deployed
+        run: npm run test:reader-smoke
+
+      - name: Save reader release evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: reader-release-${{ github.event.workflow_run.head_sha }}
+          path: test-results/
+          if-no-files-found: warn
