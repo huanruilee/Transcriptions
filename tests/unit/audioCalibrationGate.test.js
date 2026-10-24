@@ -80,3 +80,11 @@ test('rejects unrelated surrounding words used to hide compressed true speech',a
   assert.equal(audit(c).ok,true);
   assert.equal(auditAcousticEvidence(c,e,c.items[0].evidence.artifactSha256).ok,false);
 });
+
+test('rejects two repeated sentences claiming the same acoustic occurrence',async()=>{
+  const {auditAcousticEvidence}=await import('../../scripts/lib/audioCalibrationGate.js');
+  const c=make();Object.assign(c.items[0].evidence,{firstWord:0,lastWord:0,totalCharacters:17,matchedCharacters:17,unmatchedPrefix:0,unmatchedSuffix:0});
+  c.items.push({...structuredClone(c.items[0]),id:'s2'});
+  const e={audioSha256:c.audio.sha256,wordTimestamps:true,duration:30,model:'fixed',fasterWhisperVersion:'1',segments:[{words:[{word:c.items[0].text,start:10,end:17}]}]};
+  assert.equal(auditAcousticEvidence(c,e,c.items[0].evidence.artifactSha256).ok,false);
+});

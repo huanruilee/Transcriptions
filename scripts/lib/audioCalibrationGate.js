@@ -45,14 +45,16 @@ export function auditAcousticEvidence(candidate, evidence, evidenceDigest) {
   if (candidate.engine?.name !== 'faster-whisper' || candidate.engine?.revision !== evidence?.model || candidate.engine?.version !== evidence?.fasterWhisperVersion || candidate.audio?.duration !== evidence?.duration) fail('acoustic-engine');
   const words = (evidence?.segments ?? []).flatMap(s => s.words ?? []);
   if (!words.length || words.some((w,i) => typeof w.word !== 'string' || !w.word.trim() || !Number.isFinite(w.start) || !Number.isFinite(w.end) || w.start < 0 || w.end < w.start || w.end > evidence.duration || (i && w.start < words[i-1].start))) fail('acoustic-words');
+  const offsets=[];let offset=0;for(const w of words){offsets.push(offset);offset += normalized(w.word).length;}
+  let previousMatched=-1;
   for (const item of candidate.items ?? []) {
     const e = item.evidence;
     const first = words[e?.firstWord], last = words[e?.lastWord];
     if (e?.artifactSha256 !== evidenceDigest || !Number.isInteger(e?.firstWord) || !Number.isInteger(e?.lastWord) || e.firstWord > e.lastWord || !first || !last) { fail('acoustic-reference', item.id); continue; }
     if (Math.abs(first.start - item.start) > 0.001 || Math.abs(last.end - item.end) > 0.001) fail('acoustic-boundary', item.id);
     if (![e.unmatchedPrefix,e.unmatchedSuffix,e.matchedCharacters,e.totalCharacters].every(n=>Number.isInteger(n)&&n>=0) || e.unmatchedPrefix > 2 || e.unmatchedSuffix > 2 || item.risks?.length) fail('acoustic-risk', item.id);
-    const target=[...normalized(item.text)], acoustic=[], acousticWords=[];
-    for(let wi=e.firstWord;wi<=e.lastWord;wi++) for(const char of normalized(words[wi].word)) {acoustic.push(char);acousticWords.push(wi);}
+    const target=[...normalized(item.text)], acoustic=[], acousticWords=[], acousticPositions=[];
+    for(let wi=e.firstWord;wi<=e.lastWord;wi++) {let ci=0;for(const char of normalized(words[wi].word)) {acoustic.push(char);acousticWords.push(wi);acousticPositions.push(offsets[wi]+ci++);}}
     if (!target.length || acoustic.length > target.length*3+20) { fail('acoustic-text',item.id); continue; }
     // Independent LCS replay of actual words; candidate coverage is not trusted.
     const dp=Array.from({length:target.length+1},()=>new Uint32Array(acoustic.length+1));
@@ -60,6 +62,7 @@ export function auditAcousticEvidence(candidate, evidence, evidenceDigest) {
     let i=target.length,j=acoustic.length; const matched=[], acousticMatched=[];
     while(i&&j) { if(target[i-1]===acoustic[j-1]) {matched.push(i-1);acousticMatched.push(j-1);i--;j--;} else if(dp[i-1][j]>=dp[i][j-1]) i--; else j--; }
     matched.reverse(); acousticMatched.reverse();
+    for(const position of acousticMatched.map(index=>acousticPositions[index])) {if(position<=previousMatched) fail('acoustic-reuse',item.id);previousMatched=Math.max(previousMatched,position);}
     if (acousticWords[acousticMatched[0]]!==e.firstWord || acousticWords[acousticMatched.at(-1)]!==e.lastWord) fail('acoustic-boundary',item.id);
     if (e.totalCharacters!==target.length || e.matchedCharacters>matched.length || matched.length/target.length<0.75 || !matched.length || matched[0]>2 || target.length-1-matched.at(-1)>2) fail('acoustic-text',item.id);
   }
