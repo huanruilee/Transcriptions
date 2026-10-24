@@ -1,6 +1,6 @@
 # 第 30、31 講音文校準
 
-狀態：全講校準候選製作中，尚未替換正式閱讀器的時間。閱讀核定不變，未逐句人工聽核。
+狀態：兩講完整首輪候選已產生，第二輪風險區段重辨識中；尚未替換正式閱讀器的時間。閱讀核定不變，未逐句人工聽核。
 來源 commit：`3cc6514697caea78f813edfa192b3dc11ddf81c3`。第 30 講 546 句，第 31 講 545 句。
 
 ## 問題與修復契約
@@ -40,3 +40,21 @@ node scripts/audit_audio_calibration.mjs SOURCE.json CANDIDATE.json WORDS.json A
 結構與聲學 replay 分開判定：後者從實際 ASR 文字以繁簡正規化及 LCS 獨立重算匹配與缺字，並核對模型 revision／版本／總長；identity manifest 亦須由 digest 綁定，不能只信 `identityVerified`。
 
 目前瀏覽器 CI 攔截 YouTube 音訊：只證明閱讀器工程行為，尚未加入以校準產物驅動的實際點擊秒數案例。聲學全句校準與該點擊案例未完成前，不能宣稱正式時間已修復。
+
+## 首輪進度與未解決風險
+
+Test patterns 已由 PR #299 合併，commit `13c3ff5b18434efed74b08ede1a43929aa743944` 的主分支 CI 通過。獨立工程複核在固定 `a6ebdc8` PASS，限檢查器／候選工具；不是校準結果的驗收。
+
+30 講完整字級辨識完成：1,762 段、5228.774 秒；對回 546 句，其中 96 句初步列 review（87 句低匹配、40 句首尾缺字，類別有重疊）。完整 audit 仍 FAIL，正式時間未變。六句沒有可靠全局匹配，保留 null，不用舊時間填滿。
+
+首輪實測出現閱讀順序與聲音順序的衝突：正文 sent-101 是「之前的那個例子…」，sent-102 是「現在的這個例子…」；本次 ASR 在 948.16–952.70 秒先辨識「現在…」，953.26–960.41 秒後辨識「之前…」。這是 ASR 診斷、未人工聽核；證據在 `first-pass/session_30.order-conflict.json`。不能把句子時間往後推來消除倒序，也不能未經核可重排正文；須以獨立音訊時間索引或明示衝突處理。
+
+嘗試用第二個完整 large-v3 模型處理 63 個風險區段（共約 1382 秒），載入即遇 CUDA OOM，沒有產生可採用的重辨識結果；不停止其他服務來騰資源。待主要全講工作結束、釋放本次模型後再做一次有界重辨識。Qwen3-ForcedAligner 的 GPU Torch 不支援現有 GB10 執行環境，未更改驅動；CPU 單區塊試跑完成，但其強制字元時間包含未實際說出的「三稱」標示，且部分字元為零時長，不能直接當獨立聽核或全句校準 gold。未啟動未經驗證的全講 CPU 強制對齊。
+
+31 講完整字級辨識亦已完成：2,019 段、5625.742 秒，對回 545 句，首輪 matcher 列 63 句 review。將 structure 與獨立 acoustic replay 的錯誤 ID 合併後，完整待處理清單為 30 講 105 句、31 講 67 句，共 172 句；此數較 matcher 自報的 159 句更多，證明不能只信產生器自身的成功標記。兩講 audit 都 FAIL，音源 identity audit 都 PASS。
+
+第二輪改用已知可載入的同一 turbo 模型，關閉 VAD、以 63＋48 個風險視窗（約 1382＋1016 秒）各做一次重辨識；它是同模型的區段重試，不是兩個獨立 ASR 系統或人工交叉聽核。每窗都保存原始段落、字級時間及所針對的原句 ID。未自動改字或修改正式時間。
+
+首輪所有輸出保存在 `reviews/evidence/shiliang-30-31-calibration/first-pass/`：words、candidate、audit、review-queue 四類檔案分開保存。`review-queue` 包含獨立 gate 所指出的全部問題，不以候選的 `status: aligned` 當作已驗收。這些內容都是機器校準候選，不是人工確認資料。
+
+`tests/unit/audioCalibrationRecordedRegression.test.js` 將本次兩講完整首輪聲學證據保留為負向回歸：用當時 immutable source snapshot 與全音源 identity 驗證來源正確、全句有紀錄，但 structure／acoustic 必須仍拒絕校準 PASS。之後的修正版另開新版本，不覆寫這些歷史失敗資料，亦不因正式 session 變動而偷換本案例來源。
