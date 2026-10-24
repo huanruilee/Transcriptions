@@ -26,7 +26,9 @@ it(`session ${sessionId} loads the approved rebuild through actual course metada
   expect(wrapper.findAll('.transcript-heading')[0].text()).toContain('前行');
   expect(wrapper.findAll('.transcript-heading').map(h=>h.text())).toEqual(rebuild.sections.map((p:any)=>p.heading));
   expect(wrapper.findAll('.paragraph-block > .sentence').map(s=>({id:s.attributes('id'),text:s.text()}))).toEqual(expectedSentences.map((s:any)=>({id:s.id,text:s.text})));
-  expect(wrapper.text()).toContain('版面重整：2026-10-24');
+  expect(wrapper.find('.update-tag').text()).toBe('🕒 重整版最後更新：2026-10-24');
+  expect(wrapper.find('.source-update-tag').text()).toBe(`底稿校正日期：${JSON.parse(raw).lastUpdated}`);
+  expect(wrapper.text()).not.toContain('最後校正更新：');
   expect(wrapper.text()).toContain('本文已套用');
   expect(wrapper.text()).toContain('未逐句聽核');
   expect(wrapper.text()).toContain(expectedSentences.at(-1).text);
@@ -34,8 +36,11 @@ it(`session ${sessionId} loads the approved rebuild through actual course metada
 });
 it(`session ${sessionId} export keeps the approved text, timestamps, and final sentence`,async()=>{
  const result=await projectApprovedRebuild(raw,rebuild);
- const text=formatTranscriptText({courseTitle:'釋量論第二品',sessionId,sessionTitle:result.title,readerNotice:result.qualityReview.readerNotice},result.paragraphs);
+ const text=formatTranscriptText({courseTitle:'釋量論第二品',sessionId,sessionTitle:result.title,lastUpdated:result.lastUpdated,readerRebuiltAt:result.readerRebuiltAt,readerNotice:result.qualityReview.readerNotice},result.paragraphs);
  expect(text).toContain('未逐句聽核');
+ expect(text).toContain('重整版最後更新：2026-10-24');
+ expect(text).toContain(`底稿校正日期：${result.lastUpdated}`);
+ expect(text).not.toContain(`最後更新：${result.lastUpdated}`);
  expect(text.match(/^\[\d\d:\d\d:\d\d\]/gm)).toHaveLength(expectedSentences.length);
  expect(text).toContain(expectedSentences.at(-1).text);
  for(const item of rebuild.ledger) expect(text).toContain(item.after);
@@ -76,3 +81,27 @@ for (const failure of ['404', 'network', 'stale-source', 'altered-content'] as c
 }
 
 }
+
+it('refreshes course publication metadata when an older response is still cacheable',async()=>{
+ setActivePinia(createPinia());
+ window.history.replaceState({},'', '/?course=shi-liang-lun-er#session-31');
+ const mock=vi.spyOn(globalThis,'fetch').mockImplementation(async(input:any,options?:RequestInit)=>{
+  const url=String(input);
+  const file=url.includes('catalog') ? 'courses/catalog.json' : url.replace(/^\//,'');
+  if(!fs.existsSync(file)||!fs.statSync(file).isFile())return new Response('{}',{status:404});
+  let contents=fs.readFileSync(file,'utf8');
+  // Model a still-fresh browser HTTP cache from before the publication opt-in.
+  if(file===root+'course.json' && options?.cache!=='no-store'){
+   const cached=JSON.parse(contents);
+   delete cached.sessions.find((s:any)=>s.sessionId==='31').sourceRebuildInReader;
+   contents=JSON.stringify(cached);
+  }
+  return new Response(contents);
+ });
+ const wrapper=mount(App);
+ try{
+  await flushPromises();
+  await vi.waitFor(()=>expect(wrapper.text()).toContain('本文已套用'));
+  expect(wrapper.findAll('.transcript-heading')).toHaveLength(14);
+ }finally{wrapper.unmount();mock.mockRestore();}
+});

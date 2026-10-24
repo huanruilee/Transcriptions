@@ -16,6 +16,7 @@ const sessionId=session.sessionId;
 if(!session.sourceRebuildInReader)throw new Error(`Approved session ${sessionId} missing reader opt-in`);
 const approved=JSON.parse(fs.readFileSync(`${coursePath}/publications/lecture_${sessionId}_verbatim_rebuild.json`,'utf8'));
 const expectedSentences=approved.sections.flatMap((s:any)=>s.sentences);
+const source=JSON.parse(fs.readFileSync(`${coursePath}/sessions/session_${sessionId}.json`,'utf8'));
 
 test(`session ${sessionId} original URL serves the approved release and actual download`,async({page},testInfo)=>{
  // External media availability is a separate acceptance gate. Application resources remain real.
@@ -31,7 +32,8 @@ test(`session ${sessionId} original URL serves the approved release and actual d
  await page.goto(`?course=shi-liang-lun-er#session-${sessionId}`,{waitUntil:'domcontentloaded'});
  await expect(page.locator('.session-article-title')).toHaveText(session.title);
  await expect(page.locator('.session-header-actions')).toBeVisible();
- await expect(page.locator('.rebuild-tag')).toHaveText(`📖 版面重整：${approved.readingApproval.approvedAt}`);
+ await expect(page.locator('.update-tag.rebuild-tag')).toHaveText(`🕒 重整版最後更新：${approved.readingApproval.approvedAt}`);
+ await expect(page.locator('.source-update-tag')).toHaveText(`底稿校正日期：${source.lastUpdated}`);
  await expect(page.locator('.session-reader-notice')).toContainText('未逐句聽核');
  await expect(page.getByRole('link',{name:'重整版原稿對照（本文已套用） →',exact:true})).toBeVisible();
  await expect(page.locator('.transcript-heading')).toHaveText(approved.sections.map((s:any)=>s.heading));
@@ -69,6 +71,9 @@ test(`session ${sessionId} original URL serves the approved release and actual d
  expect(downloadPath).toBeTruthy();
  const text=fs.readFileSync(downloadPath!,'utf8');
  expect(text).toContain('未逐句聽核');
+ expect(text).toContain(`重整版最後更新：${approved.readingApproval.approvedAt}`);
+ expect(text).toContain(`底稿校正日期：${source.lastUpdated}`);
+ expect(text).not.toContain(`最後更新：${source.lastUpdated}`);
  expect(text).toContain(`講次：${sessionId}｜${session.title}`);
  expect(text.split('\n').filter(line=>line.startsWith('【'))).toEqual(approved.sections.map((s:any)=>s.heading));
  expect(text.match(/^\[\d\d:\d\d:\d\d\]/gm)).toHaveLength(expectedSentences.length);
