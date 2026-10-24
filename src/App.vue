@@ -316,10 +316,15 @@
               <a v-if="currentQualityReviewUrl" :href="currentQualityReviewUrl">原音抽查與待覆核清單</a>
             </p>
             <div class="session-article-meta">
-              <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
-                🕒 最後校正更新：{{ currentLastUpdated }}
+              <span
+                v-if="currentReaderRebuiltAt || currentLastUpdated"
+                class="meta-tag update-tag"
+                :class="{ 'rebuild-tag': Boolean(currentReaderRebuiltAt) }"
+                :title="currentReaderRebuiltAt ? '目前顯示之重整版核定更新日期；未逐句聽核' : '此講次逐字稿最後校正修訂日期'"
+              >
+                🕒 {{ currentReaderRebuiltAt ? '重整版最後更新' : '最後校正更新' }}：{{ currentReaderRebuiltAt || currentLastUpdated }}
               </span>
-              <span v-if="currentReaderRebuiltAt" class="meta-tag rebuild-tag">📖 版面重整：{{ currentReaderRebuiltAt }}</span>
+              <span v-if="currentReaderRebuiltAt && currentLastUpdated" class="meta-tag source-update-tag">底稿校正日期：{{ currentLastUpdated }}</span>
               <span class="meta-tag status-tag" :class="`status-${currentTranscriptStatus}`">
                 {{ currentTranscriptLabel }}
               </span>
@@ -1137,6 +1142,7 @@ function handleDownloadTranscript() {
       sessionTitle,
       pageRange: currentSessionInfo.value?.page || '',
       lastUpdated: currentLastUpdated.value,
+      readerRebuiltAt: currentReaderRebuiltAt.value,
       transcriptStatus: currentTranscriptStatus.value,
       readerNotice: currentReaderNotice.value,
     },
