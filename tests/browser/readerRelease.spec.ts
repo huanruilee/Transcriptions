@@ -42,8 +42,13 @@ test('original session URL serves the expected release, approved body, and actua
   const local=fs.readFileSync('dist/'+asset.slice('/Transcriptions/'.length));
   expect(sha256(await response.body()),`release bytes ${asset}`).toBe(sha256(local));
  }
+ // Center the control explicitly: nearest-edge auto-scroll can leave it behind
+ // the fixed player on a mobile viewport. Keep normal pointer hit testing enabled.
+ const downloadButton=page.locator('#download-transcript-mobile-btn');
+ await downloadButton.evaluate(element=>element.scrollIntoView({block:'center',behavior:'instant'}));
+ await expect(downloadButton).toBeInViewport({ratio:1});
  const downloadPromise=page.waitForEvent('download');
- await page.locator('#download-transcript-mobile-btn').click();
+ await downloadButton.click();
  const download=await downloadPromise;
  const downloadPath=await download.path();
  expect(downloadPath).toBeTruthy();
@@ -57,5 +62,7 @@ test('original session URL serves the expected release, approved body, and actua
   .toEqual(expectedSentences.map((s:any)=>`[${stamp(s.start)}] ${s.text.trim()}`));
  expect(appErrors).toEqual([]);
  await page.locator('.session-article-title').scrollIntoViewIfNeeded();
- await testInfo.attach('reader-release',{body:await page.screenshot(),contentType:'image/png'});
+ const screenshotPath=testInfo.outputPath('reader-release.png');
+ await page.screenshot({path:screenshotPath});
+ await testInfo.attach('reader-release',{path:screenshotPath,contentType:'image/png'});
 });

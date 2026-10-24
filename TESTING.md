@@ -131,3 +131,5 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 ```
 
 前一個指令要求本機伺服器提供與預計上傳相同的站台，且 `dist/index.html` 是該版本 `vite build --base=/Transcriptions/` 的輸出。CI 的準備與啟動方式見 deploy workflow。每次瀏覽器驗收保存 JSON 結果與成功畫面；失敗另保存 screenshot／trace，附於該 deployment run 的 `reader-release-<SHA>` artifact。artifact 與 deployed 結果分開保存。測試採零重試，不用自動重試掩蓋失敗。
+
+手機 viewport 的實際點擊前先將下載按鈕捲至視窗中央，確認完整位於 viewport，再以一般 pointer hit testing 點擊；禁止 `force: true` 或改用程式直接呼叫匯出來繞過遮擋。成功截圖以獨立 PNG 隨證據 artifact 保存。
