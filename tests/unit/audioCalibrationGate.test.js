@@ -55,11 +55,13 @@ test('rejects forged coverage even when hashed acoustic words have matching time
 
 test('rejects identity boolean unless bound to matching full-span audio evidence',async()=>{
   const {auditAudioIdentity}=await import('../../scripts/lib/audioCalibrationGate.js');
-  const c=make(), sha=`sha256:${'d'.repeat(64)}`;
-  const records=[{videoId:'video',runtimeAudioSha256:c.audio.sha256,officialAudioSha256:sha,officialLinkPresentInVideoDescription:true,youtubeDuration:30,checks:[1,7,14,22,28].map(seconds=>({seconds,lagSeconds:0,correlation:.99}))}];
+  const c=make(), sha=`sha256:${'d'.repeat(64)}`; c.audio.duration=60;
+  const records=[{videoId:'video',runtimeAudioSha256:c.audio.sha256,officialAudioSha256:sha,officialLinkPresentInVideoDescription:true,youtubeDuration:60,checks:[1,15,30,45,52].map(seconds=>({seconds,lagSeconds:0,correlation:.99}))}];
   assert.equal(auditAudioIdentity(c,records,sha).ok,false);
   c.audio.identityEvidenceSha256=sha;
   assert.equal(auditAudioIdentity(c,records,sha).ok,true);
+  c.audio.videoOffsetSeconds=20;assert.equal(auditAudioIdentity(c,records,sha).ok,false);c.audio.videoOffsetSeconds=0;
+  const realChecks=records[0].checks;records[0].checks=[-500,-400,-300,-200,-100].map(seconds=>({seconds,lagSeconds:0,correlation:1}));assert.equal(auditAudioIdentity(c,records,sha).ok,false);records[0].checks=realChecks;
   records[0].runtimeAudioSha256='wrong';
   assert.equal(auditAudioIdentity(c,records,sha).ok,false);
 });
@@ -68,4 +70,13 @@ test('rejects wrong model declarations and unsupported human listening claims',a
   const c=make();c.humanListened=true;
   assert.ok(audit(c).errors.some(e=>e.code==='listening-claim'));
   assert.ok(auditAcousticEvidence(c,{audioSha256:c.audio.sha256,wordTimestamps:true,model:'different',duration:30,segments:[]},c.items[0].evidence.artifactSha256).errors.some(e=>e.code==='acoustic-engine'));
+});
+
+test('rejects unrelated surrounding words used to hide compressed true speech',async()=>{
+  const {auditAcousticEvidence}=await import('../../scripts/lib/audioCalibrationGate.js');
+  const c=make(); c.audio.duration=130; c.items[0].end=117;
+  Object.assign(c.items[0].evidence,{firstWord:0,lastWord:2,end:117,totalCharacters:17,matchedCharacters:17,unmatchedPrefix:0,unmatchedSuffix:0});
+  const e={audioSha256:c.audio.sha256,wordTimestamps:true,duration:130,model:'fixed',fasterWhisperVersion:'1',segments:[{words:[{word:'無關前文',start:10,end:12},{word:c.items[0].text,start:100,end:100.5},{word:'無關後文',start:115,end:117}]}]};
+  assert.equal(audit(c).ok,true);
+  assert.equal(auditAcousticEvidence(c,e,c.items[0].evidence.artifactSha256).ok,false);
 });
