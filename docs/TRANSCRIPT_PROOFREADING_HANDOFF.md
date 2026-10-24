@@ -2,6 +2,8 @@
 
 > **最新版作業規範：[逐字稿標準流程](TRANSCRIPTION_WORKFLOW.md)。** 本頁保存個別任務交接與歷史 gate；任務狀態不自動成為全庫規範，未人工校稿者可依標準流程先以待閱校版發布。低 Token 文件仍為 Draft。
 
+> 2026-10-24 流程補充：新任務先完成 [參考資料預檢與 Benchmark 分流](REFERENCE_EVIDENCE_PROTOCOL.md)，交接 inventory、版本／授權、文字參考與人工聽核範圍、splitGroup 及參考暴露狀態。以下歷史任務的舊 gate 不因此自動變成已通過。
+
 最後更新：2026-10-22（Asia/Taipei）
 
 ## 第 08 講獨立發布範圍
