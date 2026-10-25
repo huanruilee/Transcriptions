@@ -1,4 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from'node:fs';
+import {execFileSync} from 'node:child_process';
 import {buildReading} from '../../scripts/publish_ruzhong01_reading.mjs';
 const root='reviews/evidence/ruzhong01-standard/';
 test('01 source-bound rebuild preserves all 346 source sentences and marks actual scope',()=>{
@@ -13,4 +14,13 @@ test('01 source-bound rebuild preserves all 346 source sentences and marks actua
  assert.throws(()=>buildReading(raw+' ',plan,words));assert.throws(()=>buildReading(raw,plan,words+' '));
  const bad=structuredClone(plan);bad.corrections.push({id:'unknown',from:'錯',to:'對',reason:'test'});assert.throws(()=>buildReading(raw,bad,words));
  const before=JSON.parse(raw).paragraphs[0].sentences[0].text;const rewrite=structuredClone(plan);rewrite.corrections.push({id:'p1-s1',from:before,to:'刪掉原話',reason:'test'});assert.throws(()=>buildReading(raw,rewrite,words));
+});
+
+test('01 keeps grounding pageRange parser-compatible and additional references separate',()=>{
+ const metadata=JSON.parse(fs.readFileSync('courses/入中論善顯密意疏/course.json'));
+ const item=metadata.sessions.find(s=>s.sessionId==='01');
+ assert.equal(item.pageRange,'p.63–64');
+ assert.deepEqual(item.additionalReferencePages,[6,60,61]);
+ const parsed=JSON.parse(execFileSync('python3',['-c',"import sys,json;sys.path.insert(0,'scripts/lib');from session_prompt import parse_page_range,window_pages;print(json.dumps({'range':parse_page_range(sys.argv[1]),'pages':window_pages(sys.argv[1])}))",item.pageRange],{encoding:'utf8'}));
+ assert.deepEqual(parsed.range,[63,64]);for(const page of [60,61,63,64])assert.ok(parsed.pages.includes(page));
 });
