@@ -29,3 +29,8 @@ test('editorial review requires every distinct overview key, rejecting duplicate
  const{validateContentOverview}=await import('../../scripts/content_overview_pipeline.mjs');const s=JSON.parse(fs.readFileSync(course+'sessions/session_01.json'));const opts={sourceTranscriptId:'ru-zhong-lun/session_01'};
  for(const mutate of [r=>r.items=Array(6).fill(r.items[0]),r=>r.items.pop(),r=>r.items[0].group='unknown',r=>r.items[0].index=99,r=>r.items[0].verdict='unsupported']){const bad=structuredClone(s);mutate(bad.contentOverview.review);assert.ok(validateContentOverview(bad.contentOverview,bad,opts).errors.length>0);}
 });
+
+test('candidate generation works in a fresh checkout without an existing work directory',async()=>{
+ const os=await import('node:os'),path=await import('node:path'),{execFileSync}=await import('node:child_process');const temp=fs.mkdtempSync(path.join(os.tmpdir(),'study01-fresh-'));
+ try{for(const p of ['scripts','reviews','courses'])fs.symlinkSync(path.resolve(p),path.join(temp,p),'dir');execFileSync(process.execPath,[path.resolve('scripts/publish_ruzhong01_study.mjs'),'--candidate'],{cwd:temp});assert.ok(fs.existsSync(path.join(temp,'work/ruzhong01-study/candidate.json')));assert.ok(fs.existsSync(path.join(temp,'work/ruzhong01-study/overview.json')));}finally{fs.rmSync(temp,{recursive:true,force:true});}
+});
