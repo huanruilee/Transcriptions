@@ -7,7 +7,7 @@ import { useAnnotationStore } from '../../src/stores/annotation';
 
 afterEach(()=>vi.restoreAllMocks());
 
-// Command routing only. Stored timestamps may still be acoustically wrong.
+// Command routing uses the published overlay when present; acoustic acceptance is tested separately.
 for (const sid of ['30','31']) for (const rapid of [false,true]) {
   it(`session ${sid} ${rapid?'rapidly routes different':'routes'} clicked approved sentence IDs to the same video and exact stored seconds`, async()=>{
     const settings=(window as any).happyDOM.settings;
@@ -19,7 +19,8 @@ for (const sid of ['30','31']) for (const rapid of [false,true]) {
     const annotation=useAnnotationStore(pinia);
     window.history.replaceState({},'',`/?course=shi-liang-lun-er#session-${sid}`);
     const source=JSON.parse(fs.readFileSync(`courses/釋量論第二品/sessions/session_${sid}.json`,'utf8'));
-    const rows=source.paragraphs.flatMap((p:any)=>p.sentences);
+    const timing=JSON.parse(fs.readFileSync(`courses/釋量論第二品/publications/lecture_${sid}_timing_overlay.json`,'utf8'));
+    const rows=source.paragraphs.flatMap((p:any)=>p.sentences).map((s:any)=>({...s,...(timing.items.find((r:any)=>r.id===s.id)||{})}));
     const fetchMock=vi.spyOn(globalThis,'fetch').mockImplementation(async(input:any)=>{
       const url=String(input);const file=url.includes('catalog')?'courses/catalog.json':url.replace(/^\//,'');
       return fs.existsSync(file)&&fs.statSync(file).isFile()?new Response(fs.readFileSync(file,'utf8')):new Response('{}',{status:404});
