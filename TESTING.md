@@ -170,3 +170,7 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 - `ruzhong01StudyGuide.test.js`覆蓋來源漂移、缺漏/重複範圍拒絕與底本文字完整性；Vue與artifact/deployed瀏覽器驗證主頁、原話及下載。
 
 - 2026-10-26補充講者口吻契約：研讀正文須保留格西直接論述，以「我／我們／你看」串聯原有問題、推理與保留；禁止以「格西指出／他認為」等第三者報告替代。AI導讀另軌，底本補字須明標編者註。語氣修訂仍須核對第一人稱經歷與主張有來源，不可只機械換代名詞；原話346句及時間不改。
+
+### 入中論38A本輪研讀契約
+
+`ruzhong38aStudy.test.js`驗證32段87單元、657句原話與241待核保留、來源hash與連續區間、導讀實際審查輸入一致。不得把「不許自證分」延伸成不許外境，疑詞與跨堂界線須人工來源覆核。`ruzhong38aRelease.spec.ts`納入桌面手機artifact與deployed驗證，包含主頁、大綱、原話、待核與實際下載。官方音檔標頭與完整解碼不一致時，另驗證末段節錄，不把來源區間說成精確聲學邊界。
