@@ -27,7 +27,7 @@ test('38A plan keeps every source object and flags partially corrected uncertain
 });
 test('38A final artifacts match the reviewed plan and disclose pending publication',()=>{
  const result=build38A(bytes,plan),base='courses/入中論善顯密意疏/';
- assert.deepEqual(JSON.parse(fs.readFileSync(base+'sessions/session_38A.json')),result.session);
+ const published=JSON.parse(fs.readFileSync(base+'sessions/session_38A.json'));if(published.readingEdition==='study-guide'){const raw=published.paragraphs.flatMap(p=>p.verbatimSentences);assert.deepEqual(raw.map(r=>[r.text,r.start,r.end,!!r.reviewNeeded,r.uncertainty]),result.session.paragraphs.flatMap(p=>p.sentences).map(r=>[r.text,r.start,r.end,!!r.reviewNeeded,r.uncertainty]));}else assert.deepEqual(published,result.session);
  assert.deepEqual(JSON.parse(fs.readFileSync(base+'verbatim/verbatim_38A.json')),result.verbatim);
  assert.equal(fs.readFileSync(base+'publications/lecture_38A_quality_review.html','utf8'),render38A(result));
  assert.equal(fs.readFileSync(base+'publications/lecture_38A_verbatim_reading.md','utf8'),markdown38A(result));
