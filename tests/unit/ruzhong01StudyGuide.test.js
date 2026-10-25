@@ -24,3 +24,8 @@ test('study-guide editorial overview is attributed honestly and cannot bypass ev
  const bad=structuredClone(s);bad.contentOverview.editorialSourceDigest='sha256:wrong';assert.ok(validateContentOverview(bad.contentOverview,bad,options).errors.some(e=>e.code==='GENERATOR_MISMATCH'));
  const legacy=structuredClone(s);delete legacy.readingEdition;assert.ok(validateContentOverview(legacy.contentOverview,legacy,options).errors.some(e=>e.code==='GENERATOR_MISMATCH'));
 });
+
+test('editorial review requires every distinct overview key, rejecting duplicated, missing and unknown verdicts',async()=>{
+ const{validateContentOverview}=await import('../../scripts/content_overview_pipeline.mjs');const s=JSON.parse(fs.readFileSync(course+'sessions/session_01.json'));const opts={sourceTranscriptId:'ru-zhong-lun/session_01'};
+ for(const mutate of [r=>r.items=Array(6).fill(r.items[0]),r=>r.items.pop(),r=>r.items[0].group='unknown',r=>r.items[0].index=99,r=>r.items[0].verdict='unsupported']){const bad=structuredClone(s);mutate(bad.contentOverview.review);assert.ok(validateContentOverview(bad.contentOverview,bad,opts).errors.length>0);}
+});
