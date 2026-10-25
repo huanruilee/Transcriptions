@@ -542,6 +542,12 @@
                     </template>
                   </span>
                   <span
+                    v-if="vs.reviewNeeded || vs.uncertainty || (vs.text && (vs.text.includes('【存疑】') || vs.text.includes('【待定】')))"
+                    class="sentence-review-badge verbatim-review-badge"
+                    :title="vs.uncertainty || '此句存疑，點擊核對原音與編輯'"
+                    @click.stop="openSentenceEditor(vs)"
+                  >🔍 待核定</span>
+                  <span
                     v-if="annotationStore.notes[vs.id]"
                     class="sentence-note-badge"
                     :title="annotationStore.notes[vs.id]"
@@ -1889,6 +1895,10 @@ async function loadSession(sessionId: string) {
               text: vs.text || '',
               treatiseQuote: vs.treatiseQuote ?? false,
               verseAnnotations: verseAnnotations.value[vs.id] || [],
+              reviewNeeded: vs.reviewNeeded ?? false,
+              uncertainty: vs.uncertainty ?? null,
+              agentReviewStatus: vs.agentReviewStatus ?? null,
+              agentReviewConfidence: vs.agentReviewConfidence ?? null,
             }))
           : [],
       };

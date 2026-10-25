@@ -159,3 +159,12 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 - **閱讀順序與聲音順序衝突**：正式整編稿可能調換相鄰句的順序。第 30 講 sent-101／102 已有此 ASR 診斷證據；builder 的倒序反例必須保留 review，不得推動秒數把它變成假單調成功。閱讀順序、播放器時間索引與聲學 coverage 應分開驗證；不能為了既有二分搜尋限制而改造聲學邊界。
 
 指令路由現有實作：`tests/unit_v2/shiliangPlaybackRouting.test.ts` 在 30、31 講各測一般點擊、100ms 內快速切到不同句，驗證 video ID、整秒 iframe fallback、保留小數的 seekTo postMessage；同句雙擊仍開啟編輯。`tests/browser/readerRelease.spec.ts` 以真實文字 rect／hit target 取得座標，桌面 mouse click、手機 touchscreen tap，驗證 iframe 的影片及起播秒數，不用 wrapped span 的空白中心或 force click。這些預期值目前來自既有核定資料，只證明指令送對；正式聲學時間更新時仍須通過完整校準 gate。
+
+### 入中論研讀講記（第01講依35A重做）
+
+- 正文須為依義理整理的研讀講記，不以舊口語切片數未變作成功判準；本講固定30段、81個講記單元。
+- 主頁須載入宗旨、研讀綱要、法相與研討問題；獨立Markdown/HTML及實際下載須與新正文同版，顯示待閱校與生成日期。
+- 346句原話校字稿的ID、文字、順序與起訖保留於對照，講記ID使用獨立命名；每個講記單元可追到連續來源區間，不依字數插值製造句級時間。
+- 底本補列全文明標對讀，不能變成已聽核讀誦；保留下棋譬喻、他宗問難、學習次第、三慧限定及當堂截止，不能提前補下堂滅定義理。
+- 新導讀重新審查當前正文digest。Codex編輯講記須如實署名並綁定不可變原話來源；不得冒用MiniMax生成者或只改digest套用舊審查。
+- `ruzhong01StudyGuide.test.js`覆蓋來源漂移、缺漏/重複範圍拒絕與底本文字完整性；Vue與artifact/deployed瀏覽器驗證主頁、原話及下載。
