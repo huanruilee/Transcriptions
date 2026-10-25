@@ -18,6 +18,7 @@ export interface SessionMeta {
   sourceRebuildStatus?: string;
   sourceRebuildInReader?: boolean;
   audioCalibrationOverlay?: string;
+  audioCalibrationOverlayDigest?: string;
 }
 
 export interface TOCNode {

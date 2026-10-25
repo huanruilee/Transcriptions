@@ -1707,6 +1707,7 @@ async function loadRealCourseData() {
         sourceRebuildStatus: s.sourceRebuildStatus,
         sourceRebuildInReader: s.sourceRebuildInReader,
         audioCalibrationOverlay: s.audioCalibrationOverlay,
+        audioCalibrationOverlayDigest: s.audioCalibrationOverlayDigest,
       }));
       courseStore.setSessions(sessions);
     }
@@ -1797,7 +1798,7 @@ async function loadSession(sessionId: string) {
           try {
             const timingResponse = await fetch(`${baseUrl}${cPath}/${currentSessionInfo.value.audioCalibrationOverlay}`, { cache: 'no-store' });
             if (!timingResponse.ok) throw new Error(`HTTP ${timingResponse.status}`);
-            data = await applyTimingOverlay(data, sourceText, publicationText, await timingResponse.json());
+            data = await applyTimingOverlay(data, sourceText, publicationText, await timingResponse.text(), currentSessionInfo.value.audioCalibrationOverlayDigest);
           } catch (timingError) {
             data.qualityReview.readerNotice += ' 時間校準載入或版本驗證失敗，已保留原時間。';
             console.warn('時間校準驗證失敗:', timingError);
