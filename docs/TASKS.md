@@ -100,3 +100,5 @@
 - [x] 委派小檢 QA 抽樣檢驗 sessions 69-110 — ✅ 完成（QA_REPORT_79_102.md，平均 4.83/5.0）
 - [ ] session_99B.json 補轉譯（99B 音檔僅有 A 段 20180922-A.mp3，缺 B 段音檔，無法 ASR）
 - [ ] 請領域專家複審 toc.json 79-110 章節歸屬（QA 發現 79-84B 疑為第六地延續、95A/100A 子標題對應度偏弱）
+
+- [ ] RUZHONG01-STUDY-35A：依使用者指定35A形式重做01研讀講記、原話對照、測試及正式發布（見 RUZHONG01_STUDY_GUIDE.md）。

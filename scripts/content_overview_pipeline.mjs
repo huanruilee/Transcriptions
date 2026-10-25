@@ -291,7 +291,12 @@ export function validateContentOverview(
   const isMiniMaxGenerated = overview.generatedBy === 'MiniMax-M3';
   const isDocumentedManualException = overview.generatedBy === 'Codex-manual-exception'
     && String(overview.generationException || '').startsWith('MiniMax input new_sensitive (1026)');
-  if (!isMiniMaxGenerated && !isDocumentedManualException) {
+  const isSourceBoundEditorial = overview.generatedBy === 'Codex-study-guide'
+    && transcript.readingEdition === 'study-guide'
+    && /^sha256:[a-f0-9]{64}$/.test(transcript._meta?.sourceDigest || '')
+    && overview.editorialSourceDigest === transcript._meta.sourceDigest
+    && overview.review?.sourceDigest === expectedSourceDigest;
+  if (!isMiniMaxGenerated && !isDocumentedManualException && !isSourceBoundEditorial) {
     errors.push(makeError('GENERATOR_MISMATCH', overview.generatedBy));
   }
 

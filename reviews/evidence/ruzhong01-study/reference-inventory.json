@@ -1,0 +1,25 @@
+{
+  "taskId": "RUZHONG01-STUDY-35A",
+  "sourceCommit": "aa0e6c39941045a14c7ba38e75a45f8036a8451c",
+  "checkedAt": "2026-10-25",
+  "reusedVerifiedInventory": "reviews/evidence/ruzhong01-standard/reference-inventory.json",
+  "reuseReason": "同日、同音源、同版底本；前次取得的完整官方音檔及PDF重新計算SHA吻合，重用其取得/版本核對/查無官方逐字稿記錄。非人工聽核。",
+  "assets": [
+    {
+      "localPath": "work/ruzhong01/source.mp3",
+      "sha256": "sha256:769419e52c4d250be86fa9499e267d47d312f0af9c48946db2c2699fe3d9a225",
+      "status": "verified-same-version"
+    },
+    {
+      "localPath": "work/ruzhong01/official-2016.pdf",
+      "sha256": "sha256:bfd663a4b3d3bf74ded9f0fa1798a2aca0d0e571ce0b0a9f1091555460b7c1b1",
+      "status": "verified-same-version"
+    }
+  ],
+  "roles": [
+    "edited-text-reference",
+    "terminology-reference",
+    "asr-cross-check"
+  ],
+  "benchmark": "development-regression; not blind holdout; humanListened false"
+}
