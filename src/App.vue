@@ -768,6 +768,7 @@
 
 <script setup lang="ts">
 import { projectApprovedRebuild } from './utils/approvedRebuildReader.js';
+import { applyTimingOverlay } from './utils/audioCalibrationOverlay.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { usePlayerStore } from './stores/player';
 import { useCourseStore } from './stores/course';
@@ -1705,6 +1706,8 @@ async function loadRealCourseData() {
         sourceRebuildPage: s.sourceRebuildPage,
         sourceRebuildStatus: s.sourceRebuildStatus,
         sourceRebuildInReader: s.sourceRebuildInReader,
+        audioCalibrationOverlay: s.audioCalibrationOverlay,
+        audioCalibrationOverlayDigest: s.audioCalibrationOverlayDigest,
       }));
       courseStore.setSessions(sessions);
     }
@@ -1789,7 +1792,18 @@ async function loadSession(sessionId: string) {
       try {
         const rebuildResponse = await fetch(currentRebuildUrl.value.replace(/\.html$/, '.json'), { cache: 'no-store' });
         if (!rebuildResponse.ok) throw new Error(`HTTP ${rebuildResponse.status}`);
-        data = await projectApprovedRebuild(sourceText, await rebuildResponse.json());
+        const publicationText = await rebuildResponse.text();
+        data = await projectApprovedRebuild(sourceText, JSON.parse(publicationText));
+        if (currentSessionInfo.value?.audioCalibrationOverlay) {
+          try {
+            const timingResponse = await fetch(`${baseUrl}${cPath}/${currentSessionInfo.value.audioCalibrationOverlay}`, { cache: 'no-store' });
+            if (!timingResponse.ok) throw new Error(`HTTP ${timingResponse.status}`);
+            data = await applyTimingOverlay(data, sourceText, publicationText, await timingResponse.text(), currentSessionInfo.value.audioCalibrationOverlayDigest);
+          } catch (timingError) {
+            data.qualityReview.readerNotice += ' 時間校準載入或版本驗證失敗，已保留原時間。';
+            console.warn('時間校準驗證失敗:', timingError);
+          }
+        }
       } catch (error) {
         rebuildFailed = true;
         console.warn('重整版驗證失敗，保留原稿:', error);

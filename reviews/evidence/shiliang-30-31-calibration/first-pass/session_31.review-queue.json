@@ -1,0 +1,2004 @@
+{
+  "schema": "audio-calibration-review-queue/v1",
+  "session": "31",
+  "totalSentences": 545,
+  "firstMatcherReviewCount": 63,
+  "gateReviewCount": 67,
+  "items": [
+    {
+      "id": "sent-3",
+      "text": "請放掌。",
+      "start": 72.26,
+      "end": 72.98,
+      "oldStart": 93.1,
+      "oldEnd": 93.6,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 63,
+        "lastWord": 63,
+        "start": 72.26,
+        "end": 72.98,
+        "matchedCharacters": 1,
+        "totalCharacters": 3,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 2,
+        "acousticText": "請"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-6",
+      "text": "這代表他們非常清楚苦跟心之間的關係非常緊密：「之所以會痛苦，是因為我的心中有貪念，如果我能設法遠離貪念、斷除貪念，我就不會受苦。",
+      "start": 151.27,
+      "end": 175.82,
+      "oldStart": 156.76,
+      "oldEnd": 175.57,
+      "status": "aligned",
+      "risks": [],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 167,
+        "lastWord": 223,
+        "start": 151.27,
+        "end": 175.82,
+        "matchedCharacters": 54,
+        "totalCharacters": 57,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "這代表什麼? 這代表他非常清楚, 苦與心之間關係非常緊密。之所以會痛苦, 是因為我的心中有貪念。如果我能夠設法遠離貪念, 如果我能夠設法斷除貪念, 我就不會受苦。"
+      },
+      "gateErrors": [
+        "acoustic-boundary"
+      ]
+    },
+    {
+      "id": "sent-11",
+      "text": "在此，外道提出離貪的主張──透由修苦而生厭離能夠遠離貪念；",
+      "start": 223.46,
+      "end": 231.92,
+      "oldStart": 220,
+      "oldEnd": 228.15,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 319,
+        "lastWord": 344,
+        "start": 223.46,
+        "end": 231.92,
+        "matchedCharacters": 21,
+        "totalCharacters": 25,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "提出了離貪的主張。這時候,他認為透由修苦, 而生厭離, 能夠遠離貪念。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-24",
+      "text": "我們先說什麼樣的執著稱為我執。",
+      "start": 441.41,
+      "end": 445.51,
+      "oldStart": 442.5,
+      "oldEnd": 446.63,
+      "status": "aligned",
+      "risks": [],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 787,
+        "lastWord": 797,
+        "start": 441.41,
+        "end": 445.51,
+        "matchedCharacters": 13,
+        "totalCharacters": 14,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "我們先說, 什麼樣的執著稱為我"
+      },
+      "gateErrors": [
+        "acoustic-text"
+      ]
+    },
+    {
+      "id": "sent-25",
+      "text": "之前我們一再提到，當我們執著我是獨立自主的、我不需要觀待蘊體時，那樣的執著稱為「我執」。",
+      "start": 448.91,
+      "end": 462.95,
+      "oldStart": 455.86,
+      "oldEnd": 469.25,
+      "status": "aligned",
+      "risks": [],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 799,
+        "lastWord": 844,
+        "start": 448.91,
+        "end": 462.95,
+        "matchedCharacters": 34,
+        "totalCharacters": 38,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "之前我們不是一再的提到, 所謂的我質指的是,當我們執著我, 是獨立自主的。當我們執著我, 不需要關帶孕體時,那樣的執著稱為我"
+      },
+      "gateErrors": [
+        "acoustic-text"
+      ]
+    },
+    {
+      "id": "sent-28",
+      "text": "所以使用「末學」一詞去替換「我」，根本達不到遠離我執的效果，因為心中所現起的想法仍是俱生我執，只不過是用一個比較好聽的詞去替換它罷了，但那完全沒有效果。",
+      "start": 486.46,
+      "end": 511.52,
+      "oldStart": 498.28,
+      "oldEnd": 520.7,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 898,
+        "lastWord": 965,
+        "start": 486.46,
+        "end": 511.52,
+        "matchedCharacters": 57,
+        "totalCharacters": 67,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "用墨學一詞去替換我, 根本達不到遠離我質的效果。根本達不到, 完全沒有效果。因為心中所陷起的想法, 就是聚生我質的想法。只不過, 你用了一個比較好聽的詞, 去替換它罷了。但那完全沒有效果。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-30",
+      "text": "」他為了讓心中不要現起我執，他就會說：「那我連這個都不要想。",
+      "start": 528.04,
+      "end": 529.94,
+      "oldStart": 528.7,
+      "oldEnd": 537.29,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge",
+        "implausible-duration"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 1002,
+        "lastWord": 1010,
+        "start": 528.04,
+        "end": 529.94,
+        "matchedCharacters": 12,
+        "totalCharacters": 25,
+        "unmatchedPrefix": 13,
+        "unmatchedSuffix": 0,
+        "acousticText": "就會說, 那我連這個都不要想。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "implausible-duration",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-33",
+      "text": "想著「末學想吃飯、末學想睡覺、末學想修行」，這不行，那怎麼辦？",
+      "start": 548.04,
+      "end": 555.54,
+      "oldStart": 553.65,
+      "oldEnd": 563.26,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 1036,
+        "lastWord": 1054,
+        "start": 548.04,
+        "end": 555.54,
+        "matchedCharacters": 18,
+        "totalCharacters": 24,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "學想吃飯,不行。墨學想睡覺,不行。墨學想修行,不行。那怎麼辦?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-38",
+      "text": "但是這樣就能遠離我執嗎？",
+      "start": 599.28,
+      "end": 601.02,
+      "oldStart": 602.94,
+      "oldEnd": 606.42,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 1163,
+        "lastWord": 1171,
+        "start": 599.28,
+        "end": 601.02,
+        "matchedCharacters": 8,
+        "totalCharacters": 11,
+        "unmatchedPrefix": 2,
+        "unmatchedSuffix": 0,
+        "acousticText": "這樣就能夠遠離我質嗎?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-47",
+      "text": "上課時他會說：「你就是雜念太多才會痛苦，你什麼事都不要想，你就不會痛苦。",
+      "start": 669.88,
+      "end": 678.68,
+      "oldStart": 673.34,
+      "oldEnd": 683.77,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 1314,
+        "lastWord": 1344,
+        "start": 669.88,
+        "end": 678.68,
+        "matchedCharacters": 26,
+        "totalCharacters": 31,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "他要怎麼教學?你什麼事都不要想。你就是雜念太多才會痛苦。你什麼事都不要想,你就不會痛苦。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-50",
+      "text": "應該不是。",
+      "start": 708.34,
+      "end": 708.86,
+      "oldStart": 712.09,
+      "oldEnd": 712.59,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 1398,
+        "lastWord": 1398,
+        "start": 708.34,
+        "end": 708.86,
+        "matchedCharacters": 2,
+        "totalCharacters": 4,
+        "unmatchedPrefix": 2,
+        "unmatchedSuffix": 0,
+        "acousticText": "不是。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-89",
+      "text": "但現在為什麼稱下士道的法為佛法？",
+      "start": 1187.34,
+      "end": 1190.62,
+      "oldStart": 1188.75,
+      "oldEnd": 1191.6,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 2430,
+        "lastWord": 2443,
+        "start": 1187.34,
+        "end": 1190.62,
+        "matchedCharacters": 10,
+        "totalCharacters": 15,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "但現在下世道的法,為什麼能夠稱為佛法?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-94",
+      "text": "由此可知，光是強調皈依及行善斷惡，並沒有辦法突顯佛法最不共的特色，所以要說那是佛法，有點勉強。",
+      "start": 1235.76,
+      "end": 1248.65,
+      "oldStart": 1243.95,
+      "oldEnd": 1254.05,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 2555,
+        "lastWord": 2591,
+        "start": 1235.76,
+        "end": 1248.65,
+        "matchedCharacters": 35,
+        "totalCharacters": 42,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "光是強調歸一,以及行善斷惡的內容,並沒有辦法凸顯,佛法最不共的特色。所以要說那是佛法,有點勉強。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-106",
+      "text": "這個偈頌字面上提到的是苦諦的四種行相──無常、苦、空、無我，但這個地方用了「增益」一詞，所以在解釋的時候，它是用相反的角度去解釋，而提到堅、樂、我以及我所。",
+      "start": 1429.39,
+      "end": 1450.75,
+      "oldStart": 1438.73,
+      "oldEnd": 1462.74,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 2996,
+        "lastWord": 3048,
+        "start": 1429.39,
+        "end": 1450.75,
+        "matchedCharacters": 54,
+        "totalCharacters": 64,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "字面上提到的是,苦地的四種形象。無常、苦、空、無我。但這個地方,用了增益一詞。所以,在解釋的時候,它是用相反的角度去解釋。所以提到,兼勒我以及我所。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-139",
+      "text": "透由我們的心所增益的十六種行相，那只是顛倒的認知去增益的一個假相，在增益那個假相之後，進一步我們會生起貪愛，由貪而再再流轉，所以提到「非真而愛著」。",
+      "start": 1681.32,
+      "end": 1704.3,
+      "oldStart": 1701.38,
+      "oldEnd": 1722.75,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3560,
+        "lastWord": 3619,
+        "start": 1681.32,
+        "end": 1704.3,
+        "matchedCharacters": 46,
+        "totalCharacters": 66,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "透由顛倒的認知,所增益出的十六種形象。那只是我們的心,去增益出的一個假象。在增益出一個假象之後,進一步,我們會生起貪愛。由貪,而再再流轉。所以提到,非真而愛"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-140",
+      "text": "那些境實際上是我們的心去增益的，它並不是真相，它只是一個假相，但是我們對這個假相生起了貪愛，因為貪愛而一再地在輪迴當中流轉，所以提到「貪愛」是輪迴的根本。",
+      "start": 1706.9,
+      "end": 1725.82,
+      "oldStart": 1722.75,
+      "oldEnd": 1729.56,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3622,
+        "lastWord": 3677,
+        "start": 1706.9,
+        "end": 1725.82,
+        "matchedCharacters": 61,
+        "totalCharacters": 69,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "實際上,是我們的心,去增益出來。它並不是真相,它只是一個假象。但是,我們對這個假象,生起了貪愛。因為貪愛,而再再的,在輪迴當中流轉。所以提到,貪愛,是輪迴的根本。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-146",
+      "text": "當我們在探索集諦時，是把焦點放在有漏的業和煩惱上，而說這兩者是因。",
+      "start": 1765.36,
+      "end": 1778.63,
+      "oldStart": 1769.47,
+      "oldEnd": 1782.25,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3760,
+        "lastWord": 3790,
+        "start": 1765.36,
+        "end": 1778.63,
+        "matchedCharacters": 22,
+        "totalCharacters": 30,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "當我們在探索極地時,是把焦點,放在有漏的葉和煩惱上。有漏的葉和煩惱是因。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-149",
+      "text": "第二種行相──集，「集」是什麼意思？",
+      "start": 1783.15,
+      "end": 1786.71,
+      "oldStart": 1783.97,
+      "oldEnd": 1784.47,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3799,
+        "lastWord": 3806,
+        "start": 1783.15,
+        "end": 1786.71,
+        "matchedCharacters": 8,
+        "totalCharacters": 12,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "第二種形象,急。急,是什麼意思?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-153",
+      "text": "滅諦的四種行相：滅、靜、妙、離。",
+      "start": 1818.48,
+      "end": 1822.88,
+      "oldStart": 1810.4,
+      "oldEnd": 1814.25,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3868,
+        "lastWord": 3878,
+        "start": 1818.48,
+        "end": 1822.88,
+        "matchedCharacters": 8,
+        "totalCharacters": 11,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "滅地的四種形象。滅,靜,妙,離。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-157",
+      "text": "「靜」呢？",
+      "start": 1844.76,
+      "end": 1844.98,
+      "oldStart": 1845.79,
+      "oldEnd": 1846.1,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3937,
+        "lastWord": 3937,
+        "start": 1844.76,
+        "end": 1844.98,
+        "matchedCharacters": 1,
+        "totalCharacters": 2,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "靜,"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-159",
+      "text": "為什麼斷除煩惱稱為靜？",
+      "start": 1850.28,
+      "end": 1851.2,
+      "oldStart": 1849.42,
+      "oldEnd": 1852.92,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 3948,
+        "lastWord": 3951,
+        "start": 1850.28,
+        "end": 1851.2,
+        "matchedCharacters": 6,
+        "totalCharacters": 10,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "為什麼稱為靜?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-164",
+      "text": "之前，我們在介紹滅諦的四種行相時提到，在偈頌裡並沒有特別強調第四種行相──離，而說在介紹道諦的四種行相──道、如、行、出──的第四種行相時會一併介紹。",
+      "start": 1882.38,
+      "end": 1901.16,
+      "oldStart": 1881.74,
+      "oldEnd": 1902.5,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4030,
+        "lastWord": 4084,
+        "start": 1882.38,
+        "end": 1901.16,
+        "matchedCharacters": 43,
+        "totalCharacters": 62,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "之前我們在介紹滅地的四種形象時,第四種形象,離,在寄送裡面,並沒有特別強調。而說,在介紹道地的四種形象,道如行出的第四種形象,會一併介紹。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-165",
+      "text": "但實際上在《釋量論》的第二品當中，並沒有將道諦的四種行相分開來介紹，而是把四種行相混在一起解釋，這在賈曹傑大師、克主傑大師及僧成大師的論著裡都可以看得出來。",
+      "start": 1901.9,
+      "end": 1926.26,
+      "oldStart": 1924.48,
+      "oldEnd": 1948.99,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4085,
+        "lastWord": 4153,
+        "start": 1901.9,
+        "end": 1926.26,
+        "matchedCharacters": 50,
+        "totalCharacters": 71,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "但實際上,在《适量論》的第二品當中,並沒有將道地的四種形象,分開來介紹。它並沒有分開來介紹。這在,賈曹節大師,課主節大師,以及僧成大師,這幾位大師的論柱裡面,都可以看得出來。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-174",
+      "text": "第四種增益：認為沒有徹底斷除痛苦之道──沒有任何方法能夠徹底斷",
+      "start": 1998.75,
+      "end": 2004.91,
+      "oldStart": 1999.84,
+      "oldEnd": 2007.6,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4336,
+        "lastWord": 4353,
+        "start": 1998.75,
+        "end": 2004.91,
+        "matchedCharacters": 19,
+        "totalCharacters": 28,
+        "unmatchedPrefix": 7,
+        "unmatchedSuffix": 0,
+        "acousticText": "沒有徹底斷除痛苦之道。沒有這樣的方法,能夠徹底斷"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-177",
+      "text": "其中，第一種行相：道。",
+      "start": null,
+      "end": null,
+      "oldStart": 2008.6,
+      "oldEnd": 2009.1,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": null,
+        "lastWord": null,
+        "start": null,
+        "end": null,
+        "matchedCharacters": 0,
+        "totalCharacters": 8,
+        "unmatchedPrefix": 8,
+        "unmatchedSuffix": 8,
+        "acousticText": ""
+      },
+      "gateErrors": [
+        "acoustic-reference",
+        "evidence-boundary",
+        "invalid-time",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-180",
+      "text": "這就像滅諦的四種行相當中首先提到了「滅」，它要強調的是什麼？",
+      "start": 2019.53,
+      "end": 2025.75,
+      "oldStart": 2016.14,
+      "oldEnd": 2025.24,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4391,
+        "lastWord": 4411,
+        "start": 2019.53,
+        "end": 2025.75,
+        "matchedCharacters": 18,
+        "totalCharacters": 26,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "這就像,滅地的四種形象。第一種,提到了滅。他要強調的是什麼?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-185",
+      "text": "第二種行相：如。",
+      "start": 2056.96,
+      "end": 2058.46,
+      "oldStart": 2054.56,
+      "oldEnd": 2056.66,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4480,
+        "lastWord": 4484,
+        "start": 2056.96,
+        "end": 2058.46,
+        "matchedCharacters": 4,
+        "totalCharacters": 6,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "第二種形象,如。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-187",
+      "text": "第三種行相：行。",
+      "start": 2082.31,
+      "end": 2084.27,
+      "oldStart": 2075.47,
+      "oldEnd": 2077.31,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4544,
+        "lastWord": 4548,
+        "start": 2082.31,
+        "end": 2084.27,
+        "matchedCharacters": 4,
+        "totalCharacters": 6,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 2,
+        "acousticText": "第三種形象,行。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-188",
+      "text": "現證無我的智慧是能現證心的究竟體性之道。",
+      "start": 2087.82,
+      "end": 2100.61,
+      "oldStart": 2090.06,
+      "oldEnd": 2098.37,
+      "status": "aligned",
+      "risks": [],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4551,
+        "lastWord": 4584,
+        "start": 2087.82,
+        "end": 2100.61,
+        "matchedCharacters": 15,
+        "totalCharacters": 19,
+        "unmatchedPrefix": 2,
+        "unmatchedSuffix": 0,
+        "acousticText": "無我的智慧,是能憲政心的究竟體性之道。憲政無我的智慧,是能憲政心的究竟體性之道。"
+      },
+      "gateErrors": [
+        "acoustic-boundary"
+      ]
+    },
+    {
+      "id": "sent-200",
+      "text": "它們不會痛，所以是心在痛。",
+      "start": 2197.71,
+      "end": 2199.97,
+      "oldStart": 2203.14,
+      "oldEnd": 2203.64,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4798,
+        "lastWord": 4804,
+        "start": 2197.71,
+        "end": 2199.97,
+        "matchedCharacters": 8,
+        "totalCharacters": 11,
+        "unmatchedPrefix": 1,
+        "unmatchedSuffix": 0,
+        "acousticText": "他們不會痛。這是心在痛。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-201",
+      "text": "意思是：我們的心被煩惱束縛、被苦束縛，所以我們的心需要解脫；",
+      "start": 2207.37,
+      "end": 2210.11,
+      "oldStart": 2208.14,
+      "oldEnd": 2220.09,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 4805,
+        "lastWord": 4810,
+        "start": 2207.37,
+        "end": 2210.11,
+        "matchedCharacters": 10,
+        "totalCharacters": 26,
+        "unmatchedPrefix": 16,
+        "unmatchedSuffix": 0,
+        "acousticText": "所以我們的心需要解脫。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-226",
+      "text": "接著，第四種行相：出。",
+      "start": 2402.84,
+      "end": 2407.51,
+      "oldStart": 2406.61,
+      "oldEnd": 2407.54,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 5248,
+        "lastWord": 5249,
+        "start": 2402.84,
+        "end": 2407.51,
+        "matchedCharacters": 2,
+        "totalCharacters": 8,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 6,
+        "acousticText": "接著,"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-227",
+      "text": "「出」是指能夠徹底根除痛苦和煩惱，不會再被痛苦和煩惱所逼迫。",
+      "start": null,
+      "end": null,
+      "oldStart": 2475.82,
+      "oldEnd": 2492.01,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": null,
+        "lastWord": null,
+        "start": null,
+        "end": null,
+        "matchedCharacters": 0,
+        "totalCharacters": 26,
+        "unmatchedPrefix": 26,
+        "unmatchedSuffix": 26,
+        "acousticText": ""
+      },
+      "gateErrors": [
+        "acoustic-reference",
+        "evidence-boundary",
+        "implausible-duration",
+        "invalid-time",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-229",
+      "text": "由此便能得知，滅諦的四種行相當中的「離」──之後不再生苦，就是這個意思。",
+      "start": 2431.11,
+      "end": 2447.97,
+      "oldStart": 2493.77,
+      "oldEnd": 2503.5,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 5301,
+        "lastWord": 5341,
+        "start": 2431.11,
+        "end": 2447.97,
+        "matchedCharacters": 23,
+        "totalCharacters": 29,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "能徹底根除痛苦和煩惱的道。所以從這一點,應該就能夠得知,滅地的四種形象當中的离,之後不再生苦,就是這個意思。"
+      },
+      "gateErrors": [
+        "acoustic-boundary",
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-232",
+      "text": "「於彼相違義」──與這十六種假相相違的，指的是什麼？",
+      "start": 2503.93,
+      "end": 2510.17,
+      "oldStart": 2537.81,
+      "oldEnd": 2543.98,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 5463,
+        "lastWord": 5476,
+        "start": 2503.93,
+        "end": 2510.17,
+        "matchedCharacters": 14,
+        "totalCharacters": 20,
+        "unmatchedPrefix": 1,
+        "unmatchedSuffix": 0,
+        "acousticText": "彼,與這十六種假象相為的,指的是什麼?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-233",
+      "text": "與增益的十六種行相相違的是四諦的十六種行相，那才是真性相。",
+      "start": 2511.09,
+      "end": 2519.37,
+      "oldStart": 2545.26,
+      "oldEnd": 2554.71,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 5477,
+        "lastWord": 5501,
+        "start": 2511.09,
+        "end": 2519.37,
+        "matchedCharacters": 19,
+        "totalCharacters": 27,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "與增益的十六種形象相為的,是四弟的十六種形象。那是真性"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-250",
+      "text": "（學員：不是。",
+      "start": null,
+      "end": null,
+      "oldStart": 2692.26,
+      "oldEnd": 2693.66,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": null,
+        "lastWord": null,
+        "start": null,
+        "end": null,
+        "matchedCharacters": 0,
+        "totalCharacters": 4,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 4,
+        "acousticText": ""
+      },
+      "gateErrors": [
+        "acoustic-reference",
+        "evidence-boundary",
+        "invalid-time",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-269",
+      "text": "簡單來說，不要造下新的惡業，又能消除過往的惡業，等惡業都被淨化了，我就解脫了。",
+      "start": 2762.36,
+      "end": 2771.46,
+      "oldStart": 2829.54,
+      "oldEnd": 2841.44,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 6054,
+        "lastWord": 6081,
+        "start": 2762.36,
+        "end": 2771.46,
+        "matchedCharacters": 29,
+        "totalCharacters": 34,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "不要造新的惡業,又能夠消除過往的惡業,等惡業都被淨化了,我就解脫了。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-275",
+      "text": "回到上一句，「三因缺一故」──因為輪迴必須具備身體、業及煩惱三種因素，但阿羅漢缺少了主因──煩惱；",
+      "start": 2826.72,
+      "end": 2850.66,
+      "oldStart": 2895.59,
+      "oldEnd": 2909.24,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 6204,
+        "lastWord": 6263,
+        "start": 2826.72,
+        "end": 2850.66,
+        "matchedCharacters": 30,
+        "totalCharacters": 39,
+        "unmatchedPrefix": 5,
+        "unmatchedSuffix": 0,
+        "acousticText": "三陰缺一故,因為輪迴必須具備身體、夜和煩惱三種因素。這當中的煩惱,現在強調的是貪愛。因為輪迴必須具備身體、夜、貪愛三種因素。阿羅漢缺少了主因,煩惱,"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-276",
+      "text": "這當中的煩惱強調的是貪愛。",
+      "start": null,
+      "end": null,
+      "oldStart": 2910.05,
+      "oldEnd": 2914.25,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": null,
+        "lastWord": null,
+        "start": null,
+        "end": null,
+        "matchedCharacters": 0,
+        "totalCharacters": 12,
+        "unmatchedPrefix": 12,
+        "unmatchedSuffix": 12,
+        "acousticText": ""
+      },
+      "gateErrors": [
+        "acoustic-reference",
+        "evidence-boundary",
+        "implausible-duration",
+        "invalid-time",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-306",
+      "text": "下一句，因為沒有斷除貪愛，根本就沒有能力斷除身體和業。",
+      "start": 3112.65,
+      "end": 3117.95,
+      "oldStart": 3193.02,
+      "oldEnd": 3193.52,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 6861,
+        "lastWord": 6877,
+        "start": 3112.65,
+        "end": 3117.95,
+        "matchedCharacters": 20,
+        "totalCharacters": 24,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 1,
+        "acousticText": "因為沒有斷除貪愛,根本就沒有能力斷除身體和"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-322",
+      "text": "「比知」──推測得知，就能推測得知業的種類與強弱有很多種，所以提到「業功能，有多種差異」。",
+      "start": 3323.82,
+      "end": 3327.44,
+      "oldStart": 3369.37,
+      "oldEnd": 3381.62,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 7319,
+        "lastWord": 7329,
+        "start": 3323.82,
+        "end": 3327.44,
+        "matchedCharacters": 12,
+        "totalCharacters": 35,
+        "unmatchedPrefix": 23,
+        "unmatchedSuffix": 0,
+        "acousticText": "所以提到,業功能有多種差異。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-329",
+      "text": "簡單來說，有一種煩惱是所有煩惱的根本，只要斷除它，就能斷除所有的煩惱；",
+      "start": 3420.12,
+      "end": 3426.96,
+      "oldStart": 3422.81,
+      "oldEnd": 3430.64,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 7531,
+        "lastWord": 7556,
+        "start": 3420.12,
+        "end": 3426.96,
+        "matchedCharacters": 27,
+        "totalCharacters": 31,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "有一種煩惱,是所有煩惱的根本。只要斷除了它,就能夠斷除所有的煩惱。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-348",
+      "text": "克主傑大師在解釋時，先解釋了後面那兩句，「若苦行異染，或即是煩惱」。",
+      "start": 3670.9,
+      "end": 3679.88,
+      "oldStart": 3673.72,
+      "oldEnd": 3683.25,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 8133,
+        "lastWord": 8155,
+        "start": 3670.9,
+        "end": 3679.88,
+        "matchedCharacters": 21,
+        "totalCharacters": 28,
+        "unmatchedPrefix": 5,
+        "unmatchedSuffix": 0,
+        "acousticText": "在解釋的時候,先解釋了後面的兩句。若苦行易染,或即是煩惱。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-360",
+      "text": "因此，自宗問到：如果透過持戒就能將所有的業混合起來，並且修一種苦行就能將那些業都淨除，那你何必修那麼多種苦行？",
+      "start": 3805.38,
+      "end": 3819.5,
+      "oldStart": 3810.18,
+      "oldEnd": 3821.04,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 8468,
+        "lastWord": 8509,
+        "start": 3805.38,
+        "end": 3819.5,
+        "matchedCharacters": 42,
+        "totalCharacters": 50,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "問題是,如果透過持戒,就能將所有的業混合起來,並且修一種苦行,就能將所有的業都淨除。那你何必修這麼多種苦行?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-362",
+      "text": "所以提到「為染分能斷」，「染」也是煩惱的意思，而這裡的「煩惱」是指以苦行讓身體受苦；",
+      "start": 3821.72,
+      "end": 3833.5,
+      "oldStart": 3823.14,
+      "oldEnd": 3835.27,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 8518,
+        "lastWord": 8545,
+        "start": 3821.72,
+        "end": 3833.5,
+        "matchedCharacters": 24,
+        "totalCharacters": 33,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "所以提到,唯染分能斷。這當中的染,也是煩惱的意思。所謂的煩惱,讓身體受苦,"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-378",
+      "text": "因此，則此不能使，功能合雜等──它根本沒有能力將過往所造的業混合起來。",
+      "start": 4050.72,
+      "end": 4062.8,
+      "oldStart": 4050.75,
+      "oldEnd": 4059.9,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9094,
+        "lastWord": 9111,
+        "start": 4050.72,
+        "end": 4062.8,
+        "matchedCharacters": 20,
+        "totalCharacters": 30,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "因此,它根本沒有能力將過往所造的業混合起來。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-383",
+      "text": "如此一來，牛在犁完田之後，牠的業都淨化了，所以牠也可以獲得解脫？",
+      "start": 4120.1,
+      "end": 4126.04,
+      "oldStart": 4120.39,
+      "oldEnd": 4132.64,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9247,
+        "lastWord": 9264,
+        "start": 4120.1,
+        "end": 4126.04,
+        "matchedCharacters": 19,
+        "totalCharacters": 28,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "牛離完田之後,他的業都進化了。所以他也可以獲得解脫。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-392",
+      "text": "那要如何對治業？",
+      "start": 4237.37,
+      "end": 4238.45,
+      "oldStart": 4242.88,
+      "oldEnd": 4243.38,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9492,
+        "lastWord": 9496,
+        "start": 4237.37,
+        "end": 4238.45,
+        "matchedCharacters": 5,
+        "totalCharacters": 7,
+        "unmatchedPrefix": 1,
+        "unmatchedSuffix": 0,
+        "acousticText": "要如何對峙業?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-397",
+      "text": "業可以對治；",
+      "start": 4274.15,
+      "end": 4275.31,
+      "oldStart": 4272.34,
+      "oldEnd": 4274.08,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9597,
+        "lastWord": 9600,
+        "start": 4274.15,
+        "end": 4275.31,
+        "matchedCharacters": 2,
+        "totalCharacters": 5,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "業能夠對"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-403",
+      "text": "對此，自宗提到：非從業起過，有患乃能作，已遮則不作。",
+      "start": 4324.83,
+      "end": 4333.45,
+      "oldStart": 4326.39,
+      "oldEnd": 4337.15,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9711,
+        "lastWord": 9732,
+        "start": 4324.83,
+        "end": 4333.45,
+        "matchedCharacters": 14,
+        "totalCharacters": 21,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "對於這一點,自從提到,非從業起故,有患乃能做,以這則不"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-405",
+      "text": "換句話說，光是有業，不會產生貪等過失。",
+      "start": 4345.99,
+      "end": 4357.79,
+      "oldStart": 4344.44,
+      "oldEnd": 4350.04,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9755,
+        "lastWord": 9784,
+        "start": 4345.99,
+        "end": 4357.79,
+        "matchedCharacters": 12,
+        "totalCharacters": 16,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "光是有業,不會產生過失。所以提到,非從業起故,從沒有貪愛的業,不會產生貪等過失。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-413",
+      "text": "如果不對治業，就表示善業還在，既然如此，善業就會感果。",
+      "start": 4419.8,
+      "end": 4426.44,
+      "oldStart": 4419.77,
+      "oldEnd": 4427.32,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9917,
+        "lastWord": 9933,
+        "start": 4419.8,
+        "end": 4426.44,
+        "matchedCharacters": 15,
+        "totalCharacters": 23,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 2,
+        "acousticText": "如果不對之業,善業還在。既然善業還在,善業就會"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-415",
+      "text": "樂受。",
+      "start": 4429.14,
+      "end": 4429.42,
+      "oldStart": 4430.61,
+      "oldEnd": 4431.11,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9944,
+        "lastWord": 9944,
+        "start": 4429.14,
+        "end": 4429.42,
+        "matchedCharacters": 1,
+        "totalCharacters": 2,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 1,
+        "acousticText": "樂"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-418",
+      "text": "「若無邪分別」──只要斷除我執，就不會生起非理作意等顛倒的分別；",
+      "start": 4444.84,
+      "end": 4451.1,
+      "oldStart": 4445.61,
+      "oldEnd": 4454.21,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9971,
+        "lastWord": 9991,
+        "start": 4444.84,
+        "end": 4451.1,
+        "matchedCharacters": 18,
+        "totalCharacters": 26,
+        "unmatchedPrefix": 5,
+        "unmatchedSuffix": 0,
+        "acousticText": "只要斷除了我之,就不會生起非禮作義等,顛倒的分別。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-419",
+      "text": "「樂亦不起貪」──在這樣的情況下，即使有樂受也不會生貪。",
+      "start": 4452.1,
+      "end": 4457.12,
+      "oldStart": 4454.21,
+      "oldEnd": 4461.57,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 9992,
+        "lastWord": 10004,
+        "start": 4452.1,
+        "end": 4457.12,
+        "matchedCharacters": 16,
+        "totalCharacters": 22,
+        "unmatchedPrefix": 5,
+        "unmatchedSuffix": 0,
+        "acousticText": "在這樣的情況下,即使有樂壽,也不會生貪。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-421",
+      "text": "這代表有樂受不一定會生貪；",
+      "start": 4466.74,
+      "end": 4469.98,
+      "oldStart": 4469.33,
+      "oldEnd": 4472.73,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10027,
+        "lastWord": 10034,
+        "start": 4466.74,
+        "end": 4469.98,
+        "matchedCharacters": 8,
+        "totalCharacters": 12,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "有樂壽,不一定會生貪。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-422",
+      "text": "以此類推，有苦受也不一定會起瞋。",
+      "start": 4471.32,
+      "end": 4474.12,
+      "oldStart": 4472.73,
+      "oldEnd": 4473.23,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10039,
+        "lastWord": 10046,
+        "start": 4471.32,
+        "end": 4474.12,
+        "matchedCharacters": 8,
+        "totalCharacters": 14,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 1,
+        "acousticText": "有苦壽,也不一定會起"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-434",
+      "text": "」所以有些人會不辭千里跑到 GAYA（菩提迦耶）去拜十萬大禮拜，覺得這樣能淨化比較多的惡業；",
+      "start": 4614.89,
+      "end": 4627.6,
+      "oldStart": 4627.44,
+      "oldEnd": 4631.09,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10341,
+        "lastWord": 10370,
+        "start": 4614.89,
+        "end": 4627.6,
+        "matchedCharacters": 27,
+        "totalCharacters": 40,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 3,
+        "acousticText": "所以有些人,會不辭千里,跑到Gaia去拜十萬大禮拜。是不是?這樣淨化的惡業比較多。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-437",
+      "text": "相對來說，家裡的佛像比較沒有加持力，是這樣嗎？",
+      "start": 4642.82,
+      "end": 4648.32,
+      "oldStart": 4642.91,
+      "oldEnd": 4649.42,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10401,
+        "lastWord": 10416,
+        "start": 4642.82,
+        "end": 4648.32,
+        "matchedCharacters": 16,
+        "totalCharacters": 20,
+        "unmatchedPrefix": 4,
+        "unmatchedSuffix": 0,
+        "acousticText": "家裡的佛像呢?相對來說,比較沒有加持力。是這樣嗎?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-451",
+      "text": "（學員：不是。",
+      "start": 4727.51,
+      "end": 4727.77,
+      "oldStart": 4726.09,
+      "oldEnd": 4726.59,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10586,
+        "lastWord": 10586,
+        "start": 4727.51,
+        "end": 4727.77,
+        "matchedCharacters": 2,
+        "totalCharacters": 4,
+        "unmatchedPrefix": 2,
+        "unmatchedSuffix": 0,
+        "acousticText": "不是,"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-458",
+      "text": "這樣說來，你都可以用自己的心在佛像上安立出它原本沒有的加持力，那你就加持自己就好啦，何必去領受加持？",
+      "start": 4764.04,
+      "end": 4781.52,
+      "oldStart": 4767.37,
+      "oldEnd": 4782.58,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10678,
+        "lastWord": 10726,
+        "start": 4764.04,
+        "end": 4781.52,
+        "matchedCharacters": 34,
+        "totalCharacters": 46,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 8,
+        "acousticText": "這樣看起來,你就自己加持自己就好了。何必去領受加持?你都可以用你自己的心,在佛的身上安利出,它本來沒有的加持力。那你就加持你自己就好了。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-467",
+      "text": "我覺得差異不大，拜十萬大禮拜也不輕鬆，我們在做的也是苦行；",
+      "start": 4854.21,
+      "end": 4861.95,
+      "oldStart": 4862.73,
+      "oldEnd": 4871.45,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 10871,
+        "lastWord": 10892,
+        "start": 4854.21,
+        "end": 4861.95,
+        "matchedCharacters": 17,
+        "totalCharacters": 26,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 9,
+        "acousticText": "我覺得差異不大。我們在做的也是苦行。拜十萬大禮拜也不輕鬆。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-482",
+      "text": "如果是，在常我的基礎之上，要如何追求解脫？",
+      "start": 4985.61,
+      "end": 4989.27,
+      "oldStart": 4989.02,
+      "oldEnd": 4991.63,
+      "status": "review",
+      "risks": [
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 11199,
+        "lastWord": 11212,
+        "start": 4985.61,
+        "end": 4989.27,
+        "matchedCharacters": 15,
+        "totalCharacters": 18,
+        "unmatchedPrefix": 3,
+        "unmatchedSuffix": 0,
+        "acousticText": "在有常我的基礎之上,要如何追求解脫?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved"
+      ]
+    },
+    {
+      "id": "sent-488",
+      "text": "或許有人會說：「那為什麼要拜佛？",
+      "start": 5055.44,
+      "end": 5057.96,
+      "oldStart": 5068.65,
+      "oldEnd": 5069.15,
+      "status": "review",
+      "risks": [
+        "weak-match",
+        "unmatched-edge"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 11386,
+        "lastWord": 11391,
+        "start": 5055.44,
+        "end": 5057.96,
+        "matchedCharacters": 8,
+        "totalCharacters": 13,
+        "unmatchedPrefix": 5,
+        "unmatchedSuffix": 0,
+        "acousticText": "你說,那為什麼要拜佛?"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-512",
+      "text": "為了生起無我慧，所以我們應該皈依三寶；",
+      "start": 5249.9,
+      "end": 5253.74,
+      "oldStart": 5254.54,
+      "oldEnd": 5257.56,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 11885,
+        "lastWord": 11898,
+        "start": 5249.9,
+        "end": 5253.74,
+        "matchedCharacters": 12,
+        "totalCharacters": 17,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "為了升起無我會,所以我應該歸一三寶。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    },
+    {
+      "id": "sent-529",
+      "text": "所以經論當中提到「思惟苦苦」，只是希望我們把所有能夠想到的苦都放在行苦上去思考，如此一來，我們才會對於行苦所帶來的過患有深刻的感覺。",
+      "start": 5441.33,
+      "end": 5452.91,
+      "oldStart": 5446.45,
+      "oldEnd": 5462.85,
+      "status": "review",
+      "risks": [
+        "weak-match"
+      ],
+      "evidence": {
+        "artifactSha256": "sha256:aea0e2da0934602ed91ca6ca6815bbd6166cefe22c8cad3369a93eed7b82910a",
+        "firstWord": 12339,
+        "lastWord": 12376,
+        "start": 5441.33,
+        "end": 5452.91,
+        "matchedCharacters": 41,
+        "totalCharacters": 60,
+        "unmatchedPrefix": 0,
+        "unmatchedSuffix": 0,
+        "acousticText": "所以思維苦苦,只是希望我們把所有能夠想得到的苦,都放在行苦上面。你才會對於行苦所帶來的過患有感覺。"
+      },
+      "gateErrors": [
+        "acoustic-risk",
+        "acoustic-text",
+        "unresolved",
+        "weak-match"
+      ]
+    }
+  ]
+}

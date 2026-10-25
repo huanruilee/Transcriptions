@@ -15,7 +15,8 @@ for(const session of approvedSessions){
 const sessionId=session.sessionId;
 if(!session.sourceRebuildInReader)throw new Error(`Approved session ${sessionId} missing reader opt-in`);
 const approved=JSON.parse(fs.readFileSync(`${coursePath}/publications/lecture_${sessionId}_verbatim_rebuild.json`,'utf8'));
-const expectedSentences=approved.sections.flatMap((s:any)=>s.sentences);
+const timing=session.audioCalibrationOverlay?JSON.parse(fs.readFileSync(`${coursePath}/${session.audioCalibrationOverlay}`,'utf8')):null;
+const expectedSentences=approved.sections.flatMap((s:any)=>s.sentences).map((s:any)=>({...s,...(timing?.items.find((r:any)=>r.id===s.id)||{})}));
 const source=JSON.parse(fs.readFileSync(`${coursePath}/sessions/session_${sessionId}.json`,'utf8'));
 
 test(`session ${sessionId} original URL serves the approved release and actual download`,async({page},testInfo)=>{
@@ -35,6 +36,7 @@ test(`session ${sessionId} original URL serves the approved release and actual d
  await expect(page.locator('.update-tag.rebuild-tag')).toHaveText(`🕒 重整版最後更新：${approved.readingApproval.approvedAt}`);
  await expect(page.locator('.source-update-tag')).toHaveText(`底稿校正日期：${source.lastUpdated}`);
  await expect(page.locator('.session-reader-notice')).toContainText('未逐句聽核');
+ if(timing)await expect(page.locator('.session-reader-notice')).toContainText(`時間部分校準：${timing.items.length}／${expectedSentences.length}`);
  await expect(page.getByRole('link',{name:'重整版原稿對照（本文已套用） →',exact:true})).toBeVisible();
  await expect(page.locator('.transcript-heading')).toHaveText(approved.sections.map((s:any)=>s.heading));
  const sentences=page.locator('.paragraph-block > .sentence');
@@ -94,6 +96,7 @@ test(`session ${sessionId} original URL serves the approved release and actual d
  expect(downloadPath).toBeTruthy();
  const text=fs.readFileSync(downloadPath!,'utf8');
  expect(text).toContain('未逐句聽核');
+ if(timing)expect(text).toContain(`時間部分校準：${timing.items.length}／${expectedSentences.length}`);
  expect(text).toContain(`重整版最後更新：${approved.readingApproval.approvedAt}`);
  expect(text).toContain(`底稿校正日期：${source.lastUpdated}`);
  expect(text).not.toContain(`最後更新：${source.lastUpdated}`);
