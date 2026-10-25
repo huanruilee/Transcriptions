@@ -1865,6 +1865,7 @@ async function loadSession(sessionId: string) {
         questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
+        downloadTrack: p.downloadTrack === 'reading' ? 'reading' : undefined,
         tocAnchorNode: anchorNode,
         start: typeof p.start === 'number' ? p.start : firstStart,
         sentences: (p.sentences || []).map((s: any) => ({

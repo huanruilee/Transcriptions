@@ -17,6 +17,7 @@ export interface TranscriptExportSentence {
 }
 
 export interface TranscriptExportParagraph {
+  downloadTrack?: 'reading';
   heading?: string | null;
   sentences?: TranscriptExportSentence[];
   verbatimSentences?: TranscriptExportSentence[];
@@ -73,7 +74,7 @@ export function formatTranscriptText(
   let sentenceCount = 0;
   for (const paragraph of paragraphs || []) {
     const sourceSentences =
-      Array.isArray(paragraph.verbatimSentences) && paragraph.verbatimSentences.length > 0
+      paragraph.downloadTrack !== 'reading' && Array.isArray(paragraph.verbatimSentences) && paragraph.verbatimSentences.length > 0
         ? paragraph.verbatimSentences
         : paragraph.sentences || [];
     const sentences = sourceSentences.filter((sentence) => sentence.text?.trim());
