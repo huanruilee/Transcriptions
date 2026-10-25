@@ -27,3 +27,9 @@ Task：RUZHONG01-STUDY-35A。使用者明確指定以35A標準重做01，並已�
 先有故意RED的講記契約，再實作。`node scripts/publish_ruzhong01_study.mjs --candidate`只寫work候選；正式指令需匹配當前導讀審查，且只能覆寫既知來源或一致成果，拒絕未知正文漂移。
 
 完整測試：npm test、npm run test:v2、summaries:audit、goldenStandard、Vite build、精確site artifact與正式Pages桌面/手機瀏覽器契約；另以真正音源測首末原生播放。工程通過不等於人工已核定。發布待閱校，humanListened=false。
+
+## 2026-10-26 講者直接論述口吻修訂
+
+使用者指出研讀正文應依格西論述方式整理，不使用第三者語氣。本次逐段將「格西指出／他認為」改為直接的「我／我們／你看」與問答，保留比較能力自限、同學提供解釋、「不知道／可能有」等來源中的保留。底本補列維持【編者註】，不裝成講者新說法。30段81單元與完整346句原話、ID、時間均未改動。
+
+原話來源snapshot不變；plan明記先前發布正文digest，publisher只另接受這個已知版本，未知來源仍拒絕。日期與course metadata同步2026-10-26。新導讀重新綁定並做兩次限定本地審查，voice-*保存實際request/response，先前證據仍在前版commit可追溯。新增先RED再GREEN的講者口吻回歸，並經獨立內容覆核。

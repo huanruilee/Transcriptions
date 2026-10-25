@@ -34,3 +34,9 @@ test('candidate generation works in a fresh checkout without an existing work di
  const os=await import('node:os'),path=await import('node:path'),{execFileSync}=await import('node:child_process');const temp=fs.mkdtempSync(path.join(os.tmpdir(),'study01-fresh-'));
  try{for(const p of ['scripts','reviews','courses'])fs.symlinkSync(path.resolve(p),path.join(temp,p),'dir');execFileSync(process.execPath,[path.resolve('scripts/publish_ruzhong01_study.mjs'),'--candidate'],{cwd:temp});assert.ok(fs.existsSync(path.join(temp,'work/ruzhong01-study/candidate.json')));assert.ok(fs.existsSync(path.join(temp,'work/ruzhong01-study/overview.json')));}finally{fs.rmSync(temp,{recursive:true,force:true});}
 });
+
+test('01 study正文 retains speaker voice rather than third-person narration',()=>{
+ const s=JSON.parse(fs.readFileSync(course+'sessions/session_01.json'));const text=s.paragraphs.flatMap(p=>p.sentences).map(r=>r.text).join('\n');
+ assert.doesNotMatch(text,/格西|他提出的理解|他又說|他仍認為|因此講記|本段歸納/);
+ assert.match(text,/我自己覺得/);assert.match(text,/我們大家一起/);assert.match(text,/你看/);assert.match(text,/【編者註：/);
+});
