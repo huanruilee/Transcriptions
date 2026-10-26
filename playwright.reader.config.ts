@@ -2,7 +2,7 @@ import {defineConfig} from '@playwright/test';
 const phase=process.env.READER_SMOKE_PHASE === 'deployed' ? 'deployed' : 'artifact';
 export default defineConfig({
   testDir: './tests/browser',
-  testMatch: ['readerRelease.spec.ts', 'ruzhong01Release.spec.ts', 'ruzhong38aRelease.spec.ts', 'ruzhong38bRelease.spec.ts'],
+  testMatch: ['readerRelease.spec.ts', 'ruzhong01Release.spec.ts', 'ruzhong38aRelease.spec.ts', 'ruzhong38bRelease.spec.ts', 'ruzhong39aRelease.spec.ts'],
   timeout: 45000,
   expect: {timeout: 15000},
   retries: 0,

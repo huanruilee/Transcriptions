@@ -178,3 +178,7 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 ### 入中論38B本輪研讀契約
 
 23段46單元與256原話分軌。`ruzhong38bStudy.test.js`先RED後驗來源完整性、source-window時間、有效新導讀輸入、疑詞、當堂截止與公開連結；「不用六度成佛」必須明標為問難。舊稿零待核欄位不代表人工確認。`ruzhong38bRelease.spec.ts`驗主頁桌面手機、三處存疑、256原話與下載；MP3標頭與解碼不同時須實測載入後時長及末句，不藉修改時間消除差異。
+
+### 入中論39A本輪研讀契約
+
+`ruzhong39aStudy.test.js`驗33段74單元與583原話分軌、source-window時間、hash／缺漏拒絕、目錄待閱校狀態、有效連結及新導讀實際輸入。內容覆核另檢此師與自續指涉、二障助伴、學生問難與講者反駁、基因／藏文保留；不可把廢墟屍體或果當成滅本身，也不可跨來源單元提前半句。`ruzhong39aRelease.spec.ts`納入artifact/deployed桌面手機、完整原話、存疑、導讀與下載。原音末句驗證須核當前講次URL及官方音源，排除自動下一講干擾。
