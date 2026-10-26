@@ -1,0 +1,90 @@
+{
+  "taskId": "RUZHONG-40A-STUDY",
+  "sessionId": "40A",
+  "checkedAt": "2026-10-26T21:15:48.495591+08:00",
+  "sourceCommit": "974c0724d0c46645dc69715602208b051de325e2",
+  "audio": {
+    "url": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170506-A%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p123(40).MP3",
+    "sha256": "40a2ed68b567cbe969bc7859f5af7cd1e5c947f3d8997dd95de39b74fd0b7fe2",
+    "bytes": 24991872,
+    "contentType": "audio/mpeg",
+    "headerDuration": 3123.458,
+    "decodedDuration": 3138.1681875,
+    "indexSha256": "cf77353de188b5697fa0c774e16db7f7b60aed66c9ad3684cdefe80c19317762",
+    "officialIndexMatched": true
+  },
+  "officialIndex": {
+    "url": "https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68",
+    "sha256": "cf77353de188b5697fa0c774e16db7f7b60aed66c9ad3684cdefe80c19317762",
+    "matchingFilename": "20170506-A p123(40)",
+    "verified": true
+  },
+  "textbook": {
+    "url": "https://buddha.flyday.com.tw/68%20%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F%202016/%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F(%E5%BD%B1%E5%8D%B0%E7%94%A8%E4%B8%8A%E8%AA%B2%E7%89%88-2016).pdf",
+    "sha256": "bfd663a4b3d3bf74ded9f0fa1798a2aca0d0e571ce0b0a9f1091555460b7c1b1",
+    "bytes": 1130901,
+    "title": "入中論善顯密意疏（影印用上課版-2016）",
+    "author": "宗喀巴大師",
+    "translator": "法尊法師",
+    "status": "verified",
+    "role": "terminology-reference; never audio gold",
+    "pdfPages": 285,
+    "pageChecks": [
+      {
+        "page": 123,
+        "extractedSha256": "a2aa2090ddaed8581c07debe3c0e730c4c3705cbd29a158bdd01cad145840cbf",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "page": 124,
+        "extractedSha256": "064e8943da0766f13823169b10f2f08eb2325abb475482ac29f7939db70d56ab",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "page": 125,
+        "extractedSha256": "fdfe083398d3bd5c2607cc2f987e7484a9af1ba482e734ca65d87d5b02aaea47",
+        "whitespaceNormalizedMatch": true
+      }
+    ],
+    "tool": "pypdf 6.10.0",
+    "cleaning": "whitespace normalization only",
+    "audioGold": false
+  },
+  "sourceTrack": {
+    "type": "previous-machine-proofread-not-raw-ASR",
+    "count": 459,
+    "humanListened": false,
+    "priorPerSentencePendingFlags": 0,
+    "zeroFlagsDoesNotMeanAccepted": true
+  },
+  "nextLecture": {
+    "sessionId": "40B",
+    "sha256": "e74bb7915bf35b224e426eb1a5f6245bc3d0680cad4ef045069af6876d647d5f",
+    "opening": [
+      "剛才那個可能還可以做另外一個回答，就指敵宗，這樣可以嗎。",
+      "就是說，敵宗的話，未入道者及未入道也好。",
+      "有學聖人也好，對不對，總之他們會把那個。",
+      "補特伽羅吧？",
+      "對，會說成如父無記，一定會這樣主張，對不對。那這樣的話就是憑什麼。",
+      "因為只剩下什麼，可以這樣來供他們，對不對。對，所以可能也可以往這邊去解釋。"
+    ],
+    "boundary": "40A只讀125頁科判，未講夢境生貪之喻；40B開頭先補敵宗無覆無記問答，不併入40A"
+  },
+  "boundedSearch": {
+    "queries": [
+      "見悲青增 20170506-A 逐字稿",
+      "入中論善顯密意疏 40A 逐字稿"
+    ],
+    "exactHumanTranscript": "not verified in bounded search; other teachers/course editions found, not treated as same-lecture evidence",
+    "officialIndexAndPdf": "fresh verified",
+    "youtubeDescription": "N/A no verified matching video"
+  },
+  "benchmark": "development/reference-assisted; not human listened gold or blind holdout",
+  "allowedProvider": "GX10 local llama.cpp only; public-source study material; no secrets",
+  "limitations": [
+    "MP3 header3123.458 vs fullPCM3138.1681875 seconds",
+    "source458 end3138.72 exceeds full audio by0.5518125 seconds, oldtext/time retained pending",
+    "source446 repetitive剝 may contain ASR repetition or lostspeech, not reconstructed",
+    "old machine proofread is neither rawASR nor human gold"
+  ]
+}
