@@ -182,3 +182,7 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 ### 入中論39A本輪研讀契約
 
 `ruzhong39aStudy.test.js`驗33段74單元與583原話分軌、source-window時間、hash／缺漏拒絕、目錄待閱校狀態、有效連結及新導讀實際輸入。內容覆核另檢此師與自續指涉、二障助伴、學生問難與講者反駁、基因／藏文保留；不可把廢墟屍體或果當成滅本身，也不可跨來源單元提前半句。`ruzhong39aRelease.spec.ts`納入artifact/deployed桌面手機、完整原話、存疑、導讀與下載。原音末句驗證須核當前講次URL及官方音源，排除自動下一講干擾。
+
+### 入中論39B時間越界待核發布契約
+
+263句原文舊時碼保留；完整解碼2526.4588125秒，來源261尾止及262起點越界，不平移、不插值、不裁字。`ruzhong39bStudy.test.js`先RED驗新增來源時間審查、錯誤索引／重複／無證越界阻擋拒絕與導讀兩項有限重審實際輸入。`blockedSourcePlayback.test.ts`先RED驗越界來源可見、仍能雙擊編輯、單擊不送seek。`ruzhong39bRelease.spec.ts`桌面手機驗263原話、六處正文存疑、兩句來源時間待核、真實阻擋提示及下載。正式播放只核可用起點與越界阻擋，不將末段連續對說成已匹配音訊。

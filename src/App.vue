@@ -1897,6 +1897,7 @@ async function loadSession(sessionId: string) {
               verseAnnotations: verseAnnotations.value[vs.id] || [],
               reviewNeeded: vs.reviewNeeded ?? false,
               uncertainty: vs.uncertainty ?? null,
+              playbackBlockedReason: vs.playbackBlockedReason ?? null,
               agentReviewStatus: vs.agentReviewStatus ?? null,
               agentReviewConfidence: vs.agentReviewConfidence ?? null,
             }))
@@ -2037,6 +2038,11 @@ function handleSentenceClick(s: any) {
   }
   lastClickTime = now;
   lastClickTarget = clickTarget;
+
+  if (s.playbackBlockedReason) {
+    uiStore.showToast(s.playbackBlockedReason, 'warning', 6000);
+    return;
+  }
 
   // 單擊：立即同步跳播，保留使用者主動點擊手勢權杖，聲音即點即播
   freezeAutoScroll(600);

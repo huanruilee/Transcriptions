@@ -1,0 +1,29 @@
+{
+  "provider": "GX10 local llama.cpp",
+  "modelAlias": "Qwen3.8-27B",
+  "modelCalls": 2,
+  "calls": [
+    {
+      "completion_tokens": 306,
+      "prompt_tokens": 847,
+      "total_tokens": 1153,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 160,
+      "prompt_tokens": 300,
+      "total_tokens": 460,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "totalProviderTokens": 1613,
+  "asrCalls": 0,
+  "codexUsage": "unknown",
+  "totalTokensAllAgents": "unknown",
+  "savedTokensPercent": "unknown",
+  "reason": "Bounded two-item re-review after human narrowed claims to exact attached quotes; four inputs reused unchanged; no new ASR or fabricated tail timing"
+}
