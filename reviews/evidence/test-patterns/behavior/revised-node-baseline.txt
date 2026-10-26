@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: pipeline Python behavior contracts
+not ok 1 - pipeline Python behavior contracts
+  ---
+  duration_ms: 301.958583
+  type: 'test'
+  location: '/private/tmp/transcriptions-test-patterns/tests/unit/pipelineBehavior.test.js:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+
+
+    [Step 3/5] 🧠 Deep proofreading with Smart Router for TST (Grounded: 0 chars)...
+      ✅ Completed LLM proofreading across 1 batches (Optimized 25-sentence batches, Smart Router / vLLM).
+
+    [Step 3/5] 🧠 Deep proofreading with Smart Router for TST (Grounded: 0 chars)...
+      ✅ Completed LLM proofreading across 1 batches (Optimized 25-sentence batches, Smart Router / vLLM).
+
+    [Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: 0)...
+      ✅ Consolidated into 1 readable full sentences.
+
+    [Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: 0)...
+      ✅ Consolidated into 2 readable full sentences.
+
+    test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) ... ok
+    test_dynamic_output_budget_scales_and_clamps (test_pipeline_behavior.PipelineBehaviorTests.test_dynamic_output_budget_scales_and_clamps) ... ok
+    test_llm_retry_splits_batch_then_returns_successful_single_sentence_results (test_pipeline_behavior.PipelineBehaviorTests.test_llm_retry_splits_batch_then_returns_successful_single_sentence_results) ... ok
+    test_llm_ultimate_failure_preserves_source_and_marks_review_needed (test_pipeline_behavior.PipelineBehaviorTests.test_llm_ultimate_failure_preserves_source_and_marks_review_needed) ... ok
+    test_prepolish_does_not_split_at_legacy_28_character_boundary (test_pipeline_behavior.PipelineBehaviorTests.test_prepolish_does_not_split_at_legacy_28_character_boundary) ... ok
+    test_prepolish_splits_at_long_silence_boundary (test_pipeline_behavior.PipelineBehaviorTests.test_prepolish_splits_at_long_silence_boundary) ... ok
+    test_prompt_uses_real_page_window_and_terms_from_window (test_pipeline_behavior.PipelineBehaviorTests.test_prompt_uses_real_page_window_and_terms_from_window) ... FAIL
+    test_verbatim_keeps_repetitions_speakers_and_sentence_timing (test_pipeline_behavior.PipelineBehaviorTests.test_verbatim_keeps_repetitions_speakers_and_sentence_timing) ... ok
+
+    ======================================================================
+    FAIL: test_prompt_uses_real_page_window_and_terms_from_window (test_pipeline_behavior.PipelineBehaviorTests.test_prompt_uses_real_page_window_and_terms_from_window)
+    ----------------------------------------------------------------------
+    Traceback (most recent call last):
+      File "/private/tmp/transcriptions-test-patterns/tests/python/test_pipeline_behavior.py", line 49, in test_prompt_uses_real_page_window_and_terms_from_window
+        self.assertLessEqual(len(bounded), char_limit)
+        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+    AssertionError: 47 not less than or equal to 46
+
+    ----------------------------------------------------------------------
+    Ran 8 tests in 0.238s
+
+    FAILED (failures=1)
+
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/transcriptions-test-patterns/tests/unit/pipelineBehavior.test.js:12:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 337.627917

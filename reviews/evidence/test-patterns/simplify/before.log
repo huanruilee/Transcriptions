@@ -1,0 +1,292 @@
+TAP version 13
+# Subtest: study-group prototype has source-grounded candidate structure
+ok 1 - study-group prototype has source-grounded candidate structure
+  ---
+  duration_ms: 9.911625
+  type: 'test'
+  ...
+# Subtest: study-group prototype keeps raw ASR and review evidence beside the candidate
+ok 2 - study-group prototype keeps raw ASR and review evidence beside the candidate
+  ---
+  duration_ms: 1.338291
+  type: 'test'
+  ...
+# Subtest: playlist index 01 preserves source identity and passes the machine ASR gate
+ok 3 - playlist index 01 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.895792
+  type: 'test'
+  ...
+# Subtest: candidate timing remains aligned with the immutable raw ASR segments
+ok 4 - candidate timing remains aligned with the immutable raw ASR segments
+  ---
+  duration_ms: 16.2335
+  type: 'test'
+  ...
+# Subtest: prototype-02 preserves ASR evidence while failing closed before speaker attribution
+ok 5 - prototype-02 preserves ASR evidence while failing closed before speaker attribution
+  ---
+  duration_ms: 18.115
+  type: 'test'
+  ...
+# Subtest: prototype-02 question candidates remain explicitly unresolved for human audio review
+ok 6 - prototype-02 question candidates remain explicitly unresolved for human audio review
+  ---
+  duration_ms: 3.136458
+  type: 'test'
+  ...
+# Subtest: prototype-03 keeps ASR evidence portable and fails closed before attribution
+ok 7 - prototype-03 keeps ASR evidence portable and fails closed before attribution
+  ---
+  duration_ms: 17.683625
+  type: 'test'
+  ...
+# Subtest: prototype-04 preserves the one-download evidence contract and fails closed
+ok 8 - prototype-04 preserves the one-download evidence contract and fails closed
+  ---
+  duration_ms: 16.940792
+  type: 'test'
+  ...
+# Subtest: prototype-05 preserves ASR evidence, cleanup, and unresolved attribution
+ok 9 - prototype-05 preserves ASR evidence, cleanup, and unresolved attribution
+  ---
+  duration_ms: 14.838458
+  type: 'test'
+  ...
+# Subtest: prototype-06 preserves ASR evidence even when the review writer is rate-limited
+ok 10 - prototype-06 preserves ASR evidence even when the review writer is rate-limited
+  ---
+  duration_ms: 15.624084
+  type: 'test'
+  ...
+# Subtest: prototype-07 preserves sentence ASR evidence and fails closed without word timestamps
+ok 11 - prototype-07 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 6.999417
+  type: 'test'
+  ...
+# Subtest: prototype-08 preserves sentence ASR evidence and fails closed without word timestamps
+ok 12 - prototype-08 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 4.956333
+  type: 'test'
+  ...
+# Subtest: prototype-09 preserves sentence ASR evidence and fails closed without word timestamps
+ok 13 - prototype-09 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 4.971541
+  type: 'test'
+  ...
+# Subtest: prototype-10 preserves sentence ASR evidence and fails closed without word timestamps
+ok 14 - prototype-10 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 5.59125
+  type: 'test'
+  ...
+# Subtest: prototype-11 preserves sentence ASR evidence and fails closed without word timestamps
+ok 15 - prototype-11 preserves sentence ASR evidence and fails closed without word timestamps
+  ---
+  duration_ms: 5.587083
+  type: 'test'
+  ...
+# Subtest: prototype-12 keeps the guarded rerun and records the hallucination failure
+ok 16 - prototype-12 keeps the guarded rerun and records the hallucination failure
+  ---
+  duration_ms: 7.652084
+  type: 'test'
+  ...
+# Subtest: prototype-13 preserves source identity and passes the machine ASR gate
+ok 17 - prototype-13 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.710792
+  type: 'test'
+  ...
+# Subtest: prototype-14 preserves source identity and passes the machine ASR gate
+ok 18 - prototype-14 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.194042
+  type: 'test'
+  ...
+# Subtest: prototype-15 preserves source identity and passes the machine ASR gate
+ok 19 - prototype-15 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.228833
+  type: 'test'
+  ...
+# Subtest: prototype-16 preserves source identity and passes the machine ASR gate
+ok 20 - prototype-16 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.514333
+  type: 'test'
+  ...
+# Subtest: prototype-17 preserves source identity and passes the machine ASR gate
+ok 21 - prototype-17 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.611667
+  type: 'test'
+  ...
+# Subtest: prototype-18 preserves source identity and passes the machine ASR gate
+ok 22 - prototype-18 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 6.905292
+  type: 'test'
+  ...
+# Subtest: prototype-19 preserves source identity and passes the machine ASR gate
+ok 23 - prototype-19 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.203292
+  type: 'test'
+  ...
+# Subtest: prototype-20 preserves source identity and passes the machine ASR gate
+ok 24 - prototype-20 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.39
+  type: 'test'
+  ...
+# Subtest: prototype-21 preserves source identity and passes the machine ASR gate
+ok 25 - prototype-21 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.342958
+  type: 'test'
+  ...
+# Subtest: prototype-22 preserves source identity and passes the machine ASR gate
+ok 26 - prototype-22 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.898166
+  type: 'test'
+  ...
+# Subtest: prototype-23 preserves source identity and passes the machine ASR gate
+ok 27 - prototype-23 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.77025
+  type: 'test'
+  ...
+# Subtest: prototype-24 preserves source identity and passes the machine ASR gate
+ok 28 - prototype-24 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.775875
+  type: 'test'
+  ...
+# Subtest: prototype-25 preserves source identity and passes the machine ASR gate
+ok 29 - prototype-25 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.447125
+  type: 'test'
+  ...
+# Subtest: prototype-26 preserves source identity and passes the machine ASR gate
+ok 30 - prototype-26 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.512333
+  type: 'test'
+  ...
+# Subtest: prototype-27 preserves source identity and passes the machine ASR gate
+ok 31 - prototype-27 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.299916
+  type: 'test'
+  ...
+# Subtest: prototype-28 preserves source identity and passes the machine ASR gate
+ok 32 - prototype-28 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.725709
+  type: 'test'
+  ...
+# Subtest: prototype-29 preserves source identity and passes the machine ASR gate
+ok 33 - prototype-29 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.768042
+  type: 'test'
+  ...
+# Subtest: prototype-30 preserves source identity and passes the machine ASR gate
+ok 34 - prototype-30 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.230125
+  type: 'test'
+  ...
+# Subtest: prototype-31 preserves source identity and passes the machine ASR gate
+ok 35 - prototype-31 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.111125
+  type: 'test'
+  ...
+# Subtest: prototype-32 preserves source identity and passes the machine ASR gate
+ok 36 - prototype-32 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.186542
+  type: 'test'
+  ...
+# Subtest: prototype-33 preserves source identity and passes the machine ASR gate
+ok 37 - prototype-33 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.468333
+  type: 'test'
+  ...
+# Subtest: prototype-34 preserves source identity and passes the machine ASR gate
+ok 38 - prototype-34 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.332917
+  type: 'test'
+  ...
+# Subtest: prototype-35 preserves source identity and passes the machine ASR gate
+ok 39 - prototype-35 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.756792
+  type: 'test'
+  ...
+# Subtest: prototype-36 preserves source identity and passes the machine ASR gate
+ok 40 - prototype-36 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.847167
+  type: 'test'
+  ...
+# Subtest: prototype-37 preserves source identity and passes the machine ASR gate
+ok 41 - prototype-37 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.751792
+  type: 'test'
+  ...
+# Subtest: prototype-38 preserves source identity and passes the machine ASR gate
+ok 42 - prototype-38 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.726083
+  type: 'test'
+  ...
+# Subtest: prototype-39 preserves source identity and passes the machine ASR gate
+ok 43 - prototype-39 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 4.83775
+  type: 'test'
+  ...
+# Subtest: prototype-40 preserves source identity and passes the machine ASR gate
+ok 44 - prototype-40 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.116792
+  type: 'test'
+  ...
+# Subtest: prototype-41 preserves source identity and passes the machine ASR gate
+ok 45 - prototype-41 preserves source identity and passes the machine ASR gate
+  ---
+  duration_ms: 5.162042
+  type: 'test'
+  ...
+# Subtest: prototype-44 fails closed when the only available source audio is silent
+ok 46 - prototype-44 fails closed when the only available source audio is silent
+  ---
+  duration_ms: 0.326416
+  type: 'test'
+  ...
+# Subtest: prototype-44 alternate audio format is independently confirmed silent
+ok 47 - prototype-44 alternate audio format is independently confirmed silent
+  ---
+  duration_ms: 0.082417
+  type: 'test'
+  ...
+1..47
+# tests 47
+# suites 0
+# pass 47
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 361.444084

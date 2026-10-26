@@ -9,6 +9,10 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  TRADITIONAL_CHINESE_PURITY_PROFILE,
+  findTraditionalChinesePurityViolations,
+} from '../../scripts/lib/transcriptQualityPolicy.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.join(__dirname, '../..');
@@ -16,44 +20,15 @@ const SESSIONS_DIR = path.join(PROJECT_ROOT, 'courses/入中論善顯密意疏/s
 const COURSE_JSON = path.join(PROJECT_ROOT, 'courses/入中論善顯密意疏/course.json');
 const TOC_JSON = path.join(PROJECT_ROOT, 'courses/入中論善顯密意疏/toc.json');
 
-// Strict Simplified-to-Traditional mapping dictionary (where Simplified != Traditional)
-const STRICT_SIMP_TO_TRAD = {
-  '为': '為', '这': '這', '样': '樣', '个': '個', '说': '說',
-  '体': '體', '经': '經', '论': '論', '门': '門', '从': '從',
-  '对': '對', '么': '麼', '后': '後', '变': '變', '实': '實',
-  '证': '證', '觉': '覺', '关': '關', '开': '開', '边': '邊',
-  '过': '過', '问': '問', '题': '題', '时': '時', '间': '間',
-  '还': '還', '会': '會', '点': '點', '现': '現', '显': '顯',
-  '义': '義', '极': '極', '胜': '勝', '广': '廣', '当': '當',
-  '无': '無', '师': '師', '发': '發', '与': '與', '见': '見',
-  '随': '隨', '应': '應', '处': '處', '观': '觀', '摄': '攝',
-  '识': '識', '别': '別', '业': '業', '释': '釋', '难': '難',
-  '车': '車', '声': '聲', '闻': '聞', '缘': '緣', '执': '執',
-  '许': '許', '计': '計', '总': '總', '种': '種', '量': '量',
-  '听': '聽', '讲': '講', '话': '話', '觉': '覺', '导': '導',
-  '读': '讀', '记': '記', '诵': '誦', '传': '傳', '承': '承',
-  '菩': '菩', '萨': '薩', '罗': '羅', '蜜': '蜜', '多': '多',
-  '佛': '佛', '智': '智', '慧': '慧', '辩': '辯', '难': '難',
-  '净': '淨', '胜': '勝', '谛': '諦', '俗': '俗', '义': '義'
-};
-
-// Filter out any identical entries (e.g. 佛 == 佛)
-const FILTERED_SIMP_MAP = Object.fromEntries(
-  Object.entries(STRICT_SIMP_TO_TRAD).filter(([simp, trad]) => simp !== trad)
-);
-
-const SIMP_CHARS_SET = new Set(Object.keys(FILTERED_SIMP_MAP));
-const SIMP_REGEX = new RegExp(`[${Object.keys(FILTERED_SIMP_MAP).join('')}]`, 'g');
-
 test('🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字檢驗)', async (t) => {
   
   await t.test('1. Structure: course.json and toc.json are 100% Traditional Chinese', () => {
     [COURSE_JSON, TOC_JSON].forEach(filePath => {
       const content = readFileSync(filePath, 'utf8');
-      const matches = content.match(SIMP_REGEX);
+      const matches = findTraditionalChinesePurityViolations(content);
       if (matches && matches.length > 0) {
         const unique = [...new Set(matches)];
-        const suggestions = unique.map(c => `${c} -> ${FILTERED_SIMP_MAP[c] || '?'}`).join(', ');
+        const suggestions = unique.map(c => `${c} -> ${TRADITIONAL_CHINESE_PURITY_PROFILE.simpToTrad[c] || '?'}`).join(', ');
         assert.fail(`Found ${matches.length} simplified characters in ${path.basename(filePath)}: [${suggestions}]`);
       }
       assert.ok(true, `${path.basename(filePath)} passed pure Traditional Chinese validation`);
@@ -82,12 +57,12 @@ test('🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字
         }
       }
       collect(data);
-      const matches = publicText.join('\n').match(SIMP_REGEX);
+      const matches = findTraditionalChinesePurityViolations(publicText.join('\n'));
 
       if (matches && matches.length > 0) {
         totalViolations += matches.length;
         const unique = [...new Set(matches)];
-        const suggestions = unique.map(c => `${c} -> ${FILTERED_SIMP_MAP[c] || '?'}`).join(', ');
+        const suggestions = unique.map(c => `${c} -> ${TRADITIONAL_CHINESE_PURITY_PROFILE.simpToTrad[c] || '?'}`).join(', ');
         violationReport.push(`${file}: ${matches.length} chars [${suggestions}]`);
       }
     });
