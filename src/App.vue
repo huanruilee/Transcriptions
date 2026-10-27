@@ -1001,6 +1001,8 @@ const mediaDuration = ref(0);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
 let ytPlayerInitInterval: any = null;
+let ytPlayerSetupTimeout: ReturnType<typeof setTimeout> | null = null;
+let isReaderDisposed = false;
 let isInitialMounted = false;
 
 const hasAnyVerbatim = computed(() =>
@@ -1362,9 +1364,19 @@ function seekToTime(time: number) {
   isMediaPlaying.value = true;
 }
 
+// Delayed setup belongs to this reader; it must not restart polling after unmount.
+function scheduleYouTubePlayerSetup() {
+  if (isReaderDisposed) return;
+  if (ytPlayerSetupTimeout !== null) clearTimeout(ytPlayerSetupTimeout);
+  ytPlayerSetupTimeout = setTimeout(() => {
+    ytPlayerSetupTimeout = null;
+    setupYouTubePlayer();
+  }, 100);
+}
+
 // YouTube Iframe API 初始化與時間追蹤
 function setupYouTubePlayer() {
-  if (typeof window === 'undefined') return;
+  if (isReaderDisposed || typeof window === 'undefined' || typeof document === 'undefined') return;
 
   // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
   if (!(window as any).YT && !document.querySelector('script[data-youtube-iframe-api]')) {
@@ -1651,6 +1663,7 @@ onMounted(async () => {
   }
 
   await loadRealCourseData();
+  if (isReaderDisposed) return;
 
   // 監聽 URL Hash 變更
   window.addEventListener('hashchange', () => {
@@ -1664,10 +1677,15 @@ onMounted(async () => {
   const defaultFirst = courseStore.sessions[0]?.id || (courseStore.currentCourseId === 'shi-liang-lun-er' ? '01' : '02A');
   const targetId = initialHash || defaultFirst;
   await loadSession(targetId);
-  isInitialMounted = true;
+  if (!isReaderDisposed) isInitialMounted = true;
 });
 
 onUnmounted(() => {
+  isReaderDisposed = true;
+  if (ytPlayerSetupTimeout !== null) {
+    clearTimeout(ytPlayerSetupTimeout);
+    ytPlayerSetupTimeout = null;
+  }
   window.removeEventListener('scroll', onUserScroll);
   window.removeEventListener('wheel', onUserScroll);
   window.removeEventListener('touchmove', onUserScroll);
@@ -1743,6 +1761,7 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 });
 
 async function loadSession(sessionId: string) {
+  if (isReaderDisposed) return;
   currentTocProjection.value = null;
   currentReaderNotice.value = '';
   currentReaderRebuiltAt.value = '';
@@ -1778,7 +1797,7 @@ async function loadSession(sessionId: string) {
     annotationStore.loadSessionAnnotations(sessionId);
     isLoading.value = false;
     if (pendingSession.mediaType === 'video/youtube') {
-      setTimeout(() => setupYouTubePlayer(), 100);
+      scheduleYouTubePlayerSetup();
     }
     return;
   }
@@ -1905,6 +1924,7 @@ async function loadSession(sessionId: string) {
       };
     });
 
+    if (isReaderDisposed) return;
     paragraphs.value = parsedParagraphs;
 
     const allSentences = parsedParagraphs.flatMap((p: any) => p.sentences);
@@ -1932,9 +1952,7 @@ async function loadSession(sessionId: string) {
     }
 
     if (activeMediaType.value === 'video/youtube') {
-      setTimeout(() => {
-        setupYouTubePlayer();
-      }, 100);
+      scheduleYouTubePlayerSetup();
     }
   } catch (err) {
     currentReaderNotice.value = '';

@@ -1,0 +1,16 @@
+{
+  "trigger": "mergeCI40593697103 attempts1and2 fail from documentundefined in App.vue1420 after DOM teardown",
+  "rootCause": "untracked100ms setup timeout survives reader unmount and recreates cleared polling interval",
+  "regression": "published and pending YouTube readers: after unmount and500ms elapsed no polling interval may be created; original published case RED setInterval called once",
+  "fix": "cancel owned setup timeout on unmount; disposed guards for setup and asynchronous mounted/session continuations",
+  "tests": {
+    "nodePass": 810,
+    "nodeSkip": 4,
+    "vuePass": 129,
+    "goldenPass": 8,
+    "browserDesktopMobile": 38
+  },
+  "transcriptChanged": false,
+  "lastUpdatedChanged": false,
+  "workflowThresholdChanged": false
+}
