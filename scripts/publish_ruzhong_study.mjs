@@ -10,6 +10,11 @@ export function buildStudyGuide(raw,plan){
  if(plan.readerNoticeSuffix)session.qualityReview.readerNotice+=' '+plan.readerNoticeSuffix;
  if(pending===0)session.qualityReview.readerNotice+=' 舊稿未標逐句待核，不代表已確認；本輪疑詞與發言分界另在正文標示存疑。';
  if(source.qualityReview?.tailClip)session.qualityReview.readerNotice+=' 末句若無法跳播，請開啟原音待核清單的末段節錄。';
+ if(plan.tocAnchors!==undefined){
+  if(!Array.isArray(plan.tocAnchors)||!plan.tocAnchors.length)fail('Invalid source TOC anchors');let previous=-1;
+  const nodes=plan.tocAnchors.map(a=>{if(!Number.isInteger(a.sourceIndex)||a.sourceIndex<=previous||!original[a.sourceIndex]||typeof a.title!=='string'||!a.title.trim()||!Number.isInteger(a.page)||a.page<1)fail('Invalid source TOC anchor');previous=a.sourceIndex;return{title:a.title,sessionId:sid,timestamp:original[a.sourceIndex].start,page:a.page,sourceSentenceId:original[a.sourceIndex].id,timingMethod:'source-window'};});
+  session.qualityReview.sourceDigest=plan.sourceDigest;session.qualityReview.tocProjection={sessionId:sid,sourceDigest:plan.sourceDigest,nodes};
+ }
  const co={schemaVersion:1,status:'needs-review',sourceTranscriptId:`ru-zhong-lun/session_${sid}`,sourceDigest:computeSourceDigest(session),generatedBy:'Codex-study-guide',editorialSourceDigest:plan.sourceDigest,generatedAt:plan.generatedAt,mainPoints:[],discussionTopics:[],referenceViews:[],review:{items:[]},attemptCount:1};for(const[g,text,[pi,si]]of plan.overview){const r=session.paragraphs[pi-1].sentences[si-1];co[g].push({text,evidence:[{sentenceId:r.id,quote:r.text}]})}session.contentOverview=co;
  const outline={sourceId:sid,title:`第${sid}講研讀導讀與研討問題`,sessionIds:[sid],courseOutline:['一、本講宗旨提要：'+plan.introduction,'二、義理研讀綱要',...plan.topics.map(([a,b])=>a+'：'+b),'三、重點法相辨析',...plan.terms.map(([a,b])=>a+'：'+b)],discussionOutline:plan.questions,mappings:[],provenance:{type:'curated-study-guide-outline',retrievedAt:plan.generatedAt,note:'AI輔助研讀綱要；正文採講者直接論述，補充明標編者註，非人工逐句聽核。'}};
  return{session,outline,ledger:{sourceDigest:plan.sourceDigest,sessionId:sid,originalCount:original.length,pending,...(sourceTimingReviews.length?{sourceTimingReviews}: {}),items:ledger}};
