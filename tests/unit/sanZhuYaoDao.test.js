@@ -86,6 +86,68 @@ test('paragraph timestamps increase monotonically and stay within the recording'
   }
 });
 
+test('sentence boundaries are individual ASR segments, never merged-unit ranges', () => {
+  const session = readJson(sessionPath);
+  const raw = readJson(path.join(evidenceDir, 'raw_asr.json'));
+  const rawById = new Map(raw.segments.map((segment) => [segment.id, segment]));
+  const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
+
+  // 每句都必須回溯到一個個別的 ASR 片段邊界。
+  // 少數被切成單字／數字的碎片（「第」「123」「頁」等）會共用同一片段，
+  // 此時允許時間在片段範圍內被等分推移，但不得越出該片段。
+  let exact = 0;
+  let subdivided = 0;
+
+  for (const sentence of sentences) {
+    assert.ok(sentence.rawAsrSegmentId, `${sentence.id} lost its raw ASR segment link`);
+    const segment = rawById.get(sentence.rawAsrSegmentId);
+    assert.ok(segment, `${sentence.id} points at unknown raw segment ${sentence.rawAsrSegmentId}`);
+    assert.ok(sentence.start >= segment.start - 0.05,
+      `${sentence.id} starts before its ASR segment`);
+    assert.ok(sentence.end <= segment.end + 0.05,
+      `${sentence.id} ends after its ASR segment`);
+    if (sentence.start === segment.start && sentence.end === segment.end) exact += 1;
+    else subdivided += 1;
+  }
+
+  assert.equal(exact + subdivided, sentences.length);
+  assert.ok(exact / sentences.length > 0.98,
+    'almost every sentence must reproduce its ASR segment boundary exactly');
+  assert.ok(subdivided <= 20, `too many subdivided sentences: ${subdivided}`);
+});
+
+test('no two adjacent sentences overlap in time', () => {
+  const session = readJson(sessionPath);
+  const sentences = session.paragraphs.flatMap((paragraph) => paragraph.sentences);
+  let overlaps = 0;
+
+  for (let i = 1; i < sentences.length; i += 1) {
+    if (sentences[i].start < sentences[i - 1].end - 0.001) overlaps += 1;
+  }
+  assert.equal(overlaps, 0, 'adjacent sentences must not share overlapping time ranges');
+});
+
+test('the transcript carries the pending-human-review notice for readers and downloads', () => {
+  const session = readJson(sessionPath);
+
+  assert.equal(session.qualityReview.humanProofread, false);
+  assert.match(session.qualityReview.readerNotice, /未.*人工.*聽核|尚未.*聽核/u);
+});
+
+test('course.json exposes the reader inventory and publication state', () => {
+  const course = readJson(coursePath);
+
+  assert.equal(course.transcriptPublicationState, 'candidate-review-required');
+  assert.equal(course.sessions.length, 1);
+  assert.equal(course.sessions[0].sessionId, '01');
+  assert.equal(course.sessions[0].status, 'candidate');
+  assert.equal(course.sessions[0].jsonUrl, 'courses/三主要道/sessions/session_01.json');
+  assert.equal(course.sessions[0].youtubeVideoId, 'eergIaUzRQg');
+  assert.equal(course.pendingSessions.length, 20);
+  assert.equal(course.sessions.length + course.pendingSessions.length, 21);
+  assert.match(course.qualityReview.readerNotice, /待閱校版/u);
+});
+
 test('contentOverview passes the digest and evidence contract', () => {
   const session = readJson(sessionPath);
   const overview = session.contentOverview;

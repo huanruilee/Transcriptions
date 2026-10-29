@@ -61,6 +61,13 @@ export const useCourseStore = defineStore('course', {
         path: 'courses/四念住',
         mediaType: 'audio/mp3',
       },
+      {
+        id: 'san-zhu-yao-dao',
+        title: '三主要道',
+        master: '如性法師',
+        path: 'courses/三主要道',
+        mediaType: 'video/youtube',
+      },
     ],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],
