@@ -30,8 +30,9 @@ test('discovers every canonical transcript without including derivative artifact
   const targets = discoverTranscriptTargets(repoRoot);
   const relativePaths = targets.map((target) => target.relativePath);
 
-  assert.equal(targets.length, 301);
+  assert.equal(targets.length, 302);
   assert.ok(relativePaths.includes('courses/四念住/sessions/session_01.json'));
+  assert.ok(relativePaths.includes('courses/三主要道/sessions/session_01.json'));
   assert.ok(relativePaths.includes('courses/入中論善顯密意疏/sessions/session_110B.json'));
   assert.ok(!relativePaths.some((value) => value.endsWith('_anchored.json')));
   assert.ok(!relativePaths.some((value) => value.includes('/candidate.json')));
@@ -43,10 +44,21 @@ test('selects a deterministic risk-stratified sample across every course', () =>
   const second = selectStratifiedSample(targets, { rate: 0.1, minPerCourse: 3 });
   const courseCounts = Object.groupBy(first, (target) => target.courseId);
 
-  assert.equal(first.length, 34);
+  assert.equal(first.length, 35);
   assert.deepEqual(first.map((target) => target.sourceTranscriptId), second.map((target) => target.sourceTranscriptId));
-  assert.equal(Object.keys(courseCounts).length, 4);
-  assert.ok(Object.values(courseCounts).every((items) => items.length >= 3));
+  assert.equal(Object.keys(courseCounts).length, 5);
+  // 每個課程至少要抽到 1 份；只有累積達 minPerCourse 的課程才要求抽滿 3 份。
+  // 三主要道目前僅第 01 講完成（批次 0 樣板），尚未達 minPerCourse。
+  const perCourse = new Map(targets.map((target) => [target.courseId, 0]));
+  for (const target of targets) {
+    perCourse.set(target.courseId, (perCourse.get(target.courseId) ?? 0) + 1);
+  }
+  for (const [courseId, items] of Object.entries(courseCounts)) {
+    assert.ok(items.length >= 1, `${courseId} must be sampled`);
+    if ((perCourse.get(courseId) ?? 0) >= 3) {
+      assert.ok(items.length >= 3, `${courseId} must reach the per-course floor`);
+    }
+  }
 });
 
 test('partitions targets into deterministic non-overlapping resumable shards', () => {
