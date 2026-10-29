@@ -33,7 +33,10 @@ export function generateCorrectionDates(root=path.resolve(path.dirname(fileURLTo
    const f=path.join(sessions,`session_${id}.json`);
    const t=fs.existsSync(f)?JSON.parse(fs.readFileSync(f)):{};
    return {id,title:s.title||t.title||`第 ${id} 講`,date:correctionDate(t)};
-  });
+  })
+  // 只列「已有正式逐字稿檔」的講。pendingSessions 只是待製作的骨架，
+  // 把它們標成「未記錄」會讓讀者誤以為已存在逐字稿。
+  .filter(r=>fs.existsSync(path.join(sessions,`session_${r.id}.json`)));
   fs.writeFileSync(path.join(base,'correction-dates.html'),renderCorrectionDates(course,rows));
   result.push({course:course.courseId,count:rows.length});
  }
