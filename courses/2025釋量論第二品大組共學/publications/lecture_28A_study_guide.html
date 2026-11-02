@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 28 講（上）滅諦的後三種行相（上）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 28 講（上）滅諦的後三種行相（上）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`45`（顯示編號：`28上`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (NvsCBFbyRO0)](https://www.youtube.com/watch?v=NvsCBFbyRO0)（片長 2 小時 32 分 18 秒）</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 28 講〈滅諦的後三種行相〉（科判一～六，大組討論題 Q1～Q3）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-28.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_28_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【本講核心偈頌（《釋量論・成量品》）】</h2>
+<blockquote class="verse-quote">
+<p>「<strong>非我非加持。</strong>」（第 178 頌・苦諦之無我與空行相）</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>知苦以無違，前行隨轉者，事法生悲愍，非連繫有情。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>彼於無我法，增餘我而貪；由了苦相續，而生起悲愍。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>癡是過根本，彼是執有情，無彼則不從，過因而生瞋，故許悲無過。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>非無有解脫，由宿行已盡，不續餘生故；行功能無盡，彼住無過失。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>由悲下劣故，無大功力住；若是大悲者，為他而安住。</strong>」</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>一、重點複習 ＆ 二、探討我念與我執的差異</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：關於「我念」與「我執」的差異，請問以下描述是否合理？（學員發表 `00:08:13`，法師指導 `00:27:56`–`00:59:38`）</li>
+<ul class="nested-list">
+<li>⑴ 從趨入境的角度，「我念」趨入依蘊假立的我，「我執」則是趨入獨立自主的我；前者的趨入境存在，是正確的認知，後者的趨入境則不存在，是顛倒的認知。</li>
+<li>⑵ 「我念」所呈現的是我真實的狀態，「我執」則是在這真實的狀態上，捏造了「獨立自主」的特色；所以必須先生起「我念」，才能生起「我執」，兩者有因果關係。</li>
+<li>⑶ 生起「我執」之前不見得要先生起「我念」。因為俱生我執可透過往昔所留下的習氣任運而起，所以「我念」與「我執」不見得有因果關係。</li>
+</ul>
+<li><strong>問題 2</strong>：在觀察時如何區分「我念」與「我執」，請問以下想法是否正確？</li>
+<ul class="nested-list">
+<li>⑴ 「我念」與「我執」的差別，應從是否伴隨煩惱來判斷，因為我執會引生煩惱，我念則不會。例如：規劃年底去朝聖，想著「我要去朝聖」時沒有煩惱，這個念頭是我念；但當請假時主管不同意，對著主管解釋「我要去朝聖」時，那種想法就是我執，因為此時已帶著憤怒。</li>
+<li>⑵ 上述說法不合理。雖然我執會引生煩惱，但不代表只要有我執就會引生煩惱。例如：生起我執會造下能引業，但不代表只要有我執都會造下能引業。（⑴⑵ 學員發表 `00:59:41`，法師指導 `01:18:37`–`01:49:25`）</li>
+<li>⑶ 如果當下的關注點在蘊體，比較容易生起我念，例如：我正在鍛鍊手臂肌肉；反之，如果覺得自己能夠不依賴蘊體，想著「我必須完成五十組動作」，這就是我執。</li>
+<li>⑷ 自然接納當下發生的一切，比較接近我念，例如：「我老了，健忘是正常的」；反之，如果想著「以前的我不會這樣，我不應該如此健忘」，不接受自己身心的狀態，這就是我執。（⑶⑷ 學員發表 `01:49:29`，法師指導 `01:58:30`–`02:08:52`）</li>
+</ul>
+</ul>
+<h3>三、滅諦之二：靜 ＆ 四、阿羅漢的悲心不會衍生三毒 ＆ 五、阿羅漢雖有苦諦但仍已解脫 ＆ 六、阿羅漢雖有悲心卻不長住輪迴</h3>
+<ul class="meta-list">
+<li><strong>問題 3</strong>：關於他宗質疑「阿羅漢仍有色蘊，所以沒有脫離苦諦，仍是輪迴者」，請問自宗的回應（「<strong>非無有解脫，由宿行已盡，不續餘生故；行功能無盡，彼住無過失</strong>」）是否有正答？（學員發表 `02:08:56`，法師指導 `02:21:24`–`02:31:52`）</li>
+<ul class="nested-list">
+<li>⑴ 沒有。雖然自宗以「是否解脫，要從會不會再次結生相續」為判斷標準，說明阿羅漢並非輪迴者；但對於他宗所緊咬的問題──在未離苦諦的當下，阿羅漢是否仍在輪迴，並未進行回答。</li>
+<li>⑵ 有。所謂「已離」並不是指當下有沒有，例如：即便熟睡時沒有我執，也不代表當事人已離我執。所以雖然阿羅漢當下有苦諦，但只要不會再次投生三有，就是「已離苦諦」。</li>
+<li>⑶ 有。阿羅漢已斷除煩惱，不再引生後有，其蘊體只是過往業與煩惱的產物；從完全斷除苦因（煩惱）到苦果（近取蘊的續流）完全消失，本就需要一段時間，所以即便當下阿羅漢仍有苦諦，但已不是輪迴者。</li>
+<li>⑷ 其他。</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>一、重點複習：苦諦之「空」與「無我」如何證成諸法無我</h3>
+<p class="reading-para clickable-para" onclick="playPara(53, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(53, this)">▶ 00:53</button> 本講次進入《2025 釋量論・第二品》大組共學第 28 講（上）〈滅諦的後三種行相〉。開場首先進行重點複習：內道與外道在見解上最大的分水嶺，在於內道主張「無我」、外道主張「有我」。此處所破的「我」，是指不觀待蘊體而能憑自身力量存在的「<strong>獨立自主的我</strong>」。如同前講「交換身體」與「交換心」的例子所示：若有人願意拿更健康的身體或更有智慧的心跟我們交換，我們會毫不猶豫地說「我想交換」，彷彿把身心都換給對方之後，那個作主決定的「我」依然完好無損地留在原地。</p>
+<p class="reading-para clickable-para" onclick="playPara(225, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(225, this)">▶ 03:45</button> 法師於正行課程中總結《釋量論》第 178 頌「<strong>非我非加持</strong>」如何透過苦諦的前兩行相（無常、苦）來證成後兩行相（無我、空）：<br/>1. <strong>「非我」（苦諦之無我行相 —— 自主的我與蘊體非一）</strong>：為什麼《釋量論》在介紹完「無常」與「苦」之後緊接著說「<strong>非我</strong>」？因為蘊體是剎那生滅的「無常」，且是「<strong>因自在故苦</strong>」（受自因——業與煩惱所控制、必須觀待因緣而生）。如果獨立自主的我與蘊體為「一（完全相同）」，那麼「我」也應該像五蘊一樣變成五個，且「我」也必須觀待因緣、受他所轉而成為無常與苦性；但一旦必須觀待因緣，就徹底違背了「獨立自主（不觀待）」的定義！因此，透過無常與苦性，直接證成<strong>自主的我與蘊體非一</strong>。<br/>2. <strong>「非加持」（苦諦之空行相 —— 自主的我與蘊體非異）</strong>：「加持」即是控制、主宰之義。在五蘊身心之外，根本找不到一個像「鬧鐘之外有錄音筆」般能單獨被指認出來、能控制蘊體的自主之我，故說<strong>自主的我與蘊體非異</strong>。透過「非一（無我）」與「非異（空）」的一異雙破，最終證成「諸法無我（補特伽羅無獨立自主之我）」。</p>
+<hr class="divider"/>
+<h3>二、探討「我念」與「我執」的差異：趨入境與因果關係辨析（問題 1）</h3>
+<p class="reading-para clickable-para" onclick="playPara(493, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(493, this)">▶ 08:13</button> 進入問題 1 的學員分組發表：我們心中所有想到「我」的念頭都是「我執」嗎？題目列出三個選項供大眾辨析：⑴ 從趨入境區分「我念（趨入存在的依蘊假立之我，屬正確認知）」與「我執（趨入不存在的獨立自主之我，屬顛倒認知）」；⑵ 認為「我念」呈現真實狀態、「我執」在其上捏造獨立自主，故必先生起「我念」才能生起「我執」（有因果關係）；⑶ 認為生起「我執」前不見得要先有「我念」，因俱生我執可由往昔習氣任運生起。</p>
+<p class="reading-para clickable-para" onclick="playPara(1676, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1676, this)">▶ 27:56</button> 如性法師於 `00:27:56` 針對問題 1 展開極為深入的法義剖析。首先針對<strong>選項⑴</strong>：法師肯定選項⑴的界定非常精準！在名言中，「我（補特伽羅）」是存在的，而且對我們而言是「現前分」；當我們心中生起單純緣著「依蘊假立之我」的分別知（例如阿羅漢想著「我要去托缽」、「我想為眾生說法」，或凡夫單純了知「我在這裡」而未執其為獨立自主時），這種認知的<strong>趨入境（耽著境）是存在的依蘊假立之我</strong>，因此稱為正確的「<strong>我念</strong>」。反之，「<strong>我執</strong>」雖然以存在的「依蘊假立之我」作為<strong>所緣境</strong>，但它的<strong>行相（以及所耽著的趨入境）卻是「獨立自主的我」</strong>；因為現實中根本沒有獨立自主的我，所以「我執」是趨入境不存在的<strong>顛倒認知（邪知）</strong>。</p>
+<p class="reading-para clickable-para" onclick="playPara(2355, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2355, this)">▶ 39:15</button> 接著法師對比<strong>選項⑵與選項⑶</strong>的核心爭點：「生起我執之前，是否必須先生起正確的我念？兩者有沒有因果關係？」法師指出，認為「必須先有一顆正確的『我念』呈現出我真實（依蘊假立）的狀態，然後下一剎那『我執』才在上面捏造獨立自主的特色」（選項⑵），這種說法<strong>不合理</strong>！為什麼？因為如果我們在生起我執的前一剎那，心裡真的已經先如實呈現出「我是依賴五蘊而假立」的真實狀態，那我們當下就已經體會到我不是獨立自主的了，怎麼反而會立刻把它作為因、去引生「執我為獨立自主」的我執呢？</p>
+<p class="reading-para clickable-para" onclick="playPara(2900, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2900, this)">▶ 48:20</button> 法師進一步闡明<strong>選項⑶合理的理由</strong>：凡夫相續中的「俱生我執」，是從無始劫來薰習而成的強大染污習氣；當我們在日常生活中對境時，只要因緣具足，俱生我執就能依著往昔的習氣，直接緣著「依蘊假立的我（所緣）」，當下任運地將它執為「獨立自主的我（行相）」，完全不需要在它前面先安立一顆正確的「我念」作為前導因！因此，「我念」與「我執」是面對同一個所緣（我）時，兩種行相截然不同的認知，彼此之間並不存在「必先有我念、後生起我執」的因果關係。</p>
+<hr class="divider"/>
+<h3>二（續）、在日常觀察中如何區分「我念」與「我執」？（問題 2 第⑴⑵⑶⑷小題）</h3>
+<p class="reading-para clickable-para" onclick="playPara(3581, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3581, this)">▶ 59:41</button> 進入問題 2 第⑴、⑵小題的學員發表：在日常內省時，能否以「當下有沒有伴隨粗猛煩惱（如生氣、貪婪）」來作為區分「我念」與「我執」的標準？例如規劃年底去朝聖時心平氣和想著「我要去朝聖」就是我念，被主管拒絕請假而憤怒說「我要去朝聖」才是我執？</p>
+<p class="reading-para clickable-para" onclick="playPara(4717, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4717, this)">▶ 78:37</button> 如性法師於 `01:18:37` 針對問題 2 第⑴、⑵小題作關鍵指導：法師明確指出，<strong>選項⑴不合理，選項⑵合理</strong>！誠然，在量學、中觀或道次第論典中，祖師們常引導初學者先從「強猛煩惱現起時（如別人毀謗我、拒絕我而生起強烈嗔心或委屈時）」去觀察我執，因為在情緒激動的當下，那個「獨立自主、覺得自己受委屈的我」顯現得最鮮明、最粗猛，最容易被初學者捕捉到。</p>
+<p class="reading-para clickable-para" onclick="playPara(5350, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5350, this)">▶ 89:10</button> 但是，「在強猛煩惱現起時最容易觀察到我執」，<strong>絕不代表「沒有粗猛煩惱時就不是我執」</strong>！法師以選項⑵的精妙理路說明：雖然「我執」是引生貪嗔等煩惱以及造作輪迴能引業的根本因，但並不是每一剎那生起「我執」時，當下都一定會立刻引生粗猛的貪嗔煩惱或造下能引業。當我們平時心平氣和地想著「我要去朝聖」、「我想刷牙、我想吃飯、我想讀書」時，如果內心深處依然覺得那個「要去朝聖的我、要讀書的我」是一個不依賴身心、能自主支配身心的獨立個體，那麼即便當下沒有生氣或貪心，那顆心識依然是<strong>俱生我執</strong>！不能僅憑「有沒有伴隨生氣等粗猛煩惱」或是「念頭的強弱」來斷定它是我念還是我執。</p>
+<p class="reading-para clickable-para" onclick="playPara(6569, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(6569, this)">▶ 109:29</button> 隨後進入問題 2 第⑶、⑷小題的學員發表：⑶ 當關注點在蘊體（如「我正在鍛鍊手臂肌肉」）較易生起我念，覺得不依賴蘊體（如「我必須完成五十組動作」）就是我執；⑷ 自然接納身心變化（如「我老了，健忘是正常的」）接近我念，抗拒身心狀態（如「以前的我不會這樣，我不應該如此健忘」）就是我執。</p>
+<p class="reading-para clickable-para" onclick="playPara(7110, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7110, this)">▶ 118:30</button> 如性法師於 `01:58:30` 針對第⑶、⑷小題給予細緻點評：法師指出，區分「我念」與「我執」的唯一根本標準，始終在於<strong>「當下心中所執取的我，究竟是不是不觀待蘊體、獨立自主的我」</strong>。在選項⑶中，即便一個人在健身時關注手臂肌肉，他心裡仍可能覺得「我是控制這塊肌肉的主人」而處於我執中；反之，說「我必須完成五十組動作」也不見得一定認為自己不依賴蘊體。而在選項⑷中，當我們說「以前的我不會這樣，我不應該如此健忘」、對老病生起強烈抗拒時，確實往往是因為心裡把「我」當成一個恆常不變、能完全掌控身心的獨立主宰者（我執），所以無法接受身心不受控制的現實；但反過來說，即便表面上無奈地說「我老了，健忘是正常的」，如果心裡依然覺得有一個獨立於老病身體之外的「我」，那仍然可能是我執。因此，這些日常情境可以作為輔助我們反觀內心的線索，但最終仍須回到「是否執我為不觀待蘊體而獨立存在」的判準上。</p>
+<hr class="divider"/>
+<h3>三～六、滅諦之「靜」行相與「阿羅漢雖有苦諦但仍已解脫」之辨析（問題 3）</h3>
+<p class="reading-para clickable-para" onclick="playPara(7736, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7736, this)">▶ 128:56</button> 進入本講第三大議題（科判三至六與問題 3）：《釋量論・成量品》在闡釋滅諦的第二種行相「<strong>靜</strong>」（由滅除煩惱而令內心獲得寂靜）時，外道（他宗）為了否定阿羅漢已斷除煩惱並獲得解脫，接連提出了多項犀利質疑。首先在科判四「阿羅漢的悲心不會衍生三毒」中，法稱論師以三組偈頌逐一擊破他宗質疑：<br/>1. 破「有悲心則有有情見與我執」：「<strong>知苦以無違，前行隨轉者，事法生悲愍，非連繫有情。</strong>」——阿羅漢了知眾生只是隨順往昔業與煩惱（「<strong>前行</strong>」，即行蘊中之業與煩惱）所形成的五蘊假立法，緣此苦蘊相續而生起悲愍，絲毫不執著有情為獨立自主（「<strong>非連繫有情</strong>」）。<br/>2. 破「有悲心則有貪念」：「<strong>彼於無我法，增餘我而貪；由了苦相續，而生起悲愍。</strong>」——凡夫（「<strong>彼</strong>」）因不解無我，在無我諸法上增益捏造出獨立自主之「餘我」而生貪；阿羅漢則因徹底通達苦蘊相續無我，純粹由悲心而不夾雜一絲貪愛。<br/>3. 破「所悲有情遭害則生瞋念」：「<strong>癡是過根本，彼是執有情，無彼則不從，過因而生瞋，故許悲無過。</strong>」——愚癡（我執 / 有情見）是一切貪瞋過失的根本因，阿羅漢既已連根斷除愚癡，縱使所悲愍之眾生遭人加害，亦絕不會從愚癡過因而生起瞋恚，故阿羅漢之悲心清淨無過。</p>
+<p class="reading-para clickable-para" onclick="playPara(8170, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8170, this)">▶ 136:10</button> 接著進入問題 3 的核心辯論（科判五「阿羅漢雖有苦諦但仍已解脫」）：他宗提出了一個極具水準的詰難——「有餘依阿羅漢身上依舊擁有由過去生業與煩惱所感得的色蘊（五蘊），而那個有漏蘊體就是『苦諦』！既然阿羅漢當下還擁有苦諦，就表示他尚未完全脫離苦諦，怎麼能說他已經解脫、不是輪迴者呢？」對此，法稱論師於偈頌中回答：「<strong>非無有解脫，由宿行已盡，不續餘生故；行功能無盡，彼住無過失。</strong>」學員們針對自宗這個回答「是否有正答他宗的提問」展開熱烈發表。</p>
+<p class="reading-para clickable-para" onclick="playPara(8484, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8484, this)">▶ 141:24</button> 如性法師於 `02:21:24` 針對問題 3 作出極為精彩的總結指導：法師分析，他宗之所以認為「阿羅漢當下還有色蘊（苦諦）＝ 尚未離苦諦 ＝ 仍是輪迴者」，是因為他宗把「是否為輪迴者（是否已解脫）」的判斷標準，放在「<strong>今生當下還有沒有往昔舊業所感得的苦諦蘊體</strong>」；而自宗法稱論師的回答（「<strong>非無有解脫，由宿行已盡，不續餘生故</strong>」），則是直接從根源上糾正他宗對「解脫者 vs. 輪迴者」的判準！</p>
+<p class="reading-para clickable-para" onclick="playPara(8790, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8790, this)">▶ 146:30</button> 法師闡明選項⑵與選項⑶的精義：判斷一位行者是否已經獲得解脫、是否脫離輪迴，<strong>並不是看他證果的那一世身上還有沒有舊業所留下的有漏色蘊，而是看他「是否已經徹底斷除煩惱（苦因），在今生宿業受盡之後，來世會不會再次受煩惱與業力牽引而結生相續到三有輪迴中（「由宿行已盡，不續餘生故」）」</strong>！正如選項⑵所舉的對比例子：一個凡夫在無夢熟睡時，當下雖然沒有現起粗猛的我執，但因為種子未斷、醒來還會繼續生起，所以不能說他「已離我執」；反之，有餘依阿羅漢雖然今生還留有過去業力所感得的五蘊餘報（從完全斷除苦因到舊苦果的續流徹底息滅，本就有一段時間差，如選項⑶所述），但因為他已經徹底斷除我執與煩惱，即使宿業的功能尚未完全走完（「<strong>行功能無盡</strong>」），他暫時安住世間也絕不會再生起任何煩惱過失或造作新引業（「<strong>彼住無過失</strong>」），今生壽盡後必定不再結生後有！因此，自宗的回答不僅完全正答，更精準揭示了「雖有餘依苦諦，然已究竟解脫生死」的甚深法義。最後大眾於 `02:32:00` 合掌迴向，圓滿第 28 講（上）。</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 28 講（下）滅諦的後三種行相（下）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 28 講（下）滅諦的後三種行相（下）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`46`（顯示編號：`28下`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (PYIbCsZmPHg)](https://www.youtube.com/watch?v=PYIbCsZmPHg)（片長 2 小時 43 分 50 秒）</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 28 講〈滅諦的後三種行相〉（科判七～十二，大組討論題 Q1～Q3）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-28.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_28_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【本講核心偈頌（《釋量論・成量品》）】</h2>
+<blockquote class="verse-quote">
+<p>「<strong>離薩迦耶見，初道應無有；未斷俱生故，若斷豈有有？</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>若欲得安樂，及欲不受苦，所有念我覺，俱生有情見。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>若不見有我，則全非我貪，若無有我愛，非求樂奔馳。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>生苦因即縛，於常何有彼？不生苦因解，於常何有彼？</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>不可說無常，彼非任何因，於不可說中，縛解皆非有。若自性無壞，智者說彼常，棄此可羞見，當說彼是常。</strong>」</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>七、現證無我未必能斷薩迦耶見</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：關於現證無我未必能斷薩迦耶見（「<strong>離薩迦耶見，初道應無有；未斷俱生故，若斷豈有有？</strong>」），請問：</li>
+<ul class="nested-list">
+<li>⑴ 本講提到「執繩為蛇」的例子中，一旦看清真相，恐懼就會頓時消失；然而，見道位的聖者即使現證無我，卻仍舊無法出離輪迴。上述兩種狀況無法相提並論的理由為何？（學員發表 `00:10:29`，法師指導 `00:30:12`–`00:42:38`）</li>
+<li>⑵ 「遍計我執」是受到其他宗義影響而產生的，這是否代表不是所有人都會生起遍計我執？如果是，那些沒有遍計我執的人現證無我時如何斷除遍計我執？（學員發表 `00:42:55`，法師指導 `00:58:38`–`01:41:53`）</li>
+</ul>
+</ul>
+<h3>八、區分我執與薩迦耶見</h3>
+<ul class="meta-list">
+<li><strong>問題 2</strong>：請問：在證得無我前，應該先「認識所破」，而認識所破應該從生活經驗中知道自己如何執著獨立自主的我；既然如此，是否在此時就應該區分「我執」與「我念」的差異？（學員發表 `01:42:44`，法師指導 `01:57:04`–`02:17:07`）</li>
+<li><strong>問題 3</strong>：請問：凡夫想著「這是我的手機」，與阿羅漢想著「這是我的手機」，兩者是否有明顯的差異？為何前者可能引生煩惱，後者卻不會引生煩惱？（學員發表 `02:17:41`，法師指導 `02:23:48`–`02:43:27`）</li>
+</ul>
+<h3>九、滅諦之三：妙 ＆ 十、駁斥犢子部所主張的我 ＆ 十一、滅諦之四：離 ＆ 十二、總攝滅諦的四種行相</h3>
+<ul class="meta-list">
+<li>結合原典科判九至十二，完整總攝滅諦「滅、靜、妙、離」四種行相之體系。</li>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>七、現證無我為何未必能斷除一切薩迦耶見？（問題 1 第⑴小題：「執繩為蛇」與「見道現證無我」之差異）</h3>
+<p class="reading-para clickable-para" onclick="playPara(38, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(38, this)">▶ 00:38</button> 本講次進入《2025 釋量論・第二品》大組共學第 28 講（下），深入研討《釋量論・成量品》第 28 講後半部（科判七至十二）。在科判七「現證無我未必能斷薩迦耶見」中，他宗提出質疑：「<strong>離薩迦耶見，初道應無有</strong>」——既然薩迦耶見（我執）是三有輪迴的根本，那麼當行者最初獲得聖者見道（「<strong>初道</strong>」）、現證補特伽羅無我時，他的心中應該已經沒有薩迦耶見了；既然沒有薩迦耶見，見道聖者就應該當下脫離三有輪迴（「<strong>應無有</strong>」），為何見道聖者還會在輪迴中投生呢？對此，法稱論師回答：「<strong>未斷俱生故，若斷豈有有？</strong>」——見道位雖然斷除了「遍計薩迦耶見」，但尚未斷除無始劫來薰習的「俱生薩迦耶見」；若連俱生薩迦耶見也徹底斷除（證得阿羅漢果），又豈會再次投生三有輪迴呢？</p>
+<p class="reading-para clickable-para" onclick="playPara(629, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(629, this)">▶ 10:29</button> 圍繞上述偈頌，問題 1 第⑴小題提出了一個極為深刻的法義追問：在正行課堂上，法師曾舉「<strong>執繩為蛇</strong>」的經典例子——當我們在昏暗中把牆角的花紋繩子誤認為毒蛇時，心中會生起劇烈恐懼；但只要拿手電筒一照，<strong>一旦親眼看清真相（「那只是一條繩子，根本沒有蛇」），心中的恐懼就會頓時消失</strong>！既然如此，為什麼見道位的聖者已經用現量親眼看清真相（現證「根本沒有獨立自主的我」），他的我執與輪迴卻沒有像「看清繩子無蛇、恐懼頓時消失」一樣當下全部斷除？這兩種狀況無法相提並論的理由為何？</p>
+<p class="reading-para clickable-para" onclick="playPara(1812, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1812, this)">▶ 30:12</button> 如性法師於 `00:30:12` 針對問題 1 第⑴小題給予極為透徹的指導。法師分析，「看清繩上無蛇而恐懼頓消」與「見道現證無我卻仍未斷除俱生我執」之所以不能相提並論，關鍵在於<strong>「錯誤認知的薰習時間與習氣深淺」有著天壤之別</strong>！<br/>1. <strong>「執繩為蛇」只是偶發、短暫的錯覺</strong>：我們並不是從無始劫以來每一天、每一生都把那條繩子當成蛇；那只是在光線昏暗的特定因緣下，維持了幾秒鐘或幾分鐘的短暫錯亂認知，內心深處根本沒有「執此繩為蛇」的堅固習氣。因此，一旦燈光照亮、現量看清它是繩子，那個偶發的錯覺與恐懼自然瞬間消散。<br/>2. <strong>「俱生我執」則是無始劫來無間薰習的深重習氣</strong>：我們從無始生死以來，在每一生、每一天、每一個對境中，都不斷重複著「我是獨立自主」的俱生我執，這種習氣在心相續中已經紮根得無比深厚！因此，當行者初登見道位、第一次現證無我時，雖然在根本定中能現行壓伏一切我執，並徹底斷除由後天邪宗義或邪思惟所生起的「<strong>遍計我執</strong>」（因為遍計我執需要靠虛妄理由支撐，一旦現量見道看清真相，遍計的歪理立刻崩塌）；但出定之後，無始劫來不待理由、任運生起的「<strong>俱生我執</strong>」習氣依然存在，必須在後續的「<strong>修道位</strong>」中，反覆串習見道所證得的無我空慧，如同用肥皂水反覆搓洗千年陳垢一般，才能將九品俱生煩惱與俱生我執一層一層徹底斷盡！</p>
+<hr class="divider"/>
+<h3>七（續）、「遍計我執」之界定與見道如何斷除遍計種習（問題 1 第⑵小題）</h3>
+<p class="reading-para clickable-para" onclick="playPara(2575, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2575, this)">▶ 42:55</button> 接著進入問題 1 第⑵小題的學員發表：一般說「遍計我執」是受到外道或錯誤宗義影響而產生的，這是否代表沒有學過外道宗義的普通人就不會生起「遍計我執」？如果是，那些今生沒有現行生起遍計我執的人，在現證無我（見道）時，又是如何「斷除遍計我執」的呢？</p>
+<p class="reading-para clickable-para" onclick="playPara(3518, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3518, this)">▶ 58:38</button> 如性法師於 `00:58:38` 針對問題 1 第⑵小題展開長達 43 分鐘的精闢開示。法師首先釐清兩個關鍵層次：<br/>第一，<strong>「遍計我執」不僅限於學習外道宗義，更包含我們自己反覆思惟、找理由去合理化我執的念頭</strong>；但退一步說，即便將「遍計我執」嚴格界定為「由串習外道邪宗義而引生的我執」，並承認今生未曾接觸外道宗義的普通人，在<strong>今生並沒有生起「現行的遍計我執」</strong>，這是否代表他心相續中沒有「遍計我執的種子（隨眠）」？</p>
+<p class="reading-para clickable-para" onclick="playPara(4335, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4335, this)">▶ 72:15</button> 法師一針見血地指出：<strong>今生沒有生起「現行的遍計我執」，絕不代表心相續中沒有「過去無始劫來曾造作、薰習過的遍計我執種子（隨眠）」！</strong> 任何一位在輪迴中流轉無數世的凡夫，在過去無量劫的生死中，都曾經受過各種邪見、外道宗義的薰習，在心識深處早已埋下了無數「遍計我執的種子」。只要還沒有現證無我（尚未獲得見道無間道與解脫道），這些遍計我執的種子就一直潛伏在相續中，未來一旦遇到外道邪師或邪教的因緣，隨時都可能再次現行生起！</p>
+<p class="reading-para clickable-para" onclick="playPara(5320, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5320, this)">▶ 88:40</button> 第二，法師說明<strong>「斷除煩惱」的真正定義，是指「斷除煩惱的種子（使未來永不復生）」，而不是指「當下正在現起煩惱時把它壓下去」</strong>！事實上，當行者在見道無間道現證無我的當下，心相續中專注於無我空性，當下本來就沒有任何「現行的遍計我執」；見道無間道所作的事情，正是作為正對治力，將心相續中無始劫來潛伏的「<strong>遍計我執種子（隨眠）</strong>」徹底摧毀，令其未來永遠不可能再次生起！因此，即便一位行者今生從未接觸外道、今生不曾現起遍計我執，他在現證無我獲得見道時，依然是如實地斷除了心相續中無始以來的「遍計我執種子」。</p>
+<hr class="divider"/>
+<h3>八、證得無我前「認識所破」與區分「我執 vs. 我念」（問題 2）</h3>
+<ul class="meta-list">
+<li><button class="ts-btn" onclick="event.stopPropagation(); playAt(6164, this)">▶ 102:44</button> 進入科判八「區分我執與薩迦耶見」及問題 2 的研討。在正行課程中，法師まず釐清了兩個核心名相的範圍差異：</li>
+<li><strong>「薩迦耶見（壞聚見）」</strong>：所緣必定是緣著「<strong>自己（自相續的五蘊假立之我）</strong>」，執自己為獨立自主之我。</li>
+<li><strong>「補特伽羅我執（簡稱我執）」</strong>：所緣不僅可以緣著「自己」，也可以緣著「<strong>他相續的有情</strong>」（此時稱為「有情見」，執其他有情為獨立自主）。因此，「薩迦耶見」必定是「補特伽羅我執」，但「補特伽羅我執」不一定是「薩迦耶見」（補特伽羅我執的範圍較廣）；然而兩者皆是生死輪迴的根本。</li>
+<li>接著，偈頌指出俱生我執的真實存在：「<strong>若欲得安樂，及欲不受苦，所有念我覺，俱生有情見。若不見有我，則全非我貪，若無有我愛，非求樂奔馳。</strong>」當眾生想著「我要離苦得樂」時，心中任運浮現那個獨立自主之「我」的覺知，就是俱生有情見（俱生薩迦耶見）。針對此理，問題 2 提問：在證得無我前應該先「認識所破」，既然要從生活經驗中認識自己如何執著獨立自主的我，是否在此時就必須清楚區分「我執」與「我念」的差異？</li>
+</ul>
+<ul class="meta-list">
+<li><button class="ts-btn" onclick="event.stopPropagation(); playAt(7024, this)">▶ 117:04</button> 如性法師於 `01:57:04` 針對問題 2 作出極具實修指導意義的開示。法師引用宗喀巴大師在《辨了不了義善說藏論》、《菩提道次第廣論》與《入中論善顯密意疏》中反覆強調的核心教授——<strong>「修習無我空性，最關鍵的第一步就是精準認識所破（認清我執所執之我是什麼樣子）」</strong>，並重現正行課堂上的<strong>「抓小偷喻」</strong>：</li>
+<li>如果警察要抓一個小偷，事先已經把小偷的長相、身高、穿什麼衣服、逃亡路線掌握得一清二楚，那麼要把他逮捕歸案一點都不難；反之，如果連小偷長什麼樣子、穿什麼衣服都分不清楚，就算拿著最精良的武器，在街上也根本無從抓起，甚至會抓錯好人！</li>
+</ul>
+<p class="reading-para clickable-para" onclick="playPara(7590, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7590, this)">▶ 126:30</button> 法師進一步指出：如果我們在修學無我之前，完全不去區分「什麼是我執所執的獨立自主之我（所破）」與「什麼是我念所緣的依蘊假立之我（所不破）」，把一切「我」都混為一談，就會陷入兩種極端危險：<br/>1. <strong>破得太過而墮入「斷邊」</strong>：在以正理破除「獨立自主之我」時，連同現實中造業受果、修道解脫的「名言假立之我」也一併否定掉，認為一切因果皆無；<br/>2. <strong>破得不足而墮入「常邊」</strong>：因為害怕墮入斷滅，為了保留名言中的「我」，結果連俱生我執所執著的那個「獨立自主之我」也不敢破除。<br/>雖然對尚未現證無我的初學者而言，要在每一個微細念頭中百分之百精準切開「現行的我念」與「現行的我執」確實不容易（有時甚至需要到了見道現證無我後，才能在後得位完全明辨兩者的微細界線）；但在聞思修的起步階段，我們<strong>至少必須在概念與粗分經驗上（如透過「交換身心喻」、「生起強猛煩惱時的自我感」），清楚區分「獨立自主的我（我執之境）」與「依蘊假立的我（我念之境）」</strong>，如此在修習一異雙破時，才能精準瞄準靶心而不傷及名言因果！</p>
+<hr class="divider"/>
+<h3>八（續）、凡夫與阿羅漢想著「這是我的手機」有何差異？（問題 3）＆ 九～十二、總攝滅諦四行相</h3>
+<p class="reading-para clickable-para" onclick="playPara(8261, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8261, this)">▶ 137:41</button> 進入問題 3 的學員發表：凡夫想著「這是我的手機」，與阿羅漢想著「這是我的手機」（或如正行課堂所舉「阿羅漢出門托缽時想著：這是我的缽、我的法衣」），兩者是否有明顯差異？為何前者可能引生煩惱，後者卻不會引生煩惱？</p>
+<p class="reading-para clickable-para" onclick="playPara(8628, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8628, this)">▶ 143:48</button> 如性法師於 `02:23:48` 針對問題 3 開示：凡夫與阿羅漢雖然在名言中都會使用相同的語句（「這是我的手機」、「這是我的缽、我的法衣」），但兩者內心的認知結構有著本質差異：<br/>1. <strong>阿羅漢的「我所念（我的手機 / 我的缽）」</strong>：阿羅漢已經徹底斷除了補特伽羅我執與我所執，當他想著「這是我的缽、我的手機」時，他純粹是在名言假立的層面上，了知「這個依支分假立的物品，目前屬於這個依五蘊假立的我所使用」——這是一顆百分之百符合事實的<strong>正確「我念 / 我所念」</strong>，裡面沒有絲毫「獨立自主的掌控者與被掌控物」的增益錯覺。因此，就算這個缽破了、手機壞了或被人拿走，阿羅漢也只會如實了知因緣變化，絕不會因此生起貪戀或嗔恨。<br/>2. <strong>凡夫的「我所執（我的手機）」</strong>：凡夫在想著「這是我的手機」時，雖然偶爾也有單純名言分別的時候，但絕大多數情況下，內心深處都伴隨著俱生我執與我所執——把「我」當成獨立自主的主人，把「手機」當成確定屬於我、受我完全支配的實有財產。正因為有這層「獨立自主的我與我所」的虛妄執著（薩迦耶見），就會對「我」與「我的東西」生起強烈耽著（我貪 / 我所貪）；一旦別人弄壞了「我的手機」，立刻就會覺得「他侵犯了我！」而爆發強烈的嗔恨與苦惱（「<strong>若不見有我，則全非我貪，若無有我愛，非求樂奔馳</strong>」）。</p>
+<ul class="meta-list">
+<li><button class="ts-btn" onclick="event.stopPropagation(); playAt(9330, this)">▶ 155:30</button> 最後，結合正行課堂科判九至十二，法師完整收攝滅諦的後三種行相與總結：</li>
+<li><strong>科判九「滅諦的四種行相之三：妙」</strong>：外道主張必須有「常我（獨立自主之我）」才能作為輪迴與解脫的基礎；法稱論師以「<strong>生苦因即縛，於常何有彼？不生苦因解，於常何有彼？</strong>」破斥：輪迴的本質是「被生苦之因（煩惱）所束縛」，解脫的本質是「生起無我慧而令苦因不再生起」；如果「我」是恆常不變的常法，既不可能被煩惱改變而受束縛，也不可能透過修道生起無我慧而獲解脫！唯有「依蘊假立的無常之我」，才能合理安立輪迴與解脫。</li>
+<li><strong>科判十「駁斥犢子部所主張的我」</strong>：內道毗婆沙宗犢子部為了逃避常與無常的過失，主張補特伽羅是「不可言說（非常非無常）」；法稱論師以「<strong>不可說無常，彼非任何因，於不可說中，縛解皆非有。若自性無壞，智者說彼常，棄此可羞見，當說彼是常</strong>」痛加駁斥：若不可說是無常，就不能作為任何果的因，也無法安立束縛與解脫；若其自性不會壞滅，智者皆說彼即是常法，勸其早日放棄這種羞恥矛盾的見解。</li>
+<li><strong>科判十一、十二「總攝滅諦的四種行相（滅、靜、妙、離）」</strong>：</li>
+<ul class="nested-list">
+<li>1. <strong>滅</strong>：滅除痛苦（遠離痛苦束縛之離繫功德）；</li>
+<li>2. <strong>靜</strong>：滅除煩惱（斷除心垢而令內心獲得寂靜）；</li>
+<li>3. <strong>妙</strong>：獲得利樂的解脫（對自相續有益且獲得究竟安樂之果位）；</li>
+<li>4. <strong>離</strong>：永遠遠離、之後不再生苦（一旦證得滅諦，未來永不再退轉或重新生起苦果，此行相將於下一講「道諦之出」一併詳釋）。</li>
+</ul>
+<li>大眾於 `02:43:36` 合掌誦念迴向偈，圓滿第 28 講全部課程。</li>
+</ul>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>
