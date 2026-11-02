@@ -53,8 +53,28 @@ class GroundedCorrectionSafetyTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "session.json"
             path.write_text(json.dumps(fixture))
-            with patch.object(COMPACT_MODULE, "gate", side_effect=effects or [set(), set()]):
+            with patch.object(COMPACT_MODULE, "gate", side_effect=effects or [set(), set()]), \
+                 patch.object(COMPACT_MODULE.correction, "ADJUDICATOR_MODEL", "Qwen3.8-27B"), \
+                 patch.object(COMPACT_MODULE.correction, "MODEL", "deepseek-v4.1-flash"):
                 return COMPACT_MODULE.process(path, batch, False)
+
+    def test_model_identity_must_be_independent(self):
+        with patch.object(COMPACT_MODULE.correction, "ADJUDICATOR_MODEL", "same-model"), \
+             patch.object(COMPACT_MODULE.correction, "MODEL", "same-model"):
+            with self.assertRaises(ValueError):
+                COMPACT_MODULE.assert_independent_models()
+
+    def test_apply_refreshes_processing_timestamps(self):
+        fixture = {"paragraphs": [{"sentences": [{"id": "seg-1", "text": "四念住", "rawText": "四念住", "reviewNeeded": True}]}]}
+        with patch.object(COMPACT_MODULE.correction, "ADJUDICATOR_MODEL", "Qwen3.8-27B"), \
+             patch.object(COMPACT_MODULE.correction, "MODEL", "deepseek-v4.1-flash"), \
+             patch.object(COMPACT_MODULE, "gate", side_effect=[set(), set()]):
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / "session.json"
+                path.write_text(json.dumps(fixture))
+                applied, _, _, _, _ = COMPACT_MODULE.process(path, 1, True)
+        self.assertRegex(applied["lastUpdated"], r"^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$")
+        self.assertEqual(applied["_meta"]["processed_at"], applied["lastUpdated"])
 
     def test_nonpositive_batch_never_clears_without_review(self):
         for batch in (-1, 0):
