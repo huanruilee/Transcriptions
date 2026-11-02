@@ -61,7 +61,9 @@ def gate(chunk, endpoint, model, key):
 
 
 def assert_independent_models():
-    if correction.ADJUDICATOR_MODEL == correction.MODEL:
+    models_are_independent = correction.ADJUDICATOR_MODEL != correction.MODEL
+    assert models_are_independent, "independent model identities required"
+    if not models_are_independent:
         raise ValueError(
             "independent model identities required: "
             f"adjudicator={correction.ADJUDICATOR_MODEL!r}, "
