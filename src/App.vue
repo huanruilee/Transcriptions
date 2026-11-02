@@ -1,5 +1,5 @@
 <template>
-  <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
+  <div class="app-root" :class="{ 'mini-player-docked': isVideoFloating && isVideoDockedLeft && !isVideoHidden && activeMediaType === 'video/youtube' && currentYoutubeVideoId }" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
     <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
       <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
         <h1 id="course-chooser-title">請選擇課程</h1>
@@ -370,14 +370,18 @@
             <div
               v-if="activeMediaType === 'video/youtube' && currentYoutubeVideoId"
               class="youtube-player-container"
-              :class="{ 'is-floating': isVideoFloating }"
+              :class="{ 'is-floating': isVideoFloating, 'audio-only-hidden': isVideoHidden, 'dock-bottom-left': isVideoDockedLeft }"
             >
+              <div class="floating-video-toolbar">
               <button
                 class="floating-video-toggle"
                 data-testid="floating-video-toggle"
                 :aria-pressed="isVideoFloating"
                 @click="isVideoFloating = !isVideoFloating"
               >{{ isVideoFloating ? '↙ 還原影片' : '📌 浮動置頂' }}</button>
+              <button v-if="isVideoFloating" data-testid="hide-video" @click="isVideoHidden = true">🎵 隱藏畫面</button>
+              <button v-if="isVideoFloating" class="dock-video-button" data-testid="dock-video" :aria-pressed="isVideoDockedLeft" @click="isVideoDockedLeft = !isVideoDockedLeft">{{ isVideoDockedLeft ? '↗ 移至右上' : '↙ 移至左下' }}</button>
+              </div>
               <iframe
                 id="youtube-iframe"
                 class="youtube-iframe"
@@ -696,6 +700,14 @@
         </button>
 
         <button
+          v-if="activeMediaType === 'video/youtube' && currentYoutubeVideoId"
+          id="video-visibility-toggle"
+          class="rate-btn video-visibility-toggle"
+          :aria-pressed="!isVideoHidden"
+          @click="isVideoHidden = !isVideoHidden"
+        >{{ isVideoHidden ? '📺 顯示影片' : '📺 隱藏影片' }}</button>
+
+        <button
           id="toc-drawer-trigger"
           class="toc-trigger-btn"
           data-testid="mobile-toc-drawer-btn"
@@ -850,6 +862,18 @@ function chooseInitialCourse(courseId: string) {
 // Keep the player visible while the transcript scrolls; users can restore it
 // inline with the same toggle whenever they prefer the embedded layout.
 const isVideoFloating = ref(true);
+// Storage may be unavailable in private or embedded browsing contexts.
+function readVideoPreference(key: string): boolean {
+  try { return localStorage.getItem(key) === 'true'; } catch { return false; }
+}
+const isVideoHidden = ref(readVideoPreference('mini-player-hidden'));
+const isVideoDockedLeft = ref(readVideoPreference('mini-player-dock-left'));
+watch(isVideoHidden, value => {
+  try { localStorage.setItem('mini-player-hidden', String(value)); } catch { /* Keep session controls usable. */ }
+});
+watch(isVideoDockedLeft, value => {
+  try { localStorage.setItem('mini-player-dock-left', String(value)); } catch { /* Keep session controls usable. */ }
+});
 const hasMediaEnded = ref(false);
 const isSyncModalOpen = ref(false);
 const isReviewModalOpen = ref(false);
@@ -2668,17 +2692,54 @@ if (typeof window !== 'undefined') {
   background: #000;
 }
 
-.floating-video-toggle {
+.floating-video-toolbar {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 4px;
+  right: 4px;
+  left: 4px;
   z-index: 2;
-  padding: 8px 12px;
-  border: 1px solid #777;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.floating-video-toolbar button {
+  padding: 5px 6px;
+  font-size: 11px;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  background: #222;
-  color: #fff;
+  background: var(--sidebar-bg);
+  color: var(--text-main);
   cursor: pointer;
+}
+.dock-video-button { display: none; }
+.audio-only-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  border: 0 !important;
+  position: fixed !important;
+}
+@media (min-width: 1025px) {
+  .dock-video-button { display: inline-block; }
+  .youtube-player-container.is-floating.dock-bottom-left {
+    left: 12px;
+    bottom: 68px;
+    top: auto;
+    right: auto;
+    width: 280px;
+    z-index: 90;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px #0005;
+  }
+  /* Reserve 304px even when the sidebar is narrow or collapsed. */
+  .mini-player-docked .app-layout { padding-left: 304px; }
+  .mini-player-docked .sidebar { width: max(280px, var(--sidebar-width, 280px)); margin-left: -304px; margin-right: 24px; }
+  .mini-player-docked .main-reader { min-width: 0; }
 }
 
 .youtube-player-container.is-floating {

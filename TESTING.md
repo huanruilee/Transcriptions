@@ -186,3 +186,28 @@ READER_SMOKE_PHASE=deployed READER_BASE_URL=https://huanruilee.github.io/Transcr
 ### 入中論39B時間越界待核發布契約
 
 263句原文舊時碼保留；完整解碼2526.4588125秒，來源261尾止及262起點越界，不平移、不插值、不裁字。`ruzhong39bStudy.test.js`先RED驗新增來源時間審查、錯誤索引／重複／無證越界阻擋拒絕與導讀兩項有限重審實際輸入。`blockedSourcePlayback.test.ts`先RED驗越界來源可見、仍能雙擊編輯、單擊不送seek。`ruzhong39bRelease.spec.ts`桌面手機驗263原話、六處正文存疑、兩句來源時間待核、真實阻擋提示及下載。正式播放只核可用起點與越界阻擋，不將末段連續對說成已匹配音訊。
+
+## Mini Player Test Patterns（2026-11-02）
+
+Task: MINI-PLAYER-READING。自動化案例：`tests/unit_v2/miniPlayer.test.ts`。
+
+| Given | When | Then |
+| --- | --- | --- |
+| 懸浮影片顯示中 | 點「🎵 隱藏畫面」或底列「📺 隱藏影片」 | 套用 audio-only-hidden；opacity 0、pointer-events none、寬高 1px、overflow hidden（皆 important）；不使用 display none / visibility hidden；同一 iframe 與 src 保留，底列改「📺 顯示影片」 |
+| 純音訊隱藏中 | 點底列「📺 顯示影片」 | 移除隱藏狀態並顯示同一影片 |
+| 桌面寬度 >1024 且影片顯示中 | 點「↙ 移至左下」 | dock-bottom-left；left 12px、bottom 68px、right auto、width 280px、z-index 90；正文與播放器 BoundingBox 交集面積為 0 |
+| 已隱藏或停駐左下 | 重新整理或從 session-31 切換 session-32 | 讀取 localStorage，保留顯示與停駐偏好 |
+
+瀏覽器幾何驗收：在 1025、1280、1440px 寬度，包含側欄收合與縮窄，檢查 `max(0,min(player.right,main.right)-max(player.left,main.left)) * max(0,min(player.bottom,main.bottom)-max(player.top,main.top)) === 0`。另驗證手機控制列可操作、深色／護眼邊框與陰影、隱藏前後播放時間持續前進及時間軸同步；DOM 測試不等同真實 YouTube 串流驗收。
+
+執行：
+
+```sh
+npx vitest run tests/unit_v2/miniPlayer.test.ts
+node --test tests/unit/miniPlayerStyles.test.js
+# 需安裝 playwright，預設使用 macOS Chrome；其他環境設定 CHROME_PATH。
+# 可用 PLAYWRIGHT_MODULE 指向暫存安裝的 playwright/index.mjs。
+MINI_PLAYER_URL=http://127.0.0.1:4317 node tests/browser/miniPlayer.mjs
+```
+
+瀏覽器測試使用合成講記與攔截的 YouTube 回應，驗證實際 CSS、同一 iframe、重新整理／切講及手機按鈕邊界；不宣稱驗證真實串流播放。

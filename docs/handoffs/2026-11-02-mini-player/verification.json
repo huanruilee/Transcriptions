@@ -1,0 +1,71 @@
+{
+  "task": "MINI-PLAYER-READING",
+  "baseCommit": "243704dafc4f3cde9b602a8331d53be4df8aa5f7",
+  "branch": "codex/mini-player-reading-main",
+  "verifiedAt": "2026-11-02T21:53:18.115687+06:00",
+  "sourceSha256": {
+    "src/App.vue": "f9dd90337a8332994aa4c241fd3309de7ca46fe2ebc207f34c5d1786dde59fd5",
+    "tests/unit_v2/miniPlayer.test.ts": "ac5148a068b14ca9da012addfb621648214e400de188fa4f24df071199f905e1",
+    "tests/unit/miniPlayerStyles.test.js": "07888e9ff5785bffb416971f6c1ad80be19e272b2a9a29cdc2004ec9939c362d",
+    "tests/browser/miniPlayer.mjs": "eaacdbc7b8a011dd6cc58b6747f09be956cf169a814068d57cb7c3fbfa07dc78"
+  },
+  "gates": [
+    {
+      "command": "npm run test:v2",
+      "exitCode": 0,
+      "passed": 134,
+      "failed": 0
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 856,
+      "failed": 0,
+      "existingSkipped": 4
+    },
+    {
+      "command": "npm run summaries:audit",
+      "exitCode": 0,
+      "total": 302,
+      "valid": 302
+    },
+    {
+      "command": "node --test tests/acceptance/goldenStandard.test.js",
+      "exitCode": 0,
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "command": "npm run build:v2",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build:v2 -- --base=/Transcriptions/",
+      "exitCode": 0
+    },
+    {
+      "command": "playwright test --config /private/tmp/mini-player-reader.config.ts",
+      "exitCode": 0,
+      "passed": 48,
+      "failed": 0,
+      "note": "Same tracked tests and assertions; temporary config selects installed Chrome and separate output path."
+    },
+    {
+      "command": "node tests/browser/miniPlayer.mjs",
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "existingSkipLines": [
+    "ok 2 - browser smoke (Issue \\#10): Live URL renders a working learning platform # SKIP Browser smoke requires explicit opt-in: set REQUIRE_BROWSER_SMOKE=1 (CLI tests use unit_v2/domContract instead)",
+    "ok 48 - 27B 逐字稿品管測試 # SKIP",
+    "ok 459 - 四念住 release gate: every session has a stable playable audio source # SKIP",
+    "ok 460 - 四念住 release gate: semantic review is complete and structure is usable # SKIP"
+  ],
+  "releaseAssets": {
+    "dist/index.html": "e88febc50a395b250049d56fa6cb494cc8bddb152a3e09ddb6954bb498f2eb5f",
+    "dist/audio-sw.js": "e2d176f4798d35c3dc35d3f56b987b2ca5e20bdb57053a3a7c8729f19d6e6aa1",
+    "dist/assets/index-CupqznpR.js": "2383287a9a6baac7f9b422cc162f21d92562beb86622936b1da9736437e05e17",
+    "dist/assets/index-D3dBk-Xl.css": "7a562dc5f28d2c18ec9916cbc1972ae8cc248a9feceb4f7fe18d75c9222d7249"
+  }
+}

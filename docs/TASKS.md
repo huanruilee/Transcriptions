@@ -102,3 +102,9 @@
 - [ ] 請領域專家複審 toc.json 79-110 章節歸屬（QA 發現 79-84B 疑為第六地延續、95A/100A 子標題對應度偏弱）
 
 - [ ] RUZHONG01-STUDY-35A：依使用者指定35A形式重做01研讀講記、原話對照、測試及正式發布（見 RUZHONG01_STUDY_GUIDE.md）。
+
+
+### MINI-PLAYER-READING（2026-11-02）
+
+- [x] 先建立 BDD／CSS RED，再加入隱藏／喚回、左下停駐及偏好保存。
+- [x] 完整測試與瀏覽器驗收全綠；驗證紀錄見 [MINI-PLAYER-READING](handoffs/2026-11-02-mini-player.md)。
