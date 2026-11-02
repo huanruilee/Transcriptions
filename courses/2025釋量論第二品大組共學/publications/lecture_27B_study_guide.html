@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 27 講（下）空與無我的差異（下）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 27 講（下）空與無我的差異（下）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`27B`（顯示編號：`27下`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (C0yhUazs0CU)](https://www.youtube.com/watch?v=C0yhUazs0CU)（片長 2 小時 50 分 03 秒）</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 27 講〈空與無我的差異〉（科判四～九，大組討論題 Q1～Q2）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>逐字稿 JSON：`courses/2025釋量論第二品大組共學/sessions/session_27B.json`（97 段・371 句真實音訊轉寫）</li>
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-27.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_27_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【本講核心偈頌（《釋量論・成量品》）】</h2>
+<blockquote class="verse-quote">
+<p>「<strong>若未壞我貪，彼當受逼惱，爾時增益苦，不能住自性。雖無解脫者，勤摧邪增益。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>離貪安住者，由悲或由業，業引無遮欲。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>已越有愛者，非餘所能引，俱有已盡故。</strong>」</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>四、以喻說明我由名言假立而成 ＆ 五、補特伽羅與蘊體本質相同、反體相異 ＆ 六、推翻常我並證成解脫存在</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：</li>
+<ul class="nested-list">
+<li>⑴ 請說明「獨立自主的我」與「依蘊假立的我」這兩者的定義及差異。（學員發表 `00:00:00`，法師指導 `00:41:01`）</li>
+<li>⑵ 請結合法師所舉的例子（森林露營喻、手指指臉頰喻），體會「我」是依著諸多支分聚合並由分別假立而成。（學員發表 `01:17:58`，法師指導 `01:34:19`）</li>
+</ul>
+</ul>
+<h3>七、摧伏我執才能獲得解脫之樂 ＆ 八、已斷貪的阿羅漢為何持續安住輪迴 ＆ 九、業未盡的阿羅漢為何不會引生後有</h3>
+<ul class="meta-list">
+<li><strong>問題 2</strong>：</li>
+<ul class="nested-list">
+<li>⑴ 偈頌提到「<strong>爾時增益苦</strong>」，表示有「受苦者」；但又說這是「增益（捏造）」，表示實際上沒有「我」。這兩種說法是否矛盾？為什麼？（學員發表 `01:52:47`，法師指導 `02:08:59`）</li>
+<li>⑵ 為什麼把「受苦者」增益為「有我」，就會對「我」生貪而受苦；執「名言假立的我」卻不會？（學員發表 `02:15:39`，法師指導 `02:25:24`）</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>四～六、「獨立自主的我」與「依蘊假立的我」之辨析（問題 1 第⑴小題）</h3>
+<p class="reading-para clickable-para" onclick="playPara(0, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(0, this)">▶ 00:00</button> 本講次為《2025 釋量論・第二品》大組共學第 27 講（下），研討主題涵蓋《釋量論・成量品》第 27 講後半部（科判四至九）：從破除「獨立自主之我」後如何善巧安立「依蘊假立之我（名言假立之我）」，進而探討補特伽羅與蘊體「本質相同、反體相異」的關係，以及「<strong>若未壞我貪，彼當受逼惱，爾時增益苦，不能住自性</strong>」等根本偈頌的深層法義。開場首先由學員針對問題 1 第⑴小題——「獨立自主的我」與「依蘊假立的我」兩者的定義與差異——進行分組代表發表。</p>
+<p class="reading-para clickable-para" onclick="playPara(95, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(95, this)">▶ 01:35</button> 學員代表依序分享對兩種「我」的整理：所謂「獨立自主的我」，是指我們俱生我執心中所顯現、認為不需要依賴身心五蘊、憑藉自己的力量就能單獨存在的「我」，它與身心似乎有一段距離，像是一個高高在上的掌控者與主人；而「依蘊假立的我」，則是依著色、受、想、行、識五蘊的聚合體作為施設處（安立基礎），僅由名言與分別心所安立出來的補特伽羅，這才是現實中真正存在、能造業受果的「我」。</p>
+<p class="reading-para clickable-para" onclick="playPara(2461, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2461, this)">▶ 41:01</button> 如性法師於 `00:41:01` 針對問題 1 第⑴小題展開極為嚴密的蘇格拉底式引導與法義釐清。法師首先向大眾提問：為什麼我們把這兩種我分別稱為「獨立自主的我」與「依蘊假立的我」？從字面上看，「獨立自主的我」最核心的特徵就是<strong>「不依賴身心、靠自己的力量而存在」</strong>；反之，「依蘊假立的我」則是<strong>「必須依賴身心五蘊、由分別心安立而存在」</strong>。</p>
+<p class="reading-para clickable-para" onclick="playPara(2813, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2813, this)">▶ 46:53</button> 法師進一步追問一個關鍵理路：為什麼在討論「獨立自主的我」時，我們會說「如果它存在，它跟身心必須是『一』或『異』」；但在討論「依蘊假立的我」時，我們卻說它跟蘊體是「<strong>本質相同、反體相異</strong>」？難道「本質相同、反體相異」不也是「一」或「異」嗎？法師指出，在藏傳因明與中觀的術語中，「一（同 / 本質相同）」與「異（反體相異）」需要精確區分：凡是存在的兩個法，如果它們的「本質（體性）」相同，但概念上的「反體（否定面）」不同，就稱為「<strong>本質相同、反體相異</strong>」（例如：無常與所作性、桌子與桌子的四隻腳及桌面聚合體、依蘊假立的我與五蘊聚合體）。</p>
+<p class="reading-para clickable-para" onclick="playPara(3207, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3207, this)">▶ 53:27</button> 法師以互動問答引導學員思惟：為什麼「依蘊假立的我」跟「蘊體」是<strong>本質相同、反體相異</strong>？<br/>1. 首先，為什麼兩者<strong>反體相異（不完全等同）</strong>？因為當我們說「我的身體」、「我的心」時，能擁有的「我（補特伽羅）」與所擁有的「身心（蘊體）」在名言概念與作用上顯然不同；而且蘊體有色、受、想、行、識五種，但「我」只有一個。<br/>2. 其次，為什麼兩者必定<strong>本質相同（不能本質相異）</strong>？法師反問：如果在觀察「依蘊假立的我」時，把色蘊、受蘊、想蘊、行蘊、識蘊全部拿掉、排除在外，請問你還能找到那個「依蘊假立的我」嗎？完全找不到！當了解「依蘊假立的我」的心識去趨入對境時，必須先將蘊體排除在外才能找到它嗎？不需要！這就證明了「依蘊假立的我」與「蘊體」在存在層面上是不可分割的「<strong>本質相同</strong>」。</p>
+<p class="reading-para clickable-para" onclick="playPara(3772, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3772, this)">▶ 62:52</button> 反過來看，為什麼「獨立自主的我」如果存在，它跟身心就會變成「本質相異（毫無關聯的別體）」或「完全同一」的死胡同？因為在我們俱生我執的顯現中，那個「獨立自主的我」是不需要觀待身心的——就好像當我們直接把身心拿掉、或者如前面「七十歲老翁想跟年輕人交換身體」的例子般，覺得即便把現在這個身心徹底抽換掉，那個「我」依然可以完好無損地單獨存在。如果世界上有這樣一個「把身心全部排除在外還能單獨被指認出來」的我，它跟身心就必定是「本質相異（像獅子與森林一樣毫無關聯）」；然而事實上把身心全部拿掉後，根本找不到任何「我」的蹤影，因此那種「獨立自主的我」在現實中徹底不存在！</p>
+<p class="reading-para clickable-para" onclick="playPara(4275, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4275, this)">▶ 71:15</button> 法師並補充正行課堂中「推翻常我並證成解脫存在（科判六）」的理路：既然實際存在的「我（補特伽羅）」是依賴剎那生滅的五蘊而假立，且與五蘊「本質相同」，那麼當依處（五蘊）是剎那轉變的無常法時，依之而安立的「我」也必定是無常、可轉變的（例如昨天生氣的我，今天可以變成平靜的我；凡夫的我，透過修道可以轉變成聖者的我）。這就直接推翻了外道所承許「恆常不變之常我」，並從根本上證成了「眾生透過修行斷除煩惱、獲得解脫」是完全可能的！</p>
+<hr class="divider"/>
+<h3>四（續）、以「森林露營喻」與「手指指臉頰喻」體會依蘊假立（問題 1 第⑵小題）</h3>
+<p class="reading-para clickable-para" onclick="playPara(4678, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4678, this)">▶ 77:58</button> 進入問題 1 第⑵小題的學員發表：請結合法師在課堂上所舉的「森林露營喻」與「手指指臉頰喻」，體會「我」是依著諸多支分聚合、並由分別心假立而成。學員們分享了對「一棵樹不是森林，眾多樹木聚集加上分別心安立才叫森林」以及「指著身體局部卻說指著我」的體會。</p>
+<p class="reading-para clickable-para" onclick="playPara(5659, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5659, this)">▶ 94:19</button> 如性法師於 `01:34:19` 針對問題 1 第⑵小題作深入指導。法師指出，很多同學在講「森林的譬喻」時，只講到「一棵樹不是森林，很多棵樹聚在一起就變成森林」，這樣只講對了一半！如果「很多棵樹聚在一起」就等於森林，那麼森林就不需要由「分別心假立」了。法師特別重現正行課堂上那個極具啟發性的情境——<strong>「看地圖走五公里去森林露營」的譬喻</strong>：</p>
+<p class="reading-para clickable-para" onclick="playPara(5920, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5920, this)">▶ 98:40</button> 法師生動地描述：假設你跟朋友看地圖，地圖上標示前方五公里處有一座「森林」，你們背著帳篷走了五公里，終於走到了第一棵大樹下。這時你往左看是一棵樹、往右看也是一棵樹、抬頭看還是樹，於是你轉頭問朋友：「奇怪，地圖上說這裡有森林，但為什麼我只看到一棵一棵的樹，森林到底在哪裡？我們是不是還要再往前走？」請問這位仁兄的問題出在哪裡？他把「森林」當成了一個<strong>獨立於樹木之外、可以單獨摸到看到的實體</strong>！事實上，當你走進眾多樹木聚集的範圍內，你眼睛看到的永遠是一棵一棵的樹；正是依著這「眾多樹木聚集的基礎（施設處）」，由我們的「分別心」在上面安立一個名稱與概念，說「這叫作森林，我們已經在森林裡露營了」！</p>
+<p class="reading-para clickable-para" onclick="playPara(6248, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(6248, this)">▶ 104:08</button> 接著法師解析第二個極為巧妙的日常譬喻——<strong>「左右兩邊食指指著左右臉頰喻」</strong>：假設有人伸出右手的食指，指著你的右臉頰或鼻頭，你馬上會不客氣地對他說：「你幹嘛指著<strong>我</strong>？」這時如果對方聽了，換成伸出左手的食指指著你的左臉頰，或者指著你的胸口、手臂，你同樣會說：「你幹嘛又指著<strong>我</strong>？」法師引導大家深思：為什麼對方第一次指著你的右臉頰時，你覺得他指到了「我」；第二次指著你的左臉頰或胸口時，你也覺得他指到了「我」？難道你的右臉頰是「我」、左臉頰也是另一個「我」嗎？不是！那是因為<strong>依著身體的每一個支分與整體的聚合，我們的分別心在上面假立了「我」</strong>；所以當別人觸碰或指向我們身心的任何一部分時，我們在名言中都會自然地說「他指著我」、「他碰到我了」。這兩個譬喻最能幫助我們跳脫抽象的文字，親身體會什麼叫作「依著諸多支分聚合、由分別心假立而成的我」。</p>
+<hr class="divider"/>
+<h3>七～九、「爾時增益苦」之所緣與行相不矛盾（問題 2 第⑴小題）</h3>
+<p class="reading-para clickable-para" onclick="playPara(6767, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(6767, this)">▶ 112:47</button> 進入問題 2 第⑴小題的學員發表。本題聚焦於《釋量論・成量品》的核心偈頌：「<strong>若未壞我貪，彼當受逼惱，爾時增益苦，不能住自性。雖無解脫者，勤摧邪增益。</strong>」題目問道：偈頌提到「<strong>爾時增益苦</strong>」，表示有一個正在受苦的「受苦者」；但接著又說這是「增益（捏造）」，且說「<strong>雖無解脫者，勤摧邪增益</strong>」，表示實際上沒有「我」。這兩種說法是否矛盾？為什麼？</p>
+<p class="reading-para clickable-para" onclick="playPara(7739, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7739, this)">▶ 128:59</button> 如性法師於 `02:08:59` 針對問題 2 第⑴小題給予一針見血的開示：這兩種說法<strong>完全不矛盾</strong>！因為這裡所說的「受苦者（存在的我）」與「所增益的我（不存在的我）」，分別對應了「我執」這顆心識的兩個不同面向——<strong>「所緣（所緣境）」與「行相（耽著境）」</strong>：<br/>1. <strong>「受苦者」是存在的「依蘊假立之我」（我執的所緣）</strong>：當眾生在輪迴中受苦、以及為了脫苦而精進修道求解脫時，那個正在受苦、正在修行的「補特伽羅（依蘊假立的我）」是千真萬確存在的！<br/>2. <strong>「增益為有我」是不存在的「獨立自主之我」（我執的行相）</strong>：為什麼這個真實存在的受苦者會不斷遭受逼惱、無法安住於無苦的寂靜自性（「<strong>不能住自性</strong>」）？因為我們的心識在緣著那個「依蘊假立的我（受苦者）」時，無明我執在它上面<strong>捏造、增益（無中生有地添加）</strong>了一個「獨立自主、能掌控身心的我」的特色！因此，偈頌說「<strong>爾時增益苦</strong>」與「<strong>雖無解脫者，勤摧邪增益</strong>」，並不是否定名言中受苦與解脫的補特伽羅，而是否定我執所捏造出來的那個「獨立自主之受苦者與解脫者」。</p>
+<hr class="divider"/>
+<h3>七～九（續）、為何執「獨立自主之我」會生貪受苦，執「依蘊假立之我」卻不會？（問題 2 第⑵小題與總結）</h3>
+<p class="reading-para clickable-para" onclick="playPara(8139, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8139, this)">▶ 135:39</button> 隨後進入本講壓軸的問題 2 第⑵小題學員發表：既然「依蘊假立的我」是存在的，為什麼當我們把「受苦者」增益為「有我（獨立自主的我）」時，就會對「我」生起強烈的我愛執（我貪）而受苦；反之，如果我們如實認知並執持「名言假立的我（依蘊假立的我）」，卻不會引生我貪與痛苦？</p>
+<p class="reading-para clickable-para" onclick="playPara(8724, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8724, this)">▶ 145:24</button> 如性法師於 `02:25:24` 針對第⑵小題作出極為精闢且直指人心的開示。法師分析：為什麼執著「獨立自主的我」必然引生強烈的貪愛（我貪）與痛苦，而了解「依蘊假立的我」卻不會？這有兩個深層的心理機制：<br/>第一，<strong>「獨立自主的我」與身心拉開了虛幻的「距離感」，使我們覺得身心有缺陷、但「我」完美無瑕</strong>：當我們覺得有一個獨立於身心之外的「我」時，一旦身體生病衰老、或者心裡生起煩惱痛苦，我們會把一切過錯都推給身心（「都是我的身體不好」、「都是我的情緒太差」），而覺得那個在背後的「我」本身是純潔、無辜、完美的，因而對這個「我」生起牢不可破的耽著與愛戀。</p>
+<p class="reading-para clickable-para" onclick="playPara(9130, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9130, this)">▶ 152:10</button> 第二，<strong>我們在「獨立自主的我」上面，自己捏造了「能夠掌控身心、掌控一切」的虛幻優點（功德），並對這個自己捏造出來的優點深深著迷</strong>！法師指出，凡夫之所以會對「我」生起無窮無盡的貪執（我愛執），正是因為我執把「我」美化成一個「能自主支配身心、能主宰一切的主人」。當我們深信自己擁有這種「掌控一切」的能力與優點時，我們就會為了保護這個「我」、滿足這個「我」的掌控欲而拼命追求順境（生貪）、排斥逆境（生嗔）；一旦現實不如己意、發現自己連身體生老病死都掌控不了時，強烈的逼惱與痛苦便隨之而來（「<strong>若未壞我貪，彼當受逼惱，爾時增益苦，不能住自性</strong>」）。反之，當我們透過無我慧如實通達「我只是依著剎那生滅的五蘊而假立，毫無獨立掌控的自性」時，那個被捏造出來的虛幻優點瞬間瓦解，我貪與煩惱便失去了立足點！</p>
+<p class="reading-para clickable-para" onclick="playPara(9615, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9615, this)">▶ 160:15</button> 法師並結合正行課堂第 8、第 9 科判的偈頌——「<strong>離貪安住者，由悲或由業，業引無遮欲</strong>」與「<strong>已越有愛者，非餘所能引，俱有已盡故</strong>」——補充說明：一旦聖者阿羅漢透過證得無我慧徹底摧伏了我執與三界貪愛（「<strong>已越有愛者</strong>」），即便他過去世曾造下無數尚未受報的引業，但因為潤生後有的「俱有緣（無明、我執、有愛）」已經徹底窮盡（「<strong>俱有已盡故</strong>」），那些舊業就如同缺少水分與陽光滋潤的乾枯種子，再也無法牽引阿羅漢受生後有（「<strong>非餘所能引</strong>」）；而阿羅漢之所以在入無餘涅槃前仍暫時安住於世間，純粹是由於大悲願力或過去引業所感得的餘報，內心早已沒有任何排斥或貪求的煩惱欲求（「<strong>由悲或由業，業引無遮欲</strong>」）。</p>
+<p class="reading-para clickable-para" onclick="playPara(9900, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9900, this)">▶ 165:00</button> 在課程圓滿前的總結開示中，如性法師特別勉勵全體學員：在正式修習「無我空性」之前，我們必須先反覆思惟這條<strong>五層逆推的因果鏈</strong>作為前行——<br/>1. 我們都不想要「<strong>苦</strong>」，但苦從哪裡來？<br/>2. 苦來自於造惡業與「<strong>煩惱</strong>」；<br/>3. 在眾多煩惱中，令我們不斷流轉生死的潤生根本是「<strong>貪</strong>」；<br/>4. 我們對外在五欲與親友的一切貪愛，追根究底都是為了利益自己，源自於「<strong>貪愛我（我愛執 / 我貪）</strong>」；<br/>5. 而我們之所以會貪愛「我」，正是因為誤以為有一個獨立自主、能掌控一切的「<strong>我（我執）</strong>」！<br/>只有先把「<strong>苦 ← 煩惱 ← 貪 ← 貪愛我 ← 我執</strong>」這條因果鏈在內心深處思惟透徹，生起「若不摧伏我執，就永遠無法從苦海中解脫」的強烈定解，我們在修學《釋量論》與中觀的無我正理時，才會真正成為斷惑證真的解脫實踐，而不會淪為空洞的文字遊戲。最後大眾合掌誦念迴向偈「願成善士攝受因」，圓滿第 27 講全部課程。</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

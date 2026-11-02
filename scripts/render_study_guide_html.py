@@ -55,7 +55,7 @@ def md_to_html(md_path: Path) -> Path:
         seconds = m.group(2)
         return f'<button class="ts-btn" onclick="event.stopPropagation(); playAt({seconds}, this)">{ts_text}</button>'
 
-    content = re.sub(r'\[(▶\s*\d{2}:\d{2})\]\((?:.+?)#t=(\d+)\)', replace_ts, text)
+    content = re.sub(r'\[(▶\s*\d{2,3}:\d{2})\]\((?:.+?)#t=(\d+)\)', replace_ts, text)
 
     # Process blockquotes
     lines = content.split('\n')

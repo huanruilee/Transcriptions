@@ -1,197 +1,419 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第 26 講（下）研讀指南｜2025《釋量論・第二品》大組共學</title>
+  <title>《2025 釋量論・第二品大組共學》第26講（下）・研讀講記：集諦與滅諦的行相（下）</title>
   <style>
     :root {
-      --bg: #fcfbfa;
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
       --card-bg: #ffffff;
-      --text: #2c2925;
-      --accent: #8b3a2b;
-      --accent-light: #f5ece9;
-      --border: #e8e2dc;
-      --quote-border: #c48b71;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Noto Sans TC", sans-serif;
-      line-height: 1.8;
-      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
       background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
       margin: 0;
-      padding: 24px 16px 120px;
     }
     .container {
       max-width: 860px;
-      margin: 0 auto;
+      margin: 40px auto;
+      padding: 48px;
       background: var(--card-bg);
-      padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
     h1 {
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 12px;
       font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
     }
     h2 {
-      color: var(--accent);
-      margin-top: 36px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
     }
     h3 {
-      color: #5c3b28;
+      font-size: 1.2rem;
+      color: var(--primary);
       margin-top: 28px;
+      margin-bottom: 14px;
     }
-    h4 {
-      color: #7a4b32;
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
     }
-    blockquote {
-      background: var(--accent-light);
-      border-left: 4px solid var(--quote-border);
-      margin: 20px 0;
-      padding: 14px 20px;
-      border-radius: 0 8px 8px 0;
+    .reading-para.clickable-para {
+      cursor: pointer;
     }
-    .time-anchor {
-      display: inline-block;
-      background: #ece7e1;
-      color: var(--accent);
-      padding: 2px 8px;
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
       border-radius: 4px;
-      text-decoration: none;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
       font-weight: 600;
-      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
       margin-right: 6px;
     }
-    .time-anchor:hover {
-      background: var(--accent);
-      color: #fff;
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
     }
-    ul, ol {
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
       padding-left: 24px;
+      margin-bottom: 20px;
     }
-    li {
-      margin-bottom: 8px;
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
     }
-    .player-dock {
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: #222;
-      color: #fff;
-      padding: 12px 20px;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      z-index: 1000;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
     }
-    .player-dock a {
-      color: #f7b731;
-      text-decoration: none;
-      font-weight: bold;
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-<h1>第 26 講（下）研讀指南：集諦與滅諦的行相（大組共學）</h1>
-<blockquote><p><strong>導讀簡介</strong>：本講為 2025 年《釋量論・第二品》大組共學第 26 講（下），由如性法師指導。研討圍繞兩大核心義理展開：其一為「修行人如何面對悅意境」，深度辨析受樂與損福的界限，以及貪心是否為樂受之助緣；其二為「生起苦樂受的因緣與認知的續流」，立足於《成量品》立自宗之理，確立心心所五義相應與同一續流的法相，破除心王心所割裂之謬見。</p>
-</blockquote>
-<hr style='border:none; border-top:1px solid var(--border); margin:24px 0;'>
-<h2>一、 根本論元定錨（《釋量論・成量品》法義依據）</h2>
-<p>在探討心識續流與因果生滅時，本講之根本義理依據源於法稱論師《釋量論・成量品》破外道神我與斷見、建立前後世之根本正理：</p>
-<blockquote><p>「**彼非，有異因，過失何能轉？覺非隨行故，彼因亦非他。</p>
-<p>由彼等生彼，同類近取因，生故無過失，能引隨行故。**」</p>
-</blockquote>
-<p>賈曹傑大師於《釋量論釋》中開示：</p>
-<blockquote><p>「<strong>明了覺知之近取因，必為前前剎那同類覺知。心識相續在一有情身中為連續統一之相續，藉由同類因果增長之力，能立染淨昇沉之修持。</strong>」</p>
-</blockquote>
-<hr style='border:none; border-top:1px solid var(--border); margin:24px 0;'>
-<h2>二、 討論題綱與如性法師開示解析</h2>
-<h3>【主題五：修行人如何面對悅意境】</h3>
-<h4>第 1 題：持續生起樂受是否會損福報？</h4>
-<ul>
-<li><strong>題目選項</strong>：</li>
-<li>⑴ 會。由於樂受是善業的果報，當樂受持續生起，就表示之前的善業正在隨之遞減，這時福報就在不斷減損。</li>
-<li>⑵ 不一定。若是維持生活所需（例如：解決飢餓後所獲得的飽足感），並不會損福報；但若在過程中揮霍浪費，甚至造惡，才會損福報。</li>
-<li>⑶ 不一定。例如：在行善時若心生歡喜（樂受），不僅不會減損福報，還能增加善業、累積福報。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=600s" target="_blank">▶ 10:00</a> <strong>學員分組研討</strong></p>
-<p>學員針對善業果報現前時是否必然等同於「消福」展開熱烈討論。多數組別指出聖者亦受用極大輕安大樂，若受樂即損福，則修行與發心自相矛盾。</p>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=1840s" target="_blank">▶ 30:40</a> <strong>【如性法師指導開示】</strong></p>
-<ol>
-<li><strong>區分受與業</strong>：樂受純屬感受心所，是過去善業所感之果報，體性本身為無記，並非感受樂受當下就是在造惡或損福。</li>
-<li><strong>損福之根源在於隨逐無明造惡</strong>：凡夫之所以常因享福而折福，是因為受樂時缺乏正知見，容易生起驕慢、放逸、貪著，進而造作損人利己之惡業。損福的是後續生起的煩惱惡業，而非樂受本身。</li>
-<li><strong>善用樂受累積資糧</strong>：修行人在布施、持戒、聞思時若心生歡喜（樂受），以善法欲與清淨心攝持，不僅不損福報，反而能讓善業展轉增長廣大。</li>
-</ol>
-<hr style='border:none; border-top:1px solid var(--border); margin:24px 0;'>
-<h4>第 2 題：貪是否為形成樂受的助緣？</h4>
-<ul>
-<li><strong>題目選項</strong>：</li>
-<li>⑴ 是。小明很喜歡吃披薩，他在貪念的推動下吃了披薩，感到格外開心；小美不喜歡吃披薩，即便吃了披薩也不覺得開心。由此可知：貪是形成樂受的助緣。</li>
-<li>⑵ 不一定。小明吃完披薩走在回家的路上，此時即使並未生起貪念，但當一陣涼風吹來，還是會感到舒服（樂受），所以樂受生起前不一定要以貪作為助緣。</li>
-<li>⑶ 樂受是由過往的業力與當下根境識等因緣共同形成；當樂受生起後，若缺乏正知見，就容易生貪，因此樂受是生貪的助緣，而非貪是樂受的助緣。</li>
-<li>⑷ 論述⑶不合理。例如：在烈日下行走時，想找個便利商店吹冷氣；這種對熟悉的悅意境所產生的貪，就是後續生起樂受的助緣。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=3454s" target="_blank">▶ 57:34</a> <strong>第 2 題⑴⑵ 學員研討</strong></p>
-<p>研討重點聚焦於吃披薩的前行貪心，是否具備「助緣」之正理法相。</p>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=4915s" target="_blank">▶ 1:21:55</a> <strong>【如性法師指導：第 2 題⑴】</strong></p>
-<ul>
-<li>釐清何謂助緣：若主張貪是樂受之助緣，則意味著無貪便不能生樂受。但小明吃披薩開心，核心在於披薩符合其所求、根境識相契而感得樂受；貪心僅為驅動購買行為之動機，並非生起樂受感受之直接俱有緣。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=6282s" target="_blank">▶ 1:44:42</a> <strong>【如性法師指導：第 2 題⑵】</strong></p>
-<ul>
-<li>涼風吹拂之例成立反證：行路偶逢涼風，當下無貪而清涼樂受自現，直接證成「貪非樂受之普遍必要助緣」。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=6511s" target="_blank">▶ 1:48:31</a> <strong>第 2 題⑶⑷ 學員研討</strong></p>
-<p>研討十二因緣中「觸緣受、受緣愛」的順序與因果因緣。</p>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=7320s" target="_blank">▶ 2:02:00</a> <strong>【如性法師指導：第 2 題⑶與⑷】</strong></p>
-<ul>
-<li><strong>確立「受緣愛」之因果律</strong>：佛法因緣中明確開示，通常由受而引發愛染；凡夫由無明隨逐，於樂受起貪戀，故受為生貪之助緣。</li>
-<li><strong>破除倒果為因之混淆</strong>：吹冷氣之希求或預先分別，不可倒過來顛倒因位與果位之次序。</li>
-</ul>
-<hr style='border:none; border-top:1px solid var(--border); margin:24px 0;'>
-<h3>【主題六：生起苦樂受的因緣與認知的續流】</h3>
-<h4>第 3 題：我們心中的起心動念是否都是同一條續流？</h4>
-<ul>
-<li><strong>題目選項</strong>：</li>
-<li>⑴ 是。依序不中斷地想著鬧鐘、講記及錄音筆，這三種分別知的對境雖然不同，但前一念的分別知是後一念的分別知的近取因，所以它們是同一條續流。</li>
-<li>⑵ 是。意知只有一條續流，在這條續流上，不同的念頭交替生滅，例如：由生氣轉為平靜，由執著有我轉為承許無我；若每種念頭都是獨立的續流、別別無關，則意知會有多條續流，如此便有可能出現既生氣又平靜的情緒，無我慧也無法對治我執。</li>
-<li>⑶ 不是。雖然主要的意知是一條續流，它存放著無始以來所積累的善惡業，至今都未曾中斷；但依附在這個意知上的貪、瞋、慈悲等念頭，則不是同一條續流，因為它們都有各自的同類因，且所緣與執取境的方式也不同，彼此間不會重疊。</li>
-<li>⑷ 論述⑶不合理。「前一剎那感覺快樂的意知」與「後一剎那生起苦受的意知」，依然可以屬於同一條續流，例如：上一秒享受美食感到愉悅的心情，可以因為突然看見碗裡面有蟑螂而馬上變得不開心。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=7679s" target="_blank">▶ 2:07:59</a> <strong>第 3 題學員研討</strong></p>
-<p>學員探討心識的主客關係，辨析心王與心所究為一體還是多體。</p>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=8484s" target="_blank">▶ 2:21:24</a> <strong>【如性法師指導：第 3 題⑴】</strong></p>
-<ul>
-<li><strong>明了覺知之相續</strong>：前一剎那之覺知引生後一剎那之覺知，對境雖由鬧鐘轉至錄音筆，心識相續從未中斷，確為同一條覺知續流。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=8747s" target="_blank">▶ 2:25:47</a> <strong>【如性法師指導：第 3 題⑵】（核心論點：對治之所以成立之基石）</strong></p>
-<ul>
-<li><strong>破斥多元獨立續流之謬見</strong>：若承許心識有多條互不相干之獨立續流，則一人身中將有多個意識主體，如此一來，修習無我智慧時將無法對治我執，因為智慧與我執分屬不同續流，修道對治徹底瓦解！正因只有一條相續心識，善法才能洗淨染污。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=9604s" target="_blank">▶ 2:40:04</a> <strong>【如性法師指導：第 3 題⑶】</strong></p>
-<ul>
-<li><strong>心王心所五義相應</strong>：心王與心所乃同所依、同所緣、同行相、同時、同一事，絕非心王自走一條、貪瞋各走一條。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=9774s" target="_blank">▶ 2:42:54</a> <strong>【如性法師指導：第 3 題⑷】</strong></p>
-<ul>
-<li><strong>轉樂為苦見心識無常</strong>：見蟑螂而樂轉為苦，正顯心識無常遷變，亦證知前後心念皆在此一連續覺知續流上流轉生滅。</li>
-</ul>
-<p><a class="time-anchor" href="https://www.youtube.com/watch?v=t4N3uKWRkKs&t=10206s" target="_blank">▶ 2:50:06</a> <strong>圓滿迴向</strong></p>
-<p>將聞思正法功德普皆迴向無上正等菩提。</p>
 
+  <div class="container">
+    <h1>《2025 釋量論・第二品大組共學》第26講（下）・研讀講記：集諦與滅諦的行相（下）</h1>
+<p class="reading-para">研讀講記・待閱校版：2026-11-02。正文依《釋量論・成量品》第26講原音講記與大組共學4,196句機校原話（`session_42.json`）整理，保留三方研討脈絡（主持人、學員討論、如性法師指導）與完整時間區間錨點。尚未人工完整校訂、未逐句聽核。</p>
+<p class="reading-para">最後校訂更新：2026-11-02</p>
+<p class="reading-para">[官方 YouTube 影音（第26講下）](https://www.youtube.com/watch?v=t4N3uKWRkKs)</p>
+<hr class="divider"/>
+<h2>【本講導讀與研讀大綱】</h2>
+<h3>一、本講宗旨提要</h3>
+<p class="reading-para">本講為《2025 釋量論・第二品》大組共學第 26 講（下），承接上半講「集諦的四種行相（因、集、生、緣）」，深入研討第五科「<strong>修行人如何面對悅意境</strong>」與第六科「<strong>生起苦樂受的因緣與認知的續流</strong>」，並收攝第七科「<strong>滅諦的四種行相之一：滅</strong>」及第八科「<strong>區分內外道的兩種方式與內省</strong>」。全講圍繞三大核心共學提問展開：第一，持續生起樂受是否會減損福報？第二，貪是否為形成樂受的助緣？第三，我們心中的各種起心動念是否都是同一條續流？如性法師透過嚴密的因明正理與貼近行者經驗的譬喻（如「銀行提款投資喻」、「阿羅漢吃披薩喻」、「單線道兩台車與坦克車喻」、「吃麵見蟑螂喻」），引導學員從字面名相走入內心實修的觀察。</p>
+<h3>二、根本論元定錨（《釋量論・成量品》原文與科判依據）</h3>
+<ol class="ordered-list"><li><strong>集諦第四行相「緣」與唯說愛為輪迴直接因（第 186–189 頌）</strong>：</li></ol>
+<ol class="ordered-list"><li><strong>滅諦第一行相「滅」——苦性非堅固、解脫決定存在（第 190 頌）</strong>：</li></ol>
+<h3>三、重點法相辨析</h3>
+<ul class="meta-list">
+<li><strong>損福報（福報減損）與造惡摧善根</strong>：法師特別澄清「損福報」是中性的字面描述，意即過往善業感得樂受異熟果時，該分善業存量隨之遞減（果生因滅）；生起瞋心等則稱為「摧壞善根」或「造作惡業」。</li>
+<li><strong>喜歡與貪愛</strong>：對悅意境覺得美味、滿意而生起樂受（如阿羅漢吃披薩），可稱為不染污的「喜歡」，其心不被牢牢綁在境上；凡夫的「貪」則是將心死死綁在境上，一旦遠離或不順己意即生痛苦與瞋惱。</li>
+<li><strong>近取因與俱生緣</strong>：前念與後念即使有「從生相屬」（前念越歡喜，後念見蟑螂越噁心），僅能證成前念為後念的「俱生緣」，不能直接等同於同一心識種類延續的「近取因」。</li>
+<li><strong>並存相違與對治道</strong>：生氣與平靜、我執與無我慧在同一個補特伽羅心續中，猶如兩台車行至單線道路口，一者通行時另一者必被迫停下；如何令無我慧徹底「斷除」而非僅「壓制」我執，是修道的核心關鍵。</li>
+</ul>
+<h3>四、共學討論題綱</h3>
+<ol class="ordered-list"><li><strong>【主題五・第 1 題】</strong>「持續生起樂受是否會損福報」，請問以下想法何者合理？⑴會（果生因滅，善業遞減）；⑵不一定（維持生活所需不損，揮霍造惡才損）；⑶不一定（行善心生歡喜不僅不損，還能增加善業）。</li><li><strong>【主題五・第 2 題】</strong>關於「貪是否為形成樂受的助緣」，請問以下想法何者合理？⑴是（小明貪吃披薩格外開心）；⑵不一定（涼風吹來無貪亦生樂受）；⑶樂受是生貪的助緣，而非貪是樂受的助緣；⑷論述⑶不合理（烈日下想吹冷氣的貪是樂受助緣）。</li><li><strong>【主題六・第 3 題】</strong>關於「我們心中的各種起心動念是否都是同一條續流」，請問以下想法何者正確？⑴是（想鬧鐘、講記、錄音筆）；⑵是（意知只有一條續流，否則無我慧無法對治我執）；⑶不是（主要意知是一條續流，貪瞋慈悲各有同類因）；⑷論述⑶不合理（吃美食看見碗裡有蟑螂轉樂為苦仍屬同一條續流）。</li></ol>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>1. 共學前行與第七組重點收攝：修行人如何面對悅意境與苦樂受因緣</h3>
+<p class="reading-para">[▶ 00:02](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=2.74) 【主持人】老師好，各位同學大家晚安！我們開始今天晚上的大組共學。在開始討論前，我們先來做前行，大眾請合掌：「<strong>無上甚深微妙法，百千萬劫難遭遇，我今見聞得受持，願解如來真實義。</strong>」在開始討論之前，先請第七組的心恩師姐來幫我們做收攝。</p>
+<p class="reading-para">[▶ 00:56](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=56.37) 【學員（心恩師姐收攝）】法師、同學大家好，今天由我為大家收攝第 26 講後半部（第五至第八科）。第五科「<strong>修行人如何面對悅意境</strong>」：一切樂受皆是過去善業的異熟果報，當我們在受用悅意境、持續生起樂受時，過去所造的善業存量便在不斷遞減；一般凡夫面對悅意境生起樂受時，往往隨順貪愛而放逸，白白耗損福報，而修行人則應思考如何善用此順緣修持善法。第六科「<strong>生起苦樂受的因緣與認知的續流</strong>」：探討宿世業力、當下根境識和合與苦樂受的關係，以及心中各種起心動念的心識續流。</p>
+<p class="reading-para">[▶ 05:10](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=310.0) 【學員（心恩師姐收攝）】第七科「<strong>滅諦的四種行相之一：滅</strong>」：偈頌云：「<strong>彼非堅固性，因有礙等故。</strong>」說明輪迴的苦諦並非永恆堅固不變，因為苦的因（我執與貪愛）是有能障礙、能違害的對治品（無我慧）的；只要透過修習無我慧斷除苦因，苦果必定息滅。第八科「<strong>區分內外道的兩種方式與內省</strong>」：從「見（承許四法印）」與「行（皈依三寶）」二門省思我們是否真正具備佛弟子的內涵，撕掉炫耀與自滿的標籤，腳踏實地從前後世、業果、四聖諦學起。</p>
+<h3>2. 主題五第 1 題研討：持續生起樂受是否會損福報？</h3>
+<p class="reading-para">[▶ 10:00](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=600.0) 【主持人】非常隨喜心恩師姐清楚穩健的收攝！現在我們進入第五科「修行人如何面對悅意境」的第 1 題：「<strong>持續生起樂受是否會損福報</strong>」，請問以下想法何者合理？⑴會，由於樂受是善業的果報，當樂受持續生起，就表示之前的善業正在隨之遞減，這時福報就在不斷減損；⑵不一定，若是維持生活所需（例如：解決飢餓後所獲得的飽足感），並不會損福報，但若在過程中揮霍浪費、甚至造惡，才會損福報；⑶不一定，例如在行善時若心生歡喜（樂受），不僅不會減損福報，還能增加善業、累積福報。</p>
+<p class="reading-para">[▶ 11:05](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=665.0) 【學員討論】各組學員代表依序發表看法。多數組別認同選項⑴：依據業果法則，樂受是過去善業所感得的異熟果，果報現起受用的當下，原本感生此果的那一分善業種子便已消耗（果生因滅）。針對選項⑵與⑶，智玄法師與同學們比喻：就像從銀行帳戶裡提領一千元出來買生活必需品或拿去投資，提領的當下帳戶餘額確實少了一千元；至於投資後賺回兩千元，那是新造的善業，與舊福報的消耗分屬兩事。</p>
+<h3>3. 如性法師指導第 1 題（一）：「損福報」是中性字面描述，果生因滅故選項⑴合理</h3>
+<p class="reading-para">[▶ 30:40](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=1840.0) 【如性法師】首先我還是要再次說明，我個人對於「<strong>損福報</strong>」這一詞，我不覺得這是一個負面的描述。所謂的「損福報」就是福報減損、福報變少了，這就是它的字面意思；但有些同學會把它用比較負面的詞彙去做解釋，至少我不是這樣看這個詞。如果我們基於「持續生起樂受是否會讓福報減損」的這個角度來分析的話，我覺得<strong>選項⑴很合理</strong>！畢竟所有的樂受都是過往善業感得的果報，一旦那個果報形成，就表示過去所造的善業就消失了；如果過往的善業沒有消失，那個果報怎麼會形成呢？</p>
+<p class="reading-para">[▶ 32:30](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=1950.0) 【如性法師】反之，任何的苦受都是過往惡業的果報，所以相同的思惟模式：只要有任何的苦受形成，就代表我們在消除過去的一分惡業，這也可以稱為「消業障」。剛才有同學問到：「那持續生起苦受是不是在消業障？」當然是！持續生起苦受就是在消業障。</p>
+<h3>4. 如性法師指導第 1 題（二）：行善歡喜的過往習氣消耗，與銀行提款投資喻</h3>
+<p class="reading-para">[▶ 34:10](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=2050.0) 【如性法師】即便如選項⑶所說，在行善時當事人的心中生起了歡喜、感受到了樂受，但請問那個樂受是怎麼來的？他在行善的時候為什麼會生起歡喜心？他應該有這方面的習氣，而不會無緣無故在行善時內心就感到歡喜。那樣的習氣歸在善業當中，當他在某次行善時內心感到歡喜，這就是過往的習氣所感得的；當過往的習氣感得了這樣的結果時，過往的那個習氣就消失了。況且，行善時心生歡喜就一定代表能增加善業嗎？不一定！如果生起我慢，覺得「我就是比別人厲害、我修得比別人好」，這時當事人內心也會感到歡喜（樂受），但那是與煩惱相應的。</p>
+<p class="reading-para">[▶ 37:20](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=2240.0) 【如性法師】當然，如果他在行善時動機良善，隨喜自己和他人所造的善業，那他確實可以增加善業、累積福報。所以我覺得剛才智玄法師舉的那個例子是合理的：你從你的銀行帳戶裡面拿出多少錢去做什麼事情，第一個動作「拿出一千塊錢」，你的帳戶裡面自然就少了一千塊錢；不會說因為我拿一千塊錢去投資，所以我的帳戶裡面一開始沒有少那一千塊。假設你投資真的賺到錢，你是透過這一千塊去多賺了其他的錢（新造善業），但銀行帳戶裡面原本的那筆存款還是少了那一千塊。</p>
+<h3>5. 如性法師指導第 1 題（三）：《道次第》三種死緣與聽法消耗福報的警策</h3>
+<p class="reading-para">[▶ 40:30](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=2430.0) 【如性法師】如果不從這個角度來解釋「損福報」，難不成一定要生起瞋心才叫損福報嗎？生起瞋心那不能稱為損福報，那叫「摧壞善根」、叫「造作惡業」。各位可以思考一下，在《道次第》當中有提到三種死緣：第一是「<strong>壽盡而死</strong>」（壽命走到了盡頭而死），第二是「<strong>福盡而死</strong>」（福報用盡而死），第三是「<strong>非時而死</strong>」。這當中提到「福盡而死」，代表即便我們的壽命沒有走到盡頭，但當我們的福報用盡時，我們也活不下去！所以福報是會被我們消耗掉的，這一點無庸置疑。</p>
+<p class="reading-para">[▶ 43:15](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=2595.0) 【如性法師】在這個段落以及平常講課時，我想表達的內容多半是基於：我們要如何看待自己在面對悅意境的心態？進一步，在學法的期間，我們要怎麼看待自己有機會學法的這件事情？跟吃一頓飯相比，聽一座法所需要積累的福報，這兩者沒有辦法比較——<strong>聽一座法所需要的福報，遠超過吃一頓飯所需要的福報！</strong> 不論是吃一頓飯或是聽一座法，在過程中我們過往所累積的善業都在不斷地遞減；重點是當過往的善業感果時，我們到底是讓過往的善業白白耗掉，還是能夠藉由這個機會去創造出更大的善業？這才是我們需要關注的問題。</p>
+<p class="reading-para">[▶ 49:30](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=2970.0) 【如性法師（答學員林恩問）】至於《廣論》說今生造的善業多在來世感果，而因果故事中有人今生造善、今生就增福增壽，這並不矛盾。如果造的善業力量極其強大，而且能讓善業感果的助緣也具足，今生造的善業也有可能在今生感果。善業就像種子一樣，種子是否發芽，跟種子形成多久沒有絕對關係，而是看它是否與水、土、陽光等其他因緣持續聚合。</p>
+<h3>6. 主題五第 2 題⑴⑵研討與指導：從未吃過披薩的全新接觸 vs. 喜歡與貪的差別</h3>
+<p class="reading-para">[▶ 57:34](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=3454.0) 【主持人】接著進入第 2 題前半部（選項⑴與⑵）：關於「<strong>貪是否為形成樂受的助緣</strong>」，請問以下想法何者合理？⑴是，小明很喜歡吃披薩，他在貪念的推動下吃了披薩，感到格外開心；小美不喜歡吃披薩，即便吃了披薩也不覺得開心，由此可知貪是形成樂受的助緣。⑵不一定，小明吃完披薩走在回家的路上，此時即使並未生起貪念，但當一陣涼風吹來，還是會感到舒服（樂受），所以樂受生起前不一定要以貪作為助緣。</p>
+<p class="reading-para">[▶ 59:20](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=3560.0) 【學員討論】各組學員針對小明吃披薩與吹涼風展開討論。有學員認為小明的貪念放大了吃披薩的開心程度；另有學員（如善元等）指出，若要對照，應假設小美也喜歡吃披薩但沒有起貪（如阿羅漢），且選項⑵涼風吹拂在無貪下亦生樂受，證明貪不是生起樂受的必要助緣。</p>
+<p class="reading-para">[▶ 81:55](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=4914.89) 【如性法師】首先第一個基本觀念：對於從來沒有吃過披薩的人而言，他最初是如何對披薩生起貪念的？應該要先接觸！他要先吃過，而且那個味道符合他的期待（滿意），在這樣的情況下他會先生起樂受；生起樂受之後，對我們多數人而言，就容易生起貪愛。即便一個從沒吃過披薩的人肚子很餓，看到別人都在吃披薩，那時他也只是基於過往經驗對「能解決飢餓的食物」生貪，而不是對「披薩」生貪。因此，從最初接觸一個全新對境的角度來說，一定是先接觸、感到滿意而生起樂受，之後才會生貪。</p>
+<p class="reading-para">[▶ 92:00](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=5520.0) 【如性法師】其次，我們要區分「<strong>喜歡</strong>」跟「<strong>貪</strong>」是不一樣的！假設有一位阿羅漢，他在獲得阿羅漢果之前就很喜歡吃披薩，證得阿羅漢果後，披薩對他而言是熟悉的，他去吃到飽餐廳吃披薩會不會覺得好吃、生起樂受？會！但如果有人告訴他：「你只能再吃一片。」他不會生氣，因為他的心沒有被牢牢地綁在那個境上，他可以隨時抽離；而凡夫則是心牢牢綁在披薩上，當披薩遠離或不順己意時就感到痛苦、生起煩惱。所以從總體來說，貪是不是形成樂受「必要的助緣」？不是！因為沒有貪（如阿羅漢吃披薩，或選項⑵涼風吹來）也有可能生起樂受。</p>
+<h3>7. 如性法師指導第 2 題⑴⑵（續）：凡夫「貪 ➔ 樂受 ➔ 貪」的無限迴圈</h3>
+<p class="reading-para">[▶ 100:00](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=6000.0) 【如性法師】但是，在剛才小明跟小美都貪愛吃披薩的例子裡，小明心中的貪是不是樂受的助緣？<strong>我覺得是啊！它就是樂受的助緣！</strong> 如果不是樂受的助緣，他怎麼會一口接一口不斷地吃下去？不就是因為他一開始有貪的動機，促使他做出身語的行為去吃；吃了一口覺得很滿意、生起了樂受；接著又對這件事生貪，那個貪又促使他再吃下一口，然後再生起樂受、再生貪嗎？這就是一個「<strong>無限迴圈</strong>」！</p>
+<p class="reading-para">[▶ 103:30](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=6210.0) 【如性法師】這個無限迴圈什麼時候才會被終止？對一般人而言，要一直吃到撐、覺得沒有那麼美味了，生不起樂受、甚至慢慢苦受出來了，這時候貪才會變小、才會收手——這表示只要我們不刻意控制貪念，貪念通常只是跟著感受在走，連一般動物都是如此。但修行人調整貪念不是這樣！<strong>修行人是在即便很快樂的時候，都要洞察貪所帶來的過患，試著降低貪的力量。</strong> 所以討論這題時，不要只聚焦在阿羅漢身上而否定我們凡夫自己的狀態；在我們身上，貪在某些情況下確實就是樂受的助緣！</p>
+<h3>8. 主題五第 2 題⑶⑷研討與指導：最初接觸「樂受為生貪助緣」與熟悉境「貪為樂受助緣」</h3>
+<p class="reading-para">[▶ 108:31](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=6511.0) 【主持人】謝謝法師！接著我們看第 2 題後半部（選項⑶與⑷）：⑶樂受是由過往的業力與當下根境識等因緣共同形成；當樂受生起後，若缺乏正知見，就容易生貪，因此樂受是生貪的助緣，而非貪是樂受的助緣。⑷論述⑶不合理，例如在烈日下行走時，想找個便利商店吹冷氣；這種對熟悉的悅意境所產生的貪，就是後續生起樂受的助緣。請同學開始討論。</p>
+<p class="reading-para">[▶ 122:01](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=7321.33) 【如性法師】其實選項⑶跟選項⑷放在一起是有原因的。選項⑶說「樂受是由過往的業力與當下根境識等因緣共同形成……因此樂受是生貪的助緣，而非貪是樂受的助緣」，這是在說我們<strong>初次接觸某個全新的境</strong>（例如從來沒吃過披薩，第一次有人請你吃，心情愉悅、根境識聚合而生起樂受，生起樂受後若缺乏正知見就容易生貪）。從「最初接觸全新之境」的角度來說，確實是先有樂受、後生貪念，樂受是生貪的助緣，貪不是樂受的助緣。</p>
+<p class="reading-para">[▶ 125:42](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=7542.40) 【如性法師】而選項⑷剛好相反，它強調的是「<strong>對熟悉的悅意境</strong>」：在烈日下行走，因為過去已經有吹冷氣很舒服的經驗，對這個熟悉的悅意境生起貪求，進而走進便利商店吹冷氣獲得樂受。在這種熟悉境的後續循環中，先前的貪確實扮演了促成後續樂受的助緣。把這兩個層次分開來看，就非常清楚了。</p>
+<h3>9. 主題六第 3 題研討與指導（一）：同一型別分別知的續流（選項⑴）</h3>
+<p class="reading-para">[▶ 127:59](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=7679.0) 【主持人】謝謝法師！現在進入第六科「生起苦樂受的因緣與認知的續流」第 3 題：關於「<strong>我們心中的各種起心動念是否都是同一條續流</strong>」，請問以下想法何者正確？⑴是（依序想著鬧鐘、講記及錄音筆，前一念分別知是後一念分別知的近取因）；⑵是（意知只有一條續流，否則既生氣又平靜會同時出現，無我慧也無法對治我執）；⑶不是（主要意知是一條續流，但貪、瞋、慈悲等念頭各有同類因，不是同一條續流）；⑷論述⑶不合理（上一秒享受美食愉悅，下一秒見碗裡有蟑螂而不開心，仍屬同一條續流）。</p>
+<p class="reading-para">[▶ 141:23](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=8483.06) 【如性法師】我們先看選項⑴：依序想著鬧鐘、講記、錄音筆，這三種分別知是不同型別的分別知嗎？所謂不同型別的分別知，例如貪與瞋，它們的所緣與行相（對境時的反應）截然不同；我執與無我慧更是執持境正相違。但想著鬧鐘、想著講記、想著錄音筆，這三種分別知都只是「對境做出如實合理判斷的同一型別分別知」，就像走在路上看馬路、看樹、看車子的眼根知可以是同一條續流、前者是後者的近取因一樣，這三種分別知屬於同一條續流並沒有明顯過失。</p>
+<h3>10. 如性法師指導第 3 題（二）：「單線道兩台車」與「買坦克車」譬喻（選項⑵⑶）</h3>
+<p class="reading-para">[▶ 145:49](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=8749.01) 【如性法師（與學員淑滿問答）】至於選項⑵與⑶，有人質疑：「如果生氣與平靜是兩條獨立的續流，為什麼生氣這條河在流的時候，平靜那條河就被堵住不能流？」我們不要用兩條平行河流的意象去想，可以把它理解成「<strong>兩台車子走到某一個只能容納一輛車的單線道路口</strong>」：生氣跟平靜是並存相違、互相干擾的，當有人罵你、你生氣的那台車開進路口時，平靜的那台車就沒有辦法開過去，必須停下來。</p>
+<p class="reading-para">[▶ 155:00](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=9300.0) 【如性法師】同樣地，如果把「我執」跟「無我慧」也看成兩台車子：我們目前的狀態是「連買無我慧這台車的錢都沒有」，我們心中的道路上只有我執這台車！假設有一天我們存夠了錢（積集資糧），買到了無我慧這台車，甚至把它改裝成「坦克車」，那它是怎麼把「我執」這台車徹底消滅掉的？選項⑶則是想表達：主要的意知是一條存放善惡業的續流，而依附其上的貪、瞋、慈悲等情緒，背後推動的力量（同類因／習氣）與執取境的方式各不相同，彼此不會重疊。</p>
+<h3>11. 如性法師指導第 3 題（三）：吃麵見蟑螂僅證成「俱生緣」，與課後核心思惟（選項⑷）</h3>
+<p class="reading-para">[▶ 162:54](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=9774.64) 【如性法師】再看選項⑷：吃美食感到愉悅（甚至有貪念），下一剎那看見碗裡有蟑螂馬上生起苦受與瞋念。這個例子要說明的是前後兩個念頭息息相關——之前吃得越歡喜、吃得越多，看到蟑螂的那一瞬間就越覺得噁心、越生氣。但問題是：光憑兩者有前後關聯、有「從生相屬」的因果關係，就能證明前念的貪是後念瞋的「近取因」、屬於同一條續流嗎？<strong>我覺得這個說服力道不足夠！</strong> 因為主張貪瞋是不同續流的人可以回答：「前念的歡喜只是後念生瞋的『俱生緣』，後念生起瞋心依舊有它自己過往的瞋習氣作為近取因。」</p>
+<p class="reading-para">[▶ 167:30](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=10050.0) 【如性法師】討論這個問題，<strong>最終就是要解決「我執」跟「無我慧」之間的關聯</strong>——為什麼生起無我慧能夠徹底「斷除」我執，而不是只是把我執整個壓制住、蓋住而已？在還沒斷除之前，無我慧跟我執在同一個補特伽羅心續中，為何一者出現、另一者就消失？這個問題我建議同學們放在心中持續思考！</p>
+<p class="reading-para">[▶ 169:53](https://www.youtube.com/watch?v=t4N3uKWRkKs#t=10193.38) 【主持人（圓滿迴向）】非常感謝法師！我們也儘量想辦法把自己剛才上課所造的善業迴向，讓我們前面所損的福報沒有白白浪費。大眾請合掌：「<strong>遇此無上大師教，皆由上師深恩故，此善迴向諸眾生，願成善士攝受因。</strong>」</p>
   </div>
-  <div class="player-dock">
-    <span>🎥 本講影音：<strong>第26講 集諦與滅諦的行相（下）</strong></span>
-    <a href="https://www.youtube.com/watch?v=t4N3uKWRkKs" target="_blank">在 YouTube 開啟完整影音 ↗</a>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
   </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
 </body>
 </html>

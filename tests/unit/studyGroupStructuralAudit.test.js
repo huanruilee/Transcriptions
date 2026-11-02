@@ -12,7 +12,7 @@ test('all study-group sessions satisfy structural transcript contracts', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
   const intentionallyUnbound = new Set(['34', '27B']);
 
-  assert.equal(course.sessions.length, 42);
+  assert.equal(course.sessions.length, 43);
   for (const entry of course.sessions) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
     assert.ok(session.audioUrl || session.youtubeVideoId, `missing media ${entry.sessionId}`);
