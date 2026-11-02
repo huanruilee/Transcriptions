@@ -60,9 +60,19 @@ def gate(chunk, endpoint, model, key):
     return validate(result, chunk)
 
 
+def assert_independent_models():
+    if correction.ADJUDICATOR_MODEL == correction.MODEL:
+        raise ValueError(
+            "independent model identities required: "
+            f"adjudicator={correction.ADJUDICATOR_MODEL!r}, "
+            f"external={correction.MODEL!r}"
+        )
+
+
 def process(path, batch_size, apply_changes):
     if type(batch_size) is not int or batch_size <= 0:
         raise ValueError("batch size must be a positive integer")
+    assert_independent_models()
     data = json.loads(path.read_text(encoding="utf-8"))
     source = correction.items_for(data)
     source_ids(source)
@@ -104,6 +114,10 @@ def process(path, batch_size, apply_changes):
     pending = sum(s.get("reviewNeeded") is True for p in data.get("paragraphs", []) for s in p.get("sentences", []))
     data.setdefault("_meta", {})["reviewTriage"] = {"protocol": "compact-uncertain-ids", "proposerModel": correction.ADJUDICATOR_MODEL, "adjudicatorModel": correction.MODEL, "batchSize": batch_size, "clearSentences": clear, "pendingSentences": pending, "failedBatches": sum(bool(r["error"]) for r in records)}
     data["_meta"]["candidateReviewRequired"] = pending > 0
+    if apply_changes:
+        applied_at = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S")
+        data["lastUpdated"] = applied_at
+        data["_meta"]["processed_at"] = applied_at
     return data, records, clear, pending, changes
 
 
