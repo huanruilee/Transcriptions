@@ -87,3 +87,33 @@ test('private playlist 44 is explicitly unavailable rather than published', () =
     { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
   );
 });
+
+test('all source outlines use string arrays for courseOutline and discussionOutline', () => {
+  const outlinesDir = path.join(COURSE_DIR, 'source_outlines');
+  const files = fs.readdirSync(outlinesDir).filter((name) => name.endsWith('.json'));
+  assert.ok(files.length >= 22);
+  for (const name of files) {
+    const outline = JSON.parse(fs.readFileSync(path.join(outlinesDir, name), 'utf8'));
+    assert.ok(Array.isArray(outline.courseOutline), `missing courseOutline in ${name}`);
+    assert.ok(Array.isArray(outline.discussionOutline), `missing discussionOutline in ${name}`);
+    for (const item of outline.courseOutline) {
+      assert.equal(typeof item, 'string', `non-string courseOutline item in ${name}`);
+    }
+    for (const item of outline.discussionOutline) {
+      assert.equal(typeof item, 'string', `non-string discussionOutline item in ${name}`);
+    }
+  }
+});
+
+test('all study-group sessions include speaker attribution and transcribed HTML study guides include verbatim drawers', () => {
+  const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
+  for (const entry of course.sessions) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
+    assert.ok(session.paragraphs.every((p) => typeof p.speaker === 'string' && p.speaker.length > 0), `missing paragraph speaker in ${entry.sessionId}`);
+    assert.ok(session.paragraphs.flatMap((p) => p.sentences).every((s) => typeof s.speaker === 'string' && s.speaker.length > 0), `missing sentence speaker in ${entry.sessionId}`);
+  }
+  for (const code of ['01A', '01B', '02A', '02B', '26A', '26B', '27B']) {
+    const html = fs.readFileSync(path.join(COURSE_DIR, 'publications', `lecture_${code}_study_guide.html`), 'utf8');
+    assert.match(html, /對照課堂原話/, `missing verbatim drawer in lecture_${code}_study_guide.html`);
+  }
+});

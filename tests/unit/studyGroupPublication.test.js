@@ -16,13 +16,13 @@ test('study-group publication exposes every processed playlist entry', () => {
   const entry = catalog.courses.find((course) => course.id === 'shi-liang-lun-study-group-2025');
   assert.ok(entry, 'study-group course must be registered in the catalog');
   assert.equal(entry.path, 'courses/2025釋量論第二品大組共學');
-  assert.equal(entry.totalSessions, 42);
+  assert.equal(entry.totalSessions, 43);
 
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.equal(course.sessions.length, 42);
+  assert.equal(course.sessions.length, 43);
   assert.deepEqual(
     course.sessions.map((session) => session.sessionId),
-    [...Array.from({ length: 41 }, (_, index) => String(index + 1).padStart(2, '0')), '27B'],
+    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B'],
   );
 
   for (const session of course.sessions) {
@@ -41,10 +41,12 @@ test('study-group publication exposes every processed playlist entry', () => {
 
   assert.equal(course.sessions.find((session) => session.sessionId === '14').displaySessionId, '8上');
   assert.equal(course.sessions.find((session) => session.sessionId === '27').displaySessionId, '14下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '42').displaySessionId, '26下');
   assert.equal(course.sessions.find((session) => session.sessionId === '27B').displaySessionId, '27下');
-  assert.deepEqual(course.pendingSessions.map((session) => session.sessionId), ['42', '43']);
-  assert.equal(course.pendingSessions.find((session) => session.sessionId === '42').displaySessionId, '26下');
+  assert.deepEqual(course.pendingSessions.map((session) => session.sessionId), ['43', '45', '46']);
   assert.equal(course.pendingSessions.find((session) => session.sessionId === '43').displaySessionId, '27上');
+  assert.equal(course.pendingSessions.find((session) => session.sessionId === '45').displaySessionId, '28上');
+  assert.equal(course.pendingSessions.find((session) => session.sessionId === '46').displaySessionId, '28下');
 });
 
 test('study-group publication records unavailable playlist entries instead of hiding them', () => {
@@ -239,14 +241,16 @@ test('session 37 and 38 share the 32-24 source outline index', () => {
   }
 });
 
-test('session 41 uses the 32-26 source outline index', () => {
+test('session 41 and 42 share the 32-26 source outline index', () => {
   const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-26.json'), 'utf8'));
   assert.equal(outline.sourceId, '32-26');
-  assert.deepEqual(outline.sessionIds, ['41']);
+  assert.deepEqual(outline.sessionIds, ['41', '42']);
   assert.equal(outline.courseOutline.length, 8);
   assert.equal(outline.discussionOutline.length, 8);
-  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_41.json'), 'utf8'));
-  assert.equal(session.sourceOutlineId, '32-26');
+  for (const sessionId of ['41', '42']) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, `sessions/session_${sessionId}.json`), 'utf8'));
+    assert.equal(session.sourceOutlineId, '32-26');
+  }
 });
 
 test('session 03 and 04 share the 32-02 source outline index', () => {

@@ -193,6 +193,10 @@
       color: #9a3412;
       background: #ffedd5;
     }
+    .spk-host {
+      color: #4d7c0f;
+      background: #ecfccb;
+    }
     .spk-student {
       color: #0369a1;
       background: #e0f2fe;
@@ -233,11 +237,11 @@
       right: 0;
       background: #ffffff;
       border-top: 1px solid #d6d3d1;
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
       z-index: 999;
     }
@@ -250,6 +254,23 @@
       width: 100%;
       max-width: 600px;
       height: 42px;
+    }
+    .yt-frame-wrap iframe {
+      border-radius: 6px;
+      vertical-align: middle;
+    }
+    .yt-ext-btn {
+      background: #dc2626;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .yt-ext-btn:hover {
+      background: #b91c1c;
     }
   </style>
 </head>
@@ -347,15 +368,23 @@
 <p class="reading-para clickable-para" onclick="playPara(8790, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8790, this)">▶ 146:30</button> 法師闡明選項⑵與選項⑶的精義：判斷一位行者是否已經獲得解脫、是否脫離輪迴，<strong>並不是看他證果的那一世身上還有沒有舊業所留下的有漏色蘊，而是看他「是否已經徹底斷除煩惱（苦因），在今生宿業受盡之後，來世會不會再次受煩惱與業力牽引而結生相續到三有輪迴中（「由宿行已盡，不續餘生故」）」</strong>！正如選項⑵所舉的對比例子：一個凡夫在無夢熟睡時，當下雖然沒有現起粗猛的我執，但因為種子未斷、醒來還會繼續生起，所以不能說他「已離我執」；反之，有餘依阿羅漢雖然今生還留有過去業力所感得的五蘊餘報（從完全斷除苦因到舊苦果的續流徹底息滅，本就有一段時間差，如選項⑶所述），但因為他已經徹底斷除我執與煩惱，即使宿業的功能尚未完全走完（「<strong>行功能無盡</strong>」），他暫時安住世間也絕不會再生起任何煩惱過失或造作新引業（「<strong>彼住無過失</strong>」），今生壽盡後必定不再結生後有！因此，自宗的回答不僅完全正答，更精準揭示了「雖有餘依苦諦，然已究竟解脫生死」的甚深法義。最後大眾於 `02:32:00` 合掌迴向，圓滿第 28 講（上）。</p>
   </div>
 
-  <div class="sticky-player">
-    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
-    <audio id="main-audio" controls preload="metadata" src="">
-      您的瀏覽器不支援 HTML5 音訊標籤。
-    </audio>
+  <div class="sticky-player yt-sticky-player">
+    <div class="yt-frame-wrap">
+      <iframe id="yt-iframe" width="240" height="68"
+        src="https://www.youtube.com/embed/NvsCBFbyRO0?enablejsapi=1&rel=0"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何段落時間戳或原話單句，立即跳轉 YouTube 原片對應秒數</div>
+    <a id="yt-ext-link" class="yt-ext-btn" href="https://www.youtube.com/watch?v=NvsCBFbyRO0" target="_blank" rel="noopener">📺 於 YouTube 開啟</a>
   </div>
 
   <script>
     const audio = document.getElementById('main-audio');
+    const ytIframe = document.getElementById('yt-iframe');
+    const ytExtLink = document.getElementById('yt-ext-link');
+    const youtubeId = "NvsCBFbyRO0";
     const status = document.getElementById('player-status');
     let currentActivePara = null;
 
@@ -422,6 +451,33 @@
         currentActivePara = para;
         para.classList.add('active-para');
       }
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      const mmss = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+      if (ytIframe && youtubeId) {
+        try {
+          ytIframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'seekTo',
+            args: [seconds, true]
+          }), '*');
+          ytIframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'playVideo',
+            args: []
+          }), '*');
+        } catch (e) {
+          ytIframe.src = `https://www.youtube.com/embed/${youtubeId}?start=${Math.floor(seconds)}&autoplay=1&enablejsapi=1&rel=0`;
+        }
+        if (ytExtLink) {
+          ytExtLink.href = `https://www.youtube.com/watch?v=${youtubeId}&t=${Math.floor(seconds)}s`;
+        }
+        status.innerText = `▶ 正在播放 YouTube 原片：${mmss}`;
+        return;
+      }
+
+      if (!audio) return;
       const applySeek = () => {
         try {
           audio.currentTime = seconds;
@@ -434,9 +490,7 @@
         audio.load();
       }
       audio.play().then(() => {
-        const m = Math.floor(seconds / 60);
-        const s = Math.floor(seconds % 60);
-        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        status.innerText = `▶ 正在播放：${mmss}`;
       }).catch(e => {
         console.error('Play failed:', e);
         status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
