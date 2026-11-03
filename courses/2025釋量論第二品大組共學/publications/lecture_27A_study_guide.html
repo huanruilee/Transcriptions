@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 27 講（上）空與無我的差異（上）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-host {
+      color: #4d7c0f;
+      background: #ecfccb;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+    .yt-frame-wrap iframe {
+      border-radius: 6px;
+      vertical-align: middle;
+    }
+    .yt-ext-btn {
+      background: #dc2626;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .yt-ext-btn:hover {
+      background: #b91c1c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 27 講（上）空與無我的差異（上）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`43`（顯示編號：`27上`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (8sDCFUj5E_c)](https://www.youtube.com/watch?v=8sDCFUj5E_c)（片長 2 小時 46 分 22 秒）</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 27 講〈空與無我的差異〉（科判一～三，討論題 Q1～Q3）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-27.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_27_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>一、區分心中顯現的我與實際的我</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：請結合自身的經驗分析：</li>
+<ul class="nested-list">
+<li>⑴ 在什麼情況下，我們心中會顯現「我」，但卻沒有顯現「身心」？（學員發表 `00:00:00`，法師指導 `00:29:11`）</li>
+<li>⑵ 在什麼情況下，我們心中雖然同時顯現「我」與「身心」，但卻感覺「我」與「身心」毫無關聯？（學員發表 `00:52:43`，法師指導 `01:14:18`）</li>
+<li>⑶ 透過以上的觀察，我們能得出什麼結論？（學員發表 `01:26:51`，法師指導 `01:46:35`）</li>
+</ul>
+</ul>
+<h3>二、以喻說明獨立於身心之外的我</h3>
+<ul class="meta-list">
+<li><strong>問題 2</strong>：請討論「森林中的獅子」與「桌上的錄音筆」這兩個比喻的內涵及其異同。（學員發表 `01:46:35`，法師指導 `01:56:28`）</li>
+</ul>
+<h3>三、苦諦的四種行相中空與無我的差異</h3>
+<ul class="meta-list">
+<li><strong>問題 3</strong>：</li>
+<ul class="nested-list">
+<li>⑴ 請結合「交換身心」的例子，體會「我能掌控身心」的這種感覺。</li>
+<li>⑵ 苦諦的四種行相中，「空」所強調的內涵為何？</li>
+<li>⑶ 苦諦的四種行相中，「無我」所強調的內涵為何？</li>
+<li>⑷ 透過思惟「空」與「無我」的道理，最終能得出什麼結論？（學員發表 `02:07:44`，法師指導 `02:19:53`）</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>一、區分心中顯現的我與實際的我（問題 1 研討與法師指導）</h3>
+<p class="reading-para clickable-para" onclick="playPara(0, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(0, this)">▶ 00:00</button> 本講次進入《釋量論・成量品》第 27 講〈空與無我的差異〉上半場大組共學。延續第 26 講末段法師留下的核心思考：「為什麼透過無我慧（證得補特伽羅無我的智慧）能夠徹底斷除我執與貪愛？」要回答這個問題，第一步必須先在自相續中精準指認出「我執所執著的境」——也就是區分「我們心中顯現的我（獨立自主的我）」與「實際存在的我（依蘊假立的我）」。主持人引導大眾就第一題第⑴小題展開發表：在日常生活經驗中，什麼情況下我們心中會顯現「我」，但卻完全沒有顯現「身體」或「心」？</p>
+<p class="reading-para clickable-para" onclick="playPara(570, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(570, this)">▶ 09:30</button> 多位學員結合自身生活經驗分享第⑴小題的觀察：例如當別人稱讚「你今天表現得很好」或批評「你怎麼這麼自私」時，我們內心立刻生起強烈的歡喜或委屈，當下想到的「我好高興」、「我被冤枉了」，心中浮現的是一個整體的、獨立的「我」，並不會同時去想「我的手腳被批評了」或「我的眼識、意識被稱讚了」；又如在規劃未來「我明年想去印度朝聖」時，心中也只顯現一個能做決定的「我」，而沒有顯現五蘊的個別支分。</p>
+<p class="reading-para clickable-para" onclick="playPara(1751, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1751, this)">▶ 29:11</button> 如性法師針對第 1 題第⑴小題給予深度指導：法師首先肯定同學們的觀察方向，並進一步釐清「實際存在的我」與「心中顯現的我」之間的根本落差。在名言中，實際存在的「我」必須依賴「身」與「心」（五蘊聚合體）而安立；然而，當我們在日常生活中不加觀察而生起「我口渴」、「我生氣了」、「我要去哪裡」的念頭時，我們心中所顯現的那個「我」，往往是<strong>不依賴身心、彷彿自己就能獨立站得住腳的「我」</strong>。</p>
+<p class="reading-para clickable-para" onclick="playPara(2180, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2180, this)">▶ 36:20</button> 法師以「車子與引擎、方向盤」為喻說明：當我們在馬路上看到一台車開過去，心中想著「這是一台好車」時，雖然車子實際上是由引擎、方向盤、輪胎、車殼等眾多零件組裝而成，但當下我們心中顯現「車子」時，並不會把裡面的引擎、變速箱、方向盤一一顯現出來。同理，當我們心中顯現「我」時，大多數時候並沒有同時顯現「我的身體」或「我的心識」，這就是為什麼我們很容易誤以為有一個不需依賴五蘊就能獨立存在的「我」。</p>
+<p class="reading-para clickable-para" onclick="playPara(2655, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2655, this)">▶ 44:15</button> 法師進一步補充「拍照聚焦（景深）」的譬喻：就像用相機拍合照時，當鏡頭精準對焦在中間主角的臉上時，背景的景物就會變得模糊不清；反之，當我們把注意力完全聚焦在那个鮮明、強烈的「我」之上（例如生起強烈我慢、嗔心或恐懼時），作為安立基礎的「身心五蘊」在我們的心中反而退居模糊的背景，甚至完全沒有顯現，使我們覺得那個「我」是憑藉自身力量而單獨存在的實體。</p>
+<p class="reading-para clickable-para" onclick="playPara(3163, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3163, this)">▶ 52:43</button> 接著進入問題 1 第⑵小題的學員發表：在什麼情況下，我們心中雖然同時顯現「我」與「身心」，但卻感覺「我」與「身心」毫無關聯、彼此分離？學員們舉出病痛或情緒失控時的經驗：例如當身體生病劇痛、年老體衰時，心裡常會抱怨「我的身體怎麼這麼不聽話、這麼不爭氣」，或者當心裡一直胡思亂想、無法專注時，會覺得「我的心好亂，我都管不住我的心」。在這些時刻，「我」與「我的身體 / 我的心」同時出現在心頭，但感覺「我」是一個高高在上的主人，而「身心」只是不聽使喚的工具或附屬品。</p>
+<p class="reading-para clickable-para" onclick="playPara(4458, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4458, this)">▶ 74:18</button> 如性法師針對第 1 題第⑵小題開示：當我們說「我的身體不舒服」或「我的心靜不下來」時，我們的心中確實同時顯現了「我」與「身、心」；但請仔細體會當下的行相——我們會覺得「身體是身體、我是我」、「心是心、我是我」，「我」好像站在身心之外，作為一個獨立的擁有者與控制者，正看著這個不聽話的身體或雜亂的心。這種「我與身心有距離感、彼此分離」的顯現，正是俱生我執把「我」執為「與蘊體相異、獨立於身心之外」的典型行相。</p>
+<p class="reading-para clickable-para" onclick="playPara(5211, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5211, this)">▶ 86:51</button> 隨後進入問題 1 第⑶小題的學員討論與發表：透過上述第⑴小題（顯現我卻不顯現身心）與第⑵小題（同時顯現我與身心卻覺得二者分離無關）的觀察，我們能得出什麼結論？學員總結指出：這證明了我們平時心中自然顯現並深信不疑的那個「我」，是一個「不依賴身心、獨立自主的我」；它與實際上必須依賴五蘊才能安立的「名言假立之我」截然不同。</p>
+<p class="reading-para clickable-para" onclick="playPara(6395, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(6395, this)">▶ 106:35</button> 如性法師總結問題 1 第⑶小題的結論：透過前兩小題的內省觀察，我們可以清楚得出兩個關鍵結論：第一，<strong>我們平時心中所顯現、所認為的「我」，是一個不需要依賴身心、獨立於身心之外、自己能夠單獨成立的「我」</strong>；第二，這種「心中顯現的我」只是俱生我執所捏造出來的錯覺，與「實際存在的我（必須觀待身心五蘊而假立的我）」完全不符。認清這一點，就是修習無我空性最關鍵的「破除所破之量（指認所破）」。</p>
+<hr class="divider"/>
+<h3>二、以喻說明獨立於身心之外的我（問題 2 研討與法師指導）</h3>
+<p class="reading-para clickable-para" onclick="playPara(6550, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(6550, this)">▶ 109:10</button> 進入第二大科判「以喻說明獨立於身心之外的我」（問題 2）：請討論法師在正行課程中所舉的「森林中的獅子」與「桌上的錄音筆」這兩個比喻的內涵及其異同。學員代表分享對這兩個譬喻的理解，分析獅子與森林、錄音筆與桌子之間的關係如何對應「我」與「五蘊」的關係。</p>
+<p class="reading-para clickable-para" onclick="playPara(6988, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(6988, this)">▶ 116:28</button> 如性法師於 `01:56:28` 針對問題 2 進行精密的法義解析：在正行課程中，為了幫助大家體會什麼叫作「獨立於身心之外的我」，法師先後舉了兩個比喻——第一個是「<strong>森林中的獅子</strong>」，第二個是「<strong>桌上的錄音筆</strong>」。為什麼需要舉這兩個不同的比喻？因為它們既有共通點，又有層次上的重大差異。</p>
+<p class="reading-para clickable-para" onclick="playPara(7205, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7205, this)">▶ 120:05</button> 法師闡明兩喻的<strong>相同點</strong>：無論是「森林中的獅子」還是「桌上的錄音筆」，都是用來比喻我們俱生我執心中所想像的那個「獨立於身心之外的我」——也就是我們總覺得在「身心（五蘊）」這個範圍裡面或上面，住著一個不屬於身心、與身心本質相異的「我」，就好像獅子住在森林裡、錄音筆放在桌上一樣。</p>
+<p class="reading-para clickable-para" onclick="playPara(7420, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7420, this)">▶ 123:40</button> 法師進而剖析兩喻的<strong>相異點（關鍵差別）</strong>：在第一個比喻「森林中的獅子」裡，森林是由許多樹木聚集而成的，而<strong>獅子本身並不是森林的一部分</strong>，獅子跟樹木是完全不同的兩個個體；如果把所有的樹木都砍光、移走，森林雖然消失了，但那隻獅子依然可以活生生地單獨存在。然而，如果直接用「森林與獅子」來問同學：「你覺得身心拿掉之後，我還能單獨存在嗎？」學過佛法的同學在理智上一定會馬上回答：「不可能！」為了突破這層理智上的防衛，法師才舉了第二個更貼近日常錯覺的比喻——「<strong>桌上的錄音筆</strong>」：當桌上有電腦、書本、水杯與錄音筆時，我們看過去會覺得「錄音筆就在桌上這堆東西裡面」，但錄音筆本身既不是電腦、也不是書本或水杯，它是獨立於其他物品之外的一個實體。同樣地，我們在感覺「我」的時候，雖然覺得「我」好像就在身心裡面，但卻覺得這個「我」既不是身體、也不是心識，而是一個能單獨指認出來的「獨立個體」。</p>
+<hr class="divider"/>
+<h3>三、苦諦的四種行相中空與無我的差異（問題 3 研討與法師指導）</h3>
+<p class="reading-para clickable-para" onclick="playPara(7664, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7664, this)">▶ 127:44</button> 進入第三大科判「苦諦的四種行相中空與無我的差異」（問題 3）。學員們依序針對四個小題發表研討成果：⑴ 結合「交換身心」的例子體會「我能掌控身心」的感覺；⑵ 苦諦四行相中「空」所強調的內涵；⑶ 苦諦四行相中「無我」所強調的內涵；⑷ 思惟「空」與「無我」最終得出的結論。</p>
+<p class="reading-para clickable-para" onclick="playPara(8393, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8393, this)">▶ 139:53</button> 如性法師於 `02:19:53` 就問題 3 作總結開示。首先針對第⑴小題「交換身心的譬喻」：法師重現正行課堂中的經典思想實驗——假設有一位七十歲、全身病痛的老翁，看到旁邊一位二十歲、身體非常健康強壯的年輕人，老翁心裡常會生起一個念頭：「如果我能把『我的身體』跟『他的身體』交換一下，讓我換到他那個健康的身體裡去，那該有多好！」這就像商人在市場上拿舊商品去換新商品一樣。</p>
+<p class="reading-para clickable-para" onclick="playPara(8710, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8710, this)">▶ 145:10</button> 法師引導大眾細膩觀察這個「想要交換身體」的念頭：當老翁想著「把我這個老病的身體換成他那個健康的身體」時，在老翁的心目中，「我」是什麼？「我」就是那個<strong>做決定的主人（掌控者、交易者）</strong>，而「身體」只是我所擁有的商品、衣服或房子！老翁覺得「我」可以完好無損地從舊身體裡走出來，再住進另一個新身體裡去。這最生動地暴露出我們內心深處俱生我執的行相——我們把「我」當成一個<strong>獨立於身心之外、能夠支配與掌控身心的常一自主之我</strong>。</p>
+<p class="reading-para clickable-para" onclick="playPara(9090, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9090, this)">▶ 151:30</button> 接著法師解析第⑵與第⑶小題——苦諦四行相（無常、苦、空、無我）中，「<strong>空</strong>」與「<strong>無我</strong>」究竟有何精微差異？在《釋量論・成量品》中，法稱論師從破除「我執所執之我（獨立自主之我）」的角度，區分了「空」與「無我」的不同側重點：<br/>1. <strong>「空」（空行相）所強調的內涵</strong>：是指五蘊身心當中，「空無」一個<strong>與蘊體本質相異、獨立於蘊體之外的掌控者之我</strong>（亦即強調：<strong>心中所想的我與蘊體「非異」</strong>——在身心五蘊之外，絕無一個能像商人換商品般單獨存在的「我」）。<br/>2. <strong>「無我」（無我行相）所強調的內涵</strong>：是指五蘊身心本身，也<strong>不是我們心中所想像的那個獨立自主的我</strong>（亦即強調：<strong>心中所想的我與蘊體「非一」</strong>——因為五蘊是眾多支分聚合、剎那生滅的無常法，若是與五蘊一體，則五蘊有眾多支分，「我」也應當變成許多的「我」；五蘊生滅，「我」也應當剎那生滅而無法成為前後相續的常一主人）。</p>
+<p class="reading-para clickable-para" onclick="playPara(9525, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9525, this)">▶ 158:45</button> 最後，法師開示第⑷小題的終極結論——「<strong>一異雙破</strong>」的正理推論：如果我們俱生我執心中所顯現、所執著的那個「獨立自主、能憑自身力量存在的我」真的存在於實際世界中，那麼它與「身心五蘊」的關係，在邏輯上只有兩種可能——要嘛與身心「是一（一體）」，要嘛與身心「是異（別體）」，沒有第三種可能。然而，透過苦諦的「<strong>無我</strong>」行相，我們證明了它與身心<strong>非一</strong>；透過苦諦的「<strong>空</strong>」行相，我們證明了它與身心<strong>非異</strong>。既然既非與蘊一體、亦非與蘊相異，最終必然得出無可動搖的結論：<strong>我們心中所顯現的那個「獨立自主的我」，在現實中根本不存在，完全是無明我執所捏造出來的虛妄增益！</strong> 至於名言中實際存在的「依蘊假立之我」究竟如何安立，則留待第 27 講（下）繼續深入研討。</p>
+  </div>
+
+  <div class="sticky-player yt-sticky-player">
+    <div class="yt-frame-wrap">
+      <iframe id="yt-iframe" width="240" height="68"
+        src="https://www.youtube.com/embed/8sDCFUj5E_c?enablejsapi=1&rel=0"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何段落時間戳或原話單句，立即跳轉 YouTube 原片對應秒數</div>
+    <a id="yt-ext-link" class="yt-ext-btn" href="https://www.youtube.com/watch?v=8sDCFUj5E_c" target="_blank" rel="noopener">📺 於 YouTube 開啟</a>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const ytIframe = document.getElementById('yt-iframe');
+    const ytExtLink = document.getElementById('yt-ext-link');
+    const youtubeId = "8sDCFUj5E_c";
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      const mmss = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+      if (ytIframe && youtubeId) {
+        try {
+          ytIframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'seekTo',
+            args: [seconds, true]
+          }), '*');
+          ytIframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'playVideo',
+            args: []
+          }), '*');
+        } catch (e) {
+          ytIframe.src = `https://www.youtube.com/embed/${youtubeId}?start=${Math.floor(seconds)}&autoplay=1&enablejsapi=1&rel=0`;
+        }
+        if (ytExtLink) {
+          ytExtLink.href = `https://www.youtube.com/watch?v=${youtubeId}&t=${Math.floor(seconds)}s`;
+        }
+        status.innerText = `▶ 正在播放 YouTube 原片：${mmss}`;
+        return;
+      }
+
+      if (!audio) return;
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        status.innerText = `▶ 正在播放：${mmss}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -14,18 +14,25 @@ COURSE_ID = "shi-liang-lun-study-group-2025"
 PUBLISHED_PLAYLIST_INDICES = tuple(range(1, 42))
 PENDING_VIDEO_SESSIONS = [
     {
-        "playlistIndex": 42,
-        "sessionId": "42",
-        "displaySessionId": "26下",
-        "title": "第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學",
-        "videoId": "lBOiFeGQblw",
-    },
-    {
         "playlistIndex": 43,
         "sessionId": "43",
         "displaySessionId": "27上",
         "title": "第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學",
         "videoId": "8sDCFUj5E_c",
+    },
+    {
+        "playlistIndex": 45,
+        "sessionId": "45",
+        "displaySessionId": "28上",
+        "title": "第28講 滅諦的後三種行相（上）｜2025《釋量論・第二品》大組共學",
+        "videoId": "NvsCBFbyRO0",
+    },
+    {
+        "playlistIndex": 46,
+        "sessionId": "46",
+        "displaySessionId": "28下",
+        "title": "第28講 滅諦的後三種行相（下）｜2025《釋量論・第二品》大組共學",
+        "videoId": "PYIbCsZmPHg",
     },
 ]
 UNAVAILABLE_PLAYLISTS = [
