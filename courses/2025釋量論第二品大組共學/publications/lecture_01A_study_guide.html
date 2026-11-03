@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 01 講（上）調整學法的動機（上）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 01 講（上）調整學法的動機（上）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`01`（顯示編號：`1上`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (7QA1k4uxxV0)](https://www.youtube.com/watch?v=7QA1k4uxxV0)</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 1 講〈調整學法的動機〉（科判一「解釋開經偈」、科判二「一切問題都源自於不了解真相」）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>逐字稿 JSON：`courses/2025釋量論第二品大組共學/sessions/session_01.json`（486 段・3,669 句真實音訊轉寫）</li>
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-01.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_01_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【本講核心偈頌與教證】</h2>
+<blockquote class="verse-quote">
+<p>「<strong>南無本師釋迦牟尼佛（三稱）。無上甚深微妙法，百千萬劫難遭遇，我今見聞得受持，願解如來真實義。</strong>」（《開經偈》）</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>諸佛非以水洗罪，非以手除眾生苦，非移自證於餘者，示法性諦令解脫。</strong>」</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>一、解釋開經偈</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：有些人發現自己欠缺智慧時，會習慣祈求文殊菩薩，而不是祈求釋迦牟尼佛。請問：</li>
+<ul class="nested-list">
+<li>⑴ 這麼做的原因為何？</li>
+<li>⑵ 祈求時，若是希望文殊菩薩將智慧賜予我們，這種祈求方式合理嗎？</li>
+</ul>
+</ul>
+<h3>二、一切問題都源自於不了解真相</h3>
+<ul class="meta-list">
+<li><strong>問題 2</strong>：課程中提到：「一切問題都來自於我們不了解真相。」可否由此推論「只要了解真相，就不會有問題」？請問以下描述是否正確？</li>
+<ul class="nested-list">
+<li>⑴ 上述推論並不合理。雖然由「世間上所有的問題」可以得出是因為「我們不了解真相」的這個原因，但無法反推「只要了解真相，就不會有問題」的這個結論。例如：有苗芽可以推論出之前一定有種子，但有種子不一定可以長出苗芽。</li>
+<li>⑵ 如果一切問題都來自於我們不了解真相，那麼只要了解真相，就不會衍生問題；但有時了解真相反而是問題的根源，例如：有些人在得知自己罹癌後反而比之前更痛苦。</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>一、解釋開經偈與「為何求智慧習慣祈求文殊菩薩而非釋迦牟尼佛」（問題 1 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(0, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(0, this)">▶ 00:00</button> 本講次為《2025 釋量論・第二品》大組共學開篇第 1 講（上）〈調整學法的動機〉。在正行課程中，如性法師首先為大眾詳釋《開經偈》：「<strong>南無本師釋迦牟尼佛。無上甚深微妙法，百千萬劫難遭遇，我今見聞得受持，願解如來真實義。</strong>」法師指出，「本師」意為根本導師，在娑婆世界中，無論我們現今依止哪位師長、修學哪個法門，甚至之所以能認識阿彌陀佛、藥師佛、文殊菩薩、觀世音菩薩，全都是因為本師釋迦牟尼佛應世說法並介紹給我們的；而佛陀所宣說的八萬四千法門，可統攝於「<strong>見（緣起見／無我慧）</strong>」與「<strong>行（無害行／菩提心）</strong>」二者之中，並須透過「見聞（閱讀經論、聽聞正法）➔ 受持（思惟法義、憶念於心）➔ 解義（通達如來真實密意）」三個階段方能成辦。</p>
+<p class="reading-para clickable-para" onclick="playPara(448, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(448, this)">▶ 07:28</button> 圍繞科判一，大組共學問題 1 提出了極具省思性的提問：既然本師釋迦牟尼佛是我們最根本的導師，且悲智圓滿，為什麼許多佛教徒發現自己欠缺智慧時，直覺會習慣祈求文殊菩薩，而不是祈求釋迦牟尼佛？若祈求時是希望文殊菩薩「把智慧直接賜給我們」，這種祈求方式合理嗎？多位學員先後發表看法，認為眾生覺得文殊菩薩是智慧的專職象徵、感覺較親近，且認同智慧無法直接移植，但需祈求佛菩薩加持以成為法器（具足「正、助、俱備、希求」等條件）。</p>
+<p class="reading-para clickable-para" onclick="playPara(1897, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1897, this)">▶ 31:37</button> 如性法師於 `00:31:37` 針對問題 1 第⑴小題展開犀利而深刻的蘇格拉底式引導。法師首先指出學員討論中常見的失焦現象：題目問的是「<strong>為什麼這些人會習慣祈求文殊菩薩，而不祈求釋迦牟尼佛</strong>」，而不是問應該怎麼祈求！針對同學提出「因為跟文殊菩薩感覺比較親近、跟釋迦牟尼佛沒那麼熟」的說法，法師反詰：我們去任何一間寺院禮佛，大雄寶殿正中央供奉的通常都是本師釋迦牟尼佛；而且釋迦牟尼佛有明確的歷史傳記、從悉達多太子出家求道到菩提樹下成佛的生命歷程，理應比我們從未親眼見過的文殊菩薩更容易理解、更令人感到親切才對，怎麼反而會覺得跟釋迦牟尼佛不熟呢？</p>
+<p class="reading-para clickable-para" onclick="playPara(2286, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2286, this)">▶ 38:06</button> 法師進一步剖析我們內心真正的盲點：為什麼大家求智慧時直覺找文殊菩薩、求慈悲救苦時直覺找觀世音菩薩，看到釋迦牟尼佛時卻「既不會想到慈悲，也不會想到智慧，就只是想到『喔，這是釋迦牟尼佛』」？法師一針見血地指出，這反映出我們多數人在學佛時，<strong>並沒有真正從「法義與真相」去認識佛陀的功德，而是順著世俗的刻板印象與分別心</strong>，把諸佛菩薩當成「分工部門」——誤以為文殊菩薩比釋迦牟尼佛更有智慧、觀世音菩薩比釋迦牟尼佛更有慈悲！事實上，任何一尊佛的悲、智、力皆是究竟圓滿、無二無別的；諸佛菩薩之所以示現文殊、觀音等不同面貌，完全是順應眾生有分別的根機而作的善巧方便。</p>
+<p class="reading-para clickable-para" onclick="playPara(2878, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2878, this)">▶ 47:58</button> 接著法師針對第⑵小題「祈求文殊菩薩將智慧賜予我們是否合理」進行精闢論證（`00:47:58`–`00:58:00`）：法師明確指出，祈求佛菩薩「把智慧或慈悲直接賜給我們」是<strong>完全不合理的</strong>！為什麼？因為文殊菩薩的智慧是「文殊菩薩心續中的心法（意識）」，與我們的心續<strong>本質相異</strong>；如果祈求文殊菩薩賜予智慧，文殊菩薩的智慧就能直接鑽進我們心裡，那麼當我們再祈求觀世音菩薩賜予慈悲時，觀世音菩薩的慈悲也鑽進我們心裡——請問這時候我們的身體裡面到底有幾個意識？當我們在想事情時，到底是「我」在想事情，還是「文殊菩薩」在替我想事情？正如釋迦牟尼佛親口宣說的教證：「<strong>諸佛非以水洗罪，非以手除眾生苦，非移自證於餘者，示法性諦令解脫。</strong>」佛菩薩絕對無法將自己心續中的證德像移交物品一樣直接轉移給眾生！</p>
+<p class="reading-para clickable-para" onclick="playPara(4094, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4094, this)">▶ 68:14</button> 法師並引述自己在拉達克朝聖時聽聞的<strong>「阿底峽尊者入藏公案」</strong>（`01:08:14`）：當年阿底峽尊者初到藏地參訪許多寺院，離開時常搖頭感嘆：「這是一個不好的緣起！」弟子不解為何參訪莊嚴的寺院卻說緣起不好？尊者解釋：「因為那些寺院裡只供奉了文殊、觀音、彌勒等菩薩像，卻沒有供奉本師釋迦牟尼佛的佛像！」這正提醒我們切莫本末倒置、忘失根本導師。同時，針對學員提問「因為釋迦牟尼佛因地時曾依止文殊菩薩學習，所以我們也要完全照做」，法師幽默反問：「難道每一個人成佛之前都要先去當印度的國王、娶妻生子、半夜偷偷跑出家、跟著外道學六年苦行，一定要一模一樣才能成佛嗎？」（`01:14:44`）最後法師總結<strong>正確的祈求心態</strong>（`01:22:03`）：祈求文殊菩薩或釋迦牟尼佛，<strong>絕不是向佛菩薩索取現成的智慧或把無形的「加持」掛在嘴邊，而是表明自己是一個真心想學習真相的弟子，祈求佛菩薩與師長「將生起智慧與慈悲的方法（正法）傳授給我們」，並承諾自己願意依教奉行、實事求是地聞思修持</strong>！</p>
+<hr class="divider"/>
+<h3>二、「一切問題都源自於不了解真相」之因果邏輯與「得知罹癌喻」辨析（問題 2 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(5382, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5382, this)">▶ 89:42</button> 進入第二大科判「一切問題都源自於不了解真相」（問題 2）。在正行課程中，法師以日常的「自私自利（認為自己在眾人當中最重要，卻找不到合理理由，也找不到那個住在胸口或大腦裡的『我』）」、「投資受騙」、「苦諦四行相（無常、苦、空、無我）卻顛倒執為常、樂、淨、我」為例，說明世間與出世間的一切問題皆源自於我們不了解事情的真相。大組共學問題 2 則進一步考驗同學的因明邏輯：由「一切問題都來自於不了解真相」，能否反推「只要了解真相，就不會有問題」？選項⑴以「有苗芽必有種子，但有種子不一定長出苗芽」主張不能反推；選項⑵則舉「得知自己罹癌（了解真相）反而比不知情時更痛苦」來質疑「了解真相就不會有問題」。</p>
+<ul class="meta-list">
+<li><button class="ts-btn" onclick="event.stopPropagation(); playAt(5946, this)">▶ 99:06</button> 如性法師於 `01:39:06` 針對問題 2 選項⑴的邏輯漏洞進行精準拆解：法師指出，選項⑴引用「有果（苗芽）必有因（種子），但有因（種子）不一定有果（苗芽）」的譬喻，表面上聽起來很有道理，但<strong>與它想要證成的結論前後不一致、毫無關聯</strong>！為什麼？因為在「一切問題都來自於不了解真相」這句話中：</li>
+<li><strong>「不了解真相（無明）」是「因」（如種子）</strong>；</li>
+<li><strong>「一切問題（痛苦與煩惱）」是「果」（如苗芽）</strong>。</li>
+<li>如果照「有果必有因（有問題必定源自不了解真相），但有因不一定有果」來推論，得出的結論應該是：「<strong>無因必無果 —— 只要沒有『不了解真相』這個因（亦即已經『了解真相』），就必定不會生起『問題』這個果！</strong>」怎麼反而會推出「即便了解真相（已經把種子拿掉了），還是會長出苗芽（還是會有問題）」呢？這直接展現了學習《釋量論》時嚴格檢視因果正因與周遍關係的重要性。</li>
+</ul>
+<p class="reading-para clickable-para" onclick="playPara(7341, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7341, this)">▶ 122:21</button> 接著法師於 `02:02:21` 深入剖析選項⑵的「<strong>得知自己罹癌反而更痛苦</strong>」之例：為什麼有些人在健檢前不知道自己得癌症時很快樂，健檢後得知「我罹癌了（得知真相）」反而陷入劇烈痛苦？難道「了解真相」反而是痛苦的根源嗎？法師引導大眾用因明理路冷靜觀察：<br/>1. 首先，這裡所說的「得知自己罹癌」，只是世俗現象上從「不知情」到「知情」的資訊轉變，並不是通達佛法所說「無常、無我」的究竟真相。<br/>2. 更關鍵的是：<strong>如果「知道自己罹癌（知情）」真的是導致他痛苦的主因，那麼只要「知道自己罹癌」這個認知沒有改變，他的劇烈痛苦就應該永遠持續下去！</strong> 但事實上，許多癌症患者在得知罹癌的初期雖然非常崩潰，經過幾個月或透過佛法無常觀的思惟調適後，他心裡依然清楚知道「我有癌症」，但內心的恐懼與痛苦卻大幅減輕甚至消失了！這就鐵證如山地證明：<strong>讓他痛苦的真正根源，並不是「知道罹癌這個事實」，而是他內心「無法接受無常、執著身體恆常屬於我」的錯誤心態（不了解無常與無我的真相）！</strong></p>
+<p class="reading-para clickable-para" onclick="playPara(8009, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8009, this)">▶ 133:29</button> 在本講尾聲（`02:13:29`–`02:27:47`），法師進一步結合學員的日常學習狀態，探討「<strong>為什麼當我們發現自己在學習或習氣上有問題時，往往習慣『睜一隻眼、閉一隻眼』不去正視真相？</strong>」法師慈悲而犀利地剖析：因為「正視自己的問題」在當下會帶來三重苦——聽別人指出我們缺點時很苦、自己反省承認錯誤時很苦、反省之後發現改不過來也很苦；為了逃避這當下的不舒服，人們本能地選擇「放過自己、不去面對真相」以換取短暫的安逸。然而，逃避真相只能帶來片刻的麻痺，唯有鼓起勇氣直面真相、透過聞思正理調整起心動念，才是究竟離苦得樂的唯一道路。最後大眾合掌迴向，圓滿第 1 講（上）。</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

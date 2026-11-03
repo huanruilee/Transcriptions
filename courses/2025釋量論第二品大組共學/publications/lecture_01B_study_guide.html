@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 01 講（下）調整學法的動機（下）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 01 講（下）調整學法的動機（下）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`02`（顯示編號：`1下`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (bO2f8SL6czc)](https://www.youtube.com/watch?v=bO2f8SL6czc)</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 1 講〈調整學法的動機〉（科判三「破除學佛的錯誤觀念」、科判四「學習佛法應該保持懷疑」、科判五「放棄學習就無法了解真相」）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>逐字稿 JSON：`courses/2025釋量論第二品大組共學/sessions/session_02.json`（490 段・3,594 句真實音訊轉寫）</li>
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-01.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_01_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【本講核心偈頌與教證】</h2>
+<blockquote class="verse-quote">
+<p>「<strong>佛法大海，信為能入，智為能度。</strong>」（龍樹菩薩《大智度論》）</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>福薄於此法，猶豫亦難生；雖僅生猶豫，亦能壞三有。</strong>」（聖天論師《四百論》）</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>三、破除學佛的錯誤觀念</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：本講提到：「真正好的懺悔不是整天念誦百字明咒，也不是整天拜三十五佛懺，應該是透由了解法義而改變自己的心。」對此，請問以下想法是否正確？或有其他理解方式？</li>
+<ul class="nested-list">
+<li>⑴ 透由了解法義改變自心，頂多只能讓自己此後不再造惡，無法淨除過去已造的惡業，所以仍應搭配持咒、拜懺等方式淨除過往的惡業。</li>
+<li>⑵ 上述說法不合理。透由了解法義改變自心，才能認識自己過去有哪些錯誤的行為，生起「破壞力」；同時提醒自己今後不要再犯同樣的過失，生起「遮止力」。這兩者正是四力懺悔中最重要的兩個部分。</li>
+</ul>
+</ul>
+<h3>四、學習佛法應該保持懷疑</h3>
+<ul class="meta-list">
+<li><strong>問題 2</strong>：聖天論師在《四百論》中提到：「<strong>福薄於此法，猶豫亦難生；雖僅生猶豫，亦能壞三有。</strong>」請問：</li>
+<ul class="nested-list">
+<li>⑴ 生起傾向事實的「猶豫知」要到達什麼狀態，才能夠「摧壞三有」？</li>
+<li>⑵ 為什麼在學習佛法的過程中，「猶豫知」比「伺意知」更重要？為何多數學法者傾向於以「伺意知」學習，而不喜歡用「猶豫知」學習？</li>
+</ul>
+</ul>
+<h3>五、放棄學習就無法了解真相</h3>
+<ul class="meta-list">
+<li><strong>問題 3</strong>：關於「為何學習時遇到困難會想放棄」，請問以下想法何者較為合理？</li>
+<ul class="nested-list">
+<li>⑴ 宿生等流習氣所導致。我們的習慣就是遇難就退，而學習佛法的道路漫長又孤獨，當老病纏身、順緣不足時就想放棄。</li>
+<li>⑵ 以上想法不合理。如果是被宿生等流習氣所影響，那我們應該做任何事都會容易放棄，但我們追求現世安樂時卻非如此，例如：買房子雖然遙不可及，但依舊會努力存一筆頭期款。可見容易放棄應該是目標不夠吸引我們。</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>三、破除學佛的錯誤觀念：為何「了解法義改變自心」才是最究竟的懺悔？（問題 1 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(0, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(0, this)">▶ 00:00</button> 本講次為《2025 釋量論・第二品》大組共學第 1 講（下）。在正行課程第三科判「破除學佛的錯誤觀念」中，如性法師破除了兩種常見的迷思：第一，學佛不是「只要相信佛，就等著被佛拯救」，正如《大智度論》云：「<strong>佛法大海，信為能入，智為能度</strong>」，信心雖是入道之門，但唯有生起通達真相的智慧方能度脫生死苦海；第二，學佛也不是「只要靠持咒、拜懺把過去的惡業洗乾淨就能解脫」，因為能否解脫的關鍵在於「煩惱（我執）是否斷除」，只要煩惱未斷，就算舊業淨除，下一秒仍會繼續造作新業。因此法師提出核心命題：「<strong>真正好的懺悔不是整天念誦百字明咒，也不是整天拜三十五佛懺，應該是透由了解法義而改變自己的心。</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(535, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(535, this)">▶ 08:55</button> 大組共學問題 1 即針對此命題展開深度思辨：選項⑴認為「了解法義改變自心」只能防範未來不再造惡（遮止力），無法淨除過去已造的舊業，故仍須搭配持咒拜懺；選項⑵則認為透過了解法義改變自心，才能認清過去錯誤而生起「破壞力（追悔心）」與「遮止力」，本身即具足四力懺悔的核心。學員們並進一步延伸探討「善惡業能否互相抵消（如在辣椒旁種葡萄）」、「業已造不失與四力懺悔的關係」等問題。</p>
+<p class="reading-para clickable-para" onclick="playPara(1797, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(1797, this)">▶ 29:57</button> 如性法師於 `00:29:57` 針對問題 1 進行層次分明的開示。法師首先打破選項⑴「了解法義改變自心無法淨除過去已造惡業」的迷思，向大眾連發數問：請問當我們真正生起「皈依三寶的心」或「菩提心」的當下，能不能淨除過去生與今生所造的惡業？當然可以！經典中處處宣說皈依與發菩提心能淨除無量往昔罪障。而真正的皈依心與菩提心，難道是靠口頭念誦儀軌生起的嗎？不是！它們正是透過「<strong>深入聞思法義、看清自私自利與愛我執的過患，從而徹底改變自心</strong>」所生起的功德！</p>
+<p class="reading-para clickable-para" onclick="playPara(2497, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2497, this)">▶ 41:37</button> 法師進一步剖析「<strong>為什麼了解法義、改變自心（如生起菩提心或通達無我）能夠直接淨化過去已造的惡業</strong>」：當我們透過學習前後世、四聖諦、菩提心與無我法義，在反覆觀察與思辨中，推翻了原本「我比所有眾生都重要」、「只有今生沒有來世」等顛倒認知時，我們不僅看清了過去起心動念與行為的荒謬（自然具足對往昔罪業深切厭離的「<strong>破壞力</strong>」），同時也扭轉了造惡的根源無明與愛我執（具足強大的「<strong>對治力</strong>」與「<strong>遮止力</strong>」）。這股由了解真相而轉變心續的正向力量，本身就能動搖、削弱乃至淨化心相續中往昔惡業的種子功能！</p>
+<p class="reading-para clickable-para" onclick="playPara(3181, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(3181, this)">▶ 53:01</button> 針對學員提問「淨化惡業之後，是不是就像從來沒有造過惡業一樣一筆勾銷？」，法師舉了一個極為生動的<strong>「手骨斷裂接回喻」</strong>（`00:53:01`）：假設一個人的手臂骨折斷掉了，去醫院動手術把骨頭接回來、打上石膏，經過三、五個月復健後恢復正常功能；雖然我們說他的手「治好了」，但接回來骨頭的狀態，跟一開始從未斷裂過的骨頭完全一模一樣嗎？不一樣！同樣地，四力懺悔「淨除惡業」的真實內涵，是指<strong>削弱惡業感果的力量，令其不增長廣大、乃至使定業轉輕受或不再感得惡趣苦果</strong>，而不是像橡皮擦一樣把曾經造業的事實當作從未發生過，因此絕不能抱持「先造惡業、事後再靠持咒一筆勾銷」的投機心態。</p>
+<hr class="divider"/>
+<h3>四、學習佛法應保持懷疑：《四百論》「雖僅生猶豫，亦能壞三有」與「猶豫知 vs. 伺意知」（問題 2 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(4583, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4583, this)">▶ 76:23</button> 進入第四科判「學習佛法應該保持懷疑」與問題 2 的研討。在正行課程中，法師引用聖天論師《四百論》的名言：「<strong>福薄於此法，猶豫亦難生；雖僅生猶豫，亦能壞三有。</strong>」指出在《心類學》七種認知中，「<strong>猶豫知（懷疑）</strong>」往往比不加思索就全盤接受的「<strong>伺意知</strong>」更為關鍵。學員們針對「什麼程度的猶豫知才能摧壞三有？」以及「為何多數人喜歡用伺意知學習而不喜歡猶豫知？」進行深入交流。</p>
+<p class="reading-para clickable-para" onclick="playPara(5197, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5197, this)">▶ 86:37</button> 如性法師於 `01:26:37` 針對「何種猶豫知能摧壞三有」開示：如果只是因為聽師長講了無我，自己完全沒聽懂也沒去思考，心裡只隨口想著「反正師長不會騙我，應該就是無我吧」，這種膚淺、不經思索的念頭並不足以摧壞三有！《四百論》所說能「<strong>壞三有</strong>」的猶豫知，是指行者原本深信「我是獨立自主存在的」，但在聽聞無我正理並認真反觀自心後，發現自己的苦樂與五蘊身心密不可分、在身心之外竟然找不到那個獨立的我，於是內心開始對原本深信不疑的「有我」產生了真正的動搖——「<strong>難道真的像佛所說的一樣，根本沒有獨立自主的我嗎？</strong>」</p>
+<p class="reading-para clickable-para" onclick="playPara(5410, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5410, this)">▶ 90:10</button> 法師以<strong>「摯友之間產生懷疑的裂縫喻」</strong>說明什麼叫作「摧壞三有」：就像兩位原本無話不談、信任堅不可摧的好朋友，有一天聽到別人有憑有據地說對方的壞話，即便還沒完全查證屬實，但只要心裡對這位朋友產生「懷疑」的那一瞬間，原本堅固如鐵的信任就已經<strong>裂開了一道縫隙</strong>，下次再見面時的感覺就完全不同了！同理，無始劫來我們對「獨立自主的我」深信不疑，這正是三有輪迴最堅固的根基；一旦透過聞思正理，對「無我」生起<strong>傾向事實的猶豫知</strong>，就等於在我們無始以來的俱生我執鐵牆上鑿開了第一道裂縫，從此我執不再堅不可摧，故說「<strong>雖僅生猶豫，亦能壞三有</strong>」！</p>
+<p class="reading-para clickable-para" onclick="playPara(7098, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(7098, this)">▶ 118:18</button> 接著法師於 `01:58:18` 剖析「<strong>為何猶豫知比伺意知更能推動聞思進程，但多數人卻偏愛伺意知？</strong>」：<br/>1. <strong>伺意知重結論、輕過程；猶豫知重過程、求真相</strong>：以「伺意知」學習的人，只想要一個現成的標準答案（「反正有前後世、諸法無我，我記下來相信就好了」），一旦得到答案就放進抽屜不再思考，永遠無法轉成牢不可破的比量定解；而以「猶豫知」學習的人，因為心中有疑問，就會主動去追問第一步、第二步、第三步是如何推導出來的，這種「關注與探究」正是生起比量定解不可或缺的推手。<br/>2. <strong>人類逃避思考的演化慣性與心理防衛</strong>（`02:00:30`）：法師指出，多數人之所以不喜歡生起猶豫知、不喜歡深入思考，一方面是因為大腦思考非常消耗能量，生物本能傾向用最省力的直覺與習性做判斷；另一方面則是因為<strong>一旦深入思考，很可能會發現自己過去幾十年的觀念是錯的，必須推翻自己原有的想法，這會帶來強烈的不安全感</strong>！因此，針對學員詢問「修淨土法門或受戒、臨終時是否只需要伺意知而不能有猶豫知？」（`02:16:31`），法師特別澄清：受戒當下或臨終一刻固然需要堅定信願，但在<strong>平時聞思修的準備階段</strong>，即便是修學淨土的利根行者，也必須透過合理的思辨（猶豫知 ➔ 正因推論 ➔ 比量定解）先確立「為何前後世與淨土確實存在」，建立起經得起考驗的智信，而非不求甚解的迷信。</p>
+<hr class="divider"/>
+<h3>五、放棄學習就無法了解真相：為何學法遇難想放棄，追求世間目標卻不會？（問題 3 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(8540, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8540, this)">▶ 142:20</button> 進入第五科判「放棄學習就無法了解真相」（問題 3）。題目對比了兩種解釋「為何學法遇到困難就想放棄」的觀點：選項⑴歸咎於「宿生等流習氣（遇難就退）」；選項⑵則反駁：若純粹是遇難就退的習氣所致，為何我們在追求現世安樂（如存錢買房）遇到極大困難時卻不會輕易放棄？可見真正原因在於「學法的目標（了解真相、解脫）對我們還不夠有吸引力」！</p>
+<p class="reading-para clickable-para" onclick="playPara(9132, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9132, this)">▶ 152:12</button> 如性法師於 `02:32:12` 針對問題 3 作出總結開示，並舉出極為傳神的<strong>「賭徒進賭場喻」</strong>：法師反問大眾，一個沉迷賭博的賭徒，之所以願意日以繼夜待在賭場裡不肯離開、就算輸光積蓄也還想繼續賭，難道是因為他「過去生每一世都在賭博」的宿生習氣嗎？不是！按照理論，也沒有人是一生接著一生永無止盡都在賭博的。那為什麼賭徒面對這麼大的風險與困難卻絕不放棄？<strong>因為他心裡有一個無比明確、對他極具吸引力的目標——「我要以小博大，贏得那筆龐大的金錢！」</strong> 只要這個目標在他心中足夠強烈，中間再辛苦、再困難他都願意忍受！</p>
+<p class="reading-para clickable-para" onclick="playPara(9390, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9390, this)">▶ 156:30</button> 法師藉此勉勵全體學員：我們在學習《釋量論》與佛法的道路上，之所以一遇到聽不懂、想不通、老病或忙碌就想打退堂鼓，並不是因為我們天生沒有能力，而是因為我們還沒有真正看清<strong>「不了解真相只會帶來無盡的痛苦與災難，而了解真相是離苦得樂唯一的一條出路」</strong>！當我們透過本講前行的思惟，真正把「了解真相、斷除我執」立為生命中最迫切、最吸引我們的目標時，即便學法的道路既漫長又寂寞，我們也會像追求珍寶一樣，一步一腳印堅定不移地走下去。最後大眾合掌迴向，圓滿第 1 講全部課程。</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>

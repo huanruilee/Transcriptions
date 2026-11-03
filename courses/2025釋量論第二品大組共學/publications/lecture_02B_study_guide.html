@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《2025 釋量論・第二品》大組共學 — 第 02 講（下）如何探究真相（下）</title>
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-light: #fef2f2;
+      --bg: #fafaf9;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --border: #e7e5e4;
+      --highlight: #fef08a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Serif TC", "Source Han Serif TC", "PingFang TC", serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0 0 120px 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: #7f1d1d;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+    }
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    .reading-para {
+      font-size: 1.08rem;
+      margin-bottom: 20px;
+      text-align: justify;
+      transition: background 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .reading-para.clickable-para {
+      cursor: pointer;
+    }
+    .reading-para.clickable-para:hover {
+      background: #f5f5f4;
+    }
+    .reading-para.active-para {
+      background: #fef9c3;
+    }
+    .ts-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: transform 0.1s, background 0.2s;
+    }
+    .ts-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+    .ts-btn:active {
+      transform: scale(0.95);
+    }
+    .body-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .body-header-row h2 {
+      margin: 0;
+    }
+    .verbatim-global-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .verbatim-global-btn:hover, .verbatim-global-btn.active {
+      background: #1d4ed8;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+    .verbatim-toggle-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+      vertical-align: middle;
+      transition: all 0.15s;
+    }
+    .verbatim-toggle-btn:hover, .verbatim-toggle-btn.open {
+      background: #4338ca;
+      color: #ffffff;
+      border-color: #4338ca;
+    }
+    .verbatim-drawer {
+      margin: -10px 0 22px 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #4338ca;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+    .verbatim-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4338ca;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .verbatim-close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .v-item {
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .v-item:hover {
+      background: #e0e7ff;
+    }
+    .v-ts {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 6px;
+    }
+    .v-spk {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .spk-geshe {
+      color: #9a3412;
+      background: #ffedd5;
+    }
+    .spk-student {
+      color: #0369a1;
+      background: #e0f2fe;
+    }
+    .treatise-quote {
+      color: #7c2d5a;
+      background: rgba(124, 45, 90, 0.08);
+      border-bottom: 1px solid rgba(124, 45, 90, 0.4);
+      font-weight: 600;
+    }
+    .verse-quote {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+    .meta-list, .ordered-list {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .meta-list li, .ordered-list li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 36px 0;
+    }
+    /* Sticky Bottom Player */
+    .sticky-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #d6d3d1;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .sticky-player .info {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .sticky-player audio {
+      width: 100%;
+      max-width: 600px;
+      height: 42px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>《2025 釋量論・第二品》大組共學 — 第 02 講（下）如何探究真相（下）</h1>
+<ul class="meta-list">
+<li><strong>講次代碼</strong>：`04`（顯示編號：`2下`）</li>
+<li><strong>課程名稱</strong>：2025《釋量論・第二品》大組共學</li>
+<li><strong>官方影片</strong>：[YouTube 影片連結 (__8WjGF3hhw)](https://www.youtube.com/watch?v=__8WjGF3hhw)</li>
+<li><strong>對應原典科判</strong>：《釋量論・成量品》第 2 講〈如何探究真相〉（科判四「善用自身具備的能力去探究真相」、科判五「介紹《釋量論》的造者：法稱論師」、科判六「探究真相應有的態度」）</li>
+<li><strong>關聯檔案</strong>：</li>
+<ul class="nested-list">
+<li>逐字稿 JSON：`courses/2025釋量論第二品大組共學/sessions/session_04.json`</li>
+<li>原典科判大綱：`courses/2025釋量論第二品大組共學/source_outlines/32-02.json`</li>
+<li>法師正行原典：`courses/釋量論第二品/source_text/session_02_official_raw.txt`</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【本講核心偈頌與教證】</h2>
+<blockquote class="verse-quote">
+<p>「<strong>諸佛非以水洗罪，非以手除眾生苦，非移自證於餘者，示法性諦令解脫。</strong>」</p>
+</blockquote>
+>
+<blockquote class="verse-quote">
+<p>「<strong>所量二故量為二。</strong>」（《釋量論》・自相與共相二所量，故唯有現量與比量二量）</p>
+</blockquote>
+<hr class="divider"/>
+<h2>【研讀大綱與討論題目】</h2>
+<h3>四、善用自身具備的能力去探究真相</h3>
+<ul class="meta-list">
+<li><strong>問題 1</strong>：請問：平時我在什麼情況下會運用邏輯推理來找尋真相以解決問題？</li>
+<li><strong>問題 2</strong>：關於「研討法義是否屬於觀修」，請問以下想法何者合理？</li>
+<ul class="nested-list">
+<li>⑴ 是。研討法義是指透過他人的提問、正反雙方意見的辯證，從而探究事情的真相，所以這個過程就是在細緻地思惟善法，理應屬於觀修。</li>
+<li>⑵ 上述說法不合理。如果將佛法當成知識學習，只著重於字面上的辯證，卻沒有反觀自心，或一心只想追求標準答案，都不屬於觀修，例如：佛學教授對於教義的研究討論。</li>
+</ul>
+</ul>
+<h3>五、介紹《釋量論》的造者：法稱論師 ＆ 六、探究真相應有的態度</h3>
+<ul class="meta-list">
+<li><strong>問題 3</strong>：關於「探究真相應有的態度」，請問以下想法是否正確？</li>
+<ul class="nested-list">
+<li>⑴ 與理工科人士探討前後世是否存在時，當對方提出的理由我無法反駁，但前後世又確實是真相，這時我應該堅持自宗，仔細思考對方說法中的漏洞，再伺機找其他理由反駁，不該因此就承許沒有前後世。</li>
+<li>⑵ 上述說法不合理。即便前後世是真相，但當提不出更有說服力的說法時，應該站在中立的角度，對此議題暫時存疑，而非一味地堅持自宗。</li>
+</ul>
+</ul>
+<hr class="divider"/>
+<h2>【正文講記】</h2>
+<h3>四、善用自身具備的能力去探究真相：如何在日常煩惱中運用「宗、因」邏輯推理？（問題 1 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(0, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(0, this)">▶ 00:00</button> 本講次為《2025 釋量論・第二品》大組共學第 2 講（下）。在正行課程第四科判「善用自身具備的能力去探究真相」中，如性法師引用佛陀名言：「<strong>諸佛非以水洗罪，非以手除眾生苦，非移自證於餘者，示法性諦令解脫</strong>」以及《釋量論》「<strong>所量二故量為二</strong>」（由於所量唯有自相與共相二者，故能量的認知唯有現量與比量二者），闡明文殊菩薩為何稱「<strong>《量學》是眾生的雙眼</strong>」：即使我們身邊沒有外道，但我們無始劫來心相續中任運生起的俱生我執與顛倒妄念，本身就與外道見解如出一轍！因此，我們學《量學》的正因公式，不是為了跟別人爭勝，而是為了<strong>跟自己內心的錯誤起心動念辯論</strong>，我們自己才是自己的依怙。</p>
+<p class="reading-para clickable-para" onclick="playPara(477, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(477, this)">▶ 07:57</button> 圍繞此理，大組共學問題 1 請學員反觀自身經驗：「平時我在什麼情況下會運用邏輯推理來找尋真相以解決問題？」法師在課前與討論中特別給出明確的三步驟提示：回答此題時，必須具體說明<strong>「① 我遇到了什麼問題？② 我如何運用邏輯推理換個方式思考？③ 如此思考後問題如何被解決？」</strong> 多位學員分享了在職場工作、家庭溝通或舉辦活動不如預期時，如何先抽離情緒、用理性分析解決問題的案例。</p>
+<p class="reading-para clickable-para" onclick="playPara(2615, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(2615, this)">▶ 43:35</button> 如性法師於 `00:43:35` 針對問題 1 作出直指人心的關鍵指導：法師指出，對目前的我們而言，要嚴格按照三相正因公式對深奧的隱蔽分生起「比量」確實不容易，但我們可以先把標準稍微放寬——<strong>運用邏輯推理（宗與因的檢視）來解決我們內心的負面情緒問題</strong>！法師提醒大家：當我們說「遇到問題」時，真正的問題往往不是外在的工作沒做好或別人說了什麼，而是<strong>「我的內心為什麼會生起難過、氣餒、憤怒等負面情緒？」</strong></p>
+<ul class="meta-list">
+<li><button class="ts-btn" onclick="event.stopPropagation(); playAt(3225, this)">▶ 53:45</button> 法師當場舉出一位學員最真實的心聲作為範例，示範如何用「宗、因」跟自己的煩惱辯論（`00:53:45`）：</li>
+<li>假設有一位同學下課後心裡非常痛苦，請問他內心立下的「<strong>宗</strong>」是什麼？他的宗是：「<strong>我很難過、我感到非常氣餒、我的心情十分沉重。</strong>」</li>
+<li>接著我們追問他：你為什麼這麼難過？背後支撐你難過的「<strong>因（理由）</strong>」是什麼？他說：「<strong>因為我都聽不懂法師在說什麼！</strong>」</li>
+<li>這時，我們就可以運用邏輯推理來檢視他這個念頭的「因成立」與「周遍」：</li>
+<ul class="nested-list">
+<li>1. <strong>檢視「因成不成立」</strong>：請問你真的從頭到尾「每一句話都聽不懂」嗎？如果法師講兩個小時，你有一半聽得懂、只有幾個邏輯轉折聽不懂，那說「我都聽不懂」本身就不符合事實（因不成立）！</li>
+<li>2. <strong>檢視「周遍成不成立」</strong>：退一步說，就算今天這堂課真的有很多地方聽不懂，<strong>請問「聽不懂」就一定要「感到難過、氣餒」嗎（有周遍嗎）？</strong> 正如第 1 講所說，我們學的是「百千萬劫難遭遇」的無上甚深微妙法，過去生長期漂泊惡趣、對量學極度陌生，剛開始聽不懂本來就是最正常不過的事！既然聽不懂是正常的，只要透過反覆聽聞、討論慢慢弄懂就好，有什麼好難過氣餒的？</li>
+</ul>
+<li>當我們這樣用邏輯把內心負面情緒背後的「荒謬理由」拆穿時，原本沉重難過的情緒當下就能煙消雲散！這就是把《釋量論》的邏輯推理真正落實在日常調心上的最佳典範。</li>
+</ul>
+<hr class="divider"/>
+<h3>四（續）、「研討法義」是否屬於「觀修」？兼論「聞、思、修」與「止、觀」之交集（問題 2 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(4004, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4004, this)">▶ 66:44</button> 進入問題 2 的研討：在正行課程中，法師強調「古印度與藏地祖師們的辯論，本身就是最好的觀修；真正好的修行中，觀修是近取因，止修頂多只是令心穩定的俱生緣」。問題 2 則進一步提問：「研討法義是否屬於觀修？」選項⑴認為透過提問與正反辯證探究真相，本身就是在細緻思惟善法，故屬觀修；選項⑵則認為若沒有反觀自心、只作字面知識研究（如佛學教授研究教義），則不屬於觀修。</p>
+<p class="reading-para clickable-para" onclick="playPara(4790, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(4790, this)">▶ 79:50</button> 如性法師於 `01:19:50` 針對問題 2 展開極為透徹的法相辨析。法師指出，要判斷「研討法義是否屬於觀修」，第一步必須先界定<strong>什麼叫作「修（修行）」</strong>！在《道次第》中，「修」的定義是「令心反覆串習、安住於善所緣，使心相續向上提升」。讓心向上提升的方式只有兩種：<br/>1. <strong>觀修（觀察修）</strong>：透過理性的思惟、分析、抉擇事情的真相，使心對善法生起定解並向上提升；<br/>2. <strong>止修（止住修）</strong>：遮除內心的散亂，令心專注安住於所緣境上。<br/>法師幽默地指出（`01:24:48`）：當一個人陷入負面情緒，在心裡不斷找理由證明「某人有多可惡、我有多委屈」時，他其實也在做一種「錯誤的觀修（用思考把負面情緒越養越大）」！反之，如果我們在念死無常的「三根本、九因相」時，只是像背書一樣把文字在腦海裡快速念過一遍（藏文稱為「略修」），完全沒有深入思惟剖析，那只能算增強記憶力，還談不上真正的「觀修」（`01:26:15`）。</p>
+<p class="reading-para clickable-para" onclick="playPara(5459, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(5459, this)">▶ 90:59</button> 那麼，「研討法義」到底算不算觀修？法師給出了極具啟發性的判準（`01:30:59`–`01:36:00`）：<strong>關鍵在於透過這場研討與思辨，「你的心有沒有真正向上提升」</strong>！甚至有同學問：「如果我參加完一場激烈的法義研討之後，最後還是沒得出標準答案、依舊不了解，這樣我的心有向上提升嗎？算觀修嗎？」法師明確回答：<strong>「有提升！絕對算！」</strong> 為什麼？因為在研討之前，你原本以為自己懂了、毫無懷疑（處於狹隘的伺意知或邪執中）；經過同學們多角度的提問與正反交鋒後，你發現自己原本的想法不夠周延、看到了以前從未想過的盲點，生起了「傾向事實的猶豫知」！從「盲目自以為是」進步到「發現問題、打開思惟格局」，你的心就已經實實在在地向上提升了！</p>
+<ul class="meta-list">
+<li><button class="ts-btn" onclick="event.stopPropagation(); playAt(7669, this)">▶ 127:49</button> 接著法師於 `02:07:49` 至 `02:16:00` 釐清學員常混淆的「<strong>聞、思、修三階段</strong>」與「<strong>止修、觀修二分類</strong>」之關係：</li>
+<li>法師連問三題：① 在現場聽聞講法者闡述宗、因、喻（「聞」的階段），需不需要高度專注（止修）並跟著講法者的理路高速思考（觀修）？需要！② 課後自己反覆推敲能否認同講法者的觀點（「思」的階段），需不需要止修與觀修？需要！③ 對於已經生起定解的法義反覆串習（「修」的階段），需不需要止修與觀修？也需要！</li>
+<li>因此，<strong>「聞、思、修」是依學習先後因果次序所作的三階段分類（先聽聞 ➔ 再思惟生起定解 ➔ 後修習反覆串習），而「觀修與止修」則是貫穿於聞、思、修每一個階段當中的兩種用功方式</strong>！明乎此，我們在每一堂共學聽聞與研討法義的當下，只要全神貫注、認真思辨以提升自心，當下就已經是在進行最踏實的「觀修」了。</li>
+</ul>
+<hr class="divider"/>
+<h3>五、介紹法稱論師與自在軍論師公案 ＆ 六、探究真相應有的態度（問題 3 研討與開示）</h3>
+<p class="reading-para clickable-para" onclick="playPara(8638, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8638, this)">▶ 143:58</button> 進入科判五「介紹《釋量論》造者法稱論師」與科判六「探究真相應有的態度」（問題 3）。在正行課程中，法師介紹了西元五世紀陳那論師造《集量論》、七世紀法稱論師造《釋量論》的源流，並特別講述<strong>「法稱論師依止自在軍論師三聞《集量論》」的著名公案</strong>：法稱論師聽第一遍即通達上師自在軍論師之密意，聽第二遍即通達陳那論師之本意，聽第三遍時發現自在軍論師的解釋有誤並勇敢啟白；而身為當代權威的自在軍論師聽後不僅毫無動怒，反而歡喜讚歎弟子，並命其造《釋量論》以顯揚陳那論師的真實密意。法師感嘆：法稱論師固然了不起，但自在軍論師那種「在真相面前完全放下自我面子與權威」的胸懷更為偉大！</p>
+<p class="reading-para clickable-para" onclick="playPara(8952, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(8952, this)">▶ 149:12</button> 圍繞這種「實事求是、唯真理是從」的態度，問題 3 提出了一個極為現實的考題：當我們與理工科或腦科學背景的人士探討「前後世是否存在」時，如果對方提出的反駁理由我們一時無法招架，但「有前後世」又確實是真相，這時我們應該：⑴ 堅持自宗，努力找出對方漏洞反駁，絕不承許無前後世；還是 ⑵ 站在中立角度，對此議題暫時存疑，而非一味堅持自宗？</p>
+<p class="reading-para clickable-para" onclick="playPara(9150, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9150, this)">▶ 152:30</button> 如性法師於 `02:30:00` 針對問題 3 作出極為精闢的總結開示。法師指出，面對這個問題，必須先誠實檢視我們自己心裡認為「前後世是真相」的依據是什麼，這可以分為三種狀況：<br/>1. <strong>第一種人：自己根本沒有思考過成立前後世的正因，純粹因為「我是佛教徒、佛經這麼說」就一口咬定有前後世</strong>。法師指出，如果屬於這種情況，當對方提出嚴密的科學質疑而你完全答不出來時，若還硬要堅持自宗，在別人眼中就是徹頭徹尾的「迷信」與固執！這種人根本還沒有真正生起定解，理應先退回中立客觀的態度（先把佛教徒的標籤撕掉），老老實實去把成立前後世與破除唯物腦科學的正理研究透徹。<br/>2. <strong>第二種人：自己雖然學過一些成立前後世的理由，但理由還不夠充分、思考角度還不夠寬廣</strong>。當遇到對方犀利的反駁而無法招架時，其實內心已經動搖、產生了懷疑；這時也應該誠實面對自己的疑惑，深入去補強理路，而不是表面硬撐。<br/>3. <strong>第三種人：自己已經透過《釋量論・成量品》的正因公式，對「心識必有前剎那同類因、故必有前後世」生起了百分之百篤定的比量定解</strong>。法師說明，如果一個人真的已經生起比量定解，他就不可能被對方的邪理動搖（即便一時口頭上表達不夠巧妙，也能清楚看出對方將心法等同於大腦色法的邏輯漏洞）。</p>
+<p class="reading-para clickable-para" onclick="playPara(9665, this, event)"><button class="ts-btn" onclick="event.stopPropagation(); playAt(9665, this)">▶ 161:05</button> 最後，針對有學員問：「那如果我站在中立存疑的角度，我要這樣懷疑個五年、十年嗎？」法師語重心長地勉勵大眾（`02:41:05`）：「前後世存不存在」並不是像微細空性那樣高不可攀的難題；如果你真的關心自己的來生去向、真的投入心力認真研讀《釋量論》第二品關於前後世的正理辯證，<strong>根本不需要五年、十年，一年之內你的內心就應該有非常清楚、篤定的方向了</strong>！若過了五年還在原地懷疑，那就代表這五年根本沒有認真把它當成生命的大事來思考。大眾於 `02:45:15` 合掌誦念迴向偈，圓滿第 2 講全部課程。</p>
+  </div>
+
+  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('main-audio');
+    const status = document.getElementById('player-status');
+    let currentActivePara = null;
+
+    function playPara(seconds, paraEl, evt) {
+      if (evt) {
+        const sel = window.getSelection ? window.getSelection().toString() : '';
+        if (sel && sel.length > 0) return;
+      }
+      const btn = paraEl.querySelector('.ts-btn');
+      playAt(seconds, btn || paraEl);
+    }
+
+    function toggleVerbatimDrawer(drawerId, btnEl) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isHidden = drawer.hasAttribute('hidden');
+      const btn = btnEl || document.querySelector(`[data-target="${drawerId}"]`);
+      if (isHidden) {
+        drawer.removeAttribute('hidden');
+        if (btn) {
+          btn.classList.add('open');
+          btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+        }
+      } else {
+        drawer.setAttribute('hidden', '');
+        if (btn) {
+          btn.classList.remove('open');
+          btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+        }
+      }
+    }
+
+    function toggleAllVerbatim(masterBtn) {
+      const drawers = document.querySelectorAll('.verbatim-drawer');
+      const allOpen = Array.from(drawers).every(d => !d.hasAttribute('hidden'));
+      drawers.forEach(d => {
+        const btn = document.querySelector(`[data-target="${d.id}"]`);
+        if (allOpen) {
+          d.setAttribute('hidden', '');
+          if (btn) {
+            btn.classList.remove('open');
+            btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+          }
+        } else {
+          d.removeAttribute('hidden');
+          if (btn) {
+            btn.classList.add('open');
+            btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+          }
+        }
+      });
+      if (masterBtn) {
+        masterBtn.classList.toggle('active', !allOpen);
+        masterBtn.textContent = allOpen ? '💬 展開全部課堂原話' : '💬 收合全部課堂原話';
+      }
+    }
+
+    function playAt(seconds, btnOrPara) {
+      if (currentActivePara) {
+        currentActivePara.classList.remove('active-para');
+      }
+      const para = btnOrPara.closest ? btnOrPara.closest('.reading-para') : btnOrPara;
+      if (para) {
+        currentActivePara = para;
+        para.classList.add('active-para');
+      }
+      const applySeek = () => {
+        try {
+          audio.currentTime = seconds;
+        } catch (e) {}
+      };
+      if (audio.readyState >= 1) {
+        applySeek();
+      } else {
+        audio.addEventListener('loadedmetadata', applySeek, { once: true });
+        audio.load();
+      }
+      audio.play().then(() => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }).catch(e => {
+        console.error('Play failed:', e);
+        status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
+      });
+    }
+  </script>
+</body>
+</html>
