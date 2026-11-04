@@ -122,4 +122,52 @@ test('batch_convert_all.py step2_pre_polish 句尾標點處理', async (t) => {
     assert.ok(out.startsWith('六地菩薩'), `開頭清理未生效：${JSON.stringify(out)}`);
     assert.doesNotMatch(out, /[,，]\s*[。．]/);
   });
+
+  // ── 2026-11-04 巡檢二巡：句尾守衛擴充至頓號／分號／冒號／半形句號 ──
+  await t.test('頓號／分號／冒號／半形句號結尾不得再被補句號', () => {
+    // 舊版守衛只認 r'[。？！…」』，,!?]$' → 這些輸入會被補成
+    //   『甲、。』『一；。』『一;。』『注意：。』『結束.。』
+    // 實測現有 304 個 session 中此類瑕疵為 0 筆，屬預防性修補。
+    const cases = [
+      ['甲、', '甲、'],
+      ['一；', '一；'],
+      ['一;', '一;'],
+      ['注意：', '注意：'],
+      ['結束.', '結束.'],
+      ['這樣甲、', '這樣甲、'],
+    ];
+    for (const [input, expected] of cases) {
+      const out = polish(input);
+      assert.doesNotMatch(
+        out,
+        /[、；;：:]\s*[。．]|[.．]\s*[。．]/,
+        `仍產生「標點+句號」：${JSON.stringify(input)} → ${JSON.stringify(out)}`,
+      );
+      assert.equal(out, expected, `輸出不符預期：${JSON.stringify(input)}`);
+    }
+  });
+
+  await t.test('上游輸入已含半形「,.」時不得再被補句號', () => {
+    // 舊版會把『有嘛,.』變成『有嘛,.。』
+    const out = polish('有嘛,.');
+    assert.doesNotMatch(out, /[.．]\s*[。．]/, `仍產生「句號+句號」：${JSON.stringify(out)}`);
+    assert.doesNotMatch(out, /[,，]\s*[。．]/, `仍產生「逗號+句號」：${JSON.stringify(out)}`);
+  });
+
+  await t.test('守衛擴充不得改變既有全形行為（回歸保護）', () => {
+    const stable = [
+      ['正常句子沒有逗號', '正常句子沒有逗號。'],
+      ['已經有句號了。', '已經有句號了。'],
+      ['這是問句嗎？', '這是問句嗎？'],
+      ['這是驚嘆！', '這是驚嘆！'],
+      ['嗯啊喔哦呃，正常開頭', '正常開頭。'],
+      ['這是嗎', '這是嗎？'],
+      ['這是啦', '這是啦。'],
+      ['謝謝大家', ''],
+      ['訂閱', ''],
+    ];
+    for (const [input, expected] of stable) {
+      assert.equal(polish(input), expected, `全形輸入行為改變：${JSON.stringify(input)}`);
+    }
+  });
 });

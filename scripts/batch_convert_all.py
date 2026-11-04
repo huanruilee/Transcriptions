@@ -445,7 +445,10 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
                 #   已是有效句尾，不可再 append 句號 —— 否則產生『X，。』／『X,.』瑕疵
                 #   （全形案例即 09A/99A 已修正的缺陷，半形案例見 session_43A/38B）。
                 #   驚嘆號／問號（半形與全形）同樣視為已有句尾。
-                if not re.search(r'[。？！…」』，,!?]$', raw_text):
+                #   頓號『、』『；』『：』『.』亦為有效句尾：
+                #     舊版未納入 → 『甲、』被補成『甲、。』、『結束.』被補成『結束.。』
+                #     （2026-11-04 巡檢實測；現有資料 0 筆受影響，屬預防性修補）
+                if not re.search(r'[。？！…」』，,、；;：:!?.]+$', raw_text):
                     if re.search(r'(嗎|呢|吧|對不對|是不是|如何|哪裡|怎麼|為什麼|何須|何故)[？\?]?$', raw_text):
                         raw_text = re.sub(r'[，,、\s]*$', '？', raw_text)
                     elif re.search(r'(啦|啊|嘛|喔|了|的|這樣|這個)[！\!]?$', raw_text):
