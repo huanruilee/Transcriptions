@@ -16,8 +16,11 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = '/home/henry/.gx10/xiaofa/workdirs/regress-main';
+// 專案根目錄由本檔位置推導（不可寫死絕對路徑，否則在其他 checkout 會 ENOENT）
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.join(__dirname, '..');
 const COURSE = '入中論善顯密意疏';
 const FILES = ['session_09A', 'session_99A'];
 const APPLY = process.argv.includes('--apply');

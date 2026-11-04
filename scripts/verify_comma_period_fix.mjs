@@ -4,14 +4,41 @@
 //   2. 非標點字元完全未變（以 (paragraph_index, sentence_index) 對齊比對）
 //   3. 「殘句未被誤加逗號數 = 0」
 //   4. digest 雙演算法正確重算
+//
+// 基線（pre-fix）來（2026-11-04 修正，Codex P2 review finding）：
+//   原版把 ROOT 與 BACKUP 寫死成作者私人路徑，且 BACKUP 指向未被 git 追蹤的目錄，
+//   導致本守門無法在其他 checkout 重現（ENOENT / 靜默跳過）。
+//   現在：
+//     · ROOT 由本檔位置推導（import.meta.url），任何 checkout 皆可用
+//     · 基線預設自 git 讀取（BASELINE_REF = 修正前的 commit），
+//       任何 fresh clone 只要有 git 歷史即可重現，不依賴未追蹤檔案
+//     · 仍可用 --baseline <dir> 指定外部基線目錄（優先於 git 讀取）
+//     · 仍可用 --baseline-ref <ref> 指定 git 基線 ref
+//
+// 用法：node scripts/verify_comma_period_fix.mjs [--baseline <dir>] [--baseline-ref <ref>]
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 // 直接使用 pipeline 官方的 computeSourceDigest，避免重複實作走樣
 import { computeSourceDigest } from './content_overview_pipeline.mjs';
 
-const ROOT = '/home/henry/.gx10/xiaofa/workdirs/regress-main';
-const BACKUP = '/home/henry/.gx10/xiaofa/workdirs/backups/fix-comma-period-20261104';
+// 專案根目錄由本檔位置推導（不可寫死絕對路徑，否則在其他 checkout 會 ENOENT）
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.join(__dirname, '..');
+
+// 預設基線 ref = 本次修正的父 commit（其 session 檔為修正前狀態）。
+// 解析為『修正前』而非寫死 SHA，讓日後 rebase 時仍指向正確基線。
+const DEFAULT_BASELINE_REF = 'a1e3348^';
+
+const argOf = (flag) => {
+  const i = process.argv.indexOf(flag);
+  return i !== -1 ? process.argv[i + 1] : null;
+};
+const BASELINE_DIR = argOf('--baseline');
+const BASELINE_REF = argOf('--baseline-ref') || DEFAULT_BASELINE_REF;
+
 const FILES = ['session_09A', 'session_99A'];
 const COURSE = '入中論善顯密意疏';
 
@@ -38,9 +65,40 @@ const report = (ok, msg) => {
   if (!ok) fail++;
 };
 
+// ── 基線載入 ────────────────────────────────────────────────────────
+// 優先序：--baseline 目錄 > git <BASELINE_REF> 的檔案內容 > 明確報錯。
+// 絕不靜默跳過（舊版會在找不到檔案時直接 continue，讓守門形同虛設）。
+function loadBaselineRaw(file) {
+  if (BASELINE_DIR) {
+    const p = path.join(BASELINE_DIR, `${file}.json`);
+    if (!fs.existsSync(p)) {
+      throw new Error(`--baseline 指定的路徑沒有 ${file}.json：${p}`);
+    }
+    return fs.readFileSync(p, 'utf8');
+  }
+  const rel = `courses/${COURSE}/sessions/${file}.json`;
+  try {
+    return execFileSync('git', ['show', `${BASELINE_REF}:${rel}`], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+    });
+  } catch (err) {
+    throw new Error(
+      `無法從 git 讀取基線 ${BASELINE_REF}:${rel}\n` +
+        `（請確認該 ref 存在；或改用 --baseline <dir> 指定基線目錄）\n${err.message}`
+    );
+  }
+}
+
+console.log(`基線來源：${BASELINE_DIR ? `外部目錄 ${BASELINE_DIR}` : `git ${BASELINE_REF}`}`);
+console.log(`專案根目錄：${ROOT}`);
+
 for (const file of FILES) {
-  const cur = JSON.parse(fs.readFileSync(path.join(ROOT, 'courses', COURSE, 'sessions', `${file}.json`), 'utf8'));
-  const old = JSON.parse(fs.readFileSync(path.join(BACKUP, `${file}.json`), 'utf8'));
+  const curRaw = fs.readFileSync(path.join(ROOT, 'courses', COURSE, 'sessions', `${file}.json`), 'utf8');
+  const cur = JSON.parse(curRaw);
+  const oldRaw = loadBaselineRaw(file);
+  const old = JSON.parse(oldRaw);
 
   console.log(`\n=== ${file} ===`);
 
@@ -95,11 +153,10 @@ for (const file of FILES) {
   // 5. start/end 數值字面格式未漂移（2026-11-04 新增）
   //    JSON.stringify 整檔重新序列化會把 0.0 → 0、207.0 → 207，
   //    造成 52 行非標點漂移。此守門比對「原始 JSON 文字」而非解析後數值。
-  const oldRaw = fs.readFileSync(path.join(BACKUP, `${file}.json`), 'utf8');
-  const newRaw = fs.readFileSync(path.join(ROOT, 'courses', COURSE, 'sessions', `${file}.json`), 'utf8');
+  //    oldRaw / curRaw 已於迴圈開頭取得（基線自 git 或 --baseline 載入）。
   const numRe = /"(?:start|end)":\s*([0-9.]+)/g;
   const oldNums = oldRaw.match(numRe) || [];
-  const newNums = newRaw.match(numRe) || [];
+  const newNums = curRaw.match(numRe) || [];
   report(
     oldNums.length === newNums.length && oldNums.every((v, i) => v === newNums[i]),
     `start/end 數值字面格式未漂移（old=${oldNums.length} new=${newNums.length}；逐項字面相同）`
@@ -115,7 +172,7 @@ for (const file of FILES) {
       .replace(/("sourceDigest":\s*")[^"]*(")/g, '$1__DIGEST__$2')
       .replace(/("quote":\s*")(?:[^"\\]|\\.)*(")/g, '$1__QUOTE__$2');
   report(
-    stripTextValues(oldRaw) === stripTextValues(newRaw),
+    stripTextValues(oldRaw) === stripTextValues(curRaw),
     '除 text / sourceDigest / quote 欄位外，原始 JSON 位元組完全未變'
   );
 }
