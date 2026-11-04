@@ -432,15 +432,24 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
                 raw_text = re.sub(pat, repl, raw_text)
             
             # Clean oral tokens & format punctuation
-            raw_text = re.sub(r'^[嗯啊喔哦呃，、\s]+', '', raw_text)
+            # ⚠️ 半形標點一併處理（2026-11-04 巡檢修正）：
+            #   ASR 輸出夾雜半形『,』時，原版只 strip 全形『，』，
+            #   導致句尾殘留『X,』再被 append『。』→ 產生『X,.』的逗號+句號瑕疵
+            #   （實測見 session_43A 的 147 筆 / session_38B 的 1 筆 verbatimSentences）。
+            #   三處正則皆納入半形逗號，句界與 ASR segment 邊界不受影響。
+            raw_text = re.sub(r'^[嗯啊喔哦呃，,、\s]+', '', raw_text)
             raw_text = re.sub(r'謝謝大家.*|感謝觀看.*|點讚.*|訂閱.*', '', raw_text).strip()
             
             if raw_text:
-                if not re.search(r'[。？！…」』]$', raw_text):
+                # 句尾守衛：逗號（半形『,』與全形『，』）視為講者真實停頓，
+                #   已是有效句尾，不可再 append 句號 —— 否則產生『X，。』／『X,.』瑕疵
+                #   （全形案例即 09A/99A 已修正的缺陷，半形案例見 session_43A/38B）。
+                #   驚嘆號／問號（半形與全形）同樣視為已有句尾。
+                if not re.search(r'[。？！…」』，,!?]$', raw_text):
                     if re.search(r'(嗎|呢|吧|對不對|是不是|如何|哪裡|怎麼|為什麼|何須|何故)[？\?]?$', raw_text):
-                        raw_text = re.sub(r'[，、\s]*$', '？', raw_text)
+                        raw_text = re.sub(r'[，,、\s]*$', '？', raw_text)
                     elif re.search(r'(啦|啊|嘛|喔|了|的|這樣|這個)[！\!]?$', raw_text):
-                        raw_text = re.sub(r'[，、\s]*$', '。', raw_text)
+                        raw_text = re.sub(r'[，,、\s]*$', '。', raw_text)
                     else:
                         raw_text += '。'
                 
