@@ -98,7 +98,7 @@
 - [x] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）— ✅ 從 flyday.com.tw 官方目錄下載 47 個 MP3 至 /home/henry/audio_files/
 - [x] 對 sessions 79-102 取得官方音檔後再補轉譯 — ✅ 完成（batch 13）
 - [x] 委派小檢 QA 抽樣檢驗 sessions 69-110 — ✅ 完成（QA_REPORT_79_102.md，平均 4.83/5.0）
-- [ ] session_99B.json 補轉譯（99B 音檔僅有 A 段 20180922-A.mp3，缺 B 段音檔，無法 ASR）
+- [x] session_99B.json 補轉譯（99B 音檔僅有 A 段 20180922-A.mp3，缺 B 段音檔，無法 ASR）— ✅ 阻礙已解除：B 段官方音檔（flyday `20180922-B 第一境墓地p3199.MP3`）已取得為 `audio/99B.mp3`（3205.512s）；`session_99B.json` 已完成 215 段／425 句（`_meta.audio_duration` 與檔案時長逐位相符，末句 end=3204.16s 達檔尾），並已登記於 `course.json`（219 sessions）。2026-11-04 複驗。
 - [ ] 請領域專家複審 toc.json 79-110 章節歸屬（QA 發現 79-84B 疑為第六地延續、95A/100A 子標題對應度偏弱）
 
 - [ ] RUZHONG01-STUDY-35A：依使用者指定35A形式重做01研讀講記、原話對照、測試及正式發布（見 RUZHONG01_STUDY_GUIDE.md）。
