@@ -1,0 +1,45 @@
+test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) ...
+  test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) (session='36A') ... FAIL
+  test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) (session='36B') ... FAIL
+test_dynamic_output_budget_scales_and_clamps (test_pipeline_behavior.PipelineBehaviorTests.test_dynamic_output_budget_scales_and_clamps) ... ok
+test_llm_retry_splits_batch_then_returns_successful_single_sentence_results (test_pipeline_behavior.PipelineBehaviorTests.test_llm_retry_splits_batch_then_returns_successful_single_sentence_results) ... ok
+test_llm_ultimate_failure_preserves_source_and_marks_review_needed (test_pipeline_behavior.PipelineBehaviorTests.test_llm_ultimate_failure_preserves_source_and_marks_review_needed) ... ok
+test_prepolish_does_not_split_at_legacy_28_character_boundary (test_pipeline_behavior.PipelineBehaviorTests.test_prepolish_does_not_split_at_legacy_28_character_boundary) ... ok
+test_prompt_uses_real_page_window_and_terms_from_window (test_pipeline_behavior.PipelineBehaviorTests.test_prompt_uses_real_page_window_and_terms_from_window) ... ok
+test_verbatim_keeps_repetitions_speakers_and_sentence_timing (test_pipeline_behavior.PipelineBehaviorTests.test_verbatim_keeps_repetitions_speakers_and_sentence_timing) ... ok
+
+======================================================================
+FAIL: test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) (session='36A')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-test-patterns/tests/python/test_pipeline_behavior.py", line 118, in test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out
+    self.assertEqual(run.returncode, 2, run.stdout + run.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : ✅ Generated verbatim track for 36A: 0 paras, 0 sentences, 0 chars.
+💾 Written to /var/folders/hx/2q6rs1xd10311ch1vhvkztt40000gn/T/tmpqex16hi1/courses/入中論善顯密意疏/verbatim/verbatim_36A.json
+
+
+======================================================================
+FAIL: test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out (test_pipeline_behavior.PipelineBehaviorTests.test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out) (session='36B')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/transcriptions-test-patterns/tests/python/test_pipeline_behavior.py", line 118, in test_36a_36b_canonical_outputs_are_protected_even_with_explicit_out
+    self.assertEqual(run.returncode, 2, run.stdout + run.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 : ✅ Generated verbatim track for 36B: 0 paras, 0 sentences, 0 chars.
+💾 Written to /var/folders/hx/2q6rs1xd10311ch1vhvkztt40000gn/T/tmp_qx1_xib/courses/入中論善顯密意疏/verbatim/verbatim_36B.json
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.129s
+
+FAILED (failures=2)
+
+[Step 3/5] 🧠 Deep proofreading with Smart Router for TST (Grounded: 0 chars)...
+  ✅ Completed LLM proofreading across 1 batches (Optimized 25-sentence batches, Smart Router / vLLM).
+
+[Step 3/5] 🧠 Deep proofreading with Smart Router for TST (Grounded: 0 chars)...
+  ✅ Completed LLM proofreading across 1 batches (Optimized 25-sentence batches, Smart Router / vLLM).
+
+[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: 0)...
+  ✅ Consolidated into 1 readable full sentences.
