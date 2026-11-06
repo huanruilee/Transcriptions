@@ -85,32 +85,31 @@ function realDrawerElements(body) {
 }
 
 // 取出元素上承載的音軌秒數。
-// 來源依序：playAt(秒) → data-seek / data-start → 「mm:ss」文字時間戳。
 //
-// ⚠️ 兩處實測修正（2026-11-06 巡檢，見 PR #348 討論串）：
-//  (1) data-seek / data-start 必須**直接讀屬性值**，不可把值 join 進 raw 字串
-//      再用 /data-(?:seek|start)="(\d+)/ 去比對 —— join 後字串形如 " 300 "，
-//      屬性名與引號都已脫落，regex 永遠匹配不到，該分支是死碼。
-//      實測 data-seek="300" 會讓 secondsOf 回傳 null（而非 300）。
-//  (2) 文字時間戳的分鐘數**無上限**：本語料最長 170 分鐘（2 小時 50 分），
-//      24661 個時間戳中有 8772 個（35.57%）分鐘數 >= 100（如 [100:00]）。
-//      舊 regex /(\d{1,2}):(\d{2})/ 遇到 [100:00] 只會匹配到 "00"，
-//      得到 0 秒而非 6000 秒。
-//      本語料的時間戳一律是「mm:ss（分鐘不限位數）」，不是 hh:mm:ss ——
-//      實測 0 個三段式時間戳，故此處**不可**加入 hh:mm:ss 分支，
-//      否則會把 [100:00] 誤讀成 100 小時。
+// ⚠️ 唯一來源：onclick 的 playAt(秒數)。
+//
+// 本函式**只認 playAt**。實測（2026-11-07 巡檢，逐元素比對 24875 個時間承載元素）：
+//   · .v-item 24661 個、.ts-btn 214 個，**100%** 由 onclick 的 playAt 取得時間；
+//   · 舊版還保留的 data-seek / data-start 與「mm:ss」文字時間戳兩個 fallback 分支，
+//     在現有語料中**一次都沒被走到**（舊版與新版實作逐元素輸出差異 = 0）。
+//   · renderer（scripts/render_study_guide_html.py）無條件為每個 .v-item / .ts-btn
+//     輸出 onclick="... playAt(秒數, this)"，故 playAt 才是真正的契約。
+//
+// 為何要移除 fallback（而非保留）：
+//   保留 fallback 會讓「點擊句子跳轉音檔」壞掉時測試仍全綠 ——
+//   實測移除全部 .v-item 的 playAt（保留可見的 [mm:ss] 文字），
+//   舊版測試 PASS（假陰性），移除 fallback 後才會被逐檔涵蓋率斷言攔下。
+//   也就是說 fallback 不是「多一層保險」，而是「掩蓋 renderer 退化」。
+//
+//   另註：可見的 [mm:ss] 文字時間戳僅供人閱讀，不是契約來源。
+//   本語料的分鐘數無上限（最長 170 分鐘），且 repo 內另有 400 個三段式
+//   [hh:mm:ss] 時間戳（位於 verbatim_rebuild.html / quality_review.html，
+//   非 DRAWER 世代、本測試不掃描）。若日後改以文字時間戳為來源，
+//   必須同時處理三段式格式，否則會把 [01:02:03] 誤讀成 62 秒。
 function secondsOf(el) {
   if (!el) return null;
   const playAt = (el.getAttribute?.('onclick') ?? '').match(/playAt\(\s*(\d+(?:\.\d+)?)/);
   if (playAt) return parseFloat(playAt[1]);
-  for (const attr of ['data-seek', 'data-start']) {
-    const value = el.getAttribute?.(attr);
-    if (value === null || value === undefined || value === '') continue;
-    const n = Number.parseFloat(value);
-    if (Number.isFinite(n)) return n;
-  }
-  const clock = (el.textContent ?? '').match(/(\d+):(\d{2})/);
-  if (clock) return parseInt(clock[1], 10) * 60 + parseInt(clock[2], 10);
   return null;
 }
 
@@ -168,7 +167,10 @@ test('研讀講記 HTML：原話抽屜的音軌時間須與正文段落時間錨
     underCovered.map((c) => `${c.rel}：${c.checked}/${c.total} 個抽屜被比對（其餘因缺時間戳被略過）`),
     [],
     '以下研讀講記的抽屜未全部納入時間對齊比對，契約測試對其失去防護力：\n' +
-      underCovered.map((c) => `${c.rel}：${c.checked}/${c.total}`).join('\n'),
+      underCovered.map((c) => `${c.rel}：${c.checked}/${c.total}`).join('\n') +
+      '\n\n提示：抽屜時間只認 onclick 的 playAt(秒數)。若某抽屜整批被略過，' +
+      '通常是 renderer 未輸出可解析的 playAt（例如 playAt(, this) 缺秒數）——' +
+      '請檢查 scripts/render_study_guide_html.py 是否仍為每個 .v-item 與 .ts-btn 輸出 playAt。',
   );
   assert.deepEqual(
     violations,
