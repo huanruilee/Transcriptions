@@ -86,19 +86,30 @@ function realDrawerElements(body) {
 
 // 取出元素上承載的音軌秒數。
 // 來源依序：playAt(秒) → data-seek / data-start → 「mm:ss」文字時間戳。
+//
+// ⚠️ 兩處實測修正（2026-11-06 巡檢，見 PR #348 討論串）：
+//  (1) data-seek / data-start 必須**直接讀屬性值**，不可把值 join 進 raw 字串
+//      再用 /data-(?:seek|start)="(\d+)/ 去比對 —— join 後字串形如 " 300 "，
+//      屬性名與引號都已脫落，regex 永遠匹配不到，該分支是死碼。
+//      實測 data-seek="300" 會讓 secondsOf 回傳 null（而非 300）。
+//  (2) 文字時間戳的分鐘數**無上限**：本語料最長 170 分鐘（2 小時 50 分），
+//      24661 個時間戳中有 8772 個（35.57%）分鐘數 >= 100（如 [100:00]）。
+//      舊 regex /(\d{1,2}):(\d{2})/ 遇到 [100:00] 只會匹配到 "00"，
+//      得到 0 秒而非 6000 秒。
+//      本語料的時間戳一律是「mm:ss（分鐘不限位數）」，不是 hh:mm:ss ——
+//      實測 0 個三段式時間戳，故此處**不可**加入 hh:mm:ss 分支，
+//      否則會把 [100:00] 誤讀成 100 小時。
 function secondsOf(el) {
   if (!el) return null;
-  const raw = [
-    el.getAttribute?.('onclick') ?? '',
-    el.getAttribute?.('data-seek') ?? '',
-    el.getAttribute?.('data-start') ?? '',
-    el.textContent ?? '',
-  ].join(' ');
-  const playAt = raw.match(/playAt\(\s*(\d+(?:\.\d+)?)/);
+  const playAt = (el.getAttribute?.('onclick') ?? '').match(/playAt\(\s*(\d+(?:\.\d+)?)/);
   if (playAt) return parseFloat(playAt[1]);
-  const dataAttr = raw.match(/data-(?:seek|start)="(\d+(?:\.\d+)?)/);
-  if (dataAttr) return parseFloat(dataAttr[1]);
-  const clock = raw.match(/(\d{1,2}):(\d{2})/);
+  for (const attr of ['data-seek', 'data-start']) {
+    const value = el.getAttribute?.(attr);
+    if (value === null || value === undefined || value === '') continue;
+    const n = Number.parseFloat(value);
+    if (Number.isFinite(n)) return n;
+  }
+  const clock = (el.textContent ?? '').match(/(\d+):(\d{2})/);
   if (clock) return parseInt(clock[1], 10) * 60 + parseInt(clock[2], 10);
   return null;
 }
@@ -117,6 +128,10 @@ function paragraphAnchorSeconds(drawer) {
 test('研讀講記 HTML：原話抽屜的音軌時間須與正文段落時間錨點對齊（DRAWER 世代）', () => {
   const checked = [];
   const violations = [];
+  // 逐檔涵蓋率：每個 DRAWER 世代檔案的**每個**抽屜都必須真的被比對到。
+  // 若某檔的抽屜因缺時間戳而被靜默略過，該檔的涵蓋率會 < 1，必須報錯而非放行。
+  // （實測：舊版只斷言全庫 checked.length > 0，單一檔案的抽屜被整批略過時測試仍全綠。）
+  const coverage = [];
   for (const f of listStudyGuideHtml()) {
     const html = fs.readFileSync(f.abs, 'utf8');
     if (!isDrawerGeneration(html)) continue;
@@ -140,12 +155,20 @@ test('研讀講記 HTML：原話抽屜的音軌時間須與正文段落時間錨
         );
       }
     }
+    coverage.push({ rel: f.rel, checked: fileChecked, total: drawers.length });
     if (fileChecked > 0) checked.push(`${f.rel}（${fileChecked} 抽屜）`);
   }
 
   assert.ok(
     checked.length > 0,
     '沒有任何研讀講記進入時間對齊檢查，契約測試將淪為空轉（請確認 DRAWER 世代判斷條件是否失效）',
+  );
+  const underCovered = coverage.filter((c) => c.checked < c.total);
+  assert.deepEqual(
+    underCovered.map((c) => `${c.rel}：${c.checked}/${c.total} 個抽屜被比對（其餘因缺時間戳被略過）`),
+    [],
+    '以下研讀講記的抽屜未全部納入時間對齊比對，契約測試對其失去防護力：\n' +
+      underCovered.map((c) => `${c.rel}：${c.checked}/${c.total}`).join('\n'),
   );
   assert.deepEqual(
     violations,
