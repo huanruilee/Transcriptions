@@ -117,6 +117,18 @@ def audit_course(course_dir, course_id, results):
 
     video_ids = {e.get("id") for e in data if isinstance(e, dict)}
 
+    # course.json 的 sessionId 集合：sessions + pendingSessions + unavailableSessions
+    # 未轉寫的講次位於 pendingSessions，其 sessionId 仍為合法對應標的。
+    course_json = course_dir / "course.json"
+    known_sessions = set()
+    if course_json.exists():
+        cj = json.loads(course_json.read_text(encoding="utf-8"))
+        for key in ("sessions", "pendingSessions", "unavailableSessions"):
+            for s_ in (cj.get(key) or []):
+                sid = s_.get("sessionId") or s_.get("id")
+                if sid:
+                    known_sessions.add(sid)
+
     # 來源：source_outlines/*.json
     so_dir = course_dir / "source_outlines"
     mappings = []
@@ -161,7 +173,16 @@ def audit_course(course_dir, course_id, results):
         ref = m.get("outlineRef") or {}
         vid = ref.get("videoId")
         if not vid:
-            missing_c1.append(f"{fname} Q{m.get('sourceQuestionNo')} 缺 outlineRef.videoId")
+            # 缺 videoId 時，若該筆所屬 session 已存在於 course.json 且該講
+            # 尚未轉寫（pendingSessions），屬合法中間狀，不計為缺陷；
+            # 否則視為對應資料不完整。
+            sids = [m.get("sessionId")] if m.get("sessionId") else []
+            known = any(x in known_sessions for x in sids)
+            if known:
+                continue
+            missing_c1.append(
+                f"{fname} Q{m.get('sourceQuestionNo')} 缺 outlineRef.videoId"
+                f"（sessionId={sids or '無'}）")
             continue
         found = False
         for e in data:
@@ -271,6 +292,8 @@ def audit_course(course_dir, course_id, results):
         # 標準格式首行為「藍圖提問：…」；candidate 類以
         # 「待 … 轉寫完成後補入對應句號」結尾者，仍須指出講次與題號。
         has_bp = "藍圖提問" in ev
+        # confirmed 且非 candidate 者，evidence 須標示藍圖提問原文。
+        # candidate（逐字稿未完成）允許以「待…補入對應句號」結尾。
         is_candidate = m.get("status") == "candidate"
         if not has_bp and not is_candidate:
             bad_c5.append(f"{fname} Q{m.get('sourceQuestionNo')} evidence 未標示藍圖提問原文")
