@@ -53,6 +53,14 @@
 4. `docs/DATA_SCHEMA.md`（數據格式標準）
 5. `docs/TASKS.md`（高階里程碑與 Task 清單）
 
+**按任務類型另讀**（非全部需讀）：
+
+| 任務 | 另讀 |
+|---|---|
+| 逐字稿、逐字稿校字、導讀、發布 | `docs/TRANSCRIPTION_WORKFLOW.md`、`docs/REFERENCE_EVIDENCE_PROTOCOL.md` |
+| 研讀講記之原話對照與抽屜 | `docs/STUDY_GUIDE_CALIBRATION_SOP.md` |
+| 藍圖提綱 ↔ 共學提綱 ↔ 法師開示 三層對照 | `docs/OUTLINE_DISCLOSURE_LINK_SPEC.md`（稽核器 `scripts/audit_outline_links.py`） |
+
 ---
 
 ## 4. 高階運作流程 (Intake Protocol)
