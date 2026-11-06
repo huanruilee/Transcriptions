@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { JSDOM } from 'jsdom';
 
 // 研讀講記 HTML 契約測試
 //
-// 背景：PR #345（釋量論第二品 30/31 講研讀講記）CI 全綠，但存在兩個實質缺陷，
+// 背景：PR #345（釋量論第二品 30/31 講研讀講記）CI 全綠，但存在實質缺陷，
 // 現有 npm test 完全抓不到：
 //   缺陷 1 —— 研讀講記 md 少寫段落，導致 verbatim 原話抽屜未渲染（30 講缺 p_75–p_78、
 //              31 講缺 p_82–p_92，合計 15 段 / 56 句原話不見於網頁）
@@ -22,9 +23,25 @@ import path from 'node:path';
 //   樣式與開合函式，只看字串會把「無抽屜的純文字講記」誤判為 DRAWER 世代。
 //   本檔的涵蓋率斷言只套用於 DRAWER 世代（有實體抽屜元素者）。
 //
+// 實作改版（2026-11-06，Codex review 2 項 P2 finding 成立後修正）：
+//   原版以 regex 在整份 body 上掃字串，產生兩處 false-negative：
+//     (A) /drawer-(p_\d+)/g 會同時命中「實體抽屜 id」、data-target="drawer-p_N"、
+//         toggleVerbatimDrawer('drawer-p_N') 等「按鈕參照」。當實體抽屜的 id 被破壞
+//         （或整個抽屜被刪除）而按鈕參照仍在時，該段仍被算成「有涵蓋」，缺陷不可見。
+//     (B) 空抽屜斷言取抽屜開頭 600 字元並檢查是否含中文；但每個抽屜的固定表頭
+//         （💬 課堂原話對照…）必含中文，故即使 .v-item 原話全被刪光，斷言仍恆真。
+//   改版以 JSDOM 解析（repo 既有慣例，見 tests/unit/tocRemediation.test.js），
+//   直接取真實元素與其子元素，不受字串參照或固定表頭干擾。
+//   改版同時修掉 Codex 指出的第三項 false-negative（600 字元視窗溢出到下一個抽屜）。
+//
 // 驗證基準（2026-11-06 實測）：
 //   main 537cfec：40 份 study-guide HTML，(B) 0 違規；(A) 套用範圍 4 檔全 100% 通過
-//   PR #345 fd8fb6a：(B) 2 檔違規（30/31 講空 src）；(A) 30 講缺 4 段、31 講缺 11 段
+//   PR #345 6fa707d（缺陷 2 已修、缺陷 1 未修的版本）：
+//     (B) 通過 —— 該版已改走 YouTube iframe 分支，空 src 已消失
+//     (A) 失敗 —— 30 講缺 p_75–p_78、31 講缺 p_82–p_92（15 段 / 56 句原話仍未渲染）
+//   （早先的 fd8fb6a 版兩條皆失敗；本檔在該版與 6fa707d 版皆能正確分辨。）
+//   負向驗證（2026-11-06 實測）：刻意破壞抽屜 id / 刪光 .v-item 後，改版會失敗，
+//   舊版不會 —— 證明本版確實具備偵測能力，而非只是「看起來較嚴格」。
 //
 // 已知覆蓋缺口（誠實揭露，非缺陷）：
 //   courses/2025釋量論第二品大組共學 與 courses/入中論善顯密意疏 的多數講次使用
@@ -78,9 +95,24 @@ function bodyOnly(html) {
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
 }
 
+// 解析正文為 DOM。回傳 null 表示無可解析正文。
+function parseBody(html) {
+  const dom = new JSDOM(`<!DOCTYPE html><html><body>${bodyOnly(html)}</body></html>`);
+  return dom.window.document.body;
+}
+
 // 是否為 DRAWER 世代：正文中有 class 含 verbatim-drawer 的實體元素。
 function isDrawerGeneration(html) {
   return /<[^>]*class="[^"]*\bverbatim-drawer\b[^"]*"/.test(bodyOnly(html));
+}
+
+// 取真實抽屜元素（<div id="drawer-p_N" class="...verbatim-drawer...">）。
+// 只認 id 屬性值，不認 data-target / toggleVerbatimDrawer() 等字串參照。
+function realDrawerElements(body) {
+  return [...body.querySelectorAll('.verbatim-drawer')].filter((el) => {
+    const id = el.getAttribute('id') ?? '';
+    return /^drawer-p_\d+$/.test(id);
+  });
 }
 
 test('研讀講記 HTML：音訊來源非空，或存在 YouTube iframe fallback', () => {
@@ -134,8 +166,10 @@ test('研讀講記 HTML：原話抽屜涵蓋率 100%（DRAWER 世代）', () => 
     const html = fs.readFileSync(htmlAbs, 'utf8');
     // 只有 DRAWER 世代才以 drawer-p_N 綁定段落；DETAILS 世代編號慣例不同，不套用。
     if (!isDrawerGeneration(html)) continue;
-    const body = bodyOnly(html);
-    const drawers = new Set([...body.matchAll(/drawer-(p_\d+)/g)].map((m) => m[1]));
+    const body = parseBody(html);
+    // 只計「真實抽屜元素」的 id。若抽屜元素被刪除或 id 被破壞，該段落即視為未渲染，
+    // 不會被按鈕上的 data-target / toggleVerbatimDrawer() 字串參照蒙混帶過。
+    const drawers = new Set(realDrawerElements(body).map((el) => el.getAttribute('id').slice('drawer-'.length)));
     const missing = paragraphIds.filter((id) => !drawers.has(id));
     checked.push(`${vb.course}/${sessionId}`);
     if (missing.length > 0) {
@@ -160,20 +194,27 @@ test('研讀講記 HTML：原話抽屜涵蓋率 100%（DRAWER 世代）', () => 
   );
 });
 
-test('研讀講記 HTML：DRAWER 世代的每個原話抽屜都有內容', () => {
+test('研讀講記 HTML：DRAWER 世代的每個原話抽屜都有原話內容', () => {
   const checked = [];
   const violations = [];
   for (const f of listStudyGuideHtml()) {
     const html = fs.readFileSync(f.abs, 'utf8');
     if (!isDrawerGeneration(html)) continue;
-    const body = bodyOnly(html);
-    // 取每個抽屜元素開頭的片段，確認不是空抽屜（有 id 但沒渲染出原話）。
-    const drawers = [...body.matchAll(/<[^>]*class="[^"]*\bverbatim-drawer\b[^"]*"[^>]*>([\s\S]{0,600})/g)];
+    const body = parseBody(html);
+    const drawers = realDrawerElements(body);
     if (drawers.length === 0) continue;
+    // 逐抽屜檢查「實際原話條目」（.v-item 內的 .v-txt），而非表頭文字。
+    // 舊版取開頭 600 字元檢查中文字，因固定表頭必含中文而恆真，缺陷不可見。
     const empty = drawers
-      .map((m, i) => ({ i, head: m[1] }))
-      .filter((d) => !/[一-鿿]/.test(d.head))
-      .map((d) => `抽屜 #${d.i}`);
+      .map((el) => {
+        const items = [...el.querySelectorAll('.v-item')];
+        const texts = items
+          .map((it) => (it.querySelector('.v-txt')?.textContent ?? '').replace(/\s+/g, ' ').trim())
+          .filter((t) => t.length > 0);
+        return { id: el.getAttribute('id'), items: items.length, texts };
+      })
+      .filter((d) => d.items === 0 || d.texts.length === 0 || !d.texts.some((t) => /[一-鿿]/.test(t)))
+      .map((d) => `${d.id}（.v-item ${d.items} 筆）`);
     checked.push(f.rel);
     if (empty.length > 0) {
       violations.push(`${f.rel}: ${empty.length} 個抽屜沒有原話內容（${empty.join(', ')}）`);
