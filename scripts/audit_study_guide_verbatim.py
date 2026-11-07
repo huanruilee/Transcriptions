@@ -58,6 +58,67 @@ def extract_drawers(html_text: str) -> dict:
     ))
 
 
+# 抽屜痕跡判斷：必須只看 body（去掉 <style>/<script>），
+# 否則 render_study_guide_html.py 注入的共用 CSS（.verbatim-drawer/.v-item）
+# 與 JS（toggleVerbatimDrawer）會讓「根本沒有抽屜」的產物被誤判為抽屜型。
+_BODY_DRAWER_MARKER_RE = re.compile(
+    r'verbatim-drawer|\bv-item\b|verbatim-toggle-btn|toggleVerbatimDrawer'
+    r'|data-target="drawer-'
+)
+
+# ALT（inline 原話型）產物的**正向證據**：<details><summary>原話…</summary>
+_DETAILS_VERBATIM_RE = re.compile(
+    r"<details\b[^>]*>\s*<summary\b[^>]*>[^<]*原話[^<]*</summary>", re.S
+)
+
+
+def strip_style_script(html_text: str) -> str:
+    """移除 <style>/<script> 區塊，只留 body 內容供標記判斷。"""
+    return re.sub(r"<(style|script)\b[^>]*>.*?</\1>", "", html_text, flags=re.S | re.I)
+
+
+def has_drawer_markup(html_text: str) -> bool:
+    """本檔 body 是否帶有任何原話抽屜相關標記（含壞掉的抽屜）。
+
+    只看 body：共用 CSS/JS 樣板會帶有 .verbatim-drawer/.v-item/toggleVerbatimDrawer，
+    以整份文件搜尋會讓非抽屜型產物被誤判為抽屜型。
+    """
+    return _BODY_DRAWER_MARKER_RE.search(strip_style_script(html_text)) is not None
+
+
+def is_alt_details_verbatim(html_text: str) -> bool:
+    """是否為真正的 inline 原話型（ALT）產物。
+
+    判準需要**正向證據**：body 內有 <details><summary>原話…</summary> 型態，
+    且 body 內完全沒有抽屜痕跡。
+    「抽屜 ID 被破壞」的檔案其 body 仍留有 verbatim-toggle-btn /
+    data-target="drawer-" / class="verbatim-drawer"，故不會被誤判為 ALT
+    （Codex P2 finding 1）。
+    """
+    body = strip_style_script(html_text)
+    if _BODY_DRAWER_MARKER_RE.search(body):
+        return False
+    return _DETAILS_VERBATIM_RE.search(body) is not None
+
+
+def has_youtube_player(html_text: str) -> bool:
+    """是否存在**真正的** YouTube 播放器。
+
+    只檢查 <iframe> 標籤的 src 屬性；不可用整份文件搜尋 "youtube.com/embed"，
+    否則 inline playAt 的 JS fallback URL（``ytIframe.src = `.../embed/${id}...` ``）
+    會讓「iframe 已被移除、頁面已無播放器」的情況仍被誤判為有音訊來源
+    （Codex P2 finding 2）。
+    """
+    for tag in re.findall(r"<iframe\b[^>]*>", html_text, re.S):
+        m = re.search(r'\bsrc\s*=\s*["\']([^"\']*)["\']', tag, re.S)
+        if not m:
+            continue
+        src = m.group(1).strip()
+        if src and "youtube.com/embed" in src:
+            return True
+    return False
+
+
 def audit_course(course_dir: Path) -> list:
     """稽核單一課程，回傳 [(講次, 契約名, 結果, 說明)]。"""
     results = []
@@ -84,14 +145,17 @@ def audit_course(course_dir: Path) -> list:
         md_ts_count = len(re.findall(r"\[▶\s*\d+:\d+\]", md_text))
 
         # ALT 分流：inline 原話型（正文直接內嵌原話、無抽屜元件）不適用 C1/C3，
-        # 不能以「無 drawer」判為缺陷。此類講次的原話不在本 html，而在同課程的
+        # 不能以「無 drawer」判為缺陷。此類講次的原話不在此 html，而在同課程的
         # 對照稿（如 sessions/session_*.json 或另建之對照檔），須另以該標的稽核。
-        if not drawers:
+        # ⚠️ 必須有**正向證據**（<details><summary>原話…</summary> 型態）才可豁免；
+        # 僅憑「抽屜抓不到」豁免，會讓抽屜 ID 被破壞的抽屜型產物偽裝 PASS
+        # （Codex P2 finding 1）。
+        if not drawers and is_alt_details_verbatim(html_text):
             results.append((sid, "ALT 非抽屜型原話產物（不適用 C1/C3）", True,
                             "本 html 無原話抽屜元件，原話對照不在此檔；"
                             "C1/C3 對此類講次不適用，非缺陷"))
             empty_audio = len(re.findall(r'<audio[^>]*src=""', html_text))
-            has_yt = bool(re.search(r"youtube\.com/embed", html_text))
+            has_yt = has_youtube_player(html_text)
             has_audio = bool(re.search(r'<audio[^>]*src="[^"]+"', html_text))
             results.append((sid, "C4 無空音檔且有音訊來源", empty_audio == 0 and (has_yt or has_audio),
                             f"empty_audio={empty_audio} youtube={has_yt} audio={has_audio}"))
@@ -118,7 +182,7 @@ def audit_course(course_dir: Path) -> list:
 
         # C4：不得有空音檔，且須有可用音訊來源
         empty_audio = len(re.findall(r'<audio[^>]*src=""', html_text))
-        has_yt = bool(re.search(r"youtube\.com/embed", html_text))
+        has_yt = has_youtube_player(html_text)
         has_audio = bool(re.search(r'<audio[^>]*src="[^"]+"', html_text))
         c4_ok = empty_audio == 0 and (has_yt or has_audio)
         results.append((sid, "C4 無空音檔且有音訊來源", c4_ok,
