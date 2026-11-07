@@ -193,6 +193,10 @@
       color: #9a3412;
       background: #ffedd5;
     }
+    .spk-host {
+      color: #4d7c0f;
+      background: #ecfccb;
+    }
     .spk-student {
       color: #0369a1;
       background: #e0f2fe;
@@ -233,11 +237,11 @@
       right: 0;
       background: #ffffff;
       border-top: 1px solid #d6d3d1;
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
       z-index: 999;
     }
@@ -250,6 +254,23 @@
       width: 100%;
       max-width: 600px;
       height: 42px;
+    }
+    .yt-frame-wrap iframe {
+      border-radius: 6px;
+      vertical-align: middle;
+    }
+    .yt-ext-btn {
+      background: #dc2626;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .yt-ext-btn:hover {
+      background: #b91c1c;
     }
   </style>
 </head>
@@ -374,6 +395,9 @@
 
   <script>
     const audio = document.getElementById('main-audio');
+    const ytIframe = document.getElementById('yt-iframe');
+    const ytExtLink = document.getElementById('yt-ext-link');
+    const youtubeId = "";
     const status = document.getElementById('player-status');
     let currentActivePara = null;
 
@@ -440,6 +464,33 @@
         currentActivePara = para;
         para.classList.add('active-para');
       }
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      const mmss = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+      if (ytIframe && youtubeId) {
+        try {
+          ytIframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'seekTo',
+            args: [seconds, true]
+          }), '*');
+          ytIframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'playVideo',
+            args: []
+          }), '*');
+        } catch (e) {
+          ytIframe.src = `https://www.youtube.com/embed/${youtubeId}?start=${Math.floor(seconds)}&autoplay=1&enablejsapi=1&rel=0`;
+        }
+        if (ytExtLink) {
+          ytExtLink.href = `https://www.youtube.com/watch?v=${youtubeId}&t=${Math.floor(seconds)}s`;
+        }
+        status.innerText = `▶ 正在播放 YouTube 原片：${mmss}`;
+        return;
+      }
+
+      if (!audio) return;
       const applySeek = () => {
         try {
           audio.currentTime = seconds;
@@ -452,9 +503,7 @@
         audio.load();
       }
       audio.play().then(() => {
-        const m = Math.floor(seconds / 60);
-        const s = Math.floor(seconds % 60);
-        status.innerText = `▶ 正在播放：${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        status.innerText = `▶ 正在播放：${mmss}`;
       }).catch(e => {
         console.error('Play failed:', e);
         status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';

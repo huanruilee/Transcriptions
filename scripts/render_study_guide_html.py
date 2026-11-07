@@ -16,6 +16,22 @@ import sys
 from html import escape
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from verbatim_alignment import align_verbatim_by_time_expanded, build_paragraph_spans
+
+
+def verbatim_sentences_for(alignment, verbatim_map, md_index):
+    """取得第 md_index 個 md 段所對應之全部課堂原話句子（依原文順序）。
+
+    alignment: {md_index: [p_id, ...]}
+    verbatim_map: {p_id: [sentence, ...]}
+    """
+    pids = (alignment or {}).get(md_index) or []
+    sents = []
+    for pid in pids:
+        sents.extend((verbatim_map or {}).get(pid) or [])
+    return sents
+
 
 def format_mmss(seconds: float) -> str:
     sec = max(0, int(seconds))
@@ -154,17 +170,28 @@ def md_to_html(md_path: Path) -> Path:
     content = re.sub(r'\*(.+?)\*', r'<em>\1</em>', content)
 
     raw_blocks = [b.strip() for b in content.split('\n\n') if b.strip()]
+    # 收集所有「帶時間戳段落」的秒數（依 raw_blocks 順序），
+    # 供時間區間對齊使用。索引配對（md 段 N → verbatim p_N）已廢除：
+    # 研讀講記與課堂原話的段落切分並非一一對應，會造成大面積錯位。
+    para_seconds = []
+    para_block_idx = []
+    for bi, b in enumerate(raw_blocks):
+        if b.startswith(('<h', '<blockquote', '<hr', '---')) or re.match(r'^\d+\.\s', b):
+            continue
+        if any(line.strip().startswith(('* ', '- ')) for line in b.split('\n')):
+            continue
+        m = re.search(r'playAt\((\d+),\s*this\)', b)
+        if m:
+            para_seconds.append(int(m.group(1)))
+            para_block_idx.append(bi)
+
     if not verbatim_map and session_data:
-        para_seconds = []
-        for b in raw_blocks:
-            if b.startswith(('<h', '<blockquote', '<hr', '---')) or re.match(r'^\d+\.\s', b):
-                continue
-            if any(line.strip().startswith(('* ', '- ')) for line in b.split('\n')):
-                continue
-            m = re.search(r'playAt\((\d+),\s*this\)', b)
-            if m:
-                para_seconds.append(int(m.group(1)))
         verbatim_map = build_verbatim_map_from_session(session_data, para_seconds)
+
+    # 時間區間對齊：md 段索引（於 para_seconds 序列）→ verbatim 段落清單
+    time_alignment = {}
+    if verbatim_map:
+        time_alignment = align_verbatim_by_time_expanded(verbatim_map, para_seconds)
 
     # Paragraphs
     paragraphs = []
@@ -217,7 +244,18 @@ def md_to_html(md_path: Path) -> Path:
                 sec = ts_match.group(1)
                 para_counter += 1
                 p_id = f"p_{para_counter}"
-                v_sents = verbatim_map.get(p_id, [])
+                # 時間區間對齊：取該 md 段所對應的全部 verbatim 段落，
+                # 依原文順序串接其句子。此確保「全部課堂原話皆可見」，
+                # 且抽屜所載原話確為該段正文所對應者。
+                # 時間區間對齊為唯一依據。
+                # 舊版的「索引配對」（md 段 N → verbatim p_N）已廢除：
+                # 研讀講記與課堂原話的段落切分並非一一對應，會造成大面積錯位，
+                # 且使某些段落的抽屜掛上與正文無關的原話。
+                # 若對齊結果為空，代表該 md 段確實無對應原話（如承上段的
+                # 續述段），此時不顯示抽屜，寧缺勿錯。
+                v_sents = []
+                if time_alignment:
+                    v_sents = verbatim_sentences_for(time_alignment, verbatim_map, para_counter - 1)
                 if v_sents:
                     toggle_btn = (
                         f'<button type="button" class="verbatim-toggle-btn" '
