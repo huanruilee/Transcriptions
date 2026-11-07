@@ -113,7 +113,8 @@
       "sourceQuestionNo": 6,
       "sessionId": null,
       "sessionQuestionId": null,
-      "confidence": "high",
+      "confidence": "medium",
+      "confidenceNote": "confidence 由 high 降為 medium：無相似度且非偈頌性質（2026-11-07 依 C6 契約保守化）",
       "status": "candidate",
       "evidence": "藍圖提問：請解釋現證無我未必能斷薩迦耶見的偈頌。\n對應共學提綱：第28講 滅諦的後三種行相（下）｜2025《釋量論・第二品》大組共學（PYIbCsZmPHg）§七「現證無我未必能斷薩迦耶見」第1題⑴⑵\n法師開示：0:30:12–0:42:38（第1題⑴）、0:58:38–1:41:53（第1題⑵）｜https://www.youtube.com/watch?v=PYIbCsZmPHg&t=1812s",
       "outlineRef": {
@@ -154,6 +155,11 @@
     "method": "藍圖提問 →（本機 LLM 逐講候選比較，偈頌錨點 + 教學層次複驗）→ 共學提綱題目 →（章節時間碼區間歸屬）→ session 開示",
     "llm": "本機 Qwen3.8-27B (127.0.0.1:8001)",
     "reviewRequired": true,
+    "confidenceDowngrade": {
+      "date": "2026-11-07",
+      "rule": "C6：high 須有相似度數值且 ≥ 0.90，或屬偈頌直接對應性質",
+      "count": 1
+    },
     "note": "候選結果。confidence=high 為偈頌原文直接對上或完全同一命題；medium 為教學層次同一內容但表述不同。sessionQuestionId 為空者代表該講尚無逐字稿檔，時間碼待補。"
   },
   "provenance": {
