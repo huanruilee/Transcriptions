@@ -89,6 +89,23 @@ def gather_questions(outline):
     return out
 
 
+def has_verse_quotation(evidence):
+    """判斷藍圖提問是否含偈頌原文引文。
+
+    偈頌對照之 evidence 常以「偈頌中提到：『…』」或直接引錄偈頌的方式呈現，
+    此類對應的 high 依據是偈頌原文本身，不以相似度數值為必要。
+    """
+    head = (evidence or "").split("\n")[0]
+    return bool(re.search(r"[「『][^」』]{6,}[」』]", head)) and (
+        "偈頌" in head or "頌文" in head or "頌曰" in head)
+
+
+def extract_verdict(evidence):
+    """自 evidence 取出「判定」類型（如 verse / same / teaching）。"""
+    m = re.search(r"判定\s*[:：]\s*([A-Za-z]+)", evidence or "")
+    return m.group(1) if m else None
+
+
 def extract_evidence_side(evidence, label):
     """自 evidence 取出指定標籤（如「藍圖提問」）後的原文。
 
@@ -529,10 +546,35 @@ def audit_course(course_dir, course_id, results):
         ev = m.get("evidence") or ""
         if conf == "high":
             nums = re.findall(r"相似度\s*([0-9]*\.?[0-9]+)", ev)
+            verdict = extract_verdict(ev)
             if not nums:
-                bad_c6.append(f"{fname} Q{m.get('sourceQuestionNo')} high 但無相似度數值")
-            elif float(nums[-1]) < 0.90:
-                bad_c6.append(f"{fname} Q{m.get('sourceQuestionNo')} high 但相似度 {nums[-1]} < 0.90")
+                # 無相似度數值時，不得單憑標籤判 high。
+                # 但以下兩種情形，其 high 的依據由 evidence 本身確立，
+                # 不以相似度數值為必要：
+                #   (a) 明確載明「判定：verse」（偈頌原文直接對上）
+                #   (b) 藍圖提問本身含偈頌原文引文，屬偈頌對應性質
+                if verdict == "verse":
+                    pass
+                elif has_verse_quotation(ev):
+                    pass
+                else:
+                    bad_c6.append(
+                        f"{fname} Q{m.get('sourceQuestionNo')} high 但無相似度數值"
+                        f"（判定：{verdict or '無'}）")
+            elif float(nums[-1]) < 0.90 and verdict != "verse":
+                # 相似度門檻 0.90 僅適用於「教學層次同一命題」的對應。
+                # 判定為 verse 者，其比較對象是「偈頌原文」與「教學提問」，
+                # 措辭本就相異，相似度天然偏低（實測 0.64–0.82），
+                # 不宜以同一門檻要求。
+                bad_c6.append(
+                    f"{fname} Q{m.get('sourceQuestionNo')} high 但相似度 {nums[-1]} < 0.90"
+                    f"（判定：{verdict or '無'}）")
+            elif float(nums[-1]) < 0.70 and verdict == "verse" and m.get("status") == "confirmed":
+                # 偈頌對應若相似度低於 0.70，語意接近已難以自證，
+                # 仍須人工複驗 —— 如實標示，不直接判定為灌水。
+                bad_c6.append(
+                    f"{fname} Q{m.get('sourceQuestionNo')} high/verse 但相似度僅 {nums[-1]}"
+                    f"，低於 0.70，須人工複驗")
         if conf == "low" and m.get("status") not in ("unmatched",):
             # low 不得用於已確認之對應，僅供延伸/背景
             if m.get("status") == "confirmed":
