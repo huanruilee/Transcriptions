@@ -1,0 +1,2290 @@
+{
+  "config": {
+    "argv": [
+      "/Users/henry/.hermes/node/bin/node",
+      "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/node_modules/.bin/playwright",
+      "test",
+      "--config=playwright.reader.config.ts"
+    ],
+    "configFile": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/playwright.reader.config.ts",
+    "rootDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "readerRelease.spec.ts",
+          "ruzhong01Release.spec.ts",
+          "ruzhong38aRelease.spec.ts",
+          "ruzhong38bRelease.spec.ts",
+          "ruzhong39aRelease.spec.ts",
+          "ruzhong39bRelease.spec.ts",
+          "ruzhong40aRelease.spec.ts",
+          "ruzhong40bRelease.spec.ts",
+          "ruzhong41aRelease.spec.ts",
+          "ruzhong41bRelease.spec.ts",
+          "ruzhong42aRelease.spec.ts",
+          "ruzhong42bRelease.spec.ts",
+          "ruzhong43aRelease.spec.ts",
+          "ruzhong43bRelease.spec.ts",
+          "ruzhong44aRelease.spec.ts",
+          "ruzhong44bRelease.spec.ts",
+          "ruzhong45aRelease.spec.ts",
+          "ruzhong45bRelease.spec.ts",
+          "ruzhong46aRelease.spec.ts",
+          "ruzhong46bRelease.spec.ts",
+          "ruzhong47aRelease.spec.ts",
+          "ruzhong47bRelease.spec.ts",
+          "ruzhong48aRelease.spec.ts",
+          "ruzhong48bRelease.spec.ts",
+          "ruzhong49aRelease.spec.ts"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "readerRelease.spec.ts",
+          "ruzhong01Release.spec.ts",
+          "ruzhong38aRelease.spec.ts",
+          "ruzhong38bRelease.spec.ts",
+          "ruzhong39aRelease.spec.ts",
+          "ruzhong39bRelease.spec.ts",
+          "ruzhong40aRelease.spec.ts",
+          "ruzhong40bRelease.spec.ts",
+          "ruzhong41aRelease.spec.ts",
+          "ruzhong41bRelease.spec.ts",
+          "ruzhong42aRelease.spec.ts",
+          "ruzhong42bRelease.spec.ts",
+          "ruzhong43aRelease.spec.ts",
+          "ruzhong43bRelease.spec.ts",
+          "ruzhong44aRelease.spec.ts",
+          "ruzhong44bRelease.spec.ts",
+          "ruzhong45aRelease.spec.ts",
+          "ruzhong45bRelease.spec.ts",
+          "ruzhong46aRelease.spec.ts",
+          "ruzhong46bRelease.spec.ts",
+          "ruzhong47aRelease.spec.ts",
+          "ruzhong47bRelease.spec.ts",
+          "ruzhong48aRelease.spec.ts",
+          "ruzhong48bRelease.spec.ts",
+          "ruzhong49aRelease.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop",
+        "testDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+        "snapshotDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "readerRelease.spec.ts",
+          "ruzhong01Release.spec.ts",
+          "ruzhong38aRelease.spec.ts",
+          "ruzhong38bRelease.spec.ts",
+          "ruzhong39aRelease.spec.ts",
+          "ruzhong39bRelease.spec.ts",
+          "ruzhong40aRelease.spec.ts",
+          "ruzhong40bRelease.spec.ts",
+          "ruzhong41aRelease.spec.ts",
+          "ruzhong41bRelease.spec.ts",
+          "ruzhong42aRelease.spec.ts",
+          "ruzhong42bRelease.spec.ts",
+          "ruzhong43aRelease.spec.ts",
+          "ruzhong43bRelease.spec.ts",
+          "ruzhong44aRelease.spec.ts",
+          "ruzhong44bRelease.spec.ts",
+          "ruzhong45aRelease.spec.ts",
+          "ruzhong45bRelease.spec.ts",
+          "ruzhong46aRelease.spec.ts",
+          "ruzhong46bRelease.spec.ts",
+          "ruzhong47aRelease.spec.ts",
+          "ruzhong47bRelease.spec.ts",
+          "ruzhong48aRelease.spec.ts",
+          "ruzhong48bRelease.spec.ts",
+          "ruzhong49aRelease.spec.ts"
+        ],
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4215/Transcriptions/",
+          "browserName": "chromium",
+          "serviceWorkers": "allow",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "viewport": {
+            "width": 1280,
+            "height": 900
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "mobile",
+        "testDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+        "snapshotDir": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "readerRelease.spec.ts",
+          "ruzhong01Release.spec.ts",
+          "ruzhong38aRelease.spec.ts",
+          "ruzhong38bRelease.spec.ts",
+          "ruzhong39aRelease.spec.ts",
+          "ruzhong39bRelease.spec.ts",
+          "ruzhong40aRelease.spec.ts",
+          "ruzhong40bRelease.spec.ts",
+          "ruzhong41aRelease.spec.ts",
+          "ruzhong41bRelease.spec.ts",
+          "ruzhong42aRelease.spec.ts",
+          "ruzhong42bRelease.spec.ts",
+          "ruzhong43aRelease.spec.ts",
+          "ruzhong43bRelease.spec.ts",
+          "ruzhong44aRelease.spec.ts",
+          "ruzhong44bRelease.spec.ts",
+          "ruzhong45aRelease.spec.ts",
+          "ruzhong45bRelease.spec.ts",
+          "ruzhong46aRelease.spec.ts",
+          "ruzhong46bRelease.spec.ts",
+          "ruzhong47aRelease.spec.ts",
+          "ruzhong47bRelease.spec.ts",
+          "ruzhong48aRelease.spec.ts",
+          "ruzhong48bRelease.spec.ts",
+          "ruzhong49aRelease.spec.ts"
+        ],
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4215/Transcriptions/",
+          "browserName": "chromium",
+          "serviceWorkers": "allow",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mobile"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/artifact.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "readerRelease.spec.ts",
+      "file": "readerRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "session 30 original URL serves the approved release and actual download",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 876,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:34.771Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sentence-seek-routing-only",
+                      "contentType": "application/json",
+                      "body": "eyJpZCI6InNlbnQtMzUiLCJwb2ludCI6eyJ4Ijo4MzEuNSwieSI6NDM2LjAxNTYyNX0sImV4cGVjdGVkU2Vjb25kcyI6NDAwLjY5LCJpZnJhbWVTcmMiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS9lbWJlZC9mMmVSeEVxQ3NaQT9lbmFibGVqc2FwaT0xJm9yaWdpbj1odHRwJTNBJTJGJTJGMTI3LjAuMC4xJTNBNDIxNSZhdXRvcGxheT0xJnN0YXJ0PTQwMCZtdXRlPTAifQ=="
+                    },
+                    {
+                      "name": "download-hit-target",
+                      "contentType": "application/json",
+                      "body": "eyJyZWN0Ijp7IngiOjQyMi41LCJ5Ijo0MzYuMDMxMjUsIndpZHRoIjoxMDMuMzU5Mzc1LCJoZWlnaHQiOjI4LCJ0b3AiOjQzNi4wMzEyNSwicmlnaHQiOjUyNS44NTkzNzUsImJvdHRvbSI6NDY0LjAzMTI1LCJsZWZ0Ijo0MjIuNX0sInRhcmdldCI6IjxidXR0b24gZGF0YS12LTllMTNiZDE3PVwiXCIgaWQ9XCJkb3dubG9hZC10cmFuc2NyaXB0LW1vYmlsZS1idG5cIiBjbGFzcz1cInNlc3Npb24tZG93bmxvYWQtYnRuXCIgdGl0bGU9XCLkuIvovInnm67liY3orJvmrKHnmoTntJTmloflrZfpgJDlrZfnqL/vvIjlkKvmmYLplpPnorzvvIlcIj4g8J+ThCDkuIvovInpgJDlrZfnqL8gPC9idXR0b24+Iiwidmlld3BvcnQiOnsid2lkdGgiOjEyODAsImhlaWdodCI6OTAwLCJzY2FsZSI6MX19"
+                    },
+                    {
+                      "name": "reader-release",
+                      "contentType": "image/png",
+                      "path": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact/readerRelease-session-30-o-f0b1e-release-and-actual-download-desktop/attachments/reader-release-513fb9d6d482ec3458789c05c2056e51c1a3d209.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "78d486be225d99679ac4-178e194535a7b0f15806",
+          "file": "readerRelease.spec.ts",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "session 31 original URL serves the approved release and actual download",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 573,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:36.003Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sentence-seek-routing-only",
+                      "contentType": "application/json",
+                      "body": "eyJpZCI6InNlbnQtMzUiLCJwb2ludCI6eyJ4Ijo2MzkuNSwieSI6NDM1LjEwOTM3NX0sImV4cGVjdGVkU2Vjb25kcyI6NTgwLjIzLCJpZnJhbWVTcmMiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS9lbWJlZC9JTW41QWtveXlwaz9lbmFibGVqc2FwaT0xJm9yaWdpbj1odHRwJTNBJTJGJTJGMTI3LjAuMC4xJTNBNDIxNSZhdXRvcGxheT0xJnN0YXJ0PTU4MCZtdXRlPTAifQ=="
+                    },
+                    {
+                      "name": "download-hit-target",
+                      "contentType": "application/json",
+                      "body": "eyJyZWN0Ijp7IngiOjQyMi41LCJ5Ijo0MzYuMDMxMjUsIndpZHRoIjoxMDMuMzU5Mzc1LCJoZWlnaHQiOjI4LCJ0b3AiOjQzNi4wMzEyNSwicmlnaHQiOjUyNS44NTkzNzUsImJvdHRvbSI6NDY0LjAzMTI1LCJsZWZ0Ijo0MjIuNX0sInRhcmdldCI6IjxidXR0b24gZGF0YS12LTllMTNiZDE3PVwiXCIgaWQ9XCJkb3dubG9hZC10cmFuc2NyaXB0LW1vYmlsZS1idG5cIiBjbGFzcz1cInNlc3Npb24tZG93bmxvYWQtYnRuXCIgdGl0bGU9XCLkuIvovInnm67liY3orJvmrKHnmoTntJTmloflrZfpgJDlrZfnqL/vvIjlkKvmmYLplpPnorzvvIlcIj4g8J+ThCDkuIvovInpgJDlrZfnqL8gPC9idXR0b24+Iiwidmlld3BvcnQiOnsid2lkdGgiOjEyODAsImhlaWdodCI6OTAwLCJzY2FsZSI6MX19"
+                    },
+                    {
+                      "name": "reader-release",
+                      "contentType": "image/png",
+                      "path": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact/readerRelease-session-31-o-7227b-release-and-actual-download-desktop/attachments/reader-release-7329bfe88f472cbe595e21641a466d1937351508.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "78d486be225d99679ac4-47a6f4061ee719abd04f",
+          "file": "readerRelease.spec.ts",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "session 30 original URL serves the approved release and actual download",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 565,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:57.978Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sentence-seek-routing-only",
+                      "contentType": "application/json",
+                      "body": "eyJpZCI6InNlbnQtMzUiLCJwb2ludCI6eyJ4IjoyODksInkiOjM5My4xNzE4NzV9LCJleHBlY3RlZFNlY29uZHMiOjQwMC42OSwiaWZyYW1lU3JjIjoiaHR0cHM6Ly93d3cueW91dHViZS5jb20vZW1iZWQvZjJlUnhFcUNzWkE/ZW5hYmxlanNhcGk9MSZvcmlnaW49aHR0cCUzQSUyRiUyRjEyNy4wLjAuMSUzQTQyMTUmYXV0b3BsYXk9MSZzdGFydD00MDAmbXV0ZT0wIn0="
+                    },
+                    {
+                      "name": "download-hit-target",
+                      "contentType": "application/json",
+                      "body": "eyJyZWN0Ijp7IngiOjI0LCJ5Ijo0MDcuNjA5Mzc1LCJ3aWR0aCI6MTAzLjM1OTM3NSwiaGVpZ2h0IjoyOCwidG9wIjo0MDcuNjA5Mzc1LCJyaWdodCI6MTI3LjM1OTM3NSwiYm90dG9tIjo0MzUuNjA5Mzc1LCJsZWZ0IjoyNH0sInRhcmdldCI6IjxidXR0b24gZGF0YS12LTllMTNiZDE3PVwiXCIgaWQ9XCJkb3dubG9hZC10cmFuc2NyaXB0LW1vYmlsZS1idG5cIiBjbGFzcz1cInNlc3Npb24tZG93bmxvYWQtYnRuXCIgdGl0bGU9XCLkuIvovInnm67liY3orJvmrKHnmoTntJTmloflrZfpgJDlrZfnqL/vvIjlkKvmmYLplpPnorzvvIlcIj4g8J+ThCDkuIvovInpgJDlrZfnqL8gPC9idXR0b24+Iiwidmlld3BvcnQiOnsid2lkdGgiOjM5MCwiaGVpZ2h0Ijo4NDQsInNjYWxlIjoxfX0="
+                    },
+                    {
+                      "name": "reader-release",
+                      "contentType": "image/png",
+                      "path": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact/readerRelease-session-30-o-f0b1e-release-and-actual-download-mobile/attachments/reader-release-b960a509cf8ffa048f5b040d8e7d279f61585810.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "78d486be225d99679ac4-4cf74433452fb588f844",
+          "file": "readerRelease.spec.ts",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "session 31 original URL serves the approved release and actual download",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 631,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:58.669Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "sentence-seek-routing-only",
+                      "contentType": "application/json",
+                      "body": "eyJpZCI6InNlbnQtMzUiLCJwb2ludCI6eyJ4IjoyNzMsInkiOjM5Mi44NTkzNzV9LCJleHBlY3RlZFNlY29uZHMiOjU4MC4yMywiaWZyYW1lU3JjIjoiaHR0cHM6Ly93d3cueW91dHViZS5jb20vZW1iZWQvSU1uNUFrb3l5cGs/ZW5hYmxlanNhcGk9MSZvcmlnaW49aHR0cCUzQSUyRiUyRjEyNy4wLjAuMSUzQTQyMTUmYXV0b3BsYXk9MSZzdGFydD01ODAmbXV0ZT0wIn0="
+                    },
+                    {
+                      "name": "download-hit-target",
+                      "contentType": "application/json",
+                      "body": "eyJyZWN0Ijp7IngiOjI0LCJ5Ijo0MDcuODI4MTI1LCJ3aWR0aCI6MTAzLjM1OTM3NSwiaGVpZ2h0IjoyOCwidG9wIjo0MDcuODI4MTI1LCJyaWdodCI6MTI3LjM1OTM3NSwiYm90dG9tIjo0MzUuODI4MTI1LCJsZWZ0IjoyNH0sInRhcmdldCI6IjxidXR0b24gZGF0YS12LTllMTNiZDE3PVwiXCIgaWQ9XCJkb3dubG9hZC10cmFuc2NyaXB0LW1vYmlsZS1idG5cIiBjbGFzcz1cInNlc3Npb24tZG93bmxvYWQtYnRuXCIgdGl0bGU9XCLkuIvovInnm67liY3orJvmrKHnmoTntJTmloflrZfpgJDlrZfnqL/vvIjlkKvmmYLplpPnorzvvIlcIj4g8J+ThCDkuIvovInpgJDlrZfnqL8gPC9idXR0b24+Iiwidmlld3BvcnQiOnsid2lkdGgiOjM5MCwiaGVpZ2h0Ijo4NDQsInNjYWxlIjoxfX0="
+                    },
+                    {
+                      "name": "reader-release",
+                      "contentType": "image/png",
+                      "path": "/Users/henry/Documents/Codex/2026-10-24/32-30-2026-09-08-04/work/reader-fix/test-results/artifact/readerRelease-session-31-o-7227b-release-and-actual-download-mobile/attachments/reader-release-85260d5139283780e2cd727f2160c526a3c76e8c.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "78d486be225d99679ac4-b574d6694cfce09e62f6",
+          "file": "readerRelease.spec.ts",
+          "line": 22,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong01Release.spec.ts",
+      "file": "ruzhong01Release.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong01 original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:36.585Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1dba1d8fb682112696c4-c11d01a61e81aab3843d",
+          "file": "ruzhong01Release.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong01 original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 790,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:59.311Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1dba1d8fb682112696c4-df62d87d1d595fb08703",
+          "file": "ruzhong01Release.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong38aRelease.spec.ts",
+      "file": "ruzhong38aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong38a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 823,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:37.450Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a784d67a58b8c75aed7f-658986d11956b203af91",
+          "file": "ruzhong38aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong38a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 804,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:00.111Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a784d67a58b8c75aed7f-74c173a294e6f740b713",
+          "file": "ruzhong38aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong38bRelease.spec.ts",
+      "file": "ruzhong38bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong38b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 776,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:38.281Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "192a9f7fffa3058dc9a5-05e356e2a9a7cc38d4e5",
+          "file": "ruzhong38bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong38b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 702,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:00.924Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "192a9f7fffa3058dc9a5-eb16f744418727a8c96f",
+          "file": "ruzhong38bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong39aRelease.spec.ts",
+      "file": "ruzhong39aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong39a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 908,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:39.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12a0b90b7c09ac1646d7-da039e915c0618ea8c85",
+          "file": "ruzhong39aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong39a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 752,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:01.634Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12a0b90b7c09ac1646d7-0fc36e02f94eff07bc82",
+          "file": "ruzhong39aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong39bRelease.spec.ts",
+      "file": "ruzhong39bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong39b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 806,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:39.982Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5eed02027d70160469d3-844fe9dd84555fecc3db",
+          "file": "ruzhong39bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong39b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:02.394Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5eed02027d70160469d3-b8795b3bcc65911bebda",
+          "file": "ruzhong39bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong40aRelease.spec.ts",
+      "file": "ruzhong40aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong40a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 843,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:40.797Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82c7225864d15f1459f-e10724b418e9e3368aba",
+          "file": "ruzhong40aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong40a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:03.167Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82c7225864d15f1459f-8b39e782b4e3fa0e2a51",
+          "file": "ruzhong40aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong40bRelease.spec.ts",
+      "file": "ruzhong40bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong40b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 872,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:41.649Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb9ddaba4798eb08aa76-0593e74d18381883b045",
+          "file": "ruzhong40bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong40b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 756,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:03.897Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb9ddaba4798eb08aa76-2822f95c426012612fee",
+          "file": "ruzhong40bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong41aRelease.spec.ts",
+      "file": "ruzhong41aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong41a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1568,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:42.533Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a33d224622b83ad15279-48b3bef299116bbe86a4",
+          "file": "ruzhong41aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong41a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 768,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:04.662Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a33d224622b83ad15279-90da901a9f24d01f186d",
+          "file": "ruzhong41aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong41bRelease.spec.ts",
+      "file": "ruzhong41bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong41b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 814,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:44.109Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bb06d6df2d35d97eed56-c137f16ebe45ce49e532",
+          "file": "ruzhong41bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong41b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 719,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:05.437Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bb06d6df2d35d97eed56-e79c771a34f2b14a6e2d",
+          "file": "ruzhong41bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong42aRelease.spec.ts",
+      "file": "ruzhong42aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong42a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 850,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:44.931Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3ef4ee5c37e19b367080-bf905ab64753ba4f6ca1",
+          "file": "ruzhong42aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong42a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 751,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:06.164Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3ef4ee5c37e19b367080-960d167f7ba063bd19ed",
+          "file": "ruzhong42aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong42bRelease.spec.ts",
+      "file": "ruzhong42bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong42b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 799,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:45.792Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ebbe2fe0ab2c9d3ac7ae-3c8bd7d77d3263699aae",
+          "file": "ruzhong42bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong42b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 735,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:06.922Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ebbe2fe0ab2c9d3ac7ae-6ff9399cbd810a289bf3",
+          "file": "ruzhong42bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong43aRelease.spec.ts",
+      "file": "ruzhong43aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong43a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 851,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:46.599Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "13844aa15c46e5debde5-47db50fa1a0a99420845",
+          "file": "ruzhong43aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong43a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 785,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:07.665Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "13844aa15c46e5debde5-07e9b5b8c3e828b96f7b",
+          "file": "ruzhong43aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong43bRelease.spec.ts",
+      "file": "ruzhong43bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong43b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:47.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "539a8905f88bc64a1486-9950e1f5597e90eac96e",
+          "file": "ruzhong43bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong43b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:08.458Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "539a8905f88bc64a1486-8ef59ec9e9aa04a2ea4e",
+          "file": "ruzhong43bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong44aRelease.spec.ts",
+      "file": "ruzhong44aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong44a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 825,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:48.280Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1126d69bf9a282543116-7fea2bc6f2c67041cbc5",
+          "file": "ruzhong44aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong44a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 770,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:09.187Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1126d69bf9a282543116-05ab577b46a4c60f7c59",
+          "file": "ruzhong44aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong44bRelease.spec.ts",
+      "file": "ruzhong44bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong44b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 796,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:49.114Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c6f0623f79c9611325f0-a25b88a9a31fcf6cc032",
+          "file": "ruzhong44bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong44b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:09.965Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c6f0623f79c9611325f0-e4feb3a1c984477c3d2a",
+          "file": "ruzhong44bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong45aRelease.spec.ts",
+      "file": "ruzhong45aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong45a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:49.920Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9da8ed15288795c775de-0937f3461983003a8475",
+          "file": "ruzhong45aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong45a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 738,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:10.694Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9da8ed15288795c775de-3e1022e8536f89780a08",
+          "file": "ruzhong45aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong45bRelease.spec.ts",
+      "file": "ruzhong45bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong45b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1161,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:50.746Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a1bfbd4acabae1fbab10-f96ee5fdd285c8a04dbf",
+          "file": "ruzhong45bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong45b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 773,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:11.441Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a1bfbd4acabae1fbab10-9ab45aa31d3b281f2f16",
+          "file": "ruzhong45bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong46aRelease.spec.ts",
+      "file": "ruzhong46aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong46a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:51.916Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c588891884b4f05ff87d-5d7b67952476d300a7d1",
+          "file": "ruzhong46aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong46a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 735,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:12.227Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c588891884b4f05ff87d-4a7a4ee95cf95e896267",
+          "file": "ruzhong46aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong46bRelease.spec.ts",
+      "file": "ruzhong46bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong46b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 777,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:52.777Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "05f183fc7c43de6d13f0-c4a1c4b1ba394eb947d3",
+          "file": "ruzhong46bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong46b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 784,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:12.980Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "05f183fc7c43de6d13f0-7c668d312d8c7f1b3fef",
+          "file": "ruzhong46bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong47aRelease.spec.ts",
+      "file": "ruzhong47aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong47a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 828,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:53.563Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "564b416b4e0cc5c8cd1d-9b898ead883542f740e5",
+          "file": "ruzhong47aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong47a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 755,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:13.773Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "564b416b4e0cc5c8cd1d-61bb205044dae815a388",
+          "file": "ruzhong47aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong47bRelease.spec.ts",
+      "file": "ruzhong47bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong47b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 841,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:54.400Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb3e46b8dce9bc92aa40-3468a1d3d08befcfe307",
+          "file": "ruzhong47bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong47b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:14.536Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb3e46b8dce9bc92aa40-a25e5c4f17b8a691499c",
+          "file": "ruzhong47bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong48aRelease.spec.ts",
+      "file": "ruzhong48aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong48a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 855,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:55.254Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "feeda7ca94a090b213f6-ed99baf06a6b275a0c56",
+          "file": "ruzhong48aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong48a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 787,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:15.311Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "feeda7ca94a090b213f6-d92f87831ee3795bfd8b",
+          "file": "ruzhong48aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong48bRelease.spec.ts",
+      "file": "ruzhong48bRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong48b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 710,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:56.117Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd0910fdfc6e947e334a-db9912a5fc78fbb45e53",
+          "file": "ruzhong48bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong48b original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 719,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:16.106Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd0910fdfc6e947e334a-98804f722a23b6c507ab",
+          "file": "ruzhong48bRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ruzhong49aRelease.spec.ts",
+      "file": "ruzhong49aRelease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ruzhong49a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:00:56.835Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d290b06129aae1d6122-0e904890c27e40fc5326",
+          "file": "ruzhong49aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "ruzhong49a original URL, pending labels, full text, raw view and actual download match release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 786,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T18:01:16.833Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d290b06129aae1d6122-309fa198d3b8c93dbd3c",
+          "file": "ruzhong49aRelease.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T18:00:34.449Z",
+    "duration": 43241.348,
+    "expected": 52,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
