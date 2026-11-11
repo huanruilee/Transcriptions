@@ -1,0 +1,90 @@
+{
+  "taskId": "RUZHONG01-STANDARD-01",
+  "sourceCommit": "ccc9f33a62711cb48d7694887586d1e296b0d78c",
+  "checkedAt": "2026-10-25",
+  "course": "入中論善顯密意疏",
+  "session": "01",
+  "lecturer": "見悲青增格西",
+  "audio": {
+    "contentType": "audio/mpeg",
+    "length": 19729539,
+    "finalUrl": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20160521%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p63(1).MP3",
+    "sha256": "sha256:769419e52c4d250be86fa9499e267d47d312f0af9c48946db2c2699fe3d9a225",
+    "decodedDuration": 2465.671875,
+    "decodedMethod": "ffmpeg full decode f32le mono 16000Hz sample count",
+    "asrDuration": 2465.671875,
+    "humanListened": false
+  },
+  "officialIndex": {
+    "url": "https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68",
+    "sha256": "sha256:5d218065504951936cc941940fc0bd1436e00f7113ad6539df1123c4d15a01dd",
+    "status": "verified",
+    "matchingEntry": "20160521 入中論善顯密意疏-第六現前地p63(1).MP3"
+  },
+  "textbook": {
+    "url": "https://buddha.flyday.com.tw/68%20%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F%202016/%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F(%E5%BD%B1%E5%8D%B0%E7%94%A8%E4%B8%8A%E8%AA%B2%E7%89%88-2016).pdf",
+    "sha256": "sha256:bfd663a4b3d3bf74ded9f0fa1798a2aca0d0e571ce0b0a9f1091555460b7c1b1",
+    "bytes": 1130901,
+    "title": "入中論善顯密意疏（影印用上課版-2016）",
+    "author": "宗喀巴大師",
+    "translator": "法尊法師",
+    "status": "verified",
+    "role": "terminology-reference; never audio gold",
+    "pdfPages": 285,
+    "pageChecks": [
+      {
+        "printedPage": 6,
+        "pdfPage": 6,
+        "existingRepoPath": "courses/入中論善顯密意疏/source_text/page_006.txt",
+        "freshExtractSha256": "sha256:03a1ec8e4dfd83e6e173f405c844082e4626ec2b13ab7b173d415d94ba11c1a6",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "printedPage": 60,
+        "pdfPage": 60,
+        "existingRepoPath": "courses/入中論善顯密意疏/source_text/page_060.txt",
+        "freshExtractSha256": "sha256:92136e71f6bf4af764769c39188c235be7ce30207c1bd357cd5b9de84c4e7e50",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "printedPage": 61,
+        "pdfPage": 61,
+        "existingRepoPath": "courses/入中論善顯密意疏/source_text/page_061.txt",
+        "freshExtractSha256": "sha256:fc73558b69d3f0201bc165f8bd15ac8c6126b8e2f6da1c80b153895f3bd48f60",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "printedPage": 63,
+        "pdfPage": 63,
+        "existingRepoPath": "courses/入中論善顯密意疏/source_text/page_063.txt",
+        "freshExtractSha256": "sha256:d7bd2336359c7e437f3d0e728c949554c270e17e2f5cc633e3d74d59b71dbef1",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "printedPage": 64,
+        "pdfPage": 64,
+        "existingRepoPath": "courses/入中論善顯密意疏/source_text/page_064.txt",
+        "freshExtractSha256": "sha256:81dd960fb331f985f2445da43e2ae8fb7be351dee4f81d9ed31a965eaa90e821",
+        "whitespaceNormalizedMatch": true
+      }
+    ]
+  },
+  "search": {
+    "exactLectureTranscript": "not found within bounded official-index and web search",
+    "youtubeDescription": "not applicable: official audio-only source; no verified video URL",
+    "excluded": [
+      {
+        "url": "https://www.lamrimworld.org/course.php?categ_sn=198&largetype_sn=3&smalltype_sn=24&thetype_sn=9",
+        "reason": "入中論根本頌2016TC is a different series, not session01 source"
+      }
+    ]
+  },
+  "benchmark": {
+    "class": "development-regression",
+    "splitGroup": "ruzhong01-20160521",
+    "humanListened": false,
+    "referenceExposure": "official pages used for local term proposals; not blind holdout"
+  },
+  "provider": "GX10 local faster-whisper + Qwen3.8-27B only",
+  "publicScope": "source snapshots, derived evidence, candidates, ledger; no complete audio or textbook PDF"
+}

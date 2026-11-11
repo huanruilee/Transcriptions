@@ -291,7 +291,19 @@ export function validateContentOverview(
   const isMiniMaxGenerated = overview.generatedBy === 'MiniMax-M3';
   const isDocumentedManualException = overview.generatedBy === 'Codex-manual-exception'
     && String(overview.generationException || '').startsWith('MiniMax input new_sensitive (1026)');
-  if (!isMiniMaxGenerated && !isDocumentedManualException) {
+  const expectedReviewKeys = GROUPS.flatMap(group => (Array.isArray(overview[group]) ? overview[group] : []).map((_,index) => `${group}:${index}`));
+  const actualReviewItems = Array.isArray(overview.review?.items) ? overview.review.items : [];
+  const actualReviewKeys = actualReviewItems.map(item => `${item.group}:${item.index}`);
+  const completeEditorialReview = actualReviewKeys.length === expectedReviewKeys.length
+    && new Set(actualReviewKeys).size === expectedReviewKeys.length
+    && actualReviewItems.every(item => Number.isInteger(item.index) && expectedReviewKeys.includes(`${item.group}:${item.index}`) && item.verdict === 'supported');
+  const isSourceBoundEditorial = overview.generatedBy === 'Codex-study-guide'
+    && transcript.readingEdition === 'study-guide'
+    && /^sha256:[a-f0-9]{64}$/.test(transcript._meta?.sourceDigest || '')
+    && overview.editorialSourceDigest === transcript._meta.sourceDigest
+    && overview.review?.sourceDigest === expectedSourceDigest
+    && completeEditorialReview;
+  if (!isMiniMaxGenerated && !isDocumentedManualException && !isSourceBoundEditorial) {
     errors.push(makeError('GENERATOR_MISMATCH', overview.generatedBy));
   }
 

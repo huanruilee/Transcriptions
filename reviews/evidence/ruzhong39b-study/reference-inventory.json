@@ -1,0 +1,78 @@
+{
+  "taskId": "RUZHONG-39B-STUDY",
+  "sessionId": "39B",
+  "checkedAt": "2026-10-26T19:38:07.623781",
+  "sourceCommit": "a33fb0e0df6e200efc3bb0bf15a8f69af7c1f1b7",
+  "audio": {
+    "url": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170429-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p121(39).MP3",
+    "sha256": "4c8b679c84471b00e709ae15a8d7e92e4793a25678a23a092f1318960242dace",
+    "bytes": 20117040,
+    "contentType": "audio/mpeg",
+    "headerDuration": 2514.616,
+    "decodedDuration": 2526.4588125,
+    "indexSha256": "cf77353de188b5697fa0c774e16db7f7b60aed66c9ad3684cdefe80c19317762",
+    "officialIndexMatched": true
+  },
+  "officialIndex": {
+    "url": "https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68",
+    "sha256": "cf77353de188b5697fa0c774e16db7f7b60aed66c9ad3684cdefe80c19317762",
+    "matchingFilename": "20170429-B p121(39)",
+    "verified": true
+  },
+  "textbook": {
+    "url": "https://buddha.flyday.com.tw/68%20%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F%202016/%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F(%E5%BD%B1%E5%8D%B0%E7%94%A8%E4%B8%8A%E8%AA%B2%E7%89%88-2016).pdf",
+    "sha256": "bfd663a4b3d3bf74ded9f0fa1798a2aca0d0e571ce0b0a9f1091555460b7c1b1",
+    "bytes": 1130901,
+    "title": "入中論善顯密意疏（影印用上課版-2016）",
+    "author": "宗喀巴大師",
+    "translator": "法尊法師",
+    "status": "verified",
+    "role": "terminology-reference; never audio gold",
+    "pdfPages": 285,
+    "pageChecks": [
+      {
+        "page": 121,
+        "extractedSha256": "3516b914da7dd90b1dc9cb2c83c51b8107e101c0d28bbcf8af9f5457b455c184",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "page": 122,
+        "extractedSha256": "3fd60df48268c764b145bf3af12c2a29554f0e71214f65d2138477009212a279",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "page": 123,
+        "extractedSha256": "a2aa2090ddaed8581c07debe3c0e730c4c3705cbd29a158bdd01cad145840cbf",
+        "whitespaceNormalizedMatch": true
+      }
+    ],
+    "tool": "pypdf 6.10.0",
+    "cleaning": "whitespace normalization only",
+    "audioGold": false
+  },
+  "sourceTrack": {
+    "type": "previous-machine-proofread-not-raw-ASR",
+    "count": 263,
+    "humanListened": false,
+    "priorPerSentencePendingFlags": 0,
+    "zeroFlagsDoesNotMeanAccepted": true
+  },
+  "nextLecture": "40A才正式進入123頁末酉二習氣所依問答；本堂停在酉二前與講者自限/討論建議。",
+  "boundedSearch": {
+    "queries": [
+      "見悲青增 20170429-B 逐字稿",
+      "入中論善顯密意疏 39B 逐字稿"
+    ],
+    "exactHumanTranscript": "not found in bounded official-index and web search",
+    "officialIndexAndPdf": "fresh verified",
+    "youtubeDescription": "N/A no verified matching video"
+  },
+  "benchmark": "development/reference-assisted; not human listened gold or blind holdout",
+  "allowedProvider": "GX10 local llama.cpp only; public-source study material; no secrets",
+  "limitations": [
+    "MP3初載2514.616秒，完整PCM2526.4588125秒",
+    "舊稿261結束2530.14超出解碼；262起2530.14完全超出，原文時間保留待核，262不播放",
+    "1279.63–1308.90來源文字/時間缺口未補文",
+    "機校稿不是原始ASR或人工聽核gold"
+  ]
+}

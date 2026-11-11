@@ -222,6 +222,8 @@
           </li>
         </ul>
 
+        <a class="header-btn" :href="correctionDatesUrl">📅 各講最後校訂日期（課程末頁）</a>
+
         <!-- 側邊欄拖曳調整把手 -->
         <div
           id="sidebar-resizer"
@@ -314,9 +316,15 @@
               <a v-if="currentQualityReviewUrl" :href="currentQualityReviewUrl">原音抽查與待覆核清單</a>
             </p>
             <div class="session-article-meta">
-              <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
-                🕒 最後校正更新：{{ currentLastUpdated }}
+              <span
+                v-if="currentReaderRebuiltAt || currentLastUpdated"
+                class="meta-tag update-tag"
+                :class="{ 'rebuild-tag': Boolean(currentReaderRebuiltAt) }"
+                :title="currentReaderRebuiltAt ? '目前顯示之重整版核定更新日期；未逐句聽核' : '此講次逐字稿最後校正修訂日期'"
+              >
+                🕒 {{ currentReaderRebuiltAt ? '重整版最後更新' : '最後校正更新' }}：{{ currentReaderRebuiltAt || currentLastUpdated }}
               </span>
+              <span v-if="currentReaderRebuiltAt && currentLastUpdated" class="meta-tag source-update-tag">底稿校正日期：{{ currentLastUpdated }}</span>
               <span class="meta-tag status-tag" :class="`status-${currentTranscriptStatus}`">
                 {{ currentTranscriptLabel }}
               </span>
@@ -324,6 +332,7 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
+            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">{{ currentSessionInfo?.sourceRebuildStatus === 'reading-approved' ? (currentReaderRebuiltAt ? '重整版原稿對照（本文已套用）' : '正式重整版（已閱讀確認，未逐句聽核）') : '原稿重整版：連續閱讀、校字與原稿對照（待聽核）' }} →</a></p>
             <div class="session-header-actions">
               <button
                 id="download-transcript-mobile-btn"
@@ -533,6 +542,12 @@
                     </template>
                   </span>
                   <span
+                    v-if="vs.reviewNeeded || vs.uncertainty || (vs.text && (vs.text.includes('【存疑】') || vs.text.includes('【待定】')))"
+                    class="sentence-review-badge verbatim-review-badge"
+                    :title="vs.uncertainty || '此句存疑，點擊核對原音與編輯'"
+                    @click.stop="openSentenceEditor(vs)"
+                  >🔍 待核定</span>
+                  <span
                     v-if="annotationStore.notes[vs.id]"
                     class="sentence-note-badge"
                     :title="annotationStore.notes[vs.id]"
@@ -553,6 +568,7 @@
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
+          <p v-if="!navInfo.hasNext"><a :href="correctionDatesUrl">下一頁：各講最後校訂日期總表 →</a></p>
           <EndOfSessionCard
             v-if="navInfo.hasNext && hasMediaEnded"
             :key="currentSessionId"
@@ -757,6 +773,8 @@
 </template>
 
 <script setup lang="ts">
+import { projectApprovedRebuild } from './utils/approvedRebuildReader.js';
+import { applyTimingOverlay } from './utils/audioCalibrationOverlay.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { usePlayerStore } from './stores/player';
 import { useCourseStore } from './stores/course';
@@ -855,6 +873,8 @@ const currentCourseTitle = computed(() => {
   return c ? c.title : '大乘經典研讀';
 });
 
+const correctionDatesUrl = computed(() => `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/correction-dates.html`);
+
 const currentCourseMaster = computed(() => {
   const c = courseStore.catalog.find((item) => item.id === courseStore.currentCourseId);
   return c ? c.master : '';
@@ -884,6 +904,11 @@ const currentAgentReviewedCount = ref(0);
 const currentAgentUncertainCount = ref(0);
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
+});
+const currentRebuildUrl = computed(() => {
+  const page = currentSessionInfo.value?.sourceRebuildPage;
+  return page === `lecture_${currentSessionId.value}_verbatim_rebuild.html`
+    ? `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/publications/${page}` : '';
 });
 
 const activeMediaType = computed(() =>
@@ -966,6 +991,7 @@ const youtubeIframeSrc = computed(() => {
   return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
 });
 const currentLastUpdated = ref('');
+const currentReaderRebuiltAt = ref('');
 const paragraphs = ref<any[]>([]);
 const expandedVerbatimParagraphs = ref<Record<string, boolean>>({});
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
@@ -975,6 +1001,8 @@ const mediaDuration = ref(0);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
 let ytPlayerInitInterval: any = null;
+let ytPlayerSetupTimeout: ReturnType<typeof setTimeout> | null = null;
+let isReaderDisposed = false;
 let isInitialMounted = false;
 
 const hasAnyVerbatim = computed(() =>
@@ -1123,6 +1151,7 @@ function handleDownloadTranscript() {
       sessionTitle,
       pageRange: currentSessionInfo.value?.page || '',
       lastUpdated: currentLastUpdated.value,
+      readerRebuiltAt: currentReaderRebuiltAt.value,
       transcriptStatus: currentTranscriptStatus.value,
       readerNotice: currentReaderNotice.value,
     },
@@ -1335,9 +1364,19 @@ function seekToTime(time: number) {
   isMediaPlaying.value = true;
 }
 
+// Delayed setup belongs to this reader; it must not restart polling after unmount.
+function scheduleYouTubePlayerSetup() {
+  if (isReaderDisposed) return;
+  if (ytPlayerSetupTimeout !== null) clearTimeout(ytPlayerSetupTimeout);
+  ytPlayerSetupTimeout = setTimeout(() => {
+    ytPlayerSetupTimeout = null;
+    setupYouTubePlayer();
+  }, 100);
+}
+
 // YouTube Iframe API 初始化與時間追蹤
 function setupYouTubePlayer() {
-  if (typeof window === 'undefined') return;
+  if (isReaderDisposed || typeof window === 'undefined' || typeof document === 'undefined') return;
 
   // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
   if (!(window as any).YT && !document.querySelector('script[data-youtube-iframe-api]')) {
@@ -1624,6 +1663,7 @@ onMounted(async () => {
   }
 
   await loadRealCourseData();
+  if (isReaderDisposed) return;
 
   // 監聽 URL Hash 變更
   window.addEventListener('hashchange', () => {
@@ -1637,10 +1677,15 @@ onMounted(async () => {
   const defaultFirst = courseStore.sessions[0]?.id || (courseStore.currentCourseId === 'shi-liang-lun-er' ? '01' : '02A');
   const targetId = initialHash || defaultFirst;
   await loadSession(targetId);
-  isInitialMounted = true;
+  if (!isReaderDisposed) isInitialMounted = true;
 });
 
 onUnmounted(() => {
+  isReaderDisposed = true;
+  if (ytPlayerSetupTimeout !== null) {
+    clearTimeout(ytPlayerSetupTimeout);
+    ytPlayerSetupTimeout = null;
+  }
   window.removeEventListener('scroll', onUserScroll);
   window.removeEventListener('wheel', onUserScroll);
   window.removeEventListener('touchmove', onUserScroll);
@@ -1657,7 +1702,7 @@ async function loadRealCourseData() {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
-    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
+    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`, { cache: 'no-store' });
     if (resCourse.ok) {
       const data = await resCourse.json();
       currentPublicationState.value = data.transcriptPublicationState || '';
@@ -1682,6 +1727,11 @@ async function loadRealCourseData() {
         youtubeVideoId: s.youtubeVideoId,
         youtubeUrl: s.youtubeUrl,
         pendingTranscript: Boolean(s.pendingTranscript),
+        sourceRebuildPage: s.sourceRebuildPage,
+        sourceRebuildStatus: s.sourceRebuildStatus,
+        sourceRebuildInReader: s.sourceRebuildInReader,
+        audioCalibrationOverlay: s.audioCalibrationOverlay,
+        audioCalibrationOverlayDigest: s.audioCalibrationOverlayDigest,
       }));
       courseStore.setSessions(sessions);
     }
@@ -1711,8 +1761,10 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
 });
 
 async function loadSession(sessionId: string) {
+  if (isReaderDisposed) return;
   currentTocProjection.value = null;
   currentReaderNotice.value = '';
+  currentReaderRebuiltAt.value = '';
   currentVerbatimLabel.value = '';
   currentQualityReviewUrl.value = '';
   hasMediaEnded.value = false;
@@ -1745,7 +1797,7 @@ async function loadSession(sessionId: string) {
     annotationStore.loadSessionAnnotations(sessionId);
     isLoading.value = false;
     if (pendingSession.mediaType === 'video/youtube') {
-      setTimeout(() => setupYouTubePlayer(), 100);
+      scheduleYouTubePlayerSetup();
     }
     return;
   }
@@ -1757,7 +1809,32 @@ async function loadSession(sessionId: string) {
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    const data = await res.json();
+    const useRebuild = currentSessionInfo.value?.sourceRebuildInReader && currentRebuildUrl.value;
+    const sourceText = useRebuild ? await res.text() : null;
+    let data = sourceText !== null ? JSON.parse(sourceText) : await res.json();
+    let rebuildFailed = false;
+    if (useRebuild) {
+      try {
+        const rebuildResponse = await fetch(currentRebuildUrl.value.replace(/\.html$/, '.json'), { cache: 'no-store' });
+        if (!rebuildResponse.ok) throw new Error(`HTTP ${rebuildResponse.status}`);
+        const publicationText = await rebuildResponse.text();
+        data = await projectApprovedRebuild(sourceText, JSON.parse(publicationText));
+        if (currentSessionInfo.value?.audioCalibrationOverlay) {
+          try {
+            const timingResponse = await fetch(`${baseUrl}${cPath}/${currentSessionInfo.value.audioCalibrationOverlay}`, { cache: 'no-store' });
+            if (!timingResponse.ok) throw new Error(`HTTP ${timingResponse.status}`);
+            data = await applyTimingOverlay(data, sourceText, publicationText, await timingResponse.text(), currentSessionInfo.value.audioCalibrationOverlayDigest);
+          } catch (timingError) {
+            data.qualityReview.readerNotice += ' 時間校準載入或版本驗證失敗，已保留原時間。';
+            console.warn('時間校準驗證失敗:', timingError);
+          }
+        }
+      } catch (error) {
+        rebuildFailed = true;
+        console.warn('重整版驗證失敗，保留原稿:', error);
+      }
+    }
+    currentReaderRebuiltAt.value = data.readerRebuiltAt || '';
     sourceOutline.value = null;
     if (data.sourceOutlineId) {
       try {
@@ -1793,6 +1870,7 @@ async function loadSession(sessionId: string) {
     currentTocProjection.value = sessionTocProjection(data.qualityReview,sessionId);
     currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
       ? data.qualityReview.readerNotice.trim() : '';
+    if (rebuildFailed) currentReaderNotice.value = '重整版暫時無法載入或來源版本不符，目前顯示原稿。請重新整理，或開啟下方重整版對照。';
     currentVerbatimLabel.value = typeof data.qualityReview?.verbatimLabel === 'string'
       ? data.qualityReview.verbatimLabel.trim() : '';
     const reviewPage = data.qualityReview?.reviewPage;
@@ -1812,6 +1890,7 @@ async function loadSession(sessionId: string) {
         questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
+        downloadTrack: p.downloadTrack === 'reading' ? 'reading' : undefined,
         tocAnchorNode: anchorNode,
         start: typeof p.start === 'number' ? p.start : firstStart,
         sentences: (p.sentences || []).map((s: any) => ({
@@ -1835,11 +1914,17 @@ async function loadSession(sessionId: string) {
               text: vs.text || '',
               treatiseQuote: vs.treatiseQuote ?? false,
               verseAnnotations: verseAnnotations.value[vs.id] || [],
+              reviewNeeded: vs.reviewNeeded ?? false,
+              uncertainty: vs.uncertainty ?? null,
+              playbackBlockedReason: vs.playbackBlockedReason ?? null,
+              agentReviewStatus: vs.agentReviewStatus ?? null,
+              agentReviewConfidence: vs.agentReviewConfidence ?? null,
             }))
           : [],
       };
     });
 
+    if (isReaderDisposed) return;
     paragraphs.value = parsedParagraphs;
 
     const allSentences = parsedParagraphs.flatMap((p: any) => p.sentences);
@@ -1867,12 +1952,11 @@ async function loadSession(sessionId: string) {
     }
 
     if (activeMediaType.value === 'video/youtube') {
-      setTimeout(() => {
-        setupYouTubePlayer();
-      }, 100);
+      scheduleYouTubePlayerSetup();
     }
   } catch (err) {
     currentReaderNotice.value = '';
+    currentReaderRebuiltAt.value = '';
     currentVerbatimLabel.value = '';
     currentQualityReviewUrl.value = '';
     console.error(`載入講次 ${sessionId} 逐字稿失敗:`, err);
@@ -1946,6 +2030,7 @@ function selectSession(id: string) {
 
 // 滾動防凍結機制 (對齊 V1 freezeAutoScroll: 點擊時凍結自動滾動，防止搶畫面與跳動)
 let lastClickTime = 0;
+let lastClickTarget = '';
 let singleClickTimer: any = null;
 let autoScrollFrozenUntil = 0;
 
@@ -1960,14 +2045,22 @@ function isAutoScrollFrozen(): boolean {
 // 單擊立即跳播 (保留瀏覽器 User Activation 用戶手勢，防止被 Autoplay 策略攔截) vs 雙擊編輯
 function handleSentenceClick(s: any) {
   const now = Date.now();
-  if (now - lastClickTime < 450 && lastClickTime > 0) {
-    // 450ms 內連續兩次點擊：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
+  const clickTarget = `${currentSessionId.value}:${s.id}`;
+  if (now - lastClickTime < 450 && lastClickTime > 0 && lastClickTarget === clickTarget) {
+    // 450ms 內連續點擊同講次同一句：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
     lastClickTime = 0;
+    lastClickTarget = '';
     freezeAutoScroll(1500);
     openSentenceEditor(s);
     return;
   }
   lastClickTime = now;
+  lastClickTarget = clickTarget;
+
+  if (s.playbackBlockedReason) {
+    uiStore.showToast(s.playbackBlockedReason, 'warning', 6000);
+    return;
+  }
 
   // 單擊：立即同步跳播，保留使用者主動點擊手勢權杖，聲音即點即播
   freezeAutoScroll(600);
@@ -2169,6 +2262,7 @@ if (typeof window !== 'undefined') {
 }
 
 .header-center {
+  min-width: 0;
   flex: 1;
   max-width: 440px;
 }
@@ -2189,6 +2283,8 @@ if (typeof window !== 'undefined') {
 }
 
 .search-box input {
+  min-width: 0;
+  width: 100%;
   flex: 1;
   border: none;
   background: transparent;

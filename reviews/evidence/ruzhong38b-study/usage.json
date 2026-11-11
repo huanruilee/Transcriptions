@@ -1,0 +1,30 @@
+{
+  "provider": "GX10 local llama.cpp",
+  "modelAlias": "Qwen3.8-27B",
+  "modelCalls": 2,
+  "calls": [
+    {
+      "completion_tokens": 396,
+      "prompt_tokens": 732,
+      "total_tokens": 1128,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 352,
+      "prompt_tokens": 727,
+      "total_tokens": 1079,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "totalProviderTokens": 2207,
+  "asrCalls": 0,
+  "asrStatus": "No new ASR requested; original machine-proofread retained, ambiguity marked rather than guessed",
+  "codexUsage": "unknown",
+  "totalTokensAllAgents": "unknown",
+  "savedTokensPercent": "unknown",
+  "secondCallReason": "Narrowed a discussion prompt to the supplied evidence; no further provider call after non-evidence phrasing fix"
+}

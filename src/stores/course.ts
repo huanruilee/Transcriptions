@@ -14,6 +14,11 @@ export interface SessionMeta {
   youtubeVideoId?: string;
   youtubeUrl?: string;
   pendingTranscript?: boolean;
+  sourceRebuildPage?: string;
+  sourceRebuildStatus?: string;
+  sourceRebuildInReader?: boolean;
+  audioCalibrationOverlay?: string;
+  audioCalibrationOverlayDigest?: string;
 }
 
 export interface TOCNode {
@@ -55,6 +60,13 @@ export const useCourseStore = defineStore('course', {
         master: '待審校',
         path: 'courses/四念住',
         mediaType: 'audio/mp3',
+      },
+      {
+        id: 'san-zhu-yao-dao',
+        title: '三主要道',
+        master: '如性法師',
+        path: 'courses/三主要道',
+        mediaType: 'video/youtube',
       },
     ],
     sessions: [] as SessionMeta[],

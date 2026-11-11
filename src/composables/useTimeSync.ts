@@ -25,28 +25,15 @@ export function findSentenceIndexByTime(
     return -1;
   }
 
+  // Upper-bound search: at a shared boundary the newly starting sentence wins.
   let low = 0;
-  let high = sentences.length - 1;
-
-  while (low <= high) {
+  let high = sentences.length;
+  while (low < high) {
     const mid = (low + high) >> 1;
-    const s = sentences[mid];
-
-    if (time >= s.start_time && time <= s.end_time) {
-      return mid;
-    } else if (time > s.end_time) {
-      // 句間停頓與換氣平滑保持高亮，直至下一句開始
-      const nextStart = mid < sentences.length - 1 ? sentences[mid + 1].start_time : s.end_time + 1.0;
-      if (time < nextStart) {
-        return mid;
-      }
-      low = mid + 1;
-    } else {
-      high = mid - 1;
-    }
+    if (sentences[mid].start_time <= time) low = mid + 1;
+    else high = mid;
   }
-
-  return -1;
+  return low - 1;
 }
 
 /**

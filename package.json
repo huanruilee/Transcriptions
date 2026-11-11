@@ -63,7 +63,8 @@
     "start": "npx serve src -p 9090",
     "test:sinianzhu:release": "REQUIRE_SINIANZHU_RELEASE=1 node --test tests/unit/siNianZhuReleaseGate.test.js",
     "audit:sinianzhu": "python3 scripts/audit_sinianzhu_release.py",
-    "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check"
+    "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check",
+    "test:reader-smoke": "playwright test --config playwright.reader.config.ts"
   },
   "repository": {
     "type": "git",
@@ -83,11 +84,13 @@
   },
   "homepage": "https://github.com/huanruilee/Transcriptions#readme",
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/test-utils": "^2.5.0",
     "@vueuse/core": "^14.4.0",
     "happy-dom": "^20.14.0",
     "jsdom": "^30.0.1",
+    "opencc-js": "^1.4.2",
     "pinia": "^4.0.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2",

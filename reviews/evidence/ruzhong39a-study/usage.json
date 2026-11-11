@@ -1,0 +1,30 @@
+{
+  "provider": "GX10 local llama.cpp",
+  "modelAlias": "Qwen3.8-27B",
+  "modelCalls": 2,
+  "calls": [
+    {
+      "completion_tokens": 378,
+      "prompt_tokens": 788,
+      "total_tokens": 1166,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 159,
+      "prompt_tokens": 206,
+      "total_tokens": 365,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "totalProviderTokens": 1531,
+  "asrCalls": 0,
+  "asrStatus": "No new ASR; retain complete previous machine-proofread source and uncertainty; do not claim raw ASR or human listened",
+  "codexUsage": "unknown",
+  "totalTokensAllAgents": "unknown",
+  "savedTokensPercent": "unknown",
+  "retryReason": "Single question item was misclassified as an asserted conclusion; bounded one-item re-review by question-presence criterion, original unsupported retained"
+}

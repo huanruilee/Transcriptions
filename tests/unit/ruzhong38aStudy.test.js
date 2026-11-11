@@ -1,0 +1,16 @@
+import test from'node:test';import assert from'node:assert/strict';import fs from'node:fs';
+const base='courses/入中論善顯密意疏/';
+test('38A main is source-bound speaker-voice study guide with full source and pending coverage',()=>{
+ const s=JSON.parse(fs.readFileSync(base+'sessions/session_38A.json'));assert.equal(s.readingEdition,'study-guide');assert.equal(s.sourceOutlineId,'38A');assert.match(s.lastUpdated,/2026-10-26/);const ps=s.paragraphs,ss=ps.flatMap(p=>p.sentences);assert.ok(ps.length>=20&&ps.length<=35);assert.ok(ss.length<657);assert.doesNotMatch(ss.map(s=>s.text).join(''),/格西指出|格西認為|他認為|講者指出/);
+ const source=JSON.parse(fs.readFileSync('reviews/evidence/ruzhong38a-study/source-session.json'));const originals=source.paragraphs.flatMap(p=>p.sentences);const raw=ps.flatMap(p=>p.verbatimSentences);assert.equal(raw.length,657);assert.deepEqual(raw.map(r=>[r.id,r.text,r.start,r.end,!!r.reviewNeeded]),originals.map((r,i)=>[r.id??`sent-${i}`,r.text,r.start,r.end,!!r.reviewNeeded]));assert.equal(raw.filter(r=>r.reviewNeeded).length,241);
+ const byId=new Map(raw.map(r=>[r.id,r]));for(const r of ss){assert.equal(r.start,byId.get(r.sourceSentenceIds[0]).start);assert.equal(r.end,byId.get(r.sourceSentenceIds.at(-1)).end);assert.equal(r.timingMethod,'source-window');}
+ const text=ss.map(r=>r.text).join('');for(const word of ['優格','常斷','先有而今無','八難','內心相續','隨身碟','結婚證','借據','得的得','不知道','休息'])assert.ok(text.includes(word),word);
+ const outline=JSON.parse(fs.readFileSync(base+'source_outlines/38A.json'));assert.ok(outline.discussionOutline.length>=5);assert.equal(s.qualityReview.humanListened,false);assert.match(s.qualityReview.readerNotice,/來源區間/);
+});
+
+test('38A rebuild refuses source drift and broken source partitions',async()=>{
+ const{buildStudyGuide}=await import('../../scripts/publish_ruzhong_study.mjs');const raw=fs.readFileSync('reviews/evidence/ruzhong38a-study/source-session.json','utf8'),plan=JSON.parse(fs.readFileSync('reviews/evidence/ruzhong38a-study/plan.json'));const result=buildStudyGuide(raw,plan);assert.deepEqual(result.session.paragraphs,JSON.parse(fs.readFileSync(base+'sessions/session_38A.json')).paragraphs);assert.throws(()=>buildStudyGuide(raw+' ',plan));for(const start of[-1,1,657]){const bad=structuredClone(plan);bad.paragraphs[0].sentences[0].first=start;assert.throws(()=>buildStudyGuide(raw,bad));}const bad=structuredClone(plan);bad.paragraphs.pop();assert.throws(()=>buildStudyGuide(raw,bad));
+});
+test('38A reused overview review has byte-identical actual evidence input and a current binding',async()=>{
+ const{validateContentOverview}=await import('../../scripts/content_overview_pipeline.mjs');const s=JSON.parse(fs.readFileSync(base+'sessions/session_38A.json'));assert.deepEqual(validateContentOverview(s.contentOverview,s,{sourceTranscriptId:'ru-zhong-lun/session_38A'}).errors,[]);const req=JSON.parse(fs.readFileSync('reviews/evidence/ruzhong38a-study/overview.request.json'));const actual=JSON.parse(req.messages[0].content.split('六項各一筆。')[1]);const now=['mainPoints','discussionTopics','referenceViews'].flatMap(group=>s.contentOverview[group].map((x,index)=>({group,index,...x})));assert.deepEqual(actual,now);assert.ok(s.contentOverview.review.binding.reason);
+});

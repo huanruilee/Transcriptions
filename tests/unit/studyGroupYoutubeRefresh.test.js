@@ -15,12 +15,6 @@ test('newly public official YouTube videos are exposed as pending without publis
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
   const expected = [
     {
-      sessionId: '42',
-      displaySessionId: '26下',
-      videoId: 'lBOiFeGQblw',
-      title: '第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學',
-    },
-    {
       sessionId: '43',
       displaySessionId: '27上',
       videoId: '8sDCFUj5E_c',
@@ -55,7 +49,7 @@ test('current playlist inventory records only the still-private item as unavaila
 
   const catalog = readJson('courses/catalog.json');
   const entry = catalog.courses.find((item) => item.id === 'shi-liang-lun-study-group-2025');
-  assert.equal(entry.totalSessions, 42);
+  assert.equal(entry.totalSessions, 43);
 });
 
 test('historical prototype-44 evidence is explicitly remapped to current playlist item 42 by video identity', () => {

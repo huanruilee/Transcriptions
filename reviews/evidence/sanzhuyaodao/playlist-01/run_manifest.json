@@ -1,0 +1,69 @@
+{
+  "runId": "sanzhuyaodao-01-run1",
+  "sessionId": "session_01",
+  "courseId": "san-zhu-yao-dao",
+  "startedAt": "2026-10-29 20:03:12",
+  "completedAt": "2026-10-29 20:03:12",
+  "stages": [
+    {
+      "stage": "S1-fetch",
+      "tool": "curl(gdrive)",
+      "result": "source.mp3 sha256=56250beb68de9773… 3710.4s"
+    },
+    {
+      "stage": "S2-asr",
+      "tool": "whisper-gpu-service:8010",
+      "result": "1253 segments"
+    },
+    {
+      "stage": "S3-merge",
+      "tool": "merge_units(target=90,max_sec=32)+opencc s2twp",
+      "result": "129 units"
+    },
+    {
+      "stage": "S4-correct",
+      "tool": "Qwen3.8-27B propose+adjudicate + AGY 判讀",
+      "result": "34 corrections, 0 pending human review"
+    },
+    {
+      "stage": "S5-section",
+      "tool": "official outline timestamps",
+      "result": "7 paragraphs"
+    },
+    {
+      "stage": "S6-overview",
+      "tool": "Qwen3.8-27B",
+      "result": "mainPoints/discussionTopics/referenceViews"
+    }
+  ],
+  "models": [
+    {
+      "role": "asr",
+      "model": "whisper-large-v3-turbo",
+      "endpoint": "127.0.0.1:8010"
+    },
+    {
+      "role": "correction-propose",
+      "model": "Qwen3.8-27B",
+      "endpoint": "127.0.0.1:8001"
+    },
+    {
+      "role": "adjudicate",
+      "model": "Qwen3.8-27B",
+      "endpoint": "127.0.0.1:8001"
+    },
+    {
+      "role": "context-arbiter",
+      "model": "Gemini CLI 1.4.9 (agy)",
+      "endpoint": "local cli"
+    }
+  ],
+  "gates": {
+    "charRatio": 2.413,
+    "charRatioThreshold": 0.6,
+    "charRatioPass": true,
+    "paragraphs": 7,
+    "outlineItems": 7,
+    "pendingHumanReview": 0
+  }
+}
