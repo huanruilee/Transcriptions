@@ -1,10 +1,10 @@
-# 《釋量論・第二品》大組共學 — 討論提綱與法師開示對照
+# 2025《釋量論・第二品》大組共學 — 討論提綱與法師開示對照
 
 一份可攜帶的單頁對照表：每一講的**共學提綱**，每一題附**法師開示的 YouTube
 直接連結**（點擊即跳到該段開示）。
 
-- 線上版本：<https://huanruilee.github.io/Transcriptions/courses/2025%E9%87%8B%E9%87%8F%E8%AB%96%E7%AC%AC%E4%BA%8C%E5%93%81%E5%A4%A7%E7%B5%84%E5%85%B1%E5%AD%B8/publications/shilianglun_outline_disclosure_table.html>
-- 頁面本體：`shilianglun_outline_disclosure_table.html`（完全自足，inline CSS + JS，無外部相依）
+- 線上版本：<https://huanruilee.github.io/Transcriptions/courses/study-groups/%E9%87%8B%E9%87%8F%E8%AB%96%E7%AC%AC%E4%BA%8C%E5%93%81-2025/outline-disclosure-table.html>
+- 頁面本體：`outline-disclosure-table.html`（完全自足，inline CSS + JS，無外部相依）
 
 ## 內容
 
@@ -17,8 +17,8 @@
 | 未討論的題 | 14 |
 
 資料來源為 2025《釋量論．第二品》大組共學 YouTube 播放清單
-`PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh`（共 51 支，其中 4 支為私人影片，
-說明欄無法取得，未列入本頁）。
+`PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh`（2026-11-12 查：52 支，其中 5 支為
+私人影片，說明欄無法取得，未列入本頁；第 18–22 講未於此播放列表上架）。
 
 ## 頁面功能
 
@@ -26,18 +26,21 @@
 - **全文搜尋**：即時標示命中片段、顯示命中筆數、Esc 或 ✕ 清除
 - **行動版**：目錄改為可展開抽屜
 - **列印樣式**：白底、去除導覽與操作元件
-- **「這個頁面怎麼來的」**：頁面底部內嵌本頁的產生方法說明
+
+頁面頁尾附一行資料來源說明；產生方法的完整細節見本檔與上層
+[README](../README.md)。
 
 ## 資料更新
 
-本頁**不是手寫的 HTML**，而是由 `shilianglun_table_build.py` 產生。
-要新增或更新內容，修改產生器後重新執行：
+本頁**不是手寫的 HTML**，而是由 `build.py` 產生（通用產生器，課程資訊全由
+參數傳入）。要新增或更新內容，重新執行：
 
 ```bash
-python3 shilianglun_table_build.py \
+python3 build.py \
   --playlist PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh \
-  --out shilianglun_outline_disclosure_table.html \
-  --cache shilianglun_desc_cache.json
+  --out outline-disclosure-table.html \
+  --cache desc_cache.json \
+  --title '2025《釋量論・第二品》大組共學'
 ```
 
 `--cache` 會記住已抓取的影片說明欄，之後更新只抓新增的影片。
@@ -81,9 +84,9 @@ python3 shilianglun_table_build.py \
 
 | 檔案 | 內容 |
 |---|---|
-| `shilianglun_table_build.py` | 產生器腳本（單檔，內含樣式與解析邏輯） |
-| `shilianglun_desc_cache.json` | 已抓取的影片說明欄快取 |
-| `shilianglun_playlist_snapshot.jsonl` | 產生當下的播放清單快照 |
+| `build.py` | 產生器腳本（單檔、通用版，內含樣式與解析邏輯） |
+| `desc_cache.json` | 已抓取的影片說明欄快取 |
+| `playlist-snapshot.jsonl` | 產生當下的播放清單快照 |
 
 ## 校對說明
 

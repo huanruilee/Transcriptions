@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-《釋量論・第二品》大組共學 — 討論提綱與法師開示對照 HTML 產生器
+大組共學「討論提綱與法師開示對照」HTML 產生器（通用版）
 =================================================================
 
 本腳本是這個 HTML 檔案的「來源程式」。要新增／更新內容，從這裡改，
@@ -30,11 +30,14 @@
 
 用法
 ----
-    python3 build.py --playlist <PLAYLIST_ID> --out output.html
+    python3 build.py --playlist <PLAYLIST_ID> --out output.html --title <課程名稱>
 
-    # 只更新既有資料（重新抓取並比對）
-    python3 build.py --playlist PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh \
-        --out output.html --refresh
+    # 只更新既有資料（--cache 記住已抓的說明欄，只抓新增影片）
+    python3 build.py --playlist <PLAYLIST_ID> \
+        --out output.html --cache desc_cache.json --title <課程名稱>
+
+產出檔案放在 courses/study-groups/<課程目錄>/ 之下；同一產生器可供
+多個課程共用，課程資訊全由命令列參數傳入，腳本內無寫死的課程字串。
 
 輸出是一個完全自足的單一 HTML 檔案（inline CSS + inline JS，無外部相依），
 可直接以瀏覽器開啟、隨身攜帶或列印。
@@ -130,19 +133,6 @@ mark{background:var(--acc);color:#241f1e;border-radius:2px}
 footer{color:var(--dim);font-size:12.5px;border-top:1px solid var(--line);
   padding-top:14px;margin-top:40px}
 footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:12px}
-details.method{margin-top:22px;border:1px solid var(--line);border-radius:8px;
-  background:var(--card);padding:0 14px}
-details.method>summary{cursor:pointer;padding:11px 0;font-size:14px;color:var(--acc);
-  font-weight:600;list-style:none}
-details.method>summary::-webkit-details-marker{display:none}
-details.method>summary::before{content:"▸ ";color:var(--acc2)}
-details.method[open]>summary::before{content:"▾ "}
-details.method .body{font-size:13px;color:#cfc7ba;padding-bottom:14px}
-details.method .body h4{color:var(--acc);margin:14px 0 6px;font-size:13.5px}
-details.method .body pre{background:#15120f;border:1px solid var(--line);border-radius:6px;
-  padding:10px 12px;overflow-x:auto;font-size:12px;line-height:1.6;color:#b9b0a2}
-details.method .body code{background:#15120f;padding:1px 5px;border-radius:4px;font-size:12px}
-details.method .body ol,.details.method .body ul{padding-left:20px;margin:6px 0}
 @media(max-width:900px){
   #toc{display:none}
   #toc.open{display:block;position:fixed;inset:0;z-index:70;width:100%;max-width:100%;
@@ -161,7 +151,6 @@ details.method .body ol,.details.method .body ul{padding-left:20px;margin:6px 0}
   .lecture{break-inside:auto}
   .lecture h2{background:none;color:#111;border-left:3px solid #000}
   a.dlink{background:#fff;color:#111;border:1px solid #999}
-  details.method{display:none}
 }
 """
 
@@ -569,7 +558,6 @@ def render(lectures, playlist_id, meta):
     toc_html = "\n".join(
         f'<li><a href="#{sid}">{html_mod.escape(t)}</a></li>' for sid, t in toc)
 
-    method = meta.get("method", "")
 
     doc = f"""<!DOCTYPE html>
 <html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -592,8 +580,7 @@ def render(lectures, playlist_id, meta):
 <div class="stats">{stats_html}</div>
 </header>
 {chr(10).join(out)}
-{method}
-<footer><p>{html_mod.escape(meta.get("footer", ""))}</p></footer>
+<footer><p>{meta.get("footer", "")}</p></footer>
 </main></div>
 <button id="tocbtn">☰ 目錄</button>
 <script>{JS}</script></body></html>
@@ -605,63 +592,14 @@ def render(lectures, playlist_id, meta):
 # ---------------------------------------------------------------------------
 # 主流程
 # ---------------------------------------------------------------------------
-METHOD_HTML = """
-<details class="method">
-<summary>這個頁面怎麼來的（資料來源與更新方法）</summary>
-<div class="body">
-<p>本頁是<b>自動產生</b>的，不要直接編輯 HTML。要新增或更新內容，修改產生器腳本
-<code>build.py</code> 後重新執行即可。</p>
-
-<h4>資料來源</h4>
-<ol>
-<li><b>播放清單</b>（決定有哪些講、順序、影片 ID）<br>
-<pre>yt-dlp --flat-playlist --dump-json \\
-  'https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh'</pre></li>
-<li><b>每支影片的「共學提綱」與「影片段落」</b>（決定題目與開示時間碼）<br>
-<pre>yt-dlp --dump-json --skip-download 'https://www.youtube.com/watch?v=&lt;VIDEO_ID&gt;'</pre>
-→ <code>description</code> 欄位中的兩段：</li>
-</ol>
-<ul>
-<li><code>❓共學提綱：</code> —— 每一節標題（一、二、三…）＋ 題號＋題幹＋子題⑴⑵…
-→ 產生本頁的提綱卡片</li>
-<li><code>🎞️影片段落：</code> —— 章節時間碼與章節名
-→ 產生「法師開示」的 YouTube 連結</li>
-</ul>
-
-<h4>開示時間碼的對應規則</h4>
-<ul>
-<li>章節結構：<code>第N題⑴</code>（主持人讀題）→ <code>法師指導 HH:MM:SS</code>（法師開示）</li>
-<li><b>開示起點</b> = 該題的「法師指導」章節時間</li>
-<li><b>開示終點</b> = 下一個章節的時間（使區間涵蓋整段開示而不切斷）</li>
-<li>一題有多個讀題章節時（如 <code>第1題⑴</code>、<code>第1題⑵</code>），
-    其後的第一個「法師指導」即為該題開示，標籤合併為 <code>第1題⑴⑵</code></li>
-<li>該講沒有「法師指導」章節 → 標示「此題該講未討論（他日再論）」</li>
-</ul>
-
-<h4>更新流程</h4>
-<pre>python3 build.py \\
-  --playlist PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh \\
-  --out 釋量論第二品_對照表.html \\
-  --cache desc_cache.json</pre>
-<p><code>--cache</code> 會記住已抓取的影片說明欄，之後更新只抓新增的影片，
-不必重新抓全部。</p>
-
-<h4>檢查資料一致性</h4>
-<p>產生後應確認：講數 = TOC 條目數、題數 = 有開示 + 未討論、
-每講都有「開頭／YouTube／播放列表／時長」四項。所有連結皆為
-<code>https://www.youtube.com/watch?v=…</code>，無本機絕對路徑，
-檔案可攜帶至任何機器開啟。</p>
-</div>
-</details>
-"""
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--playlist", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--cache", default=None,
                     help="description 快取檔（JSON），避免重複抓取")
+    ap.add_argument("--title", default="大組共學",
+                    help="課程名稱（用於頁面標題、目錄標題與頁尾出處）")
     args = ap.parse_args()
 
     pl = fetch_playlist(args.playlist)
@@ -708,20 +646,19 @@ def main():
     n_lect = len(lectures)
     n_priv = len(pl) - n_lect
     doc, st = render(lectures, args.playlist, meta={
-        "doc_title": "《釋量論・第二品》大組共學 — 討論提綱與法師開示對照",
-        "toc_title": "釋量論・第二品 大組共學",
+        "doc_title": f"{args.title} — 討論提綱與法師開示對照",
+        "toc_title": args.title,
         "toc_sub": "討論提綱 ＋ 法師開示直接連結",
         "h1": "討論提綱與法師開示對照",
         "lede": "每一講的共學提綱，每一題附法師開示的 YouTube 直接連結（點擊跳到該段開示）。",
         "lede2": "時間碼取自官方 YouTube 章節；題號與子題對應取自影片說明欄「共學提綱」與「影片段落」。",
         "stats": [],
         "footer": (
-            "資料來源：2025《釋量論．第二品》大組共學 YouTube 播放列表 "
+            f"資料來源：{args.title} YouTube 播放清單 "
             f"<code>{args.playlist}</code>（{len(pl)} 支影片"
             + (f"；其中 {n_priv} 支為私人影片，未列於本頁" if n_priv else "")
-            + "；第 18–22 講未於此播放列表上架）。"
+            + "）。時間碼取自各影片說明欄的官方章節，非人工聽核。"
         ),
-        "method": METHOD_HTML,
     })
 
     # 統計列
