@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>《釋量論・第二品》大組共學 — 討論提綱與法師開示對照</title>
+<title>2025《釋量論・第二品》大組共學 — 討論提綱與法師開示對照</title>
 <style>
 :root{
   --bg:#12100e; --card:#1c1916; --line:#302b26; --fg:#e8e2d8; --dim:#a89f92;
@@ -81,19 +81,6 @@ mark{background:var(--acc);color:#241f1e;border-radius:2px}
 footer{color:var(--dim);font-size:12.5px;border-top:1px solid var(--line);
   padding-top:14px;margin-top:40px}
 footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:12px}
-details.method{margin-top:22px;border:1px solid var(--line);border-radius:8px;
-  background:var(--card);padding:0 14px}
-details.method>summary{cursor:pointer;padding:11px 0;font-size:14px;color:var(--acc);
-  font-weight:600;list-style:none}
-details.method>summary::-webkit-details-marker{display:none}
-details.method>summary::before{content:"▸ ";color:var(--acc2)}
-details.method[open]>summary::before{content:"▾ "}
-details.method .body{font-size:13px;color:#cfc7ba;padding-bottom:14px}
-details.method .body h4{color:var(--acc);margin:14px 0 6px;font-size:13.5px}
-details.method .body pre{background:#15120f;border:1px solid var(--line);border-radius:6px;
-  padding:10px 12px;overflow-x:auto;font-size:12px;line-height:1.6;color:#b9b0a2}
-details.method .body code{background:#15120f;padding:1px 5px;border-radius:4px;font-size:12px}
-details.method .body ol,.details.method .body ul{padding-left:20px;margin:6px 0}
 @media(max-width:900px){
   #toc{display:none}
   #toc.open{display:block;position:fixed;inset:0;z-index:70;width:100%;max-width:100%;
@@ -112,14 +99,13 @@ details.method .body ol,.details.method .body ul{padding-left:20px;margin:6px 0}
   .lecture{break-inside:auto}
   .lecture h2{background:none;color:#111;border-left:3px solid #000}
   a.dlink{background:#fff;color:#111;border:1px solid #999}
-  details.method{display:none}
 }
 </style></head><body>
 <div id="q"><input id="qbox" type="search" placeholder="搜尋提綱、開示、題目…" autocomplete="off">
 <button id="qclear" title="清除（Esc）" aria-label="清除搜尋">✕</button></div>
 <div id="qcount"></div>
 <div class="wrap">
-<nav id="toc"><h1>釋量論・第二品 大組共學</h1>
+<nav id="toc"><h1>2025《釋量論・第二品》大組共學</h1>
 <div class="sub">討論提綱 ＋ 法師開示直接連結</div>
 <ol>
 <li><a href="#v0">第1講 調整學法的動機（上）</a></li>
@@ -2110,56 +2096,7 @@ details.method .body ol,.details.method .body ul{padding-left:20px;margin:6px 0}
 </div>
 </div>
 </section>
-
-<details class="method">
-<summary>這個頁面怎麼來的（資料來源與更新方法）</summary>
-<div class="body">
-<p>本頁是<b>自動產生</b>的，不要直接編輯 HTML。要新增或更新內容，修改產生器腳本
-<code>build.py</code> 後重新執行即可。</p>
-
-<h4>資料來源</h4>
-<ol>
-<li><b>播放清單</b>（決定有哪些講、順序、影片 ID）<br>
-<pre>yt-dlp --flat-playlist --dump-json \
-  'https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh'</pre></li>
-<li><b>每支影片的「共學提綱」與「影片段落」</b>（決定題目與開示時間碼）<br>
-<pre>yt-dlp --dump-json --skip-download 'https://www.youtube.com/watch?v=&lt;VIDEO_ID&gt;'</pre>
-→ <code>description</code> 欄位中的兩段：</li>
-</ol>
-<ul>
-<li><code>❓共學提綱：</code> —— 每一節標題（一、二、三…）＋ 題號＋題幹＋子題⑴⑵…
-→ 產生本頁的提綱卡片</li>
-<li><code>🎞️影片段落：</code> —— 章節時間碼與章節名
-→ 產生「法師開示」的 YouTube 連結</li>
-</ul>
-
-<h4>開示時間碼的對應規則</h4>
-<ul>
-<li>章節結構：<code>第N題⑴</code>（主持人讀題）→ <code>法師指導 HH:MM:SS</code>（法師開示）</li>
-<li><b>開示起點</b> = 該題的「法師指導」章節時間</li>
-<li><b>開示終點</b> = 下一個章節的時間（使區間涵蓋整段開示而不切斷）</li>
-<li>一題有多個讀題章節時（如 <code>第1題⑴</code>、<code>第1題⑵</code>），
-    其後的第一個「法師指導」即為該題開示，標籤合併為 <code>第1題⑴⑵</code></li>
-<li>該講沒有「法師指導」章節 → 標示「此題該講未討論（他日再論）」</li>
-</ul>
-
-<h4>更新流程</h4>
-<pre>python3 build.py \
-  --playlist PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh \
-  --out 釋量論第二品_對照表.html \
-  --cache desc_cache.json</pre>
-<p><code>--cache</code> 會記住已抓取的影片說明欄，之後更新只抓新增的影片，
-不必重新抓全部。</p>
-
-<h4>檢查資料一致性</h4>
-<p>產生後應確認：講數 = TOC 條目數、題數 = 有開示 + 未討論、
-每講都有「開頭／YouTube／播放列表／時長」四項。所有連結皆為
-<code>https://www.youtube.com/watch?v=…</code>，無本機絕對路徑，
-檔案可攜帶至任何機器開啟。</p>
-</div>
-</details>
-
-<footer><p>資料來源：2025《釋量論．第二品》大組共學 YouTube 播放列表 &lt;code&gt;PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh&lt;/code&gt;（51 支影片；其中 4 支為私人影片，未列於本頁；第 18–22 講未於此播放列表上架）。</p></footer>
+<footer><p>資料來源：2025《釋量論・第二品》大組共學 YouTube 播放清單 <code>PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh</code>（52 支影片；其中 5 支為私人影片，未列於本頁）。時間碼取自各影片說明欄的官方章節，非人工聽核。</p></footer>
 </main></div>
 <button id="tocbtn">☰ 目錄</button>
 <script>
