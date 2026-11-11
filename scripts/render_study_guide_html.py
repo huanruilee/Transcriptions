@@ -107,9 +107,11 @@ def md_to_html(md_path: Path) -> Path:
 
     verbatim_path = md_path.parent.parent / "verbatim" / f"verbatim_{sid}.json"
     verbatim_map = {}
+    verbatim_keys_order = []
     if verbatim_path.exists():
         vdata = json.loads(verbatim_path.read_text(encoding="utf-8"))
         verbatim_map = vdata.get("paragraphs", {})
+        verbatim_keys_order = list(verbatim_map.keys())
 
     # Title extraction
     title_match = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
@@ -215,8 +217,12 @@ def md_to_html(md_path: Path) -> Path:
             ts_match = re.search(r'playAt\((\d+),\s*this\)', block)
             if ts_match:
                 sec = ts_match.group(1)
+                # If verbatim_keys_order exists, use the actual key in order, else fallback to f"p_{para_counter+1}"
+                if verbatim_keys_order and para_counter < len(verbatim_keys_order):
+                    p_id = verbatim_keys_order[para_counter]
+                else:
+                    p_id = f"p_{para_counter + 1}"
                 para_counter += 1
-                p_id = f"p_{para_counter}"
                 v_sents = verbatim_map.get(p_id, [])
                 if v_sents:
                     toggle_btn = (
