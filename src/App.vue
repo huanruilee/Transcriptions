@@ -354,6 +354,16 @@
               >
                 {{ isAllVerbatimExpanded ? '💬 收合全部課堂原話' : '💬 展開全部課堂原話' }}
               </button>
+              <button
+                id="toggle-study-guide-btn"
+                type="button"
+                class="session-download-btn"
+                data-testid="toggle-study-guide-btn"
+                title="開啟/收合本講研讀講記抽屜 (快速鍵: G)"
+                @click="toggleStudyGuideDrawer"
+              >
+                📖 研讀講記
+              </button>
             </div>
             <div
               v-if="currentAgentReviewStatus === 'completed'"
@@ -744,6 +754,14 @@
       @close="touchMenu.visible = false"
     />
 
+    <!-- 研讀講記側邊抽屜 (Study Guide Drawer) -->
+    <StudyGuideDrawer
+      :is-open="isStudyGuideOpen"
+      :study-guide-url="currentStudyGuideUrl"
+      :session-title="currentSessionInfo?.title"
+      @close="isStudyGuideOpen = false"
+    />
+
     <!-- Mobile Bottom Sheet TOC Drawer (對齊 V1) -->
     <TOCBottomSheet
       :toc-nodes="currentTocTree"
@@ -790,6 +808,7 @@ import {sessionTocProjection,projectionChain,type SessionAnchor} from './composa
 import EndOfSessionCard from './components/EndOfSessionCard.vue';
 import TouchContextMenu from './components/TouchContextMenu.vue';
 import TranscriptOverview from './components/TranscriptOverview.vue';
+import StudyGuideDrawer from './components/StudyGuideDrawer.vue';
 import { searchSentences, navigateMatch, type SearchMatch } from './composables/useSearchEngine';
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
@@ -910,6 +929,21 @@ const currentRebuildUrl = computed(() => {
   return page === `lecture_${currentSessionId.value}_verbatim_rebuild.html`
     ? `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/publications/${page}` : '';
 });
+
+const isStudyGuideOpen = ref(false);
+const currentStudyGuideUrl = computed(() => {
+  // If explicitly declared in session or known publications
+  const sid = currentSessionId.value;
+  if (!sid) return '';
+  const cPath = courseStore.currentCoursePath;
+  if (!cPath) return '';
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}${cPath}/publications/lecture_${sid}_study_guide.html`;
+});
+
+function toggleStudyGuideDrawer() {
+  isStudyGuideOpen.value = !isStudyGuideOpen.value;
+}
 
 const activeMediaType = computed(() =>
   currentSessionInfo.value?.mediaType || courseStore.currentMediaType
@@ -1620,6 +1654,7 @@ function setupKeyboardShortcuts() {
         isSyncModalOpen.value = false;
         isReviewModalOpen.value = false;
         isOverviewModalOpen.value = false;
+        isStudyGuideOpen.value = false;
         touchMenu.value.visible = false;
         annotationStore.closeEditor();
         uiStore.closeAllDrawers();
@@ -1627,6 +1662,9 @@ function setupKeyboardShortcuts() {
       onFocusSearch: () => {
         searchInputRef.value?.focus();
         searchInputRef.value?.select();
+      },
+      onToggleStudyGuide: () => {
+        toggleStudyGuideDrawer();
       },
     });
   });

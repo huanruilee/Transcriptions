@@ -52,6 +52,32 @@ describe('KeyboardShortcuts Test Pattern (TDD)', () => {
     expect(onCloseModal).toHaveBeenCalledTimes(1);
   });
 
+  it('按 L 鍵應觸發單句/段落循環播放 (Loop)', () => {
+    const onLoopCurrentSentence = vi.fn();
+    const event = {
+      key: 'l',
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+
+    handleGlobalKeyDown(event, { onLoopCurrentSentence });
+    expect(onLoopCurrentSentence).toHaveBeenCalledTimes(1);
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
+
+  it('按 G 鍵應觸發研讀指南/講記切換 (Guide)', () => {
+    const onToggleStudyGuide = vi.fn();
+    const event = {
+      key: 'g',
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+
+    handleGlobalKeyDown(event, { onToggleStudyGuide });
+    expect(onToggleStudyGuide).toHaveBeenCalledTimes(1);
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
+
   it('按 ⌘K 或 Ctrl+K 應觸發聚焦搜尋框', () => {
     const onFocusSearch = vi.fn();
     const event = {
