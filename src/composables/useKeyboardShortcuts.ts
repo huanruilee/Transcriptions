@@ -3,6 +3,8 @@ export interface ShortcutHandlers {
   onToggleSidebar?: () => void;
   onCloseModal?: () => void;
   onFocusSearch?: () => void;
+  onLoopCurrentSentence?: () => void;
+  onToggleStudyGuide?: () => void;
 }
 
 export function handleGlobalKeyDown(event: KeyboardEvent, handlers: ShortcutHandlers): void {
@@ -42,6 +44,20 @@ export function handleGlobalKeyDown(event: KeyboardEvent, handlers: ShortcutHand
   // 4. [ -> Toggle sidebar
   if (event.key === '[') {
     handlers.onToggleSidebar?.();
+    return;
+  }
+
+  // 5. 'l' or 'L' -> Loop current sentence / paragraph
+  if (event.key === 'l' || event.key === 'L') {
+    event.preventDefault();
+    handlers.onLoopCurrentSentence?.();
+    return;
+  }
+
+  // 6. 'g' or 'G' -> Toggle Study Guide publication / drawer
+  if (event.key === 'g' || event.key === 'G') {
+    event.preventDefault();
+    handlers.onToggleStudyGuide?.();
     return;
   }
 }
