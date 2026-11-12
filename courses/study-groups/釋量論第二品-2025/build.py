@@ -88,7 +88,17 @@ header.top p{margin:2px 0;color:var(--dim);font-size:13.5px}
 .lecture{margin-bottom:46px;scroll-margin-top:16px}
 .lecture h2{font-size:21px;margin:0 0 8px;padding:10px 14px;
   background:linear-gradient(90deg,#241f1a,transparent);border-left:4px solid var(--acc);
-  border-radius:0 6px 6px 0}
+  border-radius:0 6px 6px 0;cursor:pointer;user-select:none}
+.lecture h2 a{cursor:pointer}
+.tgl{background:none;border:none;color:var(--acc);font-size:15px;width:22px;
+  padding:0 2px 0 0;margin-right:2px;cursor:pointer;font-family:inherit;line-height:1}
+.tgl::before{content:"▾";display:inline-block;transition:transform .15s}
+.lecture.collapsed>.lbody{display:none}
+.lecture.collapsed .tgl::before{transform:rotate(-90deg)}
+.bulkctl{display:flex;gap:8px;margin-top:14px}
+.bulkctl button{background:var(--card2);border:1px solid var(--line);color:var(--fg);
+  border-radius:6px;padding:5px 14px;font-size:13px;cursor:pointer}
+.bulkctl button:hover{border-color:var(--acc);color:var(--acc)}
 .anchor{color:var(--dim);text-decoration:none;font-weight:400;margin-right:4px;font-size:.8em}
 .anchor:hover{color:var(--acc)}
 .meta{font-size:12.5px;color:var(--dim);margin:0 0 14px}
@@ -145,6 +155,8 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 }
 @media print{
   #toc,#q,#qcount,#tocbtn{display:none !important}
+  .bulkctl,.tgl{display:none !important}
+  .lecture.collapsed>.lbody{display:block}
   body{background:#fff;color:#111;font-size:11pt}
   main{max-width:none;padding:0}
   .q,.disclose{border-color:#ccc;background:#fff;break-inside:avoid}
@@ -163,8 +175,49 @@ const secs=[...document.querySelectorAll('.lecture')];
 const counter=document.getElementById('qcount');
 const tocLinks=[...document.querySelectorAll('#toc ol a')];
 let cur=-1;
+let snap=null; // 搜尋前的收合狀態快照（清除搜尋時還原）
 
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// ---- 收合／展開 ----
+const LSKEY='sgl-collapse:'+location.pathname;
+function setCol(s,c){
+  s.classList.toggle('collapsed',c);
+  const b=s.querySelector('.tgl');
+  if(b)b.setAttribute('aria-expanded',c?'false':'true');
+}
+function save(){
+  const c=secs.filter(s=>s.classList.contains('collapsed')).map(s=>s.id);
+  try{localStorage.setItem(LSKEY,JSON.stringify(c))}catch(e){}
+}
+function restoreSnap(){
+  if(snap===null)return;
+  snap.forEach(id=>{const s=document.getElementById(id);if(s)setCol(s,true);});
+  snap=null;save();
+}
+function resetSearch(){box.value='';clearMarks();restoreSnap();box.focus();}
+(function initCollapse(){
+  let saved=null;try{saved=JSON.parse(localStorage.getItem(LSKEY)||'null')}catch(e){}
+  if(Array.isArray(saved))secs.forEach(s=>setCol(s,saved.includes(s.id)));
+  else secs.forEach((s,i)=>setCol(s,i>0)); // 預設只展開第一講
+  const h=location.hash.slice(1);
+  if(h){const t=document.getElementById(h);
+    if(t&&t.classList.contains('lecture')){setCol(t,false);save();
+      setTimeout(()=>t.scrollIntoView({block:'start'}),0);}}
+})();
+document.querySelectorAll('.lecture h2').forEach(h2=>{
+  h2.addEventListener('click',e=>{
+    if(e.target.closest('a'))return;
+    const sec=h2.closest('.lecture');
+    snap=null;
+    setCol(sec,!sec.classList.contains('collapsed'));save();
+  });
+});
+document.getElementById('expall').addEventListener('click',()=>{snap=null;secs.forEach(s=>setCol(s,false));save();});
+document.getElementById('collall').addEventListener('click',()=>{snap=null;secs.forEach(s=>setCol(s,true));save();});
+tocLinks.forEach((a,i)=>a.addEventListener('click',()=>{
+  if(secs[i]){setCol(secs[i],false);save();}
+}));
 
 function clearMarks(){
   document.querySelectorAll('mark').forEach(m=>{
@@ -175,11 +228,13 @@ function clearMarks(){
 }
 
 function run(){
+  const q=box.value.trim();
+  if(!q){clearMarks();restoreSnap();return;}
+  if(snap===null)snap=secs.filter(s=>s.classList.contains('collapsed')).map(s=>s.id);
   clearMarks();
-  const q=box.value.trim(); if(!q) return;
   const lower=q.toLowerCase();
   let hits=0;
-  secs.forEach(s=>{if(s.textContent.toLowerCase().includes(lower))s.classList.add('hit');});
+  secs.forEach(s=>{if(s.textContent.toLowerCase().includes(lower)){s.classList.add('hit');setCol(s,false);}});
   const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   const nodes=[];
   while(w.nextNode()){
@@ -215,10 +270,8 @@ function run(){
 
 let tm;
 box.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(run,220);});
-document.getElementById('qclear').addEventListener('click',()=>{
-  box.value='';clearMarks();box.focus();
-});
-box.addEventListener('keydown',e=>{if(e.key==='Escape'){box.value='';clearMarks();}});
+document.getElementById('qclear').addEventListener('click',resetSearch);
+box.addEventListener('keydown',e=>{if(e.key==='Escape')resetSearch();});
 
 // scroll-spy：標示目前所在講次
 const spy=new IntersectionObserver(es=>{
@@ -480,8 +533,11 @@ def render(lectures, playlist_id, meta):
 
         out.append(f'<section class="lecture" id="{sec_id}">')
         out.append(
-            f'<h2><a class="anchor" href="#{sec_id}" '
+            f'<h2><button class="tgl" type="button" aria-expanded="true" '
+            f'aria-controls="{sec_id}-body" title="收合／展開本講"></button>'
+            f'<a class="anchor" href="#{sec_id}" '
             f'title="複製本講連結">#</a> {html_mod.escape(title)}</h2>')
+        out.append(f'<div class="lbody" id="{sec_id}-body">')
         meta_html = [f'\U0001F3AC <a href="https://www.youtube.com/watch?v={vid}&amp;t=0s" '
                      f'target="_blank" rel="noopener">開頭</a>']
         if dur:
@@ -494,7 +550,7 @@ def render(lectures, playlist_id, meta):
 
         if not blocks:
             out.append('<p class="none">此影片說明欄未附共學提綱。</p>')
-            out.append('</section>')
+            out.append('</div></section>')
             continue
 
         cur_section = None
@@ -549,7 +605,7 @@ def render(lectures, playlist_id, meta):
 
         if cur_section:
             out.append('</div>')  # /section
-        out.append('</section>')
+        out.append('</div></section>')
 
     # 統計
     stats = meta.get("stats", [])
@@ -578,6 +634,7 @@ def render(lectures, playlist_id, meta):
 <p>{html_mod.escape(meta.get("lede", ""))}</p>
 <p>{html_mod.escape(meta.get("lede2", ""))}</p>
 <div class="stats">{stats_html}</div>
+<div class="bulkctl"><button id="expall" type="button">全部展開</button><button id="collall" type="button">全部收合</button></div>
 </header>
 {chr(10).join(out)}
 <footer><p>{meta.get("footer", "")}</p></footer>

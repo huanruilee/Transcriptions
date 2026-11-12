@@ -36,7 +36,17 @@ header.top p{margin:2px 0;color:var(--dim);font-size:13.5px}
 .lecture{margin-bottom:46px;scroll-margin-top:16px}
 .lecture h2{font-size:21px;margin:0 0 8px;padding:10px 14px;
   background:linear-gradient(90deg,#241f1a,transparent);border-left:4px solid var(--acc);
-  border-radius:0 6px 6px 0}
+  border-radius:0 6px 6px 0;cursor:pointer;user-select:none}
+.lecture h2 a{cursor:pointer}
+.tgl{background:none;border:none;color:var(--acc);font-size:15px;width:22px;
+  padding:0 2px 0 0;margin-right:2px;cursor:pointer;font-family:inherit;line-height:1}
+.tgl::before{content:"▾";display:inline-block;transition:transform .15s}
+.lecture.collapsed>.lbody{display:none}
+.lecture.collapsed .tgl::before{transform:rotate(-90deg)}
+.bulkctl{display:flex;gap:8px;margin-top:14px}
+.bulkctl button{background:var(--card2);border:1px solid var(--line);color:var(--fg);
+  border-radius:6px;padding:5px 14px;font-size:13px;cursor:pointer}
+.bulkctl button:hover{border-color:var(--acc);color:var(--acc)}
 .anchor{color:var(--dim);text-decoration:none;font-weight:400;margin-right:4px;font-size:.8em}
 .anchor:hover{color:var(--acc)}
 .meta{font-size:12.5px;color:var(--dim);margin:0 0 14px}
@@ -93,6 +103,8 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 }
 @media print{
   #toc,#q,#qcount,#tocbtn{display:none !important}
+  .bulkctl,.tgl{display:none !important}
+  .lecture.collapsed>.lbody{display:block}
   body{background:#fff;color:#111;font-size:11pt}
   main{max-width:none;padding:0}
   .q,.disclose{border-color:#ccc;background:#fff;break-inside:avoid}
@@ -161,9 +173,11 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <p>每一講的共學提綱，每一題附法師開示的 YouTube 直接連結（點擊跳到該段開示）。</p>
 <p>時間碼取自官方 YouTube 章節；題號與子題對應取自影片說明欄「共學提綱」與「影片段落」。</p>
 <div class="stats"><span>47 支影片</span><span>130 題</span><span>160 個開示連結</span><span>116 題有開示</span><span>14 題未討論</span></div>
+<div class="bulkctl"><button id="expall" type="button">全部展開</button><button id="collall" type="button">全部收合</button></div>
 </header>
 <section class="lecture" id="v0">
-<h2><a class="anchor" href="#v0" title="複製本講連結">#</a> 第1講 調整學法的動機（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v0-body" title="收合／展開本講"></button><a class="anchor" href="#v0" title="複製本講連結">#</a> 第1講 調整學法的動機（上）</h2>
+<div class="lbody" id="v0-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=7QA1k4uxxV0&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:27:59 ｜ <a href="https://www.youtube.com/watch?v=7QA1k4uxxV0" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>解釋開經偈</h3>
 <div class="q">
@@ -206,9 +220,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v1">
-<h2><a class="anchor" href="#v1" title="複製本講連結">#</a> 第1講 調整學法的動機（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v1-body" title="收合／展開本講"></button><a class="anchor" href="#v1" title="複製本講連結">#</a> 第1講 調整學法的動機（下）</h2>
+<div class="lbody" id="v1-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=bO2f8SL6czc&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:40:42 ｜ <a href="https://www.youtube.com/watch?v=bO2f8SL6czc" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>破除學佛的錯誤觀念</h3>
 <div class="q">
@@ -251,9 +266,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v2">
-<h2><a class="anchor" href="#v2" title="複製本講連結">#</a> 第2講 如何探究真相（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v2-body" title="收合／展開本講"></button><a class="anchor" href="#v2" title="複製本講連結">#</a> 第2講 如何探究真相（上）</h2>
+<div class="lbody" id="v2-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=_mEd_2G8glg&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:45:03 ｜ <a href="https://www.youtube.com/watch?v=_mEd_2G8glg" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>說明比量的所依──正因公式</h3>
 <div class="q">
@@ -301,9 +317,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v3">
-<h2><a class="anchor" href="#v3" title="複製本講連結">#</a> 第2講 如何探究真相（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v3-body" title="收合／展開本講"></button><a class="anchor" href="#v3" title="複製本講連結">#</a> 第2講 如何探究真相（下）</h2>
+<div class="lbody" id="v3-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=__8WjGF3hhw&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:45:26 ｜ <a href="https://www.youtube.com/watch?v=__8WjGF3hhw" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>善用自身具備的能力去探究真相</h3>
 <div class="q">
@@ -344,9 +361,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v4">
-<h2><a class="anchor" href="#v4" title="複製本講連結">#</a> 第3講 略述集量論的禮讚文（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v4-body" title="收合／展開本講"></button><a class="anchor" href="#v4" title="複製本講連結">#</a> 第3講 略述集量論的禮讚文（上）</h2>
+<div class="lbody" id="v4-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=Ijg4E9LhOdw&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:36:51 ｜ <a href="https://www.youtube.com/watch?v=Ijg4E9LhOdw" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>介紹《集量論》的禮讚文</h3>
 <div class="q">
@@ -389,9 +407,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v5">
-<h2><a class="anchor" href="#v5" title="複製本講連結">#</a> 第3講 略述集量論的禮讚文（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v5-body" title="收合／展開本講"></button><a class="anchor" href="#v5" title="複製本講連結">#</a> 第3講 略述集量論的禮讚文（下）</h2>
+<div class="lbody" id="v5-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=N0T2AfsrbaE&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:48:54 ｜ <a href="https://www.youtube.com/watch?v=N0T2AfsrbaE" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>介紹《集量論》的禮讚文</h3>
 <div class="q">
@@ -449,9 +468,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v6">
-<h2><a class="anchor" href="#v6" title="複製本講連結">#</a> 第4講 皈依世尊前的省思（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v6-body" title="收合／展開本講"></button><a class="anchor" href="#v6" title="複製本講連結">#</a> 第4講 皈依世尊前的省思（上）</h2>
+<div class="lbody" id="v6-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=V_1vh1memNo&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:59:23 ｜ <a href="https://www.youtube.com/watch?v=V_1vh1memNo" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>重新思考為何選擇皈依世尊</h3>
 <div class="q">
@@ -490,9 +510,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v7">
-<h2><a class="anchor" href="#v7" title="複製本講連結">#</a> 第4講 皈依世尊前的省思（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v7-body" title="收合／展開本講"></button><a class="anchor" href="#v7" title="複製本講連結">#</a> 第4講 皈依世尊前的省思（下）</h2>
+<div class="lbody" id="v7-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=1dWaAT2cHuk&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:45:16 ｜ <a href="https://www.youtube.com/watch?v=1dWaAT2cHuk" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>進而思索如何依師之理</h3>
 <div class="q">
@@ -531,9 +552,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v8">
-<h2><a class="anchor" href="#v8" title="複製本講連結">#</a> 第5講 介紹量與量士夫（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v8-body" title="收合／展開本講"></button><a class="anchor" href="#v8" title="複製本講連結">#</a> 第5講 介紹量與量士夫（上）</h2>
+<div class="lbody" id="v8-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=WjcwStayz2Q&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:42:15 ｜ <a href="https://www.youtube.com/watch?v=WjcwStayz2Q" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>重點複習</h3>
 <div class="q">
@@ -572,9 +594,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v9">
-<h2><a class="anchor" href="#v9" title="複製本講連結">#</a> 第5講 介紹量與量士夫（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v9-body" title="收合／展開本講"></button><a class="anchor" href="#v9" title="複製本講連結">#</a> 第5講 介紹量與量士夫（下）</h2>
+<div class="lbody" id="v9-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=VbOU16xYVPY&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:38:02 ｜ <a href="https://www.youtube.com/watch?v=VbOU16xYVPY" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>在生活中如何思惟緣起</h3>
 <div class="q">
@@ -604,9 +627,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v10">
-<h2><a class="anchor" href="#v10" title="複製本講連結">#</a> 第6講 探究有無世間造物主（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v10-body" title="收合／展開本講"></button><a class="anchor" href="#v10" title="複製本講連結">#</a> 第6講 探究有無世間造物主（上）</h2>
+<div class="lbody" id="v10-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=7iJMqkgBi8g&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:44:53 ｜ <a href="https://www.youtube.com/watch?v=7iJMqkgBi8g" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>尋找善知識應有的態度</h3>
 <div class="q">
@@ -647,9 +671,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v11">
-<h2><a class="anchor" href="#v11" title="複製本講連結">#</a> 第6講 探究有無世間造物主（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v11-body" title="收合／展開本講"></button><a class="anchor" href="#v11" title="複製本講連結">#</a> 第6講 探究有無世間造物主（下）</h2>
+<div class="lbody" id="v11-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=9ew8eXJc2Nk&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:42:06 ｜ <a href="https://www.youtube.com/watch?v=9ew8eXJc2Nk" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>破斥世間造物主的本質</h3>
 <div class="q">
@@ -684,9 +709,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v12">
-<h2><a class="anchor" href="#v12" title="複製本講連結">#</a> 第7講 學法時應反觀自心</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v12-body" title="收合／展開本講"></button><a class="anchor" href="#v12" title="複製本講連結">#</a> 第7講 學法時應反觀自心</h2>
+<div class="lbody" id="v12-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=dT_f_FGivnU&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:47:29 ｜ <a href="https://www.youtube.com/watch?v=dT_f_FGivnU" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>藉由他宗的論述反觀自心</h3>
 <div class="q">
@@ -718,9 +744,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v13">
-<h2><a class="anchor" href="#v13" title="複製本講連結">#</a> 第8講 如何判別因果關係（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v13-body" title="收合／展開本講"></button><a class="anchor" href="#v13" title="複製本講連結">#</a> 第8講 如何判別因果關係（上）</h2>
+<div class="lbody" id="v13-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=ZLllHpFN-8M&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:42:33 ｜ <a href="https://www.youtube.com/watch?v=ZLllHpFN-8M" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>心是否為世間的造物主</h3>
 <div class="q">
@@ -754,9 +781,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v14">
-<h2><a class="anchor" href="#v14" title="複製本講連結">#</a> 第8講 如何判別因果關係（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v14-body" title="收合／展開本講"></button><a class="anchor" href="#v14" title="複製本講連結">#</a> 第8講 如何判別因果關係（下）</h2>
+<div class="lbody" id="v14-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=Yj-phMhCeGA&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:45:22 ｜ <a href="https://www.youtube.com/watch?v=Yj-phMhCeGA" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>因必須對於生果有所饒益</h3>
 <div class="q">
@@ -799,9 +827,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v15">
-<h2><a class="anchor" href="#v15" title="複製本講連結">#</a> 第9講 深究遍智存在與否（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v15-body" title="收合／展開本講"></button><a class="anchor" href="#v15" title="複製本講連結">#</a> 第9講 深究遍智存在與否（上）</h2>
+<div class="lbody" id="v15-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=iFRIilKgCWc&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:47:05 ｜ <a href="https://www.youtube.com/watch?v=iFRIilKgCWc" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>重點複習</h3>
 <div class="q">
@@ -838,9 +867,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v16">
-<h2><a class="anchor" href="#v16" title="複製本講連結">#</a> 第9講 深究遍智存在與否（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v16-body" title="收合／展開本講"></button><a class="anchor" href="#v16" title="複製本講連結">#</a> 第9講 深究遍智存在與否（下）</h2>
+<div class="lbody" id="v16-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=8_HnlssRYbs&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:57:44 ｜ <a href="https://www.youtube.com/watch?v=8_HnlssRYbs" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>他宗認為無法成辦這種遍智</h3>
 <div class="q">
@@ -876,9 +906,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v17">
-<h2><a class="anchor" href="#v17" title="複製本講連結">#</a> 第10講 依師前的基本觀念（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v17-body" title="收合／展開本講"></button><a class="anchor" href="#v17" title="複製本講連結">#</a> 第10講 依師前的基本觀念（上）</h2>
+<div class="lbody" id="v17-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=79fYtB0wPlY&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:46:47 ｜ <a href="https://www.youtube.com/watch?v=79fYtB0wPlY" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>造業的動機決定最終的結果</h3>
 <div class="q">
@@ -922,9 +953,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v18">
-<h2><a class="anchor" href="#v18" title="複製本講連結">#</a> 第10講 依師前的基本觀念（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v18-body" title="收合／展開本講"></button><a class="anchor" href="#v18" title="複製本講連結">#</a> 第10講 依師前的基本觀念（下）</h2>
+<div class="lbody" id="v18-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=2lTBsCdafpc&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:53:12 ｜ <a href="https://www.youtube.com/watch?v=2lTBsCdafpc" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>之所以要尋找善知識的原因</h3>
 <div class="q">
@@ -959,9 +991,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v19">
-<h2><a class="anchor" href="#v19" title="複製本講連結">#</a> 第11講 關於祈請與依師的內省（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v19-body" title="收合／展開本講"></button><a class="anchor" href="#v19" title="複製本講連結">#</a> 第11講 關於祈請與依師的內省（上）</h2>
+<div class="lbody" id="v19-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=kngthKXpN6M&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:55:35 ｜ <a href="https://www.youtube.com/watch?v=kngthKXpN6M" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>應以何種心態祈請諸佛菩薩</h3>
 <div class="q">
@@ -999,9 +1032,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v20">
-<h2><a class="anchor" href="#v20" title="複製本講連結">#</a> 第11講 關於祈請與依師的內省（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v20-body" title="收合／展開本講"></button><a class="anchor" href="#v20" title="複製本講連結">#</a> 第11講 關於祈請與依師的內省（下）</h2>
+<div class="lbody" id="v20-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=eTGhBkPOgxA&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:44:18 ｜ <a href="https://www.youtube.com/watch?v=eTGhBkPOgxA" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>善知識至少應具備幾種德相</h3>
 <div class="q">
@@ -1031,9 +1065,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v21">
-<h2><a class="anchor" href="#v21" title="複製本講連結">#</a> 第12講 修持大悲的重要性（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v21-body" title="收合／展開本講"></button><a class="anchor" href="#v21" title="複製本講連結">#</a> 第12講 修持大悲的重要性（上）</h2>
+<div class="lbody" id="v21-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=ZmTWgK8MFfM&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:50:22 ｜ <a href="https://www.youtube.com/watch?v=ZmTWgK8MFfM" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>修悲心時所應思考的相關問題</h3>
 <div class="q">
@@ -1080,9 +1115,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v22">
-<h2><a class="anchor" href="#v22" title="複製本講連結">#</a> 第12講 修持大悲的重要性（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v22-body" title="收合／展開本講"></button><a class="anchor" href="#v22" title="複製本講連結">#</a> 第12講 修持大悲的重要性（下）</h2>
+<div class="lbody" id="v22-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=nainRhshJEI&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 3:07:41 ｜ <a href="https://www.youtube.com/watch?v=nainRhshJEI" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>小乘行者的心中有無大悲心</h3>
 <div class="q">
@@ -1122,9 +1158,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v23">
-<h2><a class="anchor" href="#v23" title="複製本講連結">#</a> 第13講 分析有無前後世（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v23-body" title="收合／展開本講"></button><a class="anchor" href="#v23" title="複製本講連結">#</a> 第13講 分析有無前後世（上）</h2>
+<div class="lbody" id="v23-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=M6gOg7dr6io&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:34:42 ｜ <a href="https://www.youtube.com/watch?v=M6gOg7dr6io" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>大悲心以何種方式緣著一切有情</h3>
 <div class="q">
@@ -1161,9 +1198,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v24">
-<h2><a class="anchor" href="#v24" title="複製本講連結">#</a> 第13講 分析有無前後世（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v24-body" title="收合／展開本講"></button><a class="anchor" href="#v24" title="複製本講連結">#</a> 第13講 分析有無前後世（下）</h2>
+<div class="lbody" id="v24-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=s0NCb1KDwV0&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:52:28 ｜ <a href="https://www.youtube.com/watch?v=s0NCb1KDwV0" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>心能否在身體之外獨立運作</h3>
 <div class="q">
@@ -1206,9 +1244,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v25">
-<h2><a class="anchor" href="#v25" title="複製本講連結">#</a> 第14講 五根與意知的關係（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v25-body" title="收合／展開本講"></button><a class="anchor" href="#v25" title="複製本講連結">#</a> 第14講 五根與意知的關係（上）</h2>
+<div class="lbody" id="v25-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=uFmVc19pIqs&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:41:09 ｜ <a href="https://www.youtube.com/watch?v=uFmVc19pIqs" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="q">
 <div class="qhead"><span class="qnum">第1題</span> 請問：上週大組共學為何先討論「心能否在身體之外獨立運作」，再討論「如果心的形成完全依賴四大，會出現哪些過失」，這兩者之間有何關聯？</div>
@@ -1236,9 +1275,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v26">
-<h2><a class="anchor" href="#v26" title="複製本講連結">#</a> 第14講 五根與意知的關係（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v26-body" title="收合／展開本講"></button><a class="anchor" href="#v26" title="複製本講連結">#</a> 第14講 五根與意知的關係（下）</h2>
+<div class="lbody" id="v26-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=L8AzPxI0YCY&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:36:35 ｜ <a href="https://www.youtube.com/watch?v=L8AzPxI0YCY" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>以喻說明苦樂源自於心</h3>
 <div class="q">
@@ -1272,9 +1312,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v27">
-<h2><a class="anchor" href="#v27" title="複製本講連結">#</a> 第15講 探討身心如何運作（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v27-body" title="收合／展開本講"></button><a class="anchor" href="#v27" title="複製本講連結">#</a> 第15講 探討身心如何運作（上）</h2>
+<div class="lbody" id="v27-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=wXKaQ9ygdd4&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:44:17 ｜ <a href="https://www.youtube.com/watch?v=wXKaQ9ygdd4" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>五根是由意知所生</h3>
 <div class="q">
@@ -1315,9 +1356,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v28">
-<h2><a class="anchor" href="#v28" title="複製本講連結">#</a> 第15講 探討身心如何運作（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v28-body" title="收合／展開本講"></button><a class="anchor" href="#v28" title="複製本講連結">#</a> 第15講 探討身心如何運作（下）</h2>
+<div class="lbody" id="v28-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=D1-MRY1j844&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:49:26 ｜ <a href="https://www.youtube.com/watch?v=D1-MRY1j844" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>斷除煩惱之後心是否會中斷</h3>
 <div class="q">
@@ -1365,9 +1407,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v29">
-<h2><a class="anchor" href="#v29" title="複製本講連結">#</a> 第16講 介紹特殊因與近取因（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v29-body" title="收合／展開本講"></button><a class="anchor" href="#v29" title="複製本講連結">#</a> 第16講 介紹特殊因與近取因（上）</h2>
+<div class="lbody" id="v29-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=j88bbDgFvy8&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:49:58 ｜ <a href="https://www.youtube.com/watch?v=j88bbDgFvy8" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>解釋何謂特殊因</h3>
 <div class="q">
@@ -1402,9 +1445,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v30">
-<h2><a class="anchor" href="#v30" title="複製本講連結">#</a> 第16講 介紹特殊因與近取因（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v30-body" title="收合／展開本講"></button><a class="anchor" href="#v30" title="複製本講連結">#</a> 第16講 介紹特殊因與近取因（下）</h2>
+<div class="lbody" id="v30-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=XoiGo0I6cCk&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:50:09 ｜ <a href="https://www.youtube.com/watch?v=XoiGo0I6cCk" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>詳細說明身並非心的近取因</h3>
 <div class="q">
@@ -1433,9 +1477,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v31">
-<h2><a class="anchor" href="#v31" title="複製本講連結">#</a> 第17講 前後世的辨析與總攝（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v31-body" title="收合／展開本講"></button><a class="anchor" href="#v31" title="複製本講連結">#</a> 第17講 前後世的辨析與總攝（上）</h2>
+<div class="lbody" id="v31-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=T_YckC3PK7g&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:55:10 ｜ <a href="https://www.youtube.com/watch?v=T_YckC3PK7g" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>深入探討特殊因及其條件</h3>
 <div class="q">
@@ -1468,9 +1513,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v32">
-<h2><a class="anchor" href="#v32" title="複製本講連結">#</a> 第17講 前後世的辨析與總攝（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v32-body" title="收合／展開本講"></button><a class="anchor" href="#v32" title="複製本講連結">#</a> 第17講 前後世的辨析與總攝（下）</h2>
+<div class="lbody" id="v32-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=6X3ygKQVK6w&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:53:01 ｜ <a href="https://www.youtube.com/watch?v=6X3ygKQVK6w" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>證成有前世的四種理路</h3>
 <div class="q">
@@ -1513,9 +1559,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v33">
-<h2><a class="anchor" href="#v33" title="複製本講連結">#</a> 前後世學習回顧與自我省思</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v33-body" title="收合／展開本講"></button><a class="anchor" href="#v33" title="複製本講連結">#</a> 前後世學習回顧與自我省思</h2>
+<div class="lbody" id="v33-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=-m6sV_rS1bU&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:53:27 ｜ <a href="https://www.youtube.com/watch?v=-m6sV_rS1bU" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="q">
 <div class="qhead"><span class="qnum">第1題</span> 在學習《釋量論》之前與之後，我對於前後世的理解有何不同？其中，哪一個論證或思考方式最令我信服？原因是什麼？</div>
@@ -1533,9 +1580,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 <div class="qhead"><span class="qnum">第4題</span> 目前，我對於前後世仍有哪些疑惑，或尚未完全說服自己的地方？</div>
 <div class="disclose none"><span class="dlabel">法師開示</span><span class="dtags">此題該講未討論（他日再論）</span></div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v34">
-<h2><a class="anchor" href="#v34" title="複製本講連結">#</a> 第23講 四諦與其修持要義（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v34-body" title="收合／展開本講"></button><a class="anchor" href="#v34" title="複製本講連結">#</a> 第23講 四諦與其修持要義（上）</h2>
+<div class="lbody" id="v34-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=Kfrn27RgpXo&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:46:36 ｜ <a href="https://www.youtube.com/watch?v=Kfrn27RgpXo" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>至今我們仍無法離苦的原因</h3>
 <div class="q">
@@ -1573,9 +1621,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v35">
-<h2><a class="anchor" href="#v35" title="複製本講連結">#</a> 第23講 四諦與其修持要義（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v35-body" title="收合／展開本講"></button><a class="anchor" href="#v35" title="複製本講連結">#</a> 第23講 四諦與其修持要義（下）</h2>
+<div class="lbody" id="v35-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=AA6JyKOI1AA&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:49:48 ｜ <a href="https://www.youtube.com/watch?v=AA6JyKOI1AA" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>應該設法讓心成為道的本質</h3>
 <div class="q">
@@ -1623,9 +1672,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v36">
-<h2><a class="anchor" href="#v36" title="複製本講連結">#</a> 第24講 苦諦的四種行相（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v36-body" title="收合／展開本講"></button><a class="anchor" href="#v36" title="複製本講連結">#</a> 第24講 苦諦的四種行相（上）</h2>
+<div class="lbody" id="v36-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=DbBo5ZedMVg&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:46:31 ｜ <a href="https://www.youtube.com/watch?v=DbBo5ZedMVg" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>以喻破斥因中有果的主張</h3>
 <div class="q">
@@ -1676,9 +1726,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v37">
-<h2><a class="anchor" href="#v37" title="複製本講連結">#</a> 第24講 苦諦的四種行相（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v37-body" title="收合／展開本講"></button><a class="anchor" href="#v37" title="複製本講連結">#</a> 第24講 苦諦的四種行相（下）</h2>
+<div class="lbody" id="v37-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=-uEGLcrHyGQ&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:43:24 ｜ <a href="https://www.youtube.com/watch?v=-uEGLcrHyGQ" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>苦諦的四種行相之四：空</h3>
 <div class="q">
@@ -1715,9 +1766,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v38">
-<h2><a class="anchor" href="#v38" title="複製本講連結">#</a> 第25講 集諦的前三種行相（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v38-body" title="收合／展開本講"></button><a class="anchor" href="#v38" title="複製本講連結">#</a> 第25講 集諦的前三種行相（上）</h2>
+<div class="lbody" id="v38-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=lu1dedE3Ncs&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:43:12 ｜ <a href="https://www.youtube.com/watch?v=lu1dedE3Ncs" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>苦樂的感受並非由境主導</h3>
 <div class="q">
@@ -1752,9 +1804,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v39">
-<h2><a class="anchor" href="#v39" title="複製本講連結">#</a> 第25講 集諦的前三種行相（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v39-body" title="收合／展開本講"></button><a class="anchor" href="#v39" title="複製本講連結">#</a> 第25講 集諦的前三種行相（下）</h2>
+<div class="lbody" id="v39-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=_gPAgRMUgkA&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:50:21 ｜ <a href="https://www.youtube.com/watch?v=_gPAgRMUgkA" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>鬧鐘的觸是否為眼根知的因</h3>
 <div class="q">
@@ -1791,9 +1844,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v40">
-<h2><a class="anchor" href="#v40" title="複製本講連結">#</a> 第26講 集諦與滅諦的行相（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v40-body" title="收合／展開本講"></button><a class="anchor" href="#v40" title="複製本講連結">#</a> 第26講 集諦與滅諦的行相（上）</h2>
+<div class="lbody" id="v40-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=AtYqSdUIXDo&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:37:16 ｜ <a href="https://www.youtube.com/watch?v=AtYqSdUIXDo" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>集諦的四種行相之四：緣</h3>
 <div class="q">
@@ -1838,9 +1892,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v41">
-<h2><a class="anchor" href="#v41" title="複製本講連結">#</a> 第26講 集諦與滅諦的行相（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v41-body" title="收合／展開本講"></button><a class="anchor" href="#v41" title="複製本講連結">#</a> 第26講 集諦與滅諦的行相（下）</h2>
+<div class="lbody" id="v41-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=t4N3uKWRkKs&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:50:32 ｜ <a href="https://www.youtube.com/watch?v=t4N3uKWRkKs" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>修行人如何面對悅意境</h3>
 <div class="q">
@@ -1888,9 +1943,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v42">
-<h2><a class="anchor" href="#v42" title="複製本講連結">#</a> 第27講 空與無我的差異（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v42-body" title="收合／展開本講"></button><a class="anchor" href="#v42" title="複製本講連結">#</a> 第27講 空與無我的差異（上）</h2>
+<div class="lbody" id="v42-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=8sDCFUj5E_c&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:46:22 ｜ <a href="https://www.youtube.com/watch?v=8sDCFUj5E_c" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>區分心中顯現的我與實際的我</h3>
 <div class="q">
@@ -1933,9 +1989,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v43">
-<h2><a class="anchor" href="#v43" title="複製本講連結">#</a> 第27講 空與無我的差異（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v43-body" title="收合／展開本講"></button><a class="anchor" href="#v43" title="複製本講連結">#</a> 第27講 空與無我的差異（下）</h2>
+<div class="lbody" id="v43-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=C0yhUazs0CU&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:50:03 ｜ <a href="https://www.youtube.com/watch?v=C0yhUazs0CU" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>以喻說明我由名言假立而成</h3>
 <div class="q">
@@ -1968,9 +2025,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v44">
-<h2><a class="anchor" href="#v44" title="複製本講連結">#</a> 第28講 滅諦的後三種行相（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v44-body" title="收合／展開本講"></button><a class="anchor" href="#v44" title="複製本講連結">#</a> 第28講 滅諦的後三種行相（上）</h2>
+<div class="lbody" id="v44-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=NvsCBFbyRO0&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:32:18 ｜ <a href="https://www.youtube.com/watch?v=NvsCBFbyRO0" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>探討我念與我執的差異</h3>
 <div class="q">
@@ -2018,9 +2076,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v45">
-<h2><a class="anchor" href="#v45" title="複製本講連結">#</a> 第28講 滅諦的後三種行相（下）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v45-body" title="收合／展開本講"></button><a class="anchor" href="#v45" title="複製本講連結">#</a> 第28講 滅諦的後三種行相（下）</h2>
+<div class="lbody" id="v45-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=PYIbCsZmPHg&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:43:50 ｜ <a href="https://www.youtube.com/watch?v=PYIbCsZmPHg" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>現證無我未必能斷薩迦耶</h3>
 <div class="q">
@@ -2055,9 +2114,10 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <section class="lecture" id="v46">
-<h2><a class="anchor" href="#v46" title="複製本講連結">#</a> 第29講 無我慧才是解脫道（上）</h2>
+<h2><button class="tgl" type="button" aria-expanded="true" aria-controls="v46-body" title="收合／展開本講"></button><a class="anchor" href="#v46" title="複製本講連結">#</a> 第29講 無我慧才是解脫道（上）</h2>
+<div class="lbody" id="v46-body">
 <p class="meta">🎬 <a href="https://www.youtube.com/watch?v=wJn8cpcsYBQ&amp;t=0s" target="_blank" rel="noopener">開頭</a> ｜ ⏱ 2:48:42 ｜ <a href="https://www.youtube.com/watch?v=wJn8cpcsYBQ" target="_blank" rel="noopener">YouTube</a> ｜ <a href="https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh" target="_blank" rel="noopener">播放列表</a></p>
 <div class="section"><h3>各別介紹心與境的自性</h3>
 <div class="q">
@@ -2095,7 +2155,7 @@ footer code{background:var(--card2);padding:1px 5px;border-radius:4px;font-size:
 </div>
 </div>
 </div>
-</section>
+</div></section>
 <footer><p>資料來源：2025《釋量論・第二品》大組共學 YouTube 播放清單 <code>PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh</code>（52 支影片；其中 5 支為私人影片，未列於本頁）。時間碼取自各影片說明欄的官方章節，非人工聽核。</p></footer>
 </main></div>
 <button id="tocbtn">☰ 目錄</button>
@@ -2105,8 +2165,49 @@ const secs=[...document.querySelectorAll('.lecture')];
 const counter=document.getElementById('qcount');
 const tocLinks=[...document.querySelectorAll('#toc ol a')];
 let cur=-1;
+let snap=null; // 搜尋前的收合狀態快照（清除搜尋時還原）
 
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// ---- 收合／展開 ----
+const LSKEY='sgl-collapse:'+location.pathname;
+function setCol(s,c){
+  s.classList.toggle('collapsed',c);
+  const b=s.querySelector('.tgl');
+  if(b)b.setAttribute('aria-expanded',c?'false':'true');
+}
+function save(){
+  const c=secs.filter(s=>s.classList.contains('collapsed')).map(s=>s.id);
+  try{localStorage.setItem(LSKEY,JSON.stringify(c))}catch(e){}
+}
+function restoreSnap(){
+  if(snap===null)return;
+  snap.forEach(id=>{const s=document.getElementById(id);if(s)setCol(s,true);});
+  snap=null;save();
+}
+function resetSearch(){box.value='';clearMarks();restoreSnap();box.focus();}
+(function initCollapse(){
+  let saved=null;try{saved=JSON.parse(localStorage.getItem(LSKEY)||'null')}catch(e){}
+  if(Array.isArray(saved))secs.forEach(s=>setCol(s,saved.includes(s.id)));
+  else secs.forEach((s,i)=>setCol(s,i>0)); // 預設只展開第一講
+  const h=location.hash.slice(1);
+  if(h){const t=document.getElementById(h);
+    if(t&&t.classList.contains('lecture')){setCol(t,false);save();
+      setTimeout(()=>t.scrollIntoView({block:'start'}),0);}}
+})();
+document.querySelectorAll('.lecture h2').forEach(h2=>{
+  h2.addEventListener('click',e=>{
+    if(e.target.closest('a'))return;
+    const sec=h2.closest('.lecture');
+    snap=null;
+    setCol(sec,!sec.classList.contains('collapsed'));save();
+  });
+});
+document.getElementById('expall').addEventListener('click',()=>{snap=null;secs.forEach(s=>setCol(s,false));save();});
+document.getElementById('collall').addEventListener('click',()=>{snap=null;secs.forEach(s=>setCol(s,true));save();});
+tocLinks.forEach((a,i)=>a.addEventListener('click',()=>{
+  if(secs[i]){setCol(secs[i],false);save();}
+}));
 
 function clearMarks(){
   document.querySelectorAll('mark').forEach(m=>{
@@ -2117,11 +2218,13 @@ function clearMarks(){
 }
 
 function run(){
+  const q=box.value.trim();
+  if(!q){clearMarks();restoreSnap();return;}
+  if(snap===null)snap=secs.filter(s=>s.classList.contains('collapsed')).map(s=>s.id);
   clearMarks();
-  const q=box.value.trim(); if(!q) return;
   const lower=q.toLowerCase();
   let hits=0;
-  secs.forEach(s=>{if(s.textContent.toLowerCase().includes(lower))s.classList.add('hit');});
+  secs.forEach(s=>{if(s.textContent.toLowerCase().includes(lower)){s.classList.add('hit');setCol(s,false);}});
   const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   const nodes=[];
   while(w.nextNode()){
@@ -2157,10 +2260,8 @@ function run(){
 
 let tm;
 box.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(run,220);});
-document.getElementById('qclear').addEventListener('click',()=>{
-  box.value='';clearMarks();box.focus();
-});
-box.addEventListener('keydown',e=>{if(e.key==='Escape'){box.value='';clearMarks();}});
+document.getElementById('qclear').addEventListener('click',resetSearch);
+box.addEventListener('keydown',e=>{if(e.key==='Escape')resetSearch();});
 
 // scroll-spy：標示目前所在講次
 const spy=new IntersectionObserver(es=>{
