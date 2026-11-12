@@ -68,6 +68,13 @@ export const useCourseStore = defineStore('course', {
         path: 'courses/三主要道',
         mediaType: 'video/youtube',
       },
+      {
+        id: 'pusa-jiu-shi-zhe-yang-cheng-fo',
+        title: '菩薩就是這樣成佛',
+        master: '智善法師',
+        path: 'courses/菩薩就是這樣成佛',
+        mediaType: 'video/youtube',
+      },
     ],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],
