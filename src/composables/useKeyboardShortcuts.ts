@@ -5,6 +5,8 @@ export interface ShortcutHandlers {
   onFocusSearch?: () => void;
   onLoopCurrentSentence?: () => void;
   onToggleStudyGuide?: () => void;
+  onSeekBackward?: (seconds?: number) => void;
+  onSeekForward?: (seconds?: number) => void;
 }
 
 export function handleGlobalKeyDown(event: KeyboardEvent, handlers: ShortcutHandlers): void {
@@ -47,14 +49,32 @@ export function handleGlobalKeyDown(event: KeyboardEvent, handlers: ShortcutHand
     return;
   }
 
-  // 5. 'l' or 'L' -> Loop current sentence / paragraph
-  if (event.key === 'l' || event.key === 'L') {
+  // 5. 'j' or 'J' -> Rewind 10s (standard video/audio shortcut)
+  if (event.key === 'j' || event.key === 'J') {
     event.preventDefault();
-    handlers.onLoopCurrentSentence?.();
+    handlers.onSeekBackward?.(10);
     return;
   }
 
-  // 6. 'g' or 'G' -> Toggle Study Guide publication / drawer
+  // 6. 'k' or 'K' -> Play/Pause toggle
+  if (event.key === 'k' || event.key === 'K') {
+    event.preventDefault();
+    handlers.onTogglePlay?.();
+    return;
+  }
+
+  // 7. 'l' or 'L' -> Forward 10s (or when modified, loop sentence)
+  if (event.key === 'l' || event.key === 'L') {
+    event.preventDefault();
+    if (event.shiftKey) {
+      handlers.onLoopCurrentSentence?.();
+    } else {
+      handlers.onSeekForward?.(10);
+    }
+    return;
+  }
+
+  // 8. 'g' or 'G' -> Toggle Study Guide publication / drawer
   if (event.key === 'g' || event.key === 'G') {
     event.preventDefault();
     handlers.onToggleStudyGuide?.();

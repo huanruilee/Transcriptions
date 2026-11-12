@@ -657,6 +657,24 @@
           >
             {{ isMediaPlaying ? '⏸️' : '▶️' }}
           </button>
+          <button
+            id="media-rewind-10-btn"
+            class="custom-seek-step-btn"
+            title="快退 10 秒 (J)"
+            type="button"
+            @click="seekRelative(-10)"
+          >
+            ↺10s
+          </button>
+          <button
+            id="media-forward-10-btn"
+            class="custom-seek-step-btn"
+            title="快進 10 秒 (L)"
+            type="button"
+            @click="seekRelative(10)"
+          >
+            ↻10s
+          </button>
           <span class="custom-time-readout">
             {{ formatTime(playerStore.currentTime) }} / {{ formatTime(mediaDuration) }}
           </span>
@@ -1325,6 +1343,13 @@ function seekParagraph(paragraph: any) {
   seekToTime(targetTime);
 }
 
+function seekRelative(deltaSeconds: number) {
+  const current = playerStore.currentTime || 0;
+  const target = Math.max(0, current + deltaSeconds);
+  seekToTime(target);
+  uiStore.showToast(`${deltaSeconds > 0 ? '快進' : '倒退'} ${Math.abs(deltaSeconds)} 秒`, 'info', 1200);
+}
+
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
@@ -1648,6 +1673,12 @@ function setupKeyboardShortcuts() {
     handleGlobalKeyDown(e, {
       onTogglePlay: () => {
         toggleMediaPlay();
+      },
+      onSeekBackward: (sec = 10) => {
+        seekRelative(-sec);
+      },
+      onSeekForward: (sec = 10) => {
+        seekRelative(sec);
       },
       onToggleSidebar: () => toggleSidebar(),
       onCloseModal: () => {
@@ -3066,8 +3097,9 @@ if (typeof window !== 'undefined') {
   border-bottom: 2px solid var(--highlight-border);
   color: var(--text-main);
   font-weight: 600;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(180, 83, 9, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.18);
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 
 .sentence.has-correction {
@@ -3267,6 +3299,29 @@ if (typeof window !== 'undefined') {
 
 .custom-play-btn:hover {
   transform: scale(1.08);
+}
+
+.custom-seek-step-btn {
+  background: var(--surface-bg, rgba(0, 0, 0, 0.04));
+  color: var(--text-main, #374151);
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 6px;
+  padding: 3px 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.custom-seek-step-btn:hover {
+  background: var(--primary-color, #1f2937);
+  color: #fff;
+  border-color: var(--primary-color, #1f2937);
+  transform: translateY(-1px);
 }
 
 .custom-time-readout {
