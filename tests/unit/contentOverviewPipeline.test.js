@@ -30,10 +30,12 @@ test('discovers every canonical transcript without including derivative artifact
   const targets = discoverTranscriptTargets(repoRoot);
   const relativePaths = targets.map((target) => target.relativePath);
 
-  assert.equal(targets.length, 303);
+  assert.equal(targets.length, 305);
   assert.ok(relativePaths.includes('courses/四念住/sessions/session_01.json'));
   assert.ok(relativePaths.includes('courses/三主要道/sessions/session_01.json'));
   assert.ok(relativePaths.includes('courses/入中論善顯密意疏/sessions/session_110B.json'));
+  assert.ok(relativePaths.includes('courses/菩薩就是這樣成佛/sessions/session_25.json'));
+  assert.ok(relativePaths.includes('courses/菩薩就是這樣成佛/sessions/session_26.json'));
   assert.ok(!relativePaths.some((value) => value.endsWith('_anchored.json')));
   assert.ok(!relativePaths.some((value) => value.includes('/candidate.json')));
 });
@@ -44,11 +46,11 @@ test('selects a deterministic risk-stratified sample across every course', () =>
   const second = selectStratifiedSample(targets, { rate: 0.1, minPerCourse: 3 });
   const courseCounts = Object.groupBy(first, (target) => target.courseId);
 
-  assert.equal(first.length, 35);
+  assert.equal(first.length, 37);
   assert.deepEqual(first.map((target) => target.sourceTranscriptId), second.map((target) => target.sourceTranscriptId));
-  assert.equal(Object.keys(courseCounts).length, 5);
+  assert.equal(Object.keys(courseCounts).length, 6);
   // 每個課程至少要抽到 1 份；只有累積達 minPerCourse 的課程才要求抽滿 3 份。
-  // 三主要道目前僅第 01 講完成（批次 0 樣板），尚未達 minPerCourse。
+  // 三主要道目前僅第 01 講、菩薩就是這樣成佛目前先轉寫 25/26 講，尚未達 minPerCourse。
   const perCourse = new Map(targets.map((target) => [target.courseId, 0]));
   for (const target of targets) {
     perCourse.set(target.courseId, (perCourse.get(target.courseId) ?? 0) + 1);
