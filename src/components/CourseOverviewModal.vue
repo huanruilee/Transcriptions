@@ -6,6 +6,7 @@ const props = defineProps<{
   sessions: OverviewSessionItem[];
   currentSessionId: string;
   courseTitle: string;
+  courseMaster?: string;
 }>();
 
 const emit = defineEmits<{
@@ -50,7 +51,7 @@ function handleSelect(sessionId: string) {
 
       <!-- Hero Header matching V1 -->
       <div class="course-overview-hero">
-        <div class="hero-desc">見悲青增格西 主講 · 音文雙向同步 · 逐字稿 + 科判目錄</div>
+        <div class="hero-desc">{{ courseMaster ? `${courseMaster} 主講` : '經典研讀' }} · 音文雙向同步 · 逐字稿 + 科判目錄</div>
         <div class="hero-badges">
           <span class="hero-badge">📚 全套 {{ sessions.length }} 講</span>
           <span class="hero-badge">🎧 音文同步</span>

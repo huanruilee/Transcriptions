@@ -757,6 +757,7 @@
       :sessions="overviewSessions"
       :current-session-id="currentSessionId"
       :course-title="currentCourseTitle"
+      :course-master="currentCourseMaster"
       @select="selectSession"
       @close="isOverviewModalOpen = false"
     />
