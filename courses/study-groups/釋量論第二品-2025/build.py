@@ -199,7 +199,7 @@ function resetSearch(){box.value='';clearMarks();restoreSnap();box.focus();}
 (function initCollapse(){
   let saved=null;try{saved=JSON.parse(localStorage.getItem(LSKEY)||'null')}catch(e){}
   if(Array.isArray(saved))secs.forEach(s=>setCol(s,saved.includes(s.id)));
-  else secs.forEach((s,i)=>setCol(s,i>0)); // 預設只展開第一講
+  else secs.forEach(s=>setCol(s,true)); // 預設全部收合
   const h=location.hash.slice(1);
   if(h){const t=document.getElementById(h);
     if(t&&t.classList.contains('lecture')){setCol(t,false);save();
@@ -403,6 +403,9 @@ def parse_description(desc):
         if msub and cur_q is not None:
             cur_q["subs"].append((msub.group(1), msub.group(2).strip()))
             continue
+        # 題幹續行（多行題目）；☆/🎉 為裝飾行，不併入
+        if cur_q is not None and not line.lstrip().startswith(("☆", "🎉")):
+            cur_q["text"] += "\n" + line.strip()
     return blocks, chapters
 
 
@@ -568,7 +571,7 @@ def render(lectures, playlist_id, meta):
                 qtext = qtext.replace(UNDISCUSSED, "").replace("※", "").strip()
             out.append('<div class="q">')
             out.append(f'<div class="qhead"><span class="qnum">第{q["no"]}題</span> '
-                       f'{html_mod.escape(qtext)}</div>')
+                       f'{html_mod.escape(qtext).replace(chr(10), "<br>")}</div>')
 
             if q["subs"]:
                 out.append('<ul class="subs">')
