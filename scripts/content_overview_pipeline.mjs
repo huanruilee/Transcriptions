@@ -571,32 +571,76 @@ export function buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCa
   return request;
 }
 
-function callGx10Fallback(messages, maxOutputTokens) {
-  const endpoint = process.env.OVERVIEW_LLM_ENDPOINT || 'http://100.113.144.100:18765/v1/chat/completions';
-  const model = process.env.OVERVIEW_LLM_MODEL || 'nvidia/Qwen3.8-27B-NVFP4';
+function readEnvKey(keyName) {
+  if (process.env[keyName]) return process.env[keyName].trim();
+  const envPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.env');
+  if (!fs.existsSync(envPath)) return '';
+  for (const line of fs.readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eq = trimmed.indexOf('=');
+    if (eq > 0 && trimmed.slice(0, eq).trim() === keyName) {
+      return trimmed.slice(eq + 1).trim().replace(/^['"]|['"]$/g, '');
+    }
+  }
+  return '';
+}
+
+function callOpenAiCompatFallback(messages, maxOutputTokens, endpoint, model, apiKey = '') {
   const body = JSON.stringify({
     model,
     temperature: 0,
-    max_tokens: Math.max(2048, Number(maxOutputTokens) || 4096),
+    max_tokens: Math.max(4096, Number(maxOutputTokens) || 4096),
     chat_template_kwargs: { enable_thinking: false },
     messages,
   });
-  const result = spawnSync('curl', [
-    '-sS', '--max-time', '180',
-    '-H', 'Content-Type: application/json',
-    '-d', body,
-    endpoint,
-  ], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(result.stderr.trim() || `GX10 curl exited ${result.status}`);
+  const args = ['-sS', '--max-time', '180', '-H', 'Content-Type: application/json'];
+  if (apiKey) args.push('-H', `Authorization: Bearer ${apiKey}`);
+  args.push('-d', body, endpoint);
+
+  const result = spawnSync('curl', args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr.trim() || `Fallback curl exited ${result.status}`);
   const data = JSON.parse(result.stdout);
-  if (data.error) throw new Error(`GX10 error: ${JSON.stringify(data.error)}`);
+  if (data.error) throw new Error(`Fallback error: ${JSON.stringify(data.error)}`);
   const text = data?.choices?.[0]?.message?.content ?? '';
   return parseModelJson(text);
 }
 
+function callFallbackProvider(messages, maxOutputTokens) {
+  if (process.env.OVERVIEW_LLM_ENDPOINT) {
+    return callOpenAiCompatFallback(
+      messages,
+      maxOutputTokens,
+      process.env.OVERVIEW_LLM_ENDPOINT,
+      process.env.OVERVIEW_LLM_MODEL || 'nvidia/Qwen3.8-27B-NVFP4',
+      process.env.OVERVIEW_LLM_API_KEY || readEnvKey('ENEURAL_API_KEY'),
+    );
+  }
+  const eneuralKey = readEnvKey('ENEURAL_API_KEY');
+  if (eneuralKey) {
+    try {
+      return callOpenAiCompatFallback(
+        messages,
+        maxOutputTokens,
+        'https://agents.eneural.ai/v1/chat/completions',
+        process.env.ENEURAL_MODEL || 'glm53-flash',
+        eneuralKey,
+      );
+    } catch {
+      // Fall through to GX10
+    }
+  }
+  return callOpenAiCompatFallback(
+    messages,
+    maxOutputTokens,
+    'http://100.113.144.100:18765/v1/chat/completions',
+    'nvidia/Qwen3.8-27B-NVFP4',
+  );
+}
+
 function callMiniMax(messages, maxOutputTokens, promptCacheKey, options = {}) {
   if (process.env.OVERVIEW_LLM_ENDPOINT) {
-    return callGx10Fallback(messages, maxOutputTokens);
+    return callFallbackProvider(messages, maxOutputTokens);
   }
   const request = buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCacheKey, options);
   const result = spawnSync(process.execPath, [RESPONSES_HELPER], {
@@ -607,7 +651,7 @@ function callMiniMax(messages, maxOutputTokens, promptCacheKey, options = {}) {
   if (result.status !== 0) {
     const errText = result.stderr.trim() || `MiniMax Responses helper exited ${result.status}`;
     if (/2056|quota|Token Plan|HTTP 500|HTTP 429/i.test(errText)) {
-      return callGx10Fallback(messages, maxOutputTokens);
+      return callFallbackProvider(messages, maxOutputTokens);
     }
     throw new Error(errText);
   }
