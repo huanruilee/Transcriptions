@@ -1,0 +1,76 @@
+{
+  "version": "1.0.0",
+  "description": "佛學與經論上下文消歧手冊（邊界案例庫）——防止全域盲目替換與過度修正",
+  "rules": [
+    {
+      "id": "DISAMB_001",
+      "term_pair": "自性 vs 自信",
+      "target_correct": "自性",
+      "target_keep": "自信",
+      "correct_context_keywords": ["空", "無自性", "實有", "成立", "成就", "勝義", "中觀", "自性空", "法執", "我執"],
+      "keep_context_keywords": ["心理", "鼓勵", "勇氣", "講話很有", "給自己一點", "有信心", "缺乏"],
+      "positive_example": "諸法無自性故名為空。",
+      "negative_example": "我們要對自己有自信，不要退縮。"
+    },
+    {
+      "id": "DISAMB_002",
+      "term_pair": "資糧 vs 資料",
+      "target_correct": "資糧",
+      "target_keep": "資料",
+      "correct_context_keywords": ["福德", "智慧", "二資糧", "成佛", "菩薩", "自利利他", "菩提", "累積", "加行"],
+      "keep_context_keywords": ["課本", "講義", "網路", "現代", "統計", "收集", "這本書裡面有很多"],
+      "positive_example": "菩薩行者必須累積福慧二資糧才能圓滿成佛。",
+      "negative_example": "這本書裡面有非常多現代科學的資料可供參考。"
+    },
+    {
+      "id": "DISAMB_003",
+      "term_pair": "因緣 vs 姻緣",
+      "target_correct": "因緣",
+      "target_keep": "姻緣",
+      "correct_context_keywords": ["緣起", "條件", "佛法", "和合", "生滅", "聚散", "前世", "道場", "善因緣"],
+      "keep_context_keywords": ["結婚", "夫妻", "相親", "紅線", "男女感情"],
+      "positive_example": "諸法因緣生，諸法因緣滅；我們今天聚在此地也是殊勝因緣。",
+      "negative_example": "他們兩人結為連理，是前世修來的世俗姻緣。"
+    },
+    {
+      "id": "DISAMB_004",
+      "term_pair": "自利利他 vs 自立立他",
+      "target_correct": "自利利他",
+      "target_keep": "自立",
+      "correct_context_keywords": ["菩薩", "大乘", "行持", "成佛", "度化眾生", "利益眾生", "利他"],
+      "keep_context_keywords": ["獨立", "自立自強", "生活自理"],
+      "positive_example": "菩薩道的核心精神在於自利利他。",
+      "negative_example": "孩子長大之後要學會自立自強。"
+    },
+    {
+      "id": "DISAMB_005",
+      "term_pair": "聲聞 vs 生文/升文",
+      "target_correct": "聲聞",
+      "target_keep": "升文/生文",
+      "correct_context_keywords": ["三乘", "獨覺", "菩薩", "出離心", "阿羅漢", "小乘", "四聖諦", "聲聞地"],
+      "keep_context_keywords": ["升文章", "生文字", "升文職"],
+      "positive_example": "聲聞乘行者專志於出離三界輪迴之苦。",
+      "negative_example": "這是系統自動產生的生文字。"
+    },
+    {
+      "id": "DISAMB_006",
+      "term_pair": "聞思修 vs 文詩修/文思修",
+      "target_correct": "聞、思、修",
+      "target_keep": "文詩",
+      "correct_context_keywords": ["三慧", "聽聞", "思維", "修行", "教法", "佛法次第"],
+      "keep_context_keywords": ["文學", "詩歌"],
+      "positive_example": "透過聞、思、修三慧，菩薩行者才能堅固道心。",
+      "negative_example": "他喜愛研讀古典文詩詞賦。"
+    },
+    {
+      "id": "DISAMB_007",
+      "term_pair": "種姓 vs 總性/種性",
+      "target_correct": "種姓",
+      "target_keep": "總性",
+      "correct_context_keywords": ["大乘", "菩薩", "聲聞", "獨覺", "五種姓", "佛性", "Gotra"],
+      "keep_context_keywords": ["總性質", "總體特性"],
+      "positive_example": "具備大乘種姓者，聞大乘法必生歡喜。",
+      "negative_example": "這是統計樣本所呈現出的總性質。"
+    }
+  ]
+}
