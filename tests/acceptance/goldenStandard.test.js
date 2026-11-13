@@ -2,6 +2,10 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  GOLDEN_STANDARD_QUALITY_PROFILE,
+  findGoldenStandardSimplifiedCharacters,
+} from '../../scripts/lib/transcriptQualityPolicy.js';
 
 describe('🌟 29A Golden Benchmark Quality Standard Test Suite', () => {
   const SESSIONS_DIR = path.resolve('courses/入中論善顯密意疏/sessions');
@@ -9,19 +13,6 @@ describe('🌟 29A Golden Benchmark Quality Standard Test Suite', () => {
   
   const audioMap = fs.existsSync(AUDIO_MAP_PATH) ? JSON.parse(fs.readFileSync(AUDIO_MAP_PATH, 'utf8')) : {};
   const allSessionFiles = fs.readdirSync(SESSIONS_DIR).filter(f => f.startsWith('session_') && f.endsWith('.json') && !f.includes('bak'));
-
-  // Negative forbidden homophone patterns that MUST NEVER appear in 29A-quality converted texts
-  const FORBIDDEN_HOMOPHONES = [
-    { pattern: /非紋症|肺紋症/, name: '非紋症/肺紋症 (應為「飛蚊症」)' },
-    { pattern: /至向有|自向有/, name: '至向有/自向有 (應為「自相有」)' },
-    { pattern: /損壞羹|損壞更/, name: '損壞羹/更 (應為「損壞根」)' },
-    { pattern: /設法心法/, name: '設法心法 (應為「色法心法」)' },
-    { pattern: /不先一心法/, name: '不先一心法 (應為「不相應行法」)' },
-    { pattern: /生一地|生意地/, name: '生一地/生意地 (應為「勝義諦」)' },
-    { pattern: /七[狂況]法/, name: '七狂法/七況法 (應為「欺誑法」)' },
-    { pattern: /執陽眼為水|羊眼/, name: '陽眼/羊眼 (應為「陽焰」)' },
-    { pattern: /執那個正的是/, name: '執那個正的是 (應為「執那個正的識」)' },
-  ];
 
   // 1. Scan and identify converted sessions that went through the full 5-step pipeline
   const convertedSessions = [];
@@ -95,7 +86,8 @@ describe('🌟 29A Golden Benchmark Quality Standard Test Suite', () => {
     convertedSessions.forEach(({ file, data }) => {
       const fullText = data.paragraphs.flatMap(p => p.sentences.map(s => s.text)).join(' ');
       
-      FORBIDDEN_HOMOPHONES.forEach(({ pattern, name }) => {
+      GOLDEN_STANDARD_QUALITY_PROFILE.forbiddenHomophones.forEach(({ source, name }) => {
+        const pattern = new RegExp(source);
         const match = fullText.match(pattern);
         assert.ok(!match, `${file} contains forbidden homophone error "${match ? match[0] : ''}" (${name})`);
       });
@@ -121,12 +113,9 @@ describe('🌟 29A Golden Benchmark Quality Standard Test Suite', () => {
 
   // 7. Pattern 6: Pure Traditional Chinese Standard (Zero Simplified Characters)
   test('Pattern 6 (Traditional Chinese Purity): Converted sessions contain 0 simplified characters', () => {
-    // Strictly simplified characters where Simplified !== Traditional
-    const STRICT_SIMP_REGEX = /[为这样个说体经论门从对么变实证觉关开边过问题时间还会点现显义极胜广当无师发与见随应处观摄识别业释难车声闻缘执许计总种听讲话导读记诵辩净谛]/g;
-
     convertedSessions.forEach(({ file, data }) => {
       const fullText = JSON.stringify(data);
-      const matches = fullText.match(STRICT_SIMP_REGEX);
+      const matches = findGoldenStandardSimplifiedCharacters(fullText);
       assert.ok(!matches || matches.length === 0, `${file} contains ${matches ? matches.length : 0} simplified characters: [${matches ? [...new Set(matches)].join(', ') : ''}]`);
     });
   });
