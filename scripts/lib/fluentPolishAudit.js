@@ -238,8 +238,8 @@ export async function generateFluentPolishProposals({
   apiKey = '',
   fetchImpl = globalThis.fetch,
   timeoutMs = 300000,
-  maxCharsPerBatch = 1100,
-  concurrency = 3,
+  maxCharsPerBatch = 750,
+  concurrency = 1,
 }) {
   const url = endpoint.endsWith('/chat/completions')
     ? endpoint
@@ -318,7 +318,10 @@ export async function generateFluentPolishProposals({
       }
     }
 
-    if (!res) throw lastErr;
+    if (!res) {
+      console.warn(`[fluentPolish] 批次請求逾時略過（將由 Stage 4 保底補標點）: ${lastErr?.message ?? lastErr}`);
+      return;
+    }
     if (!res.ok) {
       throw new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
     }

@@ -99,7 +99,7 @@ export async function auditSessionWithLlm({
   model = 'Qwen3.8-27B',
   apiKey = '',
   fetchImpl = globalThis.fetch,
-  timeoutMs = 120000,
+  timeoutMs = 300000,
 }) {
   if (!endpoint) {
     throw new Error('缺少 LLM endpoint（請提供 --llm-endpoint 或設定 LLM_ENDPOINT / QWEN_ENDPOINT）');
@@ -138,21 +138,37 @@ export async function auditSessionWithLlm({
     const headers = { 'Content-Type': 'application/json' };
     if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
-    const res = await fetchImpl(url, {
-      method: 'POST',
-      headers,
-      signal: AbortSignal.timeout(timeoutMs),
-      body: JSON.stringify({
-        model,
-        temperature: 0,
-        max_tokens: 2048,
-        chat_template_kwargs: { enable_thinking: false },
-        messages: [
-          { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
-          { role: 'user', content: JSON.stringify(batch) },
-        ],
-      }),
+    const payload = JSON.stringify({
+      model,
+      temperature: 0,
+      max_tokens: 2048,
+      chat_template_kwargs: { enable_thinking: false },
+      messages: [
+        { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
+        { role: 'user', content: JSON.stringify(batch) },
+      ],
     });
+
+    let res;
+    let lastErr;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        res = await fetchImpl(url, {
+          method: 'POST',
+          headers,
+          signal: AbortSignal.timeout(timeoutMs),
+          body: payload,
+        });
+        if (res.ok || res.status < 500) break;
+        lastErr = new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
+      } catch (err) {
+        lastErr = err;
+      }
+      if (attempt < 3) {
+        await new Promise((r) => setTimeout(r, 2000 * attempt));
+      }
+    }
+    if (!res) throw lastErr;
     if (!res.ok) {
       throw new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
     }
