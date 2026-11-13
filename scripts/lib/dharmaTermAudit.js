@@ -118,7 +118,7 @@ function checkTruncatedTerms({ sentence, prevSentence, nextSentence, paragraph, 
 }
 
 const REPETITION_LOOP_RE = /([\u4e00-\u9fff]{2,12}[，、。]?)\1{3,}/;
-const GIBBERISH_ASCII_RE = /(?:\b\d+[a-zA-Z]{2,}\b|(?:[a-z]{3,}[\s，。、,]*){3,}|[\u4e00-\u9fff].*\b[a-z]{2,}\b|\b[a-z]{2,}\b.*[\u4e00-\u9fff])/;
+const GIBBERISH_ASCII_RE = /(?:\uFFFD|[\u4e00-\u9fff][０-９]+[\u4e00-\u9fff]|\b\d+[a-zA-Z]{2,}\b|(?:[a-z]{3,}[\s，。、,]*){3,}|[\u4e00-\u9fff].*\b[a-z]{2,}\b|\b[a-z]{2,}\b.*[\u4e00-\u9fff])/;
 
 /**
  * 偵測 Whisper 初轉時的「異常重複迴圈」（如連續 4 次以上相同詞組）或「亂碼崩潰」。
@@ -193,6 +193,21 @@ export function auditSessionDharmaTerms(session) {
       if (runEnd - runStart >= 3) {
         for (let k = runStart; k < runEnd; k++) {
           consecutiveRepeatIdx.add(k);
+        }
+        // 若連續重複 >= 4 句，將緊鄰前後最多 3 句中「與重複詞有 2 字以上重疊」或「長度 <= 6 字」的殘句一併納入重辨識
+        if (runEnd - runStart >= 4) {
+          for (let k = Math.max(0, runStart - 3); k < runStart; k++) {
+            const adj = normalizeForRepeatCheck(flat[k].sentence.text);
+            if (!adj) continue;
+            const overlap = [...adj].filter((ch) => norm.includes(ch)).length;
+            if (overlap >= 2 || adj.length <= 6) consecutiveRepeatIdx.add(k);
+          }
+          for (let k = runEnd; k < Math.min(flat.length, runEnd + 3); k++) {
+            const adj = normalizeForRepeatCheck(flat[k].sentence.text);
+            if (!adj) continue;
+            const overlap = [...adj].filter((ch) => norm.includes(ch)).length;
+            if (overlap >= 2 || adj.length <= 6) consecutiveRepeatIdx.add(k);
+          }
         }
       }
     }
