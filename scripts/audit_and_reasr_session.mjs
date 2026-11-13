@@ -10,6 +10,7 @@
  *
  * 用法：
  *   node scripts/audit_and_reasr_session.mjs --source=courses/菩薩就是這樣成佛/sessions/session_25.json
+ *   node scripts/audit_and_reasr_session.mjs --source=... --with-llm --llm-endpoint=http://127.0.0.1:18001/v1
  *   node scripts/audit_and_reasr_session.mjs --source=... --dry-run
  *   node scripts/audit_and_reasr_session.mjs --source=... --output=reviews/evidence/dharma_term_audit/pusa_25.json
  */
@@ -20,6 +21,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { auditSessionDharmaTerms, buildReAsrWindows } from './lib/dharmaTermAudit.js';
+import { auditSessionWithLlm, mergeAuditFindings } from './lib/llmOmissionAudit.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = new Map(
@@ -40,17 +42,36 @@ const sourcePath = path.resolve(ROOT, sourceArg);
 const remoteHost = args.get('--remote-host') || '100.113.144.100';
 const paddingSeconds = Number(args.get('--padding') || 2.0);
 const dryRun = args.get('--dry-run') === 'true';
+const withLlm = args.get('--with-llm') === 'true';
+const llmEndpoint = args.get('--llm-endpoint')
+  || process.env.LLM_ENDPOINT
+  || process.env.QWEN_ENDPOINT
+  || process.env.OPENAI_BASE_URL
+  || 'http://127.0.0.1:18001/v1';
+const llmModel = args.get('--llm-model') || process.env.LLM_MODEL || 'Qwen3.8-27B';
+const llmApiKey = args.get('--llm-api-key') || process.env.LLM_API_KEY || process.env.OPENAI_API_KEY || '';
 const outputArg = args.get('--output');
 const outputPath = outputArg ? path.resolve(ROOT, outputArg) : null;
 
 const session = JSON.parse(readFileSync(sourcePath, 'utf8'));
-const findings = auditSessionDharmaTerms(session);
+const ruleFindings = auditSessionDharmaTerms(session);
+let llmFindings = [];
+if (withLlm) {
+  console.log(`正在執行 LLM 逐段語意掉字稽核 (${llmModel} @ ${llmEndpoint})...`);
+  llmFindings = await auditSessionWithLlm({
+    session,
+    endpoint: llmEndpoint,
+    model: llmModel,
+    apiKey: llmApiKey,
+  });
+}
+const findings = mergeAuditFindings(ruleFindings, llmFindings);
 const windows = buildReAsrWindows(findings, { paddingSeconds });
 
 console.log(`=== 教理名相殘缺／ASR 掉字稽核 ===`);
 console.log(`檔案: ${path.relative(ROOT, sourcePath)}`);
 console.log(`講次: ${session.title ?? session.sessionId ?? '(unknown)'}`);
-console.log(`偵測到疑慮句數: ${findings.length} 句，合併為 ${windows.length} 個局部重辨識視窗`);
+console.log(`規則偵測: ${ruleFindings.length} 句${withLlm ? ` | LLM 語意偵測: ${llmFindings.length} 句` : ''} | 合併後疑慮句數: ${findings.length} 句，合併為 ${windows.length} 個局部重辨識視窗`);
 
 for (const w of windows) {
   console.log(`\n[${w.windowId}] ${w.clipStart}s ~ ${w.clipEnd}s (${w.clipDuration}s) | 句 ID: ${w.sentenceIds.join(', ')}`);
