@@ -1598,11 +1598,11 @@ function onYouTubeMessage(event: MessageEvent) {
 function handleTOCSeek(targetSession: string, timestamp: number) {
   if (targetSession && targetSession !== currentSessionId.value) {
     loadSession(targetSession).then(() => {
-      if (timestamp > 0) {
+      if (typeof timestamp === 'number' && timestamp >= 0) {
         setTimeout(() => seekToTime(timestamp), 200);
       }
     });
-  } else if (timestamp > 0) {
+  } else if (typeof timestamp === 'number' && timestamp >= 0) {
     seekToTime(timestamp);
   }
 }
