@@ -573,6 +573,29 @@ export function buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCa
   return request;
 }
 
+function callGx10Fallback(messages, maxOutputTokens) {
+  const endpoint = process.env.OVERVIEW_LLM_ENDPOINT || 'http://100.113.144.100:18765/v1/chat/completions';
+  const model = process.env.OVERVIEW_LLM_MODEL || 'nvidia/Qwen3.8-27B-NVFP4';
+  const body = JSON.stringify({
+    model,
+    temperature: 0,
+    max_tokens: Math.max(2048, Number(maxOutputTokens) || 4096),
+    chat_template_kwargs: { enable_thinking: false },
+    messages,
+  });
+  const result = spawnSync('curl', [
+    '-sS', '--max-time', '180',
+    '-H', 'Content-Type: application/json',
+    '-d', body,
+    endpoint,
+  ], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr.trim() || `GX10 curl exited ${result.status}`);
+  const data = JSON.parse(result.stdout);
+  if (data.error) throw new Error(`GX10 error: ${JSON.stringify(data.error)}`);
+  const text = data?.choices?.[0]?.message?.content ?? '';
+  return parseModelJson(text);
+}
+
 function callMiniMax(messages, maxOutputTokens, promptCacheKey, options = {}) {
   if (process.env.OVERVIEW_PROVIDER === 'eneural') {
     const endpoint = process.env.ENEURAL_ENDPOINT || 'https://agents.eneural.ai/v1/chat/completions';
@@ -610,13 +633,22 @@ function callMiniMax(messages, maxOutputTokens, promptCacheKey, options = {}) {
     const msg = parsed.choices?.[0]?.message || {};
     return parseModelJson(msg.content || msg.reasoning_content || '');
   }
+  if (process.env.OVERVIEW_LLM_ENDPOINT) {
+    return callGx10Fallback(messages, maxOutputTokens);
+  }
   const request = buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCacheKey, options);
   const result = spawnSync(process.execPath, [RESPONSES_HELPER], {
     input: JSON.stringify(request),
     encoding: 'utf8',
     maxBuffer: 4 * 1024 * 1024,
   });
-  if (result.status !== 0) throw new Error(result.stderr.trim() || `MiniMax Responses helper exited ${result.status}`);
+  if (result.status !== 0) {
+    const errText = result.stderr.trim() || `MiniMax Responses helper exited ${result.status}`;
+    if (/2056|quota|Token Plan|HTTP 500|HTTP 429/i.test(errText)) {
+      return callGx10Fallback(messages, maxOutputTokens);
+    }
+    throw new Error(errText);
+  }
   const response = JSON.parse(result.stdout);
   return parseModelJson(response.outputText);
 }
