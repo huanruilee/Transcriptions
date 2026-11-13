@@ -153,9 +153,9 @@ export async function generateFluentPolishProposals({
   model = 'nvidia/Qwen3.8-27B-NVFP4',
   apiKey = '',
   fetchImpl = globalThis.fetch,
-  timeoutMs = 120000,
+  timeoutMs = 300000,
   maxCharsPerBatch = 1100,
-  concurrency = 4,
+  concurrency = 3,
 }) {
   const url = endpoint.endsWith('/chat/completions')
     ? endpoint
@@ -203,22 +203,38 @@ export async function generateFluentPolishProposals({
     const headers = { 'Content-Type': 'application/json' };
     if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
-    const res = await fetchImpl(url, {
-      method: 'POST',
-      headers,
-      signal: AbortSignal.timeout(timeoutMs),
-      body: JSON.stringify({
-        model,
-        temperature: 0,
-        max_tokens: 4096,
-        chat_template_kwargs: { enable_thinking: false },
-        messages: [
-          { role: 'system', content: FLUENT_SYSTEM_PROMPT },
-          { role: 'user', content: JSON.stringify(enrichedBatch) },
-        ],
-      }),
+    const payload = JSON.stringify({
+      model,
+      temperature: 0,
+      max_tokens: 4096,
+      chat_template_kwargs: { enable_thinking: false },
+      messages: [
+        { role: 'system', content: FLUENT_SYSTEM_PROMPT },
+        { role: 'user', content: JSON.stringify(enrichedBatch) },
+      ],
     });
 
+    let res;
+    let lastErr;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        res = await fetchImpl(url, {
+          method: 'POST',
+          headers,
+          signal: AbortSignal.timeout(timeoutMs),
+          body: payload,
+        });
+        if (res.ok || res.status < 500) break;
+        lastErr = new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
+      } catch (err) {
+        lastErr = err;
+      }
+      if (attempt < 3) {
+        await new Promise((r) => setTimeout(r, 2000 * attempt));
+      }
+    }
+
+    if (!res) throw lastErr;
     if (!res.ok) {
       throw new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
     }

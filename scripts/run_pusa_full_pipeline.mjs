@@ -149,26 +149,76 @@ function repairHallucinationsFromReAsr(session, findings, reAsrResults, windows)
   const updated = structuredClone(session);
   const repaired = [];
 
+  // Map each window's re-ASR segments uniquely to its hallucinated sentences by midpoint timestamp
+  const assignedTextBySentenceId = new Map();
+  const flatHallucinated = [];
   for (const p of updated.paragraphs ?? []) {
     for (const s of p.sentences ?? []) {
-      if (!hallucinationIds.has(s.id)) continue;
-      const win = windows.find((w) => w.sentenceIds.includes(s.id));
-      const res = win ? reAsrResults.find((r) => r.windowId === win.windowId) : null;
-      if (!res) continue;
+      if (hallucinationIds.has(s.id)) flatHallucinated.push(s);
+    }
+  }
 
-      const sStart = Number(s.start ?? 0);
-      const sEnd = Number(s.end ?? 0);
-      const overlapSegs = (res.guidedSegments?.length ? res.guidedSegments : res.rawSegments ?? [])
-        .filter((seg) => seg.end > sStart - 0.5 && seg.start < sEnd + 0.5)
-        .map((seg) => seg.text.trim())
-        .filter(Boolean);
+  for (const win of windows) {
+    const winHallucinated = flatHallucinated.filter((s) => win.sentenceIds.includes(s.id));
+    if (winHallucinated.length === 0) continue;
 
-      const replacement = (overlapSegs.join('') || res.guidedText || res.rawText || '').trim();
-      if (replacement && replacement !== s.text) {
+    const res = reAsrResults.find((r) => r.windowId === win.windowId);
+    if (!res) continue;
+
+    const minStart = Math.min(...winHallucinated.map((s) => Number(s.start ?? 0)));
+    const maxEnd = Math.max(...winHallucinated.map((s) => Number(s.end ?? 0)));
+    const segs = (res.guidedSegments?.length ? res.guidedSegments : res.rawSegments ?? [])
+      .filter((seg) => seg.end > minStart - 0.5 && seg.start < maxEnd + 0.5 && String(seg.text ?? '').trim());
+
+    const buckets = new Map(winHallucinated.map((s) => [s.id, []]));
+    for (const seg of segs) {
+      const segMid = (Number(seg.start) + Number(seg.end)) / 2;
+      let best = winHallucinated[0];
+      let bestDist = Infinity;
+      for (const s of winHallucinated) {
+        const sStart = Number(s.start ?? 0);
+        const sEnd = Number(s.end ?? 0);
+        const dist = segMid >= sStart && segMid <= sEnd
+          ? 0
+          : Math.min(Math.abs(segMid - sStart), Math.abs(segMid - sEnd));
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = s;
+        }
+      }
+      buckets.get(best.id).push(String(seg.text).trim());
+    }
+
+    for (const s of winHallucinated) {
+      const parts = buckets.get(s.id) ?? [];
+      assignedTextBySentenceId.set(s.id, parts.join(''));
+    }
+  }
+
+  for (const p of updated.paragraphs ?? []) {
+    const nextSentences = [];
+    for (const s of p.sentences ?? []) {
+      if (!hallucinationIds.has(s.id)) {
+        nextSentences.push(s);
+        continue;
+      }
+      if (!assignedTextBySentenceId.has(s.id)) {
+        nextSentences.push(s);
+        continue;
+      }
+      const replacement = assignedTextBySentenceId.get(s.id).trim();
+      if (!replacement) {
+        // Extra duplicate hallucination tick with no corresponding speech segment
+        repaired.push({ sentenceId: s.id, before: s.text, after: '' });
+        continue;
+      }
+      if (replacement !== s.text) {
         repaired.push({ sentenceId: s.id, before: s.text, after: replacement });
         s.text = replacement;
       }
+      nextSentences.push(s);
     }
+    p.sentences = nextSentences;
   }
   return { session: updated, repaired };
 }
@@ -227,7 +277,8 @@ async function processSingleSession(sessionNum) {
     model: llmModel,
     apiKey: llmApiKey,
     maxCharsPerBatch: 1100,
-    concurrency: 4,
+    concurrency: 3,
+    timeoutMs: 300000,
   });
   console.log(`[Stage 3] 流暢修訂通過安全閘門: ${proposals.length} 句 | 安全閘門攔截: ${blockedByGuard.length} 句`);
 

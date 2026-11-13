@@ -118,7 +118,7 @@ function checkTruncatedTerms({ sentence, prevSentence, nextSentence, paragraph, 
 }
 
 const REPETITION_LOOP_RE = /([\u4e00-\u9fff]{2,12}[，、。]?)\1{3,}/;
-const GIBBERISH_ASCII_RE = /(?:\b\d+[a-zA-Z]{2,}\b|(?:[a-z]{3,}[\s，。、,]*){3,})/;
+const GIBBERISH_ASCII_RE = /(?:\b\d+[a-zA-Z]{2,}\b|(?:[a-z]{3,}[\s，。、,]*){3,}|[\u4e00-\u9fff].*\b[a-z]{2,}\b|\b[a-z]{2,}\b.*[\u4e00-\u9fff])/;
 
 /**
  * 偵測 Whisper 初轉時的「異常重複迴圈」（如連續 4 次以上相同詞組）或「亂碼崩潰」。
@@ -153,6 +153,17 @@ function checkWhisperHallucinations({ sentence, paragraph }) {
 }
 
 /**
+ * 正規化句子文字以偵測跨句連續重複幻覺。
+ * @param {string} text
+ * @returns {string}
+ */
+function normalizeForRepeatCheck(text) {
+  return String(text ?? '')
+    .replace(/[\s，。、？！：；「」『』《》〈〉,.?!:;'"()（）]/g, '')
+    .trim();
+}
+
+/**
  * 掃描整份講次 JSON，回傳所有名相殘缺／疑似掉字／Whisper 幻覺清單。
  * @param {object} session
  * @returns {Array<object>}
@@ -164,6 +175,28 @@ export function auditSessionDharmaTerms(session) {
     for (const sentence of paragraph.sentences ?? []) {
       flat.push({ paragraph, sentence });
     }
+  }
+
+  // 偵測跨句連續重複幻覺（例如連續 3 句以上相同短句「有人不在乎」「歷史的」）
+  const consecutiveRepeatIdx = new Set();
+  let runStart = 0;
+  while (runStart < flat.length) {
+    const norm = normalizeForRepeatCheck(flat[runStart].sentence.text);
+    let runEnd = runStart + 1;
+    if (norm.length >= 2 && norm.length <= 24) {
+      while (
+        runEnd < flat.length &&
+        normalizeForRepeatCheck(flat[runEnd].sentence.text) === norm
+      ) {
+        runEnd++;
+      }
+      if (runEnd - runStart >= 3) {
+        for (let k = runStart; k < runEnd; k++) {
+          consecutiveRepeatIdx.add(k);
+        }
+      }
+    }
+    runStart = runEnd;
   }
 
   const results = [];
@@ -178,6 +211,20 @@ export function auditSessionDharmaTerms(session) {
       ...checkTruncatedTerms(ctx),
       ...checkWhisperHallucinations(ctx),
     ];
+
+    if (
+      consecutiveRepeatIdx.has(i) &&
+      !findings.some((f) => f.ruleId === 'whisper-hallucination-loop')
+    ) {
+      findings.push({
+        ruleId: 'whisper-hallucination-loop',
+        severity: 'high',
+        matchedText: String(sentence.text ?? '').slice(0, 30),
+        suggestedTerm: null,
+        reason: '偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原',
+        promptHints: paragraph?.heading ? [paragraph.heading] : [],
+      });
+    }
 
     if (findings.length > 0) {
       results.push({
