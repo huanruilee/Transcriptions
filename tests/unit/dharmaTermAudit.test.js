@@ -113,3 +113,25 @@ test('auditSessionWithLlm detects non-rule-table omissions, ignores unknown IDs,
 test('parseLlmSuspectsJson safely handles malformed responses', () => {
   assert.deepEqual(parseLlmSuspectsJson('not json at all'), { suspects: [] });
 });
+
+test('detects Whisper hallucination repetition loops and ASCII gibberish collapse', () => {
+  const session = {
+    sessionId: '25',
+    title: '第 25 講 | 空三摩地',
+    paragraphs: [
+      {
+        id: 'p_9',
+        heading: null,
+        sentences: [
+          { id: 'sent-800', start: 100, end: 110, text: '有人不在乎有人不在乎有人不在乎有人不在乎有人不在乎' },
+          { id: 'sent-801', start: 110, end: 120, text: '163 00dC有閥寨的大靈的knit，有要靠的那一個個 voyant，ised' },
+        ],
+      },
+    ],
+  };
+
+  const findings = auditSessionDharmaTerms(session);
+  assert.equal(findings.length, 2);
+  assert.equal(findings[0].findings[0].ruleId, 'whisper-hallucination-loop');
+  assert.equal(findings[1].findings[0].ruleId, 'whisper-hallucination-gibberish');
+});
