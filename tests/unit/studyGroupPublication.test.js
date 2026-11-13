@@ -16,13 +16,13 @@ test('study-group publication exposes every processed playlist entry', () => {
   const entry = catalog.courses.find((course) => course.id === 'shi-liang-lun-study-group-2025');
   assert.ok(entry, 'study-group course must be registered in the catalog');
   assert.equal(entry.path, 'courses/2025釋量論第二品大組共學');
-  assert.equal(entry.totalSessions, 43);
+  assert.equal(entry.totalSessions, 47);
 
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.equal(course.sessions.length, 43);
+  assert.equal(course.sessions.length, 47);
   assert.deepEqual(
     course.sessions.map((session) => session.sessionId),
-    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B'],
+    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B', '43', '44', '45', '46'],
   );
 
   for (const session of course.sessions) {
@@ -43,17 +43,16 @@ test('study-group publication exposes every processed playlist entry', () => {
   assert.equal(course.sessions.find((session) => session.sessionId === '27').displaySessionId, '14下');
   assert.equal(course.sessions.find((session) => session.sessionId === '42').displaySessionId, '26下');
   assert.equal(course.sessions.find((session) => session.sessionId === '27B').displaySessionId, '27下');
-  assert.deepEqual(course.pendingSessions.map((session) => session.sessionId), ['43', '45', '46']);
-  assert.equal(course.pendingSessions.find((session) => session.sessionId === '43').displaySessionId, '27上');
-  assert.equal(course.pendingSessions.find((session) => session.sessionId === '45').displaySessionId, '28上');
-  assert.equal(course.pendingSessions.find((session) => session.sessionId === '46').displaySessionId, '28下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '43').displaySessionId, '27上');
+  assert.equal(course.sessions.find((session) => session.sessionId === '44').displaySessionId, '28上');
+  assert.equal(course.sessions.find((session) => session.sessionId === '45').displaySessionId, '28下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '46').displaySessionId, '29上');
+  assert.deepEqual(course.pendingSessions, []);
 });
 
 test('study-group publication records unavailable playlist entries instead of hiding them', () => {
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.deepEqual(course.unavailableSessions, [
-    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
-  ]);
+  assert.deepEqual(course.unavailableSessions, []);
 });
 
 test('Vue course selector knows the published study-group course', () => {
