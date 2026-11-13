@@ -78,12 +78,21 @@ def transcribe(wav_path, prompt=""):
 with tempfile.TemporaryDirectory(prefix='pusa-reasr-') as td:
     work = pathlib.Path(td)
     audio = work / 'source.m4a'
-    subprocess.run([
-        yt_dlp, '--no-update', '--force-overwrites', '--no-playlist',
-        '-f', 'bestaudio[ext=m4a]/bestaudio',
-        '-o', str(audio),
-        payload['youtubeUrl'],
-    ], check=True, capture_output=True)
+    for attempt in range(3):
+        try:
+            subprocess.run([
+                yt_dlp, '--no-update', '--force-overwrites', '--no-playlist',
+                '--retries', '5',
+                '-f', 'bestaudio[ext=m4a]/bestaudio',
+                '-o', str(audio),
+                payload['youtubeUrl'],
+            ], check=True, capture_output=True)
+            break
+        except subprocess.CalledProcessError:
+            if attempt == 2:
+                raise
+            import time
+            time.sleep(3 * (attempt + 1))
 
     results = []
     for win in payload['windows']:
