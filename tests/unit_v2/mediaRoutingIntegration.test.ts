@@ -73,6 +73,17 @@ describe('App runtime media routing', () => {
     await wrapper.get('#media-play-toggle-btn').trigger('click');
     expect(youtube.playVideo).toHaveBeenCalledTimes(2);
     usePlayerStore().playbackRate = 1.5;
+
+    // Test seek to 0:00 (e.g. clicking sentence at 0:00 or seeking to 0)
+    youtube.seekTo.mockClear();
+    post.mockClear();
+    api().seek(0);
+    expect(youtube.seekTo).toHaveBeenCalledWith(0, true);
+    expect(post.mock.calls.some(([value]) => {
+      const parsed = JSON.parse(value as string);
+      return parsed.func === 'seekTo' && parsed.args[0] === 0;
+    })).toBe(true);
+    expect(api().getState().currentTime).toBe(0);
     await flushPromises();
     expect(youtube.setPlaybackRate).toHaveBeenCalledWith(1.5);
   });

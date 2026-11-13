@@ -166,4 +166,39 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
     expect(download.attributes('title')).toBe('此講次尚無逐字稿可下載');
     expect(fetchMock.mock.calls.some(([url]) => String(url).includes('/sessions/session_42.json'))).toBe(false);
   });
+
+  it('5. 跳轉至 0:00 (段首標籤或科判跳轉) 必須呼叫 seekTo(0, true) 且 handleTOCSeek 正確支援 timestamp=0', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-er#session-02') as any;
+
+    const seekToSpy = vi.fn();
+    (window as any).YT = {
+      Player: vi.fn(function (elementId, options) {
+        return {
+          cueVideoById: vi.fn(),
+          destroy: vi.fn(),
+          getDuration: () => 1200,
+          getCurrentTime: () => 0,
+          seekTo: seekToSpy,
+          playVideo: vi.fn(),
+          pauseVideo: vi.fn(),
+          unMute: vi.fn(),
+          getIframe: () => document.getElementById(elementId),
+        };
+      }),
+    };
+
+    const wrapper = mount(App, { attachTo: document.body });
+    await wrapper.vm.$nextTick();
+    await new Promise((r) => setTimeout(r, 250));
+
+    const testApi = (window as any).__TEST_API__;
+    expect(testApi).toBeDefined();
+
+    // 觸發跳轉至 0 秒
+    testApi.seek(0);
+    expect(seekToSpy).toHaveBeenCalledWith(0, true);
+    expect(testApi.getState().currentTime).toBe(0);
+    wrapper.unmount();
+  });
 });
