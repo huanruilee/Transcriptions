@@ -20,7 +20,12 @@ import { fileURLToPath } from 'node:url';
 
 import { auditSessionDharmaTerms, buildReAsrWindows } from './lib/dharmaTermAudit.js';
 import { auditSessionWithLlm, mergeAuditFindings } from './lib/llmOmissionAudit.js';
-import { applyPolishProposals, generateFluentPolishProposals } from './lib/fluentPolishAudit.js';
+import {
+  applyPolishProposals,
+  cleanSessionTypography,
+  ensureParagraphPunctuation,
+  generateFluentPolishProposals,
+} from './lib/fluentPolishAudit.js';
 import {
   assignSectionHeadingsWithLlm,
   mergeParagraphsByLayout,
@@ -104,8 +109,8 @@ with tempfile.TemporaryDirectory(prefix='pusa-reasr-') as td:
             '-i', str(audio),
             '-ac', '1', '-ar', '16000', str(clip),
         ], check=True)
-        raw_res = transcribe(clip, prompt='')
-        guided_res = transcribe(clip, prompt=win['prompt'])
+        raw_res = transcribe(clip, prompt='繁體中文佛教講記，請使用臺灣正體字與全形標點。')
+        guided_res = transcribe(clip, prompt='繁體中文佛教講記，請使用臺灣正體字與全形標點。' + win['prompt'])
         results.append({
             'windowId': win['windowId'],
             'clipStart': win['clipStart'],
@@ -292,13 +297,25 @@ async function processSingleSession(sessionNum) {
   console.log(`[Stage 3] 流暢修訂通過安全閘門: ${proposals.length} 句 | 安全閘門攔截: ${blockedByGuard.length} 句`);
 
   let finalSession = applyPolishProposals(repairedSession, proposals);
+  finalSession = cleanSessionTypography(finalSession);
 
-  // Stage 4: Paragraph Layout & Numbered Headings
+  // Stage 4: Paragraph Layout, Gap Punctuation & Numbered Headings
   finalSession = mergeParagraphsByLayout(finalSession, {
     minChars: 160,
     maxChars: 340,
     preserveExistingHeadings: false,
   });
+  const { session: punctuatedSession, fixedCount: gapFixedCount } = await ensureParagraphPunctuation({
+    session: finalSession,
+    endpoint: llmEndpoint,
+    model: llmModel,
+    apiKey: llmApiKey,
+    timeoutMs: 300000,
+  });
+  if (gapFixedCount > 0) {
+    console.log(`[Stage 4] 無標點長段補標點與去結巴: ${gapFixedCount} 句`);
+  }
+  finalSession = cleanSessionTypography(punctuatedSession);
   finalSession = await assignSectionHeadingsWithLlm({
     session: finalSession,
     endpoint: llmEndpoint,
