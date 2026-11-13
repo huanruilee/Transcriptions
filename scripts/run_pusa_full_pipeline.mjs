@@ -44,11 +44,39 @@ const args = new Map(
   }),
 );
 
+function readDotEnvKey(keyName) {
+  if (process.env[keyName]) return process.env[keyName].trim();
+  const envPath = path.join(ROOT, '.env');
+  try {
+    for (const line of readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eq = trimmed.indexOf('=');
+      if (eq > 0 && trimmed.slice(0, eq).trim() === keyName) {
+        return trimmed.slice(eq + 1).trim().replace(/^['"]|['"]$/g, '');
+      }
+    }
+  } catch {
+    // ignore missing .env
+  }
+  return '';
+}
+
 const sessionsArg = args.get('--sessions') || '25';
 const remoteHost = args.get('--remote-host') || '100.113.144.100';
-const llmEndpoint = args.get('--llm-endpoint') || process.env.LLM_ENDPOINT || 'http://100.113.144.100:18765/v1';
-const llmModel = args.get('--llm-model') || process.env.LLM_MODEL || 'nvidia/Qwen3.8-27B-NVFP4';
-const llmApiKey = args.get('--llm-api-key') || process.env.LLM_API_KEY || '';
+const eneuralKey = readDotEnvKey('ENEURAL_API_KEY');
+// 模型優先順序：eNeural (glm53-flash) > GX10 本地 vLLM (nvidia/Qwen3.8-27B-NVFP4)
+const llmEndpoint =
+  args.get('--llm-endpoint') ||
+  process.env.LLM_ENDPOINT ||
+  (eneuralKey ? 'https://agents.eneural.ai/v1' : 'http://100.113.144.100:18765/v1');
+const llmModel =
+  args.get('--llm-model') ||
+  process.env.LLM_MODEL ||
+  (eneuralKey && !args.get('--llm-endpoint') && !process.env.LLM_ENDPOINT
+    ? 'glm53-flash'
+    : 'nvidia/Qwen3.8-27B-NVFP4');
+const llmApiKey = args.get('--llm-api-key') || process.env.LLM_API_KEY || eneuralKey || '';
 const paddingSeconds = Number(args.get('--padding') || 2.0);
 const dryRun = args.get('--dry-run') === 'true';
 
@@ -290,8 +318,8 @@ async function processSingleSession(sessionNum) {
     endpoint: llmEndpoint,
     model: llmModel,
     apiKey: llmApiKey,
-    maxCharsPerBatch: 1100,
-    concurrency: 3,
+    maxCharsPerBatch: 750,
+    concurrency: 1,
     timeoutMs: 300000,
   });
   console.log(`[Stage 3] 流暢修訂通過安全閘門: ${proposals.length} 句 | 安全閘門攔截: ${blockedByGuard.length} 句`);
