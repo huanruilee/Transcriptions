@@ -30,7 +30,7 @@ test('discovers every canonical transcript without including derivative artifact
   const targets = discoverTranscriptTargets(repoRoot);
   const relativePaths = targets.map((target) => target.relativePath);
 
-  assert.equal(targets.length, 349);
+  assert.equal(targets.length, 353);
   assert.ok(relativePaths.includes('courses/四念住/sessions/session_01.json'));
   assert.ok(relativePaths.includes('courses/三主要道/sessions/session_01.json'));
   assert.ok(relativePaths.includes('courses/入中論善顯密意疏/sessions/session_110B.json'));

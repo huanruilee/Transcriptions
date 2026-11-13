@@ -1,0 +1,32 @@
+{
+  "sessionId": "01",
+  "sourceDigest": "ba525b25cacde8afb12b65b3927f533bf35716cc32cac5553c76b50f3efcc357",
+  "model": "nvidia/Qwen3.8-27B-NVFP4",
+  "totalSentences": 3669,
+  "deterministicChangesCount": 2,
+  "hallucinationsFlaggedCount": 0,
+  "qwenCardsSent": 0,
+  "qwenAppliedCount": 0,
+  "qwenRejectedOrKept": 0,
+  "qwenUsage": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0
+  },
+  "deterministicChanges": [
+    {
+      "id": "seg-2947",
+      "before": "好 謝謝師兄",
+      "after": "好謝謝師兄",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-2948",
+      "before": "法師好 大家好",
+      "after": "法師好大家好",
+      "reason": "全形標點與空白正規化"
+    }
+  ],
+  "hallucinations": [],
+  "qwenApplied": []
+}
