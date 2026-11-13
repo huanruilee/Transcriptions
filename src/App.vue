@@ -1031,11 +1031,7 @@ const youtubePendingStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const youtubeIframeSrc = computed(() => {
   const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
-  let start = youtubeAutoplayStart.value;
-  if (start === null && playerStore.activeSentenceId) {
-    const active = playerStore.sentences.find((sentence) => sentence.id === playerStore.activeSentenceId);
-    start = active ? Math.max(0, Math.floor(active.start_time ?? active.start ?? 0)) : null;
-  }
+  const start = youtubeAutoplayStart.value;
   if (start !== null) {
     params.set('autoplay', '1');
     params.set('start', String(start));
@@ -2140,7 +2136,7 @@ function handleSentenceClick(s: any) {
   const sentenceTime = Number(clickedSentence.start_time ?? clickedSentence.start ?? 0);
   // Keep sentence clicks playable even when the external YouTube API has not
   // initialized yet; this assignment is reactive and survives Vue re-renders.
-  if (currentYoutubeVideoId.value) {
+  if (currentYoutubeVideoId.value && (!(window as any).YT || !ytPlayer)) {
     youtubeAutoplayStart.value = Math.max(0, Math.floor(sentenceTime));
   }
   seekToTime(sentenceTime);
