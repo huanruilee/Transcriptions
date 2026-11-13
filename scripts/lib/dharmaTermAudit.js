@@ -117,8 +117,43 @@ function checkTruncatedTerms({ sentence, prevSentence, nextSentence, paragraph, 
   return findings;
 }
 
+const REPETITION_LOOP_RE = /([\u4e00-\u9fff]{2,12}[，、。]?)\1{3,}/;
+const GIBBERISH_ASCII_RE = /(?:\b\d+[a-zA-Z]{2,}\b|(?:[a-z]{3,}[\s，。、,]*){3,})/;
+
 /**
- * 掃描整份講次 JSON，回傳所有名相殘缺／疑似掉字清單。
+ * 偵測 Whisper 初轉時的「異常重複迴圈」（如連續 4 次以上相同詞組）或「亂碼崩潰」。
+ * @param {object} ctx
+ * @returns {Array<object>}
+ */
+function checkWhisperHallucinations({ sentence, paragraph }) {
+  const text = String(sentence.text ?? '');
+  const findings = [];
+  const hints = paragraph?.heading ? [paragraph.heading] : [];
+
+  if (REPETITION_LOOP_RE.test(text)) {
+    findings.push({
+      ruleId: 'whisper-hallucination-loop',
+      severity: 'high',
+      matchedText: text.match(REPETITION_LOOP_RE)?.[0]?.slice(0, 30) ?? text.slice(0, 30),
+      suggestedTerm: null,
+      reason: '偵測到疑似 Whisper 重複迴圈幻覺（同一詞組連續重複 4 次以上），需局部重辨識還原',
+      promptHints: hints,
+    });
+  } else if (GIBBERISH_ASCII_RE.test(text)) {
+    findings.push({
+      ruleId: 'whisper-hallucination-gibberish',
+      severity: 'high',
+      matchedText: text.match(GIBBERISH_ASCII_RE)?.[0]?.slice(0, 30) ?? text.slice(0, 30),
+      suggestedTerm: null,
+      reason: '偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原',
+      promptHints: hints,
+    });
+  }
+  return findings;
+}
+
+/**
+ * 掃描整份講次 JSON，回傳所有名相殘缺／疑似掉字／Whisper 幻覺清單。
  * @param {object} session
  * @returns {Array<object>}
  */
@@ -141,6 +176,7 @@ export function auditSessionDharmaTerms(session) {
     const findings = [
       ...checkParamitaPrefix(ctx),
       ...checkTruncatedTerms(ctx),
+      ...checkWhisperHallucinations(ctx),
     ];
 
     if (findings.length > 0) {
