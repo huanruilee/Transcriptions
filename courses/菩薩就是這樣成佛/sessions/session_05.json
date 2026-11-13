@@ -6,19 +6,26 @@
   "youtubeUrl": "https://www.youtube.com/watch?v=vXY6SLa7HZU",
   "date": "",
   "pageRange": "p.30-39",
-  "lastUpdated": "2026-11-12 12:41:52",
+  "lastUpdated": "2026-11-13 17:00:41",
   "_meta": {
     "engine": "mlx-whisper-large-v3",
-    "proofread": "opencc-s2twp + buddhist-terms-pipeline",
+    "proofread": "human-verified-dharma-pipeline",
     "humanProofread": false,
-    "sourceVerification": "ops-pipeline (no base text; ASR + 詞庫校正)"
+    "sourceVerification": "ops-pipeline (no base text; ASR + 詞庫校正)",
+    "fluentPolished": true,
+    "fluentPolishedCount": 545,
+    "layoutStandard": "shiliang-32-1-pdf",
+    "reAsrWindowsChecked": 56,
+    "hallucinationsRepaired": 0,
+    "guardBlockedCount": 17,
+    "proofreadSummary": "全流程校對完成：名相/語意重辨識 56 區、修復幻覺 0 處、安全閘門修訂 545 句（攔截 17）、重組 53 段與 8 個編號小標。"
   },
   "paragraphs": [
     {
       "id": "p_1",
-      "heading": "【科判導讀】布施與布施度之區別，六度的基礎、內容及四目標",
+      "heading": "1. 六度與普通善行的區別",
       "start": 12.62,
-      "end": 91.96,
+      "end": 131.82,
       "sentences": [
         {
           "id": "sent-1",
@@ -31,7 +38,7 @@
           "id": "sent-2",
           "start": 30,
           "end": 54.54,
-          "text": "《為何六部羅蜜多士大乘》",
+          "text": "《為何六波羅蜜多是大乘的獨特修行》",
           "reviewNeeded": false
         },
         {
@@ -52,7 +59,7 @@
           "id": "sent-5",
           "start": 65.54,
           "end": 67.92,
-          "text": "此外 有看到嗎？",
+          "text": "此外，有看到嗎？",
           "reviewNeeded": false
         },
         {
@@ -80,7 +87,7 @@
           "id": "sent-9",
           "start": 76.94,
           "end": 83.94,
-          "text": "那為什麼在大乘就要把它說它是獨特的修行方式呢？",
+          "text": "那為什麼在大乘就要說它是獨特的修行方式呢？",
           "reviewNeeded": false
         },
         {
@@ -103,15 +110,7 @@
           "end": 91.96,
           "text": "就是說這六件事情",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_2",
-      "heading": null,
-      "start": 93.34,
-      "end": 123,
-      "sentences": [
+        },
         {
           "id": "sent-13",
           "start": 93.34,
@@ -130,7 +129,7 @@
           "id": "sent-15",
           "start": 97,
           "end": 99,
-          "text": "佈施、持戒、忍辱",
+          "text": "布施、持戒、忍辱",
           "reviewNeeded": false
         },
         {
@@ -193,17 +192,9 @@
           "id": "sent-24",
           "start": 120.22,
           "end": 123,
-          "text": "你有做什麼佈施、持戒",
+          "text": "你有做什麼布施、持戒",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_3",
-      "heading": null,
-      "start": 123,
-      "end": 159.76,
-      "sentences": [
+        },
         {
           "id": "sent-25",
           "start": 123,
@@ -222,21 +213,29 @@
           "id": "sent-27",
           "start": 127.24,
           "end": 131.82,
-          "text": "我們就說它就是有一個品德的自我要求",
+          "text": "我們就說它就是有一個品德的自我要求。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_2",
+      "heading": null,
+      "start": 132.48,
+      "end": 182.28,
+      "sentences": [
         {
           "id": "sent-28",
           "start": 132.48,
           "end": 136.64,
-          "text": "佈施你就是去給人家方便",
+          "text": "佈施你就是去給人家方便。",
           "reviewNeeded": false
         },
         {
           "id": "sent-29",
           "start": 136.64,
           "end": 140.58,
-          "text": "或者是說去佈施你的一些勞力、財力",
+          "text": "或者是說去佈施你的一些勞力、財力。",
           "reviewNeeded": false
         },
         {
@@ -250,7 +249,7 @@
           "id": "sent-31",
           "start": 142.3,
           "end": 146.4,
-          "text": "忍辱就是人家欺負你的時候你不能生氣等等",
+          "text": "忍辱就是人家欺負你的時候你不能生氣等等。",
           "reviewNeeded": false
         },
         {
@@ -264,7 +263,7 @@
           "id": "sent-33",
           "start": 149.64,
           "end": 151,
-          "text": "七年守則一樣",
+          "text": "七年守則一樣。",
           "reviewNeeded": false
         },
         {
@@ -278,7 +277,7 @@
           "id": "sent-35",
           "start": 153.36,
           "end": 156.92,
-          "text": "不要學佛的人也應該會去做的",
+          "text": "不要學佛的人也應該會去做的。",
           "reviewNeeded": false
         },
         {
@@ -287,15 +286,7 @@
           "end": 159.76,
           "text": "然後其實在三乘裡面",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_4",
-      "heading": null,
-      "start": 159.76,
-      "end": 188.78,
-      "sentences": [
+        },
         {
           "id": "sent-37",
           "start": 159.76,
@@ -314,7 +305,7 @@
           "id": "sent-39",
           "start": 162.8,
           "end": 166.16,
-          "text": "一個最基本的那個品德的要求也好啦",
+          "text": "一個最基本的品德的要求也好啦。",
           "reviewNeeded": false
         },
         {
@@ -335,7 +326,7 @@
           "id": "sent-42",
           "start": 173.62,
           "end": 176.38,
-          "text": "還說一定要修六乘",
+          "text": "還說一定要修六度，",
           "reviewNeeded": false
         },
         {
@@ -349,16 +340,24 @@
           "id": "sent-44",
           "start": 178.36,
           "end": 181.62,
-          "text": "才能夠累積福德智慧而知良",
+          "text": "才能夠累積福德智慧圓資糧，",
           "reviewNeeded": false
         },
         {
           "id": "sent-45",
           "start": 181.62,
           "end": 182.28,
-          "text": "為什麼",
+          "text": "為什麼？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_3",
+      "heading": null,
+      "start": 183.16,
+      "end": 225.34,
+      "sentences": [
         {
           "id": "sent-46",
           "start": 183.16,
@@ -379,15 +378,7 @@
           "end": 188.78,
           "text": "我們一般在講",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_5",
-      "heading": null,
-      "start": 189.4,
-      "end": 212.06,
-      "sentences": [
+        },
         {
           "id": "sent-49",
           "start": 189.4,
@@ -399,70 +390,70 @@
           "id": "sent-50",
           "start": 190.76,
           "end": 192.92,
-          "text": "其實是沒有加波羅蜜多",
+          "text": "其實是沒有加「波羅蜜多」。",
           "reviewNeeded": false
         },
         {
           "id": "sent-51",
           "start": 193.5,
           "end": 195.6,
-          "text": "那只有在大乘裡面",
+          "text": "只有在大乘裡面",
           "reviewNeeded": false
         },
         {
           "id": "sent-52",
           "start": 195.6,
           "end": 197.16,
-          "text": "我們才會說什麼",
+          "text": "我們才會說：",
           "reviewNeeded": false
         },
         {
           "id": "sent-53",
           "start": 198.14,
           "end": 199.7,
-          "text": "六波羅蜜多",
+          "text": "六波羅蜜多，",
           "reviewNeeded": false
         },
         {
           "id": "sent-54",
           "start": 199.7,
           "end": 200.98,
-          "text": "或者是六度",
+          "text": "或者是六度。",
           "reviewNeeded": false
         },
         {
           "id": "sent-55",
           "start": 200.98,
           "end": 203.36,
-          "text": "所以你就會知道說",
+          "text": "所以你就會知道，",
           "reviewNeeded": false
         },
         {
           "id": "sent-56",
           "start": 203.36,
           "end": 205.4,
-          "text": "不同的地方就是在什麼",
+          "text": "不同的地方就在什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-57",
           "start": 206.4,
           "end": 207.32,
-          "text": "四個字",
+          "text": "四個字。",
           "reviewNeeded": false
         },
         {
           "id": "sent-58",
           "start": 207.32,
           "end": 209.22,
-          "text": "那波羅蜜多這四個字",
+          "text": "「波羅蜜多」這四個字，",
           "reviewNeeded": false
         },
         {
           "id": "sent-59",
           "start": 209.22,
           "end": 210.86,
-          "text": "大家應該都知道嘛",
+          "text": "大家應該都知道。",
           "reviewNeeded": false
         },
         {
@@ -471,107 +462,99 @@
           "end": 212.06,
           "text": "所有的般若經",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_6",
-      "heading": null,
-      "start": 213.1,
-      "end": 240.12,
-      "sentences": [
+        },
         {
           "id": "sent-61",
           "start": 213.1,
           "end": 215.2,
-          "text": "般若蜜多心經",
+          "text": "《般若波羅蜜多心經》，",
           "reviewNeeded": false
         },
         {
           "id": "sent-62",
           "start": 215.2,
           "end": 217.68,
-          "text": "那金剛經也是般若經",
+          "text": "《金剛經》也是般若經。",
           "reviewNeeded": false
         },
         {
           "id": "sent-63",
           "start": 217.68,
           "end": 220.38,
-          "text": "那反正這些般若經一定呢",
+          "text": "反正這些般若經，",
           "reviewNeeded": false
         },
         {
           "id": "sent-64",
           "start": 220.38,
           "end": 221.4,
-          "text": "它如果有",
+          "text": "它如果有，",
           "reviewNeeded": false
         },
         {
           "id": "sent-65",
           "start": 222.04,
           "end": 223.92,
-          "text": "就是這些般若經裡面",
+          "text": "就是這些般若經裡面，",
           "reviewNeeded": false
         },
         {
           "id": "sent-66",
           "start": 223.92,
           "end": 225.34,
-          "text": "一定會提到六度",
+          "text": "一定會提到六度。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_4",
+      "heading": null,
+      "start": 225.34,
+      "end": 284.54,
+      "sentences": [
         {
           "id": "sent-67",
           "start": 225.34,
           "end": 227.18,
-          "text": "金剛經也有提到",
+          "text": "《金剛經》也有提到，",
           "reviewNeeded": false
         },
         {
           "id": "sent-68",
           "start": 227.18,
           "end": 230.64,
-          "text": "但是心經是沒有特別提到",
+          "text": "但是《心經》是沒有特別提到。",
           "reviewNeeded": false
         },
         {
           "id": "sent-69",
           "start": 230.64,
           "end": 232.56,
-          "text": "但是心經其實也是",
+          "text": "但是《心經》其實也是，",
           "reviewNeeded": false
         },
         {
           "id": "sent-70",
           "start": 233.86,
           "end": 235.48,
-          "text": "心經它是獨立的",
+          "text": "《心經》它是獨立的。",
           "reviewNeeded": false
         },
         {
           "id": "sent-71",
           "start": 236.4,
           "end": 237.54,
-          "text": "神上大師他就是",
+          "text": "神上大師他就是，",
           "reviewNeeded": false
         },
         {
           "id": "sent-72",
           "start": 237.54,
           "end": 240.12,
-          "text": "他翻譯的這個兩百多個字",
+          "text": "他翻譯的這個兩百多個字。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_7",
-      "heading": null,
-      "start": 240.12,
-      "end": 263.66,
-      "sentences": [
+        },
         {
           "id": "sent-73",
           "start": 240.12,
@@ -583,7 +566,7 @@
           "id": "sent-74",
           "start": 241.44,
           "end": 243.84,
-          "text": "你也可以從大波羅蜜",
+          "text": "你也可以從《大波羅蜜經》",
           "reviewNeeded": false
         },
         {
@@ -611,7 +594,7 @@
           "id": "sent-78",
           "start": 249.34,
           "end": 250.58,
-          "text": "某一瓶的",
+          "text": "某一品的",
           "reviewNeeded": false
         },
         {
@@ -646,7 +629,7 @@
           "id": "sent-83",
           "start": 261.12,
           "end": 263,
-          "text": "凡是這個波羅蜜的系統",
+          "text": "凡是波羅蜜的系統",
           "reviewNeeded": false
         },
         {
@@ -655,15 +638,7 @@
           "end": 263.66,
           "text": "它一定會",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_8",
-      "heading": null,
-      "start": 264.38,
-      "end": 281.66,
-      "sentences": [
+        },
         {
           "id": "sent-85",
           "start": 264.38,
@@ -703,7 +678,7 @@
           "id": "sent-90",
           "start": 270.4,
           "end": 271.7,
-          "text": "跟這個六",
+          "text": "跟六度",
           "reviewNeeded": false
         },
         {
@@ -731,7 +706,7 @@
           "id": "sent-94",
           "start": 275.72,
           "end": 278.14,
-          "text": "那但是我們平常所講的六度",
+          "text": "但是我們平常所講的六度",
           "reviewNeeded": false
         },
         {
@@ -747,22 +722,22 @@
           "end": 281.66,
           "text": "不是持戒忍辱",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_9",
-      "heading": null,
-      "start": 282.92,
-      "end": 314.5,
-      "sentences": [
+        },
         {
           "id": "sent-97",
           "start": 282.92,
           "end": 284.54,
-          "text": "禁禁禁定智慧",
+          "text": "戒、忍辱、精進、禪定、智慧。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_5",
+      "heading": "2. 布施波羅蜜多的核心定義",
+      "start": 284.54,
+      "end": 382.48,
+      "sentences": [
         {
           "id": "sent-98",
           "start": 284.54,
@@ -839,15 +814,7 @@
           "end": 314.5,
           "text": "然而有看到嗎",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_10",
-      "heading": null,
-      "start": 314.5,
-      "end": 374.22,
-      "sentences": [
+        },
         {
           "id": "sent-109",
           "start": 314.5,
@@ -887,14 +854,14 @@
           "id": "sent-114",
           "start": 352.58,
           "end": 354.66,
-          "text": "這是一個二壁之 ​​動作",
+          "text": "這是一個二臂之動作",
           "reviewNeeded": false
         },
         {
           "id": "sent-115",
           "start": 354.66,
           "end": 355.74,
-          "text": "但 해�外博士",
+          "text": "除此之外",
           "reviewNeeded": false
         },
         {
@@ -931,15 +898,7 @@
           "end": 374.22,
           "text": "一般的佈施我們是付出",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_11",
-      "heading": null,
-      "start": 374.22,
-      "end": 411.5,
-      "sentences": [
+        },
         {
           "id": "sent-121",
           "start": 374.22,
@@ -951,9 +910,17 @@
           "id": "sent-122",
           "start": 377.08,
           "end": 382.48,
-          "text": "但是有的時候我們佈施不是給了就是給了",
+          "text": "但是有的時候我們佈施，不是給了就是給了。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_6",
+      "heading": null,
+      "start": 382.48,
+      "end": 435.26,
+      "sentences": [
         {
           "id": "sent-123",
           "start": 382.48,
@@ -972,14 +939,14 @@
           "id": "sent-125",
           "start": 391.06,
           "end": 393,
-          "text": "但是佈施波羅蜜多",
+          "text": "但是佈施波羅蜜多，",
           "reviewNeeded": false
         },
         {
           "id": "sent-126",
           "start": 393,
           "end": 396.6,
-          "text": "它可就不是這麼簡單的一件事",
+          "text": "它可就不是這麼簡單的一件事。",
           "reviewNeeded": false
         },
         {
@@ -1000,7 +967,7 @@
           "id": "sent-129",
           "start": 400.8,
           "end": 404.86,
-          "text": "他說佈施波羅蜜多是指在付出的同時",
+          "text": "他說佈施波羅蜜多，是指在付出的同時，",
           "reviewNeeded": false
         },
         {
@@ -1023,15 +990,7 @@
           "end": 411.5,
           "text": "他後面不是寫好",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_12",
-      "heading": null,
-      "start": 411.5,
-      "end": 442.68,
-      "sentences": [
+        },
         {
           "id": "sent-133",
           "start": 411.5,
@@ -1043,28 +1002,28 @@
           "id": "sent-134",
           "start": 414.48,
           "end": 416.08,
-          "text": "方式饒以一切有情嗎",
+          "text": "方式饒益一切有情嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-135",
           "start": 416.78,
           "end": 418.38,
-          "text": "我們上週有提到說",
+          "text": "我們上週有提到說：",
           "reviewNeeded": false
         },
         {
           "id": "sent-136",
           "start": 419.34,
           "end": 421.32,
-          "text": "那個菩提心就是什麼",
+          "text": "那個菩提心就是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-137",
           "start": 421.32,
           "end": 425.04,
-          "text": "第一你是要利益一切的有情",
+          "text": "第一，你是要利益一切的有情。",
           "reviewNeeded": false
         },
         {
@@ -1099,9 +1058,17 @@
           "id": "sent-142",
           "start": 434.1,
           "end": 435.26,
-          "text": "你就必須什麼",
+          "text": "你就必須什麼？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_7",
+      "heading": null,
+      "start": 435.26,
+      "end": 474.44,
+      "sentences": [
         {
           "id": "sent-143",
           "start": 435.26,
@@ -1113,17 +1080,9 @@
           "id": "sent-144",
           "start": 439.82,
           "end": 442.68,
-          "text": "你才能夠幫助一切眾生離苦得樂對不對",
+          "text": "你才能夠幫助一切眾生離苦得樂，對不對？",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_13",
-      "heading": null,
-      "start": 443.32,
-      "end": 476.3,
-      "sentences": [
+        },
         {
           "id": "sent-145",
           "start": 443.32,
@@ -1135,7 +1094,7 @@
           "id": "sent-146",
           "start": 444.46,
           "end": 449.36,
-          "text": "你為了有情願成佛的第二個願心是什麼",
+          "text": "你為了有情願成佛的第二個願心是什麼？",
           "reviewNeeded": false
         },
         {
@@ -1149,7 +1108,7 @@
           "id": "sent-148",
           "start": 451.62,
           "end": 452.56,
-          "text": "有沒有發現",
+          "text": "有沒有發現？",
           "reviewNeeded": false
         },
         {
@@ -1163,7 +1122,7 @@
           "id": "sent-150",
           "start": 455.1,
           "end": 458.56,
-          "text": "這個想法我們通常不太敢想",
+          "text": "這個想法我們通常不太敢想。",
           "reviewNeeded": false
         },
         {
@@ -1184,7 +1143,7 @@
           "id": "sent-153",
           "start": 469.54,
           "end": 471.14,
-          "text": "但是你有沒有想到",
+          "text": "但是你有沒有想到？",
           "reviewNeeded": false
         },
         {
@@ -1198,29 +1157,29 @@
           "id": "sent-155",
           "start": 474.12,
           "end": 474.44,
-          "text": "也就是你為了有情願成佛的第二個願心是什麼",
-          "reviewNeeded": false
-        },
-        {
-          "id": "sent-156",
-          "start": 474.44,
-          "end": 476.3,
-          "text": "也就是你為了有情願成佛的第二個願心是什麼",
+          "text": "也就是你為了有情願成佛的第二個願心是什麼？",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_14",
+      "id": "p_8",
       "heading": null,
-      "start": 476.3,
-      "end": 504.42,
+      "start": 474.44,
+      "end": 512.34,
       "sentences": [
+        {
+          "id": "sent-156",
+          "start": 474.44,
+          "end": 476.3,
+          "text": "也就是你為了有情願成佛的第二個願心是什麼？",
+          "reviewNeeded": false
+        },
         {
           "id": "sent-157",
           "start": 476.3,
           "end": 479.7,
-          "text": "也是最能夠達到這樣的目標的就是什麼",
+          "text": "也是最能夠達到這樣目標的，就是什麼？",
           "reviewNeeded": false
         },
         {
@@ -1234,7 +1193,7 @@
           "id": "sent-159",
           "start": 481.34,
           "end": 486.24,
-          "text": "所以願成佛這個願也是非常非常重要",
+          "text": "所以願成佛這個願，也是非常非常重要的。",
           "reviewNeeded": false
         },
         {
@@ -1248,66 +1207,58 @@
           "id": "sent-161",
           "start": 488.48,
           "end": 490.72,
-          "text": "是菩提心裡面必要的",
+          "text": "是菩提心裡面必要的，",
           "reviewNeeded": false
         },
         {
           "id": "sent-162",
           "start": 490.72,
           "end": 492.34,
-          "text": "發的第二個願心",
+          "text": "發的第二個願心。",
           "reviewNeeded": false
         },
         {
           "id": "sent-163",
           "start": 493.2,
           "end": 496.98,
-          "text": "所以為了我能夠利益一切有情",
+          "text": "所以為了我能夠利益一切有情，",
           "reviewNeeded": false
         },
         {
           "id": "sent-164",
           "start": 496.98,
           "end": 498.46,
-          "text": "那麼我自己要什麼",
+          "text": "那麼我自己要什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-165",
           "start": 499.12,
           "end": 499.72,
-          "text": "要成佛",
+          "text": "要成佛。",
           "reviewNeeded": false
         },
         {
           "id": "sent-166",
           "start": 500.44,
           "end": 501.72,
-          "text": "所以大家就是",
+          "text": "所以大家就是，",
           "reviewNeeded": false
         },
         {
           "id": "sent-167",
           "start": 502.34,
           "end": 504.32,
-          "text": "大家一定至少我們",
+          "text": "大家一定，至少我們，",
           "reviewNeeded": false
         },
         {
           "id": "sent-168",
           "start": 504.32,
           "end": 504.42,
-          "text": "所以大家就是大家一定至少我們",
+          "text": "所以大家就是，大家一定，至少我們。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_15",
-      "heading": null,
-      "start": 504.42,
-      "end": 532.92,
-      "sentences": [
+        },
         {
           "id": "sent-169",
           "start": 504.42,
@@ -1326,21 +1277,29 @@
           "id": "sent-171",
           "start": 510.26,
           "end": 512.34,
-          "text": "這個觀念已經講了很多次",
+          "text": "這個觀念已經講了很多次。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_9",
+      "heading": "3. 菩提心與願成佛的必要性",
+      "start": 512.34,
+      "end": 555.86,
+      "sentences": [
         {
           "id": "sent-172",
           "start": 512.34,
           "end": 513.8,
-          "text": "至少這個",
+          "text": "至少，",
           "reviewNeeded": false
         },
         {
           "id": "sent-173",
           "start": 514.38,
           "end": 516.32,
-          "text": "這個我們說菩提心的定義",
+          "text": "我們說菩提心的定義，",
           "reviewNeeded": false
         },
         {
@@ -1354,21 +1313,21 @@
           "id": "sent-175",
           "start": 518.34,
           "end": 520.92,
-          "text": "先就是把它牢牢的印在心裡",
+          "text": "先把它牢牢地印在心裡。",
           "reviewNeeded": false
         },
         {
           "id": "sent-176",
           "start": 521.42,
           "end": 522.64,
-          "text": "否則我們常常會說",
+          "text": "否則我們常常會說，",
           "reviewNeeded": false
         },
         {
           "id": "sent-177",
           "start": 523.12,
           "end": 524.52,
-          "text": "我們到道場去",
+          "text": "我們到道場去，",
           "reviewNeeded": false
         },
         {
@@ -1382,57 +1341,49 @@
           "id": "sent-179",
           "start": 527.2,
           "end": 530.66,
-          "text": "在佛法的課程都說我們大家要發菩提心",
+          "text": "佛法的課程，都說我們大家要發菩提心。",
           "reviewNeeded": false
         },
         {
           "id": "sent-180",
           "start": 530.66,
           "end": 532.92,
-          "text": "師父也常常這樣的開示對不對",
+          "text": "師父也常常這樣開示，對不對？",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_16",
-      "heading": null,
-      "start": 533.54,
-      "end": 561,
-      "sentences": [
+        },
         {
           "id": "sent-181",
           "start": 533.54,
           "end": 533.74,
-          "text": "那",
+          "text": "那，",
           "reviewNeeded": false
         },
         {
           "id": "sent-182",
           "start": 533.74,
           "end": 535.22,
-          "text": "我們聽了什麼",
+          "text": "我們聽了什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-183",
           "start": 535.22,
           "end": 536.98,
-          "text": "我們聽到耳朵都長繭了",
+          "text": "我們聽到耳朵都長繭了，",
           "reviewNeeded": false
         },
         {
           "id": "sent-184",
           "start": 537.96,
           "end": 538.44,
-          "text": "對不對",
+          "text": "對不對？",
           "reviewNeeded": false
         },
         {
           "id": "sent-185",
           "start": 539.1,
           "end": 540.66,
-          "text": "其實這句話對我們來講",
+          "text": "其實這句話對我們來講，",
           "reviewNeeded": false
         },
         {
@@ -1446,52 +1397,52 @@
           "id": "sent-187",
           "start": 543.52,
           "end": 546.78,
-          "text": "對太常聽到了反而就是什麼直接忽略",
+          "text": "太常聽到了，反而直接忽略。",
           "reviewNeeded": false
         },
         {
           "id": "sent-188",
           "start": 547.84,
           "end": 551.72,
-          "text": "所以根本這個為利有情就講得很虛了",
+          "text": "所以根本「為利有情」就講得很虛了，",
           "reviewNeeded": false
         },
         {
           "id": "sent-189",
           "start": 551.72,
           "end": 553.98,
-          "text": "在後面那個要成佛",
+          "text": "在後面那個「要成佛」，",
           "reviewNeeded": false
         },
         {
           "id": "sent-190",
           "start": 554.7,
           "end": 555.86,
-          "text": "那個根本都講不出來",
+          "text": "那個根本都講不出來。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_10",
+      "heading": null,
+      "start": 556.38,
+      "end": 597.6,
+      "sentences": [
         {
           "id": "sent-191",
           "start": 556.38,
           "end": 559.26,
-          "text": "那但是現在就是說我們知道他的確",
+          "text": "但是現在我們知道，",
           "reviewNeeded": false
         },
         {
           "id": "sent-192",
           "start": 559.78,
           "end": 561,
-          "text": "他的定義就是這樣",
+          "text": "祂的定義就是這樣。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_17",
-      "heading": null,
-      "start": 561.58,
-      "end": 578.96,
-      "sentences": [
+        },
         {
           "id": "sent-193",
           "start": 561.58,
@@ -1503,14 +1454,14 @@
           "id": "sent-194",
           "start": 561.64,
           "end": 563.7,
-          "text": "那也你也要有這個定義",
+          "text": "那你也要有這個定義",
           "reviewNeeded": false
         },
         {
           "id": "sent-195",
           "start": 563.7,
           "end": 563.72,
-          "text": "那也你也要有這個定義",
+          "text": "那你也要有這個定義",
           "reviewNeeded": false
         },
         {
@@ -1531,7 +1482,7 @@
           "id": "sent-198",
           "start": 567.56,
           "end": 568.44,
-          "text": "這兩個是什麼",
+          "text": "這兩個是什麼？",
           "reviewNeeded": false
         },
         {
@@ -1552,7 +1503,7 @@
           "id": "sent-201",
           "start": 572.46,
           "end": 573.7,
-          "text": "你就要什麼",
+          "text": "你就要什麼？",
           "reviewNeeded": false
         },
         {
@@ -1575,15 +1526,7 @@
           "end": 578.96,
           "text": "你才有足夠的能力",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_18",
-      "heading": null,
-      "start": 578.96,
-      "end": 603.84,
-      "sentences": [
+        },
         {
           "id": "sent-205",
           "start": 578.96,
@@ -1602,7 +1545,7 @@
           "id": "sent-207",
           "start": 583.48,
           "end": 585.8,
-          "text": "所以如果說你只是要什麼",
+          "text": "所以如果說你只是要什麼？",
           "reviewNeeded": false
         },
         {
@@ -1616,7 +1559,7 @@
           "id": "sent-209",
           "start": 588.44,
           "end": 589.78,
-          "text": "下一句話你就什麼",
+          "text": "下一句話你就什麼？",
           "reviewNeeded": false
         },
         {
@@ -1630,7 +1573,7 @@
           "id": "sent-211",
           "start": 592.56,
           "end": 592.66,
-          "text": "對不對",
+          "text": "對不對？",
           "reviewNeeded": false
         },
         {
@@ -1651,9 +1594,17 @@
           "id": "sent-214",
           "start": 597.18,
           "end": 597.6,
-          "text": "對不對",
+          "text": "對不對？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_11",
+      "heading": null,
+      "start": 598.62,
+      "end": 632.06,
+      "sentences": [
         {
           "id": "sent-215",
           "start": 598.62,
@@ -1667,106 +1618,98 @@
           "end": 603.84,
           "text": "徹底的離苦得樂",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_19",
-      "heading": null,
-      "start": 603.84,
-      "end": 632.06,
-      "sentences": [
+        },
         {
           "id": "sent-217",
           "start": 603.84,
           "end": 604.68,
-          "text": "那我什麼",
+          "text": "那我什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-218",
           "start": 605.32,
           "end": 606.64,
-          "text": "我要成就阿羅漢",
+          "text": "我要成就阿羅漢。",
           "reviewNeeded": false
         },
         {
           "id": "sent-219",
           "start": 607.24,
           "end": 609.52,
-          "text": "但是今天是為利一切有情",
+          "text": "但是今天是為利一切有情。",
           "reviewNeeded": false
         },
         {
           "id": "sent-220",
           "start": 609.52,
           "end": 612.3,
-          "text": "那當然後面阿羅漢是不夠的",
+          "text": "那當然後面阿羅漢是不夠的。",
           "reviewNeeded": false
         },
         {
           "id": "sent-221",
           "start": 612.84,
           "end": 614.68,
-          "text": "阿羅漢不是說他不慈悲",
+          "text": "阿羅漢不是說祂不慈悲，",
           "reviewNeeded": false
         },
         {
           "id": "sent-222",
           "start": 614.68,
           "end": 615.38,
-          "text": "而是什麼",
+          "text": "而是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-223",
           "start": 615.92,
           "end": 619.4,
-          "text": "他原先發的願就沒有那麼廣大宏廓",
+          "text": "祂原先發的願就沒有那麼廣大宏廓。",
           "reviewNeeded": false
         },
         {
           "id": "sent-224",
           "start": 619.4,
           "end": 622.44,
-          "text": "所以他所累積的資料也不夠",
+          "text": "所以祂所累積的資料也不夠。",
           "reviewNeeded": false
         },
         {
           "id": "sent-225",
           "start": 622.44,
           "end": 623.7,
-          "text": "所以他最後的結局是什麼",
+          "text": "所以祂最後的結局是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-226",
           "start": 623.7,
           "end": 625.7,
-          "text": "結果當然也沒有辦法達到什麼",
+          "text": "結果當然也沒有辦法達到什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-227",
           "start": 626.3,
           "end": 628.72,
-          "text": "達到所有能夠利益所有的眾生",
+          "text": "達到所有能夠利益所有的眾生。",
           "reviewNeeded": false
         },
         {
           "id": "sent-228",
           "start": 628.72,
           "end": 632.06,
-          "text": "所以他只是自己能夠提升到什麼",
+          "text": "所以祂只是自己能夠提升到什麼？",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_20",
+      "id": "p_12",
       "heading": null,
       "start": 632.84,
-      "end": 655.86,
+      "end": 698.94,
       "sentences": [
         {
           "id": "sent-229",
@@ -1851,15 +1794,7 @@
           "end": 655.86,
           "text": "因為我覺得課本是課本",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_21",
-      "heading": null,
-      "start": 655.86,
-      "end": 688.08,
-      "sentences": [
+        },
         {
           "id": "sent-241",
           "start": 655.86,
@@ -1878,14 +1813,14 @@
           "id": "sent-243",
           "start": 661.4,
           "end": 664.42,
-          "text": "但是事實上它跟你是非常非常有距離的",
+          "text": "但是事實上，它跟你是非常非常有距離的",
           "reviewNeeded": false
         },
         {
           "id": "sent-244",
           "start": 664.42,
           "end": 667.08,
-          "text": "所以如果你把剛剛講的那個",
+          "text": "所以，如果你把剛剛講的那個",
           "reviewNeeded": false
         },
         {
@@ -1913,7 +1848,7 @@
           "id": "sent-248",
           "start": 673.24,
           "end": 675.58,
-          "text": "我學我慢慢學我慢慢學",
+          "text": "我學，我慢慢學，我慢慢學",
           "reviewNeeded": false
         },
         {
@@ -1927,14 +1862,14 @@
           "id": "sent-250",
           "start": 677.96,
           "end": 681.76,
-          "text": "我真的我把成佛這件事情放在心裡",
+          "text": "我真的，我把成佛這件事情放在心裡",
           "reviewNeeded": false
         },
         {
           "id": "sent-251",
           "start": 683.7,
           "end": 684.94,
-          "text": "你不用跟人家講沒關係",
+          "text": "你不用跟人家講，沒關係",
           "reviewNeeded": false
         },
         {
@@ -1943,20 +1878,12 @@
           "end": 688.08,
           "text": "人家一定會覺得你瘋了",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_22",
-      "heading": null,
-      "start": 688.62,
-      "end": 716.02,
-      "sentences": [
+        },
         {
           "id": "sent-253",
           "start": 688.62,
           "end": 692.36,
-          "text": "什麼你連個好人可能都做得哩哩啷啷",
+          "text": "什麼？你連個好人可能都做得哩哩啷啷，",
           "reviewNeeded": false
         },
         {
@@ -1970,184 +1897,184 @@
           "id": "sent-255",
           "start": 694.02,
           "end": 696.86,
-          "text": "大家就可能給你一些釘子碰",
+          "text": "大家就可能給你一些釘子碰，",
           "reviewNeeded": false
         },
         {
           "id": "sent-256",
           "start": 697.58,
           "end": 698.94,
-          "text": "自己也會沒有信心",
+          "text": "自己也會沒有信心。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_13",
+      "heading": null,
+      "start": 698.94,
+      "end": 740.18,
+      "sentences": [
         {
           "id": "sent-257",
           "start": 698.94,
           "end": 700.72,
-          "text": "但是我們把它放在心裡",
+          "text": "但是我們把它放在心裡，",
           "reviewNeeded": false
         },
         {
           "id": "sent-258",
           "start": 700.72,
           "end": 701.6,
-          "text": "好好的醞釀",
+          "text": "好好的醞釀，",
           "reviewNeeded": false
         },
         {
           "id": "sent-259",
           "start": 701.6,
           "end": 705.16,
-          "text": "因為透過正確的學習",
+          "text": "因為透過正確的學習，",
           "reviewNeeded": false
         },
         {
           "id": "sent-260",
           "start": 705.16,
           "end": 707.7,
-          "text": "佛陀通通有教導我們方法",
+          "text": "佛陀通通有教導我們方法。",
           "reviewNeeded": false
         },
         {
           "id": "sent-261",
           "start": 708.9,
           "end": 712.12,
-          "text": "所以這件事情就是大家要把它記起來",
+          "text": "所以這件事情就是大家要把它記起來。",
           "reviewNeeded": false
         },
         {
           "id": "sent-262",
           "start": 712.7,
           "end": 712.8,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-263",
           "start": 712.8,
           "end": 714.32,
-          "text": "我們回到課本",
+          "text": "我們回到課本，",
           "reviewNeeded": false
         },
         {
           "id": "sent-264",
           "start": 715.2,
           "end": 716.02,
-          "text": "我們說",
+          "text": "我們說：",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_23",
-      "heading": null,
-      "start": 716.78,
-      "end": 742.56,
-      "sentences": [
+        },
         {
           "id": "sent-265",
           "start": 716.78,
           "end": 717.96,
-          "text": "所以剛剛說",
+          "text": "所以剛剛說，",
           "reviewNeeded": false
         },
         {
           "id": "sent-266",
           "start": 719.36,
           "end": 722.72,
-          "text": "佈施波羅蜜多是指在佈施的同時",
+          "text": "布施波羅蜜多是指在布施的同時，",
           "reviewNeeded": false
         },
         {
           "id": "sent-267",
           "start": 722.72,
           "end": 724.5,
-          "text": "也發願要成佛",
+          "text": "也發願要成佛。",
           "reviewNeeded": false
         },
         {
           "id": "sent-268",
           "start": 725.04,
           "end": 727.08,
-          "text": "所以它才會達到什麼",
+          "text": "所以它才會達到什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-269",
           "start": 727.08,
           "end": 728.5,
-          "text": "波羅蜜多",
+          "text": "波羅蜜多，",
           "reviewNeeded": false
         },
         {
           "id": "sent-270",
           "start": 729.14,
           "end": 731.42,
-          "text": "因為波羅蜜多的意思是什麼",
+          "text": "因為波羅蜜多的意思是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-271",
           "start": 732.26,
           "end": 734.72,
-          "text": "我們先跳到第二段來",
+          "text": "我們先跳到第二段來，",
           "reviewNeeded": false
         },
         {
           "id": "sent-272",
           "start": 734.72,
           "end": 736.22,
-          "text": "應該是第三段",
+          "text": "應該是第三段。",
           "reviewNeeded": false
         },
         {
           "id": "sent-273",
           "start": 736.22,
           "end": 738.84,
-          "text": "有沒有看到波羅蜜多這個詞彙",
+          "text": "有沒有看到「波羅蜜多」這個詞彙？",
           "reviewNeeded": false
         },
         {
           "id": "sent-274",
           "start": 738.84,
           "end": 740.18,
-          "text": "這一段有看到嗎",
+          "text": "這一段有看到嗎？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_14",
+      "heading": null,
+      "start": 740.18,
+      "end": 792.3,
+      "sentences": [
         {
           "id": "sent-275",
           "start": 740.18,
           "end": 740.92,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-276",
           "start": 741.52,
           "end": 742.56,
-          "text": "它其實它的",
+          "text": "它其實它的……",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_24",
-      "heading": null,
-      "start": 742.8,
-      "end": 769.62,
-      "sentences": [
+        },
         {
           "id": "sent-277",
           "start": 742.8,
           "end": 744.82,
-          "text": "含義就是什麼超越道彼安",
+          "text": "其實它的含義就是什麼？超越道彼岸。",
           "reviewNeeded": false
         },
         {
           "id": "sent-278",
           "start": 744.82,
           "end": 747.84,
-          "text": "這個大家都是都已經都會背了",
+          "text": "這個大家都是都已經都會背了。",
           "reviewNeeded": false
         },
         {
@@ -2168,7 +2095,7 @@
           "id": "sent-281",
           "start": 753.62,
           "end": 756.18,
-          "text": "帶著我們什麼超越輪迴到達",
+          "text": "帶著我們什麼？超越輪迴，到達",
           "reviewNeeded": false
         },
         {
@@ -2189,7 +2116,7 @@
           "id": "sent-284",
           "start": 759.78,
           "end": 762.72,
-          "text": "所以什麼叫成佛",
+          "text": "所以什麼叫成佛？",
           "reviewNeeded": false
         },
         {
@@ -2203,14 +2130,14 @@
           "id": "sent-286",
           "start": 763.82,
           "end": 765.82,
-          "text": "它說這個時候是什麼",
+          "text": "它說這個時候是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-287",
           "start": 766.36,
           "end": 767.22,
-          "text": "成佛的時候是什麼",
+          "text": "成佛的時候是什麼？",
           "reviewNeeded": false
         },
         {
@@ -2219,15 +2146,7 @@
           "end": 769.62,
           "text": "兩種遮障已然消除",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_25",
-      "heading": null,
-      "start": 770.44,
-      "end": 796.02,
-      "sentences": [
+        },
         {
           "id": "sent-289",
           "start": 770.44,
@@ -2239,7 +2158,7 @@
           "id": "sent-290",
           "start": 772.46,
           "end": 773.8,
-          "text": "遮障是指什麼",
+          "text": "遮障是指什麼？",
           "reviewNeeded": false
         },
         {
@@ -2267,7 +2186,7 @@
           "id": "sent-294",
           "start": 783.08,
           "end": 785.08,
-          "text": "所知障就是什麼菩薩",
+          "text": "所知障就是什麼？菩薩",
           "reviewNeeded": false
         },
         {
@@ -2295,14 +2214,22 @@
           "id": "sent-298",
           "start": 790.84,
           "end": 792.3,
-          "text": "這樣子的話就什麼",
+          "text": "這樣子的話就什麼？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_15",
+      "heading": null,
+      "start": 792.3,
+      "end": 850.22,
+      "sentences": [
         {
           "id": "sent-299",
           "start": 792.3,
           "end": 794.44,
-          "text": "就能夠超越道彼安",
+          "text": "就能夠超越到彼岸，",
           "reviewNeeded": false
         },
         {
@@ -2311,15 +2238,7 @@
           "end": 796.02,
           "text": "就能夠成正等正覺",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_26",
-      "heading": null,
-      "start": 796.54,
-      "end": 816.96,
-      "sentences": [
+        },
         {
           "id": "sent-301",
           "start": 796.54,
@@ -2366,7 +2285,7 @@
           "id": "sent-307",
           "start": 803.66,
           "end": 805.54,
-          "text": "像吃了大荔枉一樣",
+          "text": "像吃了大藥一樣",
           "reviewNeeded": false
         },
         {
@@ -2403,27 +2322,19 @@
           "end": 816.96,
           "text": "會擴充的非常的快",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_27",
-      "heading": null,
-      "start": 816.96,
-      "end": 842.78,
-      "sentences": [
+        },
         {
           "id": "sent-313",
           "start": 816.96,
           "end": 820.14,
-          "text": "那是不是代表你的能力就沒有限愛",
+          "text": "那是不是代表你的能力就沒有限量？",
           "reviewNeeded": false
         },
         {
           "id": "sent-314",
           "start": 820.14,
           "end": 821.76,
-          "text": "能力沒有限愛",
+          "text": "能力沒有限量",
           "reviewNeeded": false
         },
         {
@@ -2472,7 +2383,7 @@
           "id": "sent-321",
           "start": 834.24,
           "end": 836.18,
-          "text": "佈施跟佈施波羅蜜多",
+          "text": "布施跟布施波羅蜜多",
           "reviewNeeded": false
         },
         {
@@ -2495,15 +2406,7 @@
           "end": 842.78,
           "text": "要成佛",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_28",
-      "heading": null,
-      "start": 842.78,
-      "end": 868.9,
-      "sentences": [
+        },
         {
           "id": "sent-325",
           "start": 842.78,
@@ -2522,9 +2425,17 @@
           "id": "sent-327",
           "start": 847.64,
           "end": 850.22,
-          "text": "才會說佈施波羅蜜多",
+          "text": "才會說「布施波羅蜜多」",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_16",
+      "heading": null,
+      "start": 850.22,
+      "end": 891.4,
+      "sentences": [
         {
           "id": "sent-328",
           "start": 850.22,
@@ -2557,14 +2468,14 @@
           "id": "sent-332",
           "start": 858.4,
           "end": 859.9,
-          "text": "大家有沒有發現",
+          "text": "大家有沒有發現？",
           "reviewNeeded": false
         },
         {
           "id": "sent-333",
           "start": 861.08,
           "end": 862.02,
-          "text": "有沒有發現",
+          "text": "有沒有發現？",
           "reviewNeeded": false
         },
         {
@@ -2587,15 +2498,7 @@
           "end": 868.9,
           "text": "都會講到六度",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_29",
-      "heading": null,
-      "start": 868.9,
-      "end": 891.4,
-      "sentences": [
+        },
         {
           "id": "sent-337",
           "start": 868.9,
@@ -2628,14 +2531,14 @@
           "id": "sent-341",
           "start": 877.58,
           "end": 880.46,
-          "text": "把他跟成佛這件事情聯絡在一起",
+          "text": "把它跟成佛這件事情聯絡在一起？",
           "reviewNeeded": false
         },
         {
           "id": "sent-342",
           "start": 881.16,
           "end": 881.72,
-          "text": "沒有",
+          "text": "沒有。",
           "reviewNeeded": false
         },
         {
@@ -2649,44 +2552,44 @@
           "id": "sent-344",
           "start": 884.08,
           "end": 886.4,
-          "text": "所以你們沒有是很自然",
+          "text": "所以你們沒有是很自然，",
           "reviewNeeded": false
         },
         {
           "id": "sent-345",
           "start": 886.4,
           "end": 887.38,
-          "text": "因為我都沒有",
+          "text": "因為我都沒有。",
           "reviewNeeded": false
         },
         {
           "id": "sent-346",
           "start": 887.38,
           "end": 888.68,
-          "text": "我也很慚愧",
+          "text": "我也很慚愧。",
           "reviewNeeded": false
         },
         {
           "id": "sent-347",
           "start": 888.68,
           "end": 889.6,
-          "text": "但是你看",
+          "text": "但是你看，",
           "reviewNeeded": false
         },
         {
           "id": "sent-348",
           "start": 889.9,
           "end": 891.4,
-          "text": "他這邊就特別提出來",
+          "text": "祂這邊就特別提出來。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_30",
+      "id": "p_17",
       "heading": null,
       "start": 892.48,
-      "end": 917.38,
+      "end": 944.1,
       "sentences": [
         {
           "id": "sent-349",
@@ -2699,7 +2602,7 @@
           "id": "sent-350",
           "start": 894.66,
           "end": 896.4,
-          "text": "他寫的文字的量很多",
+          "text": "他寫的文字量很多",
           "reviewNeeded": false
         },
         {
@@ -2713,7 +2616,7 @@
           "id": "sent-352",
           "start": 897.96,
           "end": 900.6,
-          "text": "所以他盡可能的發揮",
+          "text": "所以他盡可能地發揮",
           "reviewNeeded": false
         },
         {
@@ -2734,7 +2637,7 @@
           "id": "sent-355",
           "start": 903.52,
           "end": 907.08,
-          "text": "達賴喇嘛尊者自己這樣子說的",
+          "text": "達賴喇嘛尊者自己這樣說的",
           "reviewNeeded": false
         },
         {
@@ -2771,15 +2674,7 @@
           "end": 917.38,
           "text": "就是有這些",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_31",
-      "heading": null,
-      "start": 918.88,
-      "end": 944.1,
-      "sentences": [
+        },
         {
           "id": "sent-361",
           "start": 918.88,
@@ -2833,7 +2728,7 @@
           "id": "sent-368",
           "start": 935.48,
           "end": 936.9,
-          "text": "波羅蜜多這個詞",
+          "text": "所以「波羅蜜多」這個詞，我們知道之後",
           "reviewNeeded": false
         },
         {
@@ -2861,16 +2756,16 @@
           "id": "sent-372",
           "start": 942.78,
           "end": 944.1,
-          "text": "這個布什波羅蜜多",
+          "text": "這個「布施波羅蜜多」",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_32",
-      "heading": null,
+      "id": "p_18",
+      "heading": "4. 菩提心策發與空性封印",
       "start": 944.74,
-      "end": 970.7,
+      "end": 986.12,
       "sentences": [
         {
           "id": "sent-373",
@@ -2883,70 +2778,70 @@
           "id": "sent-374",
           "start": 945.74,
           "end": 947.48,
-          "text": "他說布什波羅蜜多",
+          "text": "他說布施波羅蜜多",
           "reviewNeeded": false
         },
         {
           "id": "sent-375",
           "start": 947.48,
           "end": 949.54,
-          "text": "不只是由菩提心所策發",
+          "text": "不只是由菩提心所策發，",
           "reviewNeeded": false
         },
         {
           "id": "sent-376",
           "start": 950.12,
           "end": 953.22,
-          "text": "同時也由空性智慧所封印",
+          "text": "同時也由空性智慧所封印。",
           "reviewNeeded": false
         },
         {
           "id": "sent-377",
           "start": 954.06,
           "end": 955.72,
-          "text": "他用的動詞都很好",
+          "text": "祂用的動詞都很好。",
           "reviewNeeded": false
         },
         {
           "id": "sent-378",
           "start": 955.72,
           "end": 957.28,
-          "text": "策發 封印",
+          "text": "「策發」、「封印」。",
           "reviewNeeded": false
         },
         {
           "id": "sent-379",
           "start": 958.18,
           "end": 960.12,
-          "text": "那所謂的策發就是什麼",
+          "text": "那所謂的策發就是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-380",
           "start": 960.12,
           "end": 960.86,
-          "text": "動機",
+          "text": "動機。",
           "reviewNeeded": false
         },
         {
           "id": "sent-381",
           "start": 961.42,
           "end": 963.1,
-          "text": "所以我們的動機是什麼",
+          "text": "所以我們的動機是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-382",
           "start": 963.1,
           "end": 965.02,
-          "text": "我們的動機是菩提心",
+          "text": "我們的動機是菩提心，",
           "reviewNeeded": false
         },
         {
           "id": "sent-383",
           "start": 965.02,
           "end": 966.86,
-          "text": "不僅僅是出離心",
+          "text": "不僅僅是出離心，",
           "reviewNeeded": false
         },
         {
@@ -2955,107 +2850,99 @@
           "end": 970.7,
           "text": "不僅僅是我希望你能夠好的那種",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_33",
-      "heading": null,
-      "start": 970.7,
-      "end": 1005.4,
-      "sentences": [
+        },
         {
           "id": "sent-385",
           "start": 970.7,
           "end": 973.76,
-          "text": "泛泛的很籠統的心",
+          "text": "泛泛的、很籠統的心",
           "reviewNeeded": false
         },
         {
           "id": "sent-386",
           "start": 973.76,
           "end": 975.34,
-          "text": "的善心",
+          "text": "的善心。",
           "reviewNeeded": false
         },
         {
           "id": "sent-387",
           "start": 975.34,
           "end": 978.16,
-          "text": "所以菩提心就是什麼",
+          "text": "所以菩提心就是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-388",
           "start": 978.16,
           "end": 979.84,
-          "text": "就是最高階的善心",
+          "text": "就是最高階的善心。",
           "reviewNeeded": false
         },
         {
           "id": "sent-389",
           "start": 979.9,
           "end": 983.18,
-          "text": "所以這個由菩提心所策發",
+          "text": "所以這個由菩提心所策發，",
           "reviewNeeded": false
         },
         {
           "id": "sent-390",
           "start": 983.78,
           "end": 986.12,
-          "text": "然後這個沒有問題了",
+          "text": "然後這個沒有問題了。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_19",
+      "heading": null,
+      "start": 986.12,
+      "end": 1080.88,
+      "sentences": [
         {
           "id": "sent-391",
           "start": 986.12,
           "end": 988.74,
-          "text": "菩提心我們現在已經越來越熟悉",
+          "text": "菩提心我們現在已經越來越熟悉，",
           "reviewNeeded": false
         },
         {
           "id": "sent-392",
           "start": 988.74,
           "end": 990.7,
-          "text": "他的定義還有他的內容",
+          "text": "祂的定義還有祂的內容。",
           "reviewNeeded": false
         },
         {
           "id": "sent-393",
           "start": 990.7,
           "end": 993.48,
-          "text": "接著他說同時",
+          "text": "接著他說：",
           "reviewNeeded": false
         },
         {
           "id": "sent-394",
           "start": 993.48,
           "end": 995.38,
-          "text": "同時這句話很重要",
+          "text": "「同時」這句話很重要，",
           "reviewNeeded": false
         },
         {
           "id": "sent-395",
           "start": 995.38,
           "end": 1000.8,
-          "text": "就是布什波羅蜜多要由菩提心所發動",
+          "text": "就是布施波羅蜜多要由菩提心所發動，",
           "reviewNeeded": false
         },
         {
           "id": "sent-396",
           "start": 1000.8,
           "end": 1005.4,
-          "text": "然後去做布什的這件事情的同時",
+          "text": "然後去做布施的這件事情的同時，",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_34",
-      "heading": null,
-      "start": 1005.4,
-      "end": 1026.84,
-      "sentences": [
+        },
         {
           "id": "sent-397",
           "start": 1005.4,
@@ -3139,15 +3026,7 @@
           "end": 1026.84,
           "text": "那我們現在封印這個詞",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_35",
-      "heading": null,
-      "start": 1026.84,
-      "end": 1058,
-      "sentences": [
+        },
         {
           "id": "sent-409",
           "start": 1026.84,
@@ -3231,15 +3110,7 @@
           "end": 1058,
           "text": "為什麼說好",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_36",
-      "heading": null,
-      "start": 1058,
-      "end": 1086.4,
-      "sentences": [
+        },
         {
           "id": "sent-421",
           "start": 1058,
@@ -3286,7 +3157,7 @@
           "id": "sent-427",
           "start": 1071.18,
           "end": 1072.8,
-          "text": "所以說菩提心所車發",
+          "text": "所以說菩提心所策發",
           "reviewNeeded": false
         },
         {
@@ -3309,12 +3180,20 @@
           "end": 1080.88,
           "text": "還要配合著空性智慧的參與",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_20",
+      "heading": null,
+      "start": 1081.9,
+      "end": 1146.98,
+      "sentences": [
         {
           "id": "sent-431",
           "start": 1081.9,
           "end": 1084.08,
-          "text": "這個實在是有點困難對不對",
+          "text": "這個實在是有點困難，對不對？",
           "reviewNeeded": false
         },
         {
@@ -3323,15 +3202,7 @@
           "end": 1086.4,
           "text": "但是呢",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_37",
-      "heading": null,
-      "start": 1088.4,
-      "end": 1115.48,
-      "sentences": [
+        },
         {
           "id": "sent-433",
           "start": 1088.4,
@@ -3415,15 +3286,7 @@
           "end": 1115.48,
           "text": "你的心放下去",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_38",
-      "heading": null,
-      "start": 1115.48,
-      "end": 1142.8,
-      "sentences": [
+        },
         {
           "id": "sent-445",
           "start": 1115.48,
@@ -3507,22 +3370,22 @@
           "end": 1142.8,
           "text": "但是呢",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_39",
-      "heading": null,
-      "start": 1142.8,
-      "end": 1176.68,
-      "sentences": [
+        },
         {
           "id": "sent-457",
           "start": 1142.8,
           "end": 1146.98,
-          "text": "因為你發心你沒有一個特別的動機去引導",
+          "text": "因為你發心，沒有一個特別的動機去引導。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_21",
+      "heading": null,
+      "start": 1146.98,
+      "end": 1188.74,
+      "sentences": [
         {
           "id": "sent-458",
           "start": 1146.98,
@@ -3534,92 +3397,84 @@
           "id": "sent-459",
           "start": 1148.62,
           "end": 1151.06,
-          "text": "就代表你在做那件事情的時候",
+          "text": "就代表你在做那件事情的時候，",
           "reviewNeeded": false
         },
         {
           "id": "sent-460",
           "start": 1151.06,
           "end": 1152.62,
-          "text": "你沒有很用心",
+          "text": "你沒有很用心，",
           "reviewNeeded": false
         },
         {
           "id": "sent-461",
           "start": 1152.62,
           "end": 1154.3,
-          "text": "你只是去把它完成",
+          "text": "你只是去把它完成。",
           "reviewNeeded": false
         },
         {
           "id": "sent-462",
           "start": 1155,
           "end": 1157.96,
-          "text": "所以那個事件過去也能夠帶來",
+          "text": "所以那個事件過去，也能夠帶來",
           "reviewNeeded": false
         },
         {
           "id": "sent-463",
           "start": 1159.88,
           "end": 1161.58,
-          "text": "一定會有善的果報",
+          "text": "一定會有善的果報。",
           "reviewNeeded": false
         },
         {
           "id": "sent-464",
           "start": 1161.58,
           "end": 1163.58,
-          "text": "但是善的果報",
+          "text": "但是善的果報，",
           "reviewNeeded": false
         },
         {
           "id": "sent-465",
           "start": 1164.24,
           "end": 1168.58,
-          "text": "它發生的時候它也是沒什麼力量",
+          "text": "它發生的時候，它也是沒什麼力量，",
           "reviewNeeded": false
         },
         {
           "id": "sent-466",
           "start": 1168.58,
           "end": 1171.52,
-          "text": "因為你沒有給它一個強烈的動機",
+          "text": "因為你沒有給它一個強烈的動機。",
           "reviewNeeded": false
         },
         {
           "id": "sent-467",
           "start": 1172.12,
           "end": 1173.2,
-          "text": "這樣知道嗎",
+          "text": "這樣知道嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-468",
           "start": 1173.2,
           "end": 1176.68,
-          "text": "所以你要發那個強烈的這個菩提心",
+          "text": "所以你要發那個強烈的菩提心。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_40",
-      "heading": null,
-      "start": 1176.68,
-      "end": 1200.76,
-      "sentences": [
+        },
         {
           "id": "sent-469",
           "start": 1176.68,
           "end": 1178.42,
-          "text": "為它的策發點",
+          "text": "為它的策發點。",
           "reviewNeeded": false
         },
         {
           "id": "sent-470",
           "start": 1179.08,
           "end": 1179.86,
-          "text": "以後",
+          "text": "以後，",
           "reviewNeeded": false
         },
         {
@@ -3633,73 +3488,73 @@
           "id": "sent-472",
           "start": 1181.38,
           "end": 1183.76,
-          "text": "這個布什波羅蜜多的果出現的時候",
+          "text": "這個布施波羅蜜多的果出現的時候，",
           "reviewNeeded": false
         },
         {
           "id": "sent-473",
           "start": 1183.76,
           "end": 1185.04,
-          "text": "它也是什麼",
+          "text": "它也是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-474",
           "start": 1185.04,
           "end": 1188.74,
-          "text": "它也是夾帶著非常強而有力的一個力量",
+          "text": "它也是夾帶著非常強而有力的一個力量。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_22",
+      "heading": "5. 三輪體空與緣起性空",
+      "start": 1189.32,
+      "end": 1240.9,
+      "sentences": [
         {
           "id": "sent-475",
           "start": 1189.32,
           "end": 1189.86,
-          "text": "回答你",
+          "text": "回答你。",
           "reviewNeeded": false
         },
         {
           "id": "sent-476",
           "start": 1189.86,
           "end": 1190.56,
-          "text": "然後它也會帶到你身上",
+          "text": "然後它也會帶到你身上。",
           "reviewNeeded": false
         },
         {
           "id": "sent-477",
           "start": 1190.56,
           "end": 1191.38,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-478",
           "start": 1192.48,
           "end": 1196.02,
-          "text": "那這個空性的智慧我們在下面還會繼續講",
+          "text": "那這個空性的智慧，我們在下面還會繼續講。",
           "reviewNeeded": false
         },
         {
           "id": "sent-479",
           "start": 1196.02,
           "end": 1198.64,
-          "text": "然後這裡有一些字我要改一下",
+          "text": "然後這裡有一些字我要改一下。",
           "reviewNeeded": false
         },
         {
           "id": "sent-480",
           "start": 1198.64,
           "end": 1200.76,
-          "text": "好 我們來看第二行",
+          "text": "好，我們來看第二行。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_41",
-      "heading": null,
-      "start": 1200.76,
-      "end": 1223.84,
-      "sentences": [
+        },
         {
           "id": "sent-481",
           "start": 1200.76,
@@ -3725,28 +3580,28 @@
           "id": "sent-484",
           "start": 1206.76,
           "end": 1208.7,
-          "text": "這是指我們在不失的時候",
+          "text": "這是指我們在布施的時候要思維",
           "reviewNeeded": false
         },
         {
           "id": "sent-485",
           "start": 1208.7,
           "end": 1212.24,
-          "text": "要思維失者 不失的人",
+          "text": "施者、施物",
           "reviewNeeded": false
         },
         {
           "id": "sent-486",
           "start": 1212.8,
           "end": 1214.22,
-          "text": "所不失的東西",
+          "text": "所施的物",
           "reviewNeeded": false
         },
         {
           "id": "sent-487",
           "start": 1214.22,
           "end": 1216.36,
-          "text": "還有接受不失的人",
+          "text": "還有受者",
           "reviewNeeded": false
         },
         {
@@ -3760,7 +3615,7 @@
           "id": "sent-489",
           "start": 1217.18,
           "end": 1219.46,
-          "text": "失語的這個行為",
+          "text": "還有施的這個行為",
           "reviewNeeded": false
         },
         {
@@ -3783,15 +3638,7 @@
           "end": 1223.84,
           "text": "三輪",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_42",
-      "heading": null,
-      "start": 1223.84,
-      "end": 1248.34,
-      "sentences": [
+        },
         {
           "id": "sent-493",
           "start": 1223.84,
@@ -3810,7 +3657,7 @@
           "id": "sent-495",
           "start": 1229.34,
           "end": 1231.34,
-          "text": "好 所以有沒有看到用的那個詞",
+          "text": "所以有沒有看到用的那個詞",
           "reviewNeeded": false
         },
         {
@@ -3838,9 +3685,17 @@
           "id": "sent-499",
           "start": 1238.74,
           "end": 1240.9,
-          "text": "究竟本質 我上次有寫在白板對不對",
+          "text": "究竟本質，我上次有寫在白板，對不對？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_23",
+      "heading": null,
+      "start": 1240.9,
+      "end": 1315.14,
+      "sentences": [
         {
           "id": "sent-500",
           "start": 1240.9,
@@ -3875,20 +3730,12 @@
           "end": 1248.34,
           "text": "它不是專有名詞但是",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_43",
-      "heading": null,
-      "start": 1249.04,
-      "end": 1268.78,
-      "sentences": [
+        },
         {
           "id": "sent-505",
           "start": 1249.04,
           "end": 1249.84,
-          "text": "它是一個版本",
+          "text": "它是一個白話",
           "reviewNeeded": false
         },
         {
@@ -3944,14 +3791,14 @@
           "id": "sent-513",
           "start": 1260.76,
           "end": 1263.76,
-          "text": "這個不管是不失者 不失物跟",
+          "text": "這個不管是布施者、布施物跟",
           "reviewNeeded": false
         },
         {
           "id": "sent-514",
           "start": 1264.76,
           "end": 1266.36,
-          "text": "接受不失的人",
+          "text": "接受布施的人",
           "reviewNeeded": false
         },
         {
@@ -3967,15 +3814,7 @@
           "end": 1268.78,
           "text": "那整個行為",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_44",
-      "heading": null,
-      "start": 1268.78,
-      "end": 1286.78,
-      "sentences": [
+        },
         {
           "id": "sent-517",
           "start": 1268.78,
@@ -4059,15 +3898,7 @@
           "end": 1286.78,
           "text": "有看到嗎",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_45",
-      "heading": null,
-      "start": 1286.78,
-      "end": 1307.8,
-      "sentences": [
+        },
         {
           "id": "sent-529",
           "start": 1286.78,
@@ -4151,15 +3982,7 @@
           "end": 1307.8,
           "text": "就是他們是無自性的",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_46",
-      "heading": null,
-      "start": 1307.8,
-      "end": 1325.36,
-      "sentences": [
+        },
         {
           "id": "sent-541",
           "start": 1307.8,
@@ -4199,9 +4022,17 @@
           "id": "sent-546",
           "start": 1312.76,
           "end": 1315.14,
-          "text": "他們都是沒有自信的",
+          "text": "他們都是沒有自性的。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_24",
+      "heading": null,
+      "start": 1316.02,
+      "end": 1367.68,
+      "sentences": [
         {
           "id": "sent-547",
           "start": 1316.02,
@@ -4243,15 +4074,7 @@
           "end": 1325.36,
           "text": "依原他者而存在",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_47",
-      "heading": null,
-      "start": 1326.26,
-      "end": 1346.54,
-      "sentences": [
+        },
         {
           "id": "sent-553",
           "start": 1326.26,
@@ -4298,7 +4121,7 @@
           "id": "sent-559",
           "start": 1334.8,
           "end": 1336.32,
-          "text": "那自信沒有",
+          "text": "那自性沒有，",
           "reviewNeeded": false
         },
         {
@@ -4326,29 +4149,21 @@
           "id": "sent-563",
           "start": 1342.16,
           "end": 1343.8,
-          "text": "不失不是自己的力量",
+          "text": "布施不是自己的力量，",
           "reviewNeeded": false
         },
         {
           "id": "sent-564",
           "start": 1343.8,
           "end": 1346.54,
-          "text": "讓不失這件事情自然發生的",
+          "text": "讓布施這件事情自然發生的。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_48",
-      "heading": null,
-      "start": 1346.54,
-      "end": 1365.3,
-      "sentences": [
+        },
         {
           "id": "sent-565",
           "start": 1346.54,
           "end": 1349.34,
-          "text": "那麼請問不失這件事情他是透過",
+          "text": "那麼請問，布施這件事情，它是透過",
           "reviewNeeded": false
         },
         {
@@ -4427,34 +4242,34 @@
           "end": 1365.3,
           "text": "才來形成",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_49",
-      "heading": null,
-      "start": 1365.96,
-      "end": 1388.52,
-      "sentences": [
+        },
         {
           "id": "sent-577",
           "start": 1365.96,
           "end": 1367.68,
-          "text": "剛剛講的不失這件事情",
+          "text": "剛剛講的不失這件事情。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_25",
+      "heading": null,
+      "start": 1368.46,
+      "end": 1405.16,
+      "sentences": [
         {
           "id": "sent-578",
           "start": 1368.46,
           "end": 1369.58,
-          "text": "好那請問",
+          "text": "好，那請問：",
           "reviewNeeded": false
         },
         {
           "id": "sent-579",
           "start": 1369.58,
           "end": 1371.08,
-          "text": "不失這件事情",
+          "text": "「不失」這件事情，",
           "reviewNeeded": false
         },
         {
@@ -4468,14 +4283,14 @@
           "id": "sent-581",
           "start": 1373.2,
           "end": 1374,
-          "text": "說",
+          "text": "說：",
           "reviewNeeded": false
         },
         {
           "id": "sent-582",
           "start": 1374.58,
           "end": 1377.32,
-          "text": "我要成立不失我自己就什麼成立了嗎",
+          "text": "「我要成立『不失』，我自己就什麼成立了嗎？」",
           "reviewNeeded": false
         },
         {
@@ -4489,14 +4304,14 @@
           "id": "sent-584",
           "start": 1380.8,
           "end": 1381.92,
-          "text": "配合",
+          "text": "配合，",
           "reviewNeeded": false
         },
         {
           "id": "sent-585",
           "start": 1381.92,
           "end": 1384.44,
-          "text": "合合才能夠成就不失",
+          "text": "合合才能夠成就不失？",
           "reviewNeeded": false
         },
         {
@@ -4510,24 +4325,16 @@
           "id": "sent-587",
           "start": 1386.86,
           "end": 1387.62,
-          "text": "合合",
+          "text": "合合，",
           "reviewNeeded": false
         },
         {
           "id": "sent-588",
           "start": 1388.26,
           "end": 1388.52,
-          "text": "對不對",
+          "text": "對不對？",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_50",
-      "heading": null,
-      "start": 1389.04,
-      "end": 1406.48,
-      "sentences": [
+        },
         {
           "id": "sent-589",
           "start": 1389.04,
@@ -4546,14 +4353,14 @@
           "id": "sent-591",
           "start": 1391.08,
           "end": 1393.18,
-          "text": "我想要不失結果那個人",
+          "text": "我想要「不失」，結果那個人",
           "reviewNeeded": false
         },
         {
           "id": "sent-592",
           "start": 1393.18,
           "end": 1395.24,
-          "text": "因為不喜歡我他看見我",
+          "text": "因為不喜歡我，他看見我，",
           "reviewNeeded": false
         },
         {
@@ -4574,14 +4381,14 @@
           "id": "sent-595",
           "start": 1397.36,
           "end": 1399.56,
-          "text": "想要我手中的面子",
+          "text": "想要我手中的面子，",
           "reviewNeeded": false
         },
         {
           "id": "sent-596",
           "start": 1399.58,
           "end": 1400.7,
-          "text": "但是他不喜歡我",
+          "text": "但是他不喜歡我，",
           "reviewNeeded": false
         },
         {
@@ -4595,31 +4402,31 @@
           "id": "sent-598",
           "start": 1401.46,
           "end": 1402.82,
-          "text": "他轉頭就走",
+          "text": "他轉頭就走。",
           "reviewNeeded": false
         },
         {
           "id": "sent-599",
           "start": 1402.82,
           "end": 1405.16,
-          "text": "那這件事情不失可以成就嗎",
-          "reviewNeeded": false
-        },
-        {
-          "id": "sent-600",
-          "start": 1405.72,
-          "end": 1406.48,
-          "text": "就不能成就",
+          "text": "那這件事情「不失」可以成就嗎？",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_51",
+      "id": "p_26",
       "heading": null,
-      "start": 1407,
-      "end": 1430.7,
+      "start": 1405.72,
+      "end": 1450.48,
       "sentences": [
+        {
+          "id": "sent-600",
+          "start": 1405.72,
+          "end": 1406.48,
+          "text": "就不能成就。",
+          "reviewNeeded": false
+        },
         {
           "id": "sent-601",
           "start": 1407,
@@ -4680,7 +4487,7 @@
           "id": "sent-609",
           "start": 1421.26,
           "end": 1423.2,
-          "text": "不失不祿密度也會講很多",
+          "text": "不過，後面那個布施波羅蜜多也會講很多。",
           "reviewNeeded": false
         },
         {
@@ -4694,7 +4501,7 @@
           "id": "sent-611",
           "start": 1426.56,
           "end": 1429.56,
-          "text": "萬事萬物他都是有因緣所使的",
+          "text": "萬事萬物祂都是有因緣所使的。",
           "reviewNeeded": false
         },
         {
@@ -4703,15 +4510,7 @@
           "end": 1430.7,
           "text": "那就是",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_52",
-      "heading": null,
-      "start": 1430.7,
-      "end": 1456.48,
-      "sentences": [
+        },
         {
           "id": "sent-613",
           "start": 1430.7,
@@ -4737,7 +4536,7 @@
           "id": "sent-616",
           "start": 1438.82,
           "end": 1442.1,
-          "text": "依緣他者這個他指的就是因緣",
+          "text": "依緣他者，這個「他」指的就是因緣。",
           "reviewNeeded": false
         },
         {
@@ -4765,14 +4564,22 @@
           "id": "sent-620",
           "start": 1448.26,
           "end": 1450.48,
-          "text": "所以這個他就是相對於自",
+          "text": "所以這個「他」，就是相對於「自」。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_27",
+      "heading": null,
+      "start": 1450.48,
+      "end": 1555.04,
+      "sentences": [
         {
           "id": "sent-621",
           "start": 1450.48,
           "end": 1453,
-          "text": "自不成立那就代表什麼",
+          "text": "自不成立，那就代表什麼？",
           "reviewNeeded": false
         },
         {
@@ -4795,15 +4602,7 @@
           "end": 1456.48,
           "text": "他就是因緣",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_53",
-      "heading": null,
-      "start": 1456.48,
-      "end": 1482.56,
-      "sentences": [
+        },
         {
           "id": "sent-625",
           "start": 1456.48,
@@ -4850,7 +4649,7 @@
           "id": "sent-631",
           "start": 1469.86,
           "end": 1471.52,
-          "text": "上那個中關課",
+          "text": "上那個中觀課",
           "reviewNeeded": false
         },
         {
@@ -4887,15 +4686,7 @@
           "end": 1482.56,
           "text": "或者是還不熟悉的話",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_54",
-      "heading": null,
-      "start": 1484.08,
-      "end": 1509.06,
-      "sentences": [
+        },
         {
           "id": "sent-637",
           "start": 1484.08,
@@ -4979,15 +4770,7 @@
           "end": 1509.06,
           "text": "所以一個三角形",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_55",
-      "heading": null,
-      "start": 1509.7,
-      "end": 1530.86,
-      "sentences": [
+        },
         {
           "id": "sent-649",
           "start": 1509.7,
@@ -5071,15 +4854,7 @@
           "end": 1530.86,
           "text": "他要成就什麼",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_56",
-      "heading": null,
-      "start": 1531.66,
-      "end": 1548.3,
-      "sentences": [
+        },
         {
           "id": "sent-661",
           "start": 1531.66,
@@ -5163,199 +4938,183 @@
           "end": 1548.3,
           "text": "那",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_57",
-      "heading": null,
-      "start": 1548.3,
-      "end": 1568.88,
-      "sentences": [
+        },
         {
           "id": "sent-673",
           "start": 1548.3,
           "end": 1549.52,
-          "text": "那佈施物",
+          "text": "那佈施物，",
           "reviewNeeded": false
         },
         {
           "id": "sent-674",
           "start": 1549.52,
           "end": 1550.96,
-          "text": "你說我給你",
+          "text": "你說我給你，",
           "reviewNeeded": false
         },
         {
           "id": "sent-675",
           "start": 1550.96,
           "end": 1552,
-          "text": "我給你",
+          "text": "我給你，",
           "reviewNeeded": false
         },
         {
           "id": "sent-676",
           "start": 1552.66,
           "end": 1553.68,
-          "text": "我給你一千萬",
+          "text": "我給你一千萬，",
           "reviewNeeded": false
         },
         {
           "id": "sent-677",
           "start": 1553.68,
           "end": 1555.04,
-          "text": "很厲害嗎",
+          "text": "很厲害嗎？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_28",
+      "heading": null,
+      "start": 1555.04,
+      "end": 1621.5,
+      "sentences": [
         {
           "id": "sent-678",
           "start": 1555.04,
           "end": 1556.24,
-          "text": "那一千萬如果",
+          "text": "那一千萬如果，",
           "reviewNeeded": false
         },
         {
           "id": "sent-679",
           "start": 1557,
           "end": 1558.78,
-          "text": "如果那個受者不接受呢",
+          "text": "如果那個受者不接受呢？",
           "reviewNeeded": false
         },
         {
           "id": "sent-680",
           "start": 1558.78,
           "end": 1561.78,
-          "text": "那一千萬你可以說你給誰一千萬嗎",
+          "text": "那一千萬你可以說你給誰一千萬嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-681",
           "start": 1561.78,
           "end": 1562.54,
-          "text": "也不能說",
+          "text": "也不能說。",
           "reviewNeeded": false
         },
         {
           "id": "sent-682",
           "start": 1563.14,
           "end": 1564.22,
-          "text": "所以這個都是什麼",
+          "text": "所以這個都是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-683",
           "start": 1564.22,
           "end": 1566.82,
-          "text": "你要三方面配合起來",
+          "text": "你要三方面配合起來，",
           "reviewNeeded": false
         },
         {
           "id": "sent-684",
           "start": 1566.82,
           "end": 1568.88,
-          "text": "才能夠叫做一個三角形",
+          "text": "才能夠叫做一個三角形。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_58",
-      "heading": null,
-      "start": 1569.8,
-      "end": 1591.88,
-      "sentences": [
+        },
         {
           "id": "sent-685",
           "start": 1569.8,
           "end": 1569.94,
-          "text": "所以",
+          "text": "所以，",
           "reviewNeeded": false
         },
         {
           "id": "sent-686",
           "start": 1570.58,
           "end": 1571.72,
-          "text": "剛剛講的字跟它",
+          "text": "剛剛講的字跟它，",
           "reviewNeeded": false
         },
         {
           "id": "sent-687",
           "start": 1572.52,
           "end": 1574.62,
-          "text": "所以這三個都不是",
+          "text": "所以這三個都不是，",
           "reviewNeeded": false
         },
         {
           "id": "sent-688",
           "start": 1574.62,
           "end": 1575.74,
-          "text": "自信",
+          "text": "自性成立，",
           "reviewNeeded": false
         },
         {
           "id": "sent-689",
           "start": 1576.46,
           "end": 1576.88,
-          "text": "成立",
+          "text": "自性成立，",
           "reviewNeeded": false
         },
         {
           "id": "sent-690",
           "start": 1580.12,
           "end": 1581.2,
-          "text": "那我們會叫",
+          "text": "那我們會叫，",
           "reviewNeeded": false
         },
         {
           "id": "sent-691",
           "start": 1581.2,
           "end": 1582.66,
-          "text": "非自性成立",
+          "text": "非自性成立，",
           "reviewNeeded": false
         },
         {
           "id": "sent-692",
           "start": 1582.66,
           "end": 1583,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-693",
           "start": 1583,
           "end": 1583.66,
-          "text": "或者是什麼",
+          "text": "或者是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-694",
           "start": 1583.66,
           "end": 1585.1,
-          "text": "自性空",
+          "text": "自性空，",
           "reviewNeeded": false
         },
         {
           "id": "sent-695",
           "start": 1589.72,
           "end": 1590.2,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-696",
           "start": 1590.2,
           "end": 1591.88,
-          "text": "或者叫什麼無自性",
+          "text": "或者叫什麼無自性。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_59",
-      "heading": null,
-      "start": 1594.24,
-      "end": 1615.14,
-      "sentences": [
+        },
         {
           "id": "sent-697",
           "start": 1594.24,
@@ -5402,7 +5161,7 @@
           "id": "sent-703",
           "start": 1604.48,
           "end": 1606.18,
-          "text": "好那就是代表他不是",
+          "text": "好，那就是代表他不是",
           "reviewNeeded": false
         },
         {
@@ -5430,7 +5189,7 @@
           "id": "sent-707",
           "start": 1611.96,
           "end": 1613.9,
-          "text": "或者叫做叫做無自性",
+          "text": "或者叫做無自性",
           "reviewNeeded": false
         },
         {
@@ -5439,15 +5198,7 @@
           "end": 1615.14,
           "text": "好這個通通是",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_60",
-      "heading": null,
-      "start": 1615.14,
-      "end": 1637.14,
-      "sentences": [
+        },
         {
           "id": "sent-709",
           "start": 1615.14,
@@ -5459,9 +5210,17 @@
           "id": "sent-710",
           "start": 1616.72,
           "end": 1621.5,
-          "text": "那麼如果不是自己成立這件事情的話那代表什麼",
+          "text": "那麼如果不是自己成立這件事情的話，那代表什麼？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_29",
+      "heading": null,
+      "start": 1622.36,
+      "end": 1682.34,
+      "sentences": [
         {
           "id": "sent-711",
           "start": 1622.36,
@@ -5473,7 +5232,7 @@
           "id": "sent-712",
           "start": 1623.34,
           "end": 1625.44,
-          "text": "佈施這件事情成立了喔",
+          "text": "布施這件事情成立了喔！",
           "reviewNeeded": false
         },
         {
@@ -5508,7 +5267,7 @@
           "id": "sent-717",
           "start": 1631.46,
           "end": 1632,
-          "text": "對不對",
+          "text": "對不對？",
           "reviewNeeded": false
         },
         {
@@ -5531,20 +5290,12 @@
           "end": 1637.14,
           "text": "那這個因緣",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_61",
-      "heading": null,
-      "start": 1637.86,
-      "end": 1661.16,
-      "sentences": [
+        },
         {
           "id": "sent-721",
           "start": 1637.86,
           "end": 1638.82,
-          "text": "在這裡就是",
+          "text": "在這裡，就是",
           "reviewNeeded": false
         },
         {
@@ -5558,28 +5309,28 @@
           "id": "sent-723",
           "start": 1642.46,
           "end": 1643.76,
-          "text": "必要條件",
+          "text": "必要條件。",
           "reviewNeeded": false
         },
         {
           "id": "sent-724",
           "start": 1644.3,
           "end": 1644.42,
-          "text": "所以",
+          "text": "所以，",
           "reviewNeeded": false
         },
         {
           "id": "sent-725",
           "start": 1644.42,
           "end": 1645.74,
-          "text": "他要依賴因緣",
+          "text": "他要依賴因緣，",
           "reviewNeeded": false
         },
         {
           "id": "sent-726",
           "start": 1645.74,
           "end": 1648.06,
-          "text": "他要依賴什麼相關的條件",
+          "text": "他要依賴什麼相關的條件，",
           "reviewNeeded": false
         },
         {
@@ -5593,64 +5344,56 @@
           "id": "sent-728",
           "start": 1649.22,
           "end": 1650.26,
-          "text": "成立",
+          "text": "成立。",
           "reviewNeeded": false
         },
         {
           "id": "sent-729",
           "start": 1651.06,
           "end": 1652,
-          "text": "所以呢就會",
+          "text": "所以，",
           "reviewNeeded": false
         },
         {
           "id": "sent-730",
           "start": 1652,
           "end": 1654.36,
-          "text": "這個因緣就是這邊寫的他",
+          "text": "這個因緣，就是這邊寫的他。",
           "reviewNeeded": false
         },
         {
           "id": "sent-731",
           "start": 1658.04,
           "end": 1658.52,
-          "text": "所以",
+          "text": "所以，",
           "reviewNeeded": false
         },
         {
           "id": "sent-732",
           "start": 1659.1,
           "end": 1661.16,
-          "text": "有學過為事的同學",
+          "text": "有學過唯識的同學，",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_62",
-      "heading": null,
-      "start": 1661.7,
-      "end": 1683.46,
-      "sentences": [
+        },
         {
           "id": "sent-733",
           "start": 1661.7,
           "end": 1664.56,
-          "text": "宇學識理論我們常常講一他起一他起對不對",
+          "text": "唯識理論我們常常講「依他起」，「依他起」，對不對？",
           "reviewNeeded": false
         },
         {
           "id": "sent-734",
           "start": 1664.56,
           "end": 1665.22,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-735",
           "start": 1665.22,
           "end": 1666.82,
-          "text": "但是一他起他的",
+          "text": "但是「依他起」的",
           "reviewNeeded": false
         },
         {
@@ -5671,59 +5414,59 @@
           "id": "sent-738",
           "start": 1668.62,
           "end": 1671.24,
-          "text": "廣泛的定義我們不要說",
+          "text": "廣泛的定義，我們不要說",
           "reviewNeeded": false
         },
         {
           "id": "sent-739",
           "start": 1672.18,
           "end": 1674.36,
-          "text": "在為師那邊講我們就說",
+          "text": "在唯識那邊講，我們就說",
           "reviewNeeded": false
         },
         {
           "id": "sent-740",
           "start": 1674.36,
           "end": 1675.4,
-          "text": "依他",
+          "text": "依他，",
           "reviewNeeded": false
         },
         {
           "id": "sent-741",
           "start": 1675.4,
           "end": 1678.1,
-          "text": "因為在佛法裡面我們常會講到依他",
+          "text": "因為在佛法裡面，我們常會講到「依他」，",
           "reviewNeeded": false
         },
         {
           "id": "sent-742",
           "start": 1678.1,
           "end": 1680.9,
-          "text": "所謂的依他就是什麼依賴因緣",
+          "text": "所謂的「依他」就是什麼？依賴因緣",
           "reviewNeeded": false
         },
         {
           "id": "sent-743",
           "start": 1681.42,
           "end": 1682.34,
-          "text": "而成立的",
-          "reviewNeeded": false
-        },
-        {
-          "id": "sent-744",
-          "start": 1682.34,
-          "end": 1683.46,
-          "text": "好所以",
+          "text": "而成立的。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_63",
+      "id": "p_30",
       "heading": null,
-      "start": 1683.98,
-      "end": 1711.14,
+      "start": 1682.34,
+      "end": 1750.74,
       "sentences": [
+        {
+          "id": "sent-744",
+          "start": 1682.34,
+          "end": 1683.46,
+          "text": "好，所以",
+          "reviewNeeded": false
+        },
         {
           "id": "sent-745",
           "start": 1683.98,
@@ -5756,7 +5499,7 @@
           "id": "sent-749",
           "start": 1693.46,
           "end": 1695.26,
-          "text": "緣起信空的觀念",
+          "text": "緣起性空的觀念",
           "reviewNeeded": false
         },
         {
@@ -5791,7 +5534,7 @@
           "id": "sent-754",
           "start": 1704.24,
           "end": 1706,
-          "text": "如果沒有因緣合合",
+          "text": "如果沒有因緣和合",
           "reviewNeeded": false
         },
         {
@@ -5807,15 +5550,7 @@
           "end": 1711.14,
           "text": "相當沒有整個這些全部配合在一起的話",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_64",
-      "heading": null,
-      "start": 1711.14,
-      "end": 1733.24,
-      "sentences": [
+        },
         {
           "id": "sent-757",
           "start": 1711.14,
@@ -5897,17 +5632,9 @@
           "id": "sent-768",
           "start": 1731.34,
           "end": 1733.24,
-          "text": "瞭解是好了解",
+          "text": "瞭解",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_65",
-      "heading": null,
-      "start": 1733.24,
-      "end": 1760.26,
-      "sentences": [
+        },
         {
           "id": "sent-769",
           "start": 1733.24,
@@ -5954,9 +5681,17 @@
           "id": "sent-775",
           "start": 1744.1,
           "end": 1750.74,
-          "text": "你如果有能力的話你也可以先關一下三輪體空我再把這個東西佈施出去",
+          "text": "你如果有能力的話，你也可以先觀一下三輪體空，再把這個東西佈施出去。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_31",
+      "heading": null,
+      "start": 1751.5,
+      "end": 1800.38,
+      "sentences": [
         {
           "id": "sent-776",
           "start": 1751.5,
@@ -5968,7 +5703,7 @@
           "id": "sent-777",
           "start": 1753.9,
           "end": 1756.32,
-          "text": "人家就等著在那邊拿麵包了你還要我",
+          "text": "人家就等著在那邊拿麵包了，你還要我",
           "reviewNeeded": false
         },
         {
@@ -5982,7 +5717,7 @@
           "id": "sent-779",
           "start": 1758.36,
           "end": 1759.68,
-          "text": "當然不需要這樣子而是",
+          "text": "當然不需要這樣子，而是",
           "reviewNeeded": false
         },
         {
@@ -5991,15 +5726,7 @@
           "end": 1760.26,
           "text": "你",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_66",
-      "heading": null,
-      "start": 1760.92,
-      "end": 1791.16,
-      "sentences": [
+        },
         {
           "id": "sent-781",
           "start": 1760.92,
@@ -6032,14 +5759,14 @@
           "id": "sent-785",
           "start": 1771.22,
           "end": 1774.26,
-          "text": "那個我們說正知正念啊就放在",
+          "text": "那個我們說正知正念啊，就放在",
           "reviewNeeded": false
         },
         {
           "id": "sent-786",
           "start": 1774.96,
           "end": 1778.58,
-          "text": "我要什麼有菩提心策發我做這件事情",
+          "text": "我要什麼？有菩提心策發我做這件事情。",
           "reviewNeeded": false
         },
         {
@@ -6053,7 +5780,7 @@
           "id": "sent-788",
           "start": 1780.3,
           "end": 1781.1,
-          "text": "透遊",
+          "text": "透過",
           "reviewNeeded": false
         },
         {
@@ -6081,17 +5808,9 @@
           "id": "sent-792",
           "start": 1788.48,
           "end": 1791.16,
-          "text": "讓這個接受者這個對方呢",
+          "text": "讓這個接受者、這個對方呢",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_67",
-      "heading": null,
-      "start": 1791.8,
-      "end": 1816.3,
-      "sentences": [
+        },
         {
           "id": "sent-793",
           "start": 1791.8,
@@ -6103,23 +5822,31 @@
           "id": "sent-794",
           "start": 1792.76,
           "end": 1796.18,
-          "text": "你就避免這個匱乏之苦但是呢",
+          "text": "你就避免這個匱乏之苦，但是呢，",
           "reviewNeeded": false
         },
         {
           "id": "sent-795",
           "start": 1796.18,
           "end": 1799.54,
-          "text": "也希望以後我能夠藉著這個佈施的功德",
+          "text": "也希望以後我能夠藉著這個佈施的功德，",
           "reviewNeeded": false
         },
         {
           "id": "sent-796",
           "start": 1799.54,
           "end": 1800.38,
-          "text": "能夠什麼",
+          "text": "能夠什麼？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_32",
+      "heading": null,
+      "start": 1800.38,
+      "end": 1840.66,
+      "sentences": [
         {
           "id": "sent-797",
           "start": 1800.38,
@@ -6138,21 +5865,21 @@
           "id": "sent-799",
           "start": 1802.98,
           "end": 1806.56,
-          "text": "福德之量跟智慧之量最後我希望能夠成佛",
+          "text": "福德之量跟智慧之量，最後我希望能夠成佛。",
           "reviewNeeded": false
         },
         {
           "id": "sent-800",
           "start": 1806.56,
           "end": 1808.76,
-          "text": "那我為什麼要成佛回到我們的",
+          "text": "那我為什麼要成佛？回到我們的",
           "reviewNeeded": false
         },
         {
           "id": "sent-801",
           "start": 1808.76,
           "end": 1810.52,
-          "text": "策發的菩提心",
+          "text": "策發的菩提心，",
           "reviewNeeded": false
         },
         {
@@ -6166,7 +5893,7 @@
           "id": "sent-803",
           "start": 1811.16,
           "end": 1815.02,
-          "text": "佛法告訴我們因為我們的學習知道眾生在",
+          "text": "佛法告訴我們，因為我們的學習，知道眾生在",
           "reviewNeeded": false
         },
         {
@@ -6175,41 +5902,33 @@
           "end": 1816.3,
           "text": "在三界內的",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_68",
-      "heading": null,
-      "start": 1816.32,
-      "end": 1840.66,
-      "sentences": [
+        },
         {
           "id": "sent-805",
           "start": 1816.32,
           "end": 1817.56,
-          "text": "六道輪迴之苦",
+          "text": "六道輪迴之苦。",
           "reviewNeeded": false
         },
         {
           "id": "sent-806",
           "start": 1818.36,
           "end": 1818.56,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-807",
           "start": 1818.56,
           "end": 1821.42,
-          "text": "那要徹底解決這件事情唯有",
+          "text": "那要徹底解決這件事情，唯有",
           "reviewNeeded": false
         },
         {
           "id": "sent-808",
           "start": 1821.96,
           "end": 1823.38,
-          "text": "從菩提心策發",
+          "text": "從菩提心策發，",
           "reviewNeeded": false
         },
         {
@@ -6223,7 +5942,7 @@
           "id": "sent-810",
           "start": 1824.76,
           "end": 1826.7,
-          "text": "圓滿六波羅蜜就可以成佛",
+          "text": "圓滿六波羅蜜就可以成佛。",
           "reviewNeeded": false
         },
         {
@@ -6237,14 +5956,14 @@
           "id": "sent-812",
           "start": 1828.36,
           "end": 1831.34,
-          "text": "這樣子常常的去思維練習之後呢你就會",
+          "text": "這樣子常常的去思維練習之後呢，你就會",
           "reviewNeeded": false
         },
         {
           "id": "sent-813",
           "start": 1832.24,
           "end": 1834.72,
-          "text": "你就會比較有一點怎麼講",
+          "text": "你就會比較有一點怎麼講？",
           "reviewNeeded": false
         },
         {
@@ -6258,23 +5977,23 @@
           "id": "sent-815",
           "start": 1836.04,
           "end": 1838.92,
-          "text": "你不再覺得他是那麼遙不可及",
+          "text": "你不再覺得他是那麼遙不可及，",
           "reviewNeeded": false
         },
         {
           "id": "sent-816",
           "start": 1838.92,
           "end": 1840.66,
-          "text": "當然還是遙不可及啊",
+          "text": "當然還是遙不可及啊。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_69",
+      "id": "p_33",
       "heading": null,
       "start": 1840.66,
-      "end": 1867.52,
+      "end": 1887.02,
       "sentences": [
         {
           "id": "sent-817",
@@ -6359,15 +6078,7 @@
           "end": 1867.52,
           "text": "至少在這一世看大家都很用功",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_70",
-      "heading": null,
-      "start": 1868.92,
-      "end": 1897.32,
-      "sentences": [
+        },
         {
           "id": "sent-829",
           "start": 1868.92,
@@ -6407,16 +6118,24 @@
           "id": "sent-834",
           "start": 1878.92,
           "end": 1882.22,
-          "text": "那麼有興趣就代表說",
+          "text": "那麼，有興趣就代表說：",
           "reviewNeeded": false
         },
         {
           "id": "sent-835",
           "start": 1882.22,
           "end": 1887.02,
-          "text": "我們可以慢慢往成佛的那個想法去前進",
+          "text": "我們可以慢慢往成佛的那個想法去前進。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_34",
+      "heading": null,
+      "start": 1887.54,
+      "end": 1978.44,
+      "sentences": [
         {
           "id": "sent-836",
           "start": 1887.54,
@@ -6428,92 +6147,84 @@
           "id": "sent-837",
           "start": 1888.32,
           "end": 1890.08,
-          "text": "現在要現在要知道就是",
+          "text": "現在要知道就是：",
           "reviewNeeded": false
         },
         {
           "id": "sent-838",
           "start": 1890.62,
           "end": 1891.98,
-          "text": "第一個你慢慢說服自己",
+          "text": "第一，你慢慢說服自己：",
           "reviewNeeded": false
         },
         {
           "id": "sent-839",
           "start": 1892.66,
           "end": 1894.4,
-          "text": "這條路非常值得",
+          "text": "這條路非常值得。",
           "reviewNeeded": false
         },
         {
           "id": "sent-840",
           "start": 1894.4,
           "end": 1897.32,
-          "text": "否則的話我們我們學了",
+          "text": "否則的話，我們學了",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_71",
-      "heading": null,
-      "start": 1897.32,
-      "end": 1916.7,
-      "sentences": [
+        },
         {
           "id": "sent-841",
           "start": 1897.32,
           "end": 1899.02,
-          "text": "我們學了這堂課會覺得",
+          "text": "這堂課會覺得：",
           "reviewNeeded": false
         },
         {
           "id": "sent-842",
           "start": 1899.02,
           "end": 1900.66,
-          "text": "他跟我沒關係耶",
+          "text": "「他跟我沒關係耶。」",
           "reviewNeeded": false
         },
         {
           "id": "sent-843",
           "start": 1900.66,
           "end": 1902.64,
-          "text": "就是我上了一堂佛法課",
+          "text": "就是我上了一堂佛法課，",
           "reviewNeeded": false
         },
         {
           "id": "sent-844",
           "start": 1903.32,
           "end": 1904.3,
-          "text": "這樣子而已",
+          "text": "這樣子而已。",
           "reviewNeeded": false
         },
         {
           "id": "sent-845",
           "start": 1905.2,
           "end": 1905.22,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-846",
           "start": 1905.22,
           "end": 1907.32,
-          "text": "這樣子的話我就覺得",
+          "text": "這樣子的話，我就覺得：",
           "reviewNeeded": false
         },
         {
           "id": "sent-847",
           "start": 1907.32,
           "end": 1908.06,
-          "text": "沒有",
+          "text": "沒有。",
           "reviewNeeded": false
         },
         {
           "id": "sent-848",
           "start": 1908.8,
           "end": 1909.28,
-          "text": "其實就是",
+          "text": "其實就是：",
           "reviewNeeded": false
         },
         {
@@ -6527,14 +6238,14 @@
           "id": "sent-850",
           "start": 1910.42,
           "end": 1913.62,
-          "text": "這堂課的利益應該要比剛剛說的",
+          "text": "應該要比剛剛說的",
           "reviewNeeded": false
         },
         {
           "id": "sent-851",
           "start": 1913.62,
           "end": 1915.4,
-          "text": "我就是多上了一堂",
+          "text": "「我就是多上了一堂課」",
           "reviewNeeded": false
         },
         {
@@ -6543,15 +6254,7 @@
           "end": 1916.7,
           "text": "課",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_72",
-      "heading": null,
-      "start": 1917.5,
-      "end": 1945.94,
-      "sentences": [
+        },
         {
           "id": "sent-853",
           "start": 1917.5,
@@ -6635,15 +6338,7 @@
           "end": 1945.94,
           "text": "我希望",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_73",
-      "heading": null,
-      "start": 1945.94,
-      "end": 1971.16,
-      "sentences": [
+        },
         {
           "id": "sent-865",
           "start": 1945.94,
@@ -6727,15 +6422,7 @@
           "end": 1971.16,
           "text": "所以我們要升級",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_74",
-      "heading": null,
-      "start": 1971.16,
-      "end": 1994.88,
-      "sentences": [
+        },
         {
           "id": "sent-877",
           "start": 1971.16,
@@ -6761,42 +6448,50 @@
           "id": "sent-880",
           "start": 1975.46,
           "end": 1978.44,
-          "text": "有萌芽了但是要讓他繼續去增長",
+          "text": "有萌芽了，但是要讓他繼續去增長。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_35",
+      "heading": null,
+      "start": 1979.02,
+      "end": 2021.02,
+      "sentences": [
         {
           "id": "sent-881",
           "start": 1979.02,
           "end": 1981.34,
-          "text": "就是藉著這樣的學習好不好",
+          "text": "就是藉著這樣的學習，好不好？",
           "reviewNeeded": false
         },
         {
           "id": "sent-882",
           "start": 1982.12,
           "end": 1983.22,
-          "text": "我們都一起努力啦",
+          "text": "我們都一起努力啦。",
           "reviewNeeded": false
         },
         {
           "id": "sent-883",
           "start": 1983.9,
           "end": 1984.38,
-          "text": "好那",
+          "text": "好，那",
           "reviewNeeded": false
         },
         {
           "id": "sent-884",
           "start": 1984.94,
           "end": 1987.72,
-          "text": "這裡有一個我剛說要改的地方大家都改了嗎",
+          "text": "這裡有一個我剛說要改的地方，大家都改了嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-885",
           "start": 1987.72,
           "end": 1990.08,
-          "text": "他們皆空無自性",
+          "text": "「他們皆空無自性」，",
           "reviewNeeded": false
         },
         {
@@ -6819,41 +6514,33 @@
           "end": 1994.88,
           "text": "依原他",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_75",
-      "heading": null,
-      "start": 1994.88,
-      "end": 2014.34,
-      "sentences": [
+        },
         {
           "id": "sent-889",
           "start": 1994.88,
           "end": 1996.1,
-          "text": "他者而存在",
+          "text": "他者而存在。",
           "reviewNeeded": false
         },
         {
           "id": "sent-890",
           "start": 1996.1,
           "end": 1996.98,
-          "text": "依原他你就可以",
+          "text": "依原他，你就可以",
           "reviewNeeded": false
         },
         {
           "id": "sent-891",
           "start": 1997.66,
           "end": 2000.24,
-          "text": "你可以把它改成說依賴因緣而有的",
+          "text": "你可以把它改成說：「依賴因緣而有的」，",
           "reviewNeeded": false
         },
         {
           "id": "sent-892",
           "start": 2000.24,
           "end": 2001.16,
-          "text": "這比較清楚",
+          "text": "這比較清楚。",
           "reviewNeeded": false
         },
         {
@@ -6881,14 +6568,14 @@
           "id": "sent-896",
           "start": 2006.76,
           "end": 2007.7,
-          "text": "註解一下",
+          "text": "註解一下。",
           "reviewNeeded": false
         },
         {
           "id": "sent-897",
           "start": 2009.46,
           "end": 2009.9,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
@@ -6909,17 +6596,9 @@
           "id": "sent-900",
           "start": 2012.94,
           "end": 2014.34,
-          "text": "那下一句他又",
+          "text": "那下一句，他又",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_76",
-      "heading": null,
-      "start": 2014.34,
-      "end": 2044.9,
-      "sentences": [
+        },
         {
           "id": "sent-901",
           "start": 2014.34,
@@ -6931,92 +6610,92 @@
           "id": "sent-902",
           "start": 2015.42,
           "end": 2018.22,
-          "text": "不是布羅密多以菩提心為基礎",
+          "text": "不是布施波羅蜜多以菩提心為基礎",
           "reviewNeeded": false
         },
         {
           "id": "sent-903",
           "start": 2018.22,
           "end": 2021.02,
-          "text": "結合空性的智慧有沒有",
+          "text": "結合空性的智慧，有沒有？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_36",
+      "heading": "6. 方便與智慧雙運的殊勝",
+      "start": 2021.02,
+      "end": 2062.58,
+      "sentences": [
         {
           "id": "sent-904",
           "start": 2021.02,
           "end": 2024.28,
-          "text": "很重要他講兩次只是用不一樣的動詞",
+          "text": "很重要，祂講兩次，只是用不一樣的動詞。",
           "reviewNeeded": false
         },
         {
           "id": "sent-905",
           "start": 2024.88,
           "end": 2028.62,
-          "text": "好同時涉及了道的方便跟智慧兩種之分",
+          "text": "好，同時涉及了道的方便跟智慧兩種之分。",
           "reviewNeeded": false
         },
         {
           "id": "sent-906",
           "start": 2028.62,
           "end": 2029.42,
-          "text": "因此",
+          "text": "因此，",
           "reviewNeeded": false
         },
         {
           "id": "sent-907",
           "start": 2030,
           "end": 2030.92,
-          "text": "更為豐富",
+          "text": "更為豐富。",
           "reviewNeeded": false
         },
         {
           "id": "sent-908",
           "start": 2030.92,
           "end": 2032.62,
-          "text": "好那這裡講的",
+          "text": "好，那這裡講的",
           "reviewNeeded": false
         },
         {
           "id": "sent-909",
           "start": 2032.62,
           "end": 2034.68,
-          "text": "道的方便是指什麼",
+          "text": "道的方便是指什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-910",
           "start": 2037.94,
           "end": 2039.12,
-          "text": "大家要不要猜一下",
+          "text": "大家要不要猜一下？",
           "reviewNeeded": false
         },
         {
           "id": "sent-911",
           "start": 2040.62,
           "end": 2043.36,
-          "text": "道的方便當然就是我們剛講的菩提心",
+          "text": "道的方便，當然就是我們剛講的菩提心。",
           "reviewNeeded": false
         },
         {
           "id": "sent-912",
           "start": 2044.42,
           "end": 2044.9,
-          "text": "有沒有",
+          "text": "有沒有？",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_77",
-      "heading": null,
-      "start": 2044.9,
-      "end": 2072.34,
-      "sentences": [
+        },
         {
           "id": "sent-913",
           "start": 2044.9,
           "end": 2046.9,
-          "text": "好那智慧呢",
+          "text": "好，那智慧呢？",
           "reviewNeeded": false
         },
         {
@@ -7030,37 +6709,45 @@
           "id": "sent-915",
           "start": 2049,
           "end": 2051.34,
-          "text": "空性的智慧對不對",
+          "text": "空性的智慧，對不對？",
           "reviewNeeded": false
         },
         {
           "id": "sent-916",
           "start": 2051.34,
           "end": 2053.92,
-          "text": "好所以這兩個之分",
+          "text": "好，所以這兩個之分",
           "reviewNeeded": false
         },
         {
           "id": "sent-917",
           "start": 2053.92,
           "end": 2056.74,
-          "text": "它其實都能夠什麼讓我們在",
+          "text": "它其實都能夠什麼？讓我們在",
           "reviewNeeded": false
         },
         {
           "id": "sent-918",
           "start": 2056.74,
           "end": 2059.14,
-          "text": "修這條法道上呢",
+          "text": "修這條法道上呢，",
           "reviewNeeded": false
         },
         {
           "id": "sent-919",
           "start": 2059.14,
           "end": 2062.58,
-          "text": "它能夠給我們帶給我們非常大的力量往前衝",
+          "text": "它能夠給我們、帶給我們非常大的力量往前衝。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_37",
+      "heading": null,
+      "start": 2062.58,
+      "end": 2107.42,
+      "sentences": [
         {
           "id": "sent-920",
           "start": 2062.58,
@@ -7072,38 +6759,30 @@
           "id": "sent-921",
           "start": 2063.88,
           "end": 2065.72,
-          "text": "這兩個是必要的成分",
+          "text": "這兩個是必要的成分。",
           "reviewNeeded": false
         },
         {
           "id": "sent-922",
           "start": 2065.72,
           "end": 2066.54,
-          "text": "所以",
+          "text": "所以，",
           "reviewNeeded": false
         },
         {
           "id": "sent-923",
           "start": 2067.2,
           "end": 2071.12,
-          "text": "布斯本來只是一件很單純的一個動作一個事情",
+          "text": "布施本來只是一件很單純的一個動作、一個事情、一個扇形。",
           "reviewNeeded": false
         },
         {
           "id": "sent-924",
           "start": 2071.12,
           "end": 2072.34,
-          "text": "一個善行",
+          "text": "一個善行。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_78",
-      "heading": null,
-      "start": 2072.34,
-      "end": 2097.88,
-      "sentences": [
+        },
         {
           "id": "sent-925",
           "start": 2072.34,
@@ -7115,7 +6794,7 @@
           "id": "sent-926",
           "start": 2074.08,
           "end": 2078.18,
-          "text": "那這個善行呢再加上什麼這兩個方便",
+          "text": "那這個善行，再加上什麼？這兩個方便。",
           "reviewNeeded": false
         },
         {
@@ -7129,14 +6808,14 @@
           "id": "sent-928",
           "start": 2080.86,
           "end": 2081.8,
-          "text": "我們上次不是",
+          "text": "我們上次不是，",
           "reviewNeeded": false
         },
         {
           "id": "sent-929",
           "start": 2081.8,
           "end": 2083.9,
-          "text": "有講到方便跟智慧嗎",
+          "text": "有講到方便跟智慧嗎？",
           "reviewNeeded": false
         },
         {
@@ -7150,7 +6829,7 @@
           "id": "sent-931",
           "start": 2084.88,
           "end": 2086.82,
-          "text": "兩個加起來就能夠讓我們什麼",
+          "text": "兩個加起來，就能夠讓我們什麼？",
           "reviewNeeded": false
         },
         {
@@ -7171,7 +6850,7 @@
           "id": "sent-934",
           "start": 2091.14,
           "end": 2093.78,
-          "text": "因為大乘不是隻有光是講智慧",
+          "text": "因為大乘不是隻有光是講智慧，",
           "reviewNeeded": false
         },
         {
@@ -7185,22 +6864,14 @@
           "id": "sent-936",
           "start": 2095.7,
           "end": 2097.88,
-          "text": "那菩提心它就是屬於一種方便",
+          "text": "那菩提心，它就是屬於一種方便。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_79",
-      "heading": null,
-      "start": 2098.76,
-      "end": 2124.4,
-      "sentences": [
+        },
         {
           "id": "sent-937",
           "start": 2098.76,
           "end": 2099.64,
-          "text": "那空性",
+          "text": "那空性，",
           "reviewNeeded": false
         },
         {
@@ -7221,21 +6892,29 @@
           "id": "sent-940",
           "start": 2103.38,
           "end": 2107.42,
-          "text": "聞思修它就是屬於智慧的那個之分",
+          "text": "聞思修，它就是屬於智慧的那個之分。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_38",
+      "heading": null,
+      "start": 2107.42,
+      "end": 2171.8,
+      "sentences": [
         {
           "id": "sent-941",
           "start": 2107.42,
           "end": 2109.78,
-          "text": "所以加了這兩個利器呢",
+          "text": "所以加了這兩個利器，",
           "reviewNeeded": false
         },
         {
           "id": "sent-942",
           "start": 2110.54,
           "end": 2113.02,
-          "text": "因此布斯這個普通的",
+          "text": "因此布施這個普通的，",
           "reviewNeeded": false
         },
         {
@@ -7249,7 +6928,7 @@
           "id": "sent-944",
           "start": 2113.92,
           "end": 2116.6,
-          "text": "本來只是一般的善行它就會升華",
+          "text": "本來只是一般的善行，它就會升華。",
           "reviewNeeded": false
         },
         {
@@ -7263,7 +6942,7 @@
           "id": "sent-946",
           "start": 2118.94,
           "end": 2121.22,
-          "text": "然後它的結果呢也會呢",
+          "text": "然後它的結果呢，也會",
           "reviewNeeded": false
         },
         {
@@ -7277,17 +6956,9 @@
           "id": "sent-948",
           "start": 2123.14,
           "end": 2124.4,
-          "text": "讓你會覺得什麼",
+          "text": "讓你會覺得什麼？",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_80",
-      "heading": null,
-      "start": 2125.72,
-      "end": 2146.18,
-      "sentences": [
+        },
         {
           "id": "sent-949",
           "start": 2125.72,
@@ -7299,7 +6970,7 @@
           "id": "sent-950",
           "start": 2127.48,
           "end": 2129.62,
-          "text": "以菩提心為前道",
+          "text": "以菩提心為前導",
           "reviewNeeded": false
         },
         {
@@ -7371,15 +7042,7 @@
           "end": 2146.18,
           "text": "三輪體空也好",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_81",
-      "heading": null,
-      "start": 2146.18,
-      "end": 2170.18,
-      "sentences": [
+        },
         {
           "id": "sent-961",
           "start": 2146.18,
@@ -7419,7 +7082,7 @@
           "id": "sent-966",
           "start": 2157.68,
           "end": 2160.38,
-          "text": "你所做的事情都能夠變成質量",
+          "text": "你所做的事情都能夠變成資糧",
           "reviewNeeded": false
         },
         {
@@ -7433,7 +7096,7 @@
           "id": "sent-968",
           "start": 2162.22,
           "end": 2164.14,
-          "text": "道彼岸的質量",
+          "text": "道彼岸的資糧",
           "reviewNeeded": false
         },
         {
@@ -7461,50 +7124,50 @@
           "id": "sent-972",
           "start": 2168.34,
           "end": 2170.18,
-          "text": "所以布斯也可以這樣做",
+          "text": "所以布施也可以這樣做",
+          "reviewNeeded": false
+        },
+        {
+          "id": "sent-973",
+          "start": 2170.18,
+          "end": 2171.8,
+          "text": "持戒也可以這樣做。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_82",
+      "id": "p_39",
       "heading": null,
-      "start": 2170.18,
-      "end": 2190.08,
+      "start": 2171.8,
+      "end": 2211.12,
       "sentences": [
-        {
-          "id": "sent-973",
-          "start": 2170.18,
-          "end": 2171.8,
-          "text": "持戒也可以這樣做",
-          "reviewNeeded": false
-        },
         {
           "id": "sent-974",
           "start": 2171.8,
           "end": 2172.8,
-          "text": "忍辱",
+          "text": "忍辱、",
           "reviewNeeded": false
         },
         {
           "id": "sent-975",
           "start": 2172.8,
           "end": 2173.74,
-          "text": "精神",
+          "text": "精進、",
           "reviewNeeded": false
         },
         {
           "id": "sent-976",
           "start": 2173.74,
           "end": 2174.02,
-          "text": "清淨",
+          "text": "禪定、",
           "reviewNeeded": false
         },
         {
           "id": "sent-977",
           "start": 2174.02,
           "end": 2174.96,
-          "text": "沉澱",
+          "text": "般若，",
           "reviewNeeded": false
         },
         {
@@ -7525,45 +7188,37 @@
           "id": "sent-980",
           "start": 2178.92,
           "end": 2181.46,
-          "text": "所以我覺得這個是相當重要的",
+          "text": "所以我覺得這個是相當重要的。",
           "reviewNeeded": false
         },
         {
           "id": "sent-981",
           "start": 2181.46,
           "end": 2183.3,
-          "text": "就是看大家要不要",
+          "text": "就是看大家要不要。",
           "reviewNeeded": false
         },
         {
           "id": "sent-982",
           "start": 2183.3,
           "end": 2185.5,
-          "text": "這個就賺很多的感覺",
+          "text": "這個就賺很多的感覺，",
           "reviewNeeded": false
         },
         {
           "id": "sent-983",
           "start": 2185.5,
           "end": 2186.14,
-          "text": "你知道嗎",
+          "text": "你知道嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-984",
           "start": 2187.92,
           "end": 2190.08,
-          "text": "做同樣一件事情但是為什麼",
+          "text": "做同樣一件事情，但是為什麼",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_83",
-      "heading": null,
-      "start": 2190.64,
-      "end": 2214.24,
-      "sentences": [
+        },
         {
           "id": "sent-985",
           "start": 2190.64,
@@ -7575,42 +7230,42 @@
           "id": "sent-986",
           "start": 2191.66,
           "end": 2193.26,
-          "text": "結果就能夠大豐收",
+          "text": "結果就能夠大豐收，",
           "reviewNeeded": false
         },
         {
           "id": "sent-987",
           "start": 2194.74,
           "end": 2196.6,
-          "text": "因為人家我指的是菩薩",
+          "text": "因為人家，我指的是菩薩，",
           "reviewNeeded": false
         },
         {
           "id": "sent-988",
           "start": 2196.6,
           "end": 2198.76,
-          "text": "菩薩就有發什麼菩提心",
+          "text": "菩薩就有發什麼菩提心，",
           "reviewNeeded": false
         },
         {
           "id": "sent-989",
           "start": 2199.34,
           "end": 2201.12,
-          "text": "然後又結合空性的智慧",
+          "text": "然後又結合空性的智慧，",
           "reviewNeeded": false
         },
         {
           "id": "sent-990",
           "start": 2201.64,
           "end": 2202.52,
-          "text": "所以同樣",
+          "text": "所以同樣，",
           "reviewNeeded": false
         },
         {
           "id": "sent-991",
           "start": 2203.14,
           "end": 2205.26,
-          "text": "我們一般人就是這樣去做這件事情",
+          "text": "我們一般人就是這樣去做這件事情，",
           "reviewNeeded": false
         },
         {
@@ -7624,21 +7279,29 @@
           "id": "sent-993",
           "start": 2206.72,
           "end": 2208.58,
-          "text": "給一個麵包但是他",
+          "text": "給一個麵包，但是他",
           "reviewNeeded": false
         },
         {
           "id": "sent-994",
           "start": 2208.58,
           "end": 2211.12,
-          "text": "他能夠成為他未來成佛的因",
+          "text": "他能夠成為他未來成佛的因。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_40",
+      "heading": null,
+      "start": 2211.12,
+      "end": 2250.76,
+      "sentences": [
         {
           "id": "sent-995",
           "start": 2211.12,
           "end": 2212.6,
-          "text": "那我們只是什麼",
+          "text": "那我們只是什麼？",
           "reviewNeeded": false
         },
         {
@@ -7647,15 +7310,7 @@
           "end": 2214.24,
           "text": "我們得到的結果就是",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_84",
-      "heading": null,
-      "start": 2214.88,
-      "end": 2243,
-      "sentences": [
+        },
         {
           "id": "sent-997",
           "start": 2214.88,
@@ -7688,14 +7343,14 @@
           "id": "sent-1001",
           "start": 2222.24,
           "end": 2224.16,
-          "text": "所以沒有這我剛剛只是開玩笑",
+          "text": "所以沒有，我剛剛只是開玩笑。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1002",
           "start": 2224.16,
           "end": 2226.84,
-          "text": "他沒有跟你說謝謝你也不要怨恨我們後面會講到",
+          "text": "祂沒有跟你說謝謝，你也不要怨恨。我們後面會講到。",
           "reviewNeeded": false
         },
         {
@@ -7716,21 +7371,21 @@
           "id": "sent-1005",
           "start": 2229.5,
           "end": 2232.4,
-          "text": "我們看下一段這裡有一個地方需要改一下",
+          "text": "我們看下一段，這裡有一個地方需要改一下。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1006",
           "start": 2232.52,
           "end": 2234.8,
-          "text": "就波羅蜜多這一段",
+          "text": "就「波羅蜜多」這一段。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1007",
           "start": 2235.56,
           "end": 2238.56,
-          "text": "的123456第6行",
+          "text": "的 1、2、3、4、5、6，第 6 行。",
           "reviewNeeded": false
         },
         {
@@ -7739,15 +7394,7 @@
           "end": 2243,
           "text": "這些由菩提心所激勵有看到嗎",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_85",
-      "heading": null,
-      "start": 2243.52,
-      "end": 2260.8,
-      "sentences": [
+        },
         {
           "id": "sent-1009",
           "start": 2243.52,
@@ -7759,42 +7406,50 @@
           "id": "sent-1010",
           "start": 2243.66,
           "end": 2244.82,
-          "text": "你看他又講了",
+          "text": "你看，祂又講了：",
           "reviewNeeded": false
         },
         {
           "id": "sent-1011",
           "start": 2244.82,
           "end": 2246.84,
-          "text": "由菩提心所策動",
+          "text": "由菩提心所策動、",
           "reviewNeeded": false
         },
         {
           "id": "sent-1012",
           "start": 2247.36,
           "end": 2247.9,
-          "text": "激勵",
+          "text": "激勵、",
           "reviewNeeded": false
         },
         {
           "id": "sent-1013",
           "start": 2247.9,
           "end": 2248.72,
-          "text": "發動",
+          "text": "發動，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1014",
           "start": 2249.42,
           "end": 2250.76,
-          "text": "然後還要加上什麼",
+          "text": "然後還要加上什麼？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_41",
+      "heading": "7. 超越輪迴與阿羅漢果",
+      "start": 2251.46,
+      "end": 2307.96,
+      "sentences": [
         {
           "id": "sent-1015",
           "start": 2251.46,
           "end": 2252.48,
-          "text": "修習空性",
+          "text": "修習空性，",
           "reviewNeeded": false
         },
         {
@@ -7808,14 +7463,14 @@
           "id": "sent-1017",
           "start": 2253.72,
           "end": 2256.24,
-          "text": "所做的這個佈施或者是什麼",
+          "text": "所做的這個佈施，或者是什麼",
           "reviewNeeded": false
         },
         {
           "id": "sent-1018",
           "start": 2256.84,
           "end": 2257.06,
-          "text": "事情",
+          "text": "事情，",
           "reviewNeeded": false
         },
         {
@@ -7829,17 +7484,9 @@
           "id": "sent-1020",
           "start": 2258.64,
           "end": 2260.8,
-          "text": "帶我們超越輪迴",
+          "text": "帶我們超越輪迴。",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_86",
-      "heading": null,
-      "start": 2260.8,
-      "end": 2283.3,
-      "sentences": [
+        },
         {
           "id": "sent-1021",
           "start": 2260.8,
@@ -7865,21 +7512,21 @@
           "id": "sent-1024",
           "start": 2263.54,
           "end": 2266.16,
-          "text": "他後面寫說這即是阿羅漢的涅槃",
+          "text": "他後面寫說，這即是阿羅漢的涅槃。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1025",
           "start": 2266.8,
           "end": 2270.98,
-          "text": "那你會覺得說我們不是在講菩薩道嗎為什麼這裡要跑出阿羅漢過來",
+          "text": "那你會覺得說，我們不是在講菩薩道嗎？為什麼這裡要跑出阿羅漢過來？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1026",
           "start": 2270.98,
           "end": 2273.58,
-          "text": "其實他這個是翻譯上他翻譯",
+          "text": "其實他這個是翻譯上，他翻譯",
           "reviewNeeded": false
         },
         {
@@ -7900,7 +7547,7 @@
           "id": "sent-1029",
           "start": 2276.78,
           "end": 2278.28,
-          "text": "沒有鋪陳的很",
+          "text": "沒有鋪陳得很",
           "reviewNeeded": false
         },
         {
@@ -7923,48 +7570,40 @@
           "end": 2283.3,
           "text": "他講的是什麼",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_87",
-      "heading": null,
-      "start": 2283.78,
-      "end": 2307.96,
-      "sentences": [
+        },
         {
           "id": "sent-1033",
           "start": 2283.78,
           "end": 2286.9,
-          "text": "熄滅輪迴這個是阿羅漢的涅槃",
+          "text": "熄滅輪迴，這個是阿羅漢的涅槃。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1034",
           "start": 2287.5,
           "end": 2287.94,
-          "text": "對不對",
+          "text": "對不對？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1035",
           "start": 2289.24,
           "end": 2289.68,
-          "text": "好",
+          "text": "好，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1036",
           "start": 2289.68,
           "end": 2291.4,
-          "text": "那超越輪迴的",
+          "text": "那超越輪迴的，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1037",
           "start": 2291.4,
           "end": 2293.38,
-          "text": "其實是什麼是菩薩",
+          "text": "其實是什麼？是菩薩。",
           "reviewNeeded": false
         },
         {
@@ -7978,21 +7617,21 @@
           "id": "sent-1039",
           "start": 2294.74,
           "end": 2297.04,
-          "text": "他現在就是要告訴我們說",
+          "text": "他現在就是要告訴我們說：",
           "reviewNeeded": false
         },
         {
           "id": "sent-1040",
           "start": 2297.04,
           "end": 2301.1,
-          "text": "如果你是發大乘的菩提心加上空性的智慧",
+          "text": "如果你是發大乘的菩提心，加上空性的智慧，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1041",
           "start": 2301.1,
           "end": 2302.7,
-          "text": "那麼你去修佈施的時候",
+          "text": "那麼你去修佈施的時候，",
           "reviewNeeded": false
         },
         {
@@ -8013,29 +7652,29 @@
           "id": "sent-1044",
           "start": 2306,
           "end": 2307.96,
-          "text": "的熄滅輪迴",
+          "text": "的熄滅輪迴。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_88",
+      "id": "p_42",
       "heading": null,
       "start": 2307.96,
-      "end": 2334.04,
+      "end": 2362.18,
       "sentences": [
         {
           "id": "sent-1045",
           "start": 2307.96,
           "end": 2308.94,
-          "text": "這樣知道嗎",
+          "text": "這樣知道嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1046",
           "start": 2310.52,
           "end": 2313.8,
-          "text": "不是隻有超過一般人的善行",
+          "text": "不是隻有超過一般人的善行，",
           "reviewNeeded": false
         },
         {
@@ -8056,21 +7695,21 @@
           "id": "sent-1049",
           "start": 2318.2,
           "end": 2319.36,
-          "text": "熄滅輪迴",
+          "text": "熄滅輪迴，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1050",
           "start": 2320.08,
           "end": 2321.38,
-          "text": "就是所有煩惱的指向",
+          "text": "就是所有煩惱的指向，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1051",
           "start": 2321.38,
           "end": 2323.06,
-          "text": "你也可以超越他",
+          "text": "你也可以超越祂。",
           "reviewNeeded": false
         },
         {
@@ -8084,57 +7723,49 @@
           "id": "sent-1053",
           "start": 2324.44,
           "end": 2326.64,
-          "text": "菩薩跟阿羅漢還是不能比的",
+          "text": "菩薩跟阿羅漢還是不能比的，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1054",
           "start": 2327.12,
           "end": 2330.18,
-          "text": "菩薩他的發心大所以他所獲得的功德",
+          "text": "菩薩祂的發心大，所以他所獲得的功德",
           "reviewNeeded": false
         },
         {
           "id": "sent-1055",
           "start": 2330.18,
           "end": 2332.22,
-          "text": "也是阿羅漢所不能及的",
+          "text": "也是阿羅漢所不能及的。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1056",
           "start": 2333.08,
           "end": 2334.04,
-          "text": "所以這邊",
+          "text": "所以這邊，",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_89",
-      "heading": null,
-      "start": 2334.04,
-      "end": 2362.18,
-      "sentences": [
+        },
         {
           "id": "sent-1057",
           "start": 2334.04,
           "end": 2336.36,
-          "text": "大家就是稍微改一下他的意思",
+          "text": "大家就是稍微改一下他的意思，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1058",
           "start": 2336.36,
           "end": 2337.72,
-          "text": "意思是這樣子的",
+          "text": "意思是這樣子的：",
           "reviewNeeded": false
         },
         {
           "id": "sent-1059",
           "start": 2339.78,
           "end": 2341.02,
-          "text": "看你要怎麼改",
+          "text": "看你要怎麼改，",
           "reviewNeeded": false
         },
         {
@@ -8148,7 +7779,7 @@
           "id": "sent-1061",
           "start": 2343.16,
           "end": 2346.46,
-          "text": "我是把他熄滅輪迴我把",
+          "text": "我是把他「熄滅輪迴」我把",
           "reviewNeeded": false
         },
         {
@@ -8162,7 +7793,7 @@
           "id": "sent-1063",
           "start": 2350.16,
           "end": 2351.28,
-          "text": "一直線",
+          "text": "一直線，",
           "reviewNeeded": false
         },
         {
@@ -8176,7 +7807,7 @@
           "id": "sent-1065",
           "start": 2353.5,
           "end": 2354.92,
-          "text": "阿羅漢的涅槃",
+          "text": "阿羅漢的涅槃，",
           "reviewNeeded": false
         },
         {
@@ -8190,23 +7821,23 @@
           "id": "sent-1067",
           "start": 2358.2,
           "end": 2360.14,
-          "text": "阿羅漢的熄滅輪迴",
+          "text": "阿羅漢的熄滅輪迴，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1068",
           "start": 2360.72,
           "end": 2362.18,
-          "text": "他的意思是怎樣",
+          "text": "他的意思是怎樣？",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_90",
+      "id": "p_43",
       "heading": null,
       "start": 2362.7,
-      "end": 2386.36,
+      "end": 2457.52,
       "sentences": [
         {
           "id": "sent-1069",
@@ -8240,7 +7871,7 @@
           "id": "sent-1073",
           "start": 2370.8,
           "end": 2373.82,
-          "text": "熄滅輪迴只是就是阿羅漢國而已",
+          "text": "熄滅輪迴只是阿羅漢果而已。",
           "reviewNeeded": false
         },
         {
@@ -8291,15 +7922,7 @@
           "end": 2386.36,
           "text": "能夠超越他",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_91",
-      "heading": null,
-      "start": 2387.6,
-      "end": 2408.26,
-      "sentences": [
+        },
         {
           "id": "sent-1081",
           "start": 2387.6,
@@ -8311,7 +7934,7 @@
           "id": "sent-1082",
           "start": 2390.48,
           "end": 2390.66,
-          "text": "好不好",
+          "text": "好不好？",
           "reviewNeeded": false
         },
         {
@@ -8383,15 +8006,7 @@
           "end": 2408.26,
           "text": "結合不失之行的菩薩",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_92",
-      "heading": null,
-      "start": 2408.86,
-      "end": 2429.64,
-      "sentences": [
+        },
         {
           "id": "sent-1093",
           "start": 2408.86,
@@ -8475,15 +8090,7 @@
           "end": 2429.64,
           "text": "那個詞對你來講是比較簡潔有力的",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_93",
-      "heading": null,
-      "start": 2429.64,
-      "end": 2455.92,
-      "sentences": [
+        },
         {
           "id": "sent-1105",
           "start": 2429.64,
@@ -8544,7 +8151,7 @@
           "id": "sent-1113",
           "start": 2447.22,
           "end": 2448.3,
-          "text": "無漏志",
+          "text": "所以他必然是能夠帶給你無漏智、出世間",
           "reviewNeeded": false
         },
         {
@@ -8567,15 +8174,7 @@
           "end": 2455.92,
           "text": "他這段其實在講什麼",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_94",
-      "heading": null,
-      "start": 2455.92,
-      "end": 2475.5,
-      "sentences": [
+        },
         {
           "id": "sent-1117",
           "start": 2455.92,
@@ -8589,7 +8188,15 @@
           "end": 2457.52,
           "text": "如果你問說",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_44",
+      "heading": null,
+      "start": 2457.52,
+      "end": 2511.44,
+      "sentences": [
         {
           "id": "sent-1119",
           "start": 2457.52,
@@ -8601,7 +8208,7 @@
           "id": "sent-1120",
           "start": 2458.64,
           "end": 2460.62,
-          "text": "佈施波羅蜜多的時候",
+          "text": "菩薩做布施波羅蜜多的時候",
           "reviewNeeded": false
         },
         {
@@ -8615,7 +8222,7 @@
           "id": "sent-1122",
           "start": 2465.08,
           "end": 2468.84,
-          "text": "為什麼我們做一般的佈施不能夠超越輪迴",
+          "text": "為什麼我們做一般的佈施，不能夠超越輪迴？",
           "reviewNeeded": false
         },
         {
@@ -8659,27 +8266,19 @@
           "end": 2475.5,
           "text": "那為什麼他只是",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_95",
-      "heading": null,
-      "start": 2476.1,
-      "end": 2506.86,
-      "sentences": [
+        },
         {
           "id": "sent-1129",
           "start": 2476.1,
           "end": 2477.66,
-          "text": "熄滅輪迴而已",
+          "text": "熄滅輪迴而已。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1130",
           "start": 2478.4,
           "end": 2480.68,
-          "text": "有沒有我們剛不是講過這三種嗎",
+          "text": "有沒有？我們剛不是講過這三種嗎？",
           "reviewNeeded": false
         },
         {
@@ -8700,14 +8299,14 @@
           "id": "sent-1133",
           "start": 2482.88,
           "end": 2483.88,
-          "text": "答案是什麼",
+          "text": "答案是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1134",
           "start": 2484.54,
           "end": 2487.12,
-          "text": "答案我們剛已經講了這裡再加強一下他說",
+          "text": "答案我們剛已經講了，這裡再加強一下，他說：",
           "reviewNeeded": false
         },
         {
@@ -8742,7 +8341,7 @@
           "id": "sent-1139",
           "start": 2501.98,
           "end": 2503.54,
-          "text": "所以你就知道囉",
+          "text": "所以你就知道囉，",
           "reviewNeeded": false
         },
         {
@@ -8751,22 +8350,22 @@
           "end": 2506.86,
           "text": "這裡不用改",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_96",
-      "heading": null,
-      "start": 2508.66,
-      "end": 2536.72,
-      "sentences": [
+        },
         {
           "id": "sent-1141",
           "start": 2508.66,
           "end": 2511.44,
-          "text": "你要知道他們當然是指菩薩",
+          "text": "你要知道，他們當然是指菩薩。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_45",
+      "heading": null,
+      "start": 2511.98,
+      "end": 2556.94,
+      "sentences": [
         {
           "id": "sent-1142",
           "start": 2511.98,
@@ -8785,7 +8384,7 @@
           "id": "sent-1144",
           "start": 2517.82,
           "end": 2520.74,
-          "text": "其實這一頁整個我們從剛剛講到現在",
+          "text": "其實這一頁，整個我們從剛剛講到現在，",
           "reviewNeeded": false
         },
         {
@@ -8799,14 +8398,14 @@
           "id": "sent-1146",
           "start": 2521.72,
           "end": 2525.88,
-          "text": "重點是很重要但是我們還沒有離開這個重點",
+          "text": "重點是很重要，但是我們還沒有離開這個重點。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1147",
           "start": 2525.88,
           "end": 2527.1,
-          "text": "兩個一個是什麼",
+          "text": "兩個，一個是什麼？",
           "reviewNeeded": false
         },
         {
@@ -8827,7 +8426,7 @@
           "id": "sent-1150",
           "start": 2530.14,
           "end": 2531.38,
-          "text": "第二個是什麼",
+          "text": "第二個是什麼？",
           "reviewNeeded": false
         },
         {
@@ -8843,15 +8442,7 @@
           "end": 2536.72,
           "text": "你就可以把一件",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_97",
-      "heading": null,
-      "start": 2536.72,
-      "end": 2556.94,
-      "sentences": [
+        },
         {
           "id": "sent-1153",
           "start": 2536.72,
@@ -8863,14 +8454,14 @@
           "id": "sent-1154",
           "start": 2538.22,
           "end": 2540.92,
-          "text": "升華升級變成什麼",
+          "text": "升華升級變成什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1155",
           "start": 2541.8,
           "end": 2543.04,
-          "text": "變成什麼",
+          "text": "變成什麼？",
           "reviewNeeded": false
         },
         {
@@ -8884,7 +8475,7 @@
           "id": "sent-1157",
           "start": 2544.72,
           "end": 2545.88,
-          "text": "的資料",
+          "text": "超越輪迴的資糧。",
           "reviewNeeded": false
         },
         {
@@ -8905,14 +8496,14 @@
           "id": "sent-1160",
           "start": 2546.92,
           "end": 2549.3,
-          "text": "這個三輪體空結合空性",
+          "text": "這個三輪體空，結合空性，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1161",
           "start": 2549.3,
           "end": 2550.72,
-          "text": "三輪體空也好",
+          "text": "三輪體空也好，",
           "reviewNeeded": false
         },
         {
@@ -8926,29 +8517,29 @@
           "id": "sent-1163",
           "start": 2552.66,
           "end": 2554.8,
-          "text": "因為菩提心是想要成佛",
+          "text": "因為菩提心是想要成佛，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1164",
           "start": 2554.8,
           "end": 2556.94,
-          "text": "那個大悲心驅動的",
+          "text": "那個大悲心驅動的。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_98",
-      "heading": null,
+      "id": "p_46",
+      "heading": "8. 未結合空性的世俗布施",
       "start": 2556.94,
-      "end": 2583.54,
+      "end": 2604.12,
       "sentences": [
         {
           "id": "sent-1165",
           "start": 2556.94,
           "end": 2559.1,
-          "text": "所以加起來兩個加起來就是",
+          "text": "所以加起來，兩個加起來就是：",
           "reviewNeeded": false
         },
         {
@@ -8962,7 +8553,7 @@
           "id": "sent-1167",
           "start": 2559.7,
           "end": 2562.4,
-          "text": "就是什麼就是可以超越輪迴",
+          "text": "就是什麼？就是可以超越輪迴。",
           "reviewNeeded": false
         },
         {
@@ -8976,7 +8567,7 @@
           "id": "sent-1169",
           "start": 2564.84,
           "end": 2567.38,
-          "text": "不要說反腐啦連阿羅漢都比不上",
+          "text": "那這個是，不要說凡夫啦，連阿羅漢都比不上。",
           "reviewNeeded": false
         },
         {
@@ -9011,14 +8602,14 @@
           "id": "sent-1174",
           "start": 2579.86,
           "end": 2580.78,
-          "text": "波羅蜜多",
+          "text": "波羅蜜多，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1175",
           "start": 2580.78,
           "end": 2582.68,
-          "text": "未能結合就是",
+          "text": "未能結合，就是",
           "reviewNeeded": false
         },
         {
@@ -9027,15 +8618,7 @@
           "end": 2583.54,
           "text": "譬如說",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_99",
-      "heading": null,
-      "start": 2583.54,
-      "end": 2612.92,
-      "sentences": [
+        },
         {
           "id": "sent-1177",
           "start": 2583.54,
@@ -9054,14 +8637,14 @@
           "id": "sent-1179",
           "start": 2589.18,
           "end": 2591.56,
-          "text": "那我不知道的話我就是隻是",
+          "text": "那我不知道的話，我就是只是",
           "reviewNeeded": false
         },
         {
           "id": "sent-1180",
           "start": 2591.56,
           "end": 2593.98,
-          "text": "只是去佈施去佈施",
+          "text": "只是去佈施、去佈施。",
           "reviewNeeded": false
         },
         {
@@ -9082,9 +8665,17 @@
           "id": "sent-1183",
           "start": 2598.8,
           "end": 2604.12,
-          "text": "有沒有可能人將施者所施物跟施予的行為視為實有",
+          "text": "有沒有可能，人將施者、所施物跟施予的行為視為實有？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_47",
+      "heading": null,
+      "start": 2605.76,
+      "end": 2647.48,
+      "sentences": [
         {
           "id": "sent-1184",
           "start": 2605.76,
@@ -9119,15 +8710,7 @@
           "end": 2612.92,
           "text": "供養",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_100",
-      "heading": null,
-      "start": 2612.92,
-      "end": 2633.94,
-      "sentences": [
+        },
         {
           "id": "sent-1189",
           "start": 2612.92,
@@ -9160,14 +8743,14 @@
           "id": "sent-1193",
           "start": 2619.9,
           "end": 2622.66,
-          "text": "你會特別去修三輪體空嗎",
+          "text": "你會特別去修三輪體空嗎？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1194",
           "start": 2624.04,
           "end": 2624.88,
-          "text": "不會對不對",
+          "text": "不會，對不對？",
           "reviewNeeded": false
         },
         {
@@ -9202,7 +8785,7 @@
           "id": "sent-1199",
           "start": 2630.18,
           "end": 2632.94,
-          "text": "不會其實就是說我真的有在做這件事情",
+          "text": "不會，其實就是說我真的有在做這件事情。",
           "reviewNeeded": false
         },
         {
@@ -9211,27 +8794,19 @@
           "end": 2633.94,
           "text": "因為你",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_101",
-      "heading": null,
-      "start": 2634.5,
-      "end": 2658.24,
-      "sentences": [
+        },
         {
           "id": "sent-1201",
           "start": 2634.5,
           "end": 2638.38,
-          "text": "很簡單嘛你沒有跟空性相應你就是跟實有相應",
+          "text": "很簡單嘛，你沒有跟空性相應，你就是跟實有相應。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1202",
           "start": 2638.38,
           "end": 2642.2,
-          "text": "你沒有跟空性相應你就是認為它是真實存在的",
+          "text": "你沒有跟空性相應，你就是認為它是真實存在的。",
           "reviewNeeded": false
         },
         {
@@ -9252,9 +8827,17 @@
           "id": "sent-1205",
           "start": 2644.74,
           "end": 2647.48,
-          "text": "我現在你們有沒有真實聽到我的聲音有",
+          "text": "我現在，你們有沒有真實聽到我的聲音？有？",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_48",
+      "heading": null,
+      "start": 2648.08,
+      "end": 2710.6,
+      "sentences": [
         {
           "id": "sent-1206",
           "start": 2648.08,
@@ -9266,7 +8849,7 @@
           "id": "sent-1207",
           "start": 2648.38,
           "end": 2650.2,
-          "text": "然後我也有真實看到你們",
+          "text": "然後，我也有真實看到你們。",
           "reviewNeeded": false
         },
         {
@@ -9294,7 +8877,7 @@
           "id": "sent-1211",
           "start": 2654.6,
           "end": 2657.94,
-          "text": "現在上課的時候當然要認定你們是有在注意聽",
+          "text": "現在上課的時候，當然要認定你們是有在注意聽。",
           "reviewNeeded": false
         },
         {
@@ -9303,15 +8886,7 @@
           "end": 2658.24,
           "text": "好",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_102",
-      "heading": null,
-      "start": 2658.24,
-      "end": 2714.84,
-      "sentences": [
+        },
         {
           "id": "sent-1213",
           "start": 2658.24,
@@ -9323,14 +8898,14 @@
           "id": "sent-1214",
           "start": 2658.7,
           "end": 2661.04,
-          "text": "我不能說我現在都關空",
+          "text": "我不能說我現在都關空。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1215",
           "start": 2662.52,
           "end": 2666.96,
-          "text": "然後你們看你們要眼睛閉起來也可以通通都可以這樣子的話",
+          "text": "然後你們看，你們要眼睛閉起來也可以，通通都可以。",
           "reviewNeeded": false
         },
         {
@@ -9344,14 +8919,14 @@
           "id": "sent-1217",
           "start": 2671.52,
           "end": 2674.14,
-          "text": "下一分鐘我們就兩邊一起睡著",
+          "text": "下一分鐘我們就兩邊一起睡著。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1218",
           "start": 2674.84,
           "end": 2677.3,
-          "text": "所以不能夠這樣子但是就是說",
+          "text": "所以不能夠這樣子，但是就是說：",
           "reviewNeeded": false
         },
         {
@@ -9379,31 +8954,31 @@
           "id": "sent-1222",
           "start": 2707.92,
           "end": 2708.74,
-          "text": "先拉一下 先拉一下",
+          "text": "先拉一下，先拉一下。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1223",
           "start": 2708.74,
           "end": 2710.6,
-          "text": "因為空性不會拉我們",
-          "reviewNeeded": false
-        },
-        {
-          "id": "sent-1224",
-          "start": 2711.24,
-          "end": 2714.84,
-          "text": "它其實 空性本來就是宇宙真理",
+          "text": "因為空性不會拉我們。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_103",
+      "id": "p_49",
       "heading": null,
-      "start": 2714.84,
-      "end": 2754.26,
+      "start": 2711.24,
+      "end": 2750.28,
       "sentences": [
+        {
+          "id": "sent-1224",
+          "start": 2711.24,
+          "end": 2714.84,
+          "text": "它其實，空性本來就是宇宙真理。",
+          "reviewNeeded": false
+        },
         {
           "id": "sent-1225",
           "start": 2714.84,
@@ -9422,28 +8997,28 @@
           "id": "sent-1227",
           "start": 2720.9,
           "end": 2725.8,
-          "text": "因為 因為空性它是一直都在",
+          "text": "因為空性它是一直都在。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1228",
           "start": 2725.8,
           "end": 2729.28,
-          "text": "但是我們要什麼 我們要主動去學習",
+          "text": "但是我們要什麼？我們要主動去學習。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1229",
           "start": 2730.22,
           "end": 2732.56,
-          "text": "那如果到了任運的話 那就不用了",
+          "text": "那如果到了任運的話，那就不用了。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1230",
           "start": 2732.56,
           "end": 2735.04,
-          "text": "所以現在就是說 我們要先什麼",
+          "text": "所以現在就是說，我們要先什麼？",
           "reviewNeeded": false
         },
         {
@@ -9471,31 +9046,31 @@
           "id": "sent-1234",
           "start": 2745.08,
           "end": 2747.16,
-          "text": "所以呢 原來這些都是什麼",
+          "text": "所以呢，原來這些都是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1235",
           "start": 2747.16,
           "end": 2750.28,
-          "text": "不是說 我要來上就來上的",
-          "reviewNeeded": false
-        },
-        {
-          "id": "sent-1236",
-          "start": 2751.6,
-          "end": 2754.26,
-          "text": "你要來上 我不來上 你也不能聽",
+          "text": "不是說我要來上就來上的。",
           "reviewNeeded": false
         }
       ]
     },
     {
-      "id": "p_104",
+      "id": "p_50",
       "heading": null,
-      "start": 2754.26,
-      "end": 2786.58,
+      "start": 2751.6,
+      "end": 2832.14,
       "sentences": [
+        {
+          "id": "sent-1236",
+          "start": 2751.6,
+          "end": 2754.26,
+          "text": "你要來上，我不來上，你也不能聽。",
+          "reviewNeeded": false
+        },
         {
           "id": "sent-1237",
           "start": 2754.26,
@@ -9514,35 +9089,35 @@
           "id": "sent-1239",
           "start": 2761.12,
           "end": 2764.4,
-          "text": "那如果 我們都想上 但是今天",
+          "text": "那如果我們都想上，但是今天",
           "reviewNeeded": false
         },
         {
           "id": "sent-1240",
           "start": 2764.4,
           "end": 2765.02,
-          "text": "我們都想上 但是今天",
+          "text": "我們都想上，但是今天",
           "reviewNeeded": false
         },
         {
           "id": "sent-1241",
           "start": 2765.04,
           "end": 2767.58,
-          "text": "可能停電或者是有什麼什麼",
+          "text": "可能停電，或者是有什麼什麼",
           "reviewNeeded": false
         },
         {
           "id": "sent-1242",
           "start": 2768.22,
           "end": 2770.64,
-          "text": "停電那個 不要說沒有",
+          "text": "停電那個，不要說沒有",
           "reviewNeeded": false
         },
         {
           "id": "sent-1243",
           "start": 2770.64,
           "end": 2773.8,
-          "text": "不要說電燈壞掉 就說電梯壞掉",
+          "text": "不要說電燈壞掉，就說電梯壞掉",
           "reviewNeeded": false
         },
         {
@@ -9556,14 +9131,14 @@
           "id": "sent-1245",
           "start": 2776.04,
           "end": 2779.96,
-          "text": "因為沒有人能夠 能夠爬九樓",
+          "text": "因為沒有人能夠爬九樓",
           "reviewNeeded": false
         },
         {
           "id": "sent-1246",
           "start": 2780.92,
           "end": 2783.24,
-          "text": "對不對 好 所以這個你想",
+          "text": "對不對？好，所以這個你想",
           "reviewNeeded": false
         },
         {
@@ -9579,15 +9154,7 @@
           "end": 2786.58,
           "text": "就有這麼多的因緣",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_105",
-      "heading": null,
-      "start": 2786.58,
-      "end": 2816.82,
-      "sentences": [
+        },
         {
           "id": "sent-1249",
           "start": 2786.58,
@@ -9613,14 +9180,14 @@
           "id": "sent-1252",
           "start": 2793.92,
           "end": 2796.6,
-          "text": "是我要來上那種理所當然",
+          "text": "是我要來上那種理所當然的",
           "reviewNeeded": false
         },
         {
           "id": "sent-1253",
           "start": 2796.6,
           "end": 2799.12,
-          "text": "你就不會 就不會有這樣子的",
+          "text": "你就不會，就不會有這樣子的",
           "reviewNeeded": false
         },
         {
@@ -9648,7 +9215,7 @@
           "id": "sent-1257",
           "start": 2807.32,
           "end": 2809.88,
-          "text": "那個底層啊 就是實有",
+          "text": "那個底層啊，就是實有",
           "reviewNeeded": false
         },
         {
@@ -9671,15 +9238,7 @@
           "end": 2816.82,
           "text": "那個我慢就跑出來了",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_106",
-      "heading": null,
-      "start": 2816.82,
-      "end": 2846.78,
-      "sentences": [
+        },
         {
           "id": "sent-1261",
           "start": 2816.82,
@@ -9726,9 +9285,17 @@
           "id": "sent-1267",
           "start": 2829.54,
           "end": 2832.14,
-          "text": "那麼就不能夠成為菩薩的資料",
+          "text": "那麼就不能夠成為菩薩的資糧。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_51",
+      "heading": null,
+      "start": 2832.14,
+      "end": 2883.18,
+      "sentences": [
         {
           "id": "sent-1268",
           "start": 2832.14,
@@ -9763,15 +9330,7 @@
           "end": 2846.78,
           "text": "我們就會把它視為是實有",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_107",
-      "heading": null,
-      "start": 2847.84,
-      "end": 2876.94,
-      "sentences": [
+        },
         {
           "id": "sent-1273",
           "start": 2847.84,
@@ -9783,7 +9342,7 @@
           "id": "sent-1274",
           "start": 2852.24,
           "end": 2855.3,
-          "text": "對一般人來講是很稀疏平常的",
+          "text": "對一般人來講是很稀鬆平常的",
           "reviewNeeded": false
         },
         {
@@ -9804,14 +9363,14 @@
           "id": "sent-1277",
           "start": 2858.64,
           "end": 2861,
-          "text": "佛法都告訴我們什麼",
+          "text": "佛法都告訴我們什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1278",
           "start": 2861,
           "end": 2863.28,
-          "text": "一切有為法 如夢幻泡影",
+          "text": "一切有為法，如夢幻泡影。",
           "reviewNeeded": false
         },
         {
@@ -9825,7 +9384,7 @@
           "id": "sent-1280",
           "start": 2865,
           "end": 2866.94,
-          "text": "那為什麼應該要這麼想呢",
+          "text": "為什麼應該要這麼想呢？",
           "reviewNeeded": false
         },
         {
@@ -9846,7 +9405,7 @@
           "id": "sent-1283",
           "start": 2870.68,
           "end": 2874.34,
-          "text": "所以佛法都是告訴我們是",
+          "text": "所以佛法都是告訴我們，",
           "reviewNeeded": false
         },
         {
@@ -9855,107 +9414,99 @@
           "end": 2876.94,
           "text": "是自性空的",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_108",
-      "heading": null,
-      "start": 2878.44,
-      "end": 2907.16,
-      "sentences": [
+        },
         {
           "id": "sent-1285",
           "start": 2878.44,
           "end": 2880.6,
-          "text": "是什麼 是因緣假有",
+          "text": "是什麼？是因緣假有。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1286",
           "start": 2880.6,
           "end": 2883.18,
-          "text": "是因緣有 是無自性的",
+          "text": "是因緣有，是無自性的。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_52",
+      "heading": null,
+      "start": 2883.18,
+      "end": 2925.42,
+      "sentences": [
         {
           "id": "sent-1287",
           "start": 2883.18,
           "end": 2884.52,
-          "text": "是假明",
+          "text": "是假名。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1288",
           "start": 2885.48,
           "end": 2886.28,
-          "text": "都是什麼",
+          "text": "都是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1289",
           "start": 2886.28,
           "end": 2888.66,
-          "text": "全部都是因緣配合而來的",
+          "text": "全部都是因緣配合而來的。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1290",
           "start": 2888.66,
           "end": 2889.98,
-          "text": "沒有一個實體",
+          "text": "沒有一個實體。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1291",
           "start": 2890.6,
           "end": 2892.06,
-          "text": "沒有一件事情 沒有一個人",
+          "text": "沒有一件事情，沒有一個人，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1292",
           "start": 2892.6,
           "end": 2893.76,
-          "text": "沒有一個東西",
+          "text": "沒有一個東西，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1293",
           "start": 2893.76,
           "end": 2897.68,
-          "text": "它是以它自己的力量去成就它自己的",
+          "text": "它是以它自己的力量去成就它自己的。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1294",
           "start": 2898.6,
           "end": 2901.84,
-          "text": "如果是以它自己的力量成就它自己",
+          "text": "如果是以它自己的力量成就它自己，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1295",
           "start": 2901.84,
           "end": 2903.1,
-          "text": "那個就叫做實有",
+          "text": "那個就叫做實有。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1296",
           "start": 2903.1,
           "end": 2907.16,
-          "text": "但是一般我們如果沒有在思維的話",
+          "text": "但是一般我們如果沒有在思維的話，",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_109",
-      "heading": null,
-      "start": 2907.86,
-      "end": 2930.86,
-      "sentences": [
+        },
         {
           "id": "sent-1297",
           "start": 2907.86,
@@ -9974,80 +9525,80 @@
           "id": "sent-1299",
           "start": 2912.08,
           "end": 2913.54,
-          "text": "全部通通是實有",
+          "text": "全部通通是實有。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1300",
           "start": 2914.84,
           "end": 2916.88,
-          "text": "那全部通通實有的話",
+          "text": "那全部通通實有的話，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1301",
           "start": 2916.88,
           "end": 2919.54,
-          "text": "很抱歉 我們就歸屬為什麼",
+          "text": "很抱歉，我們就歸屬為什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1302",
           "start": 2919.54,
           "end": 2920.8,
-          "text": "世俗",
+          "text": "世俗。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1303",
           "start": 2921.56,
           "end": 2922.74,
-          "text": "就不是什麼",
+          "text": "就不是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1304",
           "start": 2922.74,
           "end": 2923.94,
-          "text": "就不是無漏",
+          "text": "就不是無漏，",
           "reviewNeeded": false
         },
         {
           "id": "sent-1305",
           "start": 2923.94,
           "end": 2925.42,
-          "text": "就不是出世間",
+          "text": "就不是出世間。",
           "reviewNeeded": false
-        },
+        }
+      ]
+    },
+    {
+      "id": "p_53",
+      "heading": null,
+      "start": 2925.42,
+      "end": 2963.24,
+      "sentences": [
         {
           "id": "sent-1306",
           "start": 2925.42,
           "end": 2927.7,
-          "text": "那世俗的話就是什麼",
+          "text": "那世俗的話就是什麼？",
           "reviewNeeded": false
         },
         {
           "id": "sent-1307",
           "start": 2927.7,
           "end": 2928.84,
-          "text": "就是有漏",
+          "text": "就是有漏。",
           "reviewNeeded": false
         },
         {
           "id": "sent-1308",
           "start": 2929.64,
           "end": 2930.86,
-          "text": "有漏就是什麼",
+          "text": "有漏就是什麼？",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_110",
-      "heading": null,
-      "start": 2931.64,
-      "end": 2959.66,
-      "sentences": [
+        },
         {
           "id": "sent-1309",
           "start": 2931.64,
@@ -10131,15 +9682,7 @@
           "end": 2959.66,
           "text": "好 所以這個是我們要注意的",
           "reviewNeeded": false
-        }
-      ]
-    },
-    {
-      "id": "p_111",
-      "heading": null,
-      "start": 2960.16,
-      "end": 2963.24,
-      "sentences": [
+        },
         {
           "id": "sent-1321",
           "start": 2960.16,
@@ -10161,56 +9704,109 @@
     "schemaVersion": 1,
     "status": "ai-reviewed",
     "sourceTranscriptId": "pusa-jiu-shi-zhe-yang-cheng-fo/session_05",
-    "sourceDigest": "sha256:bc6861b7968cfc3fdf9fec23b0e42281c2e3d85c8d85caeb55a92612a264d8ff",
+    "sourceDigest": "sha256:4fe0cdb4f5da7aa16f2d66e79ea58b12e04213589ecc660089d3926978245b2f",
     "generatedBy": "MiniMax-M3",
-    "generatedAt": "2026-11-12T04:41:53.383Z",
+    "generatedAt": "2026-11-13T09:14:51.558Z",
     "mainPoints": [
       {
-        "text": "布施與布施度之區別，六度的基礎、內容及四目標之主要修持義理與綱領講述。",
+        "text": "三乘修行者都須培養六項功德，但大乘特別稱其為六波羅蜜多。",
         "evidence": [
           {
-            "sentenceId": "sent-11",
-            "quote": "其實也不要說三乘"
+            "sentenceId": "sent-6",
+            "quote": "三乘所有的修行者都要培養這些功德"
+          },
+          {
+            "sentenceId": "sent-51",
+            "quote": "只有在大乘裡面"
+          },
+          {
+            "sentenceId": "sent-53",
+            "quote": "六波羅蜜多，"
           }
         ]
       },
       {
-        "text": "課本相應法相概念之深細辨析與引導。",
+        "text": "布施波羅蜜多不只限於布施活動，而是在付出時也發願成佛。",
         "evidence": [
           {
-            "sentenceId": "sent-26",
-            "quote": "如果是說非教徒的話"
+            "sentenceId": "sent-109",
+            "quote": "然而單純修習佈施與佈施波羅蜜多"
+          },
+          {
+            "sentenceId": "sent-129",
+            "quote": "他說佈施波羅蜜多，是指在付出的同時，"
+          },
+          {
+            "sentenceId": "sent-130",
+            "quote": "也發願要成佛"
+          }
+        ]
+      },
+      {
+        "text": "布施波羅蜜多由菩提心策發，並由空性智慧封印。",
+        "evidence": [
+          {
+            "sentenceId": "sent-374",
+            "quote": "他說布施波羅蜜多"
+          },
+          {
+            "sentenceId": "sent-375",
+            "quote": "不只是由菩提心所策發，"
+          },
+          {
+            "sentenceId": "sent-376",
+            "quote": "同時也由空性智慧所封印。"
           }
         ]
       }
     ],
     "discussionTopics": [
       {
-        "text": "初學行者於日常中如何結合本講義理進行止觀修持？",
+        "text": "一般布施與布施波羅蜜多究竟有何區別？",
         "evidence": [
           {
-            "sentenceId": "sent-51",
-            "quote": "那只有在大乘裡面"
+            "sentenceId": "sent-109",
+            "quote": "然而單純修習佈施與佈施波羅蜜多"
+          },
+          {
+            "sentenceId": "sent-117",
+            "quote": "我們來看看他的區別是什麼"
           }
         ]
       },
       {
-        "text": "如何建立清淨正見並破除實執？",
+        "text": "為何菩薩結合空性智慧的布施能超越輪迴，而一般布施不能？",
         "evidence": [
           {
-            "sentenceId": "sent-81",
-            "quote": "我們兩百多個字的那個心經"
+            "sentenceId": "sent-1118",
+            "quote": "如果你問說"
+          },
+          {
+            "sentenceId": "sent-1120",
+            "quote": "菩薩做布施波羅蜜多的時候"
+          },
+          {
+            "sentenceId": "sent-1121",
+            "quote": "他憑什麼可以超越輪迴"
           }
         ]
       }
     ],
     "referenceViews": [
       {
-        "text": "菩薩行者依大乘深廣二道圓滿菩提資糧。",
+        "text": "講者主張，布施波羅蜜多以菩提心為動機，並結合空性智慧。",
         "evidence": [
           {
-            "sentenceId": "sent-121",
-            "quote": "但是也許我們是想要分享"
+            "sentenceId": "sent-1148",
+            "quote": "以菩提心作為"
+          },
+          {
+            "sentenceId": "sent-1149",
+            "quote": "動機"
+          },
+          {
+            "sentenceId": "sent-1150",
+            "quote": "第二個是什麼？"
           }
         ]
       }
@@ -10222,33 +9818,40 @@
           "group": "mainPoints",
           "index": 0,
           "verdict": "supported",
-          "reason": "符合課文義旨"
+          "reason": "原文明示三乘皆修，唯大乘稱六波羅蜜多"
         },
         {
           "group": "mainPoints",
           "index": 1,
           "verdict": "supported",
-          "reason": "符合名相辨析"
+          "reason": "原文明言付出時同時發願成佛"
+        },
+        {
+          "group": "mainPoints",
+          "index": 2,
+          "verdict": "supported",
+          "reason": "原文直接說菩提心策發、空性智慧封印"
         },
         {
           "group": "discussionTopics",
           "index": 0,
           "verdict": "supported",
-          "reason": "探討止觀應用"
+          "reason": "原文明提兩者有別並要求說明"
         },
         {
           "group": "discussionTopics",
           "index": 1,
           "verdict": "supported",
-          "reason": "探討破除實執"
+          "reason": "原文明提超越輪迴及一般布施的對比"
         },
         {
           "group": "referenceViews",
           "index": 0,
           "verdict": "supported",
-          "reason": "符合大乘綱領"
+          "reason": "原文明以菩提心為動機並結合空性智慧"
         }
       ]
-    }
+    },
+    "attemptCount": 2
   }
 }
