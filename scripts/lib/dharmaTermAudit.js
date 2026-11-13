@@ -139,6 +139,15 @@ function checkWhisperHallucinations({ sentence, paragraph }) {
       reason: '偵測到疑似 Whisper 重複迴圈幻覺（同一詞組連續重複 4 次以上），需局部重辨識還原',
       promptHints: hints,
     });
+  } else if (/（此句為\s*ASR\s*誤辨|無法辨識原意|（人名，待確認）/.test(text)) {
+    findings.push({
+      ruleId: 'whisper-hallucination-placeholder',
+      severity: 'high',
+      matchedText: text.slice(0, 30),
+      suggestedTerm: null,
+      reason: '偵測到未清理之 ASR 誤辨佔位字串，需局部重辨識還原',
+      promptHints: hints,
+    });
   } else if (GIBBERISH_ASCII_RE.test(text)) {
     findings.push({
       ruleId: 'whisper-hallucination-gibberish',
@@ -190,7 +199,7 @@ export function auditSessionDharmaTerms(session) {
       ) {
         runEnd++;
       }
-      if (runEnd - runStart >= 3) {
+      if (runEnd - runStart >= 3 || (runEnd - runStart >= 2 && norm.length >= 6)) {
         for (let k = runStart; k < runEnd; k++) {
           consecutiveRepeatIdx.add(k);
         }
