@@ -187,7 +187,7 @@ def md_to_html(md_path: Path) -> Path:
     para_counter = 0
     current_speaker = ""
     for block in raw_blocks:
-        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr') or block.startswith('<div') or block.startswith('<details'):
+        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr') or block.startswith('<div') or block.startswith('<details') or block.startswith('<table'):
             if block.startswith(('<div', '<hr')):
                 current_speaker = ""
             if (block.startswith('<h2>【正文講記】</h2>') or block.startswith('<h2>二、各節問題與法師開示講記</h2>')) and verbatim_map:
@@ -301,9 +301,18 @@ def md_to_html(md_path: Path) -> Path:
                 paragraphs.append(f'<p class="reading-para{teacher_cls}">{block.replace(chr(10), "<br/>")}</p>')
 
     body_html = '\n'.join(paragraphs)
+    if md_path.stem.endswith("_dialogue_transcript"):
+        mode_bar_html = (
+            '<div class="mode-bar" role="region" aria-label="閱讀模式切換">'
+            '<span class="mode-label">閱讀模式：</span>'
+            '<button type="button" class="mode-btn active" id="mode-full-btn" onclick="setReadingMode(\'full\')">📖 完整共學實錄</button>'
+            '<button type="button" class="mode-btn" id="mode-essence-btn" onclick="setReadingMode(\'essence\')">☸️ 精華法師開示（收合學員討論）</button>'
+            '</div>'
+        )
+        body_html = body_html.replace('<div id="sec-toc"', mode_bar_html + '\n<div id="sec-toc"', 1)
 
     if youtube_id and not audio_url:
-        player_html = f"""  <div class="sticky-player yt-sticky-player">
+        player_html = f"""  <div class="sticky-player yt-sticky-player" id="sticky-player">
     <div class="yt-frame-wrap">
       <iframe id="yt-iframe" width="240" height="68"
         src="https://www.youtube.com/embed/{youtube_id}?enablejsapi=1&rel=0"
@@ -311,8 +320,9 @@ def md_to_html(md_path: Path) -> Path:
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何段落時間戳或原話單句，立即跳轉 YouTube 原片對應秒數</div>
+    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何時間按鈕，立即跳轉 YouTube 原片對應秒數</div>
     <a id="yt-ext-link" class="yt-ext-btn" href="https://www.youtube.com/watch?v={youtube_id}" target="_blank" rel="noopener">📺 於 YouTube 開啟</a>
+    <button type="button" class="player-collapse-btn" onclick="togglePlayerCollapse(this)">🔽 收合</button>
   </div>"""
     else:
         player_html = f"""  <div class="sticky-player">
@@ -344,7 +354,7 @@ def md_to_html(md_path: Path) -> Path:
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.85;
-      padding: 0 0 120px 0;
+      padding: 0 0 180px 0;
       margin: 0;
     }}
     .container {{
@@ -465,6 +475,111 @@ def md_to_html(md_path: Path) -> Path:
     }}
     .back-toc-link:hover {{
       color: #991b1b;
+    }}
+    .learner-box.pause-box {{
+      border-left-color: #6366f1;
+      background: #eef2ff;
+    }}
+    .learner-table {{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 6px 0;
+      font-size: 0.94rem;
+      background: #ffffff;
+    }}
+    .learner-table th, .learner-table td {{
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }}
+    .learner-table th {{
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }}
+    .mode-bar {{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 16px 0;
+    }}
+    .mode-label {{
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #334155;
+    }}
+    .mode-btn {{
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }}
+    .mode-btn.active, .mode-btn:hover {{
+      background: #991b1b;
+      color: #ffffff;
+      border-color: #991b1b;
+    }}
+    .toc-badge-student {{
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #ccfbf1;
+      color: #0f766e;
+      margin-right: 4px;
+    }}
+    .toc-badge-teacher {{
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #fef3c7;
+      color: #92400e;
+      margin-right: 4px;
+    }}
+    .student-group-details {{
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 14px 0;
+      background: #fafafa;
+    }}
+    .student-group-details > summary {{
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #0f766e;
+      padding: 4px 0;
+    }}
+    .player-collapse-btn {{
+      background: rgba(255,255,255,0.18);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }}
+    .sticky-player.collapsed .yt-frame-wrap,
+    .sticky-player.collapsed .yt-ext-btn {{
+      display: none;
+    }}
+    .sticky-player.collapsed {{
+      padding: 6px 16px;
     }}
     .ts-btn {{
       background: #dc2626;
@@ -793,6 +908,29 @@ def md_to_html(md_path: Path) -> Path:
         console.error('Play failed:', e);
         status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
       }});
+    }}
+
+    function setReadingMode(mode) {{
+      const fullBtn = document.getElementById('mode-full-btn');
+      const essBtn = document.getElementById('mode-essence-btn');
+      if (fullBtn && essBtn) {{
+        fullBtn.classList.toggle('active', mode === 'full');
+        essBtn.classList.toggle('active', mode === 'essence');
+      }}
+      document.querySelectorAll('.student-group-details').forEach(el => {{
+        if (mode === 'essence') {{
+          el.removeAttribute('open');
+        }} else {{
+          el.setAttribute('open', '');
+        }}
+      }});
+    }}
+
+    function togglePlayerCollapse(btn) {{
+      const player = document.getElementById('sticky-player');
+      if (!player) return;
+      const collapsed = player.classList.toggle('collapsed');
+      btn.textContent = collapsed ? '🔼 展開播放器' : '🔽 收合';
     }}
   </script>
 </body>
