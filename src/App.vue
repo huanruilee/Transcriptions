@@ -427,6 +427,7 @@
           <div
             v-for="p in paragraphs"
             :key="p.id"
+            v-show="scaffoldingReadingMode === 'full' || !currentStudyScaffolding || p.speaker?.includes('法師') || p.heading || p.teacherSummary"
             class="paragraph-block"
           >
             <div v-if="p.questionId && isQuestionStart(p)" class="discussion-question-heading">
