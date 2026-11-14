@@ -364,6 +364,18 @@
               >
                 📖 研讀講記
               </button>
+              <a
+                v-if="currentDialogueTranscriptUrl"
+                id="open-dialogue-transcript-btn"
+                :href="currentDialogueTranscriptUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="session-download-btn"
+                data-testid="open-dialogue-transcript-btn"
+                title="開啟五層思辨學習版逐字稿網頁"
+              >
+                🧭 五層思辨學習版
+              </a>
             </div>
             <div
               v-if="currentAgentReviewStatus === 'completed'"
@@ -404,6 +416,13 @@
               class="transcript-pending-notice"
             >此影片已上架，逐字稿尚待製作。</p>
           </header>
+
+          <StudyScaffoldingPanel
+            v-if="currentSessionData?.studyScaffolding"
+            :scaffolding="currentSessionData.studyScaffolding"
+            v-model:reading-mode="scaffoldingReadingMode"
+            @seek="seekToTime"
+          />
 
           <div
             v-for="p in paragraphs"
@@ -813,6 +832,7 @@
 import { projectApprovedRebuild } from './utils/approvedRebuildReader.js';
 import { applyTimingOverlay } from './utils/audioCalibrationOverlay.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import StudyScaffoldingPanel from './components/StudyScaffoldingPanel.vue';
 import { usePlayerStore } from './stores/player';
 import { useCourseStore } from './stores/course';
 import { useUIStore } from './stores/ui';
@@ -963,6 +983,15 @@ const currentStudyGuideUrl = computed(() => {
 function toggleStudyGuideDrawer() {
   isStudyGuideOpen.value = !isStudyGuideOpen.value;
 }
+
+const scaffoldingReadingMode = ref<'full' | 'essence'>('full');
+const currentDialogueTranscriptUrl = computed(() => {
+  const rel = currentSessionInfo.value?.dialogueTranscriptUrl;
+  const cPath = courseStore.currentCoursePath;
+  if (!rel || !cPath) return '';
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}${cPath}/${rel}`;
+});
 
 const activeMediaType = computed(() =>
   currentSessionInfo.value?.mediaType || courseStore.currentMediaType
