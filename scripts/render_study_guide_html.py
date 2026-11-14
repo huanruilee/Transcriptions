@@ -124,6 +124,7 @@ def md_to_html(md_path: Path) -> Path:
         return f'<button class="ts-btn" onclick="event.stopPropagation(); playAt({seconds}, this)">{ts_text}</button>'
 
     content = re.sub(r'\[(▶\s*\d{2,3}:\d{2})\]\((?:.+?)(?:#t=|&t=)(\d+(?:\.\d+)?)s?\)', replace_ts, text)
+    content = re.sub(r'\[([^\]]+)\]\((#sec-[a-zA-Z0-9_-]+)\)', r'<a class="toc-anchor-link" href="\2">\1</a>', content)
 
     # Process blockquotes
     lines = content.split('\n')
@@ -148,7 +149,19 @@ def md_to_html(md_path: Path) -> Path:
     # Convert headings - ensure double newlines around them so following lines aren't fused
     content = re.sub(r'^(#{1,3})\s+(.+)$', r'\n\n\1 \2\n\n', content, flags=re.MULTILINE)
     content = re.sub(r'^###\s+(.+)$', r'<h3>\1</h3>', content, flags=re.MULTILINE)
-    content = re.sub(r'^##\s+(.+)$', r'<h2>\1</h2>', content, flags=re.MULTILINE)
+    sec_counter = [0]
+    def replace_h2(m):
+        inner = m.group(1)
+        explicit_id = re.search(r'\s*\{#([a-zA-Z0-9_-]+)\}\s*$', inner)
+        if explicit_id:
+            hid = explicit_id.group(1)
+            inner = inner[:explicit_id.start()]
+            return f'<h2 id="{hid}">{inner}</h2>'
+        if 'class="ts-btn"' in inner:
+            sec_counter[0] += 1
+            return f'<h2 id="sec-{sec_counter[0]}">{inner}</h2>'
+        return f'<h2>{inner}</h2>'
+    content = re.sub(r'^##\s+(.+)$', replace_h2, content, flags=re.MULTILINE)
     content = re.sub(r'^#\s+(.+)$', r'<h1>\1</h1>', content, flags=re.MULTILINE)
 
     # Bold and Italic
@@ -156,10 +169,10 @@ def md_to_html(md_path: Path) -> Path:
     content = re.sub(r'\*(.+?)\*', r'<em>\1</em>', content)
 
     raw_blocks = [b.strip() for b in content.split('\n\n') if b.strip()]
-    if not verbatim_map and session_data:
+    if not verbatim_map and session_data and not md_path.stem.endswith("_dialogue_transcript"):
         para_seconds = []
         for b in raw_blocks:
-            if b.startswith(('<h', '<blockquote', '<hr', '---')) or re.match(r'^\d+\.\s', b):
+            if b.startswith(('<h', '<blockquote', '<hr', '---', '<div', '<details')) or re.match(r'^\d+\.\s', b):
                 continue
             if any(line.strip().startswith(('* ', '- ')) for line in b.split('\n')):
                 continue
@@ -171,8 +184,11 @@ def md_to_html(md_path: Path) -> Path:
     # Paragraphs
     paragraphs = []
     para_counter = 0
+    current_speaker = ""
     for block in raw_blocks:
-        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr'):
+        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr') or block.startswith('<div') or block.startswith('<details'):
+            if block.startswith(('<div', '<hr')):
+                current_speaker = ""
             if (block.startswith('<h2>【正文講記】</h2>') or block.startswith('<h2>二、各節問題與法師開示講記</h2>')) and verbatim_map:
                 heading_text = re.sub(r'</?h2>', '', block)
                 paragraphs.append(
@@ -271,9 +287,17 @@ def md_to_html(md_path: Path) -> Path:
                         f'</div>'
                     )
                 else:
-                    paragraphs.append(f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
+                    spk_m = re.search(r'<strong>([^：<]{1,15})：</strong>', block)
+                    if spk_m:
+                        current_speaker = spk_m.group(1)
+                    teacher_cls = " teacher-para" if current_speaker == "如性法師" else ""
+                    paragraphs.append(f'<p class="reading-para clickable-para{teacher_cls}" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
             else:
-                paragraphs.append(f'<p class="reading-para">{block.replace(chr(10), "<br/>")}</p>')
+                spk_m = re.search(r'<strong>([^：<]{1,15})：</strong>', block)
+                if spk_m:
+                    current_speaker = spk_m.group(1)
+                teacher_cls = " teacher-para" if current_speaker == "如性法師" else ""
+                paragraphs.append(f'<p class="reading-para{teacher_cls}">{block.replace(chr(10), "<br/>")}</p>')
 
     body_html = '\n'.join(paragraphs)
 
@@ -368,6 +392,67 @@ def md_to_html(md_path: Path) -> Path:
     }}
     .reading-para.active-para {{
       background: #fef9c3;
+    }}
+    .reading-para.teacher-para {{
+      border-left: 4px solid #b45309;
+      background: #fffbeb;
+      padding-left: 16px;
+    }}
+    .reading-para.teacher-para.clickable-para:hover {{
+      background: #fef3c7;
+    }}
+    .reading-para.teacher-para.active-para {{
+      background: #fde68a;
+    }}
+    .learner-box {{
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #0284c7;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }}
+    .learner-box.compass-box {{
+      border-left-color: #0d9488;
+      background: #f0fdfa;
+    }}
+    .learner-box.summary-box {{
+      border-left-color: #b45309;
+      background: #fffbeb;
+    }}
+    .learner-box ul, .learner-box ol {{
+      margin: 8px 0 4px 20px;
+      padding: 0;
+    }}
+    .learner-box li {{
+      margin-bottom: 6px;
+    }}
+    .self-check-card {{
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      background: #ffffff;
+    }}
+    .self-check-card summary {{
+      cursor: pointer;
+      font-weight: 700;
+      color: #7f1d1d;
+      outline: none;
+    }}
+    .self-check-card[open] summary {{
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
+    }}
+    .toc-anchor-link {{
+      color: #991b1b;
+      text-decoration: none;
+      border-bottom: 1px dotted #991b1b;
+    }}
+    .toc-anchor-link:hover {{
+      color: #dc2626;
+      border-bottom-style: solid;
     }}
     .ts-btn {{
       background: #dc2626;
