@@ -179,3 +179,13 @@ gh pr merge PR_NUMBER --merge
 2. **時間戳必須從定稿逐字稿實際句子反查（禁止估算填寫）**：
    - `verseMappings`、`compassMaps` 與 `pauseBoxes` 的所有時間戳（秒數），必須在逐字稿定稿後，從 `sessions/session_*.json` 內實際對應句子的 `start` 時間程式化反查取得，不得憑印象或分段比例估算。
    - 提交 PR 前必須跑過 `npm run summaries:audit`、`npm test` 與 `npm run test:v2`，並在部署至 GitHub Pages 後實地開啟線上網頁抽查確認。
+
+---
+
+## 九、本地模型分工路由（Gx10 Qwen / eNeural 低 Token 漏斗）
+
+為降低雲端大模型 Token 消耗並保護未公開音訊／逐字稿資料，日常轉寫與校對採三層分工：
+
+1. **第一層（本地規則與腳本）**：90% 無爭議句子的格式檢查、時間軸對齊與明顯冗詞清除，由本地腳本自動定稿。
+2. **第二層（本地模型：Gx10 Qwen / eNeural）**：Stage 2～4 的大量初校、碎句合併、同音錯字初步文義校正、以及非爭議段落的語順微調，優先交由本地模型（如 **Gx10 Qwen** 或 **eNeural**）批次處理；嚴禁將全篇逐字稿直接送往雲端大模型。
+3. **第三層（雲端大模型終審）**：僅針對本地模型標記為 `reviewRequired=true` 的爭議小卡（如專有名詞歧義、法義邏輯疑點、跨頁引文核對），搭配極簡 Prompt 與 JSON Schema 送交雲端大模型進行最終仲裁。
