@@ -23,7 +23,9 @@ const FLUENT_SYSTEM_PROMPT = [
   '   - 語氣轉折、同位語定義或引出說明可使用全形雙破折號「──」。',
   '   - 經論書名用《》，篇名用〈〉；引用或專有名詞強調用「」。',
   '   - 稱佛陀用「祂」，思惟用「思惟」。',
-  '3. 【精簡口語冗詞（必須保持文義）】只可刪除無實義的純口語雜訊（如連續結巴重複「這個這個」「然後，然後呢，」「那麼你就／你就什麼」「去／去持著它」、過密的句中語助詞「呢」「啊」「嘛」、句首多餘的「好，」「好。」）。若上一句尾與下一句首重複同一個詞（如「那麼你就」＋「你就什麼」），請精簡下一句重複的詞。',
+  '3. 【徹底清除口語冗詞並依語意補順句子（必須保持原意）】',
+  '   - 凡是發語詞與無實義口頭禪（如「呃」「嗯」「啊」「喔」「欸」、句首過渡「好，」「那，」「好，那，」「就是說，」、句中打斷語意的「就是，嗯，」「這個，呃，」、結巴重複「這個這個」「然後，然後呢，」「那麼你就／你就什麼」），**一律徹底刪除**。',
+  '   - 若原句因口語停頓而被多餘的逗號切碎（例如「對你來講，它，比較不是那種，平鋪直敘，在書本上。」或「也希望能夠，傳，達出去，」），**必須消除詞中與子句間的碎逗號，依語意順成自然流暢的句子**（如「對你來講，它比較不是那種平鋪直敘在書本上的文字。」「也希望能夠傳達出去，」）。',
   '4. 【兩條絕對紅線】',
   '   - 嚴禁跨句搬移文字：每句只能修該句時間軸內的話，絕不可把上一句或下一句的詞搬過來。',
   '   - 嚴禁刪除實義詞彙：時間／程度／邏輯／否定副詞與連詞（如「剛好」「已經」「因此」「所以」「但是」「如果」「沒有」「不要」）必須完整保留。',
@@ -607,3 +609,195 @@ export async function ensureParagraphPunctuation({
   }
   return { session: updated, fixedCount: proposals.size };
 }
+
+// 獨立發語詞與純過渡口頭禪（整句若僅含此類詞與標點，直接刪除該 sent-X）
+const STANDALONE_FILLER_RE =
+  /^(?:[呃嗯啊喔哦欸唉唔]|[好那這就]|好那|那好|好吧|這個|那個|就是|就是說|那麼|然後|對不|呃這個|嗯這個|好那這個)+[，。！？、；：…\s]*$/;
+
+// 句尾因換氣被誤切開的連詞／介詞／助動詞／副詞（其後的逗號應消去並與下一句合併）
+const BREATH_PAUSE_HEAD_RE =
+  /(?:能夠|可以|對於|關於|比較不是那種|平鋪直敘|這樣子的一個|我這樣子的一個|它其實是一個|你會覺得|就是希望|你要學|就會|就好像|是在講|曾經學習過的|在講說|都會在講說|有包括什麼|所領導的這個|可以講說|把中間那一段|會有一些|進步的|你會越練)[，、]?$/;
+
+/**
+ * 清除單句內的發語詞（呃、嗯、啊）與冗餘過渡詞。
+ * @param {string} raw
+ * @returns {string}
+ */
+export function stripInlineOralFillers(raw) {
+  let t = String(raw ?? '').trim();
+  if (!t) return '';
+
+  // 若整句為純發語詞／過渡詞，回傳空字串由外層移除該 sent-X
+  if (STANDALONE_FILLER_RE.test(t)) return '';
+
+  // 清除未在引號內的「呃」「嗯」發語詞及其後緊隨的逗號／頓號
+  if (!/[「『][^」』]*[呃嗯]/.test(t)) {
+    t = t.replace(/[，、]?\s*[呃嗯]+[，、]?\s*/g, (match) => {
+      return match.startsWith('，') ? '，' : '';
+    });
+  }
+
+  // 清除句首無實義口語過渡詞
+  t = t.replace(/^(?:(?:好|那|好，那|那，好|呃|嗯|啊|喔|欸|就是說)[，、\s]+)+/g, '');
+  // 清除句中「，就是，」「，這個，」「，啊，」等純停頓贅詞
+  t = t.replace(/，(?:就是|這個|那個|啊|喔|欸)，/g, '，');
+  t = t.replace(/^(?:就是|這個|那個)，/g, '');
+  // 清除連續重複標點
+  t = t.replace(/，+/g, '，').replace(/^，+/, '');
+
+  if (STANDALONE_FILLER_RE.test(t) || /^[\s，。！？、；：「」『』（）—…\-]+$/.test(t)) {
+    return '';
+  }
+  return t.trim();
+}
+
+/**
+ * Stage 3A：移除獨立成句的發語詞／冗詞（呃、嗯、啊、好，那），並合併被 ASR 切碎的單詞與子句，
+ * 同時更新每個合併後 sent-X 與 paragraph 的 [start, end] 時間軸。
+ * @param {object} session
+ * @param {object} [options]
+ * @returns {{ session: object, removedFillerCount: number, mergedFragmentCount: number }}
+ */
+export function consolidateFillersAndFragments(session, options = {}) {
+  const maxMergedChars = Number(options.maxMergedChars ?? 38);
+  const updated = structuredClone(session);
+  let removedFillerCount = 0;
+  let mergedFragmentCount = 0;
+
+  const nextParagraphs = [];
+  for (const p of updated.paragraphs ?? []) {
+    // Step 1: 逐句清除發語詞，過濾掉變成空字串的純發語詞句，以及相鄰完全重複的短結巴句
+    const cleaned = [];
+    for (const s of p.sentences ?? []) {
+      const stripped = stripInlineOralFillers(s.text);
+      if (!stripped) {
+        removedFillerCount++;
+        continue;
+      }
+      const prev = cleaned[cleaned.length - 1];
+      if (prev) {
+        const prevCjk = normalizeCjkOnly(prev.text);
+        const curCjk = normalizeCjkOnly(stripped);
+        // 過濾像「你有修的話，」+「你有修的話呢，」或「都要，」+「都要，」這類相鄰口語重疊
+        if (prevCjk && curCjk && (prevCjk === curCjk || (prevCjk.length <= 5 && curCjk.startsWith(prevCjk)))) {
+          prev.text = stripped;
+          prev.end = Number(s.end ?? prev.end);
+          removedFillerCount++;
+          continue;
+        }
+      }
+      cleaned.push({ ...s, text: stripped });
+    }
+
+    // Step 2: 合併被 ASR 切碎的 1～3 字碎片與換氣斷開的半截子句
+    const merged = [];
+    for (let i = 0; i < cleaned.length; i++) {
+      const cur = { ...cleaned[i] };
+
+      while (i + 1 < cleaned.length) {
+        const next = cleaned[i + 1];
+        const curText = cur.text.trim();
+        const nextText = next.text.trim();
+        const curCjkLen = normalizeCjkOnly(curText).length;
+        const nextCjkLen = normalizeCjkOnly(nextText).length;
+        const curEndsTerminal = /[。！？…」』）]$/.test(curText);
+
+        if (curEndsTerminal) break;
+
+        // 條件 A：當前碎片極短（<= 3 字，如「傳，」「它，」「很」「而且，」「但是，」）
+        // 條件 B：下一句極短（<= 3 字，如「達出去，」「空觀，」「扎實，」）
+        // 條件 C：當前句尾為介詞／助動詞／換氣斷點（如「也希望能夠，」「也讓你們對於，」「平鋪直敘，」）
+        // 條件 D：兩句合計仍屬同一短分句（<= maxMergedChars 且中間間隔 <= 1.8 秒）
+        const gapSec = Number(next.start ?? 0) - Number(cur.end ?? 0);
+        const lastClause = curText.split(/[，；：]/).filter(Boolean).pop() ?? curText;
+        const lastClauseCjkLen = normalizeCjkOnly(lastClause).length;
+        const isTinyFragment = curCjkLen <= 3 || nextCjkLen <= 3;
+        const isBreathPauseBreak = BREATH_PAUSE_HEAD_RE.test(curText);
+        const maxGap = isTinyFragment || isBreathPauseBreak ? 4.5 : 1.8;
+        const canCombineClause =
+          curCjkLen + nextCjkLen <= maxMergedChars &&
+          gapSec <= maxGap &&
+          (isTinyFragment || isBreathPauseBreak || lastClauseCjkLen <= 8);
+
+        if (!canCombineClause) break;
+
+        // 判斷合併時是否應消去中間被 ASR 硬塞的碎逗號
+        const shouldStripJoinComma =
+          curCjkLen <= 2 ||
+          nextCjkLen <= 3 ||
+          isBreathPauseBreak ||
+          !/[，。！？、；：]$/.test(curText);
+
+        const head = shouldStripJoinComma ? curText.replace(/[，、]+$/, '') : curText;
+        let combined = `${head}${nextText}`;
+        // 順手清理合併後在同一子句中重複出現的冗詞（如「一個，一個算是」->「一個算是」）
+        combined = combined
+          .replace(/([一二三四五六七八九十]個)，?\1/g, '$1')
+          .replace(/對於，?(?:這個，?)?/g, '對於')
+          .replace(/對於([\u4e00-\u9fff]{1,6})，(?=[會有產生生起])/g, '對於$1')
+          .replace(/對你來講，?它，?/g, '對你來講，它')
+          .replace(/也希望能夠，?傳，?達出去/g, '也希望能夠傳達出去')
+          .replace(/你要學，?就會，?覺得，?/g, '你要學就會覺得');
+
+        cur.text = combined;
+        cur.end = Number(next.end ?? cur.end);
+        mergedFragmentCount++;
+        i++;
+      }
+
+      // 若分句在段落末尾或下一句已是新句，確保句尾有基本標點
+      if (!/[，。！？、；：…」』）]$/.test(cur.text)) {
+        cur.text = `${cur.text}，`;
+      }
+      merged.push(cur);
+    }
+
+    if (merged.length === 0) continue;
+
+    // 段落最後一句若以逗號結尾，改為句號
+    const lastSent = merged[merged.length - 1];
+    if (/，$/.test(lastSent.text)) {
+      lastSent.text = lastSent.text.replace(/，$/, '。');
+    }
+
+    p.sentences = merged;
+    p.start = Number(merged[0].start ?? p.start);
+    p.end = Number(merged[merged.length - 1].end ?? p.end);
+    nextParagraphs.push(p);
+  }
+
+  updated.paragraphs = nextParagraphs;
+  return {
+    session: updated,
+    removedFillerCount,
+    mergedFragmentCount,
+  };
+}
+
+/**
+ * 稽核講次是否仍殘留獨立發語詞句（呃、嗯、啊、好，那）、未加引號的句中「呃／嗯」，或 1 字破碎斷句。
+ * @param {object} session
+ * @returns {Array<{ sentenceId: string, text: string, type: string }>}
+ */
+export function auditOralFillerResidue(session) {
+  const issues = [];
+  for (const p of session?.paragraphs ?? []) {
+    for (const s of p.sentences ?? []) {
+      const text = String(s.text ?? '').trim();
+      const cjk = normalizeCjkOnly(text);
+      if (STANDALONE_FILLER_RE.test(text)) {
+        issues.push({ sentenceId: s.id, text, type: 'standalone-filler' });
+        continue;
+      }
+      if (!/[「『][^」』]*[呃嗯]/.test(text) && /[呃嗯]/.test(text)) {
+        issues.push({ sentenceId: s.id, text, type: 'inline-filler-uh-um' });
+        continue;
+      }
+      if (cjk.length === 1 && !/[。！？]$/.test(text)) {
+        issues.push({ sentenceId: s.id, text, type: 'single-char-fragment' });
+      }
+    }
+  }
+  return issues;
+}
+
