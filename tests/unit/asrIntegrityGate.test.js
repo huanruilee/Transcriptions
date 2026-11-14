@@ -15,6 +15,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { auditOralFillerResidue } from '../../scripts/lib/fluentPolishAudit.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.join(__dirname, '../..');
@@ -353,6 +354,13 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
         const cur = flatTexts[i].text;
         if (cur.length >= 6 && cur === flatTexts[i - 1].text && cur === flatTexts[i - 2].text) {
           stage5Errors.push(`${course}/${file} [${flatTexts[i].id}]: 3+ consecutive identical sentence hallucination loop "${cur}"`);
+        }
+      }
+
+      // 對已完成 Stage 3A 冗詞清除與碎句合併的講次，強制攔截殘留發語詞（呃、嗯、啊、好，那）與 1 字碎句
+      if (typeof data._meta?.removedFillerCount === 'number') {
+        for (const issue of auditOralFillerResidue(data)) {
+          stage5Errors.push(`${course}/${file} [${issue.sentenceId}]: Residual oral filler / fragment (${issue.type}): "${issue.text}"`);
         }
       }
     });

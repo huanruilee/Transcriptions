@@ -23,6 +23,7 @@ import { auditSessionWithLlm, mergeAuditFindings } from './lib/llmOmissionAudit.
 import {
   applyPolishProposals,
   cleanSessionTypography,
+  consolidateFillersAndFragments,
   ensureParagraphPunctuation,
   generateFluentPolishProposals,
 } from './lib/fluentPolishAudit.js';
@@ -31,6 +32,7 @@ import {
   mergeParagraphsByLayout,
   renderReadableMarkdown,
 } from './lib/paragraphLayoutPlanner.js';
+import { computeSourceDigest } from './content_overview_pipeline.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const COURSE_DIR = path.join(ROOT, 'courses', '菩薩就是這樣成佛', 'sessions');
@@ -310,10 +312,18 @@ async function processSingleSession(sessionNum) {
   );
   console.log(`[Stage 2] Whisper 幻覺修復: ${hallucinationRepairs.length} 句`);
 
-  // Stage 3: Fluent Polish + Deterministic Safety Guard
+  // Stage 3A: Deterministic filler removal & split-fragment consolidation
+  const {
+    session: consolidatedSession,
+    removedFillerCount,
+    mergedFragmentCount,
+  } = consolidateFillersAndFragments(repairedSession);
+  console.log(`[Stage 3A] 清除純發語詞句: ${removedFillerCount} 句 | 合併破碎短句: ${mergedFragmentCount} 處`);
+
+  // Stage 3B: Fluent Polish + Deterministic Safety Guard
   const auditReport = { reAsrResults };
   const { proposals, blockedByGuard } = await generateFluentPolishProposals({
-    session: repairedSession,
+    session: consolidatedSession,
     auditReport,
     endpoint: llmEndpoint,
     model: llmModel,
@@ -322,9 +332,9 @@ async function processSingleSession(sessionNum) {
     concurrency: 1,
     timeoutMs: 300000,
   });
-  console.log(`[Stage 3] 流暢修訂通過安全閘門: ${proposals.length} 句 | 安全閘門攔截: ${blockedByGuard.length} 句`);
+  console.log(`[Stage 3B] 流暢修訂通過安全閘門: ${proposals.length} 句 | 安全閘門攔截: ${blockedByGuard.length} 句`);
 
-  let finalSession = applyPolishProposals(repairedSession, proposals);
+  let finalSession = applyPolishProposals(consolidatedSession, proposals);
   finalSession = cleanSessionTypography(finalSession);
 
   // Stage 4: Paragraph Layout, Gap Punctuation & Numbered Headings
@@ -351,6 +361,51 @@ async function processSingleSession(sessionNum) {
     apiKey: llmApiKey,
   });
 
+  // Stage 6: Sync contentOverview evidence quotes & sourceDigest after text and sentence IDs are finalized
+  if (finalSession.contentOverview) {
+    const sentMap = new Map();
+    for (const p of finalSession.paragraphs ?? []) {
+      for (const s of p.sentences ?? []) {
+        sentMap.set(s.id, s);
+      }
+    }
+    const allRemainingSents = [...sentMap.values()];
+    for (const key of ['mainPoints', 'discussionTopics', 'sections', 'referenceViews']) {
+      for (const item of finalSession.contentOverview[key] ?? []) {
+        if (!Array.isArray(item.evidence)) continue;
+        item.evidence = item.evidence
+          .map((ev) => {
+            let validIds = (ev.sentenceIds ?? []).filter((id) => sentMap.has(id));
+            if (validIds.length === 0 && typeof ev.timestamp === 'number' && allRemainingSents.length > 0) {
+              // 若原引用的短碎句已被合併入前一句，依時間戳綁定合併後的宿主句
+              let best = allRemainingSents[0];
+              let bestDist = Infinity;
+              for (const s of allRemainingSents) {
+                const dist = ev.timestamp >= s.start && ev.timestamp <= s.end
+                  ? 0
+                  : Math.min(Math.abs(ev.timestamp - s.start), Math.abs(ev.timestamp - s.end));
+                if (dist < bestDist) {
+                  bestDist = dist;
+                  best = s;
+                }
+              }
+              validIds = [best.id];
+            }
+            if (validIds.length === 0) return null;
+            const first = sentMap.get(validIds[0]);
+            return {
+              ...ev,
+              sentenceIds: validIds,
+              timestamp: first.start,
+              quote: first.text,
+            };
+          })
+          .filter(Boolean);
+      }
+    }
+    finalSession.contentOverview.sourceDigest = computeSourceDigest(finalSession);
+  }
+
   const headingCount = (finalSession.paragraphs ?? []).filter((p) => p.heading).length;
   finalSession.lastUpdated = formatNow();
   finalSession._meta = {
@@ -359,9 +414,11 @@ async function processSingleSession(sessionNum) {
     layoutStandard: 'shiliang-32-1-pdf',
     reAsrWindowsChecked: windows.length,
     hallucinationsRepaired: hallucinationRepairs.length,
+    removedFillerCount,
+    mergedFragmentCount,
     fluentPolishedCount: proposals.length,
     guardBlockedCount: blockedByGuard.length,
-    proofreadSummary: `全流程校對完成：名相/語意重辨識 ${windows.length} 區、修復幻覺 ${hallucinationRepairs.length} 處、安全閘門修訂 ${proposals.length} 句（攔截 ${blockedByGuard.length}）、重組 ${finalSession.paragraphs.length} 段與 ${headingCount} 個編號小標。`,
+    proofreadSummary: `全流程校對完成：名相/語意重辨識 ${windows.length} 區、修復幻覺 ${hallucinationRepairs.length} 處、清除發語詞 ${removedFillerCount} 句、合併碎句 ${mergedFragmentCount} 處、安全閘門修訂 ${proposals.length} 句（攔截 ${blockedByGuard.length}）、重組 ${finalSession.paragraphs.length} 段與 ${headingCount} 個編號小標。`,
   };
 
   mkdirSync(EVIDENCE_DIR, { recursive: true });
