@@ -418,8 +418,8 @@
           </header>
 
           <StudyScaffoldingPanel
-            v-if="currentSessionData?.studyScaffolding"
-            :scaffolding="currentSessionData.studyScaffolding"
+            v-if="currentStudyScaffolding"
+            :scaffolding="currentStudyScaffolding"
             v-model:reading-mode="scaffoldingReadingMode"
             @seek="seekToTime"
           />
@@ -984,6 +984,7 @@ function toggleStudyGuideDrawer() {
   isStudyGuideOpen.value = !isStudyGuideOpen.value;
 }
 
+const currentStudyScaffolding = ref<any>(null);
 const scaffoldingReadingMode = ref<'full' | 'essence'>('full');
 const currentDialogueTranscriptUrl = computed(() => {
   const rel = currentSessionInfo.value?.dialogueTranscriptUrl;
@@ -1961,6 +1962,7 @@ async function loadSession(sessionId: string) {
       : 0;
     currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
+    currentStudyScaffolding.value = data.studyScaffolding || null;
     currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
     currentTocProjection.value = sessionTocProjection(data.qualityReview,sessionId);
     currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
