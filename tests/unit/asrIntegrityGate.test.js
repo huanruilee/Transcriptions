@@ -367,4 +367,47 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
 
     assert.equal(stage5Errors.length, 0, `Found ${stage5Errors.length} Stage 5 quality gate violations:\n${stage5Errors.slice(0, 10).join('\n')}`);
   });
+
+  await t.test('8. Proofread Study-Group Pilot (2025釋量論第二品大組共學/session_46.json) Non-Regression Gate', () => {
+    const s46Path = path.join(COURSES_ROOT, '2025釋量論第二品大組共學/sessions/session_46.json');
+    const data = JSON.parse(readFileSync(s46Path, 'utf8'));
+    const headings = (data.paragraphs || []).filter(p => p.heading && p.heading.trim().length > 0);
+    assert.ok(headings.length >= 25, `Expected >= 25 thematic headings in session_46.json, got ${headings.length}`);
+
+    const FORBIDDEN_SG2025_TERMS = [
+      { pattern: /無我會/, suggestion: '無我慧' },
+      { pattern: /寄託之道|寫託|洩脫/, suggestion: '解脫之道 / 解脫' },
+      { pattern: /他中提出/, suggestion: '他宗提出' },
+      { pattern: /至終/, suggestion: '自宗' },
+      { pattern: /題杆/, suggestion: '提綱' },
+      { pattern: /心與靜|直取靜/, suggestion: '心與境 / 執取境' },
+      { pattern: /心事的男生/, suggestion: '心識之能生' },
+      { pattern: /眼根之|耳根之/, suggestion: '眼根知 / 耳根知' },
+      { pattern: /有預知/, suggestion: '猶豫知' },
+      { pattern: /四億支/, suggestion: '伺意知' },
+      { pattern: /執識為神/, suggestion: '執繩為蛇' },
+      { pattern: /南謀/, suggestion: '南無' },
+      { pattern: /大眾請合唱|大家請放上/, suggestion: '大眾請合掌 / 大家請放掌' },
+      { pattern: /適量論/, suggestion: '《釋量論》' },
+      { pattern: /課主傑/, suggestion: '克主傑' },
+      { pattern: /對質/, suggestion: '對治' },
+      { pattern: /吾我會|劇足/, suggestion: '無我慧 / 具足' },
+    ];
+
+    const errs = [];
+    for (const p of data.paragraphs || []) {
+      for (const s of p.sentences || []) {
+        if (!s.text || s.text.trim() === '') {
+          errs.push(`Empty sentence text in ${s.id}`);
+          continue;
+        }
+        for (const { pattern, suggestion } of FORBIDDEN_SG2025_TERMS) {
+          if (pattern.test(s.text)) {
+            errs.push(`[${s.id}]: Forbidden term "${s.text.match(pattern)[0]}" (Expected: "${suggestion}") in "${s.text}"`);
+          }
+        }
+      }
+    }
+    assert.equal(errs.length, 0, `Found ${errs.length} session_46.json corruption violations:\n${errs.slice(0, 10).join('\n')}`);
+  });
 });
