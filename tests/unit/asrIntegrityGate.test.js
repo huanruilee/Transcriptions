@@ -123,7 +123,7 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
 
     sessions.forEach(({ file, fullPath }) => {
       const data = JSON.parse(readFileSync(fullPath, 'utf8'));
-      const isConverted = data._meta && data._meta.engine === 'whisper-large-v3-turbo';
+      const isConverted = data._meta && ['whisper-large-v3-turbo', 'mlx-whisper-large-v3'].includes(data._meta.engine);
       if (!isConverted) return;
 
       convertedCount++;
@@ -225,7 +225,7 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
     sessions.forEach(({ file, fullPath }) => {
       // Exclude legacy ungrounded drafts until converted & cleaned
       const data = JSON.parse(readFileSync(fullPath, 'utf8'));
-      const isConverted = data._meta && data._meta.engine === 'whisper-large-v3-turbo';
+      const isConverted = data._meta && ['whisper-large-v3-turbo', 'mlx-whisper-large-v3'].includes(data._meta.engine);
       if (!isConverted) return;
 
       (data.paragraphs || []).forEach((p, pIdx) => {
@@ -288,5 +288,75 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
     // Check session_99B.json content
     const sessionData = JSON.parse(readFileSync(session99BPath, 'utf8'));
     assert.ok(sessionData.paragraphs && sessionData.paragraphs.length > 50, 'session_99B.json must contain valid paragraphs');
+  });
+
+  await t.test('7. Stage 5 Completed Course Gate: Sentence ID Uniqueness, Zero Punctuation-Only Sentences, Zero Hallucination Loops, and Dharma Terminology Non-Regression', () => {
+    const STAGE5_COURSES = new Set(['菩薩就是這樣成佛', '釋量論第二品']);
+    const PUNCT_ONLY_RE = /^[\s，。！？、；：「」『』（）—…\-]+$/;
+    const STAGE5_FORBIDDEN_TERMS = [
+      { pattern: /\uFFFD/, suggestion: '不得含有 Unicode 替換字元 (U+FFFD)' },
+      { pattern: /【⚠️|無法辨識原意|待確認/, suggestion: '已完修課程不得殘留待審核佔位符' },
+      { pattern: /佈施/, suggestion: '布施' },
+      { pattern: /嗔/, suggestion: '瞋' },
+      { pattern: /禪提/, suggestion: '羼提' },
+      { pattern: /聖意抉擇/, suggestion: '勝義抉擇' },
+      { pattern: /與其事理論|語學士定論|語邪實地論/, suggestion: '《瑜伽師地論》' },
+      { pattern: /調舉/, suggestion: '掉舉' },
+      { pattern: /預界定/, suggestion: '欲界定' },
+      { pattern: /文所成慧/, suggestion: '聞所成慧' },
+      { pattern: /思索成慧/, suggestion: '思所成慧' },
+      { pattern: /無惡根本定|無惡的根本定/, suggestion: '無二根本定' },
+      { pattern: /無分別制/, suggestion: '無分別智' },
+      { pattern: /圓空性/, suggestion: '緣空性' },
+    ];
+
+    const stage5Errors = [];
+    const targetSessions = sessions.filter(s => STAGE5_COURSES.has(s.course));
+    assert.ok(targetSessions.length >= 58, `Expected at least 58 Stage 5 sessions, got ${targetSessions.length}`);
+
+    targetSessions.forEach(({ course, file, fullPath }) => {
+      const data = JSON.parse(readFileSync(fullPath, 'utf8'));
+      const seenIds = new Set();
+      const flatTexts = [];
+
+      (data.paragraphs || []).forEach((p, pIdx) => {
+        if (p.heading) {
+          for (const { pattern, suggestion } of STAGE5_FORBIDDEN_TERMS) {
+            if (pattern.test(p.heading)) {
+              stage5Errors.push(`${course}/${file} [p_${pIdx} heading]: Forbidden term "${p.heading.match(pattern)[0]}" (Expected: "${suggestion}")`);
+            }
+          }
+        }
+        (p.sentences || []).forEach((s) => {
+          if (!s.id || typeof s.id !== 'string') {
+            stage5Errors.push(`${course}/${file} [p_${pIdx}]: Missing sentence id`);
+          } else if (seenIds.has(s.id)) {
+            stage5Errors.push(`${course}/${file} [${s.id}]: Duplicate sentence id`);
+          } else {
+            seenIds.add(s.id);
+          }
+
+          if (PUNCT_ONLY_RE.test(s.text)) {
+            stage5Errors.push(`${course}/${file} [${s.id}]: Punctuation-only sentence "${s.text}"`);
+          }
+
+          for (const { pattern, suggestion } of STAGE5_FORBIDDEN_TERMS) {
+            if (pattern.test(s.text)) {
+              stage5Errors.push(`${course}/${file} [${s.id}]: Forbidden term "${s.text.match(pattern)[0]}" (Expected: "${suggestion}") in "${s.text}"`);
+            }
+          }
+          flatTexts.push({ id: s.id, text: s.text });
+        });
+      });
+
+      for (let i = 2; i < flatTexts.length; i++) {
+        const cur = flatTexts[i].text;
+        if (cur.length >= 6 && cur === flatTexts[i - 1].text && cur === flatTexts[i - 2].text) {
+          stage5Errors.push(`${course}/${file} [${flatTexts[i].id}]: 3+ consecutive identical sentence hallucination loop "${cur}"`);
+        }
+      }
+    });
+
+    assert.equal(stage5Errors.length, 0, `Found ${stage5Errors.length} Stage 5 quality gate violations:\n${stage5Errors.slice(0, 10).join('\n')}`);
   });
 });
