@@ -167,3 +167,15 @@ gh pr merge PR_NUMBER --merge
 | 1.0 | 2026-10-23 | 統一原話優先、精煉另軌、待閱校可發布、保真追溯與驗證交接；取代舊 SOP 相衝突的流程敘述 |
 
 低 Token 工作流程仍為本機 Draft；PR #271 的 ASR 局部重辨識與 PR #281 的測試整理在本文件建立時仍為獨立 Draft，不當作 main 已具備能力。任務若需採用，先核對實際合併狀態與程式。
+
+---
+
+## 八、學習鷹架（`studyScaffolding`）底本與時間軸強制規範（v1.5 試辦定版）
+
+為杜絕偈頌張冠李戴與時間戳估算偏差，產製或更新 `sessions/session_*.json` 中的 `studyScaffolding` 時，必須遵守以下兩項紅線：
+
+1. **偈頌原文必須逐字取自課程底本（禁止模型憑記憶補寫）**：
+   - `studyScaffolding.verses` 內每一首偈頌的中文譯文，必須逐字複製自該課程對應的底本或講記原文（如 `publications/lecture_*_dialogue_transcript.md` 或 `source_text/page_*.txt`），嚴禁由模型憑記憶生成或改寫。
+2. **時間戳必須從定稿逐字稿實際句子反查（禁止估算填寫）**：
+   - `verseMappings`、`compassMaps` 與 `pauseBoxes` 的所有時間戳（秒數），必須在逐字稿定稿後，從 `sessions/session_*.json` 內實際對應句子的 `start` 時間程式化反查取得，不得憑印象或分段比例估算。
+   - 提交 PR 前必須跑過 `npm run summaries:audit`、`npm test` 與 `npm run test:v2`，並在部署至 GitHub Pages 後實地開啟線上網頁抽查確認。
