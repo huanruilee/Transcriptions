@@ -159,7 +159,8 @@ def md_to_html(md_path: Path) -> Path:
             return f'<h2 id="{hid}">{inner}</h2>'
         if 'class="ts-btn"' in inner:
             sec_counter[0] += 1
-            return f'<h2 id="sec-{sec_counter[0]}">{inner}</h2>'
+            back_toc = ' <a class="back-toc-link" href="#sec-toc">↑ 目錄</a>' if md_path.stem.endswith("_dialogue_transcript") else ""
+            return f'<h2 id="sec-{sec_counter[0]}">{inner}{back_toc}</h2>'
         return f'<h2>{inner}</h2>'
     content = re.sub(r'^##\s+(.+)$', replace_h2, content, flags=re.MULTILINE)
     content = re.sub(r'^#\s+(.+)$', r'<h1>\1</h1>', content, flags=re.MULTILINE)
@@ -453,6 +454,17 @@ def md_to_html(md_path: Path) -> Path:
     .toc-anchor-link:hover {{
       color: #dc2626;
       border-bottom-style: solid;
+    }}
+    .back-toc-link {{
+      float: right;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #64748b;
+      text-decoration: none;
+      margin-top: 4px;
+    }}
+    .back-toc-link:hover {{
+      color: #991b1b;
     }}
     .ts-btn {{
       background: #dc2626;
