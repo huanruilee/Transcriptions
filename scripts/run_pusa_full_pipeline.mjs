@@ -81,6 +81,7 @@ const llmModel =
 const llmApiKey = args.get('--llm-api-key') || process.env.LLM_API_KEY || eneuralKey || '';
 const paddingSeconds = Number(args.get('--padding') || 2.0);
 const dryRun = args.get('--dry-run') === 'true';
+const skipReasr = args.get('--skip-reasr') === 'true';
 
 function formatNow() {
   const d = new Date();
@@ -274,43 +275,55 @@ async function processSingleSession(sessionNum) {
   const t0 = Date.now();
   console.log(`\n==================== 開始處理第 ${sid} 講 (${session.title}) ====================`);
 
-  // Stage 1: Rule + LLM Omission Audit + GX10 Re-ASR
-  const ruleFindings = auditSessionDharmaTerms(session);
-  const llmFindings = await auditSessionWithLlm({
-    session,
-    endpoint: llmEndpoint,
-    model: llmModel,
-    apiKey: llmApiKey,
-  });
-  const findings = mergeAuditFindings(ruleFindings, llmFindings);
-  const windows = buildReAsrWindows(findings, { paddingSeconds });
-  console.log(`[Stage 1] 規則偵測 ${ruleFindings.length} 句 + LLM 偵測 ${llmFindings.length} 句 -> 合併 ${windows.length} 個重辨識視窗`);
+  let findings = [];
+  let windows = [];
+  let reAsrResults = [];
+  let repairedSession = session;
+  let hallucinationRepairs = [];
 
-  const youtubeUrl = session.youtubeUrl
-    || (session.youtubeVideoId ? `https://www.youtube.com/watch?v=${session.youtubeVideoId}` : null);
-  const rawReAsr = youtubeUrl && windows.length > 0
-    ? runRemoteWhisperWindows({ youtubeUrl, windows })
-    : [];
+  if (!skipReasr) {
+    // Stage 1: Rule + LLM Omission Audit + GX10 Re-ASR
+    const ruleFindings = auditSessionDharmaTerms(session);
+    const llmFindings = await auditSessionWithLlm({
+      session,
+      endpoint: llmEndpoint,
+      model: llmModel,
+      apiKey: llmApiKey,
+    });
+    findings = mergeAuditFindings(ruleFindings, llmFindings);
+    windows = buildReAsrWindows(findings, { paddingSeconds });
+    console.log(`[Stage 1] 規則偵測 ${ruleFindings.length} 句 + LLM 偵測 ${llmFindings.length} 句 -> 合併 ${windows.length} 個重辨識視窗`);
 
-  const reAsrResults = rawReAsr.map((r) => {
-    const win = windows.find((w) => w.windowId === r.windowId);
-    const recoveredTerms = (win?.expectedTerms ?? []).filter((term) => r.guidedText.includes(term));
-    return {
-      ...r,
-      sentenceIds: win?.sentenceIds ?? [],
-      expectedTerms: win?.expectedTerms ?? [],
-      recoveredTerms,
-    };
-  });
+    const youtubeUrl = session.youtubeUrl
+      || (session.youtubeVideoId ? `https://www.youtube.com/watch?v=${session.youtubeVideoId}` : null);
+    const rawReAsr = youtubeUrl && windows.length > 0
+      ? runRemoteWhisperWindows({ youtubeUrl, windows })
+      : [];
 
-  // Stage 2: Repair Whisper hallucinations before polishing
-  const { session: repairedSession, repaired: hallucinationRepairs } = repairHallucinationsFromReAsr(
-    session,
-    findings,
-    reAsrResults,
-    windows,
-  );
-  console.log(`[Stage 2] Whisper 幻覺修復: ${hallucinationRepairs.length} 句`);
+    reAsrResults = rawReAsr.map((r) => {
+      const win = windows.find((w) => w.windowId === r.windowId);
+      const recoveredTerms = (win?.expectedTerms ?? []).filter((term) => r.guidedText.includes(term));
+      return {
+        ...r,
+        sentenceIds: win?.sentenceIds ?? [],
+        expectedTerms: win?.expectedTerms ?? [],
+        recoveredTerms,
+      };
+    });
+
+    // Stage 2: Repair Whisper hallucinations before polishing
+    const repairOut = repairHallucinationsFromReAsr(
+      session,
+      findings,
+      reAsrResults,
+      windows,
+    );
+    repairedSession = repairOut.session;
+    hallucinationRepairs = repairOut.repaired;
+    console.log(`[Stage 2] Whisper 幻覺修復: ${hallucinationRepairs.length} 句`);
+  } else {
+    console.log('[Stage 1-2] 已略過（--skip-reasr=true，沿用已完成之重辨識與名詞定稿）');
+  }
 
   // Stage 3A: Deterministic filler removal & split-fragment consolidation
   const {
