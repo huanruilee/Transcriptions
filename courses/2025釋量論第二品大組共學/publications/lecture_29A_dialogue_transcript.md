@@ -13,11 +13,11 @@
 
 ## 【本講核心偈頌（《釋量論・成量品》）】
 
-> 「**修彼已說道，轉依雖轉依，如道過復起，非爾無能故。**」（第 206 偈）
+> 「**修彼已說道，轉依；雖轉依，如道過復起，非爾無能故。**」（第 206 偈）
 >
-> 「**識是取境法，如有而取彼；彼所有體性，亦是此能生。是此性從此，由餘緣歧誤，遮止觀待緣，不堅如蛇覺。**」（第 207 偈前段）
+> 「**識是取境法，如有而取彼；彼所有體性，亦是此能生。是此性；從此，由餘緣歧誤，遮止觀待緣，不堅如蛇覺。**」（第 207 偈前段）
 
-<table class="learner-table"><thead><tr><th>《釋量論》偈頌原句</th><th>白話核心義理</th><th>對應本講討論與開示</th></tr></thead><tbody><tr><td><strong>修彼已說道，轉依雖轉依，如道過復起，非爾無能故。</strong>（206）</td><td>修習無我慧獲解脫後，煩惱不會像「本無道而後生道」那樣再次生起，因已令煩惱無力再生。</td><td><a class="toc-anchor-link" href="#sec-2">總攝提綱一</a></td></tr><tr><td><strong>識是取境法，如有而取彼</strong>（207）</td><td>心識具有「如實執取對境」的特性（<strong>心的自性</strong>）。</td><td><a class="toc-anchor-link" href="#sec-3">第 1 題</a>・<a class="toc-anchor-link" href="#sec-22">第 3 題</a></td></tr><tr><td><strong>彼所有體性，亦是此能生。是此性</strong>（207）</td><td>境能成為心識之能生（<strong>境的自性</strong>），心境二者相配對。</td><td><a class="toc-anchor-link" href="#sec-3">第 1 題</a>・<a class="toc-anchor-link" href="#sec-6">法師開示（一）</a></td></tr><tr><td><strong>從此，由餘緣歧誤，遮止觀待緣，不堅如蛇覺。</strong>（207）</td><td>受錯亂因緣影響而生的顛倒認知（如執繩為蛇、我執）不堅固，見實相即被遮止；反之無我慧無法被對治分離（心自性光明）。</td><td><a class="toc-anchor-link" href="#sec-8">第 2 題</a>・<a class="toc-anchor-link" href="#sec-10">法師開示（二）</a></td></tr></tbody></table>
+<table class="learner-table"><thead><tr><th>《釋量論》偈頌原句</th><th>白話核心義理</th><th>對應本講討論與開示</th></tr></thead><tbody><tr><td><strong>修彼已說道，轉依；雖轉依，如道過復起，非爾無能故。</strong>（206）</td><td>修習無我慧獲解脫後，煩惱不會像「本無道而後生道」那樣再次生起，因已令煩惱無力再生。</td><td><a class="toc-anchor-link" href="#sec-2">總攝提綱一</a></td></tr><tr><td><strong>識是取境法，如有而取彼</strong>（207）</td><td>心識具有「如實執取對境」的特性（<strong>心的自性</strong>）。</td><td><a class="toc-anchor-link" href="#sec-3">第 1 題</a>・<a class="toc-anchor-link" href="#sec-22">第 3 題</a></td></tr><tr><td><strong>彼所有體性，亦是此能生。是此性</strong>（207）</td><td>境能成為心識之能生（<strong>境的自性</strong>），心境二者相配對。</td><td><a class="toc-anchor-link" href="#sec-3">第 1 題</a>・<a class="toc-anchor-link" href="#sec-6">法師開示（一）</a></td></tr><tr><td><strong>從此，由餘緣歧誤，遮止觀待緣，不堅如蛇覺。</strong>（207）</td><td>受錯亂因緣影響而生的顛倒認知（如執繩為蛇、我執）不堅固，見實相即被遮止；反之無我慧無法被對治分離（心自性光明）。</td><td><a class="toc-anchor-link" href="#sec-8">第 2 題</a>・<a class="toc-anchor-link" href="#sec-10">法師開示（二）</a></td></tr></tbody></table>
 
 ## 【二、三大討論題綱（「學員／法師」雙時間軸）與全篇目錄】
 
