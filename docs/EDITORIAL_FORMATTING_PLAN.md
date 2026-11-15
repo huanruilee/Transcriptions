@@ -77,10 +77,10 @@
 
 ### 1. LLM 服務與備援優先順序（eNeural 優先於 GX10 Qwen）
 - 針對校對潤飾及導讀摘要備援：
-  1. **eNeural（優先）**：`https://agents.eneural.ai/v1`（模型 `glm53-flash`），金鑰由環境變數 `ENEURAL_API_KEY`（或專案根目錄受 `.gitignore` 保護的 `.env`）讀取，呼叫時須傳入 `chat_template_kwargs: { enable_thinking: false }`。速度較快，MiniMax 額度不足或離線時優先使用 eNeural。
+  1. **eNeural（優先）**：`https://agents.eneural.ai/v1/chat/completions`（模型 `glm53-flash`），統一透過共用模組 `scripts/lib/eneuralClient.mjs` 以 **Node IPv4 SSE 串流**（`family: 4`、`stream: true`、`reasoning_effort: 'none'`、`response_format: { type: 'json_object' }`）呼叫；金鑰由環境變數 `ENEURAL_API_KEY`（或 `/Users/henry/.hermes/.env`）讀取。實戰證明直接串流可完全避開 `hermes chat` CLI 的 `state.db` 鎖定與 IPv6 逾時問題。
   2. **GX10 本地 vLLM（次要備援）**：`http://100.113.144.100:18765/v1`（模型 `nvidia/Qwen3.8-27B-NVFP4`，透過 Tailscale 免金鑰存取）。僅在 eNeural 無法連線或無金鑰時作為備援。
   3. 導讀摘要 `content_overview_pipeline.mjs` 預設仍先嘗試 MiniMax；若遇 HTTP 500/429/2056 額度限制，自動依「**eNeural → GX10 Qwen**」順序備援。
-- **單線程／低併發限制**：呼叫 Local model（GX10）或 eNeural model 時，**同一時間只跑 1 個 process / 1 個請求（`concurrency = 1`）**，避免多路並發造成推論排隊或逾時。
+- **可控並發與最小差異輸出**：批次腳本建議採 `fixes + breaks` 最小差異 JSON（僅回傳修改句子與段落起點），配合 `eneuralClient.mjs` 的 `runPool` 控制並發（eNeural IPv4 SSE 建議 `concurrency = 2～3`；本地 GX10 維持 `concurrency = 1`）。
 
 ### 2. 局部重辨識音訊服務（Whisper Re-ASR）
 - 固定透過 SSH 連線 GX10（`100.113.144.100`）以 `yt-dlp` + `ffmpeg`（`-ar 16000 -ac 1`）切出目標時間窗音訊，逐段單線程呼叫本機 CUDA Whisper（`http://127.0.0.1:8010/v1/audio/transcriptions`，`language=zh`），並附帶臺灣正體提示詞。
