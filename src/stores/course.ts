@@ -19,6 +19,7 @@ export interface SessionMeta {
   sourceRebuildInReader?: boolean;
   audioCalibrationOverlay?: string;
   audioCalibrationOverlayDigest?: string;
+  studyGuidePage?: string;
 }
 
 export interface TOCNode {
