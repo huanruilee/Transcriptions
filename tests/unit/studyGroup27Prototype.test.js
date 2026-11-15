@@ -257,3 +257,59 @@ test('session 23 (12下) syncs 5 discussionQuestions to toc.json, preserves App.
   assert.match(html12B, /福稱大師/);
   assert.doesNotMatch(html12B, /吳稱|扶撐|扶稱|福昌/);
 });
+
+test('all 47 study-group sessions sync curated questions to toc.json and maintain clean complete study guides', () => {
+  const course = readJson(`${COURSE_PATH}/course.json`);
+  const toc = readJson(`${COURSE_PATH}/toc.json`);
+  const validSpeakers = new Set(['如性法師', '學員', '維那/主持']);
+
+  assert.equal(course.sessions.length, 47);
+
+  for (const meta of course.sessions) {
+    const sid = meta.sessionId;
+    const rawId = String(meta.displaySessionId || sid).trim();
+    const code = rawId.endsWith('上')
+      ? `${rawId.slice(0, -1).padStart(2, '0')}A`
+      : rawId.endsWith('下')
+        ? `${rawId.slice(0, -1).padStart(2, '0')}B`
+        : /^\d+$/.test(rawId)
+          ? rawId.padStart(3, '0')
+          : rawId;
+
+    const session = readJson(`${COURSE_PATH}/sessions/session_${sid}.json`);
+    const tocNodes = toc.nodes.filter((n) => n.sessionId === sid);
+    const qs = session.discussionQuestions || [];
+
+    if (sid === '01') {
+      assert.equal(tocNodes.length, 5, 'session_01 should expose 5 curated TOC nodes');
+    } else {
+      assert.ok(qs.length >= 3 && qs.length <= 7, `session_${sid} should have 3-7 curated questions, got ${qs.length}`);
+      assert.equal(tocNodes.length, qs.length, `session_${sid} toc node count must match discussionQuestions`);
+      for (const q of qs) {
+        assert.match(q.displayQuestion || '', /？$/, `session_${sid} question ${q.id} must end with ？`);
+      }
+    }
+
+    for (const p of session.paragraphs || []) {
+      assert.ok(validSpeakers.has(p.speaker), `session_${sid} paragraph ${p.id} has invalid speaker: ${p.speaker}`);
+      for (const s of p.sentences || []) {
+        assert.ok(validSpeakers.has(s.speaker), `session_${sid} sentence ${s.id} has invalid speaker: ${s.speaker}`);
+      }
+    }
+
+    const md = fs.readFileSync(path.join(ROOT, `${COURSE_PATH}/publications/lecture_${code}_study_guide.md`), 'utf8');
+    assert.doesNotMatch(md, /\ufffd/, `lecture_${code}_study_guide.md contains replacement char`);
+    assert.doesNotMatch(md, /watch？v=/, `lecture_${code}_study_guide.md contains full-width URL question mark`);
+
+    const heads = [...md.matchAll(/^###\s+(.+)$/gm)].map((m) => m[1].trim());
+    assert.equal(new Set(heads).size, heads.length, `lecture_${code}_study_guide.md has duplicate H3 headings`);
+
+    const allSents = (session.paragraphs || []).flatMap((p) => p.sentences || []);
+    const duration = allSents.at(-1)?.end || 0;
+    const timestamps = [...md.matchAll(/#t=(\d+)/g)].map((m) => Number(m[1]));
+    const lastTs = timestamps.length ? Math.max(...timestamps) : 0;
+    if (duration > 0) {
+      assert.ok(lastTs >= duration * 0.70, `lecture_${code}_study_guide.md covers only ${lastTs}/${duration}s (<70%)`);
+    }
+  }
+});
