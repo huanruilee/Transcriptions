@@ -235,3 +235,25 @@ test('published candidate sentences retain the original ASR in rawText', () => {
   assert.equal(sentence.rawText, '敬禮法师就会同学大家晚安');
   assert.notEqual(sentence.text, sentence.rawText);
 });
+
+test('session 23 (12下) syncs 5 discussionQuestions to toc.json, preserves App.vue speaker mapping, and cleans lecture_12B_study_guide.html', () => {
+  const toc = readJson(`${COURSE_PATH}/toc.json`);
+  const session23 = readJson(`${COURSE_PATH}/sessions/session_23.json`);
+  const toc23 = toc.nodes.filter((node) => node.sessionId === '23');
+  assert.equal(toc23.length, 5);
+  assert.deepEqual(
+    toc23.map((n) => ({ id: n.id, title: n.title, timestamp: n.timestamp })),
+    session23.discussionQuestions.map((q) => ({ id: q.id, title: q.displayQuestion, timestamp: q.start })),
+  );
+
+  const appVue = fs.readFileSync(path.join(ROOT, 'src/App.vue'), 'utf8');
+  assert.match(appVue, /speaker:\s*p\.speaker\s*\|\|\s*null/);
+  assert.match(appVue, /usedAnchorKeys/);
+
+  const html12B = fs.readFileSync(
+    path.join(ROOT, `${COURSE_PATH}/publications/lecture_12B_study_guide.html`),
+    'utf8',
+  );
+  assert.match(html12B, /福稱大師/);
+  assert.doesNotMatch(html12B, /吳稱|扶撐|扶稱|福昌/);
+});

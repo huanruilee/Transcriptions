@@ -2015,12 +2015,28 @@ async function loadSession(sessionId: string) {
     let sentCounter = 0;
     let verbatimCounter = 0;
     expandedVerbatimParagraphs.value = {};
+    const usedAnchorKeys = new Set<string>();
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
       const firstStart = p.sentences?.[0]?.start ?? p.sentences?.[0]?.start_time ?? 0;
-      const anchorNode = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const rawAnchor = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const qObj = questionFor(p.questionId || null);
+      let anchorNode: any = null;
+      if (rawAnchor) {
+        const key = `${rawAnchor.title}@${rawAnchor.timestamp}`;
+        if (
+          !usedAnchorKeys.has(key) &&
+          rawAnchor.title !== p.heading &&
+          rawAnchor.title !== qObj?.displayQuestion &&
+          rawAnchor.title !== qObj?.question
+        ) {
+          usedAnchorKeys.add(key);
+          anchorNode = rawAnchor;
+        }
+      }
       const paraId = p.id || `para-${sentCounter}`;
       return {
         id: paraId,
+        speaker: p.speaker || null,
         questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
@@ -2031,6 +2047,7 @@ async function loadSession(sessionId: string) {
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
           end_time: s.end ?? s.end_time ?? 0,
+          speaker: s.speaker || p.speaker || null,
           text: s.text || '',
           treatiseQuote: s.treatiseQuote ?? false,
           verseAnnotations: verseAnnotations.value[s.id] || [],
