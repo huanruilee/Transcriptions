@@ -63,6 +63,7 @@
     "dev": "npx serve dist -p 9090",
     "start": "npx serve dist -p 9090",
     "test:sinianzhu:release": "REQUIRE_SINIANZHU_RELEASE=1 node --test tests/unit/siNianZhuReleaseGate.test.js",
+    "test:sinianzhu:remediation": "node --test tests/unit/sinianzhuResidualRemediation.test.js",
     "audit:sinianzhu": "python3 scripts/audit_sinianzhu_release.py",
     "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check",
     "test:reader-smoke": "playwright test --config playwright.reader.config.ts"
