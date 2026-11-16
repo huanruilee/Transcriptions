@@ -220,6 +220,8 @@ ok 5 - findSentenceIndexByTime finds correct index using O(log N) binary search
 
 **Byte-identical** — 部署版本與 repo working tree 一致。
 
+> ⚠️ **服務位置已遷移（2026-11-13 標註）**：上表 Live 端點為 2026-08 當時的歷史紀錄。現況靜態網站由 launchd `com.henry.transcriptions-web` 常駐於 **Henry 的 Mac**（`http://100.84.47.24:9090`），gx10 上已無 9090 服務。驗證數據維持原始紀錄不予修改。
+
 ---
 
 ## 5. 與前次 QA 報告對比（核心指標）

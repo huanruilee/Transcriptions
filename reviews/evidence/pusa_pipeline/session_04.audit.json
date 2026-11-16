@@ -1,0 +1,378 @@
+{
+  "findings": [],
+  "windows": [],
+  "reAsrResults": [],
+  "hallucinationRepairs": [],
+  "proposalsCount": 293,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-80",
+      "paragraphId": "p_5",
+      "start": 189.66,
+      "end": 194.38,
+      "originalText": "你真正瞭解無常，那個是有點像你去證悟無常。",
+      "proposedText": "你真正了解無常，那是有點像你去證悟無常。",
+      "categories": [
+        "punctuation",
+        "word-choice"
+      ],
+      "reason": "「瞭解」統一為「了解」，並補上句尾標點使語意完整。",
+      "guardReason": "cross-sentence-move:了解無"
+    },
+    {
+      "sentenceId": "sent-84",
+      "paragraphId": "p_5",
+      "start": 200.46,
+      "end": 202.26,
+      "originalText": "所以我們對無常也是一種，",
+      "proposedText": "所以我們對無常也是一種很模糊的觀念、概念。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾懸空，與下句黏連，補上句號完成語意。",
+      "guardReason": "cross-sentence-move:很模糊"
+    },
+    {
+      "sentenceId": "sent-85",
+      "paragraphId": "p_5",
+      "start": 202.26,
+      "end": 204.78,
+      "originalText": "很模糊的觀念、概念。",
+      "proposedText": "所以我們對無常也是一種很模糊的觀念、概念。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾懸空，與下句黏連，補上句號完成語意。",
+      "guardReason": "cross-sentence-move:所以我"
+    },
+    {
+      "sentenceId": "sent-120",
+      "paragraphId": "p_7",
+      "start": 289.8,
+      "end": 290.88,
+      "originalText": "你一定要什麼？",
+      "proposedText": "你一定要知道什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補疑問句「？」，並將「什麼」提前使語意連貫。",
+      "guardReason": "cross-sentence-move:要知道"
+    },
+    {
+      "sentenceId": "sent-309",
+      "paragraphId": "p_14",
+      "start": 618.1,
+      "end": 629.82,
+      "originalText": "所以它這裡真實，真實的菩提心，我不是很確定，它是不是叫做勝義菩提心但是，",
+      "proposedText": "所以它這裡「真實的菩提心」，我不是很確定它是不是叫做勝義菩提心。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句尾口語贅詞「但是」，補上句號，並以引號標示專有名詞。",
+      "guardReason": "content-word-omitted:但是"
+    },
+    {
+      "sentenceId": "sent-323",
+      "paragraphId": "p_14",
+      "start": 647.34,
+      "end": 650.18,
+      "originalText": "智慧資糧主要要促成佛的法身對不對？",
+      "proposedText": "智慧資糧主要是要促成佛的法身，對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號分隔陳述與反問，並保留問號。",
+      "guardReason": "cross-sentence-move:主要是"
+    },
+    {
+      "sentenceId": "sent-400",
+      "paragraphId": "p_18",
+      "start": 792.94,
+      "end": 800.04,
+      "originalText": "示教對，示教利喜，《法華經》大家回去可以再翻閱一下。",
+      "proposedText": "是什麼？示教。對，示教利喜。《法華經》大家回去可以再翻閱一下。",
+      "categories": [
+        "punctuation",
+        "missing-term"
+      ],
+      "reason": "補上問號與句號，並依上下文補齊「示教」二字，使「示教利喜」完整呈現。",
+      "guardReason": "cross-sentence-move:是什麼"
+    },
+    {
+      "sentenceId": "sent-458",
+      "paragraphId": "p_20",
+      "start": 884.82,
+      "end": 893.72,
+      "originalText": "福德資糧裡面，但是如果不是以，菩提心為前導的話，那麼就是做善事所以，",
+      "proposedText": "福德資糧裡面；但是如果不是以菩提心為前導的話，那麼就是做善事而已。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "以分號連接正反對比，刪除句尾口語黏連的「所以」，補上句號。",
+      "guardReason": "content-word-omitted:所以"
+    },
+    {
+      "sentenceId": "sent-478",
+      "paragraphId": "p_21",
+      "start": 915.76,
+      "end": 918.34,
+      "originalText": "我們有上過這堂課，所以我們就可以什麼？",
+      "proposedText": "我們有上過這堂課，所以我們就可以做什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補問號。",
+      "guardReason": "cross-sentence-move:做什麼"
+    },
+    {
+      "sentenceId": "sent-549",
+      "paragraphId": "p_23",
+      "start": 1012.2,
+      "end": 1013.54,
+      "originalText": "大家就要有一個練習，",
+      "proposedText": "大家就要有一個練習：講到六度，你一定要以菩提心為前導。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "句尾補冒號引出說明，刪除「是」使語意順暢，並與下句合併斷句。",
+      "guardReason": "cross-sentence-move:講到六"
+    },
+    {
+      "sentenceId": "sent-553",
+      "paragraphId": "p_23",
+      "start": 1017.64,
+      "end": 1020.66,
+      "originalText": "這樣子在講六度才是我們說，",
+      "proposedText": "這樣子在講六度，才是我們所說合格的六度。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「說」與重複的「合格的」，補上逗號使語意連貫。",
+      "guardReason": "cross-sentence-move:合格的"
+    },
+    {
+      "sentenceId": "sent-562",
+      "paragraphId": "p_23",
+      "start": 1027.2,
+      "end": 1029,
+      "originalText": "那接下來我們往下看，",
+      "proposedText": "接下來我們往下看「六波羅蜜多為成佛的因」這一段。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句首口語「那」，補上書名引號與句號，整合重複的段落標題。",
+      "guardReason": "cross-sentence-move:六波羅"
+    },
+    {
+      "sentenceId": "sent-569",
+      "paragraphId": "p_23",
+      "start": 1038.9,
+      "end": 1040.42,
+      "originalText": "二十八頁下面這一段，",
+      "proposedText": "二十八頁下面這一段，主要就是講到我們在後面也會繼續講的內容。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除口語「說」，補上逗號與句尾「的內容」使語意完整。",
+      "guardReason": "cross-sentence-move:主要就"
+    },
+    {
+      "sentenceId": "sent-573",
+      "paragraphId": "p_23",
+      "start": 1044.86,
+      "end": 1048.76,
+      "originalText": "他這裡主要就是在比對說對啊，",
+      "proposedText": "他這裡主要就是在比對：這個布施、持戒等六件事情，我們老實說，不是佛教徒也會在做。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除口語「對啊」，補上冒號引出比對內容，並將後兩句合併為完整語句。",
+      "guardReason": "cross-sentence-move:這個布"
+    },
+    {
+      "sentenceId": "sent-826",
+      "paragraphId": "p_31",
+      "start": 1425.48,
+      "end": 1428.86,
+      "originalText": "所以我們都想要都想要，",
+      "proposedText": "所以我們都想要累積真正的資糧，你就要知道，我們雖然也在聞法，也在做善事，也在布施，也在做生活，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪重複「都想要」，補標點斷句。",
+      "guardReason": "cross-sentence-move:累積真"
+    },
+    {
+      "sentenceId": "sent-882",
+      "paragraphId": "p_33",
+      "start": 1529.14,
+      "end": 1532.98,
+      "originalText": "那因為藏傳他們很多有在修持這個，",
+      "proposedText": "因為藏傳他們很多有在修持這個密法的部分，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句首發語詞「那」，並與下句合併語意、補上逗號。",
+      "guardReason": "cross-sentence-move:這個密"
+    },
+    {
+      "sentenceId": "sent-898",
+      "paragraphId": "p_34",
+      "start": 1568,
+      "end": 1571.82,
+      "originalText": "第一大阿僧祇劫叫做，",
+      "proposedText": "第一大阿僧祇劫，叫做你要積聚福智二資糧。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句以逗號懸空結尾，與下一句黏連；合併補上句號，使句意完整。",
+      "guardReason": "cross-sentence-move:你要積"
+    },
+    {
+      "sentenceId": "sent-916",
+      "paragraphId": "p_34",
+      "start": 1604.88,
+      "end": 1607.24,
+      "originalText": "然後把成佛當成一件事情，",
+      "proposedText": "然後把成佛當成一件事情、當成一個目標，這樣子去做的事情。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上句號，並以頓號連接並列的「當成一件事情、當成一個目標」。",
+      "guardReason": "cross-sentence-move:成一個"
+    },
+    {
+      "sentenceId": "sent-933",
+      "paragraphId": "p_35",
+      "start": 1646.68,
+      "end": 1652.62,
+      "originalText": "見道不是看到但是見。",
+      "proposedText": "見道不是看到，而是見。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號，使語意清楚。",
+      "guardReason": "content-word-omitted:但是"
+    },
+    {
+      "sentenceId": "sent-956",
+      "paragraphId": "p_36",
+      "start": 1699.48,
+      "end": 1704.72,
+      "originalText": "這個五道這樣走，從我們一開始發心到，",
+      "proposedText": "這個五道這樣走，從我們一開始發心到究竟成佛的這條路，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷裂句構，補上標點使語意連貫。",
+      "guardReason": "cross-sentence-move:究竟成"
+    },
+    {
+      "sentenceId": "sent-959",
+      "paragraphId": "p_36",
+      "start": 1704.72,
+      "end": 1708.4,
+      "originalText": "究竟成佛的這條路呢。",
+      "proposedText": "要走多久？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句補上問號。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1178",
+      "paragraphId": "p_47",
+      "start": 2201.36,
+      "end": 2205.32,
+      "originalText": "因為它能夠對治不是，",
+      "proposedText": "因為它能夠對治煩惱，",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依下句「對治煩惱一定是屬於智慧的部分」補齊「煩惱」，並補逗號。",
+      "guardReason": "cross-sentence-move:對治煩"
+    },
+    {
+      "sentenceId": "sent-1197",
+      "paragraphId": "p_48",
+      "start": 2247.14,
+      "end": 2252.18,
+      "originalText": "雖然以上我們講的，就是慢慢的我大概大家，",
+      "proposedText": "雖然以上我們講的，慢慢地，我大概了解大家的程度。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複「就是慢慢的我大概大家」的碎句，補上標點使語意完整。",
+      "guardReason": "cross-sentence-move:大家的"
+    },
+    {
+      "sentenceId": "sent-1253",
+      "paragraphId": "p_50",
+      "start": 2359.96,
+      "end": 2361.7,
+      "originalText": "我們現在是屬於造作、",
+      "proposedText": "我們現在是屬於造作的菩提心。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複的「造作、造作」，補上句尾標點。",
+      "guardReason": "cross-sentence-move:造作的"
+    },
+    {
+      "sentenceId": "sent-1284",
+      "paragraphId": "p_52",
+      "start": 2420.28,
+      "end": 2425.54,
+      "originalText": "或者是說，那時候有點像任運，非造作。有時候我們也會，",
+      "proposedText": "或者說，那時候有點像任運、非造作。有時候我們也會把它講成像是任運。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除發語詞「那」，並將與下一句被切碎的「有時候我們也會，」依語意接合補足標點。",
+      "guardReason": "cross-sentence-move:把它講"
+    },
+    {
+      "sentenceId": "sent-1318",
+      "paragraphId": "p_53",
+      "start": 2484.96,
+      "end": 2490.28,
+      "originalText": "因為我們老師說，輪迴的眾生就是愛我執嘛有我執，",
+      "proposedText": "因為我們的老師說，輪迴的眾生就是有愛我執嘛，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除「愛我執嘛有我執」的口語重複，補逗號斷句。",
+      "guardReason": "cross-sentence-move:有愛我"
+    },
+    {
+      "sentenceId": "sent-1438",
+      "paragraphId": "p_57",
+      "start": 2702.68,
+      "end": 2709.16,
+      "originalText": "我之前有講，一個就是說，你先對它什麼，和顏悅色的講話你不要，",
+      "proposedText": "我之前有講，一個就是：你先對牠和顏悅色地講話，你不要都臉臭臭的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「就是說」，補上句尾標點，並依語意順句。",
+      "guardReason": "cross-sentence-move:都臉臭"
+    }
+  ]
+}

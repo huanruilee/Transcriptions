@@ -114,10 +114,11 @@ describe('釋量論第二品第一講 UI 路由與影音回歸合約', () => {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     expect(wrapper.find('#course-chooser').exists()).toBe(true);
-    // 課程選擇器必須列出 store catalog 內的每一門課（含三主要道）。
-    expect(wrapper.findAll('.course-choice')).toHaveLength(5);
+    // 課程選擇器必須列出 store catalog 內的每一門課（含三主要道、菩薩就是這樣成佛）。
+    expect(wrapper.findAll('.course-choice')).toHaveLength(6);
     expect(wrapper.find('#course-chooser').text()).toContain('請選擇課程');
     expect(wrapper.find('#course-chooser').text()).toContain('三主要道');
+    expect(wrapper.find('#course-chooser').text()).toContain('菩薩就是這樣成佛');
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
