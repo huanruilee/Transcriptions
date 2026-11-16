@@ -1,0 +1,21 @@
+RED recorded before production edits, base 1dfb32203418cf22436090cb169e69fb57ae08c0.
+Command: python3 -m unittest discover -s tests/python -p test_study_guide_sync.py -v
+Exit: 1
+Ran 11 tests in 0.029s
+FAILED (failures=8, errors=3)
+Behavioral failures (ValueError not raised): missing evidence ID, same-ID changed meaning,
+stale digest, mismatched quote, duplicate bullets, duplicate review, incomplete review,
+unsupported review. Old sync wrote sandbox outline/session on these rejected cases.
+API errors: overview_file keyword absent (2); validate_overview hook absent (1).
+Valid existing overview control passed.
+All writes during RED were temporary sandbox fixtures; published content untouched.
+
+Two-phase preparation extension RED (before production edits):
+python3 -m unittest discover -s tests/python -p test_study_guide_sync.py -v
+Ran 21 tests in 0.559s; FAILED (errors=8).
+Five candidate tests (including four destination subcases) fail with
+TypeError: sync_session() got an unexpected keyword argument 'candidate_dir'.
+Existing 16 regression tests still pass. Candidate tests cover scratch-only
+output, NEW digest, needs-review with no old supported review, draft rejection,
+independently reviewed apply, absent overview, unchanged source demotion,
+production/symlink destination rejection, and mutually exclusive modes.

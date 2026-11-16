@@ -2,6 +2,13 @@
 
 **時間**: 2026-08-13 02:35 CST
 
+> ⚠️ **本文件為 2026-08-13 的歷史快照，其中「9090 服務運行中」與預覽連結已過期（2026-11-13 修正）。**
+>
+> - **現況**：靜態網站服務於 **Henry 的 Mac**（launchd `com.henry.transcriptions-web`，Tailscale `http://100.84.47.24:9090/index.html`），**不是** gx10。gx10 上無 9090 服務。
+> - **服務根目錄**為 repo 根（非 `src/`），此點已同步修正 `package.json` 的 `dev`/`start` 腳本。
+> - 音檔串流改由 gx10 的 `transcriptions-audio-proxy.service`（port 39090）提供。
+> - 最新進度請見 GitHub PR 佇列（`huanruilee/Transcriptions`）。
+
 ## 📊 語料進度
 
 | 指標 | 數值 |
@@ -67,5 +74,6 @@
 
 ## 🔗 預覽連結
 
-- **Tailscale 網域**：https://gx10-2887.tail378c21.ts.net:9090/index.html#session-110B
-- **VPN IP fallback**：https://100.113.144.100:9090/index.html#session-110B
+- **現行（Tailscale IP）**：http://100.84.47.24:9090/index.html#session-110B
+- **VPN IP fallback（過期，服務已遷移至 Mac）**：https://100.113.144.100:9090/index.html#session-110B
+- **⚠️ 過期連結（2026-08-13 記錄，服務已遷移至 Mac）**：https://gx10-2887.tail378c21.ts.net:9090/index.html#session-110B

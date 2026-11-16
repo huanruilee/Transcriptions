@@ -1,0 +1,115 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:a80e56c2194043818bd5ccf1369d971fd0d5ee72cffbaa2f28d81069388660f4",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_13",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p13-s8",
+            "kind": "unsupported-addition",
+            "detail": "講記宣稱《廣大遊戲經》「明白宣說」種芽因果，但底本僅引經文偈頌，未見經文明確宣說此義之文字。",
+            "evidenceIds": [
+              "p13-v1"
+            ],
+            "suggestion": "改為「經文云...」或「經文暗示...」，避免將推論當作經文直說。"
+          },
+          {
+            "sentenceId": "p13-s9",
+            "kind": "unsupported-addition",
+            "detail": "講記將「種與芽既非自性之異、亦非自性之一」直接歸為經文內容，但底本顯示此為疏文對偈頌的解釋（「此謂...」）。",
+            "evidenceIds": [
+              "p13-v1"
+            ],
+            "suggestion": "明確區分經文偈頌與疏文釋義，不可將疏文解釋混同為經文原文。"
+          }
+        ]
+      },
+      {
+        "id": "p_14",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p14-v1",
+            "kind": "uncertain",
+            "detail": "原話語氣猶豫（「反正就是...」），講記未保留此語氣，直接轉為肯定陳述，可能過度確立講者意圖。",
+            "evidenceIds": [
+              "p14-v1"
+            ],
+            "suggestion": "保留講者對經文解釋的猶豫或推測語氣，或標註為講者個人理解。"
+          },
+          {
+            "sentenceId": "p14-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記將「行非真實有」定為「立宗」，但底本原話僅說「明...之宗」，未明確區分此句為獨立立宗還是解釋。",
+            "evidenceIds": [
+              "p14-v2"
+            ],
+            "suggestion": "改為「說明...之意」，避免過度解讀為嚴格的因明立宗結構。"
+          }
+        ]
+      },
+      {
+        "id": "p_15",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p15-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記宣稱格西於下節課 36B 補充微細語義，但底本原話明確表示「聽不出來，以後再說」，未提及具體下節課內容。",
+            "evidenceIds": [
+              "p15-v3"
+            ],
+            "suggestion": "刪除關於下節課具體補充的預測，僅保留講者當下表示需再思考的意圖。"
+          },
+          {
+            "sentenceId": "p15-s6",
+            "kind": "unsupported-addition",
+            "detail": "講記宣稱「卷六正式圓滿」，但底本原話僅說「接下去...好，沒關係」，未明確宣告卷六結束。",
+            "evidenceIds": [
+              "p15-v3"
+            ],
+            "suggestion": "改為「至此卷六內容大致結束」或刪除此斷語，以符合原話的猶豫語氣。"
+          }
+        ]
+      },
+      {
+        "id": "p_16",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p16-s5",
+            "kind": "unsupported-addition",
+            "detail": "講記明確指出「兼破唯識宗等」，但底本原話僅提及「自續派」，未見原話提及唯識宗。",
+            "evidenceIds": [
+              "p16-v3"
+            ],
+            "suggestion": "刪除「兼破唯識宗等」，僅保留講記中明確提到的自續派，或標註為講者推論。"
+          },
+          {
+            "sentenceId": "p16-s4",
+            "kind": "uncertain",
+            "detail": "原話為疑問句「主要是專門破斥誰呢？」，講記轉為肯定陳述，雖符合語境但需確認是否為講者自問自答的明確結論。",
+            "evidenceIds": [
+              "p16-v2"
+            ],
+            "suggestion": "保留疑問語氣或明確標註為講者設問後自答的結構。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 1143,
+    "prompt_tokens": 5512,
+    "total_tokens": 6655,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:06:56.162Z"
+}

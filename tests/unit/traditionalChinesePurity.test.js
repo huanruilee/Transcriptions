@@ -12,9 +12,13 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.join(__dirname, '../..');
-const SESSIONS_DIR = path.join(PROJECT_ROOT, 'courses/入中論善顯密意疏/sessions');
-const COURSE_JSON = path.join(PROJECT_ROOT, 'courses/入中論善顯密意疏/course.json');
-const TOC_JSON = path.join(PROJECT_ROOT, 'courses/入中論善顯密意疏/toc.json');
+const COURSES = [
+  '入中論善顯密意疏',
+  '菩薩就是這樣成佛',
+  '三主要道',
+  '四念住',
+  '2025釋量論第二品大組共學',
+];
 
 // Strict Simplified-to-Traditional mapping dictionary (where Simplified != Traditional)
 const STRICT_SIMP_TO_TRAD = {
@@ -47,28 +51,42 @@ const SIMP_REGEX = new RegExp(`[${Object.keys(FILTERED_SIMP_MAP).join('')}]`, 'g
 
 test('🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字檢驗)', async (t) => {
   
-  await t.test('1. Structure: course.json and toc.json are 100% Traditional Chinese', () => {
-    [COURSE_JSON, TOC_JSON].forEach(filePath => {
-      const content = readFileSync(filePath, 'utf8');
-      const matches = content.match(SIMP_REGEX);
-      if (matches && matches.length > 0) {
-        const unique = [...new Set(matches)];
-        const suggestions = unique.map(c => `${c} -> ${FILTERED_SIMP_MAP[c] || '?'}`).join(', ');
-        assert.fail(`Found ${matches.length} simplified characters in ${path.basename(filePath)}: [${suggestions}]`);
+  await t.test('1. Structure: course.json and toc.json across all courses are 100% Traditional Chinese', () => {
+    for (const course of COURSES) {
+      for (const fileName of ['course.json', 'toc.json']) {
+        const filePath = path.join(PROJECT_ROOT, 'courses', course, fileName);
+        let content;
+        try {
+          content = readFileSync(filePath, 'utf8');
+        } catch {
+          continue;
+        }
+        const matches = content.match(SIMP_REGEX);
+        if (matches && matches.length > 0) {
+          const unique = [...new Set(matches)];
+          const suggestions = unique.map(c => `${c} -> ${FILTERED_SIMP_MAP[c] || '?'}`).join(', ');
+          assert.fail(`Found ${matches.length} simplified characters in ${course}/${fileName}: [${suggestions}]`);
+        }
       }
-      assert.ok(true, `${path.basename(filePath)} passed pure Traditional Chinese validation`);
-    });
+    }
+    assert.ok(true, 'All course.json and toc.json files passed pure Traditional Chinese validation');
   });
 
-  await t.test('2. Transcripts: All converted session JSON files contain 0 simplified characters', () => {
-    const sessionFiles = readdirSync(SESSIONS_DIR).filter(f => f.startsWith('session_') && f.endsWith('.json'));
-    assert.ok(sessionFiles.length > 0, 'Must have converted session files');
+  await t.test('2. Transcripts: All session JSON files across all courses contain 0 simplified characters', () => {
+    const allSessionFiles = [];
+    for (const course of COURSES) {
+      const sessionsDir = path.join(PROJECT_ROOT, 'courses', course, 'sessions');
+      const files = readdirSync(sessionsDir)
+        .filter(f => f.startsWith('session_') && f.endsWith('.json') && !f.includes('bak'))
+        .map(f => ({ course, file: f, fullPath: path.join(sessionsDir, f) }));
+      allSessionFiles.push(...files);
+    }
+    assert.ok(allSessionFiles.length > 0, 'Must have session files');
 
     let totalViolations = 0;
     const violationReport = [];
 
-    sessionFiles.forEach(file => {
-      const fullPath = path.join(SESSIONS_DIR, file);
+    allSessionFiles.forEach(({ course, file, fullPath }) => {
       const data = JSON.parse(readFileSync(fullPath, 'utf8'));
       const publicText = [];
       function collect(value, key = '') {
@@ -88,7 +106,7 @@ test('🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字
         totalViolations += matches.length;
         const unique = [...new Set(matches)];
         const suggestions = unique.map(c => `${c} -> ${FILTERED_SIMP_MAP[c] || '?'}`).join(', ');
-        violationReport.push(`${file}: ${matches.length} chars [${suggestions}]`);
+        violationReport.push(`${course}/${file}: ${matches.length} chars [${suggestions}]`);
       }
     });
 
@@ -96,6 +114,6 @@ test('🏮 Traditional Chinese Purity Test Suite (繁體正體中文無簡體字
       assert.fail(`Found ${totalViolations} simplified characters across ${violationReport.length} files:\n` + violationReport.slice(0, 10).join('\n'));
     }
 
-    assert.equal(totalViolations, 0, `All ${sessionFiles.length} sessions are 100% pure Traditional Chinese`);
+    assert.equal(totalViolations, 0, `All ${allSessionFiles.length} sessions across ${COURSES.length} courses are 100% pure Traditional Chinese`);
   });
 });

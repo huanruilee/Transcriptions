@@ -1,0 +1,19 @@
+{
+  "initialCandidate": "PASS then additional audit found4 invented transitions",
+  "affectedParagraphs": [
+    1,
+    13,
+    15,
+    24
+  ],
+  "sourceRepair": [
+    "P1 restores source4–5 cannotunderstand/originalor",
+    "P13 removes invented returninstruction",
+    "P15 restores source274 question",
+    "P24 removes invented postponement"
+  ],
+  "regressions": "2 RED tests then6 GREEN total",
+  "independentRecheck": "PASS4 repairs",
+  "overviewReuse": "all6 full items unchanged,see overview-reuse.json",
+  "newProviderCalls": 0
+}

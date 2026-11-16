@@ -1,0 +1,7371 @@
+{
+  "findings": [
+    {
+      "sentenceId": "seg-034",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 174.07,
+      "end": 176.73,
+      "text": "加上循三觀",
+      "prevText": "內身、外身、內外身",
+      "nextText": "現在這以下的文，說明",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "加上循三觀",
+          "suggestedTerm": "身",
+          "reason": "「加上循三觀」語義不完整，四念住講記中常見「循身、受、心、法觀」或「循三觀」前應有具體對象（如「循身觀」），此句疑似漏掉觀察對象名相，導致文義斷裂。",
+          "promptHints": [
+            "循身觀",
+            "身念住",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-069",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 300.72,
+      "end": 305.83,
+      "text": "這是一個",
+      "prevText": "我安立身念住的法門",
+      "nextText": "以佛世尊於循身念住中",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這是一個",
+          "suggestedTerm": "理由",
+          "reason": "「這是一個」語意未完，後接「以佛世尊於循身念住中」，中間疑似漏掉「理由」或「法門」等名詞，句子斷裂不完整。",
+          "promptHints": [
+            "身念住",
+            "法門"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-084",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 361.53,
+      "end": 363.33,
+      "text": "門的文句裡面",
+      "prevText": "就是在這個文句裡邊",
+      "nextText": "佛說不淨相應",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "門的文句裡面",
+          "suggestedTerm": "法",
+          "reason": "「門的文句裡面」前文為「就是在這個文句裡邊」，此句開頭「門」字突兀，疑似前漏「法」字，應為「法門的文句裡面」。",
+          "promptHints": [
+            "法門",
+            "身念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-104",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 434.91,
+      "end": 440.36,
+      "text": "此即顯示始從青瘀乃至食",
+      "prevText": "不能超過如是法性",
+      "nextText": "這是第一個憺怕路",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "此即顯示始從青瘀乃至食",
+          "suggestedTerm": "食噉",
+          "reason": "「始從青瘀乃至食」語義不完整，依《瑜伽師地論》不淨觀次第，青瘀之後應列至「食噉」等相，句尾「食」字後疑似漏字。",
+          "promptHints": [
+            "青瘀",
+            "膿爛",
+            "食噉",
+            "分散"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-109",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 457.36,
+      "end": 460.36,
+      "text": "此即顯示所有",
+      "prevText": "筋脈纏裹",
+      "nextText": "這是第二個憺怕路",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "此即顯示所有",
+          "suggestedTerm": "變赤",
+          "reason": "「此即顯示所有」句意未完，「所有」之後應接名相（如「所有變赤」），疑似漏掉後續名詞。",
+          "promptHints": [
+            "變赤",
+            "離皮肉血",
+            "筋脈纏裹"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-118",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 483.77,
+      "end": 485.77,
+      "text": "此即顯示",
+      "prevText": "或骨或鎖",
+      "nextText": "或骨或鎖",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "此即顯示",
+          "suggestedTerm": "骨鎖",
+          "reason": "「此即顯示」後無受詞即結束，依前後文（或骨或鎖、或復骨鎖）應接名相，疑似漏字。",
+          "promptHints": [
+            "骨",
+            "鎖",
+            "骨鎖"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-174",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 664.64,
+      "end": 672.74,
+      "text": "修這不淨的顛倒 修這不淨觀",
+      "prevText": "就能斷除淨的顛倒",
+      "nextText": "就是同樣的所緣境，一次又一次地思惟、觀察",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "修這不淨的顛倒 修這不淨觀",
+          "suggestedTerm": "觀（或「斷除淨」）",
+          "reason": "「修這不淨的顛倒」語義不通，不淨觀是為對治淨顛倒，此處應是「修這不淨觀斷除淨顛倒」之類的句子，疑似漏掉「觀」或「斷除淨」等字，造成「修顛倒」的錯誤文義。",
+          "promptHints": [
+            "不淨觀",
+            "淨顛倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-205",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 775.61,
+      "end": 779.11,
+      "text": "以於諸受住循受觀",
+      "prevText": "底下是解釋",
+      "nextText": "如實了知諸所有受",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "以於諸受住循受觀",
+          "suggestedTerm": "循受觀（完整名相）",
+          "reason": "「以於諸受住循受觀」語法上「住」後似缺「循受觀」的完整名相結構，疑漏一字成「住循受觀」不通順，應為「住循受觀」前有「於」或「循受觀」為固定名相，此句疑為「以於諸受住循受觀」漏「身」或漏「循」字，導致名相不完整。",
+          "promptHints": [
+            "循受觀",
+            "受念住",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-230",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 871.48,
+      "end": 875.33,
+      "text": "有樂受、苦受、不苦不樂",
+      "prevText": "這件事，前面也說過",
+      "nextText": "受。苦惱的感覺",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "有樂受、苦受、不苦不樂",
+          "suggestedTerm": "受",
+          "reason": "「有樂受、苦受、不苦不樂」後接「受。苦惱的感覺」，明顯是「不苦不樂受」被斷開，前句疑似漏掉「受」字，造成名相「不苦不樂受」不完整。",
+          "promptHints": [
+            "不苦不樂受",
+            "三受",
+            "受念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-258",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 939.68,
+      "end": 940.6,
+      "text": "若有樂受，樂",
+      "prevText": "就是沒有",
+      "nextText": "受壞的時候就苦惱",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "若有樂受，樂",
+          "suggestedTerm": null,
+          "reason": "「若有樂受，樂」語意未完，下句「受壞的時候就苦惱」接續，疑似「樂受」被斷開，但此句結尾「樂」字懸空，疑漏後續詞或為斷句錯誤，文義上「若有樂受」後應接完整描述，此處「樂」字突兀。",
+          "promptHints": [
+            "樂受",
+            "壞苦"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-298",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 1058.14,
+      "end": 1060.14,
+      "text": "呢？「行苦」這兩個字就有意思",
+      "prevText": "這樣批判他們",
+      "nextText": "這個「行」在這裡的意思",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "呢？「行苦」這兩個字就有意思",
+          "suggestedTerm": "很",
+          "reason": "「行苦」這兩個字就有意思，語感上疑似漏掉程度副詞，應為「很有意思」或「有意思」前缺動詞，文義不完整。",
+          "promptHints": [
+            "行苦",
+            "有意思"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-337",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 1180.33,
+      "end": 1185.17,
+      "text": "如說我們造了什麼罪",
+      "prevText": "儲藏在那裡邊",
+      "nextText": "但是沒有受果報",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "如說我們造了什麼罪",
+          "suggestedTerm": "譬",
+          "reason": "「如說」語法不完整，疑漏「譬如」的「譬」字，應為「譬如說我們造了什麼罪」",
+          "promptHints": [
+            "譬如說"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-361",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 1245.32,
+      "end": 1247.52,
+      "text": "所以，不苦不樂的",
+      "prevText": "在你不苦不樂的心境裡面儲藏",
+      "nextText": "這種境界是苦惱",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以，不苦不樂的",
+          "suggestedTerm": "受",
+          "reason": "「所以，不苦不樂的」語意未完，後接「這種境界是苦惱」，中間疑似漏掉「受」或「受蘊／受陰」等名相，導致句子斷裂缺主詞。",
+          "promptHints": [
+            "受念住",
+            "受蘊",
+            "不苦不樂受",
+            "行苦"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-397",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 1354.32,
+      "end": 1355.82,
+      "text": "就是我們心裡面執",
+      "prevText": "也應該向裡邊找一個原因",
+      "nextText": "說是「以於諸受住循受觀」",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "就是我們心裡面執",
+          "suggestedTerm": "著",
+          "reason": "「就是我們心裡面執」語意未完，疑漏「著」字，前後文都在講執著與否",
+          "promptHints": [
+            "執著",
+            "受念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-429",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 1472.16,
+      "end": 1473.36,
+      "text": "辛苦是行",
+      "prevText": "得了聖道的時候才知道",
+      "nextText": "苦也是苦",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "辛苦是行",
+          "suggestedTerm": "苦",
+          "reason": "「辛苦是行」語義不完整，前後文在講行苦，此句應是「辛苦是行苦」被吞掉一個「苦」字，與下一句「苦也是苦」連讀才通順。",
+          "promptHints": [
+            "行苦",
+            "苦苦",
+            "壞苦"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-457",
+      "paragraphId": "p-2",
+      "heading": "受念住對治樂倒",
+      "start": 1566.91,
+      "end": 1573.23,
+      "text": "所以我們應該以",
+      "prevText": "若沒有受，也就沒有不受",
+      "nextText": "以菩提願：願得涅槃",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以我們應該以",
+          "suggestedTerm": "菩提心／菩提願（或四念住等修行目標）",
+          "reason": "句子「所以我們應該以」語意未完，明顯缺少「以」的賓語，疑似漏掉後續名相或詞彙，與下句「以菩提願」銜接突兀。",
+          "promptHints": [
+            "菩提心",
+            "菩提願",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-473",
+      "paragraphId": "p-3",
+      "heading": "心念住對治常倒",
+      "start": 1628.5,
+      "end": 1632.46,
+      "text": "因此立心念",
+      "prevText": "但是我們執著是常，就是顛倒了",
+      "nextText": "住。本來其他的一切有為法",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "因此立心念",
+          "suggestedTerm": "住（心念住）",
+          "reason": "「因此立心念」與下一句「住」被切開，疑似「心念住」名相被吞字斷句，文義上應為「因此立心念住」一詞。",
+          "promptHints": [
+            "心念住",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-512",
+      "paragraphId": "p-3",
+      "heading": "心念住對治常倒",
+      "start": 1742.97,
+      "end": 1749.74,
+      "text": "所以，容易計心是常。計",
+      "prevText": "就會容易想到這裡",
+      "nextText": "常的時候，有什麼問題",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以，容易計心是常。計",
+          "suggestedTerm": "心",
+          "reason": "「計」字後文義未完，疑似漏掉受詞「心」或名相前綴，原意應為「計心是常」或「計著於常」",
+          "promptHints": [
+            "計心是常",
+            "心念住",
+            "常倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-541",
+      "paragraphId": "p-3",
+      "heading": "心念住對治常倒",
+      "start": 1871.28,
+      "end": 1876.76,
+      "text": "前面唯一對著無常中計常顛倒的信念就是",
+      "prevText": "非一眾多種種品類心生滅性，便於無常斷常顛倒",
+      "nextText": "這是把大意標出來",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "前面唯一對著無常中計常顛倒的信念就是",
+          "suggestedTerm": "念住",
+          "reason": "「前面唯一對著無常中計常顛倒的信念就是」語法不通，疑漏「念住」或「對治」等詞，且句尾「就是」懸空，後文未接續所引內容。",
+          "promptHints": [
+            "心念住",
+            "四念住",
+            "對治常顛倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-583",
+      "paragraphId": "p-3",
+      "heading": "心念住對治常倒",
+      "start": 2011.79,
+      "end": 2016.89,
+      "text": "你就能夠便於無常斷常顛倒",
+      "prevText": "這樣子去觀察",
+      "nextText": "就認為心是無常的",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "你就能夠便於無常斷常顛倒",
+          "suggestedTerm": "斷",
+          "reason": "「便於無常斷常顛倒」語法不通，疑似漏掉動詞「斷」，應為「便於斷無常斷常顛倒」或「便能斷除常顛倒」之類的句式。",
+          "promptHints": [
+            "斷除",
+            "常顛倒",
+            "無常"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-601",
+      "paragraphId": "p-3",
+      "heading": "心念住對治常倒",
+      "start": 2057.05,
+      "end": 2058.37,
+      "text": "還要有作意心",
+      "prevText": "有根那就是增上緣",
+      "nextText": "所，心才能夠出現",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "還要有作意心",
+          "suggestedTerm": "作意心所",
+          "reason": "「還要有作意心」語義不完整，唯識四緣中生心須有「作意心所」引導，此處疑似漏掉「所」字，與下句「所，心才能夠出現」文氣斷裂相接。",
+          "promptHints": [
+            "作意心所",
+            "四緣",
+            "唯識"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-632",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2150.84,
+      "end": 2153.4,
+      "text": "也會感覺到無我",
+      "prevText": "我們要是注意地去讀阿含經",
+      "nextText": "我們自動地就說是無我",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "也會感覺到無我",
+          "suggestedTerm": "無我的道理",
+          "reason": "前句說「注意地去讀阿含經」，此句「也會感覺到無我」語意不完整，疑似漏掉「到」或「無我」前的動詞受詞結構，如「感覺到無我的道理／義趣」，文義斷裂。",
+          "promptHints": [
+            "無我",
+            "法念住",
+            "阿含經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-633",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2153.4,
+      "end": 2157.32,
+      "text": "我們自動地就說是無我",
+      "prevText": "也會感覺到無我",
+      "nextText": "能了解無我是很難的",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "我們自動地就說是無我",
+          "suggestedTerm": "不（自動地就不說是無我）",
+          "reason": "「我們自動地就說是無我」語意突兀，前後文強調無我難以自悟、須佛菩薩開示，此句疑似漏字，可能原為「我們自動地就說是有我」或漏「不」字，與下句「能了解無我是很難的」相呼應。",
+          "promptHints": [
+            "無我",
+            "佛菩薩開示"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-644",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2193.7,
+      "end": 2196.7,
+      "text": "雖然沒有正面地說有我，但",
+      "prevText": "其他的有些經",
+      "nextText": "是裡面的話和有我論有點相似",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "雖然沒有正面地說有我，但",
+          "suggestedTerm": "（後續子句）",
+          "reason": "句末「雖然沒有正面地說有我，但」語意未完，疑似漏掉後續子句或名相，如「但也不明顯地說無我」，屬明顯斷句缺義。",
+          "promptHints": [
+            "無我",
+            "有我"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-677",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2310.6,
+      "end": 2315.2,
+      "text": "道宣律師聽他的師長講《四分律》二十",
+      "prevText": "讀一遍、再讀一遍，讀一遍、再讀一遍",
+      "nextText": "遍，聽二十遍",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "道宣律師聽他的師長講《四分律》二十",
+          "suggestedTerm": "遍",
+          "reason": "句尾「二十」語義不完整，疑似漏掉後續名相或量詞（如「二十遍」或「二十遍以上」），句子在數字處戛然而止。",
+          "promptHints": [
+            "四分律",
+            "聽講遍數",
+            "道宣律師"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-700",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2378.27,
+      "end": 2380.54,
+      "text": "你才能有成就",
+      "prevText": "這樣子，你才能夠在佛法裡面有成就",
+      "nextText": "你才能有成就",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "你才能有成就",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "法念住對治我倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-701",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2380.54,
+      "end": 2384.27,
+      "text": "你才能有成就",
+      "prevText": "你才能有成就",
+      "nextText": "如果像剛才說的",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "你才能有成就",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "法念住對治我倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-707",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2411.84,
+      "end": 2419.44,
+      "text": "由彼先來有有我見等諸煩惱故",
+      "prevText": "現在這裡說，怎麼會沒有我而會執著有我呢",
+      "nextText": "因為這個名句中、這個語言裡面有這麼一個字",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "由彼先來有有我見等諸煩惱故",
+          "suggestedTerm": "有我見",
+          "reason": "「由彼先來有有我見等諸煩惱故」連續兩個「有」字，語法突兀，疑似漏掉名相或抄錄時吞字，應為「有『有我見』等諸煩惱故」或漏掉其他字",
+          "promptHints": [
+            "我見",
+            "煩惱",
+            "薩迦耶見"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-716",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2453.22,
+      "end": 2456.44,
+      "text": "但是，無形中侵犯了",
+      "prevText": "只是用這個字",
+      "nextText": "你的利益的時候",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "但是，無形中侵犯了",
+          "suggestedTerm": "我",
+          "reason": "「無形中侵犯了」語意不完整，缺少被侵犯的對象，依前後文應是「我」被侵犯而感覺痛，疑似漏掉「我」字。",
+          "promptHints": [
+            "我",
+            "我見",
+            "無我論"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-737",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2512.35,
+      "end": 2515.65,
+      "text": "但是我們從來有有我見等",
+      "prevText": "在《阿含經》有這樣的記錄",
+      "nextText": "這個有我見",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "但是我們從來有有我見等",
+          "suggestedTerm": "不知道／不感覺",
+          "reason": "「我們從來有有我見等」語法突兀，疑似漏字，依上下文應是「我們從來（不知道／不感覺）有我見」之類的語句。",
+          "promptHints": [
+            "我見",
+            "無我"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-755",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2567.18,
+      "end": 2570.46,
+      "text": "無無我見等諸善法故",
+      "prevText": "因此，而就在無我法中執著有我",
+      "nextText": "這樣的人不可能有這個無我見",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "無無我見等諸善法故",
+          "suggestedTerm": "我",
+          "reason": "此句為文言引文，前後文皆在講「無我」，此句突然出現「無無我見」且語法不通，疑似漏字或誤植，應為「無我見等諸善法故」之類的文句。",
+          "promptHints": [
+            "無我見",
+            "諸善法"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-781",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2666.54,
+      "end": 2667.98,
+      "text": "就是在剎",
+      "prevText": "所以於諸蘊中生起我見",
+      "nextText": "那生滅、老病死的",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "就是在剎",
+          "suggestedTerm": "那",
+          "reason": "「就是在剎」與下一句「那生滅、老病死的」明顯是「剎那」被切斷，此句疑似漏掉「那」字，導致名相「剎那」不完整。",
+          "promptHints": [
+            "剎那",
+            "剎那生滅"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-825",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2820.5,
+      "end": 2822.92,
+      "text": "住循法觀",
+      "prevText": "去觀察的時候",
+      "nextText": "你就會如實了知所計諸蘊",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "住循法觀",
+          "suggestedTerm": "循法觀（疑漏「循身觀」或「法觀」前之字）",
+          "reason": "「住循法觀」語法不完整，依《瑜伽師地論》法念住文句，此處應為「住循身觀、循受心法觀」一類的完整名相，疑似漏掉「循」字或觀名前綴，讀起來像吞字。",
+          "promptHints": [
+            "法念住",
+            "循身觀",
+            "循法觀",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-842",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2873.26,
+      "end": 2876.58,
+      "text": "所計諸蘊的共相，應",
+      "prevText": "所計諸蘊的自相",
+      "nextText": "如實了知",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所計諸蘊的共相，應",
+          "suggestedTerm": "觀察／了知",
+          "reason": "前句為「所計諸蘊的自相」，此句「所計諸蘊的共相，應」語意未完，疑漏後接動詞（如「觀察」「了知」），或「應」字後漏字，導致句法斷裂。",
+          "promptHints": [
+            "所計諸蘊",
+            "共相",
+            "如實了知"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-865",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 2946.39,
+      "end": 2948.39,
+      "text": "這一定要把這個無我意",
+      "prevText": "便於無我斷我顛倒",
+      "nextText": "義深刻地認識",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這一定要把這個無我意",
+          "suggestedTerm": "義",
+          "reason": "「這一定要把這個無我意」句尾懸空，疑漏「義」字或後接名詞（如「無我意義」「無我義」），與下句「義深刻地認識」斷裂，疑似掉字。",
+          "promptHints": [
+            "無我義",
+            "無我觀",
+            "認識"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-890",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3010.4,
+      "end": 3012.21,
+      "text": "還是有這種情形！若",
+      "prevText": "也公然地認為有我才是對的",
+      "nextText": "這樣子，無常觀修不來",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "還是有這種情形！若",
+          "suggestedTerm": "若（後接完整子句）",
+          "reason": "「還是有這種情形！若」句尾突然出現「若」字，語法斷裂，疑似後面漏掉接續詞或名相（如「若這樣」），或「若」為誤留的殘字。",
+          "promptHints": [
+            "無常觀",
+            "無我觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-914",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3096.75,
+      "end": 3099.75,
+      "text": "其餘的都是在色受想行識諸",
+      "prevText": "除了一少分的佛教徒之外",
+      "nextText": "是唯有蘊",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "其餘的都是在色受想行識諸",
+          "suggestedTerm": "蘊",
+          "reason": "句子「其餘的都是在色受想行識諸」語法未完，句尾「諸」後明顯缺少名相（如「諸蘊」），與前文「多於諸蘊」及後句「是唯有蘊」對照，此處應為「在色受想行識諸蘊」中橫計有我之義。",
+          "promptHints": [
+            "諸蘊",
+            "色受想行識",
+            "五蘊"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-944",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3206.53,
+      "end": 3208.87,
+      "text": "但是佛教徒，這件事",
+      "prevText": "不是有我論所能敵對的",
+      "nextText": "還要有善根才能做得來",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "但是佛教徒，這件事",
+          "suggestedTerm": "做不到",
+          "reason": "「但是佛教徒，這件事」語意不完整，疑似漏掉動詞（如「做不到」或「辦不到」），導致下句「還要有善根才能做得來」失去對比對象。",
+          "promptHints": [
+            "善根",
+            "得聖道"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-996",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3392.04,
+      "end": 3394.87,
+      "text": "叫做",
+      "prevText": "或者說「非法」就是流轉生死",
+      "nextText": "或者修學禪定以後你離欲了",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "叫做",
+          "suggestedTerm": "染",
+          "reason": "前句說「非法就是流轉生死」，此句「叫做」後文義未完，疑似漏掉「染」或「染污」等結論詞，與後文「名之為淨」對應。",
+          "promptHints": [
+            "染淨",
+            "非法",
+            "流轉生死"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1018",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3456.48,
+      "end": 3457.98,
+      "text": "這是計",
+      "prevText": "就「有染、有淨」的不同了",
+      "nextText": "我論者是這樣的想法",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這是計",
+          "suggestedTerm": "橫",
+          "reason": "「這是計」語意不完整，與前後文「我論者」「橫計」對照，疑似漏掉「橫」字，應為「這是橫計」，且下句 seg-1020 重複出現「這是橫計」，此句疑為口誤或漏字。",
+          "promptHints": [
+            "橫計",
+            "我論"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1024",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3470.74,
+      "end": 3471.94,
+      "text": "底下第二科。除",
+      "prevText": "這是第一科",
+      "nextText": "為欲除遣",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "底下第二科。除",
+          "suggestedTerm": "遣",
+          "reason": "「底下第二科。除」句尾突然斷裂，「除」字後語意未完，依下文「為欲除遣…愚故，立…念住」句式，疑似漏掉「遣」或後續賓語（如「除遣」某種愚）。",
+          "promptHints": [
+            "除遣",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1070",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3592.39,
+      "end": 3595.39,
+      "text": "現在佛為破除你執",
+      "prevText": "常住真心，那是我",
+      "nextText": "你知道心是我",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "現在佛為破除你執",
+          "suggestedTerm": "心是我（愚）",
+          "reason": "句尾「你執」語意未完，依前文「為欲除遣於心意識執我愚」及下文應接「心是我」之愚，疑似漏字致句意斷裂。",
+          "promptHints": [
+            "心意識執我愚",
+            "心念住",
+            "計我論者"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1087",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3655.64,
+      "end": 3657.64,
+      "text": "呢？了別以後",
+      "prevText": "這個心是什麼意思?",
+      "nextText": "了別了一切的種種的印象、種種的這些經驗",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "呢？了別以後",
+          "suggestedTerm": "心",
+          "reason": "「呢？了別以後」句首突兀，前句「這個心是什麼意思?」問句後直接接「呢？」，中間疑似漏掉「心是什麼意思」的答語或「心」字，語法斷裂。",
+          "promptHints": [
+            "心",
+            "意",
+            "識"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1095",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3685.46,
+      "end": 3688.37,
+      "text": "和識是向外",
+      "prevText": "又收回來",
+      "nextText": "識和心來對論",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "和識是向外",
+          "suggestedTerm": "心（或「向內」）",
+          "reason": "「和識是向外」缺主詞，依前後文（識向外了別、心收回來）應是「識和心來對論」時「識是向外、心是向內」，此句疑似漏「心」或「向內」等字。",
+          "promptHints": [
+            "識",
+            "心",
+            "向外",
+            "向內"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1118",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3761.48,
+      "end": 3765.64,
+      "text": "不是我，不是常恆住、不變易的，就是除遣",
+      "prevText": "心是剎那剎那生滅變化的因緣所生法",
+      "nextText": "就是除遣這個我",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "不是我，不是常恆住、不變易的，就是除遣",
+          "suggestedTerm": "我",
+          "reason": "「就是除遣」後語義未完，下句「就是除遣這個我」補足，但本句疑漏賓語「我」或「我執」，致句意斷裂。",
+          "promptHints": [
+            "除遣我執",
+            "心念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1140",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3825.1,
+      "end": 3828.23,
+      "text": "沒有我可",
+      "prevText": "都是因緣所生法",
+      "nextText": "得。由我發出來活動",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "沒有我可",
+          "suggestedTerm": "得",
+          "reason": "「沒有我可」語法不完整，下句「得。由我發出來活動」開頭「得」應屬本句，疑為斷句錯置或漏字，原意應為「沒有我可得」。",
+          "promptHints": [
+            "無我",
+            "我不可得"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1141",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3828.23,
+      "end": 3833.35,
+      "text": "得。由我發出來活動",
+      "prevText": "沒有我可",
+      "nextText": "有合法的行動",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "得。由我發出來活動",
+          "suggestedTerm": "得",
+          "reason": "「由我發出來活動」主詞「我」前疑漏否定或上下文語境詞，且前句「沒有我可」的「得」應屬本句開頭，疑為「（沒有我）可得。由我發出來活動」被錯切。",
+          "promptHints": [
+            "我執",
+            "造業"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1142",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3833.35,
+      "end": 3835.35,
+      "text": "有合法的行動",
+      "prevText": "得。由我發出來活動",
+      "nextText": "有非法的行動",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "有合法的行動",
+          "suggestedTerm": "由我發出來的",
+          "reason": "「有合法的行動」與前後文「由我發出來活動」對照，疑漏主詞或修飾語，原意可能為「由我發出來的活動，有合法的行動」。",
+          "promptHints": [
+            "造業",
+            "合法",
+            "非法"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1149",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3850.94,
+      "end": 3860.06,
+      "text": "有第二個原因建立四念住的法門。建立四念住的",
+      "prevText": "這是第二義",
+      "nextText": "第二義",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "有第二個原因建立四念住的法門。建立四念住的",
+          "suggestedTerm": "理由",
+          "reason": "「建立四念住的」句尾懸空，疑漏「理由」或「第二義」等名詞，語法不完整。",
+          "promptHints": [
+            "建立四念住",
+            "第二義"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1175",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 3955.33,
+      "end": 3960.39,
+      "text": "若為此故，造作諸業」，那麼就是「受",
+      "prevText": "要到天上去享天福",
+      "nextText": "若造業者」：就是「心",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "若為此故，造作諸業」，那麼就是「受",
+          "suggestedTerm": "受者",
+          "reason": "引文「若為此故，造作諸業」前缺引號起始，且句尾「就是『受』」疑似漏掉名相後綴，文義不完整",
+          "promptHints": [
+            "受者",
+            "作者",
+            "我論"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1359",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 4501.26,
+      "end": 4503.62,
+      "text": "住、相雜念住",
+      "prevText": "一個自性念住",
+      "nextText": "這樣子就把這個念住",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "住、相雜念住",
+          "suggestedTerm": "共念",
+          "reason": "前句列「一個自性念住」，此句「住、相雜念住」語法斷裂，依《瑜伽師地論》三念住應為「一個共念住／相雜念住」，疑漏「共念」二字",
+          "promptHints": [
+            "共念住",
+            "相雜念住",
+            "自性念住",
+            "所緣念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1391",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 4607.87,
+      "end": 4611.27,
+      "text": "等到一念相應，斷除去",
+      "prevText": "沒斷煩惱之前的戒定慧，都是善有漏法",
+      "nextText": "我煩惱、愛煩惱的時候",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "等到一念相應，斷除去",
+          "suggestedTerm": "見",
+          "reason": "「斷除去」後語意未完，依下句「我煩惱、愛煩惱」判斷，此處疑似漏掉「見」字，應為「見煩惱、愛煩惱」，即見惑與思惑（愛煩惱）之對舉，佛學講記中常見此搭配。",
+          "promptHints": [
+            "見煩惱",
+            "愛煩惱",
+            "見惑",
+            "思惑"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1416",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 4698.25,
+      "end": 4700.66,
+      "text": "就是用這個做佛法",
+      "prevText": "這些人想出來一件事",
+      "nextText": "菩薩戒上就分明說",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "就是用這個做佛法",
+          "suggestedTerm": "（不明，可能為某種修行方法或經驗的名稱）",
+          "reason": "「就是用這個做佛法」語義不完整，前文說「這些人想出來一件事」，此句應指明「這個」是什麼（如某種修行方法或經驗），並說明如何「做佛法」，疑似漏掉關鍵名詞或動詞，導致句意斷裂。",
+          "promptHints": [
+            "相似佛法",
+            "菩薩戒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1440",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 4764.49,
+      "end": 4766.27,
+      "text": "聞所成有這樣的意思",
+      "prevText": "應該是這樣意思",
+      "nextText": "聞所成慧是初一步",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "聞所成有這樣的意思",
+          "suggestedTerm": "慧",
+          "reason": "前後文都在講「聞所成慧」，此句只說「聞所成」，疑似漏掉「慧」字",
+          "promptHints": [
+            "聞所成慧",
+            "三慧"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1484",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 4874.42,
+      "end": 4877.49,
+      "text": "是修所成的智慧",
+      "prevText": "還有煩惱",
+      "nextText": "通」於「漏」和「無漏",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是修所成的智慧",
+          "suggestedTerm": "修所成慧（作主詞，如「而修所成慧」）",
+          "reason": "前句說聞思二慧是有漏，此句突然說「是修所成的智慧」，缺少主詞（如「修所成慧」或「而修所成慧」），語法上明顯斷裂，疑似漏掉主語名相。",
+          "promptHints": [
+            "修所成慧",
+            "三慧：聞思修"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1512",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 4979.4,
+      "end": 4984.51,
+      "text": "當然我們在佛學院裡面讀過、學過的",
+      "prevText": "這四念住",
+      "nextText": "人，這是老生常談",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "當然我們在佛學院裡面讀過、學過的",
+          "suggestedTerm": "的人",
+          "reason": "「讀過、學過的」與下一句「人」之間語法斷裂，疑似漏掉「的人」或「的同學」等名詞，導致「人」字懸空無法銜接前句。",
+          "promptHints": [
+            "佛學院",
+            "同學",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1530",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5042.85,
+      "end": 5046.48,
+      "text": "文沒有這裡這麼多",
+      "prevText": "也是玄奘大師翻譯的",
+      "nextText": "比較少，可也不是很少",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "文沒有這裡這麼多",
+          "suggestedTerm": "文句",
+          "reason": "「文沒有這裡這麼多」語法突兀，疑似漏掉主詞名相，應指《法蘊足論》的「文句」或「文字」較少",
+          "promptHints": [
+            "法蘊足論",
+            "文句"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1533",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5052.32,
+      "end": 5055.64,
+      "text": "常常讀，這",
+      "prevText": "每天讀它幾遍",
+      "nextText": "文句熟了",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "常常讀，這",
+          "suggestedTerm": "法門",
+          "reason": "「常常讀，這」句尾突然截斷，疑似漏掉後續名詞，如「這個法門」「這樣用功」等",
+          "promptHints": [
+            "法門",
+            "用功"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1554",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5116.35,
+      "end": 5118.35,
+      "text": "很多方面的功德",
+      "prevText": "心情快樂",
+      "nextText": "很多種功德就逐漸",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "很多方面的功德",
+          "suggestedTerm": "就出來了",
+          "reason": "「很多方面的功德」語意不完整，疑似漏掉動詞或後續說明，如「很多方面的功德就出來了」",
+          "promptHints": [
+            "功德",
+            "逐漸"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1578",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5187.11,
+      "end": 5189.11,
+      "text": "要明記不忘才可以！師",
+      "prevText": "於文於義",
+      "nextText": "我答覆一位法師的問題",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "要明記不忘才可以！師",
+          "suggestedTerm": "師父／師答（後續語句）",
+          "reason": "句尾出現孤立的「師」字，前後文皆無法銜接，疑似原句為「才可以。師父…」或「才可以。師答…」等被切斷，導致「師」字殘留、後文漏失。",
+          "promptHints": [
+            "師父",
+            "師答",
+            "問答"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1624",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5371.17,
+      "end": 5375.61,
+      "text": "進而沉沒、昏",
+      "prevText": "這件事初開始情況良好",
+      "nextText": "這件事這樣",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "進而沉沒、昏",
+          "suggestedTerm": "沉",
+          "reason": "前後文皆作「沉沒、昏沉」，此句僅餘「昏」字，明顯少一「沉」字，語意不完整。",
+          "promptHints": [
+            "昏沉",
+            "沉沒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1714",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5643.94,
+      "end": 5645.54,
+      "text": "什麼地方不對",
+      "prevText": "那就應該注意一下",
+      "nextText": "什麼地方不對",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "什麼地方不對",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "法念住對治我倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1715",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5645.54,
+      "end": 5647.92,
+      "text": "什麼地方不對",
+      "prevText": "什麼地方不對",
+      "nextText": "也要對治",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "什麼地方不對",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "法念住對治我倒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1720",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5656.07,
+      "end": 5658.75,
+      "text": "那你就趕快修毘缽舍",
+      "prevText": "有點不合適，昏沉",
+      "nextText": "那，要對治",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "那你就趕快修毘缽舍",
+          "suggestedTerm": "那",
+          "reason": "「修毘缽舍」語意未完，毘缽舍那（觀）被截斷，疑似漏「那」字",
+          "promptHints": [
+            "毘缽舍那",
+            "觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1779",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5800.8,
+      "end": 5804.12,
+      "text": "自己就不能攝心，有",
+      "prevText": "大家有很多聲音",
+      "nextText": "的人不能",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "自己就不能攝心，有",
+          "suggestedTerm": "人",
+          "reason": "句子以「有」結尾，語法斷裂，明顯疑似吞字或漏字，且下一句「的人不能」被切開，應為「有的人不能攝心」一整句被誤切或漏字。",
+          "promptHints": [
+            "有的人",
+            "攝心不亂"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1829",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 5978.44,
+      "end": 5979.44,
+      "text": "或者單獨用",
+      "prevText": "修行人在禪堂裡用功",
+      "nextText": "他自己在頭上設一個叫做「禪鎮」的東西",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "或者單獨用",
+          "suggestedTerm": "功",
+          "reason": "前後文都在講修行人用功的方式，此句「或者單獨用」語意不完整，疑似漏掉「功」字或「坐」字，應為「或者單獨用功」或「或者單獨靜坐」之類的完整表述。",
+          "promptHints": [
+            "用功",
+            "靜坐",
+            "禪堂"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1855",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6066.94,
+      "end": 6069.12,
+      "text": "我認為這是合法",
+      "prevText": "再回去靜坐",
+      "nextText": "不能說沒有規矩",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "我認為這是合法",
+          "suggestedTerm": "佛法",
+          "reason": "「我認為這是合法」語意不完整，依前後文（靜坐昏沉起來經行、禮佛）應是說這樣做合乎佛法的規矩，疑似漏掉「佛法」二字。",
+          "promptHints": [
+            "合法",
+            "如法",
+            "佛法"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1939",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6311.62,
+      "end": 6315.87,
+      "text": "的事情，訶斥罪過的事情",
+      "prevText": "我們應該讚歎這個白、清淨的功德",
+      "nextText": "人家有功德的時候",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "的事情，訶斥罪過的事情",
+          "suggestedTerm": "讚歎",
+          "reason": "前句「讚歎這個白、清淨的功德」與本句「的事情，訶斥罪過的事情」語法斷裂，疑似「功德」後漏掉動詞（如「讚歎」）或「功德」後應接名相（如「白淨法」），導致「的事情」缺主詞。",
+          "promptHints": [
+            "讚歎功德",
+            "訶斥罪過"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1957",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6367.01,
+      "end": 6371.01,
+      "text": "子。若是自己想要有進步",
+      "prevText": "不應該這樣",
+      "nextText": "就從自己的這些煩惱上開始",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "子。若是自己想要有進步",
+          "suggestedTerm": "佛弟子",
+          "reason": "句首僅出現「子。」，明顯缺少主詞或稱謂（如「佛弟子」「諸位法師」等），語法不完整，疑似 ASR 吞掉句首字詞。",
+          "promptHints": [
+            "佛弟子",
+            "諸位法師",
+            "弟子"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1985",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6454.04,
+      "end": 6456.93,
+      "text": "我對於佛法有信心，有",
+      "prevText": "用善惡因果的觀念，也應該取消自己的這種過失",
+      "nextText": "信心就是相信因果",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "我對於佛法有信心，有",
+          "suggestedTerm": "慚愧",
+          "reason": "「我對於佛法有信心，有」句尾突然斷裂，語法不完整，疑似漏掉後續名相（如「有慚愧」等），與下句「信心就是相信因果」銜接突兀。",
+          "promptHints": [
+            "信心",
+            "慚愧",
+            "因果"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-2000",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6497.44,
+      "end": 6501.48,
+      "text": "就是去掉自己的污點，就",
+      "prevText": "現在修四念處也好",
+      "nextText": "像洗澡似的，把這些污垢都洗掉",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "就是去掉自己的污點，就",
+          "suggestedTerm": "清淨自己",
+          "reason": "「就是去掉自己的污點，就」句尾「就」字懸空，語法斷裂，疑似漏掉後續詞彙（如「就是清淨自己」等），與下句「像洗澡似的」銜接不完整。",
+          "promptHints": [
+            "污點",
+            "洗澡",
+            "清淨"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-2030",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6600.93,
+      "end": 6605.71,
+      "text": "《修四念處》就是不障人之法",
+      "prevText": "《金剛經》就是心不障人之法",
+      "nextText": "而《瑜伽師地論》裡面說得非常微細",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "《修四念處》就是不障人之法",
+          "suggestedTerm": "心",
+          "reason": "前句說《金剛經》是心不障人之法，此句以《修四念處》對舉，但句中「不障人之法」前缺少「心」字，與前句「心不障人之法」句式不對稱，疑似漏字。",
+          "promptHints": [
+            "心不障人之法",
+            "四念處"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-2057",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6763.4,
+      "end": 6769.84,
+      "text": "那麼進一步地觀察身體之因緣有",
+      "prevText": "就是觀察我不可得",
+      "nextText": "因緣有就是自性空",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "那麼進一步地觀察身體之因緣有",
+          "suggestedTerm": "是",
+          "reason": "「觀察身體之因緣有」語法突兀，前後文是觀察五蘊身不可得，此句疑似漏掉「是」或「為」等繫詞，應為「身體是因緣有」之類的句式。",
+          "promptHints": [
+            "因緣有",
+            "自性空"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-2079",
+      "paragraphId": "p-4",
+      "heading": "法念住對治我倒",
+      "start": 6848.55,
+      "end": 6854.58,
+      "text": "不知道那位同學講的「心不障人之法」",
+      "prevText": "這個方法也可以",
+      "nextText": "心不障人之法",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "不知道那位同學講的「心不障人之法」",
+          "suggestedTerm": "請示／何謂",
+          "reason": "「心不障人之法」疑為「心不障人之法」的問法，但前後文皆在講「不要障礙別人」，此句疑漏「請示」或「何謂」等字，語意不完整。",
+          "promptHints": [
+            "心不障人之法",
+            "請示"
+          ]
+        }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "windowId": "win-1",
+      "clipStart": 172.07,
+      "clipEnd": 178.73,
+      "clipDuration": 6.66,
+      "sentenceIds": [
+        "seg-034"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-034",
+          "text": "加上循三觀"
+        }
+      ],
+      "expectedTerms": [
+        "身"
+      ],
+      "prompt": "內身、外身、內外身 循身觀、身念住、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-034",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 174.07,
+          "end": 176.73,
+          "text": "加上循三觀",
+          "prevText": "內身、外身、內外身",
+          "nextText": "現在這以下的文，說明",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "加上循三觀",
+              "suggestedTerm": "身",
+              "reason": "「加上循三觀」語義不完整，四念住講記中常見「循身、受、心、法觀」或「循三觀」前應有具體對象（如「循身觀」），此句疑似漏掉觀察對象名相，導致文義斷裂。",
+              "promptHints": [
+                "循身觀",
+                "身念住",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 298.72,
+      "clipEnd": 307.83,
+      "clipDuration": 9.11,
+      "sentenceIds": [
+        "seg-069"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-069",
+          "text": "這是一個"
+        }
+      ],
+      "expectedTerms": [
+        "理由"
+      ],
+      "prompt": "我安立身念住的法門 身念住、法門",
+      "items": [
+        {
+          "sentenceId": "seg-069",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 300.72,
+          "end": 305.83,
+          "text": "這是一個",
+          "prevText": "我安立身念住的法門",
+          "nextText": "以佛世尊於循身念住中",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這是一個",
+              "suggestedTerm": "理由",
+              "reason": "「這是一個」語意未完，後接「以佛世尊於循身念住中」，中間疑似漏掉「理由」或「法門」等名詞，句子斷裂不完整。",
+              "promptHints": [
+                "身念住",
+                "法門"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 359.53,
+      "clipEnd": 365.33,
+      "clipDuration": 5.8,
+      "sentenceIds": [
+        "seg-084"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-084",
+          "text": "門的文句裡面"
+        }
+      ],
+      "expectedTerms": [
+        "法"
+      ],
+      "prompt": "就是在這個文句裡邊 法門、身念住",
+      "items": [
+        {
+          "sentenceId": "seg-084",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 361.53,
+          "end": 363.33,
+          "text": "門的文句裡面",
+          "prevText": "就是在這個文句裡邊",
+          "nextText": "佛說不淨相應",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "門的文句裡面",
+              "suggestedTerm": "法",
+              "reason": "「門的文句裡面」前文為「就是在這個文句裡邊」，此句開頭「門」字突兀，疑似前漏「法」字，應為「法門的文句裡面」。",
+              "promptHints": [
+                "法門",
+                "身念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 432.91,
+      "clipEnd": 442.36,
+      "clipDuration": 9.45,
+      "sentenceIds": [
+        "seg-104"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-104",
+          "text": "此即顯示始從青瘀乃至食"
+        }
+      ],
+      "expectedTerms": [
+        "食噉"
+      ],
+      "prompt": "不能超過如是法性 青瘀、膿爛、食噉、分散",
+      "items": [
+        {
+          "sentenceId": "seg-104",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 434.91,
+          "end": 440.36,
+          "text": "此即顯示始從青瘀乃至食",
+          "prevText": "不能超過如是法性",
+          "nextText": "這是第一個憺怕路",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "此即顯示始從青瘀乃至食",
+              "suggestedTerm": "食噉",
+              "reason": "「始從青瘀乃至食」語義不完整，依《瑜伽師地論》不淨觀次第，青瘀之後應列至「食噉」等相，句尾「食」字後疑似漏字。",
+              "promptHints": [
+                "青瘀",
+                "膿爛",
+                "食噉",
+                "分散"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 455.36,
+      "clipEnd": 462.36,
+      "clipDuration": 7,
+      "sentenceIds": [
+        "seg-109"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-109",
+          "text": "此即顯示所有"
+        }
+      ],
+      "expectedTerms": [
+        "變赤"
+      ],
+      "prompt": "筋脈纏裹 變赤、離皮肉血、筋脈纏裹",
+      "items": [
+        {
+          "sentenceId": "seg-109",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 457.36,
+          "end": 460.36,
+          "text": "此即顯示所有",
+          "prevText": "筋脈纏裹",
+          "nextText": "這是第二個憺怕路",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "此即顯示所有",
+              "suggestedTerm": "變赤",
+              "reason": "「此即顯示所有」句意未完，「所有」之後應接名相（如「所有變赤」），疑似漏掉後續名詞。",
+              "promptHints": [
+                "變赤",
+                "離皮肉血",
+                "筋脈纏裹"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 481.77,
+      "clipEnd": 487.77,
+      "clipDuration": 6,
+      "sentenceIds": [
+        "seg-118"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-118",
+          "text": "此即顯示"
+        }
+      ],
+      "expectedTerms": [
+        "骨鎖"
+      ],
+      "prompt": "或骨或鎖 骨、鎖、骨鎖",
+      "items": [
+        {
+          "sentenceId": "seg-118",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 483.77,
+          "end": 485.77,
+          "text": "此即顯示",
+          "prevText": "或骨或鎖",
+          "nextText": "或骨或鎖",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "此即顯示",
+              "suggestedTerm": "骨鎖",
+              "reason": "「此即顯示」後無受詞即結束，依前後文（或骨或鎖、或復骨鎖）應接名相，疑似漏字。",
+              "promptHints": [
+                "骨",
+                "鎖",
+                "骨鎖"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 662.64,
+      "clipEnd": 674.74,
+      "clipDuration": 12.1,
+      "sentenceIds": [
+        "seg-174"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-174",
+          "text": "修這不淨的顛倒 修這不淨觀"
+        }
+      ],
+      "expectedTerms": [
+        "觀（或「斷除淨」）"
+      ],
+      "prompt": "就能斷除淨的顛倒 不淨觀、淨顛倒",
+      "items": [
+        {
+          "sentenceId": "seg-174",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 664.64,
+          "end": 672.74,
+          "text": "修這不淨的顛倒 修這不淨觀",
+          "prevText": "就能斷除淨的顛倒",
+          "nextText": "就是同樣的所緣境，一次又一次地思惟、觀察",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "修這不淨的顛倒 修這不淨觀",
+              "suggestedTerm": "觀（或「斷除淨」）",
+              "reason": "「修這不淨的顛倒」語義不通，不淨觀是為對治淨顛倒，此處應是「修這不淨觀斷除淨顛倒」之類的句子，疑似漏掉「觀」或「斷除淨」等字，造成「修顛倒」的錯誤文義。",
+              "promptHints": [
+                "不淨觀",
+                "淨顛倒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 773.61,
+      "clipEnd": 781.11,
+      "clipDuration": 7.5,
+      "sentenceIds": [
+        "seg-205"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-205",
+          "text": "以於諸受住循受觀"
+        }
+      ],
+      "expectedTerms": [
+        "循受觀（完整名相）"
+      ],
+      "prompt": "底下是解釋 循受觀、受念住、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-205",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 775.61,
+          "end": 779.11,
+          "text": "以於諸受住循受觀",
+          "prevText": "底下是解釋",
+          "nextText": "如實了知諸所有受",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "以於諸受住循受觀",
+              "suggestedTerm": "循受觀（完整名相）",
+              "reason": "「以於諸受住循受觀」語法上「住」後似缺「循受觀」的完整名相結構，疑漏一字成「住循受觀」不通順，應為「住循受觀」前有「於」或「循受觀」為固定名相，此句疑為「以於諸受住循受觀」漏「身」或漏「循」字，導致名相不完整。",
+              "promptHints": [
+                "循受觀",
+                "受念住",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 869.48,
+      "clipEnd": 877.33,
+      "clipDuration": 7.85,
+      "sentenceIds": [
+        "seg-230"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-230",
+          "text": "有樂受、苦受、不苦不樂"
+        }
+      ],
+      "expectedTerms": [
+        "受"
+      ],
+      "prompt": "這件事，前面也說過 不苦不樂受、三受、受念住",
+      "items": [
+        {
+          "sentenceId": "seg-230",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 871.48,
+          "end": 875.33,
+          "text": "有樂受、苦受、不苦不樂",
+          "prevText": "這件事，前面也說過",
+          "nextText": "受。苦惱的感覺",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "有樂受、苦受、不苦不樂",
+              "suggestedTerm": "受",
+              "reason": "「有樂受、苦受、不苦不樂」後接「受。苦惱的感覺」，明顯是「不苦不樂受」被斷開，前句疑似漏掉「受」字，造成名相「不苦不樂受」不完整。",
+              "promptHints": [
+                "不苦不樂受",
+                "三受",
+                "受念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 937.68,
+      "clipEnd": 942.6,
+      "clipDuration": 4.92,
+      "sentenceIds": [
+        "seg-258"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-258",
+          "text": "若有樂受，樂"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "就是沒有 樂受、壞苦",
+      "items": [
+        {
+          "sentenceId": "seg-258",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 939.68,
+          "end": 940.6,
+          "text": "若有樂受，樂",
+          "prevText": "就是沒有",
+          "nextText": "受壞的時候就苦惱",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "若有樂受，樂",
+              "suggestedTerm": null,
+              "reason": "「若有樂受，樂」語意未完，下句「受壞的時候就苦惱」接續，疑似「樂受」被斷開，但此句結尾「樂」字懸空，疑漏後續詞或為斷句錯誤，文義上「若有樂受」後應接完整描述，此處「樂」字突兀。",
+              "promptHints": [
+                "樂受",
+                "壞苦"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1056.14,
+      "clipEnd": 1062.14,
+      "clipDuration": 6,
+      "sentenceIds": [
+        "seg-298"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-298",
+          "text": "呢？「行苦」這兩個字就有意思"
+        }
+      ],
+      "expectedTerms": [
+        "很"
+      ],
+      "prompt": "這樣批判他們 行苦、有意思",
+      "items": [
+        {
+          "sentenceId": "seg-298",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 1058.14,
+          "end": 1060.14,
+          "text": "呢？「行苦」這兩個字就有意思",
+          "prevText": "這樣批判他們",
+          "nextText": "這個「行」在這裡的意思",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "呢？「行苦」這兩個字就有意思",
+              "suggestedTerm": "很",
+              "reason": "「行苦」這兩個字就有意思，語感上疑似漏掉程度副詞，應為「很有意思」或「有意思」前缺動詞，文義不完整。",
+              "promptHints": [
+                "行苦",
+                "有意思"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 1178.33,
+      "clipEnd": 1187.17,
+      "clipDuration": 8.84,
+      "sentenceIds": [
+        "seg-337"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-337",
+          "text": "如說我們造了什麼罪"
+        }
+      ],
+      "expectedTerms": [
+        "譬"
+      ],
+      "prompt": "儲藏在那裡邊 譬如說",
+      "items": [
+        {
+          "sentenceId": "seg-337",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 1180.33,
+          "end": 1185.17,
+          "text": "如說我們造了什麼罪",
+          "prevText": "儲藏在那裡邊",
+          "nextText": "但是沒有受果報",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "如說我們造了什麼罪",
+              "suggestedTerm": "譬",
+              "reason": "「如說」語法不完整，疑漏「譬如」的「譬」字，應為「譬如說我們造了什麼罪」",
+              "promptHints": [
+                "譬如說"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-13",
+      "clipStart": 1243.32,
+      "clipEnd": 1249.52,
+      "clipDuration": 6.2,
+      "sentenceIds": [
+        "seg-361"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-361",
+          "text": "所以，不苦不樂的"
+        }
+      ],
+      "expectedTerms": [
+        "受"
+      ],
+      "prompt": "在你不苦不樂的心境裡面儲藏 受念住、受蘊、不苦不樂受、行苦",
+      "items": [
+        {
+          "sentenceId": "seg-361",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 1245.32,
+          "end": 1247.52,
+          "text": "所以，不苦不樂的",
+          "prevText": "在你不苦不樂的心境裡面儲藏",
+          "nextText": "這種境界是苦惱",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以，不苦不樂的",
+              "suggestedTerm": "受",
+              "reason": "「所以，不苦不樂的」語意未完，後接「這種境界是苦惱」，中間疑似漏掉「受」或「受蘊／受陰」等名相，導致句子斷裂缺主詞。",
+              "promptHints": [
+                "受念住",
+                "受蘊",
+                "不苦不樂受",
+                "行苦"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-14",
+      "clipStart": 1352.32,
+      "clipEnd": 1357.82,
+      "clipDuration": 5.5,
+      "sentenceIds": [
+        "seg-397"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-397",
+          "text": "就是我們心裡面執"
+        }
+      ],
+      "expectedTerms": [
+        "著"
+      ],
+      "prompt": "也應該向裡邊找一個原因 執著、受念住",
+      "items": [
+        {
+          "sentenceId": "seg-397",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 1354.32,
+          "end": 1355.82,
+          "text": "就是我們心裡面執",
+          "prevText": "也應該向裡邊找一個原因",
+          "nextText": "說是「以於諸受住循受觀」",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "就是我們心裡面執",
+              "suggestedTerm": "著",
+              "reason": "「就是我們心裡面執」語意未完，疑漏「著」字，前後文都在講執著與否",
+              "promptHints": [
+                "執著",
+                "受念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-15",
+      "clipStart": 1470.16,
+      "clipEnd": 1475.36,
+      "clipDuration": 5.2,
+      "sentenceIds": [
+        "seg-429"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-429",
+          "text": "辛苦是行"
+        }
+      ],
+      "expectedTerms": [
+        "苦"
+      ],
+      "prompt": "得了聖道的時候才知道 行苦、苦苦、壞苦",
+      "items": [
+        {
+          "sentenceId": "seg-429",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 1472.16,
+          "end": 1473.36,
+          "text": "辛苦是行",
+          "prevText": "得了聖道的時候才知道",
+          "nextText": "苦也是苦",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "辛苦是行",
+              "suggestedTerm": "苦",
+              "reason": "「辛苦是行」語義不完整，前後文在講行苦，此句應是「辛苦是行苦」被吞掉一個「苦」字，與下一句「苦也是苦」連讀才通順。",
+              "promptHints": [
+                "行苦",
+                "苦苦",
+                "壞苦"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-16",
+      "clipStart": 1564.91,
+      "clipEnd": 1575.23,
+      "clipDuration": 10.32,
+      "sentenceIds": [
+        "seg-457"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-457",
+          "text": "所以我們應該以"
+        }
+      ],
+      "expectedTerms": [
+        "菩提心／菩提願（或四念住等修行目標）"
+      ],
+      "prompt": "若沒有受，也就沒有不受 菩提心、菩提願、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-457",
+          "paragraphId": "p-2",
+          "heading": "受念住對治樂倒",
+          "start": 1566.91,
+          "end": 1573.23,
+          "text": "所以我們應該以",
+          "prevText": "若沒有受，也就沒有不受",
+          "nextText": "以菩提願：願得涅槃",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以我們應該以",
+              "suggestedTerm": "菩提心／菩提願（或四念住等修行目標）",
+              "reason": "句子「所以我們應該以」語意未完，明顯缺少「以」的賓語，疑似漏掉後續名相或詞彙，與下句「以菩提願」銜接突兀。",
+              "promptHints": [
+                "菩提心",
+                "菩提願",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-17",
+      "clipStart": 1626.5,
+      "clipEnd": 1634.46,
+      "clipDuration": 7.96,
+      "sentenceIds": [
+        "seg-473"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-473",
+          "text": "因此立心念"
+        }
+      ],
+      "expectedTerms": [
+        "住（心念住）"
+      ],
+      "prompt": "但是我們執著是常，就是顛倒了 心念住、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-473",
+          "paragraphId": "p-3",
+          "heading": "心念住對治常倒",
+          "start": 1628.5,
+          "end": 1632.46,
+          "text": "因此立心念",
+          "prevText": "但是我們執著是常，就是顛倒了",
+          "nextText": "住。本來其他的一切有為法",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "因此立心念",
+              "suggestedTerm": "住（心念住）",
+              "reason": "「因此立心念」與下一句「住」被切開，疑似「心念住」名相被吞字斷句，文義上應為「因此立心念住」一詞。",
+              "promptHints": [
+                "心念住",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-18",
+      "clipStart": 1740.97,
+      "clipEnd": 1751.74,
+      "clipDuration": 10.77,
+      "sentenceIds": [
+        "seg-512"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-512",
+          "text": "所以，容易計心是常。計"
+        }
+      ],
+      "expectedTerms": [
+        "心"
+      ],
+      "prompt": "就會容易想到這裡 計心是常、心念住、常倒",
+      "items": [
+        {
+          "sentenceId": "seg-512",
+          "paragraphId": "p-3",
+          "heading": "心念住對治常倒",
+          "start": 1742.97,
+          "end": 1749.74,
+          "text": "所以，容易計心是常。計",
+          "prevText": "就會容易想到這裡",
+          "nextText": "常的時候，有什麼問題",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以，容易計心是常。計",
+              "suggestedTerm": "心",
+              "reason": "「計」字後文義未完，疑似漏掉受詞「心」或名相前綴，原意應為「計心是常」或「計著於常」",
+              "promptHints": [
+                "計心是常",
+                "心念住",
+                "常倒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-19",
+      "clipStart": 1869.28,
+      "clipEnd": 1878.76,
+      "clipDuration": 9.48,
+      "sentenceIds": [
+        "seg-541"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-541",
+          "text": "前面唯一對著無常中計常顛倒的信念就是"
+        }
+      ],
+      "expectedTerms": [
+        "念住"
+      ],
+      "prompt": "非一眾多種種品類心生滅性，便於無常斷常顛倒 心念住、四念住、對治常顛倒",
+      "items": [
+        {
+          "sentenceId": "seg-541",
+          "paragraphId": "p-3",
+          "heading": "心念住對治常倒",
+          "start": 1871.28,
+          "end": 1876.76,
+          "text": "前面唯一對著無常中計常顛倒的信念就是",
+          "prevText": "非一眾多種種品類心生滅性，便於無常斷常顛倒",
+          "nextText": "這是把大意標出來",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "前面唯一對著無常中計常顛倒的信念就是",
+              "suggestedTerm": "念住",
+              "reason": "「前面唯一對著無常中計常顛倒的信念就是」語法不通，疑漏「念住」或「對治」等詞，且句尾「就是」懸空，後文未接續所引內容。",
+              "promptHints": [
+                "心念住",
+                "四念住",
+                "對治常顛倒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-20",
+      "clipStart": 2009.79,
+      "clipEnd": 2018.89,
+      "clipDuration": 9.1,
+      "sentenceIds": [
+        "seg-583"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-583",
+          "text": "你就能夠便於無常斷常顛倒"
+        }
+      ],
+      "expectedTerms": [
+        "斷"
+      ],
+      "prompt": "這樣子去觀察 斷除、常顛倒、無常",
+      "items": [
+        {
+          "sentenceId": "seg-583",
+          "paragraphId": "p-3",
+          "heading": "心念住對治常倒",
+          "start": 2011.79,
+          "end": 2016.89,
+          "text": "你就能夠便於無常斷常顛倒",
+          "prevText": "這樣子去觀察",
+          "nextText": "就認為心是無常的",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "你就能夠便於無常斷常顛倒",
+              "suggestedTerm": "斷",
+              "reason": "「便於無常斷常顛倒」語法不通，疑似漏掉動詞「斷」，應為「便於斷無常斷常顛倒」或「便能斷除常顛倒」之類的句式。",
+              "promptHints": [
+                "斷除",
+                "常顛倒",
+                "無常"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-21",
+      "clipStart": 2055.05,
+      "clipEnd": 2060.37,
+      "clipDuration": 5.32,
+      "sentenceIds": [
+        "seg-601"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-601",
+          "text": "還要有作意心"
+        }
+      ],
+      "expectedTerms": [
+        "作意心所"
+      ],
+      "prompt": "有根那就是增上緣 作意心所、四緣、唯識",
+      "items": [
+        {
+          "sentenceId": "seg-601",
+          "paragraphId": "p-3",
+          "heading": "心念住對治常倒",
+          "start": 2057.05,
+          "end": 2058.37,
+          "text": "還要有作意心",
+          "prevText": "有根那就是增上緣",
+          "nextText": "所，心才能夠出現",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "還要有作意心",
+              "suggestedTerm": "作意心所",
+              "reason": "「還要有作意心」語義不完整，唯識四緣中生心須有「作意心所」引導，此處疑似漏掉「所」字，與下句「所，心才能夠出現」文氣斷裂相接。",
+              "promptHints": [
+                "作意心所",
+                "四緣",
+                "唯識"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-22",
+      "clipStart": 2148.84,
+      "clipEnd": 2159.32,
+      "clipDuration": 10.48,
+      "sentenceIds": [
+        "seg-632",
+        "seg-633"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-632",
+          "text": "也會感覺到無我"
+        },
+        {
+          "id": "seg-633",
+          "text": "我們自動地就說是無我"
+        }
+      ],
+      "expectedTerms": [
+        "無我的道理",
+        "不（自動地就不說是無我）"
+      ],
+      "prompt": "我們要是注意地去讀阿含經 無我、法念住、阿含經、佛菩薩開示",
+      "items": [
+        {
+          "sentenceId": "seg-632",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2150.84,
+          "end": 2153.4,
+          "text": "也會感覺到無我",
+          "prevText": "我們要是注意地去讀阿含經",
+          "nextText": "我們自動地就說是無我",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "也會感覺到無我",
+              "suggestedTerm": "無我的道理",
+              "reason": "前句說「注意地去讀阿含經」，此句「也會感覺到無我」語意不完整，疑似漏掉「到」或「無我」前的動詞受詞結構，如「感覺到無我的道理／義趣」，文義斷裂。",
+              "promptHints": [
+                "無我",
+                "法念住",
+                "阿含經"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-633",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2153.4,
+          "end": 2157.32,
+          "text": "我們自動地就說是無我",
+          "prevText": "也會感覺到無我",
+          "nextText": "能了解無我是很難的",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "我們自動地就說是無我",
+              "suggestedTerm": "不（自動地就不說是無我）",
+              "reason": "「我們自動地就說是無我」語意突兀，前後文強調無我難以自悟、須佛菩薩開示，此句疑似漏字，可能原為「我們自動地就說是有我」或漏「不」字，與下句「能了解無我是很難的」相呼應。",
+              "promptHints": [
+                "無我",
+                "佛菩薩開示"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-23",
+      "clipStart": 2191.7,
+      "clipEnd": 2198.7,
+      "clipDuration": 7,
+      "sentenceIds": [
+        "seg-644"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-644",
+          "text": "雖然沒有正面地說有我，但"
+        }
+      ],
+      "expectedTerms": [
+        "（後續子句）"
+      ],
+      "prompt": "其他的有些經 無我、有我",
+      "items": [
+        {
+          "sentenceId": "seg-644",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2193.7,
+          "end": 2196.7,
+          "text": "雖然沒有正面地說有我，但",
+          "prevText": "其他的有些經",
+          "nextText": "是裡面的話和有我論有點相似",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "雖然沒有正面地說有我，但",
+              "suggestedTerm": "（後續子句）",
+              "reason": "句末「雖然沒有正面地說有我，但」語意未完，疑似漏掉後續子句或名相，如「但也不明顯地說無我」，屬明顯斷句缺義。",
+              "promptHints": [
+                "無我",
+                "有我"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-24",
+      "clipStart": 2308.6,
+      "clipEnd": 2317.2,
+      "clipDuration": 8.6,
+      "sentenceIds": [
+        "seg-677"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-677",
+          "text": "道宣律師聽他的師長講《四分律》二十"
+        }
+      ],
+      "expectedTerms": [
+        "遍"
+      ],
+      "prompt": "讀一遍、再讀一遍，讀一遍、再讀一遍 四分律、聽講遍數、道宣律師",
+      "items": [
+        {
+          "sentenceId": "seg-677",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2310.6,
+          "end": 2315.2,
+          "text": "道宣律師聽他的師長講《四分律》二十",
+          "prevText": "讀一遍、再讀一遍，讀一遍、再讀一遍",
+          "nextText": "遍，聽二十遍",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "道宣律師聽他的師長講《四分律》二十",
+              "suggestedTerm": "遍",
+              "reason": "句尾「二十」語義不完整，疑似漏掉後續名相或量詞（如「二十遍」或「二十遍以上」），句子在數字處戛然而止。",
+              "promptHints": [
+                "四分律",
+                "聽講遍數",
+                "道宣律師"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-25",
+      "clipStart": 2376.27,
+      "clipEnd": 2386.27,
+      "clipDuration": 10,
+      "sentenceIds": [
+        "seg-700",
+        "seg-701"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-700",
+          "text": "你才能有成就"
+        },
+        {
+          "id": "seg-701",
+          "text": "你才能有成就"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "這樣子，你才能夠在佛法裡面有成就 法念住對治我倒",
+      "items": [
+        {
+          "sentenceId": "seg-700",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2378.27,
+          "end": 2380.54,
+          "text": "你才能有成就",
+          "prevText": "這樣子，你才能夠在佛法裡面有成就",
+          "nextText": "你才能有成就",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "你才能有成就",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "法念住對治我倒"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-701",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2380.54,
+          "end": 2384.27,
+          "text": "你才能有成就",
+          "prevText": "你才能有成就",
+          "nextText": "如果像剛才說的",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "你才能有成就",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "法念住對治我倒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-26",
+      "clipStart": 2409.84,
+      "clipEnd": 2421.44,
+      "clipDuration": 11.6,
+      "sentenceIds": [
+        "seg-707"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-707",
+          "text": "由彼先來有有我見等諸煩惱故"
+        }
+      ],
+      "expectedTerms": [
+        "有我見"
+      ],
+      "prompt": "現在這裡說，怎麼會沒有我而會執著有我呢 我見、煩惱、薩迦耶見",
+      "items": [
+        {
+          "sentenceId": "seg-707",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2411.84,
+          "end": 2419.44,
+          "text": "由彼先來有有我見等諸煩惱故",
+          "prevText": "現在這裡說，怎麼會沒有我而會執著有我呢",
+          "nextText": "因為這個名句中、這個語言裡面有這麼一個字",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "由彼先來有有我見等諸煩惱故",
+              "suggestedTerm": "有我見",
+              "reason": "「由彼先來有有我見等諸煩惱故」連續兩個「有」字，語法突兀，疑似漏掉名相或抄錄時吞字，應為「有『有我見』等諸煩惱故」或漏掉其他字",
+              "promptHints": [
+                "我見",
+                "煩惱",
+                "薩迦耶見"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-27",
+      "clipStart": 2451.22,
+      "clipEnd": 2458.44,
+      "clipDuration": 7.22,
+      "sentenceIds": [
+        "seg-716"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-716",
+          "text": "但是，無形中侵犯了"
+        }
+      ],
+      "expectedTerms": [
+        "我"
+      ],
+      "prompt": "只是用這個字 我、我見、無我論",
+      "items": [
+        {
+          "sentenceId": "seg-716",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2453.22,
+          "end": 2456.44,
+          "text": "但是，無形中侵犯了",
+          "prevText": "只是用這個字",
+          "nextText": "你的利益的時候",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "但是，無形中侵犯了",
+              "suggestedTerm": "我",
+              "reason": "「無形中侵犯了」語意不完整，缺少被侵犯的對象，依前後文應是「我」被侵犯而感覺痛，疑似漏掉「我」字。",
+              "promptHints": [
+                "我",
+                "我見",
+                "無我論"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-28",
+      "clipStart": 2510.35,
+      "clipEnd": 2517.65,
+      "clipDuration": 7.3,
+      "sentenceIds": [
+        "seg-737"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-737",
+          "text": "但是我們從來有有我見等"
+        }
+      ],
+      "expectedTerms": [
+        "不知道／不感覺"
+      ],
+      "prompt": "在《阿含經》有這樣的記錄 我見、無我",
+      "items": [
+        {
+          "sentenceId": "seg-737",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2512.35,
+          "end": 2515.65,
+          "text": "但是我們從來有有我見等",
+          "prevText": "在《阿含經》有這樣的記錄",
+          "nextText": "這個有我見",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "但是我們從來有有我見等",
+              "suggestedTerm": "不知道／不感覺",
+              "reason": "「我們從來有有我見等」語法突兀，疑似漏字，依上下文應是「我們從來（不知道／不感覺）有我見」之類的語句。",
+              "promptHints": [
+                "我見",
+                "無我"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-29",
+      "clipStart": 2565.18,
+      "clipEnd": 2572.46,
+      "clipDuration": 7.28,
+      "sentenceIds": [
+        "seg-755"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-755",
+          "text": "無無我見等諸善法故"
+        }
+      ],
+      "expectedTerms": [
+        "我"
+      ],
+      "prompt": "因此，而就在無我法中執著有我 無我見、諸善法",
+      "items": [
+        {
+          "sentenceId": "seg-755",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2567.18,
+          "end": 2570.46,
+          "text": "無無我見等諸善法故",
+          "prevText": "因此，而就在無我法中執著有我",
+          "nextText": "這樣的人不可能有這個無我見",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "無無我見等諸善法故",
+              "suggestedTerm": "我",
+              "reason": "此句為文言引文，前後文皆在講「無我」，此句突然出現「無無我見」且語法不通，疑似漏字或誤植，應為「無我見等諸善法故」之類的文句。",
+              "promptHints": [
+                "無我見",
+                "諸善法"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-30",
+      "clipStart": 2664.54,
+      "clipEnd": 2669.98,
+      "clipDuration": 5.44,
+      "sentenceIds": [
+        "seg-781"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-781",
+          "text": "就是在剎"
+        }
+      ],
+      "expectedTerms": [
+        "那"
+      ],
+      "prompt": "所以於諸蘊中生起我見 剎那、剎那生滅",
+      "items": [
+        {
+          "sentenceId": "seg-781",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2666.54,
+          "end": 2667.98,
+          "text": "就是在剎",
+          "prevText": "所以於諸蘊中生起我見",
+          "nextText": "那生滅、老病死的",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "就是在剎",
+              "suggestedTerm": "那",
+              "reason": "「就是在剎」與下一句「那生滅、老病死的」明顯是「剎那」被切斷，此句疑似漏掉「那」字，導致名相「剎那」不完整。",
+              "promptHints": [
+                "剎那",
+                "剎那生滅"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-31",
+      "clipStart": 2818.5,
+      "clipEnd": 2824.92,
+      "clipDuration": 6.42,
+      "sentenceIds": [
+        "seg-825"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-825",
+          "text": "住循法觀"
+        }
+      ],
+      "expectedTerms": [
+        "循法觀（疑漏「循身觀」或「法觀」前之字）"
+      ],
+      "prompt": "去觀察的時候 法念住、循身觀、循法觀、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-825",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2820.5,
+          "end": 2822.92,
+          "text": "住循法觀",
+          "prevText": "去觀察的時候",
+          "nextText": "你就會如實了知所計諸蘊",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "住循法觀",
+              "suggestedTerm": "循法觀（疑漏「循身觀」或「法觀」前之字）",
+              "reason": "「住循法觀」語法不完整，依《瑜伽師地論》法念住文句，此處應為「住循身觀、循受心法觀」一類的完整名相，疑似漏掉「循」字或觀名前綴，讀起來像吞字。",
+              "promptHints": [
+                "法念住",
+                "循身觀",
+                "循法觀",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-32",
+      "clipStart": 2871.26,
+      "clipEnd": 2878.58,
+      "clipDuration": 7.32,
+      "sentenceIds": [
+        "seg-842"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-842",
+          "text": "所計諸蘊的共相，應"
+        }
+      ],
+      "expectedTerms": [
+        "觀察／了知"
+      ],
+      "prompt": "所計諸蘊的自相 所計諸蘊、共相、如實了知",
+      "items": [
+        {
+          "sentenceId": "seg-842",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2873.26,
+          "end": 2876.58,
+          "text": "所計諸蘊的共相，應",
+          "prevText": "所計諸蘊的自相",
+          "nextText": "如實了知",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所計諸蘊的共相，應",
+              "suggestedTerm": "觀察／了知",
+              "reason": "前句為「所計諸蘊的自相」，此句「所計諸蘊的共相，應」語意未完，疑漏後接動詞（如「觀察」「了知」），或「應」字後漏字，導致句法斷裂。",
+              "promptHints": [
+                "所計諸蘊",
+                "共相",
+                "如實了知"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-33",
+      "clipStart": 2944.39,
+      "clipEnd": 2950.39,
+      "clipDuration": 6,
+      "sentenceIds": [
+        "seg-865"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-865",
+          "text": "這一定要把這個無我意"
+        }
+      ],
+      "expectedTerms": [
+        "義"
+      ],
+      "prompt": "便於無我斷我顛倒 無我義、無我觀、認識",
+      "items": [
+        {
+          "sentenceId": "seg-865",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 2946.39,
+          "end": 2948.39,
+          "text": "這一定要把這個無我意",
+          "prevText": "便於無我斷我顛倒",
+          "nextText": "義深刻地認識",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這一定要把這個無我意",
+              "suggestedTerm": "義",
+              "reason": "「這一定要把這個無我意」句尾懸空，疑漏「義」字或後接名詞（如「無我意義」「無我義」），與下句「義深刻地認識」斷裂，疑似掉字。",
+              "promptHints": [
+                "無我義",
+                "無我觀",
+                "認識"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-34",
+      "clipStart": 3008.4,
+      "clipEnd": 3014.21,
+      "clipDuration": 5.81,
+      "sentenceIds": [
+        "seg-890"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-890",
+          "text": "還是有這種情形！若"
+        }
+      ],
+      "expectedTerms": [
+        "若（後接完整子句）"
+      ],
+      "prompt": "也公然地認為有我才是對的 無常觀、無我觀",
+      "items": [
+        {
+          "sentenceId": "seg-890",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3010.4,
+          "end": 3012.21,
+          "text": "還是有這種情形！若",
+          "prevText": "也公然地認為有我才是對的",
+          "nextText": "這樣子，無常觀修不來",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "還是有這種情形！若",
+              "suggestedTerm": "若（後接完整子句）",
+              "reason": "「還是有這種情形！若」句尾突然出現「若」字，語法斷裂，疑似後面漏掉接續詞或名相（如「若這樣」），或「若」為誤留的殘字。",
+              "promptHints": [
+                "無常觀",
+                "無我觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-35",
+      "clipStart": 3094.75,
+      "clipEnd": 3101.75,
+      "clipDuration": 7,
+      "sentenceIds": [
+        "seg-914"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-914",
+          "text": "其餘的都是在色受想行識諸"
+        }
+      ],
+      "expectedTerms": [
+        "蘊"
+      ],
+      "prompt": "除了一少分的佛教徒之外 諸蘊、色受想行識、五蘊",
+      "items": [
+        {
+          "sentenceId": "seg-914",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3096.75,
+          "end": 3099.75,
+          "text": "其餘的都是在色受想行識諸",
+          "prevText": "除了一少分的佛教徒之外",
+          "nextText": "是唯有蘊",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "其餘的都是在色受想行識諸",
+              "suggestedTerm": "蘊",
+              "reason": "句子「其餘的都是在色受想行識諸」語法未完，句尾「諸」後明顯缺少名相（如「諸蘊」），與前文「多於諸蘊」及後句「是唯有蘊」對照，此處應為「在色受想行識諸蘊」中橫計有我之義。",
+              "promptHints": [
+                "諸蘊",
+                "色受想行識",
+                "五蘊"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-36",
+      "clipStart": 3204.53,
+      "clipEnd": 3210.87,
+      "clipDuration": 6.34,
+      "sentenceIds": [
+        "seg-944"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-944",
+          "text": "但是佛教徒，這件事"
+        }
+      ],
+      "expectedTerms": [
+        "做不到"
+      ],
+      "prompt": "不是有我論所能敵對的 善根、得聖道",
+      "items": [
+        {
+          "sentenceId": "seg-944",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3206.53,
+          "end": 3208.87,
+          "text": "但是佛教徒，這件事",
+          "prevText": "不是有我論所能敵對的",
+          "nextText": "還要有善根才能做得來",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "但是佛教徒，這件事",
+              "suggestedTerm": "做不到",
+              "reason": "「但是佛教徒，這件事」語意不完整，疑似漏掉動詞（如「做不到」或「辦不到」），導致下句「還要有善根才能做得來」失去對比對象。",
+              "promptHints": [
+                "善根",
+                "得聖道"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-37",
+      "clipStart": 3390.04,
+      "clipEnd": 3396.87,
+      "clipDuration": 6.83,
+      "sentenceIds": [
+        "seg-996"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-996",
+          "text": "叫做"
+        }
+      ],
+      "expectedTerms": [
+        "染"
+      ],
+      "prompt": "或者說「非法」就是流轉生死 染淨、非法、流轉生死",
+      "items": [
+        {
+          "sentenceId": "seg-996",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3392.04,
+          "end": 3394.87,
+          "text": "叫做",
+          "prevText": "或者說「非法」就是流轉生死",
+          "nextText": "或者修學禪定以後你離欲了",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "叫做",
+              "suggestedTerm": "染",
+              "reason": "前句說「非法就是流轉生死」，此句「叫做」後文義未完，疑似漏掉「染」或「染污」等結論詞，與後文「名之為淨」對應。",
+              "promptHints": [
+                "染淨",
+                "非法",
+                "流轉生死"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-38",
+      "clipStart": 3454.48,
+      "clipEnd": 3459.98,
+      "clipDuration": 5.5,
+      "sentenceIds": [
+        "seg-1018"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1018",
+          "text": "這是計"
+        }
+      ],
+      "expectedTerms": [
+        "橫"
+      ],
+      "prompt": "就「有染、有淨」的不同了 橫計、我論",
+      "items": [
+        {
+          "sentenceId": "seg-1018",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3456.48,
+          "end": 3457.98,
+          "text": "這是計",
+          "prevText": "就「有染、有淨」的不同了",
+          "nextText": "我論者是這樣的想法",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這是計",
+              "suggestedTerm": "橫",
+              "reason": "「這是計」語意不完整，與前後文「我論者」「橫計」對照，疑似漏掉「橫」字，應為「這是橫計」，且下句 seg-1020 重複出現「這是橫計」，此句疑為口誤或漏字。",
+              "promptHints": [
+                "橫計",
+                "我論"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-39",
+      "clipStart": 3468.74,
+      "clipEnd": 3473.94,
+      "clipDuration": 5.2,
+      "sentenceIds": [
+        "seg-1024"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1024",
+          "text": "底下第二科。除"
+        }
+      ],
+      "expectedTerms": [
+        "遣"
+      ],
+      "prompt": "這是第一科 除遣、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-1024",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3470.74,
+          "end": 3471.94,
+          "text": "底下第二科。除",
+          "prevText": "這是第一科",
+          "nextText": "為欲除遣",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "底下第二科。除",
+              "suggestedTerm": "遣",
+              "reason": "「底下第二科。除」句尾突然斷裂，「除」字後語意未完，依下文「為欲除遣…愚故，立…念住」句式，疑似漏掉「遣」或後續賓語（如「除遣」某種愚）。",
+              "promptHints": [
+                "除遣",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-40",
+      "clipStart": 3590.39,
+      "clipEnd": 3597.39,
+      "clipDuration": 7,
+      "sentenceIds": [
+        "seg-1070"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1070",
+          "text": "現在佛為破除你執"
+        }
+      ],
+      "expectedTerms": [
+        "心是我（愚）"
+      ],
+      "prompt": "常住真心，那是我 心意識執我愚、心念住、計我論者",
+      "items": [
+        {
+          "sentenceId": "seg-1070",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3592.39,
+          "end": 3595.39,
+          "text": "現在佛為破除你執",
+          "prevText": "常住真心，那是我",
+          "nextText": "你知道心是我",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "現在佛為破除你執",
+              "suggestedTerm": "心是我（愚）",
+              "reason": "句尾「你執」語意未完，依前文「為欲除遣於心意識執我愚」及下文應接「心是我」之愚，疑似漏字致句意斷裂。",
+              "promptHints": [
+                "心意識執我愚",
+                "心念住",
+                "計我論者"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-41",
+      "clipStart": 3653.64,
+      "clipEnd": 3659.64,
+      "clipDuration": 6,
+      "sentenceIds": [
+        "seg-1087"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1087",
+          "text": "呢？了別以後"
+        }
+      ],
+      "expectedTerms": [
+        "心"
+      ],
+      "prompt": "這個心是什麼意思? 心、意、識",
+      "items": [
+        {
+          "sentenceId": "seg-1087",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3655.64,
+          "end": 3657.64,
+          "text": "呢？了別以後",
+          "prevText": "這個心是什麼意思?",
+          "nextText": "了別了一切的種種的印象、種種的這些經驗",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "呢？了別以後",
+              "suggestedTerm": "心",
+              "reason": "「呢？了別以後」句首突兀，前句「這個心是什麼意思?」問句後直接接「呢？」，中間疑似漏掉「心是什麼意思」的答語或「心」字，語法斷裂。",
+              "promptHints": [
+                "心",
+                "意",
+                "識"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-42",
+      "clipStart": 3683.46,
+      "clipEnd": 3690.37,
+      "clipDuration": 6.91,
+      "sentenceIds": [
+        "seg-1095"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1095",
+          "text": "和識是向外"
+        }
+      ],
+      "expectedTerms": [
+        "心（或「向內」）"
+      ],
+      "prompt": "又收回來 識、心、向外、向內",
+      "items": [
+        {
+          "sentenceId": "seg-1095",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3685.46,
+          "end": 3688.37,
+          "text": "和識是向外",
+          "prevText": "又收回來",
+          "nextText": "識和心來對論",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "和識是向外",
+              "suggestedTerm": "心（或「向內」）",
+              "reason": "「和識是向外」缺主詞，依前後文（識向外了別、心收回來）應是「識和心來對論」時「識是向外、心是向內」，此句疑似漏「心」或「向內」等字。",
+              "promptHints": [
+                "識",
+                "心",
+                "向外",
+                "向內"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-43",
+      "clipStart": 3759.48,
+      "clipEnd": 3767.64,
+      "clipDuration": 8.16,
+      "sentenceIds": [
+        "seg-1118"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1118",
+          "text": "不是我，不是常恆住、不變易的，就是除遣"
+        }
+      ],
+      "expectedTerms": [
+        "我"
+      ],
+      "prompt": "心是剎那剎那生滅變化的因緣所生法 除遣我執、心念住",
+      "items": [
+        {
+          "sentenceId": "seg-1118",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3761.48,
+          "end": 3765.64,
+          "text": "不是我，不是常恆住、不變易的，就是除遣",
+          "prevText": "心是剎那剎那生滅變化的因緣所生法",
+          "nextText": "就是除遣這個我",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "不是我，不是常恆住、不變易的，就是除遣",
+              "suggestedTerm": "我",
+              "reason": "「就是除遣」後語義未完，下句「就是除遣這個我」補足，但本句疑漏賓語「我」或「我執」，致句意斷裂。",
+              "promptHints": [
+                "除遣我執",
+                "心念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-44",
+      "clipStart": 3823.1,
+      "clipEnd": 3837.35,
+      "clipDuration": 14.25,
+      "sentenceIds": [
+        "seg-1140",
+        "seg-1141",
+        "seg-1142"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1140",
+          "text": "沒有我可"
+        },
+        {
+          "id": "seg-1141",
+          "text": "得。由我發出來活動"
+        },
+        {
+          "id": "seg-1142",
+          "text": "有合法的行動"
+        }
+      ],
+      "expectedTerms": [
+        "得",
+        "由我發出來的"
+      ],
+      "prompt": "都是因緣所生法 無我、我不可得、我執、造業、合法、非法",
+      "items": [
+        {
+          "sentenceId": "seg-1140",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3825.1,
+          "end": 3828.23,
+          "text": "沒有我可",
+          "prevText": "都是因緣所生法",
+          "nextText": "得。由我發出來活動",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "沒有我可",
+              "suggestedTerm": "得",
+              "reason": "「沒有我可」語法不完整，下句「得。由我發出來活動」開頭「得」應屬本句，疑為斷句錯置或漏字，原意應為「沒有我可得」。",
+              "promptHints": [
+                "無我",
+                "我不可得"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-1141",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3828.23,
+          "end": 3833.35,
+          "text": "得。由我發出來活動",
+          "prevText": "沒有我可",
+          "nextText": "有合法的行動",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "得。由我發出來活動",
+              "suggestedTerm": "得",
+              "reason": "「由我發出來活動」主詞「我」前疑漏否定或上下文語境詞，且前句「沒有我可」的「得」應屬本句開頭，疑為「（沒有我）可得。由我發出來活動」被錯切。",
+              "promptHints": [
+                "我執",
+                "造業"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-1142",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3833.35,
+          "end": 3835.35,
+          "text": "有合法的行動",
+          "prevText": "得。由我發出來活動",
+          "nextText": "有非法的行動",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "有合法的行動",
+              "suggestedTerm": "由我發出來的",
+              "reason": "「有合法的行動」與前後文「由我發出來活動」對照，疑漏主詞或修飾語，原意可能為「由我發出來的活動，有合法的行動」。",
+              "promptHints": [
+                "造業",
+                "合法",
+                "非法"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-45",
+      "clipStart": 3848.94,
+      "clipEnd": 3862.06,
+      "clipDuration": 13.12,
+      "sentenceIds": [
+        "seg-1149"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1149",
+          "text": "有第二個原因建立四念住的法門。建立四念住的"
+        }
+      ],
+      "expectedTerms": [
+        "理由"
+      ],
+      "prompt": "這是第二義 建立四念住、第二義",
+      "items": [
+        {
+          "sentenceId": "seg-1149",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3850.94,
+          "end": 3860.06,
+          "text": "有第二個原因建立四念住的法門。建立四念住的",
+          "prevText": "這是第二義",
+          "nextText": "第二義",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "有第二個原因建立四念住的法門。建立四念住的",
+              "suggestedTerm": "理由",
+              "reason": "「建立四念住的」句尾懸空，疑漏「理由」或「第二義」等名詞，語法不完整。",
+              "promptHints": [
+                "建立四念住",
+                "第二義"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-46",
+      "clipStart": 3953.33,
+      "clipEnd": 3962.39,
+      "clipDuration": 9.06,
+      "sentenceIds": [
+        "seg-1175"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1175",
+          "text": "若為此故，造作諸業」，那麼就是「受"
+        }
+      ],
+      "expectedTerms": [
+        "受者"
+      ],
+      "prompt": "要到天上去享天福 受者、作者、我論",
+      "items": [
+        {
+          "sentenceId": "seg-1175",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 3955.33,
+          "end": 3960.39,
+          "text": "若為此故，造作諸業」，那麼就是「受",
+          "prevText": "要到天上去享天福",
+          "nextText": "若造業者」：就是「心",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "若為此故，造作諸業」，那麼就是「受",
+              "suggestedTerm": "受者",
+              "reason": "引文「若為此故，造作諸業」前缺引號起始，且句尾「就是『受』」疑似漏掉名相後綴，文義不完整",
+              "promptHints": [
+                "受者",
+                "作者",
+                "我論"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-47",
+      "clipStart": 4499.26,
+      "clipEnd": 4505.62,
+      "clipDuration": 6.36,
+      "sentenceIds": [
+        "seg-1359"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1359",
+          "text": "住、相雜念住"
+        }
+      ],
+      "expectedTerms": [
+        "共念"
+      ],
+      "prompt": "一個自性念住 共念住、相雜念住、自性念住、所緣念住",
+      "items": [
+        {
+          "sentenceId": "seg-1359",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 4501.26,
+          "end": 4503.62,
+          "text": "住、相雜念住",
+          "prevText": "一個自性念住",
+          "nextText": "這樣子就把這個念住",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "住、相雜念住",
+              "suggestedTerm": "共念",
+              "reason": "前句列「一個自性念住」，此句「住、相雜念住」語法斷裂，依《瑜伽師地論》三念住應為「一個共念住／相雜念住」，疑漏「共念」二字",
+              "promptHints": [
+                "共念住",
+                "相雜念住",
+                "自性念住",
+                "所緣念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-48",
+      "clipStart": 4605.87,
+      "clipEnd": 4613.27,
+      "clipDuration": 7.4,
+      "sentenceIds": [
+        "seg-1391"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1391",
+          "text": "等到一念相應，斷除去"
+        }
+      ],
+      "expectedTerms": [
+        "見"
+      ],
+      "prompt": "沒斷煩惱之前的戒定慧，都是善有漏法 見煩惱、愛煩惱、見惑、思惑",
+      "items": [
+        {
+          "sentenceId": "seg-1391",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 4607.87,
+          "end": 4611.27,
+          "text": "等到一念相應，斷除去",
+          "prevText": "沒斷煩惱之前的戒定慧，都是善有漏法",
+          "nextText": "我煩惱、愛煩惱的時候",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "等到一念相應，斷除去",
+              "suggestedTerm": "見",
+              "reason": "「斷除去」後語意未完，依下句「我煩惱、愛煩惱」判斷，此處疑似漏掉「見」字，應為「見煩惱、愛煩惱」，即見惑與思惑（愛煩惱）之對舉，佛學講記中常見此搭配。",
+              "promptHints": [
+                "見煩惱",
+                "愛煩惱",
+                "見惑",
+                "思惑"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-49",
+      "clipStart": 4696.25,
+      "clipEnd": 4702.66,
+      "clipDuration": 6.41,
+      "sentenceIds": [
+        "seg-1416"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1416",
+          "text": "就是用這個做佛法"
+        }
+      ],
+      "expectedTerms": [
+        "（不明，可能為某種修行方法或經驗的名稱）"
+      ],
+      "prompt": "這些人想出來一件事 相似佛法、菩薩戒",
+      "items": [
+        {
+          "sentenceId": "seg-1416",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 4698.25,
+          "end": 4700.66,
+          "text": "就是用這個做佛法",
+          "prevText": "這些人想出來一件事",
+          "nextText": "菩薩戒上就分明說",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "就是用這個做佛法",
+              "suggestedTerm": "（不明，可能為某種修行方法或經驗的名稱）",
+              "reason": "「就是用這個做佛法」語義不完整，前文說「這些人想出來一件事」，此句應指明「這個」是什麼（如某種修行方法或經驗），並說明如何「做佛法」，疑似漏掉關鍵名詞或動詞，導致句意斷裂。",
+              "promptHints": [
+                "相似佛法",
+                "菩薩戒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-50",
+      "clipStart": 4762.49,
+      "clipEnd": 4768.27,
+      "clipDuration": 5.78,
+      "sentenceIds": [
+        "seg-1440"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1440",
+          "text": "聞所成有這樣的意思"
+        }
+      ],
+      "expectedTerms": [
+        "慧"
+      ],
+      "prompt": "應該是這樣意思 聞所成慧、三慧",
+      "items": [
+        {
+          "sentenceId": "seg-1440",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 4764.49,
+          "end": 4766.27,
+          "text": "聞所成有這樣的意思",
+          "prevText": "應該是這樣意思",
+          "nextText": "聞所成慧是初一步",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "聞所成有這樣的意思",
+              "suggestedTerm": "慧",
+              "reason": "前後文都在講「聞所成慧」，此句只說「聞所成」，疑似漏掉「慧」字",
+              "promptHints": [
+                "聞所成慧",
+                "三慧"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-51",
+      "clipStart": 4872.42,
+      "clipEnd": 4879.49,
+      "clipDuration": 7.07,
+      "sentenceIds": [
+        "seg-1484"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1484",
+          "text": "是修所成的智慧"
+        }
+      ],
+      "expectedTerms": [
+        "修所成慧（作主詞，如「而修所成慧」）"
+      ],
+      "prompt": "還有煩惱 修所成慧、三慧：聞思修",
+      "items": [
+        {
+          "sentenceId": "seg-1484",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 4874.42,
+          "end": 4877.49,
+          "text": "是修所成的智慧",
+          "prevText": "還有煩惱",
+          "nextText": "通」於「漏」和「無漏",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是修所成的智慧",
+              "suggestedTerm": "修所成慧（作主詞，如「而修所成慧」）",
+              "reason": "前句說聞思二慧是有漏，此句突然說「是修所成的智慧」，缺少主詞（如「修所成慧」或「而修所成慧」），語法上明顯斷裂，疑似漏掉主語名相。",
+              "promptHints": [
+                "修所成慧",
+                "三慧：聞思修"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-52",
+      "clipStart": 4977.4,
+      "clipEnd": 4986.51,
+      "clipDuration": 9.11,
+      "sentenceIds": [
+        "seg-1512"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1512",
+          "text": "當然我們在佛學院裡面讀過、學過的"
+        }
+      ],
+      "expectedTerms": [
+        "的人"
+      ],
+      "prompt": "這四念住 佛學院、同學、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-1512",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 4979.4,
+          "end": 4984.51,
+          "text": "當然我們在佛學院裡面讀過、學過的",
+          "prevText": "這四念住",
+          "nextText": "人，這是老生常談",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "當然我們在佛學院裡面讀過、學過的",
+              "suggestedTerm": "的人",
+              "reason": "「讀過、學過的」與下一句「人」之間語法斷裂，疑似漏掉「的人」或「的同學」等名詞，導致「人」字懸空無法銜接前句。",
+              "promptHints": [
+                "佛學院",
+                "同學",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-53",
+      "clipStart": 5040.85,
+      "clipEnd": 5048.48,
+      "clipDuration": 7.63,
+      "sentenceIds": [
+        "seg-1530"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1530",
+          "text": "文沒有這裡這麼多"
+        }
+      ],
+      "expectedTerms": [
+        "文句"
+      ],
+      "prompt": "也是玄奘大師翻譯的 法蘊足論、文句",
+      "items": [
+        {
+          "sentenceId": "seg-1530",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5042.85,
+          "end": 5046.48,
+          "text": "文沒有這裡這麼多",
+          "prevText": "也是玄奘大師翻譯的",
+          "nextText": "比較少，可也不是很少",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "文沒有這裡這麼多",
+              "suggestedTerm": "文句",
+              "reason": "「文沒有這裡這麼多」語法突兀，疑似漏掉主詞名相，應指《法蘊足論》的「文句」或「文字」較少",
+              "promptHints": [
+                "法蘊足論",
+                "文句"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-54",
+      "clipStart": 5050.32,
+      "clipEnd": 5057.64,
+      "clipDuration": 7.32,
+      "sentenceIds": [
+        "seg-1533"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1533",
+          "text": "常常讀，這"
+        }
+      ],
+      "expectedTerms": [
+        "法門"
+      ],
+      "prompt": "每天讀它幾遍 法門、用功",
+      "items": [
+        {
+          "sentenceId": "seg-1533",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5052.32,
+          "end": 5055.64,
+          "text": "常常讀，這",
+          "prevText": "每天讀它幾遍",
+          "nextText": "文句熟了",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "常常讀，這",
+              "suggestedTerm": "法門",
+              "reason": "「常常讀，這」句尾突然截斷，疑似漏掉後續名詞，如「這個法門」「這樣用功」等",
+              "promptHints": [
+                "法門",
+                "用功"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-55",
+      "clipStart": 5114.35,
+      "clipEnd": 5120.35,
+      "clipDuration": 6,
+      "sentenceIds": [
+        "seg-1554"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1554",
+          "text": "很多方面的功德"
+        }
+      ],
+      "expectedTerms": [
+        "就出來了"
+      ],
+      "prompt": "心情快樂 功德、逐漸",
+      "items": [
+        {
+          "sentenceId": "seg-1554",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5116.35,
+          "end": 5118.35,
+          "text": "很多方面的功德",
+          "prevText": "心情快樂",
+          "nextText": "很多種功德就逐漸",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "很多方面的功德",
+              "suggestedTerm": "就出來了",
+              "reason": "「很多方面的功德」語意不完整，疑似漏掉動詞或後續說明，如「很多方面的功德就出來了」",
+              "promptHints": [
+                "功德",
+                "逐漸"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-56",
+      "clipStart": 5185.11,
+      "clipEnd": 5191.11,
+      "clipDuration": 6,
+      "sentenceIds": [
+        "seg-1578"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1578",
+          "text": "要明記不忘才可以！師"
+        }
+      ],
+      "expectedTerms": [
+        "師父／師答（後續語句）"
+      ],
+      "prompt": "於文於義 師父、師答、問答",
+      "items": [
+        {
+          "sentenceId": "seg-1578",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5187.11,
+          "end": 5189.11,
+          "text": "要明記不忘才可以！師",
+          "prevText": "於文於義",
+          "nextText": "我答覆一位法師的問題",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "要明記不忘才可以！師",
+              "suggestedTerm": "師父／師答（後續語句）",
+              "reason": "句尾出現孤立的「師」字，前後文皆無法銜接，疑似原句為「才可以。師父…」或「才可以。師答…」等被切斷，導致「師」字殘留、後文漏失。",
+              "promptHints": [
+                "師父",
+                "師答",
+                "問答"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-57",
+      "clipStart": 5369.17,
+      "clipEnd": 5377.61,
+      "clipDuration": 8.44,
+      "sentenceIds": [
+        "seg-1624"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1624",
+          "text": "進而沉沒、昏"
+        }
+      ],
+      "expectedTerms": [
+        "沉"
+      ],
+      "prompt": "這件事初開始情況良好 昏沉、沉沒",
+      "items": [
+        {
+          "sentenceId": "seg-1624",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5371.17,
+          "end": 5375.61,
+          "text": "進而沉沒、昏",
+          "prevText": "這件事初開始情況良好",
+          "nextText": "這件事這樣",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "進而沉沒、昏",
+              "suggestedTerm": "沉",
+              "reason": "前後文皆作「沉沒、昏沉」，此句僅餘「昏」字，明顯少一「沉」字，語意不完整。",
+              "promptHints": [
+                "昏沉",
+                "沉沒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-58",
+      "clipStart": 5641.94,
+      "clipEnd": 5649.92,
+      "clipDuration": 7.98,
+      "sentenceIds": [
+        "seg-1714",
+        "seg-1715"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1714",
+          "text": "什麼地方不對"
+        },
+        {
+          "id": "seg-1715",
+          "text": "什麼地方不對"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "那就應該注意一下 法念住對治我倒",
+      "items": [
+        {
+          "sentenceId": "seg-1714",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5643.94,
+          "end": 5645.54,
+          "text": "什麼地方不對",
+          "prevText": "那就應該注意一下",
+          "nextText": "什麼地方不對",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "什麼地方不對",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "法念住對治我倒"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-1715",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5645.54,
+          "end": 5647.92,
+          "text": "什麼地方不對",
+          "prevText": "什麼地方不對",
+          "nextText": "也要對治",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "什麼地方不對",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "法念住對治我倒"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-59",
+      "clipStart": 5654.07,
+      "clipEnd": 5660.75,
+      "clipDuration": 6.68,
+      "sentenceIds": [
+        "seg-1720"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1720",
+          "text": "那你就趕快修毘缽舍"
+        }
+      ],
+      "expectedTerms": [
+        "那"
+      ],
+      "prompt": "有點不合適，昏沉 毘缽舍那、觀",
+      "items": [
+        {
+          "sentenceId": "seg-1720",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5656.07,
+          "end": 5658.75,
+          "text": "那你就趕快修毘缽舍",
+          "prevText": "有點不合適，昏沉",
+          "nextText": "那，要對治",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "那你就趕快修毘缽舍",
+              "suggestedTerm": "那",
+              "reason": "「修毘缽舍」語意未完，毘缽舍那（觀）被截斷，疑似漏「那」字",
+              "promptHints": [
+                "毘缽舍那",
+                "觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-60",
+      "clipStart": 5798.8,
+      "clipEnd": 5806.12,
+      "clipDuration": 7.32,
+      "sentenceIds": [
+        "seg-1779"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1779",
+          "text": "自己就不能攝心，有"
+        }
+      ],
+      "expectedTerms": [
+        "人"
+      ],
+      "prompt": "大家有很多聲音 有的人、攝心不亂",
+      "items": [
+        {
+          "sentenceId": "seg-1779",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5800.8,
+          "end": 5804.12,
+          "text": "自己就不能攝心，有",
+          "prevText": "大家有很多聲音",
+          "nextText": "的人不能",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "自己就不能攝心，有",
+              "suggestedTerm": "人",
+              "reason": "句子以「有」結尾，語法斷裂，明顯疑似吞字或漏字，且下一句「的人不能」被切開，應為「有的人不能攝心」一整句被誤切或漏字。",
+              "promptHints": [
+                "有的人",
+                "攝心不亂"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-61",
+      "clipStart": 5976.44,
+      "clipEnd": 5981.44,
+      "clipDuration": 5,
+      "sentenceIds": [
+        "seg-1829"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1829",
+          "text": "或者單獨用"
+        }
+      ],
+      "expectedTerms": [
+        "功"
+      ],
+      "prompt": "修行人在禪堂裡用功 用功、靜坐、禪堂",
+      "items": [
+        {
+          "sentenceId": "seg-1829",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 5978.44,
+          "end": 5979.44,
+          "text": "或者單獨用",
+          "prevText": "修行人在禪堂裡用功",
+          "nextText": "他自己在頭上設一個叫做「禪鎮」的東西",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "或者單獨用",
+              "suggestedTerm": "功",
+              "reason": "前後文都在講修行人用功的方式，此句「或者單獨用」語意不完整，疑似漏掉「功」字或「坐」字，應為「或者單獨用功」或「或者單獨靜坐」之類的完整表述。",
+              "promptHints": [
+                "用功",
+                "靜坐",
+                "禪堂"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-62",
+      "clipStart": 6064.94,
+      "clipEnd": 6071.12,
+      "clipDuration": 6.18,
+      "sentenceIds": [
+        "seg-1855"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1855",
+          "text": "我認為這是合法"
+        }
+      ],
+      "expectedTerms": [
+        "佛法"
+      ],
+      "prompt": "再回去靜坐 合法、如法、佛法",
+      "items": [
+        {
+          "sentenceId": "seg-1855",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6066.94,
+          "end": 6069.12,
+          "text": "我認為這是合法",
+          "prevText": "再回去靜坐",
+          "nextText": "不能說沒有規矩",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "我認為這是合法",
+              "suggestedTerm": "佛法",
+              "reason": "「我認為這是合法」語意不完整，依前後文（靜坐昏沉起來經行、禮佛）應是說這樣做合乎佛法的規矩，疑似漏掉「佛法」二字。",
+              "promptHints": [
+                "合法",
+                "如法",
+                "佛法"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-63",
+      "clipStart": 6309.62,
+      "clipEnd": 6317.87,
+      "clipDuration": 8.25,
+      "sentenceIds": [
+        "seg-1939"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1939",
+          "text": "的事情，訶斥罪過的事情"
+        }
+      ],
+      "expectedTerms": [
+        "讚歎"
+      ],
+      "prompt": "我們應該讚歎這個白、清淨的功德 讚歎功德、訶斥罪過",
+      "items": [
+        {
+          "sentenceId": "seg-1939",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6311.62,
+          "end": 6315.87,
+          "text": "的事情，訶斥罪過的事情",
+          "prevText": "我們應該讚歎這個白、清淨的功德",
+          "nextText": "人家有功德的時候",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "的事情，訶斥罪過的事情",
+              "suggestedTerm": "讚歎",
+              "reason": "前句「讚歎這個白、清淨的功德」與本句「的事情，訶斥罪過的事情」語法斷裂，疑似「功德」後漏掉動詞（如「讚歎」）或「功德」後應接名相（如「白淨法」），導致「的事情」缺主詞。",
+              "promptHints": [
+                "讚歎功德",
+                "訶斥罪過"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-64",
+      "clipStart": 6365.01,
+      "clipEnd": 6373.01,
+      "clipDuration": 8,
+      "sentenceIds": [
+        "seg-1957"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1957",
+          "text": "子。若是自己想要有進步"
+        }
+      ],
+      "expectedTerms": [
+        "佛弟子"
+      ],
+      "prompt": "不應該這樣 佛弟子、諸位法師、弟子",
+      "items": [
+        {
+          "sentenceId": "seg-1957",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6367.01,
+          "end": 6371.01,
+          "text": "子。若是自己想要有進步",
+          "prevText": "不應該這樣",
+          "nextText": "就從自己的這些煩惱上開始",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "子。若是自己想要有進步",
+              "suggestedTerm": "佛弟子",
+              "reason": "句首僅出現「子。」，明顯缺少主詞或稱謂（如「佛弟子」「諸位法師」等），語法不完整，疑似 ASR 吞掉句首字詞。",
+              "promptHints": [
+                "佛弟子",
+                "諸位法師",
+                "弟子"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-65",
+      "clipStart": 6452.04,
+      "clipEnd": 6458.93,
+      "clipDuration": 6.89,
+      "sentenceIds": [
+        "seg-1985"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1985",
+          "text": "我對於佛法有信心，有"
+        }
+      ],
+      "expectedTerms": [
+        "慚愧"
+      ],
+      "prompt": "用善惡因果的觀念，也應該取消自己的這種過失 信心、慚愧、因果",
+      "items": [
+        {
+          "sentenceId": "seg-1985",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6454.04,
+          "end": 6456.93,
+          "text": "我對於佛法有信心，有",
+          "prevText": "用善惡因果的觀念，也應該取消自己的這種過失",
+          "nextText": "信心就是相信因果",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "我對於佛法有信心，有",
+              "suggestedTerm": "慚愧",
+              "reason": "「我對於佛法有信心，有」句尾突然斷裂，語法不完整，疑似漏掉後續名相（如「有慚愧」等），與下句「信心就是相信因果」銜接突兀。",
+              "promptHints": [
+                "信心",
+                "慚愧",
+                "因果"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-66",
+      "clipStart": 6495.44,
+      "clipEnd": 6503.48,
+      "clipDuration": 8.04,
+      "sentenceIds": [
+        "seg-2000"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-2000",
+          "text": "就是去掉自己的污點，就"
+        }
+      ],
+      "expectedTerms": [
+        "清淨自己"
+      ],
+      "prompt": "現在修四念處也好 污點、洗澡、清淨",
+      "items": [
+        {
+          "sentenceId": "seg-2000",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6497.44,
+          "end": 6501.48,
+          "text": "就是去掉自己的污點，就",
+          "prevText": "現在修四念處也好",
+          "nextText": "像洗澡似的，把這些污垢都洗掉",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "就是去掉自己的污點，就",
+              "suggestedTerm": "清淨自己",
+              "reason": "「就是去掉自己的污點，就」句尾「就」字懸空，語法斷裂，疑似漏掉後續詞彙（如「就是清淨自己」等），與下句「像洗澡似的」銜接不完整。",
+              "promptHints": [
+                "污點",
+                "洗澡",
+                "清淨"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-67",
+      "clipStart": 6598.93,
+      "clipEnd": 6607.71,
+      "clipDuration": 8.78,
+      "sentenceIds": [
+        "seg-2030"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-2030",
+          "text": "《修四念處》就是不障人之法"
+        }
+      ],
+      "expectedTerms": [
+        "心"
+      ],
+      "prompt": "《金剛經》就是心不障人之法 心不障人之法、四念處",
+      "items": [
+        {
+          "sentenceId": "seg-2030",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6600.93,
+          "end": 6605.71,
+          "text": "《修四念處》就是不障人之法",
+          "prevText": "《金剛經》就是心不障人之法",
+          "nextText": "而《瑜伽師地論》裡面說得非常微細",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "《修四念處》就是不障人之法",
+              "suggestedTerm": "心",
+              "reason": "前句說《金剛經》是心不障人之法，此句以《修四念處》對舉，但句中「不障人之法」前缺少「心」字，與前句「心不障人之法」句式不對稱，疑似漏字。",
+              "promptHints": [
+                "心不障人之法",
+                "四念處"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-68",
+      "clipStart": 6761.4,
+      "clipEnd": 6771.84,
+      "clipDuration": 10.44,
+      "sentenceIds": [
+        "seg-2057"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-2057",
+          "text": "那麼進一步地觀察身體之因緣有"
+        }
+      ],
+      "expectedTerms": [
+        "是"
+      ],
+      "prompt": "就是觀察我不可得 因緣有、自性空",
+      "items": [
+        {
+          "sentenceId": "seg-2057",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6763.4,
+          "end": 6769.84,
+          "text": "那麼進一步地觀察身體之因緣有",
+          "prevText": "就是觀察我不可得",
+          "nextText": "因緣有就是自性空",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "那麼進一步地觀察身體之因緣有",
+              "suggestedTerm": "是",
+              "reason": "「觀察身體之因緣有」語法突兀，前後文是觀察五蘊身不可得，此句疑似漏掉「是」或「為」等繫詞，應為「身體是因緣有」之類的句式。",
+              "promptHints": [
+                "因緣有",
+                "自性空"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-69",
+      "clipStart": 6846.55,
+      "clipEnd": 6856.58,
+      "clipDuration": 10.03,
+      "sentenceIds": [
+        "seg-2079"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-2079",
+          "text": "不知道那位同學講的「心不障人之法」"
+        }
+      ],
+      "expectedTerms": [
+        "請示／何謂"
+      ],
+      "prompt": "這個方法也可以 心不障人之法、請示",
+      "items": [
+        {
+          "sentenceId": "seg-2079",
+          "paragraphId": "p-4",
+          "heading": "法念住對治我倒",
+          "start": 6848.55,
+          "end": 6854.58,
+          "text": "不知道那位同學講的「心不障人之法」",
+          "prevText": "這個方法也可以",
+          "nextText": "心不障人之法",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "不知道那位同學講的「心不障人之法」",
+              "suggestedTerm": "請示／何謂",
+              "reason": "「心不障人之法」疑為「心不障人之法」的問法，但前後文皆在講「不要障礙別人」，此句疑漏「請示」或「何謂」等字，語意不完整。",
+              "promptHints": [
+                "心不障人之法",
+                "請示"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reAsrResults": [
+    {
+      "windowId": "win-1",
+      "clipStart": 172.07,
+      "clipEnd": 178.73,
+      "rawSegments": [
+        {
+          "start": 172.09,
+          "end": 177.57,
+          "text": "人外生、內外生加上尋路三關。"
+        }
+      ],
+      "rawText": "人外生、內外生加上尋路三關。",
+      "guidedSegments": [
+        {
+          "start": 172.09,
+          "end": 177.57,
+          "text": "人、外身、內外身加上循住三觀。這樣子。"
+        }
+      ],
+      "guidedText": "人、外身、內外身加上循住三觀。這樣子。",
+      "sentenceIds": [
+        "seg-034"
+      ],
+      "expectedTerms": [
+        "身"
+      ],
+      "recoveredTerms": [
+        "身"
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 298.72,
+      "clipEnd": 307.83,
+      "rawSegments": [
+        {
+          "start": 298.74,
+          "end": 305.78,
+          "text": "按理聖念書的法文。這是一個。"
+        }
+      ],
+      "rawText": "按理聖念書的法文。這是一個。",
+      "guidedSegments": [
+        {
+          "start": 298.74,
+          "end": 305.9,
+          "text": "安立身念住的法門。這是一個。"
+        }
+      ],
+      "guidedText": "安立身念住的法門。這是一個。",
+      "sentenceIds": [
+        "seg-069"
+      ],
+      "expectedTerms": [
+        "理由"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 359.53,
+      "clipEnd": 365.33,
+      "rawSegments": [
+        {
+          "start": 360.77,
+          "end": 363.07,
+          "text": "這個法門的文具裏邊。"
+        },
+        {
+          "start": 363.07,
+          "end": 365.45,
+          "text": "說說這個不進行。"
+        }
+      ],
+      "rawText": "這個法門的文具裏邊。說說這個不進行。",
+      "guidedSegments": [
+        {
+          "start": 360.77,
+          "end": 365.35,
+          "text": "這個法門的文句裡邊 佛說這個不進行"
+        }
+      ],
+      "guidedText": "這個法門的文句裡邊 佛說這個不進行",
+      "sentenceIds": [
+        "seg-084"
+      ],
+      "expectedTerms": [
+        "法"
+      ],
+      "recoveredTerms": [
+        "法"
+      ]
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 432.91,
+      "clipEnd": 442.36,
+      "rawSegments": [
+        {
+          "start": 432.91,
+          "end": 463.88,
+          "text": "詞曲 李宗盛"
+        }
+      ],
+      "rawText": "詞曲 李宗盛",
+      "guidedSegments": [
+        {
+          "start": 432.91,
+          "end": 442.9,
+          "text": "不如是法性 實際顯示史從輕於乃至失敗。這是第一個,但不如是法性。"
+        }
+      ],
+      "guidedText": "不如是法性 實際顯示史從輕於乃至失敗。這是第一個,但不如是法性。",
+      "sentenceIds": [
+        "seg-104"
+      ],
+      "expectedTerms": [
+        "食噉"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 455.36,
+      "clipEnd": 462.36,
+      "rawSegments": [
+        {
+          "start": 455.36,
+          "end": 462.36,
+          "text": "《靈脈產果》指寄顯示所有辨詞。這是第二個彈簿。"
+        }
+      ],
+      "rawText": "《靈脈產果》指寄顯示所有辨詞。這是第二個彈簿。",
+      "guidedSegments": [
+        {
+          "start": 455.36,
+          "end": 462.36,
+          "text": "筋脈纏裹 此際顯示所有變詞。這是第二個彈簿路。"
+        }
+      ],
+      "guidedText": "筋脈纏裹 此際顯示所有變詞。這是第二個彈簿路。",
+      "sentenceIds": [
+        "seg-109"
+      ],
+      "expectedTerms": [
+        "變赤"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 481.77,
+      "clipEnd": 487.77,
+      "rawSegments": [
+        {
+          "start": 482.4,
+          "end": 487.8,
+          "text": "或所詞記顯示或古或所或伏。"
+        }
+      ],
+      "rawText": "或所詞記顯示或古或所或伏。",
+      "guidedSegments": [
+        {
+          "start": 482.4,
+          "end": 487.76,
+          "text": "或鎖 詞記顯示或骨或鎖或鎖"
+        }
+      ],
+      "guidedText": "或鎖 詞記顯示或骨或鎖或鎖",
+      "sentenceIds": [
+        "seg-118"
+      ],
+      "expectedTerms": [
+        "骨鎖"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 662.64,
+      "clipEnd": 674.74,
+      "rawSegments": [
+        {
+          "start": 662.64,
+          "end": 675.32,
+          "text": "就能斷出境的顛倒。這個修著不境的顛倒,修著不境關,就是同樣的所言。"
+        }
+      ],
+      "rawText": "就能斷出境的顛倒。這個修著不境的顛倒,修著不境關,就是同樣的所言。",
+      "guidedSegments": [
+        {
+          "start": 662.64,
+          "end": 675.32,
+          "text": "就能斷除淨的顛倒。這個修著不淨的顛倒、修著不淨觀,就是同樣的所言。"
+        }
+      ],
+      "guidedText": "就能斷除淨的顛倒。這個修著不淨的顛倒、修著不淨觀,就是同樣的所言。",
+      "sentenceIds": [
+        "seg-174"
+      ],
+      "expectedTerms": [
+        "觀（或「斷除淨」）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 773.61,
+      "clipEnd": 781.11,
+      "rawSegments": [
+        {
+          "start": 773.61,
+          "end": 781.14,
+          "text": "一於諸壽諸循壽官,如是了之逐。"
+        }
+      ],
+      "rawText": "一於諸壽諸循壽官,如是了之逐。",
+      "guidedSegments": [
+        {
+          "start": 773.61,
+          "end": 782.14,
+          "text": "一於諸壽著循受觀,如是了之逐一。"
+        }
+      ],
+      "guidedText": "一於諸壽著循受觀,如是了之逐一。",
+      "sentenceIds": [
+        "seg-205"
+      ],
+      "expectedTerms": [
+        "循受觀（完整名相）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 869.48,
+      "clipEnd": 877.33,
+      "rawSegments": [
+        {
+          "start": 869.95,
+          "end": 876.76,
+          "text": "前面也說過,有落受苦受,不苦不落受。"
+        }
+      ],
+      "rawText": "前面也說過,有落受苦受,不苦不落受。",
+      "guidedSegments": [
+        {
+          "start": 869.95,
+          "end": 877.34,
+          "text": "前面也說過 落受、苦受、不苦不樂受。"
+        }
+      ],
+      "guidedText": "前面也說過 落受、苦受、不苦不樂受。",
+      "sentenceIds": [
+        "seg-230"
+      ],
+      "expectedTerms": [
+        "受"
+      ],
+      "recoveredTerms": [
+        "受"
+      ]
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 937.68,
+      "clipEnd": 942.6,
+      "rawSegments": [
+        {
+          "start": 939.05,
+          "end": 942.05,
+          "text": "要有弱的時候,弱是壞的時候就苦惱。"
+        }
+      ],
+      "rawText": "要有弱的時候,弱是壞的時候就苦惱。",
+      "guidedSegments": [
+        {
+          "start": 939.05,
+          "end": 942.05,
+          "text": "要有樂受、壞受就苦惱。"
+        }
+      ],
+      "guidedText": "要有樂受、壞受就苦惱。",
+      "sentenceIds": [
+        "seg-258"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1056.14,
+      "clipEnd": 1062.14,
+      "rawSegments": [
+        {
+          "start": 1057.6,
+          "end": 1061.97,
+          "text": "辛苦這兩字就有意思。"
+        }
+      ],
+      "rawText": "辛苦這兩字就有意思。",
+      "guidedSegments": [
+        {
+          "start": 1057.6,
+          "end": 1061.97,
+          "text": "辛苦這兩字就有意思"
+        }
+      ],
+      "guidedText": "辛苦這兩字就有意思",
+      "sentenceIds": [
+        "seg-298"
+      ],
+      "expectedTerms": [
+        "很"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 1178.33,
+      "clipEnd": 1187.17,
+      "rawSegments": [
+        {
+          "start": 1178.33,
+          "end": 1187.19,
+          "text": "當在那裏面,別說我們造了什麼罪,但是沒有說國報。"
+        }
+      ],
+      "rawText": "當在那裏面,別說我們造了什麼罪,但是沒有說國報。",
+      "guidedSegments": [
+        {
+          "start": 1178.33,
+          "end": 1187.19,
+          "text": "譬如說我們造了什麼罪 但是沒有說國報。"
+        }
+      ],
+      "guidedText": "譬如說我們造了什麼罪 但是沒有說國報。",
+      "sentenceIds": [
+        "seg-337"
+      ],
+      "expectedTerms": [
+        "譬"
+      ],
+      "recoveredTerms": [
+        "譬"
+      ]
+    },
+    {
+      "windowId": "win-13",
+      "clipStart": 1243.32,
+      "clipEnd": 1249.52,
+      "rawSegments": [
+        {
+          "start": 1243.32,
+          "end": 1249.51,
+          "text": "在心境裡面組成。所以這個不苦不落的這種境界是苦惱。"
+        }
+      ],
+      "rawText": "在心境裡面組成。所以這個不苦不落的這種境界是苦惱。",
+      "guidedSegments": [
+        {
+          "start": 1243.32,
+          "end": 1249.51,
+          "text": "在心境裡面儲藏,所以這個不苦不樂的心境是苦惱。"
+        }
+      ],
+      "guidedText": "在心境裡面儲藏,所以這個不苦不樂的心境是苦惱。",
+      "sentenceIds": [
+        "seg-361"
+      ],
+      "expectedTerms": [
+        "受"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-14",
+      "clipStart": 1352.32,
+      "clipEnd": 1357.82,
+      "rawSegments": [
+        {
+          "start": 1352.41,
+          "end": 1357.86,
+          "text": "我們在裡面找一個原因,就是我們心裏的製造。"
+        }
+      ],
+      "rawText": "我們在裡面找一個原因,就是我們心裏的製造。",
+      "guidedSegments": [
+        {
+          "start": 1352.41,
+          "end": 1357.86,
+          "text": "就是我們心裏面執著。"
+        }
+      ],
+      "guidedText": "就是我們心裏面執著。",
+      "sentenceIds": [
+        "seg-397"
+      ],
+      "expectedTerms": [
+        "著"
+      ],
+      "recoveredTerms": [
+        "著"
+      ]
+    },
+    {
+      "windowId": "win-15",
+      "clipStart": 1470.16,
+      "clipEnd": 1475.36,
+      "rawSegments": [
+        {
+          "start": 1470.47,
+          "end": 1473.47,
+          "text": "得了聖大才知道,心無事苦。"
+        }
+      ],
+      "rawText": "得了聖大才知道,心無事苦。",
+      "guidedSegments": [
+        {
+          "start": 1470.47,
+          "end": 1473.47,
+          "text": "得了聖道的時候才知道 行苦、壞苦。"
+        }
+      ],
+      "guidedText": "得了聖道的時候才知道 行苦、壞苦。",
+      "sentenceIds": [
+        "seg-429"
+      ],
+      "expectedTerms": [
+        "苦"
+      ],
+      "recoveredTerms": [
+        "苦"
+      ]
+    },
+    {
+      "windowId": "win-16",
+      "clipStart": 1564.91,
+      "clipEnd": 1575.23,
+      "rawSegments": [
+        {
+          "start": 1566.73,
+          "end": 1575.2,
+          "text": "所以我們應該換一股體院。"
+        }
+      ],
+      "rawText": "所以我們應該換一股體院。",
+      "guidedSegments": [
+        {
+          "start": 1566.73,
+          "end": 1575.3,
+          "text": "所以我們應該換一菩提願。"
+        }
+      ],
+      "guidedText": "所以我們應該換一菩提願。",
+      "sentenceIds": [
+        "seg-457"
+      ],
+      "expectedTerms": [
+        "菩提心／菩提願（或四念住等修行目標）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-17",
+      "clipStart": 1626.5,
+      "clipEnd": 1634.46,
+      "rawSegments": [
+        {
+          "start": 1626.5,
+          "end": 1628.87,
+          "text": "就是殿倒了。"
+        },
+        {
+          "start": 1628.87,
+          "end": 1632.23,
+          "text": "因此麽立心念著。"
+        },
+        {
+          "start": 1632.23,
+          "end": 1634.23,
+          "text": "立心念著。"
+        }
+      ],
+      "rawText": "就是殿倒了。因此麽立心念著。立心念著。",
+      "guidedSegments": [
+        {
+          "start": 1626.5,
+          "end": 1633.63,
+          "text": "就是顛倒了 心念住"
+        }
+      ],
+      "guidedText": "就是顛倒了 心念住",
+      "sentenceIds": [
+        "seg-473"
+      ],
+      "expectedTerms": [
+        "住（心念住）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-18",
+      "clipStart": 1740.97,
+      "clipEnd": 1751.74,
+      "rawSegments": [
+        {
+          "start": 1742.75,
+          "end": 1751.86,
+          "text": "所以容易記心自常。記常的時候有什麼問題?"
+        }
+      ],
+      "rawText": "所以容易記心自常。記常的時候有什麼問題?",
+      "guidedSegments": [
+        {
+          "start": 1742.75,
+          "end": 1747.94,
+          "text": "所以容易計心是常、很容易一點。"
+        },
+        {
+          "start": 1747.94,
+          "end": 1751.86,
+          "text": "計常的時候有什麼問題?"
+        }
+      ],
+      "guidedText": "所以容易計心是常、很容易一點。計常的時候有什麼問題?",
+      "sentenceIds": [
+        "seg-512"
+      ],
+      "expectedTerms": [
+        "心"
+      ],
+      "recoveredTerms": [
+        "心"
+      ]
+    },
+    {
+      "windowId": "win-19",
+      "clipStart": 1869.28,
+      "clipEnd": 1878.76,
+      "rawSegments": [
+        {
+          "start": 1871.42,
+          "end": 1875.82,
+          "text": "前面唯一對日幼稚長中就長點到的新建築。"
+        },
+        {
+          "start": 1875.82,
+          "end": 1879.06,
+          "text": "這是把八億標出來。"
+        }
+      ],
+      "rawText": "前面唯一對日幼稚長中就長點到的新建築。這是把八億標出來。",
+      "guidedSegments": [
+        {
+          "start": 1871.42,
+          "end": 1878.96,
+          "text": "前面唯一對治優惠常種就常顛倒的心念住,這是把八億標出來。"
+        }
+      ],
+      "guidedText": "前面唯一對治優惠常種就常顛倒的心念住,這是把八億標出來。",
+      "sentenceIds": [
+        "seg-541"
+      ],
+      "expectedTerms": [
+        "念住"
+      ],
+      "recoveredTerms": [
+        "念住"
+      ]
+    },
+    {
+      "windowId": "win-20",
+      "clipStart": 2009.79,
+      "clipEnd": 2018.89,
+      "rawSegments": [
+        {
+          "start": 2009.79,
+          "end": 2018.93,
+          "text": "這樣子去觀察你,你就能夠便於無常斷腸顛倒,就因為心是無常。"
+        }
+      ],
+      "rawText": "這樣子去觀察你,你就能夠便於無常斷腸顛倒,就因為心是無常。",
+      "guidedSegments": [
+        {
+          "start": 2009.79,
+          "end": 2018.53,
+          "text": "這樣子去觀察 你就能夠便於無常斷常顛倒。"
+        }
+      ],
+      "guidedText": "這樣子去觀察 你就能夠便於無常斷常顛倒。",
+      "sentenceIds": [
+        "seg-583"
+      ],
+      "expectedTerms": [
+        "斷"
+      ],
+      "recoveredTerms": [
+        "斷"
+      ]
+    },
+    {
+      "windowId": "win-21",
+      "clipStart": 2055.05,
+      "clipEnd": 2060.37,
+      "rawSegments": [
+        {
+          "start": 2055.11,
+          "end": 2060.48,
+          "text": "尤根就是曾上緣,還有坐一心,心才能多。"
+        }
+      ],
+      "rawText": "尤根就是曾上緣,還有坐一心,心才能多。",
+      "guidedSegments": [
+        {
+          "start": 2055.11,
+          "end": 2060.48,
+          "text": "有根那就是增上緣 作意心所、心才能多。"
+        }
+      ],
+      "guidedText": "有根那就是增上緣 作意心所、心才能多。",
+      "sentenceIds": [
+        "seg-601"
+      ],
+      "expectedTerms": [
+        "作意心所"
+      ],
+      "recoveredTerms": [
+        "作意心所"
+      ]
+    },
+    {
+      "windowId": "win-22",
+      "clipStart": 2148.84,
+      "clipEnd": 2159.32,
+      "rawSegments": [
+        {
+          "start": 2148.84,
+          "end": 2154.75,
+          "text": "但是注意的讀阿罕經理也會感到無鵝。"
+        },
+        {
+          "start": 2154.75,
+          "end": 2158.12,
+          "text": "我們自動的就是說是無鵝。"
+        },
+        {
+          "start": 2158.12,
+          "end": 2160.12,
+          "text": "能了解無鵝是好的。"
+        }
+      ],
+      "rawText": "但是注意的讀阿罕經理也會感到無鵝。我們自動的就是說是無鵝。能了解無鵝是好的。",
+      "guidedSegments": [
+        {
+          "start": 2148.84,
+          "end": 2154.65,
+          "text": "但是注意地去讀阿含經也會感覺到無我"
+        },
+        {
+          "start": 2154.65,
+          "end": 2159.42,
+          "text": "我們自動地說是無我能了解無我"
+        }
+      ],
+      "guidedText": "但是注意地去讀阿含經也會感覺到無我我們自動地說是無我能了解無我",
+      "sentenceIds": [
+        "seg-632",
+        "seg-633"
+      ],
+      "expectedTerms": [
+        "無我的道理",
+        "不（自動地就不說是無我）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-23",
+      "clipStart": 2191.7,
+      "clipEnd": 2198.7,
+      "rawSegments": [
+        {
+          "start": 2192.11,
+          "end": 2198.91,
+          "text": "有些精了。雖然沒有正面地說有噁,但是裡面那個畫和有噁。"
+        }
+      ],
+      "rawText": "有些精了。雖然沒有正面地說有噁,但是裡面那個畫和有噁。",
+      "guidedSegments": [
+        {
+          "start": 2192.11,
+          "end": 2198.67,
+          "text": "有些經 雖然沒有正面的說有噁,但是裡面那個畫和有噁"
+        }
+      ],
+      "guidedText": "有些經 雖然沒有正面的說有噁,但是裡面那個畫和有噁",
+      "sentenceIds": [
+        "seg-644"
+      ],
+      "expectedTerms": [
+        "（後續子句）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-24",
+      "clipStart": 2308.6,
+      "clipEnd": 2317.2,
+      "rawSegments": [
+        {
+          "start": 2308.6,
+          "end": 2316.48,
+          "text": "所以道宣律師聽他的師長講這個視頻率,講20倍。"
+        }
+      ],
+      "rawText": "所以道宣律師聽他的師長講這個視頻率,講20倍。",
+      "guidedSegments": [
+        {
+          "start": 2308.6,
+          "end": 2316.96,
+          "text": "聽他的師長講四分律 講二十遍"
+        }
+      ],
+      "guidedText": "聽他的師長講四分律 講二十遍",
+      "sentenceIds": [
+        "seg-677"
+      ],
+      "expectedTerms": [
+        "遍"
+      ],
+      "recoveredTerms": [
+        "遍"
+      ]
+    },
+    {
+      "windowId": "win-25",
+      "clipStart": 2376.27,
+      "clipEnd": 2386.27,
+      "rawSegments": [
+        {
+          "start": 2376.27,
+          "end": 2384.44,
+          "text": "但是你才能夠在佛法裡面,你才能成就。"
+        },
+        {
+          "start": 2384.44,
+          "end": 2386.44,
+          "text": "因為這是……"
+        }
+      ],
+      "rawText": "但是你才能夠在佛法裡面,你才能成就。因為這是……",
+      "guidedSegments": [
+        {
+          "start": 2376.27,
+          "end": 2382.07,
+          "text": "但是你才能夠在佛法裡面你才能成就"
+        },
+        {
+          "start": 2382.07,
+          "end": 2386.34,
+          "text": "因為這是"
+        }
+      ],
+      "guidedText": "但是你才能夠在佛法裡面你才能成就因為這是",
+      "sentenceIds": [
+        "seg-700",
+        "seg-701"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-26",
+      "clipStart": 2409.84,
+      "clipEnd": 2421.44,
+      "rawSegments": [
+        {
+          "start": 2409.84,
+          "end": 2416.84,
+          "text": "文明是由比現來由我見到煮煩惱。"
+        }
+      ],
+      "rawText": "文明是由比現來由我見到煮煩惱。",
+      "guidedSegments": [
+        {
+          "start": 2409.84,
+          "end": 2416.64,
+          "text": "我會執著有我呢 有比現在有我見等煮煩惱"
+        },
+        {
+          "start": 2416.64,
+          "end": 2421.42,
+          "text": "因為這個……"
+        }
+      ],
+      "guidedText": "我會執著有我呢 有比現在有我見等煮煩惱因為這個……",
+      "sentenceIds": [
+        "seg-707"
+      ],
+      "expectedTerms": [
+        "有我見"
+      ],
+      "recoveredTerms": [
+        "有我見"
+      ]
+    },
+    {
+      "windowId": "win-27",
+      "clipStart": 2451.22,
+      "clipEnd": 2458.44,
+      "rawSegments": [
+        {
+          "start": 2451.22,
+          "end": 2458.42,
+          "text": "但是文行中侵犯了這個厲害,侵犯了你的利益的時候。"
+        }
+      ],
+      "rawText": "但是文行中侵犯了這個厲害,侵犯了你的利益的時候。",
+      "guidedSegments": [
+        {
+          "start": 2451.22,
+          "end": 2458.42,
+          "text": "但是無形中侵犯了這個厲害,侵犯了你的利益的時候。"
+        }
+      ],
+      "guidedText": "但是無形中侵犯了這個厲害,侵犯了你的利益的時候。",
+      "sentenceIds": [
+        "seg-716"
+      ],
+      "expectedTerms": [
+        "我"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-28",
+      "clipStart": 2510.35,
+      "clipEnd": 2517.65,
+      "rawSegments": [
+        {
+          "start": 2512.23,
+          "end": 2516.87,
+          "text": "但是我們從來有有偶見。"
+        }
+      ],
+      "rawText": "但是我們從來有有偶見。",
+      "guidedSegments": [
+        {
+          "start": 2512.23,
+          "end": 2516.93,
+          "text": "但是我們從來有有偶見等啊。這個有偶見。"
+        }
+      ],
+      "guidedText": "但是我們從來有有偶見等啊。這個有偶見。",
+      "sentenceIds": [
+        "seg-737"
+      ],
+      "expectedTerms": [
+        "不知道／不感覺"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-29",
+      "clipStart": 2565.18,
+      "clipEnd": 2572.46,
+      "rawSegments": [
+        {
+          "start": 2566.13,
+          "end": 2568.28,
+          "text": "有我的。"
+        }
+      ],
+      "rawText": "有我的。",
+      "guidedSegments": [
+        {
+          "start": 2566.13,
+          "end": 2572.28,
+          "text": "無我見、諸善法國。"
+        }
+      ],
+      "guidedText": "無我見、諸善法國。",
+      "sentenceIds": [
+        "seg-755"
+      ],
+      "expectedTerms": [
+        "我"
+      ],
+      "recoveredTerms": [
+        "我"
+      ]
+    },
+    {
+      "windowId": "win-30",
+      "clipStart": 2664.54,
+      "clipEnd": 2669.98,
+      "rawSegments": [
+        {
+          "start": 2664.54,
+          "end": 2669.97,
+          "text": "就是在這個插諾生滅老病死。"
+        }
+      ],
+      "rawText": "就是在這個插諾生滅老病死。",
+      "guidedSegments": [
+        {
+          "start": 2664.54,
+          "end": 2669.97,
+          "text": "就是在這個 剎那生滅老病死"
+        }
+      ],
+      "guidedText": "就是在這個 剎那生滅老病死",
+      "sentenceIds": [
+        "seg-781"
+      ],
+      "expectedTerms": [
+        "那"
+      ],
+      "recoveredTerms": [
+        "那"
+      ]
+    },
+    {
+      "windowId": "win-31",
+      "clipStart": 2818.5,
+      "clipEnd": 2824.92,
+      "rawSegments": [
+        {
+          "start": 2818.62,
+          "end": 2825.21,
+          "text": "去觀察的時候,諸巡法官,你就會如實了解。"
+        }
+      ],
+      "rawText": "去觀察的時候,諸巡法官,你就會如實了解。",
+      "guidedSegments": [
+        {
+          "start": 2818.62,
+          "end": 2825.21,
+          "text": "去觀察的時候 住、循法官,你就會如實了解。"
+        }
+      ],
+      "guidedText": "去觀察的時候 住、循法官,你就會如實了解。",
+      "sentenceIds": [
+        "seg-825"
+      ],
+      "expectedTerms": [
+        "循法觀（疑漏「循身觀」或「法觀」前之字）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-32",
+      "clipStart": 2871.26,
+      "clipEnd": 2878.58,
+      "rawSegments": [
+        {
+          "start": 2871.26,
+          "end": 2878.54,
+          "text": "請使用臺灣正體字向,所記住院的共向。"
+        }
+      ],
+      "rawText": "請使用臺灣正體字向,所記住院的共向。",
+      "guidedSegments": [
+        {
+          "start": 2871.26,
+          "end": 2878.54,
+          "text": "諸蘊的自相 所計諸蘊的共相 如實了知"
+        }
+      ],
+      "guidedText": "諸蘊的自相 所計諸蘊的共相 如實了知",
+      "sentenceIds": [
+        "seg-842"
+      ],
+      "expectedTerms": [
+        "觀察／了知"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-33",
+      "clipStart": 2944.39,
+      "clipEnd": 2950.39,
+      "rawSegments": [
+        {
+          "start": 2946.56,
+          "end": 2950.4,
+          "text": "一定要把這無惡意、深刻地"
+        }
+      ],
+      "rawText": "一定要把這無惡意、深刻地",
+      "guidedSegments": [
+        {
+          "start": 2946.56,
+          "end": 2950.4,
+          "text": "一定要把這無我義、深刻地"
+        }
+      ],
+      "guidedText": "一定要把這無我義、深刻地",
+      "sentenceIds": [
+        "seg-865"
+      ],
+      "expectedTerms": [
+        "義"
+      ],
+      "recoveredTerms": [
+        "義"
+      ]
+    },
+    {
+      "windowId": "win-34",
+      "clipStart": 3008.4,
+      "clipEnd": 3014.21,
+      "rawSegments": [
+        {
+          "start": 3008.4,
+          "end": 3012.8,
+          "text": "因為是由我才是對的。還是有這種情形。"
+        }
+      ],
+      "rawText": "因為是由我才是對的。還是有這種情形。",
+      "guidedSegments": [
+        {
+          "start": 3008.4,
+          "end": 3012.8,
+          "text": "因為有我才是對的 還是有這種情形。"
+        }
+      ],
+      "guidedText": "因為有我才是對的 還是有這種情形。",
+      "sentenceIds": [
+        "seg-890"
+      ],
+      "expectedTerms": [
+        "若（後接完整子句）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-35",
+      "clipStart": 3094.75,
+      "clipEnd": 3101.75,
+      "rawSegments": [
+        {
+          "start": 3094.75,
+          "end": 3101.95,
+          "text": "文佛教徒之外的,體育的都是在舌受顯示築運。唯有運。"
+        }
+      ],
+      "rawText": "文佛教徒之外的,體育的都是在舌受顯示築運。唯有運。",
+      "guidedSegments": [
+        {
+          "start": 3094.75,
+          "end": 3101.95,
+          "text": "除了一少分的佛教徒之外的。其餘的都是在舌受想行識中文。唯有蘊"
+        }
+      ],
+      "guidedText": "除了一少分的佛教徒之外的。其餘的都是在舌受想行識中文。唯有蘊",
+      "sentenceIds": [
+        "seg-914"
+      ],
+      "expectedTerms": [
+        "蘊"
+      ],
+      "recoveredTerms": [
+        "蘊"
+      ]
+    },
+    {
+      "windowId": "win-36",
+      "clipStart": 3204.53,
+      "clipEnd": 3210.87,
+      "rawSegments": [
+        {
+          "start": 3204.62,
+          "end": 3210.43,
+          "text": "但是佛教徒這件事還要有善根才能做得來。"
+        }
+      ],
+      "rawText": "但是佛教徒這件事還要有善根才能做得來。",
+      "guidedSegments": [
+        {
+          "start": 3204.62,
+          "end": 3210.43,
+          "text": "但是佛教徒這件事還要有善根才能做得來。"
+        }
+      ],
+      "guidedText": "但是佛教徒這件事還要有善根才能做得來。",
+      "sentenceIds": [
+        "seg-944"
+      ],
+      "expectedTerms": [
+        "做不到"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-37",
+      "clipStart": 3390.04,
+      "clipEnd": 3396.87,
+      "rawSegments": [
+        {
+          "start": 3390.04,
+          "end": 3397.13,
+          "text": "就是流暖神詞,就是言。或者修校成定以後,"
+        }
+      ],
+      "rawText": "就是流暖神詞,就是言。或者修校成定以後,",
+      "guidedSegments": [
+        {
+          "start": 3390.04,
+          "end": 3397.13,
+          "text": "或者修校成定以後"
+        }
+      ],
+      "guidedText": "或者修校成定以後",
+      "sentenceIds": [
+        "seg-996"
+      ],
+      "expectedTerms": [
+        "染"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-38",
+      "clipStart": 3454.48,
+      "clipEnd": 3459.98,
+      "rawSegments": [
+        {
+          "start": 3454.5,
+          "end": 3459.9,
+          "text": "有境地不同了。這是知恶論者。"
+        }
+      ],
+      "rawText": "有境地不同了。這是知恶論者。",
+      "guidedSegments": [
+        {
+          "start": 3454.5,
+          "end": 3459.9,
+          "text": "有淨的不同了。這是知恶論者。是這樣的。"
+        }
+      ],
+      "guidedText": "有淨的不同了。這是知恶論者。是這樣的。",
+      "sentenceIds": [
+        "seg-1018"
+      ],
+      "expectedTerms": [
+        "橫"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-39",
+      "clipStart": 3468.74,
+      "clipEnd": 3473.94,
+      "rawSegments": [
+        {
+          "start": 3469.12,
+          "end": 3472.14,
+          "text": "這是第1課。第2課。"
+        },
+        {
+          "start": 3472.14,
+          "end": 3474.14,
+          "text": "唯欲突顯而成。"
+        }
+      ],
+      "rawText": "這是第1課。第2課。唯欲突顯而成。",
+      "guidedSegments": [
+        {
+          "start": 3469.12,
+          "end": 3474,
+          "text": "這是第一科 底下第二科 唯御徒前 而"
+        }
+      ],
+      "guidedText": "這是第一科 底下第二科 唯御徒前 而",
+      "sentenceIds": [
+        "seg-1024"
+      ],
+      "expectedTerms": [
+        "遣"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-40",
+      "clipStart": 3590.39,
+      "clipEnd": 3597.39,
+      "rawSegments": [
+        {
+          "start": 3591.85,
+          "end": 3597.05,
+          "text": "現在佛你被破出去,你知道心是我。"
+        }
+      ],
+      "rawText": "現在佛你被破出去,你知道心是我。",
+      "guidedSegments": [
+        {
+          "start": 3591.85,
+          "end": 3597.85,
+          "text": "現在佛你被破出去,你知道心是我,知道心是我。"
+        }
+      ],
+      "guidedText": "現在佛你被破出去,你知道心是我,知道心是我。",
+      "sentenceIds": [
+        "seg-1070"
+      ],
+      "expectedTerms": [
+        "心是我（愚）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-41",
+      "clipStart": 3653.64,
+      "clipEnd": 3659.64,
+      "rawSegments": [
+        {
+          "start": 3653.64,
+          "end": 3659.64,
+          "text": "這個心是什麼意思?你聊別聊以後,你聊別了一切的。"
+        }
+      ],
+      "rawText": "這個心是什麼意思?你聊別聊以後,你聊別了一切的。",
+      "guidedSegments": [
+        {
+          "start": 3653.64,
+          "end": 3659.64,
+          "text": "這個心是什麼意思? 聊別聊以後,聊別聊一切的。"
+        }
+      ],
+      "guidedText": "這個心是什麼意思? 聊別聊以後,聊別聊一切的。",
+      "sentenceIds": [
+        "seg-1087"
+      ],
+      "expectedTerms": [
+        "心"
+      ],
+      "recoveredTerms": [
+        "心"
+      ]
+    },
+    {
+      "windowId": "win-42",
+      "clipStart": 3683.46,
+      "clipEnd": 3690.37,
+      "rawSegments": [
+        {
+          "start": 3684,
+          "end": 3690.29,
+          "text": "又說回來。意和實是向外,實和心來對論。"
+        }
+      ],
+      "rawText": "又說回來。意和實是向外,實和心來對論。",
+      "guidedSegments": [
+        {
+          "start": 3684,
+          "end": 3690.29,
+          "text": "又收回來 意和識、識、向外、識、心、來對論"
+        }
+      ],
+      "guidedText": "又收回來 意和識、識、向外、識、心、來對論",
+      "sentenceIds": [
+        "seg-1095"
+      ],
+      "expectedTerms": [
+        "心（或「向內」）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-43",
+      "clipStart": 3759.48,
+      "clipEnd": 3767.64,
+      "rawSegments": [
+        {
+          "start": 3759.48,
+          "end": 3765.79,
+          "text": "這就是我生命變化的因而而生。不是我,不是長江之舞,我願意的。"
+        },
+        {
+          "start": 3765.79,
+          "end": 3767.79,
+          "text": "就是初淺這個。"
+        }
+      ],
+      "rawText": "這就是我生命變化的因而而生。不是我,不是長江之舞,我願意的。就是初淺這個。",
+      "guidedSegments": [
+        {
+          "start": 3759.48,
+          "end": 3767.79,
+          "text": "不是我,不是長江之五變異的,就是除淺這個。"
+        }
+      ],
+      "guidedText": "不是我,不是長江之五變異的,就是除淺這個。",
+      "sentenceIds": [
+        "seg-1118"
+      ],
+      "expectedTerms": [
+        "我"
+      ],
+      "recoveredTerms": [
+        "我"
+      ]
+    },
+    {
+      "windowId": "win-44",
+      "clipStart": 3823.1,
+      "clipEnd": 3837.35,
+      "rawSegments": [
+        {
+          "start": 3823.1,
+          "end": 3828.47,
+          "text": "文明書審法,沒有鵝科的。"
+        },
+        {
+          "start": 3828.47,
+          "end": 3836.98,
+          "text": "那麼有鵝發出來活動,有合法的行動,有非法的行動。"
+        }
+      ],
+      "rawText": "文明書審法,沒有鵝科的。那麼有鵝發出來活動,有合法的行動,有非法的行動。",
+      "guidedSegments": [
+        {
+          "start": 3823.1,
+          "end": 3837.38,
+          "text": "因緣所生法 無我、不可得、有我、不可得、有我、不可得、有合法的行動、非法的行動"
+        }
+      ],
+      "guidedText": "因緣所生法 無我、不可得、有我、不可得、有我、不可得、有合法的行動、非法的行動",
+      "sentenceIds": [
+        "seg-1140",
+        "seg-1141",
+        "seg-1142"
+      ],
+      "expectedTerms": [
+        "得",
+        "由我發出來的"
+      ],
+      "recoveredTerms": [
+        "得"
+      ]
+    },
+    {
+      "windowId": "win-45",
+      "clipStart": 3848.94,
+      "clipEnd": 3862.06,
+      "rawSegments": [
+        {
+          "start": 3851.04,
+          "end": 3860.87,
+          "text": "第二個原因建立思念助理法文第二義。"
+        }
+      ],
+      "rawText": "第二個原因建立思念助理法文第二義。",
+      "guidedSegments": [
+        {
+          "start": 3851.04,
+          "end": 3860.87,
+          "text": "第二個原因建立四念住、立法門、第二義"
+        }
+      ],
+      "guidedText": "第二個原因建立四念住、立法門、第二義",
+      "sentenceIds": [
+        "seg-1149"
+      ],
+      "expectedTerms": [
+        "理由"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-46",
+      "clipStart": 3953.33,
+      "clipEnd": 3962.39,
+      "rawSegments": [
+        {
+          "start": 3955.34,
+          "end": 3962.79,
+          "text": "要為此故照著著業,難問就是受,要照業者就是謝。"
+        }
+      ],
+      "rawText": "要為此故照著著業,難問就是受,要照業者就是謝。",
+      "guidedSegments": [
+        {
+          "start": 3955.34,
+          "end": 3962.79,
+          "text": "要為此故照著諸業,難問就是受。要照業者,就是謝。"
+        }
+      ],
+      "guidedText": "要為此故照著諸業,難問就是受。要照業者,就是謝。",
+      "sentenceIds": [
+        "seg-1175"
+      ],
+      "expectedTerms": [
+        "受者"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-47",
+      "clipStart": 4499.26,
+      "clipEnd": 4505.62,
+      "rawSegments": [
+        {
+          "start": 4499.26,
+          "end": 4506.24,
+          "text": "有一個人念著,有一個自性念著,有一個相扎念著。這樣子就把這個念著。"
+        }
+      ],
+      "rawText": "有一個人念著,有一個自性念著,有一個相扎念著。這樣子就把這個念著。",
+      "guidedSegments": [
+        {
+          "start": 4499.26,
+          "end": 4505.14,
+          "text": "一個相雜念住、一個自性念住、一個相雜念住這樣子就把這個念..."
+        }
+      ],
+      "guidedText": "一個相雜念住、一個自性念住、一個相雜念住這樣子就把這個念...",
+      "sentenceIds": [
+        "seg-1359"
+      ],
+      "expectedTerms": [
+        "共念"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-48",
+      "clipStart": 4605.87,
+      "clipEnd": 4613.27,
+      "rawSegments": [
+        {
+          "start": 4605.87,
+          "end": 4612.65,
+          "text": "等到一念相應,斷出去,兒煩惱、愛煩惱。"
+        }
+      ],
+      "rawText": "等到一念相應,斷出去,兒煩惱、愛煩惱。",
+      "guidedSegments": [
+        {
+          "start": 4605.87,
+          "end": 4612.65,
+          "text": "等到一念相應，斷出去, 惡煩惱、愛煩惱。"
+        }
+      ],
+      "guidedText": "等到一念相應，斷出去, 惡煩惱、愛煩惱。",
+      "sentenceIds": [
+        "seg-1391"
+      ],
+      "expectedTerms": [
+        "見"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-49",
+      "clipStart": 4696.25,
+      "clipEnd": 4702.66,
+      "rawSegments": [
+        {
+          "start": 4696.25,
+          "end": 4700.99,
+          "text": "有些人想出來的一件事,就是用這個做佛法。"
+        },
+        {
+          "start": 4700.99,
+          "end": 4702.99,
+          "text": "輻射介先生就分明說,"
+        }
+      ],
+      "rawText": "有些人想出來的一件事,就是用這個做佛法。輻射介先生就分明說,",
+      "guidedSegments": [
+        {
+          "start": 4696.25,
+          "end": 4699.69,
+          "text": "有些人想出來一件事 就是用這個做佛法。"
+        },
+        {
+          "start": 4699.69,
+          "end": 4702.73,
+          "text": "菩薩戒分明說"
+        }
+      ],
+      "guidedText": "有些人想出來一件事 就是用這個做佛法。菩薩戒分明說",
+      "sentenceIds": [
+        "seg-1416"
+      ],
+      "expectedTerms": [
+        "（不明，可能為某種修行方法或經驗的名稱）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-50",
+      "clipStart": 4762.49,
+      "clipEnd": 4768.27,
+      "rawSegments": [
+        {
+          "start": 4763.22,
+          "end": 4768.24,
+          "text": "文所稱有這樣的意思。"
+        }
+      ],
+      "rawText": "文所稱有這樣的意思。",
+      "guidedSegments": [
+        {
+          "start": 4763.22,
+          "end": 4768.28,
+          "text": "文所成有這樣的意思"
+        }
+      ],
+      "guidedText": "文所成有這樣的意思",
+      "sentenceIds": [
+        "seg-1440"
+      ],
+      "expectedTerms": [
+        "慧"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-51",
+      "clipStart": 4872.42,
+      "clipEnd": 4879.49,
+      "rawSegments": [
+        {
+          "start": 4873.34,
+          "end": 4879.55,
+          "text": "是修所成的智慧,通於肉和無。"
+        }
+      ],
+      "rawText": "是修所成的智慧,通於肉和無。",
+      "guidedSegments": [
+        {
+          "start": 4873.34,
+          "end": 4879.55,
+          "text": "還有煩惱。是修所成的智慧,通於肉和無。"
+        }
+      ],
+      "guidedText": "還有煩惱。是修所成的智慧,通於肉和無。",
+      "sentenceIds": [
+        "seg-1484"
+      ],
+      "expectedTerms": [
+        "修所成慧（作主詞，如「而修所成慧」）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-52",
+      "clipStart": 4977.4,
+      "clipEnd": 4986.51,
+      "rawSegments": [
+        {
+          "start": 4977.4,
+          "end": 4986.42,
+          "text": "這個四年之後當然我們在佛學院裡面讀過、學過的,是老生常談的。"
+        }
+      ],
+      "rawText": "這個四年之後當然我們在佛學院裡面讀過、學過的,是老生常談的。",
+      "guidedSegments": [
+        {
+          "start": 4977.4,
+          "end": 4984.42,
+          "text": "這四念住 當然我們在佛學院裡面讀過、學過的"
+        },
+        {
+          "start": 4984.62,
+          "end": 4986.42,
+          "text": "是老生常談的。"
+        }
+      ],
+      "guidedText": "這四念住 當然我們在佛學院裡面讀過、學過的是老生常談的。",
+      "sentenceIds": [
+        "seg-1512"
+      ],
+      "expectedTerms": [
+        "的人"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-53",
+      "clipStart": 5040.85,
+      "clipEnd": 5048.48,
+      "rawSegments": [
+        {
+          "start": 5042.67,
+          "end": 5048.59,
+          "text": "文沒有這裏這麼多,比這少,科也不是很少。"
+        }
+      ],
+      "rawText": "文沒有這裏這麼多,比這少,科也不是很少。",
+      "guidedSegments": [
+        {
+          "start": 5042.67,
+          "end": 5048.59,
+          "text": "文沒有這裏這麼多,比這少,科也不是很少"
+        }
+      ],
+      "guidedText": "文沒有這裏這麼多,比這少,科也不是很少",
+      "sentenceIds": [
+        "seg-1530"
+      ],
+      "expectedTerms": [
+        "文句"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-54",
+      "clipStart": 5050.32,
+      "clipEnd": 5057.64,
+      "rawSegments": [
+        {
+          "start": 5050.32,
+          "end": 5058.45,
+          "text": "我常常讀文俗,文具俗了李女便。"
+        }
+      ],
+      "rawText": "我常常讀文俗,文具俗了李女便。",
+      "guidedSegments": [
+        {
+          "start": 5050.32,
+          "end": 5057.63,
+          "text": "常常讀文俗文具俗了"
+        }
+      ],
+      "guidedText": "常常讀文俗文具俗了",
+      "sentenceIds": [
+        "seg-1533"
+      ],
+      "expectedTerms": [
+        "法門"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-55",
+      "clipStart": 5114.35,
+      "clipEnd": 5120.35,
+      "rawSegments": [
+        {
+          "start": 5115.91,
+          "end": 5120.62,
+          "text": "很多方面的功德,很多種功德都逐漸的。"
+        }
+      ],
+      "rawText": "很多方面的功德,很多種功德都逐漸的。",
+      "guidedSegments": [
+        {
+          "start": 5115.91,
+          "end": 5120.48,
+          "text": "很多方面的功德、很多種功德都逐漸的"
+        }
+      ],
+      "guidedText": "很多方面的功德、很多種功德都逐漸的",
+      "sentenceIds": [
+        "seg-1554"
+      ],
+      "expectedTerms": [
+        "就出來了"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-56",
+      "clipStart": 5185.11,
+      "clipEnd": 5191.11,
+      "rawSegments": [
+        {
+          "start": 5185.11,
+          "end": 5188.82,
+          "text": "語文語意要明記不忘。"
+        }
+      ],
+      "rawText": "語文語意要明記不忘。",
+      "guidedSegments": [
+        {
+          "start": 5185.11,
+          "end": 5188.82,
+          "text": "語文語意啊,要明記不忘。"
+        }
+      ],
+      "guidedText": "語文語意啊,要明記不忘。",
+      "sentenceIds": [
+        "seg-1578"
+      ],
+      "expectedTerms": [
+        "師父／師答（後續語句）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-57",
+      "clipStart": 5369.17,
+      "clipEnd": 5377.61,
+      "rawSegments": [
+        {
+          "start": 5369.17,
+          "end": 5376.83,
+          "text": "初步開始情況良好,進而沉默昏沉。這件事啊……"
+        }
+      ],
+      "rawText": "初步開始情況良好,進而沉默昏沉。這件事啊……",
+      "guidedSegments": [
+        {
+          "start": 5369.17,
+          "end": 5376.65,
+          "text": "這件事啊……"
+        }
+      ],
+      "guidedText": "這件事啊……",
+      "sentenceIds": [
+        "seg-1624"
+      ],
+      "expectedTerms": [
+        "沉"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-58",
+      "clipStart": 5641.94,
+      "clipEnd": 5649.92,
+      "rawSegments": [
+        {
+          "start": 5642.89,
+          "end": 5649.44,
+          "text": "注意一下,身份地方不對,要對置。"
+        }
+      ],
+      "rawText": "注意一下,身份地方不對,要對置。",
+      "guidedSegments": [
+        {
+          "start": 5642.89,
+          "end": 5649.54,
+          "text": "注意一下 身份的地方不對 要對治"
+        }
+      ],
+      "guidedText": "注意一下 身份的地方不對 要對治",
+      "sentenceIds": [
+        "seg-1714",
+        "seg-1715"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-59",
+      "clipStart": 5654.07,
+      "clipEnd": 5660.75,
+      "rawSegments": [
+        {
+          "start": 5654.07,
+          "end": 5658.5,
+          "text": "那你就趕快修皮膚神羅。"
+        }
+      ],
+      "rawText": "那你就趕快修皮膚神羅。",
+      "guidedSegments": [
+        {
+          "start": 5654.07,
+          "end": 5658.5,
+          "text": "那你就趕快修皮膚神羅。"
+        }
+      ],
+      "guidedText": "那你就趕快修皮膚神羅。",
+      "sentenceIds": [
+        "seg-1720"
+      ],
+      "expectedTerms": [
+        "那"
+      ],
+      "recoveredTerms": [
+        "那"
+      ]
+    },
+    {
+      "windowId": "win-60",
+      "clipStart": 5798.8,
+      "clipEnd": 5806.12,
+      "rawSegments": [
+        {
+          "start": 5798.8,
+          "end": 5806.22,
+          "text": "大家有很多聲音,心就不能射心,永遠不能,但是你能。"
+        }
+      ],
+      "rawText": "大家有很多聲音,心就不能射心,永遠不能,但是你能。",
+      "guidedSegments": [
+        {
+          "start": 5798.8,
+          "end": 5806.12,
+          "text": "大家有很多聲音 心就不能攝心 永遠不能 但是你能"
+        }
+      ],
+      "guidedText": "大家有很多聲音 心就不能攝心 永遠不能 但是你能",
+      "sentenceIds": [
+        "seg-1779"
+      ],
+      "expectedTerms": [
+        "人"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-61",
+      "clipStart": 5976.44,
+      "clipEnd": 5981.44,
+      "rawSegments": [
+        {
+          "start": 5976.44,
+          "end": 5981.56,
+          "text": "他自己在頭上設一個叫做"
+        }
+      ],
+      "rawText": "他自己在頭上設一個叫做",
+      "guidedSegments": [
+        {
+          "start": 5976.44,
+          "end": 5981.44,
+          "text": "禪堂裡用功 或者單獨用功。他自己在頭上設一個叫做"
+        }
+      ],
+      "guidedText": "禪堂裡用功 或者單獨用功。他自己在頭上設一個叫做",
+      "sentenceIds": [
+        "seg-1829"
+      ],
+      "expectedTerms": [
+        "功"
+      ],
+      "recoveredTerms": [
+        "功"
+      ]
+    },
+    {
+      "windowId": "win-62",
+      "clipStart": 6064.94,
+      "clipEnd": 6071.12,
+      "rawSegments": [
+        {
+          "start": 6066.82,
+          "end": 6071,
+          "text": "我認為這是合法。不能說沒有規定。"
+        }
+      ],
+      "rawText": "我認為這是合法。不能說沒有規定。",
+      "guidedSegments": [
+        {
+          "start": 6066.82,
+          "end": 6071,
+          "text": "我認為這是合法不能說沒有規定。"
+        }
+      ],
+      "guidedText": "我認為這是合法不能說沒有規定。",
+      "sentenceIds": [
+        "seg-1855"
+      ],
+      "expectedTerms": [
+        "佛法"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-63",
+      "clipStart": 6309.62,
+      "clipEnd": 6317.87,
+      "rawSegments": [
+        {
+          "start": 6309.62,
+          "end": 6316.18,
+          "text": "是一個心靜的功德的事情,呵斥罪過的事情。"
+        },
+        {
+          "start": 6316.18,
+          "end": 6318.18,
+          "text": "因此有功德的事情,我們站在一起。"
+        }
+      ],
+      "rawText": "是一個心靜的功德的事情,呵斥罪過的事情。因此有功德的事情,我們站在一起。",
+      "guidedSegments": [
+        {
+          "start": 6309.62,
+          "end": 6318.28,
+          "text": "心靜的功德的事情,呵斥罪過的事情。因此有功德的事,我們站在一起。"
+        }
+      ],
+      "guidedText": "心靜的功德的事情,呵斥罪過的事情。因此有功德的事,我們站在一起。",
+      "sentenceIds": [
+        "seg-1939"
+      ],
+      "expectedTerms": [
+        "讚歎"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-64",
+      "clipStart": 6365.01,
+      "clipEnd": 6373.01,
+      "rawSegments": [
+        {
+          "start": 6365.01,
+          "end": 6373.84,
+          "text": "不應該這樣。要是自己要想要自己有進步,就從自己的這些繁體上去。"
+        }
+      ],
+      "rawText": "不應該這樣。要是自己要想要自己有進步,就從自己的這些繁體上去。",
+      "guidedSegments": [
+        {
+          "start": 6365.01,
+          "end": 6373.84,
+          "text": "不應該這樣。要是自己要想要自己有進步,就從自己的這些繁體上去。"
+        }
+      ],
+      "guidedText": "不應該這樣。要是自己要想要自己有進步,就從自己的這些繁體上去。",
+      "sentenceIds": [
+        "seg-1957"
+      ],
+      "expectedTerms": [
+        "佛弟子"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-65",
+      "clipStart": 6452.04,
+      "clipEnd": 6458.93,
+      "rawSegments": [
+        {
+          "start": 6452.04,
+          "end": 6459.11,
+          "text": "我對方有信心,信心就是相信印度。"
+        }
+      ],
+      "rawText": "我對方有信心,信心就是相信印度。",
+      "guidedSegments": [
+        {
+          "start": 6452.04,
+          "end": 6459.11,
+          "text": "我對方有信心,信心就是相信印度。"
+        }
+      ],
+      "guidedText": "我對方有信心,信心就是相信印度。",
+      "sentenceIds": [
+        "seg-1985"
+      ],
+      "expectedTerms": [
+        "慚愧"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-66",
+      "clipStart": 6495.44,
+      "clipEnd": 6503.48,
+      "rawSegments": [
+        {
+          "start": 6495.44,
+          "end": 6503.45,
+          "text": "現在修四年處也好,就是去掉自己的污點。像洗澡似的。"
+        }
+      ],
+      "rawText": "現在修四年處也好,就是去掉自己的污點。像洗澡似的。",
+      "guidedSegments": [
+        {
+          "start": 6495.44,
+          "end": 6503.45,
+          "text": "現在修四念處也好,就是去掉自己的污點。像洗澡似的。"
+        }
+      ],
+      "guidedText": "現在修四念處也好,就是去掉自己的污點。像洗澡似的。",
+      "sentenceIds": [
+        "seg-2000"
+      ],
+      "expectedTerms": [
+        "清淨自己"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-67",
+      "clipStart": 6598.93,
+      "clipEnd": 6607.71,
+      "rawSegments": [
+        {
+          "start": 6598.93,
+          "end": 6607.69,
+          "text": "修世紀念著就是不在印之法。而《玉切詞》的論裡面呢,"
+        }
+      ],
+      "rawText": "修世紀念著就是不在印之法。而《玉切詞》的論裡面呢,",
+      "guidedSegments": [
+        {
+          "start": 6598.93,
+          "end": 6607.71,
+          "text": "《金剛經》就是不障人之法。《玉切詞論》裡面,"
+        }
+      ],
+      "guidedText": "《金剛經》就是不障人之法。《玉切詞論》裡面,",
+      "sentenceIds": [
+        "seg-2030"
+      ],
+      "expectedTerms": [
+        "心"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-68",
+      "clipStart": 6761.4,
+      "clipEnd": 6771.84,
+      "rawSegments": [
+        {
+          "start": 6763.25,
+          "end": 6771.85,
+          "text": "進一步地觀察身體之因緣有。因緣有就是自信空。"
+        }
+      ],
+      "rawText": "進一步地觀察身體之因緣有。因緣有就是自信空。",
+      "guidedSegments": [
+        {
+          "start": 6763.25,
+          "end": 6771.85,
+          "text": "進一步地觀察身體之因緣有。因緣有就是自性空。"
+        }
+      ],
+      "guidedText": "進一步地觀察身體之因緣有。因緣有就是自性空。",
+      "sentenceIds": [
+        "seg-2057"
+      ],
+      "expectedTerms": [
+        "是"
+      ],
+      "recoveredTerms": [
+        "是"
+      ]
+    },
+    {
+      "windowId": "win-69",
+      "clipStart": 6846.55,
+      "clipEnd": 6856.58,
+      "rawSegments": [
+        {
+          "start": 6854.7,
+          "end": 6856.7,
+          "text": "心不障眼之法。"
+        }
+      ],
+      "rawText": "心不障眼之法。",
+      "guidedSegments": [
+        {
+          "start": 6854.7,
+          "end": 6856.7,
+          "text": "心不障人之法。"
+        }
+      ],
+      "guidedText": "心不障人之法。",
+      "sentenceIds": [
+        "seg-2079"
+      ],
+      "expectedTerms": [
+        "請示／何謂"
+      ],
+      "recoveredTerms": []
+    }
+  ],
+  "hallucinationRepairs": [
+    {
+      "sentenceId": "seg-700",
+      "before": "你才能有成就",
+      "after": "但是你才能夠在佛法裡面你才能成就"
+    },
+    {
+      "sentenceId": "seg-701",
+      "before": "你才能有成就",
+      "after": "因為這是"
+    },
+    {
+      "sentenceId": "seg-1714",
+      "before": "什麼地方不對",
+      "after": ""
+    },
+    {
+      "sentenceId": "seg-1715",
+      "before": "什麼地方不對",
+      "after": "注意一下 身份的地方不對 要對治"
+    }
+  ],
+  "proposalsCount": 789,
+  "blockedByGuard": [
+    {
+      "sentenceId": "seg-003",
+      "paragraphId": "p-1",
+      "start": 7.12,
+      "end": 31.84,
+      "originalText": "當知多種今於此中，且顯少分諸門差別前面說到內、外，",
+      "proposedText": "如是等類身受心法諸差別門，當知多種。今於此中，且顯少分。前面說到內、外，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原文為字幕短句黏連，補上句讀使「如是等類……當知多種」與「今於此中，且顯少分」各自成句，並保留「前面說到內、外」以銜接下文。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-400",
+      "paragraphId": "p-2",
+      "start": 1368.21,
+      "end": 1372.71,
+      "originalText": "樂受是苦，苦受是苦不苦不樂受也是會苦的，",
+      "proposedText": "樂受是苦，苦受是苦，不苦不樂受也是苦的，",
+      "categories": [
+        "punctuation",
+        "typo"
+      ],
+      "reason": "補逗號斷句；「會苦」為 ASR 誤聽，依上下文（三受皆苦）修正為「是苦」。",
+      "guardReason": "cross-sentence-move:也是苦"
+    },
+    {
+      "sentenceId": "seg-551",
+      "paragraphId": "p-3",
+      "start": 1904.78,
+      "end": 1909.85,
+      "originalText": "有的時候有慈悲心、有時候沒有慈悲心，",
+      "proposedText": "有的時候有慈悲心、有的時候沒有慈悲心，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列對比句，補頓號使節奏一致。",
+      "guardReason": "cross-sentence-move:心有的"
+    },
+    {
+      "sentenceId": "seg-612",
+      "paragraphId": "p-4",
+      "start": 2086.93,
+      "end": 2100.6,
+      "originalText": "前面說心念住是無常這是斷除去，",
+      "proposedText": "前面說心念住是無常，這是斷除去「我的體性是常住的」這種執著；",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句句尾缺標點，且「斷除去」後語意未完，補上標點並依下句語意以引號標明所斷除的內容，使句構完整。",
+      "guardReason": "cross-sentence-move:我的體"
+    },
+    {
+      "sentenceId": "seg-624",
+      "paragraphId": "p-4",
+      "start": 2114.93,
+      "end": 2120.44,
+      "originalText": "是斷除我的作用從作用方面，",
+      "proposedText": "是斷除我的作用，從作用方面不要執著有我；",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句「從作用方面」後語意黏連下句，補逗號斷句並以分號收束，使「斷除我的作用」與「從作用方面不要執著有我」語意分明。",
+      "guardReason": "cross-sentence-move:不要執"
+    },
+    {
+      "sentenceId": "seg-626",
+      "paragraphId": "p-4",
+      "start": 2120.44,
+      "end": 2127.37,
+      "originalText": "不要執著有我所謂對於無我中計我的錯誤，",
+      "proposedText": "所謂對於無我中計我的錯誤，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「所謂」前的「有」，補逗號使語意順暢。",
+      "guardReason": "content-word-omitted:不要"
+    },
+    {
+      "sentenceId": "seg-632",
+      "paragraphId": "p-4",
+      "start": 2150.84,
+      "end": 2157.32,
+      "originalText": "也會感覺到無我我們自動地就說是無我，",
+      "proposedText": "也會感覺到無我，我們自動地就說是無我，能了解無我是好的。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依 reAsrHint 補齊「能了解無我是好的」等漏字，並補標點使語意完整。",
+      "guardReason": "cross-sentence-move:無我是"
+    },
+    {
+      "sentenceId": "seg-668",
+      "paragraphId": "p-4",
+      "start": 2286.11,
+      "end": 2290.61,
+      "originalText": "就是那裡說的理論你不是十分，",
+      "proposedText": "就是那裡說的理論，你不是十分明了，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "補上逗號，並將下一句的「明了」依語意補回本句，使句子完整。",
+      "guardReason": "cross-sentence-move:十分明"
+    },
+    {
+      "sentenceId": "seg-676",
+      "paragraphId": "p-4",
+      "start": 2306.22,
+      "end": 2315.2,
+      "originalText": "讀一遍、再讀一遍，讀一遍、再讀一遍道宣律師聽他的師長講《四分律》二十，",
+      "proposedText": "讀一遍、再讀一遍，讀一遍、再讀一遍。道宣律師聽他的師長講《四分律》二十遍，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上句號斷開重複語與下文，並補齊「遍」字使「二十遍」完整。",
+      "guardReason": "cross-sentence-move:二十遍"
+    },
+    {
+      "sentenceId": "seg-694",
+      "paragraphId": "p-4",
+      "start": 2358.17,
+      "end": 2361.81,
+      "originalText": "那個地方有相融通的地方，",
+      "proposedText": "那個地方有相融通的地方，那個地方有一點衝突；",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點，以分號連接對比並列的兩個子句。",
+      "guardReason": "cross-sentence-move:方有一"
+    },
+    {
+      "sentenceId": "seg-735",
+      "paragraphId": "p-4",
+      "start": 2504.35,
+      "end": 2508.16,
+      "originalText": "把外道打倒了、辯倒了，",
+      "proposedText": "把外道辯倒了。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "「打倒了、辯倒了」為口語重複贅詞，精簡為「辯倒了」，並補句尾句號。",
+      "guardReason": "cross-sentence-move:外道辯"
+    },
+    {
+      "sentenceId": "seg-1050",
+      "paragraphId": "p-4",
+      "start": 3530.91,
+      "end": 3533.91,
+      "originalText": "立身念住是這樣的意思破除去，",
+      "proposedText": "立身念住是這樣的意思：破除去「這是我的住處、沒有我可得的」。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補冒號與引號，整理句構並補句號。",
+      "guardReason": "cross-sentence-move:這是我"
+    },
+    {
+      "sentenceId": "seg-1330",
+      "paragraphId": "p-4",
+      "start": 4423,
+      "end": 4432.37,
+      "originalText": "所餘相應諸心心法是相雜念住所餘，",
+      "proposedText": "所餘相應諸心心所法，是相雜念住所餘。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依下文「諸心心所法」補齊「所」字，並補句號。",
+      "guardReason": "cross-sentence-move:心所法"
+    },
+    {
+      "sentenceId": "seg-1350",
+      "paragraphId": "p-4",
+      "start": 4484.84,
+      "end": 4489.88,
+      "originalText": "就是三個是兩句話若於此住念，",
+      "proposedText": "就是三個：是兩句話「若於此住念，名為念住」。",
+      "categories": [
+        "punctuation",
+        "missing-term"
+      ],
+      "reason": "原文「若於此住念」與下句黏連，補冒號引出經文，並補上引號與標點。",
+      "guardReason": "cross-sentence-move:名為念"
+    },
+    {
+      "sentenceId": "seg-1353",
+      "paragraphId": "p-4",
+      "start": 4489.88,
+      "end": 4495.66,
+      "originalText": "名為念住若由此住念，",
+      "proposedText": "若由此住念，是兩句話。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原文「若由此住念」句尾缺標點，補逗號與句號，使經文引句完整。",
+      "guardReason": "cross-sentence-move:是兩句"
+    },
+    {
+      "sentenceId": "seg-1440",
+      "paragraphId": "p-4",
+      "start": 4764.49,
+      "end": 4766.27,
+      "originalText": "聞所成有這樣的意思，",
+      "proposedText": "聞所成慧有這樣的意思。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依 reAsrHint 與下文「聞所成慧」補齊名相「慧」，並補句尾句號。",
+      "guardReason": "cross-sentence-move:所成慧"
+    },
+    {
+      "sentenceId": "seg-1450",
+      "paragraphId": "p-4",
+      "start": 4789.79,
+      "end": 4793.29,
+      "originalText": "是和初開始的聞所成，",
+      "proposedText": "是和初開始的聞所成慧不一樣的，它有力量。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "將「慧」補回「聞所成」之後，並補標點完成句子。",
+      "guardReason": "cross-sentence-move:慧不一"
+    },
+    {
+      "sentenceId": "seg-1626",
+      "paragraphId": "p-4",
+      "start": 5379.96,
+      "end": 5391.19,
+      "originalText": "這件事有兩個情況一個是你盤腿坐的時候坐下來，",
+      "proposedText": "這件事有兩個情況：一個是你盤腿坐的時候，坐下來修奢摩他，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補冒號引出兩種情況，並補逗號斷句，使與下句黏連處語意通順。",
+      "guardReason": "cross-sentence-move:修奢摩"
+    },
+    {
+      "sentenceId": "seg-1804",
+      "paragraphId": "p-4",
+      "start": 5884.34,
+      "end": 5887.08,
+      "originalText": "調動著使用，要這樣子，",
+      "proposedText": "調動著使用，要這樣子。譬如說，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補句號，並補逗號引出舉例。",
+      "guardReason": "cross-sentence-move:譬如說"
+    },
+    {
+      "sentenceId": "seg-1834",
+      "paragraphId": "p-4",
+      "start": 5994.9,
+      "end": 6002.72,
+      "originalText": "那麼這就容易覺醒自己，",
+      "proposedText": "那麼這就容易覺醒自己、覺察自己。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "與下句為並列語意，補上頓號並合併句尾標點。",
+      "guardReason": "cross-sentence-move:覺察自"
+    },
+    {
+      "sentenceId": "seg-1858",
+      "paragraphId": "p-4",
+      "start": 6072.12,
+      "end": 6074.72,
+      "originalText": "這樣把昏沉破除去了，",
+      "proposedText": "這樣把昏沉破除去了，不是很好嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句缺標點，補逗號並將句尾改為反問語氣的問號。",
+      "guardReason": "cross-sentence-move:不是很"
+    },
+    {
+      "sentenceId": "seg-1992",
+      "paragraphId": "p-4",
+      "start": 6475.55,
+      "end": 6479.71,
+      "originalText": "我趕快去認錯我向人道歉再注意，",
+      "proposedText": "我趕快去認錯、我向人道歉，再注意不要對不住別人；別人對不住我的時候，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句為字幕短句黏連，補上頓號、逗號與分號以切分語意，並與下一句銜接。",
+      "guardReason": "cross-sentence-move:不要對"
+    },
+    {
+      "sentenceId": "seg-1995",
+      "paragraphId": "p-4",
+      "start": 6479.71,
+      "end": 6486.67,
+      "originalText": "不要對不住別人別人對不住我的時候，",
+      "proposedText": "我原諒、不計較。我們讀《金剛經》也好，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補句號結束前段，並以逗號分開後半句。",
+      "guardReason": "content-word-omitted:不要"
+    },
+    {
+      "sentenceId": "seg-2052",
+      "paragraphId": "p-4",
+      "start": 6748.22,
+      "end": 6756.69,
+      "originalText": "若我是五陰，我即為生滅若我異五陰，則非五陰相那麼這是意義，",
+      "proposedText": "「若我是五陰，我即為生滅；若我異五陰，則非五陰相。」那麼這是偈頌的意義。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "引文加引號並以分號斷句；「這是意義」補足為「偈頌的意義」使語意完整。",
+      "guardReason": "cross-sentence-move:的意義"
+    }
+  ]
+}

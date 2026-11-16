@@ -1,0 +1,81 @@
+36A bounded audio clips RED / generation / GREEN evidence
+Working directory: /Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions
+No network/model/service/commit actions.
+
+INITIAL RED (verbatim original pre-generation tool output retained from this chat;
+not a new run and not a claim that current files still fail).
+Command: node --test tests/unit/session36aAudioClips.test.js
+Exit code: 1
+TAP version 13
+# Subtest: 30 bounded review clips bind the independent 176-item inventory and official source
+not ok 1 - 30 bounded review clips bind the independent 176-item inventory and official source
+  ---
+  duration_ms: 2.0495
+  type: 'test'
+  location: '/Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions/tests/unit/session36aAudioClips.test.js:12:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'courses/入中論善顯密意疏/publications/audio_36A_review/manifest.json'"
+  code: 'ENOENT'
+  stack: |-
+    Object.openSync (node:fs:560:18)
+    Object.readFileSync (node:fs:444:35)
+    read (file:///Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions/tests/unit/session36aAudioClips.test.js:9:36)
+    TestContext.<anonymous> (file:///Users/henry/.codex/worktrees/session36a-quality-pilot/Transcriptions/tests/unit/session36aAudioClips.test.js:21:13)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 50.730584
+
+GENERATION (verbatim successful generator stdout)
+Command: python3 scripts/build_session36a_review_clips.py
+Exit code: 0
+{"clips": 30, "clipBytes": 5039016, "manifestBytes": 40416, "totalBytes": 5079432}
+
+Generation first encountered sandbox PermissionError creating the output directory;
+the same command succeeded after sandbox escalation. No audio was fabricated.
+The manifest records exact decode/encode/probe argv, per-clip sample indices,
+source hash, clip hashes, source intervals and playback offsets.
+
+LATEST GREEN (verbatim output after explicit required-tool checks were added)
+Command: node --test tests/unit/session36aAudioClips.test.js
+Exit code: 0
+TAP version 13
+# Subtest: 30 bounded review clips bind the independent 176-item inventory and official source
+ok 1 - 30 bounded review clips bind the independent 176-item inventory and official source
+  ---
+  duration_ms: 3403.201333
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3442.396042
+
+Artifacts at GREEN (SHA256):
+445c57c19c8bce6d0b184e81bb6628c4cdf134c5303840550fd1c67a05a2c149 scripts/build_session36a_review_clips.py
+1863e7232768d44f4baf4a3f81df7ea581bb0106f3a74b59e4fff44589cf442c tests/unit/session36aAudioClips.test.js
+0a7fbb95274371b78cfd7ed25f5c9945d7ef2e6e546800ad859bbaf2c8672dd6 courses/入中論善顯密意疏/publications/audio_36A_review/manifest.json
+
+Buffer bound:
+Longest selected excerpt p6-v5 = 36.02 seconds, 1152640 decoded PCM bytes.
+This exceeds spawnSync's default 1048576-byte maxBuffer.
+PCM subprocess maxBuffer is explicitly 4194304 bytes.
+ffmpeg and ffprobe -version must succeed; missing tools fail with tool name and error, never skip.
+All 30 clips independently pass ffprobe/header bounds and full PCM decode duration.
+Final p29-v11 source interval: 3533.4 through 3558.3478125 seconds.
+Browser playback acceptance remains main portal integration work.

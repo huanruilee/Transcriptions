@@ -1,0 +1,712 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:9ab8a3d67b76e197a641d0bab150d9f83ae0fdf2106a822d7a86c5078eaa6b02",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "seg-0255",
+      "before": "或者瞭解釋迦牟尼佛的教導的時候",
+      "after": "或者了解釋迦牟尼佛的教導的時候",
+      "changeClass": "orthography",
+      "reason": "「瞭解」應為「了解」，「釋迦牟尼」為標準譯名，原文「解釋迦」為同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0392",
+      "before": "其實可以理解為菩薩授於我們",
+      "after": "其實可以理解為菩薩授予我們",
+      "changeClass": "orthography",
+      "reason": "「授於」應為「授予」，固定詞彙用法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0560",
+      "before": "而是斷除無明後之後顯現",
+      "after": "而是斷除無明後顯現",
+      "changeClass": "orthography",
+      "reason": "「後之後」重複，應為「後」或「之後」，保留一個即可。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0642",
+      "before": "那我就會覺得是合理的",
+      "after": "那我就會覺得是合理的。",
+      "changeClass": "punctuation",
+      "reason": "此句為完整陳述，原稿缺少句號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0643",
+      "before": "理由是智慧是無常法",
+      "after": "理由是智慧是無常法。",
+      "changeClass": "punctuation",
+      "reason": "此句為完整陳述，原稿缺少句號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0644",
+      "before": "必須觀待眾因而生起",
+      "after": "必須觀待眾因而生起。",
+      "changeClass": "punctuation",
+      "reason": "此句為完整陳述，原稿缺少句號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0645",
+      "before": "所以除了自己努力的聞思修",
+      "after": "所以除了自己努力的聞思修，",
+      "changeClass": "punctuation",
+      "reason": "此處為語意未完，後續接「這個主因的話」，建議加逗號表示停頓。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0646",
+      "before": "這個主因的話",
+      "after": "這個主因的話，",
+      "changeClass": "punctuation",
+      "reason": "此處為語意未完，後續接「還是需要...」，建議加逗號表示停頓。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0647",
+      "before": "還是需要他力與菩薩的",
+      "after": "還是需要他力與菩薩的，",
+      "changeClass": "punctuation",
+      "reason": "此處為語意未完，後續接「加持」，建議加逗號表示停頓。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0648",
+      "before": "加持",
+      "after": "加持，",
+      "changeClass": "punctuation",
+      "reason": "此處為語意未完，後續接「還有他的福德資糧」，建議加逗號表示停頓。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0649",
+      "before": "還有他的福德資糧",
+      "after": "還有他的福德資糧。",
+      "changeClass": "punctuation",
+      "reason": "此句為完整陳述，原稿缺少句號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0873",
+      "before": "是智慧的象徵嗎",
+      "after": "是智慧的象徵嗎？",
+      "changeClass": "punctuation",
+      "reason": "原句為疑問句，但缺少問號，補上問號以明確語氣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0963",
+      "before": "我可能也還是不是真正很瞭解的情況之下",
+      "after": "我可能也還不是真正很瞭解的情況之下",
+      "changeClass": "orthography",
+      "reason": "語法修正：「還是不是」應為「還不是」，多字誤植。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1270",
+      "before": "想到在站在釋迦牟尼佛面前的時候",
+      "after": "想到站在釋迦牟尼佛面前的時候",
+      "changeClass": "orthography",
+      "reason": "修正多餘的「在」字，使語句通順。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1315",
+      "before": "然後你要有苦有難",
+      "after": "然後你要有苦難",
+      "changeClass": "orthography",
+      "reason": "「苦有難」應為「苦難」，ASR 同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1321",
+      "before": "他好像都不用跟我們說",
+      "after": "祂好像都不用跟我們說",
+      "changeClass": "term",
+      "reason": "前文皆用「祂」指稱世尊，此處「他」應統一為「祂」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1512",
+      "before": "就感覺很學習",
+      "after": "就感覺很歡喜",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文語境為聽到菩薩名號後的正面情緒反應，「學習」與「興奮」搭配不當，應為「歡喜」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1632",
+      "before": "那我們到底要祈求什麼嗎",
+      "after": "那我們到底要祈求什麼呢？",
+      "changeClass": "punctuation",
+      "reason": "疑問句尾應使用問號，原文誤用「嗎」字結尾且標點缺失。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1964",
+      "before": "我可不可以這麼理解",
+      "after": "我可不可以這麼理解？",
+      "changeClass": "punctuation",
+      "reason": "此處為疑問語氣，應補上問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1971",
+      "before": "但事情的真相是如此嗎",
+      "after": "但事情的真相是如此嗎？",
+      "changeClass": "punctuation",
+      "reason": "此處為疑問語氣，應補上問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1984",
+      "before": "哪一種緣起",
+      "after": "哪一種緣起？",
+      "changeClass": "punctuation",
+      "reason": "此處為疑問語氣，應補上問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2075",
+      "before": "效學妳們曾經走過的路",
+      "after": "效法妳們曾經走過的路",
+      "changeClass": "orthography",
+      "reason": "「效學」應為「效法」，意指模仿學習。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2136",
+      "before": "只有它的重要性在",
+      "after": "只有它的重要性在。",
+      "changeClass": "punctuation",
+      "reason": "標點補充：句末缺少句號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2196",
+      "before": "這個可以推匯出",
+      "after": "這個可以推論出",
+      "changeClass": "orthography",
+      "reason": "「推匯出」應為同音訛字，正確詞彙為「推論出」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2284",
+      "before": "如果是隻是這樣子的話",
+      "after": "如果是只是這樣子的話",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「隻是」應為「只是」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2344",
+      "before": "套用到自身的時後",
+      "after": "套用到自身的時候",
+      "changeClass": "orthography",
+      "reason": "「時後」為同音訛字，應為「時候」",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2346",
+      "before": "但是所以套用在自身的時後",
+      "after": "但是所以套用在自身的時候",
+      "changeClass": "orthography",
+      "reason": "「時後」為同音訛字，應為「時候」",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2517",
+      "before": "也就是隻要問題了，",
+      "after": "也就是只要問題了，",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字修正。語境為「一切的問題」，應為「只要」而非「隻要」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3081",
+      "before": "也就是隻要我們知道自己得到了癌症",
+      "after": "也就是只要我們知道自己得到了癌症",
+      "changeClass": "orthography",
+      "reason": "修正錯別字，「隻要」應為「只要」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3362",
+      "before": "不就是不瞭解真相",
+      "after": "不就是不瞭解真相？",
+      "changeClass": "punctuation",
+      "reason": "此句為反問語氣，原稿缺少問號，建議補上以符合語意。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3370",
+      "before": "來對於我剛剛提出的這個問題",
+      "after": "來，對於我剛剛提出的這個問題",
+      "changeClass": "punctuation",
+      "reason": "「來」為口語連接詞，後接逗號使語氣更自然。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3413",
+      "before": "中石，請說",
+      "after": "中石，請說。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3421",
+      "before": "對於快樂，我不認同",
+      "after": "對於快樂，我不認同。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3423",
+      "before": "不會",
+      "after": "不會。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3434",
+      "before": "你已經前後矛盾了",
+      "after": "你已經前後矛盾了。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3435",
+      "before": "你說不自覺",
+      "after": "你說不自覺。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3436",
+      "before": "你剛剛說的是放過自己",
+      "after": "你剛剛說的是放過自己。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3437",
+      "before": "為什麼要放過自己",
+      "after": "為什麼要放過自己？",
+      "changeClass": "punctuation",
+      "reason": "此處為疑問句，應使用問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3438",
+      "before": "因為我想不通",
+      "after": "因為我想不通。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3439",
+      "before": "因為我做不到",
+      "after": "因為我做不到。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3440",
+      "before": "想不通",
+      "after": "想不通。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3441",
+      "before": "做不到",
+      "after": "做不到。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3447",
+      "before": "所以",
+      "after": "所以。",
+      "changeClass": "punctuation",
+      "reason": "句末補上句號以符合語法規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3491",
+      "before": "我們看待自己",
+      "after": "我們看待自己，",
+      "changeClass": "punctuation",
+      "reason": "口語中「自己」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3492",
+      "before": "跟看待別人的角度不一樣",
+      "after": "跟看待別人的角度不一樣，",
+      "changeClass": "punctuation",
+      "reason": "口語中「不一樣」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3493",
+      "before": "嚴格的程度也不一樣",
+      "after": "嚴格的程度也不一樣，",
+      "changeClass": "punctuation",
+      "reason": "口語中「不一樣」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3494",
+      "before": "我們看待自己多半很寬鬆",
+      "after": "我們看待自己多半很寬鬆，",
+      "changeClass": "punctuation",
+      "reason": "口語中「寬鬆」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3495",
+      "before": "看待別人",
+      "after": "看待別人，",
+      "changeClass": "punctuation",
+      "reason": "口語中「別人」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3496",
+      "before": "我們的要求可多了",
+      "after": "我們的要求可多了，",
+      "changeClass": "punctuation",
+      "reason": "口語中「可多了」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3497",
+      "before": "所以有可能",
+      "after": "所以有可能，",
+      "changeClass": "punctuation",
+      "reason": "口語中「有可能」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3498",
+      "before": "我們放得過自己",
+      "after": "我們放得過自己，",
+      "changeClass": "punctuation",
+      "reason": "口語中「自己」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3499",
+      "before": "但不見得放得過別人",
+      "after": "但不見得放得過別人，",
+      "changeClass": "punctuation",
+      "reason": "口語中「別人」後通常有停頓，建議補上逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3500",
+      "before": "有時候是兩方面都能夠稍微體諒一下",
+      "after": "有時候是兩方面都能夠稍微體諒一下。",
+      "changeClass": "punctuation",
+      "reason": "句末建議補上句號以結束語意。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3662",
+      "before": "非常非常地感恩法識。",
+      "after": "非常非常地感恩法師。",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「法識」應為「法師」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "b068dbba-eb2b-4b74-a076-b31922ed3605"
+}

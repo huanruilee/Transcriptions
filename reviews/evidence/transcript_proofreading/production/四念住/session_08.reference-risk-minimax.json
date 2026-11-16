@@ -1,0 +1,2168 @@
+{
+  "schema": "transcript-reference-risk-repair/v1",
+  "authority": "advisory",
+  "status": "complete",
+  "sourceDigest": "sha256:a2b41bba0b5613196004c252c7ad2d5aeb081478c84942c2cde20170dd104860",
+  "alignmentDigest": "sha256:3aab0812e036877863d84a1854033b512b0ae9f219146a88321a4e75f87b626d",
+  "referenceUrl": "https://ftp.budaedu.org/ghosa/C009/T0209/ref/T0209_08.pdf",
+  "referencePdfDigest": "sha256:4f9033175f6d5635f7fbbe47438265edf1112c35fe9e37b5f75581526099d6ba",
+  "referenceTextDigest": "sha256:6d6c09ba1bcdb4febc63b4ed35bbf7c4db8e6c05546ef272a3187bbcab15e07e",
+  "clusterCount": 148,
+  "itemCount": 243,
+  "completedItemCount": 243,
+  "runBindingDigest": "sha256:6f3a9d54a7999a16aec7c6f84ccfb8b64604efcd95a1d9c0c0f2423820502242",
+  "model": {
+    "provider": "minimax-m3",
+    "requestedModel": "MiniMax-M3",
+    "actualModel": null,
+    "runtimeFingerprint": null,
+    "attested": false
+  },
+  "promptDigest": "sha256:c85d6d9a4e6436f401e68928a1da8a0e61ea657e8eda5460924a19a0e816d2e8",
+  "rawResponseDigests": [
+    "sha256:c98297defe2696682f62b36e7110c1cc84661e5beeed67b91092fae6652ca9fb",
+    "sha256:1a55410ba4c6f2f5ef0e5b84cf672ed48b200de4e21745ef57587da57f8ee389",
+    "sha256:17cbe82bdd0790ff6356c6e2d40fd948e787adec318a802331080907ea61a3c7",
+    "sha256:1d5389a543297970d068a1b610e44836b784a72131322ef3de5baa005b50548d",
+    "sha256:0f8495ee7e57a8bfe9263d414e7878d0354d9da097be39526992f3536b2d5c3d",
+    "sha256:eea0ecce73f2064c4903724ac8cb803ced2083a8f54e1c4f55c5fe3f401775dc",
+    "sha256:ed844fbfa56985138aa0c4e84193ca009138598828e58236905c87f295d8ff74",
+    "sha256:da5ccb3651c2f4f973ca0b4449a3bcf93935d7480e8e1b25d092b797ffa4eac6",
+    "sha256:8947818545feec3c6c3b47c0f17482bf35b6c4a63d5dfb64581d01e01f51f2e6",
+    "sha256:8858200c493786ee4f24527f0a326f06a088478ecd97746ec50a8f427229f43e",
+    "sha256:b62f2036037da81be32ccadba6f2e677d5be18a8b33781bd617edd29ab08a2f4",
+    "sha256:448ef386bb163f6c230b000426539cbac10bf709fc9ab4f64f06187d3bfb7818",
+    "sha256:875724dc61cdf63d586dbd3582431e4441b0e08eb586c71c27129429b7cb3921",
+    "sha256:362629e4a16de8f9d4ac4923d2724c559aa6ab4a9c0353be63cae61d2cafc50b",
+    "sha256:241144d917adc2249fdb5738542a1a804a1ec745b754f1ecf323e50ed2ca86c9",
+    "sha256:b8416ad261198fcd23cb843372e2236abc0b180d97c256199d1490fb50edb8cd",
+    "sha256:35ffa277466e7dca2a1e8ceb8062a161b729395bc88ae6b39f26fc186111842a",
+    "sha256:e0b1a02141be68306b0c174513faae867f5245acc18c0d586b6f96d4be3e8562",
+    "sha256:1a8f328e5b9ccdc42cfeced7f8344f437b6250670ee83cd4a2df99aa074fed13",
+    "sha256:3419044ad7a00aa4b3b9bc2a984756d1e9ab84cddf1654cea95b11509bc525a9",
+    "sha256:dde75dc7ad9079142ddf2fda7b5ff61b6a313d919eda4209b5db44c71a3e59cf",
+    "sha256:8cf5744159f06071c55107fe2633fc68e9bf45a7dad4876e367f8e8c8912c065",
+    "sha256:cf7a7bef032aee39a2a9536d93095a60c187766ee1a0293b93dbdd4d174e5e8d",
+    "sha256:fadc1ff8863dd4c786e779d746431c222fa3e3457a4a9e5989db0df06e5ec471",
+    "sha256:784a287e54c175bd1cf67cb7b837d87a16d6f964deeedb88b71cbcbf3d2f9f1b",
+    "sha256:3a6f66755c9c9e88092208f2dc7e3b3cc82f50e7ef59631212bfee127e7d02fc",
+    "sha256:076583ecf3035ab54cdb43734be2bd5534e063bfb996ea62a98416fd43c2f2ab",
+    "sha256:c08fc0df3186594073e4111eaac2b3416172ca95a7cbd7075c10ac8952b76f57",
+    "sha256:6615893768d88460d62386e275a45cc6667cc8dff06d982d25bb6ac06b457669",
+    "sha256:bc7a4a2f0ef47c772242465a5d96742312e819b0be16067fe1a2fef2b4cc0233",
+    "sha256:b05030a94db7f587e3b851011cd973d02e1d5c031e6781c021fc0603c946da2b",
+    "sha256:4a502bdd4ec6bf7f24a6910b6693d32cd522cf04c003a31efa4d1fae196b9476",
+    "sha256:83e07f2d1c647c06bdab20bd9d72d0a5b67b601899a59f5b19a47b9dc19017f9",
+    "sha256:a1a675dac5f64ebedf08ad906fe9dd8de5f74be451d38c0c48c3546512b16e34",
+    "sha256:4eb97a990ca62831a40f82abb8936ab7366031db004266784f7fa388b8b4a2a4",
+    "sha256:c69f5104757320d81199830c7496f9bff8ebedad1985b10322caf0bde9aca986",
+    "sha256:79cb5bd8128970ee602e80c4570875853eac48af6e3a7f049c52d3a1304018f4",
+    "sha256:f9f596084ca8e6e64f0721523eac611b50874d07310ecc019697ef90312f65a0",
+    "sha256:2de54171aa1828a142a54d9cb057ffe2838a851fd9c5e1983540af1be606a14f",
+    "sha256:8ebdc18b72c09f093d56a041518a0ec68d39d9d45ac6d3779373e5bf9267d462",
+    "sha256:1ac68f987306b48585b7fee0e9f50413b4345b100149cfa8e6248df9b6fd96cd",
+    "sha256:8ad302ac14eaf053677b9a8e8e9f78530eaca86b6d289aa69a82b0f780c2423a"
+  ],
+  "attempts": [
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:c98297defe2696682f62b36e7110c1cc84661e5beeed67b91092fae6652ca9fb"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:1a55410ba4c6f2f5ef0e5b84cf672ed48b200de4e21745ef57587da57f8ee389"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:17cbe82bdd0790ff6356c6e2d40fd948e787adec318a802331080907ea61a3c7"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": false,
+      "rawResponseDigest": null,
+      "error": "Unexpected non-whitespace character after JSON at position 122 (line 1 column 123)"
+    },
+    {
+      "inputCount": 3,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:0f8495ee7e57a8bfe9263d414e7878d0354d9da097be39526992f3536b2d5c3d"
+    },
+    {
+      "inputCount": 2,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:eea0ecce73f2064c4903724ac8cb803ced2083a8f54e1c4f55c5fe3f401775dc"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:ed844fbfa56985138aa0c4e84193ca009138598828e58236905c87f295d8ff74"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:da5ccb3651c2f4f973ca0b4449a3bcf93935d7480e8e1b25d092b797ffa4eac6"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:8947818545feec3c6c3b47c0f17482bf35b6c4a63d5dfb64581d01e01f51f2e6"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": false,
+      "rawResponseDigest": "sha256:8858200c493786ee4f24527f0a326f06a088478ecd97746ec50a8f427229f43e",
+      "error": "reference risk repair item coverage mismatch for risk-055"
+    },
+    {
+      "inputCount": 3,
+      "depth": 1,
+      "accepted": false,
+      "rawResponseDigest": "sha256:b62f2036037da81be32ccadba6f2e677d5be18a8b33781bd617edd29ab08a2f4",
+      "error": "reference risk repair item coverage mismatch for risk-056"
+    },
+    {
+      "inputCount": 2,
+      "depth": 2,
+      "accepted": true,
+      "rawResponseDigest": "sha256:448ef386bb163f6c230b000426539cbac10bf709fc9ab4f64f06187d3bfb7818"
+    },
+    {
+      "inputCount": 1,
+      "depth": 2,
+      "accepted": true,
+      "rawResponseDigest": "sha256:875724dc61cdf63d586dbd3582431e4441b0e08eb586c71c27129429b7cb3921"
+    },
+    {
+      "inputCount": 2,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:362629e4a16de8f9d4ac4923d2724c559aa6ab4a9c0353be63cae61d2cafc50b"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:241144d917adc2249fdb5738542a1a804a1ec745b754f1ecf323e50ed2ca86c9"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:b8416ad261198fcd23cb843372e2236abc0b180d97c256199d1490fb50edb8cd"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:35ffa277466e7dca2a1e8ceb8062a161b729395bc88ae6b39f26fc186111842a"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:e0b1a02141be68306b0c174513faae867f5245acc18c0d586b6f96d4be3e8562"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:1a8f328e5b9ccdc42cfeced7f8344f437b6250670ee83cd4a2df99aa074fed13"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:3419044ad7a00aa4b3b9bc2a984756d1e9ab84cddf1654cea95b11509bc525a9"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:dde75dc7ad9079142ddf2fda7b5ff61b6a313d919eda4209b5db44c71a3e59cf"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:8cf5744159f06071c55107fe2633fc68e9bf45a7dad4876e367f8e8c8912c065"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:cf7a7bef032aee39a2a9536d93095a60c187766ee1a0293b93dbdd4d174e5e8d"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": false,
+      "rawResponseDigest": null,
+      "error": "Expected ',' or ']' after array element in JSON at position 370 (line 1 column 371)"
+    },
+    {
+      "inputCount": 3,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:784a287e54c175bd1cf67cb7b837d87a16d6f964deeedb88b71cbcbf3d2f9f1b"
+    },
+    {
+      "inputCount": 2,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:3a6f66755c9c9e88092208f2dc7e3b3cc82f50e7ef59631212bfee127e7d02fc"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:076583ecf3035ab54cdb43734be2bd5534e063bfb996ea62a98416fd43c2f2ab"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:c08fc0df3186594073e4111eaac2b3416172ca95a7cbd7075c10ac8952b76f57"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": false,
+      "rawResponseDigest": "sha256:6615893768d88460d62386e275a45cc6667cc8dff06d982d25bb6ac06b457669",
+      "error": "reference risk repair item coverage mismatch for risk-139"
+    },
+    {
+      "inputCount": 3,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:bc7a4a2f0ef47c772242465a5d96742312e819b0be16067fe1a2fef2b4cc0233"
+    },
+    {
+      "inputCount": 2,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:b05030a94db7f587e3b851011cd973d02e1d5c031e6781c021fc0603c946da2b"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:4a502bdd4ec6bf7f24a6910b6693d32cd522cf04c003a31efa4d1fae196b9476"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:83e07f2d1c647c06bdab20bd9d72d0a5b67b601899a59f5b19a47b9dc19017f9"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:a1a675dac5f64ebedf08ad906fe9dd8de5f74be451d38c0c48c3546512b16e34"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:4eb97a990ca62831a40f82abb8936ab7366031db004266784f7fa388b8b4a2a4"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:c69f5104757320d81199830c7496f9bff8ebedad1985b10322caf0bde9aca986"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:79cb5bd8128970ee602e80c4570875853eac48af6e3a7f049c52d3a1304018f4"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": false,
+      "rawResponseDigest": "sha256:f9f596084ca8e6e64f0721523eac611b50874d07310ecc019697ef90312f65a0",
+      "error": "reference risk repair cluster coverage mismatch"
+    },
+    {
+      "inputCount": 3,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:2de54171aa1828a142a54d9cb057ffe2838a851fd9c5e1983540af1be606a14f"
+    },
+    {
+      "inputCount": 2,
+      "depth": 1,
+      "accepted": true,
+      "rawResponseDigest": "sha256:8ebdc18b72c09f093d56a041518a0ec68d39d9d45ac6d3779373e5bf9267d462"
+    },
+    {
+      "inputCount": 5,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:1ac68f987306b48585b7fee0e9f50413b4345b100149cfa8e6248df9b6fd96cd"
+    },
+    {
+      "inputCount": 3,
+      "depth": 0,
+      "accepted": true,
+      "rawResponseDigest": "sha256:8ad302ac14eaf053677b9a8e8e9f78530eaca86b6d289aa69a82b0f780c2423a"
+    }
+  ],
+  "generatedAt": "2026-10-15T16:55:16.678Z",
+  "transport": "mmx://external-minimax",
+  "authorization": {
+    "scope": "user-authorized-302-transcripts-to-minimax-m3"
+  },
+  "selection": {
+    "policy": "all-qwen-uncertain-clusters-plus-every-10th-resolved-cluster",
+    "qwenEvidenceDigest": "sha256:3482bc8a72df76f99dc85025cc3aa1a7ea4c6f3257b6bc992353b1da9f1290fe",
+    "qwenUncertainItemCount": 203,
+    "uncertainClusterCount": 141,
+    "auditClusterCount": 7
+  },
+  "decisions": [
+    {
+      "id": "seg-016",
+      "clusterId": "risk-001",
+      "decision": "replace",
+      "proposedText": "當知多種",
+      "code": "正式講記簡略口語「所以」與「之」",
+      "inputDigest": "sha256:8fe748c6efb9f57e9742fa6ced3e854a1bff469fd416a603a29d6929c764d51c"
+    },
+    {
+      "id": "seg-053",
+      "clusterId": "risk-007",
+      "decision": "uncertain",
+      "code": "講記無對應口語案例，無法唯一判定",
+      "inputDigest": "sha256:0af8e395e06b34d8bb17d65bbc698caad703fce4a9ede5dd9a1730b8d1401683"
+    },
+    {
+      "id": "seg-055",
+      "clusterId": "risk-008",
+      "decision": "replace",
+      "proposedText": "立身念住",
+      "code": "講記作立身念住",
+      "inputDigest": "sha256:0338f043e73cedab75830b0746ea4f7b9fad2bb09c2bd63a592b00ea6e973bc6"
+    },
+    {
+      "id": "seg-056",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:1b497f9a2fc071f785289e0c6adf1080e40997d6e3f19ac13bba3bec77928b1f"
+    },
+    {
+      "id": "seg-057",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:f858ceb51a002949bf3c71af6affc2a115748ce5b86bf18500778e87ee8ee534"
+    },
+    {
+      "id": "seg-058",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:e11be299739b32f20f86132d0f085b02fe62937964bf1648ad7693eb38c532a1"
+    },
+    {
+      "id": "seg-059",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:c2ceda0c7f18852d9ecb7a35dc0ffe6281ebe366ea631f0ab072688c6757f3cd"
+    },
+    {
+      "id": "seg-060",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:02f1d434a099fee40eccda282dfa61bc09b27a0f53d5b1d670d8239883206787"
+    },
+    {
+      "id": "seg-061",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:e5c642634ebc23ed3611fb3c952b3ba8a0e6328857b0bb5d898081de40294225"
+    },
+    {
+      "id": "seg-062",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:a97e17a11df8747508a7ed5201c7bc18fc0407ac20b2573ea453bff203246209"
+    },
+    {
+      "id": "seg-063",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:460b710a5caf533e923a201b8790553fec88d20fe0ff0b5df550cbe8de0e80f6"
+    },
+    {
+      "id": "seg-064",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:08601922827c2bb10e1b1fd19cf9dcf65789130138ecbf2a4017358285634e19"
+    },
+    {
+      "id": "seg-065",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:00cff581f896abf599e0d7392bcc6a94509cd35c0b2e4adeb0d4f35c6b3df950"
+    },
+    {
+      "id": "seg-066",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:a716d985308585dcea5cb6ee0367ffeb99cfd69449ae30e90ab357694c03f013"
+    },
+    {
+      "id": "seg-067",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:2039af64f2a090b85c812bea8bac72c693de193188094f6c6158ccdead1195c9"
+    },
+    {
+      "id": "seg-068",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:213786f3fa39d97d56b592656351d1c17a07ab68502a3df513810613f735cba0"
+    },
+    {
+      "id": "seg-069",
+      "clusterId": "risk-008",
+      "decision": "unchanged",
+      "code": "講記未細分，保留口語",
+      "inputDigest": "sha256:9226f08ab2a606eaadcb9a07cd9096c33102f77499c9ce79a2a49482d83e11a1"
+    },
+    {
+      "id": "seg-072",
+      "clusterId": "risk-009",
+      "decision": "uncertain",
+      "code": "講記作四憺怕路，非淡薄露，字差過大",
+      "inputDigest": "sha256:365acc9460cee479ed48dd1a20d17edbe1f4f2ffc02173a274cb24512c137a4e"
+    },
+    {
+      "id": "seg-083",
+      "clusterId": "risk-011",
+      "decision": "replace",
+      "proposedText": "就是這個法",
+      "code": "講記作就是這個法",
+      "inputDigest": "sha256:bfae5c2b0bacfea7b09a56f4907173d895347c83f923065f4340a7837ad36fad"
+    },
+    {
+      "id": "seg-089",
+      "clusterId": "risk-012",
+      "decision": "replace",
+      "proposedText": "我念一遍就好了。",
+      "code": "對應講記起首",
+      "inputDigest": "sha256:43663e0c402bfeec3a654e1fe6578679c3ae38c85ed2b68a2c34804ab3347c47"
+    },
+    {
+      "id": "seg-090",
+      "clusterId": "risk-012",
+      "decision": "replace",
+      "proposedText": "身念住─四憺怕路所有依外朽穢不淨差別",
+      "code": "講記唯一支持完整句",
+      "inputDigest": "sha256:538fd274bb528e47f8cfb4aa750a9698648617557faca35853a6d78560e57b88"
+    },
+    {
+      "id": "seg-091",
+      "clusterId": "risk-012",
+      "decision": "uncertain",
+      "code": "口語解釋非講記文字",
+      "inputDigest": "sha256:f03f7df0a7776ffbd853ff7c29d78a1081437f92ded1772585df9f0bf5d86739"
+    },
+    {
+      "id": "seg-092",
+      "clusterId": "risk-012",
+      "decision": "uncertain",
+      "code": "講記未出現此獨立口語",
+      "inputDigest": "sha256:1f1872b3e750b158214d7015598b23111c363793d379dcbf5ea48b87c9c296ab"
+    },
+    {
+      "id": "seg-093",
+      "clusterId": "risk-012",
+      "decision": "uncertain",
+      "code": "口語展開講記無對應",
+      "inputDigest": "sha256:7127df134e189d580b11ab0fef180b9adb93f2a74e6633be951c93f2fb28eef0"
+    },
+    {
+      "id": "seg-094",
+      "clusterId": "risk-012",
+      "decision": "uncertain",
+      "code": "口語解釋非講記文字",
+      "inputDigest": "sha256:bf43efb6480b354601a10280d80ce30fa45e948896eb4f78d9571ffaf2fbc7e2"
+    },
+    {
+      "id": "seg-095",
+      "clusterId": "risk-012",
+      "decision": "uncertain",
+      "code": "尾段口語講記未獨立列出",
+      "inputDigest": "sha256:b0627a024166d7b0136cb05448c8e7e6ee6cdc12fad69e5faf1a7cb3e75cce62"
+    },
+    {
+      "id": "seg-101",
+      "clusterId": "risk-015",
+      "decision": "uncertain",
+      "code": "講記僅一「亦」字無法判定",
+      "inputDigest": "sha256:df4e4399af0590a3d69b018f3e639aae64506a0914e8a9af961a658e238cc341"
+    },
+    {
+      "id": "seg-105",
+      "clusterId": "risk-016",
+      "decision": "uncertain",
+      "code": "口語標題講記無對應",
+      "inputDigest": "sha256:196b9fb6f4ba6710e2c9ff205f8a779a17628efd3beb905226522ddf843a5de9"
+    },
+    {
+      "id": "seg-106",
+      "clusterId": "risk-016",
+      "decision": "replace",
+      "proposedText": "若復說言：由憺怕路",
+      "code": "講記唯一可對應片段",
+      "inputDigest": "sha256:5a631afd7af4ca1f99cbbf5b4fcee792d712b25fde436c5030464c91865d7eb8"
+    },
+    {
+      "id": "seg-110",
+      "clusterId": "risk-018",
+      "decision": "uncertain",
+      "code": "口語標題講記無對應",
+      "inputDigest": "sha256:42e28490d300c46039c7264b0e2c5bca47872e4f9336501bcc1d04d9b98fc484"
+    },
+    {
+      "id": "seg-111",
+      "clusterId": "risk-018",
+      "decision": "uncertain",
+      "code": "口語講記無對應文字",
+      "inputDigest": "sha256:d65eea58a69b52a566f5b9981923e727638434d9557c5bbad04671c5972d8cd3"
+    },
+    {
+      "id": "seg-112",
+      "clusterId": "risk-018",
+      "decision": "replace",
+      "proposedText": "變赤。",
+      "code": "講記唯一對應字",
+      "inputDigest": "sha256:535cd9cebe2b85aec5ed1633c7149947681a326693f4e5116b5dd8ed9b7f25c3"
+    },
+    {
+      "id": "seg-113",
+      "clusterId": "risk-018",
+      "decision": "uncertain",
+      "code": "口語詞講記無對應",
+      "inputDigest": "sha256:20858da9bb13f342bba82887c4b06f8e8159fabe070bfbc61214536df9aab337"
+    },
+    {
+      "id": "seg-114",
+      "clusterId": "risk-018",
+      "decision": "uncertain",
+      "code": "口語講記無對應",
+      "inputDigest": "sha256:6b38fd30fd4ffa6443e2370ffe7875e8a9104b1cdea3e6673d009e60915332d8"
+    },
+    {
+      "id": "seg-115",
+      "clusterId": "risk-018",
+      "decision": "replace",
+      "proposedText": "若復說言：由憺怕路",
+      "code": "講記唯一可對應片段",
+      "inputDigest": "sha256:a0b6091a8ae1cf4e7b2b12da224e1b8d763040cf0080ec9580ae6bd4474a8298"
+    },
+    {
+      "id": "seg-121",
+      "clusterId": "risk-019",
+      "decision": "uncertain",
+      "code": "口語標題講記無對應",
+      "inputDigest": "sha256:87ffbb4463210ab7854046d3c099d3bf069f31b1571aedfb13eedb1497b65703"
+    },
+    {
+      "id": "seg-122",
+      "clusterId": "risk-019",
+      "decision": "replace",
+      "proposedText": "若復說言：由憺怕路見彼彼骨",
+      "code": "講記唯一完整支持",
+      "inputDigest": "sha256:8c1ca666b986b8cf559306b8df602ee4828f6acf486eb65d4740a764b5feb40c"
+    },
+    {
+      "id": "seg-124",
+      "clusterId": "risk-020",
+      "decision": "uncertain",
+      "code": "referenceText 無對應字",
+      "inputDigest": "sha256:21fd2c5155e2323d65f94257ad2c0459f0ee1b2d9462e9f65b61c7c93a7e7289"
+    },
+    {
+      "id": "seg-127",
+      "clusterId": "risk-021",
+      "decision": "replace",
+      "proposedText": "頷輪齒鬘",
+      "code": "原文音譯錯誤",
+      "inputDigest": "sha256:b575bf3244d56de6267c08c548e188977806ed150c6a20848e33c456bbfea663"
+    },
+    {
+      "id": "seg-128",
+      "clusterId": "risk-021",
+      "decision": "unchanged",
+      "code": "說明保留",
+      "inputDigest": "sha256:2494e94b5a05f9db3d493e94429ff90ab84868427ebf3c5ca83f241ce9d83458"
+    },
+    {
+      "id": "seg-129",
+      "clusterId": "risk-021",
+      "decision": "replace",
+      "proposedText": "齒鬘也就是齒",
+      "code": "鬘非慢",
+      "inputDigest": "sha256:daadbead33b5d7b7fc6c4dfa2d2bc623b4b30ad9552851db7daf708fc2006f07"
+    },
+    {
+      "id": "seg-130",
+      "clusterId": "risk-021",
+      "decision": "unchanged",
+      "code": "口語保留",
+      "inputDigest": "sha256:0632931b2576f1ccbdef995b89cd38bf7231338a8bf3703a00affc1b0af59b7b"
+    },
+    {
+      "id": "seg-148",
+      "clusterId": "risk-024",
+      "decision": "uncertain",
+      "code": "referenceText 無對應完整句",
+      "inputDigest": "sha256:fbae44730d56646a6064aa659c60b868523f7eb3b66f27cab8e33bda953c4d70"
+    },
+    {
+      "id": "seg-181",
+      "clusterId": "risk-026",
+      "decision": "unchanged",
+      "code": "referenceText 為空無依據",
+      "inputDigest": "sha256:a2d46f39566eab6607d904fea8015255f6a6380cdb7b348b56dcc3f2a5345587"
+    },
+    {
+      "id": "seg-191",
+      "clusterId": "risk-028",
+      "decision": "replace",
+      "proposedText": "計樂顛倒，立受念住",
+      "code": "口語誤聽改依講記",
+      "inputDigest": "sha256:6a70c494c858107c79a29f20749cb5f21ae37d6c736d6776db8fc111e37f719c"
+    },
+    {
+      "id": "seg-244",
+      "clusterId": "risk-032",
+      "decision": "unchanged",
+      "code": "參考文本為空，無從核對",
+      "inputDigest": "sha256:cd327c31da9857846cb7a1d94d13219da7b7d9845d7b87f075b39a6442094ad6"
+    },
+    {
+      "id": "seg-257",
+      "clusterId": "risk-033",
+      "decision": "replace",
+      "proposedText": "若有樂受，樂",
+      "code": "講記前句對應",
+      "inputDigest": "sha256:0eb223c013764c2f586407a986682c5953f6396df9deb5ca2f4b77a842461c1f"
+    },
+    {
+      "id": "seg-258",
+      "clusterId": "risk-033",
+      "decision": "uncertain",
+      "code": "「要有落壽」口語詞，講記未見對應字",
+      "inputDigest": "sha256:485ff44bb0a88bfe3356e4a8f05dc4f05368a78d0ffa5be0d61084e275d0e311"
+    },
+    {
+      "id": "seg-299",
+      "clusterId": "risk-036",
+      "decision": "replace",
+      "proposedText": "這個",
+      "code": "講記首二字唯一對應",
+      "inputDigest": "sha256:5836a21ff6e126d91681a19691b7c10b81e1c6a1266216ee32b0f6b3ac3ba2c5"
+    },
+    {
+      "id": "seg-324",
+      "clusterId": "risk-037",
+      "decision": "replace",
+      "proposedText": "所以，五取蘊也是苦",
+      "code": "正式講記擴充為完整句",
+      "inputDigest": "sha256:56bc25415c2fd9f75f88494c5297622ac7ea24a88991b2a0470bca296ee59afc"
+    },
+    {
+      "id": "seg-325",
+      "clusterId": "risk-037",
+      "decision": "uncertain",
+      "code": "無曲韻與苦之對應難唯一判定",
+      "inputDigest": "sha256:09ba1227257697bbfc670769384a1b3d2f9c32647f2754225a3abe93dc2fa14c"
+    },
+    {
+      "id": "seg-328",
+      "clusterId": "risk-038",
+      "decision": "replace",
+      "proposedText": "佛教說一切",
+      "code": "正式講記省略後續口語",
+      "inputDigest": "sha256:b6000f08931562fdb751f070fc7902cca49e483e6b5572959b09124a0c244dd2"
+    },
+    {
+      "id": "seg-335",
+      "clusterId": "risk-039",
+      "decision": "uncertain",
+      "code": "ref省略口語，無唯一對應",
+      "inputDigest": "sha256:c4b34674b3ba708066452247bdd8cd61b45ab2d5e229930859ed0121c4997808"
+    },
+    {
+      "id": "seg-336",
+      "clusterId": "risk-039",
+      "decision": "uncertain",
+      "code": "ref省略口語，無唯一對應",
+      "inputDigest": "sha256:b7ffa807e99047aeed276bf6f1aae4b407805f620f47a4f4e9e392df9a0b5a24"
+    },
+    {
+      "id": "seg-338",
+      "clusterId": "risk-040",
+      "decision": "unchanged",
+      "code": "ref過短，無歧異",
+      "inputDigest": "sha256:778c3cb06a93b7a98d86a3b8f9cda9f69615548c71c1994b638c4fe5ace03a83"
+    },
+    {
+      "id": "seg-341",
+      "clusterId": "risk-041",
+      "decision": "unchanged",
+      "code": "ref過短，無歧異",
+      "inputDigest": "sha256:b076a095ff99c7d6bde7618e91c9fad8004e8862e8bf776094aeaf2ed927e5c8"
+    },
+    {
+      "id": "seg-349",
+      "clusterId": "risk-042",
+      "decision": "unchanged",
+      "code": "無對應文字",
+      "inputDigest": "sha256:d0d4e3d633f6df77833913ae66495872b98066c842bb1170097ac0d31bdd0c01"
+    },
+    {
+      "id": "seg-350",
+      "clusterId": "risk-042",
+      "decision": "unchanged",
+      "code": "無對應文字",
+      "inputDigest": "sha256:f08af0b5fdadcbf9ef0d1efb6f7282ccae150774982fd8c5fa4e7b22945aff33"
+    },
+    {
+      "id": "seg-359",
+      "clusterId": "risk-043",
+      "decision": "unchanged",
+      "code": "ref對應「在你…裡面儲藏」",
+      "inputDigest": "sha256:ec74b45d08ea5b336027fea6a84e3b24bd11ec94b23c31a39dceca8cd8a48894"
+    },
+    {
+      "id": "seg-360",
+      "clusterId": "risk-043",
+      "decision": "replace",
+      "proposedText": "在不苦不樂的心境裡面儲藏",
+      "code": "ref對應「不苦不樂的心境裡面儲藏著」",
+      "inputDigest": "sha256:74d374d5b586d876cbf3c145f68a36cf7ab395628af31278ef4a5626c70e1009"
+    },
+    {
+      "id": "seg-364",
+      "clusterId": "risk-044",
+      "decision": "unchanged",
+      "code": "講記僅「若」字,不足以證明修改",
+      "inputDigest": "sha256:49121d1ce1cb6c3e6659c90880df72d0c5bc6437c386a015a7ceb9c0370f0d56"
+    },
+    {
+      "id": "seg-377",
+      "clusterId": "risk-045",
+      "decision": "unchanged",
+      "code": "講記僅「若」字,無對應內容",
+      "inputDigest": "sha256:9a0125fb5678bfa4a7cbbccba830b9f912218e8cbefa2ac6c1c3cd9a8de50f4f"
+    },
+    {
+      "id": "seg-407",
+      "clusterId": "risk-046",
+      "decision": "replace",
+      "proposedText": "智慧就增長了",
+      "code": "講記作「智慧就增長了」,原句意思不同,依講記改正",
+      "inputDigest": "sha256:b777ecf69cab724d2aec34e0fa356e9496eaa36bab48663192a2843d82bd0ce2"
+    },
+    {
+      "id": "seg-429",
+      "clusterId": "risk-047",
+      "decision": "unchanged",
+      "code": "講記僅「行」字,無法證明「辛苦是苦」之修改",
+      "inputDigest": "sha256:09c30df4a80c1c251d98a19b67d2d3b261b0b80e118e5e1c203db4ac25af7ac4"
+    },
+    {
+      "id": "seg-436",
+      "clusterId": "risk-048",
+      "decision": "replace",
+      "proposedText": "知道是苦",
+      "code": "講記有「知道是苦」,但「如實了知」與「如時了之」對應存疑,僅取可唯一判定部分",
+      "inputDigest": "sha256:2a9a7dff2b6599a2403586e86269af02075020bdfa9ee2711986a94d49382033"
+    },
+    {
+      "id": "seg-443",
+      "clusterId": "risk-049",
+      "decision": "uncertain",
+      "code": "referenceText 為空，無法唯一判定",
+      "inputDigest": "sha256:d52124c712afd565d79325a34a9159364f426cec767f5f8ec9524fca4eabc68a"
+    },
+    {
+      "id": "seg-457",
+      "clusterId": "risk-050",
+      "decision": "replace",
+      "proposedText": "所以我們應該",
+      "code": "模型格式不合契約，保留覆核",
+      "inputDigest": "sha256:311a786ff8405c5a00658cf096db5e74393dcf019e740d260863f6a52482e6cb"
+    },
+    {
+      "id": "seg-463",
+      "clusterId": "risk-051",
+      "decision": "unchanged",
+      "code": "模型格式不合契約，保留覆核",
+      "inputDigest": "sha256:fa9b451e9e8255a7fc3946a276a900f51a91c8c8d3403e406ff4f80b7d4641ee"
+    },
+    {
+      "id": "seg-479",
+      "clusterId": "risk-052",
+      "decision": "uncertain",
+      "code": "referenceText 僅支援 seg-480，seg-479 無對應",
+      "inputDigest": "sha256:ee6ec4c8ed890c543c6b11901707644d90e31c761943cb849c2811cbc2d7703d"
+    },
+    {
+      "id": "seg-480",
+      "clusterId": "risk-052",
+      "decision": "unchanged",
+      "code": "模型格式不合契約，保留覆核",
+      "inputDigest": "sha256:1f67752d9c45670934c0fe2851a92ab9ea7dfff4b353c0571815e627cacaa1c5"
+    },
+    {
+      "id": "seg-491",
+      "clusterId": "risk-053",
+      "decision": "replace",
+      "proposedText": "尤其是成就禪定的人",
+      "code": "模型格式不合契約，保留覆核",
+      "inputDigest": "sha256:3d205d7864987d73e8ecd1f9064b60e3f5e3855a1c8b88bbdd0b630ba2ef5662"
+    },
+    {
+      "id": "seg-492",
+      "clusterId": "risk-053",
+      "decision": "replace",
+      "proposedText": "他會有不同的感覺",
+      "code": "模型格式不合契約，保留覆核",
+      "inputDigest": "sha256:ce86fb78fe8f2c54afb73e60fdfb44d3d482f6482fd59852209dee3b12fcdc81"
+    },
+    {
+      "id": "seg-493",
+      "clusterId": "risk-053",
+      "decision": "replace",
+      "proposedText": "成就了禪定的人有什麼感覺",
+      "code": "模型格式不合契約，保留覆核",
+      "inputDigest": "sha256:f038100a98571fa8e2f28cefb170009778354613b20693e6a1d20348324d4a67"
+    },
+    {
+      "id": "seg-501",
+      "clusterId": "risk-055",
+      "decision": "unchanged",
+      "code": "對應「沒有妄念」，原文相同",
+      "inputDigest": "sha256:7548be94856d58f8a8ef7a110dfb28d713d97fbccedf021817c62b8488ab60d8"
+    },
+    {
+      "id": "seg-502",
+      "clusterId": "risk-055",
+      "decision": "replace",
+      "proposedText": "心裡面明靜而住的時候",
+      "code": "講記作「明靜」非「寧靜」",
+      "inputDigest": "sha256:de4fb8d173205837d8b8f91a5b7ba5ed58867769de659639e458be0ca3f05514"
+    },
+    {
+      "id": "seg-503",
+      "clusterId": "risk-055",
+      "decision": "unchanged",
+      "code": "對應「一念不生」，原文相同",
+      "inputDigest": "sha256:ee63c906095661eb53f7b410f092898df3548fda7561713c478362db6a0fa92c"
+    },
+    {
+      "id": "seg-506",
+      "clusterId": "risk-056",
+      "decision": "uncertain",
+      "code": "講記用「性淨明體」，原文「心經明啼嘛」疑為口語轉錄，無唯一支持",
+      "inputDigest": "sha256:643f1549eb3dfb83c85c82eea90b6cde4e6fc96325f731870335fa2d4492194f"
+    },
+    {
+      "id": "seg-523",
+      "clusterId": "risk-057",
+      "decision": "unchanged",
+      "code": "reference空白，無法判定",
+      "inputDigest": "sha256:5f424b020f5afcf5dea0c0aa8f4566d4e7dec9c69b2ac81301c0358dfcafca4d"
+    },
+    {
+      "id": "seg-538",
+      "clusterId": "risk-059",
+      "decision": "uncertain",
+      "code": "referenceText主旨近似但用詞不同",
+      "inputDigest": "sha256:dd71722ddd449562e2d35d54eae16d7c8c2a01e064cc3ad104261fc818dce5fc"
+    },
+    {
+      "id": "seg-541",
+      "clusterId": "risk-060",
+      "decision": "unchanged",
+      "code": "無對應文字支持替換，保留原句",
+      "inputDigest": "sha256:99a4de668590eef15067b2a4183cc69fcb6b188c8bfb8407d99d48b0d604ff27"
+    },
+    {
+      "id": "seg-543",
+      "clusterId": "risk-061",
+      "decision": "replace",
+      "proposedText": "這以下解釋",
+      "code": "講記作'以下'，非口語'一下'",
+      "inputDigest": "sha256:23d4fae0f66fa3e09afd457659842542ceb146908313d542abd5086a5c6fcfab"
+    },
+    {
+      "id": "seg-559",
+      "clusterId": "risk-062",
+      "decision": "replace",
+      "proposedText": "經歷彼彼日夜剎那瞬息須臾",
+      "code": "講記作'彼彼日夜剎那瞬息須臾'",
+      "inputDigest": "sha256:d97c840643e0402bc00dc786b0b3e5b6c7a930bf79a5a5fcbb0f472db0ce9859"
+    },
+    {
+      "id": "seg-570",
+      "clusterId": "risk-063",
+      "decision": "replace",
+      "proposedText": "是《瑜伽師地論",
+      "code": "講記作'是《瑜伽師地論》，承接前文《俱舍論》",
+      "inputDigest": "sha256:509c4150fe55a4d193700413f4124f378eef3f3be1118b51fd6daeea2d6cf88a"
+    },
+    {
+      "id": "seg-597",
+      "clusterId": "risk-064",
+      "decision": "replace",
+      "proposedText": "有「所緣緣",
+      "code": "講記作'有「所緣緣'",
+      "inputDigest": "sha256:303609424145991ccdbed919d0b08d07d0cc732ab35630a0ad70ec788e1473bd"
+    },
+    {
+      "id": "seg-606",
+      "clusterId": "risk-066",
+      "decision": "replace",
+      "proposedText": "滅的",
+      "code": "講記作'滅的'，對應'心是剎那剎那生滅的'",
+      "inputDigest": "sha256:48439e4d447c93d3948739ce1b23327e4be38a77ed1fdf2464c7a6f12332aaa6"
+    },
+    {
+      "id": "seg-608",
+      "clusterId": "risk-067",
+      "decision": "uncertain",
+      "code": "口語非講記文字",
+      "inputDigest": "sha256:8dd7537b92686a85a63f9ceac52ad5bf21109b5f1c8369c8b94661247d0cedbf"
+    },
+    {
+      "id": "seg-611",
+      "clusterId": "risk-068",
+      "decision": "replace",
+      "proposedText": "立法念住",
+      "code": "講記末句明確對應",
+      "inputDigest": "sha256:25ebe6e4ac5fd848ce98bc5714daaf8cd7f75fa8d62de0044b6a96c836a40b51"
+    },
+    {
+      "id": "seg-622",
+      "clusterId": "risk-069",
+      "decision": "replace",
+      "proposedText": "為欲對治",
+      "code": "講記首二字對應",
+      "inputDigest": "sha256:bb9e84313d572416f5b8a74f56f5c92a5e659803de2da21a7469ca04cd3b1668"
+    },
+    {
+      "id": "seg-639",
+      "clusterId": "risk-070",
+      "decision": "replace",
+      "proposedText": "的；《大智度論》、《瑜伽師地論",
+      "code": "講記末段對應",
+      "inputDigest": "sha256:8bfebedc572add1a5154778be869893288493d1e0f74e21608346260bcbe9935"
+    },
+    {
+      "id": "seg-653",
+      "clusterId": "risk-071",
+      "decision": "replace",
+      "proposedText": "我",
+      "code": "講記末字對應",
+      "inputDigest": "sha256:3a76b190c79dd31f312fe4c75f3811b70d80fab65d67080acd142a26d77a4bac"
+    },
+    {
+      "id": "seg-701",
+      "clusterId": "risk-073",
+      "decision": "uncertain",
+      "code": "字數與前後文皆不吻合，reference 無對應",
+      "inputDigest": "sha256:d7b5efd6dac9267007f8c06a4a06753bf5d91580fb5a886cf884d5783aec67f9"
+    },
+    {
+      "id": "seg-758",
+      "clusterId": "risk-076",
+      "decision": "replace",
+      "proposedText": "觀察",
+      "code": "reference 對應「觀察」",
+      "inputDigest": "sha256:887c4d2f79c4dfe237997530ee7e13bc6217c0702a54ea286ea095cc9c4fa670"
+    },
+    {
+      "id": "seg-776",
+      "clusterId": "risk-077",
+      "decision": "replace",
+      "proposedText": "不應該有這樣的看法。若",
+      "code": "reference 省略此段，僅約略「若」字可對應",
+      "inputDigest": "sha256:a04efe3bcd31c317350e0af024eac9fb0fd4852786787f4ee0a175b14202477f"
+    },
+    {
+      "id": "seg-797",
+      "clusterId": "risk-078",
+      "decision": "replace",
+      "proposedText": "以於諸法住循法",
+      "code": "reference 對應「以於諸法住循法」",
+      "inputDigest": "sha256:7ce06d86500a3e03f46b2bff8f5173c50aaac327146424b705b7434fec3822f3"
+    },
+    {
+      "id": "seg-798",
+      "clusterId": "risk-078",
+      "decision": "replace",
+      "proposedText": "觀",
+      "code": "reference 對應「觀」",
+      "inputDigest": "sha256:ed83df2663bd4b01fa7e5e6c3af9cec33bc99d6c28197f2f25ae0655846cd406"
+    },
+    {
+      "id": "seg-807",
+      "clusterId": "risk-079",
+      "decision": "replace",
+      "proposedText": "「無",
+      "code": "reference 對應「無",
+      "inputDigest": "sha256:9078df76c84c6da49af1067313b23d16e057a9e1e5cf138c63d715bd6569b172"
+    },
+    {
+      "id": "seg-808",
+      "clusterId": "risk-079",
+      "decision": "replace",
+      "proposedText": "我」有一個定義，是主宰義",
+      "code": "reference 對應「我」有一個定義，是主宰義",
+      "inputDigest": "sha256:dfc1f90b2999a20b1802e817b361676a01659219a85a6ab089b967dbc1a7c4b7"
+    },
+    {
+      "id": "seg-809",
+      "clusterId": "risk-079",
+      "decision": "replace",
+      "proposedText": "常",
+      "code": "reference 對應「常」",
+      "inputDigest": "sha256:14fee1ae34a71ea079db1e2e2be6d86065691040bbb40b833c6f3f51208a8385"
+    },
+    {
+      "id": "seg-812",
+      "clusterId": "risk-080",
+      "decision": "unchanged",
+      "code": "無為法無主宰義功能",
+      "inputDigest": "sha256:320f867612944e081a6d422b386b798c3c35e46d7a76104ecc93d16e0314afc1"
+    },
+    {
+      "id": "seg-817",
+      "clusterId": "risk-081",
+      "decision": "replace",
+      "proposedText": "也是無我",
+      "code": "補入講記內容",
+      "inputDigest": "sha256:b8ea238aad692df80eb47f7b0a7c92f8904db22d411151224800ea1e40e5867e"
+    },
+    {
+      "id": "seg-823",
+      "clusterId": "risk-082",
+      "decision": "unchanged",
+      "code": "靜下來的時候",
+      "inputDigest": "sha256:beb78cd0c8634551a7fc62666da28d64d5c5007e58eeb1beaf00513e8cd31ec2"
+    },
+    {
+      "id": "seg-825",
+      "clusterId": "risk-083",
+      "decision": "replace",
+      "proposedText": "住循法觀",
+      "code": "講記作住循法觀",
+      "inputDigest": "sha256:60394e64123777b606a959afd8d3316f0050168dc2229d793bb4fe89eddf3e1e"
+    },
+    {
+      "id": "seg-833",
+      "clusterId": "risk-084",
+      "decision": "replace",
+      "proposedText": "能斷除有我的顛倒",
+      "code": "講記明確字句",
+      "inputDigest": "sha256:f27b2a5297ba1c571b699ce91bfffa68cfc58fb4dd05c6bd3cba292974cac963"
+    },
+    {
+      "id": "seg-847",
+      "clusterId": "risk-085",
+      "decision": "uncertain",
+      "code": "逐字稿內容與講記差異過大",
+      "inputDigest": "sha256:b08bd034c2cacb4c6bb665f01b08e7873404d33e860cfe1657cb4e4528bb5226"
+    },
+    {
+      "id": "seg-865",
+      "clusterId": "risk-087",
+      "decision": "replace",
+      "proposedText": "一定要把無我",
+      "code": "正式講記唯一對應",
+      "inputDigest": "sha256:3d610a4f4b98bb9957dcc409ff79106a88bedc63d3efdff54bf261a7f3b11477"
+    },
+    {
+      "id": "seg-868",
+      "clusterId": "risk-088",
+      "decision": "uncertain",
+      "code": "講記省略此句",
+      "inputDigest": "sha256:eff22584dc14f669164ab60fb46f98cd5fe83fc76e9e1d5296c63a6c6b9f4c85"
+    },
+    {
+      "id": "seg-869",
+      "clusterId": "risk-088",
+      "decision": "replace",
+      "proposedText": "不然修不來",
+      "code": "正式講記唯一對應",
+      "inputDigest": "sha256:8f3bd6d7af37eec9ebe215df91a73dfa8020a2ae7bfec217dabab97edde08a20"
+    },
+    {
+      "id": "seg-874",
+      "clusterId": "risk-089",
+      "decision": "replace",
+      "proposedText": "身、受、心、法",
+      "code": "正式講記唯一對應",
+      "inputDigest": "sha256:c3c195cc88b17f74a48a050d9963ace0e42f3f8ee610f55b13403c0dafff605b"
+    },
+    {
+      "id": "seg-887",
+      "clusterId": "risk-090",
+      "decision": "unchanged",
+      "code": "講記無對應文字",
+      "inputDigest": "sha256:487957822a4a526eb0867b88b1c109fd8c2a0f064d66f63c5ec4797dfcd84da6"
+    },
+    {
+      "id": "seg-900",
+      "clusterId": "risk-092",
+      "decision": "replace",
+      "proposedText": "佛說四念住的法門",
+      "code": "四念住誤作四年諸，依講記改正",
+      "inputDigest": "sha256:9092678f15766930db24083ddd580772911053ad3e094dce4d83ee34b1af5c79"
+    },
+    {
+      "id": "seg-901",
+      "clusterId": "risk-092",
+      "decision": "uncertain",
+      "code": "對應講記為複述段，難以唯一判定原文",
+      "inputDigest": "sha256:ac0b3408aaf42b7cbc0391df2460a9a8e5ffe7fd5e4a3af9b9df7e5742f62df2"
+    },
+    {
+      "id": "seg-917",
+      "clusterId": "risk-094",
+      "decision": "unchanged",
+      "code": "講記未對應此口語，保留原句",
+      "inputDigest": "sha256:7373d12e16210c606ae37e6397e77cbe72b498def5f2df9fbf2c124428ef7084"
+    },
+    {
+      "id": "seg-925",
+      "clusterId": "risk-095",
+      "decision": "replace",
+      "proposedText": "橫計有我",
+      "code": "鵝係我之口誤，依講記改正",
+      "inputDigest": "sha256:287e315523d608a1c1637eada1ef2013338237abc9b17aff20104a74bd43048e"
+    },
+    {
+      "id": "seg-926",
+      "clusterId": "risk-095",
+      "decision": "replace",
+      "proposedText": "不講道理",
+      "code": "對應講記『不講道理』",
+      "inputDigest": "sha256:438f0b1ebc5598b64045b3a4119365efa3f5dbaa094846958edebf9124c4d157"
+    },
+    {
+      "id": "seg-950",
+      "clusterId": "risk-096",
+      "decision": "unchanged",
+      "code": "講記支持原文",
+      "inputDigest": "sha256:5bce0b4cbace28548713628a151e11f7fe8317b53c7bd546697d55dd9ef295d7"
+    },
+    {
+      "id": "seg-958",
+      "clusterId": "risk-097",
+      "decision": "replace",
+      "proposedText": "佛法附在有我論",
+      "code": "依講記改正口誤並還原句界",
+      "inputDigest": "sha256:c17ba365746634e4d959812deb466ec6e824aafb0ae05f58e4b8e6f20678726b"
+    },
+    {
+      "id": "seg-1000",
+      "clusterId": "risk-100",
+      "decision": "replace",
+      "proposedText": "這樣子。若是佛法說的道理",
+      "code": "依講記作口語句首補正",
+      "inputDigest": "sha256:86112dfa25e6b19b24c9ff5d594ee54d8614619d51aa41c8a153d0f67a066424"
+    },
+    {
+      "id": "seg-1005",
+      "clusterId": "risk-102",
+      "decision": "uncertain",
+      "code": "講記僅『得須陀洹果』五字，無法唯一判定原口語",
+      "inputDigest": "sha256:44d386232262a4717c44b37d89ece3d950f049bfa5ee9eab8eaea8b7439c2760"
+    },
+    {
+      "id": "seg-1018",
+      "clusterId": "risk-103",
+      "decision": "uncertain",
+      "code": "講記僅作『這是計』，無法唯一判定完整詞",
+      "inputDigest": "sha256:4c3829263ed4d1e1b3904e95c65bd75592ee5b9b0c3ede6d7e597b05aaa0e61f"
+    },
+    {
+      "id": "seg-1025",
+      "clusterId": "risk-104",
+      "decision": "replace",
+      "proposedText": "愚為欲除遣",
+      "code": "依講記唯一對應改文",
+      "inputDigest": "sha256:760e567257388b7209ea2db98aeaf5b71d270bc0598affba20fc8c8d0496f53d"
+    },
+    {
+      "id": "seg-1028",
+      "clusterId": "risk-105",
+      "decision": "replace",
+      "proposedText": "為欲除遣",
+      "code": "依講記唯一對應改文",
+      "inputDigest": "sha256:f8c0d51ef327bdb743c7b4079c6c24dbcd10b6e09910501efdc25cbb0f974d8b"
+    },
+    {
+      "id": "seg-1030",
+      "clusterId": "risk-106",
+      "decision": "replace",
+      "proposedText": "我所依事",
+      "code": "正式講記：為欲除遣我所依事愚故",
+      "inputDigest": "sha256:b0af16c34af35fda743ed545d21278c77eabc2dfea85ded8adf524aea0355e05"
+    },
+    {
+      "id": "seg-1032",
+      "clusterId": "risk-107",
+      "decision": "replace",
+      "proposedText": "為欲除遣我所領受事愚故，立受念住。為欲除遣於",
+      "code": "正式講記片段逐字對應",
+      "inputDigest": "sha256:8111ab7c8ca26d4df9b8cf9c1bb6dd49dc3f8b07c7ee10e9896a2c012ef5e1be"
+    },
+    {
+      "id": "seg-1036",
+      "clusterId": "risk-108",
+      "decision": "replace",
+      "proposedText": "為什麼",
+      "code": "正式講記：為什麼",
+      "inputDigest": "sha256:90410d7fbb29fd4b21fc254dab043cb9f868dc3fc4b2cf4e27643736a8dd3dc9"
+    },
+    {
+      "id": "seg-1042",
+      "clusterId": "risk-109",
+      "decision": "replace",
+      "proposedText": "立身念住」，身念住，就",
+      "code": "正式講記：立身念住」。身念住，就",
+      "inputDigest": "sha256:c3ac669f163d7e54c27a460ae644f4b98afca75f057f40aecfd71d0b0a4078c9"
+    },
+    {
+      "id": "seg-1043",
+      "clusterId": "risk-109",
+      "decision": "replace",
+      "proposedText": "是色受想行識",
+      "code": "正式講記：是色受想行識",
+      "inputDigest": "sha256:d1a233da550b796222fd4a8a1925c185802fcd7efd1bfb98da70ccbe207d9d39"
+    },
+    {
+      "id": "seg-1045",
+      "clusterId": "risk-110",
+      "decision": "replace",
+      "proposedText": "大蟲聚",
+      "code": "正式講記：大蟲聚",
+      "inputDigest": "sha256:2d03aaa84dc9c740be96aae09a77352594edf82b246c702fb792767e24e0d2f9"
+    },
+    {
+      "id": "seg-1060",
+      "clusterId": "risk-111",
+      "decision": "uncertain",
+      "code": "口語化嚴重，講記僅四字，無法唯一判定",
+      "inputDigest": "sha256:a6363b5a7133ecb036367ffa0dd0f0b375177eeac1629ec346c2087934aa0b51"
+    },
+    {
+      "id": "seg-1063",
+      "clusterId": "risk-112",
+      "decision": "uncertain",
+      "code": "口語嚴重且無對應講記文字",
+      "inputDigest": "sha256:52cbf3b517977ef36cd0ce5634eaffb4d1c74cade992ac6988d0b144a58e4622"
+    },
+    {
+      "id": "seg-1064",
+      "clusterId": "risk-112",
+      "decision": "replace",
+      "proposedText": "為欲除遣",
+      "code": "講記「為欲除遣」唯一支持最小修正",
+      "inputDigest": "sha256:e2165b9e4695770410e078d15c3584782c5975a3ed389859f062d68c7f458308"
+    },
+    {
+      "id": "seg-1071",
+      "clusterId": "risk-114",
+      "decision": "replace",
+      "proposedText": "執著這個心意識是我",
+      "code": "講記「著這個心意識是我」可唯一支持",
+      "inputDigest": "sha256:18e9259d2af8f25cf347c025afe97b5c4919077f27a7e9c6373d618d39f633b0"
+    },
+    {
+      "id": "seg-1072",
+      "clusterId": "risk-114",
+      "decision": "uncertain",
+      "code": "口語重複，講記僅一句對應，無法唯一分配",
+      "inputDigest": "sha256:7a556cdabbd6cfc5a6f340f24e79248ddaf59ec2e5d2eee95c3c3a84c131125a"
+    },
+    {
+      "id": "seg-1073",
+      "clusterId": "risk-114",
+      "decision": "replace",
+      "proposedText": "你執著心意識是我",
+      "code": "講記「你執著心意識是我」唯一支持",
+      "inputDigest": "sha256:2ee8820180a3a2f68e36972876165bebc93c9cfeaeb6b3d68db4490e1418bbd6"
+    },
+    {
+      "id": "seg-1074",
+      "clusterId": "risk-114",
+      "decision": "replace",
+      "proposedText": "那是糊塗的事情，我事愚故，糊塗的事",
+      "code": "講記對應句可唯一支持",
+      "inputDigest": "sha256:fed0aa5aa726653c689b4f0b128d386290bf97a4fea29a283e814f6efb32a073"
+    },
+    {
+      "id": "seg-1080",
+      "clusterId": "risk-115",
+      "decision": "replace",
+      "proposedText": "識是面向外",
+      "code": "講記「識」是面向外可唯一支持最小修正",
+      "inputDigest": "sha256:0e6a16a14e447634e2672fc264adea7956fec39360e7339903582835d8aea4a6"
+    },
+    {
+      "id": "seg-1086",
+      "clusterId": "risk-116",
+      "decision": "replace",
+      "proposedText": "心是什麼意思",
+      "code": "講記「心」什麼意思唯一支持，但句界不確定",
+      "inputDigest": "sha256:ad904e7812af84c78771135f6b160db7439f28f090dc5c524a4af4e941d6c233"
+    },
+    {
+      "id": "seg-1090",
+      "clusterId": "risk-117",
+      "decision": "replace",
+      "proposedText": "這是心的意思",
+      "code": "省去重複「心意 心」",
+      "inputDigest": "sha256:f94507c8e04d7f69b4e9a2a75a9f67d9fa7233cf1ff30508e10fdd915f768289"
+    },
+    {
+      "id": "seg-1094",
+      "clusterId": "risk-118",
+      "decision": "uncertain",
+      "code": "講記僅留「意」無法判定",
+      "inputDigest": "sha256:c2a051e6dc20d231c66a92564dec2922b4f408755a7b1a83a0940e253cbb8ad9"
+    },
+    {
+      "id": "seg-1098",
+      "clusterId": "risk-119",
+      "decision": "uncertain",
+      "code": "講記無對應文字",
+      "inputDigest": "sha256:6e767d7c35d56ff615dc97e139da7c6df80802397781203f8e306b874523ff07"
+    },
+    {
+      "id": "seg-1115",
+      "clusterId": "risk-120",
+      "decision": "uncertain",
+      "code": "referenceText 與 bias 無法唯一對應",
+      "inputDigest": "sha256:72643b18156d1eff2a16c03991538db15912f4855dd75588ee3abde13e86ad7f"
+    },
+    {
+      "id": "seg-1116",
+      "clusterId": "risk-120",
+      "decision": "uncertain",
+      "code": "referenceText 與 bias 無法唯一對應",
+      "inputDigest": "sha256:707816982c1283e0cb6106ce0bb6d528756e5c8b6d3f82af4dec11991a7e4e12"
+    },
+    {
+      "id": "seg-1119",
+      "clusterId": "risk-121",
+      "decision": "uncertain",
+      "code": "referenceText 為「愚」非「欲」，口語對應不明",
+      "inputDigest": "sha256:7383ff267f706dadfad4ee62c5ad7cbec2057cee7bbe7d2f01b041a6be9cf390"
+    },
+    {
+      "id": "seg-1120",
+      "clusterId": "risk-121",
+      "decision": "replace",
+      "proposedText": "為欲除遣所執我心能染淨事愚故",
+      "code": "referenceText 可唯一支持",
+      "inputDigest": "sha256:5a3b41b74a7553ac13e616a8b850f956905b252cd9f03c3848dfedacef383806"
+    },
+    {
+      "id": "seg-1131",
+      "clusterId": "risk-122",
+      "decision": "replace",
+      "proposedText": "為欲除遣所執我心能染淨事愚故",
+      "code": "依據正式講記唯一對應",
+      "inputDigest": "sha256:384341eb260de28cdbdb38e9692d9ec698a357b5cbc0fa57b8eb93e9fcd6744f"
+    },
+    {
+      "id": "seg-1150",
+      "clusterId": "risk-123",
+      "decision": "replace",
+      "proposedText": "第三個理",
+      "code": "依據正式講記唯一對應",
+      "inputDigest": "sha256:c6863e5b3b0b0e09ebe643d5b310337c266752f79a33b005b11eef1325b2f6d4"
+    },
+    {
+      "id": "seg-1157",
+      "clusterId": "risk-124",
+      "decision": "replace",
+      "proposedText": "立四念住",
+      "code": "依據正式講記唯一對應最小修正",
+      "inputDigest": "sha256:32766647a434d88646c3c40d0d8694c7c70b1014b16d98109b0fc53b1fc4c2a9"
+    },
+    {
+      "id": "seg-1166",
+      "clusterId": "risk-125",
+      "decision": "replace",
+      "proposedText": "執",
+      "code": "依據正式講記唯一對應最小修正",
+      "inputDigest": "sha256:962f74e96647b85b8ba742f81da41907e97d1237cc7784e191e977f6c74e6b37"
+    },
+    {
+      "id": "seg-1184",
+      "clusterId": "risk-128",
+      "decision": "replace",
+      "proposedText": "造業，「我",
+      "code": "依據正式講記對應斷片",
+      "inputDigest": "sha256:2356dbfb116d4a62f39a4d1a182775758b44d33dc14649c96dd26f150bdcd5e6"
+    },
+    {
+      "id": "seg-1191",
+      "clusterId": "risk-129",
+      "decision": "replace",
+      "proposedText": "立四念住",
+      "code": "正式講記為「立四念住」，原文「李世仁著」為同音誤識",
+      "inputDigest": "sha256:8d5fee94ac2b0fac81a26e9e71cb5e37e66dcb1ad8eb6a58da13913d472fa30f"
+    },
+    {
+      "id": "seg-1196",
+      "clusterId": "risk-130",
+      "decision": "replace",
+      "proposedText": "而安「立四念住」",
+      "code": "正式講記為「而安『立四念住』」，原文「而按理十年柱」為口誤",
+      "inputDigest": "sha256:ea70a151e2640cee319533967afd2f9e48b22609628ba99886b435610ed289f0"
+    },
+    {
+      "id": "seg-1201",
+      "clusterId": "risk-131",
+      "decision": "replace",
+      "proposedText": "還是色受想行識五蘊",
+      "code": "正式講記為「還是色受想行識五蘊」，原文「舍舟顯示武運」為同音誤識",
+      "inputDigest": "sha256:8bd3d20ac1faabbf8a23a55921d080ea7df0e35bde1c1f6c3e73b61928243329"
+    },
+    {
+      "id": "seg-1223",
+      "clusterId": "risk-132",
+      "decision": "replace",
+      "proposedText": "復有差別",
+      "code": "正式講記為「建立四念住的第四個理由復有差別」之尾句，原文僅「福有差別」未完整",
+      "inputDigest": "sha256:6df5322df4497c09b9651f362ac237a52fb86066759222faf2b9064513188114"
+    },
+    {
+      "id": "seg-1225",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "若由此故，成染成淨",
+      "code": "對應正式講記「若由此故，成染成淨」",
+      "inputDigest": "sha256:cafc1da6ca0d03ea0043f0fadcd344794061cb9760c6bbcffcd9405e30c9a3cc"
+    },
+    {
+      "id": "seg-1226",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "若染淨者",
+      "code": "對應正式講記「若染淨者」",
+      "inputDigest": "sha256:8ee799183a8a5df54e285ac598eb5a9ff72d0160d290443431fed252294d9d80"
+    },
+    {
+      "id": "seg-1227",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "總為顯示如是一切",
+      "code": "對應正式講記「總為顯示如是一切」",
+      "inputDigest": "sha256:afa3483f7644d90a8f81d221db9c9cf5d922e805c5b96035fd65b9f95b4f7f95"
+    },
+    {
+      "id": "seg-1228",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "立四念住",
+      "code": "對應正式講記「立四念住」",
+      "inputDigest": "sha256:b0f7d4f7f7492b1c3b110420e263e61fa75737682171d762acdd3903f85fde4f"
+    },
+    {
+      "id": "seg-1229",
+      "clusterId": "risk-133",
+      "decision": "unchanged",
+      "code": "對應講記「復有不同的理由」",
+      "inputDigest": "sha256:3383209d022ed2f8ec1d0fdd90826e1e084958dedf66d8e52e34a89701667bce"
+    },
+    {
+      "id": "seg-1230",
+      "clusterId": "risk-133",
+      "decision": "unchanged",
+      "code": "對應講記「就是第四個理由」",
+      "inputDigest": "sha256:badeb728b7b26e5dfb93c06fabcd313e3223ba6620ef549e9a64ed90aa262cad"
+    },
+    {
+      "id": "seg-1231",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "為了依此",
+      "code": "對應講記「若依此」，原「依慈遠遠遠近」為口誤",
+      "inputDigest": "sha256:a1d4e825089c4e2fe0ddbfce91994450e93b0df2e6882cfe63d1dfa0bb440769"
+    },
+    {
+      "id": "seg-1232",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "那麼就是身",
+      "code": "對應講記「那麼就是身」",
+      "inputDigest": "sha256:50923d83a81f2b4b48681c6475af26231b22a990da465b1312580d63d0256a34"
+    },
+    {
+      "id": "seg-1233",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "會有染污的業",
+      "code": "對應講記「或有染污的業」",
+      "inputDigest": "sha256:cde851282a4a2f2fca1922cdbd7bc34cab5a14e2b8ff47d353337ca0b4ee0e91"
+    },
+    {
+      "id": "seg-1234",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "會有清淨的業",
+      "code": "對應講記「或有清淨的業」",
+      "inputDigest": "sha256:976122cd558e759949d70a487d91ee9707c563673558ea18a5eab1eaea06d064"
+    },
+    {
+      "id": "seg-1235",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "這是清淨的事、染污的事",
+      "code": "對應講記「這是清淨的事、染污的事」",
+      "inputDigest": "sha256:d583fcbb34507ef90c82301cd25fcd82495fd0756457454eecffc9a4ac1a5f8a"
+    },
+    {
+      "id": "seg-1236",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "若為此故，起染起淨",
+      "code": "對應正式講記「若為此故，起染起淨」",
+      "inputDigest": "sha256:5d220b68e1f444697cb94c91e92014c112c728876397def75b030b2d16a0be59"
+    },
+    {
+      "id": "seg-1237",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "就是為了享受，起染污、起清淨",
+      "code": "對應講記「就是為了享受，起染污、起清淨」",
+      "inputDigest": "sha256:13030a0388c7a0de0a2566a91becffe3132f86f92cab60cb269fc25db8f8e05f"
+    },
+    {
+      "id": "seg-1238",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "就是指心說的",
+      "code": "對應講記「就是指心說的」",
+      "inputDigest": "sha256:c3f27841b0d3ec8b7f8db6b2dd0522f8a62fe68b9516a68c6a60a32c5643701f"
+    },
+    {
+      "id": "seg-1239",
+      "clusterId": "risk-133",
+      "decision": "replace",
+      "proposedText": "若由此故，成染成淨",
+      "code": "對應講記「若由此故，成染成淨」",
+      "inputDigest": "sha256:9c5eccb53c40d47354bd97c441dac59ccdd351169626a35561b26d84d00bf614"
+    },
+    {
+      "id": "seg-1249",
+      "clusterId": "risk-134",
+      "decision": "uncertain",
+      "code": "ref省略無法定位",
+      "inputDigest": "sha256:39d9727025bc337a1b32b7803757477c919751984ebacf0e23fc929a7de0a8f6"
+    },
+    {
+      "id": "seg-1252",
+      "clusterId": "risk-135",
+      "decision": "replace",
+      "proposedText": "為求受故",
+      "code": "由為求受、起染、淨對應",
+      "inputDigest": "sha256:06f88e198c7bcab00e14e0f0673c3ce3d49ded1d3964d2c32cda84c34ebaf778"
+    },
+    {
+      "id": "seg-1268",
+      "clusterId": "risk-139",
+      "decision": "replace",
+      "proposedText": "答：若於此住念，若由此住念，皆名念住",
+      "code": "re：引文前段對應",
+      "inputDigest": "sha256:cb0118f9814abb39aa3ae107bf11de3ec53f4f58f4e7024d1879292e215cb641"
+    },
+    {
+      "id": "seg-1269",
+      "clusterId": "risk-139",
+      "decision": "replace",
+      "proposedText": "於此住念者：謂所緣念住。由此住念者",
+      "code": "re：前文重複定義對應",
+      "inputDigest": "sha256:860edb8413c230331fabdad7f155eaa5db335b9929f0d078d8b7c5fba0d44326"
+    },
+    {
+      "id": "seg-1279",
+      "clusterId": "risk-140",
+      "decision": "replace",
+      "proposedText": "若於此住念",
+      "code": "ref: 若於此住念",
+      "inputDigest": "sha256:5bcd2ab9cd0de2f405a3d4196049501a54b4d2d6173b9a82b3f15ca7d2086546"
+    },
+    {
+      "id": "seg-1295",
+      "clusterId": "risk-141",
+      "decision": "replace",
+      "proposedText": "謂若慧、若念攝持於定",
+      "code": "ref: 謂若慧、若念攝持於定",
+      "inputDigest": "sha256:ab3560133b7f1ba982cd01232447a882cf82da070e4595f5e5a6b8555b7d92d4"
+    },
+    {
+      "id": "seg-1297",
+      "clusterId": "risk-142",
+      "decision": "replace",
+      "proposedText": "要慧",
+      "code": "口語縮略",
+      "inputDigest": "sha256:3f21dc828a85b9e3d15efa25cf7393cce9d70684008722f3712b93c44fc75aa3"
+    },
+    {
+      "id": "seg-1304",
+      "clusterId": "risk-143",
+      "decision": "replace",
+      "proposedText": "叫做念",
+      "code": "補充主語",
+      "inputDigest": "sha256:a970f2ac6db44ed232837542a81d25d2b09e2b34600c883bcee6a8546185b434"
+    },
+    {
+      "id": "seg-1328",
+      "clusterId": "risk-144",
+      "decision": "replace",
+      "proposedText": "住",
+      "code": "性念祝疑為口誤",
+      "inputDigest": "sha256:e5ea3d9adf57fd7ccf300178af00554e0d8faf32e488a7ba118b160d98a71d01"
+    },
+    {
+      "id": "seg-1341",
+      "clusterId": "risk-145",
+      "decision": "replace",
+      "proposedText": "還有很多的心",
+      "code": "去除口語贅詞",
+      "inputDigest": "sha256:80e97972535e9978544bd880dee27cec0f819e318f15dcdc5186db6c0d35069b"
+    },
+    {
+      "id": "seg-1348",
+      "clusterId": "risk-146",
+      "decision": "unchanged",
+      "code": "講記無對應文字",
+      "inputDigest": "sha256:7660c61870eceaa529b8d0df414da6ddb7a0605d72014b1cad8438729a5a397e"
+    },
+    {
+      "id": "seg-1350",
+      "clusterId": "risk-147",
+      "decision": "uncertain",
+      "code": "reference僅一字「就」，無唯一最小修正版",
+      "inputDigest": "sha256:ed270b803f3af2efb855c7c30ef35d6461fc6352dca81e395e7438291d725b52"
+    },
+    {
+      "id": "seg-1355",
+      "clusterId": "risk-148",
+      "decision": "replace",
+      "proposedText": "也名為念住",
+      "code": "reference「也名為念住」唯一對應",
+      "inputDigest": "sha256:fc03c8231a72d04a3952eeca6215cc46d45c9b168af25f82b2736af923fa3b6a"
+    },
+    {
+      "id": "seg-1357",
+      "clusterId": "risk-149",
+      "decision": "replace",
+      "proposedText": "所緣念住",
+      "code": "reference「所緣念住」支持",
+      "inputDigest": "sha256:29017011c1808c29dc0aeb468b473e746faf7e70866680484899cdde1749d181"
+    },
+    {
+      "id": "seg-1358",
+      "clusterId": "risk-149",
+      "decision": "replace",
+      "proposedText": "自性念",
+      "code": "reference「自性念」唯一對應，原「自信念住」需改",
+      "inputDigest": "sha256:800fbedc3399f4e92e4463b3399e87a9b411379657ce482e7fa65f766f6a519d"
+    },
+    {
+      "id": "seg-1360",
+      "clusterId": "risk-150",
+      "decision": "uncertain",
+      "code": "reference僅「這樣子」，原句較長，無唯一對應",
+      "inputDigest": "sha256:11d4c166b776b2a8af40cd06e635807cba94660d5a72ab2f6d866e7fffb662f4"
+    },
+    {
+      "id": "seg-1396",
+      "clusterId": "risk-155",
+      "decision": "replace",
+      "proposedText": "住",
+      "code": "reference「住」唯一對應，補回左anchor末字",
+      "inputDigest": "sha256:12027a8a5fe946bb487d6b56fe2f247c9f1535a4f8bcd04ac34730b40d3a39e7"
+    },
+    {
+      "id": "seg-1447",
+      "clusterId": "risk-157",
+      "decision": "replace",
+      "proposedText": "才能",
+      "code": "參考文無對應完整短句，僅「才能」二字",
+      "inputDigest": "sha256:230820be0fa1d75929513c4d0b6596e3574b37a092cab6049e2e6d654e18b651"
+    },
+    {
+      "id": "seg-1465",
+      "clusterId": "risk-158",
+      "decision": "replace",
+      "proposedText": "他不是嘴講",
+      "code": "替換口語連讀為書面分句",
+      "inputDigest": "sha256:7edf388d6c8c329d2b2857a25da926f2328b7fd86030987fa0cd6f51722c7c46"
+    },
+    {
+      "id": "seg-1523",
+      "clusterId": "risk-160",
+      "decision": "uncertain",
+      "code": "參考文無對應文字，無法判定",
+      "inputDigest": "sha256:520271d44e19e459d715232b2a4789c717f14a8037780e1ac2554e355020a5ea"
+    },
+    {
+      "id": "seg-1533",
+      "clusterId": "risk-161",
+      "decision": "replace",
+      "proposedText": "常常讀",
+      "code": "替換口語「讀文俗」為參考「讀」",
+      "inputDigest": "sha256:253bc680f76bdc41006235d6c9d573cdf3f4640163e0f579f71a83bed1462083"
+    },
+    {
+      "id": "seg-1558",
+      "clusterId": "risk-162",
+      "decision": "replace",
+      "proposedText": "我們四念住",
+      "code": "替換口語「這個四年中」為參考文",
+      "inputDigest": "sha256:75ffbc1f96929fac94b66146e25dfc9b2c65b587fd01c37bace767bed2a5f26a"
+    },
+    {
+      "id": "seg-1565",
+      "clusterId": "risk-163",
+      "decision": "uncertain",
+      "code": "ref僅「因為」，無法證明原句「因為每一條都是事實」正確與否",
+      "inputDigest": "sha256:c7098ee67a10978b42822b6fcea9907398f9cf6899f72751ee9ebbd158dbe1f1"
+    },
+    {
+      "id": "seg-1582",
+      "clusterId": "risk-164",
+      "decision": "uncertain",
+      "code": "ref僅「放鬆」，無法唯一對應「放鬆自心」",
+      "inputDigest": "sha256:f93ccc821669df4490485d4efba80290511adf0db759450cf2bb5eac8db64ccc"
+    },
+    {
+      "id": "seg-1594",
+      "clusterId": "risk-166",
+      "decision": "uncertain",
+      "code": "ref僅「答」，無法判定原句「是轉了」是否完整或需替換",
+      "inputDigest": "sha256:d29bd47ee80e0ade22a1e1f3796adca49a7178d6d5246c4d6273be1d6e336da8"
+    },
+    {
+      "id": "seg-1621",
+      "clusterId": "risk-167",
+      "decision": "uncertain",
+      "code": "ref「我剛才說」無法唯一判定原句「這件問題我將在說」的範圍",
+      "inputDigest": "sha256:869a205c8dfa9cb918744e9dea2b5a55ea1994f9e806f96463d4af8b185a5803"
+    },
+    {
+      "id": "seg-1625",
+      "clusterId": "risk-168",
+      "decision": "uncertain",
+      "code": "ref僅「沉」，無法證明原句「這件事這樣」需要保留或修正",
+      "inputDigest": "sha256:bb1525fb654d7455e371b6b847456047a8d43447f7c7f0324a85465624588e6b"
+    },
+    {
+      "id": "seg-1635",
+      "clusterId": "risk-169",
+      "decision": "uncertain",
+      "code": "口語句未在講記找到完整對應",
+      "inputDigest": "sha256:c734cdc40fb861eb6fcc1d5e39e6675b77887ed1cb06278e48aacd9d741c4bbd"
+    },
+    {
+      "id": "seg-1639",
+      "clusterId": "risk-170",
+      "decision": "replace",
+      "proposedText": "就是修奢摩他一個時候就",
+      "code": "講記僅支持奢摩他部分",
+      "inputDigest": "sha256:f779689000ee89d79240e61362e518cc5346cbd282c00a92ec05f51d440fb593"
+    },
+    {
+      "id": "seg-1662",
+      "clusterId": "risk-172",
+      "decision": "unchanged",
+      "code": "講記此段無對應文字",
+      "inputDigest": "sha256:8073fbce62cf3bb67b0f69e03b0b201e5664dfce8f730b0059684146cb937b69"
+    },
+    {
+      "id": "seg-1683",
+      "clusterId": "risk-174",
+      "decision": "replace",
+      "proposedText": "昏沉老半天還是不能",
+      "code": "講記支持去掉『行』字",
+      "inputDigest": "sha256:9bbf5b2e84cd6bf34958d186d01fb27c8cb5798959b1daa0b689b96cb974b8ff"
+    },
+    {
+      "id": "seg-1710",
+      "clusterId": "risk-175",
+      "decision": "replace",
+      "proposedText": "問題",
+      "code": "講記僅保留問題二字",
+      "inputDigest": "sha256:d97fd9fbb09365dc26eefb7be8eb2fe2903bf6deb85edc1239fa506df81a0f40"
+    },
+    {
+      "id": "seg-1715",
+      "clusterId": "risk-176",
+      "decision": "uncertain",
+      "code": "錨點重複，待釐清",
+      "inputDigest": "sha256:e287fd9be860c2c22e6e7e283295241ed32bfdedb5919f77ea5e6c00a8fdf74b"
+    },
+    {
+      "id": "seg-1716",
+      "clusterId": "risk-176",
+      "decision": "replace",
+      "proposedText": "要對治",
+      "code": "正式講記用「對治」",
+      "inputDigest": "sha256:feddb199bf5d86c4c1deed8197b35bb5c08ee222ba357d8d9d5a2fe977502684"
+    },
+    {
+      "id": "seg-1717",
+      "clusterId": "risk-176",
+      "decision": "uncertain",
+      "code": "與前項可能重複",
+      "inputDigest": "sha256:fe2cbce160d6758003ac58efdfeb2f27baffbf0326cbea0c38e7afb12ead630c"
+    },
+    {
+      "id": "seg-1725",
+      "clusterId": "risk-177",
+      "decision": "replace",
+      "proposedText": "有的食品",
+      "code": "正式講記用「食品」",
+      "inputDigest": "sha256:97886beabf14b574bbfda93858084ade679df344b69124b8768ce16bcab538a4"
+    },
+    {
+      "id": "seg-1726",
+      "clusterId": "risk-177",
+      "decision": "uncertain",
+      "code": "講記省略「它就那種」，無法唯一判定",
+      "inputDigest": "sha256:bc7ccb680c956299f987fd9ac8b04bfca4934c27d43afb703ac77bd519eaa15e"
+    },
+    {
+      "id": "seg-1865",
+      "clusterId": "risk-187",
+      "decision": "uncertain",
+      "code": "講記無對應內容",
+      "inputDigest": "sha256:ec66b9bba5e0227c43c57a0c0aa224a75b78e542f72be9b12df7e26c96df434e"
+    },
+    {
+      "id": "seg-1866",
+      "clusterId": "risk-187",
+      "decision": "unchanged",
+      "code": "講記支持",
+      "inputDigest": "sha256:d7d45bc1320dbb414567736cfab6a00dc6655d9e4bef7cb7e6b3e9fcee457e91"
+    },
+    {
+      "id": "seg-1867",
+      "clusterId": "risk-187",
+      "decision": "replace",
+      "proposedText": "一方面有靜坐",
+      "code": "講記支持",
+      "inputDigest": "sha256:0ab059b487ed900e2187977f157dbd0442bb1a68805db2469644ffe7248127a9"
+    },
+    {
+      "id": "seg-1870",
+      "clusterId": "risk-188",
+      "decision": "unchanged",
+      "code": "講記無對應，保留原句",
+      "inputDigest": "sha256:5d2c3dcaef3c7fad1f4cd03967e21229080545eaf5c90261161ae898fbd8c958"
+    },
+    {
+      "id": "seg-1887",
+      "clusterId": "risk-189",
+      "decision": "uncertain",
+      "code": "講記僅「師：這」，無法唯一判定",
+      "inputDigest": "sha256:f94d1c27ba7bdeaa828387a0ea9ba501701c0b98928a3f352c00cef8fc20e54a"
+    },
+    {
+      "id": "seg-1889",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:474f713c9e420124dd317ad7d485eb873b2423c4d8760ade5acc58147f67d743"
+    },
+    {
+      "id": "seg-1890",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:2567351ef68791ad59f9d522ed7b61c8f6a2c2f8810fe358557a79b3d542e4f7"
+    },
+    {
+      "id": "seg-1891",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:ba2c1a22ebc1fc98a266db9e352fe7a35497ae59f1dfce145e2b6b2da2d3f4f8"
+    },
+    {
+      "id": "seg-1892",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:3ad7093340ac94dcf95b0278b1644fa31f439fd99f633cfdcb0eb09300225e89"
+    },
+    {
+      "id": "seg-1893",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:3dbb0eb08323681ceee6d6531b06913a967a638cc58c3ab71f53ea971b092fdd"
+    },
+    {
+      "id": "seg-1894",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:e2a7112a47e631a89c9dd5227a1a1dc469d8712876245fe32d37dbaae2aba6a6"
+    },
+    {
+      "id": "seg-1895",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:e9737ebda5b6af39d0910563617380465c03cececc567a678be60565a0039e3f"
+    },
+    {
+      "id": "seg-1896",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:bd64412af61fbd614535ce0148a97458e67dec67ffc5fbf472c6160838fdfb2f"
+    },
+    {
+      "id": "seg-1897",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:0d7c9bd7c6486ccb37cf59b173a3b158f3f585700ed8c51e9a3271b5c3bb1bc3"
+    },
+    {
+      "id": "seg-1898",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:3164b531c8830fc432282b40e8fe16bba303c437bcccb1564f2177dc24985cf9"
+    },
+    {
+      "id": "seg-1899",
+      "clusterId": "risk-190",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:bd787fce708205326c50207be03f5538f57974f1a81c0bc8e3ef84cc7ba6de21"
+    },
+    {
+      "id": "seg-1901",
+      "clusterId": "risk-191",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:9aeddd3f2aff8ddcf9d546d20095b9a2c3da04bb94eb67cfbac76be87acd4f1e"
+    },
+    {
+      "id": "seg-1902",
+      "clusterId": "risk-191",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:3767300d4d633f3c50e390ff5013929de4498c1e36832d61639a0423b7099565"
+    },
+    {
+      "id": "seg-1903",
+      "clusterId": "risk-191",
+      "decision": "replace",
+      "proposedText": "心不障人之法",
+      "code": "講記唯一對應",
+      "inputDigest": "sha256:d85c6d70f3173e039f8e637bac059d0c30c571f15e8fd787c4c78e1e4b3a2adb"
+    },
+    {
+      "id": "seg-1904",
+      "clusterId": "risk-191",
+      "decision": "uncertain",
+      "code": "正式講記無對應文字",
+      "inputDigest": "sha256:b0d15d08a0c3297fc9d7c83faa9dfb0a5eefd68c62bb5f81999d4260afc55baf"
+    },
+    {
+      "id": "seg-1906",
+      "clusterId": "risk-192",
+      "decision": "replace",
+      "proposedText": "給別人方便",
+      "code": "講記唯一對應",
+      "inputDigest": "sha256:4b76e6c520559d829de05cc3996d8009cf0c4eb25b983026b6a1cbb621b46b3c"
+    },
+    {
+      "id": "seg-1919",
+      "clusterId": "risk-193",
+      "decision": "replace",
+      "proposedText": "別人用功的時候",
+      "code": "講記省略口語「我們要是」",
+      "inputDigest": "sha256:32b3d380170bb19ccd770d572bc8c74ccb25cbff26c1f6ee7a0e6b28fe2ca671"
+    },
+    {
+      "id": "seg-1947",
+      "clusterId": "risk-194",
+      "decision": "replace",
+      "proposedText": "有事情的時候",
+      "code": "講記省略口語「不要因為」",
+      "inputDigest": "sha256:3c16c2844bdb4b90665ad290eed7b2d807888069f01f686d9f3f239c110b02c0"
+    },
+    {
+      "id": "seg-1976",
+      "clusterId": "risk-195",
+      "decision": "uncertain",
+      "code": "正式講記只保留障礙他，省略恨他段",
+      "inputDigest": "sha256:f14e6a9592790e8b7301c9d183250182d06c92e2b952566289d40cdb6a8dc7b0"
+    },
+    {
+      "id": "seg-1977",
+      "clusterId": "risk-195",
+      "decision": "unchanged",
+      "code": "講記唯一支持",
+      "inputDigest": "sha256:33c59645333a7b17ca17135226cffcc61021c703a921cc0a0c9d81580961f98d"
+    },
+    {
+      "id": "seg-2015",
+      "clusterId": "risk-200",
+      "decision": "replace",
+      "proposedText": "你擴大它，就容易有罪過",
+      "code": "講記唯一支持，補標點",
+      "inputDigest": "sha256:b99dfb8756af96b6463d3eba767d9c4529de5a6fb411529f5706e68eaf9cf55b"
+    },
+    {
+      "id": "seg-2016",
+      "clusterId": "risk-200",
+      "decision": "replace",
+      "proposedText": "譬如說，人家在那兒拜佛，你妨礙人，你就有罪過",
+      "code": "講記可證，補調整",
+      "inputDigest": "sha256:d319bd3bad35926c8b55de2c757891e132567e3b42a4560809070c9a4f7538f3"
+    },
+    {
+      "id": "seg-2024",
+      "clusterId": "risk-201",
+      "decision": "replace",
+      "proposedText": "你用這個方法",
+      "code": "講記唯一支持",
+      "inputDigest": "sha256:cc95f0b50ff857e4953a76be2cd2c49163827f54715e517c94b6a63d1fbe650e"
+    },
+    {
+      "id": "seg-2035",
+      "clusterId": "risk-202",
+      "decision": "replace",
+      "proposedText": "說得很微細的",
+      "code": "威脆→微細，講記可證",
+      "inputDigest": "sha256:5b34294f1ccca09266f9cdaf0a5c5f71b5801bac3c3e5575bd5865a2c0d74d20"
+    },
+    {
+      "id": "seg-2039",
+      "clusterId": "risk-203",
+      "decision": "uncertain",
+      "code": "講記內容不對應此段",
+      "inputDigest": "sha256:629e84876e71b275c170b6a99738236a00f8e717bd5c4bf30e08d4f6c2cb1e82"
+    },
+    {
+      "id": "seg-2051",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "《中觀論》的〈觀法品〉",
+      "code": "對應〈觀法品〉完整書名",
+      "inputDigest": "sha256:a2143d25ca256577f7d1f23a22516959a9a4b1f291c88a8e1d5e26df166b7dca"
+    },
+    {
+      "id": "seg-2052",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "若我是五陰，我即為生滅",
+      "code": "對應正式講記五陰句",
+      "inputDigest": "sha256:edc79695b1278a8fd7286d9c75432b6b1d798e4999d19ec84f837adf3115a8d2"
+    },
+    {
+      "id": "seg-2053",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "若我異五陰，則非五陰相",
+      "code": "對應正式講記異五陰句",
+      "inputDigest": "sha256:dc3d5f1ac6e563f86b2c6aa6beb94e791e35259aa869b299c02b2d351f41612b"
+    },
+    {
+      "id": "seg-2054",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "這是一異",
+      "code": "口語殘句轉正式紀錄",
+      "inputDigest": "sha256:166a57f6d500c4c58b9d8f7e8cadfb4026a94f61f5a60b09aa0a07b60356a9da"
+    },
+    {
+      "id": "seg-2055",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "用這樣的一異去推求",
+      "code": "口語轉正式推求句",
+      "inputDigest": "sha256:60effbea1ac4719648f915293f9b52ba3c921be53c4dee18b72ec613d45e11fd"
+    },
+    {
+      "id": "seg-2056",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "就是觀察我不可得",
+      "code": "對應正式講記",
+      "inputDigest": "sha256:f2a08c2b8c4ab48b62f28dc28fc51e7e6927b06a36fef3bc4f5c0bd86294484c"
+    },
+    {
+      "id": "seg-2057",
+      "clusterId": "risk-204",
+      "decision": "replace",
+      "proposedText": "進一步地觀察身體是因緣有",
+      "code": "補字使句意完整",
+      "inputDigest": "sha256:398aead8d0b9216ed42c2534603181b8d254afca9d3ca49c6343f7473d63dfff"
+    },
+    {
+      "id": "seg-2071",
+      "clusterId": "risk-206",
+      "decision": "unchanged",
+      "code": "講記無對應文字",
+      "inputDigest": "sha256:3e12a0a8b6e542c0bdb44f84b5a0366b8960394aad76cbc54f2ac456e540b724"
+    },
+    {
+      "id": "seg-2078",
+      "clusterId": "risk-207",
+      "decision": "unchanged",
+      "code": "講記首句相同可保留",
+      "inputDigest": "sha256:3632f536aef1a6bbffc1141a261f63157b242fde33310e0e06f841fe7c043152"
+    }
+  ]
+}

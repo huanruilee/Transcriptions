@@ -222,6 +222,8 @@
           </li>
         </ul>
 
+        <a class="header-btn" :href="correctionDatesUrl">📅 各講最後校訂日期（課程末頁）</a>
+
         <!-- 側邊欄拖曳調整把手 -->
         <div
           id="sidebar-resizer"
@@ -246,8 +248,16 @@
           <span class="crumb-current">{{ currentSessionInfo?.displaySessionId || currentSessionId }} {{ currentSessionInfo?.title || '' }}</span>
         </nav>
 
+        <!-- 課程尚無逐字稿時的空狀態（取代舊版載入不存在的講次） -->
+        <section v-if="hasEmptyTranscript" class="transcript-empty-state">
+          <h1 class="transcript-empty-title">本課程尚無逐字稿</h1>
+          <p class="transcript-empty-message">
+            {{ currentCourseTitle }} 目前沒有可閱讀的講次。逐字稿完成後將自動上架，敬請期待。
+          </p>
+        </section>
+
         <!-- 動態即時科判祖先鏈 (Sticky Doctrinal Bar) -->
-        <div class="sticky-doctrinal-bar">
+        <div v-if="!hasEmptyTranscript" class="sticky-doctrinal-bar">
           <span class="breadcrumb-icon">📑</span>
           <span
             v-for="(node, idx) in activeTOCChain"
@@ -261,9 +271,11 @@
 
         <!-- 雙視角科判手風琴 (對齊 V1) -->
         <TOCAccordion
+          v-if="!hasEmptyTranscript"
           ref="tocAccordionRef"
           id="toc-accordion-root"
-          :toc-nodes="courseStore.tocTree || []"
+          :toc-nodes="currentTocTree"
+          :book-toc-nodes="courseStore.tocTree || []"
           :active-session-id="currentSessionId"
           :current-time="playerStore.currentTime"
           @seek="handleTOCSeek"
@@ -279,11 +291,23 @@
           <ol class="source-outline-list">
             <li v-for="item in sourceOutline.courseOutline" :key="item">{{ item }}</li>
           </ol>
-          <h3 class="source-outline-questions-heading">研討問題索引</h3>
-          <ol class="source-outline-questions">
-            <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
-          </ol>
-          <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
+          <details v-if="currentDiscussionQuestions.length > 0" class="source-outline-details">
+            <summary class="source-outline-summary">
+              原典研討問題索引（共 {{ sourceOutline.discussionOutline.length }} 題；本講已依下方 {{ currentDiscussionQuestions.length }} 個核心討論單元對位）
+            </summary>
+            <h3 class="source-outline-questions-heading">研討問題索引</h3>
+            <ol class="source-outline-questions">
+              <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
+            </ol>
+            <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題</span>
+          </details>
+          <template v-else>
+            <h3 class="source-outline-questions-heading">研討問題索引</h3>
+            <ol class="source-outline-questions">
+              <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
+            </ol>
+            <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
+          </template>
         </section>
 
         <section
@@ -302,16 +326,26 @@
         </section>
 
         <!-- 逐字稿本文 (文章自然排版) -->
-        <article class="transcript-article">
+        <article v-if="!hasEmptyTranscript" class="transcript-article">
           <!-- 文章開頭：講次標題與校勘時間標記 -->
           <header class="session-article-header">
             <h1 class="session-article-title">
-              {{ currentSessionInfo?.title || `第 ${currentSessionId} 講` }}
+              {{ currentSessionInfo?.title || (currentSessionId ? `第 ${currentSessionId} 講` : '載入中…') }}
             </h1>
+            <p v-if="currentReaderNotice" class="session-reader-notice" role="note">
+              閱讀提醒：{{ currentReaderNotice }}
+              <a v-if="currentQualityReviewUrl" :href="currentQualityReviewUrl">原音抽查與待覆核清單</a>
+            </p>
             <div class="session-article-meta">
-              <span v-if="currentLastUpdated" class="meta-tag update-tag" title="此講次逐字稿最後校正修訂日期">
-                🕒 最後校正更新：{{ currentLastUpdated }}
+              <span
+                v-if="currentReaderRebuiltAt || currentLastUpdated"
+                class="meta-tag update-tag"
+                :class="{ 'rebuild-tag': Boolean(currentReaderRebuiltAt) }"
+                :title="currentReaderRebuiltAt ? '目前顯示之重整版核定更新日期；未逐句聽核' : '此講次逐字稿最後校正修訂日期'"
+              >
+                🕒 {{ currentReaderRebuiltAt ? '重整版最後更新' : '最後校正更新' }}：{{ currentReaderRebuiltAt || currentLastUpdated }}
               </span>
+              <span v-if="currentReaderRebuiltAt && currentLastUpdated" class="meta-tag source-update-tag">底稿校正日期：{{ currentLastUpdated }}</span>
               <span class="meta-tag status-tag" :class="`status-${currentTranscriptStatus}`">
                 {{ currentTranscriptLabel }}
               </span>
@@ -319,15 +353,51 @@
                 📖 底本頁碼：{{ currentSessionInfo.page }}
               </span>
             </div>
-            <button
-              id="download-transcript-mobile-btn"
-              class="session-download-btn"
-              :title="downloadTranscriptTitle"
-              :disabled="isLoading || paragraphs.length === 0"
-              @click="handleDownloadTranscript"
-            >
-              📄 下載逐字稿
-            </button>
+            <p v-if="currentRebuildUrl"><a :href="currentRebuildUrl">{{ currentSessionInfo?.sourceRebuildStatus === 'reading-approved' ? (currentReaderRebuiltAt ? '重整版原稿對照（本文已套用）' : '正式重整版（已閱讀確認，未逐句聽核）') : '原稿重整版：連續閱讀、校字與原稿對照（待聽核）' }} →</a></p>
+            <div class="session-header-actions">
+              <button
+                id="download-transcript-mobile-btn"
+                class="session-download-btn"
+                :title="downloadTranscriptTitle"
+                :disabled="isLoading || paragraphs.length === 0"
+                @click="handleDownloadTranscript"
+              >
+                📄 下載逐字稿
+              </button>
+              <button
+                v-if="hasAnyVerbatim"
+                id="toggle-all-verbatim-btn"
+                type="button"
+                class="verbatim-global-toggle-btn"
+                :class="{ active: isAllVerbatimExpanded }"
+                data-testid="toggle-all-verbatim-btn"
+                @click="toggleAllVerbatim"
+              >
+                {{ isAllVerbatimExpanded ? '💬 收合全部課堂原話' : '💬 展開全部課堂原話' }}
+              </button>
+              <button
+                id="toggle-study-guide-btn"
+                type="button"
+                class="session-download-btn"
+                data-testid="toggle-study-guide-btn"
+                title="開啟/收合本講研讀講記抽屜 (快速鍵: G)"
+                @click="toggleStudyGuideDrawer"
+              >
+                📖 研讀講記
+              </button>
+              <a
+                v-if="currentDialogueTranscriptUrl"
+                id="open-dialogue-transcript-btn"
+                :href="currentDialogueTranscriptUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="session-download-btn"
+                data-testid="open-dialogue-transcript-btn"
+                title="開啟五層思辨學習版逐字稿網頁"
+              >
+                🧭 五層思辨學習版
+              </a>
+            </div>
             <div
               v-if="currentAgentReviewStatus === 'completed'"
               class="agent-review-summary"
@@ -368,23 +438,34 @@
             >此影片已上架，逐字稿尚待製作。</p>
           </header>
 
+          <StudyScaffoldingPanel
+            v-if="currentStudyScaffolding"
+            :scaffolding="currentStudyScaffolding"
+            v-model:reading-mode="scaffoldingReadingMode"
+            @seek="seekToTime"
+          />
+
           <div
             v-for="p in paragraphs"
             :key="p.id"
+            v-show="scaffoldingReadingMode === 'full' || !currentStudyScaffolding || p.speaker?.includes('法師') || p.heading || p.teacherSummary"
             class="paragraph-block"
           >
             <div v-if="p.questionId && isQuestionStart(p)" class="discussion-question-heading">
               <span>討論問題</span>
               <h3>{{ questionFor(p.questionId)?.displayQuestion }}</h3>
             </div>
-            <!-- 科判導讀小標題 -->
-            <h3 v-if="p.heading" class="transcript-heading">
+            <!-- 科判導讀小標題（避免與上方討論問題標題重複） -->
+            <h3
+              v-if="p.heading && (!p.questionId || !isQuestionStart(p) || (p.heading !== questionFor(p.questionId)?.displayQuestion && p.heading !== questionFor(p.questionId)?.question))"
+              class="transcript-heading"
+            >
               {{ p.heading }}
             </h3>
 
             <!-- Phase 2: 內嵌科判導引小卡 (對齊 V1) -->
             <div
-              v-if="p.tocAnchorNode"
+              v-if="p.tocAnchorNode && p.tocAnchorNode.title !== p.heading"
               class="toc-anchor-card"
               :aria-label="'科判節點：' + p.tocAnchorNode.title"
             >
@@ -393,6 +474,35 @@
               <span v-if="p.tocAnchorNode.page" class="toc-anchor-page">p.{{ p.tocAnchorNode.page }}</span>
               <span class="toc-anchor-ts">{{ formatTime(p.tocAnchorNode.timestamp) }}</span>
             </div>
+
+            <!-- 段首原音時間標籤 -->
+            <button
+              v-if="typeof p.start === 'number' && p.start >= 0"
+              type="button"
+              class="paragraph-ts-badge"
+              :title="'跳轉至此段原音 ' + formatTime(p.start)"
+              @click.stop="seekParagraph(p)"
+            >
+              ▶ {{ formatTime(p.start) }}
+            </button>
+            <span
+              v-if="p.speaker"
+              class="verbatim-speaker-badge"
+              :class="p.speaker.includes('學員') ? 'speaker-student' : 'speaker-geshe'"
+            >【{{ p.speaker }}】</span>
+
+            <!-- 內嵌精校口語逐字稿抽屜開關 -->
+            <button
+              v-if="p.verbatimSentences && p.verbatimSentences.length > 0"
+              type="button"
+              class="paragraph-verbatim-badge"
+              :class="{ open: Boolean(expandedVerbatimParagraphs[p.id]) }"
+              :data-testid="`verbatim-toggle-${p.id}`"
+              :title="expandedVerbatimParagraphs[p.id] ? '收合本段精校課堂原話' : '展開對照本段精校課堂原話（保留問答與口語脈絡）'"
+              @click.stop="toggleVerbatimParagraph(p.id)"
+            >
+              💬 對照課堂原話 ({{ p.verbatimSentences.length }}句) {{ expandedVerbatimParagraphs[p.id] ? '▴' : '▾' }}
+            </button>
 
             <span
               v-for="s in p.sentences"
@@ -438,6 +548,76 @@
                 📌 筆記
               </span>
             </span>
+
+            <!-- 內嵌可展開「精校課堂原話」對照抽屜 -->
+            <div
+              v-if="p.verbatimSentences && p.verbatimSentences.length > 0 && expandedVerbatimParagraphs[p.id]"
+              class="verbatim-drawer"
+              :data-testid="`verbatim-drawer-${p.id}`"
+            >
+              <div class="verbatim-drawer-header">
+                <span class="verbatim-drawer-title">💬 課堂原話對照（{{ currentVerbatimLabel || '逐字忠實原話・僅校錯別字與語氣詞' }}・點擊單句聽原音、連擊兩下可校對）</span>
+                <button
+                  type="button"
+                  class="verbatim-drawer-close"
+                  @click.stop="toggleVerbatimParagraph(p.id)"
+                >
+                  收合 ▴
+                </button>
+              </div>
+              <div class="verbatim-sentence-list">
+                <div
+                  v-for="vs in p.verbatimSentences"
+                  :id="vs.id"
+                  :key="vs.id"
+                  class="verbatim-sentence-item sentence"
+                  :class="{
+                    active: Boolean(
+                      (vs.id && playerStore.activeSentenceId === vs.id) ||
+                      (playerStore.currentTime > 0 && playerStore.currentTime >= vs.start_time && playerStore.currentTime < vs.end_time)
+                    ),
+                    'search-matched': Boolean(vs.id && searchMatches.length > 0 && searchMatches.some(m => m.sentenceId === vs.id)),
+                    'search-focused': Boolean(vs.id && searchMatches[currentMatchIndex]?.sentenceId && searchMatches[currentMatchIndex]?.sentenceId === vs.id),
+                    'has-correction': Boolean(annotationStore.corrections[vs.id]),
+                    'has-note': Boolean(annotationStore.notes[vs.id])
+                  }"
+                  :title="getSentenceTitle(vs)"
+                  @click.stop="handleSentenceClick(vs)"
+                  @touchstart="handleSentenceTouchStart($event, vs)"
+                  @touchend="handleSentenceTouchEnd"
+                  @touchcancel="handleSentenceTouchEnd"
+                >
+                  <span class="verbatim-ts">[{{ formatTime(vs.start_time) }}]</span>
+                  <span
+                    v-if="vs.speaker"
+                    class="verbatim-speaker-badge"
+                    :class="vs.speaker.includes('學員') ? 'speaker-student' : 'speaker-geshe'"
+                  >【{{ vs.speaker }}】</span>
+                  <span class="verbatim-text">
+                    <template v-for="(segment, segmentIndex) in sentenceSegments(vs)" :key="`${vs.id}-vseg-${segmentIndex}`">
+                      <span
+                        :class="{ 'verse-quote': segment.isVerse, 'treatise-quote': segment.isTreatiseQuote }"
+                      >{{ segment.text }}</span>
+                    </template>
+                  </span>
+                  <span
+                    v-if="vs.reviewNeeded || vs.uncertainty || (vs.text && (vs.text.includes('【存疑】') || vs.text.includes('【待定】')))"
+                    class="sentence-review-badge verbatim-review-badge"
+                    :title="vs.uncertainty || '此句存疑，點擊核對原音與編輯'"
+                    @click.stop="openSentenceEditor(vs)"
+                  >🔍 待核定</span>
+                  <span
+                    v-if="annotationStore.notes[vs.id]"
+                    class="sentence-note-badge"
+                    :title="annotationStore.notes[vs.id]"
+                    @click.stop="openSentenceEditor(vs)"
+                  >
+                    📌 筆記
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <section v-if="p.teacherSummary" class="teacher-summary" :data-linked-to-audio="p.teacherSummary.linkedToAudio">
               <h4 class="teacher-summary-heading">{{ p.teacherSummary.heading || '法師開示摘要' }}</h4>
               <ul class="teacher-summary-list">
@@ -447,6 +627,7 @@
           </div>
 
           <!-- 講末自動導引推薦卡片 -->
+          <p v-if="!navInfo.hasNext"><a :href="correctionDatesUrl">下一頁：各講最後校訂日期總表 →</a></p>
           <EndOfSessionCard
             v-if="navInfo.hasNext && hasMediaEnded"
             :key="currentSessionId"
@@ -525,6 +706,24 @@
           >
             {{ isMediaPlaying ? '⏸️' : '▶️' }}
           </button>
+          <button
+            id="media-rewind-10-btn"
+            class="custom-seek-step-btn"
+            title="快退 10 秒 (J)"
+            type="button"
+            @click="seekRelative(-10)"
+          >
+            ↺10s
+          </button>
+          <button
+            id="media-forward-10-btn"
+            class="custom-seek-step-btn"
+            title="快進 10 秒 (L)"
+            type="button"
+            @click="seekRelative(10)"
+          >
+            ↻10s
+          </button>
           <span class="custom-time-readout">
             {{ formatTime(playerStore.currentTime) }} / {{ formatTime(mediaDuration) }}
           </span>
@@ -545,6 +744,7 @@
           class="native-audio"
           v-show="activeMediaType === 'audio/mp3'"
           controls
+          preload="metadata"
           :playbackrate="playerStore.playbackRate"
           @timeupdate="onNativeTimeUpdate"
           @ended="hasMediaEnded = true"
@@ -606,6 +806,7 @@
       :sessions="overviewSessions"
       :current-session-id="currentSessionId"
       :course-title="currentCourseTitle"
+      :course-master="currentCourseMaster"
       @select="selectSession"
       @close="isOverviewModalOpen = false"
     />
@@ -621,9 +822,17 @@
       @close="touchMenu.visible = false"
     />
 
+    <!-- 研讀講記側邊抽屜 (Study Guide Drawer) -->
+    <StudyGuideDrawer
+      :is-open="isStudyGuideOpen"
+      :study-guide-url="currentStudyGuideUrl"
+      :session-title="currentSessionInfo?.title"
+      @close="isStudyGuideOpen = false"
+    />
+
     <!-- Mobile Bottom Sheet TOC Drawer (對齊 V1) -->
     <TOCBottomSheet
-      :toc-nodes="courseStore.tocTree || []"
+      :toc-nodes="currentTocTree"
       :active-session-id="currentSessionId"
       :is-open="uiStore.isTOCSheetOpen"
       @close="uiStore.closeAllDrawers"
@@ -650,7 +859,10 @@
 </template>
 
 <script setup lang="ts">
+import { projectApprovedRebuild } from './utils/approvedRebuildReader.js';
+import { applyTimingOverlay } from './utils/audioCalibrationOverlay.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import StudyScaffoldingPanel from './components/StudyScaffoldingPanel.vue';
 import { usePlayerStore } from './stores/player';
 import { useCourseStore } from './stores/course';
 import { useUIStore } from './stores/ui';
@@ -661,9 +873,11 @@ import ReviewRatingModal from './components/ReviewRatingModal.vue';
 import CourseOverviewModal from './components/CourseOverviewModal.vue';
 import TOCAccordion from './components/TOCAccordion.vue';
 import TOCBottomSheet from './components/TOCBottomSheet.vue';
+import {sessionTocProjection,projectionChain,type SessionAnchor} from './composables/sessionTocProjection';
 import EndOfSessionCard from './components/EndOfSessionCard.vue';
 import TouchContextMenu from './components/TouchContextMenu.vue';
 import TranscriptOverview from './components/TranscriptOverview.vue';
+import StudyGuideDrawer from './components/StudyGuideDrawer.vue';
 import { searchSentences, navigateMatch, type SearchMatch } from './composables/useSearchEngine';
 import { getPrevNextSessions, naturalSortSessions } from './composables/useSessionNavigation';
 import { formatMarkdownNotes, downloadMarkdownFile } from './composables/useExportNotes';
@@ -747,6 +961,8 @@ const currentCourseTitle = computed(() => {
   return c ? c.title : '大乘經典研讀';
 });
 
+const correctionDatesUrl = computed(() => `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/correction-dates.html`);
+
 const currentCourseMaster = computed(() => {
   const c = courseStore.catalog.find((item) => item.id === courseStore.currentCourseId);
   return c ? c.master : '';
@@ -777,6 +993,52 @@ const currentAgentUncertainCount = ref(0);
 const currentSessionInfo = computed(() => {
   return courseStore.sessions.find(s => s.id === currentSessionId.value);
 });
+const currentRebuildUrl = computed(() => {
+  const page = currentSessionInfo.value?.sourceRebuildPage;
+  return page === `lecture_${currentSessionId.value}_verbatim_rebuild.html`
+    ? `${import.meta.env.BASE_URL || '/'}${courseStore.currentCoursePath}/publications/${page}` : '';
+});
+
+const isStudyGuideOpen = ref(false);
+function resolveStudyGuideCode(courseId: string, sid: string, displayId?: string): string {
+  if (courseId !== 'shi-liang-lun-study-group-2025') return sid;
+  const raw = (displayId || sid).trim();
+  if (raw.endsWith('上')) return `${raw.slice(0, -1).padStart(2, '0')}A`;
+  if (raw.endsWith('下')) return `${raw.slice(0, -1).padStart(2, '0')}B`;
+  if (/^\d+$/.test(raw)) return raw.padStart(3, '0');
+  return raw;
+}
+const currentStudyGuideUrl = computed(() => {
+  const sid = currentSessionId.value;
+  if (!sid) return '';
+  const cPath = courseStore.currentCoursePath;
+  if (!cPath) return '';
+  const base = import.meta.env.BASE_URL || '/';
+  const explicitPage = currentSessionInfo.value?.studyGuidePage;
+  if (explicitPage) {
+    return `${base}${cPath}/${explicitPage}`;
+  }
+  const code = resolveStudyGuideCode(
+    courseStore.currentCourseId,
+    sid,
+    currentSessionInfo.value?.displaySessionId,
+  );
+  return `${base}${cPath}/publications/lecture_${code}_study_guide.html`;
+});
+
+function toggleStudyGuideDrawer() {
+  isStudyGuideOpen.value = !isStudyGuideOpen.value;
+}
+
+const currentStudyScaffolding = ref<any>(null);
+const scaffoldingReadingMode = ref<'full' | 'essence'>('full');
+const currentDialogueTranscriptUrl = computed(() => {
+  const rel = currentSessionInfo.value?.dialogueTranscriptUrl;
+  const cPath = courseStore.currentCoursePath;
+  if (!rel || !cPath) return '';
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}${cPath}/${rel}`;
+});
 
 const activeMediaType = computed(() =>
   currentSessionInfo.value?.mediaType || courseStore.currentMediaType
@@ -802,8 +1064,9 @@ const currentTranscriptStatus = computed(() =>
 const currentTranscriptLabel = computed(() => {
   const labels: Record<string, string> = {
     approved: '✅ 已校勘核定',
+    published: '✅ 已發布',
     'review-ready': '🟡 待審閱',
-    candidate: '🟡 候選稿',
+    candidate: '🟡 候選稿，待內容核定',
     'candidate-review-required': '🟡 待審閱候選稿',
     'not-transcribed': '🎬 影片已上架・逐字稿待製作',
     unmarked: '⚪ 尚未標示校勘狀態',
@@ -829,21 +1092,23 @@ const overviewSessions = computed(() => {
 });
 
 const activeTOCChain = computed(() => {
+  if (currentTocProjection.value) return projectionChain(currentTocProjection.value,playerStore.currentTime);
   return courseStore.computeActiveTOCChain(playerStore.currentTime, currentSessionId.value);
 });
 
 const currentAudioUrl = ref('');
+const currentReaderNotice = ref('');
+const currentTocProjection = ref<SessionAnchor[]|null>(null);
+const currentTocTree = computed(()=>currentTocProjection.value || courseStore.tocTree || []);
+const currentVerbatimLabel = ref('');
+const currentQualityReviewUrl = ref('');
 const currentYoutubeVideoId = ref('');
 const youtubeAutoplayStart = ref<number | null>(null);
 const youtubePendingStart = ref<number | null>(null);
 const originUrl = computed(() => (typeof window !== 'undefined' ? window.location.origin : ''));
 const youtubeIframeSrc = computed(() => {
   const params = new URLSearchParams({ enablejsapi: '1', origin: originUrl.value });
-  let start = youtubeAutoplayStart.value;
-  if (start === null && playerStore.activeSentenceId) {
-    const active = playerStore.sentences.find((sentence) => sentence.id === playerStore.activeSentenceId);
-    start = active ? Math.max(0, Math.floor(active.start_time ?? active.start ?? 0)) : null;
-  }
+  const start = youtubeAutoplayStart.value;
   if (start !== null) {
     params.set('autoplay', '1');
     params.set('start', String(start));
@@ -852,15 +1117,50 @@ const youtubeIframeSrc = computed(() => {
   return `https://www.youtube.com/embed/${currentYoutubeVideoId.value}?${params.toString()}`;
 });
 const currentLastUpdated = ref('');
+const currentReaderRebuiltAt = ref('');
 const paragraphs = ref<any[]>([]);
+const expandedVerbatimParagraphs = ref<Record<string, boolean>>({});
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
 const mediaDuration = ref(0);
+// 課程沒有任何講次／逐字稿時為 true；此時閱讀區顯示空狀態而非載入不存在的講次。
+const hasEmptyTranscript = ref(false);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
 let ytPlayerInitInterval: any = null;
+let ytPlayerSetupTimeout: ReturnType<typeof setTimeout> | null = null;
+let isReaderDisposed = false;
 let isInitialMounted = false;
+
+const hasAnyVerbatim = computed(() =>
+  paragraphs.value.some((p) => Array.isArray(p.verbatimSentences) && p.verbatimSentences.length > 0),
+);
+
+const isAllVerbatimExpanded = computed(() => {
+  const withVerbatim = paragraphs.value.filter(
+    (p) => Array.isArray(p.verbatimSentences) && p.verbatimSentences.length > 0,
+  );
+  return withVerbatim.length > 0 && withVerbatim.every((p) => Boolean(expandedVerbatimParagraphs.value[p.id]));
+});
+
+function toggleVerbatimParagraph(paraId: string) {
+  expandedVerbatimParagraphs.value = {
+    ...expandedVerbatimParagraphs.value,
+    [paraId]: !expandedVerbatimParagraphs.value[paraId],
+  };
+}
+
+function toggleAllVerbatim() {
+  const nextState = !isAllVerbatimExpanded.value;
+  const nextMap: Record<string, boolean> = {};
+  for (const p of paragraphs.value) {
+    if (Array.isArray(p.verbatimSentences) && p.verbatimSentences.length > 0) {
+      nextMap[p.id] = nextState;
+    }
+  }
+  expandedVerbatimParagraphs.value = nextMap;
+}
 
 const totalSessionDuration = computed(() => {
   const all = paragraphs.value.flatMap(p => p.sentences);
@@ -877,9 +1177,12 @@ watch(() => playerStore.activeSentenceId, (newId) => {
   }
 });
 
-// 監聽全文搜尋
+// 監聽全文搜尋（同時穿透搜尋精煉講記與內嵌精校口語逐字稿）
 watch(searchQuery, (newQ) => {
-  const allSentences = paragraphs.value.flatMap(p => p.sentences);
+  const allSentences = paragraphs.value.flatMap((p) => [
+    ...(p.sentences || []),
+    ...(p.verbatimSentences || []),
+  ]);
   searchMatches.value = searchSentences(allSentences, newQ);
   currentMatchIndex.value = 0;
   if (searchMatches.value.length > 0) {
@@ -891,10 +1194,23 @@ function jumpToMatch(index: number) {
   if (index < 0 || index >= searchMatches.value.length) return;
   currentMatchIndex.value = index;
   const match = searchMatches.value[index];
-  const el = document.getElementById(match.sentenceId);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // 若命中的句子位於某一段的精校口語逐字稿抽屜內，自動展開該段抽屜再滾動定位
+  const parentPara = paragraphs.value.find((p) =>
+    Array.isArray(p.verbatimSentences) &&
+    p.verbatimSentences.some((vs: any) => vs.id === match.sentenceId),
+  );
+  if (parentPara && !expandedVerbatimParagraphs.value[parentPara.id]) {
+    expandedVerbatimParagraphs.value = {
+      ...expandedVerbatimParagraphs.value,
+      [parentPara.id]: true,
+    };
   }
+  setTimeout(() => {
+    const el = document.getElementById(match.sentenceId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 20);
 }
 
 function handleNextMatch() {
@@ -963,7 +1279,9 @@ function handleDownloadTranscript() {
       sessionTitle,
       pageRange: currentSessionInfo.value?.page || '',
       lastUpdated: currentLastUpdated.value,
+      readerRebuiltAt: currentReaderRebuiltAt.value,
       transcriptStatus: currentTranscriptStatus.value,
+      readerNotice: currentReaderNotice.value,
     },
     paragraphs.value,
     currentTranscriptOverview.value,
@@ -990,12 +1308,24 @@ function toggleMediaPlay() {
   }
 }
 
+function isSameAudioSrc(audioEl: HTMLAudioElement, url: string): boolean {
+  if (!url) return false;
+  const attr = audioEl.getAttribute('src');
+  if (attr === url) return true;
+  if (!audioEl.src) return false;
+  try {
+    return decodeURIComponent(audioEl.src) === decodeURIComponent(url);
+  } catch {
+    return audioEl.src.toLowerCase().includes(url.toLowerCase());
+  }
+}
+
 function playMedia() {
   if (activeMediaType.value === 'audio/mp3') {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+      if (!isSameAudioSrc(audioEl, currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
@@ -1077,6 +1407,25 @@ function seekToSentence(sentenceId: string) {
   }
 }
 
+function seekParagraph(paragraph: any) {
+  const firstSentence = paragraph.sentences?.[0];
+  const targetTime = typeof paragraph.start === 'number'
+    ? paragraph.start
+    : (firstSentence?.start_time ?? firstSentence?.start ?? 0);
+  if (firstSentence?.id) {
+    playerStore.activeSentenceId = firstSentence.id;
+    document.getElementById(firstSentence.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  seekToTime(targetTime);
+}
+
+function seekRelative(deltaSeconds: number) {
+  const current = playerStore.currentTime || 0;
+  const target = Math.max(0, current + deltaSeconds);
+  seekToTime(target);
+  uiStore.showToast(`${deltaSeconds > 0 ? '快進' : '倒退'} ${Math.abs(deltaSeconds)} 秒`, 'info', 1200);
+}
+
 // 音訊與影音跳轉 (同時支援 HTML5 Audio 與 YouTube Iframe API)
 function seekToTime(time: number) {
   hasMediaEnded.value = false;
@@ -1091,7 +1440,7 @@ function seekToTime(time: number) {
     const audioEl = document.getElementById('audio-element') as HTMLAudioElement;
     if (audioEl && currentAudioUrl.value) {
       isAudioLoading.value = true;
-      if (!audioEl.src || !audioEl.src.includes(currentAudioUrl.value)) {
+      if (!isSameAudioSrc(audioEl, currentAudioUrl.value)) {
         audioEl.src = currentAudioUrl.value;
         audioEl.load();
       }
@@ -1150,9 +1499,19 @@ function seekToTime(time: number) {
   isMediaPlaying.value = true;
 }
 
+// Delayed setup belongs to this reader; it must not restart polling after unmount.
+function scheduleYouTubePlayerSetup() {
+  if (isReaderDisposed) return;
+  if (ytPlayerSetupTimeout !== null) clearTimeout(ytPlayerSetupTimeout);
+  ytPlayerSetupTimeout = setTimeout(() => {
+    ytPlayerSetupTimeout = null;
+    setupYouTubePlayer();
+  }, 100);
+}
+
 // YouTube Iframe API 初始化與時間追蹤
 function setupYouTubePlayer() {
-  if (typeof window === 'undefined') return;
+  if (isReaderDisposed || typeof window === 'undefined' || typeof document === 'undefined') return;
 
   // 1. 動態引入 YouTube IFrame API Script (若尚未引入)
   if (!(window as any).YT && !document.querySelector('script[data-youtube-iframe-api]')) {
@@ -1314,11 +1673,11 @@ function onYouTubeMessage(event: MessageEvent) {
 function handleTOCSeek(targetSession: string, timestamp: number) {
   if (targetSession && targetSession !== currentSessionId.value) {
     loadSession(targetSession).then(() => {
-      if (timestamp > 0) {
+      if (typeof timestamp === 'number' && timestamp >= 0) {
         setTimeout(() => seekToTime(timestamp), 200);
       }
     });
-  } else if (timestamp > 0) {
+  } else if (typeof timestamp === 'number' && timestamp >= 0) {
     seekToTime(timestamp);
   }
 }
@@ -1391,11 +1750,18 @@ function setupKeyboardShortcuts() {
       onTogglePlay: () => {
         toggleMediaPlay();
       },
+      onSeekBackward: (sec = 10) => {
+        seekRelative(-sec);
+      },
+      onSeekForward: (sec = 10) => {
+        seekRelative(sec);
+      },
       onToggleSidebar: () => toggleSidebar(),
       onCloseModal: () => {
         isSyncModalOpen.value = false;
         isReviewModalOpen.value = false;
         isOverviewModalOpen.value = false;
+        isStudyGuideOpen.value = false;
         touchMenu.value.visible = false;
         annotationStore.closeEditor();
         uiStore.closeAllDrawers();
@@ -1404,11 +1770,20 @@ function setupKeyboardShortcuts() {
         searchInputRef.value?.focus();
         searchInputRef.value?.select();
       },
+      onToggleStudyGuide: () => {
+        toggleStudyGuideDrawer();
+      },
     });
   });
 }
 
-function onUserScroll() {
+function isEventInsideSidebar(e?: Event): boolean {
+  const target = e?.target as HTMLElement | null;
+  return Boolean(target && typeof target.closest === 'function' && target.closest('.sidebar'));
+}
+
+function onUserScroll(e?: Event) {
+  if (isEventInsideSidebar(e)) return;
   if (isAutoScrollFrozen()) return;
   playerStore.handleUserScroll(4000);
 }
@@ -1433,6 +1808,7 @@ onMounted(async () => {
   }
 
   await loadRealCourseData();
+  if (isReaderDisposed) return;
 
   // 監聽 URL Hash 變更
   window.addEventListener('hashchange', () => {
@@ -1443,13 +1819,26 @@ onMounted(async () => {
   });
 
   const initialHash = window.location.hash.replace('#session-', '').replace('#', '');
-  const defaultFirst = courseStore.sessions[0]?.id || (courseStore.currentCourseId === 'shi-liang-lun-er' ? '01' : '02A');
+  // 僅以 course.json 的 sessions 為準；絕不臆造寫死的講次編號（例如舊版的 '02A'），
+  // 否則會載入不存在的講次而產生「幽靈講次」。
+  const defaultFirst = courseStore.sessions[0]?.id || '';
   const targetId = initialHash || defaultFirst;
+  if (!targetId) {
+    // 本課程尚無逐字稿：不呼叫 loadSession，直接顯示空狀態。
+    showEmptyTranscriptState();
+    if (!isReaderDisposed) isInitialMounted = true;
+    return;
+  }
   await loadSession(targetId);
-  isInitialMounted = true;
+  if (!isReaderDisposed) isInitialMounted = true;
 });
 
 onUnmounted(() => {
+  isReaderDisposed = true;
+  if (ytPlayerSetupTimeout !== null) {
+    clearTimeout(ytPlayerSetupTimeout);
+    ytPlayerSetupTimeout = null;
+  }
   window.removeEventListener('scroll', onUserScroll);
   window.removeEventListener('wheel', onUserScroll);
   window.removeEventListener('touchmove', onUserScroll);
@@ -1462,11 +1851,28 @@ onUnmounted(() => {
   isInitialMounted = false;
 });
 
+// 課程沒有任何講次／逐字稿時的閱讀區空狀態。
+// 不寫入 URL hash，避免產生指向不存在講次的 #session-XX。
+function showEmptyTranscriptState() {
+  if (isReaderDisposed) return;
+  hasEmptyTranscript.value = true;
+  isLoading.value = false;
+  currentSessionId.value = '';
+  paragraphs.value = [];
+  playerStore.setSentences([]);
+  currentAudioUrl.value = '';
+  currentYoutubeVideoId.value = '';
+  currentLastUpdated.value = '';
+  currentReaderNotice.value = '';
+  currentTranscriptOverview.value = null;
+  sourceOutline.value = null;
+}
+
 async function loadRealCourseData() {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cPath = courseStore.currentCoursePath;
   try {
-    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`);
+    const resCourse = await fetch(`${baseUrl}${cPath}/course.json`, { cache: 'no-store' });
     if (resCourse.ok) {
       const data = await resCourse.json();
       currentPublicationState.value = data.transcriptPublicationState || '';
@@ -1491,6 +1897,11 @@ async function loadRealCourseData() {
         youtubeVideoId: s.youtubeVideoId,
         youtubeUrl: s.youtubeUrl,
         pendingTranscript: Boolean(s.pendingTranscript),
+        sourceRebuildPage: s.sourceRebuildPage,
+        sourceRebuildStatus: s.sourceRebuildStatus,
+        sourceRebuildInReader: s.sourceRebuildInReader,
+        audioCalibrationOverlay: s.audioCalibrationOverlay,
+        audioCalibrationOverlayDigest: s.audioCalibrationOverlayDigest,
       }));
       courseStore.setSessions(sessions);
     }
@@ -1515,11 +1926,23 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
     window.history.replaceState({}, '', url.toString());
   }
   await loadRealCourseData();
-  const firstSession = courseStore.sessions[0]?.id || (newCourseId === 'shi-liang-lun-er' ? '01' : '02A');
+  const firstSession = courseStore.sessions[0]?.id || '';
+  if (!firstSession) {
+    // 本課程尚無逐字稿：不呼叫 loadSession，直接顯示空狀態。
+    showEmptyTranscriptState();
+    return;
+  }
   await loadSession(firstSession);
 });
 
 async function loadSession(sessionId: string) {
+  if (isReaderDisposed) return;
+  hasEmptyTranscript.value = false;
+  currentTocProjection.value = null;
+  currentReaderNotice.value = '';
+  currentReaderRebuiltAt.value = '';
+  currentVerbatimLabel.value = '';
+  currentQualityReviewUrl.value = '';
   hasMediaEnded.value = false;
   stopYTTracker();
   youtubePendingStart.value = null;
@@ -1550,7 +1973,7 @@ async function loadSession(sessionId: string) {
     annotationStore.loadSessionAnnotations(sessionId);
     isLoading.value = false;
     if (pendingSession.mediaType === 'video/youtube') {
-      setTimeout(() => setupYouTubePlayer(), 100);
+      scheduleYouTubePlayerSetup();
     }
     return;
   }
@@ -1562,7 +1985,32 @@ async function loadSession(sessionId: string) {
     const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    const data = await res.json();
+    const useRebuild = currentSessionInfo.value?.sourceRebuildInReader && currentRebuildUrl.value;
+    const sourceText = useRebuild ? await res.text() : null;
+    let data = sourceText !== null ? JSON.parse(sourceText) : await res.json();
+    let rebuildFailed = false;
+    if (useRebuild) {
+      try {
+        const rebuildResponse = await fetch(currentRebuildUrl.value.replace(/\.html$/, '.json'), { cache: 'no-store' });
+        if (!rebuildResponse.ok) throw new Error(`HTTP ${rebuildResponse.status}`);
+        const publicationText = await rebuildResponse.text();
+        data = await projectApprovedRebuild(sourceText, JSON.parse(publicationText));
+        if (currentSessionInfo.value?.audioCalibrationOverlay) {
+          try {
+            const timingResponse = await fetch(`${baseUrl}${cPath}/${currentSessionInfo.value.audioCalibrationOverlay}`, { cache: 'no-store' });
+            if (!timingResponse.ok) throw new Error(`HTTP ${timingResponse.status}`);
+            data = await applyTimingOverlay(data, sourceText, publicationText, await timingResponse.text(), currentSessionInfo.value.audioCalibrationOverlayDigest);
+          } catch (timingError) {
+            data.qualityReview.readerNotice += ' 時間校準載入或版本驗證失敗，已保留原時間。';
+            console.warn('時間校準驗證失敗:', timingError);
+          }
+        }
+      } catch (error) {
+        rebuildFailed = true;
+        console.warn('重整版驗證失敗，保留原稿:', error);
+      }
+    }
+    currentReaderRebuiltAt.value = data.readerRebuiltAt || '';
     sourceOutline.value = null;
     if (data.sourceOutlineId) {
       try {
@@ -1594,22 +2042,55 @@ async function loadSession(sessionId: string) {
       : 0;
     currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
+    currentStudyScaffolding.value = data.studyScaffolding || null;
     currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
+    currentTocProjection.value = sessionTocProjection(data.qualityReview,sessionId);
+    currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
+      ? data.qualityReview.readerNotice.trim() : '';
+    if (rebuildFailed) currentReaderNotice.value = '重整版暫時無法載入或來源版本不符，目前顯示原稿。請重新整理，或開啟下方重整版對照。';
+    currentVerbatimLabel.value = typeof data.qualityReview?.verbatimLabel === 'string'
+      ? data.qualityReview.verbatimLabel.trim() : '';
+    const reviewPage = data.qualityReview?.reviewPage;
+    currentQualityReviewUrl.value = typeof reviewPage === 'string'
+      && /^lecture_[0-9]+[AB]?_quality_review\.html$/.test(reviewPage)
+      ? `${baseUrl}${cPath}/publications/${reviewPage}` : '';
 
     let sentCounter = 0;
+    let verbatimCounter = 0;
+    expandedVerbatimParagraphs.value = {};
+    const usedAnchorKeys = new Set<string>();
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
       const firstStart = p.sentences?.[0]?.start ?? p.sentences?.[0]?.start_time ?? 0;
-      const anchorNode = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const rawAnchor = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const qObj = questionFor(p.questionId || null);
+      let anchorNode: any = null;
+      if (rawAnchor) {
+        const key = `${rawAnchor.title}@${rawAnchor.timestamp}`;
+        if (
+          !usedAnchorKeys.has(key) &&
+          rawAnchor.title !== p.heading &&
+          rawAnchor.title !== qObj?.displayQuestion &&
+          rawAnchor.title !== qObj?.question
+        ) {
+          usedAnchorKeys.add(key);
+          anchorNode = rawAnchor;
+        }
+      }
+      const paraId = p.id || `para-${sentCounter}`;
       return {
-        id: p.id || `para-${sentCounter}`,
+        id: paraId,
+        speaker: p.speaker || null,
         questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
+        downloadTrack: p.downloadTrack === 'reading' ? 'reading' : undefined,
         tocAnchorNode: anchorNode,
+        start: typeof p.start === 'number' ? p.start : firstStart,
         sentences: (p.sentences || []).map((s: any) => ({
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
           end_time: s.end ?? s.end_time ?? 0,
+          speaker: s.speaker || p.speaker || null,
           text: s.text || '',
           treatiseQuote: s.treatiseQuote ?? false,
           verseAnnotations: verseAnnotations.value[s.id] || [],
@@ -1618,9 +2099,26 @@ async function loadSession(sessionId: string) {
           agentReviewStatus: s.agentReviewStatus ?? null,
           agentReviewConfidence: s.agentReviewConfidence ?? null,
         })),
+        verbatimSentences: Array.isArray(p.verbatimSentences)
+          ? p.verbatimSentences.map((vs: any) => ({
+              id: vs.id || `v-${paraId}-${++verbatimCounter}`,
+              start_time: vs.start ?? vs.start_time ?? 0,
+              end_time: vs.end ?? vs.end_time ?? 0,
+              speaker: vs.speaker || null,
+              text: vs.text || '',
+              treatiseQuote: vs.treatiseQuote ?? false,
+              verseAnnotations: verseAnnotations.value[vs.id] || [],
+              reviewNeeded: vs.reviewNeeded ?? false,
+              uncertainty: vs.uncertainty ?? null,
+              playbackBlockedReason: vs.playbackBlockedReason ?? null,
+              agentReviewStatus: vs.agentReviewStatus ?? null,
+              agentReviewConfidence: vs.agentReviewConfidence ?? null,
+            }))
+          : [],
       };
     });
 
+    if (isReaderDisposed) return;
     paragraphs.value = parsedParagraphs;
 
     const allSentences = parsedParagraphs.flatMap((p: any) => p.sentences);
@@ -1648,11 +2146,13 @@ async function loadSession(sessionId: string) {
     }
 
     if (activeMediaType.value === 'video/youtube') {
-      setTimeout(() => {
-        setupYouTubePlayer();
-      }, 100);
+      scheduleYouTubePlayerSetup();
     }
   } catch (err) {
+    currentReaderNotice.value = '';
+    currentReaderRebuiltAt.value = '';
+    currentVerbatimLabel.value = '';
+    currentQualityReviewUrl.value = '';
     console.error(`載入講次 ${sessionId} 逐字稿失敗:`, err);
   } finally {
     isLoading.value = false;
@@ -1670,17 +2170,14 @@ function sentenceSegments(sentence: any) {
   });
 }
 
-// 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart)
+// 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart：嚴格匹配 node.sessionId === sessionId)
 function findTOCNodeAtParagraphStart(paraStart: number, sessionId: string, tolerance = 2) {
-  if (!courseStore.tocTree || courseStore.tocTree.length === 0) return null;
+  if (currentTocTree.value.length === 0) return null;
   let match: any = null;
   function walk(nodes: any[]) {
     if (!Array.isArray(nodes)) return;
     for (const node of nodes) {
-      const nodeSessions = Array.isArray(node.sessionIds) && node.sessionIds.length > 0
-        ? node.sessionIds
-        : (node.sessionId ? [node.sessionId] : []);
-      const sessionMatch = node.sessionId === sessionId || nodeSessions.includes(sessionId);
+      const sessionMatch = node.sessionId === sessionId;
       const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
       if (sessionMatch && ts > 0 && Math.abs(ts - paraStart) <= tolerance) {
         match = { title: node.title, timestamp: ts, page: node.page, sessionId: node.sessionId };
@@ -1690,7 +2187,7 @@ function findTOCNodeAtParagraphStart(paraStart: number, sessionId: string, toler
       }
     }
   }
-  walk(courseStore.tocTree);
+  walk(currentTocTree.value);
   return match;
 }
 
@@ -1727,6 +2224,7 @@ function selectSession(id: string) {
 
 // 滾動防凍結機制 (對齊 V1 freezeAutoScroll: 點擊時凍結自動滾動，防止搶畫面與跳動)
 let lastClickTime = 0;
+let lastClickTarget = '';
 let singleClickTimer: any = null;
 let autoScrollFrozenUntil = 0;
 
@@ -1741,14 +2239,22 @@ function isAutoScrollFrozen(): boolean {
 // 單擊立即跳播 (保留瀏覽器 User Activation 用戶手勢，防止被 Autoplay 策略攔截) vs 雙擊編輯
 function handleSentenceClick(s: any) {
   const now = Date.now();
-  if (now - lastClickTime < 450 && lastClickTime > 0) {
-    // 450ms 內連續兩次點擊：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
+  const clickTarget = `${currentSessionId.value}:${s.id}`;
+  if (now - lastClickTime < 450 && lastClickTime > 0 && lastClickTarget === clickTarget) {
+    // 450ms 內連續點擊同講次同一句：確認為雙擊，進入編輯彈窗，並凍結滾動 1500ms
     lastClickTime = 0;
+    lastClickTarget = '';
     freezeAutoScroll(1500);
     openSentenceEditor(s);
     return;
   }
   lastClickTime = now;
+  lastClickTarget = clickTarget;
+
+  if (s.playbackBlockedReason) {
+    uiStore.showToast(s.playbackBlockedReason, 'warning', 6000);
+    return;
+  }
 
   // 單擊：立即同步跳播，保留使用者主動點擊手勢權杖，聲音即點即播
   freezeAutoScroll(600);
@@ -1758,7 +2264,7 @@ function handleSentenceClick(s: any) {
   const sentenceTime = Number(clickedSentence.start_time ?? clickedSentence.start ?? 0);
   // Keep sentence clicks playable even when the external YouTube API has not
   // initialized yet; this assignment is reactive and survives Vue re-renders.
-  if (currentYoutubeVideoId.value) {
+  if (currentYoutubeVideoId.value && (!(window as any).YT || !ytPlayer)) {
     youtubeAutoplayStart.value = Math.max(0, Math.floor(sentenceTime));
   }
   seekToTime(sentenceTime);
@@ -1771,9 +2277,17 @@ function handleSentenceClick(s: any) {
 function openSentenceEditor(s: any) {
   const allSentences = playerStore.sentences;
   const idx = allSentences.findIndex(x => x.id === s.id);
-  const prevSent = idx > 0 ? allSentences[idx - 1] : null;
-  const nextSent = idx >= 0 && idx < allSentences.length - 1 ? allSentences[idx + 1] : null;
-  annotationStore.openEditor(s, { prev: prevSent, next: nextSent });
+  if (idx >= 0) {
+    const prevSent = idx > 0 ? allSentences[idx - 1] : null;
+    const nextSent = idx < allSentences.length - 1 ? allSentences[idx + 1] : null;
+    annotationStore.openEditor(s, { prev: prevSent, next: nextSent });
+    return;
+  }
+  const allVerbatim = paragraphs.value.flatMap((p) => p.verbatimSentences || []);
+  const vIdx = allVerbatim.findIndex((x: any) => x.id === s.id);
+  const prevVerbatim = vIdx > 0 ? allVerbatim[vIdx - 1] : null;
+  const nextVerbatim = vIdx >= 0 && vIdx < allVerbatim.length - 1 ? allVerbatim[vIdx + 1] : null;
+  annotationStore.openEditor(s, { prev: prevVerbatim, next: nextVerbatim });
 }
 
 function onNativeTimeUpdate(e: any) {
@@ -1942,6 +2456,7 @@ if (typeof window !== 'undefined') {
 }
 
 .header-center {
+  min-width: 0;
   flex: 1;
   max-width: 440px;
 }
@@ -1962,6 +2477,8 @@ if (typeof window !== 'undefined') {
 }
 
 .search-box input {
+  min-width: 0;
+  width: 100%;
   flex: 1;
   border: none;
   background: transparent;
@@ -2060,6 +2577,7 @@ if (typeof window !== 'undefined') {
   display: flex;
   flex: 1;
   position: relative;
+  align-items: flex-start;
 }
 
 /* 側邊欄 */
@@ -2070,7 +2588,11 @@ if (typeof window !== 'undefined') {
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-smooth);
-  position: relative;
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height) - var(--player-height));
+  max-height: calc(100vh - var(--header-height) - var(--player-height));
+  overflow: hidden;
   flex-shrink: 0;
 }
 
@@ -2102,6 +2624,7 @@ if (typeof window !== 'undefined') {
   margin: 0;
   padding: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   flex: 1;
 }
 
@@ -2203,10 +2726,17 @@ if (typeof window !== 'undefined') {
   font-size: 0.85rem;
   color: var(--primary-color);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   margin-bottom: 16px;
   backdrop-filter: blur(4px);
+}
+
+.chain-crumb {
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .session-article-header {
@@ -2295,6 +2825,29 @@ if (typeof window !== 'undefined') {
   margin: 12px 0 0;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+.transcript-empty-state {
+  margin: 48px auto;
+  max-width: 620px;
+  padding: 40px 28px;
+  text-align: center;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.transcript-empty-title {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  color: var(--text-primary);
+}
+
+.transcript-empty-message {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 .audio-loading-status {
@@ -2425,6 +2978,18 @@ if (typeof window !== 'undefined') {
   font-size: 0.88rem;
 }
 
+.source-outline-details {
+  margin-top: 12px;
+}
+
+.source-outline-summary {
+  cursor: pointer;
+  color: #285344;
+  font-size: 0.88rem;
+  font-weight: 600;
+  user-select: none;
+}
+
 .toc-anchor-card {
   display: inline-flex;
   align-items: center;
@@ -2460,6 +3025,187 @@ if (typeof window !== 'undefined') {
   font-size: 0.72rem;
   font-weight: 600;
   font-family: monospace;
+}
+
+.paragraph-ts-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-color, #8b1e1e);
+  background: rgba(139, 30, 30, 0.08);
+  border: 1px solid rgba(139, 30, 30, 0.22);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-right: 6px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: 0.08em;
+  line-height: 1.25;
+  transition: all 0.15s ease;
+}
+
+.paragraph-ts-badge:hover {
+  background: var(--accent-color, #8b1e1e);
+  color: #fff;
+  border-color: var(--accent-color, #8b1e1e);
+  transform: translateY(-1px);
+}
+
+.session-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.verbatim-global-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e40af;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.verbatim-global-toggle-btn:hover,
+.verbatim-global-toggle-btn.active {
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.paragraph-verbatim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #3730a3;
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.22);
+  border-radius: 4px;
+  padding: 1px 7px;
+  margin-right: 6px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: 0.08em;
+  line-height: 1.25;
+  transition: all 0.15s ease;
+}
+
+.paragraph-verbatim-badge:hover,
+.paragraph-verbatim-badge.open {
+  background: #4338ca;
+  color: #ffffff;
+  border-color: #4338ca;
+}
+
+.verbatim-drawer {
+  margin: 10px 0 14px;
+  padding: 12px 16px;
+  background: rgba(248, 250, 252, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-left: 4px solid #4338ca;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.94em;
+  line-height: 1.7;
+}
+
+[data-theme='dark'] .verbatim-drawer,
+[data-theme='obsidian'] .verbatim-drawer {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: rgba(100, 116, 139, 0.4);
+  border-left-color: #818cf8;
+}
+
+.verbatim-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.35);
+}
+
+.verbatim-drawer-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #4338ca;
+}
+
+[data-theme='dark'] .verbatim-drawer-title,
+[data-theme='obsidian'] .verbatim-drawer-title {
+  color: #a5b4fc;
+}
+
+.verbatim-drawer-close {
+  background: none;
+  border: none;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.verbatim-drawer-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-main);
+}
+
+.verbatim-sentence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.verbatim-sentence-item {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.verbatim-sentence-item:hover {
+  background: rgba(79, 70, 229, 0.06);
+}
+
+.verbatim-ts {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-right: 6px;
+}
+
+.verbatim-speaker-badge {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin-right: 4px;
+}
+
+.verbatim-speaker-badge.speaker-geshe {
+  color: #9a3412;
+  background: rgba(154, 52, 18, 0.1);
+}
+
+.verbatim-speaker-badge.speaker-student {
+  color: #0369a1;
+  background: rgba(3, 105, 161, 0.1);
 }
 
 .sentence {
@@ -2511,8 +3257,9 @@ if (typeof window !== 'undefined') {
   border-bottom: 2px solid var(--highlight-border);
   color: var(--text-main);
   font-weight: 600;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(180, 83, 9, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.18);
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 
 .sentence.has-correction {
@@ -2714,6 +3461,29 @@ if (typeof window !== 'undefined') {
   transform: scale(1.08);
 }
 
+.custom-seek-step-btn {
+  background: var(--surface-bg, rgba(0, 0, 0, 0.04));
+  color: var(--text-main, #374151);
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 6px;
+  padding: 3px 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.custom-seek-step-btn:hover {
+  background: var(--primary-color, #1f2937);
+  color: #fff;
+  border-color: var(--primary-color, #1f2937);
+  transform: translateY(-1px);
+}
+
 .custom-time-readout {
   font-size: 0.85rem;
   font-family: monospace;
@@ -2791,6 +3561,8 @@ if (typeof window !== 'undefined') {
     top: var(--header-height);
     bottom: var(--player-height);
     left: 0;
+    height: auto;
+    max-height: none;
     z-index: 90;
     transform: translateX(-100%);
     width: 80% !important;

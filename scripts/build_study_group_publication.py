@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Build the public study-group course from reviewed evidence artifacts."""
 
+# PEP 604（`dict[str, str] | None` 型別聯集）需要 Python 3.10+；
+# 加上 future import 後註解化，3.9 與 3.12（CI）語意一致。
+from __future__ import annotations
+
 import json
 import argparse
 import re
@@ -14,18 +18,25 @@ COURSE_ID = "shi-liang-lun-study-group-2025"
 PUBLISHED_PLAYLIST_INDICES = tuple(range(1, 42))
 PENDING_VIDEO_SESSIONS = [
     {
-        "playlistIndex": 42,
-        "sessionId": "42",
-        "displaySessionId": "26下",
-        "title": "第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學",
-        "videoId": "lBOiFeGQblw",
-    },
-    {
         "playlistIndex": 43,
         "sessionId": "43",
         "displaySessionId": "27上",
         "title": "第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學",
         "videoId": "8sDCFUj5E_c",
+    },
+    {
+        "playlistIndex": 45,
+        "sessionId": "45",
+        "displaySessionId": "28上",
+        "title": "第28講 滅諦的後三種行相（上）｜2025《釋量論・第二品》大組共學",
+        "videoId": "NvsCBFbyRO0",
+    },
+    {
+        "playlistIndex": 46,
+        "sessionId": "46",
+        "displaySessionId": "28下",
+        "title": "第28講 滅諦的後三種行相（下）｜2025《釋量論・第二品》大組共學",
+        "videoId": "PYIbCsZmPHg",
     },
 ]
 UNAVAILABLE_PLAYLISTS = [
@@ -201,15 +212,15 @@ def build_session(index: int) -> tuple[dict, dict]:
         **dict.fromkeys((16, 17), "32-09"),
         **dict.fromkeys((18, 19), "32-10"),
         **dict.fromkeys((20, 21), "32-11"),
-        # Playlist 22/23 are lecture 12 and have a separately curated 32-28
-        # outline artifact; keep that source mapping explicit and traceable.
-        **dict.fromkeys((22, 23), "32-28"),
+        # Playlist 22/23 are lecture 12 (修持大悲的重要性, 32-12);
+        # Playlist 35/36 are lecture 23 (四諦與其修持要義, 32-23).
+        **dict.fromkeys((22, 23), "32-12"),
         **dict.fromkeys((24, 25), "32-13"),
         **dict.fromkeys((26, 27), "32-14"),
         **dict.fromkeys((28, 29), "32-15"),
         **dict.fromkeys((30, 31), "32-16"),
         **dict.fromkeys((32, 33), "32-17"),
-        **dict.fromkeys((35, 36), "32-20"),
+        **dict.fromkeys((35, 36), "32-23"),
         **dict.fromkeys((37, 38), "32-24"),
         **dict.fromkeys((39, 40), "32-25"),
         41: "32-26",
