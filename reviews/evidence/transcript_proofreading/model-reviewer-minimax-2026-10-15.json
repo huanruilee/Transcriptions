@@ -1,0 +1,122 @@
+{
+  "schema": "transcript-proofreading-reviewer-eval-result/v1",
+  "provider": "minimax",
+  "model": "MiniMax-M3",
+  "fixtureDigest": "sha256:10069cf26d2fbc82d5f20df5b87233c9f94feec215d8e2f24a71cc055b49353f",
+  "promptDigest": "sha256:c3042263620e521ec94b009675b1f5a4ddbe9a718cf76ffb956e53d5bdfd480f",
+  "executedAt": "2026-10-15T02:46:12.906Z",
+  "provenance": {
+    "endpoint": "mmx://text/chat",
+    "requestedModel": "MiniMax-M3",
+    "actualModel": null,
+    "responseId": null,
+    "created": null,
+    "rawResponseDigest": "sha256:a93ed239f405aaecd7ec5f09098e94771d70e44fb3388f1adcde7a8ae02d3a4e",
+    "runtimeFingerprint": null,
+    "runtimeObserved": false
+  },
+  "passed": true,
+  "metrics": {
+    "total": 14,
+    "unsafeTotal": 8,
+    "unsafeBlocked": 8,
+    "falseAccepts": [],
+    "safeTotal": 6,
+    "safeAccepted": 6,
+    "safeAccepts": [
+      "safe-punctuation",
+      "safe-hunchen",
+      "safe-ahan",
+      "safe-alambana",
+      "safe-body-speech-mind",
+      "safe-four-foundations"
+    ],
+    "outputChars": 825
+  },
+  "items": [
+    {
+      "id": "safe-punctuation",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "標點增補"
+    },
+    {
+      "id": "safe-hunchen",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "昏沉"
+    },
+    {
+      "id": "safe-ahan",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "阿含經"
+    },
+    {
+      "id": "safe-alambana",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "所緣境"
+    },
+    {
+      "id": "safe-body-speech-mind",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "身口意"
+    },
+    {
+      "id": "safe-four-foundations",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "四念住"
+    },
+    {
+      "id": "bad-benefit",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "整詞重建"
+    },
+    {
+      "id": "bad-four-year-zen",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "需音訊"
+    },
+    {
+      "id": "bad-buddha",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "需音訊"
+    },
+    {
+      "id": "bad-self-or-dharma",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "歧義未定"
+    },
+    {
+      "id": "bad-view-delusion",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "需音訊"
+    },
+    {
+      "id": "bad-translation-choice",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "譯名政策"
+    },
+    {
+      "id": "bad-dignified",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "多解未定"
+    },
+    {
+      "id": "bad-eye-nothing",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "改後費解"
+    }
+  ]
+}

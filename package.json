@@ -25,6 +25,7 @@
     "test:study-group-prototype": "node --test tests/unit/studyGroupPrototype.test.js",
     "test:study-group-content": "node --test tests/unit/studyGroupContentReview.test.js",
     "test:study-group-content-all": "node --test tests/unit/studyGroupContentReviewAll.test.js",
+    "test:content-approval": "node --test tests/unit/contentApprovalContract.test.js",
     "test:acceptance": "node --test tests/acceptance/*.test.js",
     "test:quality": "node --test tests/quality.test.js",
     "test:human-review": "node --test tests/required-set-not-truncated.test.js",
@@ -33,6 +34,23 @@
     "test:qa:json": "node scripts/qa_analyze.js --json",
     "test:asr-gate": "node --test tests/unit/asrIntegrityGate.test.js",
     "test:proofread": "node --test tests/unit/proofreadingQualityGates.test.js",
+    "test:proofread:pipeline": "node --test tests/unit/transcriptProofreadingPipeline.test.js",
+    "proofread:inventory": "node scripts/transcript_proofreading_quality.mjs --inventory",
+    "proofread:pilot": "node scripts/transcript_proofreading_quality.mjs --pilot",
+    "proofread:pilot:local": "node scripts/run_local_proofreading_pilot.mjs",
+    "proofread:evidence:audit": "node scripts/verify_transcript_proofreading_evidence.mjs",
+    "proofread:reviewer:eval": "node scripts/evaluate_proofreading_reviewer.mjs",
+    "proofread:reviewer:production": "node scripts/run_proofreading_production_review.mjs",
+    "proofread:audio:evidence": "node scripts/run_proofreading_audio_evidence.mjs",
+    "proofread:audio:full-context": "node scripts/run_proofreading_full_context_asr.mjs",
+    "proofread:audio:align-all": "node scripts/build_full_transcript_asr_alignment.mjs",
+    "proofread:reference:align": "python3 scripts/align_transcript_reference.py",
+    "proofread:reference:candidate": "node scripts/build_reference_proofreading_candidate.mjs",
+    "proofread:reference:risk-repair": "node scripts/run_reference_risk_repair.mjs",
+    "proofread:reference:final-candidate": "node scripts/build_session08_final_candidate.mjs",
+    "proofread:session08:promote": "node scripts/promote_session08_candidate.mjs",
+    "proofread:adjudicate": "node scripts/run_proofreading_adjudication.mjs",
+    "proofread:production:manifest": "node scripts/build_proofreading_production_manifest.mjs",
     "test:rating": "node --test tests/unit/reviewRating.test.js",
     "audit:oral": "python3 scripts/audit_oral_references.py",
     "audit:transcript": "node scripts/transcript_candidate_auditor.mjs",
@@ -42,11 +60,12 @@
     "learn:sync": "python3 scripts/active_learning_manager.py --sync-all",
     "learn:dry-run": "python3 scripts/active_learning_manager.py --sync-all --dry-run",
     "sync-server": "python3 scripts/sync_server.py",
-    "dev": "npx serve src -p 9090",
-    "start": "npx serve src -p 9090",
+    "dev": "npx serve dist -p 9090",
+    "start": "npx serve dist -p 9090",
     "test:sinianzhu:release": "REQUIRE_SINIANZHU_RELEASE=1 node --test tests/unit/siNianZhuReleaseGate.test.js",
     "audit:sinianzhu": "python3 scripts/audit_sinianzhu_release.py",
-    "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check"
+    "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check",
+    "test:reader-smoke": "playwright test --config playwright.reader.config.ts"
   },
   "repository": {
     "type": "git",
@@ -66,11 +85,13 @@
   },
   "homepage": "https://github.com/huanruilee/Transcriptions#readme",
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/test-utils": "^2.5.0",
     "@vueuse/core": "^14.4.0",
-    "happy-dom": "^20.14.0",
+    "happy-dom": "^21.0.4",
     "jsdom": "^30.0.1",
+    "opencc-js": "^1.4.2",
     "pinia": "^4.0.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
@@ -80,5 +101,8 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1"
   }
 }

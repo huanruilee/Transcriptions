@@ -1,5 +1,7 @@
 # 🔬 《入中論善顯密意疏》逐字稿可複現性指南 (Reproducibility Guide)
 
+> **歷史工具指南；執行前先讀 [最新版逐字稿流程](TRANSCRIPTION_WORKFLOW.md)。** 下文舊的 28 字斷句、服務型號／速度、固定總數與自動全庫修復敘述不可當成現行契約；以當次程式及 runtime 驗證為準，不直接對正式資料跑批次或 score:fix／learn:sync。
+
 > 本文件專為 **開發人員 (Humans)** 與 **AI Agents (Antigravity / 小法 / Hermes)** 撰寫，提供完整、確定性（Deterministic）的環境建置、GPU 推論服務配置、轉寫流水線執行、品質掃描與主動學習自進化之複現 SOP。
 
 ---
@@ -159,6 +161,19 @@ npm run dev
 # 只要 push 至 main 分支，GitHub Actions 將自動打包並在 30 秒內發布上線：
 # https://huanruilee.github.io/Transcriptions/
 ```
+
+> **服務根目錄（2026-11-13 修正）**：前端的 `courses/catalog.json`、`courses/<課程>/course.json` 與 `index.html` 都位於 **repo 根目錄**，而非 `src/` 之下。因此啟動靜態伺服器時必須以 **repo 根**為根目錄：
+>
+> ```bash
+> # ✅ 正確：以 repo 根為服務根
+> cd ~/Documents/huanruilee-github-repos/Transcriptions
+> python3 -m http.server 9090 --bind 0.0.0.0 --directory .
+>
+> # ❌ 錯誤：服務 src/ 會導致 courses/*.json 全部 404
+> # npx serve src -p 9090
+> ```
+>
+> 常駐部署使用 launchd LaunchAgent `~/Library/LaunchAgents/com.henry.transcriptions-web.plist`（服務名 `com.henry.transcriptions-web`，Tailscale 位址 `http://100.84.47.24:9090/index.html`）。
 
 ---
 *文檔維護者*：Antigravity Agent & Henry Lee  

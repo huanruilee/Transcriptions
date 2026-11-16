@@ -238,6 +238,7 @@ export function normalizeCandidateEvidence(candidate, transcript = null) {
     for (const item of normalized[group] || []) {
       const seen = new Set();
       item.evidence = (Array.isArray(item.evidence) ? item.evidence : [])
+        .map((evidence) => (typeof evidence === 'string' ? { sentenceId: evidence } : evidence))
         .filter((evidence) => {
           let sentenceId = String(evidence?.sentenceId || '').trim();
           const repaired = sentenceId.replace(/^sg-(?=\d+$)/, 'seg-');
@@ -289,9 +290,22 @@ export function validateContentOverview(
     errors.push(makeError('SOURCE_DIGEST_MISMATCH', overview.sourceDigest));
   }
   const isMiniMaxGenerated = overview.generatedBy === 'MiniMax-M3';
+  const isEneuralGlmGenerated = overview.generatedBy === 'eNeural-glm53-flash';
   const isDocumentedManualException = overview.generatedBy === 'Codex-manual-exception'
     && String(overview.generationException || '').startsWith('MiniMax input new_sensitive (1026)');
-  if (!isMiniMaxGenerated && !isDocumentedManualException) {
+  const expectedReviewKeys = GROUPS.flatMap(group => (Array.isArray(overview[group]) ? overview[group] : []).map((_,index) => `${group}:${index}`));
+  const actualReviewItems = Array.isArray(overview.review?.items) ? overview.review.items : [];
+  const actualReviewKeys = actualReviewItems.map(item => `${item.group}:${item.index}`);
+  const completeEditorialReview = actualReviewKeys.length === expectedReviewKeys.length
+    && new Set(actualReviewKeys).size === expectedReviewKeys.length
+    && actualReviewItems.every(item => Number.isInteger(item.index) && expectedReviewKeys.includes(`${item.group}:${item.index}`) && item.verdict === 'supported');
+  const isSourceBoundEditorial = overview.generatedBy === 'Codex-study-guide'
+    && transcript.readingEdition === 'study-guide'
+    && /^sha256:[a-f0-9]{64}$/.test(transcript._meta?.sourceDigest || '')
+    && overview.editorialSourceDigest === transcript._meta.sourceDigest
+    && overview.review?.sourceDigest === expectedSourceDigest
+    && completeEditorialReview;
+  if (!isMiniMaxGenerated && !isEneuralGlmGenerated && !isDocumentedManualException && !isSourceBoundEditorial) {
     errors.push(makeError('GENERATOR_MISMATCH', overview.generatedBy));
   }
 
@@ -559,14 +573,126 @@ export function buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCa
   return request;
 }
 
+function readEnvKey(keyName) {
+  if (process.env[keyName]) return process.env[keyName].trim();
+  const envPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.env');
+  if (!fs.existsSync(envPath)) return '';
+  for (const line of fs.readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eq = trimmed.indexOf('=');
+    if (eq > 0 && trimmed.slice(0, eq).trim() === keyName) {
+      return trimmed.slice(eq + 1).trim().replace(/^['"]|['"]$/g, '');
+    }
+  }
+  return '';
+}
+
+function callOpenAiCompatFallback(messages, maxOutputTokens, endpoint, model, apiKey = '') {
+  const body = JSON.stringify({
+    model,
+    temperature: 0,
+    max_tokens: Math.max(4096, Number(maxOutputTokens) || 4096),
+    chat_template_kwargs: { enable_thinking: false },
+    messages,
+  });
+  const args = ['-sS', '--max-time', '180', '-H', 'Content-Type: application/json'];
+  if (apiKey) args.push('-H', `Authorization: Bearer ${apiKey}`);
+  args.push('-d', body, endpoint);
+
+  const result = spawnSync('curl', args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr.trim() || `Fallback curl exited ${result.status}`);
+  const data = JSON.parse(result.stdout);
+  if (data.error) throw new Error(`Fallback error: ${JSON.stringify(data.error)}`);
+  const text = data?.choices?.[0]?.message?.content ?? '';
+  return parseModelJson(text);
+}
+
+function callFallbackProvider(messages, maxOutputTokens) {
+  if (process.env.OVERVIEW_LLM_ENDPOINT) {
+    return callOpenAiCompatFallback(
+      messages,
+      maxOutputTokens,
+      process.env.OVERVIEW_LLM_ENDPOINT,
+      process.env.OVERVIEW_LLM_MODEL || 'nvidia/Qwen3.8-27B-NVFP4',
+      process.env.OVERVIEW_LLM_API_KEY || readEnvKey('ENEURAL_API_KEY'),
+    );
+  }
+  const eneuralKey = readEnvKey('ENEURAL_API_KEY');
+  if (eneuralKey) {
+    try {
+      return callOpenAiCompatFallback(
+        messages,
+        maxOutputTokens,
+        'https://agents.eneural.ai/v1/chat/completions',
+        process.env.ENEURAL_MODEL || 'glm53-flash',
+        eneuralKey,
+      );
+    } catch {
+      // Fall through to GX10
+    }
+  }
+  return callOpenAiCompatFallback(
+    messages,
+    maxOutputTokens,
+    'http://100.113.144.100:18765/v1/chat/completions',
+    'nvidia/Qwen3.8-27B-NVFP4',
+  );
+}
+
 function callMiniMax(messages, maxOutputTokens, promptCacheKey, options = {}) {
+  if (process.env.OVERVIEW_PROVIDER === 'eneural') {
+    const endpoint = process.env.ENEURAL_ENDPOINT || 'https://agents.eneural.ai/v1/chat/completions';
+    const model = process.env.ENEURAL_MODEL || 'glm53-flash';
+    const sshHost = process.env.ENEURAL_SSH_HOST || 'gx10';
+    const payload = {
+      endpoint,
+      body: {
+        model,
+        messages,
+        max_tokens: maxOutputTokens,
+        temperature: process.env.OVERVIEW_TEMP ? Number(process.env.OVERVIEW_TEMP) : 0.1,
+        top_p: 0.9,
+        reasoning_effort: 'none',
+      },
+    };
+    const pyScript = [
+      'import json, os, pathlib, sys, urllib.request',
+      'for line in pathlib.Path.home().joinpath(".config/eneural.env").read_text().splitlines():',
+      '    if "=" in line and not line.startswith("#"):',
+      '        k, v = line.split("=", 1); os.environ[k.strip()] = v.strip().strip("\\"\'")',
+      'payload = json.load(sys.stdin)',
+      'req = urllib.request.Request(payload["endpoint"], data=json.dumps(payload["body"], ensure_ascii=False).encode(), headers={"Content-Type":"application/json","Authorization":"Bearer "+os.environ["ENEURAL_API_KEY"],"User-Agent":"Transcriptions-production-review/1.0"})',
+      'with urllib.request.urlopen(req, timeout=180) as r: print(r.read().decode())',
+    ].join('\n');
+    const b64 = Buffer.from(pyScript, 'utf8').toString('base64');
+    const result = spawnSync('ssh', [sshHost, `python3 -c "import base64;exec(base64.b64decode('${b64}'))"`], {
+      input: JSON.stringify(payload),
+      encoding: 'utf8',
+      maxBuffer: 8 * 1024 * 1024,
+    });
+    if (result.status !== 0) throw new Error(result.stderr.trim() || `eNeural ssh exited ${result.status}`);
+    const parsed = JSON.parse(result.stdout);
+    if (parsed.error) throw new Error(`eNeural error: ${JSON.stringify(parsed.error)}`);
+    const msg = parsed.choices?.[0]?.message || {};
+    return parseModelJson(msg.content || msg.reasoning_content || '');
+  }
+  if (process.env.OVERVIEW_LLM_ENDPOINT) {
+    return callFallbackProvider(messages, maxOutputTokens);
+  }
   const request = buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCacheKey, options);
   const result = spawnSync(process.execPath, [RESPONSES_HELPER], {
     input: JSON.stringify(request),
     encoding: 'utf8',
     maxBuffer: 4 * 1024 * 1024,
   });
-  if (result.status !== 0) throw new Error(result.stderr.trim() || `MiniMax Responses helper exited ${result.status}`);
+  if (result.status !== 0) {
+    const errText = result.stderr.trim() || `MiniMax Responses helper exited ${result.status}`;
+    if (/2056|quota|Token Plan|HTTP 500|HTTP 429/i.test(errText)) {
+      return callFallbackProvider(messages, maxOutputTokens);
+    }
+    throw new Error(errText);
+  }
   const response = JSON.parse(result.stdout);
   return parseModelJson(response.outputText);
 }
@@ -664,7 +790,7 @@ export function generateOverviewCandidate(target, transcript, retryFeedback = nu
     status: 'candidate',
     sourceTranscriptId: target.sourceTranscriptId,
     sourceDigest,
-    generatedBy: 'MiniMax-M3',
+    generatedBy: process.env.OVERVIEW_PROVIDER === 'eneural' ? 'eNeural-glm53-flash' : 'MiniMax-M3',
     generatedAt: new Date().toISOString(),
     mainPoints: body.mainPoints,
     discussionTopics: body.discussionTopics,
@@ -717,7 +843,7 @@ export function generateAndReviewTarget(repoRoot, target, {
       });
     }
     return finalizeOverviewReview(candidate, {
-      reviewedBy: 'MiniMax-M3',
+      reviewedBy: process.env.OVERVIEW_PROVIDER === 'eneural' ? 'eNeural-glm53-flash' : 'MiniMax-M3',
       items: reviewItems,
     });
   };

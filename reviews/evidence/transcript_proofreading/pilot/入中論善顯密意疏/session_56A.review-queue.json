@@ -1,0 +1,1503 @@
+{
+  "schema": "transcript-proofreading-review-queue/v2",
+  "runId": "3f950ffb-c7a3-4ade-b005-79f1ea593cf1",
+  "sourceDigest": "sha256:e2da268afb39c57f5538311d0e02493c81c936e04b0cfe0581f75214e291b892",
+  "items": [
+    {
+      "itemId": "sha256:c6b7760844d7bcdb17c4eee5b896ca646262cb7506a22f66617b396297bb1416",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p014-s000",
+      "before": "二邊，對不對，長邊跟斷邊，對，那佛教就是很厲害，就是既不在長邊也不在。",
+      "after": "二邊，對不對，常邊跟斷邊，對，那佛教就是很厲害，就是既不在常邊也不在。",
+      "reason": "佛學名相修正：「長邊」應為「常邊」（常與斷），指常見與斷見二邊。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:f1863f010c613e06b963743eda1b0fd4a1165bc7122c7aa43aae61f4500a6d97",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p014-s001",
+      "before": "怎麼講的。",
+      "after": "怎麼講的？",
+      "reason": "標點修正：疑問句應使用問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:2af056b4f63f6e53af23976b75c90af66c5b7c2df28a95bc7524981801ff3a17",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p015-s001",
+      "before": "不多於長也不多於斷，是長嗎？不是。是斷嗎？也不是。就很厲害這樣。",
+      "after": "不多於常也不多於斷，是常嗎？不是。是斷嗎？也不是。就很厲害這樣。",
+      "reason": "佛學名相修正：「長」應為「常」（常見），與後文「斷」相對。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:2ac919bfbff59fdfb56ec4f2e64905999cedb2e644ff57f3929992983758fdc7",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p018-s000",
+      "before": "對，那空性是屬於長，還是不是長，還有就是我們的那個不生不滅。",
+      "after": "對，那空性是屬於常，還是不是常，還有就是我們的那個不生不滅。",
+      "reason": "佛學名相修正：「長」應為「常」（常見），指空性非斷非常。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:f6a75237e0bd6d281f59998d6c4703babe37b863dee94e69ca79e5932cd2e3ff",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p001-s000",
+      "reason": "「滿藍」聽音不明，疑似「滿籃」或特定術語，無法確認是否為 ASR 訛字。"
+    },
+    {
+      "itemId": "sha256:fe1bd3fb6a6fecc8743ca42c52899c1788993f8bf0703f9cbf75001d3cc71b5b",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p001-s001",
+      "reason": "句子結尾「只不過就是變成。」語意未完，疑似中途斷裂或聽音不明。"
+    },
+    {
+      "itemId": "sha256:da3ecbf9ec03f800942650c1a8d05fe0d2a07506ada574a7278637da43af8ead",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p002-s000",
+      "reason": "句末「再」字語意不完整，疑似口語斷句或遺漏後續內容（如「再講」、「再說」），無法確定是否為原意。"
+    },
+    {
+      "itemId": "sha256:37b85185d6d302320dcf9eb8d154f5df03cc71e6abbcac3872ea267bb996abf2",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p003-s000",
+      "reason": "句末「所以」後無下文，疑似語氣未完或句子被截斷，無法確定是否為完整語意。"
+    },
+    {
+      "itemId": "sha256:3cc0d75885c03888b10b959eae756a3f76b584f1278bc76715b29f7be755e2dc",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p005-s000",
+      "reason": "「適中」在佛法修道次第語境中，通常指「中道」或特定階位，此處聽音可能為「中道」或口誤，但無法確定講者原意是否為「適中」，故標記。"
+    },
+    {
+      "itemId": "sha256:80684ce9702a646d36cc3e8fbb2845cdb0b3d3dc5ab25a680f6e3ddeb62cd497",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p005-s001",
+      "reason": "「貫起來」語意稍顯模糊，可能為「貫串起來」或「貫通起來」之口語省略，但無法確定是否為缺字或訛字，維持原文。"
+    },
+    {
+      "itemId": "sha256:92999771e72aa702333bc919c36f189c5b8b2f43377e16060ecd246a1fca8727",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p012-s000",
+      "reason": "「有這個情緒」語意模糊，可能是「有這種感觸」、「有這種想法」或口語省略，無法確定講者原意是否為特定情緒。"
+    },
+    {
+      "itemId": "sha256:93f971cb444b9d51c1d160b987847f37305e262cdd010f2c52c197686bf4e0e6",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p026-s001",
+      "reason": "「七代弟子」是否為「七代祖師」之口誤，需確認講者意圖。"
+    },
+    {
+      "itemId": "sha256:17c321415df810c20cb3c0deff352e4ea637692edd822a16d5359e217029e488",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p039-s001",
+      "reason": "「二生六莊嚴」是否為「二聖六莊嚴」之訛，需確認佛學名相。"
+    },
+    {
+      "itemId": "sha256:c2a2a210ea6748e67da96b992cae898cee5817de1579053e6a6a6282a2881fb5",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p049-s001",
+      "reason": "「那種一個文字」語意不明，可能為口語重複或聽音錯誤。"
+    },
+    {
+      "itemId": "sha256:9bb28ee38c550c86fe36815272a20489875ca737c5839895123eb5500835d628",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p064-s000",
+      "before": "這是一個麻煩的事情，嗯，接著大家可能要翻譯到，翻到了一個。",
+      "after": "這是一個麻煩的事情，嗯，接著大家可能要翻到了一個。",
+      "reason": "ASR 同音訛字，「翻譯」在此語境下應為「翻到」（翻閱經書）",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:d4edd6551e96e152980a90c859f28f4082d4229ce3b59abd1bd516ffab5b5403",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p053-s000",
+      "reason": "句子在「變成」後中斷，後續內容缺失，無法判斷完整語意。"
+    },
+    {
+      "itemId": "sha256:fb5be43ee69d9d22924317037cb5494f2304055315a65e4b06620ca8a3ef6b62",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p053-s001",
+      "reason": "「雖然買的是新的一個器物」語意稍顯突兀，可能缺字或口語省略，無法確定是否為完整表達。"
+    },
+    {
+      "itemId": "sha256:d145121681f02da5e05427d927eebc4ad22e0c78cced9f7aaa9e1f6084a98758",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p054-s001",
+      "reason": "「可是就是變成」語意不完整，可能句子中斷或後續內容缺失，無法確定完整語意。"
+    },
+    {
+      "itemId": "sha256:91170c2c9f9e620d45101dccb2500676d44b7f379b34ebd89f3f7d56a9858e21",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p057-s001",
+      "reason": "「什麼的話」語意不明，可能為口語省略或 ASR 錯誤，無法高信心修正。"
+    },
+    {
+      "itemId": "sha256:f17097a78d940a97b320b57c29fac0de707e57eeecf80d81a2723e416ccf4011",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p059-s001",
+      "reason": "「裝飾兄」聽音不明，可能是特定稱呼、人名訛誤或法義名相，無法確定是否為「裝飾」或其他詞彙，維持原文。"
+    },
+    {
+      "itemId": "sha256:9732a8577cd974ef7908a3f9326d105293f1a438e5d3f8f6d5d2f806ebb2d5d5",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p061-s001",
+      "reason": "「這是變成」語意未完，可能缺字或口語斷句，無法高信心補全。"
+    },
+    {
+      "itemId": "sha256:be44d3750fdeab780889e7b83d6d166e0778b987ad4e1d218384af8c10f88420",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p067-s000",
+      "reason": "「休息了三個理路」語意不通，推測為「修習」或「思惟」，但聽音不明確。"
+    },
+    {
+      "itemId": "sha256:7cc39164fd37d3e0addd9a08ff253579083e2cedef67b060b882344d0bbcd91e",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p067-s001",
+      "reason": "「對這個消過」語意不通，推測為「對這個修過」或「對這個思惟過」，但聽音不明確。"
+    },
+    {
+      "itemId": "sha256:b8b8ab68edd2cb7a5884099145c831e41947fcdaaab0313cb8a1bd5094940983",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p070-s001",
+      "reason": "「為四」與「為成」聽音不明確，可能為「色法」、「四大」或特定名相之訛。"
+    },
+    {
+      "itemId": "sha256:a1e49d2f362deefc78e66184135250e3e6f31ddb01370925d12cc11622cfdd86",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p071-s000",
+      "reason": "「為四」聽音不明確，可能為「色法」、「四大」或特定名相之訛。"
+    },
+    {
+      "itemId": "sha256:d434845dc1270b8cc5dfb2adc3c3698dca9e156f98fe7676bbee84f10802be31",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p071-s001",
+      "reason": "「更新無關」聽音不明確，推測為「不相應行法」或相關名相，但無法確定。"
+    },
+    {
+      "itemId": "sha256:3aae704192c464a120cd3ff91a84b46f76bdae446414106ccc03f1e4ef793b4d",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p072-s000",
+      "reason": "「更新無關」聽音不明確，推測為「不相應行法」或相關名相，但無法確定。"
+    },
+    {
+      "itemId": "sha256:7cfb8485be0c21e81753420ce9d3ed2bd8dae273e5f1409bb3a71ae62a579b1f",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p072-s001",
+      "reason": "「有設」聽音不明確，可能為「有色」、「有法」或特定名相之訛。"
+    },
+    {
+      "itemId": "sha256:9f9a6350694f04dfe53106d88c90233322110595034359f47c7eb36d1b941a11",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p074-s001",
+      "reason": "「外設」聽音不明確，推測為「外色」、「外境」或相關名相之訛。"
+    },
+    {
+      "itemId": "sha256:c4c8b7bf4c4026aa2311a81aa70d9328c519aa65216e766ca7e5c679ad259a1c",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p085-s001",
+      "before": "這樣一個狀態，對，那講法上面的話，就是唯明安立的設法，這樣，那唯明安立的設法。",
+      "after": "這樣一個狀態，對，那講法上面的話，就是唯名安立的設法，這樣，那唯名安立的設法。",
+      "reason": "佛學名相修正。'唯明安立'應為'唯名安立'（prajñapti-matra），指僅依名稱假立而無自性。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:a7e648068d50f7625708643e867b573e1514b6225c2bb3dbad955ef58ace366c",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p091-s000",
+      "before": "管待或者說，什麼的。",
+      "after": "相待或者說，什麼的。",
+      "reason": "佛學名相修正。'管待'應為'相待'（pratītya-samutpāda 或相對概念），指相互依存。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:587bb00e379754cd9a607f528033b0bfcf795e512b9ad4f3c9ac308216dae583",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p088-s001",
+      "reason": "'秩序'一詞在佛學語境中極不常見，推測為'唯明'或'唯名'之訛誤，但無法百分之百確定講者是否使用特殊術語或口誤，故列入 uncertain。"
+    },
+    {
+      "itemId": "sha256:4446bd041945cf59537851ce331b3895bc35f16819345fcf43547d31c9a2dc9a",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p089-s001",
+      "reason": "'完全'後接'是'在口語中可接受，但若需精確書面化，可能為'完全是'之省略，但無明顯錯字，故不強制修改。"
+    },
+    {
+      "itemId": "sha256:257be5a61869f574ea5710e5d0fefd9e4ee35629188d5f14cd5f0b85ca23ef5d",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p103-s000",
+      "before": "對，因為有內心有內心，這個一定是名言量，透過名言量而瞭解它是有。",
+      "after": "對，因為有內心、有內心，這個一定是名言量，透由名言量而瞭解它是有。",
+      "reason": "口語重複「有內心」應加頓號區隔；專案政策保留「透由」不改為「透過」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:041a138139e4fc34afd29907e4182a3a855e57c1cc16305b9be62faf98879e70",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p112-s001",
+      "before": "為什麼承認外境的話，就不可以承認阿賴眼色。",
+      "after": "為什麼承認外境的話，就不可以承認阿賴耶識。",
+      "reason": "ASR 訛字。'阿賴眼色' 應為唯識宗名相 '阿賴耶識'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:105c54e0f688843ca6ad55e3888dad8db65ef0617bee0be50ffd1604c302cac2",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p113-s001",
+      "before": "就不能承認有外在的索取。如果承認有外在的索取的話，就不能承認。",
+      "after": "就不能承認有外在的所取。如果承認有外在的所取的話，就不能承認。",
+      "reason": "ASR 訛字/佛學名相。'索取' 應為 '所取'（grāhya），與前文 '能取' 相對。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:0bc7ea48689f46298d0f0135955448ddf64286fed798cf9afd4aaedbff5ff5b2",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p118-s001",
+      "before": "無外索取，這樣可以嗎？這個就算是講清楚了，就是那個字講清楚了。無色這個的話。",
+      "after": "無外色，這樣可以嗎？這個就算是講清楚了，就是那個字講清楚了。無色這個的話。",
+      "reason": "ASR 同音訛字，「無外索取」在佛法語境中不通，應為「無外色」，與前句「無外色」呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:6f2e9965e850df4a9c9575f7199c5e480c572fb3335b895fcb5d3b854a88cb96",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p100-s000",
+      "reason": "「意義了達」語意不明，可能為「意義上，了達」或聽音訛誤，無法確定是否需修正。"
+    },
+    {
+      "itemId": "sha256:3351dfaa90a4625a97a0d008a9cd469e0d0b052d57c9439641327fdaa82f013e",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p101-s000",
+      "reason": "「他們兩個是有沒有錯」語意不清，可能為口語重複或斷句問題，無法確定原意。"
+    },
+    {
+      "itemId": "sha256:44d6f0486e240bb821240c9afd4a87716bee546351063b322a17b63a02644338",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p101-s001",
+      "reason": "「或者是若」語法略顯累贅，但可能為講者口語習慣，無法確定是否需修正。"
+    },
+    {
+      "itemId": "sha256:5cce77a00390cb768da552624af5459d86f28aec3185edebb51f9bf62274ade9",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p103-s000",
+      "reason": "「有內心」的語意與上下文邏輯需確認是否為講者口誤或特定法義表述。"
+    },
+    {
+      "itemId": "sha256:d89e0bbe1de53fd20a91f0a56cc87753a6f818a893f4deaf68895d974c185b67",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p103-s001",
+      "reason": "「意義了達外射」語意不明，可能為 ASR 訛誤，無法確定確切用詞。"
+    },
+    {
+      "itemId": "sha256:d7f3705fbbb375a827b5ed0625ef8378819c8582b9bdfef740d9b181d484f4d3",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p104-s001",
+      "reason": "「會許」在佛法論辯中極少見，推測為「許」或「唯許」之訛誤，但無法完全確定講者原意。"
+    },
+    {
+      "itemId": "sha256:64dcbeef12437f66b26492e24d7286245689f7b268fa1b8fdf5cac0d44b5d7cb",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p105-s000",
+      "reason": "「沒有色了」語意稍顯突兀，可能為「沒有色」或「無色」之口語表達，但無法確定是否為訛誤。"
+    },
+    {
+      "itemId": "sha256:1ef7ad965c617234118f85b7fccdc29f86f64113f6d6ef04f726ca0ebf8a13d6",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p105-s001",
+      "reason": "「沒有外境的色」語意稍顯冗長，可能為「沒有外境之色」或「外境之色不存在」，但無法確定確切用詞。"
+    },
+    {
+      "itemId": "sha256:0ab286f6f662c8364356af8bfe982044b59478ea711b1086c8b66ccc0a75d037",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p106-s000",
+      "reason": "「無外境的色」語意稍顯冗長，可能為「無外境之色」或「外境之色不存在」，但無法確定確切用詞。"
+    },
+    {
+      "itemId": "sha256:f4a2a204f1a6ac5df5ef2696ed1d3a6aa7557f2853d809b1e403e72034f5d045",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p108-s000",
+      "reason": "阿賴眼色'一詞聽音不明，可能是'阿賴耶識'與'眼根'的混稱或口誤，需確認講者原意。"
+    },
+    {
+      "itemId": "sha256:7b7167f1d7fa8cdc91e1f0579328c4397e2a107b16d2e7b7ec56599d830a9e26",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p109-s000",
+      "reason": "'造到'一詞語義不明，可能是'照到'、'觸到'或'跑到'的訛音，需確認。"
+    },
+    {
+      "itemId": "sha256:13d54348d41ddc6d0df314e229baa4295a3bf05d3daefba2ed71c0add2382158",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p113-s000",
+      "reason": "'自種子' 可能為 '自相種' 或 '自性種' 之訛，但講者口語習慣可能不同，且上下文未明確顯示 '能取所取' 對比，故保留原文並標記不確定。"
+    },
+    {
+      "itemId": "sha256:ee0e39e735b7c1275a40dacde6d151547608445d1dcec1d07a0a73dbdb5905e6",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p114-s001",
+      "reason": "句意不明，似為斷句或聽音訛誤，無法確定完整法義。"
+    },
+    {
+      "itemId": "sha256:18f0f2d151abef28112256c3930d122d205391b974877e74c0f676bde5882ea5",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p115-s000",
+      "reason": "語意重複且結構鬆散（「可能是那個了」、「很多地方就是說」），聽音不明，無法確認是否為口語贅字或特定用語。"
+    },
+    {
+      "itemId": "sha256:d476c76159bd1a4d911b8acb4604b650173300e2d005bec6eeff77430e091e06",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p115-s001",
+      "reason": "「模擬的會說無外射無色」中「模擬」與「外射」在佛法名相上極不尋常，疑似「無明」、「外境」或「無色界」等詞之 ASR 訛誤，但缺乏上下文確認，維持原文。"
+    },
+    {
+      "itemId": "sha256:d43aca2c27dc9ca4b290b5fc10438aff7448565a2acbf2c6dc637b0fde7ef62f",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p116-s000",
+      "reason": "口語重複與斷句不清晰，但保留原意。"
+    },
+    {
+      "itemId": "sha256:4d41466930b96672f3d9069ccf316e8cdb0274c80aecee8469862bb60ceb3714",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p117-s000",
+      "reason": "「由自種子辨識青等」語法略顯生硬，可能為口語表達，無法確定是否需修正為「由自種子所生之青等」。"
+    },
+    {
+      "itemId": "sha256:98b930295f264cdfb6fb2da2bb9211d1868539ba92e443b5acdb668881687573",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p120-s000",
+      "reason": "「雖然沒有」語意斷裂，無法確定是否為漏字或口語省略，且與後文邏輯連接不明。"
+    },
+    {
+      "itemId": "sha256:642841a6684b53d5adc9cf39340e7318d6254e6efa44583894c0030cec549e90",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p120-s001",
+      "reason": "「他的四論」指涉不明，可能是特定論典名稱（如《中觀四論》）之誤聽，或為「他空見」等法義之誤，無法確切修正。"
+    },
+    {
+      "itemId": "sha256:39d60d4510fad157a98bec1060e0117c67fd9266e6e49ade5f7bc027cda78263",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p123-s001",
+      "reason": "「為之」語意不通，可能是「謂之」、「唯是」或「為破」之誤聽，需確認講者原意。"
+    },
+    {
+      "itemId": "sha256:b164fed3005a7d52b792c566a32b4b6ea0c6542d74d935791fcee89bf04e652d",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p136-s000",
+      "before": "對，所以這個應該是，我應成，應該也是可以吧，對，反正就是說，別人的話。",
+      "after": "對，所以這個應該是，我應成派，應該也是可以吧，對，反正就是說，別人的話。",
+      "reason": "「我應成」應為「我應成派」，指中觀應成派。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:2aded79cd79ebcd44e8b504ac190a2fe4cec93842d9d19bad1eeaa66f86091cf",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p148-s000",
+      "before": "若為是中，不許有色。如果這樣的話，則為是中成立阿賴耶識的時候，色大神論。",
+      "after": "若為是中，不許有色。如果這樣的話，則為是中成立阿賴耶識的時候，色大種論。",
+      "reason": "「色大神論」應為「色大種論」，指四大種（地水火風）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:70b2b16f732d02d1da3909f55442bdcaf246be04c03f47a4cf8de64f207ea3db",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p149-s000",
+      "reason": "「若你一手是」聽音不明，語意不通，可能是「若如是」或「若依此」之訛，無法確定正確文字。"
+    },
+    {
+      "itemId": "sha256:e9cd574d365a787ec32a95e7b7e6b36d76f09c100fe264bb9e1ae4a82b5605bb",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p166-s000",
+      "before": "那邊 就剛剛講的那句 討討論的那句。",
+      "after": "那邊 就剛剛講的那句 討論的那句。",
+      "reason": "ASR 同音訛字，「討討論」應為「討論」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:70d3a38cc2f11ce9583bd7a0e7ec904b9adcfe100e269bbb2b92edba0582e3fd",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p173-s000",
+      "before": "因為你在說 因為那個 是 是裡面 講說 為字 不破 比為字 就是實地 經裡面。",
+      "after": "因為你在說，因為那個是裡面講說為字不破，比為字就是實地經裡面。",
+      "reason": "補上標點符號以區分語意層次與句子邊界。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:f6fd8694b5bd0d17a0a06789cdb18e57da3af7395c32d6f69920fa78ba732a9d",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p174-s000",
+      "before": "是不是 為字 不能破 所知 那 換言之 你如果 依字面 去解釋 我們真的是。",
+      "after": "是不是為字不能破所知？那換言之，你如果依字面去解釋，我們真的是。",
+      "reason": "「是不是...」為疑問句，應加問號。「那換言之」為連接詞，後加逗號區隔語氣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:019fe23365743ef8eedfd62a856fb9b4179c100d9b439ccbc41fd37c51d5e7e1",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p151-s000",
+      "reason": "「一手是的話」語意不明，可能為「一處」、「一法」或「一色」之誤聽，無法確定講者原意，維持原文。"
+    },
+    {
+      "itemId": "sha256:67f6363b77c45c630c5093f4d4efc8e11a4f81365d26288a558548be4ec530d2",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p152-s000",
+      "reason": "「一不成」語意不明，可能為口語省略或聽音訛誤，需確認是否指「一種說法不成立」或特定術語。"
+    },
+    {
+      "itemId": "sha256:6745b3ca0f27c1805bd9a8076f0b76856934a57b496e9df54c3f9ebaa7b93d98",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p152-s001",
+      "reason": "「只受色根」聽音不明，「受」字可能為「涉及」、「緣及」或其他同音詞，法義上需確認是否指「牽涉到色根」。"
+    },
+    {
+      "itemId": "sha256:2ef8209133caf19246b1bdeff8141d81ed72283cd247d8df1e4a4356a2c38655",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p153-s000",
+      "reason": "「明色」單獨成句且語意不完整，可能為上一句的延續或特定名相，聽音不明。"
+    },
+    {
+      "itemId": "sha256:61ccbbb81998cd99b208628f82bb10cb24ee5e2bb60df6c46ac5ef56f4165829",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p155-s001",
+      "reason": "「一許有色法」語意不明，可能為口語斷句或聽音訛誤，需確認是否為「一、許有色法」或「一許有色法」之特定法義表述。"
+    },
+    {
+      "itemId": "sha256:56b48da3369f7276cbc40d8f680ecde2178f6b6d32b96d00a692023e35760e8a",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p156-s000",
+      "reason": "「因為有色法，就要說有外境」邏輯連接詞「因為...就...」在口語中常見，但法義上是否為「若有色法，則有外境」或「因有色法故，遂說有外境」之精確表述，需確認講者原意。"
+    },
+    {
+      "itemId": "sha256:fcaa582d31f065db03af4780798b8217cae3beb08ee64430919b82b67c575c02",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p157-s000",
+      "reason": "「無明形色什麼什麼」聽音不明，講者可能是在舉例或修正前詞，無法確定具體名相。"
+    },
+    {
+      "itemId": "sha256:65d15293cbae8052452be2ba207e8b41348d87c260a03f57d856f7eac5329953",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p160-s000",
+      "reason": "「明為」一詞在佛法語境中較少見，可能是「唯為」、「名爲」或「明為（光明與作為）」的聽音訛誤，需確認講者原意。"
+    },
+    {
+      "itemId": "sha256:ee195abd3cf2004ceb6e759e3689ffcd0bb231a1b794e1610ae30428413ba1ad",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p161-s000",
+      "reason": "「既有聖教 意義了達 內 既有聖教 意義了達 內心外境」語句重複且斷裂，無法確定是口語重複還是 ASR 錯誤，維持原文。"
+    },
+    {
+      "itemId": "sha256:0653c8560780ff200efd2906eeb698273e9a3d110ff38ef0d0887f743ad7ff79",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p164-s000",
+      "reason": "「佛 具則 彼等具法」語意斷裂，聽音不明，無法確定是否為「佛具則」或「佛具，則」或其他法義詞彙，需確認原文。"
+    },
+    {
+      "itemId": "sha256:381409144445c93ffc7873249707e930f7613e47d444ce15e331d8598af1d8ed",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p164-s001",
+      "reason": "語意不明，聽音可能有誤，無法確定完整句意。"
+    },
+    {
+      "itemId": "sha256:eb3ded44a60b75343b119db574f0f9efd28cc20a6a95dcac9f2309efb53de19f",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p165-s000",
+      "reason": "語意不完整，句子中途斷裂，無法確認後續內容。"
+    },
+    {
+      "itemId": "sha256:fbec3f5ec23a99d0db0310bd8d03f927662acba9125f6f670a2c45c608d97973",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p165-s001",
+      "reason": "句意斷裂且語詞模糊，疑似 ASR 訛誤或聽音不明。'故筆為字'、'不能破 所知'、'更以義門'等處文義不通，無法高信心判定正確用字或斷句，需維持原文。"
+    },
+    {
+      "itemId": "sha256:4f1cce1e98d14f0a616d7368244fd2de5feb7db62f6043e9bcda41bff15ad90f",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p167-s001",
+      "reason": "「實體經」一詞在佛典中較少見，若為特定經論名稱或口語誤聽，需進一步確認。"
+    },
+    {
+      "itemId": "sha256:fb71877d1ef08bb16c4acc8d94202811893fb371677e3dc6f230e7ba3acffec3",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p168-s000",
+      "reason": "「更用其他的 講法 說的時候呢？」語意稍顯斷裂，可能為口語重複或聽音不明，維持原文。"
+    },
+    {
+      "itemId": "sha256:6da1372e5f4ecd8badfb3155fe07ead428e4a2eb1c3e9aabeb07a8e7aa94ad57",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p170-s001",
+      "reason": "原文 '針對 為是講嘛' 語意稍顯彆扭，可能為 '針對「為」字講嘛' 或 '針對「為是」講嘛'，但聽音不明確，且 '為是' 在特定語境下可能指代明確，故保留原文並標記不確定。"
+    },
+    {
+      "itemId": "sha256:423af8efc8c50e7576addc4ed416994641b8467df5e0395a28a1f5d7d0650010",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p171-s001",
+      "reason": "句子結尾 '把它解釋成。' 明顯未完，但根據原則禁止合併或補全句子，故維持原文並標記不確定。"
+    },
+    {
+      "itemId": "sha256:65e1ef7a86469740b5e24ff97814f0ef8fd47ed1f05f51d816afcb62b71a0946",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p173-s000",
+      "reason": "聽音不明，'是裡面'、'比為字'、'實地經' 可能為 ASR 訛誤或口語省略，無法高信心判定正確詞彙。"
+    },
+    {
+      "itemId": "sha256:f95a0d0ad3397553353da14259ca19eaf6040d5b80e011173343dbd82ba2a649",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "@p180-s000",
+      "before": "破外境如果不是這樣子的話，那你如果依照文字這樣子純文字這樣子。",
+      "after": "破外境如果不是這樣子的話，那你如果依照文字這樣子、純文字這樣子。",
+      "reason": "口語中「這樣子」重複出現時，宜加頓號區隔，使語意層次更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "itemId": "sha256:ba35f556b138faae688cd4b15b318dfec45d9500a565532fe166699e00c80326",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p175-s000",
+      "reason": "原句「所為是中」語意不明，可能是「所破是中」或「所能破是中」之誤，但缺乏足夠上下文確認，故保留原文並標記 uncertain。"
+    },
+    {
+      "itemId": "sha256:827e3d37df04d84ac58183307d37897f2e9f7ec90e5832bf273a028c67ab460c",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p176-s001",
+      "reason": "「你們孩子」一詞在口語中可能指「你們這些孩子」或講者對學生的親切稱呼，若為 ASR 誤聽（如「你們這些」），則需修正，但無法確定，故標記 uncertain。"
+    },
+    {
+      "itemId": "sha256:ac8f469d9b79c9ae9e0ddb5b5c8bad86d4aa417a463205c6a50e09dc82b5f61a",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p178-s001",
+      "reason": "「世又云」是引文開頭，但原句斷詞為「在講 世又云 這個」，可能應為「在講『世又云』這段」或類似，但無法完全確定講者原意，故標記 uncertain。"
+    },
+    {
+      "itemId": "sha256:354a66294dbfe7fe1a5d80fc7154151e6505eac4da48872fdd415e3c45d1b3c8",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p180-s001",
+      "reason": "「解釋故」語意不完整，可能為「釋故」、「解故」或漏字，需確認原典。"
+    },
+    {
+      "itemId": "sha256:cc13d067fb9e46912879b7d523c70274f0371d9ebada640b0d39bf5405c6d632",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p181-s000",
+      "reason": "「比為字」聽音不明，可能為「此為字」、「此為之」或「此文字」，語意不連貫。"
+    },
+    {
+      "itemId": "sha256:66a6787ad65e2c0a7b8e4f01c37ac0f89cb17228b38ca231d36e87e439faa415",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p182-s000",
+      "reason": "句末「可是呢，為什麼他並沒有。」語意不完整，似有缺字或聽音不明，無法確定是否為口語省略或斷句錯誤。"
+    },
+    {
+      "itemId": "sha256:3cb004f13941bd492d8b64ded582f292fc7ab086304c36fdd557e12bb7d90652",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "@p183-s000",
+      "reason": "「我怎麼好像你們兩個講的好深奧」語法結構略顯鬆散，「好」與「的」用法及語意主體（是「你們講得」還是「聽起來」）需確認，但口語中可能為自然表達，故標記存疑。"
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p017-s001",
+      "before": "長法有多少，無長法有多少。",
+      "after": "長法有多少，無長法有多少？",
+      "reason": "涉及法義推測：雖「長法」極可能為「常法」之訛，但句內無直接證據（如前後文明確對比），且「長法」在特定語境下可能有其他解釋，需回聽確認。",
+      "proposal": {
+        "id": "@p017-s001",
+        "after": "長法有多少，無長法有多少？",
+        "change_class": "term",
+        "reason": "佛學名相修正：「長法」應為「常法」（常見之法），與後文「無長法」對應。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p052-s001",
+      "before": "對，所以就是變成新同學的話，就不知道能聊天的懂還是多少，這個部分非常的麻煩。",
+      "after": "對，所以就是變成新同學的話，就不知道能聊天懂還是多少，這個部分非常的麻煩。",
+      "reason": "刪改自然口語：將「能聊天的懂」改為「能聊天懂」屬於刪字，且原句可能為講者口誤或特定口語表達，無確鑿證據證明多字衍文，不應直接刪減。",
+      "proposal": {
+        "id": "@p052-s001",
+        "after": "對，所以就是變成新同學的話，就不知道能聊天懂還是多少，這個部分非常的麻煩。",
+        "change_class": "orthography",
+        "reason": "ASR 同音訛字，「能聊天的懂」語意不通，應為「能聊天懂」或「能聽得懂」，此處推測為多字衍文。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p088-s001",
+      "before": "可以這麼說，真正講的是，有部經部會講，對不對，可是，我剛剛跟秩序講一個設法的話。",
+      "after": "可以這麼說，真正講的是，有部經部會講，對不對，可是，我剛剛跟唯明安立講一個設法的話。",
+      "reason": "改變原意與上下文搬用：將「秩序」改為「唯明安立」，雖前文有「唯名」，但「秩序」與「唯明」音韻差異大，且此處講者可能指「我剛剛跟（某位）秩序（講）」或口誤，直接改為名相缺乏句內證據，且可能改變原意。",
+      "proposal": {
+        "id": "@p088-s001",
+        "after": "可以這麼說，真正講的是，有部經部會講，對不對，可是，我剛剛跟唯明安立講一個設法的話。",
+        "change_class": "term",
+        "reason": "上下文邏輯與名相修正。前文討論'唯名安立'，此處'秩序'應為'唯明'（或'唯名'）之聽音訛誤，且與後文'設法'語意不符。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p095-s000",
+      "before": "若是以正理推求，假利益，了知，無外境者。",
+      "after": "若是以正理推求，假立為有，了知，無外境者。",
+      "reason": "涉及法義推測與缺字：「假利益」改為「假立為有」雖符合中觀義理，但原詞聽音可能為「假立...」後接其他字或口誤，且「假利益」三字完整，無直接句內證據證明是訛字，需回聽確認。",
+      "proposal": {
+        "id": "@p095-s000",
+        "after": "若是以正理推求，假立為有，了知，無外境者。",
+        "change_class": "term",
+        "reason": "佛學名相與語意修正。'假利益'應為'假立為有'或'假立'，指依緣起假名安立。'假利益'聽音訛誤可能性高，且不符合中觀論典語境。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p095-s001",
+      "before": "正理，推求假利益。",
+      "after": "正理，推求假立為有。",
+      "reason": "同 @p095-s000，涉及法義推測，無句內直接證據證明「假利益」必為「假立為有」。",
+      "proposal": {
+        "id": "@p095-s001",
+        "after": "正理，推求假立為有。",
+        "change_class": "term",
+        "reason": "佛學名相修正。同 @p095-s000，'假利益'應為'假立為有'或'假立'。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p098-s001",
+      "before": "假利益嘛，就是瓶子是假利益，這個假利益在某處，哪裡有真實的狀態是怎麼樣。",
+      "after": "假立為有嘛，就是瓶子是假立為有，這個假立為有在某處，哪裡有真實的狀態是怎麼樣。",
+      "reason": "同 @p095-s000，涉及法義推測，無句內直接證據證明「假利益」必為「假立為有」。",
+      "proposal": {
+        "id": "@p098-s001",
+        "after": "假立為有嘛，就是瓶子是假立為有，這個假立為有在某處，哪裡有真實的狀態是怎麼樣。",
+        "change_class": "term",
+        "reason": "佛學名相修正。同 @p095-s000，'假利益'應為'假立為有'或'假立'。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p109-s001",
+      "before": "就是變成自己的種子讓眼色陷到青。",
+      "after": "就是變成自己的種子讓眼色現到青。",
+      "reason": "「陷到」修正為「現到」雖符合唯識種子現行義理，但原句語境模糊（「眼色陷到青」），需回聽確認是否為口語誤說或特定比喻，且「現到」非標準書面詞彙，建議由人判斷。",
+      "proposal": {
+        "id": "@p109-s001",
+        "after": "就是變成自己的種子讓眼色現到青。",
+        "change_class": "term",
+        "reason": "ASR 訛字修正。'陷到'應為'現到'或'現出'，指種子現行青色。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p126-s001",
+      "before": "用另外的話來說，其實，他們家把別的那個講法的話。",
+      "after": "用另外的話來說，其實，他們把別的那個講法的話。",
+      "reason": "刪除「家」字雖使語意通順，但「他們家」在口語中可能指代特定群體或為自然口語習慣，刪改後改變原句結構與口語特徵，且無句內直接證據證明「家」為多餘字。",
+      "proposal": {
+        "id": "@p126-s001",
+        "after": "用另外的話來說，其實，他們把別的那個講法的話。",
+        "change_class": "grammar",
+        "reason": "刪除多餘的「家」字，語意不通順。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p146-s001",
+      "before": "若不如是解的話，但一文的話，則事雲顧比為之不破所知，為之不破所知。",
+      "after": "若不如是解的話，但一文的話，則事雲俱非為之不破所知，為之不破所知。",
+      "reason": "「顧比」改為「俱非」雖符合經論義理，但原句「事雲顧比」語意極度不通，無法確定是 ASR 訛誤還是講者口誤或特殊表述，需回聽確認。",
+      "proposal": {
+        "id": "@p146-s001",
+        "after": "若不如是解的話，但一文的話，則事雲俱非為之不破所知，為之不破所知。",
+        "change_class": "term",
+        "reason": "「顧比」應為「俱非」，與前句修正一致，符合經論義理。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p160-s000",
+      "before": "明為是從不共建立的時候 這樣可以嗎 在講為詞的時候了 我們在讀為詞的時候。",
+      "after": "明為是從不共建立的時候，這樣可以嗎？在講為詞的時候了，我們在讀為詞的時候。",
+      "reason": "「明為」推測為「唯為」或「名爲」，但原句語意模糊，缺乏句內直接證據證明「明」字必為錯字，需回聽確認。",
+      "proposal": {
+        "id": "@p160-s000",
+        "after": "明為是從不共建立的時候，這樣可以嗎？在講為詞的時候了，我們在讀為詞的時候。",
+        "change_class": "term",
+        "reason": "「明為」聽音極似「唯為」或「名爲」，結合後文「為詞」，推測講者意指「唯為（僅僅是）」或「名爲（名相上）」。若為「唯為」，則與前句「不可唯為詞而說」呼應。此處保留「明為」但標記為聽音不明，因「明」字在語義上較不通順，極可能是「唯」或「名」的訛誤。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.7
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p161-s000",
+      "before": "要這樣解釋 既有聖教 意義了達 內 既有聖教 意義了達 內心外境 又無。",
+      "after": "要這樣解釋，既有聖教意義了達內，既有聖教意義了達內心外境，又無。",
+      "reason": "after 將「了達 內」與「內心外境」合併改寫，且刪減了原口語中的重複結構（「既有聖教 意義了達 內」），違反保留口語與重複原則，且改變了原句的斷句邏輯。",
+      "proposal": {
+        "id": "@p161-s000",
+        "after": "要這樣解釋，既有聖教意義了達內，既有聖教意義了達內心外境，又無。",
+        "change_class": "punctuation",
+        "reason": "原文「既有聖教 意義了達 內 既有聖教 意義了達 內心外境」顯然是口語重複或斷句錯誤，根據佛法論典慣用語「既...又...」結構，推測應為「既有聖教意義，了達內心外境，又無」。但為遵守「不得合併、拆分句子」原則，僅修正明顯的標點與斷詞，將「內」與「內心」之間的斷裂視為口語重複，保留原文結構但建議標點。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.6
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "@p163-s001",
+      "before": "只破外境 而不破設法 是不是這樣 有理 對 那現在的話 是說 營用教。",
+      "after": "只破外境，而不破設法，是不是這樣？有理，對。那現在的話，是說，應用教。",
+      "reason": "「營用教」改為「應用教」雖為同音推測，但「營用」在特定語境下可能有其他含義（如運用、經營），缺乏句內直接證據證明必為錯字，需回聽確認。",
+      "proposal": {
+        "id": "@p163-s001",
+        "after": "只破外境，而不破設法，是不是這樣？有理，對。那現在的話，是說，應用教。",
+        "change_class": "term",
+        "reason": "「營用教」應為「應用教」，指應理之教或依教而用，同音訛字。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p164-s000",
+      "before": "營用教來講的話 這個也是講得通的 這樣 所以 但若心中 佛 具則 彼等具法。",
+      "after": "應用教來講的話，這個也是講得通的，這樣。所以，但若心中佛具則，彼等具法。",
+      "reason": "after 將前句「營用教來講的話」改為「應用教來講的話」，雖修正同音訛字，但同時刪除了原句中的「這個也是講得通的 這樣」等口語內容，違反規則 1（不得因更通順而增刪字）及規則 2（不得搬用前後句或刪改自然口語）。且 reason 自稱「維持原文」卻實際大幅改寫，理由與後果不一致。",
+      "proposal": {
+        "id": "@p164-s000",
+        "after": "應用教來講的話，這個也是講得通的，這樣。所以，但若心中佛具則，彼等具法。",
+        "change_class": "term",
+        "reason": "「營用教」應為「應用教」。句中「佛 具則」語意不明，疑似「佛具則」或「佛具，則」，因聽音不明且涉及法義斷句，維持原文並標記 uncertain，此處僅修正明顯同音訛字。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p167-s000",
+      "before": "那解釋這句的時候 就會說 那為是 應該要說 為是中許 為字 也破 心 那所以說。",
+      "after": "那解釋這句的時候 就會說 那為是 應該要說 為是中許 為字 也破心 那所以說。",
+      "reason": "after 將「破 心」連讀為「破心」，雖語意可能通順，但此處涉及法義斷句判斷（「破心」或「破，心」），且原稿保留口語停頓。規則 3 規定涉及法義斷句無直接證據應為 uncertain，而非直接 accept 或 reject 為標點修正。此外，若視為標點修正，不應改變字詞間的空格結構而影響口語節奏。",
+      "proposal": {
+        "id": "@p167-s000",
+        "after": "那解釋這句的時候 就會說 那為是 應該要說 為是中許 為字 也破心 那所以說。",
+        "change_class": "punctuation",
+        "reason": "標點修正，「破 心」應連讀為「破心」以符合語意斷句。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p168-s000",
+      "before": "那個為字呢 他不破 所知 不能破 所知 然後呢 更用其他的 講法 說的時候呢？",
+      "after": "那個為字呢 他不破所知 不能破所知 然後呢 更用其他的 講法 說的時候呢？",
+      "reason": "after 將「他不破 所知」改為「他不破所知」，刪除了原句中的口語停頓（空格）。規則 1 明確規定「保留口語、省略...與每句邊界；不得因『更通順』而增刪字」。此處僅為標點/空格調整，非明顯錯別字。",
+      "proposal": {
+        "id": "@p168-s000",
+        "after": "那個為字呢 他不破所知 不能破所知 然後呢 更用其他的 講法 說的時候呢？",
+        "change_class": "punctuation",
+        "reason": "標點修正，「不破 所知」應連讀為「不破所知」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p168-s001",
+      "before": "就直接講 不能破 外境 也就是說 他在講 不能破 所知的地方 那個所知。",
+      "after": "就直接講 不能破外境 也就是說 他在講 不能破所知的地方 那個所知。",
+      "reason": "同 @p168-s000，after 刪除了「破 外境」與「破 所知」中的口語停頓，違反規則 1 保留口語節奏的要求。此非明顯錯別字修正。",
+      "proposal": {
+        "id": "@p168-s001",
+        "after": "就直接講 不能破外境 也就是說 他在講 不能破所知的地方 那個所知。",
+        "change_class": "punctuation",
+        "reason": "標點修正，「破 外境」與「破 所知」應連讀為「破外境」、「破所知」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p170-s000",
+      "before": "外境的話 如果不這樣 去解釋 而是 以字面去解釋 說 為字 實在說 不能破。",
+      "after": "外境的話 如果不這樣 去解釋 而是 以字面去解釋 說 為是 實在說 不能破。",
+      "reason": "after 將「為字」改為「為是」。雖然 reason 聲稱符合上下文，但「為字」與「為是」在語義上差異巨大（指代對象不同），且句內無直接證據證明「字」必為「是」之訛誤。規則 3 規定涉及法義或推測缺字/錯字，無句內直接證據應為 uncertain。直接 accept 風險過高。",
+      "proposal": {
+        "id": "@p170-s000",
+        "after": "外境的話 如果不這樣 去解釋 而是 以字面去解釋 說 為是 實在說 不能破。",
+        "change_class": "orthography",
+        "reason": "ASR 同音訛字修正。'為字' 應為 '為是'，符合上下文語意（指「為」這個字）。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p172-s000",
+      "before": "不破 所知的話 那後面 才會說 你如果 依這個字面 去講的時候 那就應該要說。",
+      "after": "不破所知的話，那後面才會說：你如果依這個字面去講的時候，那就應該要說。",
+      "reason": "after 大幅補入標點符號（逗號、冒號）並刪除原句中的口語停頓（如「那後面 才會說」改為「那後面才會說」）。規則 1 禁止因通順而刪改自然口語。此為過度書面化，非單純標點修正。",
+      "proposal": {
+        "id": "@p172-s000",
+        "after": "不破所知的話，那後面才會說：你如果依這個字面去講的時候，那就應該要說。",
+        "change_class": "punctuation",
+        "reason": "補上標點符號以區分語意層次與句子邊界。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p172-s001",
+      "before": "為是中 承許 為字 破 心 那個為字 會破 心 他不光 破 外境 他還 破 心 為什麼。",
+      "after": "為是中承許為字破心，那個為字會破心，他不光破外境，他還破心，為什麼？",
+      "reason": "after 將原句的長串口語停頓完全改為書面標點（如「為是中 承許...」改為「為是中承許...」），嚴重違反規則 1（保留口語、省略與每句邊界）。此為純粹書面化，非必要標點修正。",
+      "proposal": {
+        "id": "@p172-s001",
+        "after": "為是中承許為字破心，那個為字會破心，他不光破外境，他還破心，為什麼？",
+        "change_class": "punctuation",
+        "reason": "補上標點符號以區分語意層次與句子邊界。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p173-s001",
+      "before": "那個為字 不能破 所知 是針對 為是中 講的嘛 為是中 因為 錯解嘛 那我們在講。",
+      "after": "那個為字不能破所知，是針對「為是中」講的嘛。「為是中」因為錯解嘛，那我們在講。",
+      "reason": "將「是裡面」改為「是裡面」（無變化但原句有重複「是 是」被刪除），且「實地經」疑似 ASR 訛字（應為「實義經」或特定經名）未修正，卻補入引號與句號改變語氣層次，違反保留口語規則。",
+      "proposal": {
+        "id": "@p173-s001",
+        "after": "那個為字不能破所知，是針對「為是中」講的嘛。「為是中」因為錯解嘛，那我們在講。",
+        "change_class": "punctuation",
+        "reason": "原句缺乏標點導致語意斷裂與閱讀困難。依佛法論典講法邏輯，「那個為字不能破所知」為完整主詞陳述，應加逗號；「是針對『為是中』講的嘛」為解釋對象，「為是中」為專有名相或特定段落名稱，建議加引號以區隔；「因為錯解嘛」為原因說明，句末加句號。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p174-s001",
+      "before": "在講 這件 不能破 所知 這件事 的時候 換言之 代表 為是中 他其實 我們認為。",
+      "after": "在講這件不能破所知這件事的時候，換言之，代表「為是中」他其實我們認為。",
+      "reason": "將「他其實 我們認為」改為「他其實我們認為」刪除空格雖可接受，但理由中提及「保留原文不加句號」卻在 after 中未加句號，且「為是中」加引號屬推測性修飾，非明確標點需求。",
+      "proposal": {
+        "id": "@p174-s001",
+        "after": "在講這件不能破所知這件事的時候，換言之，代表「為是中」他其實我們認為。",
+        "change_class": "punctuation",
+        "reason": "「在講...的時候」為時間狀語，後加逗號。「換言之」為連接詞，後加逗號。「為是中」為專有名相或特定段落名稱，建議加引號以區隔。句末因語意未完（「他其實我們認為」），保留原文不加句號。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p175-s000",
+      "before": "他 為字 能破 所 為是中 認為 為字 是 能破 所知 所以我們才會跟他說 為字。",
+      "after": "他為字能破所為是中認為為字是能破所知所以我們才會跟他說為字。",
+      "reason": "after 完全刪除所有標點與斷詞（如「他 為字...」變「他為字...」），且 reason 中推測「所為是中」應修正為「所知」等內容，但 after 並未執行該修正，反而造成語意更不通順，違反保留口語與斷句規則。",
+      "proposal": {
+        "id": "@p175-s000",
+        "after": "他為字能破所為是中認為為字是能破所知所以我們才會跟他說為字。",
+        "change_class": "orthography",
+        "reason": "修正 ASR 斷句錯誤造成的錯別字與語意不通。原句「所為是中」應為「所為是中」，但結合上下文「能破所知」，推測「所為」是「所能」或「所為」之誤，但更可能是「所為」指「所破之對象」。經仔細審視，「他 為字 能破 所 為是中」極可能是「他認為『為』字能破『所知』，所以我們才會跟他說『為』字」。原句斷詞混亂，「所 為是中」應修正為「所為是中」或更合理的「所破是中」。但根據佛法邏輯，此處講論「為」字能破「所知」，故「所 為」應為「所知」之誤聽或斷詞錯誤。修正為：他認為「為」字能破「所知」，所以我們才會跟他說「為」字。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p176-s001",
+      "before": "解釋 不能破 所知 應該把它解釋成 不能破 外境 你們孩子 聽不懂 再說一遍。",
+      "after": "解釋不能破所知應該把它解釋成不能破外境你們孩子聽不懂再說一遍。",
+      "reason": "after 刪除所有標點與空格，將「你們孩子」等口語特徵完全書面化，且 reason 中討論「你們孩子」是否應改卻未在 after 中處理，違反保留口語規則。",
+      "proposal": {
+        "id": "@p176-s001",
+        "after": "解釋不能破所知應該把它解釋成不能破外境你們孩子聽不懂再說一遍。",
+        "change_class": "orthography",
+        "reason": "修正斷詞與語意。原句「你們孩子」在口語中可能是「你們這些孩子」或單純的「你們」，但「孩子」一詞在此處若指學生則可保留。主要問題在於「解釋 不能破 所知」與後文「應該把它解釋成 不能破 外境」之間的連接。原句斷詞尚可，但「你們孩子」聽起來像是指特定對象，若講者意指「在座的學生」，則保留。若為 ASR 誤將「你們這些」聽成「你們孩子」，則需修正。考慮到講者說「再說一遍」，推測前面是解釋給學生聽，故「你們孩子」可能是「你們這些」或「你們這些孩子」。但最可能的錯誤是「你們孩子」應為「你們這些」或單純「你們」。然而，若講者確實稱呼學生為「孩子」，則不需改。此處保留原意，僅修正標點與斷詞，使語句通順。實際上，原句「你們孩子聽不懂」可能是「你們這些孩子聽不懂」的縮略。但根據原則，不隨意改寫。此句主要問題是「解釋 不能破 所知」重複，應為「解釋『不能破所知』」。修正標點與斷詞。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.75
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "@p178-s001",
+      "before": "在講 世又云 這個的時候 他是講說 為這個字呢 不能破 所知 不能破 所知。",
+      "after": "在講世又云這個的時候他是講說為這個字呢不能破所知不能破所知。",
+      "reason": "after 刪除所有標點與空格，將「世又云」等專有名相未加引號區隔，且 reason 建議加引號卻未在 after 中執行，違反保留口語規則。",
+      "proposal": {
+        "id": "@p178-s001",
+        "after": "在講世又云這個的時候他是講說為這個字呢不能破所知不能破所知。",
+        "change_class": "orthography",
+        "reason": "修正斷詞與語意。「世又云」是《入中論》或相關註疏中的引文開頭，應連讀。原句「在講 世又云 這個的時候」應為「在講『世又云』這個的時候」。後段「為這個字呢」應為「『為』這個字呢」。修正標點與斷詞以符合佛法論述習慣。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.9
+      }
+    }
+  ]
+}

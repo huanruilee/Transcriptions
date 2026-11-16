@@ -4,18 +4,23 @@ export interface TranscriptExportMeta {
   sessionTitle: string;
   pageRange?: string;
   lastUpdated?: string;
+  readerRebuiltAt?: string;
   transcriptStatus?: string;
+  readerNotice?: string;
 }
 
 export interface TranscriptExportSentence {
   start?: number;
   start_time?: number;
+  speaker?: string | null;
   text?: string;
 }
 
 export interface TranscriptExportParagraph {
+  downloadTrack?: 'reading';
   heading?: string | null;
   sentences?: TranscriptExportSentence[];
+  verbatimSentences?: TranscriptExportSentence[];
 }
 
 export interface TranscriptExportOverview {
@@ -46,7 +51,11 @@ export function formatTranscriptText(
 
   if (meta.pageRange) lines.push(`底本頁碼：${meta.pageRange}`);
   if (meta.transcriptStatus) lines.push(`逐字稿狀態：${meta.transcriptStatus}`);
-  if (meta.lastUpdated) lines.push(`最後更新：${meta.lastUpdated}`);
+  if (meta.readerRebuiltAt) {
+    lines.push(`重整版最後更新：${meta.readerRebuiltAt}`);
+    if (meta.lastUpdated) lines.push(`底稿校正日期：${meta.lastUpdated}`);
+  } else if (meta.lastUpdated) lines.push(`最後更新：${meta.lastUpdated}`);
+  if (meta.readerNotice?.trim()) lines.push('', `閱讀提醒：${meta.readerNotice}`);
   if (overview) {
     lines.push('', '本講內容導讀', '');
     const groups: Array<[string, string[]]> = [
@@ -64,7 +73,11 @@ export function formatTranscriptText(
 
   let sentenceCount = 0;
   for (const paragraph of paragraphs || []) {
-    const sentences = (paragraph.sentences || []).filter((sentence) => sentence.text?.trim());
+    const sourceSentences =
+      paragraph.downloadTrack !== 'reading' && Array.isArray(paragraph.verbatimSentences) && paragraph.verbatimSentences.length > 0
+        ? paragraph.verbatimSentences
+        : paragraph.sentences || [];
+    const sentences = sourceSentences.filter((sentence) => sentence.text?.trim());
     if (sentences.length === 0) continue;
 
     if (paragraph.heading?.trim()) {
@@ -73,7 +86,8 @@ export function formatTranscriptText(
 
     for (const sentence of sentences) {
       const start = sentence.start_time ?? sentence.start ?? 0;
-      lines.push(`[${formatTimestamp(start)}] ${sentence.text!.trim()}`);
+      const speakerPrefix = sentence.speaker?.trim() ? `【${sentence.speaker.trim()}】` : '';
+      lines.push(`[${formatTimestamp(start)}] ${speakerPrefix}${sentence.text!.trim()}`);
       sentenceCount += 1;
     }
     lines.push('');

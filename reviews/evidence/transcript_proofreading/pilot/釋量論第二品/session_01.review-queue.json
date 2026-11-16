@@ -1,0 +1,681 @@
+{
+  "schema": "transcript-proofreading-review-queue/v2",
+  "runId": "0f60b4b4-1320-4394-9cf1-64ee02c39582",
+  "sourceDigest": "sha256:e71e58d69a90687e692926954cda2ce0a7e0a82f2ae0907685aa809325bd7152",
+  "items": [
+    {
+      "itemId": "sha256:e6b2c92f22adfdb4ae4c43b9e0433259a1f37278b36d7f7bfebe1fcc969abfbc",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-9",
+      "before": "平時，當有人問我們「你是誰的弟子」時，我們通常會說：「我是尊者的弟子、我是某某大德的弟子、我是某位師長的弟子、我是某位法師的弟子。",
+      "after": "平時，當有人問我們「你是誰的弟子」時，我們通常會說：「我是尊者的弟子、我是某某大德的弟子、我是某位師長的弟子、我是某位法師的弟子。」",
+      "reason": "原文引號未閉合，且句末標點應置於引號內。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:597c5331405f57225e5bd632b071a0b998f95c4f4bdd969df818921b226ec2e2",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-10",
+      "before": "」但是很少人會說：「我是釋迦牟尼佛的弟子。",
+      "after": "」但是很少人會說：「我是釋迦牟尼佛的弟子。」",
+      "reason": "修正引號與標點位置，使語句完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:75d780b0197d7386c64f2a2efa5134e1e143c8f7e21699706bf426e23d5ad2df",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-13",
+      "before": "在娑婆世界，如果沒有釋迦牟尼佛為我們說法，我們根本無法了解佛法的真諦，甚至如果沒有釋迦牟尼佛為我們說法，我們根本無法認識其他的佛菩薩；",
+      "after": "在娑婆世界，如果沒有釋迦牟尼佛為我們說法，我們根本無法了解佛法的真諦，甚至如果沒有釋迦牟尼佛為我們說法，我們根本無法認識其他的佛菩薩。",
+      "reason": "句末標點應為句號而非分號，因語意已完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:a342fb5f4f91efc58e1e0ff5af1c1ca9cfd94cacb6d4c56bd600e8f0b7e86bc9",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-35",
+      "reason": "「暇滿的喻」是否為講者口語省略「喻義」或「比喻」，需確認講者原意。"
+    },
+    {
+      "itemId": "sha256:efd4c510097eae59241f4930877eb69d48b67838baaed64ab89a3bcbfbf7ccf9",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-36",
+      "reason": "「暇身」是否為講者口語簡稱「暇滿人身」，若為口語習慣則不需修改，但名相上建議補全。"
+    },
+    {
+      "itemId": "sha256:7b73763c2ebd5cd810a03f3a80bfa1ec28e0ea45173b871d81b3c8ba578b8472",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-53",
+      "reason": "「洞悉一切」後是否應為句號或分號，口語中可能有停頓，但書面語建議明確標點。"
+    },
+    {
+      "itemId": "sha256:37a1fd0798818fe11b0942418c54debe969855d59ffdbcbc1919a6ec0763ff2e",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-58",
+      "reason": "「長時地」是否為講者口語習慣，若為「長時間地」則更通順，但需確認原意。"
+    },
+    {
+      "itemId": "sha256:e9c29ffca76bc93cf6b03fc4ad901844e803017587649b8e5dc07fe9197a1327",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-69",
+      "reason": "引號閉合位置可能因口語停頓而模糊，需確認是否為完整引用。"
+    },
+    {
+      "itemId": "sha256:77b96944b8d6ee96ba8c1ed556e1adc28095a97f32761e77710c9de32a69aa81",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-70",
+      "reason": "同上，引號閉合與新句子開頭的銜接。"
+    },
+    {
+      "itemId": "sha256:65fa47fca5eb11e3e1e64d67ed5bda87519954f82bcfe089bee9fda0f3f35c1f",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-71",
+      "reason": "同上。"
+    },
+    {
+      "itemId": "sha256:e83ecfd5c783ac0e45dfa02305344f7ae56c1879c1519436ab28295b31251546",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-72",
+      "reason": "同上。"
+    },
+    {
+      "itemId": "sha256:67722e1482f1159509f1184a157e25947cc025c3f75f9ad2fb1fcb103736261a",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-77",
+      "reason": "同上。"
+    },
+    {
+      "itemId": "sha256:bcfb574a493d6c8c98c0d6194716a8a15cdadb3711e1eefe4c0e08fda584be19",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-78",
+      "reason": "同上。"
+    },
+    {
+      "itemId": "sha256:697509f8bb6c43c663b0cadbce59da33c848395a6dbd2aeb6d6e589380bed15c",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-83",
+      "reason": "同上。"
+    },
+    {
+      "itemId": "sha256:4e18561d4c14811a5376f90cb6a82b00bfd847e76adab4934c952c9b02323fc3",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-84",
+      "reason": "同上。"
+    },
+    {
+      "itemId": "sha256:3ae97641b42c04ed515075869cd327020e3f8da9081592e7e7e6979e2e64539f",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-97",
+      "reason": "引號範圍是否僅限「在眾人當中我是最重要的」，還是包含後續內容。"
+    },
+    {
+      "itemId": "sha256:77688c08e5183ba0032b36a5c430468325a28f7f5fb3684476645aeb36cc2a5b",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-134",
+      "before": "（學員：是。",
+      "after": "（學員：是。）",
+      "reason": "同上，修正括號內回答的標點斷裂問題。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "itemId": "sha256:1a0d44d475de9be32465321a14faa5e21fdc74968b082273da7cc8a253a2f7cb",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-127",
+      "reason": "「胸口」一詞在佛法修持中常指代「心」或「意」的所在，但 ASR 可能將「心」誤聽為「胸口」，或講者確指生理位置。此處涉及法義理解與聽音判斷，維持原文並標記不確定。"
+    },
+    {
+      "itemId": "sha256:36496e9dd7c4b9ff4ff251494ee041f11a9be47450c9f58e02655fce99c01829",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-138",
+      "reason": "「我」跑到了大腦這裡，是嗎？此句語意略顯口語化，「跑到」一詞在佛法論述中較少見，可能為「生起於」或「安住於」之口誤，但無法確定講者原意，故標記不確定。"
+    },
+    {
+      "itemId": "sha256:60f32451c550655586227af3a3476a11a1f45555d5f747aa900d8065ad493d75",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-153",
+      "before": "「我錢都花了，但是你賣給我的這個東西竟然是假的、過期的，或者是即將到期的。",
+      "after": "「我錢都花了，但是你賣給我的這個東西竟然是假的、過期的，或者是即將到期的。」",
+      "reason": "補上句末閉引號，使引文完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:95163474182b8e6a1013f404e6f2713acc3fcbeaacd676990e764734b234294a",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-191",
+      "before": "只要我不相信佛，我就會在輪迴中持續流轉，所以我能否解脫，還是我是否會在輪迴當中繼續流轉的關鍵，在於我相不相信佛。",
+      "after": "只要我不相信佛，我就會在輪迴中持續流轉，所以我能否解脫，還是我是否會在輪迴當中繼續流轉的關鍵，在於我相不相信佛。」",
+      "reason": "補上句末閉引號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "itemId": "sha256:2314274fdf6223320823a729d18b58f99af706a8115b5941017ab777f2d218b2",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-162",
+      "reason": "「四種行相」後接破折號，口語中可能為停頓或強調，標點使用在逐字稿中較難判斷是否為講者刻意設計。"
+    },
+    {
+      "itemId": "sha256:a1204662d1e5362f47286a30b35648a8992059d81e66bf81f060194341016446",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-180",
+      "reason": "長句結構複雜，引文範圍與敘述交界處在聽覺上可能有重疊，需確認講者是否將「這就代表」視為引文一部分。"
+    },
+    {
+      "itemId": "sha256:1a9215bc00e18e11d3e8140b8d02b718406984c7a4877311c15cbcb8ef3d89e9",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "proposal",
+      "sentenceId": "sent-234",
+      "before": "（學員：不可能。",
+      "after": "（學員：不可能。）",
+      "reason": "括號內對話結束應補上右括號，與後句標點銜接。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "itemId": "sha256:c14c28d41f84ed128fba1c80a0628836c7b9a6bb958bd1d5525a5042c5e336d5",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-213",
+      "reason": "「透由」為台語或特定用法，雖非標準書面語，但專案政策允許保留，故不強制修正為「透過」。"
+    },
+    {
+      "itemId": "sha256:63e1ec19f4413b51c15d32ec063639956a04e2230ccf8a644e82d3d9e36750a8",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-248",
+      "reason": "「俱生緣」為唯識學術語，聽音可能為「俱生緣」或「俱有緣」，需確認講者原意，維持原文。"
+    },
+    {
+      "itemId": "sha256:d487a59140c4fc2388846b7e5e655a52e05450d034f307ce84f62b8fa6e28ae3",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-254",
+      "reason": "原稿使用分號連接兩個否定句，若講者意為強調兩者的並列且語氣較強，則保留分號亦無不可，此處僅建議改為逗號以符合一般書面規範。"
+    },
+    {
+      "itemId": "sha256:910b2abbd7bd6ca8ba4bbe0bd2fc56556f67744068fa4c86936ac97e5a46fc35",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-259",
+      "reason": "原稿「我們會造下惡業，這樣的惡業」為口語重複強調，若講者意圖保留此種口語節奏，則標點修改非強制性。"
+    },
+    {
+      "itemId": "sha256:d27357ce809ddb5ce0bb1c07f910d9745e967a6ad978238fd9f34e1cde99fc57",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-270",
+      "reason": "口語中常以分號表示長句中的停頓，若講者語速較慢或有意強調「提醒自己」的動作，保留分號亦可接受。"
+    },
+    {
+      "itemId": "sha256:e8a5a7ea6bb86f32236b77cb8d1a4fb10d5e0dff9bef5350a2214bd1ab988cfa",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-287",
+      "reason": "口語敘述中，假設情境前的停頓有時以逗號處理，改為分號僅為建議，非絕對錯誤。"
+    },
+    {
+      "itemId": "sha256:caf9943085a4f51d306bbaac54073efecc17fc667863d48f29b761d68beb1157",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-293",
+      "reason": "「不怎麼快樂」為口語表達，若講者意圖保留此種自然語氣，則無需修改文字，僅標點微調。"
+    },
+    {
+      "itemId": "sha256:496e73feecd29f9d2764f835c38c1c8972c691675ee708e064754ca6a33b3f70",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-313",
+      "reason": "「愛他執」一詞在佛法中較少見，通常為「愛他心」或「利他心」。若講者特指某種執著（如對他人的過度執著），則保留；若為口誤，則應修正。此處無法確定講者原意，故標記為 uncertain。"
+    },
+    {
+      "itemId": "sha256:420206c730de4211c1f1b492913d601169ccc965fa5e143a9d5d22ecb64f62d8",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-346",
+      "reason": "引號斷句位置不明確。sent-343 開頭有引號，sent-346 又開引號，sent-347 又閉引號。需確認講者是否在此處有停頓或重新引用，或是 ASR 錯誤導致引號重複。"
+    },
+    {
+      "itemId": "sha256:541b58b890db78c152390a7a9416b9157954562b6a252472d507cbcc4020114c",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-347",
+      "reason": "同上，引號結構混亂，需確認引文範圍。"
+    },
+    {
+      "itemId": "sha256:940279235ff5eb2cf9f8e96759c2314dd313b20ffe427b65cb13d65d188df723",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-351",
+      "reason": "句末「反正這些法我都聽過了，本來就有前後世。」引號未閉合，且與下一句連接緊密，需確認是否為語音斷句或漏字。"
+    },
+    {
+      "itemId": "sha256:1c68f5f56f5f28a772aa93bada8b2e04f82f0cf756e85da72ac62f6ac71c7107",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-352",
+      "reason": "句首引號「」未閉合，且內容似為承接上一句的內心獨白，需確認是否為語音斷句。"
+    },
+    {
+      "itemId": "sha256:fd1281870d76b6f21741698ddbfac7035b646ad6ca4c98f6dfa4c73e3d59cb80",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-362",
+      "reason": "句末引號未閉合，且與下一句連接緊密，需確認是否為語音斷句或漏字。"
+    },
+    {
+      "itemId": "sha256:6659c7acfc853d95ed9ee4dd5f6392a8e66635308398be6f4cea4a6432ca80fb",
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "uncertain",
+      "sentenceId": "sent-363",
+      "reason": "句首引號未閉合，且內容似為承接上一句的內心獨白，需確認是否為語音斷句。"
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-3",
+      "before": "）今年在這個地方要為各位介紹的是《釋量論》的第二品，按照過往的慣例，每一天早上在講課之前，會帶著各位唸《開經偈》。",
+      "after": "）今年在這個地方要為各位介紹的是《釋量論》第二品，按照過往的慣例，每一天早上在講課之前，會帶著各位唸《開經偈》。",
+      "reason": "刪除「的」字改變了原句語氣與節奏，且口語中「第二品」前加「的」並非錯誤，僅是風格差異，不符合「只限有上下文明確支持、幾乎無歧義」之 accept 標準。",
+      "proposal": {
+        "id": "sent-3",
+        "after": "）今年在這個地方要為各位介紹的是《釋量論》第二品，按照過往的慣例，每一天早上在講課之前，會帶著各位唸《開經偈》。",
+        "change_class": "punctuation",
+        "reason": "書名號《釋量論》與「第二品」之間通常不加「的」字，且「第二品」前若有「的」字會使語意稍顯累贅，改為直接修飾更符合佛學講稿習慣。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-132",
+      "before": "（學員：坐在拜墊上的人。",
+      "after": "（學員：坐在拜墊上的人。）",
+      "reason": "理由提及「整合為完整語句」，但 after 僅在括號內補右括號，未實際整合前後句內容，且若需整合應屬大幅改寫，不符合 accept 標準。",
+      "proposal": {
+        "id": "sent-132",
+        "after": "（學員：坐在拜墊上的人。）",
+        "change_class": "punctuation",
+        "reason": "原文括號與標點斷裂，導致句子不完整。根據上下文語意，應將括號內的回答與後續問句整合為完整語句，修正標點以符合書面規範。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-162",
+      "before": "甚至在佛法當中，提到苦諦的四種行相──無常、苦、空、無我；",
+      "after": "甚至在佛法當中，提到苦諦的四種行相──無常、苦、空、無我；但平時我們的起心動念想的卻恰恰相反，我們想的是什麼？",
+      "reason": "將分號改為逗號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且理由「符合口語流暢度」主觀性過強，不符合 accept 標準。",
+      "proposal": {
+        "id": "sent-162",
+        "after": "甚至在佛法當中，提到苦諦的四種行相──無常、苦、空、無我；但平時我們的起心動念想的卻恰恰相反，我們想的是什麼？",
+        "change_class": "punctuation",
+        "reason": "原句分號後接「但」，語意緊密，建議改為逗號以符合口語流暢度與標點規範。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.7
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-165",
+      "before": "在這些錯誤的念頭之後，所帶來的結果沒有一樣是好的，我們將無常的蘊體執著為常；",
+      "after": "在這些錯誤的念頭之後，所帶來的結果沒有一樣是好的：我們將無常的蘊體執著為常；",
+      "reason": "將分號改為冒號屬於語意邏輯層次的改動，非明顯錯別字或必要標點，且原句分號用法在口語轉寫中可接受，不符合 accept 標準。",
+      "proposal": {
+        "id": "sent-165",
+        "after": "在這些錯誤的念頭之後，所帶來的結果沒有一樣是好的：我們將無常的蘊體執著為常；",
+        "change_class": "punctuation",
+        "reason": "「沒有一樣是好的」後接具體說明，建議將分號改為冒號以明確指示下文。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.7
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-219",
+      "before": "在這樣的情況之下，既然我們追隨祂的腳步，我們是不是應該效學祂的精神？",
+      "after": "在這樣的情況之下，既然我們追隨祂的腳步，我們是不是應該效法祂的精神？",
+      "reason": "將「效學」改為「效法」雖為常用詞彙，但「效學」在口語中並非絕對錯誤，且理由未提供確鑿的佛典依據證明此處必為訛字，屬推測性改寫。",
+      "proposal": {
+        "id": "sent-219",
+        "after": "在這樣的情況之下，既然我們追隨祂的腳步，我們是不是應該效法祂的精神？",
+        "change_class": "orthography",
+        "reason": "「效學」應為「效法」，此為固定詞彙用法。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-259",
+      "before": "例如：如果我們一心想的就是追求現世安樂，在這樣的情況下，我們會造下惡業，這樣的惡業，縱使能夠透由持咒、拜佛將它淨化，但追求現世安樂的心依然沒有調整，而這樣的心所衍生的惡行是不是會持續下去？",
+      "after": "例如：如果我們一心想的就是追求現世安樂，在這樣的情況下，我們會造下惡業；這樣的惡業，縱使能夠透由持咒、拜佛將它淨化，但追求現世安樂的心依然沒有調整，而這樣的心所衍生的惡行是不是會持續下去？",
+      "reason": "將逗號改為分號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且原句逗號用法在口語中可接受，不符合 accept 標準。",
+      "proposal": {
+        "id": "sent-259",
+        "after": "例如：如果我們一心想的就是追求現世安樂，在這樣的情況下，我們會造下惡業；這樣的惡業，縱使能夠透由持咒、拜佛將它淨化，但追求現世安樂的心依然沒有調整，而這樣的心所衍生的惡行是不是會持續下去？",
+        "change_class": "punctuation",
+        "reason": "原句「我們會造下惡業，這樣的惡業」中間斷句過短且語意重複，建議改為分號以區隔因果與轉折層次，提升閱讀清晰度。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-287",
+      "before": "我們可能想要買很多棟房子，想要同時擁有很多部名車，假設這個地球上所有的房子、土地都是你一個人的，所有的車子、包包、化妝品通通都是你的，全部都是免費的，但是只有你一個人，你快樂嗎？",
+      "after": "我們可能想要買很多棟房子，想要同時擁有很多部名車；假設這個地球上所有的房子、土地都是你一個人的，所有的車子、包包、化妝品通通都是你的，全部都是免費的，但是只有你一個人，你快樂嗎？",
+      "reason": "將逗號改為分號屬於語氣與節奏的改動，非明顯錯別字或必要標點，且原句逗號用法在口語中可接受，不符合 accept 標準。",
+      "proposal": {
+        "id": "sent-287",
+        "after": "我們可能想要買很多棟房子，想要同時擁有很多部名車；假設這個地球上所有的房子、土地都是你一個人的，所有的車子、包包、化妝品通通都是你的，全部都是免費的，但是只有你一個人，你快樂嗎？",
+        "change_class": "punctuation",
+        "reason": "「想要同時擁有很多部名車」後接長假設情境，建議改為分號以區隔願望描述與假設情境。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-339",
+      "before": "4.學習佛法應該保持懷疑",
+      "after": "4. 學習佛法應該保持懷疑",
+      "reason": "增加空格屬於排版格式調整，非內容修正，且理由自承「保留原樣亦可」，不符合 accept 標準。",
+      "proposal": {
+        "id": "sent-339",
+        "after": "4. 學習佛法應該保持懷疑",
+        "change_class": "punctuation",
+        "reason": "標題數字與文字間建議增加空格，或確認是否為口語中的自然停頓。若為逐字稿，保留原樣亦可，但標準書寫通常為「4. 學習...」。此處僅做標點微調建議。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.7
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "sent-353",
+      "before": "」在我們心中這些想法應該都是伺意知吧！",
+      "after": "在我們心中這些想法應該都是伺意知吧！",
+      "reason": "將「伺意知」改為「伺察意」涉及佛學名相專業判斷，雖極可能正確，但需回聽確認口語發音或查證原典以確保無誤，符合 uncertain 標準。",
+      "proposal": {
+        "id": "sent-353",
+        "after": "在我們心中這些想法應該都是伺意知吧！",
+        "change_class": "term",
+        "reason": "修正佛學名相，將口語訛誤的「伺意知」改為標準法相名詞「伺察意」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "sent-361",
+      "before": "所以從這一個角度來分析的話，猶豫知比伺意知更重要。",
+      "after": "所以從這一個角度來分析的話，猶豫知比伺察意更重要。",
+      "reason": "同上，涉及佛學名相專業判斷，需回聽確認口語發音或查證原典以確保無誤。",
+      "proposal": {
+        "id": "sent-361",
+        "after": "所以從這一個角度來分析的話，猶豫知比伺察意更重要。",
+        "change_class": "term",
+        "reason": "修正佛學名相，將口語訛誤的「伺意知」改為標準法相名詞「伺察意」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-uncertain",
+      "sentenceId": "sent-364",
+      "before": "甚至從另外一個角度來分析，如果猶豫知比伺意知更重要，當它在你心中現起時，你為什麼要覺得不安心？",
+      "after": "甚至從另外一個角度來分析，如果猶豫知比伺察意更重要，當它在你心中現起時，你為什麼要覺得不安心？",
+      "reason": "同上，涉及佛學名相專業判斷，需回聽確認口語發音或查證原典以確保無誤。",
+      "proposal": {
+        "id": "sent-364",
+        "after": "甚至從另外一個角度來分析，如果猶豫知比伺察意更重要，當它在你心中現起時，你為什麼要覺得不安心？",
+        "change_class": "term",
+        "reason": "修正佛學名相，將口語訛誤的「伺意知」改為標準法相名詞「伺察意」。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.95
+      }
+    },
+    {
+      "status": "pending",
+      "reviewer": null,
+      "decidedAt": null,
+      "appliedSourceDigest": null,
+      "kind": "verifier-rejected",
+      "sentenceId": "sent-376",
+      "before": "不要覺得法很困難，換一個角度去想：「法在此時此刻無法堪為我的心的對境，那是因為我對於這個法類不熟悉。",
+      "after": "不要覺得法很困難，換一個角度去想：「法在此時此刻無法堪為我的心的對境，那是因為我對於這個法類不熟悉。」如果是因為我對於這個法類不熟悉，而使得這一法無法成為我的心的對境，此時，假使我們真的想要讓它成為我們心的對境，是不是應該反覆地練習，讓我們從原本的不認識到認識，從認識進一步去接受它、熟悉它，到最終能夠完全掌握它？",
+      "reason": "after 內容大幅擴充，將原本未包含的長句（「如果是因為...完全掌握它？」）直接插入引號內，違反「不得補寫未出現在本句的內容」及「不得搬用前後句」之規則。",
+      "proposal": {
+        "id": "sent-376",
+        "after": "不要覺得法很困難，換一個角度去想：「法在此時此刻無法堪為我的心的對境，那是因為我對於這個法類不熟悉。」如果是因為我對於這個法類不熟悉，而使得這一法無法成為我的心的對境，此時，假使我們真的想要讓它成為我們心的對境，是不是應該反覆地練習，讓我們從原本的不認識到認識，從認識進一步去接受它、熟悉它，到最終能夠完全掌握它？",
+        "change_class": "punctuation",
+        "reason": "修正標點，將開頭引號「」與結尾引號」」的斷句位置調整，使引文完整包含在內。原稿中引號未正確閉合導致語意斷裂。",
+        "evidence": [
+          "local-model-context"
+        ],
+        "confidence": 0.85
+      }
+    }
+  ]
+}

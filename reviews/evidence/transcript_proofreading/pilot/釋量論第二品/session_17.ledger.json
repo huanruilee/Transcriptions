@@ -1,0 +1,88 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:79d0c1955be7345717849998be9fe2ea4a8f839c2b7554f2a1681aa86dde32be",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "sent-112",
+      "before": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？",
+      "after": "這時有人一定會想說：「苗芽形成之後，這怎麼解釋？」",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "sent-123",
+      "before": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？",
+      "after": "這時或許有人又會以此類推：「哪個陶瓶不是跟在火之後？」",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將句末的問號移至引號內，並補上右引號以符合語法。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "1c16db03-d76b-496c-9446-87ee3d567aca"
+}

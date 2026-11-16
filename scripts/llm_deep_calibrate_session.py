@@ -158,6 +158,16 @@ def save_json(path, data):
         f.write("\n")
 
 def extract_source_pages(page_num, window=2):
+    """T2：擴大為前 10 頁、後 3 頁（涵蓋格西回顧前文），由 lib.session_prompt 提供。"""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from lib.session_prompt import build_source_context, window_pages
+        pages = window_pages(f"p.{page_num}")
+        ctx = build_source_context(f"p.{page_num}")
+        if ctx and pages:
+            return ctx, pages[0], pages[-1]
+    except Exception as e:
+        print(f"⚠️ wide window fallback: {e}")
     pages_text = []
     start_p = max(1, page_num - window)
     end_p = min(285, page_num + window)

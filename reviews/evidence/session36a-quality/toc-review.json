@@ -1,0 +1,56 @@
+{
+  "session": "36A",
+  "scope": "Remove four spurious 36A sessionIds entries; add 己二 sibling under 戊二 and reparent exactly four existing 庚 nodes; correct one ancestor title 醜二 to 丑二. Retain all existing node fields, session references, timings and other relationships, with only the explicit title exception.",
+  "verdict": "PASS: source-text and current session-data association audit; not independent audio timing certification",
+  "rules": [
+    ".agents/rules/study_guide_root_text_invariants.md:16-24 (cross-page verification and next-session cutoff)",
+    ".agents/skills/buddhist_transcription_toolkit/SKILL.md:114-126 (physical root-text boundary)"
+  ],
+  "changes": [
+    {"title": "亥一、正義", "page": 100, "before36A": true, "after36A": false, "reason": "The opening p104 flashback is under 亥二, beginning source_text/page_103.txt:8; not 亥一 at page_100.txt:21. Flashback quotation: page_104.txt:15-18."},
+    {"title": "申四、明破他生無世妨難", "page": 109, "before": ["35A", "35B", "34B", "36A"], "after": ["35A", "35B", "34B"], "source": "source_text/page_109.txt:18", "reason": "Earlier section, not an ancestor of 巳三 or 巳四; main 36A resumes at p111 巳三."},
+    {"title": "申五、明世間妨難之理", "page": 110, "before": ["35B", "36A", "35A", "34B"], "after": ["35B", "35A", "34B"], "source": "source_text/page_110.txt:10", "reason": "Earlier section, not an ancestor of the actual 36A lecture sections."},
+    {"title": "午二、明世名言亦無他生釋世妨難", "page": 110, "before": ["35B", "36A", "35A", "34B"], "after": ["35B", "35A", "34B"], "source": "source_text/page_110.txt:22", "reason": "Earlier section ends before 巳三 at page_111.txt:25; no legitimate ancestor relationship removed."}
+  ],
+  "retained": [
+    {"title": "巳三、明破他生之功德", "page": 111, "timestamp": 127, "source": "source_text/page_111.txt:25-26", "sessionSentence": "36A p3-s1"},
+    {"title": "巳四、明全無自性生", "page": 113, "timestamp": 1609, "source": "source_text/page_113.txt:7", "sessionSentence": "36A p16-s1", "sessionIds": ["36A", "36B", "37A", "37B"]},
+    {"title": "午一、破計有自相", "page": 113, "timestamp": 1609, "source": "source_text/page_113.txt:7", "sessionSentence": "36A p16-s2", "sessionIds": ["36A", "36B", "37A", "37B"]},
+    {"title": "未一、聖根本智應是破諸法之因", "page": 113, "timestamp": 2105, "source": "source_text/page_113.txt:8-19", "sessionSentence": "36A p20-s1", "sessionIds": ["36A", "36B"]}
+  ],
+  "boundary": {
+    "p112": "page_112.txt:3-23 is 巳三 continuation, with no new heading.",
+    "36AEnd": "Final content: 36A p26-s1 explicitly references the last two lines of p113 through p114 line 5 and quotes the 寶積經 passage starting page_113.txt:23-24 (不以空性令諸法空，但法性自空); explanation discusses self/other emptiness. The final sentence ends 我們先休息一下，下節課繼續。 The unsupported next-lecture preview was removed and is not evidence for this boundary.",
+    "36BOpening": "36B p1-s1 resumes 尚不從自體破除自性 at page_114.txt:3-4; page overlap is real, so a simplistic exclusive page cutoff would be incorrect.",
+    "futureMention": "36A p16-s3 enumerates 未二/未三 as structure, not completed lecture coverage. 未二 remains 36B at 1398 (p14-s1), rooted at page_114.txt:22; no 36A association added.",
+    "flashback": "p104 cross-reference retained in session content; no new TOC anchor invented. 亥二's existing references remain unchanged."
+  },
+  "preservation": {
+    "method": "Sorted flattened existing-node field inventory and parent-child edge inventory captured after the approved four 36A reference removals, before ancestry edits. Exclude only the new 己二 node, normalize only its four direct child edges back to 己一 and the sole 丑二 title back to 醜二. Separately verify remaining child order, exactly one new parent, exactly four moved children, and four unchanged 36A associations.",
+    "fieldsSha256": "cba454d3f2fe1a03b92b9668fe0f50a7e5676d2ccd48cdd725c0a1dec1c76ffb",
+    "edgesSha256": "0e9aaa225470a87f6613883958542aeafceac17828bbf3f60f76d68e940f5ac0",
+    "remainingChildOrderSha256": "3373e736ada958f0bde7fc3556b4b4789f98c00ddb363285f37a07fc68b08ef7"
+  },
+  "ancestryReview": {
+    "sourceProof": [
+      "source_text/page_021.txt:21-24: 戊二 divides into 己一 (first five grounds), 己二 (sixth), 己三 (last four); 己二 is a sibling, not a child of 己一.",
+      "source_text/page_063.txt:17-18: 己二 explicitly lists exactly 庚一 明此地訓釋與慧度增勝, 庚二 讚慧度功德, 庚三 觀甚深緣起真實, 庚四 結述此地功德.",
+      "source_text/page_064.txt:12,24-25 confirms the standalone 庚二 and 庚三 headings; existing node page=63 reflects the p63 outline enumeration and is preserved.",
+      "source_text/page_240.txt:4-16 confirms 庚四 and explicitly discusses 第六地.",
+      "source_text/page_080.txt:25-26 spells 丑二、成立彼宗之正理 and lists 寅二、破他生; only that existing ancestor title is corrected."
+    ],
+    "before": "戊二 > 己一、釋極喜等五地 > 庚三、觀甚深緣起真實 > ... > 醜二、成立彼宗之正理 > 寅二、破他生 > ... > 巳三 or 巳四 > 36A",
+    "after": "戊二 > 己二、釋第六現前地 > 庚三、觀甚深緣起真實 > ... > 丑二、成立彼宗之正理 > 寅二、破他生 > ... > 巳三 or 巳四 > 36A",
+    "moved": ["庚一、明此地訓釋與慧度增勝", "庚二、讚慧度功德", "庚三、觀甚深緣起真實", "庚四、結述此地功德"],
+    "newParent": {"title": "己二、釋第六現前地", "sessionId": "01", "page": 63, "timestamp": 0, "needsReview": true, "reviewStatus": "needs_review"},
+    "newParentRationale": "session_01.json paragraph p_91 at 1259.76 contains 六三，第六，現前地，分四. Session identity is grounded in current text. Use timestamp=0 pending anchor rather than assert acoustic precision or copy the existing children 0.21 placeholder; no independent listening performed.",
+    "deferred": "Existing seventh-through-tenth-ground branches remain under 己一, and all descendants of the four moved nodes remain intact, including the pre-existing unexpected 巳三 beneath 庚四. These are outside the authorized pilot; no other title, body, reference, or timestamp changes.",
+    "red": "Ancestry baseline: 1 failed / 3 passed (missing 己二 sibling). After reparenting 4 passed. Separate 丑二 gate: 1 failed / 3 passed before the single title correction."
+  },
+  "tests": {
+    "red": "node --test tests/unit/session36aToc.test.js: 1 failed, 2 passed; failure lists exactly the four spurious associations",
+    "green": "node --test tests/unit/session36aToc.test.js tests/unit/toc.test.js tests/unit/tocRemediation.test.js tests/unit/tocTranscriptAlignment.test.js: 17 passed, 0 failed (including ancestry and 丑二 gates)",
+    "diffCheck": "git diff --check: passed"
+  },
+  "limitations": "Timestamps confirmed against current loaded session data, including estimated study-guide timing; no model calls, audio inference, transcript edits, UI edits, commit or push."
+}

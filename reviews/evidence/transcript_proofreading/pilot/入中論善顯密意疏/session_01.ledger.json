@@ -1,0 +1,436 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:afd9ab29a2c303941ebbcb91b804d192791db5c9c2e85f1aa09e2255f7658f42",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "@p009-s000",
+      "before": "這樣可以嗎？這方面，那第一呢？第二的話就是變成像顯教方面的話，就是說像宗關鍵這個部分。",
+      "after": "這樣可以嗎？這方面，那第一呢？第二的話就是變成像顯教方面的話，就是說像宗大師這個部分。",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「宗關鍵」應為「宗大師」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p015-s000",
+      "before": "《中論》以及前面很多，是有一些樣的一些優秀的解釋，哪一些是錯誤的辯證。",
+      "after": "《中論》以及前面很多，是有一些樣的一些優秀的解釋，哪一些是錯誤的辯證？",
+      "changeClass": "punctuation",
+      "reason": "句末為疑問語氣，應加問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p015-s001",
+      "before": "對不對，總之就是變成有《中論》師，這樣。",
+      "after": "對不對？總之就是變成有《中論》師，這樣。",
+      "changeClass": "punctuation",
+      "reason": "「對不對」為疑問語氣，應加問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p026-s001",
+      "before": "總之不是說孔子有72個弟子，對不對，跟那個一樣了，《中論》的註疏可能更多了。",
+      "after": "總之不是說孔子有 72 個弟子，對不對？跟那個一樣了，《中論》的註疏可能更多了。",
+      "changeClass": "punctuation",
+      "reason": "口語疑問句「對不對」後應加問號以明確語氣與句子邊界。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p052-s001",
+      "before": "中見嘛 世間的中見 中觀見見 這個就把它。",
+      "after": "中見嘛，世間的中見、中觀見見，這個就把它。",
+      "changeClass": "punctuation",
+      "reason": "口語停頓處需補逗號與頓號以區隔詞彙，「中觀見見」保留重複口語特徵。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p057-s000",
+      "before": "對，可是就是變成像大止觀，廣論的那個止觀的話，就因為前人有太多的。",
+      "after": "對，可是就是變成像大止觀、廣論的那個止觀的話，就因為前人有太多的。",
+      "changeClass": "punctuation",
+      "reason": "「大止觀」與「廣論」為並列專有名詞，建議使用頓號區隔。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p080-s001",
+      "before": "對，他能夠專一的做這件事，所以即便是最複雜的，其實還是可以學的會。",
+      "after": "對，他能夠專一的做這件事，所以即便是最複雜的，其實還是可以學得會。",
+      "changeClass": "grammar",
+      "reason": "「學得會」應為可能補語結構，用「得」而非「的」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p091-s000",
+      "before": "最主要是那個吧 名此地的 菩薩以 慧度增勝。",
+      "after": "最主要是那個吧，名此地的菩薩以慧度增勝。",
+      "changeClass": "punctuation",
+      "reason": "原句空格過多且斷裂，依語意與佛經標題格式（如《入中論》第六品標題）應為連續成句，補上標點使語意完整。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p091-s001",
+      "before": "菩薩 菩薩 菩薩這種話 中文也有這種話的說法嘛。",
+      "after": "菩薩、菩薩、菩薩這種話，中文也有這種話的說法嘛。",
+      "changeClass": "punctuation",
+      "reason": "重複的「菩薩」為口語強調，應以頓號分隔；句末補上逗號與句號以區分語意層次。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p094-s000",
+      "before": "就是變成 初地的時候 不是波羅蜜多增勝 對不對 二諦的時候 是 呃 直接波羅蜜多增勝。",
+      "after": "就是變成初地的時候，不是波羅蜜多增勝，對不對？二諦的時候，是呃，直接波羅蜜多增勝。",
+      "changeClass": "punctuation",
+      "reason": "修正標點符號以區分問句與陳述句，並為語氣詞「呃」添加適當標點。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p104-s000",
+      "before": "就第一，可能要知道這個，你看這個第一，後面或許還好一點，這邊是一個非常藍的地方。",
+      "after": "就第一，可能要知道這個，你看這個第一，後面或許還好一點，這邊是一個非常難的地方。",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字：「藍」應為「難」，語意方通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p121-s000",
+      "before": "或者是說前初地的時候 不是也很接近嗎 是沒有錯了 可是就是變成。",
+      "after": "或者是說前初地的時候，不是也很接近嗎？是沒有錯了，可是就是變成。",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將口語中的停頓處改為逗號或問號，以符合語法結構。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p122-s000",
+      "before": "講一個更 更強的接近 好像也不能講 可是第二諦的時候 持戒波羅蜜多。",
+      "after": "講一個更、更強的接近，好像也不能講，可是第二諦的時候，持戒波羅蜜多。",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將重複的「更」之間改為頓號，並調整語句停頓。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p125-s001",
+      "before": "這邊的緣起 只能是那個了 就是變成。",
+      "after": "這邊的緣起，只能是那個了，就是變成。",
+      "changeClass": "punctuation",
+      "reason": "修正標點，將「緣起」後改為逗號，使語意連貫。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p135-s001",
+      "before": "我覺得就是說，先要有這樣一個概念，第一了，第二這邊會有一個很大的問題。",
+      "after": "我覺得就是說，先要有這樣一個概念，第一了，第二，這邊會有一個很大的問題。",
+      "changeClass": "punctuation",
+      "reason": "口語中「第二」後通常有停頓，建議補上逗號以區隔語意層次。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p136-s001",
+      "before": "反正就是因此此地得到三個什麼，三個智慧，三種智慧，對。",
+      "after": "反正就是因此此地得到三個什麼，三個智慧、三種智慧，對。",
+      "changeClass": "punctuation",
+      "reason": "「三個智慧」與「三種智慧」為並列修飾，建議使用頓號區隔，使語意更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p137-s000",
+      "before": "如是當知此地圓滿三種慧學，有沒有，有看到嗎？三種慧學，對，這個地方每個人的解釋都會不一樣。",
+      "after": "如是當知此地圓滿三種慧學，有沒有？有看到嗎？三種慧學，對，這個地方每個人的解釋都會不一樣。",
+      "changeClass": "punctuation",
+      "reason": "「有沒有」為疑問句，建議改為問號；「有看到嗎」亦為疑問句，需保留問號以符合語氣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p141-s000",
+      "before": "六十 應該是六十吧 此地佛子，由情修三十七菩提分法 較前增上，從此所發智慧光焰,較第三地所說如赤金光尤為超勝。以發增上正智火焰,故此地名曰焰慧。如有超勝 有沒有 對 對 所以這邊要好好地看一下。",
+      "after": "六十 應該是六十吧 此地佛子，由情修三十七菩提分法 較前增上，從此所發智慧光焰，較第三地所說如赤金光尤為超勝。以發增上正智火焰，故此地名曰焰慧。如有超勝 有沒有 對 對 所以這邊要好好地看一下。",
+      "changeClass": "punctuation",
+      "reason": "修正標點符號，在「光焰」後補上逗號，在「火焰」後補上逗號，以符合語意斷句。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p142-s000",
+      "before": "發慧意 發慧意 教前次光有超勝 有沒有 對 對 所以這邊要好好地看一下。",
+      "after": "發慧意，發慧意。教前次光有超勝，有沒有？對、對。所以這邊要好好地看一下。",
+      "changeClass": "punctuation",
+      "reason": "調整標點以區分語句邊界與疑問語氣，使口語轉寫更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p143-s000",
+      "before": "修什麼呢 菩提分 這個菩提分指的是三十七道品 對 對。",
+      "after": "修什麼呢？菩提分。這個菩提分指的是三十七道品，對、對。",
+      "changeClass": "punctuation",
+      "reason": "修正標點以區分疑問句與陳述句，並統一語氣助詞的標點使用。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p143-s001",
+      "before": "所以呢 就 就基於這個而發慧意 這樣的 這個慧意發 較前次光還要勝。",
+      "after": "所以呢 就 就基於這個而發慧意，這樣的這個慧意發，較前次光還要勝。",
+      "changeClass": "punctuation",
+      "reason": "口語停頓處建議加入逗號以區分語意層次，使句子結構更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p144-s001",
+      "before": "就是變成粗細的兩種三十七道品 對 所以這個就很複雜了 就。",
+      "after": "就是變成粗細的兩種三十七道品，對，所以這個就很複雜了，就。",
+      "changeClass": "punctuation",
+      "reason": "口語停頓處建議加入逗號以區分語意層次，使句子結構更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p146-s000",
+      "before": "粗細都都那個圓滿嗎，還是什麼，嗯。",
+      "after": "粗細都那個圓滿嗎，還是什麼，嗯。",
+      "changeClass": "orthography",
+      "reason": "修正口語重複贅字「都都」為單字「都」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p148-s001",
+      "before": "你看，靜慮增勝，極善之善會，諸地為妙性，有沒有，這個的話諸地，這個諸地指的是四諦。",
+      "after": "你看，靜慮增勝，極善之善會，諸地為妙性，有沒有？這個的話諸地，這個諸地指的是四諦。",
+      "changeClass": "punctuation",
+      "reason": "口語疑問句「有沒有」後應加問號以明確語意邊界。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p163-s000",
+      "before": "六地的時候 這個慧也有了 所以你說這個時候可不可以說 是慧增上。",
+      "after": "六地的時候，這個慧也有了，所以你說這個時候可不可以說，是慧增上？",
+      "changeClass": "punctuation",
+      "reason": "補上逗號以區分語意停頓，句末疑問語氣補上問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p163-s001",
+      "before": "般若波羅蜜多的增上 就是這樣來的了 這樣可以嗎 所以這些在解釋這樣一個狀態。",
+      "after": "般若波羅蜜多的增上，就是這樣來的了，這樣可以嗎？所以這些在解釋這樣一個狀態。",
+      "changeClass": "punctuation",
+      "reason": "補上逗號區分語意，疑問句「這樣可以嗎」後補上問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p164-s000",
+      "before": "對 所以你看這邊 如是當知此地圓滿三種慧學。",
+      "after": "對，所以你看這邊：如是當知此地圓滿三種慧學。",
+      "changeClass": "punctuation",
+      "reason": "口語轉寫需補標點以區隔語意，「對」後加逗號，「這邊」後加冒號引導下文。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p165-s000",
+      "before": "若何增勝 就是三摩地 越好 那毗缽舍那也就跟著好 對不對 對啊 所以三摩地有多好。",
+      "after": "若何增勝？就是三摩地越好，那毗缽舍那也就跟著好，對不對？對啊，所以三摩地有多好。",
+      "changeClass": "punctuation",
+      "reason": "口語問句與感嘆需補標點。「若何增勝」為疑問，加問號；「對不對」後加問號；「對啊」後加逗號或句號，此處依語氣加逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p167-s000",
+      "before": "靜慮波羅蜜多 對 所以 OK 總之這些加起來 就變成此地一得最勝般若波羅蜜多。",
+      "after": "靜慮波羅蜜多，對，所以 OK，總之這些加起來，就變成此地一得最勝般若波羅蜜多。",
+      "changeClass": "punctuation",
+      "reason": "口語中'對'與'所以'之間、'OK'前後應有停頓標點以區分語意層次。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p167-s001",
+      "before": "這樣可以嗎 對 所以此地就變成了 般若波羅蜜多增上。",
+      "after": "這樣可以嗎？對，所以此地就變成了般若波羅蜜多增上。",
+      "changeClass": "punctuation",
+      "reason": "'這樣可以嗎'為疑問句，應加問號；'對'後宜加逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "@p168-s000",
+      "before": "OK 那 接下來會有另外一個問題了 就是因為它獲得了 增上的般若波羅蜜多。",
+      "after": "OK，那接下來會有另外一個問題了，就是因為它獲得了增上的般若波羅蜜多。",
+      "changeClass": "punctuation",
+      "reason": "'OK'、'那'、'就是因為'等連接詞前後宜加逗號以區分語意。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "b3476943-c06a-4c5e-80f2-fed27b24ddab"
+}

@@ -42,13 +42,20 @@ def audit_session(path, audio_manifest=None):
             else:
                 previous_end = sentence["end"]
     audio_url = data.get("audioUrl")
+    youtube_id = data.get("youtubeVideoId")
     probe = (audio_manifest or {}).get(sid, {"status": "NOT_RUN"})
-    audio_ready = (
+    mp3_ready = (
         data.get("audioAvailable") is True
         and isinstance(audio_url, str)
         and bool(AUDIO_RE.match(audio_url))
         and data.get("_meta", {}).get("audioDeleted") is not True
     )
+    youtube_ready = (
+        data.get("mediaType") == "video/youtube"
+        and isinstance(youtube_id, str)
+        and bool(youtube_id.strip())
+    )
+    audio_ready = mp3_ready or youtube_ready
     semantic_ready = (
         data.get("publicationState") == "published"
         and len(headings) >= MIN_HEADINGS

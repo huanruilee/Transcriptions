@@ -1,0 +1,2280 @@
+{
+  "findings": [
+    {
+      "sentenceId": "seg-001",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 1.1,
+      "end": 4.64,
+      "text": "廖元朵修不禁官。",
+      "prevText": "",
+      "nextText": "通能對之如是試禪。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "廖元朵修不禁官。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「廖元朵修不禁官」音近錯字嚴重，疑為「了義多修不淨觀」或「若欲多修不淨觀」之類，且「不禁官」應為「不淨觀」，句義不通，疑似掉字或誤字。",
+          "promptHints": [
+            "不淨觀",
+            "修習"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-002",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 4.64,
+      "end": 8.14,
+      "text": "通能對之如是試禪。",
+      "prevText": "廖元朵修不禁官。",
+      "nextText": "一谷所中無事談靜。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "通能對之如是試禪。",
+          "suggestedTerm": "貪",
+          "reason": "「通能對之如是試禪」語法不通，疑為「通能對治如是貪」或「唯能對治如是欲貪」之類，疑似漏掉「貪」字或名相。",
+          "promptHints": [
+            "對治",
+            "貪欲"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-003",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 8.14,
+      "end": 11.93,
+      "text": "一谷所中無事談靜。",
+      "prevText": "通能對之如是試禪。",
+      "nextText": "故應切變修古所觀。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "一谷所中無事談靜。",
+          "suggestedTerm": "貪",
+          "reason": "「一谷所中無事談靜」文義不通，疑為「一蘊所中無事貪靜」或「於蘊所中無事貪」之類，疑似漏字。",
+          "promptHints": [
+            "蘊",
+            "貪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-004",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 11.93,
+      "end": 15.93,
+      "text": "故應切變修古所觀。",
+      "prevText": "一谷所中無事談靜。",
+      "nextText": "這幾句話。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "故應切變修古所觀。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「故應切變修古所觀」疑為「故應切要修不淨觀」或「故應勤修不淨觀」，「古所觀」應為「不淨觀」，疑似掉字。",
+          "promptHints": [
+            "不淨觀",
+            "修習"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-007",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 24.68,
+      "end": 34.43,
+      "text": "其他的不禁官沒有解釋的原因。",
+      "prevText": "這是世親不是他說。",
+      "nextText": "這是說明修古所觀的原因。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "其他的不禁官沒有解釋的原因。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「其他的不禁官沒有解釋的原因」中「不禁官」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+          "promptHints": [
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-008",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 34.43,
+      "end": 42.51,
+      "text": "這是說明修古所觀的原因。",
+      "prevText": "其他的不禁官沒有解釋的原因。",
+      "nextText": "此古朔官為聖潔作義舍骨。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這是說明修古所觀的原因。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「這是說明修古所觀的原因」中「古所觀」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+          "promptHints": [
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-009",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 42.51,
+      "end": 48.66,
+      "text": "此古朔官為聖潔作義舍骨。",
+      "prevText": "這是說明修古所觀的原因。",
+      "nextText": "少分緣故不斷煩惱。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "此古朔官為聖潔作義舍骨。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「此古朔官為聖潔作義舍骨」文義完全不通，疑為「此不淨觀為聖教所說義」之類，嚴重掉字或誤字。",
+          "promptHints": [
+            "不淨觀",
+            "聖教"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-012",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 56.06,
+      "end": 65.94,
+      "text": "這古朔官也是真實的觀察。",
+      "prevText": "唯能制服令獨現行。",
+      "nextText": "但是經過長時期的修習。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這古朔官也是真實的觀察。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「這古朔官也是真實的觀察」中「古朔官」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+          "promptHints": [
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-016",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 82.14,
+      "end": 84.64,
+      "text": "能致服煩惱 令不現行。",
+      "prevText": "所以他能夠降伏。",
+      "nextText": "但是它只是一部分的境界。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "能致服煩惱 令不現行。",
+          "suggestedTerm": "制伏",
+          "reason": "「能致服煩惱 令不現行」疑為「能制伏煩惱 令不現行」，「致服」應為「制伏」，疑似掉字。",
+          "promptHints": [
+            "制伏",
+            "煩惱"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-018",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 91.94,
+      "end": 93.94,
+      "text": "不通於一切法律。",
+      "prevText": "但是它只是一部分的境界。",
+      "nextText": "所以少分源 不能斷煩惱。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "不通於一切法律。",
+          "suggestedTerm": "法處",
+          "reason": "「不通於一切法律」中「法律」疑為「法處」或「法界」，佛學名相誤字，疑似漏掉正確名相。",
+          "promptHints": [
+            "法處",
+            "法界"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-019",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 94.44,
+      "end": 96.44,
+      "text": "所以少分源 不能斷煩惱。",
+      "prevText": "不通於一切法律。",
+      "nextText": "言喻竊是修古所觀。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以少分源 不能斷煩惱。",
+          "suggestedTerm": "少分緣",
+          "reason": "「所以少分源 不能斷煩惱」中「少分源」疑為「少分緣」，音近誤字，疑似漏掉正確詞彙。",
+          "promptHints": [
+            "少分緣",
+            "煩惱"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-020",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 96.94,
+      "end": 102.36,
+      "text": "言喻竊是修古所觀。",
+      "prevText": "所以少分源 不能斷煩惱。",
+      "nextText": "總有三位。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "言喻竊是修古所觀。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「言喻竊是修古所觀」文義不通，疑為「言不淨觀是修習所觀」或「言不淨者即是修不淨觀」之類，嚴重掉字。",
+          "promptHints": [
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-022",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 106.35,
+      "end": 110.85,
+      "text": "這以下正式說明古所觀的相貌。",
+      "prevText": "總有三位。",
+      "nextText": "這個古所觀有三個階級",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這以下正式說明古所觀的相貌。",
+          "suggestedTerm": "不淨觀",
+          "reason": "「這以下正式說明古所觀的相貌」中「古所觀」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+          "promptHints": [
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-023",
+      "paragraphId": "p-1",
+      "heading": "不淨觀修習緣起",
+      "start": 112.28,
+      "end": 114.78,
+      "text": "這個古所觀有三個階級",
+      "prevText": "這以下正式說明古所觀的相貌。",
+      "nextText": "一是初習業,初開始學習清靜的功。這是一個階級。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這個古所觀有三個階級",
+          "suggestedTerm": "不淨觀",
+          "reason": "「這個古所觀有三個階級」中「古所觀」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+          "promptHints": [
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-309",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1101.51,
+      "end": 1106.35,
+      "text": "為朗樂觀聖節力爭。",
+      "prevText": "這件事你畢業了",
+      "nextText": "於一句中掀出竹骨。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "為朗樂觀聖節力爭。",
+          "suggestedTerm": "勝解",
+          "reason": "「為朗樂觀聖節力爭」文義不通，疑為「為令略觀勝解力增」之誤，且「聖節」疑為「勝解」之誤聽，句中或有漏字致語法不完整。",
+          "promptHints": [
+            "勝解",
+            "略觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-317",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1131.24,
+      "end": 1134.92,
+      "text": "是唯令略觀聖結禮政。",
+      "prevText": "這個階級怎麼樣修法呢？",
+      "nextText": "還是 目的還是。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是唯令略觀聖結禮政。",
+          "suggestedTerm": "勝解力增",
+          "reason": "「是唯令略觀聖結禮政」疑為「是唯令略觀勝解力增」，「聖結禮政」音近誤聽，名相「勝解」可能被誤轉或漏字。",
+          "promptHints": [
+            "勝解",
+            "略觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-322",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1145,
+      "end": 1147.08,
+      "text": "於依據中。",
+      "prevText": "加強。",
+      "nextText": "就是一個古人裡邊。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "於依據中。",
+          "suggestedTerm": "一骨",
+          "reason": "「於依據中」文義突兀，疑漏名相，應為「於一骨中」或「於依骨中」，指在一骨之中觀察，可能漏「骨」字。",
+          "promptHints": [
+            "骨",
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-330",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1170.83,
+      "end": 1174.27,
+      "text": "或直或關 或官或直。",
+      "prevText": "把這個心呢 細在那裡安住不動。",
+      "nextText": "這樣子去學習去。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "或直或關 或官或直。",
+          "suggestedTerm": "止觀",
+          "reason": "「或直或關 或官或直」疑為「或止或觀 或觀或止」之誤，名相「止觀」被誤聽，可能漏字或誤轉。",
+          "promptHints": [
+            "止觀",
+            "修習"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-332",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1178,
+      "end": 1181.68,
+      "text": "見字乃至雛頭半骨。",
+      "prevText": "這樣子去學習去。",
+      "nextText": "這樣逐漸地由豬骨略去了，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "見字乃至雛頭半骨。",
+          "suggestedTerm": "見住",
+          "reason": "「見字乃至雛頭半骨」疑為「見住乃至除頭半骨」，「見字」音近誤聽，疑漏或誤轉名相。",
+          "promptHints": [
+            "除頭半骨",
+            "不淨觀"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-342",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1212.15,
+      "end": 1215.87,
+      "text": "施惟半骨 細心而入。",
+      "prevText": "乃至除頭半骨。",
+      "nextText": "這樣子就施惟去。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "施惟半骨 細心而入。",
+          "suggestedTerm": "思惟",
+          "reason": "「施惟半骨 細心而入」疑為「思惟半骨 細心而入」，「施惟」音近誤聽，名相「思惟」可能被誤轉。",
+          "promptHints": [
+            "思惟",
+            "半骨"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-344",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1217.87,
+      "end": 1221.51,
+      "text": "其詞轉略不進觀塵。",
+      "prevText": "這樣子就施惟去。",
+      "nextText": "名譽卻是以術修味。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "其詞轉略不進觀塵。",
+          "suggestedTerm": "觀察",
+          "reason": "「其詞轉略不進觀塵」疑為「其觀轉略不廣觀察」或類似，文義不通，疑漏名相或誤轉。",
+          "promptHints": [
+            "略觀",
+            "觀察"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-345",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1221.51,
+      "end": 1226.53,
+      "text": "名譽卻是以術修味。",
+      "prevText": "其詞轉略不進觀塵。",
+      "nextText": "這個以術修味。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "名譽卻是以術修味。",
+          "suggestedTerm": "已熟修位",
+          "reason": "「名譽卻是以術修味」疑為「名為已熟修位」，「名譽卻是」音近誤聽，名相「已熟修位」可能被誤轉或漏字。",
+          "promptHints": [
+            "已熟修位",
+            "修位"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-354",
+      "paragraphId": "p-4",
+      "heading": "已熟修位進階",
+      "start": 1246.69,
+      "end": 1249.09,
+      "text": "欲卻是一出修位",
+      "prevText": "你修不淨觀已經很成熟了。",
+      "nextText": "為令略觀 聖節自在，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "欲卻是一出修位",
+          "suggestedTerm": "已熟修位",
+          "reason": "「欲卻是一出修位」疑為「名為已熟修位」，「欲卻是一出」音近誤聽，名相「已熟修位」可能被誤轉或漏字。",
+          "promptHints": [
+            "已熟修位",
+            "修位"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1830",
+      "paragraphId": "p-10",
+      "heading": "止觀交替實修",
+      "start": 6188.24,
+      "end": 6191.06,
+      "text": "修不靜觀的時候身體差了。",
+      "prevText": "下天的時候身體差了。",
+      "nextText": "修不靜觀的時候身體差了。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "修不靜觀的時候身體差了。",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "止觀交替實修"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1831",
+      "paragraphId": "p-10",
+      "heading": "止觀交替實修",
+      "start": 6191.06,
+      "end": 6198.21,
+      "text": "修不靜觀的時候身體差了。",
+      "prevText": "修不靜觀的時候身體差了。",
+      "nextText": "修不靜觀的，",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "修不靜觀的時候身體差了。",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "止觀交替實修"
+          ]
+        }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "windowId": "win-1",
+      "clipStart": 0,
+      "clipEnd": 17.93,
+      "clipDuration": 17.93,
+      "sentenceIds": [
+        "seg-001",
+        "seg-002",
+        "seg-003",
+        "seg-004"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-001",
+          "text": "廖元朵修不禁官。"
+        },
+        {
+          "id": "seg-002",
+          "text": "通能對之如是試禪。"
+        },
+        {
+          "id": "seg-003",
+          "text": "一谷所中無事談靜。"
+        },
+        {
+          "id": "seg-004",
+          "text": "故應切變修古所觀。"
+        }
+      ],
+      "expectedTerms": [
+        "不淨觀",
+        "貪"
+      ],
+      "prompt": "不淨觀、修習、對治、貪欲、蘊、貪",
+      "items": [
+        {
+          "sentenceId": "seg-001",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 1.1,
+          "end": 4.64,
+          "text": "廖元朵修不禁官。",
+          "prevText": "",
+          "nextText": "通能對之如是試禪。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "廖元朵修不禁官。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「廖元朵修不禁官」音近錯字嚴重，疑為「了義多修不淨觀」或「若欲多修不淨觀」之類，且「不禁官」應為「不淨觀」，句義不通，疑似掉字或誤字。",
+              "promptHints": [
+                "不淨觀",
+                "修習"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-002",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 4.64,
+          "end": 8.14,
+          "text": "通能對之如是試禪。",
+          "prevText": "廖元朵修不禁官。",
+          "nextText": "一谷所中無事談靜。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "通能對之如是試禪。",
+              "suggestedTerm": "貪",
+              "reason": "「通能對之如是試禪」語法不通，疑為「通能對治如是貪」或「唯能對治如是欲貪」之類，疑似漏掉「貪」字或名相。",
+              "promptHints": [
+                "對治",
+                "貪欲"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-003",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 8.14,
+          "end": 11.93,
+          "text": "一谷所中無事談靜。",
+          "prevText": "通能對之如是試禪。",
+          "nextText": "故應切變修古所觀。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "一谷所中無事談靜。",
+              "suggestedTerm": "貪",
+              "reason": "「一谷所中無事談靜」文義不通，疑為「一蘊所中無事貪靜」或「於蘊所中無事貪」之類，疑似漏字。",
+              "promptHints": [
+                "蘊",
+                "貪"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-004",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 11.93,
+          "end": 15.93,
+          "text": "故應切變修古所觀。",
+          "prevText": "一谷所中無事談靜。",
+          "nextText": "這幾句話。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "故應切變修古所觀。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「故應切變修古所觀」疑為「故應切要修不淨觀」或「故應勤修不淨觀」，「古所觀」應為「不淨觀」，疑似掉字。",
+              "promptHints": [
+                "不淨觀",
+                "修習"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 22.68,
+      "clipEnd": 50.66,
+      "clipDuration": 27.98,
+      "sentenceIds": [
+        "seg-007",
+        "seg-008",
+        "seg-009"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-007",
+          "text": "其他的不禁官沒有解釋的原因。"
+        },
+        {
+          "id": "seg-008",
+          "text": "這是說明修古所觀的原因。"
+        },
+        {
+          "id": "seg-009",
+          "text": "此古朔官為聖潔作義舍骨。"
+        }
+      ],
+      "expectedTerms": [
+        "不淨觀"
+      ],
+      "prompt": "這是世親不是他說。 不淨觀、聖教",
+      "items": [
+        {
+          "sentenceId": "seg-007",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 24.68,
+          "end": 34.43,
+          "text": "其他的不禁官沒有解釋的原因。",
+          "prevText": "這是世親不是他說。",
+          "nextText": "這是說明修古所觀的原因。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "其他的不禁官沒有解釋的原因。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「其他的不禁官沒有解釋的原因」中「不禁官」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+              "promptHints": [
+                "不淨觀"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-008",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 34.43,
+          "end": 42.51,
+          "text": "這是說明修古所觀的原因。",
+          "prevText": "其他的不禁官沒有解釋的原因。",
+          "nextText": "此古朔官為聖潔作義舍骨。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這是說明修古所觀的原因。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「這是說明修古所觀的原因」中「古所觀」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+              "promptHints": [
+                "不淨觀"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-009",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 42.51,
+          "end": 48.66,
+          "text": "此古朔官為聖潔作義舍骨。",
+          "prevText": "這是說明修古所觀的原因。",
+          "nextText": "少分緣故不斷煩惱。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "此古朔官為聖潔作義舍骨。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「此古朔官為聖潔作義舍骨」文義完全不通，疑為「此不淨觀為聖教所說義」之類，嚴重掉字或誤字。",
+              "promptHints": [
+                "不淨觀",
+                "聖教"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 54.06,
+      "clipEnd": 67.94,
+      "clipDuration": 13.88,
+      "sentenceIds": [
+        "seg-012"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-012",
+          "text": "這古朔官也是真實的觀察。"
+        }
+      ],
+      "expectedTerms": [
+        "不淨觀"
+      ],
+      "prompt": "唯能制服令獨現行。 不淨觀",
+      "items": [
+        {
+          "sentenceId": "seg-012",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 56.06,
+          "end": 65.94,
+          "text": "這古朔官也是真實的觀察。",
+          "prevText": "唯能制服令獨現行。",
+          "nextText": "但是經過長時期的修習。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這古朔官也是真實的觀察。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「這古朔官也是真實的觀察」中「古朔官」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+              "promptHints": [
+                "不淨觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 80.14,
+      "clipEnd": 86.64,
+      "clipDuration": 6.5,
+      "sentenceIds": [
+        "seg-016"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-016",
+          "text": "能致服煩惱 令不現行。"
+        }
+      ],
+      "expectedTerms": [
+        "制伏"
+      ],
+      "prompt": "所以他能夠降伏。 制伏、煩惱",
+      "items": [
+        {
+          "sentenceId": "seg-016",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 82.14,
+          "end": 84.64,
+          "text": "能致服煩惱 令不現行。",
+          "prevText": "所以他能夠降伏。",
+          "nextText": "但是它只是一部分的境界。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "能致服煩惱 令不現行。",
+              "suggestedTerm": "制伏",
+              "reason": "「能致服煩惱 令不現行」疑為「能制伏煩惱 令不現行」，「致服」應為「制伏」，疑似掉字。",
+              "promptHints": [
+                "制伏",
+                "煩惱"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 89.94,
+      "clipEnd": 116.78,
+      "clipDuration": 26.84,
+      "sentenceIds": [
+        "seg-018",
+        "seg-019",
+        "seg-020",
+        "seg-022",
+        "seg-023"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-018",
+          "text": "不通於一切法律。"
+        },
+        {
+          "id": "seg-019",
+          "text": "所以少分源 不能斷煩惱。"
+        },
+        {
+          "id": "seg-020",
+          "text": "言喻竊是修古所觀。"
+        },
+        {
+          "id": "seg-022",
+          "text": "這以下正式說明古所觀的相貌。"
+        },
+        {
+          "id": "seg-023",
+          "text": "這個古所觀有三個階級"
+        }
+      ],
+      "expectedTerms": [
+        "法處",
+        "少分緣",
+        "不淨觀"
+      ],
+      "prompt": "但是它只是一部分的境界。 法處、法界、少分緣、煩惱、不淨觀",
+      "items": [
+        {
+          "sentenceId": "seg-018",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 91.94,
+          "end": 93.94,
+          "text": "不通於一切法律。",
+          "prevText": "但是它只是一部分的境界。",
+          "nextText": "所以少分源 不能斷煩惱。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "不通於一切法律。",
+              "suggestedTerm": "法處",
+              "reason": "「不通於一切法律」中「法律」疑為「法處」或「法界」，佛學名相誤字，疑似漏掉正確名相。",
+              "promptHints": [
+                "法處",
+                "法界"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-019",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 94.44,
+          "end": 96.44,
+          "text": "所以少分源 不能斷煩惱。",
+          "prevText": "不通於一切法律。",
+          "nextText": "言喻竊是修古所觀。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以少分源 不能斷煩惱。",
+              "suggestedTerm": "少分緣",
+              "reason": "「所以少分源 不能斷煩惱」中「少分源」疑為「少分緣」，音近誤字，疑似漏掉正確詞彙。",
+              "promptHints": [
+                "少分緣",
+                "煩惱"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-020",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 96.94,
+          "end": 102.36,
+          "text": "言喻竊是修古所觀。",
+          "prevText": "所以少分源 不能斷煩惱。",
+          "nextText": "總有三位。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "言喻竊是修古所觀。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「言喻竊是修古所觀」文義不通，疑為「言不淨觀是修習所觀」或「言不淨者即是修不淨觀」之類，嚴重掉字。",
+              "promptHints": [
+                "不淨觀"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-022",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 106.35,
+          "end": 110.85,
+          "text": "這以下正式說明古所觀的相貌。",
+          "prevText": "總有三位。",
+          "nextText": "這個古所觀有三個階級",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這以下正式說明古所觀的相貌。",
+              "suggestedTerm": "不淨觀",
+              "reason": "「這以下正式說明古所觀的相貌」中「古所觀」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+              "promptHints": [
+                "不淨觀"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-023",
+          "paragraphId": "p-1",
+          "heading": "不淨觀修習緣起",
+          "start": 112.28,
+          "end": 114.78,
+          "text": "這個古所觀有三個階級",
+          "prevText": "這以下正式說明古所觀的相貌。",
+          "nextText": "一是初習業,初開始學習清靜的功。這是一個階級。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這個古所觀有三個階級",
+              "suggestedTerm": "不淨觀",
+              "reason": "「這個古所觀有三個階級」中「古所觀」應為「不淨觀」，音近誤字，疑似漏掉正確名相。",
+              "promptHints": [
+                "不淨觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 1099.51,
+      "clipEnd": 1108.35,
+      "clipDuration": 8.84,
+      "sentenceIds": [
+        "seg-309"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-309",
+          "text": "為朗樂觀聖節力爭。"
+        }
+      ],
+      "expectedTerms": [
+        "勝解"
+      ],
+      "prompt": "這件事你畢業了 勝解、略觀",
+      "items": [
+        {
+          "sentenceId": "seg-309",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1101.51,
+          "end": 1106.35,
+          "text": "為朗樂觀聖節力爭。",
+          "prevText": "這件事你畢業了",
+          "nextText": "於一句中掀出竹骨。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "為朗樂觀聖節力爭。",
+              "suggestedTerm": "勝解",
+              "reason": "「為朗樂觀聖節力爭」文義不通，疑為「為令略觀勝解力增」之誤，且「聖節」疑為「勝解」之誤聽，句中或有漏字致語法不完整。",
+              "promptHints": [
+                "勝解",
+                "略觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 1129.24,
+      "clipEnd": 1136.92,
+      "clipDuration": 7.68,
+      "sentenceIds": [
+        "seg-317"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-317",
+          "text": "是唯令略觀聖結禮政。"
+        }
+      ],
+      "expectedTerms": [
+        "勝解力增"
+      ],
+      "prompt": "這個階級怎麼樣修法呢？ 勝解、略觀",
+      "items": [
+        {
+          "sentenceId": "seg-317",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1131.24,
+          "end": 1134.92,
+          "text": "是唯令略觀聖結禮政。",
+          "prevText": "這個階級怎麼樣修法呢？",
+          "nextText": "還是 目的還是。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是唯令略觀聖結禮政。",
+              "suggestedTerm": "勝解力增",
+              "reason": "「是唯令略觀聖結禮政」疑為「是唯令略觀勝解力增」，「聖結禮政」音近誤聽，名相「勝解」可能被誤轉或漏字。",
+              "promptHints": [
+                "勝解",
+                "略觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 1143,
+      "clipEnd": 1149.08,
+      "clipDuration": 6.08,
+      "sentenceIds": [
+        "seg-322"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-322",
+          "text": "於依據中。"
+        }
+      ],
+      "expectedTerms": [
+        "一骨"
+      ],
+      "prompt": "加強。 骨、不淨觀",
+      "items": [
+        {
+          "sentenceId": "seg-322",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1145,
+          "end": 1147.08,
+          "text": "於依據中。",
+          "prevText": "加強。",
+          "nextText": "就是一個古人裡邊。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "於依據中。",
+              "suggestedTerm": "一骨",
+              "reason": "「於依據中」文義突兀，疑漏名相，應為「於一骨中」或「於依骨中」，指在一骨之中觀察，可能漏「骨」字。",
+              "promptHints": [
+                "骨",
+                "不淨觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 1168.83,
+      "clipEnd": 1183.68,
+      "clipDuration": 14.85,
+      "sentenceIds": [
+        "seg-330",
+        "seg-332"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-330",
+          "text": "或直或關 或官或直。"
+        },
+        {
+          "id": "seg-332",
+          "text": "見字乃至雛頭半骨。"
+        }
+      ],
+      "expectedTerms": [
+        "止觀",
+        "見住"
+      ],
+      "prompt": "把這個心呢 細在那裡安住不動。 止觀、修習、除頭半骨、不淨觀",
+      "items": [
+        {
+          "sentenceId": "seg-330",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1170.83,
+          "end": 1174.27,
+          "text": "或直或關 或官或直。",
+          "prevText": "把這個心呢 細在那裡安住不動。",
+          "nextText": "這樣子去學習去。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "或直或關 或官或直。",
+              "suggestedTerm": "止觀",
+              "reason": "「或直或關 或官或直」疑為「或止或觀 或觀或止」之誤，名相「止觀」被誤聽，可能漏字或誤轉。",
+              "promptHints": [
+                "止觀",
+                "修習"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-332",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1178,
+          "end": 1181.68,
+          "text": "見字乃至雛頭半骨。",
+          "prevText": "這樣子去學習去。",
+          "nextText": "這樣逐漸地由豬骨略去了，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "見字乃至雛頭半骨。",
+              "suggestedTerm": "見住",
+              "reason": "「見字乃至雛頭半骨」疑為「見住乃至除頭半骨」，「見字」音近誤聽，疑漏或誤轉名相。",
+              "promptHints": [
+                "除頭半骨",
+                "不淨觀"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 1210.15,
+      "clipEnd": 1228.53,
+      "clipDuration": 18.38,
+      "sentenceIds": [
+        "seg-342",
+        "seg-344",
+        "seg-345"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-342",
+          "text": "施惟半骨 細心而入。"
+        },
+        {
+          "id": "seg-344",
+          "text": "其詞轉略不進觀塵。"
+        },
+        {
+          "id": "seg-345",
+          "text": "名譽卻是以術修味。"
+        }
+      ],
+      "expectedTerms": [
+        "思惟",
+        "觀察",
+        "已熟修位"
+      ],
+      "prompt": "乃至除頭半骨。 思惟、半骨、略觀、觀察、已熟修位、修位",
+      "items": [
+        {
+          "sentenceId": "seg-342",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1212.15,
+          "end": 1215.87,
+          "text": "施惟半骨 細心而入。",
+          "prevText": "乃至除頭半骨。",
+          "nextText": "這樣子就施惟去。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "施惟半骨 細心而入。",
+              "suggestedTerm": "思惟",
+              "reason": "「施惟半骨 細心而入」疑為「思惟半骨 細心而入」，「施惟」音近誤聽，名相「思惟」可能被誤轉。",
+              "promptHints": [
+                "思惟",
+                "半骨"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-344",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1217.87,
+          "end": 1221.51,
+          "text": "其詞轉略不進觀塵。",
+          "prevText": "這樣子就施惟去。",
+          "nextText": "名譽卻是以術修味。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "其詞轉略不進觀塵。",
+              "suggestedTerm": "觀察",
+              "reason": "「其詞轉略不進觀塵」疑為「其觀轉略不廣觀察」或類似，文義不通，疑漏名相或誤轉。",
+              "promptHints": [
+                "略觀",
+                "觀察"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-345",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1221.51,
+          "end": 1226.53,
+          "text": "名譽卻是以術修味。",
+          "prevText": "其詞轉略不進觀塵。",
+          "nextText": "這個以術修味。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "名譽卻是以術修味。",
+              "suggestedTerm": "已熟修位",
+              "reason": "「名譽卻是以術修味」疑為「名為已熟修位」，「名譽卻是」音近誤聽，名相「已熟修位」可能被誤轉或漏字。",
+              "promptHints": [
+                "已熟修位",
+                "修位"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1244.69,
+      "clipEnd": 1251.09,
+      "clipDuration": 6.4,
+      "sentenceIds": [
+        "seg-354"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-354",
+          "text": "欲卻是一出修位"
+        }
+      ],
+      "expectedTerms": [
+        "已熟修位"
+      ],
+      "prompt": "你修不淨觀已經很成熟了。 已熟修位、修位",
+      "items": [
+        {
+          "sentenceId": "seg-354",
+          "paragraphId": "p-4",
+          "heading": "已熟修位進階",
+          "start": 1246.69,
+          "end": 1249.09,
+          "text": "欲卻是一出修位",
+          "prevText": "你修不淨觀已經很成熟了。",
+          "nextText": "為令略觀 聖節自在，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "欲卻是一出修位",
+              "suggestedTerm": "已熟修位",
+              "reason": "「欲卻是一出修位」疑為「名為已熟修位」，「欲卻是一出」音近誤聽，名相「已熟修位」可能被誤轉或漏字。",
+              "promptHints": [
+                "已熟修位",
+                "修位"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 6186.24,
+      "clipEnd": 6200.21,
+      "clipDuration": 13.97,
+      "sentenceIds": [
+        "seg-1830",
+        "seg-1831"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1830",
+          "text": "修不靜觀的時候身體差了。"
+        },
+        {
+          "id": "seg-1831",
+          "text": "修不靜觀的時候身體差了。"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "下天的時候身體差了。 止觀交替實修",
+      "items": [
+        {
+          "sentenceId": "seg-1830",
+          "paragraphId": "p-10",
+          "heading": "止觀交替實修",
+          "start": 6188.24,
+          "end": 6191.06,
+          "text": "修不靜觀的時候身體差了。",
+          "prevText": "下天的時候身體差了。",
+          "nextText": "修不靜觀的時候身體差了。",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "修不靜觀的時候身體差了。",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "止觀交替實修"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-1831",
+          "paragraphId": "p-10",
+          "heading": "止觀交替實修",
+          "start": 6191.06,
+          "end": 6198.21,
+          "text": "修不靜觀的時候身體差了。",
+          "prevText": "修不靜觀的時候身體差了。",
+          "nextText": "修不靜觀的，",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "修不靜觀的時候身體差了。",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "止觀交替實修"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reAsrResults": [
+    {
+      "windowId": "win-1",
+      "clipStart": 0,
+      "clipEnd": 17.93,
+      "rawSegments": [
+        {
+          "start": 1.3,
+          "end": 16.31,
+          "text": "楊毓宇愛修不盡觀,通能對之如是試談,一谷所中無是談境,故應竊辨修不盡觀。"
+        }
+      ],
+      "rawText": "楊毓宇愛修不盡觀,通能對之如是試談,一谷所中無是談境,故應竊辨修不盡觀。",
+      "guidedSegments": [
+        {
+          "start": 1.3,
+          "end": 16.23,
+          "text": "並不淨觀, 統能對治如是試談, 一古所中無事談靜, 故應且便休古所官。"
+        }
+      ],
+      "guidedText": "並不淨觀, 統能對治如是試談, 一古所中無事談靜, 故應且便休古所官。",
+      "sentenceIds": [
+        "seg-001",
+        "seg-002",
+        "seg-003",
+        "seg-004"
+      ],
+      "expectedTerms": [
+        "不淨觀",
+        "貪"
+      ],
+      "recoveredTerms": [
+        "不淨觀"
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 22.68,
+      "clipEnd": 50.66,
+      "rawSegments": [
+        {
+          "start": 22.93,
+          "end": 50.61,
+          "text": "但是世心佛教他說啊,其他的不儘管沒有解釋的原因。說明修古所觀的原因。使古所觀為聖節作義社故,少分緣故。"
+        }
+      ],
+      "rawText": "但是世心佛教他說啊,其他的不儘管沒有解釋的原因。說明修古所觀的原因。使古所觀為聖節作義社故,少分緣故。",
+      "guidedSegments": [
+        {
+          "start": 22.93,
+          "end": 50.61,
+          "text": "但是世親不是他說啊。其他的不淨觀沒有解釋的原因。說明修古所觀的原因。使古所觀為聖節作義社故,少分緣故。"
+        }
+      ],
+      "guidedText": "但是世親不是他說啊。其他的不淨觀沒有解釋的原因。說明修古所觀的原因。使古所觀為聖節作義社故,少分緣故。",
+      "sentenceIds": [
+        "seg-007",
+        "seg-008",
+        "seg-009"
+      ],
+      "expectedTerms": [
+        "不淨觀"
+      ],
+      "recoveredTerms": [
+        "不淨觀"
+      ]
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 54.06,
+      "clipEnd": 67.94,
+      "rawSegments": [
+        {
+          "start": 54.06,
+          "end": 66.08,
+          "text": "不服令不現行。這古守觀也是真實的觀察。"
+        }
+      ],
+      "rawText": "不服令不現行。這古守觀也是真實的觀察。",
+      "guidedSegments": [
+        {
+          "start": 54.06,
+          "end": 66.08,
+          "text": "不適合理獨不現行。 古守觀也是真實的觀察。"
+        }
+      ],
+      "guidedText": "不適合理獨不現行。 古守觀也是真實的觀察。",
+      "sentenceIds": [
+        "seg-012"
+      ],
+      "expectedTerms": [
+        "不淨觀"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 80.14,
+      "clipEnd": 86.64,
+      "rawSegments": [
+        {
+          "start": 81.38,
+          "end": 85.5,
+          "text": "能降伏能制服煩惱令不現行。"
+        },
+        {
+          "start": 85.5,
+          "end": 86.7,
+          "text": "但是……"
+        }
+      ],
+      "rawText": "能降伏能制服煩惱令不現行。但是……",
+      "guidedSegments": [
+        {
+          "start": 81.38,
+          "end": 86.66,
+          "text": "能降伏、能制伏、煩惱、令伏現行。 但是……"
+        }
+      ],
+      "guidedText": "能降伏、能制伏、煩惱、令伏現行。 但是……",
+      "sentenceIds": [
+        "seg-016"
+      ],
+      "expectedTerms": [
+        "制伏"
+      ],
+      "recoveredTerms": [
+        "制伏"
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 89.94,
+      "clipEnd": 116.78,
+      "rawSegments": [
+        {
+          "start": 89.94,
+          "end": 99.18,
+          "text": "《競節》 《不通於一切法》 少分源 不能斷煩惱。"
+        },
+        {
+          "start": 99.18,
+          "end": 106.21,
+          "text": "《言喻竊師修骨搜官 總有三位》"
+        },
+        {
+          "start": 106.21,
+          "end": 112.36,
+          "text": "這以下正是說明骨搜官的相貌。"
+        },
+        {
+          "start": 112.36,
+          "end": 114.92,
+          "text": "這個骨搜官有三個階級。"
+        }
+      ],
+      "rawText": "《競節》 《不通於一切法》 少分源 不能斷煩惱。《言喻竊師修骨搜官 總有三位》這以下正是說明骨搜官的相貌。這個骨搜官有三個階級。",
+      "guidedSegments": [
+        {
+          "start": 89.94,
+          "end": 99.06,
+          "text": "不通於一切法律。 少分緣、不能斷煩惱。"
+        },
+        {
+          "start": 99.06,
+          "end": 112.36,
+          "text": "言喻切師修古所觀,總有三位。 這以下正式說明古所觀的相貌。"
+        },
+        {
+          "start": 112.36,
+          "end": 114.36,
+          "text": "古所觀有三個階級。"
+        }
+      ],
+      "guidedText": "不通於一切法律。 少分緣、不能斷煩惱。言喻切師修古所觀,總有三位。 這以下正式說明古所觀的相貌。古所觀有三個階級。",
+      "sentenceIds": [
+        "seg-018",
+        "seg-019",
+        "seg-020",
+        "seg-022",
+        "seg-023"
+      ],
+      "expectedTerms": [
+        "法處",
+        "少分緣",
+        "不淨觀"
+      ],
+      "recoveredTerms": [
+        "少分緣"
+      ]
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 1099.51,
+      "clipEnd": 1108.35,
+      "rawSegments": [
+        {
+          "start": 1101.33,
+          "end": 1108.47,
+          "text": "唯夢六觀聖節力爭,與一句。"
+        }
+      ],
+      "rawText": "唯夢六觀聖節力爭,與一句。",
+      "guidedSegments": [
+        {
+          "start": 1101.33,
+          "end": 1108.37,
+          "text": "唯明六觀聖節力爭 欲依據"
+        }
+      ],
+      "guidedText": "唯明六觀聖節力爭 欲依據",
+      "sentenceIds": [
+        "seg-309"
+      ],
+      "expectedTerms": [
+        "勝解"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 1129.24,
+      "clipEnd": 1136.92,
+      "rawSegments": [
+        {
+          "start": 1129.24,
+          "end": 1136.84,
+          "text": "修法是唯論略觀神節力爭,目的還是……"
+        }
+      ],
+      "rawText": "修法是唯論略觀神節力爭,目的還是……",
+      "guidedSegments": [
+        {
+          "start": 1129.24,
+          "end": 1136.66,
+          "text": "修法呢�是唯論、略觀、勝解、略證�還是４目的４還是４"
+        }
+      ],
+      "guidedText": "修法呢�是唯論、略觀、勝解、略證�還是４目的４還是４",
+      "sentenceIds": [
+        "seg-317"
+      ],
+      "expectedTerms": [
+        "勝解力增"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 1143,
+      "clipEnd": 1149.08,
+      "rawSegments": [
+        {
+          "start": 1143.28,
+          "end": 1149.1,
+          "text": "佳強,於一句中,就是一個古人。"
+        }
+      ],
+      "rawText": "佳強,於一句中,就是一個古人。",
+      "guidedSegments": [
+        {
+          "start": 1143.28,
+          "end": 1149.02,
+          "text": "加強。 於一句中,就是一個古人"
+        }
+      ],
+      "guidedText": "加強。 於一句中,就是一個古人",
+      "sentenceIds": [
+        "seg-322"
+      ],
+      "expectedTerms": [
+        "一骨"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 1168.83,
+      "clipEnd": 1183.68,
+      "rawSegments": [
+        {
+          "start": 1168.98,
+          "end": 1177.25,
+          "text": "或直或官,或官或直,這樣子去學習去。"
+        },
+        {
+          "start": 1177.25,
+          "end": 1182.96,
+          "text": "《劍》是乃至雛頭半骨,這樣做劍的呀。"
+        }
+      ],
+      "rawText": "或直或官,或官或直,這樣子去學習去。《劍》是乃至雛頭半骨,這樣做劍的呀。",
+      "guidedSegments": [
+        {
+          "start": 1168.98,
+          "end": 1183.24,
+          "text": "或直或官、或官或直 這樣子去學習去。 這樣做的呀。"
+        }
+      ],
+      "guidedText": "或直或官、或官或直 這樣子去學習去。 這樣做的呀。",
+      "sentenceIds": [
+        "seg-330",
+        "seg-332"
+      ],
+      "expectedTerms": [
+        "止觀",
+        "見住"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 1210.15,
+      "clipEnd": 1228.53,
+      "rawSegments": [
+        {
+          "start": 1210.15,
+          "end": 1217.89,
+          "text": "字竹頭半骨,詩為半骨,細心而住。這樣子就詩為去。"
+        },
+        {
+          "start": 1217.89,
+          "end": 1228.6,
+          "text": "其詞轉略,不進觀塵,名譽卻是以豬修味。"
+        }
+      ],
+      "rawText": "字竹頭半骨,詩為半骨,細心而住。這樣子就詩為去。其詞轉略,不進觀塵,名譽卻是以豬修味。",
+      "guidedSegments": [
+        {
+          "start": 1210.15,
+          "end": 1217.99,
+          "text": "思煮頭半骨。思惟、半骨、細心而入。這樣子就思惟去。"
+        },
+        {
+          "start": 1217.99,
+          "end": 1228.58,
+          "text": "其詞轉略不進觀塵。名譽卻是以豬修位。"
+        }
+      ],
+      "guidedText": "思煮頭半骨。思惟、半骨、細心而入。這樣子就思惟去。其詞轉略不進觀塵。名譽卻是以豬修位。",
+      "sentenceIds": [
+        "seg-342",
+        "seg-344",
+        "seg-345"
+      ],
+      "expectedTerms": [
+        "思惟",
+        "觀察",
+        "已熟修位"
+      ],
+      "recoveredTerms": [
+        "思惟"
+      ]
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1244.69,
+      "clipEnd": 1251.09,
+      "rawSegments": [
+        {
+          "start": 1245.64,
+          "end": 1248.93,
+          "text": "靈欲皆是一處修為。"
+        }
+      ],
+      "rawText": "靈欲皆是一處修為。",
+      "guidedSegments": [
+        {
+          "start": 1245.64,
+          "end": 1248.91,
+          "text": "人欲結識已出修位。"
+        }
+      ],
+      "guidedText": "人欲結識已出修位。",
+      "sentenceIds": [
+        "seg-354"
+      ],
+      "expectedTerms": [
+        "已熟修位"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 6186.24,
+      "clipEnd": 6200.21,
+      "rawSegments": [
+        {
+          "start": 6186.24,
+          "end": 6194.65,
+          "text": "修建觀的時候是神的它的。"
+        },
+        {
+          "start": 6194.65,
+          "end": 6200.15,
+          "text": "修建觀的。"
+        }
+      ],
+      "rawText": "修建觀的時候是神的它的。修建觀的。",
+      "guidedSegments": [
+        {
+          "start": 6186.24,
+          "end": 6194.65,
+          "text": "下天的時候身體差了。 修建觀的時候身體差了。"
+        },
+        {
+          "start": 6194.65,
+          "end": 6200.15,
+          "text": "修建觀的。"
+        }
+      ],
+      "guidedText": "下天的時候身體差了。 修建觀的時候身體差了。修建觀的。",
+      "sentenceIds": [
+        "seg-1830",
+        "seg-1831"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    }
+  ],
+  "hallucinationRepairs": [
+    {
+      "sentenceId": "seg-1830",
+      "before": "修不靜觀的時候身體差了。",
+      "after": "下天的時候身體差了。 修建觀的時候身體差了。"
+    },
+    {
+      "sentenceId": "seg-1831",
+      "before": "修不靜觀的時候身體差了。",
+      "after": "修建觀的。"
+    }
+  ],
+  "proposalsCount": 73,
+  "blockedByGuard": [
+    {
+      "sentenceId": "seg-474",
+      "paragraphId": "p-6",
+      "start": 1677.61,
+      "end": 1679.57,
+      "originalText": "硬做四句。",
+      "proposedText": "應該把它統起來說。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「捅→統」。",
+      "guardReason": "cross-sentence-move:應該把"
+    },
+    {
+      "sentenceId": "seg-475",
+      "paragraphId": "p-6",
+      "start": 1679.57,
+      "end": 1683.38,
+      "originalText": "應該把它捅起來說。",
+      "proposedText": "應該有四句話。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-476",
+      "paragraphId": "p-6",
+      "start": 1683.38,
+      "end": 1685.46,
+      "originalText": "應該有四句話。",
+      "proposedText": "就可以包裹了，所有的意思都在內了。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "content-word-omitted:應該"
+    },
+    {
+      "sentenceId": "seg-486",
+      "paragraphId": "p-6",
+      "start": 1705.28,
+      "end": 1706.44,
+      "originalText": "這個作義啊。",
+      "proposedText": "這個作義，去觀察。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上標點。",
+      "guardReason": "cross-sentence-move:去觀察"
+    },
+    {
+      "sentenceId": "seg-493",
+      "paragraphId": "p-6",
+      "start": 1731.26,
+      "end": 1735.66,
+      "originalText": "前面有以書、未書、未書、以書。",
+      "proposedText": "前面有已熟、未熟、未熟、已熟。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「書→熟」。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-513",
+      "paragraphId": "p-6",
+      "start": 1802.49,
+      "end": 1804.88,
+      "originalText": "這是。",
+      "proposedText": "這一段文是《俱舍論》上的。",
+      "categories": [
+        "asr-error",
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "修正「據史論→俱舍論」，刪除口語「這是。」，補上標點。",
+      "guardReason": "cross-sentence-move:這一段"
+    },
+    {
+      "sentenceId": "seg-514",
+      "paragraphId": "p-6",
+      "start": 1804.88,
+      "end": 1808.48,
+      "originalText": "這一段文是《據史論》上的。",
+      "proposedText": "在《俱舍論》這一段。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「據史論→俱舍論」。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-515",
+      "paragraphId": "p-6",
+      "start": 1808.48,
+      "end": 1810.08,
+      "originalText": "在《據史論》這一段。",
+      "proposedText": "主要是說這個白骨觀。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-517",
+      "paragraphId": "p-6",
+      "start": 1814.22,
+      "end": 1818.93,
+      "originalText": "說這個古所觀。",
+      "proposedText": "學習這個白骨觀。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "cross-sentence-move:學習這"
+    },
+    {
+      "sentenceId": "seg-518",
+      "paragraphId": "p-6",
+      "start": 1818.93,
+      "end": 1824.06,
+      "originalText": "學習這個白骨觀。",
+      "proposedText": "或者自己會畫。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-519",
+      "paragraphId": "p-6",
+      "start": 1824.06,
+      "end": 1826.34,
+      "originalText": "或者自己會畫。",
+      "proposedText": "就是畫一個大張圖，一個白骨圖。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-520",
+      "paragraphId": "p-6",
+      "start": 1826.34,
+      "end": 1830.49,
+      "originalText": "就是畫一個大張圖,一個白骨圖。",
+      "proposedText": "那我昨天說過，常常看，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除多餘逗號與「啊」。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-521",
+      "paragraphId": "p-6",
+      "start": 1830.69,
+      "end": 1836.66,
+      "originalText": "那我昨天說過啊,常常看,，",
+      "proposedText": "然後你靜坐的時候是觀察，就容易一點，",
+      "categories": [
+        "punctuation",
+        "asr-error"
+      ],
+      "reason": "修正「觀察室文→觀察」，補上標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-523",
+      "paragraphId": "p-6",
+      "start": 1836.86,
+      "end": 1841.06,
+      "originalText": "然後你靜坐的時候是觀察室文就容易一點,，",
+      "proposedText": "還有幫助。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-524",
+      "paragraphId": "p-6",
+      "start": 1841.26,
+      "end": 1855.86,
+      "originalText": "還有幫助。",
+      "proposedText": "這個《身念住》。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "cross-sentence-move:這個身"
+    },
+    {
+      "sentenceId": "seg-525",
+      "paragraphId": "p-6",
+      "start": 1856.06,
+      "end": 1859.75,
+      "originalText": "這個《身念住》。",
+      "proposedText": "您這個《俱舍論》這一段文是屬於《身念住》。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「據詩論→俱舍論」。",
+      "guardReason": "cross-sentence-move:您這個"
+    },
+    {
+      "sentenceId": "seg-527",
+      "paragraphId": "p-6",
+      "start": 1864.75,
+      "end": 1866.96,
+      "originalText": "《身念住》。",
+      "proposedText": "這裡只是說一個骨所觀、白骨觀。",
+      "categories": [
+        "asr-error",
+        "punctuation"
+      ],
+      "reason": "修正「古所關→骨所觀」「白骨關→白骨觀」，補上頓號。",
+      "guardReason": "cross-sentence-move:這裡只"
+    },
+    {
+      "sentenceId": "seg-528",
+      "paragraphId": "p-6",
+      "start": 1867.16,
+      "end": 1871.56,
+      "originalText": "這裡只是說一個古所關、白骨關。",
+      "proposedText": "我以下引這個文，這是《瑜伽師地論》。",
+      "categories": [
+        "asr-error",
+        "punctuation"
+      ],
+      "reason": "修正「玉切斯的論→瑜伽師地論」，補上標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-529",
+      "paragraphId": "p-6",
+      "start": 1871.56,
+      "end": 1877.03,
+      "originalText": "我以下引這個文,這是《玉切斯的論》。",
+      "proposedText": "第三十卷裡面的文。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-530",
+      "paragraphId": "p-6",
+      "start": 1877.03,
+      "end": 1879.03,
+      "originalText": "第三十卷裡面的文。",
+      "proposedText": "這裡面就是全部的不淨觀。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「不禁觀→不淨觀」。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-531",
+      "paragraphId": "p-6",
+      "start": 1879.03,
+      "end": 1882.03,
+      "originalText": "這裡面就是全部的不禁觀。",
+      "proposedText": "所謂九想觀也在內了。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「九祥觀→九想觀」。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-532",
+      "paragraphId": "p-6",
+      "start": 1882.03,
+      "end": 1884.26,
+      "originalText": "所謂九祥觀也在內了。",
+      "proposedText": "白骨觀也在內。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "cross-sentence-move:白骨觀"
+    },
+    {
+      "sentenceId": "seg-533",
+      "paragraphId": "p-6",
+      "start": 1884.26,
+      "end": 1886.26,
+      "originalText": "白骨觀也在內。",
+      "proposedText": "有的人的根性不一樣。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-534",
+      "paragraphId": "p-6",
+      "start": 1886.26,
+      "end": 1892.75,
+      "originalText": "有的人的根性不一樣。",
+      "proposedText": "修白骨觀、修骨鎖觀。",
+      "categories": [
+        "asr-error",
+        "punctuation"
+      ],
+      "reason": "修正「鼓手觀→骨鎖觀」，補上頓號。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-535",
+      "paragraphId": "p-6",
+      "start": 1892.75,
+      "end": 1894.75,
+      "originalText": "修白骨觀、修鼓手觀。",
+      "proposedText": "它就能相應。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-536",
+      "paragraphId": "p-6",
+      "start": 1894.75,
+      "end": 1896.75,
+      "originalText": "它就能相應。",
+      "proposedText": "也能破自己的這個欲心。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-537",
+      "paragraphId": "p-6",
+      "start": 1896.75,
+      "end": 1898.75,
+      "originalText": "也能破自己的這個欲心。",
+      "proposedText": "但是也有人不合適。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "seg-538",
+      "paragraphId": "p-6",
+      "start": 1898.75,
+      "end": 1900.75,
+      "originalText": "但是也有人不合適。",
+      "proposedText": "所以這個《瑜伽師地論》。",
+      "categories": [
+        "asr-error"
+      ],
+      "reason": "修正「玉切斯的論→瑜伽師地論」。",
+      "guardReason": "content-word-omitted:但是"
+    },
+    {
+      "sentenceId": "seg-539",
+      "paragraphId": "p-6",
+      "start": 1900.75,
+      "end": 1903.68,
+      "originalText": "所以這個《玉切斯的論》。",
+      "proposedText": "這就是比較全部的了。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補齊句尾標點。",
+      "guardReason": "content-word-omitted:所以"
+    }
+  ]
+}

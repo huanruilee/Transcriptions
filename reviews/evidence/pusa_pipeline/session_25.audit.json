@@ -1,0 +1,3292 @@
+{
+  "findings": [
+    {
+      "sentenceId": "sent-7",
+      "paragraphId": "p_1",
+      "heading": "1. 開場隨喜與課程預告",
+      "start": 44.76,
+      "end": 51.8,
+      "text": "下禮拜大家可以複習這幾次我們在講波羅蜜多的範圍內容。",
+      "prevText": "如果沒有去的話，下禮拜我們還是停課。",
+      "nextText": "好，那我們這兩三節課，我上次也有講到說，其實這個真的是蠻重量級的課。",
+      "findings": [
+        {
+          "ruleId": "missing-paramita-prefix",
+          "severity": "high",
+          "matchedText": "波羅蜜多",
+          "suggestedTerm": "般若波羅蜜多",
+          "reason": "上下文提及六度最後一度／空性／空三摩地，單獨出現「波羅蜜多」疑似漏掉前綴「般若」",
+          "promptHints": [
+            "六度",
+            "布施、持戒、忍辱、精進、禪定、般若",
+            "般若波羅蜜多",
+            "1. 開場隨喜與課程預告"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-9",
+      "paragraphId": "p_2",
+      "heading": null,
+      "start": 66.58,
+      "end": 77.18,
+      "text": "為什麼？因為波羅蜜多是所有我們學佛的一個核心目標。",
+      "prevText": "好，那我們這兩三節課，我上次也有講到說，其實這個真的是蠻重量級的課。",
+      "nextText": "我們一直在說我們有無明，要斷煩惱。",
+      "findings": [
+        {
+          "ruleId": "missing-paramita-prefix",
+          "severity": "high",
+          "matchedText": "波羅蜜多",
+          "suggestedTerm": "般若波羅蜜多",
+          "reason": "上下文提及六度最後一度／空性／空三摩地，單獨出現「波羅蜜多」疑似漏掉前綴「般若」",
+          "promptHints": [
+            "六度",
+            "布施、持戒、忍辱、精進、禪定、般若",
+            "般若波羅蜜多"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-48",
+      "paragraphId": "p_6",
+      "heading": "3. 中觀應成派之殊勝見",
+      "start": 267.16,
+      "end": 270.96,
+      "text": "所以，以中觀的立場，我們有講過這本書，",
+      "prevText": "當然空觀有包括什麼人無我跟法無我。",
+      "nextText": "這本尤其說達賴喇嘛尊者，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以，以中觀的立場，我們有講過這本書，",
+          "suggestedTerm": "書名（如《中觀根本慧論》等）",
+          "reason": "「我們有講過這本書」語義不完整，前句講空觀、後句講達賴喇嘛尊者，此處疑似漏掉書名或「這本書」的具體指涉（如某本中觀著作），導致句子斷裂缺實質名詞。",
+          "promptHints": [
+            "中觀",
+            "書名",
+            "達賴喇嘛尊者"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-120",
+      "paragraphId": "p_10",
+      "heading": null,
+      "start": 483.66,
+      "end": 485.98,
+      "text": "南禪的禪修方式，",
+      "prevText": "這個，",
+      "nextText": "或者是我要去學密法等等。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "南禪的禪修方式，",
+          "suggestedTerm": "南傳",
+          "reason": "「南禪的禪修方式」語義突兀，前後列舉念佛法門、唯識法門、密法等，此處疑漏「南傳」二字，應為「南傳禪的禪修方式」或「南傳的禪修方式」。",
+          "promptHints": [
+            "南傳禪修",
+            "內觀禪",
+            "念佛法門",
+            "唯識法門",
+            "密法"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-224",
+      "paragraphId": "p_13",
+      "heading": "5. 辨析空三摩地與如幻",
+      "start": 619,
+      "end": 619.5,
+      "text": "或者是你已經有",
+      "prevText": "我們說有力量，",
+      "nextText": "有一些成果。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "或者是你已經有",
+          "suggestedTerm": "覺受",
+          "reason": "「或者是你已經有」之後語意未完，接續句「有一些成果」中間疑似漏掉名相（如「覺受」或「驗相」），導致「有」字後直接跳接成果，文義斷裂。",
+          "promptHints": [
+            "覺受",
+            "驗相",
+            "成果"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-416",
+      "paragraphId": "p_19",
+      "heading": null,
+      "start": 858.92,
+      "end": 860.82,
+      "text": "唯識的也好，",
+      "prevText": "喔，",
+      "nextText": "或者是，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "唯識的也好，",
+          "suggestedTerm": "中觀的也好",
+          "reason": "前句「那這個正見或者是見地」後接「唯識的也好」，中間疑似漏掉一個宗派名相（如中觀），造成列舉不完整且與後文「唯識的也好」重複出現的結構不一致。",
+          "promptHints": [
+            "中觀",
+            "唯識",
+            "見地"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-470",
+      "paragraphId": "p_21",
+      "heading": "7. 中道正見與破除邊見",
+      "start": 925.98,
+      "end": 927.54,
+      "text": "它就是代表一條正",
+      "prevText": "所以，",
+      "nextText": "一條",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "它就是代表一條正",
+          "suggestedTerm": "途",
+          "reason": "句子「它就是代表一條正」語義未完，後接「一條」「康莊的正途」，明顯疑似漏掉名詞（如「途」或「道」），造成斷句不完整。",
+          "promptHints": [
+            "正途",
+            "道路",
+            "法道"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-550",
+      "paragraphId": "p_23",
+      "heading": null,
+      "start": 1032.92,
+      "end": 1033.92,
+      "text": "非有，",
+      "prevText": "什麼，",
+      "nextText": "非有，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "非有，",
+          "suggestedTerm": "非無",
+          "reason": "斷見定義處僅說「非有」，依中觀通例應為「非有非無」或「一切法非有」前後語義不完整，疑似漏掉「非無」或「畢竟無」等字，導致斷見定義語義斷裂。",
+          "promptHints": [
+            "斷見",
+            "常見",
+            "自性實有",
+            "非有非無"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-675",
+      "paragraphId": "p_28",
+      "heading": "9. 遠離常見斷見之誤解",
+      "start": 1272.6,
+      "end": 1274.68,
+      "text": "還有包含我們說外道的六十二種，",
+      "prevText": "六十二種，",
+      "nextText": "這個邪見，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "還有包含我們說外道的六十二種，",
+          "suggestedTerm": "見",
+          "reason": "前句說「六十二種」，此句說「還有包含我們說外道的六十二種」，但六十二見通常指外道見，此處語意重複且未指明是「六十二種見」或「六十二種邪見」，疑似漏掉「見」或「邪見」等名相後綴，導致語意不完整。",
+          "promptHints": [
+            "六十二見",
+            "外道六十二見",
+            "邪見"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-732",
+      "paragraphId": "p_30",
+      "heading": "10. 空三摩地之定慧雙運",
+      "start": 1381.24,
+      "end": 1383.14,
+      "text": "它還多了三摩地三個字，",
+      "prevText": "除了空這個字以外，",
+      "nextText": "對不對，",
+      "findings": [
+        {
+          "ruleId": "truncated-samadhi",
+          "severity": "medium",
+          "matchedText": "三摩地",
+          "suggestedTerm": "空三摩地 / 無相三摩地 / 無願三摩地",
+          "reason": "單獨出現「三摩地」且無前綴，依上下文確認是否漏掉「空／無相／無願」",
+          "promptHints": [
+            "空三摩地",
+            "無相三摩地",
+            "無願三摩地",
+            "如幻三摩地",
+            "三三摩地",
+            "三解脫門"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-735",
+      "paragraphId": "p_30",
+      "heading": "10. 空三摩地之定慧雙運",
+      "start": 1384.86,
+      "end": 1386.2,
+      "text": "三摩地是什麼意思？",
+      "prevText": "對不對，",
+      "nextText": "什麼意思？",
+      "findings": [
+        {
+          "ruleId": "truncated-samadhi",
+          "severity": "medium",
+          "matchedText": "三摩地",
+          "suggestedTerm": "空三摩地 / 無相三摩地 / 無願三摩地",
+          "reason": "單獨出現「三摩地」且無前綴，依上下文確認是否漏掉「空／無相／無願」",
+          "promptHints": [
+            "空三摩地",
+            "無相三摩地",
+            "無願三摩地",
+            "如幻三摩地",
+            "三三摩地",
+            "三解脫門"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-739",
+      "paragraphId": "p_30",
+      "heading": "10. 空三摩地之定慧雙運",
+      "start": 1394.14,
+      "end": 1395.08,
+      "text": "三摩地，",
+      "prevText": "可以給我一個字嗎？",
+      "nextText": "就是定，",
+      "findings": [
+        {
+          "ruleId": "truncated-samadhi",
+          "severity": "medium",
+          "matchedText": "三摩地",
+          "suggestedTerm": "空三摩地 / 無相三摩地 / 無願三摩地",
+          "reason": "單獨出現「三摩地」且無前綴，依上下文確認是否漏掉「空／無相／無願」",
+          "promptHints": [
+            "空三摩地",
+            "無相三摩地",
+            "無願三摩地",
+            "如幻三摩地",
+            "三三摩地",
+            "三解脫門"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-756",
+      "paragraphId": "p_31",
+      "heading": null,
+      "start": 1434.66,
+      "end": 1435.7,
+      "text": "這個力量的支持下，去做觀──毗婆舍那，或我們說慧觀，然後，再把那個慧觀所獲得的結果，",
+      "prevText": "在你的定力上，",
+      "nextText": "去以定力把自己的心去持著慧觀所獲得的結果。比如說你已經認為：是的，我確認。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這個力量的支持下，去做觀──毗婆舍那，或我們說慧觀，然後，再把那個慧觀所獲得的結果，",
+          "suggestedTerm": "去修",
+          "reason": "句中「在你的定力上」之後語法突然斷裂，疑似漏掉動詞（如「去修／去進行」），才接得上「去做觀」",
+          "promptHints": [
+            "毗婆舍那",
+            "慧觀",
+            "定慧雙運"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-793",
+      "paragraphId": "p_33",
+      "heading": null,
+      "start": 1512.8,
+      "end": 1515.24,
+      "text": "所以空三摩地，就是",
+      "prevText": "好，我們先來看一下。",
+      "nextText": "就是",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以空三摩地，就是",
+          "suggestedTerm": "空所緣／觀諸法無我",
+          "reason": "「所以空三摩地，就是」後接「就是」重複且語義未完，疑似漏掉空三摩地的定義內容（如「空所緣」或「觀諸法無我」等實質詞彙）。",
+          "promptHints": [
+            "空三摩地",
+            "空觀",
+            "所緣"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-825",
+      "paragraphId": "p_34",
+      "heading": "11. 人無我觀之入手處",
+      "start": 1566.8,
+      "end": 1569.06,
+      "text": "斷除薩迦耶見、獲得",
+      "prevText": "我說成功啦！",
+      "nextText": "獲證初果。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "斷除薩迦耶見、獲得",
+          "suggestedTerm": "須陀洹果",
+          "reason": "「斷除薩迦耶見、獲得」語意未完，後接「獲證初果」，中間疑似漏掉「須陀洹果」等名相，造成「獲得」缺受詞。",
+          "promptHints": [
+            "薩迦耶見",
+            "初果",
+            "須陀洹"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-830",
+      "paragraphId": "p_34",
+      "heading": "11. 人無我觀之入手處",
+      "start": 1575,
+      "end": 1577.04,
+      "text": "在那中含有大多數的",
+      "prevText": "觀法無我。",
+      "nextText": "觀一切法空是比較容易的。所以既然要講到人無我，那我們就來看一下「我」這個詞。我們在講「我」的時候，就是指我們這個人，對不對？那我們這個人是自性成就的，還是他是一個緣起法呢？他是緣起法，對。所以他說，這個人或者是這個我，他是依緣而存在的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "在那中含有大多數的",
+          "suggestedTerm": "有情",
+          "reason": "「在那中含有大多數的」句子突然中斷，缺少後續名詞（如「有情」或「法」），疑似 ASR 吞字。",
+          "promptHints": [
+            "人無我",
+            "法無我",
+            "有情"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-895",
+      "paragraphId": "p_37",
+      "heading": "12. 五蘊和合中無實我",
+      "start": 1702.44,
+      "end": 1703.74,
+      "text": "因為我們認為我這個",
+      "prevText": "為什麼這裡就要把這個唯名的我，跟我們認為的我，馬上先提出來？",
+      "nextText": "我會認為我這個人，就是有一個我的一個實體的存在。那個實體到底在哪裡？我的個體到底在哪裡？你其實找不出來。但是你就會說：「這個就是我啊。」",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "因為我們認為我這個",
+          "suggestedTerm": "認知",
+          "reason": "句子在「我這個」之後語意未完，缺少後續名詞（如「認知」「執著」等），疑似 ASR 吞掉後半句。",
+          "promptHints": [
+            "我執",
+            "五蘊",
+            "實體"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1125",
+      "paragraphId": "p_46",
+      "heading": null,
+      "start": 2127.36,
+      "end": 2128.08,
+      "text": "所要無",
+      "prevText": "我們這裡",
+      "nextText": "無我所要無的物件呢，不是你那個存在的這個個體啦，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所要無",
+          "suggestedTerm": "無我",
+          "reason": "「我們這裡所要無」語法不完整，後接「無我所要無的物件」，疑漏「無我」或「遮除」等詞，導致句子斷裂。",
+          "promptHints": [
+            "無我",
+            "所遮",
+            "所破"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1158",
+      "paragraphId": "p_48",
+      "heading": null,
+      "start": 2198.38,
+      "end": 2198.5,
+      "text": "你認為是有看到，其實是有看到。",
+      "prevText": "你認為是有看到，其實祂是不存在的。你這樣講就是什麼？破壞世俗諦。",
+      "nextText": "因為世俗諦說，你這個人",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "你認為是有看到，其實是有看到。",
+          "suggestedTerm": "沒有（自性）",
+          "reason": "前後文在講「你認為是有看到，其實祂是不存在的」，此句應是解說世俗諦上「有看到」的成立，但「其實是有看到」語意重複且缺少否定轉折，疑似漏掉「其實是沒有（自性）」之類的字，導致文義斷裂。",
+          "promptHints": [
+            "世俗諦",
+            "自性",
+            "勝義諦"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1223",
+      "paragraphId": "p_51",
+      "heading": null,
+      "start": 2335.86,
+      "end": 2336.6,
+      "text": "搞錯",
+      "prevText": "那麼你就搞錯了。",
+      "nextText": "所以，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "搞錯",
+          "suggestedTerm": "搞錯了",
+          "reason": "「搞錯」單獨成句，語法不完整，疑似漏掉後續詞彙（如「了」或補充說明），前後文為「那麼你就搞錯了。搞錯 所以…」，此句突兀斷裂。",
+          "promptHints": [
+            "搞錯",
+            "空",
+            "自性"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1260",
+      "paragraphId": "p_52",
+      "heading": null,
+      "start": 2409.34,
+      "end": 2411.04,
+      "text": "沒有了這段真的很重要。",
+      "prevText": "也剛好有時間啊，",
+      "nextText": "你們如果等一下來看我的課",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "沒有了這段真的很重要。",
+          "suggestedTerm": "如果",
+          "reason": "前句「這段課本也剛好有時間啊」語意不完整，此句「沒有了這段真的很重要」開頭突兀，疑似漏掉「如果」或「要是」等假設詞，原意應為「如果沒有了這段，真的很重要」之類的假設語氣。",
+          "promptHints": [
+            "假設語氣",
+            "如果沒有"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1280",
+      "paragraphId": "p_53",
+      "heading": "15. 施設處與假名安立",
+      "start": 2448.9,
+      "end": 2450.5,
+      "text": "那物件就是什麼？獨立",
+      "prevText": "就是再講一次剛剛我所講的，",
+      "nextText": "存在的我，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "那物件就是什麼？獨立",
+          "suggestedTerm": "自性",
+          "reason": "「那物件就是什麼？獨立」語意未完，後接「存在的我」，疑漏「自性」或「實有」等修飾詞，或「獨立」後漏「實有」等字。",
+          "promptHints": [
+            "獨立實有",
+            "自性存在",
+            "人無我"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1294",
+      "paragraphId": "p_53",
+      "heading": "15. 施設處與假名安立",
+      "start": 2476.1,
+      "end": 2480.06,
+      "text": "就是說，我們今天如果有個小baby出生的，對不對？好，他...",
+      "prevText": "身心。",
+      "nextText": "好，",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "就是說，我們今天如果有個小baby",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": [
+            "15. 施設處與假名安立"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1317",
+      "paragraphId": "p_54",
+      "heading": null,
+      "start": 2520.92,
+      "end": 2523.86,
+      "text": "我我的心，譬如說如果我今天是",
+      "prevText": "好，那",
+      "nextText": "那個小孩子的爸爸媽媽，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "我我的心，譬如說如果我今天是",
+          "suggestedTerm": null,
+          "reason": "「我我的心」出現重複字「我我」，疑為口誤或漏字，應為「我的心」或「我的這個心」。",
+          "promptHints": [
+            "心的作用",
+            "命名"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1350",
+      "paragraphId": "p_56",
+      "heading": null,
+      "start": 2586.52,
+      "end": 2589.32,
+      "text": "他這裡面是寫「也就是不用關」嗎？",
+      "prevText": "也",
+      "nextText": "你把「就是」這兩個字擦掉，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "他這裡面是寫「也就是不用關」嗎？",
+          "suggestedTerm": "觀待施設處",
+          "reason": "原句應為「也就是不用觀待施設處」，此句僅剩「也就是不用關」，明顯漏掉「觀待施設處」等字，語義不完整。",
+          "promptHints": [
+            "觀待",
+            "施設處",
+            "施設假名"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1409",
+      "paragraphId": "p_58",
+      "heading": null,
+      "start": 2692.44,
+      "end": 2693.88,
+      "text": "我今天爸爸",
+      "prevText": "我們說王小明，",
+      "nextText": "今天如果他的爸爸媽媽給他取名叫王小明之後，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "我今天爸爸",
+          "suggestedTerm": "是",
+          "reason": "「我今天爸爸」語法不完整，疑似漏掉「是」或「當」等字，造成句子斷裂不通。",
+          "promptHints": [
+            "我今天",
+            "爸爸"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1425",
+      "paragraphId": "p_59",
+      "heading": null,
+      "start": 2729.3,
+      "end": 2729.88,
+      "text": "只是剛，",
+      "prevText": "只是什麼？",
+      "nextText": "只是那個五蘊和合的小 baby。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "只是剛，",
+          "suggestedTerm": "出生的（嬰兒）",
+          "reason": "「只是剛，」語意未完，疑似漏掉後續名詞，前後文在講五蘊和合體，應是「只是剛出生的…」之類被截斷",
+          "promptHints": [
+            "五蘊和合",
+            "小 baby",
+            "剛出生"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1426",
+      "paragraphId": "p_59",
+      "heading": null,
+      "start": 2729.88,
+      "end": 2732.56,
+      "text": "只是那個五蘊和合的小 baby。",
+      "prevText": "只是剛，",
+      "nextText": "然後，",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "只是那個五蘊和合的小 baby",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-1454",
+      "paragraphId": "p_60",
+      "heading": null,
+      "start": 2789.02,
+      "end": 2793.02,
+      "text": "去批評你，但是你真的做錯事的那，你當然是要檢討。",
+      "prevText": "當然，如果人家人家講你的，",
+      "nextText": "那我們，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "去批評你，但是你真的做錯事的那，你當然是要檢討。",
+          "suggestedTerm": "那個部分",
+          "reason": "「但是你真的做錯事的那，」句尾「那」字懸空，疑似漏掉名詞，應為「做錯事的那個部分／那件事」",
+          "promptHints": [
+            "批評",
+            "檢討"
+          ]
+        }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "windowId": "win-1",
+      "clipStart": 42.76,
+      "clipEnd": 53.8,
+      "clipDuration": 11.04,
+      "sentenceIds": [
+        "sent-7"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-7",
+          "text": "下禮拜大家可以複習這幾次我們在講波羅蜜多的範圍內容。"
+        }
+      ],
+      "expectedTerms": [
+        "般若波羅蜜多"
+      ],
+      "prompt": "如果沒有去的話，下禮拜我們還是停課。 六度、布施、持戒、忍辱、精進、禪定、般若、般若波羅蜜多、1. 開場隨喜與課程預告",
+      "items": [
+        {
+          "sentenceId": "sent-7",
+          "paragraphId": "p_1",
+          "heading": "1. 開場隨喜與課程預告",
+          "start": 44.76,
+          "end": 51.8,
+          "text": "下禮拜大家可以複習這幾次我們在講波羅蜜多的範圍內容。",
+          "prevText": "如果沒有去的話，下禮拜我們還是停課。",
+          "nextText": "好，那我們這兩三節課，我上次也有講到說，其實這個真的是蠻重量級的課。",
+          "findings": [
+            {
+              "ruleId": "missing-paramita-prefix",
+              "severity": "high",
+              "matchedText": "波羅蜜多",
+              "suggestedTerm": "般若波羅蜜多",
+              "reason": "上下文提及六度最後一度／空性／空三摩地，單獨出現「波羅蜜多」疑似漏掉前綴「般若」",
+              "promptHints": [
+                "六度",
+                "布施、持戒、忍辱、精進、禪定、般若",
+                "般若波羅蜜多",
+                "1. 開場隨喜與課程預告"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 64.58,
+      "clipEnd": 79.18,
+      "clipDuration": 14.6,
+      "sentenceIds": [
+        "sent-9"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-9",
+          "text": "為什麼？因為波羅蜜多是所有我們學佛的一個核心目標。"
+        }
+      ],
+      "expectedTerms": [
+        "般若波羅蜜多"
+      ],
+      "prompt": "好，那我們這兩三節課，我上次也有講到說，其實這個真的是蠻重量級的課。 六度、布施、持戒、忍辱、精進、禪定、般若、般若波羅蜜多",
+      "items": [
+        {
+          "sentenceId": "sent-9",
+          "paragraphId": "p_2",
+          "heading": null,
+          "start": 66.58,
+          "end": 77.18,
+          "text": "為什麼？因為波羅蜜多是所有我們學佛的一個核心目標。",
+          "prevText": "好，那我們這兩三節課，我上次也有講到說，其實這個真的是蠻重量級的課。",
+          "nextText": "我們一直在說我們有無明，要斷煩惱。",
+          "findings": [
+            {
+              "ruleId": "missing-paramita-prefix",
+              "severity": "high",
+              "matchedText": "波羅蜜多",
+              "suggestedTerm": "般若波羅蜜多",
+              "reason": "上下文提及六度最後一度／空性／空三摩地，單獨出現「波羅蜜多」疑似漏掉前綴「般若」",
+              "promptHints": [
+                "六度",
+                "布施、持戒、忍辱、精進、禪定、般若",
+                "般若波羅蜜多"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 265.16,
+      "clipEnd": 272.96,
+      "clipDuration": 7.8,
+      "sentenceIds": [
+        "sent-48"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-48",
+          "text": "所以，以中觀的立場，我們有講過這本書，"
+        }
+      ],
+      "expectedTerms": [
+        "書名（如《中觀根本慧論》等）"
+      ],
+      "prompt": "當然空觀有包括什麼人無我跟法無我。 中觀、書名、達賴喇嘛尊者",
+      "items": [
+        {
+          "sentenceId": "sent-48",
+          "paragraphId": "p_6",
+          "heading": "3. 中觀應成派之殊勝見",
+          "start": 267.16,
+          "end": 270.96,
+          "text": "所以，以中觀的立場，我們有講過這本書，",
+          "prevText": "當然空觀有包括什麼人無我跟法無我。",
+          "nextText": "這本尤其說達賴喇嘛尊者，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以，以中觀的立場，我們有講過這本書，",
+              "suggestedTerm": "書名（如《中觀根本慧論》等）",
+              "reason": "「我們有講過這本書」語義不完整，前句講空觀、後句講達賴喇嘛尊者，此處疑似漏掉書名或「這本書」的具體指涉（如某本中觀著作），導致句子斷裂缺實質名詞。",
+              "promptHints": [
+                "中觀",
+                "書名",
+                "達賴喇嘛尊者"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 481.66,
+      "clipEnd": 487.98,
+      "clipDuration": 6.32,
+      "sentenceIds": [
+        "sent-120"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-120",
+          "text": "南禪的禪修方式，"
+        }
+      ],
+      "expectedTerms": [
+        "南傳"
+      ],
+      "prompt": "這個， 南傳禪修、內觀禪、念佛法門、唯識法門、密法",
+      "items": [
+        {
+          "sentenceId": "sent-120",
+          "paragraphId": "p_10",
+          "heading": null,
+          "start": 483.66,
+          "end": 485.98,
+          "text": "南禪的禪修方式，",
+          "prevText": "這個，",
+          "nextText": "或者是我要去學密法等等。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "南禪的禪修方式，",
+              "suggestedTerm": "南傳",
+              "reason": "「南禪的禪修方式」語義突兀，前後列舉念佛法門、唯識法門、密法等，此處疑漏「南傳」二字，應為「南傳禪的禪修方式」或「南傳的禪修方式」。",
+              "promptHints": [
+                "南傳禪修",
+                "內觀禪",
+                "念佛法門",
+                "唯識法門",
+                "密法"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 617,
+      "clipEnd": 621.5,
+      "clipDuration": 4.5,
+      "sentenceIds": [
+        "sent-224"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-224",
+          "text": "或者是你已經有"
+        }
+      ],
+      "expectedTerms": [
+        "覺受"
+      ],
+      "prompt": "我們說有力量， 覺受、驗相、成果",
+      "items": [
+        {
+          "sentenceId": "sent-224",
+          "paragraphId": "p_13",
+          "heading": "5. 辨析空三摩地與如幻",
+          "start": 619,
+          "end": 619.5,
+          "text": "或者是你已經有",
+          "prevText": "我們說有力量，",
+          "nextText": "有一些成果。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "或者是你已經有",
+              "suggestedTerm": "覺受",
+              "reason": "「或者是你已經有」之後語意未完，接續句「有一些成果」中間疑似漏掉名相（如「覺受」或「驗相」），導致「有」字後直接跳接成果，文義斷裂。",
+              "promptHints": [
+                "覺受",
+                "驗相",
+                "成果"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 856.92,
+      "clipEnd": 862.82,
+      "clipDuration": 5.9,
+      "sentenceIds": [
+        "sent-416"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-416",
+          "text": "唯識的也好，"
+        }
+      ],
+      "expectedTerms": [
+        "中觀的也好"
+      ],
+      "prompt": "喔， 中觀、唯識、見地",
+      "items": [
+        {
+          "sentenceId": "sent-416",
+          "paragraphId": "p_19",
+          "heading": null,
+          "start": 858.92,
+          "end": 860.82,
+          "text": "唯識的也好，",
+          "prevText": "喔，",
+          "nextText": "或者是，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "唯識的也好，",
+              "suggestedTerm": "中觀的也好",
+              "reason": "前句「那這個正見或者是見地」後接「唯識的也好」，中間疑似漏掉一個宗派名相（如中觀），造成列舉不完整且與後文「唯識的也好」重複出現的結構不一致。",
+              "promptHints": [
+                "中觀",
+                "唯識",
+                "見地"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 923.98,
+      "clipEnd": 929.54,
+      "clipDuration": 5.56,
+      "sentenceIds": [
+        "sent-470"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-470",
+          "text": "它就是代表一條正"
+        }
+      ],
+      "expectedTerms": [
+        "途"
+      ],
+      "prompt": "所以， 正途、道路、法道",
+      "items": [
+        {
+          "sentenceId": "sent-470",
+          "paragraphId": "p_21",
+          "heading": "7. 中道正見與破除邊見",
+          "start": 925.98,
+          "end": 927.54,
+          "text": "它就是代表一條正",
+          "prevText": "所以，",
+          "nextText": "一條",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "它就是代表一條正",
+              "suggestedTerm": "途",
+              "reason": "句子「它就是代表一條正」語義未完，後接「一條」「康莊的正途」，明顯疑似漏掉名詞（如「途」或「道」），造成斷句不完整。",
+              "promptHints": [
+                "正途",
+                "道路",
+                "法道"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 1030.92,
+      "clipEnd": 1035.92,
+      "clipDuration": 5,
+      "sentenceIds": [
+        "sent-550"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-550",
+          "text": "非有，"
+        }
+      ],
+      "expectedTerms": [
+        "非無"
+      ],
+      "prompt": "什麼， 斷見、常見、自性實有、非有非無",
+      "items": [
+        {
+          "sentenceId": "sent-550",
+          "paragraphId": "p_23",
+          "heading": null,
+          "start": 1032.92,
+          "end": 1033.92,
+          "text": "非有，",
+          "prevText": "什麼，",
+          "nextText": "非有，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "非有，",
+              "suggestedTerm": "非無",
+              "reason": "斷見定義處僅說「非有」，依中觀通例應為「非有非無」或「一切法非有」前後語義不完整，疑似漏掉「非無」或「畢竟無」等字，導致斷見定義語義斷裂。",
+              "promptHints": [
+                "斷見",
+                "常見",
+                "自性實有",
+                "非有非無"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 1270.6,
+      "clipEnd": 1276.68,
+      "clipDuration": 6.08,
+      "sentenceIds": [
+        "sent-675"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-675",
+          "text": "還有包含我們說外道的六十二種，"
+        }
+      ],
+      "expectedTerms": [
+        "見"
+      ],
+      "prompt": "六十二種， 六十二見、外道六十二見、邪見",
+      "items": [
+        {
+          "sentenceId": "sent-675",
+          "paragraphId": "p_28",
+          "heading": "9. 遠離常見斷見之誤解",
+          "start": 1272.6,
+          "end": 1274.68,
+          "text": "還有包含我們說外道的六十二種，",
+          "prevText": "六十二種，",
+          "nextText": "這個邪見，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "還有包含我們說外道的六十二種，",
+              "suggestedTerm": "見",
+              "reason": "前句說「六十二種」，此句說「還有包含我們說外道的六十二種」，但六十二見通常指外道見，此處語意重複且未指明是「六十二種見」或「六十二種邪見」，疑似漏掉「見」或「邪見」等名相後綴，導致語意不完整。",
+              "promptHints": [
+                "六十二見",
+                "外道六十二見",
+                "邪見"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 1379.24,
+      "clipEnd": 1388.2,
+      "clipDuration": 8.96,
+      "sentenceIds": [
+        "sent-732",
+        "sent-735"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-732",
+          "text": "它還多了三摩地三個字，"
+        },
+        {
+          "id": "sent-735",
+          "text": "三摩地是什麼意思？"
+        }
+      ],
+      "expectedTerms": [
+        "空三摩地 / 無相三摩地 / 無願三摩地"
+      ],
+      "prompt": "除了空這個字以外， 空三摩地、無相三摩地、無願三摩地、如幻三摩地、三三摩地、三解脫門",
+      "items": [
+        {
+          "sentenceId": "sent-732",
+          "paragraphId": "p_30",
+          "heading": "10. 空三摩地之定慧雙運",
+          "start": 1381.24,
+          "end": 1383.14,
+          "text": "它還多了三摩地三個字，",
+          "prevText": "除了空這個字以外，",
+          "nextText": "對不對，",
+          "findings": [
+            {
+              "ruleId": "truncated-samadhi",
+              "severity": "medium",
+              "matchedText": "三摩地",
+              "suggestedTerm": "空三摩地 / 無相三摩地 / 無願三摩地",
+              "reason": "單獨出現「三摩地」且無前綴，依上下文確認是否漏掉「空／無相／無願」",
+              "promptHints": [
+                "空三摩地",
+                "無相三摩地",
+                "無願三摩地",
+                "如幻三摩地",
+                "三三摩地",
+                "三解脫門"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "sent-735",
+          "paragraphId": "p_30",
+          "heading": "10. 空三摩地之定慧雙運",
+          "start": 1384.86,
+          "end": 1386.2,
+          "text": "三摩地是什麼意思？",
+          "prevText": "對不對，",
+          "nextText": "什麼意思？",
+          "findings": [
+            {
+              "ruleId": "truncated-samadhi",
+              "severity": "medium",
+              "matchedText": "三摩地",
+              "suggestedTerm": "空三摩地 / 無相三摩地 / 無願三摩地",
+              "reason": "單獨出現「三摩地」且無前綴，依上下文確認是否漏掉「空／無相／無願」",
+              "promptHints": [
+                "空三摩地",
+                "無相三摩地",
+                "無願三摩地",
+                "如幻三摩地",
+                "三三摩地",
+                "三解脫門"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1392.14,
+      "clipEnd": 1397.08,
+      "clipDuration": 4.94,
+      "sentenceIds": [
+        "sent-739"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-739",
+          "text": "三摩地，"
+        }
+      ],
+      "expectedTerms": [
+        "空三摩地 / 無相三摩地 / 無願三摩地"
+      ],
+      "prompt": "可以給我一個字嗎？ 空三摩地、無相三摩地、無願三摩地、如幻三摩地、三三摩地、三解脫門",
+      "items": [
+        {
+          "sentenceId": "sent-739",
+          "paragraphId": "p_30",
+          "heading": "10. 空三摩地之定慧雙運",
+          "start": 1394.14,
+          "end": 1395.08,
+          "text": "三摩地，",
+          "prevText": "可以給我一個字嗎？",
+          "nextText": "就是定，",
+          "findings": [
+            {
+              "ruleId": "truncated-samadhi",
+              "severity": "medium",
+              "matchedText": "三摩地",
+              "suggestedTerm": "空三摩地 / 無相三摩地 / 無願三摩地",
+              "reason": "單獨出現「三摩地」且無前綴，依上下文確認是否漏掉「空／無相／無願」",
+              "promptHints": [
+                "空三摩地",
+                "無相三摩地",
+                "無願三摩地",
+                "如幻三摩地",
+                "三三摩地",
+                "三解脫門"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 1432.66,
+      "clipEnd": 1437.7,
+      "clipDuration": 5.04,
+      "sentenceIds": [
+        "sent-756"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-756",
+          "text": "這個力量的支持下，去做觀──毗婆舍那，或我們說慧觀，然後，再把那個慧觀所獲得的結果，"
+        }
+      ],
+      "expectedTerms": [
+        "去修"
+      ],
+      "prompt": "在你的定力上， 毗婆舍那、慧觀、定慧雙運",
+      "items": [
+        {
+          "sentenceId": "sent-756",
+          "paragraphId": "p_31",
+          "heading": null,
+          "start": 1434.66,
+          "end": 1435.7,
+          "text": "這個力量的支持下，去做觀──毗婆舍那，或我們說慧觀，然後，再把那個慧觀所獲得的結果，",
+          "prevText": "在你的定力上，",
+          "nextText": "去以定力把自己的心去持著慧觀所獲得的結果。比如說你已經認為：是的，我確認。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這個力量的支持下，去做觀──毗婆舍那，或我們說慧觀，然後，再把那個慧觀所獲得的結果，",
+              "suggestedTerm": "去修",
+              "reason": "句中「在你的定力上」之後語法突然斷裂，疑似漏掉動詞（如「去修／去進行」），才接得上「去做觀」",
+              "promptHints": [
+                "毗婆舍那",
+                "慧觀",
+                "定慧雙運"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-13",
+      "clipStart": 1510.8,
+      "clipEnd": 1517.24,
+      "clipDuration": 6.44,
+      "sentenceIds": [
+        "sent-793"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-793",
+          "text": "所以空三摩地，就是"
+        }
+      ],
+      "expectedTerms": [
+        "空所緣／觀諸法無我"
+      ],
+      "prompt": "好，我們先來看一下。 空三摩地、空觀、所緣",
+      "items": [
+        {
+          "sentenceId": "sent-793",
+          "paragraphId": "p_33",
+          "heading": null,
+          "start": 1512.8,
+          "end": 1515.24,
+          "text": "所以空三摩地，就是",
+          "prevText": "好，我們先來看一下。",
+          "nextText": "就是",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以空三摩地，就是",
+              "suggestedTerm": "空所緣／觀諸法無我",
+              "reason": "「所以空三摩地，就是」後接「就是」重複且語義未完，疑似漏掉空三摩地的定義內容（如「空所緣」或「觀諸法無我」等實質詞彙）。",
+              "promptHints": [
+                "空三摩地",
+                "空觀",
+                "所緣"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-14",
+      "clipStart": 1564.8,
+      "clipEnd": 1571.06,
+      "clipDuration": 6.26,
+      "sentenceIds": [
+        "sent-825"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-825",
+          "text": "斷除薩迦耶見、獲得"
+        }
+      ],
+      "expectedTerms": [
+        "須陀洹果"
+      ],
+      "prompt": "我說成功啦！ 薩迦耶見、初果、須陀洹",
+      "items": [
+        {
+          "sentenceId": "sent-825",
+          "paragraphId": "p_34",
+          "heading": "11. 人無我觀之入手處",
+          "start": 1566.8,
+          "end": 1569.06,
+          "text": "斷除薩迦耶見、獲得",
+          "prevText": "我說成功啦！",
+          "nextText": "獲證初果。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "斷除薩迦耶見、獲得",
+              "suggestedTerm": "須陀洹果",
+              "reason": "「斷除薩迦耶見、獲得」語意未完，後接「獲證初果」，中間疑似漏掉「須陀洹果」等名相，造成「獲得」缺受詞。",
+              "promptHints": [
+                "薩迦耶見",
+                "初果",
+                "須陀洹"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-15",
+      "clipStart": 1573,
+      "clipEnd": 1579.04,
+      "clipDuration": 6.04,
+      "sentenceIds": [
+        "sent-830"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-830",
+          "text": "在那中含有大多數的"
+        }
+      ],
+      "expectedTerms": [
+        "有情"
+      ],
+      "prompt": "觀法無我。 人無我、法無我、有情",
+      "items": [
+        {
+          "sentenceId": "sent-830",
+          "paragraphId": "p_34",
+          "heading": "11. 人無我觀之入手處",
+          "start": 1575,
+          "end": 1577.04,
+          "text": "在那中含有大多數的",
+          "prevText": "觀法無我。",
+          "nextText": "觀一切法空是比較容易的。所以既然要講到人無我，那我們就來看一下「我」這個詞。我們在講「我」的時候，就是指我們這個人，對不對？那我們這個人是自性成就的，還是他是一個緣起法呢？他是緣起法，對。所以他說，這個人或者是這個我，他是依緣而存在的。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "在那中含有大多數的",
+              "suggestedTerm": "有情",
+              "reason": "「在那中含有大多數的」句子突然中斷，缺少後續名詞（如「有情」或「法」），疑似 ASR 吞字。",
+              "promptHints": [
+                "人無我",
+                "法無我",
+                "有情"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-16",
+      "clipStart": 1700.44,
+      "clipEnd": 1705.74,
+      "clipDuration": 5.3,
+      "sentenceIds": [
+        "sent-895"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-895",
+          "text": "因為我們認為我這個"
+        }
+      ],
+      "expectedTerms": [
+        "認知"
+      ],
+      "prompt": "為什麼這裡就要把這個唯名的我，跟我們認為的我，馬上先提出來？ 我執、五蘊、實體",
+      "items": [
+        {
+          "sentenceId": "sent-895",
+          "paragraphId": "p_37",
+          "heading": "12. 五蘊和合中無實我",
+          "start": 1702.44,
+          "end": 1703.74,
+          "text": "因為我們認為我這個",
+          "prevText": "為什麼這裡就要把這個唯名的我，跟我們認為的我，馬上先提出來？",
+          "nextText": "我會認為我這個人，就是有一個我的一個實體的存在。那個實體到底在哪裡？我的個體到底在哪裡？你其實找不出來。但是你就會說：「這個就是我啊。」",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "因為我們認為我這個",
+              "suggestedTerm": "認知",
+              "reason": "句子在「我這個」之後語意未完，缺少後續名詞（如「認知」「執著」等），疑似 ASR 吞掉後半句。",
+              "promptHints": [
+                "我執",
+                "五蘊",
+                "實體"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-17",
+      "clipStart": 2125.36,
+      "clipEnd": 2130.08,
+      "clipDuration": 4.72,
+      "sentenceIds": [
+        "sent-1125"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1125",
+          "text": "所要無"
+        }
+      ],
+      "expectedTerms": [
+        "無我"
+      ],
+      "prompt": "我們這裡 無我、所遮、所破",
+      "items": [
+        {
+          "sentenceId": "sent-1125",
+          "paragraphId": "p_46",
+          "heading": null,
+          "start": 2127.36,
+          "end": 2128.08,
+          "text": "所要無",
+          "prevText": "我們這裡",
+          "nextText": "無我所要無的物件呢，不是你那個存在的這個個體啦，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所要無",
+              "suggestedTerm": "無我",
+              "reason": "「我們這裡所要無」語法不完整，後接「無我所要無的物件」，疑漏「無我」或「遮除」等詞，導致句子斷裂。",
+              "promptHints": [
+                "無我",
+                "所遮",
+                "所破"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-18",
+      "clipStart": 2196.38,
+      "clipEnd": 2200.5,
+      "clipDuration": 4.12,
+      "sentenceIds": [
+        "sent-1158"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1158",
+          "text": "你認為是有看到，其實是有看到。"
+        }
+      ],
+      "expectedTerms": [
+        "沒有（自性）"
+      ],
+      "prompt": "你認為是有看到，其實祂是不存在的。你這樣講就是什麼？破壞世俗諦。 世俗諦、自性、勝義諦",
+      "items": [
+        {
+          "sentenceId": "sent-1158",
+          "paragraphId": "p_48",
+          "heading": null,
+          "start": 2198.38,
+          "end": 2198.5,
+          "text": "你認為是有看到，其實是有看到。",
+          "prevText": "你認為是有看到，其實祂是不存在的。你這樣講就是什麼？破壞世俗諦。",
+          "nextText": "因為世俗諦說，你這個人",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "你認為是有看到，其實是有看到。",
+              "suggestedTerm": "沒有（自性）",
+              "reason": "前後文在講「你認為是有看到，其實祂是不存在的」，此句應是解說世俗諦上「有看到」的成立，但「其實是有看到」語意重複且缺少否定轉折，疑似漏掉「其實是沒有（自性）」之類的字，導致文義斷裂。",
+              "promptHints": [
+                "世俗諦",
+                "自性",
+                "勝義諦"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-19",
+      "clipStart": 2333.86,
+      "clipEnd": 2338.6,
+      "clipDuration": 4.74,
+      "sentenceIds": [
+        "sent-1223"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1223",
+          "text": "搞錯"
+        }
+      ],
+      "expectedTerms": [
+        "搞錯了"
+      ],
+      "prompt": "那麼你就搞錯了。 搞錯、空、自性",
+      "items": [
+        {
+          "sentenceId": "sent-1223",
+          "paragraphId": "p_51",
+          "heading": null,
+          "start": 2335.86,
+          "end": 2336.6,
+          "text": "搞錯",
+          "prevText": "那麼你就搞錯了。",
+          "nextText": "所以，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "搞錯",
+              "suggestedTerm": "搞錯了",
+              "reason": "「搞錯」單獨成句，語法不完整，疑似漏掉後續詞彙（如「了」或補充說明），前後文為「那麼你就搞錯了。搞錯 所以…」，此句突兀斷裂。",
+              "promptHints": [
+                "搞錯",
+                "空",
+                "自性"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-20",
+      "clipStart": 2407.34,
+      "clipEnd": 2413.04,
+      "clipDuration": 5.7,
+      "sentenceIds": [
+        "sent-1260"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1260",
+          "text": "沒有了這段真的很重要。"
+        }
+      ],
+      "expectedTerms": [
+        "如果"
+      ],
+      "prompt": "也剛好有時間啊， 假設語氣、如果沒有",
+      "items": [
+        {
+          "sentenceId": "sent-1260",
+          "paragraphId": "p_52",
+          "heading": null,
+          "start": 2409.34,
+          "end": 2411.04,
+          "text": "沒有了這段真的很重要。",
+          "prevText": "也剛好有時間啊，",
+          "nextText": "你們如果等一下來看我的課",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "沒有了這段真的很重要。",
+              "suggestedTerm": "如果",
+              "reason": "前句「這段課本也剛好有時間啊」語意不完整，此句「沒有了這段真的很重要」開頭突兀，疑似漏掉「如果」或「要是」等假設詞，原意應為「如果沒有了這段，真的很重要」之類的假設語氣。",
+              "promptHints": [
+                "假設語氣",
+                "如果沒有"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-21",
+      "clipStart": 2446.9,
+      "clipEnd": 2452.5,
+      "clipDuration": 5.6,
+      "sentenceIds": [
+        "sent-1280"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1280",
+          "text": "那物件就是什麼？獨立"
+        }
+      ],
+      "expectedTerms": [
+        "自性"
+      ],
+      "prompt": "就是再講一次剛剛我所講的， 獨立實有、自性存在、人無我",
+      "items": [
+        {
+          "sentenceId": "sent-1280",
+          "paragraphId": "p_53",
+          "heading": "15. 施設處與假名安立",
+          "start": 2448.9,
+          "end": 2450.5,
+          "text": "那物件就是什麼？獨立",
+          "prevText": "就是再講一次剛剛我所講的，",
+          "nextText": "存在的我，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "那物件就是什麼？獨立",
+              "suggestedTerm": "自性",
+              "reason": "「那物件就是什麼？獨立」語意未完，後接「存在的我」，疑漏「自性」或「實有」等修飾詞，或「獨立」後漏「實有」等字。",
+              "promptHints": [
+                "獨立實有",
+                "自性存在",
+                "人無我"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-22",
+      "clipStart": 2474.1,
+      "clipEnd": 2482.06,
+      "clipDuration": 7.96,
+      "sentenceIds": [
+        "sent-1294"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1294",
+          "text": "就是說，我們今天如果有個小baby出生的，對不對？好，他..."
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "身心。 15. 施設處與假名安立",
+      "items": [
+        {
+          "sentenceId": "sent-1294",
+          "paragraphId": "p_53",
+          "heading": "15. 施設處與假名安立",
+          "start": 2476.1,
+          "end": 2480.06,
+          "text": "就是說，我們今天如果有個小baby出生的，對不對？好，他...",
+          "prevText": "身心。",
+          "nextText": "好，",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-gibberish",
+              "severity": "high",
+              "matchedText": "就是說，我們今天如果有個小baby",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+              "promptHints": [
+                "15. 施設處與假名安立"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-23",
+      "clipStart": 2518.92,
+      "clipEnd": 2525.86,
+      "clipDuration": 6.94,
+      "sentenceIds": [
+        "sent-1317"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1317",
+          "text": "我我的心，譬如說如果我今天是"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "好，那 心的作用、命名",
+      "items": [
+        {
+          "sentenceId": "sent-1317",
+          "paragraphId": "p_54",
+          "heading": null,
+          "start": 2520.92,
+          "end": 2523.86,
+          "text": "我我的心，譬如說如果我今天是",
+          "prevText": "好，那",
+          "nextText": "那個小孩子的爸爸媽媽，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "我我的心，譬如說如果我今天是",
+              "suggestedTerm": null,
+              "reason": "「我我的心」出現重複字「我我」，疑為口誤或漏字，應為「我的心」或「我的這個心」。",
+              "promptHints": [
+                "心的作用",
+                "命名"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-24",
+      "clipStart": 2584.52,
+      "clipEnd": 2591.32,
+      "clipDuration": 6.8,
+      "sentenceIds": [
+        "sent-1350"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1350",
+          "text": "他這裡面是寫「也就是不用關」嗎？"
+        }
+      ],
+      "expectedTerms": [
+        "觀待施設處"
+      ],
+      "prompt": "也 觀待、施設處、施設假名",
+      "items": [
+        {
+          "sentenceId": "sent-1350",
+          "paragraphId": "p_56",
+          "heading": null,
+          "start": 2586.52,
+          "end": 2589.32,
+          "text": "他這裡面是寫「也就是不用關」嗎？",
+          "prevText": "也",
+          "nextText": "你把「就是」這兩個字擦掉，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "他這裡面是寫「也就是不用關」嗎？",
+              "suggestedTerm": "觀待施設處",
+              "reason": "原句應為「也就是不用觀待施設處」，此句僅剩「也就是不用關」，明顯漏掉「觀待施設處」等字，語義不完整。",
+              "promptHints": [
+                "觀待",
+                "施設處",
+                "施設假名"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-25",
+      "clipStart": 2690.44,
+      "clipEnd": 2695.88,
+      "clipDuration": 5.44,
+      "sentenceIds": [
+        "sent-1409"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1409",
+          "text": "我今天爸爸"
+        }
+      ],
+      "expectedTerms": [
+        "是"
+      ],
+      "prompt": "我們說王小明， 我今天、爸爸",
+      "items": [
+        {
+          "sentenceId": "sent-1409",
+          "paragraphId": "p_58",
+          "heading": null,
+          "start": 2692.44,
+          "end": 2693.88,
+          "text": "我今天爸爸",
+          "prevText": "我們說王小明，",
+          "nextText": "今天如果他的爸爸媽媽給他取名叫王小明之後，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "我今天爸爸",
+              "suggestedTerm": "是",
+              "reason": "「我今天爸爸」語法不完整，疑似漏掉「是」或「當」等字，造成句子斷裂不通。",
+              "promptHints": [
+                "我今天",
+                "爸爸"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-26",
+      "clipStart": 2727.3,
+      "clipEnd": 2734.56,
+      "clipDuration": 7.26,
+      "sentenceIds": [
+        "sent-1425",
+        "sent-1426"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1425",
+          "text": "只是剛，"
+        },
+        {
+          "id": "sent-1426",
+          "text": "只是那個五蘊和合的小 baby。"
+        }
+      ],
+      "expectedTerms": [
+        "出生的（嬰兒）"
+      ],
+      "prompt": "只是什麼？ 五蘊和合、小 baby、剛出生",
+      "items": [
+        {
+          "sentenceId": "sent-1425",
+          "paragraphId": "p_59",
+          "heading": null,
+          "start": 2729.3,
+          "end": 2729.88,
+          "text": "只是剛，",
+          "prevText": "只是什麼？",
+          "nextText": "只是那個五蘊和合的小 baby。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "只是剛，",
+              "suggestedTerm": "出生的（嬰兒）",
+              "reason": "「只是剛，」語意未完，疑似漏掉後續名詞，前後文在講五蘊和合體，應是「只是剛出生的…」之類被截斷",
+              "promptHints": [
+                "五蘊和合",
+                "小 baby",
+                "剛出生"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "sent-1426",
+          "paragraphId": "p_59",
+          "heading": null,
+          "start": 2729.88,
+          "end": 2732.56,
+          "text": "只是那個五蘊和合的小 baby。",
+          "prevText": "只是剛，",
+          "nextText": "然後，",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-gibberish",
+              "severity": "high",
+              "matchedText": "只是那個五蘊和合的小 baby",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+              "promptHints": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-27",
+      "clipStart": 2787.02,
+      "clipEnd": 2795.02,
+      "clipDuration": 8,
+      "sentenceIds": [
+        "sent-1454"
+      ],
+      "originalTexts": [
+        {
+          "id": "sent-1454",
+          "text": "去批評你，但是你真的做錯事的那，你當然是要檢討。"
+        }
+      ],
+      "expectedTerms": [
+        "那個部分"
+      ],
+      "prompt": "當然，如果人家人家講你的， 批評、檢討",
+      "items": [
+        {
+          "sentenceId": "sent-1454",
+          "paragraphId": "p_60",
+          "heading": null,
+          "start": 2789.02,
+          "end": 2793.02,
+          "text": "去批評你，但是你真的做錯事的那，你當然是要檢討。",
+          "prevText": "當然，如果人家人家講你的，",
+          "nextText": "那我們，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "去批評你，但是你真的做錯事的那，你當然是要檢討。",
+              "suggestedTerm": "那個部分",
+              "reason": "「但是你真的做錯事的那，」句尾「那」字懸空，疑似漏掉名詞，應為「做錯事的那個部分／那件事」",
+              "promptHints": [
+                "批評",
+                "檢討"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reAsrResults": [
+    {
+      "windowId": "win-1",
+      "clipStart": 42.76,
+      "clipEnd": 53.8,
+      "rawSegments": [
+        {
+          "start": 42.76,
+          "end": 52.26,
+          "text": "下禮拜我們還是挺渴,下禮拜大家可以複習這幾次我們在講波羅蜜多的這個範圍的內容。"
+        }
+      ],
+      "rawText": "下禮拜我們還是挺渴,下禮拜大家可以複習這幾次我們在講波羅蜜多的這個範圍的內容。",
+      "guidedSegments": [
+        {
+          "start": 42.76,
+          "end": 52.52,
+          "text": "那下禮拜我們還是停課。 下禮拜大家可以複習這幾次我們在講波羅蜜多的範圍的內容。"
+        }
+      ],
+      "guidedText": "那下禮拜我們還是停課。 下禮拜大家可以複習這幾次我們在講波羅蜜多的範圍的內容。",
+      "sentenceIds": [
+        "sent-7"
+      ],
+      "expectedTerms": [
+        "般若波羅蜜多"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 64.58,
+      "clipEnd": 79.18,
+      "rawSegments": [
+        {
+          "start": 64.58,
+          "end": 79.2,
+          "text": "是蠻重量級的課。那為什麼?因為波羅、波羅蜜多是所有我們學佛的一個核心目標。"
+        }
+      ],
+      "rawText": "是蠻重量級的課。那為什麼?因為波羅、波羅蜜多是所有我們學佛的一個核心目標。",
+      "guidedSegments": [
+        {
+          "start": 64.58,
+          "end": 79.2,
+          "text": "是蠻重量級的課。好�那為什麼，因為波羅蜜多是�所有我們學佛的一個核心目標。好，那我沒……"
+        }
+      ],
+      "guidedText": "是蠻重量級的課。好�那為什麼，因為波羅蜜多是�所有我們學佛的一個核心目標。好，那我沒……",
+      "sentenceIds": [
+        "sent-9"
+      ],
+      "expectedTerms": [
+        "般若波羅蜜多"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 265.16,
+      "clipEnd": 272.96,
+      "rawSegments": [
+        {
+          "start": 265.16,
+          "end": 272.92,
+          "text": "所以我們有講過這本書這本"
+        }
+      ],
+      "rawText": "所以我們有講過這本書這本",
+      "guidedSegments": [
+        {
+          "start": 265.16,
+          "end": 272.92,
+          "text": "所以以中觀的立場我們有講過這本書這本"
+        }
+      ],
+      "guidedText": "所以以中觀的立場我們有講過這本書這本",
+      "sentenceIds": [
+        "sent-48"
+      ],
+      "expectedTerms": [
+        "書名（如《中觀根本慧論》等）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 481.66,
+      "clipEnd": 487.98,
+      "rawSegments": [
+        {
+          "start": 481.66,
+          "end": 488.06,
+          "text": "我要去學南傳的禪修方式,或者是我要去學秘法。"
+        }
+      ],
+      "rawText": "我要去學南傳的禪修方式,或者是我要去學秘法。",
+      "guidedSegments": [
+        {
+          "start": 481.66,
+          "end": 488.06,
+          "text": "我要去學南傳禪修方式,或者是我要去學密法"
+        }
+      ],
+      "guidedText": "我要去學南傳禪修方式,或者是我要去學密法",
+      "sentenceIds": [
+        "sent-120"
+      ],
+      "expectedTerms": [
+        "南傳"
+      ],
+      "recoveredTerms": [
+        "南傳"
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 617,
+      "clipEnd": 621.5,
+      "rawSegments": [
+        {
+          "start": 617,
+          "end": 621.49,
+          "text": "等到你,我們說有力量或者是"
+        }
+      ],
+      "rawText": "等到你,我們說有力量或者是",
+      "guidedSegments": [
+        {
+          "start": 617,
+          "end": 621.53,
+          "text": "等到你Ｂ我們說有力量Ｂ或者是Ｂ"
+        }
+      ],
+      "guidedText": "等到你Ｂ我們說有力量Ｂ或者是Ｂ",
+      "sentenceIds": [
+        "sent-224"
+      ],
+      "expectedTerms": [
+        "覺受"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 856.92,
+      "clipEnd": 862.82,
+      "rawSegments": [
+        {
+          "start": 856.92,
+          "end": 862.92,
+          "text": "那這個證件或者是建地呢?不管你是中官的也好,為事的也好。"
+        }
+      ],
+      "rawText": "那這個證件或者是建地呢?不管你是中官的也好,為事的也好。",
+      "guidedSegments": [
+        {
+          "start": 856.92,
+          "end": 862.82,
+          "text": "那這個證件或者是見地呢，不管你是中觀的也好，為識的也好，"
+        }
+      ],
+      "guidedText": "那這個證件或者是見地呢，不管你是中觀的也好，為識的也好，",
+      "sentenceIds": [
+        "sent-416"
+      ],
+      "expectedTerms": [
+        "中觀的也好"
+      ],
+      "recoveredTerms": [
+        "中觀的也好"
+      ]
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 923.98,
+      "clipEnd": 929.54,
+      "rawSegments": [
+        {
+          "start": 923.98,
+          "end": 929.6,
+          "text": "中就代表正。所以它就是代表一條康莊的。"
+        }
+      ],
+      "rawText": "中就代表正。所以它就是代表一條康莊的。",
+      "guidedSegments": [
+        {
+          "start": 923.98,
+          "end": 929.8,
+          "text": "中就代表正，所以�它就是代表一條康莊的"
+        }
+      ],
+      "guidedText": "中就代表正，所以�它就是代表一條康莊的",
+      "sentenceIds": [
+        "sent-470"
+      ],
+      "expectedTerms": [
+        "途"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 1030.92,
+      "clipEnd": 1035.92,
+      "rawSegments": [
+        {
+          "start": 1030.92,
+          "end": 1036.07,
+          "text": "《一切法》什麼 非有 非有"
+        }
+      ],
+      "rawText": "《一切法》什麼 非有 非有",
+      "guidedSegments": [
+        {
+          "start": 1030.92,
+          "end": 1035.47,
+          "text": "一切法 什麼 非有 非有"
+        }
+      ],
+      "guidedText": "一切法 什麼 非有 非有",
+      "sentenceIds": [
+        "sent-550"
+      ],
+      "expectedTerms": [
+        "非無"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 1270.6,
+      "clipEnd": 1276.68,
+      "rawSegments": [
+        {
+          "start": 1270.6,
+          "end": 1275.8,
+          "text": "62種還有包含我們說外道的62種這個鞋間。"
+        },
+        {
+          "start": 1275.8,
+          "end": 1277,
+          "text": "當然62種"
+        }
+      ],
+      "rawText": "62種還有包含我們說外道的62種這個鞋間。當然62種",
+      "guidedSegments": [
+        {
+          "start": 1270.6,
+          "end": 1275.8,
+          "text": "六十二種， 還有包含我們說外道的六十二種這個鞋間。"
+        },
+        {
+          "start": 1275.8,
+          "end": 1276.8,
+          "text": "當然六十二， 六十二 、"
+        }
+      ],
+      "guidedText": "六十二種， 還有包含我們說外道的六十二種這個鞋間。當然六十二， 六十二 、",
+      "sentenceIds": [
+        "sent-675"
+      ],
+      "expectedTerms": [
+        "見"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 1379.24,
+      "clipEnd": 1388.2,
+      "rawSegments": [
+        {
+          "start": 1379.24,
+          "end": 1384.61,
+          "text": "但是呢,除了空這個字以外,它還多了三摩第三個字,對不對?"
+        },
+        {
+          "start": 1384.61,
+          "end": 1386.61,
+          "text": "對不對?三摩第是什麼意思?"
+        }
+      ],
+      "rawText": "但是呢,除了空這個字以外,它還多了三摩第三個字,對不對?對不對?三摩第是什麼意思?",
+      "guidedSegments": [
+        {
+          "start": 1379.24,
+          "end": 1386.73,
+          "text": "但是呢，除了空這個字以外，它還多了三摩地、三個字對不對，對不對�三摩地是什麼意思，"
+        }
+      ],
+      "guidedText": "但是呢，除了空這個字以外，它還多了三摩地、三個字對不對，對不對�三摩地是什麼意思，",
+      "sentenceIds": [
+        "sent-732",
+        "sent-735"
+      ],
+      "expectedTerms": [
+        "空三摩地 / 無相三摩地 / 無願三摩地"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1392.14,
+      "clipEnd": 1397.08,
+      "rawSegments": [
+        {
+          "start": 1392.36,
+          "end": 1397.07,
+          "text": "哈?可以給我一個字嗎?三摩滴就是定。"
+        }
+      ],
+      "rawText": "哈?可以給我一個字嗎?三摩滴就是定。",
+      "guidedSegments": [
+        {
+          "start": 1392.36,
+          "end": 1397.07,
+          "text": "好 可以給我一個字嗎Ｂ三摩地、就是定"
+        }
+      ],
+      "guidedText": "好 可以給我一個字嗎Ｂ三摩地、就是定",
+      "sentenceIds": [
+        "sent-739"
+      ],
+      "expectedTerms": [
+        "空三摩地 / 無相三摩地 / 無願三摩地"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 1432.66,
+      "clipEnd": 1437.7,
+      "rawSegments": [
+        {
+          "start": 1433.07,
+          "end": 1437.73,
+          "text": "或情緒舊句正確,或者說溫明白。"
+        }
+      ],
+      "rawText": "或情緒舊句正確,或者說溫明白。",
+      "guidedSegments": [
+        {
+          "start": 1433.07,
+          "end": 1438.03,
+          "text": "。 毗婆舍那， 毗婆舍那， 或我們說慧觀。"
+        }
+      ],
+      "guidedText": "。 毗婆舍那， 毗婆舍那， 或我們說慧觀。",
+      "sentenceIds": [
+        "sent-756"
+      ],
+      "expectedTerms": [
+        "去修"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-13",
+      "clipStart": 1510.8,
+      "clipEnd": 1517.24,
+      "rawSegments": [
+        {
+          "start": 1510.8,
+          "end": 1517.24,
+          "text": "空山摩地,好,我們先來看一下。所以空山摩地就是……"
+        }
+      ],
+      "rawText": "空山摩地,好,我們先來看一下。所以空山摩地就是……",
+      "guidedSegments": [
+        {
+          "start": 1510.8,
+          "end": 1517.28,
+          "text": "空三摩地。好�我們先來看一下。所以空三摩地就是……"
+        }
+      ],
+      "guidedText": "空三摩地。好�我們先來看一下。所以空三摩地就是……",
+      "sentenceIds": [
+        "sent-793"
+      ],
+      "expectedTerms": [
+        "空所緣／觀諸法無我"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-14",
+      "clipStart": 1564.8,
+      "clipEnd": 1571.06,
+      "rawSegments": [
+        {
+          "start": 1564.8,
+          "end": 1571.06,
+          "text": "就獲得什麼?我說成功啦!斷除撒架也見獲得獲證出國。好。"
+        }
+      ],
+      "rawText": "就獲得什麼?我說成功啦!斷除撒架也見獲得獲證出國。好。",
+      "guidedSegments": [
+        {
+          "start": 1564.8,
+          "end": 1570.98,
+          "text": "就獲得什麼！我說成功啦！斷除薩迦耶見、獲得、獲證出國。好！"
+        }
+      ],
+      "guidedText": "就獲得什麼！我說成功啦！斷除薩迦耶見、獲得、獲證出國。好！",
+      "sentenceIds": [
+        "sent-825"
+      ],
+      "expectedTerms": [
+        "須陀洹果"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-15",
+      "clipStart": 1573,
+      "clipEnd": 1579.04,
+      "rawSegments": [
+        {
+          "start": 1573,
+          "end": 1579.03,
+          "text": "教育一切法空觀是比較容易的。"
+        }
+      ],
+      "rawText": "教育一切法空觀是比較容易的。",
+      "guidedSegments": [
+        {
+          "start": 1573,
+          "end": 1579.03,
+          "text": "教育一切法空觀是比較容易的。"
+        }
+      ],
+      "guidedText": "教育一切法空觀是比較容易的。",
+      "sentenceIds": [
+        "sent-830"
+      ],
+      "expectedTerms": [
+        "有情"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-16",
+      "clipStart": 1700.44,
+      "clipEnd": 1705.74,
+      "rawSegments": [
+        {
+          "start": 1700.44,
+          "end": 1702.84,
+          "text": "先馬上提出來。"
+        },
+        {
+          "start": 1702.84,
+          "end": 1705.82,
+          "text": "因為我們認為我這個"
+        }
+      ],
+      "rawText": "先馬上提出來。因為我們認為我這個",
+      "guidedSegments": [
+        {
+          "start": 1700.44,
+          "end": 1705.74,
+          "text": "馬上先提出來，因為我們認為，我這個，"
+        }
+      ],
+      "guidedText": "馬上先提出來，因為我們認為，我這個，",
+      "sentenceIds": [
+        "sent-895"
+      ],
+      "expectedTerms": [
+        "認知"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-17",
+      "clipStart": 2125.36,
+      "clipEnd": 2130.08,
+      "rawSegments": [
+        {
+          "start": 2125.83,
+          "end": 2130.07,
+          "text": "我們這裡所要無,無我,所要"
+        }
+      ],
+      "rawText": "我們這裡所要無,無我,所要",
+      "guidedSegments": [
+        {
+          "start": 2125.83,
+          "end": 2130.07,
+          "text": "我們這裡 所要無,無我、所要"
+        }
+      ],
+      "guidedText": "我們這裡 所要無,無我、所要",
+      "sentenceIds": [
+        "sent-1125"
+      ],
+      "expectedTerms": [
+        "無我"
+      ],
+      "recoveredTerms": [
+        "無我"
+      ]
+    },
+    {
+      "windowId": "win-18",
+      "clipStart": 2196.38,
+      "clipEnd": 2200.5,
+      "rawSegments": [
+        {
+          "start": 2196.38,
+          "end": 2199.32,
+          "text": "你這樣講就是什麼?破壞世俗地。"
+        },
+        {
+          "start": 2199.32,
+          "end": 2200.78,
+          "text": "因為世俗地說"
+        }
+      ],
+      "rawText": "你這樣講就是什麼?破壞世俗地。因為世俗地說",
+      "guidedSegments": [
+        {
+          "start": 2196.38,
+          "end": 2200.5,
+          "text": "你這樣講就是什麼Ｂ破壞世俗諦。 因為世俗諦說Ｂ"
+        }
+      ],
+      "guidedText": "你這樣講就是什麼Ｂ破壞世俗諦。 因為世俗諦說Ｂ",
+      "sentenceIds": [
+        "sent-1158"
+      ],
+      "expectedTerms": [
+        "沒有（自性）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-19",
+      "clipStart": 2333.86,
+      "clipEnd": 2338.6,
+      "rawSegments": [
+        {
+          "start": 2333.86,
+          "end": 2336.88,
+          "text": "空的話 那麼你就錯 搞錯"
+        },
+        {
+          "start": 2336.88,
+          "end": 2338.16,
+          "text": "好"
+        }
+      ],
+      "rawText": "空的話 那麼你就錯 搞錯好",
+      "guidedSegments": [
+        {
+          "start": 2333.86,
+          "end": 2338.16,
+          "text": "空的話。那麼你就搞錯。"
+        }
+      ],
+      "guidedText": "空的話。那麼你就搞錯。",
+      "sentenceIds": [
+        "sent-1223"
+      ],
+      "expectedTerms": [
+        "搞錯了"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-20",
+      "clipStart": 2407.34,
+      "clipEnd": 2413.04,
+      "rawSegments": [
+        {
+          "start": 2407.65,
+          "end": 2411.65,
+          "text": "也剛好有時間啦。沒有啦,這一段真的很重要。"
+        },
+        {
+          "start": 2411.65,
+          "end": 2413.65,
+          "text": "你們如果等一下來看。"
+        }
+      ],
+      "rawText": "也剛好有時間啦。沒有啦,這一段真的很重要。你們如果等一下來看。",
+      "guidedSegments": [
+        {
+          "start": 2407.65,
+          "end": 2413.05,
+          "text": "沒有啦，這一段真的很重要，你們如果等一下來看"
+        }
+      ],
+      "guidedText": "沒有啦，這一段真的很重要，你們如果等一下來看",
+      "sentenceIds": [
+        "sent-1260"
+      ],
+      "expectedTerms": [
+        "如果"
+      ],
+      "recoveredTerms": [
+        "如果"
+      ]
+    },
+    {
+      "windowId": "win-21",
+      "clipStart": 2446.9,
+      "clipEnd": 2452.5,
+      "rawSegments": [
+        {
+          "start": 2446.9,
+          "end": 2448.9,
+          "text": "我講一次剛剛我所講的。"
+        },
+        {
+          "start": 2448.9,
+          "end": 2451.9,
+          "text": "那對象就是什麼?獨立存在的我。"
+        },
+        {
+          "start": 2451.9,
+          "end": 2452.9,
+          "text": "或是……"
+        }
+      ],
+      "rawText": "我講一次剛剛我所講的。那對象就是什麼?獨立存在的我。或是……",
+      "guidedSegments": [
+        {
+          "start": 2446.9,
+          "end": 2452.5,
+          "text": "那對象就是什麼，獨立存在的我，或是，"
+        }
+      ],
+      "guidedText": "那對象就是什麼，獨立存在的我，或是，",
+      "sentenceIds": [
+        "sent-1280"
+      ],
+      "expectedTerms": [
+        "自性"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-22",
+      "clipStart": 2474.1,
+      "clipEnd": 2482.06,
+      "rawSegments": [
+        {
+          "start": 2475.47,
+          "end": 2480.47,
+          "text": "生心。就是說,我們今天如果有個小baby出生的,對不對?"
+        },
+        {
+          "start": 2480.47,
+          "end": 2482.05,
+          "text": "好,他..."
+        }
+      ],
+      "rawText": "生心。就是說,我們今天如果有個小baby出生的,對不對?好,他...",
+      "guidedSegments": [
+        {
+          "start": 2475.47,
+          "end": 2482.01,
+          "text": "身心。 就是說,我們今天如果有個小baby出生的,對不對?"
+        }
+      ],
+      "guidedText": "身心。 就是說,我們今天如果有個小baby出生的,對不對?",
+      "sentenceIds": [
+        "sent-1294"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-23",
+      "clipStart": 2518.92,
+      "clipEnd": 2525.86,
+      "rawSegments": [
+        {
+          "start": 2518.92,
+          "end": 2525.86,
+          "text": "對不對Ｂ那我的心�譬如說�如果我今天是那個小孩Ｂ"
+        }
+      ],
+      "rawText": "對不對Ｂ那我的心�譬如說�如果我今天是那個小孩Ｂ",
+      "guidedSegments": [
+        {
+          "start": 2518.92,
+          "end": 2525.86,
+          "text": "對不對，那 我的心�譬如說�如果我今天是那個小孩，"
+        }
+      ],
+      "guidedText": "對不對，那 我的心�譬如說�如果我今天是那個小孩，",
+      "sentenceIds": [
+        "sent-1317"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-24",
+      "clipStart": 2584.52,
+      "clipEnd": 2591.32,
+      "rawSegments": [
+        {
+          "start": 2584.52,
+          "end": 2586.52,
+          "text": "大家改一下。"
+        },
+        {
+          "start": 2586.52,
+          "end": 2587.52,
+          "text": "也。"
+        },
+        {
+          "start": 2587.52,
+          "end": 2588.52,
+          "text": "他這裡不是寫的?"
+        },
+        {
+          "start": 2588.52,
+          "end": 2589.52,
+          "text": "也就是不用關嗎?"
+        },
+        {
+          "start": 2589.52,
+          "end": 2591.52,
+          "text": "你把就是這兩個字"
+        }
+      ],
+      "rawText": "大家改一下。也。他這裡不是寫的?也就是不用關嗎?你把就是這兩個字",
+      "guidedSegments": [
+        {
+          "start": 2584.52,
+          "end": 2591.48,
+          "text": "大家改一下。也 它這裡不是寫?也就是不用關嗎?你把就是這兩個字"
+        }
+      ],
+      "guidedText": "大家改一下。也 它這裡不是寫?也就是不用關嗎?你把就是這兩個字",
+      "sentenceIds": [
+        "sent-1350"
+      ],
+      "expectedTerms": [
+        "觀待施設處"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-25",
+      "clipStart": 2690.44,
+      "clipEnd": 2695.88,
+      "rawSegments": [
+        {
+          "start": 2690.44,
+          "end": 2695.94,
+          "text": "所以我們說王曉,今天如果他的爸爸媽媽給他去,"
+        }
+      ],
+      "rawText": "所以我們說王曉,今天如果他的爸爸媽媽給他去,",
+      "guidedSegments": [
+        {
+          "start": 2690.44,
+          "end": 2695.94,
+          "text": "所以我們說王小明，今天如果他的爸爸媽媽給他去"
+        }
+      ],
+      "guidedText": "所以我們說王小明，今天如果他的爸爸媽媽給他去",
+      "sentenceIds": [
+        "sent-1409"
+      ],
+      "expectedTerms": [
+        "是"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-26",
+      "clipStart": 2727.3,
+      "clipEnd": 2734.56,
+      "rawSegments": [
+        {
+          "start": 2728.16,
+          "end": 2734.56,
+          "text": "只是什麼?只是剛就是那個五韻合合的那個小baby,然後呢"
+        }
+      ],
+      "rawText": "只是什麼?只是剛就是那個五韻合合的那個小baby,然後呢",
+      "guidedSegments": [
+        {
+          "start": 2728.16,
+          "end": 2734.56,
+          "text": "只是什麼？就是那個五蘊和合的那個小 baby,然後呢�"
+        }
+      ],
+      "guidedText": "只是什麼？就是那個五蘊和合的那個小 baby,然後呢�",
+      "sentenceIds": [
+        "sent-1425",
+        "sent-1426"
+      ],
+      "expectedTerms": [
+        "出生的（嬰兒）"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-27",
+      "clipStart": 2787.02,
+      "clipEnd": 2795.02,
+      "rawSegments": [
+        {
+          "start": 2787.02,
+          "end": 2793.42,
+          "text": "如果人家講你的,去批評你,但是你真的做錯事了,那你當然是要檢討。"
+        },
+        {
+          "start": 2793.42,
+          "end": 2795.42,
+          "text": "那我們現在是站在休息。"
+        }
+      ],
+      "rawText": "如果人家講你的,去批評你,但是你真的做錯事了,那你當然是要檢討。那我們現在是站在休息。",
+      "guidedSegments": [
+        {
+          "start": 2787.02,
+          "end": 2795.02,
+          "text": "但是你真的做錯事的那你當然是要檢討。那我們現在是站在休息。"
+        }
+      ],
+      "guidedText": "但是你真的做錯事的那你當然是要檢討。那我們現在是站在休息。",
+      "sentenceIds": [
+        "sent-1454"
+      ],
+      "expectedTerms": [
+        "那個部分"
+      ],
+      "recoveredTerms": []
+    }
+  ],
+  "hallucinationRepairs": [
+    {
+      "sentenceId": "sent-1294",
+      "before": "就是說，我們今天如果有個小baby出生的，對不對？好，他...",
+      "after": "身心。 就是說,我們今天如果有個小baby出生的,對不對?"
+    },
+    {
+      "sentenceId": "sent-1426",
+      "before": "只是那個五蘊和合的小 baby。",
+      "after": "只是什麼？就是那個五蘊和合的那個小 baby,然後呢�"
+    }
+  ],
+  "proposalsCount": 270,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-94",
+      "paragraphId": "p_9",
+      "start": 419.04,
+      "end": 424.64,
+      "originalText": "但是，在對於我們，我們就從很現實的面來講，",
+      "proposedText": "但是，對於我們來說，就從很現實的面來講，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「在於我們，我們就」的口語重複，並補順語意。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-184",
+      "paragraphId": "p_12",
+      "start": 564.48,
+      "end": 570.22,
+      "originalText": "那我們就不多說，那上次呢，講到一百，二十一頁對不對？",
+      "proposedText": "那我們就不多說。上次講到一百二十一頁，對不對？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「呢」，補上句號與問號，並將「一百，二十一頁」的碎逗號移除。",
+      "guardReason": "cross-sentence-move:說上次"
+    },
+    {
+      "sentenceId": "sent-228",
+      "paragraphId": "p_14",
+      "start": 624.66,
+      "end": 625.16,
+      "originalText": "成功了就是你已經什麼，",
+      "proposedText": "成功了，就是你已經證得空觀了。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「什麼」，補上句尾標點，並與下一句合併為完整語意。",
+      "guardReason": "cross-sentence-move:證得空"
+    },
+    {
+      "sentenceId": "sent-229",
+      "paragraphId": "p_14",
+      "start": 625.26,
+      "end": 625.98,
+      "originalText": "證得空觀了。",
+      "proposedText": "最好當然就是你成功了。",
+      "categories": [],
+      "reason": "此句標點完整、語意清楚，無須修改。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-230",
+      "paragraphId": "p_14",
+      "start": 626.04,
+      "end": 628.14,
+      "originalText": "最好當然就是你成功了。",
+      "proposedText": "成功了，就是你已經證得空觀了；接下來你下座，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「什麼」，補上標點使語意連貫。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-278",
+      "paragraphId": "p_15",
+      "start": 681.14,
+      "end": 684.42,
+      "originalText": "你要怎麼的發心，你的心力要怎麼樣的，",
+      "proposedText": "你要怎麼樣的發心，你的心力要怎麼樣的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號，保留原句懸停語氣以銜接下句「那種強度」。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-384",
+      "paragraphId": "p_18",
+      "start": 814.4,
+      "end": 817.74,
+      "originalText": "這個只是文字的皮毛而已所以，",
+      "proposedText": "這個只是文字的皮毛而已。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句「而已所以」語序錯置，修正為完整句並補句號。",
+      "guardReason": "content-word-omitted:所以"
+    },
+    {
+      "sentenceId": "sent-394",
+      "paragraphId": "p_19",
+      "start": 832.16,
+      "end": 837.3,
+      "originalText": "我們上一節，科判上有講到三慧，我們上一節所以，因為每一個階段，聞可以產生聞所成慧，",
+      "proposedText": "我們上一節科判上有講到三慧，因為每一個階段，聞可以產生聞所成慧，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「我們上一節」與句中冗餘的「所以」，並補上句讀使語意連貫。",
+      "guardReason": "content-word-omitted:所以"
+    },
+    {
+      "sentenceId": "sent-496",
+      "paragraphId": "p_22",
+      "start": 964.68,
+      "end": 967.96,
+      "originalText": "你要透過聞思修去學習到，",
+      "proposedText": "你要透過聞思修去學習到中觀的正見，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上句尾逗號，並消除詞間碎逗號使語意連貫。",
+      "guardReason": "cross-sentence-move:中觀的"
+    },
+    {
+      "sentenceId": "sent-517",
+      "paragraphId": "p_23",
+      "start": 988.52,
+      "end": 993.22,
+      "originalText": "有慧眼的人就認為說：沒有啊你只要，你這樣太過了吧，或者是不及。",
+      "proposedText": "有慧眼的人就認為說：「沒有啊！你這樣太過了吧？或者是不及。」",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除碎逗「你只要」，補上引號與「？」「！」，使引述語完整。",
+      "guardReason": "content-word-omitted:只要"
+    },
+    {
+      "sentenceId": "sent-554",
+      "paragraphId": "p_24",
+      "start": 1039.12,
+      "end": 1042.64,
+      "originalText": "自性的沒有。",
+      "proposedText": "自性無。",
+      "categories": [
+        "punctuation",
+        "word-choice"
+      ],
+      "reason": "原句「自性的沒有」語意不順，改為名相「自性無」，與前文「自性有」對應。",
+      "guardReason": "content-word-omitted:沒有"
+    },
+    {
+      "sentenceId": "sent-603",
+      "paragraphId": "p_25",
+      "start": 1126.78,
+      "end": 1130.4,
+      "originalText": "它如果能夠以自己的力量就形成它目前，",
+      "proposedText": "它如果能夠以自己的力量就形成它目前、現在的存在形態，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "整理碎逗號為頓號並順句，補上逗號避免黏連。",
+      "guardReason": "cross-sentence-move:現在的"
+    },
+    {
+      "sentenceId": "sent-676",
+      "paragraphId": "p_28",
+      "start": 1274.7,
+      "end": 1278.96,
+      "originalText": "這個邪見，當然，六十二種是扣掉常見跟斷見，",
+      "proposedText": "這個六十二種邪見，當然是扣掉常見跟斷見的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "調整語序使「六十二種邪見」名相完整，句尾補逗號。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-719",
+      "paragraphId": "p_30",
+      "start": 1355.7,
+      "end": 1359.42,
+      "originalText": "那這個就是大概把上次講的，",
+      "proposedText": "那這個就是大概把上次講的，稍微再連結一下。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補標點，與下句黏連處斷句。",
+      "guardReason": "cross-sentence-move:稍微再"
+    },
+    {
+      "sentenceId": "sent-722",
+      "paragraphId": "p_30",
+      "start": 1363.7,
+      "end": 1366.34,
+      "originalText": "那麼我們接下來就是進入到今天的這個，",
+      "proposedText": "那麼我們接下來就是進入到今天的這個空三摩地──了知人無我跟法無我。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併斷句並補句尾標點，以破折號引出說明。",
+      "guardReason": "cross-sentence-move:空三摩"
+    },
+    {
+      "sentenceId": "sent-726",
+      "paragraphId": "p_30",
+      "start": 1371.7,
+      "end": 1373.4,
+      "originalText": "那這裡講的空三摩地呢，",
+      "proposedText": "那這裡講的空三摩地，我們剛剛講，其實就是在修什麼？就是在修我空觀跟法空觀。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補疑問句「？」與句號，斷開黏連長句。",
+      "guardReason": "cross-sentence-move:我們剛"
+    },
+    {
+      "sentenceId": "sent-731",
+      "paragraphId": "p_30",
+      "start": 1379.42,
+      "end": 1384.66,
+      "originalText": "除了空這個字以外，它還多了三摩地三個字對不對，",
+      "proposedText": "但是呢，除了空這個字以外，它還多了三摩地三個字，對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補疑問句「？」，依 reAsrHint 校正語序。",
+      "guardReason": "cross-sentence-move:但是呢"
+    },
+    {
+      "sentenceId": "sent-781",
+      "paragraphId": "p_32",
+      "start": 1490.3,
+      "end": 1496.34,
+      "originalText": "去止緣它，就是以一種定的心所去，",
+      "proposedText": "去止緣它，就是以一種定的心所去持著它。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併碎句並補上句號，使「去止緣它」與「以定的心所去持著它」語意連貫。",
+      "guardReason": "cross-sentence-move:去持著"
+    },
+    {
+      "sentenceId": "sent-883",
+      "paragraphId": "p_36",
+      "start": 1672.12,
+      "end": 1675.44,
+      "originalText": "所以「唯我」你可以把它，",
+      "proposedText": "所以「唯我」你可以把它註解一下，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句被字幕切分為兩段（sent-883 與 sent-885），此句句尾補上逗號，與下句「註解一下」語意連貫。",
+      "guardReason": "cross-sentence-move:註解一"
+    },
+    {
+      "sentenceId": "sent-991",
+      "paragraphId": "p_41",
+      "start": 1864.98,
+      "end": 1866.4,
+      "originalText": "不然你為什麼會找上，",
+      "proposedText": "不然你為什麼會找上這個父親、這個母親？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句以逗號懸空切斷，與下一句黏連；合併補上問號，使問句完整。",
+      "guardReason": "cross-sentence-move:這個父"
+    },
+    {
+      "sentenceId": "sent-1123",
+      "paragraphId": "p_46",
+      "start": 2121.32,
+      "end": 2133.78,
+      "originalText": "第四行，我們這裡所要無無我所要無的物件呢，不是你那個存在的這個個體啦，",
+      "proposedText": "第四行，我們這裡所要無的、所要遮的對象，不是你那個存在的這個個體。",
+      "categories": [
+        "typo",
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "「無無我」為口誤重複，修正為「所要無的、所要遮的」；「物件」應為「對象」；句尾補句號，並精簡口語「呢」「啦」。",
+      "guardReason": "cross-sentence-move:所要遮"
+    },
+    {
+      "sentenceId": "sent-1173",
+      "paragraphId": "p_48",
+      "start": 2223.32,
+      "end": 2227.12,
+      "originalText": "那個是錯誤的，那個是我們一定要把它，",
+      "proposedText": "那個是錯誤的，那個是我們一定要把它看清楚，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句尾口語停頓的碎逗號，與下一句合併語意，使句子流暢。",
+      "guardReason": "cross-sentence-move:看清楚"
+    },
+    {
+      "sentenceId": "sent-1223",
+      "paragraphId": "p_51",
+      "start": 2335.86,
+      "end": 2337.82,
+      "originalText": "搞錯所以，",
+      "proposedText": "搞錯了。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依 reAsrHint 補齊「了」，並補上句號。",
+      "guardReason": "content-word-omitted:所以"
+    },
+    {
+      "sentenceId": "sent-1412",
+      "paragraphId": "p_58",
+      "start": 2699.8,
+      "end": 2702.54,
+      "originalText": "五蘊就跟那個王小明這個名字就什麼，",
+      "proposedText": "五蘊就跟那個王小明這個名字聯絡在一起了。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句中口語停頓「就什麼，」，使句子流暢。",
+      "guardReason": "cross-sentence-move:聯絡在"
+    },
+    {
+      "sentenceId": "sent-1413",
+      "paragraphId": "p_58",
+      "start": 2703.38,
+      "end": 2704.72,
+      "originalText": "聯絡在一起了。",
+      "proposedText": "五蘊就跟那個王小明這個名字聯絡在一起了。",
+      "categories": [
+        "merge"
+      ],
+      "reason": "與前句合併為完整句子。",
+      "guardReason": "cross-sentence-move:五蘊就"
+    },
+    {
+      "sentenceId": "sent-1416",
+      "paragraphId": "p_58",
+      "start": 2708.86,
+      "end": 2713.72,
+      "originalText": "然後呢，他上學，他的老師、同學就叫王小明。",
+      "proposedText": "然後他上學，他的老師、同學就叫他王小明。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語發語詞「呢」。",
+      "guardReason": "cross-sentence-move:就叫他"
+    },
+    {
+      "sentenceId": "sent-1433",
+      "paragraphId": "p_59",
+      "start": 2744.2,
+      "end": 2751.38,
+      "originalText": "但是我們從今以後，我們就把我們的名字跟你認為，",
+      "proposedText": "但是我們從今以後，就把我們的名字，跟你認為實體有的那個我，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「我們」（避免重複），並調整標點使語意連貫。",
+      "guardReason": "cross-sentence-move:實體有"
+    },
+    {
+      "sentenceId": "sent-1437",
+      "paragraphId": "p_59",
+      "start": 2752.12,
+      "end": 2754.52,
+      "originalText": "實體有的那個我，緊緊的什麼？",
+      "proposedText": "緊緊地融合在一起，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原文「緊緊的什麼？」為口語停頓，合併語意並補上逗號。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1453",
+      "paragraphId": "p_60",
+      "start": 2786.14,
+      "end": 2788.54,
+      "originalText": "當然，如果人家人家講你的，",
+      "proposedText": "當然，如果人家講你、批評你，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「人家」，補上頓號使並列語意連貫。",
+      "guardReason": "cross-sentence-move:批評你"
+    },
+    {
+      "sentenceId": "sent-1461",
+      "paragraphId": "p_61",
+      "start": 2808.36,
+      "end": 2809.72,
+      "originalText": "這個我們在，",
+      "proposedText": "這個我們在〈真實義品〉那邊，也有上過這樣的一個觀念。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複的「我們在」，合併下一句並補上標點，使句子流暢。",
+      "guardReason": "cross-sentence-move:們在真"
+    },
+    {
+      "sentenceId": "sent-1463",
+      "paragraphId": "p_61",
+      "start": 2817.94,
+      "end": 2819.02,
+      "originalText": "所以其實。",
+      "proposedText": "所以其實，依中觀或唯識，都可以去假名安立。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句尾懸置的「其實。」，與後句合併成完整語意，並補上標點。",
+      "guardReason": "cross-sentence-move:依中觀"
+    },
+    {
+      "sentenceId": "sent-1465",
+      "paragraphId": "p_61",
+      "start": 2819.78,
+      "end": 2824.38,
+      "originalText": "依中觀依唯識，其實都可以去，",
+      "proposedText": "假名安立這件事情，本來就是中觀、唯識都會講到的。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "將「假名安立。這件事情本來就是，」與下句黏合，消除碎逗號並補上句號。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1470",
+      "paragraphId": "p_61",
+      "start": 2834.62,
+      "end": 2837.98,
+      "originalText": "所以這整句話的意思，這樣大家知道嗎？",
+      "proposedText": "所以這整句話的意思，這樣大家知道嗎？我們再從121頁最後一行來看，祂說：",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句補「？」；「他說」指佛陀，改為「祂說」並補標點。",
+      "guardReason": "cross-sentence-move:我們再"
+    },
+    {
+      "sentenceId": "sent-1474",
+      "paragraphId": "p_61",
+      "start": 2844.18,
+      "end": 2846.94,
+      "originalText": "如果你是認為這個人，",
+      "proposedText": "如果你是認為這個人就是你自己，是不需要觀待五蘊身心，也不用觀待那個來命名你的心，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併三個碎句，補上逗號使條件句完整流暢。",
+      "guardReason": "cross-sentence-move:就是你"
+    }
+  ]
+}
