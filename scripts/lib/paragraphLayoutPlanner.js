@@ -77,8 +77,15 @@ export function mergeParagraphsByLayout(session, options = {}) {
       bucketHeading = item.forceBreakHeading;
     }
 
+    // 先估計：若加入這句會超出 maxChars，先把目前這桶收掉再放這句。
+    // 否則「加入後才檢查」會讓段落超出上限整整一句的長度（實測最長到 374 字，上限 340）。
+    const incoming = cjkLen(s.text);
+    if (bucket.length > 0 && bucketChars + incoming > maxChars) {
+      flush();
+    }
+
     bucket.push(s);
-    bucketChars += cjkLen(s.text);
+    bucketChars += incoming;
 
     const isTerminal = endsWithTerminalPunctuation(s.text);
     if ((bucketChars >= minChars && isTerminal) || bucketChars >= maxChars) {

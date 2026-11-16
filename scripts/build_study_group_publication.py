@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Build the public study-group course from reviewed evidence artifacts."""
 
+# PEP 604（`dict[str, str] | None` 型別聯集）需要 Python 3.10+；
+# 加上 future import 後註解化，3.9 與 3.12（CI）語意一致。
+from __future__ import annotations
+
 import json
 import argparse
 import re

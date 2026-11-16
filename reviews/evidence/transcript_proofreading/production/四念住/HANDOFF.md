@@ -1,5 +1,7 @@
 # Transcriptions 全庫校稿交接
 
+2026-11-16 治理改版紀錄（四念住 v2 管線重寫）：四念住 8 講已用 Stage 1-4 v2 管線重跑（碎句合併、段落重切，s08 由 4 段變 94 段、2136 句併為 1158 句）並以《四念住講記》完成 Stage 5 講記校正（209 筆，法相頻次對齊驗證）。**現行 `courses/四念住/sessions/session_08.json` 已不等於 immutable run `e153a10f` 的 promote 產物**；`session08Promotion.test.js` 已改為驗證 run 內部鏈（manifest↔candidate↔review digests、隔離重跑 promote 重現 amendment 綁定），不再要求現行正式檔等於舊 run 產物。e153a10f 目錄保持 byte 不動，作為舊文歷史證據。新文發布語意依 `docs/TRANSCRIPTION_WORKFLOW.md` §6「待閱校版」（`publicationState: candidate-review-required`），驗收閘門為 asrIntegrityGate + summaries:audit + domainGroundingGate。
+
 2026-10-22 優先交接更新：第 08 講推送授權已解除，origin 已含 384f8e7 與 83f3f45。後續修復只更新 contentOverview，以 session_08.overview-amendment.json 保存更新前後 digest；原 PASS 正文快照不變。新增摘要回歸 gate，promotion 前驗證摘要來源與支持性。下文「先取得推送同意」已過期；此次範圍僅第 08 講，不啟動其餘試點。
 
 ## 可直接交給下一位 Agent 的 Prompt

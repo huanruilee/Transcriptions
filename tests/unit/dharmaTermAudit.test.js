@@ -111,7 +111,13 @@ test('auditSessionWithLlm detects non-rule-table omissions, ignores unknown IDs,
 });
 
 test('parseLlmSuspectsJson safely handles malformed responses', () => {
-  assert.deepEqual(parseLlmSuspectsJson('not json at all'), { suspects: [] });
+  // parseFailed=true 讓呼叫端能區分「沒有漏字」與「根本沒解析成功」——
+  // 兩者若都回 { suspects: [] }，稽核失效會靜默通過。
+  assert.deepEqual(parseLlmSuspectsJson('not json at all'), { suspects: [], parseFailed: true });
+  assert.deepEqual(parseLlmSuspectsJson('{"suspects":[{"sentenceId":"sent-1"}]}'), {
+    suspects: [{ sentenceId: 'sent-1' }],
+    parseFailed: false,
+  });
 });
 
 test('detects Whisper hallucination repetition loops and ASCII gibberish collapse', () => {

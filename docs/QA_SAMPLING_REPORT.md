@@ -6,6 +6,8 @@
 > **部署 URL**：`https://gx10-2887.tail378c21.ts.net:9090/index.html`  
 > **Git 最新 commit**：`cddc167` — docs: 更新 TASKS.md 進度（101/106 堂 [95%]）
 
+> ⚠️ **服務位置已遷移（2026-11-13 標註）**：本報告的 9090 連結為**當時（2026-08-12）的歷史紀錄**。現況該靜態網站已由 launchd 服務 `com.henry.transcriptions-web` 常駐於 **Henry 的 Mac**，網址為 `http://100.84.47.24:9090/index.html`；gx10 上已無 9090 服務。下方稽核數據維持原始紀錄不予修改。
+
 ---
 
 ## 1. 即時網頁運作

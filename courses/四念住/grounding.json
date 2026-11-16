@@ -1,75 +1,541 @@
 {
   "courseId": "si-nian-zhu",
-  "title": "四念住",
-  "lecturer": "玅境長老",
-  "monastery": "美國法雲寺佛學院",
-  "year": "1996",
-  "sourcePlaylist": "https://www.youtube.com/playlist?list=PLZtuZl3ZGCvofIuf8nswuoJ7OJ30HLEL0",
-  "doctrinalTradition": "漢傳大乘止觀與瑜伽行派（奢摩他、毘缽舍那）",
-  "primaryTexts": [
-    "《瑜伽師地論·本地分·聲聞地》（彌勒菩薩說、玄奘大師譯）",
-    "《大智度論》卷十九〈釋初品中四念處義〉（龍樹菩薩造、鳩摩羅什譯）",
-    "《阿含經》",
-    "《俱舍論》"
+  "title": "四念住（玅境長老主講・美國法雲寺佛學院）",
+  "verified_at": "2026-11-16",
+  "step0_entity_grounding": {
+    "note": "依 docs/TRANSCRIPTION_WORKFLOW.md §3 Step 0 執行之結果。本課程的 Step 0 產物是《四念住講記》——它是同一場演講的整編定稿，可作為名相與經文的權威比對基準，優先於用 ASR 猜測。",
+    "probe_1_channel_and_instructor": {
+      "query": "玺境長老 四念住 讲記 妙境法師",
+      "result": "玺境長老（妙境長老，1930–2003），法號妙智，號仁奇，黑龜江省龜江縣人。1996 年在美國法雲寺佛學院宣講。它創辦法雲寺，推舊修四念處以趣求圣道。",
+      "status": "verified",
+      "evidence": "謭記首頁：「上珛下境長老一九九六年宣講于美國法雲寺佛學院」"
+    },
+    "probe_2_textbook": {
+      "query": "四念住 讀記 珛境",
+      "result": "《四念住讀記》（珚境老和尚）。全文 32 頁，為珚境老和尚口述、助手整理的定稿。講記中引《大般若經》六百卷《全記（第六分・念住品）、《佛光話經》《佛四計》《維摩訣所說經》《耶萬廿本經》《佛讕八万佛法。",
+      "status": "verified"
+    },
+    "probe_3_related_courses": {
+      "query": "珛境長老 youtube 法雲寺",
+      "result": "YouTube channel vairucana002，「珚境長老主講四念住01～08」，版權所有：美國法雲寺；playlist 《四念住（妙境法師）》list=PLwxMZvasISWyWiuSaZiuN1mhJ3Rsohn8X。",
+      "status": "verified"
+    }
+  },
+  "entities": {
+    "channel": {
+      "name": "美國法雲寺（法雲寺傳學院）",
+      "youtube_channel": "vairucana002",
+      "youtube_playlist_url": "https://www.youtube.com/playlist?list=PLwxMZvasISWyWiuSaZiuN1mhJ3Rsohn8X",
+      "website": "http://fayun.org"
+    },
+    "instructor": {
+      "name": "珚境長老（妙境長老）",
+      "alias": [
+        "珚镜長老",
+        "妙境老和尚",
+        "妙境法師"
+      ],
+      "lifespan": "1930–2003",
+      "secular_name": "王",
+      "dharma_names": [
+        "妙智",
+        "仁奇",
+        "珚境"
+      ],
+      "tradition": "漢傳佛教",
+      "venue": "美國法雲寺傳學院",
+      "year": 1996,
+      "common_misrecognitions": [
+        "妙境法師（不是晓境）",
+        "珛境長老"
+      ],
+      "notable_works": [
+        "《妙法莲華經》",
+        "《瑜佘師地論》",
+        "《摩註般若波羅密經》",
+        "《金剛經》",
+        "《維摩訣所說經》",
+        "《菩萬戒本經》"
+      ]
+    },
+    "textbook": {
+      "title": "《四念住讀記》",
+      "compiled_by": "珚境老和尚（口述，助手整理）",
+      "source_url": "http://www.book853.com/show.aspx?id=1626&cid=12",
+      "pages": 32,
+      "local_path": "reviews/evidence/sinianzhu/reference/jiangji_sinianzhu_jiangji_full.md",
+      "sha256": "sha256:c76f4ced1fc4cb66255634b471af646c7875b0187784f62754002f05278e02fe",
+      "role": "edited-text-reference",
+      "chapter_map": [
+        {
+          "page": 1,
+          "title": "前言",
+          "sessions": [
+            "session_01"
+          ]
+        },
+        {
+          "page": 2,
+          "title": "第一章 念住品・一",
+          "sessions": [
+            "session_01",
+            "session_02"
+          ]
+        },
+        {
+          "page": 3,
+          "title": "第一章 念住品・二",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 4,
+          "title": "第一章 念住品・三",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 5,
+          "title": "第一章 念住品・四",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 6,
+          "title": "第一章 念住品・五",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 7,
+          "title": "第一章 念住品・六",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 8,
+          "title": "第一章 念住品・七",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 9,
+          "title": "第一章 念住品・問答",
+          "sessions": [
+            "session_02"
+          ]
+        },
+        {
+          "page": 11,
+          "title": "第二章 骨鎖觀",
+          "sessions": [
+            "session_04"
+          ]
+        },
+        {
+          "page": 12,
+          "title": "第二章 骨鎖觀・二",
+          "sessions": [
+            "session_04"
+          ]
+        },
+        {
+          "page": 13,
+          "title": "第二章 骨鎖觀・問答",
+          "sessions": [
+            "session_04"
+          ]
+        },
+        {
+          "page": 14,
+          "title": "第三章 不淨所緣",
+          "sessions": [
+            "session_03",
+            "session_05",
+            "session_07"
+          ]
+        },
+        {
+          "page": 15,
+          "title": "第三章 不淨所緣・二",
+          "sessions": [
+            "session_05",
+            "session_07"
+          ]
+        },
+        {
+          "page": 16,
+          "title": "第三章 不淨所緣・三",
+          "sessions": [
+            "session_07"
+          ]
+        },
+        {
+          "page": 17,
+          "title": "第三章 尋思品",
+          "sessions": [
+            "session_07"
+          ]
+        },
+        {
+          "page": 18,
+          "title": "第三章 尋思品・二",
+          "sessions": [
+            "session_07"
+          ]
+        },
+        {
+          "page": 19,
+          "title": "第三章 問答",
+          "sessions": [
+            "session_03",
+            "session_05",
+            "session_07"
+          ]
+        },
+        {
+          "page": 20,
+          "title": "第四章 四念住",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 21,
+          "title": "第四章 四念住・二",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 22,
+          "title": "第四章 四念住・三",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 23,
+          "title": "第四章 四念住・四",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 24,
+          "title": "第四章 四念住・五",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 25,
+          "title": "第四章 四念住・六",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 26,
+          "title": "第四章 四念住・七",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 27,
+          "title": "第四章 四念住・八",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 28,
+          "title": "第四章 四念住・九",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 29,
+          "title": "第四章 問答",
+          "sessions": [
+            "session_06",
+            "session_08"
+          ]
+        },
+        {
+          "page": 31,
+          "title": "結語",
+          "sessions": []
+        },
+        {
+          "page": 32,
+          "title": "後記",
+          "sessions": []
+        }
+      ]
+    },
+    "canonical_and_related_works": [
+      {
+        "name": "《大般若經》（六百卷，玄奧講）",
+        "relevant": "第六分・念住品",
+        "common_misrecognitions": [
+          "漢調經"
+        ]
+      },
+      {
+        "name": "《佛讕萬措摩尽霍讓論（可叶度圓讓論）（可叶度圓讓論）",
+        "relevant": "追思六事差別所罔比罆拿、四念住、身念住、心念住、法念住、行住經論",
+        "common_misrecognitions": [
+          "玉切斯的論",
+          "玉切斯蒂論",
+          "玉學士的論"
+        ]
+      },
+      {
+        "name": "《法蔽足論》",
+        "relevant": "四念住的論謂",
+        "common_misrecognitions": []
+      },
+      {
+        "name": "《中阿含經》",
+        "relevant": "四念住經文",
+        "common_misrecognitions": []
+      }
+    ]
+  },
+  "high_frequency_doctrinal_terms": [
+    {
+      "term": "不淨觀",
+      "misrecognitions": [
+        "不靜觀",
+        "不尽觀",
+        "不進觀",
+        "不敬觀",
+        "不恬管",
+        "不尽管"
+      ]
+    },
+    {
+      "term": "對治",
+      "misrecognitions": [
+        "對持"
+      ]
+    },
+    {
+      "term": "骨鎖",
+      "misrecognitions": [
+        "骨所",
+        "骨朔",
+        "骨索",
+        "古所",
+        "古說",
+        "鼓說",
+        "古人"
+      ]
+    },
+    {
+      "term": "勝解",
+      "misrecognitions": [
+        "聖節",
+        "聖洁",
+        "聖結",
+        "聖託",
+        "聖別",
+        "聖解"
+      ]
+    },
+    {
+      "term": "繫心",
+      "misrecognitions": [
+        "細心",
+        "續心"
+      ]
+    },
+    {
+      "term": "青疵",
+      "misrecognitions": [
+        "清淚",
+        "清餘",
+        "軽於",
+        "軽隥",
+        "清雨",
+        "清餘",
+        "清忠"
+      ]
+    },
+    {
+      "term": "辭作意",
+      "misrecognitions": [
+        "操作意味",
+        "超作義"
+      ]
+    },
+    {
+      "term": "初習業",
+      "misrecognitions": [
+        "以書修"
+      ]
+    },
+    {
+      "term": "已熟修",
+      "misrecognitions": [
+        "以書修"
+      ]
+    },
+    {
+      "term": "隊好",
+      "misrecognitions": [
+        "誰好",
+        "水好"
+      ]
+    },
+    {
+      "term": "其相",
+      "misrecognitions": [
+        "氣象"
+      ]
+    },
+    {
+      "term": "障道因缘",
+      "misrecognitions": [
+        "藏道姻缘",
+        "藏道理解"
+      ]
+    },
+    {
+      "term": "調治顢倒",
+      "misrecognitions": [
+        "誳治顢倒"
+      ]
+    },
+    {
+      "term": "谭慍癢",
+      "misrecognitions": [
+        "贝慍癢"
+      ]
+    },
+    {
+      "term": "輕安",
+      "misrecognitions": [
+        "清安",
+        "情安",
+        "靖安"
+      ]
+    },
+    {
+      "term": "欲界定",
+      "misrecognitions": [
+        "預計定"
+      ]
+    },
+    {
+      "term": "作意",
+      "misrecognitions": []
+    },
+    {
+      "term": "奢摩他",
+      "misrecognitions": [
+        "舊摩他"
+      ]
+    },
+    {
+      "term": "毗钵舍那",
+      "misrecognitions": [
+        "屁不舍挪",
+        "屌股設诺"
+      ]
+    },
+    {
+      "term": "詘",
+      "misrecognitions": []
+    },
+    {
+      "term": "辭探",
+      "misrecognitions": [
+        "巡視",
+        "對話"
+      ]
+    }
   ],
-  "coreTerms": [
-    "四念住",
-    "四念處",
-    "身念住",
-    "受念住",
-    "心念住",
-    "法念住",
-    "奢摩他",
-    "毘缽舍那",
-    "止觀",
-    "念與慧",
-    "明記不忘",
-    "臍輪",
-    "丹田",
-    "數息",
-    "隨息",
-    "經行",
-    "七作意",
-    "了相作意",
-    "六事尋思",
-    "尋思黑品",
-    "尋思白品",
-    "黑品所攝",
-    "不淨觀",
-    "菩薩摩訶薩"
+  "reference_materials": [
+    {
+      "referenceId": "jiangji",
+      "type": "edited-text-reference",
+      "title": "《四念住讀記》（珚境老和尚）",
+      "url": "http://www.book853.com/show.aspx?id=1626&cid=12",
+      "retrieved_at": "2026-11-16",
+      "pages": 32,
+      "local_path": "reviews/evidence/sinianzhu/reference/jiangji_sinianzhu_jiangji_full.md",
+      "sha256": "sha256:c76f4ced1fc4cb66255634b471af646c7875b0187784f62754002f05278e02fe",
+      "usage": [
+        "terminology-reference",
+        "edited-text-reference",
+        "asr-cross-check"
+      ],
+      "note": "同一場演講的整編定稿；名相與經文以此為準。"
+    },
+    {
+      "referenceId": "youtube-series",
+      "type": "asr-cross-check",
+      "title": "珚境長老主講四念住01～08（YouTube）",
+      "url": "https://www.youtube.com/playlist?list=PLwxMZvasISWyWiuSaZiuN1mhJ3Rsohn8X",
+      "retrieved_at": "2026-11-16",
+      "video_ids": {
+        "session_01": "lKqaPStMs50",
+        "session_02": "MXImL0lPB7I",
+        "session_03": "INT8NBRIL9w",
+        "session_04": "MmkIt_RCq-s",
+        "session_05": "HyF9OE1P1Z0",
+        "session_06": "puLbjObQICU",
+        "session_07": "xFUEo9KVt5E",
+        "session_08": "iZ5sBbnGoZY"
+      },
+      "usage": [
+        "asr-cross-check"
+      ],
+      "note": "這是這剹讀字稿的音源；正使用 YouTube iframe 播放，本地音檔已刪除。"
+    },
+    {
+      "referenceId": "qinxiufuhui",
+      "type": "terminology-reference",
+      "title": "勤修福慧《四念住讲記》",
+      "url": "https://qinxiufuhui.github.io/posts/53223.html",
+      "retrieved_at": "2026-11-16",
+      "usage": [
+        "terminology-reference"
+      ]
+    }
   ],
-  "asrCorrections": [
-    ["國學院", "佛學院"],
-    ["棋輪", "臍輪"],
-    ["肚氣", "肚臍"],
-    ["奢魔陀", "奢摩他"],
-    ["奢摩陀", "奢摩他"],
-    ["皮婆舍那", "毘缽舍那"],
-    ["毘婆舍那", "毘缽舍那"],
-    ["雲和名為", "云何名為"],
-    ["尋思彼品", "尋思黑品"],
-    ["尋師筆品", "尋思黑品"],
-    ["謂作詩詩", "謂作是思"],
-    ["不如私之", "不如實知"],
-    ["貪慾", "貪欲"],
-    ["瑜伽詩地論", "瑜伽師地論"],
-    ["申念處", "身念處"],
-    ["修不敬倫", "修不淨輪"],
-    ["思維", "思惟"],
-    ["顛倒黑品所赦", "顛倒黑品所攝"],
-    ["黑品所赦", "黑品所攝"],
-    ["興於各國念住", "行於各各念住"],
-    ["一個是念，一個是會", "一個是念，一個是慧"],
-    ["一個是念 一個是會", "一個是念，一個是慧"],
-    ["會是觀察的意思", "慧是觀察的意思"],
-    ["諸敬舍相", "諸淨色相"],
-    ["諸境舍相", "諸淨色相"],
-    ["鏡攝像", "淨色相"],
-    ["淨攝像", "淨色相"],
-    ["淨設相", "淨色相"],
-    ["不敬共鄉", "不淨共相"],
-    ["不敬自家", "不淨自相"],
-    ["不淨自家", "不淨自相"]
-  ],
-  "groundingNotes": "1996年玅境長老於美國法雲寺佛學院講授《四念住講記》（舊譯「四念處」，新譯「四念住」），以「念（明記不忘、止）與慧（觀察、觀）」為綱領，廣引《瑜伽師地論·聲聞地》、《大智度論》、《阿含經》等。"
+  "alignment_method": {
+    "name": "3-gram 覆蓋率對齊",
+    "description": "將讀記全文建成 3-gram 索引，對逐字稿每句窗d中文 3 字片段完全不在讀記中的比例。N=3 時可用的、零覆蓋率句約為全域 13,075 句中的 209 句。",
+    "script": "tools/sinianzhu_align_jiangji.py",
+    "calibration": {
+      "correct_sentence_coverage": [
+        0.33,
+        1.0
+      ],
+      "garbled_sentence_coverage": [
+        0.0,
+        0.17
+      ]
+    }
+  }
 }

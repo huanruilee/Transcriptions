@@ -16,9 +16,11 @@
 
 ## ⚠️ 音檔與 Git 儲存庫規範 (Audio Asset Policy)
 
-* **🚫 嚴禁將音檔 (.mp3 / .wav) 上傳至 GitHub 或存放於 gdrive**：音檔放置於 `gx10` 伺服器本機工作區 (`/home/henry/audio_files/`)，透過 9090 HTTPS Web 服務提供串流。原始音檔目錄可參照：[https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68](https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68)。
+* **🚫 嚴禁將音檔 (.mp3 / .wav) 上傳至 GitHub 或存放於 gdrive**：音檔放置於 `gx10` 伺服器本機工作區 (`/home/henry/audio_files/`)，透過 `transcriptions-audio-proxy.service` (port 39090，僅綁 127.0.0.1) 提供串流。原始音檔目錄可參照：[https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68](https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68)。
 * **📄 GitHub 專用定位**：GitHub 儲存庫**僅存放程式碼 (`src/`)、規格文件 (`docs/`)、Schema (`DATA_SCHEMA.md`)、轉譯 JSON (`courses/`)、腳本 (`scripts/`) 與測試 (`tests/`)**，確保未來任何 Agent 都能遵循技術資料與規範自動復刻與執行。
-* **🌐 即時網頁預覽 (Live Web Preview)**：小法每完成一批次轉譯與測試，**必須同步部署更新 `https://gx10-2887.tail378c21.ts.net:9090/index.html`**，並於進度簡報中附上預覽連結，讓 Henry 能即時線上測試與觀看成果。
+* **🌐 即時網頁預覽 (Live Web Preview)**：小法每完成一批次轉譯與測試，**必須同步部署更新 `http://100.84.47.24:9090/index.html`**，並於進度簡報中附上預覽連結，讓 Henry 能即時線上測試與觀看成果。
+  > **服務位置說明（2026-11-13 修正）**：此靜態網站**部署在 Henry 的 Mac 上**（`Mac-mini-M4.local`，Tailscale IP `100.84.47.24`），**不是**在 gx10 上。由 launchd 服務 `com.henry.transcriptions-web` 常駐（LaunchAgent：`~/Library/LaunchAgents/com.henry.transcriptions-web.plist`），服務根目錄為 **repo 根目錄**（`courses/` 與 `index.html` 都在根，非 `src/`）。
+  > 查詢狀態：`launchctl list | grep com.henry.transcriptions-web`；重啟：`launchctl load -w ~/Library/LaunchAgents/com.henry.transcriptions-web.plist`。
 
 本儲存庫的核心目標是 **「結合 GGF 治理與 QMS (ISO 9001) 品質管理體系，定義清楚的成果要求 (Deliverables) 與高階運作流程 (Workflow)」**。
 
