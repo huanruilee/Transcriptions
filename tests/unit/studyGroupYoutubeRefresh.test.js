@@ -11,7 +11,7 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
 }
 
-test('newly public official YouTube videos are exposed as pending without publishing empty transcripts', () => {
+test('newly public official YouTube videos (43-46) are transcribed and registered in course.json', () => {
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
   const expected = [
     {
@@ -20,36 +20,45 @@ test('newly public official YouTube videos are exposed as pending without publis
       videoId: '8sDCFUj5E_c',
       title: '第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學',
     },
+    {
+      sessionId: '44',
+      displaySessionId: '28上',
+      videoId: 'NvsCBFbyRO0',
+      title: '第28講 滅諦的後三種行相（上）｜2025《釋量論・第二品》大組共學',
+    },
+    {
+      sessionId: '45',
+      displaySessionId: '28下',
+      videoId: 'PYIbCsZmPHg',
+      title: '第28講 滅諦的後三種行相（下）｜2025《釋量論・第二品》大組共學',
+    },
+    {
+      sessionId: '46',
+      displaySessionId: '29上',
+      videoId: 'wJn8cpcsYBQ',
+      title: '第29講 無我慧才是解脫道（上）｜2025《釋量論・第二品》大組共學',
+    },
   ];
 
   for (const item of expected) {
-    const entry = course.pendingSessions.find((session) => session.sessionId === item.sessionId);
+    const entry = course.sessions.find((session) => session.sessionId === item.sessionId);
     assert.ok(entry, `missing course entry ${item.sessionId}`);
     assert.equal(entry.displaySessionId, item.displaySessionId);
     assert.equal(entry.title, item.title);
     assert.equal(entry.mediaType, 'video/youtube');
     assert.equal(entry.youtubeVideoId, item.videoId);
     assert.equal(entry.youtubeUrl, `https://www.youtube.com/watch?v=${item.videoId}`);
-    assert.equal(entry.status, 'not-transcribed');
-
-    assert.equal(
-      fs.existsSync(path.join(COURSE_DIR, 'sessions', `session_${item.sessionId}.json`)),
-      false,
-      `pending session ${item.sessionId} must not have a synthetic transcript JSON`,
-    );
-    assert.equal(course.sessions.some((session) => session.sessionId === item.sessionId), false);
+    assert.equal(fs.existsSync(path.join(COURSE_DIR, 'sessions', `session_${item.sessionId}.json`)), true);
   }
 });
 
-test('current playlist inventory records only the still-private item as unavailable', () => {
+test('current playlist inventory records 47 total sessions after filling 43-46', () => {
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
-  assert.deepEqual(course.unavailableSessions, [
-    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
-  ]);
+  assert.equal(course.unavailableSessions.length, 0);
 
   const catalog = readJson('courses/catalog.json');
   const entry = catalog.courses.find((item) => item.id === 'shi-liang-lun-study-group-2025');
-  assert.equal(entry.totalSessions, 43);
+  assert.equal(entry.totalSessions, 47);
 });
 
 test('historical prototype-44 evidence is explicitly remapped to current playlist item 42 by video identity', () => {

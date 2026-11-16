@@ -1,0 +1,229 @@
+{
+  "findings": [],
+  "windows": [],
+  "reAsrResults": [],
+  "hallucinationRepairs": [],
+  "proposalsCount": 230,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-93",
+      "paragraphId": "p_8",
+      "start": 294.16,
+      "end": 298.44,
+      "originalText": "那如何變成這個，最後的這個結局、這個公式出來，",
+      "proposedText": "那要怎麼變成這個最後的結局、這個公式出來？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "句尾補問號，刪除口語贅字「去」，使問句通順。",
+      "guardReason": "cross-sentence-move:後的結"
+    },
+    {
+      "sentenceId": "sent-129",
+      "paragraphId": "p_10",
+      "start": 379.3,
+      "end": 385.58,
+      "originalText": "要成佛這件事情，你沒有智慧波羅蜜，沒有般若波羅蜜，你就是沒有文殊師利菩薩。",
+      "proposedText": "要成佛這件事情，你沒有智慧波羅蜜、沒有般若波羅蜜，你就是沒有文殊師利菩薩那把寶劍。",
+      "categories": [
+        "punctuation",
+        "missing-term"
+      ],
+      "reason": "並列名相改用頓號；補句號。",
+      "guardReason": "cross-sentence-move:那把寶"
+    },
+    {
+      "sentenceId": "sent-245",
+      "paragraphId": "p_16",
+      "start": 625.48,
+      "end": 628.72,
+      "originalText": "他的自性，剛剛講的三輪體空的體，",
+      "proposedText": "它的自性，就是剛剛講的三輪體空的體。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "「他」改為「它」指涉法義，調整語序並補句號。",
+      "guardReason": "cross-sentence-move:自性就"
+    },
+    {
+      "sentenceId": "sent-252",
+      "paragraphId": "p_16",
+      "start": 639.74,
+      "end": 642.12,
+      "originalText": "裡面有很多什麼因緣的配合，",
+      "proposedText": "裡面有很多因緣的配合、條件的聚合，才說有形成我們現在在課堂上做這件事情。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相改用頓號，理順碎逗並補句號。",
+      "guardReason": "cross-sentence-move:條件的"
+    },
+    {
+      "sentenceId": "sent-517",
+      "paragraphId": "p_25",
+      "start": 991.76,
+      "end": 996.92,
+      "originalText": "你現在懺悔了，你想要什麼，你覺得這件事情真的不好，",
+      "proposedText": "你現在懺悔了，你想要懺悔，你覺得這件事情真的不好，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補逗號，與下句語意連貫。",
+      "guardReason": "cross-sentence-move:想要懺"
+    },
+    {
+      "sentenceId": "sent-673",
+      "paragraphId": "p_30",
+      "start": 1228.62,
+      "end": 1230.18,
+      "originalText": "我們還是有看到這個，",
+      "proposedText": "我們還是有看到這個顯現出來的東西，對不對？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "合併碎句並補上問號，使語意完整。",
+      "guardReason": "cross-sentence-move:顯現出"
+    },
+    {
+      "sentenceId": "sent-674",
+      "paragraphId": "p_30",
+      "start": 1230.26,
+      "end": 1231.94,
+      "originalText": "顯現出來的這個東西對不對？",
+      "proposedText": "譬如說這個杯子，它還是叫做杯子，但是，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除「譬如說」後的碎逗號，並補上逗號與下句連接。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-681",
+      "paragraphId": "p_30",
+      "start": 1236.5,
+      "end": 1240.28,
+      "originalText": "杯子這件事情，但是，杯子這件事情，它本身並不是與生俱，",
+      "proposedText": "杯子這件事情，它本身並不是與生俱來的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「但是，杯子這件事情」，並補齊「與生俱來」的語意。",
+      "guardReason": "content-word-omitted:但是"
+    },
+    {
+      "sentenceId": "sent-686",
+      "paragraphId": "p_31",
+      "start": 1244.72,
+      "end": 1249.88,
+      "originalText": "工廠啊配合啊，什麼什麼，把它弄出來，把它製作出來然後呢，",
+      "proposedText": "工廠配合，把它弄出來、製作出來，然後呢，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語發語詞「啊」，整理碎逗號，保留原句語意與「然後呢」的銜接。",
+      "guardReason": "cross-sentence-move:工廠配"
+    },
+    {
+      "sentenceId": "sent-841",
+      "paragraphId": "p_36",
+      "start": 1489.3,
+      "end": 1494,
+      "originalText": "然而由於他們並非以自己的力量而存在第三段，",
+      "proposedText": "有看到嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上問號。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-904",
+      "paragraphId": "p_38",
+      "start": 1588.22,
+      "end": 1606.48,
+      "originalText": "只是要告訴大家，那個發心是很重要的。好，講到這裡，我們來看一下下一頁，你會看到一個段落的結束。這位徒登確準這位師父，他都會幫我們做一個反思的題目。好，然後呢，這個就是大家回去自己思惟。",
+      "proposedText": "他舉這些例子，只是要告訴大家說，只是要告訴大家，那個發心是很重要的。好，講到這裡，我們來看一下下一頁，你會看到一個段落的結束。這位徒登確準這位師父，他都會幫我們做一個反思的題目。好，然後呢，這個就是大家回去自己思惟。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除「好，」「然後呢，」等口語發語詞，並補齊句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1244",
+      "paragraphId": "p_53",
+      "start": 2261.1,
+      "end": 2267.78,
+      "originalText": "其實忍是面對他人，所以有的時候，我們現在一般比較會，",
+      "proposedText": "其實忍是面對他人，所以有的時候，我們現在比較會把它翻得更白話一點，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句「我們現在一般比較會」與下一句「把它翻得更白話一點」被切碎，合併順句並補逗號連接。",
+      "guardReason": "cross-sentence-move:把它翻"
+    },
+    {
+      "sentenceId": "sent-1292",
+      "paragraphId": "p_55",
+      "start": 2333.16,
+      "end": 2335.52,
+      "originalText": "但是如果我們兩個不要分開來講，",
+      "proposedText": "但是如果我們兩個不要分開來講，它就是代表世間的利益，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語冗詞「就是──就是」，使句子流暢。",
+      "guardReason": "cross-sentence-move:它就是"
+    },
+    {
+      "sentenceId": "sent-1438",
+      "paragraphId": "p_60",
+      "start": 2590.84,
+      "end": 2595.46,
+      "originalText": "反思那個，都是你們自己回去，有時間的話可以思考。",
+      "proposedText": "反思的部分，都是你們自己回去，有時間的話可以思考。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "將口語的「那個」改為「的部分」以明確指涉，並補上句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1464",
+      "paragraphId": "p_62",
+      "start": 2635.32,
+      "end": 2638.04,
+      "originalText": "這個饒益其他眾生不是就是，",
+      "proposedText": "這個饒益其他眾生不就是利他嗎？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複「不是就是」，合併為完整疑問句並補上問號。",
+      "guardReason": "cross-sentence-move:就是利"
+    },
+    {
+      "sentenceId": "sent-1587",
+      "paragraphId": "p_67",
+      "start": 2876.34,
+      "end": 2884.12,
+      "originalText": "凡夫不免如此。好，所以但是呢，如果我們是以四攝，大家還記得嗎？",
+      "proposedText": "凡夫不免如此。所以，如果我們是以四攝，大家還記得嗎？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「好，」「呢」，「所以但是」贅連詞擇一保留，句尾補問號。",
+      "guardReason": "content-word-omitted:但是"
+    }
+  ]
+}

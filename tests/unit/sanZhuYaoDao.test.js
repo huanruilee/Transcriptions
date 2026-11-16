@@ -138,12 +138,12 @@ test('course.json exposes the reader inventory and publication state', () => {
   const course = readJson(coursePath);
 
   assert.equal(course.transcriptPublicationState, 'candidate-review-required');
-  assert.equal(course.sessions.length, 1);
+  assert.equal(course.sessions.length, 21);
   assert.equal(course.sessions[0].sessionId, '01');
   assert.equal(course.sessions[0].status, 'candidate');
   assert.equal(course.sessions[0].jsonUrl, 'courses/三主要道/sessions/session_01.json');
   assert.equal(course.sessions[0].youtubeVideoId, 'eergIaUzRQg');
-  assert.equal(course.pendingSessions.length, 20);
+  assert.equal(course.pendingSessions.length, 0);
   assert.equal(course.sessions.length + course.pendingSessions.length, 21);
   assert.match(course.qualityReview.readerNotice, /待閱校版/u);
 });

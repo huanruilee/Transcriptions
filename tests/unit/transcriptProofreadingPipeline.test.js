@@ -1133,24 +1133,24 @@ test('saved checkpoint batches are revalidated before resume', () => {
 
 test('repository inventory and pilot are deterministic across all courses', () => {
   const inventory = discoverTranscriptSessions(ROOT);
-  assert.equal(inventory.length, 304);
+  assert.equal(inventory.length, 354);
   assert.deepEqual(
     Object.fromEntries(Object.entries(Object.groupBy(inventory, (item) => item.course)).map(([course, rows]) => [course, rows.length])),
     {
-      '2025釋量論第二品大組共學': 43,
+      '2025釋量論第二品大組共學': 47,
       '入中論善顯密意疏': 220,
-      '三主要道': 1,
+      '三主要道': 21,
       '四念住': 8,
+      '菩薩就是這樣成佛': 26,
       '釋量論第二品': 32,
     },
   );
 
   const pilot = selectStratifiedPilot(inventory, 3);
-  // 三主要道目前僅第 01 講完成，因此該課程只能抽 1 份；其餘課程各抽 3 份。
-  assert.equal(pilot.length, 13);
+  assert.equal(pilot.length, 18);
   assert.deepEqual(
     Object.values(Object.groupBy(pilot, (item) => item.course)).map((rows) => rows.length),
-    [3, 3, 1, 3, 3],
+    [3, 3, 3, 3, 3, 3],
   );
   assert.deepEqual(selectStratifiedPilot(inventory, 3), pilot, 'pilot selection must be reproducible');
 });
