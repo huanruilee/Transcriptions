@@ -111,6 +111,12 @@ RULES = [
  ("的角之","的覺支","底本T0209_07念覺支"),
  ("角質","覺支","底本T0209_07七覺支"),
  ("尋伺觀","循身觀","底本T0209「住循身觀」（底本無尋伺）"),
+ ("覺支性","覺知性","底本T0209_03「真如是有覺知性的，真如的理性上有覺知性」"),
+ ("真如沒有覺支","真如沒有覺知","底本T0209_03「真如沒有覺知！」"),
+ ("念燈","念等","底本T0209_07「於內有念等覺支」"),
+ ("能治了之","能自了知","底本T0209_07「能自了知我無念等覺支」"),
+ ("念的覺支","念覺支","底本T0209_07「像念覺支這麼說」"),
+ ("當之一二","當知亦爾","底本T0209_07「如是擇法等覺支，當知亦爾」"),
  ("福心","伏心","底本T0209_03「若能伏心則伏眾法」"),
  ("相符其心","降伏其心","底本T0209_03「用觀降伏其心」"),
  ("唸","念","底本全書唸=0、念>>0"),
@@ -166,6 +172,9 @@ SEG = {
   "seg-1626":"他有提到說制令不動。",
   "seg-586":"這裡說這個伏心不但是止，觀也應該在內。",
   "seg-1676":"但是修了不淨觀到白骨觀。",
+  "seg-2124":"這個真如是有覺知性的。",
+  "seg-2125":"真如的理性上有覺知性。",
+  "seg-2134":"真如沒有覺知。",
   "seg-585":"所以要能伏心，則伏眾法。",
   "seg-593":"就是「則伏眾法」，得自在了。",
  },
@@ -180,7 +189,7 @@ SEG = {
  },
  "session_07": {
   "seg-1282":"得無生法忍了。",
-  "seg-700":"也是這樣子，像念的覺支，念的覺支怎麼說？",
+  "seg-700":"也是這樣子，像念覺支，念覺支怎麼說？",
   "seg-570":"第二個是擇法。",
  },
 }
@@ -190,7 +199,6 @@ UNRESOLVED = {
  "session_02":["seg-1029"],
  "session_03":["seg-998","seg-999","seg-1000"],
  "session_04":["seg-1523","seg-1553","seg-1554","seg-1555","seg-1556"],
- "session_07":["seg-701"],
 }
 UNREASON = {
  "seg-633":"專名不確定（疑似論名/論師名）","seg-634":"疑為「異熟果」類名相，底本無對應段",
@@ -213,8 +221,8 @@ def digest_of(data):
         for si,s in enumerate(p.get("sentences") or []):
             tx=re.sub(r"\s+"," ",str(s.get("text") or "")).strip()
             if not tx: continue
-            src.append({"id":str(s.get("id") or f"p{pi+1}-s{si+1}"),"text":tx,"heading":h,"paragraphIndex":pi})
-    return "sha256:"+hashlib.sha256(json.dumps(src,ensure_ascii=False).encode()).hexdigest()
+            src.append({"id":str(s.get("id") or f"p{pi+1}-s{si+1}"),"text":tx,"heading":h})
+    return "sha256:"+hashlib.sha256(json.dumps(src,ensure_ascii=False,separators=(",",":")).encode()).hexdigest()
 
 def main():
     ledger=[]; unresolved=[]; rule_counts=Counter(); seg_edits=0
@@ -233,9 +241,11 @@ def main():
                         ledger.append({"sessionId":sid,"segId":s["id"],"before":old,"after":new,"rule":"segment-rewrite","evidence":"底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"})
                         seg_edits+=1
                 before_rules=new
-                for pat,rep,ev in RULES:
-                    if pat in new:
-                        new=new.replace(pat,rep); rule_counts[pat]+=1
+                for _pass in range(2):
+                    for pat,rep,ev in RULES:
+                        if pat in new:
+                            if _pass==0: rule_counts[pat]+=1
+                            new=new.replace(pat,rep)
                 if new!=old:
                     if new==before_rules:
                         pass
