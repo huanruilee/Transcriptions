@@ -1,0 +1,78 @@
+{
+  "taskId": "RUZHONG-38B-STUDY",
+  "sessionId": "38B",
+  "checkedAt": "2026-10-26T10:22:53.973979",
+  "sourceCommit": "db58a88a72cb0192cb73378b73a26563cec66fbb",
+  "audio": {
+    "url": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170422-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p121(38).MP3",
+    "sha256": "8a2925d2fe7549320d19260d285a73ac6188ac5452d94a531e18782ad5a3a341",
+    "bytes": 13156464,
+    "contentType": "audio/mpeg",
+    "headerDuration": 1644.032,
+    "decodedDuration": 1651.77475,
+    "indexSha256": "cf77353de188b5697fa0c774e16db7f7b60aed66c9ad3684cdefe80c19317762",
+    "officialIndexMatched": true
+  },
+  "officialIndex": {
+    "url": "https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68",
+    "sha256": "cf77353de188b5697fa0c774e16db7f7b60aed66c9ad3684cdefe80c19317762",
+    "matchingFilename": "20170422-B p121(38)",
+    "verified": true
+  },
+  "textbook": {
+    "url": "https://buddha.flyday.com.tw/68%20%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F%202016/%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F(%E5%BD%B1%E5%8D%B0%E7%94%A8%E4%B8%8A%E8%AA%B2%E7%89%88-2016).pdf",
+    "sha256": "bfd663a4b3d3bf74ded9f0fa1798a2aca0d0e571ce0b0a9f1091555460b7c1b1",
+    "bytes": 1130901,
+    "title": "入中論善顯密意疏（影印用上課版-2016）",
+    "author": "宗喀巴大師",
+    "translator": "法尊法師",
+    "status": "verified",
+    "role": "terminology-reference; never audio gold",
+    "pdfPages": 285,
+    "pageChecks": [
+      {
+        "page": 120,
+        "extractedSha256": "e2e0ac055abc9b527bfd2ba651babcdb6e0d86adc9052d5e081393082eb2a90f",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "page": 121,
+        "extractedSha256": "3516b914da7dd90b1dc9cb2c83c51b8107e101c0d28bbcf8af9f5457b455c184",
+        "whitespaceNormalizedMatch": true
+      },
+      {
+        "page": 122,
+        "extractedSha256": "3fd60df48268c764b145bf3af12c2a29554f0e71214f65d2138477009212a279",
+        "whitespaceNormalizedMatch": true
+      }
+    ],
+    "tool": "pypdf 6.10.0",
+    "cleaning": "whitespace normalization only",
+    "audioGold": false
+  },
+  "sourceTrack": {
+    "type": "previous-machine-proofread-not-raw-ASR",
+    "count": 256,
+    "humanListened": false,
+    "priorPerSentencePendingFlags": 0,
+    "zeroFlagsDoesNotMeanAccepted": true
+  },
+  "nextLecture": "39A開頭回看121頁二乘修道問難；未補其後解答、完整本頌或122頁四家安立。",
+  "boundedSearch": {
+    "queries": [
+      "見悲青增 20170422 入中論 逐字稿",
+      "入中論善顯密意疏 38B"
+    ],
+    "exactHumanTranscript": "not found",
+    "officialIndexAndPdf": "fresh verified",
+    "youtubeDescription": "N/A: no verified matching YouTube source",
+    "thirdParty": "林崇安教材/音檔目錄，未用作本講人工逐字稿"
+  },
+  "benchmark": "development/reference-assisted; not human listened gold or blind holdout",
+  "allowedProvider": "GX10 local llama.cpp only; public-source study material; no secrets",
+  "limitations": [
+    "初始MP3標頭1644.032秒，完整解碼1651.77475秒；原生播放器完整載入後可更新時長，須等候再跳末句",
+    "原話舊機校稿不冒稱原始ASR",
+    "疑詞與角色分界明標存疑，未逐句人工聽核"
+  ]
+}

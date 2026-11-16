@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import { build38A, markdown38A, render38A, text38A } from '../../scripts/session38a_faithful_reading.mjs';
 
-const sourceBytes = fs.readFileSync('courses/入中論善顯密意疏/sessions/session_38A.json');
+const sourceBytes = fs.readFileSync('reviews/evidence/ruzhong38a-study/source-session.json');
 const digest = (bytes) => `sha256:${createHash('sha256').update(bytes).digest('hex')}`;
 const plan = (extra = {}) => ({ sourceDigest: digest(sourceBytes), processedAt: '2026-10-23T09:00:00+08:00', corrections: [], pending: [], ...extra });
 const buildFull = (extra = {}) => build38A(sourceBytes, plan(extra));

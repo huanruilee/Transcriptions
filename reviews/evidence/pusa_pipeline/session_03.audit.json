@@ -1,0 +1,374 @@
+{
+  "findings": [],
+  "windows": [],
+  "reAsrResults": [],
+  "hallucinationRepairs": [],
+  "proposalsCount": 294,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-2",
+      "paragraphId": "p_1",
+      "start": 31.62,
+      "end": 50.16,
+      "originalText": "他們一個很常出現每次都會用這樣子去禮讚般若波羅蜜那我們知道我們這一堂課菩薩就是這樣成佛他其實當初選這個課的重點，",
+      "proposedText": "他們一個很常出現、每次都會用這樣子去禮讚般若波羅蜜多。那我們知道，我們這一堂課《菩薩就是這樣成佛》，他其實當初選這個課的重點，",
+      "categories": [
+        "punctuation",
+        "missing-term"
+      ],
+      "reason": "補上頓號與句號斷開黏連長句；「波羅蜜」補為「波羅蜜多」；課名加《》並補冒號引出說明。",
+      "guardReason": "cross-sentence-move:羅蜜多"
+    },
+    {
+      "sentenceId": "sent-89",
+      "paragraphId": "p_5",
+      "start": 271.8,
+      "end": 274.82,
+      "originalText": "你要怎麼跟這個十幾歲的小的，",
+      "proposedText": "你要怎麼跟這個十幾歲的小的、年輕朋友說，「難」又是什麼意思？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上句尾問號。",
+      "guardReason": "cross-sentence-move:年輕朋"
+    },
+    {
+      "sentenceId": "sent-98",
+      "paragraphId": "p_6",
+      "start": 287.06,
+      "end": 289.72,
+      "originalText": "對對對，就是一定要什麼？",
+      "proposedText": "對，一定要用什麼？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複的「就是」，並補上問號使疑問句完整。",
+      "guardReason": "cross-sentence-move:定要用"
+    },
+    {
+      "sentenceId": "sent-100",
+      "paragraphId": "p_6",
+      "start": 289.72,
+      "end": 293,
+      "originalText": "一定要用臺語，你才能夠去講出那個，",
+      "proposedText": "一定要用臺語，才能夠講出那個味道。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「去」，並將與下句黏連的碎句補上標點、順成完整語意。",
+      "guardReason": "cross-sentence-move:那個味"
+    },
+    {
+      "sentenceId": "sent-128",
+      "paragraphId": "p_7",
+      "start": 334.92,
+      "end": 336.9,
+      "originalText": "我可能會請同學你們就是，",
+      "proposedText": "我可能會請同學你們自己看看是怎麼樣，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「就是」，句尾補逗號。",
+      "guardReason": "cross-sentence-move:自己看"
+    },
+    {
+      "sentenceId": "sent-167",
+      "paragraphId": "p_8",
+      "start": 402.26,
+      "end": 404.16,
+      "originalText": "如果當然這裡面資料，",
+      "proposedText": "當然，這裡面的資料，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「如果」，調整語序並補上標點。",
+      "guardReason": "content-word-omitted:如果"
+    },
+    {
+      "sentenceId": "sent-373",
+      "paragraphId": "p_15",
+      "start": 738.1,
+      "end": 742.02,
+      "originalText": "因為我們有印上上週有印那個什麼，",
+      "proposedText": "因為我們上週有印那個什麼，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「印上」與無實義的「有印那個什麼」中的冗詞，保留原意。",
+      "guardReason": "cross-sentence-move:我們上"
+    },
+    {
+      "sentenceId": "sent-538",
+      "paragraphId": "p_23",
+      "start": 1083.68,
+      "end": 1088.76,
+      "originalText": "他中了煩惱的因，所以感得的是什麼？",
+      "proposedText": "他種了煩惱的因，所以感得的是什麼？",
+      "categories": [
+        "typo",
+        "punctuation"
+      ],
+      "reason": "「中了」為「種了」之誤，並補上問號。",
+      "guardReason": "cross-sentence-move:他種了"
+    },
+    {
+      "sentenceId": "sent-665",
+      "paragraphId": "p_30",
+      "start": 1366.28,
+      "end": 1370.5,
+      "originalText": "因此祂所獲得的證量也是不足的，",
+      "proposedText": "因此祂所獲得的證量也是不足的、有限有量。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾缺標點，與下一句黏連；補上頓號使「不足的、有限有量」成為並列補語，語意完整。",
+      "guardReason": "cross-sentence-move:有限有"
+    },
+    {
+      "sentenceId": "sent-667",
+      "paragraphId": "p_30",
+      "start": 1371.36,
+      "end": 1376.32,
+      "originalText": "因此從這邊去比對，我們在比對三乘的時候，",
+      "proposedText": "因此從這邊去比對，我們在比對三乘的時候，這個時候你就會想說：",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾缺標點，與下一句黏連；補上逗號使語意連貫。",
+      "guardReason": "cross-sentence-move:這個時"
+    },
+    {
+      "sentenceId": "sent-670",
+      "paragraphId": "p_30",
+      "start": 1378.74,
+      "end": 1380.9,
+      "originalText": "對最圓滿的法我有什麼？",
+      "proposedText": "對最圓滿的法我有什麼？唯有成佛。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾缺標點，疑問句應以問號收尾；補上問號使反問語氣明確。",
+      "guardReason": "cross-sentence-move:唯有成"
+    },
+    {
+      "sentenceId": "sent-672",
+      "paragraphId": "p_30",
+      "start": 1382.84,
+      "end": 1384.62,
+      "originalText": "所以才會跑出這麼一句：",
+      "proposedText": "所以才會跑出這麼一句：「為利有情，我一定要成佛。」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾缺標點，與下一句黏連；補上冒號引出引文，語意完整。",
+      "guardReason": "cross-sentence-move:為利有"
+    },
+    {
+      "sentenceId": "sent-675",
+      "paragraphId": "p_30",
+      "start": 1388.9,
+      "end": 1394.24,
+      "originalText": "否則為利有情，我們就會想說：「我就做做善事就好了，",
+      "proposedText": "否則為利有情，我們就會想說：「我就做做善事就好了，我也是幫助別人。」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾缺標點，引文未閉合且與下一句黏連；補上逗號與引號使引文完整。",
+      "guardReason": "cross-sentence-move:我也是"
+    },
+    {
+      "sentenceId": "sent-679",
+      "paragraphId": "p_30",
+      "start": 1396.62,
+      "end": 1400.3,
+      "originalText": "但是你可不可以利益到一切有情？",
+      "proposedText": "但是你可不可以利益到一切有情？因為一切有情有什麼？有八萬四千種煩惱，眾生有八萬四千種根性。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句句尾缺標點，疑問句應以問號收尾；補上問號使反問語氣明確。",
+      "guardReason": "cross-sentence-move:因為一"
+    },
+    {
+      "sentenceId": "sent-750",
+      "paragraphId": "p_34",
+      "start": 1548.88,
+      "end": 1552.56,
+      "originalText": "有的時候就，我不是在說你們，我自己也是這樣。",
+      "proposedText": "有的時候就是這樣，我不是在說你們，我自己也是這樣。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語停頓「就」，補上句尾句號，使語意完整流暢。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-791",
+      "paragraphId": "p_35",
+      "start": 1616.92,
+      "end": 1619.8,
+      "originalText": "我要怎麼樣才能夠達到我目標？",
+      "proposedText": "我要怎麼樣才能夠達到我的目標？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補「的」使語句通順，句尾問號正確。",
+      "guardReason": "cross-sentence-move:到我的"
+    },
+    {
+      "sentenceId": "sent-863",
+      "paragraphId": "p_38",
+      "start": 1794.42,
+      "end": 1795.02,
+      "originalText": "那個龍樹菩薩，大家都知道祂是中觀登，",
+      "proposedText": "那個龍樹菩薩，大家都知道祂是中觀的祖師，",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "原句「中觀登」為 ASR 誤聽殘缺，依下句「祂是中觀的祖師」補齊名相；因下句為重複語，此句補上逗號以銜接語意。",
+      "guardReason": "cross-sentence-move:中觀的"
+    },
+    {
+      "sentenceId": "sent-910",
+      "paragraphId": "p_41",
+      "start": 1900.72,
+      "end": 1904.12,
+      "originalText": "然後福德它是屬於方便的層面，",
+      "proposedText": "福德資糧是屬於方便的層面，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句首發語詞「然後」，句尾補逗號以銜接下句。",
+      "guardReason": "cross-sentence-move:福德資"
+    },
+    {
+      "sentenceId": "sent-973",
+      "paragraphId": "p_42",
+      "start": 2041.94,
+      "end": 2047.14,
+      "originalText": "所以跟智慧有比較有最直接的連帶關係的對不對？",
+      "proposedText": "所以跟智慧有最直接的連帶關係，對不對？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「比較」，補上問號。",
+      "guardReason": "cross-sentence-move:慧有最"
+    },
+    {
+      "sentenceId": "sent-1202",
+      "paragraphId": "p_51",
+      "start": 2456.68,
+      "end": 2461.06,
+      "originalText": "我們不要講到出離三界就是它出離就是指，",
+      "proposedText": "我們不要講到出離三界，就是它出離是指──",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「就是」，補逗號與破折號引出下句。",
+      "guardReason": "cross-sentence-move:出離是"
+    },
+    {
+      "sentenceId": "sent-1260",
+      "paragraphId": "p_53",
+      "start": 2545.52,
+      "end": 2548.16,
+      "originalText": "怎麼跟你的職場啊？",
+      "proposedText": "怎麼跟你的職場相處啊？",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "依語意補齊「相處」，使問句完整。",
+      "guardReason": "cross-sentence-move:相處啊"
+    },
+    {
+      "sentenceId": "sent-1266",
+      "paragraphId": "p_53",
+      "start": 2553.88,
+      "end": 2559.26,
+      "originalText": "還有法友之間，這些事情呢，這些事情其實對我們一般的，",
+      "proposedText": "還有法友之間的這些事情，其實對我們一般的，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句尾語氣詞「呢」與重複的「這些事情」，並補逗號銜接下句。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1392",
+      "paragraphId": "p_58",
+      "start": 2802.58,
+      "end": 2804.36,
+      "originalText": "為什麼它現在這個苦？",
+      "proposedText": "為什麼它現在會遭遇到這種苦？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補問號。",
+      "guardReason": "cross-sentence-move:現在會"
+    },
+    {
+      "sentenceId": "sent-1415",
+      "paragraphId": "p_60",
+      "start": 2851.24,
+      "end": 2857.54,
+      "originalText": "所以才能夠安住在那個苦果上用正念。",
+      "proposedText": "所以才能夠安住在那個苦果上，用正知正念去面對它。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原逐字稿將「正知正念」切碎在兩句，合併補順為完整句子，並補上標點。",
+      "guardReason": "cross-sentence-move:正知正"
+    },
+    {
+      "sentenceId": "sent-1429",
+      "paragraphId": "p_61",
+      "start": 2891.4,
+      "end": 2896.26,
+      "originalText": "智慧資量它是一種了悟，",
+      "proposedText": "智慧資糧它是一種了悟，",
+      "categories": [
+        "typo"
+      ],
+      "reason": "「資量」為錯別字，應為「資糧」。",
+      "guardReason": "cross-sentence-move:慧資糧"
+    },
+    {
+      "sentenceId": "sent-1441",
+      "paragraphId": "p_61",
+      "start": 2915.24,
+      "end": 2918.24,
+      "originalText": "我們之前是不是有學過？",
+      "proposedText": "我們之前是不是有學過補特伽羅？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "與下一句「補特伽羅？」為口語重複，合併補上問號，避免斷句破碎。",
+      "guardReason": "cross-sentence-move:補特伽"
+    },
+    {
+      "sentenceId": "sent-1442",
+      "paragraphId": "p_61",
+      "start": 2918.24,
+      "end": 2919.92,
+      "originalText": "補特伽羅？",
+      "proposedText": "我不可得，對不對？就是人無我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上問號與句號，完整標點。",
+      "guardReason": "cross-sentence-move:我不可"
+    }
+  ]
+}

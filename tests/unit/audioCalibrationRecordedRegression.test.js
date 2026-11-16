@@ -1,0 +1,23 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {auditAudioCalibration,auditAcousticEvidence,auditAudioIdentity} from '../../scripts/lib/audioCalibrationGate.js';
+const root='reviews/evidence/shiliang-30-31-calibration/first-pass/';
+const sha=raw=>'sha256:'+createHash('sha256').update(raw).digest('hex');
+for(const sid of ['30','31']) test(`recorded full session ${sid} first-pass evidence must not become a false calibrated PASS`,()=>{
+  const sourceRaw=readFileSync(`${root}session_${sid}.source.json`);
+  const acousticRaw=readFileSync(`${root}session_${sid}.words.json`);
+  const identityRaw=readFileSync(`${root}audio-identity.json`);
+  const source=JSON.parse(sourceRaw), acoustic=JSON.parse(acousticRaw);
+  const candidate=JSON.parse(readFileSync(`${root}session_${sid}.candidate.json`));
+  assert.equal(candidate.sourceDigest,sha(sourceRaw));
+  assert.equal(candidate.items.length,source.paragraphs.flatMap(p=>p.sentences).length);
+  const structure=auditAudioCalibration(source,candidate,sha(sourceRaw));
+  const replay=auditAcousticEvidence(candidate,acoustic,sha(acousticRaw));
+  assert.equal(auditAudioIdentity(candidate,JSON.parse(identityRaw),sha(identityRaw)).ok,true);
+  assert.equal(structure.ok,false);
+  assert.ok(structure.errors.some(e=>e.code==='weak-match'));
+  assert.equal(replay.ok,false);
+  assert.ok(replay.errors.some(e=>e.code==='acoustic-text'));
+});

@@ -2,11 +2,12 @@
 """
 render_study_guide_html.py
 
-將講記 Markdown 文件轉換為具備「即時原音播放」功能的獨立高質感網頁 HTML。
+將講記 Markdown 文件轉換為具備「即時原音/原影播放」與「課堂原話對照抽屜」功能的獨立高質感網頁 HTML。
 特色：
-1. 底部常駐 HTML5 音訊播放器（直接串流官方音檔）。
-2. 點擊任何段首時間戳 [▶ mm:ss]，播放器立即跳轉至該秒數播放並高亮段落。
-3. 嚴格比照法師講記排版美學（紅字大標題、典雅襯線字體、偈頌引言框、研讀大綱專區）。
+1. 支援官方 MP3 音檔常駐播放器與 YouTube IFrame API 即時跳轉播放器。
+2. 點擊任何段首時間戳 [▶ mm:ss] 或原話單句，播放器立即跳轉至該秒數播放並高亮段落。
+3. 自動由 verbatim/verbatim_{sid}.json 或對應的 sessions/session_*.json 依段落時間區間擷取課堂原話對照。
+4. 嚴格比照法師講記排版美學（紅字大標題、典雅襯線字體、偈頌引言框、研讀大綱專區）。
 """
 
 import json
@@ -15,9 +16,11 @@ import sys
 from html import escape
 from pathlib import Path
 
+
 def format_mmss(seconds: float) -> str:
     sec = max(0, int(seconds))
     return f"{sec // 60:02d}:{sec % 60:02d}"
+
 
 def highlight_quotes(text: str) -> str:
     return re.sub(
@@ -26,36 +29,102 @@ def highlight_quotes(text: str) -> str:
         text
     )
 
+
+def resolve_session_data(md_path: Path, sid: str, youtube_id: str) -> dict:
+    sessions_dir = md_path.parent.parent / "sessions"
+    direct_path = sessions_dir / f"session_{sid}.json"
+    if direct_path.exists():
+        return json.loads(direct_path.read_text(encoding="utf-8"))
+    if youtube_id and sessions_dir.exists():
+        for cand in sorted(sessions_dir.glob("session_*.json")):
+            try:
+                data = json.loads(cand.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if data.get("youtubeVideoId") == youtube_id:
+                return data
+    return {}
+
+
+def build_verbatim_map_from_session(session_data: dict, para_seconds: list[int]) -> dict:
+    if not session_data or not para_seconds:
+        return {}
+    all_sents = [
+        s for p in session_data.get("paragraphs", [])
+        for s in p.get("sentences", [])
+        if isinstance(s.get("start"), (int, float))
+    ]
+    if not all_sents:
+        return {}
+    duration = (
+        session_data.get("_meta", {}).get("durationSeconds")
+        or max((s.get("end", 0) for s in all_sents), default=0)
+        or 999999
+    )
+    vmap = {}
+    for idx, start_sec in enumerate(para_seconds):
+        next_sec = duration
+        for later_sec in para_seconds[idx + 1:]:
+            if later_sec > start_sec:
+                next_sec = later_sec
+                break
+        window_end = min(next_sec, start_sec + 2400)
+        matched = [
+            {
+                "id": s.get("id", ""),
+                "start": s.get("start", 0),
+                "end": s.get("end", 0),
+                "speaker": s.get("speaker", ""),
+                "text": s.get("text", ""),
+            }
+            for s in all_sents
+            if start_sec <= s.get("start", 0) < window_end
+        ]
+        if matched:
+            vmap[f"p_{idx + 1}"] = matched
+    return vmap
+
+
 def md_to_html(md_path: Path) -> Path:
     text = md_path.read_text(encoding="utf-8")
     sid = md_path.stem.replace("lecture_", "").replace("_study_guide", "")
-    session_path = md_path.parent.parent / "sessions" / f"session_{sid}.json"
-    quality = json.loads(session_path.read_text(encoding="utf-8")).get("qualityReview", {}) if session_path.exists() else {}
-    verbatim_label = escape(quality.get("verbatimLabel") or "逐字忠實原話・僅校錯別字與語氣詞")
-    verbatim_path = md_path.parent.parent / "verbatim" / f"verbatim_{sid}.json"
-    verbatim_map = {}
-    if verbatim_path.exists():
-        vdata = json.loads(verbatim_path.read_text(encoding="utf-8"))
-        verbatim_map = vdata.get("paragraphs", {})
 
-    # Extract audio URL - handle URLs containing parens e.g. p97(29).MP3
+    # Extract MP3 or YouTube URL
     audio_match = re.search(r'\]\((https?://buddha\.flyday\.com\.tw/[^\s]+?\.MP3)\)', text, re.IGNORECASE)
     if not audio_match:
         audio_match = re.search(r'(https?://buddha\.flyday\.com\.tw/[^\s)>]+?\.MP3)', text, re.IGNORECASE)
     audio_url = audio_match.group(1).split('#')[0] if audio_match else ""
+
+    yt_match = re.search(r'https?://(?:www\.)?youtube\.com/watch\?v=([A-Za-z0-9_-]{11})', text)
+    youtube_id = yt_match.group(1) if yt_match else ""
+
+    session_data = resolve_session_data(md_path, sid, youtube_id)
+    if not audio_url and not youtube_id and session_data.get("audioUrl"):
+        audio_url = session_data.get("audioUrl", "")
+
+    quality = session_data.get("qualityReview", {}) if session_data else {}
+    verbatim_label = escape(quality.get("verbatimLabel") or "逐字忠實原話・僅校錯別字與語氣詞")
+
+    verbatim_path = md_path.parent.parent / "verbatim" / f"verbatim_{sid}.json"
+    verbatim_map = {}
+    verbatim_keys_order = []
+    if verbatim_path.exists():
+        vdata = json.loads(verbatim_path.read_text(encoding="utf-8"))
+        verbatim_map = vdata.get("paragraphs", {})
+        verbatim_keys_order = list(verbatim_map.keys())
 
     # Title extraction
     title_match = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
     title = title_match.group(1) if title_match else md_path.stem
 
     # Replace timestamp links: [▶ 01:46](...#t=106) -> <button class="ts-btn" onclick="playAt(106, this)">▶ 01:46</button>
-    # Match through to #t=(\d+) so that parenthesized audio URLs in markdown links don't truncate
     def replace_ts(m):
         ts_text = m.group(1)
-        seconds = m.group(2)
+        seconds = int(float(m.group(2)))
         return f'<button class="ts-btn" onclick="event.stopPropagation(); playAt({seconds}, this)">{ts_text}</button>'
 
-    content = re.sub(r'\[(▶\s*\d{2}:\d{2})\]\((?:.+?)#t=(\d+)\)', replace_ts, text)
+    content = re.sub(r'\[(▶\s*\d{2,3}:\d{2})\]\((?:.+?)(?:#t=|&t=)(\d+(?:\.\d+)?)s?\)', replace_ts, text)
+    content = re.sub(r'\[([^\]]+)\]\((#sec-[a-zA-Z0-9_-]+)\)', r'<a class="toc-anchor-link" href="\2">\1</a>', content)
 
     # Process blockquotes
     lines = content.split('\n')
@@ -80,25 +149,52 @@ def md_to_html(md_path: Path) -> Path:
     # Convert headings - ensure double newlines around them so following lines aren't fused
     content = re.sub(r'^(#{1,3})\s+(.+)$', r'\n\n\1 \2\n\n', content, flags=re.MULTILINE)
     content = re.sub(r'^###\s+(.+)$', r'<h3>\1</h3>', content, flags=re.MULTILINE)
-    content = re.sub(r'^##\s+(.+)$', r'<h2>\1</h2>', content, flags=re.MULTILINE)
+    sec_counter = [0]
+    def replace_h2(m):
+        inner = m.group(1)
+        explicit_id = re.search(r'\s*\{#([a-zA-Z0-9_-]+)\}\s*$', inner)
+        if explicit_id:
+            hid = explicit_id.group(1)
+            inner = inner[:explicit_id.start()]
+            return f'<h2 id="{hid}">{inner}</h2>'
+        if 'class="ts-btn"' in inner:
+            sec_counter[0] += 1
+            back_toc = ' <a class="back-toc-link" href="#sec-toc">↑ 目錄</a>' if md_path.stem.endswith("_dialogue_transcript") else ""
+            return f'<h2 id="sec-{sec_counter[0]}">{inner}{back_toc}</h2>'
+        return f'<h2>{inner}</h2>'
+    content = re.sub(r'^##\s+(.+)$', replace_h2, content, flags=re.MULTILINE)
     content = re.sub(r'^#\s+(.+)$', r'<h1>\1</h1>', content, flags=re.MULTILINE)
 
     # Bold and Italic
     content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', content)
     content = re.sub(r'\*(.+?)\*', r'<em>\1</em>', content)
 
+    raw_blocks = [b.strip() for b in content.split('\n\n') if b.strip()]
+    if not verbatim_map and session_data and not md_path.stem.endswith("_dialogue_transcript"):
+        para_seconds = []
+        for b in raw_blocks:
+            if b.startswith(('<h', '<blockquote', '<hr', '---', '<div', '<details')) or re.match(r'^\d+\.\s', b):
+                continue
+            if any(line.strip().startswith(('* ', '- ')) for line in b.split('\n')):
+                continue
+            m = re.search(r'playAt\((\d+),\s*this\)', b)
+            if m:
+                para_seconds.append(int(m.group(1)))
+        verbatim_map = build_verbatim_map_from_session(session_data, para_seconds)
+
     # Paragraphs
     paragraphs = []
     para_counter = 0
-    for block in content.split('\n\n'):
-        block = block.strip()
-        if not block:
-            continue
-        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr'):
-            if block.startswith('<h2>【正文講記】</h2>') and verbatim_map:
+    current_speaker = ""
+    for block in raw_blocks:
+        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr') or block.startswith('<div') or block.startswith('<details') or block.startswith('<table'):
+            if block.startswith(('<div', '<hr')):
+                current_speaker = ""
+            if (block.startswith('<h2>【正文講記】</h2>') or block.startswith('<h2>二、各節問題與法師開示講記</h2>')) and verbatim_map:
+                heading_text = re.sub(r'</?h2>', '', block)
                 paragraphs.append(
                     '<div class="body-header-row">'
-                    '<h2>【正文講記】</h2>'
+                    f'<h2>{heading_text}</h2>'
                     '<button type="button" id="toggle-all-verbatim" class="verbatim-global-btn" onclick="toggleAllVerbatim(this)">'
                     '💬 展開全部課堂原話'
                     '</button>'
@@ -107,7 +203,6 @@ def md_to_html(md_path: Path) -> Path:
             else:
                 paragraphs.append(block)
         elif any(line.strip().startswith(('* ', '- ')) for line in block.split('\n')):
-            # Handle nested list
             list_html = ['<ul class="meta-list">']
             in_nested = False
             for line in block.split('\n'):
@@ -139,8 +234,12 @@ def md_to_html(md_path: Path) -> Path:
             ts_match = re.search(r'playAt\((\d+),\s*this\)', block)
             if ts_match:
                 sec = ts_match.group(1)
+                # If verbatim_keys_order exists, use the actual key in order, else fallback to f"p_{para_counter+1}"
+                if verbatim_keys_order and para_counter < len(verbatim_keys_order):
+                    p_id = verbatim_keys_order[para_counter]
+                else:
+                    p_id = f"p_{para_counter + 1}"
                 para_counter += 1
-                p_id = f"p_{para_counter}"
                 v_sents = verbatim_map.get(p_id, [])
                 if v_sents:
                     toggle_btn = (
@@ -160,7 +259,12 @@ def md_to_html(md_path: Path) -> Path:
                         v_start = vs.get("start", 0)
                         v_mmss = format_mmss(v_start)
                         v_spk = vs.get("speaker", "")
-                        spk_cls = "spk-student" if "學員" in v_spk else "spk-geshe"
+                        if "學員" in v_spk:
+                            spk_cls = "spk-student"
+                        elif "維那" in v_spk or "主持" in v_spk:
+                            spk_cls = "spk-host"
+                        else:
+                            spk_cls = "spk-geshe"
                         spk_html = f'<span class="v-spk {spk_cls}">【{v_spk}】</span>' if v_spk else ''
                         v_txt = highlight_quotes(vs.get("text", ""))
                         v_items.append(
@@ -184,11 +288,49 @@ def md_to_html(md_path: Path) -> Path:
                         f'</div>'
                     )
                 else:
-                    paragraphs.append(f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
+                    spk_m = re.search(r'<strong>([^：<]{1,15})：</strong>', block)
+                    if spk_m:
+                        current_speaker = spk_m.group(1)
+                    teacher_cls = " teacher-para" if current_speaker == "如性法師" else ""
+                    paragraphs.append(f'<p class="reading-para clickable-para{teacher_cls}" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
             else:
-                paragraphs.append(f'<p class="reading-para">{block.replace(chr(10), "<br/>")}</p>')
+                spk_m = re.search(r'<strong>([^：<]{1,15})：</strong>', block)
+                if spk_m:
+                    current_speaker = spk_m.group(1)
+                teacher_cls = " teacher-para" if current_speaker == "如性法師" else ""
+                paragraphs.append(f'<p class="reading-para{teacher_cls}">{block.replace(chr(10), "<br/>")}</p>')
 
     body_html = '\n'.join(paragraphs)
+    if md_path.stem.endswith("_dialogue_transcript"):
+        mode_bar_html = (
+            '<div class="mode-bar" role="region" aria-label="閱讀模式切換">'
+            '<span class="mode-label">閱讀模式：</span>'
+            '<button type="button" class="mode-btn active" id="mode-full-btn" onclick="setReadingMode(\'full\')">📖 完整共學實錄</button>'
+            '<button type="button" class="mode-btn" id="mode-essence-btn" onclick="setReadingMode(\'essence\')">☸️ 精華法師開示（收合學員討論）</button>'
+            '</div>'
+        )
+        body_html = body_html.replace('<div id="sec-toc"', mode_bar_html + '\n<div id="sec-toc"', 1)
+
+    if youtube_id and not audio_url:
+        player_html = f"""  <div class="sticky-player yt-sticky-player" id="sticky-player">
+    <div class="yt-frame-wrap">
+      <iframe id="yt-iframe" width="240" height="68"
+        src="https://www.youtube.com/embed/{youtube_id}?enablejsapi=1&rel=0"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何時間按鈕，立即跳轉 YouTube 原片對應秒數</div>
+    <a id="yt-ext-link" class="yt-ext-btn" href="https://www.youtube.com/watch?v={youtube_id}" target="_blank" rel="noopener">📺 於 YouTube 開啟</a>
+    <button type="button" class="player-collapse-btn" onclick="togglePlayerCollapse(this)">🔽 收合</button>
+  </div>"""
+    else:
+        player_html = f"""  <div class="sticky-player">
+    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
+    <audio id="main-audio" controls preload="metadata" src="{audio_url}">
+      您的瀏覽器不支援 HTML5 音訊標籤。
+    </audio>
+  </div>"""
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-TW">
@@ -212,7 +354,7 @@ def md_to_html(md_path: Path) -> Path:
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.85;
-      padding: 0 0 120px 0;
+      padding: 0 0 180px 0;
       margin: 0;
     }}
     .container {{
@@ -261,6 +403,183 @@ def md_to_html(md_path: Path) -> Path:
     }}
     .reading-para.active-para {{
       background: #fef9c3;
+    }}
+    .reading-para.teacher-para {{
+      border-left: 4px solid #b45309;
+      background: #fffbeb;
+      padding-left: 16px;
+    }}
+    .reading-para.teacher-para.clickable-para:hover {{
+      background: #fef3c7;
+    }}
+    .reading-para.teacher-para.active-para {{
+      background: #fde68a;
+    }}
+    .learner-box {{
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #0284c7;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }}
+    .learner-box.compass-box {{
+      border-left-color: #0d9488;
+      background: #f0fdfa;
+    }}
+    .learner-box.summary-box {{
+      border-left-color: #b45309;
+      background: #fffbeb;
+    }}
+    .learner-box ul, .learner-box ol {{
+      margin: 8px 0 4px 20px;
+      padding: 0;
+    }}
+    .learner-box li {{
+      margin-bottom: 6px;
+    }}
+    .self-check-card {{
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      background: #ffffff;
+    }}
+    .self-check-card summary {{
+      cursor: pointer;
+      font-weight: 700;
+      color: #7f1d1d;
+      outline: none;
+    }}
+    .self-check-card[open] summary {{
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
+    }}
+    .toc-anchor-link {{
+      color: #991b1b;
+      text-decoration: none;
+      border-bottom: 1px dotted #991b1b;
+    }}
+    .toc-anchor-link:hover {{
+      color: #dc2626;
+      border-bottom-style: solid;
+    }}
+    .back-toc-link {{
+      float: right;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #64748b;
+      text-decoration: none;
+      margin-top: 4px;
+    }}
+    .back-toc-link:hover {{
+      color: #991b1b;
+    }}
+    .learner-box.pause-box {{
+      border-left-color: #6366f1;
+      background: #eef2ff;
+    }}
+    .learner-table {{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 6px 0;
+      font-size: 0.94rem;
+      background: #ffffff;
+    }}
+    .learner-table th, .learner-table td {{
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }}
+    .learner-table th {{
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }}
+    .mode-bar {{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 16px 0;
+    }}
+    .mode-label {{
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #334155;
+    }}
+    .mode-btn {{
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }}
+    .mode-btn.active, .mode-btn:hover {{
+      background: #991b1b;
+      color: #ffffff;
+      border-color: #991b1b;
+    }}
+    .toc-badge-student {{
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #ccfbf1;
+      color: #0f766e;
+      margin-right: 4px;
+    }}
+    .toc-badge-teacher {{
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #fef3c7;
+      color: #92400e;
+      margin-right: 4px;
+    }}
+    .student-group-details {{
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 14px 0;
+      background: #fafafa;
+    }}
+    .student-group-details > summary {{
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #0f766e;
+      padding: 4px 0;
+    }}
+    .player-collapse-btn {{
+      background: rgba(255,255,255,0.18);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }}
+    .sticky-player.collapsed .yt-frame-wrap,
+    .sticky-player.collapsed .yt-ext-btn {{
+      display: none;
+    }}
+    .sticky-player.collapsed {{
+      padding: 6px 16px;
     }}
     .ts-btn {{
       background: #dc2626;
@@ -385,6 +704,10 @@ def md_to_html(md_path: Path) -> Path:
       color: #9a3412;
       background: #ffedd5;
     }}
+    .spk-host {{
+      color: #4d7c0f;
+      background: #ecfccb;
+    }}
     .spk-student {{
       color: #0369a1;
       background: #e0f2fe;
@@ -425,11 +748,11 @@ def md_to_html(md_path: Path) -> Path:
       right: 0;
       background: #ffffff;
       border-top: 1px solid #d6d3d1;
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
       z-index: 999;
     }}
@@ -443,6 +766,23 @@ def md_to_html(md_path: Path) -> Path:
       max-width: 600px;
       height: 42px;
     }}
+    .yt-frame-wrap iframe {{
+      border-radius: 6px;
+      vertical-align: middle;
+    }}
+    .yt-ext-btn {{
+      background: #dc2626;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }}
+    .yt-ext-btn:hover {{
+      background: #b91c1c;
+    }}
   </style>
 </head>
 <body>
@@ -451,15 +791,13 @@ def md_to_html(md_path: Path) -> Path:
     {body_html}
   </div>
 
-  <div class="sticky-player">
-    <div class="info" id="player-status">🎧 隨選隨聽：點擊任何段落文字或時間戳跳轉播放</div>
-    <audio id="main-audio" controls preload="metadata" src="{audio_url}">
-      您的瀏覽器不支援 HTML5 音訊標籤。
-    </audio>
-  </div>
+{player_html}
 
   <script>
     const audio = document.getElementById('main-audio');
+    const ytIframe = document.getElementById('yt-iframe');
+    const ytExtLink = document.getElementById('yt-ext-link');
+    const youtubeId = "{youtube_id}";
     const status = document.getElementById('player-status');
     let currentActivePara = null;
 
@@ -526,6 +864,33 @@ def md_to_html(md_path: Path) -> Path:
         currentActivePara = para;
         para.classList.add('active-para');
       }}
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      const mmss = `${{m.toString().padStart(2, '0')}}:${{s.toString().padStart(2, '0')}}`;
+
+      if (ytIframe && youtubeId) {{
+        try {{
+          ytIframe.contentWindow.postMessage(JSON.stringify({{
+            event: 'command',
+            func: 'seekTo',
+            args: [seconds, true]
+          }}), '*');
+          ytIframe.contentWindow.postMessage(JSON.stringify({{
+            event: 'command',
+            func: 'playVideo',
+            args: []
+          }}), '*');
+        }} catch (e) {{
+          ytIframe.src = `https://www.youtube.com/embed/${{youtubeId}}?start=${{Math.floor(seconds)}}&autoplay=1&enablejsapi=1&rel=0`;
+        }}
+        if (ytExtLink) {{
+          ytExtLink.href = `https://www.youtube.com/watch?v=${{youtubeId}}&t=${{Math.floor(seconds)}}s`;
+        }}
+        status.innerText = `▶ 正在播放 YouTube 原片：${{mmss}}`;
+        return;
+      }}
+
+      if (!audio) return;
       const applySeek = () => {{
         try {{
           audio.currentTime = seconds;
@@ -538,13 +903,34 @@ def md_to_html(md_path: Path) -> Path:
         audio.load();
       }}
       audio.play().then(() => {{
-        const m = Math.floor(seconds / 60);
-        const s = Math.floor(seconds % 60);
-        status.innerText = `▶ 正在播放：${{m.toString().padStart(2, '0')}}:${{s.toString().padStart(2, '0')}}`;
+        status.innerText = `▶ 正在播放：${{mmss}}`;
       }}).catch(e => {{
         console.error('Play failed:', e);
         status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
       }});
+    }}
+
+    function setReadingMode(mode) {{
+      const fullBtn = document.getElementById('mode-full-btn');
+      const essBtn = document.getElementById('mode-essence-btn');
+      if (fullBtn && essBtn) {{
+        fullBtn.classList.toggle('active', mode === 'full');
+        essBtn.classList.toggle('active', mode === 'essence');
+      }}
+      document.querySelectorAll('.student-group-details').forEach(el => {{
+        if (mode === 'essence') {{
+          el.removeAttribute('open');
+        }} else {{
+          el.setAttribute('open', '');
+        }}
+      }});
+    }}
+
+    function togglePlayerCollapse(btn) {{
+      const player = document.getElementById('sticky-player');
+      if (!player) return;
+      const collapsed = player.classList.toggle('collapsed');
+      btn.textContent = collapsed ? '🔼 展開播放器' : '🔽 收合';
     }}
   </script>
 </body>
@@ -552,8 +938,9 @@ def md_to_html(md_path: Path) -> Path:
 """
     out_html = md_path.with_suffix(".html")
     out_html.write_text(html, encoding="utf-8")
-    print(f"成功生成網頁：{out_html}")
+    print(f"成功生成網頁：{out_html} (原話抽屜數: {len(verbatim_map)})")
     return out_html
+
 
 if __name__ == "__main__":
     files = [Path(value) for value in sys.argv[1:]] if len(sys.argv) > 1 else Path("courses/入中論善顯密意疏/publications").glob("*.md")

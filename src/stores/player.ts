@@ -12,6 +12,8 @@ export const usePlayerStore = defineStore('player', {
     isUserScrolling: false,
     scrollLockTimer: null as any,
     sentences: [] as SentenceItem[],
+    timelineSentences: [] as SentenceItem[],
+    timelineDisplayIndices: [] as number[],
   }),
 
   actions: {
@@ -24,6 +26,11 @@ export const usePlayerStore = defineStore('player', {
 
     setSentences(items: SentenceItem[]) {
       this.sentences = items;
+      const timeline = items.map((sentence, displayIndex) => ({sentence, displayIndex}))
+        .filter(({sentence:s}) => Number.isFinite(s.start_time) && Number.isFinite(s.end_time) && s.start_time >= 0 && s.end_time >= s.start_time)
+        .sort((a,b) => a.sentence.start_time-b.sentence.start_time || a.displayIndex-b.displayIndex);
+      this.timelineSentences = timeline.map(item => item.sentence);
+      this.timelineDisplayIndices = timeline.map(item => item.displayIndex);
       this.currentTime = 0;
       this.activeSentenceId = null;
       this.activeSentenceIndex = -1;
@@ -31,9 +38,9 @@ export const usePlayerStore = defineStore('player', {
 
     updateTime(time: number) {
       this.currentTime = time;
-      const idx = findSentenceIndexByTime(this.sentences, time);
-      this.activeSentenceIndex = idx;
-      this.activeSentenceId = idx === -1 ? null : this.sentences[idx].id;
+      const idx = Number.isFinite(time) ? findSentenceIndexByTime(this.timelineSentences, time) : -1;
+      this.activeSentenceIndex = idx === -1 ? -1 : this.timelineDisplayIndices[idx];
+      this.activeSentenceId = idx === -1 ? null : this.timelineSentences[idx].id;
     },
 
     handleUserScroll(timeoutMs = 2500) {

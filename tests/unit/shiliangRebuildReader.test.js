@@ -23,3 +23,21 @@ test('rejects stale source, unapproved content, changed timing, and listening cl
   await assert.rejects(projectApprovedRebuild(raw,altered));
  }
 });
+
+test('every published reading-approved rebuild in this course is the default main-reader body',async()=>{
+ const root='courses/釋量論第二品/';
+ const course=JSON.parse(fs.readFileSync(root+'course.json'));
+ const approved=course.sessions.filter(s=>s.status==='published'&&s.sourceRebuildStatus==='reading-approved');
+ assert.ok(approved.some(s=>s.sessionId==='31'),'session 31 must be covered');
+ for(const session of approved){
+  assert.equal(session.sourceRebuildInReader,true,`approved session ${session.sessionId} must render in the main reader`);
+  const sourceText=fs.readFileSync(`${root}sessions/session_${session.sessionId}.json`,'utf8');
+  const publication=JSON.parse(fs.readFileSync(`${root}publications/lecture_${session.sessionId}_verbatim_rebuild.json`));
+  const result=await projectApprovedRebuild(sourceText,publication);
+  const actual=result.paragraphs.flatMap(p=>p.sentences);
+  const original=JSON.parse(sourceText).paragraphs.flatMap(p=>p.sentences);
+  assert.deepEqual(actual.map(({text,...rest})=>rest),original.map(({text,...rest})=>rest));
+  assert.deepEqual(actual.map(s=>s.text),publication.sections.flatMap(p=>p.sentences).map(s=>s.text));
+  assert.deepEqual(result.paragraphs.filter(p=>p.heading).map(p=>p.heading),publication.sections.map(s=>s.heading));
+ }
+});

@@ -66,7 +66,7 @@ test('36A ancestry passes through authoritative sixth-ground sibling with exactl
   assert.match(page('064')[23], /庚三、觀甚深緣起真實/);
   assert.equal(page('240')[3], '庚四、結述此地功德');
   assert.match(page('080')[24], /丑二、成立彼宗之正理/);
-  assert.ok(read('sessions/session_01.json').paragraphs.flatMap(p => p.sentences || [])
+  assert.ok(read('sessions/session_01.json').paragraphs.flatMap(p => p.verbatimSentences || p.sentences || [])
     .some(s => /六三，第六，現前地，分四/.test(s.text)));
 });
 

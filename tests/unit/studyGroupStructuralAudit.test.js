@@ -10,9 +10,9 @@ const COURSE_PATH = path.join(COURSE_DIR, 'course.json');
 
 test('all study-group sessions satisfy structural transcript contracts', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
-  const intentionallyUnbound = new Set(['34', '27B']);
+  const intentionallyUnbound = new Set(['34', '27B', '43', '44', '45', '46']);
 
-  assert.equal(course.sessions.length, 42);
+  assert.equal(course.sessions.length, 47);
   for (const entry of course.sessions) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
     assert.ok(session.audioUrl || session.youtubeVideoId, `missing media ${entry.sessionId}`);
@@ -79,11 +79,38 @@ test('audio-confirmed dedication is not dropped after the hand-clasp cue', () =>
   ]);
 });
 
-test('private playlist 44 is explicitly unavailable rather than published', () => {
+test('playlist 44 (28上) and 27B (C0yhUazs0CU) are published in course.json', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
-  assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
-  assert.deepEqual(
-    course.unavailableSessions.find((item) => item.playlistIndex === 44),
-    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
-  );
+  assert.equal(course.sessions.some((session) => session.sessionId === '44'), true);
+  assert.equal(course.sessions.some((session) => session.sessionId === '27B' && session.youtubeVideoId === 'C0yhUazs0CU'), true);
+});
+
+test('all source outlines use string arrays for courseOutline and discussionOutline', () => {
+  const outlinesDir = path.join(COURSE_DIR, 'source_outlines');
+  const files = fs.readdirSync(outlinesDir).filter((name) => name.endsWith('.json'));
+  assert.ok(files.length >= 22);
+  for (const name of files) {
+    const outline = JSON.parse(fs.readFileSync(path.join(outlinesDir, name), 'utf8'));
+    assert.ok(Array.isArray(outline.courseOutline), `missing courseOutline in ${name}`);
+    assert.ok(Array.isArray(outline.discussionOutline), `missing discussionOutline in ${name}`);
+    for (const item of outline.courseOutline) {
+      assert.equal(typeof item, 'string', `non-string courseOutline item in ${name}`);
+    }
+    for (const item of outline.discussionOutline) {
+      assert.equal(typeof item, 'string', `non-string discussionOutline item in ${name}`);
+    }
+  }
+});
+
+test('all study-group sessions include speaker attribution and transcribed HTML study guides include verbatim drawers', () => {
+  const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
+  for (const entry of course.sessions) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
+    assert.ok(session.paragraphs.every((p) => typeof p.speaker === 'string' && p.speaker.length > 0), `missing paragraph speaker in ${entry.sessionId}`);
+    assert.ok(session.paragraphs.flatMap((p) => p.sentences).every((s) => typeof s.speaker === 'string' && s.speaker.length > 0), `missing sentence speaker in ${entry.sessionId}`);
+  }
+  for (const code of ['01A', '01B', '02A', '02B', '26A', '26B', '27B']) {
+    const html = fs.readFileSync(path.join(COURSE_DIR, 'publications', `lecture_${code}_study_guide.html`), 'utf8');
+    assert.match(html, /對照課堂原話/, `missing verbatim drawer in lecture_${code}_study_guide.html`);
+  }
 });

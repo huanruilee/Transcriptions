@@ -86,7 +86,7 @@ const STORAGE_PREFIX_NOTES = 'transcriptions_note_';
 
 export const useAnnotationStore = defineStore('annotation', {
   state: () => ({
-    currentSessionId: '02A',
+    currentSessionId: null as string | null,
     corrections: {} as Record<string, CorrectionItem>,
     notes: {} as Record<string, NoteItem>,
     isEditorOpen: false,
@@ -166,10 +166,12 @@ export const useAnnotationStore = defineStore('annotation', {
 
       this.corrections[sentenceId] = item;
 
-      // 持久化到 localStorage
+      // 持久化到 localStorage（currentSessionId 可能為 null，須避免寫入 "null" 這種假鍵）
       try {
-        const corrKey = `${STORAGE_PREFIX_CORRECTION}${this.currentSessionId}`;
-        localStorage.setItem(corrKey, JSON.stringify(this.corrections));
+        const corrKey = this.currentSessionId
+          ? `${STORAGE_PREFIX_CORRECTION}${this.currentSessionId}`
+          : '';
+        if (corrKey) localStorage.setItem(corrKey, JSON.stringify(this.corrections));
       } catch (e) {
         console.error('儲存校勘至 localStorage 失敗:', e);
       }
@@ -196,8 +198,10 @@ export const useAnnotationStore = defineStore('annotation', {
       this.notes[sentenceId] = noteItem;
 
       try {
-        const noteKey = `${STORAGE_PREFIX_NOTES}${this.currentSessionId}`;
-        localStorage.setItem(noteKey, JSON.stringify(this.notes));
+        const noteKey = this.currentSessionId
+          ? `${STORAGE_PREFIX_NOTES}${this.currentSessionId}`
+          : '';
+        if (noteKey) localStorage.setItem(noteKey, JSON.stringify(this.notes));
       } catch (e) {
         console.error('儲存筆記至 localStorage 失敗:', e);
       }
@@ -208,6 +212,7 @@ export const useAnnotationStore = defineStore('annotation', {
       delete this.notes[sentenceId];
 
       try {
+        if (!this.currentSessionId) return;
         const corrKey = `${STORAGE_PREFIX_CORRECTION}${this.currentSessionId}`;
         localStorage.setItem(corrKey, JSON.stringify(this.corrections));
 

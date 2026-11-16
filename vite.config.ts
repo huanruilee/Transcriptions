@@ -13,6 +13,16 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
+    // happy-dom 21 預設停用 iframe 頁面載入（改由 enable* 旗標明確 opt-in）。
+    // 閱讀器的 YouTube 播放器測試需要 iframe.contentWindow 存在，
+    // 否則 postMessage 通道與 end-of-session 事件無法驗證。
+    environmentOptions: {
+      happyDOM: {
+        settings: {
+          enableIframePageLoading: true,
+        },
+      },
+    },
     include: ['tests/unit_v2/**/*.{test,spec}.ts'],
   },
   server: {

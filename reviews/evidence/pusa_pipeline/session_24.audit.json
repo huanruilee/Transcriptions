@@ -1,0 +1,322 @@
+{
+  "findings": [],
+  "windows": [],
+  "reAsrResults": [],
+  "hallucinationRepairs": [],
+  "proposalsCount": 203,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-5",
+      "paragraphId": "p_1",
+      "start": 20.34,
+      "end": 27.12,
+      "originalText": "事實上空性跟無我我們在四諦十六行相的苦諦，",
+      "proposedText": "事實上，空性跟無我，我們在四諦十六行相的苦諦那邊就有講過，對不對？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併 sent-5、sent-6 的碎句，消除詞間碎逗號，反問句補問號。",
+      "guardReason": "cross-sentence-move:那邊就"
+    },
+    {
+      "sentenceId": "sent-8",
+      "paragraphId": "p_1",
+      "start": 34.12,
+      "end": 41.44,
+      "originalText": "但是聲聞的解讀跟乃至於後來大乘，",
+      "proposedText": "但是聲聞的解讀，跟乃至於後來大乘──我們說在唯識跟中觀──它所要引導的修行的路線也不一樣，方式也不一樣。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "sent-8 至 sent-9 與 sent-13 至 sent-15 為口語重複，合併整理為一句，以破折號標明同位語說明，句尾補句號。",
+      "guardReason": "cross-sentence-move:我們說"
+    },
+    {
+      "sentenceId": "sent-46",
+      "paragraphId": "p_3",
+      "start": 150.26,
+      "end": 153.52,
+      "originalText": "一本蠻重要的一個教科書，",
+      "proposedText": "蠻重要的一本教科書，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複的「一本」，句尾補逗號。",
+      "guardReason": "cross-sentence-move:的一本"
+    },
+    {
+      "sentenceId": "sent-125",
+      "paragraphId": "p_6",
+      "start": 311.4,
+      "end": 316.14,
+      "originalText": "通常我們會，就是在藏傳他們會說：",
+      "proposedText": "通常我們會說，在藏傳佛教他們會說：",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語停頓「就是」，補上標點使語意連貫。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-184",
+      "paragraphId": "p_9",
+      "start": 431.76,
+      "end": 436.76,
+      "originalText": "所以這個是中觀跟唯識，",
+      "proposedText": "所以這個是中觀跟唯識他們比較。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補句號，去除字幕切分造成的懸空逗號。",
+      "guardReason": "cross-sentence-move:他們比"
+    },
+    {
+      "sentenceId": "sent-209",
+      "paragraphId": "p_10",
+      "start": 482.62,
+      "end": 484.4,
+      "originalText": "那你對這些都不瞭解，",
+      "proposedText": "那你對這些都不瞭解，你怎麼離苦？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原為兩個短句黏連，合併補上問號，使語意完整。",
+      "guardReason": "cross-sentence-move:你怎麼"
+    },
+    {
+      "sentenceId": "sent-304",
+      "paragraphId": "p_14",
+      "start": 677.66,
+      "end": 681.2,
+      "originalText": "因為「他」這個字，英文是直接用英文的，",
+      "proposedText": "因為「他」這個字，英文是直接用英文的語法去翻譯過來的。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句以逗號收尾造成與下句黏連，合併補上句號，使「英文的語法」語意完整。",
+      "guardReason": "cross-sentence-move:語法去"
+    },
+    {
+      "sentenceId": "sent-421",
+      "paragraphId": "p_19",
+      "start": 910.38,
+      "end": 913.24,
+      "originalText": "那現在大家普遍對佛教會，",
+      "proposedText": "那現在大家普遍對佛教會給予一定的尊重。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原為字幕短句黏連，補上句號使語意完整。",
+      "guardReason": "cross-sentence-move:給予一"
+    },
+    {
+      "sentenceId": "sent-426",
+      "paragraphId": "p_19",
+      "start": 922.24,
+      "end": 923.42,
+      "originalText": "那些人的頭腦是什麼？",
+      "proposedText": "那些人的頭腦是什麼？很厲害的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句補問號，後句補句號。",
+      "guardReason": "cross-sentence-move:很厲害"
+    },
+    {
+      "sentenceId": "sent-429",
+      "paragraphId": "p_19",
+      "start": 926.58,
+      "end": 929.76,
+      "originalText": "因為他們在世間法的確是什麼，",
+      "proposedText": "因為他們在世間法的確是非常聰明、是非常有思辨力的；",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併碎句並補標點，使語意連貫。",
+      "guardReason": "cross-sentence-move:是非常"
+    },
+    {
+      "sentenceId": "sent-433",
+      "paragraphId": "p_19",
+      "start": 936.04,
+      "end": 941.82,
+      "originalText": "所以，跟他們的對談，並不是說我們故意要跟他們，",
+      "proposedText": "所以，跟他們的對談，並不是說我們故意要跟他們用什麼方法，而是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併碎句、補問號，使設問語氣完整。",
+      "guardReason": "cross-sentence-move:用什麼"
+    },
+    {
+      "sentenceId": "sent-436",
+      "paragraphId": "p_19",
+      "start": 941.82,
+      "end": 948.18,
+      "originalText": "用什麼方法，而是什麼？是讓以前可能對佛法沒有去真正，",
+      "proposedText": "是讓以前可能對佛法沒有去真正認識的人，可以透過科學的一些連結，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "消除口語停頓碎逗號，補逗號斷句。",
+      "guardReason": "cross-sentence-move:認識的"
+    },
+    {
+      "sentenceId": "sent-594",
+      "paragraphId": "p_26",
+      "start": 1265.92,
+      "end": 1269.62,
+      "originalText": "所以我們必須要先透過學習、",
+      "proposedText": "所以我們必須要先透過學習、聽聞空性的法教。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句與下一句實為同一句被字幕切斷，合併補全語意並補上句號。",
+      "guardReason": "cross-sentence-move:聽聞空"
+    },
+    {
+      "sentenceId": "sent-609",
+      "paragraphId": "p_26",
+      "start": 1299.5,
+      "end": 1302.72,
+      "originalText": "具足聞所成慧的話，我們要去吸收哪一些，",
+      "proposedText": "具足聞所成慧的話，我們要去吸收哪些法教呢？",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「哪一些，哪一些」，精簡為「哪些」並補上問號形成完整疑問句。",
+      "guardReason": "cross-sentence-move:法教呢"
+    },
+    {
+      "sentenceId": "sent-671",
+      "paragraphId": "p_29",
+      "start": 1426.08,
+      "end": 1429.78,
+      "originalText": "那透過因明的的這個，",
+      "proposedText": "那透過因明的這個鍛鍊之後，",
+      "categories": [
+        "typo",
+        "punctuation"
+      ],
+      "reason": "修正重複的「的」，並補上標點使句意通順。",
+      "guardReason": "cross-sentence-move:鍛鍊之"
+    },
+    {
+      "sentenceId": "sent-790",
+      "paragraphId": "p_34",
+      "start": 1661.6,
+      "end": 1664.52,
+      "originalText": "然後講到什麼？修止的，",
+      "proposedText": "然後講到什麼？講到修止的成果，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句尾懸空的「修止的，」碎逗號，補上問號並順句。",
+      "guardReason": "cross-sentence-move:講到修"
+    },
+    {
+      "sentenceId": "sent-1065",
+      "paragraphId": "p_46",
+      "start": 2217.72,
+      "end": 2219.86,
+      "originalText": "尤其其實你在有一點點，",
+      "proposedText": "尤其其實你在有一點點思慧的情況之下，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句中碎逗號，將「思慧」與下句語意連貫，句尾補標點。",
+      "guardReason": "cross-sentence-move:思慧的"
+    },
+    {
+      "sentenceId": "sent-1117",
+      "paragraphId": "p_48",
+      "start": 2323.62,
+      "end": 2327.24,
+      "originalText": "那你就知道，你那邊的理解是──你那邊所，",
+      "proposedText": "那你就知道，你那邊的理解是有問題的──你那邊所立的宗，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複「你那邊所」，補上破折號與逗號，使語意連貫。",
+      "guardReason": "cross-sentence-move:有問題"
+    },
+    {
+      "sentenceId": "sent-1155",
+      "paragraphId": "p_49",
+      "start": 2398.86,
+      "end": 2404.06,
+      "originalText": "所以我們不是在從就是欲界定到，",
+      "proposedText": "所以我們不是在從欲界定到，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "與下一句為口語重複起頭，保留較完整版本，句尾補逗號。",
+      "guardReason": "cross-sentence-move:在從欲"
+    },
+    {
+      "sentenceId": "sent-1182",
+      "paragraphId": "p_50",
+      "start": 2454.32,
+      "end": 2463.7,
+      "originalText": "所以透過專注、穩定跟明晰的力量然後呢去緣著緣著，",
+      "proposedText": "所以透過專注、穩定跟明晰的力量，然後去緣著空性的道理去思惟。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除「呢」等口語贅詞，補標點並順句。",
+      "guardReason": "cross-sentence-move:空性的"
+    },
+    {
+      "sentenceId": "sent-1333",
+      "paragraphId": "p_56",
+      "start": 2761.54,
+      "end": 2763.98,
+      "originalText": "所以這個可能還不是一般，",
+      "proposedText": "所以這個可能還不是一般不相信因果的人，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語填充語「就是說」，並將被切碎的兩句依語意順成一句，句尾補標點。",
+      "guardReason": "cross-sentence-move:不相信"
+    },
+    {
+      "sentenceId": "sent-1357",
+      "paragraphId": "p_57",
+      "start": 2814.86,
+      "end": 2818.26,
+      "originalText": "你以──就是我們剛剛講緣空性的，",
+      "proposedText": "你以──就是我們剛剛講緣空性的──止觀雙運，從加行位進入到見道位。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "以破折號整理插入語，句尾補句號。",
+      "guardReason": "cross-sentence-move:止觀雙"
+    },
+    {
+      "sentenceId": "sent-1394",
+      "paragraphId": "p_58",
+      "start": 2888.82,
+      "end": 2895.18,
+      "originalText": "這裡無二根本定，其實就是無分別的根本智定就是在，",
+      "proposedText": "這裡的無二根本定，其實就是無分別的根本智定，就是在",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號釐清語意，句尾保留與下一句的順接。",
+      "guardReason": "ungrounded-rewrite"
+    }
+  ]
+}

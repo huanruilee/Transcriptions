@@ -6,11 +6,13 @@ import App from '../../src/App.vue';
 import {formatTranscriptText} from '../../src/composables/useExportTranscript';
 import {projectApprovedRebuild} from '../../src/utils/approvedRebuildReader.js';
 const root='courses/釋量論第二品/';
-const raw=fs.readFileSync(root+'sessions/session_30.json','utf8');
-const rebuild=JSON.parse(fs.readFileSync(root+'publications/lecture_30_verbatim_rebuild.json','utf8'));
-it('loads the approved rebuild through actual course metadata into the main reader',async()=>{
+for (const sessionId of ['30','31']) {
+const raw=fs.readFileSync(root+`sessions/session_${sessionId}.json`,'utf8');
+const rebuild=JSON.parse(fs.readFileSync(root+`publications/lecture_${sessionId}_verbatim_rebuild.json`,'utf8'));
+const expectedSentences=rebuild.sections.flatMap((p:any)=>p.sentences);
+it(`session ${sessionId} loads the approved rebuild through actual course metadata into the main reader`,async()=>{
  setActivePinia(createPinia());
- window.history.replaceState({},'', '/?course=shi-liang-lun-er#session-30');
+ window.history.replaceState({},'', `/?course=shi-liang-lun-er#session-${sessionId}`);
  const mock=vi.spyOn(globalThis,'fetch').mockImplementation(async(input:any)=>{
   const url=String(input);
   const file=url.includes('catalog') ? 'courses/catalog.json' : url.replace(/^\//,'');
@@ -20,30 +22,37 @@ it('loads the approved rebuild through actual course metadata into the main read
  const wrapper=mount(App);
  try{
   await flushPromises();
-  await vi.waitFor(()=>expect(wrapper.findAll('.transcript-heading')).toHaveLength(10));
+  await vi.waitFor(()=>expect(wrapper.findAll('.transcript-heading')).toHaveLength(rebuild.sections.length));
   expect(wrapper.findAll('.transcript-heading')[0].text()).toContain('前行');
-  expect(wrapper.findAll('.transcript-heading')[1].text()).toContain('再次說明');
-  expect(wrapper.text()).toContain('版面重整：2026-10-24');
+  expect(wrapper.findAll('.transcript-heading').map(h=>h.text())).toEqual(rebuild.sections.map((p:any)=>p.heading));
+  expect(wrapper.findAll('.paragraph-block > .sentence').map(s=>({id:s.attributes('id'),text:s.text()}))).toEqual(expectedSentences.map((s:any)=>({id:s.id,text:s.text})));
+  expect(wrapper.find('.update-tag').text()).toBe('🕒 重整版最後更新：2026-10-24');
+  expect(wrapper.find('.source-update-tag').text()).toBe(`底稿校正日期：${JSON.parse(raw).lastUpdated}`);
+  expect(wrapper.text()).not.toContain('最後校正更新：');
   expect(wrapper.text()).toContain('本文已套用');
   expect(wrapper.text()).toContain('未逐句聽核');
-  expect(wrapper.text()).toContain('好，我們今天的課就上到這個地方。');
+  expect(wrapper.text()).toContain(expectedSentences.at(-1).text);
  }finally{wrapper.unmount();mock.mockRestore();}
 });
-it('actual export keeps the reading notice, 546 timestamps, and final sentence',async()=>{
+it(`session ${sessionId} export keeps the approved text, timestamps, and final sentence`,async()=>{
  const result=await projectApprovedRebuild(raw,rebuild);
- const text=formatTranscriptText({courseTitle:'釋量論第二品',sessionId:'30',sessionTitle:result.title,readerNotice:result.qualityReview.readerNotice},result.paragraphs);
+ const text=formatTranscriptText({courseTitle:'釋量論第二品',sessionId,sessionTitle:result.title,lastUpdated:result.lastUpdated,readerRebuiltAt:result.readerRebuiltAt,readerNotice:result.qualityReview.readerNotice},result.paragraphs);
  expect(text).toContain('未逐句聽核');
- expect(text.match(/^\[\d\d:\d\d:\d\d\]/gm)).toHaveLength(546);
- expect(text).toContain('好，我們今天的課就上到這個地方。');
+ expect(text).toContain('重整版最後更新：2026-10-24');
+ expect(text).toContain(`底稿校正日期：${result.lastUpdated}`);
+ expect(text).not.toContain(`最後更新：${result.lastUpdated}`);
+ expect(text.match(/^\[\d\d:\d\d:\d\d\]/gm)).toHaveLength(expectedSentences.length);
+ expect(text).toContain(expectedSentences.at(-1).text);
+ for(const item of rebuild.ledger) expect(text).toContain(item.after);
 });
 
 for (const failure of ['404', 'network', 'stale-source', 'altered-content'] as const) {
- it(`visibly falls back to the original reader on ${failure}, without a false applied badge`,async()=>{
+ it(`session ${sessionId} visibly falls back on ${failure}, without a false applied badge`,async()=>{
   setActivePinia(createPinia());
-  window.history.replaceState({},'', '/?course=shi-liang-lun-er#session-30');
+  window.history.replaceState({},'', `/?course=shi-liang-lun-er#session-${sessionId}`);
   const mock=vi.spyOn(globalThis,'fetch').mockImplementation(async(input:any)=>{
    const url=String(input);
-   if(url.endsWith('lecture_30_verbatim_rebuild.json')){
+   if(url.endsWith(`lecture_${sessionId}_verbatim_rebuild.json`)){
     if(failure==='404')return new Response('{}',{status:404});
     if(failure==='network')throw new TypeError('Network unavailable');
     const altered=structuredClone(rebuild);
@@ -61,8 +70,8 @@ for (const failure of ['404', 'network', 'stale-source', 'altered-content'] as c
    await flushPromises();
    await vi.waitFor(()=>expect(wrapper.find('.session-reader-notice').text()).toContain('目前顯示原稿'));
    expect(wrapper.findAll('.transcript-heading').map(h=>h.text())).toEqual(JSON.parse(raw).paragraphs.filter((p:any)=>p.heading).map((p:any)=>p.heading));
-   expect(wrapper.findAll('.paragraph-block > .sentence')).toHaveLength(546);
-   expect(wrapper.text()).toContain('好，我們今天的課就上到這個地方。');
+   expect(wrapper.findAll('.paragraph-block > .sentence')).toHaveLength(expectedSentences.length);
+   expect(wrapper.text()).toContain(expectedSentences.at(-1).text);
    expect(wrapper.text()).not.toContain('本文已套用');
    expect(wrapper.find('.rebuild-tag').exists()).toBe(false);
    expect(wrapper.text()).not.toContain('未核定內容');
@@ -70,3 +79,29 @@ for (const failure of ['404', 'network', 'stale-source', 'altered-content'] as c
   }finally{wrapper.unmount();mock.mockRestore();warn.mockRestore();}
  });
 }
+
+}
+
+it('refreshes course publication metadata when an older response is still cacheable',async()=>{
+ setActivePinia(createPinia());
+ window.history.replaceState({},'', '/?course=shi-liang-lun-er#session-31');
+ const mock=vi.spyOn(globalThis,'fetch').mockImplementation(async(input:any,options?:RequestInit)=>{
+  const url=String(input);
+  const file=url.includes('catalog') ? 'courses/catalog.json' : url.replace(/^\//,'');
+  if(!fs.existsSync(file)||!fs.statSync(file).isFile())return new Response('{}',{status:404});
+  let contents=fs.readFileSync(file,'utf8');
+  // Model a still-fresh browser HTTP cache from before the publication opt-in.
+  if(file===root+'course.json' && options?.cache!=='no-store'){
+   const cached=JSON.parse(contents);
+   delete cached.sessions.find((s:any)=>s.sessionId==='31').sourceRebuildInReader;
+   contents=JSON.stringify(cached);
+  }
+  return new Response(contents);
+ });
+ const wrapper=mount(App);
+ try{
+  await flushPromises();
+  await vi.waitFor(()=>expect(wrapper.text()).toContain('本文已套用'));
+  expect(wrapper.findAll('.transcript-heading')).toHaveLength(14);
+ }finally{wrapper.unmount();mock.mockRestore();}
+});

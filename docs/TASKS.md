@@ -2,7 +2,13 @@
 
 ## 流程權威入口（2026-10-23）
 
-- [x] **READER-TEST-PATTERNS-01**：固定閱讀器入口整合、資料保真、失敗回退、實際下載一致性與部署版本 smoke 五層契約；補404／網路／過期來源／未核定內容UI測試，Pages上傳前與發布後執行桌面／手機Chromium，保存分階段驗收證據。範圍與命令見 [TESTING.md](../TESTING.md#閱讀器發布-test-patterns2026-10-24)。
+- [ ] **RUZHONG01-STANDARD-01**：依v1.2流程重整入中論第01講，完整音源／底本預檢、346句保真帳本、局部校字及時間驗證、待閱校主入口與下載、固定版本獨立覆核、CI／Pages上線驗證。範圍及限制見[交付說明](RUZHONG01_STANDARD_REBUILD.md)。
+
+- [x] **STUDYGUIDE-AUDIT-TOOL-01**：將研讀講記「原話對照抽屜」唯讀稽核工具 `scripts/audit_study_guide_verbatim.py` 自 PR #345 抽出，獨立納入 main，使缺陷揭露可追溯驗證。工具檢查四項契約（C1 抽屜數==md時間戳段數／C2 抽屜內容逐字相符／C3 全部verbatim段落可見／C4 無空音檔且有音訊來源）。實測：乾淨 main 上 20 項檢查全 PASS（exit 0）；PR #345 head 上正確 FAIL 3 項（30 講 C1／C3、31 講 C3），證明非空轉工具。**本項僅交付稽核工具，不代表 PR #345 缺陷 2（抽屜索引錯位）已修復**；該缺陷仍待 #345 修正後由 PR #348 之時間錨點契約測試攔截。
+
+- [x] **SHILIANG31-READER-01**：第31講主閱讀器直接套用既有已核定重整版（545句／14標題／4項核定標點），來源、核定與時間均不改。Node驗證所有已發布核定講次皆啟用，App載入／失敗回退覆蓋30與31，browser依核定清單自動列舉，避免僅驗證第30講。課程publication metadata使用no-store，確保既有分頁刷新取得新入口設定；補舊快取回歸。主頁與下載以「重整版最後更新」顯示核定日期，底稿日期另標，避免誤認正式版尚未更新。
+
+- [x] **READER-TEST-PATTERNS-01**：固定閱讀器入口整合、資料保真、失敗回退、實際下載一致性、日期更新追溯與部署版本 smoke 六層契約；補404／網路／過期來源／未核定內容UI測試，Pages上傳前與發布後執行桌面／手機Chromium，保存分階段驗收證據。範圍與命令見 [TESTING.md](../TESTING.md#閱讀器發布-test-patterns2026-10-24)。
 
 - [x] **SHILIANG30-READER-01**：主閱讀器套用已閱讀核定的第 30 講重整段落；來源 session 與 publication 核定檔不變，檢查來源與內容 digest，保留全部 546 句 ID／時間。獨立顯示版面重整日期、未逐句聽核限制；下載沿用投影後正文與閱讀提醒。
 
@@ -94,5 +100,7 @@
 - [x] 下載缺失音檔（sessions 79-102 本地無音檔，需從官方目錄取得）— ✅ 從 flyday.com.tw 官方目錄下載 47 個 MP3 至 /home/henry/audio_files/
 - [x] 對 sessions 79-102 取得官方音檔後再補轉譯 — ✅ 完成（batch 13）
 - [x] 委派小檢 QA 抽樣檢驗 sessions 69-110 — ✅ 完成（QA_REPORT_79_102.md，平均 4.83/5.0）
-- [ ] session_99B.json 補轉譯（99B 音檔僅有 A 段 20180922-A.mp3，缺 B 段音檔，無法 ASR）
+- [x] session_99B.json 補轉譯（99B 音檔僅有 A 段 20180922-A.mp3，缺 B 段音檔，無法 ASR）— ✅ 阻礙已解除：B 段官方音檔（flyday `20180922-B 第一境墓地p3199.MP3`）已取得為 `audio/99B.mp3`（3205.512s）；`session_99B.json` 已完成 215 段／425 句（`_meta.audio_duration` 與檔案時長逐位相符，末句 end=3204.16s 達檔尾），並已登記於 `course.json`（219 sessions）。2026-11-04 複驗。
 - [ ] 請領域專家複審 toc.json 79-110 章節歸屬（QA 發現 79-84B 疑為第六地延續、95A/100A 子標題對應度偏弱）
+
+- [ ] RUZHONG01-STUDY-35A：依使用者指定35A形式重做01研讀講記、原話對照、測試及正式發布（見 RUZHONG01_STUDY_GUIDE.md）。
