@@ -413,6 +413,47 @@ def should_split(chunk_text, last_text, gap, is_last):
     return n >= HARD_MAX_CHARS
 
 
+def normalize_cjk_halfwidth_punct(text):
+    """將中文語境內的半形標點正規化為全形（2026-11-05 巡檢）。
+
+    背景：PR #341 的句尾守衛只解決「逗號+句號」瑕疵，且把半形『,』視為有效句尾，
+    從未做半形→全形的寬度正規化，因此 ASR 輸出的半形標點會原樣進入新講次。
+    實測 304 個已發布 session 中，中文語境相鄰的半形標點共 2,946 筆
+    （2025大組 1,301、入中論 889、四念住 756）；有 rawText 可比對者 100%
+    同時存在於 rawText → 確認為 ASR 來源，非管線引入。
+
+    規則（保守，避免破壞語意）：
+      1. 只處理「, ; :」三種半形標點，且必須至少一側緊鄰中文字元。
+      2. 若兩側皆為西文字母或數字（數字千分位、英文、URL）則跳過。
+      3. 純西文片段（含空格）整段跳過。
+      4. 只改字元寬度，不動句界、不合併、不切分 —— ASR segment 邊界契約不受影響。
+
+    本函式為純字元層級轉換，可重複執行（idempotent）。
+    """
+    if not text:
+        return text
+
+    # 中文字元範圍（基本漢字 + 延伸 A 區）
+    cjk = r'一-鿿㐀-䶿'
+    # 兩側皆西文（數字千分位、英文、URL）→ 跳過，不做寬度轉換
+    both_western = r'(?<=[A-Za-z0-9])[,;:](?=[A-Za-z0-9])'
+    protected = {m.start() for m in re.finditer(both_western, text)}
+
+    fullwidth = {',': '，', ';': '；', ':': '：'}
+    out = []
+    for i, ch in enumerate(text):
+        if ch in ',;:' and i not in protected:
+            prev = text[i-1] if i > 0 else ''
+            nxt = text[i+1] if i + 1 < len(text) else ''
+            prev_cjk = bool(re.match('[' + cjk + ']', prev or ' '))
+            next_cjk = bool(re.match('[' + cjk + ']', nxt or ' '))
+            if prev_cjk or next_cjk:
+                out.append(fullwidth[ch])
+                continue
+        out.append(ch)
+    return ''.join(out)
+
+
 def step2_pre_polish(raw_sentences, dynamic_terms=None):
     print(f"\n[Step 2/5] 📝 Pre-polishing, merging clauses & punctuation (terms: {len(dynamic_terms or [])})...")
     merged_sents = []
@@ -437,6 +478,12 @@ def step2_pre_polish(raw_sentences, dynamic_terms=None):
             #   導致句尾殘留『X,』再被 append『。』→ 產生『X,.』的逗號+句號瑕疵
             #   （實測見 session_43A 的 147 筆 / session_38B 的 1 筆 verbatimSentences）。
             #   三處正則皆納入半形逗號，句界與 ASR segment 邊界不受影響。
+            # ⚠️ 中文語境半形標點正規化（2026-11-05 巡檢）：
+            #   先做半形→全形寬度正規化，再進後續守衛 —— 順序重要：
+            #   若不先正規化，句尾守衛會把半形『,』當成「已有句尾」而放行，
+            #   中文語境的半形標點就會原樣留在成品裡。
+            #   只改字元寬度，不動句界、不合併、不切分。
+            raw_text = normalize_cjk_halfwidth_punct(raw_text)
             raw_text = re.sub(r'^[嗯啊喔哦呃，,、\s]+', '', raw_text)
             raw_text = re.sub(r'謝謝大家.*|感謝觀看.*|點讚.*|訂閱.*', '', raw_text).strip()
             
