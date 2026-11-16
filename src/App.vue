@@ -291,11 +291,23 @@
           <ol class="source-outline-list">
             <li v-for="item in sourceOutline.courseOutline" :key="item">{{ item }}</li>
           </ol>
-          <h3 class="source-outline-questions-heading">研討問題索引</h3>
-          <ol class="source-outline-questions">
-            <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
-          </ol>
-          <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
+          <details v-if="currentDiscussionQuestions.length > 0" class="source-outline-details">
+            <summary class="source-outline-summary">
+              原典研討問題索引（共 {{ sourceOutline.discussionOutline.length }} 題；本講已依下方 {{ currentDiscussionQuestions.length }} 個核心討論單元對位）
+            </summary>
+            <h3 class="source-outline-questions-heading">研討問題索引</h3>
+            <ol class="source-outline-questions">
+              <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
+            </ol>
+            <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題</span>
+          </details>
+          <template v-else>
+            <h3 class="source-outline-questions-heading">研討問題索引</h3>
+            <ol class="source-outline-questions">
+              <li v-for="(item, index) in sourceOutline.discussionOutline" :key="`${index}-${item}`">{{ item }}</li>
+            </ol>
+            <span class="source-outline-note">共 {{ sourceOutline.discussionOutline.length }} 題；逐字稿時間與問題對應仍需校準</span>
+          </template>
         </section>
 
         <section
@@ -373,6 +385,18 @@
               >
                 📖 研讀講記
               </button>
+              <a
+                v-if="currentDialogueTranscriptUrl"
+                id="open-dialogue-transcript-btn"
+                :href="currentDialogueTranscriptUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="session-download-btn"
+                data-testid="open-dialogue-transcript-btn"
+                title="開啟五層思辨學習版逐字稿網頁"
+              >
+                🧭 五層思辨學習版
+              </a>
             </div>
             <div
               v-if="currentAgentReviewStatus === 'completed'"
@@ -414,23 +438,34 @@
             >此影片已上架，逐字稿尚待製作。</p>
           </header>
 
+          <StudyScaffoldingPanel
+            v-if="currentStudyScaffolding"
+            :scaffolding="currentStudyScaffolding"
+            v-model:reading-mode="scaffoldingReadingMode"
+            @seek="seekToTime"
+          />
+
           <div
             v-for="p in paragraphs"
             :key="p.id"
+            v-show="scaffoldingReadingMode === 'full' || !currentStudyScaffolding || p.speaker?.includes('法師') || p.heading || p.teacherSummary"
             class="paragraph-block"
           >
             <div v-if="p.questionId && isQuestionStart(p)" class="discussion-question-heading">
               <span>討論問題</span>
               <h3>{{ questionFor(p.questionId)?.displayQuestion }}</h3>
             </div>
-            <!-- 科判導讀小標題 -->
-            <h3 v-if="p.heading" class="transcript-heading">
+            <!-- 科判導讀小標題（避免與上方討論問題標題重複） -->
+            <h3
+              v-if="p.heading && (!p.questionId || !isQuestionStart(p) || (p.heading !== questionFor(p.questionId)?.displayQuestion && p.heading !== questionFor(p.questionId)?.question))"
+              class="transcript-heading"
+            >
               {{ p.heading }}
             </h3>
 
             <!-- Phase 2: 內嵌科判導引小卡 (對齊 V1) -->
             <div
-              v-if="p.tocAnchorNode"
+              v-if="p.tocAnchorNode && p.tocAnchorNode.title !== p.heading"
               class="toc-anchor-card"
               :aria-label="'科判節點：' + p.tocAnchorNode.title"
             >
@@ -450,6 +485,11 @@
             >
               ▶ {{ formatTime(p.start) }}
             </button>
+            <span
+              v-if="p.speaker"
+              class="verbatim-speaker-badge"
+              :class="p.speaker.includes('學員') ? 'speaker-student' : 'speaker-geshe'"
+            >【{{ p.speaker }}】</span>
 
             <!-- 內嵌精校口語逐字稿抽屜開關 -->
             <button
@@ -822,6 +862,7 @@
 import { projectApprovedRebuild } from './utils/approvedRebuildReader.js';
 import { applyTimingOverlay } from './utils/audioCalibrationOverlay.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import StudyScaffoldingPanel from './components/StudyScaffoldingPanel.vue';
 import { usePlayerStore } from './stores/player';
 import { useCourseStore } from './stores/course';
 import { useUIStore } from './stores/ui';
@@ -959,19 +1000,45 @@ const currentRebuildUrl = computed(() => {
 });
 
 const isStudyGuideOpen = ref(false);
+function resolveStudyGuideCode(courseId: string, sid: string, displayId?: string): string {
+  if (courseId !== 'shi-liang-lun-study-group-2025') return sid;
+  const raw = (displayId || sid).trim();
+  if (raw.endsWith('上')) return `${raw.slice(0, -1).padStart(2, '0')}A`;
+  if (raw.endsWith('下')) return `${raw.slice(0, -1).padStart(2, '0')}B`;
+  if (/^\d+$/.test(raw)) return raw.padStart(3, '0');
+  return raw;
+}
 const currentStudyGuideUrl = computed(() => {
-  // If explicitly declared in session or known publications
   const sid = currentSessionId.value;
   if (!sid) return '';
   const cPath = courseStore.currentCoursePath;
   if (!cPath) return '';
   const base = import.meta.env.BASE_URL || '/';
-  return `${base}${cPath}/publications/lecture_${sid}_study_guide.html`;
+  const explicitPage = currentSessionInfo.value?.studyGuidePage;
+  if (explicitPage) {
+    return `${base}${cPath}/${explicitPage}`;
+  }
+  const code = resolveStudyGuideCode(
+    courseStore.currentCourseId,
+    sid,
+    currentSessionInfo.value?.displaySessionId,
+  );
+  return `${base}${cPath}/publications/lecture_${code}_study_guide.html`;
 });
 
 function toggleStudyGuideDrawer() {
   isStudyGuideOpen.value = !isStudyGuideOpen.value;
 }
+
+const currentStudyScaffolding = ref<any>(null);
+const scaffoldingReadingMode = ref<'full' | 'essence'>('full');
+const currentDialogueTranscriptUrl = computed(() => {
+  const rel = currentSessionInfo.value?.dialogueTranscriptUrl;
+  const cPath = courseStore.currentCoursePath;
+  if (!rel || !cPath) return '';
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}${cPath}/${rel}`;
+});
 
 const activeMediaType = computed(() =>
   currentSessionInfo.value?.mediaType || courseStore.currentMediaType
@@ -1974,6 +2041,7 @@ async function loadSession(sessionId: string) {
       : 0;
     currentAgentUncertainCount.value = data._meta?.agentReviewHumanNeededSentences ?? data._meta?.agentReviewUncertainSentences ?? 0;
     currentDiscussionQuestions.value = Array.isArray(data.discussionQuestions) ? data.discussionQuestions : [];
+    currentStudyScaffolding.value = data.studyScaffolding || null;
     currentTranscriptOverview.value = buildTranscriptOverview(data, currentSessionInfo.value || {});
     currentTocProjection.value = sessionTocProjection(data.qualityReview,sessionId);
     currentReaderNotice.value = typeof data.qualityReview?.readerNotice === 'string'
@@ -1989,12 +2057,28 @@ async function loadSession(sessionId: string) {
     let sentCounter = 0;
     let verbatimCounter = 0;
     expandedVerbatimParagraphs.value = {};
+    const usedAnchorKeys = new Set<string>();
     const parsedParagraphs = (data.paragraphs || []).map((p: any) => {
       const firstStart = p.sentences?.[0]?.start ?? p.sentences?.[0]?.start_time ?? 0;
-      const anchorNode = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const rawAnchor = findTOCNodeAtParagraphStart(firstStart, sessionId, 2);
+      const qObj = questionFor(p.questionId || null);
+      let anchorNode: any = null;
+      if (rawAnchor) {
+        const key = `${rawAnchor.title}@${rawAnchor.timestamp}`;
+        if (
+          !usedAnchorKeys.has(key) &&
+          rawAnchor.title !== p.heading &&
+          rawAnchor.title !== qObj?.displayQuestion &&
+          rawAnchor.title !== qObj?.question
+        ) {
+          usedAnchorKeys.add(key);
+          anchorNode = rawAnchor;
+        }
+      }
       const paraId = p.id || `para-${sentCounter}`;
       return {
         id: paraId,
+        speaker: p.speaker || null,
         questionId: p.questionId || null,
         heading: p.heading || null,
         teacherSummary: p.teacherSummary || null,
@@ -2005,6 +2089,7 @@ async function loadSession(sessionId: string) {
           id: s.id || `sent-${sentCounter++}`,
           start_time: s.start ?? s.start_time ?? 0,
           end_time: s.end ?? s.end_time ?? 0,
+          speaker: s.speaker || p.speaker || null,
           text: s.text || '',
           treatiseQuote: s.treatiseQuote ?? false,
           verseAnnotations: verseAnnotations.value[s.id] || [],
@@ -2890,6 +2975,18 @@ if (typeof window !== 'undefined') {
   padding-left: 1.4rem;
   line-height: 1.55;
   font-size: 0.88rem;
+}
+
+.source-outline-details {
+  margin-top: 12px;
+}
+
+.source-outline-summary {
+  cursor: pointer;
+  color: #285344;
+  font-size: 0.88rem;
+  font-weight: 600;
+  user-select: none;
 }
 
 .toc-anchor-card {

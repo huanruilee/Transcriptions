@@ -1,7 +1,7 @@
 # 逐字稿標準流程
 
-版本：1.4。更新：2026-11-14（Asia/Taipei）。適用：所有課程及所有 Agent。
-本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 保持一致，不要複製一份自行維護。
+版本：1.5。更新：2026-11-15（Asia/Taipei）。適用：所有課程及所有 Agent。
+本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
 
@@ -205,10 +205,23 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.5 | 2026-11-15 | 正式合入低 Token 漏斗共用模組（`scripts/lib/eneuralClient.mjs`、`scripts/lib/transcriptGuards.mjs`）、`config/locked-sessions.json` 前置鎖定檢查與最小差異輸出（`fixes + breaks`），並新增全流程交接手冊 `docs/AGENT_HANDOFF_PLAYBOOK.md` |
 | 1.4 | 2026-11-14 | 對齊 Stage 0～7 單向流水線；廢除「保留口頭禪／禁止刪合碎句」舊規，改為強制清除口語冗詞（呃、嗯、啊、好，那）、合併破碎短句並依語意補順句子，且導讀同步移至 Stage 5 專家終審定稿之後 |
 | 1.3 | 2026-11-13 | 納入讀者體驗改進：連續閱讀與對照雙模式、ASR 幻覺收折膠囊標記、講記雙向跳轉與名相懸浮註釋規範 |
 | 1.2 | 2026-10-24 | 納入閱讀器發布五層測試契約與 artifact／deployed 瀏覽器 gate |
 | 1.1 | 2026-10-24 | 強制先尋找並核對參考資料；區分整編稿、字幕與人工聽核基準；增加 Benchmark 防洩漏、低 Token 分工及來源清單交接 |
 | 1.0 | 2026-10-23 | 統一原話優先、精煉另軌、待閱校可發布、保真追溯與驗證交接；取代舊 SOP 相衝突的流程敘述 |
 
-低 Token 工作流程仍為本機 Draft；PR #271 的 ASR 局部重辨識與 PR #281 的測試整理在本文件建立時仍為獨立 Draft，不當作 main 已具備能力。任務若需採用，先核對實際合併狀態與程式。
+低 Token 漏斗工作流與實戰操作規範已正式收錄於 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 與 [大組共學工作流 v3](STUDY_GROUP_WORKFLOW_V3.md)；PR #271 與 PR #281 若仍屬歷史獨立 Draft，採用前仍須先核對實際合併狀態與程式。
+
+---
+
+## 八、學習鷹架（`studyScaffolding`）底本與時間軸強制規範（v1.5 試辦定版）
+
+為杜絕偈頌張冠李戴與時間戳估算偏差，產製或更新 `sessions/session_*.json` 中的 `studyScaffolding` 時，必須遵守以下兩項紅線：
+
+1. **偈頌原文必須逐字取自課程底本（禁止模型憑記憶補寫）**：
+   - `studyScaffolding.verses` 內每一首偈頌的中文譯文，必須逐字複製自該課程對應的底本或講記原文（如 `publications/lecture_*_dialogue_transcript.md` 或 `source_text/page_*.txt`），嚴禁由模型憑記憶生成或改寫。
+2. **時間戳必須從定稿逐字稿實際句子反查（禁止估算填寫）**：
+   - `verseMappings`、`compassMaps` 與 `pauseBoxes` 的所有時間戳（秒數），必須在逐字稿定稿後，從 `sessions/session_*.json` 內實際對應句子的 `start` 時間程式化反查取得，不得憑印象或分段比例估算。
+   - 提交 PR 前必須跑過 `npm run summaries:audit`、`npm test` 與 `npm run test:v2`，並在部署至 GitHub Pages 後實地開啟線上網頁抽查確認。
