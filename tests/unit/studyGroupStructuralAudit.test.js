@@ -10,9 +10,9 @@ const COURSE_PATH = path.join(COURSE_DIR, 'course.json');
 
 test('all study-group sessions satisfy structural transcript contracts', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
-  const intentionallyUnbound = new Set(['34', '27B']);
+  const intentionallyUnbound = new Set(['34', '27B', '43', '44', '45', '46']);
 
-  assert.equal(course.sessions.length, 43);
+  assert.equal(course.sessions.length, 47);
   for (const entry of course.sessions) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions', `session_${entry.sessionId}.json`), 'utf8'));
     assert.ok(session.audioUrl || session.youtubeVideoId, `missing media ${entry.sessionId}`);
@@ -79,13 +79,10 @@ test('audio-confirmed dedication is not dropped after the hand-clasp cue', () =>
   ]);
 });
 
-test('private playlist 44 is explicitly unavailable rather than published', () => {
+test('playlist 44 (28上) and 27B (C0yhUazs0CU) are published in course.json', () => {
   const course = JSON.parse(fs.readFileSync(COURSE_PATH, 'utf8'));
-  assert.equal(course.sessions.some((session) => session.sessionId === '44'), false);
-  assert.deepEqual(
-    course.unavailableSessions.find((item) => item.playlistIndex === 44),
-    { playlistIndex: 44, videoId: 'C0yhUazs0CU', reason: 'youtube_private' },
-  );
+  assert.equal(course.sessions.some((session) => session.sessionId === '44'), true);
+  assert.equal(course.sessions.some((session) => session.sessionId === '27B' && session.youtubeVideoId === 'C0yhUazs0CU'), true);
 });
 
 test('all source outlines use string arrays for courseOutline and discussionOutline', () => {

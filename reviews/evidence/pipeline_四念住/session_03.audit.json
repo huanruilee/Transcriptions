@@ -1,0 +1,4448 @@
+{
+  "findings": [
+    {
+      "sentenceId": "seg-001",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 1.65,
+      "end": 6.62,
+      "text": "天王 人和諸菩薩摩沙。",
+      "prevText": "",
+      "nextText": "親身佛兒伯羅蜜多。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "天王 人和諸菩薩摩沙。",
+          "suggestedTerm": "訶",
+          "reason": "「菩薩摩沙」疑似「菩薩摩訶薩」漏「訶」字，且「人和」疑為「天王！云何菩薩」之類經文開頭，名相不完整",
+          "promptHints": [
+            "菩薩摩訶薩",
+            "天王"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-002",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 6.62,
+      "end": 9.62,
+      "text": "親身佛兒伯羅蜜多。",
+      "prevText": "天王 人和諸菩薩摩沙。",
+      "nextText": "修心念著。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "親身佛兒伯羅蜜多。",
+          "suggestedTerm": "波羅蜜多",
+          "reason": "「親身佛兒伯羅蜜多」明顯語音錯誤，疑為「觀身、佛、波羅蜜多」等名相，缺實質字詞",
+          "promptHints": [
+            "波羅蜜多",
+            "觀身"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-003",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 9.62,
+      "end": 12.36,
+      "text": "修心念著。",
+      "prevText": "親身佛兒伯羅蜜多。",
+      "nextText": "為此菩薩做事實惟。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "修心念著。",
+          "suggestedTerm": "住",
+          "reason": "「修心念著」疑為「修心念住」，四念住名相，ASR 將「住」誤為「著」，名相後綴缺正字",
+          "promptHints": [
+            "四念住",
+            "心念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-009",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 33.09,
+      "end": 41.47,
+      "text": "這一下是說 修新建築的方法。",
+      "prevText": "不敬畏敬。",
+      "nextText": "我們通常因為，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這一下是說 修新建築的方法。",
+          "suggestedTerm": "心念住",
+          "reason": "「修新建築的方法」疑為「修心念住的方法」，「新建築」為「心念住」之誤，缺名相",
+          "promptHints": [
+            "心念住",
+            "四念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-013",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 60.93,
+      "end": 62.43,
+      "text": "慈苦未落。",
+      "prevText": "但是這裡。",
+      "nextText": "無額為火。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "慈苦未落。",
+          "suggestedTerm": "無常",
+          "reason": "「慈苦未落」疑為「受是苦、無常」等受念住內容，「未落」疑為「無常」或「苦惱」漏字，文義不通",
+          "promptHints": [
+            "受念住",
+            "苦"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-016",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 68.3,
+      "end": 70.8,
+      "text": "也包括在新建築裡面表。",
+      "prevText": "不敬為性。",
+      "nextText": "慈心,我們現前的靈敏的一念心。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "也包括在新建築裡面表。",
+          "suggestedTerm": "心念住",
+          "reason": "「新建築裡面表」疑為「心念住裡面」，缺名相「心念住」且句尾「表」疑為「說」漏字",
+          "promptHints": [
+            "心念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-023",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 104.25,
+      "end": 109.36,
+      "text": "還是還有失苦未落。",
+      "prevText": "是不止於此。",
+      "nextText": "實在是苦惱境界。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "還是還有失苦未落。",
+          "suggestedTerm": "受是苦",
+          "reason": "「還是還有失苦未落」疑為「還有受是苦、無常」等，缺實質名相，文義斷裂",
+          "promptHints": [
+            "受念住",
+            "苦"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-026",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 116.13,
+      "end": 120.54,
+      "text": "這本來是受念著。",
+      "prevText": "可是因為是快樂的，",
+      "nextText": "但是也包裹在新念著裡邊。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這本來是受念著。",
+          "suggestedTerm": "住",
+          "reason": "「這本來是受念著」疑為「受念住」，四念住名相後綴誤字",
+          "promptHints": [
+            "受念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-027",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 120.54,
+      "end": 124.12,
+      "text": "但是也包裹在新念著裡邊。",
+      "prevText": "這本來是受念著。",
+      "nextText": "因為苦惱是快樂。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "但是也包裹在新念著裡邊。",
+          "suggestedTerm": "心念住",
+          "reason": "「新念著」疑為「心念住」，名相錯誤缺正字",
+          "promptHints": [
+            "心念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-033",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 141.08,
+      "end": 144.08,
+      "text": "關法念著 關法無額。",
+      "prevText": "無額為我。",
+      "nextText": "也包裹在新念珠裡。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "關法念著 關法無額。",
+          "suggestedTerm": "觀法念住 觀法無我",
+          "reason": "「關法念著 關法無額」疑為「觀法念住、觀法無我」，缺「住」「我」等實質字",
+          "promptHints": [
+            "法念住",
+            "觀法無我"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-034",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 144.08,
+      "end": 146.51,
+      "text": "也包裹在新念珠裡。",
+      "prevText": "關法念著 關法無額。",
+      "nextText": "一切法都是無惡的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "也包裹在新念珠裡。",
+          "suggestedTerm": "心念住",
+          "reason": "「新念珠」疑為「心念住」，名相錯誤",
+          "promptHints": [
+            "心念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-039",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 159.06,
+      "end": 162.44,
+      "text": "這是身念 觀身不敬。",
+      "prevText": "此不敬未敬。",
+      "nextText": "也算在新念珠裡面。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這是身念 觀身不敬。",
+          "suggestedTerm": "身念住 觀身不淨",
+          "reason": "「這是身念 觀身不敬」疑為「身念住、觀身不淨」，缺「住」「淨」等實質字",
+          "promptHints": [
+            "身念住",
+            "觀身不淨"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-040",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 162.44,
+      "end": 165.54,
+      "text": "也算在新念珠裡面。",
+      "prevText": "這是身念 觀身不敬。",
+      "nextText": "因為只要不清靜。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "也算在新念珠裡面。",
+          "suggestedTerm": "心念住",
+          "reason": "「新念珠」疑為「心念住」，名相錯誤",
+          "promptHints": [
+            "心念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-045",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 173.22,
+      "end": 176.88,
+      "text": "本來這個生念珠。",
+      "prevText": "也是細膩。",
+      "nextText": "有別念珠 有種念珠。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "本來這個生念珠。",
+          "suggestedTerm": "身念住",
+          "reason": "「生念珠」疑為「身念住」，名相錯誤缺正字",
+          "promptHints": [
+            "身念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-046",
+      "paragraphId": "p-1",
+      "heading": "四念住總說",
+      "start": 176.88,
+      "end": 181.32,
+      "text": "有別念珠 有種念珠。",
+      "prevText": "本來這個生念珠。",
+      "nextText": "這裡就是等於說是總念住了。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "有別念珠 有種念珠。",
+          "suggestedTerm": "住",
+          "reason": "「有別念珠 有種念珠」疑為「有別念住、有總念住」，缺「住」字且「種」疑為「總」",
+          "promptHints": [
+            "別念住",
+            "總念住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-290",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1095.34,
+      "end": 1101.67,
+      "text": "這以下說這個心的無常經濟。",
+      "prevText": "飄忽不停如風一馬",
+      "nextText": "是心性肅轉。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這以下說這個心的無常經濟。",
+          "suggestedTerm": "經文",
+          "reason": "「心的無常經濟」語義不通，疑為「經文」或「經句」之誤／漏字",
+          "promptHints": [
+            "經文",
+            "經句"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-291",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1101.67,
+      "end": 1104.43,
+      "text": "是心性肅轉。",
+      "prevText": "這以下說這個心的無常經濟。",
+      "nextText": "這一念零零地寫這個心。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是心性肅轉。",
+          "suggestedTerm": "豎",
+          "reason": "「心性肅轉」疑為「心性豎轉」之誤，後文 seg-349 作「豎轉」可證",
+          "promptHints": [
+            "心性豎轉",
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-292",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1104.43,
+      "end": 1107.47,
+      "text": "這一念零零地寫這個心。",
+      "prevText": "是心性肅轉。",
+      "nextText": "它的體性。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這一念零零地寫這個心。",
+          "suggestedTerm": "了別",
+          "reason": "「零零地寫這個心」語義不通，疑漏「了別」等詞，應為描述心念了別之句",
+          "promptHints": [
+            "了別",
+            "一念心"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-295",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1112.77,
+      "end": 1116.01,
+      "text": "是如玄火輪那樣子。",
+      "prevText": "是很迅速地轉變。",
+      "nextText": "玄火輪是怎麼講的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是如玄火輪那樣子。",
+          "suggestedTerm": "旋",
+          "reason": "「玄火輪」疑為「旋火輪」之誤，後文 seg-349 作「旋火輪」可證",
+          "promptHints": [
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-300",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1127.11,
+      "end": 1130.22,
+      "text": "拿一支箱點著了它。",
+      "prevText": "所以我們拿著。",
+      "nextText": "你用手指轉。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "拿一支箱點著了它。",
+          "suggestedTerm": "香",
+          "reason": "「拿一支箱點著了它」疑為「拿一支香點著了它」之誤，缺「香」字",
+          "promptHints": [
+            "香",
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-317",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1164.01,
+      "end": 1166.21,
+      "text": "只是一暢落間的了別性。",
+      "prevText": "這表示我們這一念心。",
+      "nextText": "但是繼續不斷地這樣子。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "只是一暢落間的了別性。",
+          "suggestedTerm": "剎那",
+          "reason": "「一暢落間的了別性」疑為「一剎那間的了別性」之誤，缺「剎那」",
+          "promptHints": [
+            "剎那",
+            "了別性"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-320",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1172.01,
+      "end": 1175.37,
+      "text": "是常駐的。",
+      "prevText": "我們就感到這一念心。",
+      "nextText": "不感到的是暢落 長得生烈的，",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是常駐的。",
+          "suggestedTerm": "住",
+          "reason": "「是常駐的」疑為「是常住的」之誤，佛學名相作「常住」",
+          "promptHints": [
+            "常住",
+            "無常"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-321",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1175.37,
+      "end": 1179.77,
+      "text": "不感到的是暢落 長得生烈的，",
+      "prevText": "是常駐的。",
+      "nextText": "所以如無玄火輪。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "不感到的是暢落 長得生烈的，",
+          "suggestedTerm": "剎那剎那生滅",
+          "reason": "「不感到的是暢落 長得生烈的」語義混亂，疑為「不感覺到是剎那剎那生滅的」之誤",
+          "promptHints": [
+            "剎那",
+            "生滅"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-322",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1179.77,
+      "end": 1183.22,
+      "text": "所以如無玄火輪。",
+      "prevText": "不感到的是暢落 長得生烈的，",
+      "nextText": "那麼這個火輪只是一點而已。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以如無玄火輪。",
+          "suggestedTerm": "旋火輪",
+          "reason": "「如無玄火輪」疑為「如旋火輪」之誤，多「無」且「玄」誤",
+          "promptHints": [
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-325",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1190.74,
+      "end": 1193.54,
+      "text": "所以我們的一內心只是一剎諾而已。",
+      "prevText": "並不是輪。",
+      "nextText": "但是它相續地這樣子就感覺到。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以我們的一內心只是一剎諾而已。",
+          "suggestedTerm": "剎那",
+          "reason": "「一內心只是一剎諾而已」疑為「我們的內心只是一剎那而已」之誤，缺「的」且「剎諾」誤",
+          "promptHints": [
+            "剎那",
+            "一念心"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-327",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1195.9,
+      "end": 1199.1,
+      "text": "不感覺到是剎諾剎諾的。",
+      "prevText": "但是它相續地這樣子就感覺到。",
+      "nextText": "是這樣意思。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "不感覺到是剎諾剎諾的。",
+          "suggestedTerm": "剎那",
+          "reason": "「剎諾剎諾的」疑為「剎那剎那的」之誤",
+          "promptHints": [
+            "剎那"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-329",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1201.43,
+      "end": 1206.7,
+      "text": "是心性肅轉如玄火輪。",
+      "prevText": "是這樣意思。",
+      "nextText": "我們就容易誤會。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是心性肅轉如玄火輪。",
+          "suggestedTerm": "豎轉如旋火輪",
+          "reason": "「心性肅轉如玄火輪」疑為「心性豎轉如旋火輪」之誤",
+          "promptHints": [
+            "心性豎轉",
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-333",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1217.33,
+      "end": 1222.35,
+      "text": "心性肅轉如玄佛倫。",
+      "prevText": "容易這樣誤會。",
+      "nextText": "所以我們從這個波爾經上。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "心性肅轉如玄佛倫。",
+          "suggestedTerm": "豎轉如旋火輪",
+          "reason": "「心性肅轉如玄佛倫」疑為「心性豎轉如旋火輪」之誤",
+          "promptHints": [
+            "心性豎轉",
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-334",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1222.35,
+      "end": 1225.03,
+      "text": "所以我們從這個波爾經上。",
+      "prevText": "心性肅轉如玄佛倫。",
+      "nextText": "從這句話看起來。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以我們從這個波爾經上。",
+          "suggestedTerm": "般若經",
+          "reason": "「波爾經」疑為「般若經」之誤，缺正確名相",
+          "promptHints": [
+            "般若經",
+            "大般若經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-336",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1226.99,
+      "end": 1230.97,
+      "text": "和楞燕經完全不一樣。",
+      "prevText": "從這句話看起來。",
+      "nextText": "楞燕經在我們。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "和楞燕經完全不一樣。",
+          "suggestedTerm": "楞嚴經",
+          "reason": "「楞燕經」疑為「楞嚴經」之誤",
+          "promptHints": [
+            "楞嚴經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-337",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1230.97,
+      "end": 1233.19,
+      "text": "楞燕經在我們。",
+      "prevText": "和楞燕經完全不一樣。",
+      "nextText": "在佛教裡面很多人都不歡喜。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "楞燕經在我們。",
+          "suggestedTerm": "楞嚴經",
+          "reason": "「楞燕經」疑為「楞嚴經」之誤",
+          "promptHints": [
+            "楞嚴經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-338",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1233.19,
+      "end": 1236.88,
+      "text": "在佛教裡面很多人都不歡喜。",
+      "prevText": "楞燕經在我們。",
+      "nextText": "楞燕經一直地說心是常。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "在佛教裡面很多人都不歡喜。",
+          "suggestedTerm": "楞嚴經",
+          "reason": "「楞燕經」疑為「楞嚴經」之誤",
+          "promptHints": [
+            "楞嚴經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-339",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1236.88,
+      "end": 1241.38,
+      "text": "楞燕經一直地說心是常。",
+      "prevText": "在佛教裡面很多人都不歡喜。",
+      "nextText": "心是常。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "楞燕經一直地說心是常。",
+          "suggestedTerm": "楞嚴經",
+          "reason": "「楞燕經」疑為「楞嚴經」之誤",
+          "promptHints": [
+            "楞嚴經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-341",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1243.22,
+      "end": 1244.74,
+      "text": "不便義的，",
+      "prevText": "心是常。",
+      "nextText": "因此這樣。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "不便義的，",
+          "suggestedTerm": "不變",
+          "reason": "「不便義的」疑為「不變義的」之誤，缺正確字",
+          "promptHints": [
+            "不變",
+            "常住"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-344",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1247.42,
+      "end": 1250.42,
+      "text": "心性肅轉如玄佛倫。",
+      "prevText": "但是現在這裡。",
+      "nextText": "就表示它是差弄 差弄生命變化的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "心性肅轉如玄佛倫。",
+          "suggestedTerm": "豎轉如旋火輪",
+          "reason": "「心性肅轉如玄佛倫」疑為「心性豎轉如旋火輪」之誤",
+          "promptHints": [
+            "心性豎轉",
+            "旋火輪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-345",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1250.42,
+      "end": 1253.7,
+      "text": "就表示它是差弄 差弄生命變化的。",
+      "prevText": "心性肅轉如玄佛倫。",
+      "nextText": "不是常。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "就表示它是差弄 差弄生命變化的。",
+          "suggestedTerm": "剎那剎那",
+          "reason": "「差弄 差弄生命變化的」疑為「剎那剎那生命變化的」之誤",
+          "promptHints": [
+            "剎那",
+            "生滅"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-348",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1258.29,
+      "end": 1262.43,
+      "text": "欲未常住。",
+      "prevText": "此心無常。",
+      "nextText": "是心性豎轉如旋火輪。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "欲未常住。",
+          "suggestedTerm": "令",
+          "reason": "「欲未常住」疑為「欲令常住」之誤，缺正確字",
+          "promptHints": [
+            "欲令常住",
+            "無常"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-357",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1286.73,
+      "end": 1289.73,
+      "text": "飄洞 音也是那樣子。",
+      "prevText": "這風在虛空裡。",
+      "nextText": "飄洞。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "飄洞 音也是那樣子。",
+          "suggestedTerm": "動",
+          "reason": "「飄洞 音也是那樣子」疑為「飄動，它也是那樣子」之誤",
+          "promptHints": [
+            "飄動"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-360",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1292.73,
+      "end": 1299.54,
+      "text": "是飄忽不停如野馬。",
+      "prevText": "它一直是不能不停下來。",
+      "nextText": "這個野馬除在莊子上有這個名字。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "是飄忽不停如野馬。",
+          "suggestedTerm": "野馬",
+          "reason": "「如野馬」與前文 seg-350「如風」不一致，疑前文漏「野馬」或此句誤",
+          "promptHints": [
+            "野馬",
+            "陽焰"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-362",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1305.38,
+      "end": 1311.38,
+      "text": "就是別的地方也說是陽宴。",
+      "prevText": "這個野馬除在莊子上有這個名字。",
+      "nextText": "就是春夏之間,地面上就是一種濕氣。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "就是別的地方也說是陽宴。",
+          "suggestedTerm": "陽焰",
+          "reason": "「陽宴」疑為「陽焰」之誤，佛學名相作「陽焰」",
+          "promptHints": [
+            "陽焰",
+            "野馬"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-364",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1324.68,
+      "end": 1330.68,
+      "text": "太陽一照的時候,濕氣喪生,水蒸氣。",
+      "prevText": "就是春夏之間,地面上就是一種濕氣。",
+      "nextText": "我們遠遠的看著就像水似的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "太陽一照的時候,濕氣喪生,水蒸氣。",
+          "suggestedTerm": "上升",
+          "reason": "「濕氣喪生」疑為「濕氣上升」之誤",
+          "promptHints": [
+            "水蒸氣",
+            "上升"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-366",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1335.3,
+      "end": 1340.82,
+      "text": "而這個陽焰由太陽光的灶一蒸發。",
+      "prevText": "我們遠遠的看著就像水似的。",
+      "nextText": "加上它就飄動。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "而這個陽焰由太陽光的灶一蒸發。",
+          "suggestedTerm": "照",
+          "reason": "「太陽光的灶一蒸發」疑為「太陽光的一照一蒸發」之誤，缺正確字",
+          "promptHints": [
+            "太陽光",
+            "蒸發"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-369",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1347.46,
+      "end": 1350.36,
+      "text": "所以叫做揚焰。",
+      "prevText": "好像水在流動似的。",
+      "nextText": "說野馬這就表示馬在那裡跑的意思。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以叫做揚焰。",
+          "suggestedTerm": "陽焰",
+          "reason": "「揚焰」疑為「陽焰」之誤",
+          "promptHints": [
+            "陽焰"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-375",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1367.73,
+      "end": 1370.53,
+      "text": "飄乎不停如風。",
+      "prevText": "這樣比喻的境界。",
+      "nextText": "飄乎不停如野馬。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "飄乎不停如風。",
+          "suggestedTerm": "忽",
+          "reason": "「飄乎不停如風」疑為「飄忽不停如風」之誤",
+          "promptHints": [
+            "飄忽"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-376",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1370.53,
+      "end": 1373.23,
+      "text": "飄乎不停如野馬。",
+      "prevText": "飄乎不停如風。",
+      "nextText": "心的流動,像野馬似的,像羊艷似的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "飄乎不停如野馬。",
+          "suggestedTerm": "忽",
+          "reason": "「飄乎不停如野馬」疑為「飄忽不停如野馬」之誤",
+          "promptHints": [
+            "飄忽",
+            "野馬"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-377",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1373.23,
+      "end": 1379.86,
+      "text": "心的流動,像野馬似的,像羊艷似的。",
+      "prevText": "飄乎不停如野馬。",
+      "nextText": "如水瀑啟,如火能燒。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "心的流動,像野馬似的,像羊艷似的。",
+          "suggestedTerm": "陽焰",
+          "reason": "「羊艷」疑為「陽焰」之誤",
+          "promptHints": [
+            "陽焰"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-378",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1379.86,
+      "end": 1385.97,
+      "text": "如水瀑啟,如火能燒。",
+      "prevText": "心的流動,像野馬似的,像羊艷似的。",
+      "nextText": "心性的飄忽不停,如水瀑啟。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "如水瀑啟,如火能燒。",
+          "suggestedTerm": "瀑布",
+          "reason": "「如水瀑啟」疑為「如水瀑布」之誤，缺正確字",
+          "promptHints": [
+            "瀑布"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-379",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1385.97,
+      "end": 1391.97,
+      "text": "心性的飄忽不停,如水瀑啟。",
+      "prevText": "如水瀑啟,如火能燒。",
+      "nextText": "這個就是瀑布。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "心性的飄忽不停,如水瀑啟。",
+          "suggestedTerm": "瀑布",
+          "reason": "「如水瀑啟」疑為「如水瀑布」之誤",
+          "promptHints": [
+            "瀑布"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-383",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1401.86,
+      "end": 1405.87,
+      "text": "都叫做吐氣。",
+      "prevText": "一直地不停地在那裡流。",
+      "nextText": "就是這個心一直在那裡流動不停。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "都叫做吐氣。",
+          "suggestedTerm": "瀑流",
+          "reason": "「都叫做吐氣」疑為「都叫做瀑流」之誤，佛學名相作「瀑流」",
+          "promptHints": [
+            "瀑流",
+            "四瀑流"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-387",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1419.1,
+      "end": 1421.1,
+      "text": "煙燒 一直向前燒。",
+      "prevText": "像野火在那個大草原上。",
+      "nextText": "像心也一直在那分別一些。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "煙燒 一直向前燒。",
+          "suggestedTerm": "延燒",
+          "reason": "「煙燒 一直向前燒」疑為「延燒，一直向前燒」之誤",
+          "promptHints": [
+            "野火",
+            "延燒"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-388",
+      "paragraphId": "p-4",
+      "heading": "心性無常喻",
+      "start": 1421.6,
+      "end": 1424.1,
+      "text": "像心也一直在那分別一些。",
+      "prevText": "煙燒 一直向前燒。",
+      "nextText": "各式各樣的分別。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "像心也一直在那分別一些。",
+          "suggestedTerm": "這",
+          "reason": "「像心也一直在那分別一些」疑為「像這心也一直在那分別一些」之誤，缺「這」",
+          "promptHints": [
+            "心",
+            "分別"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-501",
+      "paragraphId": "p-5",
+      "heading": "觀心與調伏",
+      "start": 1803.15,
+      "end": 1805.5,
+      "text": "可能會難一點。",
+      "prevText": "第二個方法使您心不動。",
+      "nextText": "可能會難一點。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "可能會難一點。",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "觀心與調伏"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-502",
+      "paragraphId": "p-5",
+      "heading": "觀心與調伏",
+      "start": 1805.5,
+      "end": 1807.5,
+      "text": "可能會難一點。",
+      "prevText": "可能會難一點。",
+      "nextText": "但是我在想。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "可能會難一點。",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": [
+            "觀心與調伏"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-718",
+      "paragraphId": "p-6",
+      "heading": "法念住修習",
+      "start": 2464.82,
+      "end": 2468.82,
+      "text": "興森波爾波羅蜜多修法念著。",
+      "prevText": "天王 雲河 諸菩薩摩哈喀。",
+      "nextText": "前面說修心念著。",
+      "findings": [
+        {
+          "ruleId": "missing-paramita-prefix",
+          "severity": "medium",
+          "matchedText": "波羅蜜多",
+          "suggestedTerm": null,
+          "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+          "promptHints": [
+            "六度",
+            "布施、持戒、忍辱、精進、禪定、般若",
+            "般若波羅蜜多",
+            "法念住修習"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-738",
+      "paragraphId": "p-6",
+      "heading": "法念住修習",
+      "start": 2528.14,
+      "end": 2529.14,
+      "text": "布林 波羅蜜多。",
+      "prevText": "雲河 諸 菩薩 星神。",
+      "nextText": "修法念住,法念住要怎麼樣的學習呢?",
+      "findings": [
+        {
+          "ruleId": "missing-paramita-prefix",
+          "severity": "medium",
+          "matchedText": "波羅蜜多",
+          "suggestedTerm": null,
+          "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+          "promptHints": [
+            "六度",
+            "布施、持戒、忍辱、精進、禪定、般若",
+            "般若波羅蜜多",
+            "法念住修習"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1042",
+      "paragraphId": "p-6",
+      "heading": "法念住修習",
+      "start": 3502.3,
+      "end": 3511.3,
+      "text": "雲和諸菩薩莫沙 興森波爾波羅蜜多餘境紀念",
+      "prevText": "先從這裡開始。",
+      "nextText": "這前邊呢 是個別地說。",
+      "findings": [
+        {
+          "ruleId": "missing-paramita-prefix",
+          "severity": "medium",
+          "matchedText": "波羅蜜多",
+          "suggestedTerm": null,
+          "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+          "promptHints": [
+            "六度",
+            "布施、持戒、忍辱、精進、禪定、般若",
+            "般若波羅蜜多",
+            "法念住修習"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "seg-1047",
+      "paragraphId": "p-7",
+      "heading": "總念住與對治",
+      "start": 3524.82,
+      "end": 3529.23,
+      "text": "雲和諸菩薩莫沙 興森波爾波羅蜜多的時候，",
+      "prevText": "這底下就總數起來。",
+      "nextText": "在這個《深受新法》的境界上。",
+      "findings": [
+        {
+          "ruleId": "missing-paramita-prefix",
+          "severity": "medium",
+          "matchedText": "波羅蜜多",
+          "suggestedTerm": null,
+          "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+          "promptHints": [
+            "六度",
+            "布施、持戒、忍辱、精進、禪定、般若",
+            "般若波羅蜜多",
+            "總念住與對治"
+          ]
+        }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "windowId": "win-1",
+      "clipStart": 0,
+      "clipEnd": 14.36,
+      "clipDuration": 14.36,
+      "sentenceIds": [
+        "seg-001",
+        "seg-002",
+        "seg-003"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-001",
+          "text": "天王 人和諸菩薩摩沙。"
+        },
+        {
+          "id": "seg-002",
+          "text": "親身佛兒伯羅蜜多。"
+        },
+        {
+          "id": "seg-003",
+          "text": "修心念著。"
+        }
+      ],
+      "expectedTerms": [
+        "訶",
+        "波羅蜜多",
+        "住"
+      ],
+      "prompt": "菩薩摩訶薩、天王、波羅蜜多、觀身、四念住、心念住",
+      "items": [
+        {
+          "sentenceId": "seg-001",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 1.65,
+          "end": 6.62,
+          "text": "天王 人和諸菩薩摩沙。",
+          "prevText": "",
+          "nextText": "親身佛兒伯羅蜜多。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "天王 人和諸菩薩摩沙。",
+              "suggestedTerm": "訶",
+              "reason": "「菩薩摩沙」疑似「菩薩摩訶薩」漏「訶」字，且「人和」疑為「天王！云何菩薩」之類經文開頭，名相不完整",
+              "promptHints": [
+                "菩薩摩訶薩",
+                "天王"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-002",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 6.62,
+          "end": 9.62,
+          "text": "親身佛兒伯羅蜜多。",
+          "prevText": "天王 人和諸菩薩摩沙。",
+          "nextText": "修心念著。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "親身佛兒伯羅蜜多。",
+              "suggestedTerm": "波羅蜜多",
+              "reason": "「親身佛兒伯羅蜜多」明顯語音錯誤，疑為「觀身、佛、波羅蜜多」等名相，缺實質字詞",
+              "promptHints": [
+                "波羅蜜多",
+                "觀身"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-003",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 9.62,
+          "end": 12.36,
+          "text": "修心念著。",
+          "prevText": "親身佛兒伯羅蜜多。",
+          "nextText": "為此菩薩做事實惟。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "修心念著。",
+              "suggestedTerm": "住",
+              "reason": "「修心念著」疑為「修心念住」，四念住名相，ASR 將「住」誤為「著」，名相後綴缺正字",
+              "promptHints": [
+                "四念住",
+                "心念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 31.09,
+      "clipEnd": 43.47,
+      "clipDuration": 12.38,
+      "sentenceIds": [
+        "seg-009"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-009",
+          "text": "這一下是說 修新建築的方法。"
+        }
+      ],
+      "expectedTerms": [
+        "心念住"
+      ],
+      "prompt": "不敬畏敬。 心念住、四念住",
+      "items": [
+        {
+          "sentenceId": "seg-009",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 33.09,
+          "end": 41.47,
+          "text": "這一下是說 修新建築的方法。",
+          "prevText": "不敬畏敬。",
+          "nextText": "我們通常因為，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這一下是說 修新建築的方法。",
+              "suggestedTerm": "心念住",
+              "reason": "「修新建築的方法」疑為「修心念住的方法」，「新建築」為「心念住」之誤，缺名相",
+              "promptHints": [
+                "心念住",
+                "四念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 58.93,
+      "clipEnd": 64.43,
+      "clipDuration": 5.5,
+      "sentenceIds": [
+        "seg-013"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-013",
+          "text": "慈苦未落。"
+        }
+      ],
+      "expectedTerms": [
+        "無常"
+      ],
+      "prompt": "但是這裡。 受念住、苦",
+      "items": [
+        {
+          "sentenceId": "seg-013",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 60.93,
+          "end": 62.43,
+          "text": "慈苦未落。",
+          "prevText": "但是這裡。",
+          "nextText": "無額為火。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "慈苦未落。",
+              "suggestedTerm": "無常",
+              "reason": "「慈苦未落」疑為「受是苦、無常」等受念住內容，「未落」疑為「無常」或「苦惱」漏字，文義不通",
+              "promptHints": [
+                "受念住",
+                "苦"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 66.3,
+      "clipEnd": 72.8,
+      "clipDuration": 6.5,
+      "sentenceIds": [
+        "seg-016"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-016",
+          "text": "也包括在新建築裡面表。"
+        }
+      ],
+      "expectedTerms": [
+        "心念住"
+      ],
+      "prompt": "不敬為性。 心念住",
+      "items": [
+        {
+          "sentenceId": "seg-016",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 68.3,
+          "end": 70.8,
+          "text": "也包括在新建築裡面表。",
+          "prevText": "不敬為性。",
+          "nextText": "慈心,我們現前的靈敏的一念心。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "也包括在新建築裡面表。",
+              "suggestedTerm": "心念住",
+              "reason": "「新建築裡面表」疑為「心念住裡面」，缺名相「心念住」且句尾「表」疑為「說」漏字",
+              "promptHints": [
+                "心念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 102.25,
+      "clipEnd": 111.36,
+      "clipDuration": 9.11,
+      "sentenceIds": [
+        "seg-023"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-023",
+          "text": "還是還有失苦未落。"
+        }
+      ],
+      "expectedTerms": [
+        "受是苦"
+      ],
+      "prompt": "是不止於此。 受念住、苦",
+      "items": [
+        {
+          "sentenceId": "seg-023",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 104.25,
+          "end": 109.36,
+          "text": "還是還有失苦未落。",
+          "prevText": "是不止於此。",
+          "nextText": "實在是苦惱境界。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "還是還有失苦未落。",
+              "suggestedTerm": "受是苦",
+              "reason": "「還是還有失苦未落」疑為「還有受是苦、無常」等，缺實質名相，文義斷裂",
+              "promptHints": [
+                "受念住",
+                "苦"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 114.13,
+      "clipEnd": 126.12,
+      "clipDuration": 11.99,
+      "sentenceIds": [
+        "seg-026",
+        "seg-027"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-026",
+          "text": "這本來是受念著。"
+        },
+        {
+          "id": "seg-027",
+          "text": "但是也包裹在新念著裡邊。"
+        }
+      ],
+      "expectedTerms": [
+        "住",
+        "心念住"
+      ],
+      "prompt": "可是因為是快樂的， 受念住、心念住",
+      "items": [
+        {
+          "sentenceId": "seg-026",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 116.13,
+          "end": 120.54,
+          "text": "這本來是受念著。",
+          "prevText": "可是因為是快樂的，",
+          "nextText": "但是也包裹在新念著裡邊。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這本來是受念著。",
+              "suggestedTerm": "住",
+              "reason": "「這本來是受念著」疑為「受念住」，四念住名相後綴誤字",
+              "promptHints": [
+                "受念住"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-027",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 120.54,
+          "end": 124.12,
+          "text": "但是也包裹在新念著裡邊。",
+          "prevText": "這本來是受念著。",
+          "nextText": "因為苦惱是快樂。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "但是也包裹在新念著裡邊。",
+              "suggestedTerm": "心念住",
+              "reason": "「新念著」疑為「心念住」，名相錯誤缺正字",
+              "promptHints": [
+                "心念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 139.08,
+      "clipEnd": 148.51,
+      "clipDuration": 9.43,
+      "sentenceIds": [
+        "seg-033",
+        "seg-034"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-033",
+          "text": "關法念著 關法無額。"
+        },
+        {
+          "id": "seg-034",
+          "text": "也包裹在新念珠裡。"
+        }
+      ],
+      "expectedTerms": [
+        "觀法念住 觀法無我",
+        "心念住"
+      ],
+      "prompt": "無額為我。 法念住、觀法無我、心念住",
+      "items": [
+        {
+          "sentenceId": "seg-033",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 141.08,
+          "end": 144.08,
+          "text": "關法念著 關法無額。",
+          "prevText": "無額為我。",
+          "nextText": "也包裹在新念珠裡。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "關法念著 關法無額。",
+              "suggestedTerm": "觀法念住 觀法無我",
+              "reason": "「關法念著 關法無額」疑為「觀法念住、觀法無我」，缺「住」「我」等實質字",
+              "promptHints": [
+                "法念住",
+                "觀法無我"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-034",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 144.08,
+          "end": 146.51,
+          "text": "也包裹在新念珠裡。",
+          "prevText": "關法念著 關法無額。",
+          "nextText": "一切法都是無惡的。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "也包裹在新念珠裡。",
+              "suggestedTerm": "心念住",
+              "reason": "「新念珠」疑為「心念住」，名相錯誤",
+              "promptHints": [
+                "心念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 157.06,
+      "clipEnd": 167.54,
+      "clipDuration": 10.48,
+      "sentenceIds": [
+        "seg-039",
+        "seg-040"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-039",
+          "text": "這是身念 觀身不敬。"
+        },
+        {
+          "id": "seg-040",
+          "text": "也算在新念珠裡面。"
+        }
+      ],
+      "expectedTerms": [
+        "身念住 觀身不淨",
+        "心念住"
+      ],
+      "prompt": "此不敬未敬。 身念住、觀身不淨、心念住",
+      "items": [
+        {
+          "sentenceId": "seg-039",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 159.06,
+          "end": 162.44,
+          "text": "這是身念 觀身不敬。",
+          "prevText": "此不敬未敬。",
+          "nextText": "也算在新念珠裡面。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這是身念 觀身不敬。",
+              "suggestedTerm": "身念住 觀身不淨",
+              "reason": "「這是身念 觀身不敬」疑為「身念住、觀身不淨」，缺「住」「淨」等實質字",
+              "promptHints": [
+                "身念住",
+                "觀身不淨"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-040",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 162.44,
+          "end": 165.54,
+          "text": "也算在新念珠裡面。",
+          "prevText": "這是身念 觀身不敬。",
+          "nextText": "因為只要不清靜。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "也算在新念珠裡面。",
+              "suggestedTerm": "心念住",
+              "reason": "「新念珠」疑為「心念住」，名相錯誤",
+              "promptHints": [
+                "心念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 171.22,
+      "clipEnd": 183.32,
+      "clipDuration": 12.1,
+      "sentenceIds": [
+        "seg-045",
+        "seg-046"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-045",
+          "text": "本來這個生念珠。"
+        },
+        {
+          "id": "seg-046",
+          "text": "有別念珠 有種念珠。"
+        }
+      ],
+      "expectedTerms": [
+        "身念住",
+        "住"
+      ],
+      "prompt": "也是細膩。 身念住、別念住、總念住",
+      "items": [
+        {
+          "sentenceId": "seg-045",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 173.22,
+          "end": 176.88,
+          "text": "本來這個生念珠。",
+          "prevText": "也是細膩。",
+          "nextText": "有別念珠 有種念珠。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "本來這個生念珠。",
+              "suggestedTerm": "身念住",
+              "reason": "「生念珠」疑為「身念住」，名相錯誤缺正字",
+              "promptHints": [
+                "身念住"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-046",
+          "paragraphId": "p-1",
+          "heading": "四念住總說",
+          "start": 176.88,
+          "end": 181.32,
+          "text": "有別念珠 有種念珠。",
+          "prevText": "本來這個生念珠。",
+          "nextText": "這裡就是等於說是總念住了。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "有別念珠 有種念珠。",
+              "suggestedTerm": "住",
+              "reason": "「有別念珠 有種念珠」疑為「有別念住、有總念住」，缺「住」字且「種」疑為「總」",
+              "promptHints": [
+                "別念住",
+                "總念住"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 1093.34,
+      "clipEnd": 1109.47,
+      "clipDuration": 16.13,
+      "sentenceIds": [
+        "seg-290",
+        "seg-291",
+        "seg-292"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-290",
+          "text": "這以下說這個心的無常經濟。"
+        },
+        {
+          "id": "seg-291",
+          "text": "是心性肅轉。"
+        },
+        {
+          "id": "seg-292",
+          "text": "這一念零零地寫這個心。"
+        }
+      ],
+      "expectedTerms": [
+        "經文",
+        "豎",
+        "了別"
+      ],
+      "prompt": "飄忽不停如風一馬 經文、經句、心性豎轉、旋火輪、了別、一念心",
+      "items": [
+        {
+          "sentenceId": "seg-290",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1095.34,
+          "end": 1101.67,
+          "text": "這以下說這個心的無常經濟。",
+          "prevText": "飄忽不停如風一馬",
+          "nextText": "是心性肅轉。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這以下說這個心的無常經濟。",
+              "suggestedTerm": "經文",
+              "reason": "「心的無常經濟」語義不通，疑為「經文」或「經句」之誤／漏字",
+              "promptHints": [
+                "經文",
+                "經句"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-291",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1101.67,
+          "end": 1104.43,
+          "text": "是心性肅轉。",
+          "prevText": "這以下說這個心的無常經濟。",
+          "nextText": "這一念零零地寫這個心。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是心性肅轉。",
+              "suggestedTerm": "豎",
+              "reason": "「心性肅轉」疑為「心性豎轉」之誤，後文 seg-349 作「豎轉」可證",
+              "promptHints": [
+                "心性豎轉",
+                "旋火輪"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-292",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1104.43,
+          "end": 1107.47,
+          "text": "這一念零零地寫這個心。",
+          "prevText": "是心性肅轉。",
+          "nextText": "它的體性。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "這一念零零地寫這個心。",
+              "suggestedTerm": "了別",
+              "reason": "「零零地寫這個心」語義不通，疑漏「了別」等詞，應為描述心念了別之句",
+              "promptHints": [
+                "了別",
+                "一念心"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1110.77,
+      "clipEnd": 1118.01,
+      "clipDuration": 7.24,
+      "sentenceIds": [
+        "seg-295"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-295",
+          "text": "是如玄火輪那樣子。"
+        }
+      ],
+      "expectedTerms": [
+        "旋"
+      ],
+      "prompt": "是很迅速地轉變。 旋火輪",
+      "items": [
+        {
+          "sentenceId": "seg-295",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1112.77,
+          "end": 1116.01,
+          "text": "是如玄火輪那樣子。",
+          "prevText": "是很迅速地轉變。",
+          "nextText": "玄火輪是怎麼講的。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是如玄火輪那樣子。",
+              "suggestedTerm": "旋",
+              "reason": "「玄火輪」疑為「旋火輪」之誤，後文 seg-349 作「旋火輪」可證",
+              "promptHints": [
+                "旋火輪"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 1125.11,
+      "clipEnd": 1132.22,
+      "clipDuration": 7.11,
+      "sentenceIds": [
+        "seg-300"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-300",
+          "text": "拿一支箱點著了它。"
+        }
+      ],
+      "expectedTerms": [
+        "香"
+      ],
+      "prompt": "所以我們拿著。 香、旋火輪",
+      "items": [
+        {
+          "sentenceId": "seg-300",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1127.11,
+          "end": 1130.22,
+          "text": "拿一支箱點著了它。",
+          "prevText": "所以我們拿著。",
+          "nextText": "你用手指轉。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "拿一支箱點著了它。",
+              "suggestedTerm": "香",
+              "reason": "「拿一支箱點著了它」疑為「拿一支香點著了它」之誤，缺「香」字",
+              "promptHints": [
+                "香",
+                "旋火輪"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-13",
+      "clipStart": 1162.01,
+      "clipEnd": 1168.21,
+      "clipDuration": 6.2,
+      "sentenceIds": [
+        "seg-317"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-317",
+          "text": "只是一暢落間的了別性。"
+        }
+      ],
+      "expectedTerms": [
+        "剎那"
+      ],
+      "prompt": "這表示我們這一念心。 剎那、了別性",
+      "items": [
+        {
+          "sentenceId": "seg-317",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1164.01,
+          "end": 1166.21,
+          "text": "只是一暢落間的了別性。",
+          "prevText": "這表示我們這一念心。",
+          "nextText": "但是繼續不斷地這樣子。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "只是一暢落間的了別性。",
+              "suggestedTerm": "剎那",
+              "reason": "「一暢落間的了別性」疑為「一剎那間的了別性」之誤，缺「剎那」",
+              "promptHints": [
+                "剎那",
+                "了別性"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-14",
+      "clipStart": 1170.01,
+      "clipEnd": 1185.22,
+      "clipDuration": 15.21,
+      "sentenceIds": [
+        "seg-320",
+        "seg-321",
+        "seg-322"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-320",
+          "text": "是常駐的。"
+        },
+        {
+          "id": "seg-321",
+          "text": "不感到的是暢落 長得生烈的，"
+        },
+        {
+          "id": "seg-322",
+          "text": "所以如無玄火輪。"
+        }
+      ],
+      "expectedTerms": [
+        "住",
+        "剎那剎那生滅",
+        "旋火輪"
+      ],
+      "prompt": "我們就感到這一念心。 常住、無常、剎那、生滅、旋火輪",
+      "items": [
+        {
+          "sentenceId": "seg-320",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1172.01,
+          "end": 1175.37,
+          "text": "是常駐的。",
+          "prevText": "我們就感到這一念心。",
+          "nextText": "不感到的是暢落 長得生烈的，",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是常駐的。",
+              "suggestedTerm": "住",
+              "reason": "「是常駐的」疑為「是常住的」之誤，佛學名相作「常住」",
+              "promptHints": [
+                "常住",
+                "無常"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-321",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1175.37,
+          "end": 1179.77,
+          "text": "不感到的是暢落 長得生烈的，",
+          "prevText": "是常駐的。",
+          "nextText": "所以如無玄火輪。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "不感到的是暢落 長得生烈的，",
+              "suggestedTerm": "剎那剎那生滅",
+              "reason": "「不感到的是暢落 長得生烈的」語義混亂，疑為「不感覺到是剎那剎那生滅的」之誤",
+              "promptHints": [
+                "剎那",
+                "生滅"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-322",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1179.77,
+          "end": 1183.22,
+          "text": "所以如無玄火輪。",
+          "prevText": "不感到的是暢落 長得生烈的，",
+          "nextText": "那麼這個火輪只是一點而已。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以如無玄火輪。",
+              "suggestedTerm": "旋火輪",
+              "reason": "「如無玄火輪」疑為「如旋火輪」之誤，多「無」且「玄」誤",
+              "promptHints": [
+                "旋火輪"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-15",
+      "clipStart": 1188.74,
+      "clipEnd": 1208.7,
+      "clipDuration": 19.96,
+      "sentenceIds": [
+        "seg-325",
+        "seg-327",
+        "seg-329"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-325",
+          "text": "所以我們的一內心只是一剎諾而已。"
+        },
+        {
+          "id": "seg-327",
+          "text": "不感覺到是剎諾剎諾的。"
+        },
+        {
+          "id": "seg-329",
+          "text": "是心性肅轉如玄火輪。"
+        }
+      ],
+      "expectedTerms": [
+        "剎那",
+        "豎轉如旋火輪"
+      ],
+      "prompt": "並不是輪。 剎那、一念心、心性豎轉、旋火輪",
+      "items": [
+        {
+          "sentenceId": "seg-325",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1190.74,
+          "end": 1193.54,
+          "text": "所以我們的一內心只是一剎諾而已。",
+          "prevText": "並不是輪。",
+          "nextText": "但是它相續地這樣子就感覺到。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以我們的一內心只是一剎諾而已。",
+              "suggestedTerm": "剎那",
+              "reason": "「一內心只是一剎諾而已」疑為「我們的內心只是一剎那而已」之誤，缺「的」且「剎諾」誤",
+              "promptHints": [
+                "剎那",
+                "一念心"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-327",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1195.9,
+          "end": 1199.1,
+          "text": "不感覺到是剎諾剎諾的。",
+          "prevText": "但是它相續地這樣子就感覺到。",
+          "nextText": "是這樣意思。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "不感覺到是剎諾剎諾的。",
+              "suggestedTerm": "剎那",
+              "reason": "「剎諾剎諾的」疑為「剎那剎那的」之誤",
+              "promptHints": [
+                "剎那"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-329",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1201.43,
+          "end": 1206.7,
+          "text": "是心性肅轉如玄火輪。",
+          "prevText": "是這樣意思。",
+          "nextText": "我們就容易誤會。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是心性肅轉如玄火輪。",
+              "suggestedTerm": "豎轉如旋火輪",
+              "reason": "「心性肅轉如玄火輪」疑為「心性豎轉如旋火輪」之誤",
+              "promptHints": [
+                "心性豎轉",
+                "旋火輪"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-16",
+      "clipStart": 1215.33,
+      "clipEnd": 1255.7,
+      "clipDuration": 40.37,
+      "sentenceIds": [
+        "seg-333",
+        "seg-334",
+        "seg-336",
+        "seg-337",
+        "seg-338",
+        "seg-339",
+        "seg-341",
+        "seg-344",
+        "seg-345"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-333",
+          "text": "心性肅轉如玄佛倫。"
+        },
+        {
+          "id": "seg-334",
+          "text": "所以我們從這個波爾經上。"
+        },
+        {
+          "id": "seg-336",
+          "text": "和楞燕經完全不一樣。"
+        },
+        {
+          "id": "seg-337",
+          "text": "楞燕經在我們。"
+        },
+        {
+          "id": "seg-338",
+          "text": "在佛教裡面很多人都不歡喜。"
+        },
+        {
+          "id": "seg-339",
+          "text": "楞燕經一直地說心是常。"
+        },
+        {
+          "id": "seg-341",
+          "text": "不便義的，"
+        },
+        {
+          "id": "seg-344",
+          "text": "心性肅轉如玄佛倫。"
+        },
+        {
+          "id": "seg-345",
+          "text": "就表示它是差弄 差弄生命變化的。"
+        }
+      ],
+      "expectedTerms": [
+        "豎轉如旋火輪",
+        "般若經",
+        "楞嚴經",
+        "不變",
+        "剎那剎那"
+      ],
+      "prompt": "容易這樣誤會。 心性豎轉、旋火輪、般若經、大般若經、楞嚴經、不變、常住、剎那、生滅",
+      "items": [
+        {
+          "sentenceId": "seg-333",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1217.33,
+          "end": 1222.35,
+          "text": "心性肅轉如玄佛倫。",
+          "prevText": "容易這樣誤會。",
+          "nextText": "所以我們從這個波爾經上。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "心性肅轉如玄佛倫。",
+              "suggestedTerm": "豎轉如旋火輪",
+              "reason": "「心性肅轉如玄佛倫」疑為「心性豎轉如旋火輪」之誤",
+              "promptHints": [
+                "心性豎轉",
+                "旋火輪"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-334",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1222.35,
+          "end": 1225.03,
+          "text": "所以我們從這個波爾經上。",
+          "prevText": "心性肅轉如玄佛倫。",
+          "nextText": "從這句話看起來。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以我們從這個波爾經上。",
+              "suggestedTerm": "般若經",
+              "reason": "「波爾經」疑為「般若經」之誤，缺正確名相",
+              "promptHints": [
+                "般若經",
+                "大般若經"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-336",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1226.99,
+          "end": 1230.97,
+          "text": "和楞燕經完全不一樣。",
+          "prevText": "從這句話看起來。",
+          "nextText": "楞燕經在我們。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "和楞燕經完全不一樣。",
+              "suggestedTerm": "楞嚴經",
+              "reason": "「楞燕經」疑為「楞嚴經」之誤",
+              "promptHints": [
+                "楞嚴經"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-337",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1230.97,
+          "end": 1233.19,
+          "text": "楞燕經在我們。",
+          "prevText": "和楞燕經完全不一樣。",
+          "nextText": "在佛教裡面很多人都不歡喜。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "楞燕經在我們。",
+              "suggestedTerm": "楞嚴經",
+              "reason": "「楞燕經」疑為「楞嚴經」之誤",
+              "promptHints": [
+                "楞嚴經"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-338",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1233.19,
+          "end": 1236.88,
+          "text": "在佛教裡面很多人都不歡喜。",
+          "prevText": "楞燕經在我們。",
+          "nextText": "楞燕經一直地說心是常。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "在佛教裡面很多人都不歡喜。",
+              "suggestedTerm": "楞嚴經",
+              "reason": "「楞燕經」疑為「楞嚴經」之誤",
+              "promptHints": [
+                "楞嚴經"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-339",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1236.88,
+          "end": 1241.38,
+          "text": "楞燕經一直地說心是常。",
+          "prevText": "在佛教裡面很多人都不歡喜。",
+          "nextText": "心是常。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "楞燕經一直地說心是常。",
+              "suggestedTerm": "楞嚴經",
+              "reason": "「楞燕經」疑為「楞嚴經」之誤",
+              "promptHints": [
+                "楞嚴經"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-341",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1243.22,
+          "end": 1244.74,
+          "text": "不便義的，",
+          "prevText": "心是常。",
+          "nextText": "因此這樣。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "不便義的，",
+              "suggestedTerm": "不變",
+              "reason": "「不便義的」疑為「不變義的」之誤，缺正確字",
+              "promptHints": [
+                "不變",
+                "常住"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-344",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1247.42,
+          "end": 1250.42,
+          "text": "心性肅轉如玄佛倫。",
+          "prevText": "但是現在這裡。",
+          "nextText": "就表示它是差弄 差弄生命變化的。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "心性肅轉如玄佛倫。",
+              "suggestedTerm": "豎轉如旋火輪",
+              "reason": "「心性肅轉如玄佛倫」疑為「心性豎轉如旋火輪」之誤",
+              "promptHints": [
+                "心性豎轉",
+                "旋火輪"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-345",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1250.42,
+          "end": 1253.7,
+          "text": "就表示它是差弄 差弄生命變化的。",
+          "prevText": "心性肅轉如玄佛倫。",
+          "nextText": "不是常。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "就表示它是差弄 差弄生命變化的。",
+              "suggestedTerm": "剎那剎那",
+              "reason": "「差弄 差弄生命變化的」疑為「剎那剎那生命變化的」之誤",
+              "promptHints": [
+                "剎那",
+                "生滅"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-17",
+      "clipStart": 1256.29,
+      "clipEnd": 1264.43,
+      "clipDuration": 8.14,
+      "sentenceIds": [
+        "seg-348"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-348",
+          "text": "欲未常住。"
+        }
+      ],
+      "expectedTerms": [
+        "令"
+      ],
+      "prompt": "此心無常。 欲令常住、無常",
+      "items": [
+        {
+          "sentenceId": "seg-348",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1258.29,
+          "end": 1262.43,
+          "text": "欲未常住。",
+          "prevText": "此心無常。",
+          "nextText": "是心性豎轉如旋火輪。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "欲未常住。",
+              "suggestedTerm": "令",
+              "reason": "「欲未常住」疑為「欲令常住」之誤，缺正確字",
+              "promptHints": [
+                "欲令常住",
+                "無常"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-18",
+      "clipStart": 1284.73,
+      "clipEnd": 1301.54,
+      "clipDuration": 16.81,
+      "sentenceIds": [
+        "seg-357",
+        "seg-360"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-357",
+          "text": "飄洞 音也是那樣子。"
+        },
+        {
+          "id": "seg-360",
+          "text": "是飄忽不停如野馬。"
+        }
+      ],
+      "expectedTerms": [
+        "動",
+        "野馬"
+      ],
+      "prompt": "這風在虛空裡。 飄動、野馬、陽焰",
+      "items": [
+        {
+          "sentenceId": "seg-357",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1286.73,
+          "end": 1289.73,
+          "text": "飄洞 音也是那樣子。",
+          "prevText": "這風在虛空裡。",
+          "nextText": "飄洞。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "飄洞 音也是那樣子。",
+              "suggestedTerm": "動",
+              "reason": "「飄洞 音也是那樣子」疑為「飄動，它也是那樣子」之誤",
+              "promptHints": [
+                "飄動"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-360",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1292.73,
+          "end": 1299.54,
+          "text": "是飄忽不停如野馬。",
+          "prevText": "它一直是不能不停下來。",
+          "nextText": "這個野馬除在莊子上有這個名字。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "是飄忽不停如野馬。",
+              "suggestedTerm": "野馬",
+              "reason": "「如野馬」與前文 seg-350「如風」不一致，疑前文漏「野馬」或此句誤",
+              "promptHints": [
+                "野馬",
+                "陽焰"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-19",
+      "clipStart": 1303.38,
+      "clipEnd": 1313.38,
+      "clipDuration": 10,
+      "sentenceIds": [
+        "seg-362"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-362",
+          "text": "就是別的地方也說是陽宴。"
+        }
+      ],
+      "expectedTerms": [
+        "陽焰"
+      ],
+      "prompt": "這個野馬除在莊子上有這個名字。 陽焰、野馬",
+      "items": [
+        {
+          "sentenceId": "seg-362",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1305.38,
+          "end": 1311.38,
+          "text": "就是別的地方也說是陽宴。",
+          "prevText": "這個野馬除在莊子上有這個名字。",
+          "nextText": "就是春夏之間,地面上就是一種濕氣。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "就是別的地方也說是陽宴。",
+              "suggestedTerm": "陽焰",
+              "reason": "「陽宴」疑為「陽焰」之誤，佛學名相作「陽焰」",
+              "promptHints": [
+                "陽焰",
+                "野馬"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-20",
+      "clipStart": 1322.68,
+      "clipEnd": 1332.68,
+      "clipDuration": 10,
+      "sentenceIds": [
+        "seg-364"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-364",
+          "text": "太陽一照的時候,濕氣喪生,水蒸氣。"
+        }
+      ],
+      "expectedTerms": [
+        "上升"
+      ],
+      "prompt": "就是春夏之間,地面上就是一種濕氣。 水蒸氣、上升",
+      "items": [
+        {
+          "sentenceId": "seg-364",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1324.68,
+          "end": 1330.68,
+          "text": "太陽一照的時候,濕氣喪生,水蒸氣。",
+          "prevText": "就是春夏之間,地面上就是一種濕氣。",
+          "nextText": "我們遠遠的看著就像水似的。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "太陽一照的時候,濕氣喪生,水蒸氣。",
+              "suggestedTerm": "上升",
+              "reason": "「濕氣喪生」疑為「濕氣上升」之誤",
+              "promptHints": [
+                "水蒸氣",
+                "上升"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-21",
+      "clipStart": 1333.3,
+      "clipEnd": 1342.82,
+      "clipDuration": 9.52,
+      "sentenceIds": [
+        "seg-366"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-366",
+          "text": "而這個陽焰由太陽光的灶一蒸發。"
+        }
+      ],
+      "expectedTerms": [
+        "照"
+      ],
+      "prompt": "我們遠遠的看著就像水似的。 太陽光、蒸發",
+      "items": [
+        {
+          "sentenceId": "seg-366",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1335.3,
+          "end": 1340.82,
+          "text": "而這個陽焰由太陽光的灶一蒸發。",
+          "prevText": "我們遠遠的看著就像水似的。",
+          "nextText": "加上它就飄動。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "而這個陽焰由太陽光的灶一蒸發。",
+              "suggestedTerm": "照",
+              "reason": "「太陽光的灶一蒸發」疑為「太陽光的一照一蒸發」之誤，缺正確字",
+              "promptHints": [
+                "太陽光",
+                "蒸發"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-22",
+      "clipStart": 1345.46,
+      "clipEnd": 1352.36,
+      "clipDuration": 6.9,
+      "sentenceIds": [
+        "seg-369"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-369",
+          "text": "所以叫做揚焰。"
+        }
+      ],
+      "expectedTerms": [
+        "陽焰"
+      ],
+      "prompt": "好像水在流動似的。 陽焰",
+      "items": [
+        {
+          "sentenceId": "seg-369",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1347.46,
+          "end": 1350.36,
+          "text": "所以叫做揚焰。",
+          "prevText": "好像水在流動似的。",
+          "nextText": "說野馬這就表示馬在那裡跑的意思。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "所以叫做揚焰。",
+              "suggestedTerm": "陽焰",
+              "reason": "「揚焰」疑為「陽焰」之誤",
+              "promptHints": [
+                "陽焰"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-23",
+      "clipStart": 1365.73,
+      "clipEnd": 1393.97,
+      "clipDuration": 28.24,
+      "sentenceIds": [
+        "seg-375",
+        "seg-376",
+        "seg-377",
+        "seg-378",
+        "seg-379"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-375",
+          "text": "飄乎不停如風。"
+        },
+        {
+          "id": "seg-376",
+          "text": "飄乎不停如野馬。"
+        },
+        {
+          "id": "seg-377",
+          "text": "心的流動,像野馬似的,像羊艷似的。"
+        },
+        {
+          "id": "seg-378",
+          "text": "如水瀑啟,如火能燒。"
+        },
+        {
+          "id": "seg-379",
+          "text": "心性的飄忽不停,如水瀑啟。"
+        }
+      ],
+      "expectedTerms": [
+        "忽",
+        "陽焰",
+        "瀑布"
+      ],
+      "prompt": "這樣比喻的境界。 飄忽、野馬、陽焰、瀑布",
+      "items": [
+        {
+          "sentenceId": "seg-375",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1367.73,
+          "end": 1370.53,
+          "text": "飄乎不停如風。",
+          "prevText": "這樣比喻的境界。",
+          "nextText": "飄乎不停如野馬。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "飄乎不停如風。",
+              "suggestedTerm": "忽",
+              "reason": "「飄乎不停如風」疑為「飄忽不停如風」之誤",
+              "promptHints": [
+                "飄忽"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-376",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1370.53,
+          "end": 1373.23,
+          "text": "飄乎不停如野馬。",
+          "prevText": "飄乎不停如風。",
+          "nextText": "心的流動,像野馬似的,像羊艷似的。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "飄乎不停如野馬。",
+              "suggestedTerm": "忽",
+              "reason": "「飄乎不停如野馬」疑為「飄忽不停如野馬」之誤",
+              "promptHints": [
+                "飄忽",
+                "野馬"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-377",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1373.23,
+          "end": 1379.86,
+          "text": "心的流動,像野馬似的,像羊艷似的。",
+          "prevText": "飄乎不停如野馬。",
+          "nextText": "如水瀑啟,如火能燒。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "心的流動,像野馬似的,像羊艷似的。",
+              "suggestedTerm": "陽焰",
+              "reason": "「羊艷」疑為「陽焰」之誤",
+              "promptHints": [
+                "陽焰"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-378",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1379.86,
+          "end": 1385.97,
+          "text": "如水瀑啟,如火能燒。",
+          "prevText": "心的流動,像野馬似的,像羊艷似的。",
+          "nextText": "心性的飄忽不停,如水瀑啟。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "如水瀑啟,如火能燒。",
+              "suggestedTerm": "瀑布",
+              "reason": "「如水瀑啟」疑為「如水瀑布」之誤，缺正確字",
+              "promptHints": [
+                "瀑布"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-379",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1385.97,
+          "end": 1391.97,
+          "text": "心性的飄忽不停,如水瀑啟。",
+          "prevText": "如水瀑啟,如火能燒。",
+          "nextText": "這個就是瀑布。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "心性的飄忽不停,如水瀑啟。",
+              "suggestedTerm": "瀑布",
+              "reason": "「如水瀑啟」疑為「如水瀑布」之誤",
+              "promptHints": [
+                "瀑布"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-24",
+      "clipStart": 1399.86,
+      "clipEnd": 1407.87,
+      "clipDuration": 8.01,
+      "sentenceIds": [
+        "seg-383"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-383",
+          "text": "都叫做吐氣。"
+        }
+      ],
+      "expectedTerms": [
+        "瀑流"
+      ],
+      "prompt": "一直地不停地在那裡流。 瀑流、四瀑流",
+      "items": [
+        {
+          "sentenceId": "seg-383",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1401.86,
+          "end": 1405.87,
+          "text": "都叫做吐氣。",
+          "prevText": "一直地不停地在那裡流。",
+          "nextText": "就是這個心一直在那裡流動不停。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "都叫做吐氣。",
+              "suggestedTerm": "瀑流",
+              "reason": "「都叫做吐氣」疑為「都叫做瀑流」之誤，佛學名相作「瀑流」",
+              "promptHints": [
+                "瀑流",
+                "四瀑流"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-25",
+      "clipStart": 1417.1,
+      "clipEnd": 1426.1,
+      "clipDuration": 9,
+      "sentenceIds": [
+        "seg-387",
+        "seg-388"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-387",
+          "text": "煙燒 一直向前燒。"
+        },
+        {
+          "id": "seg-388",
+          "text": "像心也一直在那分別一些。"
+        }
+      ],
+      "expectedTerms": [
+        "延燒",
+        "這"
+      ],
+      "prompt": "像野火在那個大草原上。 野火、延燒、心、分別",
+      "items": [
+        {
+          "sentenceId": "seg-387",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1419.1,
+          "end": 1421.1,
+          "text": "煙燒 一直向前燒。",
+          "prevText": "像野火在那個大草原上。",
+          "nextText": "像心也一直在那分別一些。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "煙燒 一直向前燒。",
+              "suggestedTerm": "延燒",
+              "reason": "「煙燒 一直向前燒」疑為「延燒，一直向前燒」之誤",
+              "promptHints": [
+                "野火",
+                "延燒"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-388",
+          "paragraphId": "p-4",
+          "heading": "心性無常喻",
+          "start": 1421.6,
+          "end": 1424.1,
+          "text": "像心也一直在那分別一些。",
+          "prevText": "煙燒 一直向前燒。",
+          "nextText": "各式各樣的分別。",
+          "findings": [
+            {
+              "ruleId": "llm-semantic-omission",
+              "severity": "medium",
+              "matchedText": "像心也一直在那分別一些。",
+              "suggestedTerm": "這",
+              "reason": "「像心也一直在那分別一些」疑為「像這心也一直在那分別一些」之誤，缺「這」",
+              "promptHints": [
+                "心",
+                "分別"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-26",
+      "clipStart": 1801.15,
+      "clipEnd": 1809.5,
+      "clipDuration": 8.35,
+      "sentenceIds": [
+        "seg-501",
+        "seg-502"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-501",
+          "text": "可能會難一點。"
+        },
+        {
+          "id": "seg-502",
+          "text": "可能會難一點。"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "第二個方法使您心不動。 觀心與調伏",
+      "items": [
+        {
+          "sentenceId": "seg-501",
+          "paragraphId": "p-5",
+          "heading": "觀心與調伏",
+          "start": 1803.15,
+          "end": 1805.5,
+          "text": "可能會難一點。",
+          "prevText": "第二個方法使您心不動。",
+          "nextText": "可能會難一點。",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "可能會難一點。",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "觀心與調伏"
+              ]
+            }
+          ]
+        },
+        {
+          "sentenceId": "seg-502",
+          "paragraphId": "p-5",
+          "heading": "觀心與調伏",
+          "start": 1805.5,
+          "end": 1807.5,
+          "text": "可能會難一點。",
+          "prevText": "可能會難一點。",
+          "nextText": "但是我在想。",
+          "findings": [
+            {
+              "ruleId": "whisper-hallucination-loop",
+              "severity": "high",
+              "matchedText": "可能會難一點。",
+              "suggestedTerm": null,
+              "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+              "promptHints": [
+                "觀心與調伏"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-27",
+      "clipStart": 2462.82,
+      "clipEnd": 2470.82,
+      "clipDuration": 8,
+      "sentenceIds": [
+        "seg-718"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-718",
+          "text": "興森波爾波羅蜜多修法念著。"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "天王 雲河 諸菩薩摩哈喀。 六度、布施、持戒、忍辱、精進、禪定、般若、般若波羅蜜多、法念住修習",
+      "items": [
+        {
+          "sentenceId": "seg-718",
+          "paragraphId": "p-6",
+          "heading": "法念住修習",
+          "start": 2464.82,
+          "end": 2468.82,
+          "text": "興森波爾波羅蜜多修法念著。",
+          "prevText": "天王 雲河 諸菩薩摩哈喀。",
+          "nextText": "前面說修心念著。",
+          "findings": [
+            {
+              "ruleId": "missing-paramita-prefix",
+              "severity": "medium",
+              "matchedText": "波羅蜜多",
+              "suggestedTerm": null,
+              "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+              "promptHints": [
+                "六度",
+                "布施、持戒、忍辱、精進、禪定、般若",
+                "般若波羅蜜多",
+                "法念住修習"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-28",
+      "clipStart": 2526.14,
+      "clipEnd": 2531.14,
+      "clipDuration": 5,
+      "sentenceIds": [
+        "seg-738"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-738",
+          "text": "布林 波羅蜜多。"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "雲河 諸 菩薩 星神。 六度、布施、持戒、忍辱、精進、禪定、般若、般若波羅蜜多、法念住修習",
+      "items": [
+        {
+          "sentenceId": "seg-738",
+          "paragraphId": "p-6",
+          "heading": "法念住修習",
+          "start": 2528.14,
+          "end": 2529.14,
+          "text": "布林 波羅蜜多。",
+          "prevText": "雲河 諸 菩薩 星神。",
+          "nextText": "修法念住,法念住要怎麼樣的學習呢?",
+          "findings": [
+            {
+              "ruleId": "missing-paramita-prefix",
+              "severity": "medium",
+              "matchedText": "波羅蜜多",
+              "suggestedTerm": null,
+              "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+              "promptHints": [
+                "六度",
+                "布施、持戒、忍辱、精進、禪定、般若",
+                "般若波羅蜜多",
+                "法念住修習"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-29",
+      "clipStart": 3500.3,
+      "clipEnd": 3513.3,
+      "clipDuration": 13,
+      "sentenceIds": [
+        "seg-1042"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1042",
+          "text": "雲和諸菩薩莫沙 興森波爾波羅蜜多餘境紀念"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "先從這裡開始。 六度、布施、持戒、忍辱、精進、禪定、般若、般若波羅蜜多、法念住修習",
+      "items": [
+        {
+          "sentenceId": "seg-1042",
+          "paragraphId": "p-6",
+          "heading": "法念住修習",
+          "start": 3502.3,
+          "end": 3511.3,
+          "text": "雲和諸菩薩莫沙 興森波爾波羅蜜多餘境紀念",
+          "prevText": "先從這裡開始。",
+          "nextText": "這前邊呢 是個別地說。",
+          "findings": [
+            {
+              "ruleId": "missing-paramita-prefix",
+              "severity": "medium",
+              "matchedText": "波羅蜜多",
+              "suggestedTerm": null,
+              "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+              "promptHints": [
+                "六度",
+                "布施、持戒、忍辱、精進、禪定、般若",
+                "般若波羅蜜多",
+                "法念住修習"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "windowId": "win-30",
+      "clipStart": 3522.82,
+      "clipEnd": 3531.23,
+      "clipDuration": 8.41,
+      "sentenceIds": [
+        "seg-1047"
+      ],
+      "originalTexts": [
+        {
+          "id": "seg-1047",
+          "text": "雲和諸菩薩莫沙 興森波爾波羅蜜多的時候，"
+        }
+      ],
+      "expectedTerms": [],
+      "prompt": "這底下就總數起來。 六度、布施、持戒、忍辱、精進、禪定、般若、般若波羅蜜多、總念住與對治",
+      "items": [
+        {
+          "sentenceId": "seg-1047",
+          "paragraphId": "p-7",
+          "heading": "總念住與對治",
+          "start": 3524.82,
+          "end": 3529.23,
+          "text": "雲和諸菩薩莫沙 興森波爾波羅蜜多的時候，",
+          "prevText": "這底下就總數起來。",
+          "nextText": "在這個《深受新法》的境界上。",
+          "findings": [
+            {
+              "ruleId": "missing-paramita-prefix",
+              "severity": "medium",
+              "matchedText": "波羅蜜多",
+              "suggestedTerm": null,
+              "reason": "單獨出現「波羅蜜多」且無前綴度別（如布施／持戒／般若）修飾，疑似 ASR 吞字",
+              "promptHints": [
+                "六度",
+                "布施、持戒、忍辱、精進、禪定、般若",
+                "般若波羅蜜多",
+                "總念住與對治"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reAsrResults": [
+    {
+      "windowId": "win-1",
+      "clipStart": 0,
+      "clipEnd": 14.36,
+      "rawSegments": [
+        {
+          "start": 1.85,
+          "end": 6.6,
+          "text": "天皇人和諸菩薩摩薩,"
+        },
+        {
+          "start": 6.6,
+          "end": 8.9,
+          "text": "先身佛爾波羅密度,"
+        },
+        {
+          "start": 8.9,
+          "end": 14.34,
+          "text": "修心念諸,為此菩薩諸。"
+        }
+      ],
+      "rawText": "天皇人和諸菩薩摩薩,先身佛爾波羅密度,修心念諸,為此菩薩諸。",
+      "guidedSegments": [
+        {
+          "start": 1.85,
+          "end": 14.4,
+          "text": "天王、人和諸菩薩摩訶、心身、布爾、波羅蜜多、修心念住,為此菩薩諸。"
+        }
+      ],
+      "guidedText": "天王、人和諸菩薩摩訶、心身、布爾、波羅蜜多、修心念住,為此菩薩諸。",
+      "sentenceIds": [
+        "seg-001",
+        "seg-002",
+        "seg-003"
+      ],
+      "expectedTerms": [
+        "訶",
+        "波羅蜜多",
+        "住"
+      ],
+      "recoveredTerms": [
+        "訶",
+        "波羅蜜多",
+        "住"
+      ]
+    },
+    {
+      "windowId": "win-2",
+      "clipStart": 31.09,
+      "clipEnd": 43.47,
+      "rawSegments": [
+        {
+          "start": 32.81,
+          "end": 41.3,
+          "text": "這壹下是說修新建築的方法。"
+        }
+      ],
+      "rawText": "這壹下是說修新建築的方法。",
+      "guidedSegments": [
+        {
+          "start": 32.81,
+          "end": 41.3,
+          "text": "這壹下是說修心念住的方法。"
+        }
+      ],
+      "guidedText": "這壹下是說修心念住的方法。",
+      "sentenceIds": [
+        "seg-009"
+      ],
+      "expectedTerms": [
+        "心念住"
+      ],
+      "recoveredTerms": [
+        "心念住"
+      ]
+    },
+    {
+      "windowId": "win-3",
+      "clipStart": 58.93,
+      "clipEnd": 64.43,
+      "rawSegments": [
+        {
+          "start": 60.59,
+          "end": 64.03,
+          "text": "師父為弱,無耳為弱。"
+        }
+      ],
+      "rawText": "師父為弱,無耳為弱。",
+      "guidedSegments": [
+        {
+          "start": 60.59,
+          "end": 64.03,
+          "text": "師父為樂,無耳為佛。"
+        }
+      ],
+      "guidedText": "師父為樂,無耳為佛。",
+      "sentenceIds": [
+        "seg-013"
+      ],
+      "expectedTerms": [
+        "無常"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-4",
+      "clipStart": 66.3,
+      "clipEnd": 72.8,
+      "rawSegments": [
+        {
+          "start": 66.3,
+          "end": 71.15,
+          "text": "也包括在新念珠裏面表。"
+        }
+      ],
+      "rawText": "也包括在新念珠裏面表。",
+      "guidedSegments": [
+        {
+          "start": 66.3,
+          "end": 71.15,
+          "text": "也包括在心念住裏面表。"
+        }
+      ],
+      "guidedText": "也包括在心念住裏面表。",
+      "sentenceIds": [
+        "seg-016"
+      ],
+      "expectedTerms": [
+        "心念住"
+      ],
+      "recoveredTerms": [
+        "心念住"
+      ]
+    },
+    {
+      "windowId": "win-5",
+      "clipStart": 102.25,
+      "clipEnd": 111.36,
+      "rawSegments": [
+        {
+          "start": 102.25,
+          "end": 111.39,
+          "text": "不止於此,還是還有實苦未落,實在是苦未落。"
+        }
+      ],
+      "rawText": "不止於此,還是還有實苦未落,實在是苦未落。",
+      "guidedSegments": [
+        {
+          "start": 102.25,
+          "end": 111.39,
+          "text": "不止於此。 還是害有失苦未落。"
+        }
+      ],
+      "guidedText": "不止於此。 還是害有失苦未落。",
+      "sentenceIds": [
+        "seg-023"
+      ],
+      "expectedTerms": [
+        "受是苦"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-6",
+      "clipStart": 114.13,
+      "clipEnd": 126.12,
+      "rawSegments": [
+        {
+          "start": 114.13,
+          "end": 125.59,
+          "text": "是因為是快樂的。這本來是受念珠,但是也包裹在新念珠裏面。因為……"
+        }
+      ],
+      "rawText": "是因為是快樂的。這本來是受念珠,但是也包裹在新念珠裏面。因為……",
+      "guidedSegments": [
+        {
+          "start": 114.13,
+          "end": 125.63,
+          "text": "因為是快樂的，這本來是受念住，但是也包裹在心念住裡面，因為，"
+        }
+      ],
+      "guidedText": "因為是快樂的，這本來是受念住，但是也包裹在心念住裡面，因為，",
+      "sentenceIds": [
+        "seg-026",
+        "seg-027"
+      ],
+      "expectedTerms": [
+        "住",
+        "心念住"
+      ],
+      "recoveredTerms": [
+        "住",
+        "心念住"
+      ]
+    },
+    {
+      "windowId": "win-7",
+      "clipStart": 139.08,
+      "clipEnd": 148.51,
+      "rawSegments": [
+        {
+          "start": 139.08,
+          "end": 146.67,
+          "text": "文化為我,關法念著、關法務,也包我在信念著裏。"
+        }
+      ],
+      "rawText": "文化為我,關法念著、關法務,也包我在信念著裏。",
+      "guidedSegments": [
+        {
+          "start": 139.08,
+          "end": 146.57,
+          "text": "無額為我。 觀法念住、觀法無我,也包我在心念住裏。"
+        }
+      ],
+      "guidedText": "無額為我。 觀法念住、觀法無我,也包我在心念住裏。",
+      "sentenceIds": [
+        "seg-033",
+        "seg-034"
+      ],
+      "expectedTerms": [
+        "觀法念住 觀法無我",
+        "心念住"
+      ],
+      "recoveredTerms": [
+        "心念住"
+      ]
+    },
+    {
+      "windowId": "win-8",
+      "clipStart": 157.06,
+      "clipEnd": 167.54,
+      "rawSegments": [
+        {
+          "start": 157.06,
+          "end": 165.73,
+          "text": "不敬未敬,這是身念,觀神不敬也算在新建築裡面。"
+        },
+        {
+          "start": 165.73,
+          "end": 167.63,
+          "text": "因為只要……"
+        }
+      ],
+      "rawText": "不敬未敬,這是身念,觀神不敬也算在新建築裡面。因為只要……",
+      "guidedSegments": [
+        {
+          "start": 157.06,
+          "end": 165.73,
+          "text": "不敬未敬。 身念、觀身不敬也算在心念住裡面。"
+        },
+        {
+          "start": 165.73,
+          "end": 167.63,
+          "text": "因為只要……"
+        }
+      ],
+      "guidedText": "不敬未敬。 身念、觀身不敬也算在心念住裡面。因為只要……",
+      "sentenceIds": [
+        "seg-039",
+        "seg-040"
+      ],
+      "expectedTerms": [
+        "身念住 觀身不淨",
+        "心念住"
+      ],
+      "recoveredTerms": [
+        "心念住"
+      ]
+    },
+    {
+      "windowId": "win-9",
+      "clipStart": 171.22,
+      "clipEnd": 183.32,
+      "rawSegments": [
+        {
+          "start": 171.79,
+          "end": 183.5,
+          "text": "也是新。本來這個聖建築有別的建築有種建築。這裡就是等於說是主。"
+        }
+      ],
+      "rawText": "也是新。本來這個聖建築有別的建築有種建築。這裡就是等於說是主。",
+      "guidedSegments": [
+        {
+          "start": 171.79,
+          "end": 183.5,
+          "text": "也是細膩。本來這個身念住有別念住有總念住。這裡就是等於說是主。"
+        }
+      ],
+      "guidedText": "也是細膩。本來這個身念住有別念住有總念住。這裡就是等於說是主。",
+      "sentenceIds": [
+        "seg-045",
+        "seg-046"
+      ],
+      "expectedTerms": [
+        "身念住",
+        "住"
+      ],
+      "recoveredTerms": [
+        "身念住",
+        "住"
+      ]
+    },
+    {
+      "windowId": "win-10",
+      "clipStart": 1093.34,
+      "clipEnd": 1109.47,
+      "rawSegments": [
+        {
+          "start": 1095.16,
+          "end": 1108.74,
+          "text": "這一下說這個心的無常的經濟。是心性素軟。這一件靈靈的心,它的體性。"
+        }
+      ],
+      "rawText": "這一下說這個心的無常的經濟。是心性素軟。這一件靈靈的心,它的體性。",
+      "guidedSegments": [
+        {
+          "start": 1095.16,
+          "end": 1100.37,
+          "text": "這一下說這個心的無常的經濟"
+        },
+        {
+          "start": 1100.37,
+          "end": 1108.74,
+          "text": "是心性豎轉、這一念零零的心 它的體性"
+        }
+      ],
+      "guidedText": "這一下說這個心的無常的經濟是心性豎轉、這一念零零的心 它的體性",
+      "sentenceIds": [
+        "seg-290",
+        "seg-291",
+        "seg-292"
+      ],
+      "expectedTerms": [
+        "經文",
+        "豎",
+        "了別"
+      ],
+      "recoveredTerms": [
+        "豎"
+      ]
+    },
+    {
+      "windowId": "win-11",
+      "clipStart": 1110.77,
+      "clipEnd": 1118.01,
+      "rawSegments": [
+        {
+          "start": 1110.77,
+          "end": 1117.37,
+          "text": "是如玄虎倫那樣子。玄虎倫怎麼講呢?"
+        }
+      ],
+      "rawText": "是如玄虎倫那樣子。玄虎倫怎麼講呢?",
+      "guidedSegments": [
+        {
+          "start": 1110.77,
+          "end": 1118.37,
+          "text": "旋火輪怎麼講呢?"
+        }
+      ],
+      "guidedText": "旋火輪怎麼講呢?",
+      "sentenceIds": [
+        "seg-295"
+      ],
+      "expectedTerms": [
+        "旋"
+      ],
+      "recoveredTerms": [
+        "旋"
+      ]
+    },
+    {
+      "windowId": "win-12",
+      "clipStart": 1125.11,
+      "clipEnd": 1132.22,
+      "rawSegments": [
+        {
+          "start": 1125.2,
+          "end": 1132.11,
+          "text": "所以我們拿一支箱點著了它,你用手指轉。"
+        }
+      ],
+      "rawText": "所以我們拿一支箱點著了它,你用手指轉。",
+      "guidedSegments": [
+        {
+          "start": 1125.2,
+          "end": 1132.11,
+          "text": "所以我們拿著香點著了它。 用手指轉了。"
+        }
+      ],
+      "guidedText": "所以我們拿著香點著了它。 用手指轉了。",
+      "sentenceIds": [
+        "seg-300"
+      ],
+      "expectedTerms": [
+        "香"
+      ],
+      "recoveredTerms": [
+        "香"
+      ]
+    },
+    {
+      "windowId": "win-13",
+      "clipStart": 1162.01,
+      "clipEnd": 1168.21,
+      "rawSegments": [
+        {
+          "start": 1162.01,
+          "end": 1168.21,
+          "text": "不表示我們這一念心,只是一個採和節的了別性。但是繼續不斷地這樣子。"
+        }
+      ],
+      "rawText": "不表示我們這一念心,只是一個採和節的了別性。但是繼續不斷地這樣子。",
+      "guidedSegments": [
+        {
+          "start": 1162.01,
+          "end": 1168.21,
+          "text": "只是一剷剎那、了別性。 但是繼續不斷地這樣子。"
+        }
+      ],
+      "guidedText": "只是一剷剎那、了別性。 但是繼續不斷地這樣子。",
+      "sentenceIds": [
+        "seg-317"
+      ],
+      "expectedTerms": [
+        "剎那"
+      ],
+      "recoveredTerms": [
+        "剎那"
+      ]
+    },
+    {
+      "windowId": "win-14",
+      "clipStart": 1170.01,
+      "clipEnd": 1185.22,
+      "rawSegments": [
+        {
+          "start": 1170.01,
+          "end": 1179.76,
+          "text": "感到這一念心是長住的,不感到是長住生裂的。"
+        },
+        {
+          "start": 1179.76,
+          "end": 1183.23,
+          "text": "所以如玄火輪。"
+        },
+        {
+          "start": 1183.23,
+          "end": 1185.33,
+          "text": "那麼這個火輪,"
+        }
+      ],
+      "rawText": "感到這一念心是長住的,不感到是長住生裂的。所以如玄火輪。那麼這個火輪,",
+      "guidedSegments": [
+        {
+          "start": 1170.01,
+          "end": 1177.85,
+          "text": "感到這一念心是常住的。不感到是常住、常住、生滅的。"
+        },
+        {
+          "start": 1177.85,
+          "end": 1183.23,
+          "text": "所以如旋火輪。"
+        }
+      ],
+      "guidedText": "感到這一念心是常住的。不感到是常住、常住、生滅的。所以如旋火輪。",
+      "sentenceIds": [
+        "seg-320",
+        "seg-321",
+        "seg-322"
+      ],
+      "expectedTerms": [
+        "住",
+        "剎那剎那生滅",
+        "旋火輪"
+      ],
+      "recoveredTerms": [
+        "住",
+        "旋火輪"
+      ]
+    },
+    {
+      "windowId": "win-15",
+      "clipStart": 1188.74,
+      "clipEnd": 1208.7,
+      "rawSegments": [
+        {
+          "start": 1188.99,
+          "end": 1199.89,
+          "text": "並不是倫,所以我們的一內心只是一插諾而已,但是它相續的這樣子就感覺到,不感覺到是插諾插諾的。是這樣意思。"
+        },
+        {
+          "start": 1199.89,
+          "end": 1208.37,
+          "text": "是心性肅轉如懸火人,我們就容易誤會。"
+        }
+      ],
+      "rawText": "並不是倫,所以我們的一內心只是一插諾而已,但是它相續的這樣子就感覺到,不感覺到是插諾插諾的。是這樣意思。是心性肅轉如懸火人,我們就容易誤會。",
+      "guidedSegments": [
+        {
+          "start": 1188.99,
+          "end": 1200.09,
+          "text": "並不是輪。 所以我們的一念心只是一插諾而已。 但是它相訊地這樣就感覺到,不感覺到是插諾插諾的。 是這樣意思。"
+        },
+        {
+          "start": 1200.09,
+          "end": 1208.67,
+          "text": "是心性豎轉、如旋火輪。 我們就容易誤會。"
+        }
+      ],
+      "guidedText": "並不是輪。 所以我們的一念心只是一插諾而已。 但是它相訊地這樣就感覺到,不感覺到是插諾插諾的。 是這樣意思。是心性豎轉、如旋火輪。 我們就容易誤會。",
+      "sentenceIds": [
+        "seg-325",
+        "seg-327",
+        "seg-329"
+      ],
+      "expectedTerms": [
+        "剎那",
+        "豎轉如旋火輪"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-16",
+      "clipStart": 1215.33,
+      "clipEnd": 1255.7,
+      "rawSegments": [
+        {
+          "start": 1217.27,
+          "end": 1228.92,
+          "text": "心性肅軟如懸佛倫。所以我們從這個波爾經上,從這句話看,和楞严經完全不一樣。"
+        },
+        {
+          "start": 1228.92,
+          "end": 1236.87,
+          "text": "楞严經在我們,在佛教裡面很多人都會歡喜。"
+        },
+        {
+          "start": 1236.87,
+          "end": 1244.81,
+          "text": "楞严經一直地說心是常,心是常,不便意的。"
+        },
+        {
+          "start": 1244.81,
+          "end": 1254.51,
+          "text": "因此這樣講。但是現在這裡,心性肅軟如懸佛倫,就表示它是差弄,差弄生命變化的,不是常。"
+        }
+      ],
+      "rawText": "心性肅軟如懸佛倫。所以我們從這個波爾經上,從這句話看,和楞严經完全不一樣。楞严經在我們,在佛教裡面很多人都會歡喜。楞严經一直地說心是常,心是常,不便意的。因此這樣講。但是現在這裡,心性肅軟如懸佛倫,就表示它是差弄,差弄生命變化的,不是常。",
+      "guidedSegments": [
+        {
+          "start": 1217.27,
+          "end": 1254.49,
+          "text": "心性豎轉、如旋火輪。所以我們從這個波爾經上,從這句話看,和楞嚴經完全不一樣。楞嚴經在我們,在佛教裡面很多人都會歡喜。楞嚴經一直地說心是常,心是常。不變異的。因此這樣講。但是現在這裡,心性豎轉、如旋火輪,就表示它是差弄、差弄、生滅、變化的。不是常。"
+        }
+      ],
+      "guidedText": "心性豎轉、如旋火輪。所以我們從這個波爾經上,從這句話看,和楞嚴經完全不一樣。楞嚴經在我們,在佛教裡面很多人都會歡喜。楞嚴經一直地說心是常,心是常。不變異的。因此這樣講。但是現在這裡,心性豎轉、如旋火輪,就表示它是差弄、差弄、生滅、變化的。不是常。",
+      "sentenceIds": [
+        "seg-333",
+        "seg-334",
+        "seg-336",
+        "seg-337",
+        "seg-338",
+        "seg-339",
+        "seg-341",
+        "seg-344",
+        "seg-345"
+      ],
+      "expectedTerms": [
+        "豎轉如旋火輪",
+        "般若經",
+        "楞嚴經",
+        "不變",
+        "剎那剎那"
+      ],
+      "recoveredTerms": [
+        "楞嚴經",
+        "不變"
+      ]
+    },
+    {
+      "windowId": "win-17",
+      "clipStart": 1256.29,
+      "clipEnd": 1264.43,
+      "rawSegments": [
+        {
+          "start": 1256.29,
+          "end": 1259.69,
+          "text": "慈心無常,欲未常住。"
+        },
+        {
+          "start": 1259.69,
+          "end": 1264.43,
+          "text": "是心性素準,如同的。"
+        }
+      ],
+      "rawText": "慈心無常,欲未常住。是心性素準,如同的。",
+      "guidedSegments": [
+        {
+          "start": 1256.29,
+          "end": 1264.43,
+          "text": "此心無常。 欲未常住。 心性素準。"
+        }
+      ],
+      "guidedText": "此心無常。 欲未常住。 心性素準。",
+      "sentenceIds": [
+        "seg-348"
+      ],
+      "expectedTerms": [
+        "令"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-18",
+      "clipStart": 1284.73,
+      "clipEnd": 1301.54,
+      "rawSegments": [
+        {
+          "start": 1284.73,
+          "end": 1290.18,
+          "text": "風在虛空裡飄動,心也是那樣子。"
+        },
+        {
+          "start": 1290.18,
+          "end": 1292.51,
+          "text": "它一直是不能不停下來。"
+        },
+        {
+          "start": 1292.51,
+          "end": 1297.61,
+          "text": "是飄浮不停如野馬。"
+        },
+        {
+          "start": 1297.61,
+          "end": 1301.1,
+          "text": "這個野馬是裝出……"
+        }
+      ],
+      "rawText": "風在虛空裡飄動,心也是那樣子。它一直是不能不停下來。是飄浮不停如野馬。這個野馬是裝出……",
+      "guidedSegments": [
+        {
+          "start": 1284.73,
+          "end": 1292.71,
+          "text": "風在虛空裡。 飄動、心也是那樣子。 飄動。一直是不能不停下來。"
+        },
+        {
+          "start": 1292.71,
+          "end": 1301.5,
+          "text": "是飄浮不停如野馬。 野馬是裝出……"
+        }
+      ],
+      "guidedText": "風在虛空裡。 飄動、心也是那樣子。 飄動。一直是不能不停下來。是飄浮不停如野馬。 野馬是裝出……",
+      "sentenceIds": [
+        "seg-357",
+        "seg-360"
+      ],
+      "expectedTerms": [
+        "動",
+        "野馬"
+      ],
+      "recoveredTerms": [
+        "動",
+        "野馬"
+      ]
+    },
+    {
+      "windowId": "win-19",
+      "clipStart": 1303.38,
+      "clipEnd": 1313.38,
+      "rawSegments": [
+        {
+          "start": 1303.63,
+          "end": 1313.51,
+          "text": "就是別的地方也說是陽宴,就是春夏之間。"
+        }
+      ],
+      "rawText": "就是別的地方也說是陽宴,就是春夏之間。",
+      "guidedSegments": [
+        {
+          "start": 1303.63,
+          "end": 1313.55,
+          "text": "就是別的地方也說是陽焰,就是春夏之間。"
+        }
+      ],
+      "guidedText": "就是別的地方也說是陽焰,就是春夏之間。",
+      "sentenceIds": [
+        "seg-362"
+      ],
+      "expectedTerms": [
+        "陽焰"
+      ],
+      "recoveredTerms": [
+        "陽焰"
+      ]
+    },
+    {
+      "windowId": "win-20",
+      "clipStart": 1322.68,
+      "clipEnd": 1332.68,
+      "rawSegments": [
+        {
+          "start": 1322.83,
+          "end": 1331.63,
+          "text": "就是一種濕氣。太陽一照的時候,濕氣上升,水蒸氣。"
+        }
+      ],
+      "rawText": "就是一種濕氣。太陽一照的時候,濕氣上升,水蒸氣。",
+      "guidedSegments": [
+        {
+          "start": 1322.83,
+          "end": 1331.53,
+          "text": "就是一種濕氣。 太陽一照的時候,濕氣、上升。"
+        },
+        {
+          "start": 1331.53,
+          "end": 1333.53,
+          "text": "我們遠遠地看。"
+        }
+      ],
+      "guidedText": "就是一種濕氣。 太陽一照的時候,濕氣、上升。我們遠遠地看。",
+      "sentenceIds": [
+        "seg-364"
+      ],
+      "expectedTerms": [
+        "上升"
+      ],
+      "recoveredTerms": [
+        "上升"
+      ]
+    },
+    {
+      "windowId": "win-21",
+      "clipStart": 1333.3,
+      "clipEnd": 1342.82,
+      "rawSegments": [
+        {
+          "start": 1333.74,
+          "end": 1342.92,
+          "text": "就像水似的。而這個陽眼,有太陽光的造一蒸發,加上它就飄動。"
+        }
+      ],
+      "rawText": "就像水似的。而這個陽眼,有太陽光的造一蒸發,加上它就飄動。",
+      "guidedSegments": [
+        {
+          "start": 1333.74,
+          "end": 1343,
+          "text": "就像水似的。 陽眼有太陽光的照一蒸發,加上它就飄動。"
+        }
+      ],
+      "guidedText": "就像水似的。 陽眼有太陽光的照一蒸發,加上它就飄動。",
+      "sentenceIds": [
+        "seg-366"
+      ],
+      "expectedTerms": [
+        "照"
+      ],
+      "recoveredTerms": [
+        "照"
+      ]
+    },
+    {
+      "windowId": "win-22",
+      "clipStart": 1345.46,
+      "clipEnd": 1352.36,
+      "rawSegments": [
+        {
+          "start": 1347.63,
+          "end": 1350.52,
+          "text": "所以叫做楊燕。"
+        }
+      ],
+      "rawText": "所以叫做楊燕。",
+      "guidedSegments": [
+        {
+          "start": 1347.63,
+          "end": 1352.46,
+          "text": "所以叫做陽焰。 說野馬你這就表示……"
+        }
+      ],
+      "guidedText": "所以叫做陽焰。 說野馬你這就表示……",
+      "sentenceIds": [
+        "seg-369"
+      ],
+      "expectedTerms": [
+        "陽焰"
+      ],
+      "recoveredTerms": [
+        "陽焰"
+      ]
+    },
+    {
+      "windowId": "win-23",
+      "clipStart": 1365.73,
+      "clipEnd": 1393.97,
+      "rawSegments": [
+        {
+          "start": 1365.82,
+          "end": 1391.83,
+          "text": "這個經濟。飄浮不停如風,飄浮不停如野馬。心的流動像野馬似的,像陽眼似的。如水曝啟,如火能燒。心性的飄浮不停,如水曝啟。"
+        }
+      ],
+      "rawText": "這個經濟。飄浮不停如風,飄浮不停如野馬。心的流動像野馬似的,像陽眼似的。如水曝啟,如火能燒。心性的飄浮不停,如水曝啟。",
+      "guidedSegments": [
+        {
+          "start": 1365.82,
+          "end": 1391.83,
+          "text": "飄忽不停如風,飄忽不停如野馬。心的流動像野馬似的,像陽焰似的。如水曝啟,如火能燒。心性的飄忽不停,如水曝啟。"
+        }
+      ],
+      "guidedText": "飄忽不停如風,飄忽不停如野馬。心的流動像野馬似的,像陽焰似的。如水曝啟,如火能燒。心性的飄忽不停,如水曝啟。",
+      "sentenceIds": [
+        "seg-375",
+        "seg-376",
+        "seg-377",
+        "seg-378",
+        "seg-379"
+      ],
+      "expectedTerms": [
+        "忽",
+        "陽焰",
+        "瀑布"
+      ],
+      "recoveredTerms": [
+        "忽",
+        "陽焰"
+      ]
+    },
+    {
+      "windowId": "win-24",
+      "clipStart": 1399.86,
+      "clipEnd": 1407.87,
+      "rawSegments": [
+        {
+          "start": 1399.86,
+          "end": 1407.84,
+          "text": "不停地站在那邊就叫做吐氣。"
+        }
+      ],
+      "rawText": "不停地站在那邊就叫做吐氣。",
+      "guidedSegments": [
+        {
+          "start": 1399.86,
+          "end": 1407.84,
+          "text": "就叫做吐氣。"
+        }
+      ],
+      "guidedText": "就叫做吐氣。",
+      "sentenceIds": [
+        "seg-383"
+      ],
+      "expectedTerms": [
+        "瀑流"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-25",
+      "clipStart": 1417.1,
+      "clipEnd": 1426.1,
+      "rawSegments": [
+        {
+          "start": 1417.38,
+          "end": 1425.89,
+          "text": "草原上延燒,一直向前燒,信念在那分別,各種各樣的分別。"
+        }
+      ],
+      "rawText": "草原上延燒,一直向前燒,信念在那分別,各種各樣的分別。",
+      "guidedSegments": [
+        {
+          "start": 1417.38,
+          "end": 1425.89,
+          "text": "草原上的炎燒,一直向前燒,心也在那分別,各種各樣的分別。"
+        }
+      ],
+      "guidedText": "草原上的炎燒,一直向前燒,心也在那分別,各種各樣的分別。",
+      "sentenceIds": [
+        "seg-387",
+        "seg-388"
+      ],
+      "expectedTerms": [
+        "延燒",
+        "這"
+      ],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-26",
+      "clipStart": 1801.15,
+      "clipEnd": 1809.5,
+      "rawSegments": [
+        {
+          "start": 1803.13,
+          "end": 1808.76,
+          "text": "可能會難一點。但是我在想。"
+        }
+      ],
+      "rawText": "可能會難一點。但是我在想。",
+      "guidedSegments": [
+        {
+          "start": 1803.13,
+          "end": 1808.74,
+          "text": "可能會難一點。 但是我在想。"
+        }
+      ],
+      "guidedText": "可能會難一點。 但是我在想。",
+      "sentenceIds": [
+        "seg-501",
+        "seg-502"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-27",
+      "clipStart": 2462.82,
+      "clipEnd": 2470.82,
+      "rawSegments": [
+        {
+          "start": 2462.82,
+          "end": 2468.64,
+          "text": "徒佛沙摩哈沙興森波爾波羅密度修法念著。"
+        }
+      ],
+      "rawText": "徒佛沙摩哈沙興森波爾波羅密度修法念著。",
+      "guidedSegments": [
+        {
+          "start": 2462.82,
+          "end": 2468.82,
+          "text": "諸菩薩摩哈喀。 行神般若波羅蜜多、修法念住。"
+        }
+      ],
+      "guidedText": "諸菩薩摩哈喀。 行神般若波羅蜜多、修法念住。",
+      "sentenceIds": [
+        "seg-718"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-28",
+      "clipStart": 2526.14,
+      "clipEnd": 2531.14,
+      "rawSegments": [
+        {
+          "start": 2526.16,
+          "end": 2531.16,
+          "text": "雲和諸菩薩茅沙星村布爾波羅密多修法念著。"
+        }
+      ],
+      "rawText": "雲和諸菩薩茅沙星村布爾波羅密多修法念著。",
+      "guidedSegments": [
+        {
+          "start": 2526.16,
+          "end": 2530.96,
+          "text": "雲河 諸 菩薩 星神 布爾 波羅蜜多修法念住"
+        }
+      ],
+      "guidedText": "雲河 諸 菩薩 星神 布爾 波羅蜜多修法念住",
+      "sentenceIds": [
+        "seg-738"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-29",
+      "clipStart": 3500.3,
+      "clipEnd": 3513.3,
+      "rawSegments": [
+        {
+          "start": 3502.34,
+          "end": 3509.62,
+          "text": "雲和諸菩薩莫薩清聖波爾波羅密多余境體念。"
+        },
+        {
+          "start": 3509.62,
+          "end": 3513.36,
+          "text": "這前邊呢,是……"
+        }
+      ],
+      "rawText": "雲和諸菩薩莫薩清聖波爾波羅密多余境體念。這前邊呢,是……",
+      "guidedSegments": [
+        {
+          "start": 3502.34,
+          "end": 3509.62,
+          "text": "雲和諸、菩薩、莫沙、清聖、波羅蜜多、余境、紀念。"
+        },
+        {
+          "start": 3509.62,
+          "end": 3513.24,
+          "text": "這前邊呢。"
+        }
+      ],
+      "guidedText": "雲和諸、菩薩、莫沙、清聖、波羅蜜多、余境、紀念。這前邊呢。",
+      "sentenceIds": [
+        "seg-1042"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    },
+    {
+      "windowId": "win-30",
+      "clipStart": 3522.82,
+      "clipEnd": 3531.23,
+      "rawSegments": [
+        {
+          "start": 3524.8,
+          "end": 3531.23,
+          "text": "雲和諸、福山、巴哈沙、星神、波爾、波羅密多的時候,在這深受新法的境遇。"
+        }
+      ],
+      "rawText": "雲和諸、福山、巴哈沙、星神、波爾、波羅密多的時候,在這深受新法的境遇。",
+      "guidedSegments": [
+        {
+          "start": 3524.8,
+          "end": 3531.23,
+          "text": "雲和諸、福山、巴哈沙、星神、波爾、波羅蜜多的時候。在這深受新法的境界。"
+        }
+      ],
+      "guidedText": "雲和諸、福山、巴哈沙、星神、波爾、波羅蜜多的時候。在這深受新法的境界。",
+      "sentenceIds": [
+        "seg-1047"
+      ],
+      "expectedTerms": [],
+      "recoveredTerms": []
+    }
+  ],
+  "hallucinationRepairs": [
+    {
+      "sentenceId": "seg-501",
+      "before": "可能會難一點。",
+      "after": ""
+    },
+    {
+      "sentenceId": "seg-502",
+      "before": "可能會難一點。",
+      "after": "可能會難一點。 但是我在想。"
+    }
+  ],
+  "proposalsCount": 36,
+  "blockedByGuard": [
+    {
+      "sentenceId": "seg-019",
+      "paragraphId": "p-1",
+      "start": 87.92,
+      "end": 90.2,
+      "originalText": "不是常常住。",
+      "proposedText": "不是常住。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依語意將「不是常常住」修正為「不是常住」，補上句號。",
+      "guardReason": "cross-sentence-move:是常住"
+    },
+    {
+      "sentenceId": "seg-038",
+      "paragraphId": "p-1",
+      "start": 155.12,
+      "end": 159.06,
+      "originalText": "此不敬未敬。",
+      "proposedText": "此不淨為淨。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "依語意將「此不敬未敬」修正為「此不淨為淨」，補上句號。",
+      "guardReason": "ungrounded-rewrite"
+    }
+  ]
+}

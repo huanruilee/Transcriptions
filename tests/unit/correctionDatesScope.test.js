@@ -39,12 +39,12 @@ test('correction-dates pages list only sessions that have a real transcript file
   }
 });
 
-test('the 三主要道 correction-dates page covers only the delivered lecture', () => {
+test('the 三主要道 correction-dates page covers all delivered lectures', () => {
   const dir = path.join(repoRoot, 'courses', '三主要道');
   const html = fs.readFileSync(path.join(dir, 'correction-dates.html'), 'utf8');
   const course = readJson(path.join(dir, 'course.json'));
 
-  assert.equal(course.sessions.length, 1);
-  assert.ok(html.includes('共 1 講'), 'the page must report the number of lectures with transcripts');
-  assert.ok(!html.includes('#session-02"'), 'pending lectures must not be listed');
+  assert.equal(course.sessions.length, 21);
+  assert.ok(html.includes('共 21 講'), 'the page must report the number of lectures with transcripts');
+  assert.ok(html.includes('#session-02"'), 'delivered lectures must be listed');
 });

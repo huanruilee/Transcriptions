@@ -94,7 +94,10 @@ test('promotion reconstructs the reviewed overview amendment from the original s
   });
   const result = command();
   assert.equal(result.status,0,result.stderr);
-  assert.equal(sha256(readFileSync(publishedPath)),sha256(readFileSync('courses/四念住/sessions/session_08.json')));
+  // 2026-11-16 治理改版：v2 管線（Stage 1-4 重跑 + Stage 5 講記校正）已重寫 session_08.json，
+  // 現行正式檔不再等於 e153a10f run 的 promote 產物（見 HANDOFF.md 同日紀錄）。
+  // 本測試只驗證 run 自身的 pre-promotion-source → promoted 重現鏈（line 99），
+  // 不再綁定現行正式檔 digest。
   const manifest=JSON.parse(readFileSync(path.join(root,base,'session_08.promotion-manifest.json')));
   assert.equal(manifest.promotedSourceFileDigest,sha256(readFileSync(publishedPath)));
   assert.equal(manifest.candidateDigest,sha256(readFileSync(`${base}/session_08.final-candidate.json`)));
@@ -116,12 +119,11 @@ test('session 08 published overview cites the current proofread text', () => {
   }).errors, []);
 });
 
-test('session 08 promotion is bound to the independently approved immutable run', () => {
+test('session 08 promotion is bound to the independently approved immutable run', (t) => {
   const reviewBytes = readFileSync(`${base}/session_08.independent-review.json`);
   const review = JSON.parse(reviewBytes);
   const manifest = JSON.parse(readFileSync(`${base}/session_08.promotion-manifest.json`, 'utf8'));
   const candidateBytes = readFileSync(`${base}/session_08.final-candidate.json`);
-  const publishedBytes = readFileSync('courses/四念住/sessions/session_08.json');
 
   assert.equal(review.runId, runId);
   assert.equal(review.outcome, 'PASS');
@@ -133,10 +135,25 @@ test('session 08 promotion is bound to the independently approved immutable run'
   assert.equal(manifest.independentReviewDigest, sha256(reviewBytes));
   assert.equal(manifest.candidateDigest, sha256(candidateBytes));
   assert.equal(manifest.promotedSourceFileDigest, sha256(candidateBytes));
+  // 2026-11-16 治理改版：run 內部鏈完整性改以「隔離重跑 promote」驗證 amendment 綁定
+  //（amendment.publishedDigest 指向 candidate+overview 的 3f743b76…），
+  // 不再要求現行 session_08.json（已由 v2 管線重寫）等於 run 產物。
+  const root = mkdtempSync(path.join(tmpdir(), 'session08-binding-'));
+  t.after(() => rmSync(root, {recursive:true,force:true}));
+  cpSync(base, path.join(root,base), {recursive:true});
+  const publishedPath = path.join(root,'courses/四念住/sessions/session_08.json');
+  mkdirSync(path.dirname(publishedPath),{recursive:true});
+  copyFileSync(`${base}/session_08.pre-promotion-source.json`,publishedPath);
+  const rerun = spawnSync(process.execPath,['scripts/promote_session08_candidate.mjs'],{
+    encoding:'utf8',env:{...process.env,TRANSCRIPT_PROOFREADING_ROOT:root},
+  });
+  assert.equal(rerun.status,0,rerun.stderr);
+  const promotedBytes = readFileSync(publishedPath);
   const amendment = JSON.parse(readFileSync(`${base}/session_08.overview-amendment.json`));
-  assert.deepEqual(validateOverviewAmendment({candidate: candidateBytes, published: publishedBytes, manifest, amendment}), []);
-  const changed = JSON.parse(publishedBytes);
+  assert.equal(amendment.publishedDigest, sha256(promotedBytes));
+  assert.deepEqual(validateOverviewAmendment({candidate: candidateBytes, published: promotedBytes, manifest, amendment}), []);
+  const changed = JSON.parse(promotedBytes);
   changed.paragraphs[0].sentences[0].text += '竄改';
   assert.ok(validateOverviewAmendment({candidate: candidateBytes, published: Buffer.from(JSON.stringify(changed)), manifest, amendment}).includes('approved transcript changed'));
-  assert.ok(validateOverviewAmendment({candidate: candidateBytes, published: publishedBytes, manifest, amendment: {...amendment,publishedDigest:'invalid'}}).includes('amendment binding mismatch'));
+  assert.ok(validateOverviewAmendment({candidate: candidateBytes, published: promotedBytes, manifest, amendment: {...amendment,publishedDigest:'invalid'}}).includes('amendment binding mismatch'));
 });
