@@ -1,0 +1,65 @@
+{
+  "sessionId": "07",
+  "sourceDigest": "20bab9fd3c18ac93fa4805d7cea280961397b8c433bd7fc27b451221493d623f",
+  "model": "nvidia/Qwen3.8-27B-NVFP4",
+  "totalSentences": 5358,
+  "deterministicChangesCount": 5,
+  "hallucinationsFlaggedCount": 0,
+  "qwenCardsSent": 3,
+  "qwenAppliedCount": 2,
+  "qwenRejectedOrKept": 1,
+  "qwenUsage": {
+    "prompt_tokens": 443,
+    "completion_tokens": 261,
+    "total_tokens": 704
+  },
+  "deterministicChanges": [
+    {
+      "id": "seg-0001",
+      "before": "老師好 各位同學大家好。",
+      "after": "老師好各位同學大家好。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0016",
+      "before": "法師好 大家好",
+      "after": "法師好大家好",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0024",
+      "before": "敬禮 成亮 御立生",
+      "after": "敬禮成亮御立生",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0025",
+      "before": "大師 善士 救護者",
+      "after": "大師善士救護者",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-2232",
+      "before": "好 反正我想回應一下。",
+      "after": "好反正我想回應一下。",
+      "reason": "全形標點與空白正規化"
+    }
+  ],
+  "hallucinations": [],
+  "qwenApplied": [
+    {
+      "id": "seg-3605",
+      "action": "REVISE",
+      "before": "我們的限量其實對我們沒有太多的作用。",
+      "after": "我們的現量其實對我們沒有太多的作用。",
+      "reason": "前後文提及「比量」，依因明學理，與「比量」相對應且常討論其局限性的應為「現量」（直接感知），而非「限量」。"
+    },
+    {
+      "id": "seg-4202",
+      "action": "REVISE",
+      "before": "什麼沒有自信的我",
+      "after": "什麼沒有自性的我",
+      "reason": "前後文討論「沒有獨立自主的我」，屬空性/無自性議題，「自性」為正確佛學術語；「自信」為同音誤植。"
+    }
+  ]
+}
