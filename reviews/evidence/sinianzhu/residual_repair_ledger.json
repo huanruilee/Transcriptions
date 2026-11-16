@@ -2,7 +2,7 @@
   "generatedAt": "2026-11-17",
   "baseText": "https://ftp.budaedu.org/ghosa/C009/T0209/ref/T0209_NN.pdf",
   "ruleCount": 151,
-  "edits": 535,
+  "edits": 538,
   "ledger": [
     {
       "sessionId": "session_01",
@@ -1152,7 +1152,7 @@
       "sessionId": "session_03",
       "segId": "seg-020",
       "before": "但是因為我們於此，就因為這一念心是常住的，",
-      "after": "然瑜伽師修骨鎖觀。",
+      "after": "但是因為我們愚癡，就認為這一念心是常住的。",
       "rule": "segment-rewrite",
       "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
@@ -2086,6 +2086,14 @@
     },
     {
       "sessionId": "session_03",
+      "segId": "seg-1989",
+      "before": "還是《論言經》、《啟析論》的思想。",
+      "after": "還是《楞嚴經》、《起信論》的思想。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_03",
       "segId": "seg-1992",
       "before": "學習阿漢經，學習博爾經。",
       "after": "學習阿含經，學習般若經。",
@@ -2264,17 +2272,25 @@
       "sessionId": "session_04",
       "segId": "seg-304",
       "before": "這是禪詩，玉結石就是禪詩。",
-      "after": "這是禪定，欲界定就是禪定。",
-      "rule": "regex",
-      "evidence": "底本T0209_04「欲界定就是禪定」；底本禪詩=0; 底本T0209_03「這些欲的境界裡面生活」"
+      "after": "這是禪師，瑜伽師就是禪師。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_04",
       "segId": "seg-305",
       "before": "修止冠相應的禪詩。",
-      "after": "修止觀相應的禪定。",
+      "after": "修止觀相應的禪師。",
       "rule": "regex",
-      "evidence": "底本止觀; 底本T0209_04「欲界定就是禪定」；底本禪詩=0"
+      "evidence": "底本止觀; 底本T0209_04「瑜伽師就是禪師，修止觀相應的禪師」；底本禪詩=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-306",
+      "before": "初息夜的一個階段。",
+      "after": "初習業的一個階段。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_04",
@@ -2952,9 +2968,9 @@
       "sessionId": "session_04",
       "segId": "seg-1442",
       "before": "就是雲河巡視不敬共襄應該這樣想。",
-      "after": "就是云何尋思不淨共襄應該這樣想。",
-      "rule": "regex",
-      "evidence": "底本引文云何；全書雲河=0; 底本尋思×76；巡視=0; 底本不敬=0、不淨×558"
+      "after": "就是云何尋思不淨共相應該這樣想。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_04",
@@ -3144,9 +3160,9 @@
       "sessionId": "session_04",
       "segId": "seg-1620",
       "before": "修入四年之後，我以為很快地，就能得到無聲發言。",
-      "after": "修入四年之後，我以為很快地，就能得到無生法忍。",
-      "rule": "regex",
-      "evidence": "底本得無生法忍"
+      "after": "修四念住之後，我認為很快地，就能得到無生法忍。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_04",
@@ -4035,6 +4051,14 @@
       "after": "使你這個念的力量越來越廣大。",
       "rule": "regex",
       "evidence": "底本全書唸=0、念>>0"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-683",
+      "before": "就能記住而且這一聲啊，是記住，",
+      "after": "就能記住而且這一生啊，是記住，",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_07",
