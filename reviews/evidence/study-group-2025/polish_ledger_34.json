@@ -1,0 +1,146 @@
+{
+  "sessionId": "34",
+  "sourceDigest": "169d33d9ef223016b8725e6a28dc1fff40f26f0536a488307255d29e021aa3d9",
+  "model": "nvidia/Qwen3.8-27B-NVFP4",
+  "totalSentences": 3571,
+  "deterministicChangesCount": 20,
+  "hallucinationsFlaggedCount": 1,
+  "qwenCardsSent": 6,
+  "qwenAppliedCount": 0,
+  "qwenRejectedOrKept": 6,
+  "qwenUsage": {
+    "prompt_tokens": 657,
+    "completion_tokens": 443,
+    "total_tokens": 1100
+  },
+  "deterministicChanges": [
+    {
+      "id": "seg-0007",
+      "before": "百千萬劫難遭遇,",
+      "after": "百千萬劫難遭遇，",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0008",
+      "before": "我今見聞得受持,",
+      "after": "我今見聞得受持，",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0010",
+      "before": "請放長,",
+      "after": "請放長，",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0013",
+      "before": "對許多人而言,",
+      "after": "對許多人而言，",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0217",
+      "before": "好的 法師晚上好。",
+      "after": "好的法師晚上好。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0339",
+      "before": "我們心中的我職到底是怎麼冒出來",
+      "after": "我們心中的我執到底是怎麼冒出來",
+      "reason": "同音誤植：我職/我直→我執"
+    },
+    {
+      "id": "seg-0432",
+      "before": "老師好 同學好",
+      "after": "老師好同學好",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0501",
+      "before": "好 剛才的角度",
+      "after": "好剛才的角度",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-0616",
+      "before": "好 以上謝謝法師",
+      "after": "好以上謝謝法師",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-1253",
+      "before": "想改變 找方法。",
+      "after": "想改變找方法。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-1254",
+      "before": "找到方法 認真執行。",
+      "after": "找到方法認真執行。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-1282",
+      "before": "法師好 大家好。",
+      "after": "法師好大家好。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-1285",
+      "before": "一者 我會第一次感覺",
+      "after": "一者我會第一次感覺",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-2189",
+      "before": "滑手機滑手機滑手機",
+      "after": "【⚠️ 音檔異常／需人工聽打確認】",
+      "reason": "ASR重複/亂碼異常標記"
+    },
+    {
+      "id": "seg-2568",
+      "before": "沒有了這個我職",
+      "after": "沒有了這個我執",
+      "reason": "同音誤植：我職/我直→我執"
+    },
+    {
+      "id": "seg-2632",
+      "before": "法師好 大家好。",
+      "after": "法師好大家好。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-2902",
+      "before": "法師好 大家好。",
+      "after": "法師好大家好。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-3043",
+      "before": "皈依佛 皈依法 皈依僧。",
+      "after": "皈依佛皈依法皈依僧。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-3277",
+      "before": "法師好 大家好。",
+      "after": "法師好大家好。",
+      "reason": "全形標點與空白正規化"
+    },
+    {
+      "id": "seg-3565",
+      "before": "好 那我們今晚的共學就到這個地方。",
+      "after": "好那我們今晚的共學就到這個地方。",
+      "reason": "全形標點與空白正規化"
+    }
+  ],
+  "hallucinations": [
+    {
+      "id": "seg-2189",
+      "before": "滑手機滑手機滑手機",
+      "after": "【⚠️ 音檔異常／需人工聽打確認】"
+    }
+  ],
+  "qwenApplied": []
+}

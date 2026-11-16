@@ -1,0 +1,6559 @@
+{
+  "source": "courses/菩薩就是這樣成佛/sessions/session_25.json",
+  "sessionId": "25",
+  "title": "第 25 講 | 空三摩地",
+  "model": "nvidia/Qwen3.8-27B-NVFP4",
+  "totalProposals": 541,
+  "categoryCounts": {
+    "oral-filler": 109,
+    "punctuation": 459,
+    "missing-term": 26
+  },
+  "proposals": [
+    {
+      "sentenceId": "sent-8",
+      "paragraphId": "p_1",
+      "start": 54.44,
+      "end": 66.38,
+      "originalText": "好，那我們這兩三節課呢，我上次也有講到說，其實這個真的是蠻重量級的課。",
+      "proposedText": "好，我們這兩三節課，我上次也有講到，其實這個真的是蠻重量級的課。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句中語助詞「那」和「呢」，讓語句更流暢。"
+    },
+    {
+      "sentenceId": "sent-9",
+      "paragraphId": "p_1",
+      "start": 66.58,
+      "end": 77.18,
+      "originalText": "那為什麼？因為波羅蜜多是所有我們學佛的一個核心目標。",
+      "proposedText": "為什麼？因為波羅蜜多是所有我們學佛的一個核心目標。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將「那為什麼？」改為「為什麼？」，並保留問號，符合修訂原則中對疑問句的標點要求。"
+    },
+    {
+      "sentenceId": "sent-10",
+      "paragraphId": "p_1",
+      "start": 78.1,
+      "end": 81.5,
+      "originalText": "那我們一直在說我們有無明啊，要斷煩惱啊。",
+      "proposedText": "我們一直在說，我們有無明，要斷煩惱。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句首口語詞「那」，並調整逗號為句號或保持逗號以符合語意流暢（此處保留逗號以連接後續動作，但刪除「那」）。"
+    },
+    {
+      "sentenceId": "sent-11",
+      "paragraphId": "p_1",
+      "start": 82.16,
+      "end": 82.68,
+      "originalText": "那，",
+      "proposedText": "要怎麼辦？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句僅有「那，」，結合上下文及 sent-12，應為疑問句的開頭或獨立疑問。根據 sent-12 是「要怎麼做？」，sent-11 應為「要怎麼辦？」。但看 sent-12 是「要怎麼做？」，sent-11 原文是「那，」。這看起來像是 ASR 切分錯誤。sent-11 和 sent-12 連起來是「那，要怎麼辦？要怎麼做？」。若只修 sent-11，應補齊為「要怎麼辦？」。"
+    },
+    {
+      "sentenceId": "sent-12",
+      "paragraphId": "p_1",
+      "start": 84.14,
+      "end": 85.94,
+      "originalText": "要怎麼辦？要怎麼做？",
+      "proposedText": "要怎麼做？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "確認為疑問句，保留問號。"
+    },
+    {
+      "sentenceId": "sent-13",
+      "paragraphId": "p_2",
+      "start": 86.16,
+      "end": 93.5,
+      "originalText": "其實所有的準備呢，都是為了去衝這一波，那一波，波羅蜜多。",
+      "proposedText": "其實所有的準備，都是為了去衝這一波、那一波般若波羅蜜多。",
+      "categories": [
+        "missing-term",
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "補齊「般若」，將「這一波，那一波，」改為「這一波、那一波」並與後接名相連貫，刪除「呢」。"
+    },
+    {
+      "sentenceId": "sent-14",
+      "paragraphId": "p_2",
+      "start": 94.1,
+      "end": 100.64,
+      "originalText": "所以呢，在這個六度的最後一個，也就是波羅蜜多這裡呢，",
+      "proposedText": "所以，在六度的最後一個，也就是般若波羅蜜多這裡，",
+      "categories": [
+        "missing-term",
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "補齊「般若」，刪除「呢」，修正「六度的最後一個」後的標點。"
+    },
+    {
+      "sentenceId": "sent-15",
+      "paragraphId": "p_2",
+      "start": 100.96,
+      "end": 107.76,
+      "originalText": "我們之前呢，也是有詳細的講過前述的內容。",
+      "proposedText": "我們之前也是有詳細地講過前述的內容。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「呢」，將「的」改為「地」修飾動詞「講過」（或保留「的」亦可，但「詳細地」更規範，若僅刪口語詞則只刪「呢」）。"
+    },
+    {
+      "sentenceId": "sent-16",
+      "paragraphId": "p_2",
+      "start": 107.92,
+      "end": 111.5,
+      "originalText": "但是呢，今天的內容呢，我覺得是，",
+      "proposedText": "但是，今天的內容，我覺得是，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除「呢」，保留語意斷句。"
+    },
+    {
+      "sentenceId": "sent-17",
+      "paragraphId": "p_2",
+      "start": 112.82,
+      "end": 116.88,
+      "originalText": "比起前面講的內容呢，都還要重要得多。",
+      "proposedText": "比起前面講的內容，都還要重要得多。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「呢」。"
+    },
+    {
+      "sentenceId": "sent-19",
+      "paragraphId": "p_2",
+      "start": 123.32,
+      "end": 125.98,
+      "originalText": "好，那這個思維空性的道理呢，",
+      "proposedText": "好，這個思維空性的道理，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「那」和「呢」。"
+    },
+    {
+      "sentenceId": "sent-20",
+      "paragraphId": "p_2",
+      "start": 127.44,
+      "end": 134.42,
+      "originalText": "其實就是我們從121頁，好，現在要進入的主題，空三摩地。",
+      "proposedText": "其實就是我們從121頁，現在要進入的主題，空三摩地。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除「好」，調整標點使句子完整。"
+    },
+    {
+      "sentenceId": "sent-21",
+      "paragraphId": "p_2",
+      "start": 135.34,
+      "end": 140.96,
+      "originalText": "那，這個空三摩地大家也不是，就是，",
+      "proposedText": "這個空三摩地，大家也不是，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「那」和「就是」。"
+    },
+    {
+      "sentenceId": "sent-23",
+      "paragraphId": "p_2",
+      "start": 143.62,
+      "end": 148.86,
+      "originalText": "然後剛好，最近，見岸師父是不是也講三三昧，對不對？",
+      "proposedText": "然後，最近見岸師父是不是也講三三昧，對不對？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除「剛好」，確認問號。"
+    },
+    {
+      "sentenceId": "sent-24",
+      "paragraphId": "p_2",
+      "start": 149.18,
+      "end": 153.78,
+      "originalText": "好，所以大家，那還有我們之前學習《瑜伽師地論》。",
+      "proposedText": "好，大家，還有我們之前學習《瑜伽師地論》。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上書名號《》。"
+    },
+    {
+      "sentenceId": "sent-27",
+      "paragraphId": "p_3",
+      "start": 163.9,
+      "end": 169.22,
+      "originalText": "那乃至於到〈菩薩地〉的止觀那邊呢，",
+      "proposedText": "那乃至於到〈菩薩地〉的止觀那邊，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾無實義的語助詞「呢」，並將逗號保留以連接下文。"
+    },
+    {
+      "sentenceId": "sent-31",
+      "paragraphId": "p_3",
+      "start": 180.56,
+      "end": 184.74,
+      "originalText": "但是呢，老實說，這個下手處要怎麼去觀修呢？",
+      "proposedText": "但是，老實說，這個下手處要怎麼去觀修呢？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句首「呢」，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-33",
+      "paragraphId": "p_3",
+      "start": 187.88,
+      "end": 192.58,
+      "originalText": "我們可以把它聚焦在某，在這些，就是，",
+      "proposedText": "我們可以把它聚焦在這些，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除結巴重複的「某，在這些，就是，」，保留核心語意。"
+    },
+    {
+      "sentenceId": "sent-35",
+      "paragraphId": "p_3",
+      "start": 200.94,
+      "end": 206.96,
+      "originalText": "那這個中觀的思維呢，因為我們在講堂這邊也有上過中觀的課。",
+      "proposedText": "那這個中觀的思維，因為我們在講堂這邊也有上過中觀的課。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾「呢」，將逗號改為句號，因為語意已完整。"
+    },
+    {
+      "sentenceId": "sent-37",
+      "paragraphId": "p_4",
+      "start": 210.24,
+      "end": 219.28,
+      "originalText": "但是呢，在這裡，他的引導呢，就是，幾乎是每一句都很重要。",
+      "proposedText": "但是，在這裡，他的引導，幾乎是每一句都很重要。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除多餘的「呢」和「就是」，使句子更流暢。"
+    },
+    {
+      "sentenceId": "sent-38",
+      "paragraphId": "p_4",
+      "start": 219.54,
+      "end": 228.34,
+      "originalText": "然後，我會細細地講，那我希望同學就是，不要認為。",
+      "proposedText": "然後，我會細細地講，我希望同學不要認為：",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除「就是」，將「就是，不要認為」改為「不要認為：」，引出下文。"
+    },
+    {
+      "sentenceId": "sent-39",
+      "paragraphId": "p_4",
+      "start": 228.34,
+      "end": 234.42,
+      "originalText": "我們先預設一個立場，就是，我今天是第一次聽這一堂課。",
+      "proposedText": "我們先預設一個立場，就是我今天是第一次聽這一堂課。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將「就是，」改為「，就是」或保留，但建議將逗號改為逗號，語意通順。原句「就是，我今天是第一次聽這一堂課」可改為「就是我今天是第一次聽這一堂課」。"
+    },
+    {
+      "sentenceId": "sent-42",
+      "paragraphId": "p_4",
+      "start": 240.7,
+      "end": 245.4,
+      "originalText": "那如果你是以這樣子的態度來聽今天的課的話，",
+      "proposedText": "如果你是以這樣子的態度來聽今天的課的話，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為條件句，逗號正確。"
+    },
+    {
+      "sentenceId": "sent-44",
+      "paragraphId": "p_4",
+      "start": 251,
+      "end": 255.58,
+      "originalText": "那，所以我們常常從以前到現在都會在講說，如理思維。",
+      "proposedText": "所以我們常常從以前到現在都會在講說，如理思維。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除「那，」，將「講說，」改為「講：」或「講，」，建議改為「所以我們常常從以前到現在都會在講如理思維。」"
+    },
+    {
+      "sentenceId": "sent-45",
+      "paragraphId": "p_4",
+      "start": 255.88,
+      "end": 258.08,
+      "originalText": "然後講到後面的止觀呢，",
+      "proposedText": "然後講到後面的止觀，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除「呢」，保留逗號連接下文。"
+    },
+    {
+      "sentenceId": "sent-47",
+      "paragraphId": "p_4",
+      "start": 263.08,
+      "end": 266.94,
+      "originalText": "那，當然空觀有包括什麼人無我跟法無我。",
+      "proposedText": "當然空觀有包括什麼人無我跟法無我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除「那，」，將「包括什麼」改為「包括」，「人無我」與「法無我」之間加頓號。"
+    },
+    {
+      "sentenceId": "sent-49",
+      "paragraphId": "p_5",
+      "start": 271.56,
+      "end": 275.2,
+      "originalText": "這本尤其說達賴喇嘛尊者呢，",
+      "proposedText": "這本尤其說達賴喇嘛尊者，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句尾口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-50",
+      "paragraphId": "p_5",
+      "start": 275.28,
+      "end": 281.42,
+      "originalText": "他身為是，他雖然是藏傳佛教的一個領導者。",
+      "proposedText": "他雖然是藏傳佛教的一個領導者。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除結巴重複的「他身為是，他」，保留實質內容。"
+    },
+    {
+      "sentenceId": "sent-51",
+      "paragraphId": "p_5",
+      "start": 281.72,
+      "end": 286.5,
+      "originalText": "但是呢，他所領導的這個格魯派呢，",
+      "proposedText": "但是他所領導的格魯派，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」及「這個」。"
+    },
+    {
+      "sentenceId": "sent-52",
+      "paragraphId": "p_5",
+      "start": 286.6,
+      "end": 288.16,
+      "originalText": "主要，或者是，",
+      "proposedText": "主要，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「或者是，」，使語意更精簡。"
+    },
+    {
+      "sentenceId": "sent-53",
+      "paragraphId": "p_5",
+      "start": 288.34,
+      "end": 291.52,
+      "originalText": "或者可以講說，我們說整個藏區呢，",
+      "proposedText": "或者可以講說，整個藏區，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「我們說」及「呢」。"
+    },
+    {
+      "sentenceId": "sent-54",
+      "paragraphId": "p_5",
+      "start": 291.66,
+      "end": 296.82,
+      "originalText": "都認，就是他們是自詡為是中觀派。",
+      "proposedText": "都認，就是他們是自詡為中觀派。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除「是」與「中觀派」之間多餘的逗號。"
+    },
+    {
+      "sentenceId": "sent-56",
+      "paragraphId": "p_5",
+      "start": 298.96,
+      "end": 302.86,
+      "originalText": "就是說他們是中觀應成派的追隨者，學習者。",
+      "proposedText": "就是說他們是中觀應成派的追隨者、學習者。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相「追隨者」與「學習者」之間應使用頓號。"
+    },
+    {
+      "sentenceId": "sent-57",
+      "paragraphId": "p_5",
+      "start": 303.46,
+      "end": 309.92,
+      "originalText": "所以呢，他們比較不會去以唯識的思想來去做觀修，",
+      "proposedText": "所以，他們比較不會以唯識的思想來做觀修，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」及「去」。"
+    },
+    {
+      "sentenceId": "sent-60",
+      "paragraphId": "p_5",
+      "start": 314.42,
+      "end": 316.56,
+      "originalText": "但是在他們操作的時候呢，",
+      "proposedText": "但是在他們操作的時候，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句尾口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-62",
+      "paragraphId": "p_6",
+      "start": 318.26,
+      "end": 320.92,
+      "originalText": "中觀應成派他是最了義，",
+      "proposedText": "中觀應成派是最了義，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除多餘的代詞「他」。"
+    },
+    {
+      "sentenceId": "sent-70",
+      "paragraphId": "p_6",
+      "start": 343.64,
+      "end": 348.24,
+      "originalText": "那麼我們可以就這樣子的跟著今天課程的路線，",
+      "proposedText": "那麼我們可以就這樣子跟著今天課程的路線，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "「這樣子」為口語贅詞，可刪除。"
+    },
+    {
+      "sentenceId": "sent-88",
+      "paragraphId": "p_8",
+      "start": 400.1,
+      "end": 403.88,
+      "originalText": "對不對，因為你不知道走向你來的這個人，",
+      "proposedText": "對不對？因為你不知道走向你來的這個人，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-90",
+      "paragraphId": "p_8",
+      "start": 406.78,
+      "end": 408.84,
+      "originalText": "所以菩薩自己這裡呢，",
+      "proposedText": "所以菩薩自己，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-94",
+      "paragraphId": "p_8",
+      "start": 419.04,
+      "end": 421.36,
+      "originalText": "但是呢，在對於我們，",
+      "proposedText": "但是，在對於我們，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-98",
+      "paragraphId": "p_9",
+      "start": 431.98,
+      "end": 435.12,
+      "originalText": "學得好、學得深，對不對。",
+      "proposedText": "學得好、學得深，對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-99",
+      "paragraphId": "p_9",
+      "start": 435.52,
+      "end": 436.76,
+      "originalText": "好，所以呢，",
+      "proposedText": "好，所以，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-112",
+      "paragraphId": "p_10",
+      "start": 468,
+      "end": 469.28,
+      "originalText": "這樣的法門呢，",
+      "proposedText": "這樣的法門，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-162",
+      "paragraphId": "p_14",
+      "start": 541.68,
+      "end": 542.34,
+      "originalText": "你要學，",
+      "proposedText": "你要學就會覺得比較懶散，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併斷句，刪除無實義的語助詞「嗯」，修正標點。"
+    },
+    {
+      "sentenceId": "sent-166",
+      "paragraphId": "p_14",
+      "start": 545.58,
+      "end": 546.88,
+      "originalText": "比較懶散啊，",
+      "proposedText": "因為沒興趣嘛。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾多餘的「啊」，改為句號。"
+    },
+    {
+      "sentenceId": "sent-170",
+      "paragraphId": "p_15",
+      "start": 548.98,
+      "end": 549.06,
+      "originalText": "啊，",
+      "proposedText": "我就來聽一堂課，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句首口語詞「啊」。"
+    },
+    {
+      "sentenceId": "sent-174",
+      "paragraphId": "p_15",
+      "start": 552.78,
+      "end": 553.9,
+      "originalText": "你會把它什麼，",
+      "proposedText": "你會把它放在心裡面，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「什麼」。"
+    },
+    {
+      "sentenceId": "sent-178",
+      "paragraphId": "p_15",
+      "start": 558.12,
+      "end": 558.54,
+      "originalText": "啊，",
+      "proposedText": "你有修的話，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句首口語詞「啊」及句尾語助詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-184",
+      "paragraphId": "p_16",
+      "start": 564.48,
+      "end": 566.1,
+      "originalText": "那我們就不多說，",
+      "proposedText": "那我們就不多說。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將誤留的逗號改為句號，語意完整。"
+    },
+    {
+      "sentenceId": "sent-185",
+      "paragraphId": "p_16",
+      "start": 566.2,
+      "end": 567.42,
+      "originalText": "那上次呢，",
+      "proposedText": "上次講到一百二十一頁，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併數字斷句，將「一百，二十一頁」修正為「一百二十一頁」。"
+    },
+    {
+      "sentenceId": "sent-337",
+      "paragraphId": "p_29",
+      "start": 755.52,
+      "end": 755.74,
+      "originalText": "就是說，",
+      "proposedText": "還沒有轉凡成聖之前，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「就是說，」，並與下一句合併以去除斷句。"
+    },
+    {
+      "sentenceId": "sent-338",
+      "paragraphId": "p_29",
+      "start": 756,
+      "end": 758.46,
+      "originalText": "還沒有轉凡成聖之前啊，",
+      "proposedText": "也就是包含了資糧位，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併斷句，刪除「也就是，」後的逗號，使語意連貫。"
+    },
+    {
+      "sentenceId": "sent-339",
+      "paragraphId": "p_29",
+      "start": 758.52,
+      "end": 758.9,
+      "originalText": "也就是，",
+      "proposedText": "乃至到加行位。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併斷句，刪除「然後，」及「怎麼，」等口語贅詞，將「好，」改為句號。"
+    },
+    {
+      "sentenceId": "sent-340",
+      "paragraphId": "p_29",
+      "start": 759.42,
+      "end": 760.68,
+      "originalText": "包含了資糧位，",
+      "proposedText": "所以，在此之前是指資糧位，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，保留「所以，」作為連接詞，刪除中間斷句。"
+    },
+    {
+      "sentenceId": "sent-341",
+      "paragraphId": "p_29",
+      "start": 761.16,
+      "end": 761.6,
+      "originalText": "然後，",
+      "proposedText": "我們可以站，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「就，」等口語贅詞。"
+    },
+    {
+      "sentenceId": "sent-342",
+      "paragraphId": "p_29",
+      "start": 761.78,
+      "end": 762.16,
+      "originalText": "怎麼，",
+      "proposedText": "大概可以這麼說，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞。"
+    },
+    {
+      "sentenceId": "sent-343",
+      "paragraphId": "p_29",
+      "start": 762.34,
+      "end": 764.04,
+      "originalText": "乃至到加行位，",
+      "proposedText": "所以在資糧位，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞。"
+    },
+    {
+      "sentenceId": "sent-344",
+      "paragraphId": "p_29",
+      "start": 764.16,
+      "end": 764.36,
+      "originalText": "好，",
+      "proposedText": "我們現在是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「我們說」等口語贅詞，保留疑問句。"
+    },
+    {
+      "sentenceId": "sent-345",
+      "paragraphId": "p_29",
+      "start": 764.44,
+      "end": 765.08,
+      "originalText": "所以，",
+      "proposedText": "假設我們都是進入資糧位，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞。"
+    },
+    {
+      "sentenceId": "sent-346",
+      "paragraphId": "p_29",
+      "start": 765.14,
+      "end": 767.32,
+      "originalText": "在此之前是指資糧位，",
+      "proposedText": "那麼我們應該要先什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞，保留疑問句。"
+    },
+    {
+      "sentenceId": "sent-347",
+      "paragraphId": "p_29",
+      "start": 767.48,
+      "end": 768.2,
+      "originalText": "我們可以站，",
+      "proposedText": "要先獲得正確的中觀見地。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞，將句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-348",
+      "paragraphId": "p_29",
+      "start": 768.34,
+      "end": 768.76,
+      "originalText": "就，",
+      "proposedText": "這個見地，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「呃，」等口語贅詞。"
+    },
+    {
+      "sentenceId": "sent-349",
+      "paragraphId": "p_30",
+      "start": 768.88,
+      "end": 770.04,
+      "originalText": "大概可以這麼說，",
+      "proposedText": "白話文就是思想，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞。"
+    },
+    {
+      "sentenceId": "sent-350",
+      "paragraphId": "p_30",
+      "start": 770.2,
+      "end": 770.24,
+      "originalText": "好，",
+      "proposedText": "但是這個思想是很縝密的，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "合併斷句，刪除「喔」等口語贅詞，保留逗號以連接下一句。"
+    },
+    {
+      "sentenceId": "sent-351",
+      "paragraphId": "p_30",
+      "start": 770.34,
+      "end": 771.64,
+      "originalText": "所以在資糧位，",
+      "proposedText": "而且是很堅固的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞，將句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-352",
+      "paragraphId": "p_30",
+      "start": 771.72,
+      "end": 772.14,
+      "originalText": "我們現在，",
+      "proposedText": "因為我們說，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，保留「因為我們說，」作為連接詞。"
+    },
+    {
+      "sentenceId": "sent-353",
+      "paragraphId": "p_30",
+      "start": 772.22,
+      "end": 773.22,
+      "originalText": "我們說我們現在是什麼？",
+      "proposedText": "要到達一個見地，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，保留逗號以連接下一句。"
+    },
+    {
+      "sentenceId": "sent-354",
+      "paragraphId": "p_30",
+      "start": 773.74,
+      "end": 775.88,
+      "originalText": "假設我們都是進入資糧位嘛，",
+      "proposedText": "代表它能夠代表你內心的思想，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，保留逗號以連接下一句。"
+    },
+    {
+      "sentenceId": "sent-355",
+      "paragraphId": "p_30",
+      "start": 776,
+      "end": 776.28,
+      "originalText": "好，",
+      "proposedText": "你現在看一切世界，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，保留逗號以連接下一句。"
+    },
+    {
+      "sentenceId": "sent-356",
+      "paragraphId": "p_30",
+      "start": 776.46,
+      "end": 778.24,
+      "originalText": "那麼我們應該要先什麼？",
+      "proposedText": "你都是以這樣子的方式去投射、去看待。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，刪除「好，」等口語贅詞，將「去投射，去看待」改為「去投射、去看待」，並將句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-373",
+      "paragraphId": "p_32",
+      "start": 804.18,
+      "end": 804.52,
+      "originalText": "這個，",
+      "proposedText": "這樣子的一個強度，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句首口語贅詞「這個，」，使語句更流暢。"
+    },
+    {
+      "sentenceId": "sent-374",
+      "paragraphId": "p_32",
+      "start": 804.62,
+      "end": 806.72,
+      "originalText": "這樣子的一個強度，",
+      "proposedText": "我們才可以叫做見地。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句尾口語贅詞「好，」，並將逗號改為句號以結束完整語意。"
+    },
+    {
+      "sentenceId": "sent-380",
+      "paragraphId": "p_32",
+      "start": 810.92,
+      "end": 811.02,
+      "originalText": "啊，",
+      "proposedText": "那我就有，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾口語贅詞「好，」，保留逗號以連接後續內容。"
+    },
+    {
+      "sentenceId": "sent-382",
+      "paragraphId": "p_32",
+      "start": 811.62,
+      "end": 813.82,
+      "originalText": "我學到了中觀正見了，",
+      "proposedText": "我學到了中觀正見了。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句尾口語贅詞「好，」，並將逗號改為句號以結束完整語意。"
+    },
+    {
+      "sentenceId": "sent-385",
+      "paragraphId": "p_33",
+      "start": 816.64,
+      "end": 817.24,
+      "originalText": "好，",
+      "proposedText": "所以，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句首口語贅詞「好，」，使語句更流暢。"
+    },
+    {
+      "sentenceId": "sent-395",
+      "paragraphId": "p_33",
+      "start": 832.74,
+      "end": 833.04,
+      "originalText": "對不對？",
+      "proposedText": "我們上一節，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾口語贅詞「好，」，保留逗號以連接後續內容。"
+    },
+    {
+      "sentenceId": "sent-399",
+      "paragraphId": "p_34",
+      "start": 836.54,
+      "end": 837.3,
+      "originalText": "對不對？",
+      "proposedText": "好，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾口語贅詞「好，」，保留逗號以連接後續內容。"
+    },
+    {
+      "sentenceId": "sent-401",
+      "paragraphId": "p_34",
+      "start": 837.86,
+      "end": 838.32,
+      "originalText": "所以呢，",
+      "proposedText": "所以，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」，使語句更簡潔。"
+    },
+    {
+      "sentenceId": "sent-411",
+      "paragraphId": "p_35",
+      "start": 851.3,
+      "end": 852.38,
+      "originalText": "都是要穩固，",
+      "proposedText": "都是要穩固",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "移除句末逗號，與下一句連接。"
+    },
+    {
+      "sentenceId": "sent-413",
+      "paragraphId": "p_35",
+      "start": 854.68,
+      "end": 856.16,
+      "originalText": "也就是你的見地，",
+      "proposedText": "也就是你的見地。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將逗號改為句號，因為「也就是你的見地」是對前句的補充說明，語意已完整。"
+    },
+    {
+      "sentenceId": "sent-414",
+      "paragraphId": "p_35",
+      "start": 856.32,
+      "end": 858.52,
+      "originalText": "那這個正見或者是見地呢，",
+      "proposedText": "那這個正見或者是見地，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「呢」，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-415",
+      "paragraphId": "p_35",
+      "start": 858.74,
+      "end": 858.9,
+      "originalText": "喔，",
+      "proposedText": "不管你是中觀的也好，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「喔」，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-416",
+      "paragraphId": "p_35",
+      "start": 858.92,
+      "end": 860.82,
+      "originalText": "不管你是中觀的也好，",
+      "proposedText": "唯識的也好，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「喔」，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-417",
+      "paragraphId": "p_35",
+      "start": 860.92,
+      "end": 861.16,
+      "originalText": "喔，",
+      "proposedText": "或者是，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "保留逗號，因為句子未完。"
+    },
+    {
+      "sentenceId": "sent-418",
+      "paragraphId": "p_35",
+      "start": 861.28,
+      "end": 862.36,
+      "originalText": "唯識的也好，",
+      "proposedText": "聲聞乘的見地也好，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「呃」、「就是我們說」、「是」、「呃」等冗詞，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-419",
+      "paragraphId": "p_35",
+      "start": 862.46,
+      "end": 862.6,
+      "originalText": "喔，",
+      "proposedText": "乃至於，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "保留逗號，因為句子未完。"
+    },
+    {
+      "sentenceId": "sent-420",
+      "paragraphId": "p_35",
+      "start": 862.76,
+      "end": 863.56,
+      "originalText": "或者是，",
+      "proposedText": "金剛乘的見地也都可以。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「是」、「好」，精簡口語，並改為句號。"
+    },
+    {
+      "sentenceId": "sent-421",
+      "paragraphId": "p_36",
+      "start": 863.56,
+      "end": 864.1,
+      "originalText": "呃，",
+      "proposedText": "但是，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「呢」，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-422",
+      "paragraphId": "p_36",
+      "start": 864.14,
+      "end": 865.58,
+      "originalText": "就是我們說，",
+      "proposedText": "你一定要按照佛所留下來的聖言量、法語，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「聖言量」與「法語」之間加上頓號，表示並列。"
+    },
+    {
+      "sentenceId": "sent-423",
+      "paragraphId": "p_36",
+      "start": 865.7,
+      "end": 866.14,
+      "originalText": "是，",
+      "proposedText": "藉由師長的教導，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「然後呢」、「呃」，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-424",
+      "paragraphId": "p_36",
+      "start": 866.26,
+      "end": 866.94,
+      "originalText": "呃，",
+      "proposedText": "或者是正確的資糧，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「呃」，精簡口語。"
+    },
+    {
+      "sentenceId": "sent-425",
+      "paragraphId": "p_36",
+      "start": 866.96,
+      "end": 869.16,
+      "originalText": "聲聞乘的見地也好，",
+      "proposedText": "也就是這些經律論，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "保留逗號，因為句子未完。"
+    },
+    {
+      "sentenceId": "sent-426",
+      "paragraphId": "p_36",
+      "start": 869.24,
+      "end": 869.42,
+      "originalText": "好，",
+      "proposedText": "來獲得正確的見地。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除「好」，精簡口語，並改為句號。"
+    },
+    {
+      "sentenceId": "sent-427",
+      "paragraphId": "p_36",
+      "start": 869.5,
+      "end": 870.14,
+      "originalText": "乃至於，",
+      "proposedText": "接著，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "保留逗號，因為句子未完。"
+    },
+    {
+      "sentenceId": "sent-449",
+      "paragraphId": "p_38",
+      "start": 900.64,
+      "end": 901.96,
+      "originalText": "這個中這個字，",
+      "proposedText": "這個「中」字，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將「中」加引號以強調名相，並移除重複的「這個」。"
+    },
+    {
+      "sentenceId": "sent-453",
+      "paragraphId": "p_38",
+      "start": 905.34,
+      "end": 905.92,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-454",
+      "paragraphId": "p_38",
+      "start": 906.5,
+      "end": 906.96,
+      "originalText": "觀，",
+      "proposedText": "觀中道，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併「觀」與「中道」，使語意完整。"
+    },
+    {
+      "sentenceId": "sent-460",
+      "paragraphId": "p_39",
+      "start": 913.76,
+      "end": 914.56,
+      "originalText": "就是什麼，",
+      "proposedText": "就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-462",
+      "paragraphId": "p_39",
+      "start": 916.68,
+      "end": 918.14,
+      "originalText": "就代表它不是屬於，",
+      "proposedText": "就代表它不是屬於旁門左道嘛，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併「就代表它不是屬於」與「旁門左道嘛」。"
+    },
+    {
+      "sentenceId": "sent-463",
+      "paragraphId": "p_39",
+      "start": 918.2,
+      "end": 919.76,
+      "originalText": "旁門左道嘛，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號，並移除重複的「對不對」。"
+    },
+    {
+      "sentenceId": "sent-470",
+      "paragraphId": "p_40",
+      "start": 925.98,
+      "end": 927.54,
+      "originalText": "它就是代表一條正，",
+      "proposedText": "它就是代表一條康莊的正途，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併「一條」與「康莊的正途」，移除重複的「一條」。"
+    },
+    {
+      "sentenceId": "sent-477",
+      "paragraphId": "p_40",
+      "start": 936.34,
+      "end": 938.48,
+      "originalText": "都是我們應該要去除掉的，",
+      "proposedText": "都是我們應該要去除掉的錯誤見解，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併「錯誤的見解」與前句，使語意完整。"
+    },
+    {
+      "sentenceId": "sent-482",
+      "paragraphId": "p_41",
+      "start": 945.74,
+      "end": 947.24,
+      "originalText": "常邊跟什麼，",
+      "proposedText": "常邊、斷邊，",
+      "categories": [
+        "punctuation",
+        "missing-term"
+      ],
+      "reason": "依據 reAsrHint 補齊「斷」字，並修正「常邊跟什麼」為「常邊、斷邊」，加上頓號。"
+    },
+    {
+      "sentenceId": "sent-485",
+      "paragraphId": "p_41",
+      "start": 948.88,
+      "end": 950.58,
+      "originalText": "因為常邊跟斷邊呢，",
+      "proposedText": "因為常邊跟斷邊，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-487",
+      "paragraphId": "p_41",
+      "start": 952.8,
+      "end": 953.18,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "反問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-492",
+      "paragraphId": "p_41",
+      "start": 957.76,
+      "end": 960.56,
+      "originalText": "那你就知道旁邊的一定要先掃除掉，",
+      "proposedText": "那你就知道邊見的一定要先掃除掉，",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "「旁邊」應為「邊見」，修正名相錯誤。"
+    },
+    {
+      "sentenceId": "sent-494",
+      "paragraphId": "p_42",
+      "start": 961.5,
+      "end": 963.88,
+      "originalText": "那旁邊要怎麼掃除掉呢，",
+      "proposedText": "那邊見要怎麼掃除掉？",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "「旁邊」應為「邊見」，疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-495",
+      "paragraphId": "p_42",
+      "start": 963.96,
+      "end": 964.6,
+      "originalText": "就是呢，",
+      "proposedText": "就是，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-502",
+      "paragraphId": "p_42",
+      "start": 976.38,
+      "end": 977.16,
+      "originalText": "就像，",
+      "proposedText": "我們現在走在一條路上，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「就像」。"
+    },
+    {
+      "sentenceId": "sent-505",
+      "paragraphId": "p_43",
+      "start": 979.88,
+      "end": 980.22,
+      "originalText": "啊，",
+      "proposedText": "人家說，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「啊」。"
+    },
+    {
+      "sentenceId": "sent-507",
+      "paragraphId": "p_43",
+      "start": 980.66,
+      "end": 980.74,
+      "originalText": "欸，",
+      "proposedText": "你怎麼都偏左或者是偏右？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-509",
+      "paragraphId": "p_43",
+      "start": 982.74,
+      "end": 983.76,
+      "originalText": "你說沒有啊，",
+      "proposedText": "你說沒有啊。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此處為轉述語氣，保留「啊」作為語氣詞，但前句「你怎麼都偏左或者是偏右」已改為問號，此處為回答，維持逗號或句號皆可，但考慮到後續「我走在中間啊」，此處改為句號更清晰，或者保留逗號連接。鑑於「你說沒有啊」是完整語意，改為句號。"
+    },
+    {
+      "sentenceId": "sent-512",
+      "paragraphId": "p_43",
+      "start": 985.56,
+      "end": 985.74,
+      "originalText": "啊，",
+      "proposedText": "但是旁邊的人，",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "「旁邊」應為「邊見」，修正名相錯誤。"
+    },
+    {
+      "sentenceId": "sent-515",
+      "paragraphId": "p_43",
+      "start": 987.46,
+      "end": 987.68,
+      "originalText": "就是，",
+      "proposedText": "我們說，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「就是」。"
+    },
+    {
+      "sentenceId": "sent-553",
+      "paragraphId": "p_47",
+      "start": 1037.36,
+      "end": 1038.96,
+      "originalText": "後面的非有就是什麼，",
+      "proposedText": "後面的非有就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-554",
+      "paragraphId": "p_47",
+      "start": 1039.12,
+      "end": 1040.32,
+      "originalText": "自性的沒有，",
+      "proposedText": "自性的沒有。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-555",
+      "paragraphId": "p_47",
+      "start": 1041.58,
+      "end": 1042.64,
+      "originalText": "自性的沒有，",
+      "proposedText": "自性的沒有。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-557",
+      "paragraphId": "p_47",
+      "start": 1044.64,
+      "end": 1045.08,
+      "originalText": "就是什麼，",
+      "proposedText": "就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-559",
+      "paragraphId": "p_47",
+      "start": 1046.12,
+      "end": 1048.2,
+      "originalText": "它就是根本不存在，",
+      "proposedText": "它就是根本不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-562",
+      "paragraphId": "p_47",
+      "start": 1050.5,
+      "end": 1053.94,
+      "originalText": "一個是真的不存在，",
+      "proposedText": "一個是真的不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-564",
+      "paragraphId": "p_47",
+      "start": 1055.02,
+      "end": 1056.16,
+      "originalText": "一個是真的不存在，",
+      "proposedText": "一個是真的不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-570",
+      "paragraphId": "p_48",
+      "start": 1066.28,
+      "end": 1066.74,
+      "originalText": "就是什麼，",
+      "proposedText": "就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-571",
+      "paragraphId": "p_48",
+      "start": 1066.88,
+      "end": 1067.42,
+      "originalText": "自性，",
+      "proposedText": "自性。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-575",
+      "paragraphId": "p_48",
+      "start": 1071.16,
+      "end": 1072.46,
+      "originalText": "你就會墮入什麼，",
+      "proposedText": "你就會墮入什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-576",
+      "paragraphId": "p_48",
+      "start": 1073.16,
+      "end": 1074.94,
+      "originalText": "不是常邊就是斷邊，",
+      "proposedText": "不是常邊就是斷邊。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-602",
+      "paragraphId": "p_51",
+      "start": 1124.56,
+      "end": 1125.28,
+      "originalText": "需要嗎，",
+      "proposedText": "需要嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-607",
+      "paragraphId": "p_51",
+      "start": 1136.84,
+      "end": 1137.02,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-612",
+      "paragraphId": "p_51",
+      "start": 1141.1,
+      "end": 1145.08,
+      "originalText": "有哪一件事情是以它自己的力量去成立它的呢，",
+      "proposedText": "有哪一件事情是以它自己的力量去成立它的呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-615",
+      "paragraphId": "p_52",
+      "start": 1148.02,
+      "end": 1148.5,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-616",
+      "paragraphId": "p_52",
+      "start": 1149.04,
+      "end": 1149.74,
+      "originalText": "但是呢，",
+      "proposedText": "但是，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-627",
+      "paragraphId": "p_53",
+      "start": 1169.38,
+      "end": 1170.54,
+      "originalText": "細細的去觀察，",
+      "proposedText": "細細地去觀察，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「去」為動詞補語，應使用「地」；句末逗號改為句號以結束語意。"
+    },
+    {
+      "sentenceId": "sent-634",
+      "paragraphId": "p_53",
+      "start": 1181.12,
+      "end": 1182.54,
+      "originalText": "但是事實上呢，",
+      "proposedText": "但是事實上，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「事實上」，將「但是事實上呢，」精簡為「但是事實上，」，並修正標點。"
+    },
+    {
+      "sentenceId": "sent-635",
+      "paragraphId": "p_53",
+      "start": 1183.2,
+      "end": 1184.1,
+      "originalText": "事實上，",
+      "proposedText": "你做的決定真的是你所做的決定嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾應使用問號「？」。"
+    },
+    {
+      "sentenceId": "sent-643",
+      "paragraphId": "p_54",
+      "start": 1204.76,
+      "end": 1206.2,
+      "originalText": "跟你昨天，",
+      "proposedText": "跟你昨天吵架的那個人，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，使語意更連貫。"
+    },
+    {
+      "sentenceId": "sent-645",
+      "paragraphId": "p_54",
+      "start": 1208.66,
+      "end": 1210.56,
+      "originalText": "會不會有點受到影響，",
+      "proposedText": "會不會受到影響？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾應使用問號「？」。"
+    },
+    {
+      "sentenceId": "sent-646",
+      "paragraphId": "p_54",
+      "start": 1210.7,
+      "end": 1212.44,
+      "originalText": "或者是你剛好，",
+      "proposedText": "或者是你剛好開啟電視看到，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併斷句，使語意更連貫。"
+    },
+    {
+      "sentenceId": "sent-650",
+      "paragraphId": "p_55",
+      "start": 1218.7,
+      "end": 1222.28,
+      "originalText": "會不會影響到你的一些想法，",
+      "proposedText": "會不會影響到你的一些想法？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾應使用問號「？」。"
+    },
+    {
+      "sentenceId": "sent-658",
+      "paragraphId": "p_55",
+      "start": 1236.62,
+      "end": 1238.78,
+      "originalText": "包括你這邊聽到的，",
+      "proposedText": "包括你這邊聽到的、那邊看到的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號「、」。"
+    },
+    {
+      "sentenceId": "sent-660",
+      "paragraphId": "p_55",
+      "start": 1239.8,
+      "end": 1241.72,
+      "originalText": "或者是突然想到的，",
+      "proposedText": "或者是突然想到的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句末改為句號「。」，結束段落。"
+    },
+    {
+      "sentenceId": "sent-663",
+      "paragraphId": "p_56",
+      "start": 1246.28,
+      "end": 1249.86,
+      "originalText": "這些在在都會影響到你的決定，",
+      "proposedText": "這些在在都會影響到你的決定。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "將句尾逗號改為句號，使語意完整；刪除口語贅詞「那」。"
+    },
+    {
+      "sentenceId": "sent-664",
+      "paragraphId": "p_56",
+      "start": 1250.08,
+      "end": 1252.56,
+      "originalText": "那當然我們只是舉了一個比較粗的，",
+      "proposedText": "我們只是舉了一個比較粗的，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「那當然」，使文句更精簡。"
+    },
+    {
+      "sentenceId": "sent-665",
+      "paragraphId": "p_56",
+      "start": 1252.68,
+      "end": 1254.18,
+      "originalText": "那比較細的，",
+      "proposedText": "比較細的，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「那」。"
+    },
+    {
+      "sentenceId": "sent-666",
+      "paragraphId": "p_56",
+      "start": 1254.28,
+      "end": 1256.34,
+      "originalText": "這個大家都可以，",
+      "proposedText": "大家都可以，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「這個」。"
+    },
+    {
+      "sentenceId": "sent-669",
+      "paragraphId": "p_56",
+      "start": 1260.34,
+      "end": 1262.58,
+      "originalText": "那遠離這兩個，",
+      "proposedText": "遠離這兩個，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「那」。"
+    },
+    {
+      "sentenceId": "sent-674",
+      "paragraphId": "p_57",
+      "start": 1271.58,
+      "end": 1272.54,
+      "originalText": "62種，",
+      "proposedText": "六十二種，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將數字「62」轉為中文「六十二」，符合經論講記規範。"
+    },
+    {
+      "sentenceId": "sent-675",
+      "paragraphId": "p_57",
+      "start": 1272.6,
+      "end": 1274.68,
+      "originalText": "還有包含我們說外道的62種，",
+      "proposedText": "還有包含我們說外道的六十二種，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將數字「62」轉為中文「六十二」。"
+    },
+    {
+      "sentenceId": "sent-677",
+      "paragraphId": "p_57",
+      "start": 1275.6,
+      "end": 1278.96,
+      "originalText": "當然62種是扣掉常見跟斷見，",
+      "proposedText": "當然六十二種是扣掉常見跟斷見，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將數字「62」轉為中文「六十二」。"
+    },
+    {
+      "sentenceId": "sent-679",
+      "paragraphId": "p_57",
+      "start": 1281.26,
+      "end": 1283.84,
+      "originalText": "那麼斷見大家要更注意一下，",
+      "proposedText": "斷見大家要更注意一下，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「那麼」。"
+    },
+    {
+      "sentenceId": "sent-680",
+      "paragraphId": "p_57",
+      "start": 1284.42,
+      "end": 1285.38,
+      "originalText": "斷見呢，",
+      "proposedText": "斷見，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除句尾語助詞「呢」，並調整標點。"
+    },
+    {
+      "sentenceId": "sent-686",
+      "paragraphId": "p_58",
+      "start": 1293.5,
+      "end": 1295.86,
+      "originalText": "那平常我們不修的話，",
+      "proposedText": "平常我們不修的話，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「那」。"
+    },
+    {
+      "sentenceId": "sent-695",
+      "paragraphId": "p_58",
+      "start": 1310.76,
+      "end": 1312.96,
+      "originalText": "那因為那又是你的禪修經驗，",
+      "proposedText": "因為那又是你的禪修經驗，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「那」。"
+    },
+    {
+      "sentenceId": "sent-699",
+      "paragraphId": "p_59",
+      "start": 1319.46,
+      "end": 1322.34,
+      "originalText": "那麼你一旦有了那個體驗之後呢，",
+      "proposedText": "那麼你一旦有了那個體驗之後，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-700",
+      "paragraphId": "p_59",
+      "start": 1322.48,
+      "end": 1323.8,
+      "originalText": "你就會什麼，",
+      "proposedText": "你就會跑出一個錯誤的見解，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「什麼」，使語意連貫。"
+    },
+    {
+      "sentenceId": "sent-702",
+      "paragraphId": "p_59",
+      "start": 1326.06,
+      "end": 1326.52,
+      "originalText": "就是什麼，",
+      "proposedText": "就是，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「什麼」，保留語氣。"
+    },
+    {
+      "sentenceId": "sent-711",
+      "paragraphId": "p_60",
+      "start": 1341.04,
+      "end": 1341.7,
+      "originalText": "沒有，",
+      "proposedText": "沒有業力，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併重複的「沒有」，修正標點。"
+    },
+    {
+      "sentenceId": "sent-712",
+      "paragraphId": "p_60",
+      "start": 1341.7,
+      "end": 1341.86,
+      "originalText": "沒有，",
+      "proposedText": "沒有善惡的果報，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「沒有」及口語贅詞「這個」。"
+    },
+    {
+      "sentenceId": "sent-716",
+      "paragraphId": "p_60",
+      "start": 1348.78,
+      "end": 1350.74,
+      "originalText": "影響下去你的身口意呢，",
+      "proposedText": "影響下去你的身口意，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-722",
+      "paragraphId": "p_61",
+      "start": 1363.7,
+      "end": 1366.34,
+      "originalText": "那麼我們接下來就是進入到今天的這個，",
+      "proposedText": "那麼我們接下來就是進入到今天的空三摩地，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「這個」。"
+    },
+    {
+      "sentenceId": "sent-723",
+      "paragraphId": "p_61",
+      "start": 1366.44,
+      "end": 1369.28,
+      "originalText": "空三摩地了知人無我跟法無我，",
+      "proposedText": "了知人無我跟法無我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將句尾逗號改為句號，因為此處語意完整。"
+    },
+    {
+      "sentenceId": "sent-726",
+      "paragraphId": "p_61",
+      "start": 1371.7,
+      "end": 1373.4,
+      "originalText": "那這裡講的空三摩地呢，",
+      "proposedText": "那這裡講的空三摩地，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-730",
+      "paragraphId": "p_61",
+      "start": 1378.52,
+      "end": 1379.38,
+      "originalText": "但是呢，",
+      "proposedText": "但是，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-733",
+      "paragraphId": "p_62",
+      "start": 1383.24,
+      "end": 1383.44,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-734",
+      "paragraphId": "p_62",
+      "start": 1384.22,
+      "end": 1384.66,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-735",
+      "paragraphId": "p_62",
+      "start": 1384.86,
+      "end": 1386.2,
+      "originalText": "三摩地是什麼意思，",
+      "proposedText": "三摩地是什麼意思？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-736",
+      "paragraphId": "p_62",
+      "start": 1389.28,
+      "end": 1390.04,
+      "originalText": "什麼意思，",
+      "proposedText": "什麼意思？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-738",
+      "paragraphId": "p_62",
+      "start": 1392.6,
+      "end": 1394.02,
+      "originalText": "可以給我一個字嗎，",
+      "proposedText": "可以給我一個字嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-741",
+      "paragraphId": "p_62",
+      "start": 1397,
+      "end": 1397.46,
+      "originalText": "對不對，",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-744",
+      "paragraphId": "p_62",
+      "start": 1398.96,
+      "end": 1401.62,
+      "originalText": "這個空三摩地是什麼意思，",
+      "proposedText": "這個空三摩地是什麼意思？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-754",
+      "paragraphId": "p_63",
+      "start": 1431.48,
+      "end": 1431.96,
+      "originalText": "163 00dC",
+      "proposedText": "〔在此處ASR識別嚴重錯誤，疑似為「安住」或「融入」之誤，因缺乏上下文及音訊證據，無法確切還原，建議保留原意或刪除此處亂碼〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「163 00dC」為明顯ASR亂碼，且後續句子重複亂碼，無法推斷正確經論名相，故標註異常。"
+    },
+    {
+      "sentenceId": "sent-755",
+      "paragraphId": "p_63",
+      "start": 1431.96,
+      "end": 1434.66,
+      "originalText": "有閥寨的大靈的knit，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有閥寨的大靈的knit」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-756",
+      "paragraphId": "p_63",
+      "start": 1434.66,
+      "end": 1435.7,
+      "originalText": "有要靠的那一個個 voyant，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個個 voyant」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-757",
+      "paragraphId": "p_64",
+      "start": 1437.12,
+      "end": 1439.16,
+      "originalText": "有要靠的那一個個有幻的ised，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個個有幻的ised」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-758",
+      "paragraphId": "p_64",
+      "start": 1439.16,
+      "end": 1439.7,
+      "originalText": "有要靠的那一個有幻的my，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的my」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-759",
+      "paragraphId": "p_64",
+      "start": 1439.7,
+      "end": 1440.86,
+      "originalText": "有要靠的那一個有幻的ay.",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的ay.」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-760",
+      "paragraphId": "p_64",
+      "start": 1446.84,
+      "end": 1448.66,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-761",
+      "paragraphId": "p_64",
+      "start": 1448.66,
+      "end": 1449.68,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-762",
+      "paragraphId": "p_64",
+      "start": 1449.68,
+      "end": 1450.36,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-763",
+      "paragraphId": "p_64",
+      "start": 1450.36,
+      "end": 1450.42,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-764",
+      "paragraphId": "p_64",
+      "start": 1450.42,
+      "end": 1453.76,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-765",
+      "paragraphId": "p_64",
+      "start": 1453.76,
+      "end": 1456.2,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-766",
+      "paragraphId": "p_64",
+      "start": 1456.2,
+      "end": 1456.7,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-767",
+      "paragraphId": "p_64",
+      "start": 1457.32,
+      "end": 1457.9,
+      "originalText": "有要靠的那一個有幻的y，",
+      "proposedText": "〔ASR亂碼，無法辨識〕",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "原文「有要靠的那一個有幻的y」為無意義亂碼。"
+    },
+    {
+      "sentenceId": "sent-770",
+      "paragraphId": "p_65",
+      "start": 1464.48,
+      "end": 1466.1,
+      "originalText": "它的存在呢",
+      "proposedText": "它的存在，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將口語語助詞「呢」改為逗號，使語意更連貫。"
+    },
+    {
+      "sentenceId": "sent-779",
+      "paragraphId": "p_65",
+      "start": 1483.22,
+      "end": 1485.94,
+      "originalText": "就以你的心呢",
+      "proposedText": "就以你的心，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「呢」，並調整標點。"
+    },
+    {
+      "sentenceId": "sent-780",
+      "paragraphId": "p_65",
+      "start": 1485.94,
+      "end": 1490.3,
+      "originalText": "就在這樣子的一個結果上面呢",
+      "proposedText": "就在這樣子的一個結果上面，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「呢」，並調整標點。"
+    },
+    {
+      "sentenceId": "sent-782",
+      "paragraphId": "p_66",
+      "start": 1492.26,
+      "end": 1493.28,
+      "originalText": "然後呢",
+      "proposedText": "然後，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「呢」，並調整標點。"
+    },
+    {
+      "sentenceId": "sent-785",
+      "paragraphId": "p_66",
+      "start": 1497.64,
+      "end": 1500.52,
+      "originalText": "那個時候因為你已經獲得了確定了嘛",
+      "proposedText": "那個時候，因為你已經獲得了確定了嘛，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "調整標點，使語意清晰。"
+    },
+    {
+      "sentenceId": "sent-787",
+      "paragraphId": "p_66",
+      "start": 1502.76,
+      "end": 1504.58,
+      "originalText": "那這個後來",
+      "proposedText": "那這個後來，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "調整標點，使語意清晰。"
+    },
+    {
+      "sentenceId": "sent-796",
+      "paragraphId": "p_67",
+      "start": 1519.96,
+      "end": 1520.88,
+      "originalText": "但是呢",
+      "proposedText": "但是，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語贅詞「呢」，並調整標點。"
+    },
+    {
+      "sentenceId": "sent-801",
+      "paragraphId": "p_67",
+      "start": 1530.86,
+      "end": 1532.54,
+      "originalText": "一定要有定的力量",
+      "proposedText": "一定要有定的力量。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「一定要有定的力量」，並加上句號。"
+    },
+    {
+      "sentenceId": "sent-806",
+      "paragraphId": "p_68",
+      "start": 1540.82,
+      "end": 1542.82,
+      "originalText": "必須要改的地方",
+      "proposedText": "必須要改的地方。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，應加句號。"
+    },
+    {
+      "sentenceId": "sent-807",
+      "paragraphId": "p_68",
+      "start": 1542.82,
+      "end": 1544.68,
+      "originalText": "我們看第二行",
+      "proposedText": "我們看第二行。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，應加句號。"
+    },
+    {
+      "sentenceId": "sent-808",
+      "paragraphId": "p_68",
+      "start": 1544.68,
+      "end": 1545,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞獨立成句，加句號。"
+    },
+    {
+      "sentenceId": "sent-809",
+      "paragraphId": "p_68",
+      "start": 1545.56,
+      "end": 1546.04,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞獨立成句，加句號。"
+    },
+    {
+      "sentenceId": "sent-810",
+      "paragraphId": "p_68",
+      "start": 1546.04,
+      "end": 1547.46,
+      "originalText": "先講人無我",
+      "proposedText": "先講人無我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，應加句號。"
+    },
+    {
+      "sentenceId": "sent-813",
+      "paragraphId": "p_68",
+      "start": 1548.38,
+      "end": 1551.98,
+      "originalText": "就是空觀有分人無我的觀法嘛",
+      "proposedText": "就是空觀有分人無我的觀法嘛。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除口語「嘛」，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-814",
+      "paragraphId": "p_68",
+      "start": 1551.98,
+      "end": 1552.48,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞獨立成句，加句號。"
+    },
+    {
+      "sentenceId": "sent-815",
+      "paragraphId": "p_68",
+      "start": 1552.48,
+      "end": 1554.48,
+      "originalText": "還有什麼要觀法無我嘛",
+      "proposedText": "還有什麼？要觀法無我嘛。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "「還有什麼」為疑問或提問，加問號；「要觀法無我嘛」刪除「嘛」，加句號。"
+    },
+    {
+      "sentenceId": "sent-816",
+      "paragraphId": "p_68",
+      "start": 1554.48,
+      "end": 1554.86,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞獨立成句，加句號。"
+    },
+    {
+      "sentenceId": "sent-817",
+      "paragraphId": "p_69",
+      "start": 1554.86,
+      "end": 1556.1,
+      "originalText": "哪一個比較好觀",
+      "proposedText": "哪一個比較好觀？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾加問號。"
+    },
+    {
+      "sentenceId": "sent-818",
+      "paragraphId": "p_69",
+      "start": 1557.28,
+      "end": 1558.98,
+      "originalText": "人無我比較好觀",
+      "proposedText": "人無我比較好觀。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，加句號。"
+    },
+    {
+      "sentenceId": "sent-819",
+      "paragraphId": "p_69",
+      "start": 1558.98,
+      "end": 1559.34,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞獨立成句，加句號。"
+    },
+    {
+      "sentenceId": "sent-822",
+      "paragraphId": "p_69",
+      "start": 1561.34,
+      "end": 1563.5,
+      "originalText": "你如果觀人無我成功的話呢",
+      "proposedText": "你如果觀人無我成功的話",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "條件句未完，保留逗號。"
+    },
+    {
+      "sentenceId": "sent-825",
+      "paragraphId": "p_69",
+      "start": 1566.8,
+      "end": 1569.06,
+      "originalText": "斷除薩迦耶見、獲得",
+      "proposedText": "斷除薩迦耶見、獲得獲證初果。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "根據 reAsrHint，「獲得」後接「獲證初果」。原句「獲得」與下句「獲證初果」重複或斷裂。應合併為「斷除薩迦耶見、獲證初果」。"
+    },
+    {
+      "sentenceId": "sent-826",
+      "paragraphId": "p_69",
+      "start": 1569.06,
+      "end": 1570.5,
+      "originalText": "獲證初果",
+      "proposedText": "獲證初果。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "若 sent-825 已合併，此句可刪或保留。但根據規則，只修訂單句。若 sent-825 改為「斷除薩迦耶見、獲證初果。」，則 sent-826 重複。建議 sent-825 改為「斷除薩迦耶見、」，sent-826 改為「獲證初果。」。"
+    },
+    {
+      "sentenceId": "sent-827",
+      "paragraphId": "p_69",
+      "start": 1570.5,
+      "end": 1570.92,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞獨立成句，加句號。"
+    },
+    {
+      "sentenceId": "sent-850",
+      "paragraphId": "p_71",
+      "start": 1604.68,
+      "end": 1606.88,
+      "originalText": "這裡不是有寫唯我嗎",
+      "proposedText": "這裡不是有寫「唯我」嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示名相，疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-851",
+      "paragraphId": "p_71",
+      "start": 1606.88,
+      "end": 1609,
+      "originalText": "對不對 但是唯我是什麼",
+      "proposedText": "對不對？但是「唯我」是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號，名相加引號。"
+    },
+    {
+      "sentenceId": "sent-854",
+      "paragraphId": "p_72",
+      "start": 1612.62,
+      "end": 1614.38,
+      "originalText": "他是翻譯錯誤 因為他的",
+      "proposedText": "他是翻譯錯誤，因為他的",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，將連貫語意處改為逗號。"
+    },
+    {
+      "sentenceId": "sent-856",
+      "paragraphId": "p_72",
+      "start": 1616.48,
+      "end": 1618.3,
+      "originalText": "Mere I Mere的意思就是",
+      "proposedText": "Mere I，Mere 的意思就是",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "英文專有名詞間加逗號分隔。"
+    },
+    {
+      "sentenceId": "sent-859",
+      "paragraphId": "p_72",
+      "start": 1622.44,
+      "end": 1625,
+      "originalText": "我這個字 這個詞而已",
+      "proposedText": "我這個字、這個詞而已。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-861",
+      "paragraphId": "p_72",
+      "start": 1626.4,
+      "end": 1628.66,
+      "originalText": "唯我 我們可以把它劃掉 那要改成",
+      "proposedText": "「唯我」我們可以把它劃掉，那要改成",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相加引號，語意未完保留逗號。"
+    },
+    {
+      "sentenceId": "sent-862",
+      "paragraphId": "p_72",
+      "start": 1628.66,
+      "end": 1630.58,
+      "originalText": "什麼呢 僅僅是",
+      "proposedText": "什麼呢？僅僅是",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-867",
+      "paragraphId": "p_73",
+      "start": 1638.6,
+      "end": 1640.54,
+      "originalText": "否則唯我這個詞",
+      "proposedText": "否則「唯我」這個詞",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相加引號。"
+    },
+    {
+      "sentenceId": "sent-871",
+      "paragraphId": "p_73",
+      "start": 1645.94,
+      "end": 1648.7,
+      "originalText": "僅僅是我 這個好像太多字了吧",
+      "proposedText": "「僅僅是我」，這個好像太多字了吧？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相加引號，反問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-873",
+      "paragraphId": "p_73",
+      "start": 1650.34,
+      "end": 1652.7,
+      "originalText": "然後好像也不夠乾脆",
+      "proposedText": "然後好像也不夠乾脆。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-876",
+      "paragraphId": "p_73",
+      "start": 1656.78,
+      "end": 1659.08,
+      "originalText": "就是什麼 唯名的我",
+      "proposedText": "就是什麼？「唯名的我」。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號，名相加引號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-877",
+      "paragraphId": "p_74",
+      "start": 1660.46,
+      "end": 1661.98,
+      "originalText": "唯我 就是指",
+      "proposedText": "「唯我」就是指",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示名相，句尾改為逗號以連接後文。"
+    },
+    {
+      "sentenceId": "sent-878",
+      "paragraphId": "p_74",
+      "start": 1662.44,
+      "end": 1663.1,
+      "originalText": "唯名的我",
+      "proposedText": "「唯名的我」。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示名相，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-879",
+      "paragraphId": "p_74",
+      "start": 1663.76,
+      "end": 1665.48,
+      "originalText": "這個我 只是一個",
+      "proposedText": "這個「我」只是一個",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示名相。"
+    },
+    {
+      "sentenceId": "sent-880",
+      "paragraphId": "p_74",
+      "start": 1666.44,
+      "end": 1668.58,
+      "originalText": "名稱 只是一個代號",
+      "proposedText": "名稱，只是一個代號，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，使語意流暢。"
+    },
+    {
+      "sentenceId": "sent-881",
+      "paragraphId": "p_74",
+      "start": 1668.58,
+      "end": 1670.34,
+      "originalText": "只是一個假名而已",
+      "proposedText": "只是一個假名而已。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-882",
+      "paragraphId": "p_74",
+      "start": 1670.34,
+      "end": 1672.12,
+      "originalText": "這個叫做唯名的我",
+      "proposedText": "這叫做「唯名的我」。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示名相，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-883",
+      "paragraphId": "p_74",
+      "start": 1672.12,
+      "end": 1674.36,
+      "originalText": "所以唯我 你可以",
+      "proposedText": "所以「唯我」，你可以",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示名相，句尾改為逗號。"
+    },
+    {
+      "sentenceId": "sent-885",
+      "paragraphId": "p_74",
+      "start": 1675.44,
+      "end": 1678.12,
+      "originalText": "註解一下 就是指唯名的我",
+      "proposedText": "註解一下，就是指「唯名的我」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號，句尾改為逗號。"
+    },
+    {
+      "sentenceId": "sent-886",
+      "paragraphId": "p_74",
+      "start": 1678.12,
+      "end": 1679.24,
+      "originalText": "或者是什麼",
+      "proposedText": "或者是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-887",
+      "paragraphId": "p_74",
+      "start": 1679.24,
+      "end": 1682.7,
+      "originalText": "僅僅是我的假名 這兩個意思是一樣的",
+      "proposedText": "僅僅是我的假名，這兩個意思是一樣的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-892",
+      "paragraphId": "p_75",
+      "start": 1690.26,
+      "end": 1692.06,
+      "originalText": "名字的名 名字",
+      "proposedText": "名字的名，名字",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意清晰。"
+    },
+    {
+      "sentenceId": "sent-910",
+      "paragraphId": "p_76",
+      "start": 1726.08,
+      "end": 1727.28,
+      "originalText": "這個就是我啊",
+      "proposedText": "「這個就是我啊」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上引號標示直接引語。"
+    },
+    {
+      "sentenceId": "sent-922",
+      "paragraphId": "p_77",
+      "start": 1751.32,
+      "end": 1755.44,
+      "originalText": "你是有受想行識蘊",
+      "proposedText": "你是有受、想、行、識蘊",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相「受、想、行、識」應補上頓號。"
+    },
+    {
+      "sentenceId": "sent-930",
+      "paragraphId": "p_78",
+      "start": 1766.56,
+      "end": 1768.68,
+      "originalText": "五蘊和合的這個假我呢",
+      "proposedText": "五蘊和合的這個假我",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」，使文句更簡潔。"
+    },
+    {
+      "sentenceId": "sent-937",
+      "paragraphId": "p_79",
+      "start": 1779.88,
+      "end": 1780.8,
+      "originalText": "我的實體",
+      "proposedText": "我的實體可言、可得",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「可言」與「可得」為並列詞語，應補上頓號以明確語意。"
+    },
+    {
+      "sentenceId": "sent-952",
+      "paragraphId": "p_80",
+      "start": 1802.82,
+      "end": 1803.36,
+      "originalText": "你說",
+      "proposedText": "你說：",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「你說」後接引語，應使用冒號以符合中文標點規範。"
+    },
+    {
+      "sentenceId": "sent-953",
+      "paragraphId": "p_80",
+      "start": 1804.04,
+      "end": 1805.46,
+      "originalText": "不然頭比較重要",
+      "proposedText": "不然頭比較重要？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為反問或疑問語氣，句尾應使用問號。"
+    },
+    {
+      "sentenceId": "sent-955",
+      "paragraphId": "p_80",
+      "start": 1806.48,
+      "end": 1807.84,
+      "originalText": "這個是什麼",
+      "proposedText": "這個是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為疑問句，句尾應使用問號。"
+    },
+    {
+      "sentenceId": "sent-958",
+      "paragraphId": "p_80",
+      "start": 1809.46,
+      "end": 1810.2,
+      "originalText": "頭是什麼",
+      "proposedText": "頭是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為疑問句，句尾應使用問號。"
+    },
+    {
+      "sentenceId": "sent-960",
+      "paragraphId": "p_80",
+      "start": 1811.2,
+      "end": 1812.12,
+      "originalText": "對不對",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為反問或確認語氣，句尾應使用問號。"
+    },
+    {
+      "sentenceId": "sent-962",
+      "paragraphId": "p_81",
+      "start": 1815.4,
+      "end": 1817.08,
+      "originalText": "到底那個我在哪裡",
+      "proposedText": "到底那個「我」在哪裡？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為疑問句，句尾應使用問號；「我」為核心名相，加引號以強調。"
+    },
+    {
+      "sentenceId": "sent-964",
+      "paragraphId": "p_81",
+      "start": 1819.42,
+      "end": 1821.44,
+      "originalText": "然後指著就說這個叫做我",
+      "proposedText": "然後指著就說：「這個叫做我。」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「說」後接直接引語，應使用冒號及引號。"
+    },
+    {
+      "sentenceId": "sent-967",
+      "paragraphId": "p_81",
+      "start": 1824.6,
+      "end": 1825,
+      "originalText": "就是說",
+      "proposedText": "就是說，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「就是說」為口語連接詞，後接主句，加逗號以分隔語意。"
+    },
+    {
+      "sentenceId": "sent-969",
+      "paragraphId": "p_81",
+      "start": 1827.2,
+      "end": 1828.76,
+      "originalText": "很細細的去思維的時候",
+      "proposedText": "很細細地去思維的時候，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「的時候」為時間狀語，後接主句，加逗號以分隔。"
+    },
+    {
+      "sentenceId": "sent-970",
+      "paragraphId": "p_81",
+      "start": 1829.46,
+      "end": 1830.24,
+      "originalText": "你會發現說",
+      "proposedText": "你會發現說，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「發現說」後接內容，加逗號以分隔。"
+    },
+    {
+      "sentenceId": "sent-971",
+      "paragraphId": "p_81",
+      "start": 1830.8,
+      "end": 1833.16,
+      "originalText": "我們認為那麼理所當然的我",
+      "proposedText": "我們認為那麼理所當然的「我」，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「我」為核心名相，加引號以強調；「的」後為主語，加逗號以分隔。"
+    },
+    {
+      "sentenceId": "sent-972",
+      "paragraphId": "p_81",
+      "start": 1833.16,
+      "end": 1834.26,
+      "originalText": "居然找不到",
+      "proposedText": "居然找不到。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，句尾應使用句號。"
+    },
+    {
+      "sentenceId": "sent-974",
+      "paragraphId": "p_82",
+      "start": 1837.06,
+      "end": 1839.3,
+      "originalText": "你認為這麼實實在在的",
+      "proposedText": "你認為這麼實實在在的、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「實實在在的」與後文「有分量」為並列形容詞，加頓號以分隔。"
+    },
+    {
+      "sentenceId": "sent-976",
+      "paragraphId": "p_82",
+      "start": 1841.52,
+      "end": 1844.9,
+      "originalText": "有一個主宰性的那個我",
+      "proposedText": "有一個主宰性的那個「我」，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「我」為核心名相，加引號以強調；「的」後為主語，加逗號以分隔。"
+    },
+    {
+      "sentenceId": "sent-977",
+      "paragraphId": "p_82",
+      "start": 1844.9,
+      "end": 1846.72,
+      "originalText": "其實找不到",
+      "proposedText": "其實找不到。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，句尾應使用句號。"
+    },
+    {
+      "sentenceId": "sent-979",
+      "paragraphId": "p_82",
+      "start": 1848.14,
+      "end": 1850.9,
+      "originalText": "然後你如果從佛法的角度來講",
+      "proposedText": "然後你如果從佛法的角度來講，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「來講」後接主句，加逗號以分隔。"
+    },
+    {
+      "sentenceId": "sent-980",
+      "paragraphId": "p_82",
+      "start": 1851.46,
+      "end": 1852.6,
+      "originalText": "你可以分析啊",
+      "proposedText": "你可以分析：",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「分析」後接內容，應使用冒號。"
+    },
+    {
+      "sentenceId": "sent-981",
+      "paragraphId": "p_82",
+      "start": 1852.6,
+      "end": 1853.36,
+      "originalText": "我是什麼",
+      "proposedText": "「我」是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「我」為核心名相，加引號以強調；此句為疑問句，句尾應使用問號。"
+    },
+    {
+      "sentenceId": "sent-982",
+      "paragraphId": "p_82",
+      "start": 1853.36,
+      "end": 1854.34,
+      "originalText": "父母",
+      "proposedText": "父母、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「父母」與後文「父親母親」為並列名相，加頓號以分隔。"
+    },
+    {
+      "sentenceId": "sent-983",
+      "paragraphId": "p_82",
+      "start": 1854.34,
+      "end": 1855.58,
+      "originalText": "父親母親",
+      "proposedText": "父親母親、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「父親母親」與後文「父精母血」為並列名相，加頓號以分隔。"
+    },
+    {
+      "sentenceId": "sent-984",
+      "paragraphId": "p_82",
+      "start": 1855.58,
+      "end": 1857.14,
+      "originalText": "父精母血的因緣",
+      "proposedText": "父精母血的因緣。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，句尾應使用句號。"
+    },
+    {
+      "sentenceId": "sent-987",
+      "paragraphId": "p_83",
+      "start": 1860.96,
+      "end": 1862.38,
+      "originalText": "還有一個很重要的啊",
+      "proposedText": "還有一個很重要的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將句尾語氣詞「啊」改為逗號，使語意與後文連接更緊密。"
+    },
+    {
+      "sentenceId": "sent-988",
+      "paragraphId": "p_83",
+      "start": 1862.38,
+      "end": 1863.78,
+      "originalText": "你過去生的業力啊",
+      "proposedText": "你過去生的業力，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將句尾語氣詞「啊」改為逗號，保持語流連貫。"
+    },
+    {
+      "sentenceId": "sent-992",
+      "paragraphId": "p_83",
+      "start": 1866.4,
+      "end": 1867.8,
+      "originalText": "這個父親這個母親",
+      "proposedText": "這個父親、這個母親？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相「父親」與「母親」之間加頓號；疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-994",
+      "paragraphId": "p_83",
+      "start": 1868.56,
+      "end": 1869.28,
+      "originalText": "一些共業",
+      "proposedText": "一些共業，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將句尾語氣詞「對不對」前的逗號保留，但此處「對不對」為獨立問句，應分開。修正：將 sent-994 改為「一些共業，」，sent-995 改為「對不對？」。"
+    },
+    {
+      "sentenceId": "sent-995",
+      "paragraphId": "p_83",
+      "start": 1869.3,
+      "end": 1870.06,
+      "originalText": "對不對",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1000",
+      "paragraphId": "p_84",
+      "start": 1872.54,
+      "end": 1874,
+      "originalText": "你跟父親跟母親",
+      "proposedText": "你跟父親、跟母親，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相「父親」與「母親」之間加頓號；句尾改為逗號以連接下文。"
+    },
+    {
+      "sentenceId": "sent-1001",
+      "paragraphId": "p_84",
+      "start": 1874,
+      "end": 1876.24,
+      "originalText": "還有你的種種的這些業力",
+      "proposedText": "還有你的種種的這些業力，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除冗詞「這些」，使文句更精簡。"
+    },
+    {
+      "sentenceId": "sent-1003",
+      "paragraphId": "p_84",
+      "start": 1876.78,
+      "end": 1878,
+      "originalText": "和合的",
+      "proposedText": "和合的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為逗號，連接下文。"
+    },
+    {
+      "sentenceId": "sent-1005",
+      "paragraphId": "p_84",
+      "start": 1878.52,
+      "end": 1879.36,
+      "originalText": "然後呢",
+      "proposedText": "然後，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-1009",
+      "paragraphId": "p_85",
+      "start": 1885.74,
+      "end": 1888.56,
+      "originalText": "那我是不是指那個心呢",
+      "proposedText": "那我是不是指那個心呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1010",
+      "paragraphId": "p_85",
+      "start": 1888.56,
+      "end": 1890.64,
+      "originalText": "心的統合作用呢",
+      "proposedText": "心的統合作用呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1011",
+      "paragraphId": "p_85",
+      "start": 1890.64,
+      "end": 1892.78,
+      "originalText": "因為我們覺得好像有點像",
+      "proposedText": "因為我們覺得好像有點像，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為逗號，連接下文。"
+    },
+    {
+      "sentenceId": "sent-1013",
+      "paragraphId": "p_85",
+      "start": 1893.88,
+      "end": 1894.96,
+      "originalText": "但是是嗎",
+      "proposedText": "但是是嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1015",
+      "paragraphId": "p_85",
+      "start": 1898.44,
+      "end": 1899.28,
+      "originalText": "常、一",
+      "proposedText": "常、一，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相加頓號；句尾改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1016",
+      "paragraphId": "p_85",
+      "start": 1899.3,
+      "end": 1899.78,
+      "originalText": "常恆住",
+      "proposedText": "常恆住，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1017",
+      "paragraphId": "p_85",
+      "start": 1900.64,
+      "end": 1901.8,
+      "originalText": "不變異",
+      "proposedText": "不變異，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1019",
+      "paragraphId": "p_85",
+      "start": 1903.74,
+      "end": 1905.6,
+      "originalText": "有一個主宰性的",
+      "proposedText": "有一個主宰性的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1020",
+      "paragraphId": "p_85",
+      "start": 1905.6,
+      "end": 1907.16,
+      "originalText": "有一個主體性的",
+      "proposedText": "有一個主體性的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號，結束語意。"
+    },
+    {
+      "sentenceId": "sent-1021",
+      "paragraphId": "p_86",
+      "start": 1908.58,
+      "end": 1910.26,
+      "originalText": "但是心法是什麼",
+      "proposedText": "但是心法是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-1027",
+      "paragraphId": "p_86",
+      "start": 1917.06,
+      "end": 1918.54,
+      "originalText": "全部通通是什麼",
+      "proposedText": "全部通通是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-1032",
+      "paragraphId": "p_86",
+      "start": 1926.28,
+      "end": 1928.94,
+      "originalText": "當然是千變萬化很很複雜",
+      "proposedText": "當然是千變萬化、很複雜。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「很」，並列形容詞間補上頓號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1033",
+      "paragraphId": "p_87",
+      "start": 1928.94,
+      "end": 1932.16,
+      "originalText": "你如果從這個醫學心理學神經學去找",
+      "proposedText": "你如果從醫學、心理學、神經學去找，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號，刪除口語「這個」。"
+    },
+    {
+      "sentenceId": "sent-1034",
+      "paragraphId": "p_87",
+      "start": 1932.94,
+      "end": 1934.34,
+      "originalText": "你發現什麼",
+      "proposedText": "你發現什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-1038",
+      "paragraphId": "p_87",
+      "start": 1938.42,
+      "end": 1941.36,
+      "originalText": "慢慢慢慢的你會開始有一點",
+      "proposedText": "慢慢慢慢的，你會開始有一點",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意未完，保留逗號以銜接下文，刪除重複的「一點」（見 sent-1039）。"
+    },
+    {
+      "sentenceId": "sent-1042",
+      "paragraphId": "p_87",
+      "start": 1946.8,
+      "end": 1948.5,
+      "originalText": "我到底是什麼",
+      "proposedText": "我到底是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-1044",
+      "paragraphId": "p_87",
+      "start": 1950.36,
+      "end": 1951.38,
+      "originalText": "怎麼講",
+      "proposedText": "怎麼講？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用「？」。"
+    },
+    {
+      "sentenceId": "sent-1045",
+      "paragraphId": "p_88",
+      "start": 1952.18,
+      "end": 1954.06,
+      "originalText": "有點不是那麼確定",
+      "proposedText": "有點不是那麼確定。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號「。」。"
+    },
+    {
+      "sentenceId": "sent-1050",
+      "paragraphId": "p_88",
+      "start": 1961.46,
+      "end": 1962.32,
+      "originalText": "體認",
+      "proposedText": "體認。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號「。」。"
+    },
+    {
+      "sentenceId": "sent-1051",
+      "paragraphId": "p_88",
+      "start": 1963.06,
+      "end": 1964.8,
+      "originalText": "所以這個一定要思維",
+      "proposedText": "所以這個一定要思維，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意未完，保留逗號以銜接下文。"
+    },
+    {
+      "sentenceId": "sent-1052",
+      "paragraphId": "p_88",
+      "start": 1964.8,
+      "end": 1965.84,
+      "originalText": "而不是說就是",
+      "proposedText": "而不是說",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語「就是」，保留「而不是說」。"
+    },
+    {
+      "sentenceId": "sent-1053",
+      "paragraphId": "p_88",
+      "start": 1966.36,
+      "end": 1968.32,
+      "originalText": "我們上課上到我空觀",
+      "proposedText": "我們上課上到我空觀、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號。"
+    },
+    {
+      "sentenceId": "sent-1054",
+      "paragraphId": "p_88",
+      "start": 1968.32,
+      "end": 1969.12,
+      "originalText": "法空觀",
+      "proposedText": "法空觀，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意未完，保留逗號以銜接下文。"
+    },
+    {
+      "sentenceId": "sent-1060",
+      "paragraphId": "p_89",
+      "start": 1978.02,
+      "end": 1980.3,
+      "originalText": "那個在文的方面",
+      "proposedText": "那個在文義的方面",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "補齊「義」字，「文的方面」語意不完整，應為「文義的方面」。"
+    },
+    {
+      "sentenceId": "sent-1065",
+      "paragraphId": "p_89",
+      "start": 1987.1,
+      "end": 1988.76,
+      "originalText": "你就要細細細細的",
+      "proposedText": "你就要細細的",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「細」字。"
+    },
+    {
+      "sentenceId": "sent-1067",
+      "paragraphId": "p_89",
+      "start": 1990.24,
+      "end": 1993.6,
+      "originalText": "針對這些重點的來一一做解釋",
+      "proposedText": "針對這些重點來一一做解釋",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「針對」，並修正語序使其通順。"
+    },
+    {
+      "sentenceId": "sent-1073",
+      "paragraphId": "p_90",
+      "start": 2003.54,
+      "end": 2005.7,
+      "originalText": "就是我自己這個人呢",
+      "proposedText": "就是我自己這個人",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句尾語助詞「呢」。"
+    },
+    {
+      "sentenceId": "sent-1090",
+      "paragraphId": "p_91",
+      "start": 2040.12,
+      "end": 2044.68,
+      "originalText": "接下來我們看再再講的更細緻一點就是",
+      "proposedText": "接下來我們再講的更細緻一點就是",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「再」字。"
+    },
+    {
+      "sentenceId": "sent-1097",
+      "paragraphId": "p_92",
+      "start": 2064.04,
+      "end": 2068.06,
+      "originalText": "你證得無我是不是這個我就消失了就等於你殺了一個人",
+      "proposedText": "你證得無我，是不是這個「我」就消失了？就等於你殺了一個人？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "將疑問句尾改為問號；「這個我就消失了」語意斷裂，補上引號或逗號以釐清「我」為名相；「就等於」前加逗號或問號以區分語意層次。"
+    },
+    {
+      "sentenceId": "sent-1099",
+      "paragraphId": "p_92",
+      "start": 2072.64,
+      "end": 2074.86,
+      "originalText": "有一段話他是這樣子",
+      "proposedText": "有一段話，他是這樣子",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「有一段話」後加逗號，使語句節奏更清晰。"
+    },
+    {
+      "sentenceId": "sent-1109",
+      "paragraphId": "p_93",
+      "start": 2092.3,
+      "end": 2095.08,
+      "originalText": "是依照緣起而成立的呢",
+      "proposedText": "是依照緣起而成立的呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1113",
+      "paragraphId": "p_93",
+      "start": 2098.44,
+      "end": 2099.82,
+      "originalText": "自性就是什麼",
+      "proposedText": "自性就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1114",
+      "paragraphId": "p_93",
+      "start": 2099.82,
+      "end": 2105.02,
+      "originalText": "不需要因緣你以自己的一種某種神秘的力量而存在",
+      "proposedText": "不需要因緣，你以自己的一種某種神秘的力量而存在。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "「不需要因緣」後加逗號；「一種某種」口語重複，精簡為「某種」或「一種」，此處取「某種」較符合原意之模糊性，或保留「一種」刪「某種」。建議改為「不需要因緣，你以自己某種神秘的力量而存在。」"
+    },
+    {
+      "sentenceId": "sent-1118",
+      "paragraphId": "p_94",
+      "start": 2109.48,
+      "end": 2111.02,
+      "originalText": "因緣而有嗎",
+      "proposedText": "是因緣而有嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1121",
+      "paragraphId": "p_94",
+      "start": 2113.98,
+      "end": 2117.94,
+      "originalText": "我們就要看所破或者是這邊講的所遮",
+      "proposedText": "我們就要看所破，或者是這邊講的所遮。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「所破」後加逗號，「所遮」後加句號，因後接「有看到嗎」為另一語意。"
+    },
+    {
+      "sentenceId": "sent-1126",
+      "paragraphId": "p_94",
+      "start": 2128.64,
+      "end": 2133.78,
+      "originalText": "無我所要無的物件呢不是你那個存在的這個個體啦",
+      "proposedText": "無我所要無的物件，不是你那個存在的這個個體啦。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "「物件」後加逗號；「啦」為口語語助詞，可保留以維持講授語氣，或刪去。此處保留以符合「流暢講記」而非「嚴肅論文」，但標點需修正。"
+    },
+    {
+      "sentenceId": "sent-1132",
+      "paragraphId": "p_95",
+      "start": 2142.48,
+      "end": 2144.44,
+      "originalText": "就是以自性去成立的",
+      "proposedText": "就是以自性去成立的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，保留逗號以連接後續名相。"
+    },
+    {
+      "sentenceId": "sent-1133",
+      "paragraphId": "p_95",
+      "start": 2146.06,
+      "end": 2146.94,
+      "originalText": "獨立自主的我",
+      "proposedText": "獨立自主的我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列項，使用逗號。"
+    },
+    {
+      "sentenceId": "sent-1134",
+      "paragraphId": "p_95",
+      "start": 2148.04,
+      "end": 2149.6,
+      "originalText": "或者是以自性",
+      "proposedText": "或者是以自性成立的，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「去」，句意未完保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1136",
+      "paragraphId": "p_95",
+      "start": 2152.46,
+      "end": 2153.56,
+      "originalText": "不需要因緣",
+      "proposedText": "不需要因緣、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相，使用頓號。"
+    },
+    {
+      "sentenceId": "sent-1137",
+      "paragraphId": "p_95",
+      "start": 2153.56,
+      "end": 2154,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1138",
+      "paragraphId": "p_95",
+      "start": 2154,
+      "end": 2156.32,
+      "originalText": "常住的我那個是什麼",
+      "proposedText": "常住的我，那個是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1140",
+      "paragraphId": "p_95",
+      "start": 2157.44,
+      "end": 2159.28,
+      "originalText": "破除要遮止的",
+      "proposedText": "破除、要遮止的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列動詞，使用頓號；句意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1141",
+      "paragraphId": "p_96",
+      "start": 2159.94,
+      "end": 2163.88,
+      "originalText": "那把錯誤的遮止掉你就不會落入什麼",
+      "proposedText": "那把錯誤的遮止掉，你就不會落入什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號；中間加逗號斷句。"
+    },
+    {
+      "sentenceId": "sent-1142",
+      "paragraphId": "p_96",
+      "start": 2164.5,
+      "end": 2166.12,
+      "originalText": "常邊或者是斷邊",
+      "proposedText": "常邊或者是斷邊。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1143",
+      "paragraphId": "p_96",
+      "start": 2167.28,
+      "end": 2168.36,
+      "originalText": "這樣可以理解嗎",
+      "proposedText": "這樣可以理解嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1144",
+      "paragraphId": "p_96",
+      "start": 2169.12,
+      "end": 2169.92,
+      "originalText": "可以嗎",
+      "proposedText": "可以嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1145",
+      "paragraphId": "p_96",
+      "start": 2169.92,
+      "end": 2169.96,
+      "originalText": "可以嗎",
+      "proposedText": "可以嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1146",
+      "paragraphId": "p_96",
+      "start": 2170.5,
+      "end": 2171.02,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1147",
+      "paragraphId": "p_96",
+      "start": 2171.7,
+      "end": 2172.02,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1148",
+      "paragraphId": "p_96",
+      "start": 2172.02,
+      "end": 2173.56,
+      "originalText": "大家要跟著思維喔",
+      "proposedText": "大家要跟著思維喔。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1149",
+      "paragraphId": "p_96",
+      "start": 2173.56,
+      "end": 2174.48,
+      "originalText": "所以",
+      "proposedText": "所以，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "連接詞，後接主句，保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1150",
+      "paragraphId": "p_96",
+      "start": 2175.36,
+      "end": 2176.84,
+      "originalText": "很重要的是",
+      "proposedText": "很重要的是，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1152",
+      "paragraphId": "p_96",
+      "start": 2179.16,
+      "end": 2181.14,
+      "originalText": "所要破除的",
+      "proposedText": "所要破除的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1153",
+      "paragraphId": "p_97",
+      "start": 2181.7,
+      "end": 2184.62,
+      "originalText": "或者是所要遮除的是什麼",
+      "proposedText": "或者是所要遮除的是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1154",
+      "paragraphId": "p_97",
+      "start": 2185.3,
+      "end": 2189.04,
+      "originalText": "你如果遮錯了或者是破錯了你就會認為",
+      "proposedText": "你如果遮錯了或者是破錯了，你就會認為",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "條件句，中間加逗號；句意未完保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1155",
+      "paragraphId": "p_97",
+      "start": 2189.04,
+      "end": 2190.86,
+      "originalText": "佛法講無我就是",
+      "proposedText": "佛法講無我，就是",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "引用經論概念，加逗號斷句；句意未完保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1156",
+      "paragraphId": "p_97",
+      "start": 2191.42,
+      "end": 2193.54,
+      "originalText": "什麼通通都沒有我啦我這個人",
+      "proposedText": "什麼通通都沒有我啦，我這個人",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "口語轉述，加逗號；句意未完保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1157",
+      "paragraphId": "p_97",
+      "start": 2193.54,
+      "end": 2198.36,
+      "originalText": "你認為是有看到其實他是不存在的你這樣講就是什麼破壞世俗諦",
+      "proposedText": "你認為是有看到，其實他是不存在的，你這樣講就是什麼？破壞世俗諦。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "修正標點，將長句斷開；「就是什麼」為口語設問，後接答案，改為問號與句號。"
+    },
+    {
+      "sentenceId": "sent-1158",
+      "paragraphId": "p_97",
+      "start": 2198.38,
+      "end": 2198.5,
+      "originalText": "你認為是有看到其實是有看到",
+      "proposedText": "你認為是有看到，其實是有看到。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1159",
+      "paragraphId": "p_97",
+      "start": 2198.5,
+      "end": 2201,
+      "originalText": "因為世俗諦說你這個人",
+      "proposedText": "因為世俗諦說，你這個人",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "引用經論概念，加逗號；句意未完保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1160",
+      "paragraphId": "p_97",
+      "start": 2201.7,
+      "end": 2202.24,
+      "originalText": "存在呀",
+      "proposedText": "存在呀。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1161",
+      "paragraphId": "p_97",
+      "start": 2202.74,
+      "end": 2203.24,
+      "originalText": "然後呢",
+      "proposedText": "然後呢，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "連接詞，保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1162",
+      "paragraphId": "p_97",
+      "start": 2203.76,
+      "end": 2205.6,
+      "originalText": "身份證上面有登記字號啊",
+      "proposedText": "身份證上面有登記字號啊。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1163",
+      "paragraphId": "p_97",
+      "start": 2205.6,
+      "end": 2206.24,
+      "originalText": "好",
+      "proposedText": "好。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1164",
+      "paragraphId": "p_97",
+      "start": 2206.82,
+      "end": 2206.9,
+      "originalText": "然後",
+      "proposedText": "然後，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "連接詞，保留逗號。"
+    },
+    {
+      "sentenceId": "sent-1166",
+      "paragraphId": "p_98",
+      "start": 2208.2,
+      "end": 2211.18,
+      "originalText": "你是出現的啊你是存在的啊",
+      "proposedText": "你是出現的，你是存在的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，將口語中的「啊」轉化為語氣，並斷句。"
+    },
+    {
+      "sentenceId": "sent-1169",
+      "paragraphId": "p_98",
+      "start": 2214.8,
+      "end": 2216.48,
+      "originalText": "當然是是存在的",
+      "proposedText": "當然是存在的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「是」，修正句尾標點。"
+    },
+    {
+      "sentenceId": "sent-1170",
+      "paragraphId": "p_98",
+      "start": 2216.48,
+      "end": 2219.98,
+      "originalText": "但是佛法講的無我是要遮破",
+      "proposedText": "但是佛法講的無我，是要遮破",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「無我」後加逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1173",
+      "paragraphId": "p_98",
+      "start": 2223.32,
+      "end": 2227.12,
+      "originalText": "那個那個是錯誤的那個是我們一定要把它",
+      "proposedText": "那個是錯誤的，那個是我們一定要把它",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「那個」，修正標點。"
+    },
+    {
+      "sentenceId": "sent-1174",
+      "paragraphId": "p_98",
+      "start": 2227.12,
+      "end": 2229.58,
+      "originalText": "看清楚然後把它揪出來",
+      "proposedText": "看清楚，然後把它揪出來",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「看清楚」後加逗號，區分動作。"
+    },
+    {
+      "sentenceId": "sent-1179",
+      "paragraphId": "p_99",
+      "start": 2237.88,
+      "end": 2239.6,
+      "originalText": "該遮除的遮除掉之後",
+      "proposedText": "該遮除的遮除掉之後，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，連接下文。"
+    },
+    {
+      "sentenceId": "sent-1180",
+      "paragraphId": "p_99",
+      "start": 2240.38,
+      "end": 2242.78,
+      "originalText": "這個我會不會不存在",
+      "proposedText": "這個我會不會不存在？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句改用問號。"
+    },
+    {
+      "sentenceId": "sent-1181",
+      "paragraphId": "p_99",
+      "start": 2243.56,
+      "end": 2244.34,
+      "originalText": "會不會",
+      "proposedText": "會不會？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句改用問號。"
+    },
+    {
+      "sentenceId": "sent-1182",
+      "paragraphId": "p_99",
+      "start": 2249.04,
+      "end": 2249.94,
+      "originalText": "不會吧",
+      "proposedText": "不會吧？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "反問或疑問語氣改用問號。"
+    },
+    {
+      "sentenceId": "sent-1184",
+      "paragraphId": "p_99",
+      "start": 2251.62,
+      "end": 2254.4,
+      "originalText": "世俗諦上我們這個人是存在的啊",
+      "proposedText": "世俗諦上，我們這個人是存在的啊。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「世俗諦上」後加逗號，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1185",
+      "paragraphId": "p_99",
+      "start": 2255.28,
+      "end": 2257,
+      "originalText": "好所以講空性",
+      "proposedText": "好，所以講空性，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除口語「好」後的冗詞感，加逗號連接。"
+    },
+    {
+      "sentenceId": "sent-1186",
+      "paragraphId": "p_99",
+      "start": 2257.12,
+      "end": 2259.3,
+      "originalText": "空性是屬於勝義諦的部分嗎",
+      "proposedText": "空性是屬於勝義諦的部分嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句改用問號。"
+    },
+    {
+      "sentenceId": "sent-1188",
+      "paragraphId": "p_99",
+      "start": 2260.96,
+      "end": 2265.22,
+      "originalText": "講勝義諦不是要讓你去破壞世俗諦的成立",
+      "proposedText": "講勝義諦，不是要讓你去破壞世俗諦的成立。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「講勝義諦」後加逗號，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1189",
+      "paragraphId": "p_100",
+      "start": 2265.74,
+      "end": 2267.2,
+      "originalText": "而是要讓你什麼",
+      "proposedText": "而是要讓你什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句改用問號。"
+    },
+    {
+      "sentenceId": "sent-1192",
+      "paragraphId": "p_100",
+      "start": 2271.58,
+      "end": 2272.46,
+      "originalText": "是什麼",
+      "proposedText": "是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句改用問號。"
+    },
+    {
+      "sentenceId": "sent-1193",
+      "paragraphId": "p_100",
+      "start": 2273,
+      "end": 2273.7,
+      "originalText": "緣起",
+      "proposedText": "緣起、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相，加頓號。"
+    },
+    {
+      "sentenceId": "sent-1194",
+      "paragraphId": "p_100",
+      "start": 2274.28,
+      "end": 2275.02,
+      "originalText": "假合的我",
+      "proposedText": "假合的我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1197",
+      "paragraphId": "p_100",
+      "start": 2279.16,
+      "end": 2280.6,
+      "originalText": "的成立方式",
+      "proposedText": "的成立方式，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號。"
+    },
+    {
+      "sentenceId": "sent-1198",
+      "paragraphId": "p_100",
+      "start": 2280.6,
+      "end": 2282.6,
+      "originalText": "因此建立了什麼",
+      "proposedText": "因此建立了什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句改用問號。"
+    },
+    {
+      "sentenceId": "sent-1199",
+      "paragraphId": "p_100",
+      "start": 2282.6,
+      "end": 2284.7,
+      "originalText": "緣起假合的我",
+      "proposedText": "緣起假合的我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1202",
+      "paragraphId": "p_101",
+      "start": 2287.12,
+      "end": 2289.42,
+      "originalText": "有沒有你我的存在有沒有",
+      "proposedText": "有沒有你、我的存在？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「你」與「我」為並列名相，應加頓號；此處為提問，句尾應改為問號。"
+    },
+    {
+      "sentenceId": "sent-1205",
+      "paragraphId": "p_101",
+      "start": 2294.04,
+      "end": 2294.98,
+      "originalText": "自性成立的呢",
+      "proposedText": "自性成立的呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此為選擇疑問句的第一部分，句尾應為問號或逗號，視整體結構。通常「是...呢，還是...呢？」結構中，中間用逗號，最後用問號。但 ASR 切分較碎。建議將 sent-1204 至 sent-1206 視為一個完整疑問句。"
+    },
+    {
+      "sentenceId": "sent-1206",
+      "paragraphId": "p_101",
+      "start": 2294.98,
+      "end": 2297.7,
+      "originalText": "還是緣起假合成立的呢",
+      "proposedText": "還是緣起假合成立的呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "選擇疑問句結尾，應加問號。"
+    },
+    {
+      "sentenceId": "sent-1209",
+      "paragraphId": "p_101",
+      "start": 2300.98,
+      "end": 2303.58,
+      "originalText": "破除自性就是把錯誤的那個",
+      "proposedText": "破除自性，就是把錯誤的那個",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「破除自性」為主語或動詞短語，後接解釋，加逗號使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1212",
+      "paragraphId": "p_101",
+      "start": 2306.58,
+      "end": 2310,
+      "originalText": "他會不會完全不見因為他不是要把你這個人全部否定掉",
+      "proposedText": "他會不會完全不見？因為他不是要把你這個人全部否定掉。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「他會不會完全不見」為疑問句，應加問號；「因為...」為解釋原因，為陳述句，應加句號。"
+    },
+    {
+      "sentenceId": "sent-1213",
+      "paragraphId": "p_102",
+      "start": 2311.32,
+      "end": 2317.02,
+      "originalText": "否定掉的話那不就是全世界通通都要否定掉了一切法空就是全部通通都沒有嘛",
+      "proposedText": "否定掉的話，那不就是全世界通通都要否定掉了？一切法空就是全部通通都沒有嘛。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「否定掉的話」後加逗號；「那不就是...」為反問句，加問號；「一切法空...」為陳述，加句號。"
+    },
+    {
+      "sentenceId": "sent-1214",
+      "paragraphId": "p_102",
+      "start": 2317.64,
+      "end": 2319.82,
+      "originalText": "那那那這樣大家不用學習了",
+      "proposedText": "那這樣大家不用學習了。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「那那那」，保留一個「那」或刪除；句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1215",
+      "paragraphId": "p_102",
+      "start": 2320.44,
+      "end": 2322.84,
+      "originalText": "如果一切法空就是什麼通通都沒有的話",
+      "proposedText": "如果一切法空就是什麼通通都沒有的話，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此為假設句前半，句尾用逗號。"
+    },
+    {
+      "sentenceId": "sent-1216",
+      "paragraphId": "p_102",
+      "start": 2322.84,
+      "end": 2324.78,
+      "originalText": "我們幹嘛要來學習佛法",
+      "proposedText": "我們幹嘛要來學習佛法？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾加問號。"
+    },
+    {
+      "sentenceId": "sent-1218",
+      "paragraphId": "p_102",
+      "start": 2326.84,
+      "end": 2327.86,
+      "originalText": "學習中觀呢",
+      "proposedText": "學習中觀呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句，句尾加問號。"
+    },
+    {
+      "sentenceId": "sent-1221",
+      "paragraphId": "p_102",
+      "start": 2329.96,
+      "end": 2333.18,
+      "originalText": "就知道說如果你用這樣子的思想去解讀如",
+      "proposedText": "所以就知道說，如果你用這樣子的思想去解讀「空」的話，",
+      "categories": [
+        "punctuation",
+        "missing-term"
+      ],
+      "reason": "根據 reAsrHint，「解讀如」應為「解讀空」，補齊「空」字並加引號標示名相；「所以就知道說」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1222",
+      "paragraphId": "p_102",
+      "start": 2333.76,
+      "end": 2335.28,
+      "originalText": "空的話那麼你就錯",
+      "proposedText": "那麼你就搞錯了。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "合併 sent-1222 與 sent-1223 的語意，「錯」與「搞錯」重複，取「搞錯」；句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1226",
+      "paragraphId": "p_103",
+      "start": 2341.36,
+      "end": 2343.48,
+      "originalText": "我們可以得出一個結論就是什麼",
+      "proposedText": "我們可以得出一個結論，就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「結論」後加逗號；「就是什麼」為提問，加問號。"
+    },
+    {
+      "sentenceId": "sent-1227",
+      "paragraphId": "p_103",
+      "start": 2344,
+      "end": 2345.66,
+      "originalText": "自性有的我",
+      "proposedText": "自性有的我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相後加逗號，與後句連貫。"
+    },
+    {
+      "sentenceId": "sent-1228",
+      "paragraphId": "p_103",
+      "start": 2346.3,
+      "end": 2347.1,
+      "originalText": "根本不存在",
+      "proposedText": "根本不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "陳述句結尾，加句號。"
+    },
+    {
+      "sentenceId": "sent-1230",
+      "paragraphId": "p_103",
+      "start": 2349.38,
+      "end": 2351.64,
+      "originalText": "好我們剛剛講這麼多",
+      "proposedText": "好，我們剛剛講這麼多，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「好」後加逗號；「講這麼多」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1232",
+      "paragraphId": "p_103",
+      "start": 2352.36,
+      "end": 2354.98,
+      "originalText": "快要二三十分鐘",
+      "proposedText": "快要二三十分鐘，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "時間狀語後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1233",
+      "paragraphId": "p_103",
+      "start": 2355.56,
+      "end": 2356.32,
+      "originalText": "講的就是什麼",
+      "proposedText": "講的就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "提問，加問號。"
+    },
+    {
+      "sentenceId": "sent-1234",
+      "paragraphId": "p_103",
+      "start": 2356.84,
+      "end": 2358.26,
+      "originalText": "自性實有的我",
+      "proposedText": "自性實有的我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1235",
+      "paragraphId": "p_103",
+      "start": 2358.9,
+      "end": 2359.8,
+      "originalText": "他是不存在的",
+      "proposedText": "他是不存在的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "陳述句結尾，加句號。"
+    },
+    {
+      "sentenceId": "sent-1247",
+      "paragraphId": "p_104",
+      "start": 2379.22,
+      "end": 2383.44,
+      "originalText": "好那為什麼我們要先去遮除自性實有的我呢",
+      "proposedText": "好，那為什麼我們要先去遮除自性實有的我？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號，並修正「好那」之間的斷句。"
+    },
+    {
+      "sentenceId": "sent-1250",
+      "paragraphId": "p_105",
+      "start": 2389.78,
+      "end": 2392.62,
+      "originalText": "唯有這樣子才能夠正入什麼",
+      "proposedText": "唯有這樣子，才能夠正入什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "設問句，句尾改用問號，並調整逗號以符合語氣。"
+    },
+    {
+      "sentenceId": "sent-1251",
+      "paragraphId": "p_105",
+      "start": 2393.2,
+      "end": 2394.22,
+      "originalText": "人無我",
+      "proposedText": "人無我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相獨立成句，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1252",
+      "paragraphId": "p_105",
+      "start": 2394.22,
+      "end": 2395.46,
+      "originalText": "才能夠做",
+      "proposedText": "才能夠做空三摩地的下一步練習。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "合併碎句，刪除口語贅詞「做」與「的」，使文句通順。"
+    },
+    {
+      "sentenceId": "sent-1256",
+      "paragraphId": "p_105",
+      "start": 2403.06,
+      "end": 2405.02,
+      "originalText": "為什麼今天要講的這麼細",
+      "proposedText": "為什麼今天要講得這麼細？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號，並修正「講的」為「講得」。"
+    },
+    {
+      "sentenceId": "sent-1259",
+      "paragraphId": "p_105",
+      "start": 2407.82,
+      "end": 2408.76,
+      "originalText": "也剛好有時間啊",
+      "proposedText": "也剛好有時間。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除口語語助詞「啊」，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1260",
+      "paragraphId": "p_105",
+      "start": 2409.34,
+      "end": 2411.04,
+      "originalText": "沒有了這段真的很重要",
+      "proposedText": "沒有了這段，真的很重要。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除口語語助詞「啊」，加逗號與句號。"
+    },
+    {
+      "sentenceId": "sent-1261",
+      "paragraphId": "p_106",
+      "start": 2411.66,
+      "end": 2413.52,
+      "originalText": "你們如果等一下來看我的課",
+      "proposedText": "你們如果等一下來看我的課，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，表示未完。"
+    },
+    {
+      "sentenceId": "sent-1263",
+      "paragraphId": "p_106",
+      "start": 2414.18,
+      "end": 2415.18,
+      "originalText": "我就是每",
+      "proposedText": "我幾乎每句話都畫。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複口語「我就是每」，合併為完整句。"
+    },
+    {
+      "sentenceId": "sent-1265",
+      "paragraphId": "p_106",
+      "start": 2417.62,
+      "end": 2418.64,
+      "originalText": "我很喜歡畫畫畫",
+      "proposedText": "我很喜歡畫畫畫。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "保留口語重複以表達強調，但加句號。"
+    },
+    {
+      "sentenceId": "sent-1266",
+      "paragraphId": "p_106",
+      "start": 2418.64,
+      "end": 2423.64,
+      "originalText": "好就是每一句都畫因為我覺得每一句都非常非常重要而且這個就是",
+      "proposedText": "好，就是每一句都畫，因為我覺得每一句都非常重要，而且這個就是",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複「畫畫畫」與「非常非常」，加逗號與句號。"
+    },
+    {
+      "sentenceId": "sent-1268",
+      "paragraphId": "p_106",
+      "start": 2424.8,
+      "end": 2427.4,
+      "originalText": "你的腦子就是要跟著這樣的去思維",
+      "proposedText": "你的腦子就是要跟著這樣去思維。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除重複「你的腦」，加句號。"
+    },
+    {
+      "sentenceId": "sent-1270",
+      "paragraphId": "p_106",
+      "start": 2428.94,
+      "end": 2431.92,
+      "originalText": "泛泛的認為我懂",
+      "proposedText": "泛泛地認為我懂，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加逗號，表示未完。"
+    },
+    {
+      "sentenceId": "sent-1275",
+      "paragraphId": "p_107",
+      "start": 2438.14,
+      "end": 2439.94,
+      "originalText": "所以接下來倒數第2行",
+      "proposedText": "所以接下來倒數第二行。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "將口語數字「第2行」改為「第二行」，並修正句尾標點為句號。"
+    },
+    {
+      "sentenceId": "sent-1276",
+      "paragraphId": "p_107",
+      "start": 2439.94,
+      "end": 2442.96,
+      "originalText": "在人無我脈絡中要破除的物件",
+      "proposedText": "在人無我脈絡中要破除的物件。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，將逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1279",
+      "paragraphId": "p_107",
+      "start": 2445.86,
+      "end": 2448.22,
+      "originalText": "就是再講一次剛剛我所講的",
+      "proposedText": "就是再講一次剛剛我所講的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，將逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1280",
+      "paragraphId": "p_107",
+      "start": 2448.9,
+      "end": 2450.5,
+      "originalText": "那物件就是什麼獨立",
+      "proposedText": "那物件就是什麼？獨立",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「就是什麼」為提問，改為問號。"
+    },
+    {
+      "sentenceId": "sent-1281",
+      "paragraphId": "p_107",
+      "start": 2450.5,
+      "end": 2451.78,
+      "originalText": "存在的我",
+      "proposedText": "存在的我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "與前句「獨立」連貫，構成「獨立存在的我」，句尾用逗號連接後續選項。"
+    },
+    {
+      "sentenceId": "sent-1282",
+      "paragraphId": "p_107",
+      "start": 2451.78,
+      "end": 2453.74,
+      "originalText": "或是自性存在的我",
+      "proposedText": "或是自性存在的我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列選項，句尾用逗號。"
+    },
+    {
+      "sentenceId": "sent-1283",
+      "paragraphId": "p_107",
+      "start": 2453.74,
+      "end": 2454.76,
+      "originalText": "或是這個人",
+      "proposedText": "或是這個人。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列選項結束，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1284",
+      "paragraphId": "p_107",
+      "start": 2455.62,
+      "end": 2458.52,
+      "originalText": "那他現在接下來又講得更細一點",
+      "proposedText": "那他現在接下來又講得更細一點。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1286",
+      "paragraphId": "p_108",
+      "start": 2458.98,
+      "end": 2460.02,
+      "originalText": "他說呢",
+      "proposedText": "他說呢，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1287",
+      "paragraphId": "p_108",
+      "start": 2460.02,
+      "end": 2462.16,
+      "originalText": "這是指這個人",
+      "proposedText": "這是指這個人。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1288",
+      "paragraphId": "p_108",
+      "start": 2462.16,
+      "end": 2465.6,
+      "originalText": "這個人我們就思維我們自己",
+      "proposedText": "這個人我們就思維我們自己。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1289",
+      "paragraphId": "p_108",
+      "start": 2465.6,
+      "end": 2467.06,
+      "originalText": "我們自己這個人呢",
+      "proposedText": "我們自己這個人呢，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語氣詞後加逗號，引出下文。"
+    },
+    {
+      "sentenceId": "sent-1291",
+      "paragraphId": "p_108",
+      "start": 2467.7,
+      "end": 2470.82,
+      "originalText": "無需觀待施設處",
+      "proposedText": "無需觀待施設處。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相陳述，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1292",
+      "paragraphId": "p_108",
+      "start": 2471.64,
+      "end": 2473.14,
+      "originalText": "施設處是指什麼",
+      "proposedText": "施設處是指什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "提問句，改為問號。"
+    },
+    {
+      "sentenceId": "sent-1293",
+      "paragraphId": "p_108",
+      "start": 2475.2,
+      "end": 2476.1,
+      "originalText": "身心",
+      "proposedText": "身心。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "回答內容，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1294",
+      "paragraphId": "p_108",
+      "start": 2476.1,
+      "end": 2480.06,
+      "originalText": "就是說我們今天呢如果有個小baby出生的對不對",
+      "proposedText": "就是說我們今天呢，如果有個小baby出生的，對不對？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除冗詞「就是說」，「呢」後加逗號，「對不對」為反問/確認，改為問號。"
+    },
+    {
+      "sentenceId": "sent-1297",
+      "paragraphId": "p_109",
+      "start": 2482.1,
+      "end": 2484.06,
+      "originalText": "一個小孩出生的然後",
+      "proposedText": "一個小孩出生的，然後",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「出生的」後加逗號，「然後」連接下文。"
+    },
+    {
+      "sentenceId": "sent-1298",
+      "paragraphId": "p_109",
+      "start": 2484.06,
+      "end": 2486.34,
+      "originalText": "爸爸媽媽就給他取一個名字",
+      "proposedText": "爸爸媽媽就給他取一個名字。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1299",
+      "paragraphId": "p_109",
+      "start": 2487.22,
+      "end": 2488.9,
+      "originalText": "好又叫做王小明",
+      "proposedText": "好，又叫做王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「好」為語氣詞，後加逗號；語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1300",
+      "paragraphId": "p_109",
+      "start": 2488.9,
+      "end": 2491.12,
+      "originalText": "永遠都叫王小明",
+      "proposedText": "永遠都叫王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整，改為句號。"
+    },
+    {
+      "sentenceId": "sent-1301",
+      "paragraphId": "p_109",
+      "start": 2491.12,
+      "end": 2493.12,
+      "originalText": "王小明出生的",
+      "proposedText": "王小明出生的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「出生的」後加逗號，連接下文。"
+    },
+    {
+      "sentenceId": "sent-1303",
+      "paragraphId": "p_109",
+      "start": 2494.52,
+      "end": 2497.04,
+      "originalText": "你為什麼會取王小明這個名字呢",
+      "proposedText": "你為什麼會取王小明這個名字呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "提問句，改為問號。"
+    },
+    {
+      "sentenceId": "sent-1304",
+      "paragraphId": "p_109",
+      "start": 2497.12,
+      "end": 2498.72,
+      "originalText": "因為他一定有什麼",
+      "proposedText": "因為他一定有什麼，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「有什麼」後語意未完，加逗號。"
+    },
+    {
+      "sentenceId": "sent-1306",
+      "paragraphId": "p_109",
+      "start": 2500.44,
+      "end": 2504.62,
+      "originalText": "施設處就是名字要安立的地方叫做施設處",
+      "proposedText": "施設處，就是名字要安立的地方，叫做施設處。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「施設處」後加逗號，「地方」後加逗號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1308",
+      "paragraphId": "p_109",
+      "start": 2505.86,
+      "end": 2506.92,
+      "originalText": "小baby嗎",
+      "proposedText": "小baby嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "提問/確認句，改為問號。"
+    },
+    {
+      "sentenceId": "sent-1309",
+      "paragraphId": "p_110",
+      "start": 2507.88,
+      "end": 2509.52,
+      "originalText": "一定要有一個小朋友對不對",
+      "proposedText": "一定要有一個小朋友，對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，將「對不對」改為反問句尾的問號，並加上逗號分隔。"
+    },
+    {
+      "sentenceId": "sent-1310",
+      "paragraphId": "p_110",
+      "start": 2510.18,
+      "end": 2511.1,
+      "originalText": "他的出生所以",
+      "proposedText": "他的出生，所以",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1312",
+      "paragraphId": "p_110",
+      "start": 2512.42,
+      "end": 2514.26,
+      "originalText": "好所以命名的",
+      "proposedText": "好，所以命名的",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，區分語氣詞與主句。"
+    },
+    {
+      "sentenceId": "sent-1313",
+      "paragraphId": "p_110",
+      "start": 2514.78,
+      "end": 2516.36,
+      "originalText": "要命名的是什麼",
+      "proposedText": "要命名的是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1314",
+      "paragraphId": "p_110",
+      "start": 2516.36,
+      "end": 2518.34,
+      "originalText": "是心的作用對不對",
+      "proposedText": "是心的作用，對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1315",
+      "paragraphId": "p_110",
+      "start": 2518.88,
+      "end": 2519.28,
+      "originalText": "對不對",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1316",
+      "paragraphId": "p_110",
+      "start": 2519.28,
+      "end": 2520.32,
+      "originalText": "好那",
+      "proposedText": "好，那",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，區分語氣詞。"
+    },
+    {
+      "sentenceId": "sent-1317",
+      "paragraphId": "p_110",
+      "start": 2520.92,
+      "end": 2523.86,
+      "originalText": "我我的心譬如說如果我今天是",
+      "proposedText": "我我的心，譬如說如果我今天是",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除結巴重複的「我我」，保留「我」以符合語意。"
+    },
+    {
+      "sentenceId": "sent-1319",
+      "paragraphId": "p_110",
+      "start": 2527.12,
+      "end": 2529.98,
+      "originalText": "我說我要給你取名叫王小明",
+      "proposedText": "我說我要給你取名叫王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1320",
+      "paragraphId": "p_110",
+      "start": 2529.98,
+      "end": 2533.1,
+      "originalText": "好這個是我的心在發動",
+      "proposedText": "好，這個是我的心在發動。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1321",
+      "paragraphId": "p_111",
+      "start": 2533.78,
+      "end": 2534.72,
+      "originalText": "施設名言",
+      "proposedText": "施設名言。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1322",
+      "paragraphId": "p_111",
+      "start": 2535.32,
+      "end": 2535.66,
+      "originalText": "這件事情",
+      "proposedText": "這件事情，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1323",
+      "paragraphId": "p_111",
+      "start": 2536.8,
+      "end": 2537.32,
+      "originalText": "但是",
+      "proposedText": "但是，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，區分轉折語氣。"
+    },
+    {
+      "sentenceId": "sent-1324",
+      "paragraphId": "p_111",
+      "start": 2537.9,
+      "end": 2541.64,
+      "originalText": "所要施設的名言他一定有一個所施設的",
+      "proposedText": "所要施設的名言，他一定有一個所施設的",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1325",
+      "paragraphId": "p_111",
+      "start": 2542.48,
+      "end": 2543.2,
+      "originalText": "東西吧",
+      "proposedText": "東西吧？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1326",
+      "paragraphId": "p_111",
+      "start": 2543.76,
+      "end": 2545.56,
+      "originalText": "那個東西就是那個小孩子嗎",
+      "proposedText": "那個東西就是那個小孩子嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1327",
+      "paragraphId": "p_111",
+      "start": 2545.56,
+      "end": 2549.52,
+      "originalText": "好所以那個小孩子就是這邊講的施設處",
+      "proposedText": "好，所以那個小孩子就是這邊講的施設處。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1328",
+      "paragraphId": "p_111",
+      "start": 2550.16,
+      "end": 2554.2,
+      "originalText": "好但是那個小孩子這個施設處是指小孩子的什麼",
+      "proposedText": "好，但是那個小孩子這個施設處是指小孩子的什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1329",
+      "paragraphId": "p_111",
+      "start": 2555.02,
+      "end": 2556.9,
+      "originalText": "因為我們剛剛才學了人無",
+      "proposedText": "因為我們剛剛才學了人無我，所以代表",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "根據 reAsrHints 補齊「我」字，並加上逗號。"
+    },
+    {
+      "sentenceId": "sent-1330",
+      "paragraphId": "p_111",
+      "start": 2557.12,
+      "end": 2557.22,
+      "originalText": "我",
+      "proposedText": "我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1333",
+      "paragraphId": "p_112",
+      "start": 2560.76,
+      "end": 2562.72,
+      "originalText": "以自性成立的我",
+      "proposedText": "以自性成立的我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1334",
+      "paragraphId": "p_112",
+      "start": 2563.26,
+      "end": 2564.88,
+      "originalText": "所以那個施設處是指什麼",
+      "proposedText": "所以那個施設處是指什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1336",
+      "paragraphId": "p_112",
+      "start": 2565.84,
+      "end": 2567.94,
+      "originalText": "色受想行識",
+      "proposedText": "色、受、想、行、識",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號。"
+    },
+    {
+      "sentenceId": "sent-1337",
+      "paragraphId": "p_112",
+      "start": 2567.94,
+      "end": 2569,
+      "originalText": "這五蘊而已",
+      "proposedText": "這五蘊而已。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1338",
+      "paragraphId": "p_112",
+      "start": 2569,
+      "end": 2570.28,
+      "originalText": "小孩子",
+      "proposedText": "小孩子，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1339",
+      "paragraphId": "p_112",
+      "start": 2570.28,
+      "end": 2572.02,
+      "originalText": "一生出來就有五蘊嗎",
+      "proposedText": "一生出來就有五蘊嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1340",
+      "paragraphId": "p_112",
+      "start": 2572.02,
+      "end": 2572.56,
+      "originalText": "對不對",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1341",
+      "paragraphId": "p_112",
+      "start": 2572.56,
+      "end": 2573.72,
+      "originalText": "是不是嗎",
+      "proposedText": "是不是嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1342",
+      "paragraphId": "p_112",
+      "start": 2573.72,
+      "end": 2576.68,
+      "originalText": "好所以施設處就是指",
+      "proposedText": "好，所以施設處就是指",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，區分語氣詞與主句。"
+    },
+    {
+      "sentenceId": "sent-1343",
+      "paragraphId": "p_112",
+      "start": 2576.68,
+      "end": 2577.82,
+      "originalText": "身心",
+      "proposedText": "身心，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "加上逗號，使語意更清晰。"
+    },
+    {
+      "sentenceId": "sent-1344",
+      "paragraphId": "p_112",
+      "start": 2577.82,
+      "end": 2580.96,
+      "originalText": "也就是色受想行識這五蘊",
+      "proposedText": "也就是色、受、想、行、識這五蘊。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號，語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1350",
+      "paragraphId": "p_113",
+      "start": 2586.52,
+      "end": 2589.32,
+      "originalText": "他這裡面是寫也就是不用關嗎",
+      "proposedText": "他這裡面是寫「也就是不用關嗎」？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上引號以標示引用內容，並將疑問句句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1351",
+      "paragraphId": "p_113",
+      "start": 2589.32,
+      "end": 2591.78,
+      "originalText": "你把就是這兩個字擦掉",
+      "proposedText": "你把「就是」這兩個字擦掉。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "補上引號標示要擦除的具體字詞，並修正句尾標點。"
+    },
+    {
+      "sentenceId": "sent-1352",
+      "paragraphId": "p_113",
+      "start": 2592.32,
+      "end": 2593.8,
+      "originalText": "好因為我覺得這個語言",
+      "proposedText": "好，因為我覺得這個語言，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「好」後加逗號，使語意流暢。"
+    },
+    {
+      "sentenceId": "sent-1355",
+      "paragraphId": "p_113",
+      "start": 2597.96,
+      "end": 2602.92,
+      "originalText": "他這樣子講也沒有錯但是就是可能會有點誤導了好你們下課的時候",
+      "proposedText": "他這樣子講也沒有錯，但是可能會有點誤導。好，你們下課的時候，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除口語贅詞「就是」，修正標點以區分語意層次。"
+    },
+    {
+      "sentenceId": "sent-1359",
+      "paragraphId": "p_114",
+      "start": 2608.9,
+      "end": 2611.08,
+      "originalText": "無需觀待施設處",
+      "proposedText": "無需觀待施設處，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在名相後加逗號，與後續句子連接。"
+    },
+    {
+      "sentenceId": "sent-1362",
+      "paragraphId": "p_114",
+      "start": 2613.32,
+      "end": 2613.34,
+      "originalText": "關",
+      "proposedText": "觀",
+      "categories": [
+        "missing-term"
+      ],
+      "reason": "根據上下文「觀待」，ASR 可能漏字或斷句錯誤，原句為「不用關待」，應修正為「不用觀待」，但此處僅單字「關」，需結合 sent-1363 判斷。若 sent-1362 為「關」，sent-1363 為「待」，則無需修改單字，只需合併。"
+    },
+    {
+      "sentenceId": "sent-1364",
+      "paragraphId": "p_114",
+      "start": 2614.3,
+      "end": 2615.48,
+      "originalText": "施設他的",
+      "proposedText": "施設。他的",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「施設」後加句號，結束前一句；「他的」為下一句開頭。"
+    },
+    {
+      "sentenceId": "sent-1365",
+      "paragraphId": "p_114",
+      "start": 2615.48,
+      "end": 2616.06,
+      "originalText": "他的心",
+      "proposedText": "心",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "此句為單字，保留。"
+    },
+    {
+      "sentenceId": "sent-1367",
+      "paragraphId": "p_114",
+      "start": 2617.64,
+      "end": 2619.6,
+      "originalText": "即能自方成立",
+      "proposedText": "即能自方成立，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「成立」後加逗號，與「自方存在」並列。"
+    },
+    {
+      "sentenceId": "sent-1368",
+      "paragraphId": "p_114",
+      "start": 2620.34,
+      "end": 2621.3,
+      "originalText": "自方存在",
+      "proposedText": "自方存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1372",
+      "paragraphId": "p_115",
+      "start": 2626.5,
+      "end": 2630.52,
+      "originalText": "假名或者是說我們給他取名字這件事情就叫",
+      "proposedText": "假名，或者是說我們給他取名字，這件事情就叫",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「假名」後加逗號，在「取名字」後加逗號，使句子結構清晰。"
+    },
+    {
+      "sentenceId": "sent-1373",
+      "paragraphId": "p_115",
+      "start": 2631.36,
+      "end": 2632.68,
+      "originalText": "講的好像比較偉大一點",
+      "proposedText": "講得好像比較偉大一點，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「一點」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1374",
+      "paragraphId": "p_115",
+      "start": 2633.2,
+      "end": 2635.36,
+      "originalText": "在佛法上就叫施設假名",
+      "proposedText": "在佛法上就叫施設假名。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1378",
+      "paragraphId": "p_115",
+      "start": 2638,
+      "end": 2640.54,
+      "originalText": "我給那個小朋友取一個名字叫王小明",
+      "proposedText": "我給那個小朋友取一個名字叫王小明，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "在「王小明」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1381",
+      "paragraphId": "p_116",
+      "start": 2642.62,
+      "end": 2643.84,
+      "originalText": "施設處是指什麼",
+      "proposedText": "施設處是指什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1383",
+      "paragraphId": "p_116",
+      "start": 2645.48,
+      "end": 2647.84,
+      "originalText": "色受想行識身心對不對",
+      "proposedText": "色、受、想、行、識，身心，對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號，疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1385",
+      "paragraphId": "p_116",
+      "start": 2648.68,
+      "end": 2651.4,
+      "originalText": "他一定要和合才叫做一個小朋友",
+      "proposedText": "他一定要和合，才叫做一個小朋友。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1391",
+      "paragraphId": "p_116",
+      "start": 2657.08,
+      "end": 2658.92,
+      "originalText": "這個假名的是誰",
+      "proposedText": "這個假名的是誰？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1394",
+      "paragraphId": "p_117",
+      "start": 2665.7,
+      "end": 2667.26,
+      "originalText": "算命先生可能不會取王小明",
+      "proposedText": "算命先生可能不會取「王小明」。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號，並為人名加上引號以示專名。"
+    },
+    {
+      "sentenceId": "sent-1398",
+      "paragraphId": "p_117",
+      "start": 2674.66,
+      "end": 2675.46,
+      "originalText": "等名字",
+      "proposedText": "等名字。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1399",
+      "paragraphId": "p_117",
+      "start": 2675.48,
+      "end": 2676.74,
+      "originalText": "好那",
+      "proposedText": "好，那",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，「好」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1400",
+      "paragraphId": "p_117",
+      "start": 2677.28,
+      "end": 2677.98,
+      "originalText": "總之呢",
+      "proposedText": "總之呢，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「總之呢」後加逗號，作為連接詞。"
+    },
+    {
+      "sentenceId": "sent-1402",
+      "paragraphId": "p_117",
+      "start": 2679.58,
+      "end": 2680.5,
+      "originalText": "施設的人",
+      "proposedText": "施設的人，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「施設的人」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1403",
+      "paragraphId": "p_117",
+      "start": 2681.12,
+      "end": 2685.26,
+      "originalText": "施設這個假名字的人就是給予這個命名的這個人",
+      "proposedText": "施設這個假名字的人，就是給予這個命名的這個人，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列或解釋性語句，加逗號。"
+    },
+    {
+      "sentenceId": "sent-1404",
+      "paragraphId": "p_117",
+      "start": 2685.9,
+      "end": 2687.96,
+      "originalText": "其實主要就是他那顆心",
+      "proposedText": "其實主要就是他那顆心。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處把誤留的逗號改為句號。"
+    },
+    {
+      "sentenceId": "sent-1405",
+      "paragraphId": "p_118",
+      "start": 2688.8,
+      "end": 2689.14,
+      "originalText": "對不對",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1407",
+      "paragraphId": "p_118",
+      "start": 2689.7,
+      "end": 2690.72,
+      "originalText": "好所以",
+      "proposedText": "好，所以",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「好」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1408",
+      "paragraphId": "p_118",
+      "start": 2691.36,
+      "end": 2692.44,
+      "originalText": "我們說王小",
+      "proposedText": "我們說王小明，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「王小明」後加逗號，作為話題。"
+    },
+    {
+      "sentenceId": "sent-1410",
+      "paragraphId": "p_118",
+      "start": 2693.88,
+      "end": 2697.22,
+      "originalText": "今天如果他的爸爸媽媽給他取名叫王小明之後",
+      "proposedText": "今天如果他的爸爸媽媽給他取名叫王小明之後，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「之後」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1413",
+      "paragraphId": "p_118",
+      "start": 2703.38,
+      "end": 2704.72,
+      "originalText": "聯絡在一起了",
+      "proposedText": "聯絡在一起了，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「了」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1414",
+      "paragraphId": "p_118",
+      "start": 2704.72,
+      "end": 2705.46,
+      "originalText": "對不對",
+      "proposedText": "對不對？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1415",
+      "paragraphId": "p_118",
+      "start": 2706,
+      "end": 2708.86,
+      "originalText": "從此以後他的家人就叫他王小明",
+      "proposedText": "從此以後，他的家人就叫他王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「以後」後加逗號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1416",
+      "paragraphId": "p_118",
+      "start": 2708.86,
+      "end": 2710.08,
+      "originalText": "好然後呢",
+      "proposedText": "好，然後呢，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「好」後加逗號，「呢」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1417",
+      "paragraphId": "p_119",
+      "start": 2710.08,
+      "end": 2713.72,
+      "originalText": "他上學他的老師同學就叫王小明",
+      "proposedText": "他上學，他的老師、同學就叫王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，將「上學」後改為逗號，「老師同學」間加頓號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1419",
+      "paragraphId": "p_119",
+      "start": 2715.48,
+      "end": 2720.14,
+      "originalText": "所有的這些他的同事啊他認識的這些朋友就叫他王小明",
+      "proposedText": "所有的這些，他的同事、他認識的這些朋友，就叫他王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，「同事」後加頓號，「朋友」後加逗號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1420",
+      "paragraphId": "p_119",
+      "start": 2720.14,
+      "end": 2721.2,
+      "originalText": "好所以",
+      "proposedText": "好，所以",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「好」為語氣詞，後接「所以」，中間加逗號。"
+    },
+    {
+      "sentenceId": "sent-1421",
+      "paragraphId": "p_119",
+      "start": 2722.36,
+      "end": 2723.94,
+      "originalText": "其實大家都忘記了",
+      "proposedText": "其實大家都忘記了，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，與下句連貫，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1423",
+      "paragraphId": "p_119",
+      "start": 2725.38,
+      "end": 2727.04,
+      "originalText": "不是王小明",
+      "proposedText": "不是王小明，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1424",
+      "paragraphId": "p_119",
+      "start": 2727.9,
+      "end": 2728.78,
+      "originalText": "只是什麼",
+      "proposedText": "只是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "設問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1426",
+      "paragraphId": "p_119",
+      "start": 2729.88,
+      "end": 2732.56,
+      "originalText": "就是那個五蘊和合的那個小baby",
+      "proposedText": "就是那個五蘊和合的那個小 baby。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "「小baby」規範為「小 baby」，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1427",
+      "paragraphId": "p_119",
+      "start": 2733.14,
+      "end": 2733.66,
+      "originalText": "然後呢",
+      "proposedText": "然後，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "連接詞，後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1428",
+      "paragraphId": "p_119",
+      "start": 2734.72,
+      "end": 2735.82,
+      "originalText": "有一個命名者",
+      "proposedText": "有一個命名者。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1430",
+      "paragraphId": "p_120",
+      "start": 2737.42,
+      "end": 2740.18,
+      "originalText": "施設名言的這件事情的這個心",
+      "proposedText": "施設名言的這件事情的這個心，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1431",
+      "paragraphId": "p_120",
+      "start": 2740.18,
+      "end": 2742.02,
+      "originalText": "把他安立這個名言",
+      "proposedText": "把他安立這個名言，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1432",
+      "paragraphId": "p_120",
+      "start": 2742.56,
+      "end": 2744.2,
+      "originalText": "就僅僅是這樣子而已",
+      "proposedText": "就僅僅是這樣子而已。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1433",
+      "paragraphId": "p_120",
+      "start": 2744.2,
+      "end": 2746.38,
+      "originalText": "但是我們從今以後",
+      "proposedText": "但是我們從今以後，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1437",
+      "paragraphId": "p_120",
+      "start": 2752.12,
+      "end": 2753.3,
+      "originalText": "實體有的那個我",
+      "proposedText": "實體有的那個我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1438",
+      "paragraphId": "p_120",
+      "start": 2753.3,
+      "end": 2754.52,
+      "originalText": "緊緊的什麼",
+      "proposedText": "緊緊的什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "設問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1439",
+      "paragraphId": "p_120",
+      "start": 2755.36,
+      "end": 2756.6,
+      "originalText": "融合在一起",
+      "proposedText": "融合在一起。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1440",
+      "paragraphId": "p_120",
+      "start": 2757.48,
+      "end": 2759.6,
+      "originalText": "所以有一天如果有人跟你講說",
+      "proposedText": "所以有一天，如果有人跟你講說：",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「講說」後接引語，改為冒號。"
+    },
+    {
+      "sentenceId": "sent-1441",
+      "paragraphId": "p_121",
+      "start": 2760.72,
+      "end": 2763.02,
+      "originalText": "如果我們自己是王小明的話",
+      "proposedText": "如果我們自己是王小明的話，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1444",
+      "paragraphId": "p_121",
+      "start": 2765.64,
+      "end": 2767.72,
+      "originalText": "人家在罵王小明的話",
+      "proposedText": "人家在罵王小明的話，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意未完，改為逗號。"
+    },
+    {
+      "sentenceId": "sent-1445",
+      "paragraphId": "p_121",
+      "start": 2768.18,
+      "end": 2769.06,
+      "originalText": "你就會說",
+      "proposedText": "你就會說：",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「說」後接引語，改為冒號。"
+    },
+    {
+      "sentenceId": "sent-1446",
+      "paragraphId": "p_121",
+      "start": 2769.58,
+      "end": 2770.52,
+      "originalText": "怎麼可以說我呢",
+      "proposedText": "「怎麼可以說我呢？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "引語開始，加左引號，問句加問號。"
+    },
+    {
+      "sentenceId": "sent-1447",
+      "paragraphId": "p_121",
+      "start": 2771.12,
+      "end": 2772.04,
+      "originalText": "怎麼可以罵我呢",
+      "proposedText": "怎麼可以罵我呢？」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "引語結束，加右引號。"
+    },
+    {
+      "sentenceId": "sent-1448",
+      "paragraphId": "p_121",
+      "start": 2772.64,
+      "end": 2772.96,
+      "originalText": "好你們",
+      "proposedText": "好，你們",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「好」為語氣詞，後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1449",
+      "paragraphId": "p_121",
+      "start": 2772.96,
+      "end": 2776.5,
+      "originalText": "我根本不是那樣子然後你們都是壞蛋怎麼樣怎麼樣子",
+      "proposedText": "我根本不是那樣子，然後你們都是壞蛋，怎麼樣、怎麼樣子？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "修正標點，「樣子」後加逗號，「壞蛋」後加逗號，「怎麼樣」後加頓號，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1450",
+      "paragraphId": "p_121",
+      "start": 2776.5,
+      "end": 2777.78,
+      "originalText": "你就會覺得什麼",
+      "proposedText": "你就會覺得什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "設問句，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1451",
+      "paragraphId": "p_121",
+      "start": 2778.44,
+      "end": 2780,
+      "originalText": "要去捍衛那個我",
+      "proposedText": "要去捍衛那個我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句意完整，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1452",
+      "paragraphId": "p_121",
+      "start": 2780.58,
+      "end": 2783.68,
+      "originalText": "但是事實上王小明只是一個假名字而已",
+      "proposedText": "但是事實上，王小明只是一個假名字而已。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「事實上」後加逗號，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1453",
+      "paragraphId": "p_122",
+      "start": 2786.14,
+      "end": 2788.54,
+      "originalText": "當然如果人家人家講你的",
+      "proposedText": "當然，如果人家講你的",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除重複的「人家」，並加上逗號以符合語意節奏。"
+    },
+    {
+      "sentenceId": "sent-1454",
+      "paragraphId": "p_122",
+      "start": 2789.02,
+      "end": 2793.02,
+      "originalText": "去批評你但是你真的做錯事的那你就當然是要檢討",
+      "proposedText": "去批評你，但是你真的做錯事的話，你就當然是要檢討。",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "修正標點，將「的」改為「的話」以通順語意，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1456",
+      "paragraphId": "p_122",
+      "start": 2793.66,
+      "end": 2795.9,
+      "originalText": "我們現在是站在修行的立場來講",
+      "proposedText": "我們現在是站在修行的立場來講，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，因為後續句子是具體說明。"
+    },
+    {
+      "sentenceId": "sent-1458",
+      "paragraphId": "p_122",
+      "start": 2797,
+      "end": 2798.24,
+      "originalText": "從此以後",
+      "proposedText": "從此以後，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，表示時間狀語後的停頓。"
+    },
+    {
+      "sentenceId": "sent-1459",
+      "paragraphId": "p_122",
+      "start": 2798.78,
+      "end": 2801.96,
+      "originalText": "你這個人而且你認為是有一個實質的我",
+      "proposedText": "你這個人，而且你認為是有一個實質的我，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修正標點，將「而且」前加逗號，句尾加逗號以連接下文。"
+    },
+    {
+      "sentenceId": "sent-1460",
+      "paragraphId": "p_122",
+      "start": 2801.96,
+      "end": 2806.36,
+      "originalText": "就等於什麼我等於王小明就緊緊的綁在一起",
+      "proposedText": "就等於什麼？我等於王小明，就緊緊的綁在一起。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「就等於什麼」為設問，改為問號；「王小明」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1462",
+      "paragraphId": "p_122",
+      "start": 2812.04,
+      "end": 2816.56,
+      "originalText": "我們在〈真實義品〉那邊也有上過這樣子的一個觀念",
+      "proposedText": "我們在〈真實義品〉那邊也有上過這樣子的一個觀念。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "刪除重複的「我們」，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1466",
+      "paragraphId": "p_123",
+      "start": 2821.6,
+      "end": 2822.68,
+      "originalText": "依唯識",
+      "proposedText": "依唯識，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，與前句並列。"
+    },
+    {
+      "sentenceId": "sent-1468",
+      "paragraphId": "p_123",
+      "start": 2826.22,
+      "end": 2828.76,
+      "originalText": "假名安立這件事情本來就是",
+      "proposedText": "假名安立。這件事情本來就是",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「假名安立」為完整動詞短語，後加句號；「這件事情」另起一句。"
+    },
+    {
+      "sentenceId": "sent-1469",
+      "paragraphId": "p_123",
+      "start": 2829.6,
+      "end": 2831.24,
+      "originalText": "中觀、唯識都會講到的",
+      "proposedText": "中觀、唯識都會講到的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1470",
+      "paragraphId": "p_123",
+      "start": 2834.62,
+      "end": 2837.98,
+      "originalText": "所以這整句話的意思這樣大家知道嗎",
+      "proposedText": "所以這整句話的意思，這樣大家知道嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「意思」後加逗號，句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1472",
+      "paragraphId": "p_123",
+      "start": 2839.84,
+      "end": 2841.6,
+      "originalText": "121頁最後一行來看",
+      "proposedText": "121頁最後一行來看，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，連接下文。"
+    },
+    {
+      "sentenceId": "sent-1473",
+      "paragraphId": "p_123",
+      "start": 2842.9,
+      "end": 2843.38,
+      "originalText": "他說呢",
+      "proposedText": "他說呢，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號。"
+    },
+    {
+      "sentenceId": "sent-1475",
+      "paragraphId": "p_123",
+      "start": 2847.52,
+      "end": 2851.64,
+      "originalText": "就是你自己是不需要觀待五蘊身心",
+      "proposedText": "就是你自己，是不需要觀待五蘊身心，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「你自己」後加逗號，「五蘊身心」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1477",
+      "paragraphId": "p_124",
+      "start": 2854.12,
+      "end": 2856.4,
+      "originalText": "來命名你的心",
+      "proposedText": "來命名你的心。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1478",
+      "paragraphId": "p_124",
+      "start": 2857.26,
+      "end": 2861.06,
+      "originalText": "我這個王小明這個人呢我本身就是",
+      "proposedText": "我這個王小明這個人呢，我本身就是",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「這個人呢」後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1479",
+      "paragraphId": "p_124",
+      "start": 2861.06,
+      "end": 2862.84,
+      "originalText": "自方成立",
+      "proposedText": "自性成立。",
+      "categories": [
+        "missing-term",
+        "punctuation"
+      ],
+      "reason": "根據 reAsrHint 及佛教名相，「自方成立」應為「自性成立」或「自性實有」，但結合下文「自性實有」，此處口誤「自方」應修正為「自性」，句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1480",
+      "paragraphId": "p_124",
+      "start": 2862.84,
+      "end": 2865.04,
+      "originalText": "我自己就是王小明的話",
+      "proposedText": "我自己就是王小明的話，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號，表示假設語氣未完。"
+    },
+    {
+      "sentenceId": "sent-1481",
+      "paragraphId": "p_124",
+      "start": 2865.74,
+      "end": 2866.98,
+      "originalText": "這個就叫做什麼",
+      "proposedText": "這個就叫做什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為問號。"
+    },
+    {
+      "sentenceId": "sent-1482",
+      "paragraphId": "p_124",
+      "start": 2867.52,
+      "end": 2869.7,
+      "originalText": "自性實有的王小明",
+      "proposedText": "自性實有的王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1483",
+      "paragraphId": "p_124",
+      "start": 2871.9,
+      "end": 2872.5,
+      "originalText": "好",
+      "proposedText": "好，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號。"
+    },
+    {
+      "sentenceId": "sent-1484",
+      "paragraphId": "p_124",
+      "start": 2872.5,
+      "end": 2873.16,
+      "originalText": "好",
+      "proposedText": "好，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號。"
+    },
+    {
+      "sentenceId": "sent-1487",
+      "paragraphId": "p_124",
+      "start": 2877.98,
+      "end": 2879.42,
+      "originalText": "將近一節課",
+      "proposedText": "將近一節課，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾加逗號。"
+    },
+    {
+      "sentenceId": "sent-1488",
+      "paragraphId": "p_124",
+      "start": 2879.42,
+      "end": 2881.58,
+      "originalText": "好苦口婆心的講那麼多",
+      "proposedText": "好苦口婆心的講那麼多。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾改為句號。"
+    },
+    {
+      "sentenceId": "sent-1489",
+      "paragraphId": "p_125",
+      "start": 2881.58,
+      "end": 2885.68,
+      "originalText": "大家應該有點了解了吧如此自性有的王小明",
+      "proposedText": "大家應該有點了解了吧？如此自性有的王小明，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "將疑問語氣改為問號，刪除口語贅詞「呢」，並修正標點以連接下文。"
+    },
+    {
+      "sentenceId": "sent-1490",
+      "paragraphId": "p_125",
+      "start": 2885.68,
+      "end": 2887.86,
+      "originalText": "事實上有沒有存在呢",
+      "proposedText": "事實上有沒有存在？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1491",
+      "paragraphId": "p_125",
+      "start": 2888.82,
+      "end": 2889.86,
+      "originalText": "不存在",
+      "proposedText": "不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-1492",
+      "paragraphId": "p_125",
+      "start": 2889.86,
+      "end": 2891.32,
+      "originalText": "因此",
+      "proposedText": "因此，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "連接詞後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1493",
+      "paragraphId": "p_125",
+      "start": 2891.32,
+      "end": 2895.18,
+      "originalText": "所要破斥的物件也完全不存在",
+      "proposedText": "所要破斥的物件也完全不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-1494",
+      "paragraphId": "p_125",
+      "start": 2895.18,
+      "end": 2896.08,
+      "originalText": "就是說",
+      "proposedText": "就是說，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "口語轉述詞後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1497",
+      "paragraphId": "p_125",
+      "start": 2900.26,
+      "end": 2902.94,
+      "originalText": "實體的王小明的這個人也不存在",
+      "proposedText": "實體的王小明，這個人也不存在。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "將「的這個人」改為「，這個人」以明確主語，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1498",
+      "paragraphId": "p_125",
+      "start": 2904.36,
+      "end": 2905.74,
+      "originalText": "所以在這邊我們在",
+      "proposedText": "所以在這邊，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "連接詞後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1503",
+      "paragraphId": "p_126",
+      "start": 2912.48,
+      "end": 2913.96,
+      "originalText": "或者是你要所破的",
+      "proposedText": "或者是你要所破的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "修飾語後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1504",
+      "paragraphId": "p_126",
+      "start": 2914.78,
+      "end": 2916.56,
+      "originalText": "不是王小明這個人",
+      "proposedText": "不是王小明這個人，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "否定句後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1506",
+      "paragraphId": "p_126",
+      "start": 2918.22,
+      "end": 2919.98,
+      "originalText": "遮除破除的是什麼",
+      "proposedText": "遮除破除的是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾改用問號。"
+    },
+    {
+      "sentenceId": "sent-1507",
+      "paragraphId": "p_126",
+      "start": 2919.98,
+      "end": 2922.32,
+      "originalText": "自性成立的王小明",
+      "proposedText": "自性成立的王小明，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "名相後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1508",
+      "paragraphId": "p_126",
+      "start": 2923.22,
+      "end": 2925,
+      "originalText": "不需因緣假合",
+      "proposedText": "不需因緣假合、",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "並列名相補上頓號。"
+    },
+    {
+      "sentenceId": "sent-1509",
+      "paragraphId": "p_126",
+      "start": 2925.52,
+      "end": 2928.86,
+      "originalText": "不需要假名安立的王小明這個是需要被",
+      "proposedText": "不需要假名安立的王小明。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-1510",
+      "paragraphId": "p_126",
+      "start": 2928.86,
+      "end": 2930.58,
+      "originalText": "破除跟遮止的",
+      "proposedText": "這個是需要被",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "未完句，保留。"
+    },
+    {
+      "sentenceId": "sent-1511",
+      "paragraphId": "p_126",
+      "start": 2931.52,
+      "end": 2932,
+      "originalText": "這樣",
+      "proposedText": "破除跟遮止的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "語意完整處改為句號。"
+    },
+    {
+      "sentenceId": "sent-1512",
+      "paragraphId": "p_126",
+      "start": 2933.58,
+      "end": 2934.6,
+      "originalText": "這節課的",
+      "proposedText": "這樣，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "口語結語後加逗號。"
+    },
+    {
+      "sentenceId": "sent-1513",
+      "paragraphId": "p_127",
+      "start": 2934.6,
+      "end": 2938.42,
+      "originalText": "最後的重點就是我們可以把它濃縮在這句話裡面",
+      "proposedText": "這節課的",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "未完句，保留。"
+    },
+    {
+      "sentenceId": "sent-1514",
+      "paragraphId": "p_127",
+      "start": 2938.92,
+      "end": 2940.66,
+      "originalText": "好那麼先下課休息",
+      "proposedText": "最後的重點就是，我們可以把它濃縮在這句話裡面。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "「就是」後加逗號，句尾加句號。"
+    },
+    {
+      "sentenceId": "sent-1515",
+      "paragraphId": "p_127",
+      "start": 2940.68,
+      "end": 2940.94,
+      "originalText": "好",
+      "proposedText": "好，那麼先下課休息。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "口語開頭加逗號，句尾加句號。"
+    }
+  ]
+}

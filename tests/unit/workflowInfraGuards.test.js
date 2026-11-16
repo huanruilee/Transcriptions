@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { extractJsonObject } from '../../scripts/lib/eneuralClient.mjs';
+import {
+  assertRawTextPreserved,
+  isLockedSession,
+  loadLockedSessions,
+  maskUrls,
+  unmaskUrls,
+} from '../../scripts/lib/transcriptGuards.mjs';
+
+test('locked-sessions registry protects known SHA-256 pinned sessions', () => {
+  const locked = loadLockedSessions();
+  assert.ok(locked.length >= 2);
+  assert.equal(
+    isLockedSession('courses/2025釋量論第二品大組共學/sessions/session_01.json'),
+    true,
+  );
+  assert.equal(
+    isLockedSession('courses/四念住/sessions/session_08.json'),
+    true,
+  );
+  assert.equal(
+    isLockedSession('courses/四念住/sessions/session_05.json'),
+    false,
+  );
+});
+
+test('maskUrls preserves ?v= query strings across punctuation normalization', () => {
+  const input = '參考影音 https://www.youtube.com/watch?v=HyF9OE1P1Z0&t=12s 這是什麼?';
+  const { masked, urls } = maskUrls(input);
+  const normalized = masked.replace(/\?/g, '？');
+  const output = unmaskUrls(normalized, urls);
+  assert.equal(
+    output,
+    '參考影音 https://www.youtube.com/watch?v=HyF9OE1P1Z0&t=12s 這是什麼？',
+  );
+});
+
+test('extractJsonObject parses fenced and plain JSON objects', () => {
+  const fenced = '```json\n{"fixes":[{"id":"seg-1","text":"abc"}],"breaks":[]}\n```';
+  const parsed = extractJsonObject(fenced);
+  assert.deepEqual(parsed.fixes, [{ id: 'seg-1', text: 'abc' }]);
+});
+
+test('assertRawTextPreserved throws when rawText is mutated', () => {
+  const before = {
+    paragraphs: [{ sentences: [{ id: 'seg-1', text: '原句', rawText: '原句' }] }],
+  };
+  const validAfter = {
+    paragraphs: [{ sentences: [{ id: 'seg-1', text: '修正句', rawText: '原句' }] }],
+  };
+  const invalidAfter = {
+    paragraphs: [{ sentences: [{ id: 'seg-1', text: '修正句', rawText: '竄改' }] }],
+  };
+  assert.doesNotThrow(() => assertRawTextPreserved(before, validAfter));
+  assert.throws(() => assertRawTextPreserved(before, invalidAfter), /rawText mutation detected/);
+});
