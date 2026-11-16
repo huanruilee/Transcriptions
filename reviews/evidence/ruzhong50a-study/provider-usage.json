@@ -2,14 +2,37 @@
   "GX10Text": {
     "provider": "strata local",
     "model": "qwen3.8-flash-next-iq3_s",
-    "calls": 1,
-    "usage": {
-      "prompt_tokens": 2052,
-      "completion_tokens": 667,
-      "total_tokens": 2719,
-      "prompt_tokens_details": {
-        "cached_tokens": 0
+    "calls": 3,
+    "usageByCall": [
+      {
+        "prompt_tokens": 2052,
+        "completion_tokens": 667,
+        "total_tokens": 2719,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      {
+        "prompt_tokens": 140,
+        "completion_tokens": 512,
+        "total_tokens": 652,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      {
+        "prompt_tokens": 100,
+        "completion_tokens": 109,
+        "total_tokens": 209,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
       }
+    ],
+    "totals": {
+      "prompt_tokens": 2292,
+      "completion_tokens": 1288,
+      "total_tokens": 3580
     }
   },
   "GX10Whisper": {
