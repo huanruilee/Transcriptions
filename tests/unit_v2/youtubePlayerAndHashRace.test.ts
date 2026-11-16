@@ -289,4 +289,48 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
 
     wrapper.unmount();
   });
+
+  it('5. 跳轉至 0:00 (段首標籤或科判跳轉) 必須呼叫 seekTo(0, true) 且 handleTOCSeek 正確支援 timestamp=0', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-er#session-02') as any;
+
+    const seekToSpy = vi.fn();
+    // App.vue 以 `new YT.Player(...)` 建立播放器：mock 必須是可 new 的建構子
+    //（vi.fn().mockImplementation(arrow) 會丟 "is not a constructor" 且被 catch 吞掉）。
+    (window as any).YT = {
+      Player: class {
+        constructor(elementId: string) {
+          return {
+            cueVideoById: vi.fn(),
+            destroy: vi.fn(),
+            getDuration: () => 1200,
+            getCurrentTime: () => 0,
+            seekTo: seekToSpy,
+            playVideo: vi.fn(),
+            pauseVideo: vi.fn(),
+            unMute: vi.fn(),
+            getIframe: () => document.getElementById(elementId),
+          };
+        }
+      },
+    };
+
+    // setupYouTubePlayer 以 document.getElementById 找 iframe，
+    // mount 必須 attach 到 document（VTU 預設掛在 detached div）。
+    const wrapper = mount(App, { attachTo: document.body });
+    await wrapper.vm.$nextTick();
+    // scheduleYouTubePlayerSetup 先延遲 100ms 再以 100ms interval 輪詢，
+    // ytPlayer 需約 250ms 才完成初始化，這裡等待必須涵蓋整個建立流程。
+    await new Promise((r) => setTimeout(r, 450));
+
+    const testApi = (window as any).__TEST_API__;
+    expect(testApi).toBeDefined();
+
+    // 觸發跳轉至 0 秒
+    testApi.seek(0);
+    expect(seekToSpy).toHaveBeenCalledWith(0, true);
+    expect(testApi.getState().currentTime).toBe(0);
+    wrapper.unmount();
+    document.body.innerHTML = '';
+  });
 });

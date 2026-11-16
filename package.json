@@ -25,6 +25,7 @@
     "test:study-group-prototype": "node --test tests/unit/studyGroupPrototype.test.js",
     "test:study-group-content": "node --test tests/unit/studyGroupContentReview.test.js",
     "test:study-group-content-all": "node --test tests/unit/studyGroupContentReviewAll.test.js",
+    "test:content-approval": "node --test tests/unit/contentApprovalContract.test.js",
     "test:acceptance": "node --test tests/acceptance/*.test.js",
     "test:quality": "node --test tests/quality.test.js",
     "test:human-review": "node --test tests/required-set-not-truncated.test.js",
@@ -59,8 +60,8 @@
     "learn:sync": "python3 scripts/active_learning_manager.py --sync-all",
     "learn:dry-run": "python3 scripts/active_learning_manager.py --sync-all --dry-run",
     "sync-server": "python3 scripts/sync_server.py",
-    "dev": "npx serve src -p 9090",
-    "start": "npx serve src -p 9090",
+    "dev": "npx serve dist -p 9090",
+    "start": "npx serve dist -p 9090",
     "test:sinianzhu:release": "REQUIRE_SINIANZHU_RELEASE=1 node --test tests/unit/siNianZhuReleaseGate.test.js",
     "audit:sinianzhu": "python3 scripts/audit_sinianzhu_release.py",
     "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check",
@@ -86,19 +87,22 @@
   "devDependencies": {
     "@playwright/test": "^1.64.1",
     "@vitejs/plugin-vue": "^6.0.8",
-    "@vue/test-utils": "^2.5.0",
+    "@vue/test-utils": "^2.5.1",
     "@vueuse/core": "^14.4.0",
-    "happy-dom": "^20.14.0",
+    "happy-dom": "^21.0.4",
     "jsdom": "^30.0.1",
     "opencc-js": "^1.4.2",
     "pinia": "^4.0.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
     "vitest": "^5.0.0",
-    "vue": "^3.5.42",
+    "vue": "^3.5.43",
     "ws": "^8.21.3"
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1"
   }
 }

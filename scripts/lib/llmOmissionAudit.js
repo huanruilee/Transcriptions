@@ -25,6 +25,9 @@ const DEFAULT_SYSTEM_PROMPT = [
  */
 export function buildLlmAuditBatches(session, maxCharsPerBatch = 2400) {
   const paragraphs = Array.isArray(session?.paragraphs) ? session.paragraphs : [];
+  // estChars 只估算段落本身；實際 payload 還有 sessionTitle、段落陣列外框等額外字元。
+  // 留一點餘裕，避免剛好貼齊上限時實際請求超標。
+  const effectiveLimit = Math.floor(maxCharsPerBatch * 0.95);
   const batches = [];
   let current = [];
   let currentChars = 0;
@@ -51,7 +54,7 @@ export function buildLlmAuditBatches(session, maxCharsPerBatch = 2400) {
     };
     const estChars = JSON.stringify(item).length;
 
-    if (current.length > 0 && currentChars + estChars > maxCharsPerBatch) {
+    if (current.length > 0 && currentChars + estChars > effectiveLimit) {
       batches.push({ sessionTitle: session?.title ?? '', paragraphs: current });
       current = [];
       currentChars = 0;
@@ -63,7 +66,67 @@ export function buildLlmAuditBatches(session, maxCharsPerBatch = 2400) {
   if (current.length > 0) {
     batches.push({ sessionTitle: session?.title ?? '', paragraphs: current });
   }
-  return batches;
+
+  // 單一超大段落（如早期課程僅有 1 個自然段）會讓整段變成一個批次，
+  // 送進 LLM 後回應被 max_tokens 截斷 → finish_reason=length → 解析不到 JSON → 稽核靜默失效。
+  // 這裡把超過上限的段落再切成多個子批次，確保每個請求都在模型可回應的規模內。
+  const safeBatches = [];
+  for (const batch of batches) {
+    const oversized = batch.paragraphs.filter((p) => JSON.stringify(p).length > effectiveLimit);
+    const normal = batch.paragraphs.filter((p) => JSON.stringify(p).length <= effectiveLimit);
+    if (normal.length > 0) {
+      safeBatches.push({ sessionTitle: batch.sessionTitle, paragraphs: normal });
+    }
+    for (const para of oversized) {
+      const chunks = splitOversizedParagraph(para, effectiveLimit);
+      for (const chunk of chunks) {
+        safeBatches.push({ sessionTitle: batch.sessionTitle, paragraphs: [chunk] });
+      }
+    }
+  }
+  return safeBatches;
+}
+
+/**
+ * 把超過字元上限的單一段落切成多個子段落（保留前一句作 prevContext 以維持語意銜接）。
+ * @param {object} paragraph
+ * @param {number} maxChars
+ * @returns {Array<object>}
+ */
+function splitOversizedParagraph(paragraph, maxChars) {
+  const sentences = Array.isArray(paragraph?.sentences) ? paragraph.sentences : [];
+  if (sentences.length === 0) return [paragraph];
+
+  const chunks = [];
+  let current = [];
+  let currentChars = 0;
+
+  const pushChunk = (list, isFirst) => {
+    if (list.length === 0) return;
+    chunks.push({
+      ...paragraph,
+      // 子段落標記切分來源，避免下游把它當成原文的獨立段落 ID
+      paragraphId: isFirst ? paragraph.paragraphId : `${paragraph.paragraphId}#part${chunks.length + 1}`,
+      sentences: list,
+      prevContext: isFirst ? (paragraph.prevContext ?? '') : (list[0].text ?? ''),
+      nextContext: isFirst ? (paragraph.nextContext ?? '') : (list[list.length - 1].text ?? ''),
+    });
+  };
+
+  for (let i = 0; i < sentences.length; i++) {
+    const s = sentences[i];
+    const itemChars = JSON.stringify({ ...s, prevContext: '', nextContext: '' }).length;
+    if (current.length > 0 && currentChars + itemChars > maxChars) {
+      pushChunk(current, chunks.length === 0);
+      current = [];
+      currentChars = 0;
+    }
+    current.push(s);
+    currentChars += itemChars;
+  }
+  pushChunk(current, chunks.length === 0);
+
+  return chunks;
 }
 
 /**
@@ -78,13 +141,16 @@ export function parseLlmSuspectsJson(rawText) {
   const start = candidate.indexOf('{');
   const end = candidate.lastIndexOf('}');
   if (start === -1 || end === -1 || end <= start) {
-    return { suspects: [] };
+    return { suspects: [], parseFailed: true };
   }
   try {
     const parsed = JSON.parse(candidate.slice(start, end + 1));
-    return Array.isArray(parsed?.suspects) ? parsed : { suspects: [] };
+    if (!Array.isArray(parsed?.suspects)) {
+      return { suspects: [], parseFailed: true };
+    }
+    return { suspects: parsed.suspects, parseFailed: false };
   } catch {
-    return { suspects: [] };
+    return { suspects: [], parseFailed: true };
   }
 }
 
@@ -159,7 +225,7 @@ export async function auditSessionWithLlm({
           signal: AbortSignal.timeout(timeoutMs),
           body: payload,
         });
-        if (res.ok || res.status < 500) break;
+        if (res.ok || (res.status < 500 && res.status !== 429 && res.status !== 408)) break;
         lastErr = new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
       } catch (err) {
         lastErr = err;
@@ -174,7 +240,22 @@ export async function auditSessionWithLlm({
     }
     const data = await res.json();
     const content = data?.choices?.[0]?.message?.content ?? '';
+    const finishReason = data?.choices?.[0]?.finish_reason ?? '';
+
+    // 截斷偵測：finish_reason=length 表示回應被 max_tokens 截斷，JSON 不完整 → 稽核會靜默失效。
+    // 這時必須報錯而不是回傳空結果，否則「沒抓到漏字」與「根本沒檢查」長得一模一樣。
+    if (finishReason === 'length') {
+      throw new Error(
+        `LLM 語意稽核回應遭截斷（finish_reason=length），批次過大或 max_tokens 不足；本次批次稽核未生效`,
+      );
+    }
+
     const parsed = parseLlmSuspectsJson(content);
+    if (parsed.parseFailed) {
+      throw new Error(
+        `LLM 語意稽核回應無法解析為 JSON（批次過大或回應異常），本次批次稽核未生效`,
+      );
+    }
 
     for (const suspect of parsed.suspects) {
       const sid = String(suspect?.sentenceId ?? '').trim();

@@ -124,6 +124,7 @@ def md_to_html(md_path: Path) -> Path:
         return f'<button class="ts-btn" onclick="event.stopPropagation(); playAt({seconds}, this)">{ts_text}</button>'
 
     content = re.sub(r'\[(▶\s*\d{2,3}:\d{2})\]\((?:.+?)(?:#t=|&t=)(\d+(?:\.\d+)?)s?\)', replace_ts, text)
+    content = re.sub(r'\[([^\]]+)\]\((#sec-[a-zA-Z0-9_-]+)\)', r'<a class="toc-anchor-link" href="\2">\1</a>', content)
 
     # Process blockquotes
     lines = content.split('\n')
@@ -148,7 +149,20 @@ def md_to_html(md_path: Path) -> Path:
     # Convert headings - ensure double newlines around them so following lines aren't fused
     content = re.sub(r'^(#{1,3})\s+(.+)$', r'\n\n\1 \2\n\n', content, flags=re.MULTILINE)
     content = re.sub(r'^###\s+(.+)$', r'<h3>\1</h3>', content, flags=re.MULTILINE)
-    content = re.sub(r'^##\s+(.+)$', r'<h2>\1</h2>', content, flags=re.MULTILINE)
+    sec_counter = [0]
+    def replace_h2(m):
+        inner = m.group(1)
+        explicit_id = re.search(r'\s*\{#([a-zA-Z0-9_-]+)\}\s*$', inner)
+        if explicit_id:
+            hid = explicit_id.group(1)
+            inner = inner[:explicit_id.start()]
+            return f'<h2 id="{hid}">{inner}</h2>'
+        if 'class="ts-btn"' in inner:
+            sec_counter[0] += 1
+            back_toc = ' <a class="back-toc-link" href="#sec-toc">↑ 目錄</a>' if md_path.stem.endswith("_dialogue_transcript") else ""
+            return f'<h2 id="sec-{sec_counter[0]}">{inner}{back_toc}</h2>'
+        return f'<h2>{inner}</h2>'
+    content = re.sub(r'^##\s+(.+)$', replace_h2, content, flags=re.MULTILINE)
     content = re.sub(r'^#\s+(.+)$', r'<h1>\1</h1>', content, flags=re.MULTILINE)
 
     # Bold and Italic
@@ -156,10 +170,10 @@ def md_to_html(md_path: Path) -> Path:
     content = re.sub(r'\*(.+?)\*', r'<em>\1</em>', content)
 
     raw_blocks = [b.strip() for b in content.split('\n\n') if b.strip()]
-    if not verbatim_map and session_data:
+    if not verbatim_map and session_data and not md_path.stem.endswith("_dialogue_transcript"):
         para_seconds = []
         for b in raw_blocks:
-            if b.startswith(('<h', '<blockquote', '<hr', '---')) or re.match(r'^\d+\.\s', b):
+            if b.startswith(('<h', '<blockquote', '<hr', '---', '<div', '<details')) or re.match(r'^\d+\.\s', b):
                 continue
             if any(line.strip().startswith(('* ', '- ')) for line in b.split('\n')):
                 continue
@@ -171,8 +185,11 @@ def md_to_html(md_path: Path) -> Path:
     # Paragraphs
     paragraphs = []
     para_counter = 0
+    current_speaker = ""
     for block in raw_blocks:
-        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr'):
+        if block.startswith('<h') or block.startswith('<blockquote') or block.startswith('<hr') or block.startswith('<div') or block.startswith('<details') or block.startswith('<table'):
+            if block.startswith(('<div', '<hr')):
+                current_speaker = ""
             if (block.startswith('<h2>【正文講記】</h2>') or block.startswith('<h2>二、各節問題與法師開示講記</h2>')) and verbatim_map:
                 heading_text = re.sub(r'</?h2>', '', block)
                 paragraphs.append(
@@ -271,14 +288,31 @@ def md_to_html(md_path: Path) -> Path:
                         f'</div>'
                     )
                 else:
-                    paragraphs.append(f'<p class="reading-para clickable-para" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
+                    spk_m = re.search(r'<strong>([^：<]{1,15})：</strong>', block)
+                    if spk_m:
+                        current_speaker = spk_m.group(1)
+                    teacher_cls = " teacher-para" if current_speaker == "如性法師" else ""
+                    paragraphs.append(f'<p class="reading-para clickable-para{teacher_cls}" onclick="playPara({sec}, this, event)">{block.replace(chr(10), "<br/>")}</p>')
             else:
-                paragraphs.append(f'<p class="reading-para">{block.replace(chr(10), "<br/>")}</p>')
+                spk_m = re.search(r'<strong>([^：<]{1,15})：</strong>', block)
+                if spk_m:
+                    current_speaker = spk_m.group(1)
+                teacher_cls = " teacher-para" if current_speaker == "如性法師" else ""
+                paragraphs.append(f'<p class="reading-para{teacher_cls}">{block.replace(chr(10), "<br/>")}</p>')
 
     body_html = '\n'.join(paragraphs)
+    if md_path.stem.endswith("_dialogue_transcript"):
+        mode_bar_html = (
+            '<div class="mode-bar" role="region" aria-label="閱讀模式切換">'
+            '<span class="mode-label">閱讀模式：</span>'
+            '<button type="button" class="mode-btn active" id="mode-full-btn" onclick="setReadingMode(\'full\')">📖 完整共學實錄</button>'
+            '<button type="button" class="mode-btn" id="mode-essence-btn" onclick="setReadingMode(\'essence\')">☸️ 精華法師開示（收合學員討論）</button>'
+            '</div>'
+        )
+        body_html = body_html.replace('<div id="sec-toc"', mode_bar_html + '\n<div id="sec-toc"', 1)
 
     if youtube_id and not audio_url:
-        player_html = f"""  <div class="sticky-player yt-sticky-player">
+        player_html = f"""  <div class="sticky-player yt-sticky-player" id="sticky-player">
     <div class="yt-frame-wrap">
       <iframe id="yt-iframe" width="240" height="68"
         src="https://www.youtube.com/embed/{youtube_id}?enablejsapi=1&rel=0"
@@ -286,8 +320,9 @@ def md_to_html(md_path: Path) -> Path:
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何段落時間戳或原話單句，立即跳轉 YouTube 原片對應秒數</div>
+    <div class="info" id="player-status">🎬 隨選隨聽：點擊任何時間按鈕，立即跳轉 YouTube 原片對應秒數</div>
     <a id="yt-ext-link" class="yt-ext-btn" href="https://www.youtube.com/watch?v={youtube_id}" target="_blank" rel="noopener">📺 於 YouTube 開啟</a>
+    <button type="button" class="player-collapse-btn" onclick="togglePlayerCollapse(this)">🔽 收合</button>
   </div>"""
     else:
         player_html = f"""  <div class="sticky-player">
@@ -319,7 +354,7 @@ def md_to_html(md_path: Path) -> Path:
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.85;
-      padding: 0 0 120px 0;
+      padding: 0 0 180px 0;
       margin: 0;
     }}
     .container {{
@@ -368,6 +403,183 @@ def md_to_html(md_path: Path) -> Path:
     }}
     .reading-para.active-para {{
       background: #fef9c3;
+    }}
+    .reading-para.teacher-para {{
+      border-left: 4px solid #b45309;
+      background: #fffbeb;
+      padding-left: 16px;
+    }}
+    .reading-para.teacher-para.clickable-para:hover {{
+      background: #fef3c7;
+    }}
+    .reading-para.teacher-para.active-para {{
+      background: #fde68a;
+    }}
+    .learner-box {{
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #0284c7;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }}
+    .learner-box.compass-box {{
+      border-left-color: #0d9488;
+      background: #f0fdfa;
+    }}
+    .learner-box.summary-box {{
+      border-left-color: #b45309;
+      background: #fffbeb;
+    }}
+    .learner-box ul, .learner-box ol {{
+      margin: 8px 0 4px 20px;
+      padding: 0;
+    }}
+    .learner-box li {{
+      margin-bottom: 6px;
+    }}
+    .self-check-card {{
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      background: #ffffff;
+    }}
+    .self-check-card summary {{
+      cursor: pointer;
+      font-weight: 700;
+      color: #7f1d1d;
+      outline: none;
+    }}
+    .self-check-card[open] summary {{
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
+    }}
+    .toc-anchor-link {{
+      color: #991b1b;
+      text-decoration: none;
+      border-bottom: 1px dotted #991b1b;
+    }}
+    .toc-anchor-link:hover {{
+      color: #dc2626;
+      border-bottom-style: solid;
+    }}
+    .back-toc-link {{
+      float: right;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #64748b;
+      text-decoration: none;
+      margin-top: 4px;
+    }}
+    .back-toc-link:hover {{
+      color: #991b1b;
+    }}
+    .learner-box.pause-box {{
+      border-left-color: #6366f1;
+      background: #eef2ff;
+    }}
+    .learner-table {{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 6px 0;
+      font-size: 0.94rem;
+      background: #ffffff;
+    }}
+    .learner-table th, .learner-table td {{
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }}
+    .learner-table th {{
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }}
+    .mode-bar {{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 16px 0;
+    }}
+    .mode-label {{
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #334155;
+    }}
+    .mode-btn {{
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }}
+    .mode-btn.active, .mode-btn:hover {{
+      background: #991b1b;
+      color: #ffffff;
+      border-color: #991b1b;
+    }}
+    .toc-badge-student {{
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #ccfbf1;
+      color: #0f766e;
+      margin-right: 4px;
+    }}
+    .toc-badge-teacher {{
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: #fef3c7;
+      color: #92400e;
+      margin-right: 4px;
+    }}
+    .student-group-details {{
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 14px 0;
+      background: #fafafa;
+    }}
+    .student-group-details > summary {{
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #0f766e;
+      padding: 4px 0;
+    }}
+    .player-collapse-btn {{
+      background: rgba(255,255,255,0.18);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }}
+    .sticky-player.collapsed .yt-frame-wrap,
+    .sticky-player.collapsed .yt-ext-btn {{
+      display: none;
+    }}
+    .sticky-player.collapsed {{
+      padding: 6px 16px;
     }}
     .ts-btn {{
       background: #dc2626;
@@ -696,6 +908,29 @@ def md_to_html(md_path: Path) -> Path:
         console.error('Play failed:', e);
         status.innerText = '⚠️ 播放受限，請點擊播放器播放按鈕';
       }});
+    }}
+
+    function setReadingMode(mode) {{
+      const fullBtn = document.getElementById('mode-full-btn');
+      const essBtn = document.getElementById('mode-essence-btn');
+      if (fullBtn && essBtn) {{
+        fullBtn.classList.toggle('active', mode === 'full');
+        essBtn.classList.toggle('active', mode === 'essence');
+      }}
+      document.querySelectorAll('.student-group-details').forEach(el => {{
+        if (mode === 'essence') {{
+          el.removeAttribute('open');
+        }} else {{
+          el.setAttribute('open', '');
+        }}
+      }});
+    }}
+
+    function togglePlayerCollapse(btn) {{
+      const player = document.getElementById('sticky-player');
+      if (!player) return;
+      const collapsed = player.classList.toggle('collapsed');
+      btn.textContent = collapsed ? '🔼 展開播放器' : '🔽 收合';
     }}
   </script>
 </body>

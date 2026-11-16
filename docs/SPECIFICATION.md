@@ -14,7 +14,8 @@
    * 同日期的上、下兩節課統一重構標示為 `2A` 與 `2B`（顯示文字：`第 2A 堂 (上)` 與 `第 2B 堂 (下)`）。
    * 原始音檔目錄來源：[https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68](https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68)。
    * **音檔存放規範**：音檔放置於 `gx10` 本機目錄 `/home/henry/audio_files/`，**嚴禁存放於 gdrive 或上傳至 GitHub**。GitHub 僅存放程式碼、規格、Schema、JSON 與測試。
-   * **即時網頁預覽與部署 (Live Preview & Deployment)**：小法每完成一批次轉譯，必須同步更新 `gx10` 上的即時網頁服務 `https://gx10-2887.tail378c21.ts.net:9090/index.html`，讓 Henry 可以在小法作業期間邊做邊線上預覽！
+   * **即時網頁預覽與部署 (Live Preview & Deployment)**：小法每完成一批次轉譯，必須同步更新 `Henry 的 Mac` 上的即時網頁服務 `http://100.84.47.24:9090/index.html`，讓 Henry 可以在小法作業期間邊做邊線上預覽！
+     > **服務位置（2026-11-13 修正）**：此服務**跑在 Henry 的 Mac**（Tailscale IP `100.84.47.24`），**不是** gx10。launchd 服務名 `com.henry.transcriptions-web`，服務根目錄為 **repo 根目錄**（`courses/`、`index.html` 皆在根，非 `src/`）。音檔串流則由 gx10 的 `transcriptions-audio-proxy.service`（port 39090）提供。
 2. **統一顯示格式**：
    * 側邊欄每項固定格式：`第 [X][A/B] 堂 | YYYY-MM-DD | p.XX`（例：`第 2A 堂 | 2016-05-28 | p.63`）。
 3. **標題與狀態同步 (Title & State Sync)**：

@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 
 import {
   applyPolishProposals,
+  auditOralFillerResidue,
+  consolidateFillersAndFragments,
   generateFluentPolishProposals,
   parsePolishChangesJson,
   validatePolishProposal,
@@ -146,3 +148,53 @@ test('validatePolishProposal and parsePolishChangesJson handle edge cases', () =
     'content-word-omitted:因為',
   );
 });
+
+test('consolidateFillersAndFragments removes standalone fillers (呃/嗯/啊/好，那) and merges split sub-sentence fragments while preserving timestamps', () => {
+  const session = {
+    sessionId: '25',
+    title: '第 25 講 | 空三摩地',
+    paragraphs: [
+      {
+        id: 'p_11',
+        heading: null,
+        start: 507.98,
+        end: 551.36,
+        sentences: [
+          { id: 'sent-135', start: 507.98, end: 508.92, text: '你會覺得，' },
+          { id: 'sent-136', start: 509.86, end: 511.9, text: '空性的這個知見，' },
+          { id: 'sent-137', start: 511.96, end: 512.66, text: '對你來講，' },
+          { id: 'sent-138', start: 513.34, end: 513.86, text: '呃，' },
+          { id: 'sent-139', start: 513.96, end: 514.26, text: '它，' },
+          { id: 'sent-140', start: 515.06, end: 516.44, text: '比較不是那種，' },
+          { id: 'sent-141', start: 516.46, end: 517.46, text: '平鋪直敘，' },
+          { id: 'sent-142', start: 517.58, end: 518.7, text: '在書本上。' },
+          { id: 'sent-143', start: 519.02, end: 519.36, text: '好，' },
+          { id: 'sent-144', start: 519.5, end: 519.92, text: '那，' },
+          { id: 'sent-151', start: 529.04, end: 530.4, text: '也希望能夠，' },
+          { id: 'sent-152', start: 531.16, end: 531.6, text: '傳，' },
+          { id: 'sent-153', start: 531.82, end: 532.7, text: '達出去，' },
+          { id: 'sent-154', start: 532.96, end: 534.2, text: '也讓你們對於，' },
+          { id: 'sent-155', start: 534.24, end: 534.76, text: '這個，' },
+          { id: 'sent-156', start: 535.86, end: 536.3, text: '呃，' },
+          { id: 'sent-157', start: 536.36, end: 536.86, text: '空觀，' },
+          { id: 'sent-158', start: 536.94, end: 538.18, text: '會有一些興趣。' },
+        ],
+      },
+    ],
+  };
+
+  assert.ok(auditOralFillerResidue(session).length >= 5, 'Should detect raw fillers and 1-char fragments before consolidation');
+
+  const { session: consolidated, removedFillerCount, mergedFragmentCount } = consolidateFillersAndFragments(session);
+  assert.ok(removedFillerCount >= 5);
+  assert.ok(mergedFragmentCount >= 8);
+  assert.equal(auditOralFillerResidue(consolidated).length, 0, 'Should have zero residual fillers or 1-char fragments after consolidation');
+
+  const joined = consolidated.paragraphs[0].sentences.map((s) => s.text).join('');
+  assert.doesNotMatch(joined, /[呃嗯]/);
+  assert.match(joined, /傳達出去/);
+  assert.match(joined, /對於空觀會有一些興趣/);
+  assert.equal(consolidated.paragraphs[0].start, 507.98);
+  assert.equal(consolidated.paragraphs[0].end, 538.18);
+});
+

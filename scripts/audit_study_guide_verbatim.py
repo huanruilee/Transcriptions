@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""研讀講記「原話對照抽屜」稽核（唯讀）。
+
+檢查四項契約，用於判斷研讀講記的網頁產物是否忠實對應課堂原話：
+
+  C1  drawer 數 == md 內時間戳段落數
+  C2  每個抽屜的句子與 verbatim 對應段落逐字相符
+  C3  verbatim 每一段都能在抽屜中找到（無原話不可見）
+  C4  無空音檔，且有可用的音訊來源（YouTube embed 或非空 audio src）
+
+用法：
+    python3 scripts/audit_study_guide_verbatim.py [course_dir ...]
+
+預設掃描 courses/ 下所有含 publications/lecture_*_study_guide.html 且同層有
+verbatim/ 目錄的課程。退出碼：全部 PASS 回 0，出現 FAIL 回 1。
+
+注意：本腳本為唯讀稽核，不修改任何檔案。C3 對「課堂原話段落數多於研讀講記
+分段數」的課程必然 FAIL（研讀講記會重新分段），此時需人工判斷是揭露不足
+還是索引錯位，不可僅以 FAIL 判定內容有誤。
+"""
+import html as H
+import json
+import re
+import sys
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+
+
+def strip_tags(s: str) -> str:
+    """去除 HTML 標籤並還原跳脫字元，用於抽屜文字與原話文字比對。"""
+    return H.unescape(re.sub(r"<[^>]+>", "", s)).strip()
+
+
+def drawer_sentences(body: str) -> list:
+    """從抽屜 HTML 取出每句原話文字。
+
+    每句為一個 <div class="v-item">，其內含 v-ts / v-spk / v-txt 三個 span，
+    v-txt 為末者；文字中可能巢狀 <span class="treatise-quote">，故不可直接用
+    非貪婪的 v-txt 擷取（會在巢狀閉合標籤處提前截斷）。
+    """
+    out = []
+    for item in re.findall(r'<div class="v-item".*?</div>', body, re.S):
+        m = re.search(
+            r'<span class="v-txt">(.*?)</span>(?=<span class="v-txt">|</div>\s*$)',
+            item, re.S,
+        ) or re.search(r'<span class="v-txt">(.*)$', item, re.S)
+        if m:
+            out.append(strip_tags(m.group(1)))
+    return out
+
+
+def extract_drawers(html_text: str) -> dict:
+    """回傳 {段落 key: 抽屜內容 HTML}。"""
+    return dict(re.findall(
+        r'<div id="drawer-(p_\d+)" class="verbatim-drawer"[^>]*>(.*?)(?=<div id="drawer-|</body>)',
+        html_text, re.S,
+    ))
+
+
+# 抽屜痕跡判斷：必須只看 body（去掉 <style>/<script>），
+# 否則 render_study_guide_html.py 注入的共用 CSS（.verbatim-drawer/.v-item）
+# 與 JS（toggleVerbatimDrawer）會讓「根本沒有抽屜」的產物被誤判為抽屜型。
+_BODY_DRAWER_MARKER_RE = re.compile(
+    r'verbatim-drawer|\bv-item\b|verbatim-toggle-btn|toggleVerbatimDrawer'
+    r'|data-target="drawer-'
+)
+
+# ALT（inline 原話型）產物的**正向證據**：<details><summary>原話…</summary>
+_DETAILS_VERBATIM_RE = re.compile(
+    r"<details\b[^>]*>\s*<summary\b[^>]*>[^<]*原話[^<]*</summary>", re.S
+)
+
+
+def strip_style_script(html_text: str) -> str:
+    """移除 <style>/<script> 區塊，只留 body 內容供標記判斷。"""
+    return re.sub(r"<(style|script)\b[^>]*>.*?</\1>", "", html_text, flags=re.S | re.I)
+
+
+def has_drawer_markup(html_text: str) -> bool:
+    """本檔 body 是否帶有任何原話抽屜相關標記（含壞掉的抽屜）。
+
+    只看 body：共用 CSS/JS 樣板會帶有 .verbatim-drawer/.v-item/toggleVerbatimDrawer，
+    以整份文件搜尋會讓非抽屜型產物被誤判為抽屜型。
+    """
+    return _BODY_DRAWER_MARKER_RE.search(strip_style_script(html_text)) is not None
+
+
+def is_alt_details_verbatim(html_text: str) -> bool:
+    """是否為真正的 inline 原話型（ALT）產物。
+
+    判準需要**正向證據**：body 內有 <details><summary>原話…</summary> 型態，
+    且 body 內完全沒有抽屜痕跡。
+    「抽屜 ID 被破壞」的檔案其 body 仍留有 verbatim-toggle-btn /
+    data-target="drawer-" / class="verbatim-drawer"，故不會被誤判為 ALT
+    （Codex P2 finding 1）。
+    """
+    body = strip_style_script(html_text)
+    if _BODY_DRAWER_MARKER_RE.search(body):
+        return False
+    return _DETAILS_VERBATIM_RE.search(body) is not None
+
+
+def has_youtube_player(html_text: str) -> bool:
+    """是否存在**真正的** YouTube 播放器。
+
+    只檢查 <iframe> 標籤的 src 屬性；不可用整份文件搜尋 "youtube.com/embed"，
+    否則 inline playAt 的 JS fallback URL（``ytIframe.src = `.../embed/${id}...` ``）
+    會讓「iframe 已被移除、頁面已無播放器」的情況仍被誤判為有音訊來源
+    （Codex P2 finding 2）。
+    """
+    for tag in re.findall(r"<iframe\b[^>]*>", html_text, re.S):
+        m = re.search(r'\bsrc\s*=\s*["\']([^"\']*)["\']', tag, re.S)
+        if not m:
+            continue
+        src = m.group(1).strip()
+        if src and "youtube.com/embed" in src:
+            return True
+    return False
+
+
+def audit_course(course_dir: Path) -> list:
+    """稽核單一課程，回傳 [(講次, 契約名, 結果, 說明)]。"""
+    results = []
+    pub = course_dir / "publications"
+    vdir = course_dir / "verbatim"
+    if not pub.is_dir() or not vdir.is_dir():
+        return results
+
+    for html_path in sorted(pub.glob("lecture_*_study_guide.html")):
+        sid = re.search(r"lecture_([0-9A-Za-z]+)_study_guide", html_path.name)
+        if not sid:
+            continue
+        sid = sid.group(1)
+        md_path = pub / f"lecture_{sid}_study_guide.md"
+        vpath = vdir / f"verbatim_{sid}.json"
+        if not md_path.exists() or not vpath.exists():
+            continue
+
+        html_text = html_path.read_text(encoding="utf-8")
+        md_text = md_path.read_text(encoding="utf-8")
+        verbatim = json.loads(vpath.read_text(encoding="utf-8")).get("paragraphs", {})
+
+        drawers = extract_drawers(html_text)
+        md_ts_count = len(re.findall(r"\[▶\s*\d+:\d+\]", md_text))
+
+        # ALT 分流：inline 原話型（正文直接內嵌原話、無抽屜元件）不適用 C1/C3，
+        # 不能以「無 drawer」判為缺陷。此類講次的原話不在此 html，而在同課程的
+        # 對照稿（如 sessions/session_*.json 或另建之對照檔），須另以該標的稽核。
+        # ⚠️ 必須有**正向證據**（<details><summary>原話…</summary> 型態）才可豁免；
+        # 僅憑「抽屜抓不到」豁免，會讓抽屜 ID 被破壞的抽屜型產物偽裝 PASS
+        # （Codex P2 finding 1）。
+        if not drawers and is_alt_details_verbatim(html_text):
+            results.append((sid, "ALT 非抽屜型原話產物（不適用 C1/C3）", True,
+                            "本 html 無原話抽屜元件，原話對照不在此檔；"
+                            "C1/C3 對此類講次不適用，非缺陷"))
+            empty_audio = len(re.findall(r'<audio[^>]*src=""', html_text))
+            has_yt = has_youtube_player(html_text)
+            has_audio = bool(re.search(r'<audio[^>]*src="[^"]+"', html_text))
+            results.append((sid, "C4 無空音檔且有音訊來源", empty_audio == 0 and (has_yt or has_audio),
+                            f"empty_audio={empty_audio} youtube={has_yt} audio={has_audio}"))
+            continue
+
+        # C1：抽屜數應等於 md 時間戳段數
+        c1_ok = len(drawers) == md_ts_count
+        results.append((sid, "C1 drawer數==md時間戳段數", c1_ok,
+                        f"drawer={len(drawers)} md時間戳段={md_ts_count}"))
+
+        # C2：抽屜內容須與 verbatim 逐字相符
+        mismatched = []
+        for key, body in drawers.items():
+            expect = [s["text"].strip() for s in verbatim.get(key, [])]
+            if drawer_sentences(body) != expect:
+                mismatched.append(key)
+        results.append((sid, "C2 抽屜內容==verbatim逐字", not mismatched,
+                        f"不符={len(mismatched)} {mismatched[:5]}"))
+
+        # C3：verbatim 每段都應可見
+        missing = [k for k in verbatim if k not in drawers]
+        results.append((sid, "C3 全部verbatim段落可見", not missing,
+                        f"未出現={len(missing)} {missing[:8]}"))
+
+        # C4：不得有空音檔，且須有可用音訊來源
+        empty_audio = len(re.findall(r'<audio[^>]*src=""', html_text))
+        has_yt = has_youtube_player(html_text)
+        has_audio = bool(re.search(r'<audio[^>]*src="[^"]+"', html_text))
+        c4_ok = empty_audio == 0 and (has_yt or has_audio)
+        results.append((sid, "C4 無空音檔且有音訊來源", c4_ok,
+                        f"empty_audio={empty_audio} youtube={has_yt} audio={has_audio}"))
+    return results
+
+
+def main(argv):
+    if argv:
+        dirs = [Path(a).resolve() for a in argv]
+    else:
+        dirs = sorted(p for p in (REPO / "courses").iterdir() if p.is_dir())
+
+    all_results = []
+    for d in dirs:
+        if d.is_dir():
+            all_results.extend(audit_course(d))
+
+    if not all_results:
+        print("未找到可稽核的研讀講記（需同時有 publications/lecture_*_study_guide.html "
+              "與同層 verbatim/verbatim_*.json）")
+        return 0
+
+    failed = 0
+    for sid, name, ok, detail in all_results:
+        status = "PASS" if ok else "FAIL"
+        if not ok:
+            failed += 1
+        print(f"[{status}] {sid} {name} — {detail}")
+
+    print()
+    print(f"稽核完成：{len(all_results)} 項檢查，FAIL {failed} 項")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
