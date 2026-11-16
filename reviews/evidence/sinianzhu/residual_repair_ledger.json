@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-11-17",
   "baseText": "https://ftp.budaedu.org/ghosa/C009/T0209/ref/T0209_NN.pdf",
-  "ruleCount": 111,
-  "edits": 374,
+  "ruleCount": 151,
+  "edits": 535,
   "ledger": [
     {
       "sessionId": "session_01",
@@ -27,6 +27,14 @@
       "after": "你心裡面念兩句話。",
       "rule": "regex",
       "evidence": "底本全書唸=0、念>>0"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-103",
+      "before": "在《運學時代論》裡面。",
+      "after": "在《瑜伽師地論》裡面。",
+      "rule": "regex",
+      "evidence": "底本瑜伽師地論×41；原句已有《》避免雙括號"
     },
     {
       "sessionId": "session_01",
@@ -190,11 +198,27 @@
     },
     {
       "sessionId": "session_01",
+      "segId": "seg-378",
+      "before": "也能得無聲發言。",
+      "after": "也能得無生法忍。",
+      "rule": "regex",
+      "evidence": "底本得無生法忍"
+    },
+    {
+      "sessionId": "session_01",
       "segId": "seg-381",
       "before": "然後去修官。",
       "after": "然後去修觀。",
       "rule": "regex",
       "evidence": "底本T0209_01修觀"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-382",
+      "before": "也能得無聲發言。",
+      "after": "也能得無生法忍。",
+      "rule": "regex",
+      "evidence": "底本得無生法忍"
     },
     {
       "sessionId": "session_01",
@@ -299,6 +323,30 @@
       "after": "多過修觀的時間儘量這樣子。",
       "rule": "regex",
       "evidence": "底本T0209_01修觀"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-535",
+      "before": "第六份〈念住品〉。",
+      "after": "第六分〈念住品〉。",
+      "rule": "regex",
+      "evidence": "底本第六分×8；份=0"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-537",
+      "before": "《大般若波羅蜜多經》的第六份。",
+      "after": "《大般若波羅蜜多經》的第六分。",
+      "rule": "regex",
+      "evidence": "底本第六分×8；份=0"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-539",
+      "before": "這是第六份。",
+      "after": "這是第六分。",
+      "rule": "regex",
+      "evidence": "底本第六分×8；份=0"
     },
     {
       "sessionId": "session_01",
@@ -422,6 +470,14 @@
     },
     {
       "sessionId": "session_01",
+      "segId": "seg-658",
+      "before": "就是那個第六份。",
+      "after": "就是那個第六分。",
+      "rule": "regex",
+      "evidence": "底本第六分×8；份=0"
+    },
+    {
+      "sessionId": "session_01",
       "segId": "seg-695",
       "before": "這些新聖波爾伯利多的聖民。",
       "after": "這些新聖般若波羅利多的聖民。",
@@ -443,6 +499,14 @@
       "after": "他能夠放下五欲。",
       "rule": "regex",
       "evidence": "底本欲356:慾0"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-867",
+      "before": "我們沒得無聲發言，沒有清靜的智慧。",
+      "after": "我們沒得無生法忍，沒有清淨的智慧。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116; 底本得無生法忍"
     },
     {
       "sessionId": "session_01",
@@ -598,6 +662,14 @@
     },
     {
       "sessionId": "session_01",
+      "segId": "seg-1008",
+      "before": "所以要清靜自己的心。",
+      "after": "所以要清淨自己的心。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_01",
       "segId": "seg-1014",
       "before": "觀察此身從竹之頂。",
       "after": "觀察此身從足至頂。",
@@ -611,6 +683,14 @@
       "after": "從足至頂這樣觀察。",
       "rule": "regex",
       "evidence": "底本T0209_04「從足至頂」"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1058",
+      "before": "在阿漢經理來說得很清楚。",
+      "after": "在阿含經理來說得很清楚。",
+      "rule": "regex",
+      "evidence": "底本阿含經×24；阿漢=0"
     },
     {
       "sessionId": "session_01",
@@ -675,6 +755,30 @@
       "after": "這個我的問題。",
       "rule": "regex",
       "evidence": "底本T0209_01「我」之ASR同音誤字（該講無鵝類語境）"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1392",
+      "before": "唯有種種不敬過世。",
+      "after": "唯有種種不淨過世。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1394",
+      "before": "觀神不敬。",
+      "after": "觀神不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1395",
+      "before": "觀神是不清靜的。",
+      "after": "觀神是不清淨的。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
     },
     {
       "sessionId": "session_01",
@@ -870,11 +974,35 @@
     },
     {
       "sessionId": "session_01",
+      "segId": "seg-1662",
+      "before": "白骨出來，你心清靜。",
+      "after": "白骨出來，你心清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1663",
+      "before": "心清靜。",
+      "after": "心清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_01",
       "segId": "seg-1675",
       "before": "而在奢摩陀的基礎上修白骨關。",
       "after": "而在奢摩陀的基礎上修白骨觀。",
       "rule": "regex",
       "evidence": "底本T0209_03白骨觀"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1676",
+      "before": "或者修這個箱子說種種不敬。",
+      "after": "或者修這個箱子說種種不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_01",
@@ -907,6 +1035,22 @@
       "after": "就是唯識觀。",
       "rule": "segment-rewrite",
       "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1900",
+      "before": "就可以學習博爾法文。",
+      "after": "就可以學習般若法門。",
+      "rule": "regex",
+      "evidence": "底本般若法門×6; 底本博爾=0"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-1901",
+      "before": "結果我們就學習博爾法文。",
+      "after": "結果我們就學習般若法門。",
+      "rule": "regex",
+      "evidence": "底本般若法門×6; 底本博爾=0"
     },
     {
       "sessionId": "session_01",
@@ -966,6 +1110,14 @@
     },
     {
       "sessionId": "session_02",
+      "segId": "seg-1315",
+      "before": "不敬為性。",
+      "after": "不淨為性。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_02",
       "segId": "seg-1316",
       "before": "這是說一個愚痴的境界。",
       "after": "這是說一個愚癡的境界。",
@@ -998,11 +1150,27 @@
     },
     {
       "sessionId": "session_03",
+      "segId": "seg-020",
+      "before": "但是因為我們於此，就因為這一念心是常住的，",
+      "after": "然瑜伽師修骨鎖觀。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_03",
       "segId": "seg-030",
       "before": "是愚痴的心這樣錯誤地，",
       "after": "是愚癡的心這樣錯誤地，",
       "rule": "regex",
       "evidence": "底本癡110:痴0"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-038",
+      "before": "此不敬未敬。",
+      "after": "此不淨未敬。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_03",
@@ -1048,33 +1216,41 @@
       "sessionId": "session_03",
       "segId": "seg-149",
       "before": "你不要相信它，立刻的要調補它，，",
-      "after": "你不要相信它，立刻的要調補它，",
+      "after": "你不要相信它，立刻的要調伏它，",
       "rule": "regex",
-      "evidence": "ASR標點重複"
+      "evidence": "底本T0209_03「你若能夠調伏它，用止來調伏這個心」; ASR標點重複"
     },
     {
       "sessionId": "session_03",
       "segId": "seg-169",
       "before": "修新念著的時候，不要這樣子。",
-      "after": "修身念住的時候，不要這樣子。",
+      "after": "修心念住的時候，不要這樣子。",
       "rule": "regex",
-      "evidence": "底本T0209_03「修身念住的時候」; 底本T0209_03身/心/法念住"
+      "evidence": "底本T0209_03「修心念住的時候不要這樣子」；L03修身念住=0、修心念住=13（小檢校正）; 底本T0209_03身/心/法念住"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-171",
+      "before": "要不這個主因調換一下。",
+      "after": "要不這個主人調換一下。",
+      "rule": "regex",
+      "evidence": "底本T0209_03「要把這個主人調換一下」"
     },
     {
       "sessionId": "session_03",
       "segId": "seg-261",
       "before": "所以修新念著的時候，",
-      "after": "所以修身念住的時候，",
+      "after": "所以修心念住的時候，",
       "rule": "regex",
-      "evidence": "底本T0209_03「修身念住的時候」; 底本T0209_03身/心/法念住"
+      "evidence": "底本T0209_03「修心念住的時候不要這樣子」；L03修身念住=0、修心念住=13（小檢校正）; 底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_03",
       "segId": "seg-284",
       "before": "所以我們要是能夠修新念著。",
-      "after": "所以我們要是能夠修身念住。",
+      "after": "所以我們要是能夠修心念住。",
       "rule": "regex",
-      "evidence": "底本T0209_03「修身念住的時候」; 底本T0209_03身/心/法念住"
+      "evidence": "底本T0209_03「修心念住的時候不要這樣子」；L03修身念住=0、修心念住=13（小檢校正）; 底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_03",
@@ -1128,9 +1304,9 @@
       "sessionId": "session_03",
       "segId": "seg-403",
       "before": "他在修這個新念著的時候，，",
-      "after": "他在修這個身念住的時候，",
+      "after": "他在修這個心念住的時候，",
       "rule": "regex",
-      "evidence": "底本T0209_03「修身念住的時候」; 底本T0209_03身/心/法念住; ASR標點重複"
+      "evidence": "底本T0209_03「修心念住的時候不要這樣子」；L03修身念住=0、修心念住=13（小檢校正）; 底本T0209_03身/心/法念住; ASR標點重複"
     },
     {
       "sessionId": "session_03",
@@ -1171,6 +1347,22 @@
       "after": "令心隨己。",
       "rule": "regex",
       "evidence": "底本T0209_03「令心隨己」"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-466",
+      "before": "這個心有的時候清靜。",
+      "after": "這個心有的時候清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-467",
+      "before": "有時候不清靜。",
+      "after": "有時候不清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
     },
     {
       "sessionId": "session_03",
@@ -1227,6 +1419,22 @@
       "after": "這裡說這個伏心不但是止，觀也應該在內。",
       "rule": "segment-rewrite",
       "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-587",
+      "before": "你要能夠調補它。",
+      "after": "你要能夠調伏它。",
+      "rule": "regex",
+      "evidence": "底本T0209_03「你若能夠調伏它，用止來調伏這個心」"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-588",
+      "before": "用指來調補這個心。",
+      "after": "用指來調伏這個心。",
+      "rule": "regex",
+      "evidence": "底本T0209_03「你若能夠調伏它，用止來調伏這個心」"
     },
     {
       "sessionId": "session_03",
@@ -1296,9 +1504,9 @@
       "sessionId": "session_03",
       "segId": "seg-717",
       "before": "天王，雲河諸菩薩摩哈喀。",
-      "after": "天王，雲河諸菩薩摩訶薩。",
+      "after": "天王，云何諸菩薩摩訶薩。",
       "rule": "regex",
-      "evidence": "底本T0209_01「諸菩薩摩訶薩」"
+      "evidence": "底本引文云何；全書雲河=0; 底本T0209_01「諸菩薩摩訶薩」"
     },
     {
       "sessionId": "session_03",
@@ -1328,17 +1536,33 @@
       "sessionId": "session_03",
       "segId": "seg-721",
       "before": "這個經文上說思念著這地方很多。",
-      "after": "這個經文上說思念住這地方很多。",
+      "after": "這個經文上說四念住這地方很多。",
       "rule": "regex",
       "evidence": "底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_03",
+      "segId": "seg-725",
+      "before": "華音經，博爾經。",
+      "after": "華音經，般若經。",
+      "rule": "regex",
+      "evidence": "底本般若經×28; 底本博爾=0"
+    },
+    {
+      "sessionId": "session_03",
       "segId": "seg-730",
       "before": "這是《大波爾經》第六份。",
-      "after": "這是《大般若經》第六份。",
+      "after": "這是《大般若經》第六分。",
       "rule": "regex",
-      "evidence": "底本T0209_01/07"
+      "evidence": "底本第六分×8；份=0; 底本T0209_01/07"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-737",
+      "before": "雲河諸，菩薩，星神。",
+      "after": "云何諸，菩薩，星神。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲河=0"
     },
     {
       "sessionId": "session_03",
@@ -1363,6 +1587,14 @@
       "after": "為此菩薩這個法念住的學習。",
       "rule": "regex",
       "evidence": "底本T0209_03身/心/法念住"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-834",
+      "before": "為譚承詞和其他的一些煩惱。",
+      "after": "為貪瞋癡和其他的一些煩惱。",
+      "rule": "regex",
+      "evidence": "底本「貪瞋癡的煩惱」×42"
     },
     {
       "sessionId": "session_03",
@@ -1440,9 +1672,9 @@
       "sessionId": "session_03",
       "segId": "seg-1042",
       "before": "雲和諸菩薩莫沙，興森波爾波羅蜜多餘境紀念。",
-      "after": "雲和諸菩薩莫沙，行深般若波羅蜜多餘境紀念。",
-      "rule": "regex",
-      "evidence": "底本T0209_01/03經文; 底本T0209_01; 底本T0209_07; 底本T0209_01/07"
+      "after": "云何諸菩薩摩訶薩行深般若波羅蜜多，修心念住。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_03",
@@ -1464,9 +1696,9 @@
       "sessionId": "session_03",
       "segId": "seg-1047",
       "before": "雲和諸菩薩莫沙，興森波爾波羅蜜多的時候，",
-      "after": "雲和諸菩薩莫沙，行深般若波羅蜜多的時候，",
+      "after": "云何諸菩薩摩訶薩，行深般若波羅蜜多的時候，",
       "rule": "regex",
-      "evidence": "底本T0209_01/03經文; 底本T0209_01; 底本T0209_07; 底本T0209_01/07"
+      "evidence": "底本「諸菩薩摩訶薩」; 底本引文云何；全書雲和=0; 底本T0209_01/03經文; 底本T0209_01; 底本T0209_07; 底本T0209_01/07"
     },
     {
       "sessionId": "session_03",
@@ -1480,15 +1712,15 @@
       "sessionId": "session_03",
       "segId": "seg-1170",
       "before": "這樣修行的，這是《大博爾經》第六份念著品裡面。",
-      "after": "這樣修行的，這是《大博爾經》第六份念住品裡面。",
+      "after": "這樣修行的，這是《大般若經》第六分念住品裡面。",
       "rule": "regex",
-      "evidence": "底本T0209_03身/心/法念住"
+      "evidence": "底本般若經×28; 底本博爾=0; 底本第六分×8；份=0; 底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_03",
       "segId": "seg-1172",
       "before": "是我這個思念著，這是這個思念著的一個大意。",
-      "after": "是我這個思念住，這是這個思念住的一個大意。",
+      "after": "是我這個四念住，這是這個四念住的一個大意。",
       "rule": "regex",
       "evidence": "底本T0209_03身/心/法念住"
     },
@@ -1496,17 +1728,25 @@
       "sessionId": "session_03",
       "segId": "seg-1206",
       "before": "二是慈禧念。",
-      "after": "二是持息念。",
+      "after": "二是慈息念。",
       "rule": "regex",
-      "evidence": "底本T0209_03「叫做持息念」"
+      "evidence": "底本息念; 底本T0209_03「叫做持息念」"
     },
     {
       "sessionId": "session_03",
       "segId": "seg-1208",
       "before": "這個慈禧念，慈就是用這個禧唸的方法。",
-      "after": "這個持息念，慈就是用這個禧念的方法。",
-      "rule": "regex",
-      "evidence": "底本T0209_03「叫做持息念」; 底本全書唸=0、念>>0"
+      "after": "這個持息念，持就是用這個息念的方法。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1209",
+      "before": "來奢侈自己的心不要亂。",
+      "after": "來攝持自己的心不要亂。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
     {
       "sessionId": "session_03",
@@ -1528,9 +1768,33 @@
       "sessionId": "session_03",
       "segId": "seg-1219",
       "before": "使人心不亂，所以叫做慈禧念。",
-      "after": "使人心不亂，所以叫做持息念。",
+      "after": "使人心不亂，所以叫做慈息念。",
       "rule": "regex",
-      "evidence": "底本T0209_03「叫做持息念」"
+      "evidence": "底本息念; 底本T0209_03「叫做持息念」"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1275",
+      "before": "閉關不敬。",
+      "after": "閉關不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1278",
+      "before": "他要觀察這個不敬。",
+      "after": "他要觀察這個不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1279",
+      "before": "觀神不敬的時候，能正如修。",
+      "after": "觀神不淨的時候，能正如修。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_03",
@@ -1544,9 +1808,9 @@
       "sessionId": "session_03",
       "segId": "seg-1345",
       "before": "所以慈禧念這個法門非多緣故。",
-      "after": "所以持息念這個法門非多緣故。",
+      "after": "所以慈息念這個法門非多緣故。",
       "rule": "regex",
-      "evidence": "底本T0209_03「叫做持息念」"
+      "evidence": "底本息念; 底本T0209_03「叫做持息念」"
     },
     {
       "sessionId": "session_03",
@@ -1563,6 +1827,22 @@
       "after": "這個不淨觀的所緣境。",
       "rule": "regex",
       "evidence": "底本T0209_03「不淨觀的所緣境」"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1388",
+      "before": "不敬多於外門轉顧。",
+      "after": "不淨多於外門轉顧。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1435",
+      "before": "是怎麼樣子那天雲和宋約。",
+      "after": "是怎麼樣子那天云何宋約。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0"
     },
     {
       "sessionId": "session_03",
@@ -1622,9 +1902,25 @@
     },
     {
       "sessionId": "session_03",
+      "segId": "seg-1572",
+      "before": "他能這樣，就能保持內心的清靜。",
+      "after": "他能這樣，就能保持內心的清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1625",
+      "before": "是唯能制服令部現行。",
+      "after": "是唯能制伏令不現行。",
+      "rule": "regex",
+      "evidence": "底本T0209_03「唯能制伏令不現行」"
+    },
+    {
+      "sessionId": "session_03",
       "segId": "seg-1626",
       "before": "他有提到說官司吃不動。",
-      "after": "他有提到說制令不動。",
+      "after": "他有提到說唯能制伏令不現行。",
       "rule": "segment-rewrite",
       "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
     },
@@ -1782,11 +2078,35 @@
     },
     {
       "sessionId": "session_03",
+      "segId": "seg-1788",
+      "before": "其實現在的元航式翻譯的阿漢經。",
+      "after": "其實現在的元航式翻譯的阿含經。",
+      "rule": "regex",
+      "evidence": "底本阿含經×24；阿漢=0"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1992",
+      "before": "學習阿漢經，學習博爾經。",
+      "after": "學習阿含經，學習般若經。",
+      "rule": "regex",
+      "evidence": "底本阿含經×24；阿漢=0; 底本般若經×28; 底本博爾=0"
+    },
+    {
+      "sessionId": "session_03",
       "segId": "seg-2033",
       "before": "實際的問題，就是當前我們出家人要清靜，，",
-      "after": "實際的問題，就是當前我們出家人要清靜，",
+      "after": "實際的問題，就是當前我們出家人要清淨，",
       "rule": "regex",
-      "evidence": "ASR標點重複"
+      "evidence": "底本清靜=0、清淨×116; ASR標點重複"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-2035",
+      "before": "神口也要清靜。",
+      "after": "神口也要清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
     },
     {
       "sessionId": "session_03",
@@ -1795,6 +2115,14 @@
       "after": "要在這個立場看，修十年初是對的，",
       "rule": "regex",
       "evidence": "ASR標點重複"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-2070",
+      "before": "清靜的，也可能有煙霧。",
+      "after": "清淨的，也可能有煙霧。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
     },
     {
       "sessionId": "session_03",
@@ -1822,6 +2150,54 @@
     },
     {
       "sessionId": "session_04",
+      "segId": "seg-008",
+      "before": "這是說明修一趣所觀的原因。",
+      "after": "這是說明修骨鎖觀的原因。",
+      "rule": "regex",
+      "evidence": "底本T0209_04「這個骨鎖觀有三個階級」; 底本T0209_04骨鎖觀"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-012",
+      "before": "這一趣所觀也是真實的觀察。",
+      "after": "這骨鎖觀也是真實的觀察。",
+      "rule": "regex",
+      "evidence": "底本T0209_04「這個骨鎖觀有三個階級」; 底本T0209_04骨鎖觀"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-020",
+      "before": "言喻伽師修一趣所觀。",
+      "after": "然瑜伽師修骨鎖觀。",
+      "rule": "regex",
+      "evidence": "底本T0209_04「然瑜伽師修骨鎖觀」; 底本T0209_04「這個骨鎖觀有三個階級」; 底本T0209_04骨鎖觀"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-022",
+      "before": "這以下正式說明一趣所觀的相貌。",
+      "after": "這以下正式說明骨鎖觀的相貌。",
+      "rule": "regex",
+      "evidence": "底本T0209_04「這個骨鎖觀有三個階級」; 底本T0209_04骨鎖觀"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-023",
+      "before": "這個一趣所觀有三個階級。",
+      "after": "這個骨鎖觀有三個階級。",
+      "rule": "regex",
+      "evidence": "底本T0209_04「這個骨鎖觀有三個階級」; 底本T0209_04骨鎖觀"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-024",
+      "before": "一是初習業，初開始學習清靜的功。這是一個階級。",
+      "after": "一是初習業，初開始學習清淨的功。這是一個階級。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_04",
       "segId": "seg-057",
       "before": "唸佛的念。",
       "after": "念佛的念。",
@@ -1830,11 +2206,11 @@
     },
     {
       "sessionId": "session_04",
-      "segId": "seg-068",
-      "before": "哪一個部位呢？或於竹子、或鵝、或魚。",
-      "after": "哪一個部位呢？或於竹子、或我、或魚。",
+      "segId": "seg-067",
+      "before": "自己身體的母一部分。",
+      "after": "自己身體的每一部分。",
       "rule": "regex",
-      "evidence": "底本T0209_01「我」之ASR同音誤字（該講無鵝類語境）"
+      "evidence": "底本每一"
     },
     {
       "sessionId": "session_04",
@@ -1888,9 +2264,17 @@
       "sessionId": "session_04",
       "segId": "seg-304",
       "before": "這是禪詩，玉結石就是禪詩。",
-      "after": "這是禪詩，欲結石就是禪詩。",
+      "after": "這是禪定，欲界定就是禪定。",
       "rule": "regex",
-      "evidence": "底本T0209_03「這些欲的境界裡面生活」"
+      "evidence": "底本T0209_04「欲界定就是禪定」；底本禪詩=0; 底本T0209_03「這些欲的境界裡面生活」"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-305",
+      "before": "修止冠相應的禪詩。",
+      "after": "修止觀相應的禪定。",
+      "rule": "regex",
+      "evidence": "底本止觀; 底本T0209_04「欲界定就是禪定」；底本禪詩=0"
     },
     {
       "sessionId": "session_04",
@@ -1899,6 +2283,14 @@
       "after": "這個欲心來了的時候，",
       "rule": "regex",
       "evidence": "底本T0209_03「這些欲的境界裡面生活」"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-397",
+      "before": "把這個心水很清靜地安住在哪不動。",
+      "after": "把這個心水很清淨地安住在哪不動。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
     },
     {
       "sessionId": "session_04",
@@ -1934,6 +2326,254 @@
     },
     {
       "sessionId": "session_04",
+      "segId": "seg-541",
+      "before": "雲和親修不淨觀者。",
+      "after": "云何親修不淨觀者。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-543",
+      "before": "以不敬，正上正法。",
+      "after": "以不淨，正上正法。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-548",
+      "before": "雲和親修不淨觀的巡視六四。",
+      "after": "云何親修不淨觀的尋思六事。",
+      "rule": "regex",
+      "evidence": "底本 尋思六事差別; 底本引文云何；全書雲和=0; 底本尋思×76；巡視=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-551",
+      "before": "他怎麼樣去巡視。",
+      "after": "他怎麼樣去尋思。",
+      "rule": "regex",
+      "evidence": "底本尋思×76；巡視=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-552",
+      "before": "巡視就是思惟。",
+      "after": "尋思就是思惟。",
+      "rule": "regex",
+      "evidence": "底本尋思×76；巡視=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-577",
+      "before": "為不敬正上正法。",
+      "after": "為不淨正上正法。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-591",
+      "before": "佛意不敬。",
+      "after": "佛意不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-608",
+      "before": "你天天地，或者是博爾經內的文。",
+      "after": "你天天地，或者是般若經內的文。",
+      "rule": "regex",
+      "evidence": "底本般若經×28; 底本博爾=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-646",
+      "before": "所謂以不敬正上正法，就是佛說的。",
+      "after": "所謂以不淨正上正法，就是佛說的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-710",
+      "before": "知此不敬，思為不敬。",
+      "after": "知此不淨，思為不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-713",
+      "before": "竭了其意的時候，你能知此不敬，思為不敬。",
+      "after": "竭了其意的時候，你能知此不淨，思為不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-715",
+      "before": "就知道臭皮囊是不敬。",
+      "after": "就知道臭皮囊是不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-716",
+      "before": "真實是不敬的。",
+      "after": "真實是不淨的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-720",
+      "before": "佛說不敬時就是不敬。",
+      "after": "佛說不淨時就是不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-721",
+      "before": "是不敬嗎？我看著也不錯嘛。",
+      "after": "是不淨嗎？我看著也不錯嘛。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-724",
+      "before": "知此不敬、思惟不敬。",
+      "after": "知此不淨、思惟不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-726",
+      "before": "這個不敬的境界。",
+      "after": "這個不淨的境界。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-730",
+      "before": "所以說知此不敬，思為不敬。",
+      "after": "所以說知此不淨，思為不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-742",
+      "before": "所以觀神不敬。",
+      "after": "所以觀神不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-755",
+      "before": "欲先所聞。",
+      "after": "於先所聞。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-756",
+      "before": "依諸不敬。",
+      "after": "依諸不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-757",
+      "before": "所說正話。",
+      "after": "所說正法。",
+      "rule": "regex",
+      "evidence": "底本「依諸不淨所說正法」"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-758",
+      "before": "截了其異。",
+      "after": "解了其義。",
+      "rule": "regex",
+      "evidence": "底本「依諸不淨所說正法，解了其義」×10"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-759",
+      "before": "如此名為，依諸不敬。",
+      "after": "如此名為，依諸不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-761",
+      "before": "殉詩其異。",
+      "after": "尋思其義。",
+      "rule": "regex",
+      "evidence": "底本論段「尋思其義」×4; 底本尋思×76"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-763",
+      "before": "殉詩六四。",
+      "after": "尋思六事。",
+      "rule": "regex",
+      "evidence": "底本「尋思六事差別所緣毘缽舍那」×5; 底本尋思×76"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-764",
+      "before": "第一個殉詩其異。",
+      "after": "第一個尋思其義。",
+      "rule": "regex",
+      "evidence": "底本論段「尋思其義」×4; 底本尋思×76"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-778",
+      "before": "這些不敬的酒會的相貌。",
+      "after": "這些不淨的酒會的相貌。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-781",
+      "before": "聽佛所說的這個不敬，正上正話。",
+      "after": "聽佛所說的這個不淨，正上正話。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-782",
+      "before": "一諸不敬，這位於賢所聞的什麼呢？，",
+      "after": "一諸不淨，這位於賢所聞的什麼呢？，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-784",
+      "before": "是一諸不敬所說正話，",
+      "after": "是一諸不淨所說正法，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558; 底本「依諸不淨所說正法」"
+    },
+    {
+      "sessionId": "session_04",
       "segId": "seg-785",
       "before": "就是佛不是憑空說的呀，，",
       "after": "就是佛不是憑空說的呀，",
@@ -1942,11 +2582,107 @@
     },
     {
       "sessionId": "session_04",
+      "segId": "seg-786",
+      "before": "是一諸不敬的呀，這不淨的這個色手相應師，",
+      "after": "是一諸不淨的呀，這不淨的這個色手相應師，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
       "segId": "seg-788",
       "before": "所說的這不敬的正話，，",
-      "after": "所說的這不敬的正話，",
+      "after": "所說的這不淨的正話，",
       "rule": "regex",
-      "evidence": "ASR標點重複"
+      "evidence": "底本不敬=0、不淨×558; ASR標點重複"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-789",
+      "before": "解了其意，解了這個不敬的道理。",
+      "after": "解了其意，解了這個不淨的道理。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-790",
+      "before": "《如是名為於主不敬，尋世其異》。",
+      "after": "《如是名為於諸不淨，尋思其義》。",
+      "rule": "regex",
+      "evidence": "底本 尋思其義×4; 底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-792",
+      "before": "《雲和名為尋世彼士》第二。",
+      "after": "《云何名為尋思六事》第二。",
+      "rule": "regex",
+      "evidence": "底本「云何名為尋思六事」；尋思六事×6; 底本引文云何；全書雲和=0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-794",
+      "before": "尋世彼士。",
+      "after": "尋思六事。",
+      "rule": "regex",
+      "evidence": "底本「云何名為尋思六事」；尋思六事×6"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-795",
+      "before": "怎麼叫做尋世彼士呢？，",
+      "after": "怎麼叫做尋思六事呢？，",
+      "rule": "regex",
+      "evidence": "底本「云何名為尋思六事」；尋思六事×6"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-797",
+      "before": "這個不敬的意義啊。",
+      "after": "這個不淨的意義啊。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-799",
+      "before": "觀不敬物建立二份。",
+      "after": "觀不淨物建立二份。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-800",
+      "before": "觀這個不敬的東西把它建立成兩部分。",
+      "after": "觀這個不淨的東西把它建立成兩部分。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-828",
+      "before": "使令自己對自身不敬的印識。",
+      "after": "使令自己對自身不淨的印識。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-830",
+      "before": "真實不虛地，思為以不敬。",
+      "after": "真實不虛地，思為以不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-837",
+      "before": "浮予如是身中所有多不敬物。",
+      "after": "浮予如是身中所有多不淨物。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_04",
@@ -1955,6 +2691,22 @@
       "after": "食欲法毛乃至大殿。",
       "rule": "regex",
       "evidence": "底本欲356:慾0"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-856",
+      "before": "如是名為以內不敬尋思之相。",
+      "after": "如是名為以內不淨尋思之相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-859",
+      "before": "富與其外諸不敬物。",
+      "after": "富與其外諸不淨物。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_04",
@@ -2062,11 +2814,179 @@
     },
     {
       "sessionId": "session_04",
+      "segId": "seg-1357",
+      "before": "要能如是，如實了之外不敬相。",
+      "after": "要能如是，如實了之外不淨相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1358",
+      "before": "使民尋思外諸所有不敬之相。",
+      "after": "使民尋思外諸所有不淨之相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1363",
+      "before": "如實同於真實地，能夠了知外這些不敬物、不敬相。",
+      "after": "如實同於真實地，能夠了知外這些不淨物、不淨相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1365",
+      "before": "使命尋思外諸所有的不敬之相。",
+      "after": "使命尋思外諸所有的不淨之相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1366",
+      "before": "雲和尋思不敬共相。",
+      "after": "云何尋思不淨共相。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0; 底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
       "segId": "seg-1378",
       "before": "玉學時代論其他的地方。",
-      "after": "欲學時代論其他的地方。",
+      "after": "瑜伽師地論其他的地方。",
       "rule": "regex",
-      "evidence": "底本T0209_03「這些欲的境界裡面生活」"
+      "evidence": "底本瑜伽師地論×41；原句已有《》避免雙括號; 底本T0209_03「這些欲的境界裡面生活」"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1387",
+      "before": "要在外身不敬散相。",
+      "after": "要在外身不淨散相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1390",
+      "before": "它這個不敬陝像。",
+      "after": "它這個不淨陝像。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1395",
+      "before": "死亡的不敬陝像和沒有死亡的時候，",
+      "after": "死亡的不淨陝像和沒有死亡的時候，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1397",
+      "before": "只有在內身不敬陝像。",
+      "after": "只有在內身不淨陝像。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1400",
+      "before": "雲和尋思，不敬的共相。",
+      "after": "云何尋思，不淨的共相。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0; 底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1404",
+      "before": "但是它也是有不敬散相的。",
+      "after": "但是它也是有不淨散相的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1426",
+      "before": "我這個表皮上的清靜善向，",
+      "after": "我這個表皮上的清淨善向，",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1436",
+      "before": "那種不敬的體系相貌。",
+      "after": "那種不淨的體系相貌。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1437",
+      "before": "譬如在外不敬善相。",
+      "after": "譬如在外不淨善相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1440",
+      "before": "也決定和外面法性的不敬善像是一樣的。",
+      "after": "也決定和外面法性的不淨善像是一樣的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1441",
+      "before": "譬如在外不敬善像。",
+      "after": "譬如在外不淨善像。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1442",
+      "before": "就是雲河巡視不敬共襄應該這樣想。",
+      "after": "就是云何尋思不淨共襄應該這樣想。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲河=0; 底本尋思×76；巡視=0; 底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1443",
+      "before": "所以我想那個法性怎麼那麼不敬。",
+      "after": "所以我想那個法性怎麼那麼不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1449",
+      "before": "都是要不敬的。",
+      "after": "都是要不淨的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1450",
+      "before": "事明尋思，不敬共相。",
+      "after": "事明尋思，不淨共相。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1451",
+      "before": "所以不敬共相，這樣想。",
+      "after": "所以不淨共相，這樣想。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_04",
@@ -2174,6 +3094,30 @@
     },
     {
       "sessionId": "session_04",
+      "segId": "seg-1597",
+      "before": "不是聖天主，過激心不可得。",
+      "after": "不是心念住，過去心不可得。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1598",
+      "before": "現在性不可得，未來性不可得。",
+      "after": "現在心不可得，未來心不可得。",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1599",
+      "before": "不是聖天主嗎？",
+      "after": "不是心念住嗎？",
+      "rule": "segment-rewrite",
+      "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_04",
       "segId": "seg-1614",
       "before": "而這樣子從大乘，從波爾經和大書論所說的就是畢竟空。",
       "after": "而這樣子從大乘，從般若經和大書論所說的就是畢竟空。",
@@ -2195,6 +3139,22 @@
       "after": "依據這些般若經的導律。",
       "rule": "regex",
       "evidence": "底本T0209_01/07"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1620",
+      "before": "修入四年之後，我以為很快地，就能得到無聲發言。",
+      "after": "修入四年之後，我以為很快地，就能得到無生法忍。",
+      "rule": "regex",
+      "evidence": "底本得無生法忍"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1623",
+      "before": "這無聲發言是有希望的。",
+      "after": "這無生法忍是有希望的。",
+      "rule": "regex",
+      "evidence": "底本得無生法忍"
     },
     {
       "sessionId": "session_04",
@@ -2310,11 +3270,203 @@
     },
     {
       "sessionId": "session_05",
-      "segId": "seg-420",
-      "before": "所以叫做聖意是要內要外、獨有鵝，",
-      "after": "所以叫做聖意是要內要外、獨有我，",
+      "segId": "seg-332",
+      "before": "要外所有不敬捨相以現在世，",
+      "after": "要外所有不淨捨相以現在世，",
       "rule": "regex",
-      "evidence": "底本T0209_01「我」之ASR同音誤字（該講無鵝類語境）"
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-365",
+      "before": "這一句話是指著外邊的不敬舍相的情況。",
+      "after": "這一句話是指著外邊的不淨舍相的情況。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-371",
+      "before": "於未來是不當不敬，如今現在外不敬則無有是處。",
+      "after": "於未來是不當不淨，如今現在外不淨則無有是處。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-375",
+      "before": "將來要是不當不敬。",
+      "after": "將來要是不當不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-376",
+      "before": "不會有不敬的相貌。",
+      "after": "不會有不淨的相貌。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-377",
+      "before": "如今現在外不敬才那樣子。",
+      "after": "如今現在外不淨才那樣子。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-380",
+      "before": "將來也一樣是不敬的。",
+      "after": "將來也一樣是不淨的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-386",
+      "before": "獻如是相。",
+      "after": "現如是相。",
+      "rule": "regex",
+      "evidence": "底本「現如是相」"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-401",
+      "before": "也都臭穢了，也有種種不敬的形象都現出來了。",
+      "after": "也都臭穢了，也有種種不淨的形象都現出來了。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-518",
+      "before": "也沒有不敬可得，有這麼一件事。",
+      "after": "也沒有不淨可得，有這麼一件事。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-534",
+      "before": "為之為敬或為不敬。",
+      "after": "為之為敬或為不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-537",
+      "before": "或說為敬、或是不敬，這是聖意的境界。",
+      "after": "或說為敬、或是不淨，這是聖意的境界。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-793",
+      "before": "引發出來的父母不敬和合所生，",
+      "after": "引發出來的父母不淨和合所生，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-798",
+      "before": "父親的不敬和母親的不敬，",
+      "after": "父親的不淨和母親的不淨，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-827",
+      "before": "明白這個人很清靜。",
+      "after": "明白這個人很清淨。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-830",
+      "before": "餘常常是種種不敬。",
+      "after": "餘常常是種種不淨。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-831",
+      "before": "解析充滿表面上是清靜的。",
+      "after": "解析充滿表面上是清淨的。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-835",
+      "before": "一切時都是種種不敬結席充滿的。",
+      "after": "一切時都是種種不淨結席充滿的。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-836",
+      "before": "很多的不敬東西充滿在身體裡面。",
+      "after": "很多的不淨東西充滿在身體裡面。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-837",
+      "before": "種種不敬結席充滿這個佛在世的時候，",
+      "after": "種種不淨結席充滿這個佛在世的時候，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-859",
+      "before": "很多很多的不敬、種種不敬物，充滿於身內。",
+      "after": "很多很多的不淨、種種不淨物，充滿於身內。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-862",
+      "before": "種種不敬物，充滿於身內。",
+      "after": "種種不淨物，充滿於身內。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-870",
+      "before": "種種不敬節席充滿這樣的觀察，",
+      "after": "種種不淨節席充滿這樣的觀察，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-900",
+      "before": "與此不敬，要能如是善修善習。",
+      "after": "與此不淨，要能如是善修善習。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-909",
+      "before": "與此不敬，對於生命體的不親近。",
+      "after": "與此不淨，對於生命體的不親近。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_05",
@@ -2326,11 +3478,75 @@
     },
     {
       "sessionId": "session_05",
+      "segId": "seg-1040",
+      "before": "要與不敬善息、善多修習，",
+      "after": "要與不淨善息、善多修習，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1049",
+      "before": "要與不敬，善修善息，",
+      "after": "要與不淨，善修善息，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1078",
+      "before": "與主不敬，如如作意思惟、修習，",
+      "after": "與主不淨，如如作意思惟、修習，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1163",
+      "before": "為作事實雲和今者做一思為能對治法，",
+      "after": "為作事實云何今者做一思為能對治法，",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1195",
+      "before": "是今者作義思惟這個雲和是自己問自己的意思。",
+      "after": "是今者作義思惟這個云何是自己問自己的意思。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1334",
+      "before": "第六份的〈念處品〉總說是念處的大義。",
+      "after": "第六分的〈念處品〉總說是念處的大義。",
+      "rule": "regex",
+      "evidence": "底本第六分×8；份=0"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1355",
+      "before": "一定把這個不敬在心裡面獻出來，一定這樣子。",
+      "after": "一定把這個不淨在心裡面獻出來，一定這樣子。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_05",
       "segId": "seg-1418",
       "before": "這是在《玉琪詞德論》裡面，",
       "after": "這是在《欲琪詞德論》裡面，",
       "rule": "regex",
       "evidence": "底本T0209_03「這些欲的境界裡面生活」"
+    },
+    {
+      "sessionId": "session_05",
+      "segId": "seg-1423",
+      "before": "所以近於此中，說現代於此思念住裡面，",
+      "after": "所以近於此中，說現代於此四念住裡面，",
+      "rule": "regex",
+      "evidence": "底本四念住×315；思念住=0（同音 sìnìan）"
     },
     {
       "sessionId": "session_05",
@@ -2344,9 +3560,9 @@
       "sessionId": "session_05",
       "segId": "seg-1825",
       "before": "而讀阿漢經的時候啊，佛的意思，你觀一些法空啊，破除去法不知遭，但是你要沒有破俄治，你還是生死凡夫。",
-      "after": "而讀阿漢經的時候啊，佛的意思，你觀一切法空啊，破除去法不知遭，但是你要沒有破俄治，你還是生死凡夫。",
+      "after": "而讀阿含經的時候啊，佛的意思，你觀一切法空啊，破除去法不知遭，但是你要沒有破俄治，你還是生死凡夫。",
       "rule": "regex",
-      "evidence": "底本T0209_01「一切法也不可得」"
+      "evidence": "底本阿含經×24；阿漢=0; 底本T0209_01「一切法也不可得」"
     },
     {
       "sessionId": "session_05",
@@ -2411,6 +3627,14 @@
       "after": "其他的欲容易對治，",
       "rule": "regex",
       "evidence": "底本欲356:慾0"
+    },
+    {
+      "sessionId": "session_06",
+      "segId": "seg-173",
+      "before": "就真實地覺悟了，這個不敬的情況了，這是聞思修三慧。",
+      "after": "就真實地覺悟了，這個不淨的情況了，這是聞思修三慧。",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_06",
@@ -2542,6 +3766,14 @@
     },
     {
       "sessionId": "session_06",
+      "segId": "seg-1100",
+      "before": "等到成功了的時候就是得無聲發言掉，",
+      "after": "等到成功了的時候就是得無生法忍掉，",
+      "rule": "regex",
+      "evidence": "底本得無生法忍"
+    },
+    {
+      "sessionId": "session_06",
       "segId": "seg-1308",
       "before": "沒得聖道的人，它都是能令我們愚痴的，",
       "after": "沒得聖道的人，它都是能令我們愚癡的，",
@@ -2648,33 +3880,33 @@
       "sessionId": "session_07",
       "segId": "seg-070",
       "before": "譚玉蓋，陳輝蓋。",
-      "after": "譚欲蓋，陳輝蓋。",
+      "after": "貪欲蓋，瞋恚蓋。",
       "rule": "regex",
-      "evidence": "底本T0209_03「這些欲的境界裡面生活」"
+      "evidence": "底本五蓋瞋恚蓋; 底本T0209_03「這些欲的境界裡面生活」"
     },
     {
       "sessionId": "session_07",
       "segId": "seg-335",
       "before": "這是這個新念著，雲和為心。",
-      "after": "這是這個身念住，雲和為心。",
+      "after": "這是這個心念住，云何為心。",
       "rule": "regex",
-      "evidence": "底本T0209_03「修身念住的時候」; 底本T0209_03身/心/法念住"
+      "evidence": "底本引文云何；全書雲和=0; 底本T0209_03「修心念住的時候不要這樣子」；L03修身念住=0、修心念住=13（小檢校正）; 底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_07",
       "segId": "seg-337",
       "before": "像那個聖念著第一段是雲和為身。",
-      "after": "像那個聖念住第一段是雲和為身。",
+      "after": "像那個聖念住第一段是云何為身。",
       "rule": "regex",
-      "evidence": "底本T0209_03身/心/法念住"
+      "evidence": "底本引文云何；全書雲和=0; 底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_07",
       "segId": "seg-338",
       "before": "那麼新念著就是第一段雲和為心。",
-      "after": "那麼身念住就是第一段雲和為心。",
+      "after": "那麼心念住就是第一段云何為心。",
       "rule": "regex",
-      "evidence": "底本T0209_03「修身念住的時候」; 底本T0209_03身/心/法念住"
+      "evidence": "底本引文云何；全書雲和=0; 底本T0209_03「修心念住的時候不要這樣子」；L03修身念住=0、修心念住=13（小檢校正）; 底本T0209_03身/心/法念住"
     },
     {
       "sessionId": "session_07",
@@ -2832,9 +4064,9 @@
       "sessionId": "session_07",
       "segId": "seg-758",
       "before": "沒有了這個大博爾經上的四年著品，",
-      "after": "沒有了這個大博爾經上的四念住品，",
+      "after": "沒有了這個大般若經上的四念住品，",
       "rule": "regex",
-      "evidence": "底本T0209_07〈四念住品〉"
+      "evidence": "底本般若經×28; 底本博爾=0; 底本T0209_07〈四念住品〉"
     },
     {
       "sessionId": "session_07",
@@ -2867,6 +4099,14 @@
       "after": "這個念等載髮腳之心盡喜安定舌燈腳之一而，",
       "rule": "regex",
       "evidence": "底本T0209_07「於內有念等覺支」"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-858",
+      "before": "所以出國聖言，那麼還有比例啊得無聲發言，初得無聲發言的菩薩也是。",
+      "after": "所以出國聖言，那麼還有比例啊得無生法忍，初得無生法忍的菩薩也是。",
+      "rule": "regex",
+      "evidence": "底本得無生法忍"
     },
     {
       "sessionId": "session_07",
@@ -2974,11 +4214,59 @@
     },
     {
       "sessionId": "session_07",
+      "segId": "seg-1355",
+      "before": "這就是根據前面雲和為身，",
+      "after": "這就是根據前面云何為身，",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲和=0"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-1435",
+      "before": "內裡邊的心肝脾胃甚至是不敬物，",
+      "after": "內裡邊的心肝脾胃甚至是不淨物，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-1466",
+      "before": "受心法善觀這就是根據前面雲河為身那一段。",
+      "after": "受心法善觀這就是根據前面云何為身那一段。",
+      "rule": "regex",
+      "evidence": "底本引文云何；全書雲河=0"
+    },
+    {
+      "sessionId": "session_07",
       "segId": "seg-1468",
       "before": "都是分成了四年著尋神觀，尋授觀尋心觀，尋法觀這樣子，",
       "after": "都是分成了四念住尋神觀，尋授觀尋心觀，尋法觀這樣子，",
       "rule": "regex",
       "evidence": "底本T0209_07〈四念住品〉"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-1564",
+      "before": "就是很清靜很自在。",
+      "after": "就是很清淨很自在。",
+      "rule": "regex",
+      "evidence": "底本清靜=0、清淨×116"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-1955",
+      "before": "你去觀他是不敬視明與內外身諸行舍怪，",
+      "after": "你去觀他是不淨視明與內外身諸行舍怪，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
+    },
+    {
+      "sessionId": "session_07",
+      "segId": "seg-2022",
+      "before": "其實簡單地說也還是觀這個隱私不敬，",
+      "after": "其實簡單地說也還是觀這個隱私不淨，",
+      "rule": "regex",
+      "evidence": "底本不敬=0、不淨×558"
     },
     {
       "sessionId": "session_07",

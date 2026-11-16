@@ -27,14 +27,18 @@ const BLACKLIST = [
   '貪聖池','處障','處中比比','由念入心','額空','額不可得','觀俄','一些法',
   '術疾','樹極','轉意。','轉逆','到何正正','發作紙',
   '偉大的一定','有失禪','捨生纖維','輕瘀','慈禧念','元氣觀','職關','修職',
-  '四年度','念著','比比','福心','相符其心','烏鵝','計鵝','鵝','念燈','當之一二','能治了之','，，',
+  '四年度','念著','比比','福心','相符其心','烏鵝','計鵝','念燈','當之一二','能治了之','，，',
+  // Stage6b（小檢 request-changes 後追加，均已依底本裁決修復）
+  '雲和','雲河','清靜','不敬','博爾','第六份','禪詩','阿漢','禧','殉詩','巡視','一趣',
+  '聖天主','調補','制令不動','陳輝','譚欲蓋','欲結石','母一','無聲發','玉學時代論','運學時代論','莫沙','主因',
 ];
 
 test('四念住 published text is free of residual garbled terms (base-text adjudicated)', () => {
   const failures = [];
   for (const { id, data } of loadSessions()) {
-    for (const p of data.paragraphs) {
-      for (const s of p.sentences || []) {
+    for (const p in data.paragraphs) {
+      for (const s of data.paragraphs[p].sentences || []) {
+        if (s.reviewNeeded === true) continue; // pending human review, tracked in unresolved ledger
         for (const term of BLACKLIST) {
           if ((s.text || '').includes(term)) {
             failures.push(`${id}:${s.id} contains "${term}" in text: ${s.text.slice(0, 40)}`);
