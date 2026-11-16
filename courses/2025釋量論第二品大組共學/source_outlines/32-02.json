@@ -115,7 +115,8 @@
       "sourceQuestionNo": 10,
       "sessionId": "04",
       "sessionQuestionId": "q-08-01",
-      "confidence": "high",
+      "confidence": "medium",
+      "confidenceNote": "confidence 由 high 降為 medium：相似度 0.66 < 0.90（2026-11-07 依 C6 契約保守化）",
       "status": "confirmed",
       "evidence": "藍圖提問：請試著舉出：以生活例子透過邏輯推理而生起證得比量的案例。\n對應共學提綱：第2講 如何探究真相（下）｜2025《釋量論・第二品》大組共學（__8WjGF3hhw）§四「善用自身具備的能力去探究真相」第1題\n提綱原文：請問：平時我在什麼情況下會運用邏輯推理來找尋真相以解決問題？\n判定：same（語意相似度 0.66）\n法師開示：0:45:05–1:06:26（04 q-08-01）｜https://www.youtube.com/watch?v=__8WjGF3hhw&t=2705s\n對應開示問答：那你後來運用的邏輯推理是哪個理由讓你不去找外境",
       "outlineRef": {
@@ -176,6 +177,11 @@
     "method": "藍圖提問 →（本機 LLM 逐講候選比較，偈頌錨點 + 教學層次複驗）→ 共學提綱題目 →（章節時間碼區間歸屬）→ session 開示",
     "llm": "本機 Qwen3.8-27B (127.0.0.1:8001)",
     "reviewRequired": true,
+    "confidenceDowngrade": {
+      "date": "2026-11-07",
+      "rule": "C6：high 須有相似度數值且 ≥ 0.90，或屬偈頌直接對應性質",
+      "count": 1
+    },
     "note": "候選結果。confidence=high 為偈頌原文直接對上或完全同一命題；medium 為教學層次同一內容但表述不同。sessionQuestionId 為空者代表該講尚無逐字稿檔，時間碼待補。"
   },
   "provenance": {
