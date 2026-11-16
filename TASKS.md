@@ -27,7 +27,9 @@
 
 ## 預覽
 
-https://gx10-2887.tail378c21.ts.net:9090/index.html
+http://100.84.47.24:9090/index.html
+
+> 服務部署於 Henry 的 Mac（launchd `com.henry.transcriptions-web`），非 gx10。
 
 ## 2026-10-26 入中論38A本輪研讀
 

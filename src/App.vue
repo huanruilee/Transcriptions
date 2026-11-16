@@ -248,8 +248,16 @@
           <span class="crumb-current">{{ currentSessionInfo?.displaySessionId || currentSessionId }} {{ currentSessionInfo?.title || '' }}</span>
         </nav>
 
+        <!-- 課程尚無逐字稿時的空狀態（取代舊版載入不存在的講次） -->
+        <section v-if="hasEmptyTranscript" class="transcript-empty-state">
+          <h1 class="transcript-empty-title">本課程尚無逐字稿</h1>
+          <p class="transcript-empty-message">
+            {{ currentCourseTitle }} 目前沒有可閱讀的講次。逐字稿完成後將自動上架，敬請期待。
+          </p>
+        </section>
+
         <!-- 動態即時科判祖先鏈 (Sticky Doctrinal Bar) -->
-        <div class="sticky-doctrinal-bar">
+        <div v-if="!hasEmptyTranscript" class="sticky-doctrinal-bar">
           <span class="breadcrumb-icon">📑</span>
           <span
             v-for="(node, idx) in activeTOCChain"
@@ -263,6 +271,7 @@
 
         <!-- 雙視角科判手風琴 (對齊 V1) -->
         <TOCAccordion
+          v-if="!hasEmptyTranscript"
           ref="tocAccordionRef"
           id="toc-accordion-root"
           :toc-nodes="currentTocTree"
@@ -305,11 +314,11 @@
         </section>
 
         <!-- 逐字稿本文 (文章自然排版) -->
-        <article class="transcript-article">
+        <article v-if="!hasEmptyTranscript" class="transcript-article">
           <!-- 文章開頭：講次標題與校勘時間標記 -->
           <header class="session-article-header">
             <h1 class="session-article-title">
-              {{ currentSessionInfo?.title || `第 ${currentSessionId} 講` }}
+              {{ currentSessionInfo?.title || (currentSessionId ? `第 ${currentSessionId} 講` : '載入中…') }}
             </h1>
             <p v-if="currentReaderNotice" class="session-reader-notice" role="note">
               閱讀提醒：{{ currentReaderNotice }}
@@ -1047,6 +1056,8 @@ const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
 const mediaDuration = ref(0);
+// 課程沒有任何講次／逐字稿時為 true；此時閱讀區顯示空狀態而非載入不存在的講次。
+const hasEmptyTranscript = ref(false);
 let ytPlayer: any = null;
 let ytTrackerInterval: any = null;
 let ytPlayerInitInterval: any = null;
@@ -1740,8 +1751,16 @@ onMounted(async () => {
   });
 
   const initialHash = window.location.hash.replace('#session-', '').replace('#', '');
-  const defaultFirst = courseStore.sessions[0]?.id || (courseStore.currentCourseId === 'shi-liang-lun-er' ? '01' : '02A');
+  // 僅以 course.json 的 sessions 為準；絕不臆造寫死的講次編號（例如舊版的 '02A'），
+  // 否則會載入不存在的講次而產生「幽靈講次」。
+  const defaultFirst = courseStore.sessions[0]?.id || '';
   const targetId = initialHash || defaultFirst;
+  if (!targetId) {
+    // 本課程尚無逐字稿：不呼叫 loadSession，直接顯示空狀態。
+    showEmptyTranscriptState();
+    if (!isReaderDisposed) isInitialMounted = true;
+    return;
+  }
   await loadSession(targetId);
   if (!isReaderDisposed) isInitialMounted = true;
 });
@@ -1763,6 +1782,23 @@ onUnmounted(() => {
   }
   isInitialMounted = false;
 });
+
+// 課程沒有任何講次／逐字稿時的閱讀區空狀態。
+// 不寫入 URL hash，避免產生指向不存在講次的 #session-XX。
+function showEmptyTranscriptState() {
+  if (isReaderDisposed) return;
+  hasEmptyTranscript.value = true;
+  isLoading.value = false;
+  currentSessionId.value = '';
+  paragraphs.value = [];
+  playerStore.setSentences([]);
+  currentAudioUrl.value = '';
+  currentYoutubeVideoId.value = '';
+  currentLastUpdated.value = '';
+  currentReaderNotice.value = '';
+  currentTranscriptOverview.value = null;
+  sourceOutline.value = null;
+}
 
 async function loadRealCourseData() {
   const baseUrl = import.meta.env.BASE_URL || '/';
@@ -1822,12 +1858,18 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
     window.history.replaceState({}, '', url.toString());
   }
   await loadRealCourseData();
-  const firstSession = courseStore.sessions[0]?.id || (newCourseId === 'shi-liang-lun-er' ? '01' : '02A');
+  const firstSession = courseStore.sessions[0]?.id || '';
+  if (!firstSession) {
+    // 本課程尚無逐字稿：不呼叫 loadSession，直接顯示空狀態。
+    showEmptyTranscriptState();
+    return;
+  }
   await loadSession(firstSession);
 });
 
 async function loadSession(sessionId: string) {
   if (isReaderDisposed) return;
+  hasEmptyTranscript.value = false;
   currentTocProjection.value = null;
   currentReaderNotice.value = '';
   currentReaderRebuiltAt.value = '';
@@ -2697,6 +2739,29 @@ if (typeof window !== 'undefined') {
   margin: 12px 0 0;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+.transcript-empty-state {
+  margin: 48px auto;
+  max-width: 620px;
+  padding: 40px 28px;
+  text-align: center;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.transcript-empty-title {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  color: var(--text-primary);
+}
+
+.transcript-empty-message {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 .audio-loading-status {

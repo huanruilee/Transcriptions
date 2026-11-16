@@ -35,8 +35,6 @@ import {
 import { computeSourceDigest } from './content_overview_pipeline.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const COURSE_DIR = path.join(ROOT, 'courses', '菩薩就是這樣成佛', 'sessions');
-const EVIDENCE_DIR = path.join(ROOT, 'reviews', 'evidence', 'pusa_pipeline');
 
 const args = new Map(
   process.argv.slice(2).map((arg) => {
@@ -45,6 +43,9 @@ const args = new Map(
     return [arg.slice(0, eq), arg.slice(eq + 1)];
   }),
 );
+
+const COURSE_DIR = path.join(ROOT, 'courses', (args.get('--course') || '菩薩就是這樣成佛'), 'sessions');
+const EVIDENCE_DIR = path.join(ROOT, 'reviews', 'evidence', `pipeline_${args.get('--course') || '菩薩就是這樣成佛'}`);
 
 function readDotEnvKey(keyName) {
   if (process.env[keyName]) return process.env[keyName].trim();
@@ -176,7 +177,7 @@ with tempfile.TemporaryDirectory(prefix='pusa-reasr-') as td:
         })),
       }),
       encoding: 'utf8',
-      timeout: 600000,
+      timeout: 1800000,
       maxBuffer: 16_000_000,
     },
   );
@@ -372,6 +373,7 @@ async function processSingleSession(sessionNum) {
     endpoint: llmEndpoint,
     model: llmModel,
     apiKey: llmApiKey,
+    timeoutMs: 300000,
   });
 
   // Stage 6: Sync contentOverview evidence quotes & sourceDigest after text and sentence IDs are finalized
@@ -423,6 +425,12 @@ async function processSingleSession(sessionNum) {
   finalSession.lastUpdated = formatNow();
   finalSession._meta = {
     ...(finalSession._meta ?? {}),
+    // 段落／句數統計必須與重排後的實際資料同步，否則會留下管線前的舊值而誤導。
+    total_paragraphs: (finalSession.paragraphs ?? []).length,
+    total_sentences: (finalSession.paragraphs ?? []).reduce(
+      (sum, p) => sum + (p.sentences ?? []).length,
+      0,
+    ),
     proofread: 'human-verified-dharma-pipeline',
     layoutStandard: 'shiliang-32-1-pdf',
     reAsrWindowsChecked: windows.length,

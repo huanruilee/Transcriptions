@@ -1,0 +1,415 @@
+{
+  "findings": [],
+  "windows": [],
+  "reAsrResults": [],
+  "hallucinationRepairs": [],
+  "proposalsCount": 265,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-19",
+      "paragraphId": "p_2",
+      "start": 62.9,
+      "end": 66.44,
+      "originalText": "自性認為自性實有的。",
+      "proposedText": "自性執認為自性是實有的。",
+      "categories": [
+        "typo",
+        "punctuation"
+      ],
+      "reason": "原句「自性認為自性實有的」語意殘缺，依上下文（前句「這個就是自性執」）補正為「自性執認為自性是實有的」，並補句號。",
+      "guardReason": "cross-sentence-move:自性執"
+    },
+    {
+      "sentenceId": "sent-30",
+      "paragraphId": "p_2",
+      "start": 87.04,
+      "end": 88.08,
+      "originalText": "我們認為都是什麼？",
+      "proposedText": "我們認為這些都是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "疑問句句尾補問號，並補「這些」使指涉明確。",
+      "guardReason": "cross-sentence-move:認為這"
+    },
+    {
+      "sentenceId": "sent-54",
+      "paragraphId": "p_4",
+      "start": 132.54,
+      "end": 135.04,
+      "originalText": "無明所帶著我們去，",
+      "proposedText": "無明帶著我們去認識的一切法，通通都是自性成立的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語停頓的碎逗號，將跨字幕的句子依語意順成完整句，並補上句尾標點。",
+      "guardReason": "cross-sentence-move:認識的"
+    },
+    {
+      "sentenceId": "sent-61",
+      "paragraphId": "p_4",
+      "start": 146.64,
+      "end": 148,
+      "originalText": "這邊也有想，",
+      "proposedText": "這邊也有想，就是它是以自己這一方的能力去存在，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除口語重複的「就是」發語，與下一句順接。",
+      "guardReason": "cross-sentence-move:就是它"
+    },
+    {
+      "sentenceId": "sent-62",
+      "paragraphId": "p_4",
+      "start": 150.5,
+      "end": 155.76,
+      "originalText": "就是它是以自己這一方的能力去存在，",
+      "proposedText": "去呈現出它現在的樣子；",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上分號，與前句並列說明自性有的內涵。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-67",
+      "paragraphId": "p_4",
+      "start": 160.72,
+      "end": 162.52,
+      "originalText": "這個就是講得比較細一點，",
+      "proposedText": "這個就是講得比較細一點，這個叫做自性有。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號與句號，使定義句完整。",
+      "guardReason": "cross-sentence-move:這個叫"
+    },
+    {
+      "sentenceId": "sent-71",
+      "paragraphId": "p_4",
+      "start": 167.98,
+      "end": 170.7,
+      "originalText": "那我們認定有一個我，",
+      "proposedText": "那我們認定有一個我，這句話就代表什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號與問號，使反問句完整。",
+      "guardReason": "cross-sentence-move:這句話"
+    },
+    {
+      "sentenceId": "sent-73",
+      "paragraphId": "p_4",
+      "start": 172.46,
+      "end": 174.54,
+      "originalText": "我們所認定的那個我，",
+      "proposedText": "我們所認定的那個我，顯現為自性有。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號與句號，完成結論句。",
+      "guardReason": "cross-sentence-move:顯現為"
+    },
+    {
+      "sentenceId": "sent-192",
+      "paragraphId": "p_10",
+      "start": 414.54,
+      "end": 419.42,
+      "originalText": "因為你如果可以觀察到這麼細的話你就，",
+      "proposedText": "因為你如果可以觀察到這麼細的話，你就超越自己以前的自己，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除句中無實義的停頓「就，」並補上逗號，使語意流暢。",
+      "guardReason": "cross-sentence-move:超越自"
+    },
+    {
+      "sentenceId": "sent-204",
+      "paragraphId": "p_10",
+      "start": 439.76,
+      "end": 441.46,
+      "originalText": "不是，他只是一個什麼？",
+      "proposedText": "不是，他只是一個什麼？──因緣和合的。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "以破折號引出答案，使問答結構更清晰。",
+      "guardReason": "cross-sentence-move:因緣和"
+    },
+    {
+      "sentenceId": "sent-229",
+      "paragraphId": "p_11",
+      "start": 489.84,
+      "end": 491.1,
+      "originalText": "等於王曉明？",
+      "proposedText": "等於王曉明嗎？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "句尾補上問號。",
+      "guardReason": "cross-sentence-move:曉明嗎"
+    },
+    {
+      "sentenceId": "sent-238",
+      "paragraphId": "p_12",
+      "start": 511.98,
+      "end": 515.44,
+      "originalText": "所以在這裡，我們《瑜伽師地論》有幾個，",
+      "proposedText": "所以在這裡，我們《瑜伽師地論》有幾段，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原文「有幾個，」語意未完，依下句〈真實義品〉補順為「有幾段」，並補上句尾標點。",
+      "guardReason": "cross-sentence-move:有幾段"
+    },
+    {
+      "sentenceId": "sent-244",
+      "paragraphId": "p_12",
+      "start": 522.88,
+      "end": 525.04,
+      "originalText": "畫了一些白板還有畫，",
+      "proposedText": "畫了一些白板，還有畫了一些小圖案，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原文「畫了一些白板還有畫，」「一些小圖案大家可能忘記了，」被切碎，依語意順成「畫了一些白板，還有畫了一些小圖案，」。",
+      "guardReason": "cross-sentence-move:一些小"
+    },
+    {
+      "sentenceId": "sent-313",
+      "paragraphId": "p_14",
+      "start": 663.98,
+      "end": 667.88,
+      "originalText": "所以如果有人去欺負，",
+      "proposedText": "所以如果有人去欺負王曉明，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "原句被切碎為兩句，將「王曉明」併入本句補全賓語，補上句尾逗號。",
+      "guardReason": "cross-sentence-move:王曉明"
+    },
+    {
+      "sentenceId": "sent-411",
+      "paragraphId": "p_17",
+      "start": 863.36,
+      "end": 870.78,
+      "originalText": "但是你真的去思惟之後對於無我的，",
+      "proposedText": "但是你真的去思惟之後，對於無我的確認性，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上逗號，將「對於無我的」與下句「確認性」的語意連貫。",
+      "guardReason": "cross-sentence-move:確認性"
+    },
+    {
+      "sentenceId": "sent-421",
+      "paragraphId": "p_17",
+      "start": 882.92,
+      "end": 884.34,
+      "originalText": "因為我們現在就認為，",
+      "proposedText": "因為我們現在就認為是有一個我。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "與下句合併語意，補上句號。",
+      "guardReason": "cross-sentence-move:是有一"
+    },
+    {
+      "sentenceId": "sent-549",
+      "paragraphId": "p_22",
+      "start": 1140.08,
+      "end": 1167.2,
+      "originalText": "因為它的存在，跟它真實存在方式之間是不一樣的。好，這句話聽得懂嗎？就是我在我的內心，",
+      "proposedText": "因為它的存在，跟它真實存在的方式是不一樣的。這句話聽得懂嗎？就是我在我的內心，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語「好」，補句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-834",
+      "paragraphId": "p_34",
+      "start": 1807.56,
+      "end": 1812,
+      "originalText": "是要成遣除自性執是要成不是叫，",
+      "proposedText": "所謂遣除自性執，是要遣除自性執，不是叫你遣除所有的我。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "原句為 ASR 斷句錯亂的殘句，依上下文語意重組為完整問句前的引導句，並補上標點。",
+      "guardReason": "cross-sentence-move:你遣除"
+    },
+    {
+      "sentenceId": "sent-991",
+      "paragraphId": "p_40",
+      "start": 2086.48,
+      "end": 2090.66,
+      "originalText": "在之前就是我們從今天上課，",
+      "proposedText": "在之前，就是我們從今天上課一開始講到的，",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "補上逗號使語氣停頓自然，並調整「從今天上課一開始」的連讀節奏。",
+      "guardReason": "cross-sentence-move:開始講"
+    },
+    {
+      "sentenceId": "sent-1057",
+      "paragraphId": "p_42",
+      "start": 2192.7,
+      "end": 2195.18,
+      "originalText": "但是它去緣取到不對的、",
+      "proposedText": "但是它去緣取到不對的、不對的東西，就是什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補逗號與問號，整理斷句。",
+      "guardReason": "cross-sentence-move:對的東"
+    },
+    {
+      "sentenceId": "sent-1063",
+      "paragraphId": "p_42",
+      "start": 2200.68,
+      "end": 2202.44,
+      "originalText": "然後還以為自己是在，",
+      "proposedText": "然後還以為自己是在觀修空性，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補逗號斷句，與下句銜接。",
+      "guardReason": "cross-sentence-move:觀修空"
+    },
+    {
+      "sentenceId": "sent-1080",
+      "paragraphId": "p_43",
+      "start": 2234.82,
+      "end": 2241.36,
+      "originalText": "「難若生死來。」",
+      "proposedText": "「難若生死來，譬如正念住，如同虎聞魚。」",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併引文兩句並補上句號，使引文完整。",
+      "guardReason": "cross-sentence-move:譬如正"
+    },
+    {
+      "sentenceId": "sent-1113",
+      "paragraphId": "p_44",
+      "start": 2314.26,
+      "end": 2316.42,
+      "originalText": "我們可以可以轉。",
+      "proposedText": "我們可以轉。",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除重複的「可以」。",
+      "guardReason": "cross-sentence-move:們可以轉"
+    },
+    {
+      "sentenceId": "sent-1164",
+      "paragraphId": "p_46",
+      "start": 2410.68,
+      "end": 2414.02,
+      "originalText": "其實這邊給大家先洩露一個，",
+      "proposedText": "其實這邊先給大家洩露一個後面會講到的重點：",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語停頓的碎逗號，補上冒號引出下文，使句子流暢完整。",
+      "guardReason": "cross-sentence-move:後面會"
+    },
+    {
+      "sentenceId": "sent-1234",
+      "paragraphId": "p_49",
+      "start": 2564.44,
+      "end": 2566.28,
+      "originalText": "然後精神很好的一種，",
+      "proposedText": "然後精神很好的一種感觸。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "與下一句「一種感觸」黏連，合併補句號，消除碎句。",
+      "guardReason": "cross-sentence-move:一種感"
+    },
+    {
+      "sentenceId": "sent-1257",
+      "paragraphId": "p_49",
+      "start": 2598.58,
+      "end": 2602.44,
+      "originalText": "色界的煩惱心識裡面所，",
+      "proposedText": "色界的煩惱心識裡面所不會去體驗到的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "與下一句黏連，合併補句號，消除碎句。",
+      "guardReason": "cross-sentence-move:不會去"
+    },
+    {
+      "sentenceId": "sent-1383",
+      "paragraphId": "p_53",
+      "start": 2765.02,
+      "end": 2771.3,
+      "originalText": "可能就是初禪，乃至於甚至還不到因為就是九心住到後面呢因為，",
+      "proposedText": "可能就是初禪，乃至於甚至還不到初禪。",
+      "categories": [
+        "oral-filler",
+        "repetition",
+        "punctuation"
+      ],
+      "reason": "清除 ASR 重複黏連的殘句，依語意補回「初禪」並補句號。",
+      "guardReason": "content-word-omitted:因為"
+    },
+    {
+      "sentenceId": "sent-1392",
+      "paragraphId": "p_53",
+      "start": 2778.42,
+      "end": 2783.38,
+      "originalText": "他其實在中觀來講，所以這個是稍微他所要遮止的也是自性成立的法。",
+      "proposedText": "他其實在中觀來講，他所要遮止的也是自性成立的法。",
+      "categories": [
+        "repetition",
+        "punctuation"
+      ],
+      "reason": "清除 ASR 重複黏連的殘句，合併為完整語句並補句號。",
+      "guardReason": "content-word-omitted:所以"
+    },
+    {
+      "sentenceId": "sent-1450",
+      "paragraphId": "p_55",
+      "start": 2900.68,
+      "end": 2904.72,
+      "originalText": "因為他們的，就是如果我們說在按照，",
+      "proposedText": "因為如果我們按照阿毗達摩的分類來說，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「他們的，就是」「在」，並補上句尾標點，使語意順暢。",
+      "guardReason": "cross-sentence-move:阿毗達"
+    },
+    {
+      "sentenceId": "sent-1530",
+      "paragraphId": "p_58",
+      "start": 3093.28,
+      "end": 3096.76,
+      "originalText": "既然是要觀待他者的他，",
+      "proposedText": "既然是要觀待他者，「他」這個字指什麼？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原文「他，這個字」語序調整為「『他』這個字」，並補引號與問號。",
+      "guardReason": "cross-sentence-move:這個字"
+    }
+  ]
+}

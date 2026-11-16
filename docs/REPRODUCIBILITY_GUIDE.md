@@ -162,6 +162,19 @@ npm run dev
 # https://huanruilee.github.io/Transcriptions/
 ```
 
+> **服務根目錄（2026-11-13 修正）**：前端的 `courses/catalog.json`、`courses/<課程>/course.json` 與 `index.html` 都位於 **repo 根目錄**，而非 `src/` 之下。因此啟動靜態伺服器時必須以 **repo 根**為根目錄：
+>
+> ```bash
+> # ✅ 正確：以 repo 根為服務根
+> cd ~/Documents/huanruilee-github-repos/Transcriptions
+> python3 -m http.server 9090 --bind 0.0.0.0 --directory .
+>
+> # ❌ 錯誤：服務 src/ 會導致 courses/*.json 全部 404
+> # npx serve src -p 9090
+> ```
+>
+> 常駐部署使用 launchd LaunchAgent `~/Library/LaunchAgents/com.henry.transcriptions-web.plist`（服務名 `com.henry.transcriptions-web`，Tailscale 位址 `http://100.84.47.24:9090/index.html`）。
+
 ---
 *文檔維護者*：Antigravity Agent & Henry Lee  
 *最後驗證日期*：2026-08-28

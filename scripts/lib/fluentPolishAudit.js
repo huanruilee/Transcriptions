@@ -310,7 +310,7 @@ export async function generateFluentPolishProposals({
           signal: AbortSignal.timeout(timeoutMs),
           body: payload,
         });
-        if (res.ok || res.status < 500) break;
+        if (res.ok || (res.status < 500 && res.status !== 429 && res.status !== 408)) break;
         lastErr = new Error(`LLM 請求失敗: HTTP ${res.status} ${res.statusText}`);
       } catch (err) {
         lastErr = err;
@@ -552,7 +552,7 @@ export async function ensureParagraphPunctuation({
           signal: AbortSignal.timeout(timeoutMs),
           body: payload,
         });
-        if (res.ok || res.status < 500) break;
+        if (res.ok || (res.status < 500 && res.status !== 429 && res.status !== 408)) break;
       } catch {
         if (attempt === 3) res = null;
       }
