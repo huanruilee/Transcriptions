@@ -289,4 +289,27 @@ flowchart TD
 3. **Automated Quality Gate Remediation**:
    - Run `quality_scorer.scan_session_quality` and `targeted_remediation` immediately after each session completes to verify score $\ge 10/10$. Any residual errors matching `ERROR_DICTIONARY` are remediated in-place within 0.01s.
 
+---
+
+## 13. Study Guide Generation & Triad Synchronization Protocol (研讀版講記與三位一體同步規範)
+
+When upgrading a session (e.g., `35A`, `35B`) into a full Study Guide publication and synchronized web session:
+
+1. **Ground Truth & Boundary Audit**:
+   - Read all raw paragraphs in `sessions/session_{SID}.json` alongside `source_text/page_XXX.txt` (including any cross-referenced pages mentioned during the lecture) and check `sessions/session_{NEXT_SID}.json` to confirm the exact cutoff point.
+2. **Verbatim Root Text + Oral Commentary Composition (`publications/lecture_{SID}_study_guide.md`)**:
+   - Include the 4-part Study Guide Header (`一、本講宗旨提要`, `二、義理研讀綱要`, `三、重點法相辨析`, `四、課後思考與研討問題`).
+   - In `【正文講記】`, start every paragraph with `[▶ mm:ss](mp3_url#t=seconds)`.
+   - **Mandatory Invariant**: Embed every cited verse and《善顯密意疏》treatise passage **verbatim** in bold quotes (`「**……**」`) before presenting the Geshe's oral commentary, metaphors, and Q&A exchanges.
+   - Maintain 20–30 paragraphs per session so `avgSentences` (`total_sentences / total_paragraphs`) remains well within `[1.5, 8.0]`.
+3. **Triad Synchronization & Pre-flight Verification**:
+   ```bash
+   python3 scripts/render_study_guide_html.py "courses/入中論善顯密意疏/publications/lecture_{SID}_study_guide.md"
+   python3 scripts/sync_study_guide_to_session.py {SID}
+   npm run summaries:audit
+   node --test tests/acceptance/goldenStandard.test.js
+   npm test && npm run test:v2 && npm run build:v2
+   ```
+
+
 

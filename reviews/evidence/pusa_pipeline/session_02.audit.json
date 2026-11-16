@@ -1,0 +1,337 @@
+{
+  "findings": [],
+  "windows": [],
+  "reAsrResults": [],
+  "hallucinationRepairs": [],
+  "proposalsCount": 292,
+  "blockedByGuard": [
+    {
+      "sentenceId": "sent-51",
+      "paragraphId": "p_2",
+      "start": 143.84,
+      "end": 150.7,
+      "originalText": "一開始，我們有說這本書它就分為兩大兩個段落。",
+      "proposedText": "一開始我們有說，這本書就分為兩大段落。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複「兩大兩個」，補上句尾標點並順句。",
+      "guardReason": "cross-sentence-move:大段落"
+    },
+    {
+      "sentenceId": "sent-85",
+      "paragraphId": "p_3",
+      "start": 208,
+      "end": 211.1,
+      "originalText": "就是它一剛開始，作者就先，",
+      "proposedText": "就是它一剛開始，作者就先引出寂天菩薩的著作，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除碎逗號，將「寂天菩薩，寂天菩薩的著作」順成「寂天菩薩的著作」，句尾補標點。",
+      "guardReason": "cross-sentence-move:寂天菩"
+    },
+    {
+      "sentenceId": "sent-95",
+      "paragraphId": "p_4",
+      "start": 232.26,
+      "end": 234.8,
+      "originalText": "你們有誰現在在上那個，",
+      "proposedText": "你們有誰現在在上那個《入菩薩行論》？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "合併跨句書名並補上問號，使疑問句完整。",
+      "guardReason": "cross-sentence-move:入菩薩"
+    },
+    {
+      "sentenceId": "sent-202",
+      "paragraphId": "p_7",
+      "start": 413.68,
+      "end": 414.5,
+      "originalText": "他就是什麼？",
+      "proposedText": "他就是走了。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "原句「他就是什麼？他就是走了。」口語重複，合併為一句並補上句號。",
+      "guardReason": "cross-sentence-move:就是走"
+    },
+    {
+      "sentenceId": "sent-281",
+      "paragraphId": "p_10",
+      "start": 525.76,
+      "end": 528.32,
+      "originalText": "這個寂天菩薩，我們再講回寂天菩薩，",
+      "proposedText": "我們再講回寂天菩薩的故事。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「這個」，並與下一句合併語意，補上句尾句號。",
+      "guardReason": "cross-sentence-move:菩薩的"
+    },
+    {
+      "sentenceId": "sent-287",
+      "paragraphId": "p_10",
+      "start": 534.5,
+      "end": 538.12,
+      "originalText": "他只做三件事情：吃飯。",
+      "proposedText": "他只做三件事情：吃飯、睡覺還有上廁所。這不就是我們一般人會做的嗎？",
+      "categories": [
+        "punctuation",
+        "oral-filler"
+      ],
+      "reason": "刪除口語冗詞「呢」，將三件事以頓號並列，並補上問號與句號。",
+      "guardReason": "cross-sentence-move:睡覺還"
+    },
+    {
+      "sentenceId": "sent-293",
+      "paragraphId": "p_10",
+      "start": 546.48,
+      "end": 548.62,
+      "originalText": "你從來不會看到他在那邊，",
+      "proposedText": "你從來不會看到他在那邊很用功地做功課，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語重複「在在」，補上逗號以連接下一句。",
+      "guardReason": "cross-sentence-move:很用功"
+    },
+    {
+      "sentenceId": "sent-348",
+      "paragraphId": "p_12",
+      "start": 613.7,
+      "end": 618.54,
+      "originalText": "大家就嚇到說：「還有沒沒有聽過的大家都是博學之士。",
+      "proposedText": "大家就嚇到說：「還有沒聽過的？大家都是博學之士。」",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "修正口語結巴「沒沒」為「沒」，並補上問號與句號，將黏連的兩句分開。",
+      "guardReason": "content-word-omitted:沒有"
+    },
+    {
+      "sentenceId": "sent-447",
+      "paragraphId": "p_15",
+      "start": 729.72,
+      "end": 731.7,
+      "originalText": "它可以什麼讓，",
+      "proposedText": "它可以讓，",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「什麼」，修正為「它可以讓」，並補上逗號。",
+      "guardReason": "cross-sentence-move:可以讓"
+    },
+    {
+      "sentenceId": "sent-451",
+      "paragraphId": "p_15",
+      "start": 734.14,
+      "end": 743.26,
+      "originalText": "他可以讓不管你是什麼教派的，全部都把它視為至珍之寶。因為在我們所謂的藏傳文書中，",
+      "proposedText": "它可以讓不管你是什麼教派的，全部都把它視為至珍之寶。因為在我們所謂的藏傳文獻中，",
+      "categories": [
+        "typo"
+      ],
+      "reason": "「文書」應為「文獻」之誤，修正錯別字。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-517",
+      "paragraphId": "p_20",
+      "start": 994.32,
+      "end": 1000.36,
+      "originalText": "所以，我們可以在這個如果是一個答案的話，加一個問題。",
+      "proposedText": "所以，我們可以在這個答案上，再加一個問題。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「如果是一個」，順成句子並補標點。",
+      "guardReason": "content-word-omitted:如果"
+    },
+    {
+      "sentenceId": "sent-636",
+      "paragraphId": "p_30",
+      "start": 1417.7,
+      "end": 1422.38,
+      "originalText": "完全是因為我們的愛我執太重了，不可放。",
+      "proposedText": "完全是因為我們的愛我執太重了，不肯放。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "原句「不可放」為口誤，與下一句「不肯放」重複；依語意修正為「不肯放」，並刪除贅句。",
+      "guardReason": "content-word-omitted:不可"
+    },
+    {
+      "sentenceId": "sent-649",
+      "paragraphId": "p_31",
+      "start": 1476.82,
+      "end": 1481.8,
+      "originalText": "那冒出芽，這個菩提心，剛開始冒出來的時候，",
+      "proposedText": "冒出芽的這個菩提心，剛開始冒出來的時候，",
+      "categories": [
+        "oral-filler"
+      ],
+      "reason": "刪除句首「那」，並調整語序使句子通順。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-654",
+      "paragraphId": "p_32",
+      "start": 1495.52,
+      "end": 1500.22,
+      "originalText": "他的前一本，其實他最重要的教授就是，",
+      "proposedText": "他的前一本，其實他最重要的教授就是教導我們怎麼去發菩提心。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除句尾懸空的口語停頓逗號，與下句語意合併順句，補上句號。",
+      "guardReason": "cross-sentence-move:教導我"
+    },
+    {
+      "sentenceId": "sent-667",
+      "paragraphId": "p_33",
+      "start": 1538.46,
+      "end": 1543.02,
+      "originalText": "那所謂七因果的教授呢，他也不是藏傳的。",
+      "proposedText": "所謂七因果的教授，它也不是藏傳獨有的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「那」「呢」，將「他」改為「它」，並合併斷句使語意連貫。",
+      "guardReason": "cross-sentence-move:獨有的"
+    },
+    {
+      "sentenceId": "sent-668",
+      "paragraphId": "p_33",
+      "start": 1543.04,
+      "end": 1543.6,
+      "originalText": "他是獨有的。",
+      "proposedText": "但是它特別把它整理起來。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除冗詞「呢」，「他」改為「它」，並補上句尾標點。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-688",
+      "paragraphId": "p_35",
+      "start": 1613.36,
+      "end": 1620.44,
+      "originalText": "母親、父親、小孩、孫子、朋友、仇人，有沒有？",
+      "proposedText": "母親、父親、小孩、孫子、朋友、仇人？有沒有可能？",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "補上問號，並將「有沒有」補全為「有沒有可能」以呼應上句疑問。",
+      "guardReason": "cross-sentence-move:沒有可"
+    },
+    {
+      "sentenceId": "sent-830",
+      "paragraphId": "p_42",
+      "start": 1922.82,
+      "end": 1923.42,
+      "originalText": "都能夠什麼？",
+      "proposedText": "都能夠傳送給那個人。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「什麼」，與下一句合併為完整句子。",
+      "guardReason": "cross-sentence-move:能夠傳"
+    },
+    {
+      "sentenceId": "sent-858",
+      "paragraphId": "p_43",
+      "start": 1967.58,
+      "end": 1975.48,
+      "originalText": "那總之呢，這些就是，算是這兩個，兩種方法呢是在我們說藏傳要怎麼，",
+      "proposedText": "總之，這些算是兩種方法，是在我們說藏傳要怎麼發菩提心時會介紹的。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除發語詞「那」與語尾助詞「呢」，消除碎逗號，並補上句尾句號。",
+      "guardReason": "cross-sentence-move:怎麼發"
+    },
+    {
+      "sentenceId": "sent-1037",
+      "paragraphId": "p_50",
+      "start": 2260.56,
+      "end": 2261.5,
+      "originalText": "它的波羅蜜多，或是波羅蜜，波羅蜜多當然是指音譯 paramita。",
+      "proposedText": "它的音譯是波羅蜜多，或稱波羅蜜；波羅蜜多當然是指音譯 paramita。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "以分號區分並列說明，補上標點使句構通順。",
+      "guardReason": "ungrounded-rewrite"
+    },
+    {
+      "sentenceId": "sent-1060",
+      "paragraphId": "p_50",
+      "start": 2281.18,
+      "end": 2284.28,
+      "originalText": "之所以稱之為「到彼岸」，",
+      "proposedText": "之所以稱之為「到彼岸」，是因為這個時候的這六項修持，它的動機是來自於求取佛果的菩提心，所以我們說：「為利有情願成佛」。",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "與下句合併為完整因果句，補上標點並刪除重複的「它的動機」。",
+      "guardReason": "cross-sentence-move:彼岸是"
+    },
+    {
+      "sentenceId": "sent-1091",
+      "paragraphId": "p_52",
+      "start": 2351.34,
+      "end": 2355.64,
+      "originalText": "那這本書呢，也是這個。",
+      "proposedText": "這本書在藏地，也是他們必學的一本教科書。",
+      "categories": [
+        "oral-filler",
+        "punctuation"
+      ],
+      "reason": "刪除口語冗詞「那」「呢」「也是這個」，並與下句語意順接，補上標點。",
+      "guardReason": "cross-sentence-move:在藏地"
+    },
+    {
+      "sentenceId": "sent-1382",
+      "paragraphId": "p_64",
+      "start": 2899.96,
+      "end": 2902.46,
+      "originalText": "都是這麼適合適合人，",
+      "proposedText": "都是這麼適合人走的。",
+      "categories": [
+        "repetition",
+        "punctuation"
+      ],
+      "reason": "刪除口吃重複「適合適合」，與下句合併語意後補上句號。",
+      "guardReason": "cross-sentence-move:人走的"
+    },
+    {
+      "sentenceId": "sent-1386",
+      "paragraphId": "p_64",
+      "start": 2912.5,
+      "end": 2916.32,
+      "originalText": "在這個過程當中，六度其實我們就是要培養，",
+      "proposedText": "在這個過程當中，六度其實就是我們要培養的，",
+      "categories": [
+        "punctuation"
+      ],
+      "reason": "調整語序並補上句號，使語意完整。",
+      "guardReason": "cross-sentence-move:我們要"
+    }
+  ]
+}

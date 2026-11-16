@@ -1,0 +1,4300 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:dbc883c6c2bc04e728fc4aa7b574edf4ea4e85b9a62329527376d2a083fdd0c5",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "seg-0006",
+      "before": "今天是進行26獎上半部的大主共學",
+      "after": "今天是進行26講上半部的大組共學",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'獎'應為'講'，'大主'應為'大組'（對應課程名稱及上下文）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0007",
+      "before": "那主題是極地與滅地的形象",
+      "after": "那主題是集諦與滅諦的行相",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'極地'應為'集諦'，'滅地'應為'滅諦'，'形象'在佛法語境中通常作'行相'（對應標題）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0009",
+      "before": "幫我們做這上半部的總設",
+      "after": "幫我們做這上半部的總說",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'總設'應為'總說'（總體說明）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0014",
+      "before": "極地的四種形象之四圓",
+      "after": "集諦的四種行相之四諦",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'極地'應為'集諦'，'形象'應為'行相'，'四圓'應為'四諦'（集諦四種行相：因、集、生、緣，或指四諦中的集諦，此處語境似在講四諦名相）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0016",
+      "before": "貪愛是投身輪迴的圓",
+      "after": "貪愛是投身輪迴的因",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'圓'應為'因'（集諦四行相之一：因）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0018",
+      "before": "我們從祭宋來看",
+      "after": "我們從偈頌來看",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'祭宋'應為'偈頌'（佛經中的詩頌）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0020",
+      "before": "於非樂樂響",
+      "after": "於非樂樂想",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'響'應為'想'（於非樂中起樂想，佛教常見語）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0036",
+      "before": "只要行者透遊修持無我會",
+      "after": "只要行者透由修持無我見",
+      "changeClass": "orthography|term",
+      "reason": "透遊應為透由；無我會應為無我見，為佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0058",
+      "before": "就不會再次投身於三友",
+      "after": "就不會再次投身於三有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學名相為「三有」（欲有、色有、無色有），指三界輪迴，非「三友」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0064",
+      "before": "才能夠隱身後友",
+      "after": "才能夠隱身後有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。前文提及「離愛無後有」，此處應為「後有」（未來的生命存在），非「身友」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0068",
+      "before": "然而聖者已經現正無我",
+      "after": "然而聖者已經現證無我",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學用語為「現證」（親身證得），非「現正」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0069",
+      "before": "表示他的心中沒有強大的我值",
+      "after": "表示他的心中沒有強大的我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正。對應前文「現證無我」，心中應無「我執」，非「我值」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0074",
+      "before": "所以自終認為貪愛是輪迴的因",
+      "after": "所以自宗認為貪愛是輪迴的因",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。對話雙方為「自宗」與「他宗」，非「自終」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0093",
+      "before": "自終繼續說",
+      "after": "自宗繼續說",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。對話雙方為「自宗」與「他宗」，非「自終」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0104",
+      "before": "是矛盾相偽的",
+      "after": "是矛盾相違的",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「偽」應為「違」，佛學論典中常用「矛盾相違」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0136",
+      "before": "最終在趕果時",
+      "after": "最終在感果時",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「趕果」應為「感果」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0138",
+      "before": "才能趕果",
+      "after": "才能感果",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「趕果」應為「感果」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0145",
+      "before": "馬上就會投身後勇",
+      "after": "馬上就會投身後有",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「後勇」應為「後有」（佛教術語，指來世）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0151",
+      "before": "滋潤業讓業趕果的並非無名",
+      "after": "滋潤業讓業感果的並非無明",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「趕」應為「感」（感召果報）；「無名」應為「無明」（佛教名相）",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0153",
+      "before": "因此無名並不符合無間的條件",
+      "after": "因此無明並不符合無間的條件",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字：「無名」應為「無明」",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0166",
+      "before": "業也不會趕果",
+      "after": "業也不會感果",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「趕」應為「感」，佛法中業力招感果報。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0237",
+      "before": "貪愛是投身輪迴的巨神圓",
+      "after": "貪愛是投身輪迴的巨輪",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。佛法名相中，「巨神圓」應為「巨輪」，指輪迴之輪。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0238",
+      "before": "所以紀宋才提到",
+      "after": "所以寂勝才提到",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。佛法名相中，「紀宋」應為「寂勝」，指寂天菩薩或相關論師。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0250",
+      "before": "紀宋不知是有因為說",
+      "after": "寂勝不知是有因為說",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。佛法名相中，「紀宋」應為「寂勝」，指寂天菩薩或相關論師。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0258",
+      "before": "那無名跟業不具備",
+      "after": "那無明跟業不具備",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「無名」應為「無明」（Avidyā），為十二因支之首。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0263",
+      "before": "無名跟貪愛之間",
+      "after": "無明跟貪愛之間",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0281",
+      "before": "就是那一地譬如以苦地為例",
+      "after": "就是那一地譬如以苦諦為例",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「苦地」應為「苦諦」（四聖諦之一），與後文「滅諦」對應",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0288",
+      "before": "有肉的業跟貪愛",
+      "after": "有漏的業跟貪愛",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「有肉的業」應為「有漏的業」（sāsrava-karma），「肉」與「漏」音近",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0297",
+      "before": "就是有肉的夜漢堪愛",
+      "after": "就是有漏的業與貪愛",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「有肉的夜漢堪愛」明顯為「有漏的業與貪愛」之嚴重聽音訛誤，「夜漢」非詞彙，「堪愛」應為「貪愛」",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0300",
+      "before": "也不是由大智在天而生",
+      "after": "也不是由大自在天而生",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「大智在天」應為「大自在天」（Ishvara），外道常見之創造神說法",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0351",
+      "before": "但尚未斷除我值",
+      "after": "但尚未斷除我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法語境中「我執」為核心名相，「我值」無義。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0352",
+      "before": "如同運動員生枝各肌群的訓練原理與技巧",
+      "after": "如同運動員生起各肌群的訓練原理與技巧",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。「生枝」應為「生起」，語意方通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0365",
+      "before": "人為斷除俱生我職",
+      "after": "人為斷除俱生我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「我執」，非「我職」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0367",
+      "before": "直到斷除我職才能離開",
+      "after": "直到斷除我執才能離開",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「我執」，非「我職」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0370",
+      "before": "仍然完全沒有斷除我值",
+      "after": "仍然完全沒有斷除我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「我執」，非「我值」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0390",
+      "before": "但必然能斷除我值",
+      "after": "但必然能斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0393",
+      "before": "就會所有的我值就馬上斷除了",
+      "after": "就會所有的我執就馬上斷除了",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0399",
+      "before": "是以對我值產生根本性的對峙",
+      "after": "是以對我執產生根本性的對治",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「對峙」應為佛法修持用語「對治」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0400",
+      "before": "使強大的我值力量被破壞削弱",
+      "after": "使強大的我執力量被破壞削弱",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0405",
+      "before": "可是因為沒有強大的我值作為動機",
+      "after": "可是因為沒有強大的我執作為動機",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'我值'應為'我執'（ātma-grāha），指對自我的執著。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0415",
+      "before": "他我值是大幅削弱",
+      "after": "他我執是大幅削弱",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'我值'應為'我執'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0416",
+      "before": "但是還沒有斷除我值",
+      "after": "但是還沒有斷除我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'我值'應為'我執'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0441",
+      "before": "那個斷除我止",
+      "after": "那個斷除我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'我止'應為'我執'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0462",
+      "before": "完全沒有斷除我之",
+      "after": "完全沒有斷除我執",
+      "changeClass": "term",
+      "reason": "「我之」應為「我執」，符合佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0466",
+      "before": "本身已經是對我之產生了",
+      "after": "本身已經是對我執產生了",
+      "changeClass": "term",
+      "reason": "「我之」應為「我執」，符合佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0502",
+      "before": "憲政無我之後",
+      "after": "現證無我之後",
+      "changeClass": "term",
+      "reason": "「憲政」應為「現證」，指親證真理。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0503",
+      "before": "我之的力量減弱",
+      "after": "我執的力量減弱",
+      "changeClass": "term",
+      "reason": "「我之」在佛法語境中通常指「我執」，且「力量」前宜用「執」字以明義。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0512",
+      "before": "需要強大的我之",
+      "after": "需要強大的我執",
+      "changeClass": "term",
+      "reason": "「我之」應為「我執」，指對自我的執著。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0520",
+      "before": "憲政無我的智慧",
+      "after": "現證無我的智慧",
+      "changeClass": "term",
+      "reason": "「憲政」應為「現證」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0521",
+      "before": "就必然能夠斷除我之",
+      "after": "就必然能夠斷除我執",
+      "changeClass": "term",
+      "reason": "「我之」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0525",
+      "before": "他確實是憲政無我",
+      "after": "他確實是現證無我",
+      "changeClass": "term",
+      "reason": "「憲政」應為「現證」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0526",
+      "before": "他在憲政無我的狀態確實沒有我職",
+      "after": "他在證悟無我的狀態確實沒有我執",
+      "changeClass": "term",
+      "reason": "「憲政」應為「證悟」之同音訛誤；「我職」應為佛學名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0527",
+      "before": "但是出訂之後",
+      "after": "但是出定之後",
+      "changeClass": "term",
+      "reason": "「出訂」應為「出定」（出離禪定），同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0530",
+      "before": "只是因為憲政之後",
+      "after": "只是因為證悟之後",
+      "changeClass": "term",
+      "reason": "「憲政」應為「證悟」之同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0531",
+      "before": "出訂之後",
+      "after": "出定之後",
+      "changeClass": "term",
+      "reason": "「出訂」應為「出定」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0532",
+      "before": "他的我職的力量就會消得很弱了",
+      "after": "他的我執的力量就會消得很弱了",
+      "changeClass": "term",
+      "reason": "「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0538",
+      "before": "我值的力道已經大幅降低",
+      "after": "我執的力道已經大幅降低",
+      "changeClass": "term",
+      "reason": "「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0539",
+      "before": "所以不會造新的能營業",
+      "after": "所以不會造新的能引業",
+      "changeClass": "term",
+      "reason": "「能營業」應為「能引業」（能引發後有之業），同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0544",
+      "before": "他既然已經斷除我值了",
+      "after": "他既然已經斷除我執了",
+      "changeClass": "term",
+      "reason": "「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0546",
+      "before": "我值的力道大幅降低",
+      "after": "我執的力道大幅降低",
+      "changeClass": "term",
+      "reason": "「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0548",
+      "before": "又說因為我值的習氣仍在",
+      "after": "又說因為我執的習氣仍在",
+      "changeClass": "term",
+      "reason": "「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0550",
+      "before": "你的我值都已經斷了",
+      "after": "你的我執都已經斷了",
+      "changeClass": "term",
+      "reason": "「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0552",
+      "before": "請問哪樣的煩惱能夠滋潤他的夜襲器",
+      "after": "請問哪樣的煩惱能夠滋潤他的習氣",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「夜襲器」應為「習氣」，語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0560",
+      "before": "他那時候確實沒有我職",
+      "after": "他那時候確實沒有我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0572",
+      "before": "能造能影業",
+      "after": "能造能引業",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「能影業」應為「能引業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0573",
+      "before": "但是這樣的我值",
+      "after": "但是這樣的我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0577",
+      "before": "以前所造的那些能營業",
+      "after": "以前所造的那些能引業",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「能營業」應為「能引業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0579",
+      "before": "我值",
+      "after": "我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0581",
+      "before": "憲政的狀態",
+      "after": "證無我的狀態",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「憲政」應為「證」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0583",
+      "before": "他的我值越消越弱",
+      "after": "他的我執越消越弱",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0587",
+      "before": "他有四國嘛",
+      "after": "他有四果嘛",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「四國」應為「四果」（預流、一來、不還、阿羅漢）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0591",
+      "before": "就沒有辦法去滋潤那些能飲業",
+      "after": "就沒有辦法去滋潤那些能引業",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「能飲業」應為「能引業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0602",
+      "before": "那個我值",
+      "after": "那個我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0604",
+      "before": "我值的習氣是不一樣的",
+      "after": "我執的習氣是不一樣的",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0605",
+      "before": "他本身就是我值",
+      "after": "他本身就是我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0606",
+      "before": "而不是我值的習氣",
+      "after": "而不是我執的習氣",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0609",
+      "before": "我值已經斷了",
+      "after": "我執已經斷了",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0612",
+      "before": "為什麼能造能飲業",
+      "after": "為什麼能造能引業",
+      "changeClass": "term",
+      "reason": "佛法名相修正，「能飲業」應為「能引業」（能引生後果的業），「飲」為同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0613",
+      "before": "是因為它有我值的習氣",
+      "after": "是因為它有我執的習氣",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0687",
+      "before": "是這樣子因為有我直在",
+      "after": "是這樣子因為有我執在",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我直」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0705",
+      "before": "然後那時候生氣是現行的稱心嘛",
+      "after": "然後那時候生氣是現行的瞋心嘛",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法語境中，「生氣」對應的煩惱名相為「瞋」，「稱心」應為「瞋心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0708",
+      "before": "然後今天我又對於小民聲稱",
+      "after": "然後今天我又對於小民生瞋",
+      "changeClass": "term",
+      "reason": "ASR 訛字。前文提及「生氣」，此處應為「生瞋」，「聲稱」為同音錯誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0712",
+      "before": "變成一個稱心",
+      "after": "變成一個瞋心",
+      "changeClass": "term",
+      "reason": "ASR 訛字。對應前文「生氣」與「瞋心」，「稱心」應為「瞋心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0730",
+      "before": "他不是那種隱末的狀態",
+      "after": "他不是那種隱沒的狀態",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。前文 seg-0706 使用「隱沒」，此處「隱末」應為「隱沒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0745",
+      "before": "我覺得他真的講斷除我之",
+      "after": "我覺得他真的講斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法語境中，「斷除我之」語意未完，應為「斷除我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0748",
+      "before": "是不是",
+      "after": "是不是？",
+      "changeClass": "punctuation",
+      "reason": "標點修正。疑問句應加問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0764",
+      "before": "我直流下習氣",
+      "after": "我留下習氣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「直流下」應為「留下」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0771",
+      "before": "我直流下那個習氣",
+      "after": "我留下那個習氣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「直流下」應為「留下」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0776",
+      "before": "遇到某些勁的時候",
+      "after": "遇到某些境的時候",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「勁」應為「境」（境界）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0779",
+      "before": "因為他長時間喘息",
+      "after": "因為他長時間串習",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「喘息」應為「串習」（佛教名相，指反覆修習形成習慣）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0781",
+      "before": "他可能遇到那個筋的時候",
+      "after": "他可能遇到那個境的時候",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「筋」應為「境」（境界）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0805",
+      "before": "這裡我值的習氣指的是",
+      "after": "這裡我執的習氣指的是",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0807",
+      "before": "我值斷除之後",
+      "after": "我執斷除之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「我值」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0842",
+      "before": "可能跟剛才寬恕法",
+      "after": "可能跟剛才寬恕法師",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「法」應為名詞「法師」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0850",
+      "before": "他確實會有隱磨在身體的狀況",
+      "after": "他確實會有隱沒在身體的狀況",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「隱磨」應為「隱沒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0862",
+      "before": "這個是正相偉",
+      "after": "這個是正相違",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「正相偉」應為佛學名相「正相違」，指互相排斥、不能共存。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0889",
+      "before": "就是說雖然是正相為沒錯",
+      "after": "就是說雖然是正相違沒錯",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「正相為」應為「正相違」，與前文 seg-0862 呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0937",
+      "before": "會有點死灰腐燃的感覺",
+      "after": "會有點死灰復燃的感覺",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。'死灰腐燃'應為成語'死灰復燃'，意指失勢者重新得勢或已消失的事物重新出現，此處指煩惱重新生起。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0949",
+      "before": "憲政無我之後",
+      "after": "證悟無我之後",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'憲政'為同音 ASR 訛字，佛法語境下指'證悟'（證得真理）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0976",
+      "before": "說當這個行者在憲政無我的當下",
+      "after": "說當這個行者在證悟無我的當下",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正：「憲政」明顯為「證悟」之同音誤植，於佛法語境中，行者見無我即為證悟。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0982",
+      "before": "就是被我執折磨了不知道多少節",
+      "after": "就是被我執折磨了不知道多少劫",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正：「節」應為「劫」（kalpa），佛法中形容時間長久常用「無量劫」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-0987",
+      "before": "我覺得談而容易",
+      "after": "我覺得談何容易",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正：「談而容易」應為成語「談何容易」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1003",
+      "before": "在他憲政無我的當下的時候",
+      "after": "在他證悟無我的當下的時候",
+      "changeClass": "term",
+      "reason": "「憲政」應為「證悟」之 ASR 訛字，語意不符。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1004",
+      "before": "只是我之的力量被大幅的削弱",
+      "after": "只是我執的力量被大幅的削弱",
+      "changeClass": "term",
+      "reason": "「我之」應為「我執」，佛法名相修正。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1042",
+      "before": "我成許",
+      "after": "我承許",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。對應上一句的修正，回應者應為「承許」（承認、主張）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1043",
+      "before": "就是昨天我是成許",
+      "after": "就是昨天我是承許",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語意為昨天曾持某種主張，應修正為「承許」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1053",
+      "before": "他只是當初的兵級我之",
+      "after": "他只是當初的兵級我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，佛學名相應為「我執」而非「我之」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1063",
+      "before": "他這時候憲政無我",
+      "after": "他這時候證得無我",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「憲政」應為「證得」，指親證無我。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1064",
+      "before": "只是在賤方面知道",
+      "after": "只是在見方面知道",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「賤」音近「見」，指見道位。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1071",
+      "before": "才有辦法斷除我職",
+      "after": "才有辦法斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1092",
+      "before": "因為昨天基本上所有的同學都是程式一",
+      "after": "因為昨天基本上所有的同學都是承許一",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「程式」應為「承許」（承認、主張），佛學常用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1104",
+      "before": "應該就可以說是端除了",
+      "after": "應該就可以說是斷除了",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'端除'應為'斷除'（斷除煩惱/我執）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1112",
+      "before": "這種只學為誰的",
+      "after": "這種只執為誰的",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'學'應為'執'（執著）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1141",
+      "before": "像第一小文說的巨神我",
+      "after": "像第一小文說的俱生我",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'巨神'應為'俱生'（俱生我執，佛教名相）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1143",
+      "before": "他這裡是用運動員的一個欲來講",
+      "after": "他這裡是用運動員的一個喻來講",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'欲'應為'喻'（比喻）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1150",
+      "before": "那考試也是在那個監力所考",
+      "after": "那考試也是在那個監理所考",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'監力所'應為'監理所'（監理單位）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1169",
+      "before": "憲政無我入定的狀態當中",
+      "after": "在現證無我入定的狀態當中",
+      "changeClass": "term",
+      "reason": "「憲政」為明顯同音 ASR 訛字，佛法語境中應為「現證」（親自證得）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1200",
+      "before": "但實際上當他憲政",
+      "after": "但實際上當他現證",
+      "changeClass": "term",
+      "reason": "「憲政」為明顯同音 ASR 訛字，佛法語境中應為「現證」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1205",
+      "before": "遍及我值",
+      "after": "遍及我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「值」應為「執」，佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1206",
+      "before": "他只是巨生的還沒有斷",
+      "after": "他只是俱生的還沒有斷",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「巨生」應為「俱生」，佛法名相「俱生我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1214",
+      "before": "他其實現真無我之後",
+      "after": "他其實現證無我之後",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「真」應為「證」，佛法名相「現證無我」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1244",
+      "before": "他只是在肢腱上知道",
+      "after": "他只是在肢體上知道",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「肢腱」應為「肢體」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1246",
+      "before": "譬如說他只是比量正德之類的",
+      "after": "譬如說他只是比量正見之類的",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「正德」應為「正見」，佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1252",
+      "before": "還沒有斷除聚生我職",
+      "after": "還沒有斷除俱生我執",
+      "changeClass": "term",
+      "reason": "「聚生我職」為同音 ASR 訛字，佛法名相應為「俱生我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1311",
+      "before": "還有那個姻緣",
+      "after": "還有那個因緣",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'姻緣' 指男女情緣，此處語境為條件限制，應為 '因緣'（佛教名相或泛指條件）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1322",
+      "before": "這個地方說從健的方面看清",
+      "after": "這個地方說從見的方面看清",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'健' 應為 '見'（見道），與後文 '見解'、'證得' 呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1346",
+      "before": "在跟斷除我值之間的差距",
+      "after": "在跟斷除我執之間的差距",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。'我值' 應為 '我執'（佛教名相，指對自我的執著）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1357",
+      "before": "就必然能斷除我之",
+      "after": "就必然能斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我之」應為「我執」，佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1411",
+      "before": "當然是透過比量正德無我之後",
+      "after": "當然是透過比量正見無我之後",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'正德'應為佛學術語'正見'（正確見解），且後文多次出現'正見'或'見解'，此處語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1424",
+      "before": "所以他憲政的時候一定是處在入定的狀態",
+      "after": "所以他現證的時候一定是處在入定的狀態",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'憲政'應為'現證'（親身證得），與上下文'現證無我'、'現正無物'語意一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1427",
+      "before": "才有可能從以分別之正德無我",
+      "after": "才有可能從以分別之正見無我",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'正德'應為'正見'，與前文 seg-1411 及佛法名相一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1428",
+      "before": "進階到現正無物",
+      "after": "進階到現證無我",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'現正無物'應為'現證無我'，與全文主題及 seg-1417、seg-1429 語意一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1430",
+      "before": "他的心境上不會出現有誤",
+      "after": "他的心境上不會出現有我",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'有誤'應為'有我'，與上下文討論'執著有我'、'無我'的主題一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1431",
+      "before": "他的心中也不會升起我值",
+      "after": "他的心中也不會升起我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'我值'應為'我執'（對我的執著），是佛法核心名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1437",
+      "before": "而且是憲政",
+      "after": "而且是現證",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'憲政'應為'現證'，與上下文一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1440",
+      "before": "他就沒有憲政無我的智慧",
+      "after": "他就沒有現證無我的智慧",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'憲政'應為'現證'，與上下文一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1444",
+      "before": "但那個時候不是憲政的狀態",
+      "after": "但那個時候不是現證的狀態",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'憲政'應為'現證'，與上下文一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1453",
+      "before": "他就沒有辦法憲政無我",
+      "after": "他就沒有辦法現證無我",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'憲政' 語意不通，佛法修證中應為 '現證'（直接體證）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1456",
+      "before": "以分別之正德無我",
+      "after": "以分別之正見無我",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'正德' 在此語境下應為 '正見'（正確的知見），與後文 '無我' 搭配。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1478",
+      "before": "最常串席的一個對勁",
+      "after": "最常串習的一個對境",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'串席' 應為 '串習'（反覆練習、熏習）；'對勁' 應為 '對境'（心識所緣的對象）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1483",
+      "before": "再次地升起我之",
+      "after": "再次地升起我執",
+      "changeClass": "term",
+      "reason": "語意修正。'我之' 應為 '我執'（對自我的執著），符合佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1490",
+      "before": "我舉一個比選項三更貼切的例子,",
+      "after": "我舉一個比選項三更貼切的例子，",
+      "changeClass": "punctuation",
+      "reason": "標點修正。原文逗號為半形，建議統一為全形逗號以符合繁體中文排版規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1602",
+      "before": "他會不由自主的往左架的方向靠近",
+      "after": "他會不由自主地往左架的方向靠近",
+      "changeClass": "grammar",
+      "reason": "修飾動詞「靠近」應使用「地」，而非「的」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1621",
+      "before": "這件事情你已經現正",
+      "after": "這件事情你已經現量",
+      "changeClass": "term",
+      "reason": "佛學名相「現正」應為「現量」（直接感知），此處語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1627",
+      "before": "無我與有我是正相為",
+      "after": "無我與有我是正相違",
+      "changeClass": "term",
+      "reason": "佛學名相「正相為」應為「正相違」（互相矛盾），此處語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1629",
+      "before": "行者憲政無我之後",
+      "after": "行者證悟無我之後",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「憲政」應為「證悟」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1630",
+      "before": "必然能斷除我之",
+      "after": "必然能斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我之」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1632",
+      "before": "行者憲政無我",
+      "after": "行者證悟無我",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「憲政」應為「證悟」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1633",
+      "before": "他還是沒有斷除我之",
+      "after": "他還是沒有斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我之」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1640",
+      "before": "那他應該要斷除我職",
+      "after": "那他應該要斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1642",
+      "before": "憲政無我",
+      "after": "證悟無我",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「憲政」應為「證悟」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1643",
+      "before": "離斷除我職",
+      "after": "離斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1648",
+      "before": "資良道",
+      "after": "資糧道",
+      "changeClass": "term",
+      "reason": "佛學名相「資良道」應為「資糧道」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1649",
+      "before": "家行道",
+      "after": "加行道",
+      "changeClass": "term",
+      "reason": "佛學名相「家行道」應為「加行道」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1661",
+      "before": "最終要斷除我值",
+      "after": "最終要斷除我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「值」應為「執」",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1664",
+      "before": "從憲正無我到斷除我值",
+      "after": "從證悟無我到斷除我執",
+      "changeClass": "term",
+      "reason": "「憲正」應為「證悟」之 ASR 訛字；「我值」應為「我執」之 ASR 訛字，符合佛法名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1668",
+      "before": "跟斷除我值是不能畫上等號",
+      "after": "跟斷除我執是不能畫上等號",
+      "changeClass": "orthography",
+      "reason": "「我值」應為「我執」之同音訛字，佛學名相錯誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1682",
+      "before": "憲政無我與斷除我值",
+      "after": "證悟無我與斷除我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學名相中，「憲政」應為「證悟」，「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1687",
+      "before": "就不要說憲政無我",
+      "after": "就不要說證悟無我",
+      "changeClass": "term",
+      "reason": "ASR 訛字。前文已修正為「證悟」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1688",
+      "before": "以比量正德無我的那個當下",
+      "after": "以比量正證無我的那個當下",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學名相中，「正德」應為「正證」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1689",
+      "before": "當事人的心中都不會陷起我之",
+      "after": "當事人的心中都不會陷起我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字。「我之」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1690",
+      "before": "但因為我之的習氣仍在",
+      "after": "但因為我執的習氣仍在",
+      "changeClass": "term",
+      "reason": "ASR 訛字。「我之」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1692",
+      "before": "但因為我之的習氣仍在",
+      "after": "但因為我執的習氣仍在",
+      "changeClass": "term",
+      "reason": "ASR 訛字。與 seg-1690 及上下文語意一致，「我之」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1707",
+      "before": "因為他的心中有我值的習氣",
+      "after": "因為他的心中有我執的習氣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我值」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1710",
+      "before": "即便當事人的心中沒有我值",
+      "after": "即便當事人的心中沒有我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我值」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1711",
+      "before": "只要有我值的習氣",
+      "after": "只要有我執的習氣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我值」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1717",
+      "before": "都已經沒有我值了",
+      "after": "都已經沒有我執了",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我值」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1722",
+      "before": "小聖的阿羅漢已經斷除了我職",
+      "after": "小聖的阿羅漢已經斷除了我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我職」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1723",
+      "before": "但他依舊保有我職的習氣",
+      "after": "但他依舊保有我執的習氣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我職」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1724",
+      "before": "所謂我職的習氣就是",
+      "after": "所謂我執的習氣就是",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，佛法名相應為「我執」而非「我職」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1731",
+      "before": "就算他有我職的習氣",
+      "after": "就算他有我執的習氣",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1735",
+      "before": "但那樣的習氣是不會隱身煩惱",
+      "after": "但那樣的習氣是不會引生煩惱",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「隱身」應為「引生」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1736",
+      "before": "我們之前在大祖共學講的那個例子",
+      "after": "我們之前在大眾共學講的那個例子",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「大祖」應為「大眾」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1737",
+      "before": "起稱心的那個例子",
+      "after": "起貪心的那個例子",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「稱心」在佛法語境下應為「貪心」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1745",
+      "before": "所以因為我職的習氣仍在",
+      "after": "所以因為我執的習氣仍在",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1758",
+      "before": "以大幅降低",
+      "after": "已大幅降低",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。前文 seg-1751 為「已大幅降低」，此處 seg-1758 與 seg-1759 重複且皆作「以」，應修正為「已」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1760",
+      "before": "那不就是還有我值",
+      "after": "那不就是還有我執",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。上下文討論「我執」的力道與存在，「我值」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1763",
+      "before": "所以不會造新的能已業",
+      "after": "所以不會造新的能引業",
+      "changeClass": "term",
+      "reason": "佛學名相修正。佛法中常言「能引業」，指能引生後有之業。「能已業」語意不通，應為「能引業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1768",
+      "before": "從賤的角度來分析",
+      "after": "從見的角度來分析",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。佛法修證區分「見道」與「修道」，此處應為「從見的角度」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1770",
+      "before": "它是一種賤",
+      "after": "它是一種見",
+      "changeClass": "term",
+      "reason": "同音 ASR 訛字。前文提到「從見的角度」，此處指「現證無我」是一種「見」（見道位），應為「見」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1771",
+      "before": "但尚未斷除我職",
+      "after": "但尚未斷除我執",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字。上下文皆為「我執」，「我職」應修正為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1791",
+      "before": "之所以會升起我職",
+      "after": "之所以會升起我執",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1796",
+      "before": "我職呢",
+      "after": "我執呢",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1797",
+      "before": "斜見",
+      "after": "邪見",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「斜見」應為「邪見」（佛教名相）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1820",
+      "before": "所以不能把見地跟理愛",
+      "after": "所以不能把見地跟離愛",
+      "changeClass": "orthography",
+      "reason": "同音訛字。前文多次提及「離愛」，此處應為「離愛」而非「理愛」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1824",
+      "before": "見地不等於理愛",
+      "after": "見地不等於離愛",
+      "changeClass": "orthography",
+      "reason": "同音訛字。前文多次提及「離愛」，此處應為「離愛」而非「理愛」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1876",
+      "before": "無名語貪愛都是輪迴的因",
+      "after": "無明與貪愛都是輪迴的因",
+      "changeClass": "orthography",
+      "reason": "錯別字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1878",
+      "before": "無名是輪迴的根本",
+      "after": "無明是輪迴的根本",
+      "changeClass": "orthography",
+      "reason": "錯別字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1883",
+      "before": "貪愛能直接推動液種子成熟為後有",
+      "after": "貪愛能直接推動業種子成熟為後有",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「液」應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1884",
+      "before": "無名雖是一切煩惱的根本",
+      "after": "無明雖是一切煩惱的根本",
+      "changeClass": "orthography",
+      "reason": "錯別字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1899",
+      "before": "括號無名的命令",
+      "after": "括號（無明）的命令",
+      "changeClass": "punctuation",
+      "reason": "標點修正，「括號」應為實際括號符號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1914",
+      "before": "從貪愛和無名上",
+      "after": "從貪愛和無明上",
+      "changeClass": "term",
+      "reason": "「無名」應為佛學名相「無明」（Avidyā），ASR 同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1928",
+      "before": "所以在這兩個關繫上",
+      "after": "所以在這兩個關係上",
+      "changeClass": "orthography",
+      "reason": "「關繫」應為「關係」，屬常見錯別字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1957",
+      "before": "它是濃回的因",
+      "after": "它是迴向的因",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法語境中，「濃回」應為「迴向」（parinamana），指將功德轉向特定目標。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1958",
+      "before": "是巨生源",
+      "after": "是俱生緣",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相中，「巨生源」應為「俱生緣」（sahaja-pratyaya），指與心識同時生起的緣。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1959",
+      "before": "那個湯埃呢",
+      "after": "那個投胎呢",
+      "changeClass": "term",
+      "reason": "ASR 訛字。語境為輪迴投生，「湯埃」應為「投胎」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1961",
+      "before": "滋潤葉種子",
+      "after": "滋潤業種子",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「業種子」（karma-bija），「葉」應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1964",
+      "before": "而選擇投身三遊",
+      "after": "而選擇投生三有",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「三有」（tridhātu），指欲有、色有、無色有，「三遊」應為「三有」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1972",
+      "before": "就是無名跟貪愛都具備這個條件是嗎",
+      "after": "就是無明跟貪愛都具備這個條件是嗎",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「無明」（avidya），「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2032",
+      "before": "無名跟湯愛",
+      "after": "無明跟貪愛",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'無名'應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2052",
+      "before": "無名是輪迴的根本",
+      "after": "無明是輪迴的根本",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「無名」應為「無明」（avidyā），指對真理的愚癡，是輪迴根本。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2063",
+      "before": "而且一直在滋論他",
+      "after": "而且一直在滋潤他",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「滋論」應為「滋潤」，指煩惱增長。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2111",
+      "before": "他基本上是無名的",
+      "after": "他基本上是無明的",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2147",
+      "before": "他把這個貪愛和這個無名一塊",
+      "after": "他把這個貪愛和這個無明一塊",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2148",
+      "before": "他就包括了這個無名",
+      "after": "他就包括了這個無明",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2149",
+      "before": "我感覺這個無名",
+      "after": "我感覺這個無明",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2154",
+      "before": "就是把這個無名給略除了",
+      "after": "就是把這個無明給略除了",
+      "changeClass": "orthography",
+      "reason": "佛學名相修正。上下文討論解脫與斷除煩惱，「無名」應為「無明」（Avidyā），指愚癡，為十二因緣之首。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2201",
+      "before": "這人法制說是見地",
+      "after": "這人法智說是見地",
+      "changeClass": "term",
+      "reason": "「法制」應為佛學名相「法智」，指對四聖諦中苦集滅道之智。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2224",
+      "before": "他這個維縮愛",
+      "after": "他這個維繫愛",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「維縮」應為「維繫」，符合佛法語境中對「愛」的斷除或維持之意。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2228",
+      "before": "因為無名還在嘛",
+      "after": "因為無明還在嘛",
+      "changeClass": "term",
+      "reason": "佛法名相修正，「無名」應為「無明」（avidyā），指根本煩惱。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2229",
+      "before": "那無名還在的話",
+      "after": "那無明還在的話",
+      "changeClass": "term",
+      "reason": "佛法名相修正，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2258",
+      "before": "或有哀氣滋潤的話呢",
+      "after": "或有愛氣滋潤的話呢",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「愛」（貪愛），非「哀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2260",
+      "before": "所以雖然有無名",
+      "after": "所以雖然有無明",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「無明」（無知），非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2273",
+      "before": "但是即便無名還在",
+      "after": "但是即便無明還在",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「無明」，非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2276",
+      "before": "因為你無名在",
+      "after": "因為你無明在",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「無明」，非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2293",
+      "before": "斷除貪愛還有無名嗎",
+      "after": "斷除貪愛還有無明嗎",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「無明」，非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2297",
+      "before": "還有無名嗎",
+      "after": "還有無明嗎",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「無明」，非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2314",
+      "before": "無名不是輪迴的根本",
+      "after": "無明不是輪迴的根本",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「無名」應為「無明」（Avidyā），指愚癡、不明真理，是十二因緣之首。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2316",
+      "before": "無名跟貪愛到最後",
+      "after": "無明跟貪愛到最後",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同 seg-2314，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2325",
+      "before": "無名是貪愛的因",
+      "after": "無明是貪愛的因",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同 seg-2314，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2349",
+      "before": "就是他必須要斷除無名",
+      "after": "就是他必須要斷除無明",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同 seg-2314，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2368",
+      "before": "但是無名還在",
+      "after": "但是無明還在",
+      "changeClass": "term",
+      "reason": "佛學名相修正：'無名'應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2381",
+      "before": "無名才是輪迴的根本",
+      "after": "無明才是輪迴的根本",
+      "changeClass": "term",
+      "reason": "佛學名相修正：'無名'應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2384",
+      "before": "無名跟貪愛是一條鏈",
+      "after": "無明跟貪愛是一條鏈",
+      "changeClass": "term",
+      "reason": "佛學名相修正：'無名'應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2391",
+      "before": "雖然還有無名",
+      "after": "雖然還有無明",
+      "changeClass": "term",
+      "reason": "佛學名相修正：'無名'應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2411",
+      "before": "就表示他已經先斷除無名",
+      "after": "就表示他已經先斷除無明",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「無名」應為「無明」（Avidyā），佛教核心名相，指愚痴、不明真理。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2412",
+      "before": "斷除所有的我詞了",
+      "after": "斷除所有的我執了",
+      "changeClass": "term",
+      "reason": "佛學名相修正：「我詞」應為「我執」（Atma-graha），指對自我的執著，與前文「無明」及後文「貪愛」邏輯相符。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2418",
+      "before": "術玉是想要說嗎",
+      "after": "書玉是想要說嗎",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正：「術玉」應為人名「書玉」，與後文 seg-2446「謝謝書玉」呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2436",
+      "before": "即可協脫",
+      "after": "即可解脫",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正：「協脫」應為「解脫」（Mokṣa），與前文 seg-2407「解脫」及佛法語境相符。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2443",
+      "before": "沒有貪愛就可以卸脫",
+      "after": "沒有貪愛就可以解脫",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正：「卸脫」應為「解脫」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2454",
+      "before": "因為能引相續顧",
+      "after": "因為能引相續故",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'顧'為同音誤植，佛學名相應為'故'（因此之意）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2460",
+      "before": "然後就會再促使下一次的運停",
+      "after": "然後就會再促使下一次的運轉",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'運停'語意不通，依上下文輪迴義，應為'運轉'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2467",
+      "before": "其實吳明跟貪愛是一條鏈的話",
+      "after": "其實無明跟貪愛是一條鏈的話",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'吳明'為人名或誤植，佛學名相應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2473",
+      "before": "才是這個直接營",
+      "after": "才是這個直接因",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'營'為同音誤植，依語境應為'因'（原因/因緣）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2478",
+      "before": "能影相續故的那個階段嗎",
+      "after": "能引相續故的那個階段嗎",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'影'為同音誤植，佛學名相應為'引'（引發）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2480",
+      "before": "但是這個貪愛背後是因為無名作為驅動力",
+      "after": "但是這個貪愛背後是因為無明作為驅動力",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'無名'為同音誤植，佛學名相應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2482",
+      "before": "然後貪愛才會再去造下有肉的業",
+      "after": "然後貪愛才會再去造有漏的業",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'下肉'為同音誤植，佛學名相應為'有漏'（sāsrava）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2490",
+      "before": "那只有攤愛才可以",
+      "after": "那只有貪愛才可以",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'攤愛'為同音誤植，佛學名相應為'貪愛'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2575",
+      "before": "就是吳鳴他就是沒有",
+      "after": "就是無明他就是沒有",
+      "changeClass": "term",
+      "reason": "ASR 訛字。應為「無明」，非「吳鳴」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2577",
+      "before": "我會覺得吳堅",
+      "after": "我會覺得無明",
+      "changeClass": "term",
+      "reason": "ASR 訛字。應為「無明」，非「吳堅」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2580",
+      "before": "那個吳堅啊",
+      "after": "那個無明啊",
+      "changeClass": "term",
+      "reason": "ASR 訛字。應為「無明」，非「吳堅」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2675",
+      "before": "去執取後友",
+      "after": "去執取後有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「執取後有」，指執著於未來的生命存在，原文「後友」應為「後有」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2686",
+      "before": "他說吳明作為根本驅動力",
+      "after": "他說無明作為根本驅動力",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相為「無明」，指對真理的愚癡，原文「吳明」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2691",
+      "before": "吳明其實是因為他看錯了",
+      "after": "無明其實是因為他看錯了",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文皆在討論「無明」，原文「吳明」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2711",
+      "before": "如果說吹毛求刺的話",
+      "after": "如果說吹毛求疵的話",
+      "changeClass": "orthography",
+      "reason": "「吹毛求刺」為同音 ASR 訛字，正確成語應為「吹毛求疵」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2727",
+      "before": "即便無名",
+      "after": "即便無明",
+      "changeClass": "term",
+      "reason": "佛法名相修正，「無名」應為「無明」（avidyā）",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2732",
+      "before": "但實際上貪愛和無名",
+      "after": "但實際上貪愛和無明",
+      "changeClass": "term",
+      "reason": "佛法名相修正，「無名」應為「無明」（avidyā）",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2738",
+      "before": "我覺得這個關繫上",
+      "after": "我覺得這個關係上",
+      "changeClass": "orthography",
+      "reason": "「關繫」應為「關係」",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2757",
+      "before": "液種子成熟為後友",
+      "after": "液種子成熟為後有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學名相中，「後有」指來世的果報身，「後友」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2761",
+      "before": "促使著某種葉能夠成熟的",
+      "after": "促使著某種業能夠成熟的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學語境中，「業」是造作之意，「葉」為植物部分，此處應指業力成熟。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2763",
+      "before": "貪愛在滋潤葉",
+      "after": "貪愛在滋潤業",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。前文已修正為「業」，此處應一致，指貪愛滋潤業種。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2764",
+      "before": "使得某些葉",
+      "after": "使得某些業",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。同上，應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2766",
+      "before": "我們把葉形容為種子好了",
+      "after": "我們把業形容為種子好了",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。同上，應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2771",
+      "before": "無名雖是一切煩惱的根本",
+      "after": "無明雖是一切煩惱的根本",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學名相為「無明」，非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2773",
+      "before": "的確滋潤液感果的",
+      "after": "的確滋潤業感果的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。前文已修正為「業」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2776",
+      "before": "所以平常在十二元起當中",
+      "after": "所以平常在十二因緣當中",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學名相為「十二因緣」，非「十二元起」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2794",
+      "before": "你就會想要取得那個勁",
+      "after": "你就會想要取得那個境",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學語境中，「境」指所緣對象，「勁」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2843",
+      "before": "我想投生散去",
+      "after": "我想投生善趣",
+      "changeClass": "orthography",
+      "reason": "原文「散去」應為「善趣」，「散」與「善」同音，且上下文對比惡趣，此處應指投生善道。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2856",
+      "before": "無名不具備這樣的條件",
+      "after": "無明不具備這樣的條件",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文論述佛法名相，「無名」應為「無明」（Avidyā），指根本煩惱之一。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2897",
+      "before": "只要斷除貪愛即可解脫",
+      "after": "只要斷除貪愛即可解脫。",
+      "changeClass": "punctuation",
+      "reason": "標點修正。此句為完整陳述，建議加上句號以明確結束語意。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2911",
+      "before": "因為無名才是輪迴的根本",
+      "after": "因為無明才是輪迴的根本",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2912",
+      "before": "的確無名是輪迴的根本",
+      "after": "的確無明是輪迴的根本",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2931",
+      "before": "就必須斷除無名",
+      "after": "就必須斷除無明",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2932",
+      "before": "沒有斷除無名",
+      "after": "沒有斷除無明",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2934",
+      "before": "這當中的無名指的是我職",
+      "after": "這當中的無明指的是我執",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2935",
+      "before": "當我們還有我職的時候",
+      "after": "當我們還有我執的時候",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「我職」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2941",
+      "before": "那既然無名是貪愛的根本",
+      "after": "那既然無明是貪愛的根本",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2944",
+      "before": "也就是無名也斷除",
+      "after": "也就是無明也斷除",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2947",
+      "before": "但沒有斷除無名的",
+      "after": "但沒有斷除無明的",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2950",
+      "before": "依舊有無名",
+      "after": "依舊有無明",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2955",
+      "before": "但他的心中依舊有我持",
+      "after": "但他的心中依舊有我執",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文討論我執（ātma-grāha），「我持」應為「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2956",
+      "before": "這時候請問他還有沒有後友",
+      "after": "這時候請問他還有沒有後有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛教術語為「後有」（bhava，指來世的存有），非「後友」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2962",
+      "before": "那沒有後友",
+      "after": "那沒有後有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。對應前文及佛教術語，應為「後有」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2965",
+      "before": "又說他有無名",
+      "after": "又說他有無明",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛教核心煩惱為「無明」（avidyā），非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-2973",
+      "before": "就不會再次投生於三友",
+      "after": "就不會再次投生於三有",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛教術語「三有」（bhava，指欲有、色有、無色有），非「三友」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3006",
+      "before": "我職生起之後",
+      "after": "我執生起之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法語境中應為「我執」，指對自我的執著，而非「職」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3018",
+      "before": "所以能引相續顧",
+      "after": "所以能引相續故",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。「顧」應為「故」，表示原因或結論。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3033",
+      "before": "雖然背後有無名作為根本的驅動力",
+      "after": "雖然背後有無明作為根本的驅動力",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法名相應為「無明」，而非「無名」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3035",
+      "before": "無名是我直在驅動",
+      "after": "無明是我執在驅動",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。應為「無明」與「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3037",
+      "before": "我們就是因為有那個我直在",
+      "after": "我們就是因為有那個我執在",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。應為「我執」而非「我直」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3048",
+      "before": "還是強猛的撐",
+      "after": "還是強猛的瞋",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛法三毒為貪、瞋、癡，此處對應「貪」應為「瞋」，而非「撐」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3059",
+      "before": "都是我直在背後推動",
+      "after": "都是我執在背後推動",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'直'應為'執'（我執），與後文 seg-3065、seg-3071、seg-3073 的'我職'一致，皆為'我執'之誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3065",
+      "before": "都是我職在推動",
+      "after": "都是我執在推動",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'職'應為'執'（我執）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3068",
+      "before": "無我會在推動這些事情",
+      "after": "不是我執在推動這些事情",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'無我'應為'我執'，語意上與前句'都是我執在推動'形成對比（不是我在推動 vs 是我執在推動）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3071",
+      "before": "都是我職在推動",
+      "after": "都是我執在推動",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'職'應為'執'（我執）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3073",
+      "before": "我職雖然是煩惱的根本",
+      "after": "我執雖然是煩惱的根本",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'職'應為'執'（我執）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3077",
+      "before": "是我職所隱身的那些煩惱",
+      "after": "是我執所隱身的那些煩惱",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'職'應為'執'（我執）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3078",
+      "before": "貪 臣 我慢",
+      "after": "貪、瞋、我慢",
+      "changeClass": "orthography",
+      "reason": "佛學名相修正。'臣'應為'瞋'（三毒之一），與前後文'貪'、'我慢'並列。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3085",
+      "before": "無名對我們的殺傷力",
+      "after": "無明對我們的殺傷力",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'無名'應為'無明'（佛教核心名相）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3093",
+      "before": "我直或者是無名",
+      "after": "我執或者是無明",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'直'應為'執'，'無名'應為'無明'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3122",
+      "before": "但是靠下板機的那個士兵",
+      "after": "但是扣下板機的那個士兵",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「靠下」應為「扣下」（扣扳機）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3148",
+      "before": "會不會是因為我們的心中有我職",
+      "after": "會不會是因為我們的心中有我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我職」應為佛學名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3149",
+      "before": "加上我們心緒中有貪嗔的習氣",
+      "after": "加上我們心續中有貪嗔的習氣",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「心緒」在佛法語境中應為「心續」（citta-santāna）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3150",
+      "before": "再加上我們的眼前有各式各樣的勁",
+      "after": "再加上我們的眼前有各式各樣的境",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「勁」應為佛學名相「境」（所緣境）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3152",
+      "before": "有我質",
+      "after": "有我執",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「我質」應為佛法名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3173",
+      "before": "它不包括稱嗎",
+      "after": "它不包括嗔嗎",
+      "changeClass": "term",
+      "reason": "ASR 訛字，上下文討論三毒（貪、嗔、癡），「稱」應為「嗔」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3176",
+      "before": "保留了稱和臥直",
+      "after": "保留了嗔和癡",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「稱和臥直」應為「嗔和癡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3183",
+      "before": "他也不會起撐",
+      "after": "他也不會起嗔",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「起撐」應為「起嗔」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3187",
+      "before": "我會起撐嗎",
+      "after": "我會起嗔嗎",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「起撐」應為「起嗔」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3190",
+      "before": "所以會有稱念",
+      "after": "所以會有嗔念",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「稱念」應為「嗔念」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3196",
+      "before": "但依舊有撐的這種情況",
+      "after": "但依舊有嗔的這種情況",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「撐」應為「嗔」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3200",
+      "before": "間接也斷掉了稱和吃",
+      "after": "間接也斷掉了嗔和癡",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「稱和吃」應為「嗔和癡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3210",
+      "before": "無名也斷除",
+      "after": "無明也斷除",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「無名」應為「無明」（Avidyā），指根本煩惱。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3212",
+      "before": "只斷骨",
+      "after": "只斷根",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。上下文比喻為「連根斷除」，故「骨」應為「根」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3221",
+      "before": "他要長時間地修地",
+      "after": "他要長時間地修定",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。語境為修行方法，「修地」應為「修定」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3222",
+      "before": "因為他覺得我長時間修地",
+      "after": "因為他覺得我長時間修定",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。同上，「修地」應為「修定」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3225",
+      "before": "但貪嗔的因無名",
+      "after": "但貪嗔的因無明",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3228",
+      "before": "無名作怪",
+      "after": "無明作怪",
+      "changeClass": "term",
+      "reason": "佛學名相修正。原文「無名」應為「無明」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3239",
+      "before": "我只不會再照下能飲業",
+      "after": "我只不會再造下能引業",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。原文「照下」應為「造下」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3244",
+      "before": "如果我職被大幅削減之後",
+      "after": "如果我見被大幅削減之後",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字修正。原文「職」應為「見」（指見道）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3246",
+      "before": "也就沒有辦法造下能飲的業",
+      "after": "也就沒有辦法造下能引的業",
+      "changeClass": "term",
+      "reason": "聽音不明。原文「能飲」應為「能引」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3250",
+      "before": "你是說他有沒有辦法造下能飲業",
+      "after": "你是說他有沒有辦法造下能引業",
+      "changeClass": "term",
+      "reason": "聽音不明。原文「能飲」應為「能引」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3254",
+      "before": "那就表示我職的力量非常的弱",
+      "after": "那就表示我執的力量非常的弱",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「我職」應為「我執」，符合佛法語境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3268",
+      "before": "這兩者之間沒有什麼關系",
+      "after": "這兩者之間沒有什麼關係",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3284",
+      "before": "那個種子本身已經保留在我們的心緒上",
+      "after": "那個種子本身已經保留在我們的心續上",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「心緒」應為「心續」（心相續）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3291",
+      "before": "所以即便是見到位",
+      "after": "所以即便是見道位",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「到位」應為「道位」（見道位）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3293",
+      "before": "他都已經現正無我",
+      "after": "他都已經現證無我",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「現正」應為「現證」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3306",
+      "before": "我們要斷除那個我職",
+      "after": "我們要斷除那個我執",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字，「我職」應為佛學名相「我執」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3309",
+      "before": "是要斷癱",
+      "after": "是要斷癡",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「癱」應為三毒之一「癡」（無明）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3311",
+      "before": "斷癱也是用無我會去斷",
+      "after": "斷癡也是用無我會去斷",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「癱」應為「癡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3312",
+      "before": "斷癱不是說",
+      "after": "斷癡不是說",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「癱」應為「癡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3313",
+      "before": "我就用一個不靜觀去斷",
+      "after": "我就用一個不淨觀去斷",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「不靜觀」應為佛法對治貪欲的修法「不淨觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3314",
+      "before": "用不靜觀沒有辦法斷癱",
+      "after": "用不淨觀沒有辦法斷癡",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「不靜觀」應為「不淨觀」，「癱」應為「癡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3315",
+      "before": "用不靜觀只能夠遮止癱",
+      "after": "用不淨觀只能夠遮止癡",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「不靜觀」應為「不淨觀」，「癱」應為「癡」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3318",
+      "before": "眼不見為盡",
+      "after": "眼不見為淨",
+      "changeClass": "orthography",
+      "reason": "成語誤植，「盡」應為「淨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3359",
+      "before": "這兩者又有什麼關系",
+      "after": "這兩者又有什麼關係",
+      "changeClass": "orthography",
+      "reason": "修正錯別字，「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3372",
+      "before": "就必須斷除我職",
+      "after": "就必須斷除我執",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「我職」應為「我執」（ātma-grāha），指對自我的執著。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3389",
+      "before": "剛剛講會造成能營業",
+      "after": "剛剛講會造成能引業",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「能營業」應為「能引業」（ākṣepa-karma），指能引生後有之業。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3402",
+      "before": "有無數個能引液",
+      "after": "有無數個能引業",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「能引業」，非「能引液」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3426",
+      "before": "隱身後有的",
+      "after": "引生後有的",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法名相為「引生後有」，指引生來世，非「隱身」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3428",
+      "before": "到底是去到善去",
+      "after": "到底是去到善趣",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法用語為「善趣」，非「善去」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3429",
+      "before": "還是去到惡去",
+      "after": "還是去到惡趣",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛法用語為「惡趣」，非「惡去」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3477",
+      "before": "逐步分析出苦地由煩惱和夜而生",
+      "after": "逐步分析出苦諦由煩惱和業而生",
+      "changeClass": "term",
+      "reason": "「苦地」應為「苦諦」，「夜」應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3479",
+      "before": "集地最主要的勢力",
+      "after": "集諦最主要的勢力",
+      "changeClass": "term",
+      "reason": "「集地」應為「集諦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3480",
+      "before": "有漏的夜和煩惱所具備的特色",
+      "after": "有漏的業和煩惱所具備的特色",
+      "changeClass": "term",
+      "reason": "「夜」應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3519",
+      "before": "就是比較糟糕的投行處",
+      "after": "就是比較糟糕的投生處",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字修正。佛法中「投生處」指輪迴的去向，「投行處」無此法義。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3523",
+      "before": "感德強謀的苦",
+      "after": "感得強謀的苦",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字修正。佛法中「感得」指由業力招感果報，「感德」在此語境不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3565",
+      "before": "因為極地跟苦地是因果之間的關系",
+      "after": "因為極地跟苦地是因果之間的關係",
+      "changeClass": "orthography",
+      "reason": "錯別字。「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3594",
+      "before": "以後愛生曲嗎",
+      "after": "以後愛生取嗎",
+      "changeClass": "term",
+      "reason": "ASR 訛字。十二因緣中，「愛」緣「取」。「曲」應為「取」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3677",
+      "before": "能夠申起猛烈的苦",
+      "after": "能夠生起猛烈的苦",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學語境中，「生起」為固定搭配，指煩惱或苦果的產生。「申起」無此用法，應為「生起」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3696",
+      "before": "或是提出這個問題的主別",
+      "after": "或是提出這個問題的差別",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語意上應為「差別」（difference）或「分別」，指是否有不同的觀點。「主別」無此詞，應為「差別」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3711",
+      "before": "先討論到苦地",
+      "after": "先討論到苦諦",
+      "changeClass": "term",
+      "reason": "佛學名相修正。上下文討論四聖諦（集諦、滅諦），「苦地」應為「苦諦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3721",
+      "before": "就是說你看我們講苦地的時候",
+      "after": "就是說你看我們講苦諦的時候",
+      "changeClass": "term",
+      "reason": "佛學名相修正。前文已修正「苦地」為「苦諦」，此處應一致。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3724",
+      "before": "就是苦地已經是生出來",
+      "after": "就是苦諦已經是生出來",
+      "changeClass": "term",
+      "reason": "佛學名相修正。前文已修正「苦地」為「苦諦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3770",
+      "before": "那後面提到總社的時候",
+      "after": "那後面提到總集的時候",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學名相「總集」指集諦，「社」應為「集」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3783",
+      "before": "他是在聚集眾多姻緣之後",
+      "after": "他是在聚集眾多因緣之後",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。佛學語境「因緣」，「姻」應為「因」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3800",
+      "before": "這兩者是什麼關系",
+      "after": "這兩者是什麼關係",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。「關系」應為「關係」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3924",
+      "before": "油液產生後有的那個階段",
+      "after": "業產生後有的那個階段",
+      "changeClass": "term",
+      "reason": "ASR 訛字。同上，應為「業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3932",
+      "before": "他已經先清楚說明苦地的內涵",
+      "after": "他已經先清楚說明苦諦的內涵",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學名相「苦諦」，「地」為同音誤植。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3933",
+      "before": "那苦是有違法",
+      "after": "那苦是有為法",
+      "changeClass": "term",
+      "reason": "ASR 訛字。佛學名相「有為法」，「違」為同音誤植。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3964",
+      "before": "那有肉的業跟貪愛",
+      "after": "那有漏的業跟貪愛",
+      "changeClass": "orthography",
+      "reason": "同音訛字。前文 seg-3951 已提及「有漏」，此處語意應為「有漏的業」，非「有肉的業」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3969",
+      "before": "所以有貪式為因",
+      "after": "所以有貪愛為因",
+      "changeClass": "orthography",
+      "reason": "同音訛字。佛法名相應為「有貪愛」，指對三界的貪愛，非「有貪式」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-3983",
+      "before": "此善迴向書眾生",
+      "after": "此善迴向諸眾生",
+      "changeClass": "orthography",
+      "reason": "同音訛字。迴向偈標準文本為「此善迴向諸眾生」，非「書眾生」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.99,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "cfca5f72-1891-47af-9cae-723e2f91517f"
+}

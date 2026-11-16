@@ -15,6 +15,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { auditOralFillerResidue } from '../../scripts/lib/fluentPolishAudit.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.join(__dirname, '../..');
@@ -77,6 +78,15 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
         schemaErrors.push(`${file}: 'paragraphs' must be an array`);
         return;
       }
+      if (data.transcriptStatus === 'not-transcribed') {
+        if (data.paragraphs.length !== 0) {
+          schemaErrors.push(`${file}: not-transcribed sessions must not contain transcript paragraphs`);
+        }
+        if (!data.audioUrl && !data.youtubeVideoId) {
+          schemaErrors.push(`${file}: not-transcribed sessions must retain a verified media source`);
+        }
+        return;
+      }
       if (data.paragraphs.length === 0) {
         schemaErrors.push(`${file}: 'paragraphs' must not be empty`);
         return;
@@ -114,7 +124,7 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
 
     sessions.forEach(({ file, fullPath }) => {
       const data = JSON.parse(readFileSync(fullPath, 'utf8'));
-      const isConverted = data._meta && data._meta.engine === 'whisper-large-v3-turbo';
+      const isConverted = data._meta && ['whisper-large-v3-turbo', 'mlx-whisper-large-v3'].includes(data._meta.engine);
       if (!isConverted) return;
 
       convertedCount++;
@@ -216,7 +226,7 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
     sessions.forEach(({ file, fullPath }) => {
       // Exclude legacy ungrounded drafts until converted & cleaned
       const data = JSON.parse(readFileSync(fullPath, 'utf8'));
-      const isConverted = data._meta && data._meta.engine === 'whisper-large-v3-turbo';
+      const isConverted = data._meta && ['whisper-large-v3-turbo', 'mlx-whisper-large-v3'].includes(data._meta.engine);
       if (!isConverted) return;
 
       (data.paragraphs || []).forEach((p, pIdx) => {
@@ -279,5 +289,125 @@ test('🛡️ ASR-M2: Automated Quality Gate & Contract Validation Test Suite', 
     // Check session_99B.json content
     const sessionData = JSON.parse(readFileSync(session99BPath, 'utf8'));
     assert.ok(sessionData.paragraphs && sessionData.paragraphs.length > 50, 'session_99B.json must contain valid paragraphs');
+  });
+
+  await t.test('7. Stage 5 Completed Course Gate: Sentence ID Uniqueness, Zero Punctuation-Only Sentences, Zero Hallucination Loops, and Dharma Terminology Non-Regression', () => {
+    const STAGE5_COURSES = new Set(['菩薩就是這樣成佛', '釋量論第二品']);
+    const PUNCT_ONLY_RE = /^[\s，。！？、；：「」『』（）—…\-]+$/;
+    const STAGE5_FORBIDDEN_TERMS = [
+      { pattern: /\uFFFD/, suggestion: '不得含有 Unicode 替換字元 (U+FFFD)' },
+      { pattern: /【⚠️|無法辨識原意|待確認/, suggestion: '已完修課程不得殘留待審核佔位符' },
+      { pattern: /佈施/, suggestion: '布施' },
+      { pattern: /嗔/, suggestion: '瞋' },
+      { pattern: /禪提/, suggestion: '羼提' },
+      { pattern: /聖意抉擇/, suggestion: '勝義抉擇' },
+      { pattern: /與其事理論|語學士定論|語邪實地論/, suggestion: '《瑜伽師地論》' },
+      { pattern: /調舉/, suggestion: '掉舉' },
+      { pattern: /預界定/, suggestion: '欲界定' },
+      { pattern: /文所成慧/, suggestion: '聞所成慧' },
+      { pattern: /思索成慧/, suggestion: '思所成慧' },
+      { pattern: /無惡根本定|無惡的根本定/, suggestion: '無二根本定' },
+      { pattern: /無分別制/, suggestion: '無分別智' },
+      { pattern: /圓空性/, suggestion: '緣空性' },
+    ];
+
+    const stage5Errors = [];
+    const targetSessions = sessions.filter(s => STAGE5_COURSES.has(s.course));
+    assert.ok(targetSessions.length >= 58, `Expected at least 58 Stage 5 sessions, got ${targetSessions.length}`);
+
+    targetSessions.forEach(({ course, file, fullPath }) => {
+      const data = JSON.parse(readFileSync(fullPath, 'utf8'));
+      const seenIds = new Set();
+      const flatTexts = [];
+
+      (data.paragraphs || []).forEach((p, pIdx) => {
+        if (p.heading) {
+          for (const { pattern, suggestion } of STAGE5_FORBIDDEN_TERMS) {
+            if (pattern.test(p.heading)) {
+              stage5Errors.push(`${course}/${file} [p_${pIdx} heading]: Forbidden term "${p.heading.match(pattern)[0]}" (Expected: "${suggestion}")`);
+            }
+          }
+        }
+        (p.sentences || []).forEach((s) => {
+          if (!s.id || typeof s.id !== 'string') {
+            stage5Errors.push(`${course}/${file} [p_${pIdx}]: Missing sentence id`);
+          } else if (seenIds.has(s.id)) {
+            stage5Errors.push(`${course}/${file} [${s.id}]: Duplicate sentence id`);
+          } else {
+            seenIds.add(s.id);
+          }
+
+          if (PUNCT_ONLY_RE.test(s.text)) {
+            stage5Errors.push(`${course}/${file} [${s.id}]: Punctuation-only sentence "${s.text}"`);
+          }
+
+          for (const { pattern, suggestion } of STAGE5_FORBIDDEN_TERMS) {
+            if (pattern.test(s.text)) {
+              stage5Errors.push(`${course}/${file} [${s.id}]: Forbidden term "${s.text.match(pattern)[0]}" (Expected: "${suggestion}") in "${s.text}"`);
+            }
+          }
+          flatTexts.push({ id: s.id, text: s.text });
+        });
+      });
+
+      for (let i = 2; i < flatTexts.length; i++) {
+        const cur = flatTexts[i].text;
+        if (cur.length >= 6 && cur === flatTexts[i - 1].text && cur === flatTexts[i - 2].text) {
+          stage5Errors.push(`${course}/${file} [${flatTexts[i].id}]: 3+ consecutive identical sentence hallucination loop "${cur}"`);
+        }
+      }
+
+      // 對已完成 Stage 3A 冗詞清除與碎句合併的講次，強制攔截殘留發語詞（呃、嗯、啊、好，那）與 1 字碎句
+      if (typeof data._meta?.removedFillerCount === 'number') {
+        for (const issue of auditOralFillerResidue(data)) {
+          stage5Errors.push(`${course}/${file} [${issue.sentenceId}]: Residual oral filler / fragment (${issue.type}): "${issue.text}"`);
+        }
+      }
+    });
+
+    assert.equal(stage5Errors.length, 0, `Found ${stage5Errors.length} Stage 5 quality gate violations:\n${stage5Errors.slice(0, 10).join('\n')}`);
+  });
+
+  await t.test('8. Proofread Study-Group Pilot (2025釋量論第二品大組共學/session_46.json) Non-Regression Gate', () => {
+    const s46Path = path.join(COURSES_ROOT, '2025釋量論第二品大組共學/sessions/session_46.json');
+    const data = JSON.parse(readFileSync(s46Path, 'utf8'));
+    const headings = (data.paragraphs || []).filter(p => p.heading && p.heading.trim().length > 0);
+    assert.ok(headings.length >= 25, `Expected >= 25 thematic headings in session_46.json, got ${headings.length}`);
+
+    const FORBIDDEN_SG2025_TERMS = [
+      { pattern: /無我會/, suggestion: '無我慧' },
+      { pattern: /寄託之道|寫託|洩脫/, suggestion: '解脫之道 / 解脫' },
+      { pattern: /他中提出/, suggestion: '他宗提出' },
+      { pattern: /至終/, suggestion: '自宗' },
+      { pattern: /題杆/, suggestion: '提綱' },
+      { pattern: /心與靜|直取靜/, suggestion: '心與境 / 執取境' },
+      { pattern: /心事的男生/, suggestion: '心識之能生' },
+      { pattern: /眼根之|耳根之/, suggestion: '眼根知 / 耳根知' },
+      { pattern: /有預知/, suggestion: '猶豫知' },
+      { pattern: /四億支/, suggestion: '伺意知' },
+      { pattern: /執識為神/, suggestion: '執繩為蛇' },
+      { pattern: /南謀/, suggestion: '南無' },
+      { pattern: /大眾請合唱|大家請放上/, suggestion: '大眾請合掌 / 大家請放掌' },
+      { pattern: /適量論/, suggestion: '《釋量論》' },
+      { pattern: /課主傑/, suggestion: '克主傑' },
+      { pattern: /對質/, suggestion: '對治' },
+      { pattern: /吾我會|劇足/, suggestion: '無我慧 / 具足' },
+    ];
+
+    const errs = [];
+    for (const p of data.paragraphs || []) {
+      for (const s of p.sentences || []) {
+        if (!s.text || s.text.trim() === '') {
+          errs.push(`Empty sentence text in ${s.id}`);
+          continue;
+        }
+        for (const { pattern, suggestion } of FORBIDDEN_SG2025_TERMS) {
+          if (pattern.test(s.text)) {
+            errs.push(`[${s.id}]: Forbidden term "${s.text.match(pattern)[0]}" (Expected: "${suggestion}") in "${s.text}"`);
+          }
+        }
+      }
+    }
+    assert.equal(errs.length, 0, `Found ${errs.length} session_46.json corruption violations:\n${errs.slice(0, 10).join('\n')}`);
   });
 });

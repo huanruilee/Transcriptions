@@ -52,6 +52,64 @@ describe('KeyboardShortcuts Test Pattern (TDD)', () => {
     expect(onCloseModal).toHaveBeenCalledTimes(1);
   });
 
+  it('按 L 鍵應觸發快進 10 秒；Shift+L 應觸發單句循環播放', () => {
+    const onSeekForward = vi.fn();
+    const onLoopCurrentSentence = vi.fn();
+
+    const forwardEvent = {
+      key: 'l',
+      shiftKey: false,
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+    handleGlobalKeyDown(forwardEvent, { onSeekForward, onLoopCurrentSentence });
+    expect(onSeekForward).toHaveBeenCalledWith(10);
+    expect(onLoopCurrentSentence).not.toHaveBeenCalled();
+
+    const loopEvent = {
+      key: 'l',
+      shiftKey: true,
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+    handleGlobalKeyDown(loopEvent, { onSeekForward, onLoopCurrentSentence });
+    expect(onLoopCurrentSentence).toHaveBeenCalledTimes(1);
+  });
+
+  it('按 J 鍵應觸發快退 10 秒；按 K 鍵應觸發播放/暫停', () => {
+    const onSeekBackward = vi.fn();
+    const onTogglePlay = vi.fn();
+
+    const rewindEvent = {
+      key: 'j',
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+    handleGlobalKeyDown(rewindEvent, { onSeekBackward });
+    expect(onSeekBackward).toHaveBeenCalledWith(10);
+
+    const playPauseEvent = {
+      key: 'k',
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+    handleGlobalKeyDown(playPauseEvent, { onTogglePlay });
+    expect(onTogglePlay).toHaveBeenCalledTimes(1);
+  });
+
+  it('按 G 鍵應觸發研讀指南/講記切換 (Guide)', () => {
+    const onToggleStudyGuide = vi.fn();
+    const event = {
+      key: 'g',
+      target: document.createElement('body'),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent;
+
+    handleGlobalKeyDown(event, { onToggleStudyGuide });
+    expect(onToggleStudyGuide).toHaveBeenCalledTimes(1);
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
+
   it('按 ⌘K 或 Ctrl+K 應觸發聚焦搜尋框', () => {
     const onFocusSearch = vi.fn();
     const event = {

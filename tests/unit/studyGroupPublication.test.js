@@ -16,13 +16,13 @@ test('study-group publication exposes every processed playlist entry', () => {
   const entry = catalog.courses.find((course) => course.id === 'shi-liang-lun-study-group-2025');
   assert.ok(entry, 'study-group course must be registered in the catalog');
   assert.equal(entry.path, 'courses/2025釋量論第二品大組共學');
-  assert.equal(entry.totalSessions, 43);
+  assert.equal(entry.totalSessions, 47);
 
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.equal(course.sessions.length, 43);
+  assert.equal(course.sessions.length, 47);
   assert.deepEqual(
     course.sessions.map((session) => session.sessionId),
-    [...Array.from({ length: 41 }, (_, index) => String(index + 1).padStart(2, '0')), '44', '27B'],
+    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B', '43', '44', '45', '46'],
   );
 
   for (const session of course.sessions) {
@@ -30,9 +30,9 @@ test('study-group publication exposes every processed playlist entry', () => {
     assert.equal(fs.existsSync(sessionPath), true, `missing published session ${session.sessionId}`);
     const payload = JSON.parse(fs.readFileSync(sessionPath, 'utf8'));
     assert.equal(payload.sessionId, session.sessionId);
+    assert.ok(payload.audioUrl || payload.youtubeVideoId, `missing media source ${session.sessionId}`);
     assert.ok(['candidate', 'review-ready'].includes(payload.transcriptStatus));
     assert.ok(payload.paragraphs.length > 0, `empty transcript ${session.sessionId}`);
-    assert.ok(payload.audioUrl || payload.youtubeVideoId, `missing media source ${session.sessionId}`);
     if (session.sessionId !== '27B') {
       const sentences = payload.paragraphs.flatMap((paragraph) => paragraph.sentences);
       assert.ok(sentences.some((sentence) => sentence.reviewNeeded === false), `all sentences incorrectly flagged ${session.sessionId}`);
@@ -41,15 +41,18 @@ test('study-group publication exposes every processed playlist entry', () => {
 
   assert.equal(course.sessions.find((session) => session.sessionId === '14').displaySessionId, '8上');
   assert.equal(course.sessions.find((session) => session.sessionId === '27').displaySessionId, '14下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '42').displaySessionId, '26下');
   assert.equal(course.sessions.find((session) => session.sessionId === '27B').displaySessionId, '27下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '43').displaySessionId, '27上');
+  assert.equal(course.sessions.find((session) => session.sessionId === '44').displaySessionId, '28上');
+  assert.equal(course.sessions.find((session) => session.sessionId === '45').displaySessionId, '28下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '46').displaySessionId, '29上');
+  assert.deepEqual(course.pendingSessions, []);
 });
 
 test('study-group publication records unavailable playlist entries instead of hiding them', () => {
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.deepEqual(course.unavailableSessions, [
-    { playlistIndex: 42, reason: 'youtube_unavailable' },
-    { playlistIndex: 43, reason: 'youtube_private' },
-  ]);
+  assert.deepEqual(course.unavailableSessions, []);
 });
 
 test('Vue course selector knows the published study-group course', () => {
@@ -130,12 +133,21 @@ test('session 20 and 21 share the 32-11 source outline index', () => {
   }
 });
 
-test('session 22 and 23 share the 32-28 source outline index', () => {
-  const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-28.json'), 'utf8'));
-  assert.equal(outline.sourceId, '32-28');
-  assert.deepEqual(outline.sessionIds, ['22', '23']);
-  assert.equal(outline.discussionOutline.length, 9);
+test('session 22 and 23 share the 32-12 source outline index (and 44/45 share 32-28)', () => {
+  const outline12 = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-12.json'), 'utf8'));
+  assert.equal(outline12.sourceId, '32-12');
+  assert.deepEqual(outline12.sessionIds, ['22', '23']);
+  assert.equal(outline12.courseOutline.length, 7);
+  assert.equal(outline12.discussionOutline.length, 6);
   for (const sessionId of ['22', '23']) {
+    const session = JSON.parse(fs.readFileSync(COURSE_DIR + `/sessions/session_${sessionId}.json`, 'utf8'));
+    assert.equal(session.sourceOutlineId, '32-12');
+  }
+  const outline28 = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-28.json'), 'utf8'));
+  assert.equal(outline28.sourceId, '32-28');
+  assert.deepEqual(outline28.sessionIds, ['44', '45']);
+  assert.equal(outline28.discussionOutline.length, 9);
+  for (const sessionId of ['44', '45']) {
     const session = JSON.parse(fs.readFileSync(COURSE_DIR + `/sessions/session_${sessionId}.json`, 'utf8'));
     assert.equal(session.sourceOutlineId, '32-28');
   }
@@ -201,15 +213,15 @@ test('session 32 and 33 share the 32-17 source outline index', () => {
   }
 });
 
-test('session 35 and 36 share the 32-20 source outline index', () => {
-  const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-20.json'), 'utf8'));
-  assert.equal(outline.sourceId, '32-20');
+test('session 35 and 36 share the 32-23 source outline index', () => {
+  const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-23.json'), 'utf8'));
+  assert.equal(outline.sourceId, '32-23');
   assert.deepEqual(outline.sessionIds, ['35', '36']);
-  assert.equal(outline.courseOutline.length, 8);
-  assert.equal(outline.discussionOutline.length, 8);
+  assert.equal(outline.courseOutline.length, 13);
+  assert.equal(outline.discussionOutline.length, 7);
   for (const sessionId of ['35', '36']) {
     const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, `sessions/session_${sessionId}.json`), 'utf8'));
-    assert.equal(session.sourceOutlineId, '32-20');
+    assert.equal(session.sourceOutlineId, '32-23');
   }
 });
 
@@ -237,14 +249,16 @@ test('session 37 and 38 share the 32-24 source outline index', () => {
   }
 });
 
-test('session 41 uses the 32-26 source outline index', () => {
+test('session 41 and 42 share the 32-26 source outline index', () => {
   const outline = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'source_outlines/32-26.json'), 'utf8'));
   assert.equal(outline.sourceId, '32-26');
-  assert.deepEqual(outline.sessionIds, ['41']);
+  assert.deepEqual(outline.sessionIds, ['41', '42']);
   assert.equal(outline.courseOutline.length, 8);
   assert.equal(outline.discussionOutline.length, 8);
-  const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_41.json'), 'utf8'));
-  assert.equal(session.sourceOutlineId, '32-26');
+  for (const sessionId of ['41', '42']) {
+    const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, `sessions/session_${sessionId}.json`), 'utf8'));
+    assert.equal(session.sourceOutlineId, '32-26');
+  }
 });
 
 test('session 03 and 04 share the 32-02 source outline index', () => {

@@ -2,12 +2,24 @@ import { defineStore } from 'pinia';
 
 export interface SessionMeta {
   id: string;
+  displaySessionId?: string;
   title: string;
   page?: string;
   summary?: string;
   date?: string;
   lastUpdated?: string;
   transcriptStatus?: string;
+  mediaType?: string;
+  audioUrl?: string;
+  youtubeVideoId?: string;
+  youtubeUrl?: string;
+  pendingTranscript?: boolean;
+  sourceRebuildPage?: string;
+  sourceRebuildStatus?: string;
+  sourceRebuildInReader?: boolean;
+  audioCalibrationOverlay?: string;
+  audioCalibrationOverlayDigest?: string;
+  studyGuidePage?: string;
 }
 
 export interface TOCNode {
@@ -49,6 +61,20 @@ export const useCourseStore = defineStore('course', {
         master: '待審校',
         path: 'courses/四念住',
         mediaType: 'audio/mp3',
+      },
+      {
+        id: 'san-zhu-yao-dao',
+        title: '三主要道',
+        master: '如性法師',
+        path: 'courses/三主要道',
+        mediaType: 'video/youtube',
+      },
+      {
+        id: 'pusa-jiu-shi-zhe-yang-cheng-fo',
+        title: '菩薩就是這樣成佛',
+        master: '智善法師',
+        path: 'courses/菩薩就是這樣成佛',
+        mediaType: 'video/youtube',
       },
     ],
     sessions: [] as SessionMeta[],
@@ -127,6 +153,8 @@ export const useCourseStore = defineStore('course', {
 
       let bestChain: TOCNode[] = [];
       let bestTimestamp = -1;
+      let fallbackChain: TOCNode[] = [];
+      let fallbackTimestamp = Infinity;
 
       function walk(nodes: TOCNode[], chain: TOCNode[]) {
         if (!Array.isArray(nodes)) return;
@@ -135,20 +163,23 @@ export const useCourseStore = defineStore('course', {
             ? node.sessionIds
             : (node.sessionId ? [node.sessionId] : []);
 
-          if (sessionId && nodeSessions.length > 0 && !nodeSessions.includes(sessionId)) {
-            if (node.children && node.children.length > 0) {
-              walk(node.children, chain);
-            }
-            continue;
-          }
-
           const ts = typeof node.timestamp === 'number' ? node.timestamp : (node.start_time ?? 0);
           const currentChain = [...chain, node];
 
-          const isNodeAnchor = !sessionId || node.sessionId === sessionId || nodeSessions.includes(sessionId);
-          if (isNodeAnchor && ts <= time && ts > bestTimestamp) {
+          const isPrimaryAnchor = !sessionId || node.sessionId === sessionId;
+          const isSecondaryMatch = Boolean(sessionId && nodeSessions.includes(sessionId));
+
+          if (isPrimaryAnchor && ts <= time && ts >= bestTimestamp) {
             bestTimestamp = ts;
             bestChain = [...currentChain];
+          }
+
+          if ((isPrimaryAnchor || isSecondaryMatch) && fallbackChain.length === 0) {
+            fallbackChain = [...currentChain];
+            fallbackTimestamp = ts;
+          } else if (isPrimaryAnchor && ts < fallbackTimestamp) {
+            fallbackChain = [...currentChain];
+            fallbackTimestamp = ts;
           }
 
           if (node.children && node.children.length > 0) {
@@ -158,7 +189,7 @@ export const useCourseStore = defineStore('course', {
       }
 
       walk(this.tocTree, []);
-      return bestChain;
+      return bestChain.length > 0 ? bestChain : fallbackChain;
     },
   },
 });

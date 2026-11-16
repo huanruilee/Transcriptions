@@ -1,0 +1,197 @@
+test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) ...
+  test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='願成善師赦受命') ... FAIL
+  test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='願成善事設受醫') ... FAIL
+  test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='愿成善事设受医') ... FAIL
+  test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='愿成善事设寿因') ... FAIL
+test_help_and_invalid_arguments_never_enter_mutating_main (__main__.PublicationBuilderContracts.test_help_and_invalid_arguments_never_enter_mutating_main) ... FAIL
+test_last_complete_dedication_wins (__main__.PublicationBuilderContracts.test_last_complete_dedication_wins) ... FAIL
+test_no_marker_and_incomplete_marker_are_unchanged (__main__.PublicationBuilderContracts.test_no_marker_and_incomplete_marker_are_unchanged) ... FAIL
+test_playlist_11_original_simplified_asr_excludes_repeated_tail (__main__.PublicationBuilderContracts.test_playlist_11_original_simplified_asr_excludes_repeated_tail) ... FAIL
+test_raw_text_is_not_sliced_using_corrected_text_offsets (__main__.PublicationBuilderContracts.test_raw_text_is_not_sliced_using_corrected_text_offsets) ... FAIL
+test_split_dedication_preserves_sentence_ids_and_timestamps (__main__.PublicationBuilderContracts.test_split_dedication_preserves_sentence_ids_and_timestamps) ... FAIL
+
+======================================================================
+FAIL: test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='願成善師赦受命')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 30, in test_complete_traditional_and_simplified_endings
+    self.assertEqual([s['text'] for s in result], ['正文', closing + '。'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['正文', '願成善師赦受'] != ['正文', '願成善師赦受命。']
+
+First differing element 1:
+'願成善師赦受'
+'願成善師赦受命。'
+
+- ['正文', '願成善師赦受']
++ ['正文', '願成善師赦受命。']
+?               ++
+
+
+======================================================================
+FAIL: test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='願成善事設受醫')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 30, in test_complete_traditional_and_simplified_endings
+    self.assertEqual([s['text'] for s in result], ['正文', closing + '。'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['正文', '願成善事設受'] != ['正文', '願成善事設受醫。']
+
+First differing element 1:
+'願成善事設受'
+'願成善事設受醫。'
+
+- ['正文', '願成善事設受']
++ ['正文', '願成善事設受醫。']
+?               ++
+
+
+======================================================================
+FAIL: test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='愿成善事设受医')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 30, in test_complete_traditional_and_simplified_endings
+    self.assertEqual([s['text'] for s in result], ['正文', closing + '。'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['正文', '愿成善事设受医。謝謝大家', '尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環'] != ['正文', '愿成善事设受医。']
+
+First differing element 1:
+'愿成善事设受医。謝謝大家'
+'愿成善事设受医。'
+
+First list contains 1 additional elements.
+First extra element 2:
+'尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環'
+
+- ['正文', '愿成善事设受医。謝謝大家', '尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環']
++ ['正文', '愿成善事设受医。']
+
+======================================================================
+FAIL: test_complete_traditional_and_simplified_endings (__main__.PublicationBuilderContracts.test_complete_traditional_and_simplified_endings) (closing='愿成善事设寿因')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 30, in test_complete_traditional_and_simplified_endings
+    self.assertEqual([s['text'] for s in result], ['正文', closing + '。'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['正文', '愿成善事设寿因。謝謝大家', '尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環'] != ['正文', '愿成善事设寿因。']
+
+First differing element 1:
+'愿成善事设寿因。謝謝大家'
+'愿成善事设寿因。'
+
+First list contains 1 additional elements.
+First extra element 2:
+'尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環'
+
+- ['正文', '愿成善事设寿因。謝謝大家', '尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環尾端循環']
++ ['正文', '愿成善事设寿因。']
+
+======================================================================
+FAIL: test_help_and_invalid_arguments_never_enter_mutating_main (__main__.PublicationBuilderContracts.test_help_and_invalid_arguments_never_enter_mutating_main)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 89, in test_help_and_invalid_arguments_never_enter_mutating_main
+    self.assertEqual(snapshot(), before, run.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'cou[208 chars]1388), 'scripts/build-entered': ('7e030e2d23c5[71 chars]626)} != {'cou[208 chars]1388)}
+  {'course.json': ('4628d083803b269bfcbb0f1aadb2b9693d4b9db853dbf71a83a3092c04d29efc',
+                   1789474019156007305),
+-  'scripts/build-entered': ('7e030e2d23c5e83ffb8c73d440e409f65857c79a69c1a1de3433b0aaf10999b6',
+-                            1789474019179164626),
+   'scripts/builder.py': ('cadc3d029a1fbe165f7a9baac68693764295788126e2bdf178d81e37af9a68aa',
+                          1789474019155891388)} :
+
+======================================================================
+FAIL: test_last_complete_dedication_wins (__main__.PublicationBuilderContracts.test_last_complete_dedication_wins)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 67, in test_last_complete_dedication_wins
+    self.assertEqual([s['id'] for s in result], ['s0', 's1', 's2'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['s1'] != ['s0', 's1', 's2']
+
+First differing element 0:
+'s1'
+'s0'
+
+Second list contains 2 additional elements.
+First extra element 1:
+'s1'
+
+- ['s1']
++ ['s0', 's1', 's2']
+
+======================================================================
+FAIL: test_no_marker_and_incomplete_marker_are_unchanged (__main__.PublicationBuilderContracts.test_no_marker_and_incomplete_marker_are_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 62, in test_no_marker_and_incomplete_marker_are_unchanged
+    self.assertEqual(builder.trim_after_dedication(original), original)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'id[58 chars]願成善'}] != [{'id[58 chars]願成善'}, {'id': 's1', 'start': 1, 'end': 2, 'tex[34 chars]標記'}]
+
+Second list contains 1 additional elements.
+First extra element 1:
+{'id': 's1', 'start': 1, 'end': 2, 'text': '正文沒有結尾標記', 'rawText': '正文沒有結尾標記'}
+
+- [{'end': 1, 'id': 's0', 'rawText': '願成善', 'start': 0, 'text': '願成善'}]
+?                                                                     ^
+
++ [{'end': 1, 'id': 's0', 'rawText': '願成善', 'start': 0, 'text': '願成善'},
+?                                                                     ^
+
++  {'end': 2, 'id': 's1', 'rawText': '正文沒有結尾標記', 'start': 1, 'text': '正文沒有結尾標記'}]
+
+======================================================================
+FAIL: test_playlist_11_original_simplified_asr_excludes_repeated_tail (__main__.PublicationBuilderContracts.test_playlist_11_original_simplified_asr_excludes_repeated_tail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 37, in test_playlist_11_original_simplified_asr_excludes_repeated_tail
+    self.assertEqual(result[-1]["id"], 'seg-4632')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'seg-4633' != 'seg-4632'
+- seg-4633
+?        ^
++ seg-4632
+?        ^
+
+
+======================================================================
+FAIL: test_raw_text_is_not_sliced_using_corrected_text_offsets (__main__.PublicationBuilderContracts.test_raw_text_is_not_sliced_using_corrected_text_offsets)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 57, in test_raw_text_is_not_sliced_using_corrected_text_offsets
+    self.assertEqual(result[0]['rawText'], original[0]['rawText'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '原始辨識有比' != '原始辨識有比較長的前綴 愿成善事设受医 谢谢'
+- 原始辨識有比
++ 原始辨識有比較長的前綴 愿成善事设受医 谢谢
+
+
+======================================================================
+FAIL: test_split_dedication_preserves_sentence_ids_and_timestamps (__main__.PublicationBuilderContracts.test_split_dedication_preserves_sentence_ids_and_timestamps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/henry/.codex/worktrees/f677/Transcriptions/tests/unit/publication_builder_regression.py", line 45, in test_split_dedication_preserves_sentence_ids_and_timestamps
+    self.assertEqual([s['text'] for s in result], ['正文', '愿成善事设', '受应。'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['正文', '愿成善事设', '受应。尾端闲聊', '重複重複重複重複重複重複重複重複重複重複'] != ['正文', '愿成善事设', '受应。']
+
+First differing element 2:
+'受应。尾端闲聊'
+'受应。'
+
+First list contains 1 additional elements.
+First extra element 3:
+'重複重複重複重複重複重複重複重複重複重複'
+
+- ['正文', '愿成善事设', '受应。尾端闲聊', '重複重複重複重複重複重複重複重複重複重複']
++ ['正文', '愿成善事设', '受应。']
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.042s
+
+FAILED (failures=10)
+
+EXIT_CODE=1
+BASELINE=8b33793

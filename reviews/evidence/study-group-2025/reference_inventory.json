@@ -1,0 +1,54 @@
+{
+  "taskId": "SHILIANG-SG2025-PHASE1",
+  "courseId": "shi-liang-lun-study-group-2025",
+  "courseTitle": "2025《釋量論・第二品》大組共學",
+  "sourceCommit": "82fc409",
+  "checkedAt": "2026-11-13",
+  "references": [
+    {
+      "referenceId": "yt-playlist-PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+      "type": "youtube-playlist",
+      "title": "2025《釋量論・第二品》大組共學（如來法性影音頻道）",
+      "url": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
+      "localCachePath": "courses/study-groups/釋量論第二品-2025/playlist-snapshot.jsonl",
+      "descriptionCachePath": "courses/study-groups/釋量論第二品-2025/desc_cache.json",
+      "status": "verified",
+      "role": ["asr-cross-check", "terminology-reference"],
+      "notes": "51 entries in playlist-snapshot.jsonl: 47 public videos with descriptions in desc_cache.json, 4 private/untitled videos."
+    },
+    {
+      "referenceId": "shiliang-er-source-text",
+      "type": "root-text-and-transcripts",
+      "title": "《釋量論第二品》根本頌與如性法師本論 32 講逐字底本",
+      "localPath": "courses/釋量論第二品/source_text/",
+      "status": "verified",
+      "role": ["terminology-reference"],
+      "notes": "Contains pramana_chapter2_root_verses.txt and session_01..32_official_raw.txt for doctrinal term and root-verse verification."
+    },
+    {
+      "referenceId": "sg2025-grounding",
+      "type": "course-grounding",
+      "title": "2025《釋量論・第二品》大組共學 Step 0 實體與名相知識包",
+      "localPath": "courses/2025釋量論第二品大組共學/grounding.json",
+      "status": "verified",
+      "role": ["terminology-reference"]
+    }
+  ],
+  "coverageGapsIdentified": {
+    "courseJsonMissingVideoId": [
+      {
+        "sessionId": "27B",
+        "displaySessionId": "27下",
+        "youtubeVideoIdInSession": "C0yhUazs0CU",
+        "issue": "course.json had youtubeVideoId=null while session_27B.json already had C0yhUazs0CU"
+      }
+    ],
+    "missingPublicVideos": [
+      {"sessionId": "43", "displaySessionId": "27上", "youtubeVideoId": "8sDCFUj5E_c", "title": "第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學"},
+      {"sessionId": "44", "displaySessionId": "28上", "youtubeVideoId": "NvsCBFbyRO0", "title": "第28講 滅諦的後三種行相（上）｜2025《釋量論・第二品》大組共學"},
+      {"sessionId": "45", "displaySessionId": "28下", "youtubeVideoId": "PYIbCsZmPHg", "title": "第28講 滅諦的後三種行相（下）｜2025《釋量論・第二品》大組共學"},
+      {"sessionId": "46", "displaySessionId": "29上", "youtubeVideoId": "wJn8cpcsYBQ", "title": "第29講 無我慧才是解脫道（上）｜2025《釋量論・第二品》大組共學"}
+    ],
+    "privateOrUnavailableInPlaylist": ["IQxfpRRoDNE", "a_d4qmx4YUg", "ZidYex1fsR4", "cE_jylkWGs4"]
+  }
+}

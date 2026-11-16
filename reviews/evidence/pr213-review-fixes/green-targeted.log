@@ -1,0 +1,234 @@
+TAP version 13
+# Subtest: publication builder boundary and CLI runtime contracts
+ok 1 - publication builder boundary and CLI runtime contracts
+  ---
+  duration_ms: 188.071792
+  type: 'test'
+  ...
+# Subtest: chunk assembler clips overlap padding and source-duration overflow
+ok 2 - chunk assembler clips overlap padding and source-duration overflow
+  ---
+  duration_ms: 61.842292
+  type: 'test'
+  ...
+# Subtest: 27下 remains addressable inside the published study-group course
+ok 3 - 27下 remains addressable inside the published study-group course
+  ---
+  duration_ms: 0.394416
+  type: 'test'
+  ...
+# Subtest: 27下 study-group course uses question TOC and preserves 27B provenance
+ok 4 - 27下 study-group course uses question TOC and preserves 27B provenance
+  ---
+  duration_ms: 3.665334
+  type: 'test'
+  ...
+# Subtest: 27下 transcript is timestamped and every question has an unlinked teacher summary
+ok 5 - 27下 transcript is timestamped and every question has an unlinked teacher summary
+  ---
+  duration_ms: 2.738791
+  type: 'test'
+  ...
+# Subtest: web reader renders question headings, summary provenance, and route components
+ok 6 - web reader renders question headings, summary provenance, and route components
+  ---
+  duration_ms: 0.341625
+  type: 'test'
+  ...
+# Subtest: audio click exposes a polite loading indicator until playback starts
+ok 7 - audio click exposes a polite loading indicator until playback starts
+  ---
+  duration_ms: 0.21975
+  type: 'test'
+  ...
+# Subtest: publication builder does not attach a wrong source outline to lecture 12
+ok 8 - publication builder does not attach a wrong source outline to lecture 12
+  ---
+  duration_ms: 0.145375
+  type: 'test'
+  ...
+# Subtest: publication builder retains a dedication split across adjacent segments
+ok 9 - publication builder retains a dedication split across adjacent segments
+  ---
+  duration_ms: 27.760375
+  type: 'test'
+  ...
+# Subtest: dedication trimming supports simplified ASR and keeps the complete closing phrase
+ok 10 - dedication trimming supports simplified ASR and keeps the complete closing phrase
+  ---
+  duration_ms: 26.251083
+  type: 'test'
+  ...
+# Subtest: publication builder --help exits without running the mutating build
+ok 11 - publication builder --help exits without running the mutating build
+  ---
+  duration_ms: 191.753083
+  type: 'test'
+  ...
+# Subtest: study-group publication exposes every processed playlist entry
+ok 12 - study-group publication exposes every processed playlist entry
+  ---
+  duration_ms: 196.876708
+  type: 'test'
+  ...
+# Subtest: study-group publication records unavailable playlist entries instead of hiding them
+ok 13 - study-group publication records unavailable playlist entries instead of hiding them
+  ---
+  duration_ms: 0.20875
+  type: 'test'
+  ...
+# Subtest: Vue course selector knows the published study-group course
+ok 14 - Vue course selector knows the published study-group course
+  ---
+  duration_ms: 0.114583
+  type: 'test'
+  ...
+# Subtest: study-group presentation exposes quote and teacher-summary contracts
+ok 15 - study-group presentation exposes quote and teacher-summary contracts
+  ---
+  duration_ms: 3.087792
+  type: 'test'
+  ...
+# Subtest: session 14 source outline is preserved as a separate, traceable index
+ok 16 - session 14 source outline is preserved as a separate, traceable index
+  ---
+  duration_ms: 0.587083
+  type: 'test'
+  ...
+# Subtest: session 34 remains explicitly unbound after independent source audit
+ok 17 - session 34 remains explicitly unbound after independent source audit
+  ---
+  duration_ms: 2.598875
+  type: 'test'
+  ...
+# Subtest: session 16 and 17 share the next source outline index
+ok 18 - session 16 and 17 share the next source outline index
+  ---
+  duration_ms: 5.809917
+  type: 'test'
+  ...
+# Subtest: session 18 and 19 share the 32-10 source outline index
+ok 19 - session 18 and 19 share the 32-10 source outline index
+  ---
+  duration_ms: 6.624542
+  type: 'test'
+  ...
+# Subtest: session 20 and 21 share the 32-11 source outline index
+ok 20 - session 20 and 21 share the 32-11 source outline index
+  ---
+  duration_ms: 6.829375
+  type: 'test'
+  ...
+# Subtest: session 22 and 23 share the 32-28 source outline index
+ok 21 - session 22 and 23 share the 32-28 source outline index
+  ---
+  duration_ms: 6.366333
+  type: 'test'
+  ...
+# Subtest: session 24 and 25 share the 32-13 source outline index
+ok 22 - session 24 and 25 share the 32-13 source outline index
+  ---
+  duration_ms: 6.882041
+  type: 'test'
+  ...
+# Subtest: session 26 and 27 share the 32-14 source outline index
+ok 23 - session 26 and 27 share the 32-14 source outline index
+  ---
+  duration_ms: 5.530875
+  type: 'test'
+  ...
+# Subtest: session 28 and 29 share the 32-15 source outline index
+ok 24 - session 28 and 29 share the 32-15 source outline index
+  ---
+  duration_ms: 6.334375
+  type: 'test'
+  ...
+# Subtest: session 30 and 31 share the 32-16 source outline index
+ok 25 - session 30 and 31 share the 32-16 source outline index
+  ---
+  duration_ms: 5.736458
+  type: 'test'
+  ...
+# Subtest: session 32 and 33 share the 32-17 source outline index
+ok 26 - session 32 and 33 share the 32-17 source outline index
+  ---
+  duration_ms: 5.534791
+  type: 'test'
+  ...
+# Subtest: session 35 and 36 share the 32-20 source outline index
+ok 27 - session 35 and 36 share the 32-20 source outline index
+  ---
+  duration_ms: 5.925
+  type: 'test'
+  ...
+# Subtest: session 39 and 40 share the 32-25 source outline index
+ok 28 - session 39 and 40 share the 32-25 source outline index
+  ---
+  duration_ms: 6.133709
+  type: 'test'
+  ...
+# Subtest: session 37 and 38 share the 32-24 source outline index
+ok 29 - session 37 and 38 share the 32-24 source outline index
+  ---
+  duration_ms: 5.501917
+  type: 'test'
+  ...
+# Subtest: session 41 uses the 32-26 source outline index
+ok 30 - session 41 uses the 32-26 source outline index
+  ---
+  duration_ms: 2.78925
+  type: 'test'
+  ...
+# Subtest: session 03 and 04 share the 32-02 source outline index
+ok 31 - session 03 and 04 share the 32-02 source outline index
+  ---
+  duration_ms: 5.680167
+  type: 'test'
+  ...
+# Subtest: session 09 and 10 share the 32-05 source outline index
+ok 32 - session 09 and 10 share the 32-05 source outline index
+  ---
+  duration_ms: 5.63825
+  type: 'test'
+  ...
+# Subtest: session 01 and 02 share the 32-01 source outline index
+ok 33 - session 01 and 02 share the 32-01 source outline index
+  ---
+  duration_ms: 5.460833
+  type: 'test'
+  ...
+# Subtest: session 05 and 06 share the 32-03 source outline index
+ok 34 - session 05 and 06 share the 32-03 source outline index
+  ---
+  duration_ms: 5.163084
+  type: 'test'
+  ...
+# Subtest: session 07 and 08 share the 32-04 source outline index
+ok 35 - session 07 and 08 share the 32-04 source outline index
+  ---
+  duration_ms: 5.946042
+  type: 'test'
+  ...
+# Subtest: session 11 and 12 share the 32-06 source outline index
+ok 36 - session 11 and 12 share the 32-06 source outline index
+  ---
+  duration_ms: 5.98775
+  type: 'test'
+  ...
+# Subtest: session 13 uses the 32-07 source outline index
+ok 37 - session 13 uses the 32-07 source outline index
+  ---
+  duration_ms: 3.08675
+  type: 'test'
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 360.756291
+
+EXIT_CODE=0

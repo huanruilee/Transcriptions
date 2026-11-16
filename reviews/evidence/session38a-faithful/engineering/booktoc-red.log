@@ -1,0 +1,35 @@
+npm notice run transcriptions-platform@1.1.0-dev test:v2
+npm notice run vitest run tests/unit_v2/sessionTocProjection.test.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /private/tmp/transcriptions-38a-upgrade
+
+ ❯ tests/unit_v2/sessionTocProjection.test.ts (2 tests | 1 failed) 14ms
+   × keeps the full book available when a lecture uses corrected local anchors 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit_v2/sessionTocProjection.test.ts > keeps the full book available when a lecture uses corrected local anchors
+AssertionError: expected '📑 科判章節目錄 (點擊即刻跳轉播放)  本課科判  全書總科判 當講已…' to contain '全書其他章'
+
+Expected: "全書其他章"
+Received: "📑 科判章節目錄 (點擊即刻跳轉播放)  本課科判  全書總科判 當講已校定位38A0:10"
+
+ ❯ tests/unit_v2/sessionTocProjection.test.ts:9:25
+      7|  expect(wrapper.text()).toContain('當講已校定位');expect(wrapper.text()).not…
+      8|  await wrapper.findAll('button').find(b=>b.text()==='全書總科判')!.trigger(…
+      9|  expect(wrapper.text()).toContain('全書其他章');wrapper.unmount();
+       |                         ^
+     10| });
+     11| it('uses only source-bound session anchors and never leaks them to ano…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  21:21:47
+   Duration  363ms (environment 58%, transform 20%, import 15%, tests 5%, worker 1%)
+

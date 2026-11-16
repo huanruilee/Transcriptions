@@ -1,0 +1,187 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:d62e480cbff88e53083e715fd958fc33d76b1d35206bdd1a1189e6c4699a5876",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_5",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p5-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記將「不常不斷」直接歸因於「諸法無自性」，原話僅說「無自性...遠離常斷」，未建立此因果邏輯鏈。",
+            "evidenceIds": [
+              "p5-v1"
+            ],
+            "suggestion": "改為「無自性則能遠離常斷」，避免過度推論。"
+          },
+          {
+            "sentenceId": "p5-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「昨天的你、今天的你...老了一天」等具體演繹，原話僅提及「苗的第一剎那...延續」，未涉及人類年齡增長細節。",
+            "evidenceIds": [
+              "p5-v2"
+            ],
+            "suggestion": "保留「苗芽延續」之喻，移除人類年齡增長之具體描述。"
+          },
+          {
+            "sentenceId": "p5-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記斷言「可以合理說...」，原話僅說「不可以說...因為自性有的話就隔開了」，側重否定而非肯定推論。",
+            "evidenceIds": [
+              "p5-v3"
+            ],
+            "suggestion": "聚焦於「自性有則無法建立因果相續」之否定論述。"
+          },
+          {
+            "sentenceId": "p5-v1",
+            "kind": "root-quote",
+            "detail": "原話確認無自性可遠離常斷，但語氣猶豫（「大概這樣」），講記轉為肯定陳述。",
+            "evidenceIds": [
+              "p5-v1"
+            ],
+            "suggestion": "保留原話之猶豫語氣或明確標註為推論。"
+          }
+        ]
+      },
+      {
+        "id": "p_6",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p6-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記使用「絕對不可能」之強語氣，原話僅說「不可以有這種狀態」，未達絕對否定程度。",
+            "evidenceIds": [
+              "p6-v7"
+            ],
+            "suggestion": "修飾為「無法安立」或「不能成立」。"
+          },
+          {
+            "sentenceId": "p6-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記將「常邊」定義為「連一絲一毫改變...都不能講」，原話僅說「完全相同...就常了」，未強調「一絲一毫」。",
+            "evidenceIds": [
+              "p6-v1"
+            ],
+            "suggestion": "移除「一絲一毫」等修飾詞，回歸原話之「完全相同」。"
+          },
+          {
+            "sentenceId": "p6-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「昨天的你跟今天的你...毫無關聯」，原話僅說「變成兩碼事」，未具體展開為「毫無關聯」。",
+            "evidenceIds": [
+              "p6-v2"
+            ],
+            "suggestion": "簡化為「變成兩碼事」或「無因果關係」。"
+          },
+          {
+            "sentenceId": "p6-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記總結「只要執著實有，就必定...」，原話僅說「如果實有的話，就會走向常、斷」，未使用「必定」之必然性詞彙。",
+            "evidenceIds": [
+              "p6-v9"
+            ],
+            "suggestion": "改為「若執實有，則易墮入...」。"
+          }
+        ]
+      },
+      {
+        "id": "p_7",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p7-s1",
+            "kind": "root-quote",
+            "detail": "講記引用頌文與底本一致，但講記標題「青牛黃牛」之喻未見於原話，僅見於疏文。",
+            "evidenceIds": [
+              "p7-v1"
+            ],
+            "suggestion": "確認標題是否應為講記自擬，若無原話支持則需標註。"
+          },
+          {
+            "sentenceId": "p7-s2",
+            "kind": "unsupported-addition",
+            "detail": "講記將「種無壞」解釋為「相續並沒有壞滅間斷」，原話僅說「芽的時候種子的相續沒有壞了」，未使用「壞滅間斷」之術語。",
+            "evidenceIds": [
+              "p7-v2"
+            ],
+            "suggestion": "保留「相續沒有壞」之通俗說法，避免過度專業化。"
+          },
+          {
+            "sentenceId": "p7-s3",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「種子本身已經謝滅」，原話僅說「種子不需要存在」，未明確提及「謝滅」。",
+            "evidenceIds": [
+              "p7-v7"
+            ],
+            "suggestion": "改為「種子已不存在」或「種子不須存在」。"
+          },
+          {
+            "sentenceId": "p7-v3",
+            "kind": "uncertain",
+            "detail": "原話提及「昨天你怎樣...相續完全一樣」，講記以此類比芽種，但原話未明確建立此類比之邏輯。",
+            "evidenceIds": [
+              "p7-v3"
+            ],
+            "suggestion": "若無原話明確連結，應視為講記之個人發揮，需標註。"
+          }
+        ]
+      },
+      {
+        "id": "p_8",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p8-s1",
+            "kind": "root-quote",
+            "detail": "講記引用疏文內容，與底本一致，但講記未區分「疏文」與「原話」。",
+            "evidenceIds": [
+              "p8-v1"
+            ],
+            "suggestion": "明確標註此段為疏文解釋，非講者原話。"
+          },
+          {
+            "sentenceId": "p8-s2",
+            "kind": "root-quote",
+            "detail": "講記引用疏文「芽雖現有，種子亦必間斷無疑」，與底本一致。",
+            "evidenceIds": [
+              "p8-v1"
+            ],
+            "suggestion": "確認是否為直接引用疏文。"
+          },
+          {
+            "sentenceId": "p8-s7",
+            "kind": "unsupported-addition",
+            "detail": "講記加入「格西與學員核對法尊法師譯文斷句」之細節，原話僅提及「OK，那解釋的時候就談到...」，無此背景。",
+            "evidenceIds": [
+              "p8-v1"
+            ],
+            "suggestion": "移除關於譯文斷句核對之背景描述。"
+          },
+          {
+            "sentenceId": "p8-v2",
+            "kind": "uncertain",
+            "detail": "原話「亦必間斷無疑」語氣猶豫（「什麼？」），講記轉為肯定陳述，且未保留原話之疑問語氣。",
+            "evidenceIds": [
+              "p8-v2"
+            ],
+            "suggestion": "保留原話之猶豫或修正為「講者認為...」。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 1861,
+    "prompt_tokens": 5934,
+    "total_tokens": 7795,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:05:36.509Z"
+}

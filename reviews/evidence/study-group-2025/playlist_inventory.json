@@ -2,13 +2,13 @@
   "schema": "transcriptions/playlist_inventory/v1",
   "playlistUrl": "https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
   "playlistId": "PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh",
-  "retrievedAt": "2026-09-10T07:30:14Z",
+  "retrievedAt": "2026-09-28T15:25:29Z",
   "playlistTitle": "2025《釋量論．第二品》大組共學",
   "channel": "如理作意",
   "channelId": "UC5KTc52arz3GOeHLPCag-vw",
   "declaredCount": 44,
   "visibleCount": 44,
-  "hiddenOrUnavailableCount": 2,
+  "hiddenOrUnavailableCount": 1,
   "items": [
     {
       "playlistIndex": 1,
@@ -709,40 +709,6 @@
     },
     {
       "playlistIndex": 42,
-      "videoId": "BGruVOFnFhI",
-      "rawTitle": "NA",
-      "duration": "NA",
-      "durationMinutes": null,
-      "lecture": null,
-      "segment": null,
-      "titleCore": null,
-      "normalized": false,
-      "normalizationNote": "raw title is NA",
-      "playable": false,
-      "availabilityStatus": "unavailable",
-      "availabilityDetail": "Video unavailable",
-      "availabilityEvidence": "yt-dlp -F https://www.youtube.com/watch?v=BGruVOFnFhI -> ERROR: [youtube] BGruVOFnFhI: Video unavailable",
-      "watchUrl": "https://www.youtube.com/watch?v=BGruVOFnFhI"
-    },
-    {
-      "playlistIndex": 43,
-      "videoId": "8sDCFUj5E_c",
-      "rawTitle": "NA",
-      "duration": "NA",
-      "durationMinutes": null,
-      "lecture": null,
-      "segment": null,
-      "titleCore": null,
-      "normalized": false,
-      "normalizationNote": "raw title is NA",
-      "playable": false,
-      "availabilityStatus": "unavailable",
-      "availabilityDetail": "Private video",
-      "availabilityEvidence": "yt-dlp -F https://www.youtube.com/watch?v=8sDCFUj5E_c -> ERROR: [youtube] 8sDCFUj5E_c: Private video",
-      "watchUrl": "https://www.youtube.com/watch?v=8sDCFUj5E_c"
-    },
-    {
-      "playlistIndex": 44,
       "videoId": "lBOiFeGQblw",
       "rawTitle": "第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學",
       "duration": "2:50:32",
@@ -757,30 +723,58 @@
       "availabilityDetail": null,
       "availabilityEvidence": null,
       "watchUrl": "https://www.youtube.com/watch?v=lBOiFeGQblw"
+    },
+    {
+      "playlistIndex": 43,
+      "videoId": "8sDCFUj5E_c",
+      "rawTitle": "第27講 空與無我的差異（上）｜2025《釋量論・第二品》大組共學",
+      "duration": "2:46:22",
+      "durationMinutes": 166.37,
+      "lecture": 27,
+      "segment": "上",
+      "titleCore": "空與無我的差異",
+      "normalized": true,
+      "normalizationNote": null,
+      "playable": true,
+      "availabilityStatus": "playable",
+      "availabilityDetail": null,
+      "availabilityEvidence": null,
+      "watchUrl": "https://www.youtube.com/watch?v=8sDCFUj5E_c"
+    },
+    {
+      "playlistIndex": 44,
+      "videoId": "C0yhUazs0CU",
+      "rawTitle": "NA",
+      "duration": "NA",
+      "durationMinutes": null,
+      "lecture": null,
+      "segment": null,
+      "titleCore": null,
+      "normalized": false,
+      "normalizationNote": "raw title is NA",
+      "playable": false,
+      "availabilityStatus": "unavailable",
+      "availabilityDetail": "Private video",
+      "availabilityEvidence": "yt-dlp -F https://www.youtube.com/watch?v=C0yhUazs0CU -> ERROR: [youtube] C0yhUazs0CU: Private video",
+      "watchUrl": "https://www.youtube.com/watch?v=C0yhUazs0CU"
     }
   ],
   "scopeDecision": {
-    "executableTranscriptScope": 42,
-    "excludedCount": 2,
-    "exclusionReason": "Entries 42 (BGruVOFnFhI) and 43 (8sDCFUj5E_c) return ERROR: Video unavailable / Private video respectively via `yt-dlp -F`. They are part of the playlist index but cannot be transcribed; retained in items[] with playable=false.",
+    "executableTranscriptScope": 43,
+    "excludedCount": 1,
+    "exclusionReason": "Entry 44 (C0yhUazs0CU) returns ERROR: Private video via `yt-dlp -F`. It remains part of the playlist index but cannot be transcribed; retained in items[] with playable=false.",
     "includeCriteria": "playlistIndex present AND videoId resolvable AND status playable (verified via yt-dlp -F or --flat-playlist metadata)"
   },
   "evidence": {
     "fetchMethod": "yt-dlp --flat-playlist --print (no media downloaded)",
-    "ytDlpVersion": "2026.03.17",
+    "ytDlpVersion": "2026.07.04",
     "playlistLevelCheck": "yt-dlp --flat-playlist --print \"PL_TITLE::%(playlist_title)s\" --print \"PL_CHAN::%(playlist_channel)s::%(playlist_channel_id)s::%(playlist_uploader)s\"",
     "unplayableVerifications": [
       {
-        "playlistIndex": 42,
-        "videoId": "BGruVOFnFhI",
-        "cmd": "yt-dlp -F https://www.youtube.com/watch?v=BGruVOFnFhI",
-        "result": "ERROR: [youtube] BGruVOFnFhI: Video unavailable"
-      },
-      {
-        "playlistIndex": 43,
-        "videoId": "8sDCFUj5E_c",
-        "cmd": "yt-dlp -F https://www.youtube.com/watch?v=8sDCFUj5E_c",
-        "result": "ERROR: [youtube] 8sDCFUj5E_c: Private video"
+        "playlistIndex": 44,
+        "videoId": "C0yhUazs0CU",
+        "cmd": "yt-dlp -F https://www.youtube.com/watch?v=C0yhUazs0CU",
+        "result": "ERROR: [youtube] C0yhUazs0CU: Private video"
       }
     ],
     "noFullMediaDownloaded": true

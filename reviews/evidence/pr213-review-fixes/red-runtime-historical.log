@@ -1,0 +1,84 @@
+npm notice run transcriptions-platform@1.1.0-dev test:v2
+npm notice run vitest run tests/unit_v2/mediaRoutingIntegration.test.ts
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:9:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.0 /Users/henry/.codex/worktrees/f677/Transcriptions
+
+ ❯ tests/unit_v2/mediaRoutingIntegration.test.ts (4 tests | 4 failed) 74ms
+   ❯ App runtime media routing (4)
+     × initializes YouTube and routes sentence clicks, toggles and speed to its API 41ms
+     × loads MP3 and routes a sentence seek through real metadata readiness 12ms
+     × recomputes media routing when switching MP3 -> YouTube -> MP3 12ms
+     × explains private audio access to public visitors while keeping the transcript usable 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit_v2/mediaRoutingIntegration.test.ts > App runtime media routing > initializes YouTube and routes sentence clicks, toggles and speed to its API
+AssertionError: expected "vi.fn()" to be called at least once
+ ❯ tests/unit_v2/mediaRoutingIntegration.test.ts:64:26
+     62|   it('initializes YouTube and routes sentence clicks, toggles and spee…
+     63|     await open();
+     64|     expect(createPlayer).toHaveBeenCalled();
+       |                          ^
+     65|     const post = vi.spyOn((wrapper.get('#youtube-iframe').element as H…
+     66|     await wrapper.get('#sentence').trigger('click');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit_v2/mediaRoutingIntegration.test.ts > App runtime media routing > loads MP3 and routes a sentence seek through real metadata readiness
+AssertionError: expected '' to be 'https://gx10-2887.tail378c21.ts.net:9…' // Object.is equality
+
+- Expected
++ Received
+
+- https://gx10-2887.tail378c21.ts.net:9443/audio/example.mp3
+
+ ❯ tests/unit_v2/mediaRoutingIntegration.test.ts:83:23
+     81|     await open('27B');
+     82|     const audio = wrapper.get('#audio-element').element as HTMLAudioEl…
+     83|     expect(audio.src).toBe(audioUrl);
+       |                       ^
+     84|     expect(createPlayer).not.toHaveBeenCalled();
+     85|     Object.defineProperty(audio, 'readyState', { configurable: true, v…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit_v2/mediaRoutingIntegration.test.ts > App runtime media routing > recomputes media routing when switching MP3 -> YouTube -> MP3
+AssertionError: expected "vi.fn()" to be called at least once
+ ❯ tests/unit_v2/mediaRoutingIntegration.test.ts:113:26
+    111|     const audio = wrapper.get('#audio-element').element as HTMLAudioEl…
+    112|     expect(audio.hasAttribute('src')).toBe(false);
+    113|     expect(createPlayer).toHaveBeenCalled();
+       |                          ^
+    114|     await wrapper.get('#sentence').trigger('click');
+    115|     expect(youtube.seekTo).toHaveBeenCalledWith(18, true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit_v2/mediaRoutingIntegration.test.ts > App runtime media routing > explains private audio access to public visitors while keeping the transcript usable
+AssertionError: expected '☰ 2025《釋量論・第二品》大組共學大組共學 🗂️ 總覽 🔍 ⚡ 同…' to contain '限內部網路預覽'
+
+Expected: "限內部網路預覽"
+Received: "☰ 2025《釋量論・第二品》大組共學大組共學 🗂️ 總覽 🔍 ⚡ 同步  📥 筆記  ⭐ 評分  🛡️ 審核  📜  🌙  🍂 A-100%A+ 📖 講記逐字稿  🪷 課文原典  ⚖️ 雙讀對照 入中論善顯密意疏 (見悲青增格西) 釋量論第二品 (如性法師) 2025《釋量論・第二品》大組共學 (大組共學) 01Video27BAudio🏠 2025《釋量論・第二品》大組共學/27B Audio📑 📑 科判章節目錄 (點擊即刻跳轉播放)  本課科判  全書總科判 Audio⚪ 尚未標示校勘狀態Example27B 講0:00 ⏮️  ⏭️ 1.0x  📑 科判 📑 本課科判目錄講次：27B（共 0 個節點） ✕  本講次尚無專屬科判節點"
+
+ ❯ tests/unit_v2/mediaRoutingIntegration.test.ts:129:28
+    127|   it('explains private audio access to public visitors while keeping t…
+    128|     await open('27B');
+    129|     expect(wrapper.text()).toContain('限內部網路預覽');
+       |                            ^
+    130|     await wrapper.get('#audio-element').trigger('error');
+    131|     expect(wrapper.get('[role="alert"]').text()).toContain('仍可閱讀逐字稿');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  20:04:57
+   Duration  573ms (transform 46%, environment 28%, tests 15%, import 11%, worker 1%)
+
+
+EXIT_CODE=1
+BASELINE=8b33793

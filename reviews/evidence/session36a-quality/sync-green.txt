@@ -1,0 +1,52 @@
+GREEN: safe study-guide sync regression
+Base: 1dfb32203418cf22436090cb169e69fb57ae08c0
+Branch: codex/session36a-quality-pilot
+
+python3 -m unittest discover -s tests/python -p test_study_guide_sync.py -v
+Exit 0; Ran 16 tests; OK.
+Coverage: missing ID; same ID changed meaning; stale digest; mismatched quote;
+missing overview; stale/invalid replacement; incomplete/unsupported review;
+duplicate bullets, review entries, evidence IDs, source IDs; valid unchanged
+overview; valid separately reviewed replacement; verbatim override rejection;
+real 36A sandbox sync preserving complete verbatim sentence objects (IDs/timing/text).
+Rejection tests compare session and source_outline bytes before/after.
+
+node --test tests/unit/studyGuideSync.test.js tests/unit/contentOverviewPipeline.test.js
+Exit 0; tests 30; pass 30; fail 0.
+Node wrapper includes the 16 Python tests in npm test discovery.
+
+git diff --check
+Exit 0.
+
+npm test
+Exit 1; tests 592; pass 578; fail 9; skipped 5.
+Seven test modules cannot load missing jsdom: annotationWorkflow,
+localModelHeadings, a11y, sidebarFilterBehavior, tocRemediation,
+tocResponsiveRefactor, uxCourseOverview.
+reviewCollaborator: EPERM writing reports/review_queue_test_collab.json.
+syncServer: failed to start on port 19091.
+Full suite is NOT green. No dependency, unrelated script or content changes made.
+
+Safety boundary: canonical Node structural/source/coverage validator plus complete
+supported review metadata is enforced; this does not perform a new semantic AI
+review. --overview-file must contain a separately reviewed contentOverview object
+already bound to the NEW source. No digest/quote/review repair is performed.
+Validation completes before either output directory creation or output write.
+No commits, pushes, published course edits, docs edits, or PR operations.
+
+Two-phase preparation extension GREEN:
+node --test tests/unit/studyGuideSync.test.js tests/unit/contentOverviewPipeline.test.js
+Exit 0; tests 30; pass 30; fail 0. Wrapper now runs 22 Python tests.
+git diff --check: exit 0.
+Shared build_candidate constructs source/outline for both modes; no duplicated
+paragraph/timing algorithm. --candidate-dir writes session_36A.json and 36A.json
+only in an explicit new/empty scratch directory. Course trees, ancestors,
+production aliases/symlinks and occupied directories reject before output writes.
+Candidate overview always needs-review, old review removed, digest set to NEW
+source. Existing draft bullets/quotes stay untouched for independent review;
+they are not evidence of approval. Preparation and --overview-file are exclusive.
+Tests cover CLI routing; unchanged and changed source demotion; absent overview;
+byte-identical production files; draft apply rejection; independently reviewed
+replacement apply; same paragraphs between prepare/apply; real 36A verbatim
+preservation through prepare and apply. Existing fail-closed tests still pass.
+Parallel agents' unrelated working-tree changes were left untouched.

@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { useCourseStore } from '../../src/stores/course';
+import { usePlayerStore } from '../../src/stores/player';
 import App from '../../src/App.vue';
 
 describe('YouTube Player & Hash Race Prevention Contract', () => {
@@ -34,6 +35,8 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
 
   afterEach(() => {
     global.fetch = originalFetch;
+    delete (window as any).YT;
+    document.body.innerHTML = '';
     vi.restoreAllMocks();
   });
 
@@ -49,6 +52,7 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
 
     expect(courseStore.currentCourseId).toBe('shi-liang-lun-er');
     expect(window.location.hash).toBe('#session-02');
+    wrapper.unmount();
   });
 
   it('2. YouTube 播放器容器必須保有 iframe 且不得被 destroy() 移除', async () => {
@@ -88,6 +92,7 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
       await new Promise((r) => setTimeout(r, 150));
       expect(destroySpy).not.toHaveBeenCalled();
     }
+    wrapper.unmount();
   });
 
   it('3. 在 YouTube 模式下原生 audio 標籤不加載 Google Drive 連結，避免 Format Error (Code 4)', async () => {
@@ -103,5 +108,229 @@ describe('YouTube Player & Hash Race Prevention Contract', () => {
 
     const audioEl = wrapper.find('#audio-element').element as HTMLAudioElement;
     expect(audioEl.src.includes('drive.google.com')).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('4. 待轉錄 YouTube 講次由 pendingSessions 顯示，不請求空的 session JSON', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-study-group-2025#session-42') as any;
+
+    const fetchMock = vi.fn().mockImplementation((url: string) => {
+      if (url.endsWith('/course.json')) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            sessions: [
+              { sessionId: '41', displaySessionId: '26上', title: '第26講（上）' },
+              { sessionId: '27B', displaySessionId: '27下', title: '第27講（下）' },
+            ],
+            pendingSessions: [
+              {
+                sessionId: '42',
+                displaySessionId: '26下',
+                title: '第26講 集諦與滅諦的行相（下）',
+                status: 'not-transcribed',
+                mediaType: 'video/youtube',
+                youtubeVideoId: 'lBOiFeGQblw',
+                youtubeUrl: 'https://www.youtube.com/watch?v=lBOiFeGQblw',
+              },
+              {
+                sessionId: '43',
+                displaySessionId: '27上',
+                title: '第27講 空與無我的差異（上）',
+                status: 'not-transcribed',
+                mediaType: 'video/youtube',
+                youtubeVideoId: '8sDCFUj5E_c',
+                youtubeUrl: 'https://www.youtube.com/watch?v=8sDCFUj5E_c',
+              },
+            ],
+          }),
+        });
+      }
+      if (url.endsWith('/toc.json')) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve({ nodes: [] }) });
+      }
+      return Promise.resolve({ ok: false, status: 404, json: () => Promise.resolve({}) });
+    });
+    global.fetch = fetchMock as any;
+
+    const wrapper = mount(App);
+    await wrapper.vm.$nextTick();
+    await new Promise((r) => setTimeout(r, 80));
+
+    expect(useCourseStore().sessions.map((session) => session.id)).toEqual(['41', '27B', '42', '43']);
+    expect(wrapper.findAll('.session-id').map((node) => node.text())).toEqual([
+      '26上',
+      '26下',
+      '27上',
+      '27下',
+    ]);
+    expect(wrapper.find('.transcript-pending-notice').text()).toContain('逐字稿尚待製作');
+    expect(wrapper.find('#youtube-iframe').attributes('src')).toContain('lBOiFeGQblw');
+    const download = wrapper.find('#download-transcript-mobile-btn');
+    expect(download.attributes('disabled')).toBeDefined();
+    expect(download.attributes('title')).toBe('此講次尚無逐字稿可下載');
+    expect(fetchMock.mock.calls.some(([url]) => String(url).includes('/sessions/session_42.json'))).toBe(false);
+    wrapper.unmount();
+  });
+
+  it('5. 跳轉至 0:00 (段首標籤或科判跳轉) 必須呼叫 seekTo(0, true) 且 handleTOCSeek 正確支援 timestamp=0', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-er#session-02') as any;
+
+    const seekToSpy = vi.fn();
+    (window as any).YT = {
+      Player: vi.fn(function (elementId, options) {
+        return {
+          cueVideoById: vi.fn(),
+          destroy: vi.fn(),
+          getDuration: () => 1200,
+          getCurrentTime: () => 0,
+          seekTo: seekToSpy,
+          playVideo: vi.fn(),
+          pauseVideo: vi.fn(),
+          unMute: vi.fn(),
+          getIframe: () => document.getElementById(elementId),
+        };
+      }),
+    };
+
+    const wrapper = mount(App, { attachTo: document.body });
+    await wrapper.vm.$nextTick();
+
+    // 觸發跳轉至 0 秒
+    await vi.waitFor(() => {
+      const testApi = (window as any).__TEST_API__;
+      expect(testApi).toBeDefined();
+      testApi.seek(0);
+      expect(seekToSpy).toHaveBeenCalledWith(0, true);
+    }, { timeout: 2000 });
+    expect((window as any).__TEST_API__.getState().currentTime).toBe(0);
+    wrapper.unmount();
+  });
+
+  it('6. YT.Player 已載入時，點擊 0:00 段落徽章與播放推進至下一句不得改變 iframe src 觸發重載迴圈', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=pusa-jiu-shi-zhe-yang-cheng-fo#session-25') as any;
+
+    global.fetch = vi.fn().mockImplementation((url: string) => {
+      if (typeof url === 'string' && url.includes('session')) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            youtubeVideoId: 'rlbTRYGbwIM',
+            paragraphs: [
+              {
+                id: 'p_1',
+                start: 0,
+                sentences: [
+                  { id: 'sent-1', start: 0, end: 3.48, text: '各位同學，大家晚上好。' },
+                  { id: 'sent-2', start: 7.06, end: 11.24, text: '我們又有一段時間沒上課了。' },
+                ],
+              },
+            ],
+          }),
+        });
+      }
+      if (typeof url === 'string' && url.includes('toc.json')) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve({ nodes: [] }) });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({
+          sessions: [{ sessionId: '25', title: '第25講' }],
+        }),
+      });
+    }) as any;
+
+    const seekToSpy = vi.fn();
+    (window as any).YT = {
+      Player: vi.fn(function (elementId: string) {
+        return {
+          cueVideoById: vi.fn(),
+          destroy: vi.fn(),
+          getDuration: () => 1200,
+          getCurrentTime: () => 0,
+          seekTo: seekToSpy,
+          playVideo: vi.fn(),
+          pauseVideo: vi.fn(),
+          unMute: vi.fn(),
+          getIframe: () => document.getElementById(elementId),
+        };
+      }),
+    };
+
+    const wrapper = mount(App, { attachTo: document.body });
+    await vi.waitFor(() => {
+      expect(wrapper.find('.paragraph-ts-badge').exists()).toBe(true);
+      expect((window as any).YT.Player).toHaveBeenCalled();
+    }, { timeout: 2000 });
+    await wrapper.vm.$nextTick();
+
+    const iframe = wrapper.find('#youtube-iframe');
+    const initialSrc = iframe.attributes('src') || '';
+    expect(initialSrc).not.toContain('start=');
+
+    await wrapper.find('.paragraph-ts-badge').trigger('click');
+    await wrapper.vm.$nextTick();
+    expect(seekToSpy).toHaveBeenCalledWith(0, true);
+    expect(iframe.attributes('src')).toBe(initialSrc);
+
+    const playerStore = usePlayerStore();
+    playerStore.updateTime(7.5);
+    await wrapper.vm.$nextTick();
+    expect(playerStore.activeSentenceId).toBe('sent-2');
+    expect(iframe.attributes('src')).toBe(initialSrc);
+
+    await wrapper.find('#sent-2').trigger('click');
+    await wrapper.vm.$nextTick();
+    expect(seekToSpy).toHaveBeenCalledWith(7.06, true);
+    expect(iframe.attributes('src')).toBe(initialSrc);
+
+    wrapper.unmount();
+  });
+
+  it('5. 跳轉至 0:00 (段首標籤或科判跳轉) 必須呼叫 seekTo(0, true) 且 handleTOCSeek 正確支援 timestamp=0', async () => {
+    delete (window as any).location;
+    window.location = new URL('https://huanruilee.github.io/Transcriptions/?course=shi-liang-lun-er#session-02') as any;
+
+    const seekToSpy = vi.fn();
+    // App.vue 以 `new YT.Player(...)` 建立播放器：mock 必須是可 new 的建構子
+    //（vi.fn().mockImplementation(arrow) 會丟 "is not a constructor" 且被 catch 吞掉）。
+    (window as any).YT = {
+      Player: class {
+        constructor(elementId: string) {
+          return {
+            cueVideoById: vi.fn(),
+            destroy: vi.fn(),
+            getDuration: () => 1200,
+            getCurrentTime: () => 0,
+            seekTo: seekToSpy,
+            playVideo: vi.fn(),
+            pauseVideo: vi.fn(),
+            unMute: vi.fn(),
+            getIframe: () => document.getElementById(elementId),
+          };
+        }
+      },
+    };
+
+    // setupYouTubePlayer 以 document.getElementById 找 iframe，
+    // mount 必須 attach 到 document（VTU 預設掛在 detached div）。
+    const wrapper = mount(App, { attachTo: document.body });
+    await wrapper.vm.$nextTick();
+    // scheduleYouTubePlayerSetup 先延遲 100ms 再以 100ms interval 輪詢，
+    // ytPlayer 需約 250ms 才完成初始化，這裡等待必須涵蓋整個建立流程。
+    await new Promise((r) => setTimeout(r, 450));
+
+    const testApi = (window as any).__TEST_API__;
+    expect(testApi).toBeDefined();
+
+    // 觸發跳轉至 0 秒
+    testApi.seek(0);
+    expect(seekToSpy).toHaveBeenCalledWith(0, true);
+    expect(testApi.getState().currentTime).toBe(0);
+    wrapper.unmount();
+    document.body.innerHTML = '';
   });
 });

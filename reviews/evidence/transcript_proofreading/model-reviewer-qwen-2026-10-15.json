@@ -1,0 +1,122 @@
+{
+  "schema": "transcript-proofreading-reviewer-eval-result/v1",
+  "provider": "qwen",
+  "model": "Qwen3.8-27B",
+  "fixtureDigest": "sha256:10069cf26d2fbc82d5f20df5b87233c9f94feec215d8e2f24a71cc055b49353f",
+  "promptDigest": "sha256:c3042263620e521ec94b009675b1f5a4ddbe9a718cf76ffb956e53d5bdfd480f",
+  "executedAt": "2026-10-15T02:46:13.939Z",
+  "provenance": {
+    "endpoint": "http://127.0.0.1:18001/v1/chat/completions",
+    "requestedModel": "Qwen3.8-27B",
+    "actualModel": "Qwen3.8-27B",
+    "responseId": "chatcmpl-Ledo7maFaw9JSYYFPnJcxq04hWC8WyKU",
+    "created": 1792032373,
+    "rawResponseDigest": "sha256:ee7123213e858ba25585402050898b19d04d02d4f652edf754258fe5a43f70fe",
+    "runtimeFingerprint": "sha256:6186616f7bb03baaa0723d0b1c5cc8e0fbba6a2f5ae274842f809ba3f8169d62",
+    "runtimeObserved": true
+  },
+  "passed": true,
+  "metrics": {
+    "total": 14,
+    "unsafeTotal": 8,
+    "unsafeBlocked": 8,
+    "falseAccepts": [],
+    "safeTotal": 6,
+    "safeAccepted": 6,
+    "safeAccepts": [
+      "safe-punctuation",
+      "safe-hunchen",
+      "safe-ahan",
+      "safe-alambana",
+      "safe-body-speech-mind",
+      "safe-four-foundations"
+    ],
+    "outputChars": 867
+  },
+  "items": [
+    {
+      "id": "safe-punctuation",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "純標點修正"
+    },
+    {
+      "id": "safe-hunchen",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "已知錯字修正"
+    },
+    {
+      "id": "safe-ahan",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "知名相修正"
+    },
+    {
+      "id": "safe-alambana",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "已知名相修正"
+    },
+    {
+      "id": "safe-body-speech-mind",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "慣用語修正"
+    },
+    {
+      "id": "safe-four-foundations",
+      "expected": "accept",
+      "verdict": "accept",
+      "code": "上下文唯一證明"
+    },
+    {
+      "id": "bad-benefit",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "語意不連貫"
+    },
+    {
+      "id": "bad-four-year-zen",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "語意不通且無證據"
+    },
+    {
+      "id": "bad-buddha",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "需音訊或原典"
+    },
+    {
+      "id": "bad-self-or-dharma",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "多義性未定"
+    },
+    {
+      "id": "bad-view-delusion",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "需音訊證據"
+    },
+    {
+      "id": "bad-translation-choice",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "譯名政策未明"
+    },
+    {
+      "id": "bad-dignified",
+      "expected": "block",
+      "verdict": "uncertain",
+      "code": "多詞可能"
+    },
+    {
+      "id": "bad-eye-nothing",
+      "expected": "block",
+      "verdict": "reject",
+      "code": "修改後不可理解"
+    }
+  ]
+}

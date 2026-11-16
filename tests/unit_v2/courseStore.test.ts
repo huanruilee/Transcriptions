@@ -74,4 +74,95 @@ describe('CourseStore Test Pattern (TDD)', () => {
     expect(chain2).toHaveLength(1);
     expect(chain2[0].title).toBe('甲一 釋題義');
   });
+
+  it('深層科判樹（18層以上）在祖先未重複標註當前 sessionId 時，仍應完整保留整條祖先鏈，且嚴格以主講次判定時間錨點', () => {
+    const store = useCourseStore();
+    const deepTOC = [
+      {
+        title: '甲三、釋論義',
+        sessionId: '85A',
+        timestamp: 0,
+        children: [
+          {
+            title: '乙二、正出所造論體',
+            sessionId: '87A',
+            timestamp: 0,
+            children: [
+              {
+                title: '丙一、因地',
+                sessionId: '87A',
+                timestamp: 0,
+                children: [
+                  {
+                    title: '辰一、總破他生派',
+                    sessionId: '21B',
+                    timestamp: 0,
+                    children: [
+                      {
+                        title: '巳三、明破他生之功德',
+                        sessionId: '36A',
+                        sessionIds: ['36A'],
+                        timestamp: 127,
+                      },
+                      {
+                        title: '巳四、明全無自性生',
+                        sessionId: '36A',
+                        sessionIds: ['36A', '36B'],
+                        timestamp: 1609,
+                        children: [
+                          {
+                            title: '午一、破計有自相',
+                            sessionId: '36A',
+                            sessionIds: ['36A', '36B'],
+                            timestamp: 1609,
+                            children: [
+                              {
+                                title: '未一、聖根本智應是破諸法之因',
+                                sessionId: '36A',
+                                sessionIds: ['36A', '36B'],
+                                timestamp: 2105,
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        title: '亥一、他講次旁支（僅次要sessionIds含36A）',
+                        sessionId: '30B',
+                        sessionIds: ['30B', '36A'],
+                        timestamp: 78,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    store.setTOC(deepTOC);
+
+    // 1. 即使在 10 秒（早於 127s 第一個科判），仍應 fallback 到 36A 第一個主科判並保留全部祖先
+    const earlyChain = store.computeActiveTOCChain(10, '36A');
+    expect(earlyChain.map((n) => n.title)).toEqual([
+      '甲三、釋論義',
+      '乙二、正出所造論體',
+      '丙一、因地',
+      '辰一、總破他生派',
+      '巳三、明破他生之功德',
+    ]);
+
+    // 2. 在 2200 秒時，應定位至最深的「未一、聖根本智應是破諸法之因」（共 7 層，絕不只剩最上 2 層）
+    const deepChain = store.computeActiveTOCChain(2200, '36A');
+    expect(deepChain.map((n) => n.title)).toEqual([
+      '甲三、釋論義',
+      '乙二、正出所造論體',
+      '丙一、因地',
+      '辰一、總破他生派',
+      '巳四、明全無自性生',
+      '午一、破計有自相',
+      '未一、聖根本智應是破諸法之因',
+    ]);
+  });
 });

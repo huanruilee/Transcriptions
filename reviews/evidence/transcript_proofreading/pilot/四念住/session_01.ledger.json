@@ -1,0 +1,1792 @@
+{
+  "schema": "transcript-proofreading-ledger/v1",
+  "sourceDigest": "sha256:38aa66ecea41107c19c6e4e1f0cc19faa13c24dae3831a6f5b6dacf5de53dc2a",
+  "model": {
+    "provider": "local-vllm",
+    "model": "Qwen3.8-27B",
+    "runtime": {
+      "models": [
+        {
+          "name": "Qwen3.8-27B",
+          "model": "Qwen3.8-27B",
+          "modified_at": "",
+          "size": "",
+          "digest": "",
+          "type": "model",
+          "description": "",
+          "tags": [
+            ""
+          ],
+          "capabilities": [
+            "completion"
+          ],
+          "parameters": "",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "",
+            "families": [
+              ""
+            ],
+            "parameter_size": "",
+            "quantization_level": ""
+          }
+        }
+      ],
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.8-27B",
+          "aliases": [
+            "Qwen3.8-27B"
+          ],
+          "tags": [],
+          "object": "model",
+          "created": 1791970633,
+          "owned_by": "llamacpp",
+          "meta": {
+            "vocab_type": 2,
+            "n_vocab": 248320,
+            "n_ctx": 131072,
+            "n_ctx_train": 262144,
+            "n_embd": 2048,
+            "n_params": 34660610688,
+            "size": 22230960640,
+            "ftype": "Q4_K - Medium"
+          }
+        }
+      ]
+    }
+  },
+  "entries": [
+    {
+      "sentenceId": "seg-006",
+      "before": "舊的翻譯叫做四念住",
+      "after": "舊的翻譯叫做四念處",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'四念住'為新譯，舊譯多作'四念處'，且後文 seg-024 已使用'四念處'，此處應統一或依傳統舊譯修正。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-054",
+      "before": "這是阿罕經阿比達巴論",
+      "after": "這是阿含經阿毘達磨論",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'阿罕經'應為佛教經典《阿含經》；'阿比達巴論'應為《阿毘達磨論》（Abhidharma）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-097",
+      "before": "知喜長知喜短",
+      "after": "知息長 知息短",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'知喜長知喜短'應為'知息長、知息短'，為數息法標準名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-099",
+      "before": "知洗除 知洗入",
+      "after": "知息除 知息入",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'知洗除 知洗入'應為'知息除、知息入'，'洗'與'息'音近。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-100",
+      "before": "知洗長 知洗短",
+      "after": "知息長 知息短",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'知洗長 知洗短'應為'知息長、知息短'，'洗'與'息'音近。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-108",
+      "before": "戲進來",
+      "after": "吸進來",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。上下文論述呼吸（撥出去、戲進來），「戲」應為「吸」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-113",
+      "before": "在這個中間有一個戲",
+      "after": "在這個中間有一個息",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。論述呼吸時，「戲」應為「息」（呼吸之息）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-116",
+      "before": "這個時候也不出霧也不入",
+      "after": "這個時候也不出息也不入",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。前文已修正「戲」為「息」，此處「霧」應為「息」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-121",
+      "before": "這個洗過去了的時候,就開始吸,把那個氣又吸進來",
+      "after": "這個息過去了的時候，就開始吸，把那個氣又吸進來",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字。前文已確立「洗」為「息」，此處「洗」應修正為「息」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-134",
+      "before": "還有個洗的",
+      "after": "還有個出息的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。語境為呼吸的出入，「洗」應為「出息」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-140",
+      "before": "這個洗的現象就出來了",
+      "after": "這個出息的現象就出來了",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。前文已修正，此處「洗」應為「出息」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-150",
+      "before": "所以一開始靜歌的時候",
+      "after": "所以一開始靜坐的時候",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。「靜歌」應為「靜坐」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-163",
+      "before": "使得那個心不省亂",
+      "after": "使得那個心不昏亂",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'省'應為'昏'，'不昏亂'為佛法修習常用語，指心不散亂、不清醒。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-184",
+      "before": "你住一半小時",
+      "after": "你住半小時",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'一半小時'應為'半小時'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-270",
+      "before": "五分鐘的明敬而住都有困難",
+      "after": "五分鐘的明淨而住都有困難",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「明敬」應為「明淨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-302",
+      "before": "是有煩惱,因為你沒有修正念,你沒有修官慧,當然就是這樣。",
+      "after": "是有煩惱，因為你沒有修正念，你沒有修觀慧，當然就是這樣。",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「官慧」應為佛法名相「觀慧」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-304",
+      "before": "修官慧不能斷煩惱,你還是修,你還是修。",
+      "after": "修觀慧不能斷煩惱，你還是修，你還是修。",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「官慧」應為佛法名相「觀慧」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-306",
+      "before": "因為你要不修正殿的時候,你還是要打妄想嘛",
+      "after": "因為你要不修正念的時候，你還是要打妄想嘛",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「正殿」應為佛法名相「正念」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-330",
+      "before": "你修官會的時候",
+      "after": "你修觀慧的時候",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「官會」應為佛法名相「觀慧」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-337",
+      "before": "你修這個官慧的時候",
+      "after": "你修這個觀慧的時候",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「官慧」應為佛法名相「觀慧」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-377",
+      "before": "也可以修官",
+      "after": "也可以修觀",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「修官」應為佛法名相「修觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-381",
+      "before": "然後去修官",
+      "after": "然後去修觀",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「修官」應為佛法名相「修觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-383",
+      "before": "最好是得到初參、二十三、四參",
+      "after": "最好是得到初禪、二禪、三禪、四禪",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「初參、二十三、四參」應為「初禪、二禪、三禪、四禪」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-390",
+      "before": "你想修官得聖道",
+      "after": "你想修觀得聖道",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「修官」應為佛法名相「修觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-404",
+      "before": "能得聖道的時候修官",
+      "after": "能得聖道的時候修觀",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「修官」應為「修觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-415",
+      "before": "初開始運功是這樣的",
+      "after": "初開始用功是這樣的",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「運功」應為「用功」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-418",
+      "before": "那麼盤頭過以後也是攝心不亂修止",
+      "after": "那麼盤腿過以後也是攝心不亂修止",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「盤頭」應為「盤腿」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-436",
+      "before": "因為你這書的能力是強了",
+      "after": "因為你這止的能力是強了",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「書」應為「止」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-439",
+      "before": "你或者修五分鐘的關",
+      "after": "你或者修五分鐘的觀",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「關」應為「觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-443",
+      "before": "修關的時間",
+      "after": "修觀的時間",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「修關」應為「修觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-444",
+      "before": "不要超過紙的時間",
+      "after": "不要超過止的時間",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「紙」應為「止」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-445",
+      "before": "紙的時間叫它長一點",
+      "after": "止的時間叫它長一點",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「紙」應為「止」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-446",
+      "before": "關的時間叫它短",
+      "after": "觀的時間叫它短",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「關」應為「觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-591",
+      "before": "菩薩翻個絕有情",
+      "after": "菩薩翻個覺有情",
+      "changeClass": "term",
+      "reason": "「絕有情」為同音訛字，佛學名相應為「覺有情」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-602",
+      "before": "就是他有大背心",
+      "after": "就是他有大悲心",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'大背心'應為'大悲心'，與前句'摩訶薩'（大士）對應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-607",
+      "before": "就是阿諾汗也是菩薩",
+      "after": "就是阿那含也是菩薩",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'阿諾汗'應為'阿那含'（Anāgāmi，三果聖人），後文提及'絕無聖道'（或指不還果）與菩薩的比較。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-614",
+      "before": "是阿諾汗所不能激烈",
+      "after": "是阿那含所不能及的",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'阿諾汗'應為'阿那含'，'激烈'應為'及'（或'能及'），語意為阿那含無法達到菩薩的境界。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-621",
+      "before": "這個《森》這個字",
+      "after": "這個《般若》這個字",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'森'應為'般若'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-622",
+      "before": "在大致論龍樹夫社的解釋",
+      "after": "在大智度論龍樹菩薩的解釋",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'大致論'應為'大智度論'，'夫社'應為'菩薩'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-624",
+      "before": "這個《森》怎麼講",
+      "after": "這個《般若》怎麼講",
+      "changeClass": "term",
+      "reason": "ASR 訛字。'森'應為'般若'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-653",
+      "before": "所以叫興森波爾伯羅蕊",
+      "after": "所以叫興森波羅蜜多",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。'波爾伯羅蕊'應為佛學名相'波羅蜜多'（Pāramitā）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-660",
+      "before": "這個念祝品是第五",
+      "after": "這個念住品是第五",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。'念祝'應為'念住'（Smṛtyupasthāna，四念住）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-676",
+      "before": "六波羅蜜 三十七道瓶",
+      "after": "六波羅蜜 三十七道品",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'道瓶'應為'道品'（三十七道品）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-691",
+      "before": "圓這個所緣靜",
+      "after": "圓這個所緣境",
+      "changeClass": "term",
+      "reason": "ASR 同音訛字。'靜'應為'境'（所緣境）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-733",
+      "before": "我們沒能夠棄入法性的真理",
+      "after": "我們沒能夠契入法性的真理",
+      "changeClass": "term",
+      "reason": "「棄入」應為「契入」（契合進入），為佛法常用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-739",
+      "before": "一切時一切出",
+      "after": "一切時一切處",
+      "changeClass": "orthography",
+      "reason": "「出」應為「處」，「一切時一切處」為佛法常用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-743",
+      "before": "但是還有顛倒的過世",
+      "after": "但是還有顛倒的過失",
+      "changeClass": "orthography",
+      "reason": "「過世」應為「過失」，指錯誤或過患。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-749",
+      "before": "才是一切過世都熄滅了",
+      "after": "才是一切過失都熄滅了",
+      "changeClass": "orthography",
+      "reason": "「過世」應為「過失」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-770",
+      "before": "新生波爾波羅密多的菩薩",
+      "after": "新生波羅蜜多的菩薩",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'爾'應為'羅'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-772",
+      "before": "世諸菩薩善修伸受心法念祝",
+      "after": "世諸菩薩善修身受心法念住",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'伸受'應為'身受'，'念祝'應為'念住'。'四念住'為標準名相。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-776",
+      "before": "他善於修小深受心法念著的關係",
+      "after": "他善於修身受心法念住的關係",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'小深'應為'身受'，'念著'應為'念住'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-779",
+      "before": "能夠專心地修詩念著",
+      "after": "能夠專心地修四念住",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'詩念著'應為'四念住'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-784",
+      "before": "所以叫做善修身受心法念入",
+      "after": "所以叫做善修身受心法念住",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'念入'應為'念住'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-785",
+      "before": "這個念入我們的心是不住的",
+      "after": "這個念住我們的心是不住的",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'念入'應為'念住'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-797",
+      "before": "這個《深受心法》",
+      "after": "這個《身受心法》",
+      "changeClass": "term",
+      "reason": "ASR 訛字，'深受'應為'身受'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-822",
+      "before": "是個文字 見聞覺知的文",
+      "after": "是個文字，見聞覺知的文",
+      "changeClass": "punctuation",
+      "reason": "標點修正。原句'是個文字 見聞覺知的文'中間空格應為逗號或頓號，使語意更清晰。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-823",
+      "before": "這樣的文應物這個文字就比較同意了",
+      "after": "這樣的文應物，這個文字就比較同意了",
+      "changeClass": "punctuation",
+      "reason": "標點修正。原句'這樣的文應物這個文字'中間缺少標點，應加入逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.8,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-836",
+      "before": "《如佛世尊戒經》中說",
+      "after": "《如來世尊戒經》中說",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「如佛世尊」應為「如來世尊」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-864",
+      "before": "初第二地的菩薩",
+      "after": "初地、第二地的菩薩",
+      "changeClass": "term",
+      "reason": "ASR 訛字與標點，「初第二地」應為「初地、第二地」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-873",
+      "before": "但是你能夠如理作義的時候",
+      "after": "但是你能夠如理作意的时候",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「作義」應為「作意」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-886",
+      "before": "正義唸的時候煩惱不動,",
+      "after": "正念的時候煩惱不動，",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「正義唸」應為「正念」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-891",
+      "before": "我們凡夫也是正義念,正義念裡面還有執照",
+      "after": "我們凡夫也是正念，正念裡面還有執著",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「正義念」應為「正念」，「執照」應為「執著」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-917",
+      "before": "你要把正念提起來,煩惱就沒有了",
+      "after": "你要把正念提起來，煩惱就沒有了",
+      "changeClass": "punctuation",
+      "reason": "標點符號修正：將英文逗號改為中文全形逗號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-928",
+      "before": "修聖唸咒",
+      "after": "修聖念住",
+      "changeClass": "term",
+      "reason": "佛學名相修正。'咒'應為'住'（四念住）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-940",
+      "before": "為此菩薩一如十字,",
+      "after": "為此菩薩一如實，",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'十字'應為'如實'（與後文'如實的智慧'呼應）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-944",
+      "before": "唯有種種不盡過世。",
+      "after": "唯有種種不淨過失。",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'盡'應為'淨'（不淨觀），'世'應為'失'（過失）。'不盡過世'語意不通，'不淨過失'為標準佛學用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-949",
+      "before": "與諸法十相相應的智慧",
+      "after": "與諸法實相相應的智慧",
+      "changeClass": "term",
+      "reason": "ASR 訛字修正。'十相'應為'實相'（諸法實相）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1005",
+      "before": "是遠離那個視,也遠離那個心",
+      "after": "是遠離那個身，也遠離那個心",
+      "changeClass": "term",
+      "reason": "上下文論述「身相應過」與「心相應過」，前句提及「身相應過」，此處「視」應為「身」之同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1011",
+      "before": "你在這經形也可以這樣思維",
+      "after": "你在這經行也可以這樣思維",
+      "changeClass": "orthography",
+      "reason": "「經形」應為「經行」（佛教修行名相），同音訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1014",
+      "before": "觀察此身從竹之頂",
+      "after": "觀察此身從足至頂",
+      "changeClass": "term",
+      "reason": "「竹之頂」應為「足至頂」，同音訛字（竹/足，之/至），符合四念住中「從足至頂」觀察身體的次第。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1028",
+      "before": "用筋把它連起來,然後包著一層皮",
+      "after": "用筋把它連起來，然後包著一層皮",
+      "changeClass": "punctuation",
+      "reason": "標點修正：逗號前不應有空格，且應使用全形逗號以符合繁體中文書寫規範。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1032",
+      "before": "但是皮裡邊的心肝、脾胃腎",
+      "after": "但是皮裡邊的心肝、脾胃、腎",
+      "changeClass": "punctuation",
+      "reason": "標點修正：並列名詞間應使用頓號分隔，原句缺少「脾胃」後的頓號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1058",
+      "before": "在阿漢經理來說得很清楚",
+      "after": "在阿含經裡來說得很清楚",
+      "changeClass": "term",
+      "reason": "ASR 訛字，佛典名稱應為「阿含經」，非「阿漢經理」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1071",
+      "before": "但是我看見這個性很新鮮",
+      "after": "但是我看見這個紙很新鮮",
+      "changeClass": "orthography",
+      "reason": "語意不通，「性」應為「紙」，與上下文拿紙張的比喻相符。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1079",
+      "before": "但是變化是很威脆的",
+      "after": "但是變化是很脆弱的",
+      "changeClass": "orthography",
+      "reason": "同音 ASR 訛字，「威脆」應為「脆弱」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1119",
+      "before": "我們釋迦莫敬佛說 沒有我",
+      "after": "我們釋迦牟尼佛說 沒有我",
+      "changeClass": "term",
+      "reason": "「釋迦莫敬」應為「釋迦牟尼」，為佛陀名號之 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1125",
+      "before": "這個大智德論龍樹菩薩",
+      "after": "這個大智度論龍樹菩薩",
+      "changeClass": "term",
+      "reason": "「大智德論」應為《大智度論》，為龍樹菩薩所著。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1131",
+      "before": "修是六度萬恨",
+      "after": "修是六度萬行",
+      "changeClass": "term",
+      "reason": "「六度萬恨」應為「六度萬行」，「恨」為「行」之 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1136",
+      "before": "龍師佛說他提出這個問題",
+      "after": "龍樹菩薩說他提出這個問題",
+      "changeClass": "term",
+      "reason": "「龍師佛」應為「龍樹菩薩」，前文已提及。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1150",
+      "before": "大致的論裡面",
+      "after": "大智度論裡面",
+      "changeClass": "term",
+      "reason": "「大致的論」應為《大智度論》，依上下文龍樹菩薩之著作。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1185",
+      "before": "你修為史觀 不能了生死",
+      "after": "你修為史觀，不能了生死",
+      "changeClass": "punctuation",
+      "reason": "語意斷句處需加逗號以區分條件與結果。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.7,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1201",
+      "before": "你永久思想不能穩定",
+      "after": "你永遠思想不能穩定",
+      "changeClass": "orthography",
+      "reason": "口語中「永久」與「永遠」常混用，此處指時間上的持續性，「永遠」更符合語境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.85,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1206",
+      "before": "其他的白怪也可以",
+      "after": "其他的法門也可以",
+      "changeClass": "term",
+      "reason": "ASR 訛字。「白怪」應為「法門」，符合佛法語境。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1266",
+      "before": "是這樣一事",
+      "after": "是這樣一回事",
+      "changeClass": "orthography",
+      "reason": "口語中「一事」應為「一回事」，屬常見訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1275",
+      "before": "就是人死了以後沒有斷練",
+      "after": "就是人死了以後沒有斷滅",
+      "changeClass": "term",
+      "reason": "佛法名相「斷滅」誤聽為「斷練」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1279",
+      "before": "死了以後不斷面臨",
+      "after": "死了以後不斷流轉",
+      "changeClass": "term",
+      "reason": "佛法名相「流轉」誤聽為「面臨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1286",
+      "before": "說因為什麼不斷面臨",
+      "after": "說因為什麼不斷流轉",
+      "changeClass": "term",
+      "reason": "佛法名相「流轉」誤聽為「面臨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1289",
+      "before": "所以不斷面",
+      "after": "所以不斷流轉",
+      "changeClass": "term",
+      "reason": "佛法名相「流轉」誤聽為「面」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1294",
+      "before": "常駐真心性精靈體",
+      "after": "常駐真心性靈體",
+      "changeClass": "term",
+      "reason": "前文提及「性靈體」，此處「精靈」應為「靈」之訛字，且與前文呼應。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.92,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1320",
+      "before": "你炸了善業",
+      "after": "你造了善業",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'炸'應為'造'（造作善業）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1341",
+      "before": "這是在顯眼神經論上",
+      "after": "這是在顯揚聖教論上",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'顯眼神經論'應為《顯揚聖教論》（世親菩薩造，玄奘譯）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1345",
+      "before": "那麼這裡說是無惡",
+      "after": "那麼這裡說是無我",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'無惡'應為'無我'（佛法核心教義）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1366",
+      "before": "所以斷愛煩惱和賤煩惱",
+      "after": "所以斷愛煩惱和見煩惱",
+      "changeClass": "term",
+      "reason": "佛法名相中，與「愛」並列的煩惱通常為「見」（如身見、邊見等），「賤」應為「見」之 ASR 訛字。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1370",
+      "before": "我們初家學習佛法",
+      "after": "我們初學佛法",
+      "changeClass": "orthography",
+      "reason": "「初家」應為「初學」，指剛開始學習佛法的人。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1383",
+      "before": "在社大城論裡邊",
+      "after": "在俱舍論裡邊",
+      "changeClass": "term",
+      "reason": "「社大城論」應為《俱舍論》（Abhidharmakośa），佛教重要論典。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1386",
+      "before": "我們常常講凱詩啊",
+      "after": "我們常常講契經啊",
+      "changeClass": "term",
+      "reason": "「凱詩」應為「契經」（Sūtra），佛經的別稱。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1403",
+      "before": "一定要對著這個慾",
+      "after": "一定要對著這個欲",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「慾」應為「欲」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1419",
+      "before": "舍舍顯示的像貌是這樣",
+      "after": "捨捨顯示的像貌是這樣",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「舍舍」應為「捨捨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1421",
+      "before": "這個舍舍顯示裡沒有我",
+      "after": "這個捨捨顯示裡沒有我",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「舍舍」應為「捨捨」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1422",
+      "before": "就是無耳觀",
+      "after": "就是無我觀",
+      "changeClass": "term",
+      "reason": "佛學名相訛誤，「無耳」應為「無我」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1454",
+      "before": "一下子就得善過",
+      "after": "一下子就得善果",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「善過」應為「善果」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1461",
+      "before": "菩薩摩沙他們修是身受心法",
+      "after": "菩薩摩訶薩他們修是身受心法",
+      "changeClass": "term",
+      "reason": "佛學名相錯誤，「摩沙」應為「摩訶薩」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1464",
+      "before": "觀生不敬 觀受事故",
+      "after": "觀生不淨 觀受是苦",
+      "changeClass": "term",
+      "reason": "四念住名相錯誤，「不敬」應為「不淨」，「事故」應為「是苦」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1465",
+      "before": "觀心猶常 觀導悟",
+      "after": "觀心無常 觀法無我",
+      "changeClass": "term",
+      "reason": "四念住名相錯誤，「猶常」應為「無常」，「導悟」應為「無我」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1467",
+      "before": "南川跟北川修的結果",
+      "after": "南傳跟北傳修的結果",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「南川」應為「南傳」，「北川」應為「北傳」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1469",
+      "before": "還是說修的內容也有聲廣不同",
+      "after": "還是說修的內容也有深廣不同",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「聲廣」應為「深廣」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1472",
+      "before": "這個北川佛教",
+      "after": "這個北傳佛教",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「北川」應為「北傳」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1484",
+      "before": "修武惡觀",
+      "after": "修無常觀",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「武惡」應為「無常」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1485",
+      "before": "北川佛教",
+      "after": "北傳佛教",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「北川」應為「北傳」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1486",
+      "before": "要比南川更圓滿",
+      "after": "要比南傳更圓滿",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「南川」應為「南傳」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1488",
+      "before": "比南川佛教又廣",
+      "after": "比南傳佛教又廣",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「南川」應為「南傳」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1492",
+      "before": "南川佛教學們有",
+      "after": "南傳佛教學者有",
+      "changeClass": "term",
+      "reason": "佛學名相修正，「南川」應為「南傳」，「學們」應為「學者」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1546",
+      "before": "但是那個習的時候是比較長的",
+      "after": "但是那個息的時候是比較長的",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'習'應為'息'（呼吸）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1547",
+      "before": "但習的時候也要知道",
+      "after": "但息的時候也要知道",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'習'應為'息'（呼吸）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1597",
+      "before": "大一點懸在自己的餓室裡邊",
+      "after": "大一點懸在自己的禪室裡邊",
+      "changeClass": "orthography",
+      "reason": "同音訛字，「餓室」應為「禪室」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.98,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1607",
+      "before": "看這個白骨的鼓音",
+      "after": "看這個白骨的骨相",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。白骨觀中觀察的是「骨相」，「鼓音」語意不通。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1623",
+      "before": "再修紙",
+      "after": "再修觀",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文為修習白骨觀，「紙」應為「觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1645",
+      "before": "再修,再修紙",
+      "after": "再修,再修觀",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。上下文為修習白骨觀，「紙」應為「觀」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1675",
+      "before": "而在奢摩陀的基礎上修白骨關",
+      "after": "而在奢摩他的基礎上修白骨觀",
+      "changeClass": "term",
+      "reason": "佛學名相錯誤，「奢摩陀」應為「奢摩他」（Samatha），「白骨關」應為「白骨觀」。",
+      "evidence": [
+        "term"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1683",
+      "before": "讀言的話 證念都提不出來",
+      "after": "讀經的話 證念都提不出來",
+      "changeClass": "orthography",
+      "reason": "ASR 訛字修正。'言'應為'經'，'讀經'為常見佛法用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1709",
+      "before": "說一切法無惡,你就容易相信",
+      "after": "說一切法無常，你就容易相信",
+      "changeClass": "term",
+      "reason": "佛學名相修正。上下文論述「無常」與「諸行是無常」，「無惡」顯為 ASR 同音訛誤。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1717",
+      "before": "佛的大為德、大智慧",
+      "after": "佛的大威德、大智慧",
+      "changeClass": "orthography",
+      "reason": "錯別字修正。「大為德」應為「大威德」，為常見佛學詞彙。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1733",
+      "before": "那麼誰在呼 誰在吸呢?",
+      "after": "那麼誰在呼、誰在吸呢？",
+      "changeClass": "punctuation",
+      "reason": "標點修正。口語停頓處應加頓號，並補全問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1741",
+      "before": "就是磁",
+      "after": "就是色",
+      "changeClass": "term",
+      "reason": "佛學名相修正。後文接「受想行」，此處應為五蘊之首「色」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1742",
+      "before": "就是受想行磁",
+      "after": "就是受想行識",
+      "changeClass": "term",
+      "reason": "佛學名相修正。五蘊為「色受想行識」，前句已提「色」，此處應補全「識」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1744",
+      "before": "是磁而已嘛",
+      "after": "就是色而已嘛",
+      "changeClass": "term",
+      "reason": "佛學名相修正。同 seg-1741，應為「色」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1763",
+      "before": "是摔藥了",
+      "after": "是吃藥了",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'摔藥' 語意不通，結合上下文'病痛'，應為'吃藥'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1772",
+      "before": "體內有一個無變化的有足",
+      "after": "體內有一個無變化的我",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字。'有足' 語意不通，外道'即我論'主張有一個不變的'我'，應為'我'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1786",
+      "before": "我和石能不能畫等號呢?",
+      "after": "我和石能不能畫等號呢？",
+      "changeClass": "punctuation",
+      "reason": "標點修正。句末應為問號。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 1,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1811",
+      "before": "還有執擾",
+      "after": "還有執著",
+      "changeClass": "orthography",
+      "reason": "同音訛字。'執擾'應為'執著'，佛教常用語。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1816",
+      "before": "他因為他還有執擾",
+      "after": "他因為他還有執著",
+      "changeClass": "orthography",
+      "reason": "同音訛字。'執擾'應為'執著'。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1821",
+      "before": "也是有屍體",
+      "after": "也是有實體",
+      "changeClass": "orthography",
+      "reason": "同音訛字。'屍體'應為'實體'，指有真實自性。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1825",
+      "before": "這個山論中",
+      "after": "這個中觀中",
+      "changeClass": "term",
+      "reason": "同音訛字。'山論'應為'中觀'，佛教宗派名。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1851",
+      "before": "不是說米蕾佛",
+      "after": "不是說彌勒佛",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「米蕾」應為佛教名相「彌勒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1852",
+      "before": "就是吳昭佛",
+      "after": "就是彌勒佛",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「吳昭」應為「彌勒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1857",
+      "before": "米蕾佛是陰間的一個",
+      "after": "彌勒佛是陰間的一個",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「米蕾」應為「彌勒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1860",
+      "before": "就是吳昭佛在陰間",
+      "after": "就是彌勒佛在陰間",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「吳昭」應為「彌勒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1867",
+      "before": "當來下生米蕾佛",
+      "after": "當來下生彌勒佛",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「米蕾」應為「彌勒」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1876",
+      "before": "唯實這個法門",
+      "after": "唯識這個法門",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「唯實」應為唯識宗名相「唯識」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1884",
+      "before": "他做千方遍",
+      "after": "他做千方便",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「做千方遍」應為「做千方便」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1892",
+      "before": "在《解釋秘經》有一段文有這樣的意思",
+      "after": "在《解深密經》有一段文有這樣的意思",
+      "changeClass": "quotation",
+      "reason": "佛經名相，「解釋秘經」應為《解深密經》。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1900",
+      "before": "就可以學習博爾法文",
+      "after": "就可以學習般若法文",
+      "changeClass": "term",
+      "reason": "ASR 訛字，「博爾」應為「般若」。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1918",
+      "before": "那這樣的官",
+      "after": "那這樣的觀",
+      "changeClass": "orthography",
+      "reason": "ASR 同音訛字，「官」應為「觀」（佛教修持中的「觀」）。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.95,
+      "reviewRequired": true
+    },
+    {
+      "sentenceId": "seg-1952",
+      "before": "誰願望過了 使得我心裡痛",
+      "after": "誰願望過了，使得我心裡痛",
+      "changeClass": "punctuation",
+      "reason": "補上標點符號以區分語意層次。",
+      "evidence": [
+        "local-model-context"
+      ],
+      "confidence": 0.9,
+      "reviewRequired": true
+    }
+  ],
+  "runId": "2b84bf21-ec6d-4813-81af-0bf3e163afc9"
+}

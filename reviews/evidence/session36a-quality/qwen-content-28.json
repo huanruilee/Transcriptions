@@ -1,0 +1,63 @@
+{
+  "schema": "qwen-paragraph-review/v1",
+  "model": "Qwen3.8-27B",
+  "inputDigest": "sha256:38a82762b36168c5ddc48d9b2a9dbfec7b9608b2bc58551b8039620b878e4106",
+  "sourceFileDigest": "sha256:b628200320b0f51d9bee6161f6ec0cb1eb8c7a009f67823ff519d43a88bf0c55",
+  "review": {
+    "paragraphs": [
+      {
+        "id": "p_29",
+        "verdict": "needs-review",
+        "findings": [
+          {
+            "sentenceId": "p29-s1",
+            "kind": "unsupported-addition",
+            "detail": "講記宣稱唯識宗主張「依他起（如瓶子）是實有的」，但底本僅論及「依他起自相不空」及「無異體能取所取說名為空」，未直接將「瓶子」作為依他起實有之例證。",
+            "evidenceIds": [
+              "p29-v1",
+              "p29-v2"
+            ],
+            "suggestion": "將「如瓶子」刪除或改為「如依他起法」，以符合底本論述範圍。"
+          },
+          {
+            "sentenceId": "p29-s4",
+            "kind": "unsupported-addition",
+            "detail": "講記提及「其他教派批評格魯派說：你們格魯派說瓶子本身不空...」，此為他宗對自宗的批評，底本未載有此具體批評內容，且講記將此批評作為事實陳述。",
+            "evidenceIds": [
+              "p29-v6",
+              "p29-v7"
+            ],
+            "suggestion": "改為「有他宗質疑...」或刪除具體批評內容，避免將他宗觀點誤作自宗已承認之事實。"
+          },
+          {
+            "sentenceId": "p29-s5",
+            "kind": "unsupported-addition",
+            "detail": "講記提出「真正的自空應該說『瓶子被瓶子自己所空』才對！」，此為講者對底本論點的推論或個人見解，底本僅陳述「瓶以瓶空乃是自空」之觀點並予以破斥，未直接定義何謂「真正的自空」。",
+            "evidenceIds": [
+              "p29-v6"
+            ],
+            "suggestion": "刪去此句，或改為「有論點認為...」，以區分底本陳述與講者推論。"
+          },
+          {
+            "sentenceId": "p29-s6",
+            "kind": "uncertain",
+            "detail": "講記指宗大師在 114 頁有「非常精采的破斥」，底本第 114 頁確實有破斥「瓶不以瓶空」之論點，但「精采」為修辭形容，非實質內容。",
+            "evidenceIds": [
+              "p29-v6"
+            ],
+            "suggestion": "保留事實部分，刪除修辭形容詞「非常精采」。"
+          }
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "completion_tokens": 637,
+    "prompt_tokens": 4300,
+    "total_tokens": 4937,
+    "prompt_tokens_details": {
+      "cached_tokens": 160
+    }
+  },
+  "createdAt": "2026-10-22T11:08:57.157Z"
+}

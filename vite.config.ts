@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
+import { generateCorrectionDates } from './scripts/course_correction_dates.mjs';
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), { name: 'course-correction-dates', buildStart() { generateCorrectionDates(); } }],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
