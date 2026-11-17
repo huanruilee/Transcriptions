@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-11-17",
   "baseText": "https://ftp.budaedu.org/ghosa/C009/T0209/ref/T0209_NN.pdf",
-  "ruleCount": 193,
-  "edits": 597,
+  "ruleCount": 208,
+  "edits": 611,
   "ledger": [
     {
       "sessionId": "session_01",
@@ -4779,6 +4779,118 @@
       "after": "因為你前面初習業位、已熟修位，",
       "rule": "segment-rewrite",
       "evidence": "底本上下文裁決（見 docs/SINIANZHU_REVIEW_WORKFLOW.md Stage6）"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-095",
+      "before": "哪兩句話呢？知喜楚知喜入。",
+      "after": "哪兩句話呢？知息出知息入。",
+      "rule": "regex",
+      "evidence": "底本T0209_01 L34「知息出、知息入，知息長、知息短」，念這兩句話"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-097",
+      "before": "知喜長知喜短。",
+      "after": "知息長知息短。",
+      "rule": "regex",
+      "evidence": "底本T0209_01 L34-37 知息長、知息短"
+    },
+    {
+      "sessionId": "session_01",
+      "segId": "seg-102",
+      "before": "喜我也講過很多次。",
+      "after": "息我也講過很多次。",
+      "rule": "regex",
+      "evidence": "底本T0209_01 L37 承接「知息出…你念這兩句話」談息；ASR 息→喜"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1218",
+      "before": "念呢，由念舍心安住於喜。",
+      "after": "念呢，由念攝心安住於息。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L575 攝心安住於息"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1337",
+      "before": "這個喜念的法門。",
+      "after": "這個持息念的法門。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L564-571 持息念"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1343",
+      "before": "此喜念非多緣故。",
+      "after": "此持息念非多緣故。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L651「此持息念，非多緣故」"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1349",
+      "before": "緣這個出入喜。",
+      "after": "緣這個出入息。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L571 出入息；課程合法形式皆為出入息"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1377",
+      "before": "就是此詞喜念。",
+      "after": "就是此詞持息念。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L564-571 持息念"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1382",
+      "before": "圓這個出入喜。",
+      "after": "緣這個出入息。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L653 緣出入息；ASR 圓→緣; 底本T0209_03 L571 出入息；課程合法形式皆為出入息"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1383",
+      "before": "出入喜是在我們那個身上面。",
+      "after": "出入息是在我們那個身上面。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L571 出入息；課程合法形式皆為出入息"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1487",
+      "before": "但是多數人有修淑喜觀的經驗，",
+      "after": "但是多數人有修數息觀的經驗，",
+      "rule": "regex",
+      "evidence": "底本T0209_04 L768 有修數息觀的經驗"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1488",
+      "before": "修淑慶觀的經驗也不多。",
+      "after": "修不淨觀的經驗也不多。",
+      "rule": "regex",
+      "evidence": "底本T0209_04 L768「有修不淨觀的經驗的人不多」——第二者是 不淨觀，非數息觀"
+    },
+    {
+      "sessionId": "session_04",
+      "segId": "seg-1489",
+      "before": "所以也可以先修淑喜觀，",
+      "after": "所以也可以先修數息觀，",
+      "rule": "regex",
+      "evidence": "底本T0209_04 L768 有修數息觀的經驗"
+    },
+    {
+      "sessionId": "session_03",
+      "segId": "seg-1335",
+      "before": "彼喜念能正入修。",
+      "after": "彼持息念能正入修。",
+      "rule": "regex",
+      "evidence": "底本T0209_03 L554「正入修門，要者有二：一、不淨觀，二、持息念」"
     }
   ]
 }
