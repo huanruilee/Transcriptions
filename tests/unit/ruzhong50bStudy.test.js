@@ -24,3 +24,6 @@ test('50B standalone guide is registered in the course manifest',()=>{
  const course=JSON.parse(fs.readFileSync(root+'course.json','utf8'));
  assert.ok(course.studyGuides?.includes('publications/lecture_50B_study_guide.html'));
 });
+test('self-reflection is mapped to the source sentences that contain it',()=>{
+ const p=session().paragraphs;assert.ok(p[2].sentences[0].sourceSentenceIds.includes('sent-82'));assert.ok(p[3].sentences[0].sourceSentenceIds.includes('sent-83'));assert.doesNotMatch(p[3].sentences[0].sourceSentenceIds.join(','),/sent-82(?:,|$)/);
+});
