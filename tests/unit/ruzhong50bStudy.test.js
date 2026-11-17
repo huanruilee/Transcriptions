@@ -27,3 +27,6 @@ test('50B standalone guide is registered in the course manifest',()=>{
 test('self-reflection is mapped to the source sentences that contain it',()=>{
  const p=session().paragraphs;assert.ok(p[2].sentences[0].sourceSentenceIds.includes('sent-82'));assert.ok(p[3].sentences[0].sourceSentenceIds.includes('sent-83'));assert.doesNotMatch(p[3].sentences[0].sourceSentenceIds.join(','),/sent-82(?:,|$)/);
 });
+test('自宗不許自證目錄 points to the actual transition',()=>{
+ const n=session().qualityReview.tocProjection.nodes.find(n=>n.title==='自宗不許自證亦有念生');assert.equal(n.sourceSentenceId,'sent-83');assert.equal(n.timestamp,574.3);
+});
