@@ -1,5 +1,6 @@
 import{test,expect}from'@playwright/test';import fs from'node:fs';import{createHash}from'node:crypto';
 const root='courses/入中論善顯密意疏/',source=JSON.parse(fs.readFileSync(root+'sessions/session_50B.json','utf8')),rows=source.paragraphs.flatMap((p:any)=>p.sentences),assets=[...fs.readFileSync('dist/index.html','utf8').matchAll(/(?:src|href)="(\/Transcriptions\/assets\/[^"]+)"/g)].map(m=>m[1]);
+if(assets.length<2)throw new Error('Missing release assets');
 test('ruzhong50b original URL, pending labels, full text, raw view and actual download match release',async({page},info)=>{
  await page.route(/https:\/\/(?:[^/]+\.)?(?:youtube\.com|youtube-nocookie\.com|ytimg\.com|googlevideo\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//,r=>r.abort());
  // Full audio decode and real native first/last seek are separately verified against hash-matched official audio locally.
