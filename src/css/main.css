@@ -1695,6 +1695,22 @@ body.dark-mode .toc-anchor-ts { background: rgba(197, 155, 39, 0.12); color: #c5
   transform: translateY(-1px);
 }
 
+/* 審校標記顯示開關（🔍 標記钮，localStorage: transcriptions:showReviewBadges） */
+.review-badges-hidden .sentence-review-badge {
+  display: none;
+}
+
+.header-btn.is-active {
+  border-color: var(--accent-green, #356859);
+  box-shadow: inset 0 0 0 1px rgba(53, 104, 89, 0.45);
+}
+
+/* 佛法術語 tooltip（term_annotations.json） */
+.term-tip {
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+}
+
 .sentence.has-note {
   position: relative;
 }

@@ -41,6 +41,13 @@
           <li v-for="item in overview.referenceViews" :key="item">{{ item }}</li>
         </ul>
       </section>
+
+      <section v-if="citations.length" class="transcript-overview__group" data-testid="overview-citations">
+        <h3>本講引用的經論</h3>
+        <ul>
+          <li v-for="c in citations" :key="c.title">《{{ c.title }}》 <span class="citation-count">×{{ c.count }}</span></li>
+        </ul>
+      </section>
     </div>
   </section>
 </template>
@@ -49,9 +56,12 @@
 import { ref, computed } from 'vue';
 import type { TranscriptOverview } from '../composables/useTranscriptOverview';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   overview: TranscriptOverview;
-}>();
+  citations?: Array<{ title: string; count: number }>;
+}>(), {
+  citations: () => [],
+});
 
 const isCollapsed = ref(false);
 

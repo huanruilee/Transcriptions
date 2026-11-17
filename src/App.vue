@@ -97,6 +97,18 @@
           ⭐ 評分
         </button>
 
+        <button
+          id="review-badges-toggle-btn"
+          class="header-btn"
+          data-testid="review-badges-toggle"
+          :class="{ 'is-active': showReviewBadges }"
+          :aria-pressed="String(showReviewBadges)"
+          :title="showReviewBadges ? '隱藏審校標記（🔍 待核定）' : '顯示審校標記（🔍 待核定）'"
+          @click="toggleReviewBadges"
+        >
+          🔍 標記
+        </button>
+
         <a
           href="review.html"
           target="_blank"
@@ -284,6 +296,7 @@
         <TranscriptOverview
           v-if="currentTranscriptOverview"
           :overview="currentTranscriptOverview"
+          :citations="sessionCitations"
         />
 
         <section v-if="sourceOutline" class="source-outline" aria-label="原始課程提綱">
@@ -526,8 +539,8 @@
             >
               <template v-for="(segment, segmentIndex) in sentenceSegments(s)" :key="`${s.id}-segment-${segmentIndex}`">
                 <span
-                  :class="{ 'verse-quote': segment.isVerse, 'treatise-quote': segment.isTreatiseQuote }"
-                  :title="segment.isTreatiseQuote ? '《釋量論》原文引用（依逐字稿引號標示）' : (segment.isVerse ? `根本頌第 ${segment.verseIds.join('、')} 頌（文字對照；音檔尚未獨立核驗）` : undefined)"
+                  :class="{ 'verse-quote': segment.isVerse, 'treatise-quote': segment.isTreatiseQuote, 'term-tip': segment.isTerm }"
+                  :title="segment.isTerm ? segment.termDef : (segment.isTreatiseQuote ? '《釋量論》原文引用（依逐字稿引號標示）' : (segment.isVerse ? `根本頌第 ${segment.verseIds.join('、')} 頌（文字對照；音檔尚未獨立核驗）` : undefined))"
                 >{{ segment.text }}</span>
               </template>
               <!-- 待核定徽章 (對齊 V1) -->
@@ -1130,6 +1143,42 @@ const currentReaderRebuiltAt = ref('');
 const paragraphs = ref<any[]>([]);
 const expandedVerbatimParagraphs = ref<Record<string, boolean>>({});
 const verseAnnotations = ref<Record<string, VerseAnnotation[]>>({});
+
+// 課程術語 tooltip（term_annotations.json，可選檔案）
+const termAnnotations = ref<Array<{ term: string; definition: string }>>([]);
+
+// 審校標記顯示開關（預設開啟；記憶於 localStorage）
+const showReviewBadges = ref(true);
+
+function applyReviewBadgesVisibility() {
+  document.documentElement.classList.toggle('review-badges-hidden', !showReviewBadges.value);
+}
+
+function toggleReviewBadges() {
+  showReviewBadges.value = !showReviewBadges.value;
+  try { localStorage.setItem('transcriptions:showReviewBadges', showReviewBadges.value ? '1' : '0'); } catch (e) {}
+  applyReviewBadgesVisibility();
+}
+
+try {
+  showReviewBadges.value = localStorage.getItem('transcriptions:showReviewBadges') !== '0';
+} catch (e) {}
+applyReviewBadgesVisibility();
+
+// 本講引用的經論清單（由《》引號擷取，非 AI 生成）
+const sessionCitations = computed(() => {
+  const map = new Map<string, number>();
+  for (const p of paragraphs.value) {
+    for (const s of p.sentences || []) {
+      for (const m of String(s.text || '').matchAll(/《([^《》\n]{2,20})》/g)) {
+        map.set(m[1], (map.get(m[1]) || 0) + 1);
+      }
+    }
+  }
+  return [...map.entries()]
+    .map(([title, count]) => ({ title, count }))
+    .sort((a, b) => b.count - a.count);
+});
 const isLoading = ref(false);
 const isMediaPlaying = ref(false);
 const mediaDuration = ref(0);
@@ -2043,6 +2092,19 @@ async function loadSession(sessionId: string) {
     } catch (verseError) {
       console.warn('偈頌標註載入失敗，保留一般逐字稿顯示:', verseError);
     }
+    termAnnotations.value = [];
+    try {
+      const termRes = await fetch(`${baseUrl}${cPath}/term_annotations.json`, { cache: 'no-store' });
+      if (termRes.ok) {
+        const termData = await termRes.json();
+        const list = Array.isArray(termData?.terms) ? termData.terms : [];
+        termAnnotations.value = list
+          .filter((t: any) => typeof t?.term === 'string' && typeof t?.definition === 'string')
+          .sort((a: any, b: any) => b.term.length - a.term.length);
+      }
+    } catch (termError) {
+      console.warn('術語 tooltip 載入失敗，保留一般逐字稿顯示:', termError);
+    }
     currentAudioUrl.value = data.audioUrl || '';
     currentYoutubeVideoId.value = data.youtubeVideoId || '';
     currentLastUpdated.value = data.lastUpdated || '';
@@ -2177,7 +2239,31 @@ function sentenceSegments(sentence: any) {
       text: part,
       isTreatiseQuote: Boolean(sentence.treatiseQuote || /^「[^」]*」$/.test(part) || /^『[^』]*』$/.test(part)),
     }));
-  });
+  }).flatMap(wrapTermSegments);
+}
+
+// 把非頌、非引號的 segment 再依課程術語切出 tooltip span（term 已按長度排序，長詞優先）
+function wrapTermSegments(segment: any) {
+  if (segment.isVerse || segment.isTreatiseQuote || segment.isTerm || termAnnotations.value.length === 0) {
+    return [segment];
+  }
+  let parts = [segment];
+  for (const term of termAnnotations.value) {
+    const next: any[] = [];
+    for (const part of parts) {
+      if (part.isTerm || !part.text.includes(term.term)) {
+        next.push(part);
+        continue;
+      }
+      const chunks = part.text.split(term.term);
+      chunks.forEach((chunk: string, i: number) => {
+        if (chunk) next.push({ ...part, text: chunk });
+        if (i < chunks.length - 1) next.push({ ...part, text: term.term, isTerm: true, termDef: term.definition });
+      });
+    }
+    parts = next;
+  }
+  return parts;
 }
 
 // 根據段落起始時間匹配科判節點 (對齊 V1 findTOCNodeAtParagraphStart：嚴格匹配 node.sessionId === sessionId)
