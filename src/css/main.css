@@ -1695,8 +1695,9 @@ body.dark-mode .toc-anchor-ts { background: rgba(197, 155, 39, 0.12); color: #c5
   transform: translateY(-1px);
 }
 
-/* 審校標記顯示開關（🔍 標記钮，localStorage: transcriptions:showReviewBadges） */
-.review-badges-hidden .sentence-review-badge {
+/* 審校標記顯示開關（🔍 標記钮，localStorage: transcriptions:showReviewBadges）
+   雙重類別提高 specificity，壓過組件 scoped style 的 .sentence-review-badge[data-v-*] */
+.review-badges-hidden .sentence-review-badge.sentence-review-badge {
   display: none;
 }
 

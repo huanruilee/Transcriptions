@@ -3391,6 +3391,17 @@ if (typeof window !== 'undefined') {
   transform: translateY(-1px);
 }
 
+/* 審校標記顯示開關（🔍 標記鈕 → html 根節點 class，localStorage 記憶） */
+.review-badges-hidden .sentence-review-badge {
+  display: none;
+}
+
+/* 佛法術語 tooltip（term_annotations.json） */
+.term-tip {
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+}
+
 .sentence.has-note {
   position: relative;
 }

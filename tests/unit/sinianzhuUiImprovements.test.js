@@ -49,8 +49,9 @@ test('審校標顯示開關契約 (App.vue + main.css)', () => {
   assert.ok(app.includes("localStorage.setItem('transcriptions:showReviewBadges'"), 'toggle persists');
   assert.ok(app.includes("classList.toggle('review-badges-hidden'"), 'html class toggled');
   const css = read('src/css/main.css');
-  assert.ok(css.includes('.review-badges-hidden .sentence-review-badge'), 'hide rule exists');
-  assert.match(css, /\.review-badges-hidden \.sentence-review-badge\s*{\s*display:\s*none/, 'hide rule sets display:none');
+  assert.ok(css.includes('.review-badges-hidden .sentence-review-badge.sentence-review-badge'), 'hide rule exists with doubled class to beat scoped-style specificity');
+  assert.match(css, /\.review-badges-hidden \.sentence-review-badge\.sentence-review-badge\s*{\s*display:\s*none/, 'hide rule sets display:none');
+  assert.match(app, /\.review-badges-hidden \.sentence-review-badge\s*{\s*display:\s*none/, 'hide rule also lives in App.vue scoped block (V2 bundles component styles only)');
 });
 
 test('本講引用經論清單契約 (App.vue + TranscriptOverview.vue)', () => {
