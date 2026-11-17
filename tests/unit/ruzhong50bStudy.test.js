@@ -30,3 +30,6 @@ test('self-reflection is mapped to the source sentences that contain it',()=>{
 test('自宗不許自證目錄 points to the actual transition',()=>{
  const n=session().qualityReview.tocProjection.nodes.find(n=>n.title==='自宗不許自證亦有念生');assert.equal(n.sourceSentenceId,'sent-83');assert.equal(n.timestamp,574.3);
 });
+test('cross-page textbook excerpt preserves the beginning of 能取心',()=>{
+ const s=text();assert.match(s,/第155–156頁跨頁補列[^。]*。由能取心領受餘所取境事/);
+});
