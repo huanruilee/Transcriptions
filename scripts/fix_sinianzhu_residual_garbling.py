@@ -10,7 +10,7 @@ never touched. Produces a per-edit evidence ledger.
 import json, re, sys, os, hashlib
 from collections import Counter
 
-ROOT = "/home/henry/.hermes/cache/scratch/sinianzhu_review/wt"
+ROOT = os.environ.get("TRANSCRIPTIONS_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SDIR = os.path.join(ROOT, "courses/四念住/sessions")
 EVID = os.path.join(ROOT, "reviews/evidence/sinianzhu")
 
@@ -169,9 +169,60 @@ RULES = [
  ("，，","，","ASR標點重複"),
 ]
 
+# ---- Stage6d rules (2026-11-17, 數息段 seg-099..160 / 調心段 seg-421..468 /
+#      白骨觀次第 seg-1615..1650; adjudicated against base text T0209_01 lines
+#      34-160, 577-585 and T0209_04 lines 26-29, 845-852) --------------------
+RULES += [
+ ("知洗除，知洗入","知息出、知息入","底本T0209_01 L34「知息出、知息入」"),
+ ("知洗長，知洗短","知息長、知息短","底本T0209_01 L37「知息長、知息短」"),
+ ("戲進來","吸進來","底本T0209_01 L40「可是也沒有吸進來」"),
+ ("撥出去","呼出去","底本T0209_01 L39-51「呼出去」×6；全書撥=0"),
+ ("有一個戲","有一個息","底本T0209_01 L40「在這個中間有一個息」"),
+ ("這個戲啊","這個息啊","底本T0209_01 L40「這個息就是停止的意思」"),
+ ("這個戲就叫做","這個息就叫做","底本T0209_01 L41「這個息就叫做出息」"),
+ ("聽子","停止","底本T0209_01 L40「這個息就是停止的意思」"),
+ ("不出霧也不入","不出也不入","底本T0209_01 L40「這個時候也不出、也不入」"),
+ ("雛喜","出息","底本T0209_01 L41「這個息就叫做出息」；雛喜ASR=出息"),
+ ("這個洗過去了","這個息過去了","底本T0209_01 L45「這個息過去了的時候」"),
+ ("又有一個吸，叫做入息","又有一個息，叫做入息","底本T0209_01 L49「又有一個息，那叫做入息」"),
+ ("又有洗","又有息","底本T0209_01 L49「又有個息」"),
+ ("個洗的","個息的","底本T0209_01 L51「還有個息的」"),
+ ("洗的現象","息的現象","底本T0209_01 L52「息的現象就出來了」"),
+ ("出席也長","出息也長","底本T0209_01 L53「出息也長一點」"),
+ ("入席也會長","入息也會長","底本T0209_01 L53「入息也會長一點」"),
+ ("入席長","入息長","底本T0209_01 L54「小孩子的入息長」"),
+ ("出席長","出息長","底本T0209_01 L54「老年人出息長」"),
+ ("靜歌","靜坐","底本T0209_01 L56「一開始靜坐的時候」；全書靜歌=0"),
+ ("知識出、知識入","知息出、知息入","底本T0209_01 L56「知息出、知息入」"),
+ ("知識長、知識短","知息長、知息短","底本T0209_01 L56「知息長、知息短」"),
+ ("注意這個喜在出","注意這個息在出","底本T0209_01 L57「注意這個息在出」"),
+ ("注意這個喜在入","注意這個息在入","底本T0209_01 L57「注意這個息在入」"),
+ ("注意這個喜是長","注意這個息是長","底本T0209_01 L58「注意這個息是長」"),
+ ("注意這個喜是短","注意這個息是短","底本T0209_01 L58「注意這個息是短」"),
+ ("修關會","修觀慧","底本T0209_01 L102「那不如修觀慧了」"),
+ ("修關","修觀","底本T0209_01 L141/150「修觀的時間」「忘掉了修觀」；全書修關=0"),
+ ("分鐘的關","分鐘的觀","底本T0209_01 L140「修五分鐘的觀」L150「兩分鐘、三分鐘的觀」"),
+ ("世間柱","四念住","底本T0209_01 L113「讀經幫助你修四念住的」"),
+ ("紙的時間","止的時間","底本T0209_01 L141「不要超過止的時間，止的時間叫它長一點」"),
+ ("說紙修成功","說止修成功","底本T0209_01 L123「就是止修成功了」"),
+ ("欲界定的這個紙","欲界定的這個止","底本T0209_01 L128「欲界定的止」"),
+ ("鐘頭的紙","鐘頭的止","底本T0209_01 L137「修一個鐘頭的止」"),
+ ("再修紙","再修止","底本T0209_01 L577/585「你再修止」「再修止」"),
+ ("記憶不動","寂然不動","底本T0209_01 L140「修了一個鐘頭的止，寂然不動」"),
+ ("再休止","再修止","底本T0209_01 L150「三分鐘的觀，再修止」"),
+ ("就大妄想","就打妄想","底本T0209_01 L580「過了五分鐘就打妄想了"),
+ ("舌摩托","奢摩他","底本T0209_01 L581「你這樣子修奢摩他三十分鐘」"),
+ ("佐量","酌量","底本T0209_01 L581「你酌量它三十分鐘"),
+ ("從頂之竹","從頂至足","底本T0209_01 L576「不是從頂至足」"),
+ ("第一個出席","第一個初習業","底本T0209_04 L29「第一個初習業，在這個期間」"),
+]
+
 # ---- targeted segment rewrites (exact seg id -> new text) -------------------
 SEG = {
  "session_01": {
+  "seg-1615":"這上告訴你一個次第，",
+  "seg-1622":"那麼你再修止。",
+  "seg-1631":"要趕快地覺悟，回來。",
   "seg-083":"這個所緣境也是很多。",  "seg-645":"就是都已經是得無生法忍的聖人了。",
   "seg-646":"他已經成就了根本智。",
   "seg-648":"這樣的人叫做「行深般若波羅蜜多」。",
@@ -223,6 +274,7 @@ SEG = {
   "seg-020":"但是因為我們愚癡，就認為這一念心是常住的。",
  },
  "session_04": {
+  "seg-1647":"因為你前面初習業位、已熟修位，",
   "seg-1585":"大乘的四念住有更深一層的境界。",
   "seg-304":"這是禪師，瑜伽師就是禪師。",
   "seg-306":"初習業的一個階段。",
@@ -265,6 +317,8 @@ TOKEN_FLAGS = [
  "宋約","星神","小綠","拉法師","供養攤","正話","琪詞","箱子說","禧","無聲發","博爾",
  "親修","奢侈","華音經","阿漢","《《","》》",
  "官","譚居士","說現代","做一思為",
+ # Stage6d
+ "雛喜","靜歌","世間柱","修關","舌摩托","聽子","出席","入席","佐量","記憶不動","從頂之竹","撥出",
 ]
 UNREASON = {
  "seg-633":"專名不確定（疑似論名/論師名）","seg-634":"疑為「異熟果」類名相，底本無對應段",
@@ -340,7 +394,14 @@ def main():
             data["contentOverview"]["sourceDigest"]=digest_of(data)
         json.dump(data,open(fp,"w"),ensure_ascii=False,indent=2)
     os.makedirs(EVID,exist_ok=True)
-    json.dump({"generatedAt":"2026-11-17","baseText":"https://ftp.budaedu.org/ghosa/C009/T0209/ref/T0209_NN.pdf","ruleCount":len(RULES),"edits":len(ledger),"ledger":ledger},open(os.path.join(EVID,"residual_repair_ledger.json"),"w"),ensure_ascii=False,indent=2)
+    ledger_fp=os.path.join(EVID,"residual_repair_ledger.json")
+    prior=[]
+    if os.path.exists(ledger_fp):
+        try: prior=json.load(open(ledger_fp)).get("ledger",[])
+        except Exception: prior=[]
+    seen={(e["sessionId"],e["segId"],e["after"]) for e in prior}
+    merged=prior+[e for e in ledger if (e["sessionId"],e["segId"],e["after"]) not in seen]
+    json.dump({"generatedAt":"2026-11-17","baseText":"https://ftp.budaedu.org/ghosa/C009/T0209/ref/T0209_NN.pdf","ruleCount":len(RULES),"edits":len(merged),"ledger":merged},open(ledger_fp,"w"),ensure_ascii=False,indent=2)
     json.dump({"generatedAt":"2026-11-17","sentences":unresolved},open(os.path.join(EVID,"unresolved_sentences.json"),"w"),ensure_ascii=False,indent=2)
     print("edits:",len(ledger),"seg_rewrites:",seg_edits,"unresolved:",len(unresolved))
     print("rule_hits:")
