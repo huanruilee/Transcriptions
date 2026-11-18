@@ -135,3 +135,36 @@ python3 scripts/init_course.py \
    ```
 3. **GitHub Pages 自動發布**：
    GitHub Actions 會在 20 秒內自動將最新課程打包並發布至正式站台，無須任何手動伺服器設定！
+
+---
+
+## 附：`video/youtube` 且有「官方底本」的課程（四法印先例）
+
+《四法印》（`si-fa-yin`）是本平台第一門「講師自己在 YouTube 描述附官方整編逐字稿 PDF＋官方音檔」的
+`video/youtube` 課程，因此走的是**底本對校**路徑，比《三主要道》《四念住》的純 ASR＋詞庫更強。
+可重現指令全部落在 `scripts/sifayin_*.py`：
+
+| 步驟 | 指令 | 產物 |
+|---|---|---|
+| 0 抓官方素材 | `python3 scripts/sifayin_intake.py --sessions 01,..` | `reviews/evidence/sifayin/playlist-NN/{reference_official.pdf,source.mp3}` ＋ `intake_manifest.json`（SHA-256） |
+| 1 官方提綱 | `python3 scripts/sifayin_outline.py` | `playlist-NN/outline.json`（附時間碼小標；缺提綱即報錯，不猜） |
+| 2 ASR | `python3 scripts/sifayin_asr.py --sessions ..` | `playlist-NN/raw_asr.json`（segments＋RTF＋尾差＋音檔雜湊） |
+| 3 底本對校＋切段 | `~/projects/transcription-web/venv/bin/python scripts/sifayin_build_transcript.py --sessions ..` | `courses/四法印/sessions/*.json` ＋ `correction_candidates.json` |
+| 4 內容摘要 | `OVERVIEW_PROVIDER=eneural node scripts/content_overview_pipeline.mjs --session si-fa-yin/session_NN --apply` | session 內 `contentOverview`（證據逐字回查） |
+| 5 稽核六件套 | `python3 scripts/sifayin_finalize.py --sessions ..` | `run_manifest.json`、`review.md`、`content_review*.json` |
+| 6 課程註冊 | `python3 scripts/sifayin_grounding.py && python3 scripts/sifayin_build_catalog.py` | `grounding.json`、`course.json`、`toc.json`、`correction-dates.html`、`courses/catalog.json` |
+
+關鍵紀律（寫進 `tests/unit/siFaYin.test.js` 當閘門）：
+
+1. **時間碼只來自 ASR**；官方提綱只決定段落邊界與小標。
+2. 官方底本是**整編定稿**：只有「同音／近音＋底本詞頻佐證」的名相訛誤才自動改寫
+   （`strict-homophone`／`near-homophone-term`），口語刪節一律標 `editorial-divergence` 不改；
+   同音但無詞頻佐證者標 `reviewNeeded` 交人工，絕不自動改。
+3. `rawText` 保留 ASR 原樣，`text` 才是校訂結果。
+4. 未經逐句人工聽核前，`publicationState` 維持 `candidate-review-required`，
+   `run_manifest.gates.humanListened` 必為 `false`。
+5. 每講證據必須湊齊六件套，`content_review_manifest` 的 `unsupported` 必須為 0。
+6. 兩處註冊都要改：`courses/catalog.json` 與 `src/stores/course.ts`；
+   新增課程後 `contentOverviewPipeline`／`transcriptProofreadingPipeline` 的總數常量要同步更新。
+7. 跑順序不可逆：先定稿逐字稿，再跑 `contentOverview`；之後若重建逐字稿，digest 會失配，
+   `npm run summaries:audit` 會擋下。

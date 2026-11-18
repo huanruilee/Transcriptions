@@ -1,0 +1,519 @@
+{
+  "courseId": "si-fa-yin",
+  "title": "四法印（如性法師主講・2020 臺灣營隊）",
+  "verified_at": "2026-11-19",
+  "step0_entity_grounding": {
+    "note": "依 docs/TRANSCRIPTION_WORKFLOW.md §3 Step 0 執行。本課程每講 YouTube 描述均附官方整編逐字稿 PDF 與官方音檔，故 Step 0 產物即該 11 份官方底本：名相與引文以底本為準，時間碼一律以 ASR 為準。",
+    "probe_1_channel_and_instructor": {
+      "query": "四法印 如性法師 如來法性影音頻道 營隊",
+      "result": "如來法性影音頻道（channelId UCcL81Q7idwmC-AIFGtKt8Pg）播放列表 PLMngxNMnjFcPB4eYNHrOUdCgh__7hF2hl，共 11 支：導論《法師的教學藍圖與建議》＋四法印 10-1〜10-10。底本首页：「講解：如性法師／日期：2020 年7 月26 日〜8 月2 日／地點：臺灣」。",
+      "status": "verified",
+      "evidence": "reviews/evidence/sifayin/playlist_inventory.tsv, video_metadata.tsv, courses/四法印/source_text/lecture_02.txt 首行"
+    },
+    "probe_2_textbook": {
+      "query": "四法印 文字檔 官方 下載",
+      "result": "每講描述提供「文字檔下載」Google Drive 連結（官方整編定稿，11/11 可下載）、「電子書下載」與「聲音檔下載」；官方音檔長度與 YouTube duration 逐講一致（誤差 <1 秒）。",
+      "status": "verified",
+      "evidence": "reviews/evidence/sifayin/intake_manifest.json, reviews/evidence/sifayin/reference/README.md"
+    },
+    "probe_3_related_courses": {
+      "query": "如性法師 三主要道 釋量論 平台既有課程",
+      "result": "同頻道同講師的《三主要道》（san-zhu-yao-dao）與《2025 釋量論・第二品大組共學》已在平台上線，可沿用其 video/youtube schema 與提綱切段做法；本課程另有官方底本，故採底本對校路徑。",
+      "status": "verified",
+      "evidence": "courses/san-zhu-yao-dao 之先例；tests/unit/sanZhuYaoDao.test.js"
+    }
+  },
+  "entities": {
+    "channel": {
+      "name": "如來法性影音頻道",
+      "channel_id": "UCcL81Q7idwmC-AIFGtKt8Pg",
+      "playlist_id": "PLMngxNMnjFcPB4eYNHrOUdCgh__7hF2hl",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLMngxNMnjFcPB4eYNHrOUdCgh__7hF2hl",
+      "soundcloud": "https://soundcloud.com/rulaifaxing"
+    },
+    "instructor": {
+      "name": "如性法師",
+      "tradition": "漢傳佛教・兼修藏傳格魯派五部大論",
+      "venues": "2020 年臺灣營隊（第三營；第一營四聖諦、第二營《緣起讚》）",
+      "common_misrecognitions": [
+        "如信法師",
+        "如心法師",
+        "如興法師",
+        "人性法師"
+      ]
+    },
+    "textbook": {
+      "title": "《四法印》官方整編逐字稿（11 講）",
+      "compiled_by": "如性法師主講，頻道助手整理定稿",
+      "pages_total_observed": "17〜31 頁／講（見 reference/README.md）",
+      "role": "edited-text-reference",
+      "chapter_map": [
+        {
+          "session": "session_01",
+          "official_label": "法師的教學藍圖與建議"
+        },
+        {
+          "session": "session_02",
+          "official_label": "第一講（學習態度與四法印簡介）"
+        },
+        {
+          "session": "session_03",
+          "official_label": "第二講（四法印之一：諸行無常）"
+        },
+        {
+          "session": "session_04",
+          "official_label": "第三講（死亡不是人生的終點）"
+        },
+        {
+          "session": "session_05",
+          "official_label": "第四講（探索生命的起源）"
+        },
+        {
+          "session": "session_06",
+          "official_label": "第五講（探討心的作用與有無造物主）"
+        },
+        {
+          "session": "session_07",
+          "official_label": "第六講（四法印之二：有漏皆苦）"
+        },
+        {
+          "session": "session_08",
+          "official_label": "第七講（探索痛苦的根源）"
+        },
+        {
+          "session": "session_09",
+          "official_label": "第八講（探討我們心中所想的我）"
+        },
+        {
+          "session": "session_10",
+          "official_label": "第九講（四法印之三：諸法無我）"
+        },
+        {
+          "session": "session_11",
+          "official_label": "第十講（四法印之四：涅槃寂靜）"
+        }
+      ]
+    }
+  },
+  "reference_materials": [
+    {
+      "referenceId": "sifayin-official-transcript-01",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 01",
+      "session_id": "session_01",
+      "youtube_video_id": "dAyrtR6hQik",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=179s_yyywor0EgJ8nsyH1303yswUbIpu4&export=download&confirm=t",
+      "drive_file_id": "179s_yyywor0EgJ8nsyH1303yswUbIpu4",
+      "local_path": "courses/四法印/source_text/lecture_01.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-01/reference_official.pdf",
+      "sha256": "sha256:c87f27ea45c773a11c862ea47583b9589b7e5e75db6d603feac256b2b6ba95f4",
+      "pdf_sha256": "sha256:78b6fa41b283c139afd5ef707f3badcf1939376f6cb16539546ba801b4bcc537",
+      "chars": 5665,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-02",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 02",
+      "session_id": "session_02",
+      "youtube_video_id": "tLSvZzazrbM",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1qMJJqQK3w5nlTf2O3O9lVxCE51Su0DG0&export=download&confirm=t",
+      "drive_file_id": "1qMJJqQK3w5nlTf2O3O9lVxCE51Su0DG0",
+      "local_path": "courses/四法印/source_text/lecture_02.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-02/reference_official.pdf",
+      "sha256": "sha256:12c950d89bafbb12fc3fc410110a952ed03874a63b4cccba6eb98f1731e72080",
+      "pdf_sha256": "sha256:faa3d8545a018a91d70a2c2e23f528a5c49b485efa37279cbc545835ac711d0d",
+      "chars": 10669,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-03",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 03",
+      "session_id": "session_03",
+      "youtube_video_id": "SPovYO1r4ss",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1V4qqdAxm9BhnLwSfmZmvxd-tf8oq4ZSI&export=download&confirm=t",
+      "drive_file_id": "1V4qqdAxm9BhnLwSfmZmvxd-tf8oq4ZSI",
+      "local_path": "courses/四法印/source_text/lecture_03.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-03/reference_official.pdf",
+      "sha256": "sha256:a5da03d926e349024499c6f772df2a2471c310adb1c62544e43b2b08367935cf",
+      "pdf_sha256": "sha256:28569016ebdcd20edfdebfb8fc03a2e3e87afa9eb82e73e0ffa2a6544e9656e7",
+      "chars": 11602,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-04",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 04",
+      "session_id": "session_04",
+      "youtube_video_id": "BdOVte3o6kc",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=18HFPgNLzP_VawslTz-86IBu7P3ifHqJ0&export=download&confirm=t",
+      "drive_file_id": "18HFPgNLzP_VawslTz-86IBu7P3ifHqJ0",
+      "local_path": "courses/四法印/source_text/lecture_04.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-04/reference_official.pdf",
+      "sha256": "sha256:359f45b4e8dd1caebd85ce889627a19ae78558f0103af97e6d5e2e922399cebe",
+      "pdf_sha256": "sha256:f2662173a2bb98f49b5e097a6b733d59e9d70adabd1e4390d47f301b040dc8fe",
+      "chars": 13370,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-05",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 05",
+      "session_id": "session_05",
+      "youtube_video_id": "FARWbQZPAcw",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1F6CVQ5B7YQ7YePHxHFbcIanQU8bkqxS2&export=download&confirm=t",
+      "drive_file_id": "1F6CVQ5B7YQ7YePHxHFbcIanQU8bkqxS2",
+      "local_path": "courses/四法印/source_text/lecture_05.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-05/reference_official.pdf",
+      "sha256": "sha256:326d1a08f9098ab59f9d4cf7ea504e60f24d50628860ce5dfd6753250da71989",
+      "pdf_sha256": "sha256:cb2aa26001dc816b0af4287d51428575d3d8ee5321d8f822cf976c8c54a918cb",
+      "chars": 10224,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-06",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 06",
+      "session_id": "session_06",
+      "youtube_video_id": "oCQU-3ggipM",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1R0okhvvsDrXwhOPvKciLszkRWrlP-Okh&export=download&confirm=t",
+      "drive_file_id": "1R0okhvvsDrXwhOPvKciLszkRWrlP-Okh",
+      "local_path": "courses/四法印/source_text/lecture_06.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-06/reference_official.pdf",
+      "sha256": "sha256:cf596b4df2ed40e012ca2b029808870a630a79e009d1b292a0e414c1132c6ef1",
+      "pdf_sha256": "sha256:da401b224779aeb445f4575af96addc07f0c2d03876322b5545473163d1f272b",
+      "chars": 13588,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-07",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 07",
+      "session_id": "session_07",
+      "youtube_video_id": "LQjIiEGKjH0",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1bMJAbYh9OMwU6dCVmv7T4WO5axT1TUGx&export=download&confirm=t",
+      "drive_file_id": "1bMJAbYh9OMwU6dCVmv7T4WO5axT1TUGx",
+      "local_path": "courses/四法印/source_text/lecture_07.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-07/reference_official.pdf",
+      "sha256": "sha256:4f77c301594608c0bbb6f475fd49207028888c0e89c5cc7ec8bf7dd1ef860daa",
+      "pdf_sha256": "sha256:d447f0d1baaf32637095be58524d09f4b11b7a44a22cb1b1e84b44b44e1b7b54",
+      "chars": 14039,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-08",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 08",
+      "session_id": "session_08",
+      "youtube_video_id": "ucXdxJYUO8s",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1z59s16OEYwnE-drDZElLzRoceqNw6cbi&export=download&confirm=t",
+      "drive_file_id": "1z59s16OEYwnE-drDZElLzRoceqNw6cbi",
+      "local_path": "courses/四法印/source_text/lecture_08.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-08/reference_official.pdf",
+      "sha256": "sha256:e72b6de286ff26320eede72363abc4da25c3e408c65fc206d25ff9443026a28e",
+      "pdf_sha256": "sha256:4aa37073f216bf7cb331e88e2595a1455bad04469e0398dd2921c4e6a576c55b",
+      "chars": 10003,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-09",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 09",
+      "session_id": "session_09",
+      "youtube_video_id": "bAuJq_T43S4",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1HZwB4PttBFVm6dQosttTJAfYWVqoWpCy&export=download&confirm=t",
+      "drive_file_id": "1HZwB4PttBFVm6dQosttTJAfYWVqoWpCy",
+      "local_path": "courses/四法印/source_text/lecture_09.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-09/reference_official.pdf",
+      "sha256": "sha256:8522d0ea52c119efdbee4ca28c4a17d1db736460446ca3aa3a4870d9dea1d240",
+      "pdf_sha256": "sha256:f778a821acae06520cd8d6d2b35f00c2229efc5fde7e729b496c629c04e80e30",
+      "chars": 9343,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-10",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 10",
+      "session_id": "session_10",
+      "youtube_video_id": "11gEibLNGTM",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1QZqozWNahbPioqAf7uUZ73aklp8IaLS0&export=download&confirm=t",
+      "drive_file_id": "1QZqozWNahbPioqAf7uUZ73aklp8IaLS0",
+      "local_path": "courses/四法印/source_text/lecture_10.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-10/reference_official.pdf",
+      "sha256": "sha256:436fff16a2513fe84c8e4b7f9e2415bfbf825af9e64375c72a60bfc60d07031c",
+      "pdf_sha256": "sha256:793fdc4e6303c911576fcc2fa910bbc5b96d032ec3534bfb75d3ef3563e2225d",
+      "chars": 9337,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    },
+    {
+      "referenceId": "sifayin-official-transcript-11",
+      "type": "edited-text-reference",
+      "title": "四法印 官方整編逐字稿 11",
+      "session_id": "session_11",
+      "youtube_video_id": "s8hZpRQm9BY",
+      "source": "性法師（如來法性影音頻道）官方 YouTube 描述之 Google Drive 官方 PDF",
+      "url": "https://drive.usercontent.google.com/download?id=1tuv19d_OCncOFbZaqON_DXJDRxH9qoWE&export=download&confirm=t",
+      "drive_file_id": "1tuv19d_OCncOFbZaqON_DXJDRxH9qoWE",
+      "local_path": "courses/四法印/source_text/lecture_11.txt",
+      "pdf_local_path": "reviews/evidence/sifayin/playlist-11/reference_official.pdf",
+      "sha256": "sha256:63ad55a2cd9f23dc5db09566e868e4e89720c06cf8c501514f1a4f22bcd2d04c",
+      "pdf_sha256": "sha256:6a8edadcb02681ae73485480ece9741b8d959022dc78957cc2fc13fc074938b2",
+      "chars": 8639,
+      "retrieved_at": "2026-11-18T18:58:47+00:00",
+      "role": "官方整編定稿：作名相／引文校訂基準；時間碼一律以 ASR 為準"
+    }
+  ],
+  "high_frequency_doctrinal_terms": [
+    {
+      "term": "四法印",
+      "baseTextFrequency": 47
+    },
+    {
+      "term": "三法印",
+      "baseTextFrequency": 1
+    },
+    {
+      "term": "諸行無常",
+      "baseTextFrequency": 13
+    },
+    {
+      "term": "有漏皆苦",
+      "baseTextFrequency": 13
+    },
+    {
+      "term": "諸法無我",
+      "baseTextFrequency": 10
+    },
+    {
+      "term": "涅槃寂靜",
+      "baseTextFrequency": 6
+    },
+    {
+      "term": "四聖諦",
+      "baseTextFrequency": 14,
+      "observed_misrecognitions": [
+        "地（2 次）"
+      ]
+    },
+    {
+      "term": "苦諦",
+      "baseTextFrequency": 5
+    },
+    {
+      "term": "集諦",
+      "baseTextFrequency": 5
+    },
+    {
+      "term": "滅諦",
+      "baseTextFrequency": 5
+    },
+    {
+      "term": "道諦",
+      "baseTextFrequency": 0
+    },
+    {
+      "term": "開經偈",
+      "baseTextFrequency": 2
+    },
+    {
+      "term": "菩提心",
+      "baseTextFrequency": 12
+    },
+    {
+      "term": "大悲心",
+      "baseTextFrequency": 6
+    },
+    {
+      "term": "補特伽羅",
+      "baseTextFrequency": 2
+    },
+    {
+      "term": "施設處",
+      "baseTextFrequency": 0
+    },
+    {
+      "term": "取蘊",
+      "baseTextFrequency": 22
+    },
+    {
+      "term": "常一自在的我",
+      "baseTextFrequency": 0
+    },
+    {
+      "term": "輪迴",
+      "baseTextFrequency": 44
+    },
+    {
+      "term": "解脫",
+      "baseTextFrequency": 63
+    },
+    {
+      "term": "三寶",
+      "baseTextFrequency": 8
+    },
+    {
+      "term": "因緣",
+      "baseTextFrequency": 119
+    },
+    {
+      "term": "緣起",
+      "baseTextFrequency": 7
+    },
+    {
+      "term": "無常",
+      "baseTextFrequency": 84
+    },
+    {
+      "term": "無我",
+      "baseTextFrequency": 45
+    },
+    {
+      "term": "空性",
+      "baseTextFrequency": 1
+    },
+    {
+      "term": "执著",
+      "baseTextFrequency": 0
+    },
+    {
+      "term": "煩惱",
+      "baseTextFrequency": 176
+    }
+  ],
+  "observed_homophone_corrections": [
+    {
+      "asr": "文",
+      "official": "聞",
+      "count": 4
+    },
+    {
+      "asr": "適",
+      "official": "釋",
+      "count": 2
+    },
+    {
+      "asr": "地",
+      "official": "諦",
+      "count": 2
+    },
+    {
+      "asr": "設",
+      "official": "攝",
+      "count": 2
+    },
+    {
+      "asr": "元",
+      "official": "緣",
+      "count": 2
+    },
+    {
+      "asr": "世",
+      "official": "士",
+      "count": 2
+    },
+    {
+      "asr": "唸",
+      "official": "念",
+      "count": 2
+    },
+    {
+      "asr": "測",
+      "official": "策",
+      "count": 2
+    },
+    {
+      "asr": "佔",
+      "official": "占",
+      "count": 1
+    },
+    {
+      "asr": "四",
+      "official": "寺",
+      "count": 1
+    },
+    {
+      "asr": "社",
+      "official": "攝",
+      "count": 1
+    },
+    {
+      "asr": "做",
+      "official": "作",
+      "count": 1
+    },
+    {
+      "asr": "維",
+      "official": "惟",
+      "count": 1
+    },
+    {
+      "asr": "升",
+      "official": "生",
+      "count": 1
+    },
+    {
+      "asr": "隻",
+      "official": "只",
+      "count": 1
+    },
+    {
+      "asr": "他",
+      "official": "它",
+      "count": 1
+    },
+    {
+      "asr": "正",
+      "official": "證",
+      "count": 1
+    }
+  ],
+  "per_session_asr_stats": {
+    "session_01": {
+      "appliedCorrections": 13,
+      "pendingReview": 99,
+      "asrSegments": 551
+    },
+    "session_02": {
+      "appliedCorrections": 14,
+      "pendingReview": 77,
+      "asrSegments": 1356
+    }
+  },
+  "alignment_method": {
+    "asr": "本地 whisper-gpu-service（/v1/audio/transcriptions, response_format=verbose_json, language=zh, vad_filter=true, no_speech_threshold=0.6, condition_on_previous_text=true）；時間碼全部來自 ASR segments。",
+    "simplified_to_traditional": "OpenCC s2twp（venv: ~/projects/transcription-web/venv）。",
+    "base_text_alignment": "python difflib.SequenceMatcher 字級對齊（只比對 CJK 字元），逐句取其對應的底本視窗做局部對齊。",
+    "correction_policy": "只自動套用「同音／近音字替換且長度≤3、單次改動≤6 字」的差異（pypinyin 聲母韻母相同）；整編稿的口語刪節／改寫標記為 editorial-divergence，不覆寫講者口語；位置錯位者標記 reviewNeeded 交人工。",
+    "paragraph_segmentation": "段落邊界取自每講 YouTube 描述的官方附時間碼提綱（sifayin_outline.py），小標即官方提綱條目；提綱缺失時明確回報，不猜測小標。",
+    "scripts": [
+      "scripts/sifayin_intake.py",
+      "scripts/sifayin_outline.py",
+      "scripts/sifayin_asr.py",
+      "scripts/sifayin_build_transcript.py",
+      "scripts/sifayin_evidence_docs.py",
+      "scripts/sifayin_build_catalog.py",
+      "scripts/sifayin_grounding.py"
+    ]
+  }
+}
