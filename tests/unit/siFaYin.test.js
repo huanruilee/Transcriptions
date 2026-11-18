@@ -94,7 +94,7 @@ test('both registration points (catalog.json and src/stores/course.ts) list si-f
   // App.vue 對每門課都渲染 correction-dates 連結，缺檔會 404
   const dates = fs.readFileSync(path.join(courseDir, 'correction-dates.html'), 'utf8');
   assert.equal((dates.match(/<tr><th scope="row">/g) || []).length, 11);
-  assert.match(dates, /待閱校版/);
+  assert.match(dates, /有日期不代表已人工聽核/);
 });
 
 test('every session follows the canonical transcript contract with ASR-only timecodes', () => {

@@ -15,6 +15,7 @@ scripts/sifayin_build_catalog.py
 
 import json
 import re
+import subprocess
 from datetime import datetime
 from pathlib import Path
 
@@ -72,30 +73,8 @@ def title_for(session_id: str) -> tuple[str, str, str]:
             f"四法印・第{CN_NUMERALS[number - 2]}講", date)
 
 
-def write_correction_dates(sessions: list[dict]) -> None:
-    rows = "".join(
-        f'<tr><th scope="row"><a href="../../?course={COURSE_ID}&amp;session={entry["sessionId"]}">'
-        f'{entry["sessionId"]}</a></th><td>{entry["title"]}</td>'
-        f'<td>{entry["lastUpdated"]}</td><td>session_{entry["sessionId"]}.json 之 lastUpdated（ASR＋自動校字產出日）</td></tr>'
-        for entry in sessions
-    )
-    html = (
-        '<!doctype html><html lang="zh-Hant"><meta charset="utf-8">'
-        '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>四法印｜各講逐字稿產出日期</title>'
-        '<style>body{font:17px/1.7 system-ui;background:#f7f4ee;color:#263029;margin:0}'
-        'main{max-width:1100px;margin:auto;padding:24px}table{width:100%;border-collapse:collapse;background:white}'
-        'th,td{padding:12px;text-align:left;border-bottom:1px solid #ddd}caption{text-align:left;font-weight:bold}'
-        'a{color:#285a3b}.scroll{overflow-x:auto}small{color:#59685b}</style><main>'
-        f'<a href="../../?course={COURSE_ID}">← 返回課程</a><h1>四法印：各講逐字稿產出／更新日期</h1>'
-        f'<p>本頁記錄本課程 {len(sessions)} 講逐字稿的最近產出／更新日期。日期取自正式逐字稿的更新欄位，'
-        '不是授課日、部署日或試閱候選日期。<strong>本課程目前全數為待閱校版</strong>：逐字稿由本地 ASR 轉寫並以講師提供的'
-        '官方整編逐字稿做名相對校，尚未逐句人工聽核；有日期不代表已聽核。未記錄表示缺少有效日期，不代表從未校訂。</p>'
-        '<div class="scroll"><table><caption>正式逐字稿記錄日期</caption><thead><tr><th scope="col">講次</th>'
-        '<th scope="col">標題</th><th scope="col">最後校訂／更新日期（原記錄）</th><th scope="col">日期來源</th></tr></thead>'
-        f'<tbody>{rows}</tbody></table></div><small>共 {len(sessions)} 講</small></main></html>'
-    )
-    (COURSE_DIR / "correction-dates.html").write_text(html, encoding="utf-8")
+# correction-dates.html 一律交由平台正式產生器（scripts/course_correction_dates.mjs）：
+# 自己寫一份就成了第二套模板，跑測試時會被正式模板蓋掉，造成「本地綠、CI 紅」的假象。
 
 
 def write_learned_corrections() -> int:
@@ -241,7 +220,10 @@ def main() -> None:
         "sections": toc_sections,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    write_correction_dates(sessions)
+    canonical = subprocess.run(
+        ["node", "scripts/course_correction_dates.mjs"], cwd=BASE,
+        capture_output=True, text=True, check=True)
+    print("[catalog] correction-dates 由正 generator 產出：", canonical.stdout.strip()[:120])
     learned = write_learned_corrections()
 
     catalog_path = BASE / "courses" / "catalog.json"
