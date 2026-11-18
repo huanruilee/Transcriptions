@@ -76,6 +76,13 @@ export const useCourseStore = defineStore('course', {
         path: 'courses/菩薩就是這樣成佛',
         mediaType: 'video/youtube',
       },
+      {
+        id: 'si-fa-yin',
+        title: '四法印',
+        master: '如性法師',
+        path: 'courses/四法印',
+        mediaType: 'video/youtube',
+      },
     ],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],

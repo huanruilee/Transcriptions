@@ -650,7 +650,9 @@ function callMiniMax(messages, maxOutputTokens, promptCacheKey, options = {}) {
       body: {
         model,
         messages,
-        max_tokens: maxOutputTokens,
+        // glm53-flash 是推理型模型：4096 常被內部推理吃掉，
+        // 導致要點 JSON 被截到只剩 1 條（INVALID_GROUP_LENGTH）。
+        max_tokens: Math.max(8192, Number(maxOutputTokens) || 4096),
         temperature: process.env.OVERVIEW_TEMP ? Number(process.env.OVERVIEW_TEMP) : 0.1,
         top_p: 0.9,
         reasoning_effort: 'none',

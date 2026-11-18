@@ -18,6 +18,7 @@ const COURSES = [
   '三主要道',
   '四念住',
   '2025釋量論第二品大組共學',
+  '四法印',
 ];
 
 // Strict Simplified-to-Traditional mapping dictionary (where Simplified != Traditional)

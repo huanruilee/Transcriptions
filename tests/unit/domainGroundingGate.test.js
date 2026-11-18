@@ -29,6 +29,7 @@ const PENDING_WHITELIST = {
 /** 課程目錄名 → reviews/evidence/ 下的目錄名（兩者不一定同名） */
 const EVIDENCE_DIR_ALIAS = {
   '四念住': 'sinianzhu',
+  '四法印': 'sifayin',
 };
 
 function evidenceDirFor(course) {
