@@ -32,7 +32,7 @@ const SIMPLIFIED_CHARS = new Set([
   '觉', '关', '开', '边', '过', '问', '题', '时', '间', '还', '会', '点', '现', '显', '义', '极',
   '胜', '广', '当', '无', '师', '发', '与', '见', '随', '应', '处', '观', '摄', '识', '别', '业',
   '释', '难', '车', '声', '闻', '缘', '执', '许', '计', '总', '种', '听', '讲', '话', '导', '读',
-  '记', '诵', '传', '承', '萨', '罗', '蜜', '辩', '净', '谛', '学', '习', '态', '灵', '产', '亲',
+  '记', '诵', '传', '萨', '罗', '蜜', '辩', '净', '谛', '学', '习', '态', '灵', '产', '亲',
 ]);
 
 test('四法印 course.json registers the series with the verified instructor and official playlist', () => {
@@ -70,7 +70,9 @@ test('toc.json lists all 11 lectures with the video ids from the official playli
   assert.deepEqual(toc.sections.map((s) => s.videoId), inventory.map((s) => s.videoId));
   toc.sections.forEach((section, index) => {
     assert.match(section.videoId, /^[A-Za-z0-9_-]{11}$/);
-    assert.equal(section.durationSec, inventory[index].durationSec, `${section.id} 秒數須與播放列表一致`);
+    // 官方 MP3 與 YouTube 講次長度可能差 1 秒（容器取整），容許 ±2 秒
+    assert.ok(Math.abs(section.durationSec - inventory[index].durationSec) <= 2,
+      `${section.id} 秒數須與播放列表一致（${section.durationSec} vs ${inventory[index].durationSec}）`);
     assert.equal(section.available, true);
     assert.ok(fs.existsSync(path.join(repoRoot, section.sessionRef)), `${section.sessionRef} 必須存在`);
     assert.ok(section.title.length > 2);
@@ -91,7 +93,7 @@ test('both registration points (catalog.json and src/stores/course.ts) list si-f
 
   // App.vue 對每門課都渲染 correction-dates 連結，缺檔會 404
   const dates = fs.readFileSync(path.join(courseDir, 'correction-dates.html'), 'utf8');
-  assert.equal((dates.match(/<tr>/g) || []).length, 11);
+  assert.equal((dates.match(/<tr><th scope="row">/g) || []).length, 11);
   assert.match(dates, /待閱校版/);
 });
 
@@ -189,8 +191,20 @@ test('proofreading is evidence-based: only homophone fixes auto-applied, rawText
       const sentence = byId.get(fix.sentenceId);
       assert.ok(sentence, `${sessionId} 校正句 ${fix.sentenceId} 不在 session 內`);
       assert.ok(sentence.text.includes(fix.referenceDelta), `${sessionId} ${fix.sentenceId} 校正未套用到 text`);
-      assert.ok(!sentence.rawText.includes(fix.referenceDelta) || sentence.rawText === sentence.text,
-        `${sessionId} ${fix.sentenceId} rawText 應保留 ASR 原樣`);
+      // rawText 必須留住 ASR 原貌：校正前後 text ≠ rawText，且單字差時 ASR 原字還在 rawText
+      assert.notEqual(sentence.rawText, sentence.text, `${sessionId} ${fix.sentenceId} rawText 應保留 ASR 原樣`);
+      assert.ok(sentence.rawText.includes(fix.asrDelta), `${sessionId} ${fix.sentenceId} rawText 未保留 ASR 差字`);
+      // 位置級查核：compStart/compEnd 是「可比對字串」（只剩中日韓字）的索引，
+      // 所以去標點後的 rawText/text 在同一索引必須分別是 ASR 原字與底本字。
+      const hanOnly = (t) => t.replace(/[^\p{Script=Han}]/gu, '');
+      const rawHan = hanOnly(sentence.rawText);
+      const textHan = hanOnly(sentence.text);
+      const span = fix.compEnd - fix.compStart;
+      assert.equal(span, fix.asrDelta.length, `${sessionId} ${fix.sentenceId} compStart/End 與 asrDelta 長度不符`);
+      assert.equal(rawHan.slice(fix.compStart, fix.compEnd), fix.asrDelta,
+        `${sessionId} ${fix.sentenceId} rawText 該位置非 ASR 原字`);
+      assert.equal(textHan.slice(fix.compStart, fix.compEnd), fix.referenceDelta,
+        `${sessionId} ${fix.sentenceId} text 該位置非底本字`);
       assert.ok(Math.max(fix.asrDelta.length, fix.referenceDelta.length) <= 6,
         `${sessionId} 單次校字改動過大：${fix.asrDelta}→${fix.referenceDelta}`);
       matchedApplied += 1;

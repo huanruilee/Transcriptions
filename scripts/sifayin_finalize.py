@@ -57,17 +57,58 @@ def main() -> int:
     for sid in session_ids(args.sessions):
         folder = EVIDENCE / f"playlist-{sid}"
         review_manifest_path = folder / "content_review_manifest.json"
-        if not review_manifest_path.exists():
-            print(f"[finalize] {sid}: 缺 content_review_manifest.json（先跑 content overview）",
-                  file=sys.stderr)
-            continue
         raw = load(folder / "raw_asr.json")
         candidate = load(folder / "candidate.json")
         corrections = load(folder / "correction_candidates.json")
         outline = load(folder / "outline.json")
         session = load(COURSE / "sessions" / f"session_{sid}.json")
-        review_manifest = load(review_manifest_path)
+        if not session.get("contentOverview"):
+            print(f"[finalize] {sid}: 缺 contentOverview（先跑 content_overview_pipeline --apply）",
+                  file=sys.stderr)
+            continue
         rec = intake[sid]
+
+        # 證據用內容審查檔（content_review.json / _manifest.json）由正式逐字稿的
+        # contentOverview 重新回查產生：sentenceId 存在＋quote 逐字相符才算通過。
+        overview = session["contentOverview"]
+        sentence_map = {s["id"]: s["text"] for para in session["paragraphs"] for s in para["sentences"]}
+        unsupported = 0
+        partial = 0
+        counts = {}
+        for group in ("mainPoints", "discussionTopics", "referenceViews"):
+            items = overview.get(group) or []
+            counts[group] = len(items)
+            for item in items:
+                for evidence in item.get("evidence") or []:
+                    actual = sentence_map.get(str(evidence.get("sentenceId", "")))
+                    quote = str(evidence.get("quote", "")).strip()
+                    if actual is None:
+                        unsupported += 1
+                    elif quote and quote not in actual:
+                        partial += 1
+        review_payload = {
+            "sessionId": f"session_{sid}",
+            "reviewedAt": overview.get("generatedAt"),
+            "contentOverview": overview,
+            "paragraphs": [{"id": p["id"], "heading": p["heading"], "sentences": len(p["sentences"])}
+                           for p in session["paragraphs"]],
+        }
+        (folder / "content_review.json").write_text(
+            json.dumps(review_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        review_manifest = {
+            "sessionId": f"session_{sid}",
+            "sourceDigest": overview.get("sourceDigest"),
+            "generatedBy": overview.get("generatedBy"),
+            "generatedAt": overview.get("generatedAt"),
+            "counts": counts,
+            "evidenceValidation": {
+                "method": "sentenceId 回查 + quote 逐字比對（允許跨句）",
+                "unsupported": unsupported,
+                "partial": partial,
+            },
+        }
+        review_manifest_path.write_text(
+            json.dumps(review_manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         final_chars = len(re.sub(r"\s", "", text_of(session)))
         char_ratio = round(final_chars / raw["charCount"], 4)

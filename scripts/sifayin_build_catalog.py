@@ -41,11 +41,18 @@ def official_field(session_id: str, label: str) -> str:
 
 
 def normalize_date(raw: str) -> str:
-    """官方底本的「日期：2020 年7 月26 日〜8 月2 日」→ 2020-07-26〜2020-08-02。"""
-    def one(match: re.Match) -> str:
-        return f"{int(match.group(1)):04d}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+    """官方底本的「日期：2020 年7 月26 日〜8 月2 日」→ 2020-07-26〜2020-08-02。
 
-    out = re.sub(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日", one, raw)
+    第二段常省略年份（「〜8 月2 日」），補前一段的年份。
+    """
+    year: list[str] = [""]
+
+    def one(match: re.Match) -> str:
+        y = match.group(1) or year[0]
+        year[0] = y
+        return f"{int(y):04d}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+
+    out = re.sub(r"(\d{4})?\s*年?\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日", one, raw)
     return re.sub(r"\s+", "", out)
 
 

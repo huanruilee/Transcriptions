@@ -150,7 +150,7 @@ python3 scripts/init_course.py \
 | 1 官方提綱 | `python3 scripts/sifayin_outline.py` | `playlist-NN/outline.json`（附時間碼小標；缺提綱即報錯，不猜） |
 | 2 ASR | `python3 scripts/sifayin_asr.py --sessions ..` | `playlist-NN/raw_asr.json`（segments＋RTF＋尾差＋音檔雜湊） |
 | 3 底本對校＋切段 | `~/projects/transcription-web/venv/bin/python scripts/sifayin_build_transcript.py --sessions ..` | `courses/四法印/sessions/*.json` ＋ `correction_candidates.json` |
-| 4 內容摘要 | `OVERVIEW_PROVIDER=eneural node scripts/content_overview_pipeline.mjs --session si-fa-yin/session_NN --apply` | session 內 `contentOverview`（證據逐字回查） |
+| 4 內容摘要 | `node scripts/content_overview_pipeline.mjs --session si-fa-yin/session_NN --apply`（要改走 eNeural 才加 `OVERVIEW_PROVIDER=eneural`） | session 內 `contentOverview`（證據逐字回查） |
 | 5 稽核六件套 | `python3 scripts/sifayin_finalize.py --sessions ..` | `run_manifest.json`、`review.md`、`content_review*.json` |
 | 6 課程註冊 | `python3 scripts/sifayin_grounding.py && python3 scripts/sifayin_build_catalog.py` | `grounding.json`、`course.json`、`toc.json`、`correction-dates.html`、`courses/catalog.json` |
 
@@ -161,6 +161,12 @@ python3 scripts/init_course.py \
    （`strict-homophone`／`near-homophone-term`），口語刪節一律標 `editorial-divergence` 不改；
    同音但無詞頻佐證者標 `reviewNeeded` 交人工，絕不自動改。
 3. `rawText` 保留 ASR 原樣，`text` 才是校訂結果。
+4. **底本詞庫的 n-gram 只在同一子句內組字**（標點切斷、換行視同連續）：把標點直接丟掉會把
+   「自己。我」當成詞「己我」（實測 23 次）這種假名相；同時詞表校正**不得拆散底本也在用的詞**
+   （`breaks_attested_word()`：ASR 原字與鄰字在底本已構成詞、改後的組合成語在底本零出現 → 退回人工，
+   例：不得把「難遭遇」改成「難遭於」）。
+5. 官方 PDF／音檔屬第三方大檔，**不入庫**；只入庫抽取後的純文字底本，並在
+   `reference_inventory.json` 留 SHA-256 與原始下載連結。
 4. 未經逐句人工聽核前，`publicationState` 維持 `candidate-review-required`，
    `run_manifest.gates.humanListened` 必為 `false`。
 5. 每講證據必須湊齊六件套，`content_review_manifest` 的 `unsupported` 必須為 0。

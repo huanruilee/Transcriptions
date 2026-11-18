@@ -70,7 +70,7 @@ MIN_TERM_FREQUENCY = 2
 ORTHOGRAPHIC_VARIANTS = {
     frozenset(pair) for pair in [
         ("他", "它"), ("做", "作"), ("佔", "占"), ("裏", "裡"), ("箸", "著"),
-        ("着", "著"), ("裏", "里"), ("象", "像"),
+        ("着", "著"), ("裏", "里"), ("象", "像"), ("曬", "晒"), ("迴", "回"),
     ]
 }
 
@@ -335,13 +335,20 @@ def apply_candidates(segments, candidates, corpus):
 
 
 def build_corpus() -> Counter:
-    """11 份官方底本的 n-gram 頻率（2〜5 字），作為名相校正的判定依據。"""
+    """11 份官方底本的 n-gram 頻率（2〜5 字），作為名相校正的判定依據。
+
+    n-gram 只在「同一子句內」組字：底本的標點（，。、「」等）一律切斷，
+    換行／空白視為連續（PDF 常在句中斷行）。若把標點直接丟掉再組字，
+    「自己。我」會被當成詞「己我」（實測 23 次），產生假名相。
+    """
     counter = Counter()
+    clause_run = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\s]+")
     for path in sorted(SOURCE_DIR.glob("lecture_*.txt")):
-        stream = "".join(COMPARABLE.findall(path.read_text(encoding="utf-8")))
-        for n in (2, 3, 4, 5):
-            for i in range(len(stream) - n + 1):
-                counter[stream[i:i + n]] += 1
+        for run in clause_run.findall(path.read_text(encoding="utf-8")):
+            stream = "".join(COMPARABLE.findall(run))
+            for n in (2, 3, 4, 5):
+                for i in range(len(stream) - n + 1):
+                    counter[stream[i:i + n]] += 1
     return counter
 
 
@@ -378,6 +385,27 @@ def glossary_index(corpus: Counter) -> dict:
         for pos, ch in enumerate(term):
             index.setdefault(term[:pos] + "?" + term[pos + 1:], set()).add((term, ch, pos, freq))
     return index
+
+
+MIN_ATTESTED_BIGRAM = 3
+
+
+def breaks_attested_word(corpus: Counter, comp: str, pos: int, asr_ch: str, ref_ch: str) -> bool:
+    """詞表校正不得拆散底本自己也在用的詞。
+
+    例：ASR「難遭遇我」若把「遇→於」（湊底本詞「於我」），會把底本也出現的
+    「遭遇」拆爛，且「遭於」在底本零出現 → 退回人工。
+    """
+    neighbours = []
+    if pos > 0:
+        neighbours.append(comp[pos - 1])
+    if pos + 1 < len(comp):
+        neighbours.append(comp[pos + 1])
+    for nb in neighbours:
+        for asr_bigram, ref_bigram in ((nb + asr_ch, nb + ref_ch), (asr_ch + nb, ref_ch + nb)):
+            if corpus.get(asr_bigram, 0) >= MIN_ATTESTED_BIGRAM and corpus.get(ref_bigram, 0) == 0:
+                return True
+    return False
 
 
 def glossary_candidates(segments, corpus: Counter, index: dict):
@@ -417,6 +445,8 @@ def glossary_candidates(segments, corpus: Counter, index: dict):
                 if len(matches) != 1:
                     continue
                 term, ch, p, freq = matches.pop()
+                if breaks_attested_word(corpus, comp, i + p, span[p], ch):
+                    continue  # 會拆散底本也在用的詞：不自動改，交人工
                 asr_part, ref_part = span[p], ch
                 results.append({
                     "sentenceIndex": seg_index,
@@ -568,6 +598,7 @@ def main() -> int:
                 "lectureTitle": title_for(session_id)[0],
                 "total_paragraphs": len(paragraphs),
                 "total_sentences": sentence_total,
+                "charCount": sum(len(s["text"]) for para in paragraphs for s in para["sentences"]),
                 "processed_at": now,
                 "audioDurationSec": raw["audioDurationSec"],
                 "asrModel": raw["model"],
