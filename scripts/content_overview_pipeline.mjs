@@ -369,6 +369,28 @@ export function validateContentOverview(
     }
   }
 
+  // attemptTrail (optional, future outputs only) — per-attempt gate verdict history.
+  // Absent on all pre-existing overviews; when present its shape is enforced but it
+  // never affects the structural verdict semantics of the groups/review above.
+  if (overview.attemptTrail !== undefined) {
+    if (!Array.isArray(overview.attemptTrail)) {
+      errors.push(makeError('INVALID_ATTEMPT_TRAIL', 'attemptTrail must be an array'));
+    } else {
+      overview.attemptTrail.forEach((entry, index) => {
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+          errors.push(makeError('INVALID_ATTEMPT_TRAIL', `entry:${index}`));
+          return;
+        }
+        if (!Number.isInteger(entry.attempt) || entry.attempt < 1) errors.push(makeError('INVALID_ATTEMPT_TRAIL', `attempt:${index}`));
+        if (!Number.isInteger(entry.run) || entry.run < 1) errors.push(makeError('INVALID_ATTEMPT_TRAIL', `run:${index}`));
+        if (!['pre-review', 'reviewed', 'error'].includes(entry.stage)) errors.push(makeError('INVALID_ATTEMPT_TRAIL', `stage:${index}`));
+        if (!Array.isArray(entry.rawVerdicts)) errors.push(makeError('INVALID_ATTEMPT_TRAIL', `rawVerdicts:${index}`));
+        if (!Number.isInteger(entry.prunedCount) || entry.prunedCount < 0) errors.push(makeError('INVALID_ATTEMPT_TRAIL', `prunedCount:${index}`));
+        if (!Array.isArray(entry.coverageErrors)) errors.push(makeError('INVALID_ATTEMPT_TRAIL', `coverageErrors:${index}`));
+      });
+    }
+  }
+
   if (requireCoverage) {
     const totalItems = GROUPS.reduce(
       (total, group) => total + (Array.isArray(overview[group]) ? overview[group].length : 0),
@@ -832,6 +854,23 @@ export function generateAndReviewTarget(repoRoot, target, {
   let retryFeedback = null;
   const acceptedByGroup = Object.fromEntries(GROUPS.map((group) => [group, new Map()]));
 
+  // Attempt audit trail: every attempt's raw gate verdicts are persisted so rejected
+  // judgments stay traceable (previously only the aggregate attemptCount survived).
+  // - entry.attempt: session-global monotonic ordinal (continues across re-runs)
+  // - entry.run: 1-based pipeline invocation ordinal for this session
+  // - attemptCount keeps its existing meaning: attempts performed by the latest run,
+  //   i.e. attemptTrail.filter(entry => entry.run === max(run)).length === attemptCount.
+  const priorAttemptTrail = Array.isArray(existingOverview?.attemptTrail)
+    ? structuredClone(existingOverview.attemptTrail)
+    : [];
+  const run = priorAttemptTrail.reduce((max, entry) => Math.max(max, Number(entry?.run) || 0), 0) + 1;
+  const priorMaxAttempt = priorAttemptTrail.reduce((max, entry) => Math.max(max, Number(entry?.attempt) || 0), 0);
+  const attemptTrail = [];
+  const countCandidateItems = (overview) => GROUPS.reduce(
+    (total, group) => total + (Array.isArray(overview?.[group]) ? overview[group].length : 0),
+    0,
+  );
+
   const composeAccepted = (base) => {
     const candidate = structuredClone(base);
     const reviewItems = [];
@@ -906,6 +945,15 @@ export function generateAndReviewTarget(repoRoot, target, {
     attempt <= retries + 1 && finalized?.status !== 'ai-reviewed';
     attempt += 1) {
     attempts = attempt;
+    const attemptRecord = {
+      attempt: priorMaxAttempt + attempt,
+      run,
+      stage: 'error',
+      rawVerdicts: [],
+      prunedCount: 0,
+      coverageErrors: [],
+    };
+    attemptTrail.push(attemptRecord);
     try {
       const normalized = normalizeCandidateEvidence(
         generateCandidateFn(target, transcript, retryFeedback),
@@ -920,6 +968,9 @@ export function generateAndReviewTarget(repoRoot, target, {
         requireCoverage: false,
       });
       if (candidateValidation.errors.length > 0) {
+        attemptRecord.stage = 'pre-review';
+        attemptRecord.coverageErrors = candidateValidation.errors
+          .map(({ code, detail }) => ({ code, detail }));
         candidate.status = 'needs-review';
         candidate.validationErrors = candidateValidation.errors;
         finalized = candidate;
@@ -927,7 +978,22 @@ export function generateAndReviewTarget(repoRoot, target, {
         continue;
       }
       const rawReview = reviewCandidateFn(candidate, transcript);
+      attemptRecord.stage = 'reviewed';
+      attemptRecord.rawVerdicts = (Array.isArray(rawReview?.items) ? rawReview.items : [])
+        .map(({ group, index, verdict, reason }) => {
+          const record = {
+            group,
+            index,
+            verdict: verdict === 'supported' ? 'supported' : 'unsupported',
+            reason: String(reason || '').slice(0, 200),
+          };
+          if (record.verdict === 'unsupported') {
+            record.text = String(candidate[group]?.[index]?.text || '').slice(0, 80);
+          }
+          return record;
+        });
       const pruned = pruneUnsupportedItems(candidate, rawReview);
+      attemptRecord.prunedCount = countCandidateItems(candidate) - countCandidateItems(pruned.candidate);
       const prunedReview = new Map((pruned.review.items || [])
         .map((item) => [`${item.group}:${item.index}`, item]));
       for (const group of GROUPS) {
@@ -942,6 +1008,8 @@ export function generateAndReviewTarget(repoRoot, target, {
       }
       finalized = composeAccepted(candidate);
       const finalValidation = validateContentOverview(finalized, transcript, target);
+      attemptRecord.coverageErrors = finalValidation.errors
+        .map(({ code, detail }) => ({ code, detail }));
       if (finalValidation.errors.length > 0) {
         finalized.status = 'needs-review';
         finalized.validationErrors = finalValidation.errors;
@@ -959,6 +1027,7 @@ export function generateAndReviewTarget(repoRoot, target, {
           })),
       };
     } catch (error) {
+      attemptRecord.error = String(error?.message || error).slice(0, 500);
       lastError = error;
     }
   }
@@ -966,6 +1035,9 @@ export function generateAndReviewTarget(repoRoot, target, {
   if (!finalized && lastError) throw lastError;
   if (!finalized) throw new Error(`No overview candidate produced for ${target.sourceTranscriptId}`);
   finalized.attemptCount = attempts;
+  if (attemptTrail.length > 0) {
+    finalized.attemptTrail = [...priorAttemptTrail, ...attemptTrail];
+  }
 
   const reportPath = reportPathFor(repoRoot, target);
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
@@ -975,7 +1047,7 @@ export function generateAndReviewTarget(repoRoot, target, {
     transcript.contentOverview = finalized;
     fs.writeFileSync(target.absolutePath, `${JSON.stringify(transcript, null, 2)}\n`, 'utf8');
   }
-  return { target, overview: finalized, reportPath, attempts };
+  return { target, overview: finalized, reportPath, attempts, attemptTrail: finalized.attemptTrail || [] };
 }
 
 function parseArgs(argv) {

@@ -1202,3 +1202,241 @@ test('an overfilled reviewed guide is deterministically reduced to eight points 
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
   }
 });
+
+test('records per-attempt gate verdicts in attemptTrail when a rejection triggers a retry', () => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'content-overview-attempt-trail-'));
+  const absolutePath = path.join(tempRoot, 'session_01.json');
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '主要內容原句。' },
+      { id: 's-2', text: '第二個主要內容原句。' },
+      { id: 's-3', text: '討論議題原句。' },
+      { id: 's-4', text: '第二個討論議題原句。' },
+      { id: 's-5', text: '參考觀點原句。' },
+    ] }],
+  };
+  fs.writeFileSync(absolutePath, JSON.stringify(transcript));
+  const target = {
+    absolutePath,
+    sourceTranscriptId: 'test/session_01',
+    relativePath: 'session_01.json',
+    courseTitle: '測試',
+    sessionId: '01',
+  };
+  const digest = validateContentOverview({
+    schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: '', generatedBy: 'MiniMax-M3', mainPoints: [], discussionTopics: [], referenceViews: [],
+  }, transcript, target).expectedSourceDigest;
+  const candidate = () => ({
+    schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: digest, generatedBy: 'MiniMax-M3',
+    mainPoints: [
+      { text: '主要內容', evidence: [{ sentenceId: 's-1' }] },
+      { text: '第二個主要內容', evidence: [{ sentenceId: 's-2' }] },
+    ],
+    discussionTopics: [
+      { text: '討論議題', evidence: [{ sentenceId: 's-3' }] },
+      { text: '第二個討論議題', evidence: [{ sentenceId: 's-4' }] },
+    ],
+    referenceViews: [{ text: '參考觀點', evidence: [{ sentenceId: 's-5' }] }],
+  });
+  let reviewCall = 0;
+  const reviewFactory = (reviewedCandidate) => {
+    reviewCall += 1;
+    return {
+      items: ['mainPoints', 'discussionTopics', 'referenceViews'].flatMap((group) =>
+        reviewedCandidate[group].map((_item, index) => ({
+          group,
+          index,
+          verdict: reviewCall === 1 && group === 'referenceViews' ? 'unsupported' : 'supported',
+          reason: reviewCall === 1 && group === 'referenceViews' ? '引句未出現在原文' : '支持',
+        }))),
+    };
+  };
+
+  try {
+    const result = generateAndReviewTarget(tempRoot, target, {
+      apply: true,
+      retries: 3,
+      generateCandidateFn: candidate,
+      reviewCandidateFn: reviewFactory,
+    });
+    assert.equal(result.attempts, 2);
+    const trail = result.overview.attemptTrail;
+    assert.equal(Array.isArray(trail), true);
+    assert.equal(trail.length, 2);
+
+    const [first, second] = trail;
+    assert.equal(first.attempt, 1);
+    assert.equal(first.run, 1);
+    assert.equal(first.stage, 'reviewed');
+    assert.equal(first.prunedCount, 1);
+    assert.deepEqual(first.rawVerdicts.at(-1), {
+      group: 'referenceViews',
+      index: 0,
+      verdict: 'unsupported',
+      reason: '引句未出現在原文',
+      text: '參考觀點',
+    });
+    assert.equal(first.rawVerdicts.filter((verdict) => verdict.verdict === 'unsupported').length, 1);
+    assert.ok(first.coverageErrors.some((error) => error.code === 'INVALID_TOTAL_BULLET_COUNT'));
+    assert.ok(first.coverageErrors.some((error) => error.code === 'INVALID_GROUP_LENGTH'));
+
+    assert.equal(second.attempt, 2);
+    assert.equal(second.stage, 'reviewed');
+    assert.equal(second.prunedCount, 0);
+    assert.ok(second.rawVerdicts.every((verdict) => verdict.verdict === 'supported'));
+    assert.deepEqual(second.coverageErrors, []);
+
+    assert.equal(result.overview.attemptCount, 2);
+    assert.ok(result.overview.review.items.every((item) => item.verdict === 'supported'));
+    assert.deepEqual(validateContentOverview(result.overview, transcript, target).errors, []);
+    assert.equal(auditContentOverviews([target]).valid, 1);
+
+    const persisted = JSON.parse(fs.readFileSync(absolutePath, 'utf8'));
+    assert.equal(persisted.contentOverview.attemptTrail.length, 2);
+    assert.equal(persisted.contentOverview.attemptTrail[0].rawVerdicts.at(-1).verdict, 'unsupported');
+
+    // Re-running a completed session must not fabricate attempts or wipe the trail.
+    const rerun = generateAndReviewTarget(tempRoot, target, {
+      apply: true,
+      generateCandidateFn: () => {
+        throw new Error('model should not be called');
+      },
+    });
+    assert.equal(rerun.attempts, 2);
+    assert.equal(rerun.overview.attemptTrail.length, 2);
+    assert.equal(rerun.overview.attemptTrail[0].run, 1);
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('records pre-review structural blocks in attemptTrail without review verdicts', () => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'content-overview-trail-prereview-'));
+  const absolutePath = path.join(tempRoot, 'session_01.json');
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '主要內容原句。' },
+      { id: 's-2', text: '第二個主要內容原句。' },
+      { id: 's-3', text: '討論議題原句。' },
+      { id: 's-4', text: '第二個討論議題原句。' },
+      { id: 's-5', text: '參考觀點原句。' },
+    ] }],
+  };
+  fs.writeFileSync(absolutePath, JSON.stringify(transcript));
+  const target = {
+    absolutePath,
+    sourceTranscriptId: 'test/session_01',
+    relativePath: 'session_01.json',
+    courseTitle: '測試',
+    sessionId: '01',
+  };
+  const digest = validateContentOverview({
+    schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: '', generatedBy: 'MiniMax-M3', mainPoints: [], discussionTopics: [], referenceViews: [],
+  }, transcript, target).expectedSourceDigest;
+  let attempt = 0;
+  const candidateFactory = () => {
+    attempt += 1;
+    const blocked = attempt === 1;
+    return {
+      schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+      sourceDigest: digest, generatedBy: 'MiniMax-M3',
+      mainPoints: [
+        { text: blocked ? '深入探討主要內容' : '主要內容', evidence: [{ sentenceId: 's-1' }] },
+        { text: '第二個主要內容', evidence: [{ sentenceId: 's-2' }] },
+      ],
+      discussionTopics: [
+        { text: '討論議題', evidence: [{ sentenceId: 's-3' }] },
+        { text: '第二個討論議題', evidence: [{ sentenceId: 's-4' }] },
+      ],
+      referenceViews: [{ text: '參考觀點', evidence: [{ sentenceId: 's-5' }] }],
+    };
+  };
+  const reviewFactory = (reviewedCandidate) => ({
+    items: ['mainPoints', 'discussionTopics', 'referenceViews'].flatMap((group) =>
+      reviewedCandidate[group].map((_item, index) => ({ group, index, verdict: 'supported', reason: '支持' }))),
+  });
+
+  try {
+    const result = generateAndReviewTarget(tempRoot, target, {
+      retries: 2,
+      generateCandidateFn: candidateFactory,
+      reviewCandidateFn: reviewFactory,
+    });
+    assert.equal(result.attempts, 2);
+    const trail = result.overview.attemptTrail;
+    assert.equal(trail.length, 2);
+    assert.equal(trail[0].stage, 'pre-review');
+    assert.deepEqual(trail[0].rawVerdicts, []);
+    assert.equal(trail[0].prunedCount, 0);
+    assert.ok(trail[0].coverageErrors.some((error) => error.code === 'FORBIDDEN_PHRASE'));
+    assert.equal(trail[1].stage, 'reviewed');
+    assert.equal(trail[1].attempt, 2);
+    assert.deepEqual(trail[1].coverageErrors, []);
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('attemptTrail is schema-gated without affecting overviews that lack it', () => {
+  const transcript = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '主要內容原句。' },
+      { id: 's-2', text: '第二個主要內容原句。' },
+      { id: 's-3', text: '討論議題原句。' },
+      { id: 's-4', text: '第二個討論議題原句。' },
+      { id: 's-5', text: '參考觀點原句。' },
+    ] }],
+  };
+  const target = { sourceTranscriptId: 'test/session_01' };
+  const overviewItemsForTest = {
+    mainPoints: ['主要內容', '第二個主要內容'],
+    discussionTopics: ['討論議題', '第二個討論議題'],
+    referenceViews: ['參考觀點'],
+  };
+  const digest = validateContentOverview({
+    schemaVersion: 1, status: 'candidate', sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: '', generatedBy: 'MiniMax-M3', mainPoints: [], discussionTopics: [], referenceViews: [],
+  }, transcript, target).expectedSourceDigest;
+  const overview = {
+    schemaVersion: 1,
+    status: 'ai-reviewed',
+    sourceTranscriptId: target.sourceTranscriptId,
+    sourceDigest: digest,
+    generatedBy: 'MiniMax-M3',
+    mainPoints: [
+      { text: '主要內容', evidence: [{ sentenceId: 's-1', quote: '主要內容原句。' }] },
+      { text: '第二個主要內容', evidence: [{ sentenceId: 's-2', quote: '第二個主要內容原句。' }] },
+    ],
+    discussionTopics: [
+      { text: '討論議題', evidence: [{ sentenceId: 's-3', quote: '討論議題原句。' }] },
+      { text: '第二個討論議題', evidence: [{ sentenceId: 's-4', quote: '第二個討論議題原句。' }] },
+    ],
+    referenceViews: [{ text: '參考觀點', evidence: [{ sentenceId: 's-5', quote: '參考觀點原句。' }] }],
+    review: {
+      reviewedBy: 'MiniMax-M3',
+      items: ['mainPoints', 'discussionTopics', 'referenceViews'].flatMap((group) =>
+        overviewItemsForTest[group].map((_text, index) => ({ group, index, verdict: 'supported', reason: '支持' }))),
+    },
+  };
+
+  assert.deepEqual(validateContentOverview(overview, transcript, target).errors, []);
+
+  const withTrail = structuredClone(overview);
+  withTrail.attemptTrail = [{
+    attempt: 1, run: 1, stage: 'reviewed', rawVerdicts: [], prunedCount: 0, coverageErrors: [],
+  }];
+  assert.deepEqual(validateContentOverview(withTrail, transcript, target).errors, []);
+
+  const badAttempt = structuredClone(overview);
+  badAttempt.attemptTrail = [{ run: 1, stage: 'reviewed', rawVerdicts: [], prunedCount: 0, coverageErrors: [] }];
+  assert.ok(validateContentOverview(badAttempt, transcript, target).errors
+    .some((error) => error.code === 'INVALID_ATTEMPT_TRAIL'));
+
+  const notArray = structuredClone(overview);
+  notArray.attemptTrail = 'attempt 1';
+  assert.ok(validateContentOverview(notArray, transcript, target).errors
+    .some((error) => error.code === 'INVALID_ATTEMPT_TRAIL'));
+});
