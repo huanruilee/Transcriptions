@@ -171,7 +171,7 @@ def self_test() -> int:
               '    "privateOrUnavailableInPlaylist": ["OLD1", "OLD2"]\n  }\n}\n')
     tmp = Path("/tmp/_inv_selftest.json")
     tmp.write_text(sample, encoding="utf-8")
-    res = {"checkedAt": "2026-11-18", "privateStillMissing": ["NEW1"], "unresolvedMissing": [],
+    res = {"checkedAt": "2026-11-18", "privateStillMissing": ["NEW1"], "unresolvedMissing": ["UNK"],
            "privateToPublicTransitions": [{"videoId": "NEW2", "title": "t"}],
            "publicMissingFromSite": [{"videoId": "NEW1", "title": "t"}]}
     ok, note = update_inventory_text(tmp, res)
@@ -183,6 +183,8 @@ def self_test() -> int:
         problems.append("checkedAt not updated")
     if '"privateOrUnavailableInPlaylist": ["NEW1"]' not in out:
         problems.append("private array not replaced")
+    if '"UNK"' in out:
+        problems.append("probe failure was written into the inventory (would fake a later transition)")
     if '"availabilityTransitions"' not in out:
         problems.append("transitions not inserted")
     if '{"role": ["a", "b"]}' not in out or '"title": "\u7b2c27\u8b1b"' not in out:
@@ -209,7 +211,11 @@ def update_inventory_text(path: Path, result: dict) -> tuple[bool, str]:
     """
     text = path.read_text(encoding="utf-8")
     checked = result["checkedAt"]
-    new_private = sorted(set(result["privateStillMissing"]) | set(result["unresolvedMissing"]))
+    # Only *confirmed* private/unavailable ids belong in the private list. Mixing in
+    # probe failures would make the next run treat them as "previously private" and
+    # report a fabricated private->public transition. Unknown state stays out of the
+    # inventory and is signalled by exit code 3 plus the evidence file.
+    new_private = sorted(result["privateStillMissing"])
 
     new_text, n_date = re.subn(r'"checkedAt":\s*"[^"]*"', f'"checkedAt": "{checked}"',
                                text, count=1)
@@ -350,14 +356,18 @@ def main() -> int:
             if not ok:
                 return 3
 
+    # An incomplete probe makes the verdict untrustworthy, so it takes precedence
+    # over "action needed": a caller must not read 2 and assume the inventory was
+    # fully evaluated.
+    if result["unresolvedMissing"]:
+        print("\nverdict: incomplete — probes failed for", result["unresolvedMissing"],
+              "- re-run before acting on the counts above")
+        return 3
     action = bool(result["publicMissingFromSite"] or result["privateToPublicTransitions"]
                   or result["onSiteNotInPlaylist"])
     if action:
         print("\nverdict: ACTION NEEDED")
         return 2
-    if result["unresolvedMissing"]:
-        print("\nverdict: incomplete — some probes failed, re-run")
-        return 3
     print("\nverdict: in sync")
     return 0
 
