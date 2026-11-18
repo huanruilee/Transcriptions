@@ -50,8 +50,12 @@ def parse_outline(description: str):
         match = OUTLINE_RE.match(line)
         if not match:
             continue
-        index, heading, minute, second, hour = match.groups()
-        seconds = int(second) + int(minute) * 60 + (int(hour) * 3600 if hour else 0)
+        index, heading, first, second, third = match.groups()
+        # 官方提綱有兩種寫法：（MM:SS）與（H:MM:SS）
+        if third:
+            seconds = int(first) * 3600 + int(second) * 60 + int(third)
+        else:
+            seconds = int(first) * 60 + int(second)
         heading = re.sub(r"\s+", "", heading)
         if not heading:
             continue

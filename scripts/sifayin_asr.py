@@ -40,20 +40,31 @@ def audio_duration(path: Path) -> float:
     return round(float(out.strip()), 3)
 
 
+MAX_ASR_SECONDS = 3000
+
+
 def transcribe(path: Path, prompt: str) -> dict:
     cmd = [
-        "curl", "--max-time", "1200", "-sS", "-X", "POST", WHISPER_URL,
+        "curl", "--max-time", str(MAX_ASR_SECONDS), "-sS", "-X", "POST", WHISPER_URL,
         "-F", f"file=@{path}",
         "-F", "model=whisper-1",
         "-F", "language=zh",
         "-F", "response_format=verbose_json",
         "-F", f"prompt={prompt}",
     ]
-    raw = subprocess.check_output(cmd, text=True)
-    data = json.loads(raw)
-    if "segments" not in data:
-        raise RuntimeError(f"whisper returned no segments: {raw[:300]}")
-    return data
+    last_error = None
+    for attempt in (1, 2):
+        try:
+            raw = subprocess.check_output(cmd, text=True)
+            data = json.loads(raw)
+            if "segments" in data:
+                return data
+            last_error = RuntimeError(f"whisper returned no segments: {raw[:300]}")
+        except subprocess.CalledProcessError as err:  # curl 28 = timeout
+            last_error = err
+        if attempt == 1:
+            print(f"[asr] retry after failure: {last_error}", flush=True)
+    raise last_error
 
 
 def main() -> int:

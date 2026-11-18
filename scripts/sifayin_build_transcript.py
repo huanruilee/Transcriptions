@@ -29,6 +29,7 @@ from datetime import datetime
 from pathlib import Path
 
 import opencc
+from functools import lru_cache
 from pypinyin import lazy_pinyin
 
 BASE = Path(__file__).resolve().parent.parent
@@ -38,6 +39,24 @@ SESSIONS_DIR = COURSE_DIR / "sessions"
 EVIDENCE = BASE / "reviews" / "evidence" / "sifayin"
 
 CONVERTER = opencc.OpenCC("s2twp")
+T2S = opencc.OpenCC("t2s")
+
+
+@lru_cache(maxsize=None)
+def canon_char(ch: str) -> str:
+    """對齊用的字元正規化：異體／簡繁（適/适、轉/转）視為同一字。
+
+    只作為 difflib 的比較 key；證據與輸出一律使用原字元。長度保證 1:1，
+    轉換結果不只一字時保留原字。
+    """
+    out = T2S.convert(ch)
+    return out if len(out) == 1 else ch
+
+
+def canon(text: str) -> str:
+    return "".join(canon_char(ch) for ch in text)
+
+
 COMPARABLE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]")
 JUNK_CHARS = re.compile(r"[\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff\ufffd\u0000-\u001f]")
 LATIN_RUN = re.compile(r"[A-Za-z]{3,}")
@@ -51,7 +70,7 @@ MIN_TERM_FREQUENCY = 2
 ORTHOGRAPHIC_VARIANTS = {
     frozenset(pair) for pair in [
         ("他", "它"), ("做", "作"), ("佔", "占"), ("裏", "裡"), ("箸", "著"),
-        ("着", "著"), ("裏", "里"),
+        ("着", "著"), ("裏", "里"), ("象", "像"),
     ]
 }
 
@@ -84,7 +103,8 @@ def global_char_map(asr_segments, reference):
     """回傳 asr 字元索引 → 參考字元索引 的對照表（只含 equal 區塊）。"""
     asr_stream = "".join(comparable_with_map(seg["text"])[0] for seg in asr_segments)
     ref_stream, _ = comparable_with_map(reference)
-    ops = difflib.SequenceMatcher(None, asr_stream, ref_stream, autojunk=False).get_opcodes()
+    # 比對用正規化字元（避免簡繁異體造成對齊漂移），索引仍對應原字元流
+    ops = difflib.SequenceMatcher(None, canon(asr_stream), canon(ref_stream), autojunk=False).get_opcodes()
     mapping = {}
     for tag, i1, i2, j1, j2 in ops:
         if tag != "equal":
@@ -94,10 +114,16 @@ def global_char_map(asr_segments, reference):
     return asr_stream, ref_stream, mapping
 
 
-def sentence_candidates(segments, asr_stream, ref_stream, char_map):
-    """每句取其對應的參考區間，在句內做局部對齊，提出短距離校正候選。"""
+def sentence_candidates(segments, asr_stream, ref_stream, char_map, ref_canon):
+    """每句取其對應的參考區間，在句內做局部對齊，提出短距離校正候選。
+
+    視窗定位：先用全域字級對照表（t2s 正規化 key）給的區間；若該區間的
+    相似度不足，再用「句內最長共同子串」在底本流上單調向前找錨點重試。
+    兩條路徑都是確定性的，且都只影響視窗選擇，不改寫政策。
+    """
     results = []
     cursor = 0
+    anchor_lo = 0
     for seg_index, seg in enumerate(segments):
         comp, mapping = comparable_with_map(seg["text"])
         length = len(comp)
@@ -105,16 +131,36 @@ def sentence_candidates(segments, asr_stream, ref_stream, char_map):
         cursor = end
         if length == 0:
             continue
+        comp_key = canon(comp)
+
+        windows = []
         ref_positions = [char_map[i] for i in range(start, end) if i in char_map]
-        if not ref_positions:
+        if ref_positions:
+            windows.append((max(0, min(ref_positions) - 8),
+                            min(len(ref_stream), max(ref_positions) + 9)))
+        matcher = difflib.SequenceMatcher(None, comp_key, ref_canon, autojunk=False)
+        anchor = matcher.find_longest_match(0, length, anchor_lo, len(ref_canon))
+        if anchor.size >= 4:
+            a_start = max(0, anchor.b - anchor.a - 8)
+            a_end = min(len(ref_stream), anchor.b + (length - anchor.a) + 9)
+            windows.append((a_start, a_end))
+            anchor_lo = max(anchor_lo, anchor.b + anchor.size - 4)
+
+        best = None
+        seen = set()
+        for window_start, window_end in windows:
+            if window_end - window_start < 4 or (window_start, window_end) in seen:
+                continue
+            seen.add((window_start, window_end))
+            ref_window = ref_stream[window_start:window_end]
+            ref_key = canon(ref_window)
+            similarity = difflib.SequenceMatcher(None, comp_key, ref_key, autojunk=False).ratio()
+            if best is None or similarity > best[0]:
+                best = (similarity, ref_window)
+        if best is None or best[0] < MIN_SENTENCE_SIMILARITY:
             continue
-        window_start = max(0, min(ref_positions) - 8)
-        window_end = min(len(ref_stream), max(ref_positions) + 9)
-        ref_window = ref_stream[window_start:window_end]
-        similarity = difflib.SequenceMatcher(None, comp, ref_window, autojunk=False).ratio()
-        if similarity < MIN_SENTENCE_SIMILARITY:
-            continue
-        ops = refined_opcodes(comp, ref_window)
+        similarity, ref_window = best
+        ops = refined_opcodes(comp_key, canon(ref_window))
         for tag, i1, i2, j1, j2 in ops:
             if tag == "equal":
                 continue
@@ -215,6 +261,9 @@ def classify_fix(candidate: dict, corpus: Counter) -> str:
       editorial-divergence：其餘（整編稿的口語刪節、連接詞改寫，或無詞頻佐證）→ 不改講者口語。
     """
     asr_part, ref_part = candidate["asrDelta"], candidate["referenceDelta"]
+    if candidate.get("glossary"):
+        # 詞表同音保鮮器已自帶詞頻與唯一性條件，直接定檔
+        return "glossary-homophone"
     if not asr_part or not ref_part or asr_part == ref_part or len(asr_part) != len(ref_part):
         return "editorial-divergence"
     if len(asr_part) == 1 and frozenset((asr_part, ref_part)) in ORTHOGRAPHIC_VARIANTS:
@@ -253,8 +302,14 @@ def apply_candidates(segments, candidates, corpus):
                 candidate["note"] = "stale-position"
                 unresolved.append(candidate)
                 continue
-            text_start = mapping[c_start] if c_start < len(mapping) else len(seg["text"])
-            text_end = mapping[c_end] if c_end < len(mapping) else len(seg["text"])
+            if c_start >= len(mapping):
+                candidate["note"] = "stale-position"
+                unresolved.append(candidate)
+                continue
+            # 用 delta 自身的長度在原字串取連續區間：
+            # mapping[c_end] 會跳過標點，導致「地、」≠「地」而誤判為標點差異。
+            text_start = mapping[c_start]
+            text_end = text_start + len(candidate["asrDelta"])
             if seg["text"][text_start:text_end] != candidate["asrDelta"]:
                 candidate["note"] = "punctuation-gap"
                 unresolved.append(candidate)
@@ -288,6 +343,96 @@ def build_corpus() -> Counter:
             for i in range(len(stream) - n + 1):
                 counter[stream[i:i + n]] += 1
     return counter
+
+
+MIN_GLOSSARY_FREQUENCY = 3
+MIN_GLOSSARY_FREQUENCY_2 = 20   # 兩字詞需要更強的詞頻，才准動
+MIN_TIGHT_RATIO = 0.4           # 「緊縮詞」條件：詞與其兩側 bigram 的條件機率
+
+# 詞表校正只處理名相，不碰虛詞／口語功能字（避免把講者的口語改寫成別的字）
+STOP_CHARS = set("的了是在有和就不人這那他她它們中與為以而上個一二三四五六七八九十大小好很"
+                 "把被從對將已經要能會沒麼呢嗎吧啊呀哦嗯又再也都只可或者所其此之乎着得")
+
+
+def glossary_index(corpus: Counter) -> dict:
+    """底本詞表的「差一字」索引：pattern = 詞把其中一格換成 '?'。
+
+    收詞條件（全部可稽核）：
+      * 詞長 2〜5 字；兩字詞要出現 ≥20 次，3〜5 字詞要 ≥3 次。
+      * 「緊縮詞」條件（只對 3〜5 字）：詞頻 / 左 bigram 頻 與 詞頻 / 右 bigram 頻
+        兩者都 ≥0.4。這排除了跨詞界的偶然 n-gram（例：「成之後」出自「完成之後」，
+        4/243=0.02 會被踢掉），留下真正的詞（例：「四聖諦」14/14=1.0）。
+    """
+    index: dict[str, set] = {}
+    for term, freq in corpus.items():
+        n = len(term)
+        if not (2 <= n <= 5):
+            continue
+        if freq < (MIN_GLOSSARY_FREQUENCY_2 if n == 2 else MIN_GLOSSARY_FREQUENCY):
+            continue
+        if n >= 3:
+            left = corpus.get(term[:-1], 0)
+            right = corpus.get(term[1:], 0)
+            if freq / left < MIN_TIGHT_RATIO or freq / right < MIN_TIGHT_RATIO:
+                continue
+        for pos, ch in enumerate(term):
+            index.setdefault(term[:pos] + "?" + term[pos + 1:], set()).add((term, ch, pos, freq))
+    return index
+
+
+def glossary_candidates(segments, corpus: Counter, index: dict):
+    """詞表同音保鮮器：句內若有「底本用過 ≥3 次的名相」被 ASR 聽成同音異字，
+    而該寫法在 11 份底本從未出現，即提出校正候選。
+
+    限制（全部可稽核）：
+      * 詞長 2〜5 字；兩字詞詞頻 ≥20，三字以上 ≥3 且通過緊縮詞條件。
+      * 只差一格，且兩字聲韻完全相同（pypinyin 去聲調）。
+      * 底本該詞出現次數 ≥3；ASR 寫法在底本出現次數 = 0。
+      * 被替換的字（兩側）都不能是虛詞／功能字；兩字詞的另一格也不能是虛詞。
+      * 同一位置只能有一個同音候選詞，否則不自動改（交人工）。
+    """
+    results = []
+    for seg_index, seg in enumerate(segments):
+        comp, _ = comparable_with_map(seg["text"])
+        for n in (2, 3, 4, 5):
+            for i in range(len(comp) - n + 1):
+                span = comp[i:i + n]
+                if corpus.get(span, 0):
+                    continue  # 這種寫法底本用過：不自動動
+                matches = set()
+                for p in range(n):
+                    for term, ch, pos, freq in index.get(span[:p] + "?" + span[p + 1:], ()):
+                        if pos != p or ch == span[p]:
+                            continue
+                        if frozenset((span[p], ch)) in ORTHOGRAPHIC_VARIANTS:
+                            continue
+                        if span[p] in STOP_CHARS or ch in STOP_CHARS:
+                            continue
+                        if n == 2 and (span[1 - p] in STOP_CHARS or term[1 - pos] in STOP_CHARS):
+                            # 兩字詞的另一格若是虛詞，證據不足（例：「的修」撑不起「羞→修」）
+                            continue
+                        if syllables(span[p]) != syllables(ch):
+                            continue
+                        matches.add((term, ch, p, freq))
+                if len(matches) != 1:
+                    continue
+                term, ch, p, freq = matches.pop()
+                asr_part, ref_part = span[p], ch
+                results.append({
+                    "sentenceIndex": seg_index,
+                    "sentenceId": seg["id"],
+                    "compStart": i + p,
+                    "compEnd": i + p + 1,
+                    "asrDelta": asr_part,
+                    "referenceDelta": ref_part,
+                    "changeChars": 1,
+                    "sentenceSimilarity": None,
+                    "asrContexts": [span, term],
+                    "refContexts": [term],
+                    "glossary": {"term": term, "frequency": freq,
+                                 "asrSpan": span, "asrSpanInCorpus": 0},
+                })
+    return results
 
 
 def paragraphize(segments, outline_sections):
@@ -331,6 +476,7 @@ def main() -> int:
     from sifayin_build_catalog import title_for  # 講次標題一律沿用官方「課程：」列
 
     corpus = build_corpus()
+    glossary = glossary_index(corpus)
 
     for session_id in [s.strip() for s in args.sessions.split(",") if s.strip()]:
         folder = EVIDENCE / f"playlist-{session_id}"
@@ -360,12 +506,36 @@ def main() -> int:
             })
 
         asr_stream, ref_stream, char_map = global_char_map(segments, reference)
-        candidates = sentence_candidates(segments, asr_stream, ref_stream, char_map)
-        applied, unresolved = apply_candidates(segments, candidates, corpus)
+        candidates = sentence_candidates(segments, asr_stream, ref_stream, char_map,
+                                           canon(ref_stream))
+        seen_spans = {(c["sentenceId"], c["compStart"], c["asrDelta"], c["referenceDelta"])
+                      for c in candidates}
+        for candidate in glossary_candidates(segments, corpus, glossary):
+            key = (candidate["sentenceId"], candidate["compStart"],
+                   candidate["asrDelta"], candidate["referenceDelta"])
+            if key not in seen_spans:
+                candidates.append(candidate)
+        # 同一字被兩個假說搶改時，保留先提出的（對齊-derived 在前），
+        # 後者記錄為 overlap-skipped，不悄悄丟掉。
+        occupied: dict[int, set] = {}
+        deduped, overlaps = [], []
+        for candidate in candidates:
+            used = occupied.setdefault(candidate["sentenceIndex"], set())
+            span = range(candidate["compStart"], candidate["compEnd"])
+            if any(i in used for i in span):
+                candidate["note"] = "overlap-skipped"
+                overlaps.append(candidate)
+                continue
+            used.update(span)
+            deduped.append(candidate)
+        applied, unresolved = apply_candidates(segments, deduped, corpus)
+        unresolved.extend(overlaps)
 
+        NOISE_NOTES = ("editorial-divergence", "orthographic-variant", "overlap-skipped",
+                       "stale-position", "punctuation-gap")
         for candidate in unresolved:
-            if candidate.get("note") in ("editorial-divergence", "orthographic-variant"):
-                continue  # 整編稿的口語刪節／改寫與正寫法差異，不是 ASR 錯誤，不標存疑
+            if candidate.get("note") in NOISE_NOTES:
+                continue  # 整編稿差異、正寫法、對齊機制與去重殘留，都不是語意疑義
             if not candidate["asrDelta"] or not candidate["referenceDelta"]:
                 continue
             segments[candidate["sentenceIndex"]]["reviewNeeded"] = True
@@ -425,9 +595,11 @@ def main() -> int:
         (folder / "candidate.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         (folder / "correction_candidates.json").write_text(json.dumps({
-            "schema": "sifayin-correction-candidates/v2",
+            "schema": "sifayin-correction-candidates/v3",
             "sessionId": f"session_{session_id}",
-            "algorithm": "python-difflib-sequence-matcher/v1 (comparable-unicode char map)",
+            "algorithm": "python-difflib-sequence-matcher/v2 (comparable-unicode char map, script-canonical keys)",
+            "alignmentNote": "difflib 的比較 key 先做逐字 t2s 正規化（適/适、轉/转 視為同字），"
+                             "避免 ASR 偶發簡體字造成對齊漂移；證據與輸出仍保留原字元。",
             "correctionPolicy": {
                 "strict-homophone": "等長 ≤3 字且每字聲韻相同（pypinyin 不計聲調）",
                 "near-homophone-term": f"等長 ≤{MAX_TERM_FIX_CHARS} 字、每字同音或近音（同聲母且韻母 edit distance ≤1），"
@@ -435,6 +607,10 @@ def main() -> int:
                 "editorial-divergence": "其餘差異＝整編稿的口語刪節／改寫，不套用、不標存疑",
                 "orthographic-variant": "他/它、做/作、佔/占 等正寫法差異：不套用、不標存疑",
                 "unattested-homophone": "同音但底本無詞頻佐證：不自動改，標記 reviewNeeded 交人工",
+                "glossary-homophone": ("詞表同音校正：句內 2〜5 字區間與底本某詞只差一字且該字聲韻完全相同；"
+                                     "該詞須通過收詞條件（兩字詞頻≥%d／3〜5字词頻≥%d 且緊縮比≥%.1f），"
+                                     "ASR 寫法在 11 份底本零出現，同位置同音候選詞唯一，被換的字不屬虛詞，"
+                                     "才自動套用" % (MIN_GLOSSARY_FREQUENCY_2, MIN_GLOSSARY_FREQUENCY, MIN_TIGHT_RATIO)),
             },
             "maxAutoChangeChars": MAX_AUTO_CHANGE_CHARS,
             "minSentenceSimilarity": MIN_SENTENCE_SIMILARITY,

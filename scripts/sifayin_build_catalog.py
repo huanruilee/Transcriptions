@@ -29,31 +29,40 @@ CHANNEL_ID = "UCcL81Q7idwmC-AIFGtKt8Pg"
 INSTRUCTOR = "如性法師"
 CN_NUMERALS = "一二三四五六七八九十"
 
-SESSION_TITLES = {
-    "01": ("第01講 導論：法師的教學藍圖與建議", "教學藍圖", "2020-07-25"),
-}
-
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def official_course_label(session_id: str) -> str:
+def official_field(session_id: str, label: str) -> str:
     head = (COURSE_DIR / "source_text" / f"lecture_{session_id}.txt").read_text(encoding="utf-8")[:400]
-    match = re.search(r"課程：(.+)", head)
+    match = re.search(rf"{label}：(.+)", head)
     return match.group(1).strip() if match else ""
 
 
+def normalize_date(raw: str) -> str:
+    """官方底本的「日期：2020 年7 月26 日〜8 月2 日」→ 2020-07-26〜2020-08-02。"""
+    def one(match: re.Match) -> str:
+        return f"{int(match.group(1)):04d}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+
+    out = re.sub(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日", one, raw)
+    return re.sub(r"\s+", "", out)
+
+
 def title_for(session_id: str) -> tuple[str, str, str]:
-    if session_id in SESSION_TITLES:
-        return SESSION_TITLES[session_id]
-    label = official_course_label(session_id)
-    match = re.match(r"(第[%s]講)（(.+?)）" % CN_NUMERALS, label)
+    label = official_field(session_id, "課程")
+    date = normalize_date(official_field(session_id, "日期"))
+    if not date:
+        raise SystemExit(f"lecture_{session_id}: 官方「日期：」列解析失敗")
+    if session_id == "01":
+        return (f"第01講 導論：{label}", "教學藍圖", date)
+    match = re.match(r"第[%s]講（(.+?)）" % CN_NUMERALS, label)
     if not match:
         raise SystemExit(f"lecture_{session_id}: 官方「課程：」列解析失敗：{label!r}")
-    official, topic = match.group(1), match.group(2)
+    topic = match.group(1)
     number = int(session_id)
-    return (f"第{number:02d}講 四法印{official}：{topic}", f"四法印・{official}", "2020-07-26〜2020-08-02")
+    return (f"第{number:02d}講 四法印第{CN_NUMERALS[number - 2]}講：{topic}",
+            f"四法印・第{CN_NUMERALS[number - 2]}講", date)
 
 
 def write_correction_dates(sessions: list[dict]) -> None:
@@ -82,6 +91,51 @@ def write_correction_dates(sessions: list[dict]) -> None:
     (COURSE_DIR / "correction-dates.html").write_text(html, encoding="utf-8")
 
 
+def write_learned_corrections() -> int:
+    """由審核過的自動校字彙整《四法印》術語庫（learned_corrections.json）。
+
+    只收有詞頻佐證的對子（glossary 條目自帶底本詞頻），並記錄政策與出現次數，
+    讓後續同講師音檔的 ASR 可以直接沿用；單次且無佐證的改動一律不收。
+    """
+    terms: dict[str, dict] = {}
+    for path in sorted(EVIDENCE.glob("playlist-*/correction_candidates.json")):
+        session_id = path.parent.name.replace("playlist-", "")
+        data = load_json(path)
+        for fix in data.get("applied", []):
+            glossary = fix.get("glossary") or {}
+            asr_form = glossary.get("asrSpan") or fix["asrDelta"]
+            corrected = glossary.get("term") or fix["referenceDelta"]
+            if len(corrected) < 2 or asr_form == corrected:
+                continue
+            entry = terms.setdefault(asr_form, {
+                "corrected": corrected,
+                "category": "佛法名相",
+                "reasoning": (f"官方整編逐字稿作詞頻佐證（底本 {glossary.get('frequency', '—')} 次）；"
+                              f"ASR 寫法在 11 份底本零出現；政策 {fix.get('policy', '')}"),
+                "policy": fix.get("policy", ""),
+                "baseFrequency": glossary.get("frequency"),
+                "observedIn": [],
+            })
+            if session_id not in entry["observedIn"]:
+                entry["observedIn"].append(session_id)
+    payload = {
+        "_metadata": {
+            "course": "四法印",
+            "courseId": COURSE_ID,
+            "instructor": INSTRUCTOR,
+            "playlistId": PLAYLIST_URL.split("list=")[1],
+            "purpose": "《四法印》ASR 同音訛字對照（由官方整編逐字稿詞頻佐證自動彙整）",
+            "derivedFrom": "reviews/evidence/sifayin/playlist-*/correction_candidates.json（applied）",
+            "notes": "每筆附底本詞頻與政策；套用前仍需確認語境，不得以此覆蓋講者口語。",
+        },
+        "global_terms": dict(sorted(terms.items())),
+        "context_rules": [],
+    }
+    (COURSE_DIR / "learned_corrections.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return len(terms)
+
+
 def main() -> None:
     manifest = load_json(EVIDENCE / "intake_manifest.json")["sessions"]
     reference_inventory = load_json(EVIDENCE / "reference" / "reference_inventory.json")["references"]
@@ -104,11 +158,8 @@ def main() -> None:
         title, page_range, date = title_for(session_id)
         overview = session.get("contentOverview") or {}
         points = overview.get("mainPoints") or []
-        summary = (
-            f"如性法師：四法印 {title.split(' 導論')[0]}（本地 ASR + 官方整編底本名相對校，待閱校版）。"
-            if not points else
-            f"如性法師：{title}（本地 ASR + 官方整編底本名相對校，待閱校版）。主旨：{points[0]['text']}"
-        )
+        summary = (f"如性法師：{title}（{date}，本地 ASR 轉寫＋講師官方整編逐字稿名相對校，待閱校版）。"
+                   + (f"主旨：{points[0]['text']}" if points else ""))
         sessions.append({
             "sessionId": session_id,
             "title": title,
@@ -184,6 +235,7 @@ def main() -> None:
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     write_correction_dates(sessions)
+    learned = write_learned_corrections()
 
     catalog_path = BASE / "courses" / "catalog.json"
     catalog = load_json(catalog_path)
@@ -206,7 +258,8 @@ def main() -> None:
         catalog["courses"].append(entry)
     catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    print(f"[catalog] sessions={len(sessions)} toc={len(toc_sections)} catalog entries={len(catalog['courses'])}")
+    print(f"[catalog] sessions={len(sessions)} toc={len(toc_sections)} catalog entries="
+          f"{len(catalog['courses'])} learned_terms={learned}")
 
 
 if __name__ == "__main__":

@@ -233,6 +233,24 @@ test('grounding.json (Step 0) is complete and lists the 11 official base texts',
   assert.ok(fs.existsSync(path.join(evidenceRoot, 'reference', 'README.md')));
 });
 
+test('learned_corrections.json only carries pairs attested in the official base texts', () => {
+  const learned = readJson(path.join(courseDir, 'learned_corrections.json'));
+  assert.equal(learned._metadata.courseId, 'si-fa-yin');
+  assert.ok(learned._metadata.derivedFrom.includes('correction_candidates.json'));
+
+  const corpus = SESSION_IDS
+    .map((id) => fs.readFileSync(path.join(courseDir, 'source_text', `lecture_${id}.txt`), 'utf8'))
+    .join('');
+  const terms = Object.entries(learned.global_terms);
+  assert.ok(terms.length >= 10, `術語庫過小：${terms.length}`);
+  for (const [asrForm, entry] of terms) {
+    assert.ok(entry.corrected && entry.reasoning && entry.category, `${asrForm} 缺佐證欄位`);
+    assert.ok(corpus.includes(entry.corrected), `${asrForm}→${entry.corrected} 底本查無此詞`);
+    assert.ok(!corpus.includes(asrForm) || asrForm === entry.corrected,
+      `${asrForm} 在底本已存在，不得自動改寫`);
+  }
+});
+
 test('every session carries a reviewed contentOverview whose quotes are verbatim in the transcript', () => {
   for (const sessionId of SESSION_IDS) {
     const session = readJson(path.join(courseDir, 'sessions', `session_${sessionId}.json`));
