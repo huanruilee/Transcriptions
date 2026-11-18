@@ -4,8 +4,8 @@
 - 音檔：講師官方 MP3，3814.8 秒，sha256:02ac9cdf885289bef0e2c966dee23810bafd6f95c4d939afde34df93238faaf8
 - 底本：講師官方整編逐字稿 PDF（sha256:cb2aa26001dc816b0af4287d51428575d3d8ee5321d8f822cf976c8c54a918cb），抽取文字 10224 字（courses/四法印/source_text/lecture_05.txt）
 - ASR：faster-whisper-large-v3-turbo，609 段 / 11020 字，RTF 0.04357，尾差 4.6 秒
-- 對校：官方提綱 7 段全部成為段落邊界；自動校字 69 處；記錄差異 542 處（{"editorial-divergence": 453, "orthographic-variant": 4, "stale-position": 4, "unattested-homophone": 12, "punctuation-gap": 9, "overlap-skipped": 60}）
-- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 3, "discussionTopics": 2, "referenceViews": 2}，逐字回查不通過 0 條
+- 對校：官方提綱 7 段全部成為段落邊界；自動校字 72 處；記錄差異 539 處（{"editorial-divergence": 436, "orthographic-variant": 4, "stale-position": 4, "unattested-homophone": 12, "punctuation-gap": 25, "overlap-skipped": 58}）
+- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 3, "discussionTopics": 1, "referenceViews": 1}，逐字回查不通過 0 條
 - 狀態：candidate-review-required（尚未逐句人工聽核）
 
 ## 自動套用之校字（僅同音／近音名相，保留 ASR 口語）
@@ -16,11 +16,11 @@
 | seg-0003 | 和 | 合 | strict-homophone | 0.779 |
 | seg-0007 | 合 | 和 | strict-homophone | 0.72 |
 | seg-0007 | 違 | 為 | strict-homophone | 0.72 |
-| seg-0009 | 蓄留 | 續流 | strict-homophone | 0.728 |
+| seg-0009 | 留 | 流 | glossary-homophone | None |
 | seg-0009 | 升 | 生 | strict-homophone | 0.728 |
-| seg-0009 | 關戴 | 觀待 | strict-homophone | 0.728 |
+| seg-0009 | 戴 | 待 | glossary-homophone | None |
 | seg-0010 | 賢 | 咸 | strict-homophone | 0.717 |
-| seg-0010 | 惠河 | 會合 | strict-homophone | 0.717 |
+| seg-0010 | 河 | 合 | glossary-homophone | None |
 | seg-0010 | 消 | 銷 | strict-homophone | 0.717 |
 | seg-0010 | 祭誦 | 偈頌 | strict-homophone | 0.717 |
 | seg-0011 | 民生 | 名聲 | near-homophone-term | 0.833 |
@@ -36,10 +36,13 @@
 | seg-0014 | 靜 | 境 | strict-homophone | 0.824 |
 | seg-0015 | 靜 | 境 | strict-homophone | 0.805 |
 | seg-0015 | 靜 | 境 | strict-homophone | 0.805 |
+| seg-0015 | 靜 | 境 | glossary-homophone | None |
 | seg-0015 | 靜 | 境 | strict-homophone | 0.805 |
 | seg-0016 | 嗔 | 瞋 | glossary-homophone | None |
 | seg-0016 | 嗔 | 瞋 | strict-homophone | 0.761 |
+| seg-0017 | 嗔 | 瞋 | glossary-homophone | None |
 | seg-0017 | 升 | 生 | strict-homophone | 0.747 |
+| seg-0017 | 式 | 時 | glossary-homophone | None |
 | seg-0017 | 嗔 | 瞋 | strict-homophone | 0.747 |
 | seg-0017 | 升 | 生 | strict-homophone | 0.747 |
 | seg-0017 | 嗔 | 瞋 | strict-homophone | 0.747 |
@@ -99,5 +102,5 @@
 | seg-0050 | 新 | 心 | unattested-homophone |
 | seg-0432 | 時 | 始 | unattested-homophone |
 
-- 整段口語刪節／改寫（editorial-divergence）共 453 處、標點差異 9 處、正寫法差異 4 處：一律保留 ASR 原樣，完整清單見 `correction_candidates.json`。
+- 整段口語刪節／改寫（editorial-divergence）共 436 處、標點差異 25 處、正寫法差異 4 處：一律保留 ASR 原樣，完整清單見 `correction_candidates.json`。
 

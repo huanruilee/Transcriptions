@@ -167,6 +167,12 @@ python3 scripts/init_course.py \
    例：不得把「難遭遇」改成「難遭於」）。
 5. 官方 PDF／音檔屬第三方大檔，**不入庫**；只入庫抽取後的純文字底本，並在
    `reference_inventory.json` 留 SHA-256 與原始下載連結。
+6. **ASR 停頓／雜訊標記要轉讀號、不能直接刪**：whisper GPU 服務用 U+FFFD、`＼`、全形英文字母
+   （Ｖ、Ｂ…）當停頓標記；直接當雜訊刪掉會讓整段變成無標點連寫（PR #444 的 P1 意見）。
+   段落末句缺句終標點時補句號（只補標點、不改字）；兩者計數寫進 `session._meta`
+   的 `asrPauseMarkersNormalized` 與 `paragraphEndTerminatorsAdded`。
+7. **`correction-dates.html` 只能由平台正式產生器 `scripts/course_correction_dates.mjs` 產出**：
+   課程自己寫模板就成了第二套模板，跑測試時被蓋掉，出現「本地綠、CI 紅」。
 4. 未經逐句人工聽核前，`publicationState` 維持 `candidate-review-required`，
    `run_manifest.gates.humanListened` 必為 `false`。
 5. 每講證據必須湊齊六件套，`content_review_manifest` 的 `unsupported` 必須為 0。

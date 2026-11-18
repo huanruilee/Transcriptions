@@ -4,7 +4,7 @@
 - 音檔：講師官方 MP3，3938.376 秒，sha256:00abbc8f9ed22bf80646e232ab684b6146b9b085ab19be1ace4ae957eacb344e
 - 底本：講師官方整編逐字稿 PDF（sha256:faa3d8545a018a91d70a2c2e23f528a5c49b485efa37279cbc545835ac711d0d），抽取文字 10669 字（courses/四法印/source_text/lecture_02.txt）
 - ASR：faster-whisper-large-v3-turbo，1356 段 / 11900 字，RTF 0.12896，尾差 9.47 秒
-- 對校：官方提綱 8 段全部成為段落邊界；自動校字 49 處；記錄差異 95 處（{"editorial-divergence": 72, "punctuation-gap": 2, "stale-position": 2, "orthographic-variant": 1, "overlap-skipped": 18}）
+- 對校：官方提綱 8 段全部成為段落邊界；自動校字 49 處；記錄差異 95 處（{"editorial-divergence": 72, "punctuation-gap": 2, "overlap-skipped": 18, "stale-position": 2, "orthographic-variant": 1}）
 - 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 3, "discussionTopics": 1, "referenceViews": 1}，逐字回查不通過 0 條
 - 狀態：candidate-review-required（尚未逐句人工聽核）
 

@@ -2,8 +2,8 @@
   "runId": "si-fa-yin-8-run1",
   "sessionId": "session_08",
   "courseId": "si-fa-yin",
-  "startedAt": "2026-11-19 05:24:12",
-  "completedAt": "2026-11-18 21:38:20",
+  "startedAt": "2026-11-19 06:01:41",
+  "completedAt": "2026-11-18 22:17:10",
   "stages": [
     {
       "stage": "S1-fetch",
@@ -33,7 +33,7 @@
     {
       "stage": "S6-overview",
       "tool": "eNeural glm53-flash（生成＋獨立證據審查）",
-      "result": "{\"mainPoints\": 2, \"discussionTopics\": 2, \"referenceViews\": 1}"
+      "result": "{\"mainPoints\": 2, \"discussionTopics\": 2, \"referenceViews\": 2}"
     }
   ],
   "models": [
@@ -74,15 +74,15 @@
     "unresolvedNotes": {
       "editorial-divergence": 106,
       "orthographic-variant": 3,
+      "overlap-skipped": 144,
       "unattested-homophone": 1,
-      "stale-position": 3,
-      "overlap-skipped": 144
+      "stale-position": 3
     },
     "unknownUnresolvedNotes": [
       "overlap-skipped",
       "stale-position"
     ],
-    "overviewEvidenceTotal": 5,
+    "overviewEvidenceTotal": 6,
     "overviewUnsupported": 0,
     "overviewPass": true,
     "humanListened": false,
@@ -90,12 +90,12 @@
   },
   "artifacts": {
     "rawAsr": "sha256:5207421e1bfa05082de4204d75e8466f116471acee9d4c2fcf16e73079f95488",
-    "candidate": "sha256:7cfd2bb46d5e10ac3058e836ba85490d41872cc12e7f1ee719cd78086733ab6e",
-    "correctionCandidates": "sha256:1e1256d1802a5a2eb261db1f69507bd423c5923b1ab0fd671dcecdd4b1f79000",
+    "candidate": "sha256:c1091786f796ecb6696c5271ae4fdf994a793ca47da847fca5ec73cd0453ed71",
+    "correctionCandidates": "sha256:091e6728d14a00616a05001e0b2686895bd1cd255ea73a4efce81a6e5a0d2186",
     "outline": "sha256:c2a958de3901f3a3cb2bb133db6f50501776c743ce431207e438d13b3db3487b",
-    "contentReview": "sha256:ab352c7258102c604a6e2964fdd067d18593921634db31a12f9fe11a799bca9c",
-    "contentReviewManifest": "sha256:12abb3c440a52dfa926bb6d71c9d31dcd8a9f8a746616035078bc47d39ef7aaf",
-    "finalSession": "sha256:87862ced6e74bc876c24638af713ac906092316439390fad8981db11a56e462c",
+    "contentReview": "sha256:16747a27026a435e7aecde04ce1dd76d3b75e0344ea03f64b673f35f296604f1",
+    "contentReviewManifest": "sha256:8cff69f8c208080754d81e97074c991d32d9f091607337caa6bd2baffba29c9f",
+    "finalSession": "sha256:f563171dd014f3c7a8f4a3961b1ac04308d10dbe89f543eec7919fcfed291f80",
     "baseText": "sha256:e72b6de286ff26320eede72363abc4da25c3e408c65fc206d25ff9443026a28e"
   }
 }

@@ -13,13 +13,13 @@
   },
   "maxAutoChangeChars": 6,
   "minSentenceSimilarity": 0.55,
-  "appliedCount": 196,
+  "appliedCount": 198,
   "appliedByPolicy": {
     "near-homophone-term": 2,
     "strict-homophone": 28,
-    "glossary-homophone": 166
+    "glossary-homophone": 168
   },
-  "unresolvedCount": 278,
+  "unresolvedCount": 276,
   "applied": [
     {
       "sentenceIndex": 2,
@@ -208,6 +208,30 @@
         "term": "蘊體",
         "frequency": 97,
         "asrSpan": "孕體",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
+    },
+    {
+      "sentenceIndex": 13,
+      "sentenceId": "seg-0014",
+      "compStart": 18,
+      "compEnd": 19,
+      "asrDelta": "甲",
+      "referenceDelta": "假",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "分別甲",
+        "分別假"
+      ],
+      "refContexts": [
+        "分別假"
+      ],
+      "glossary": {
+        "term": "分別假",
+        "frequency": 14,
+        "asrSpan": "分別甲",
         "asrSpanInCorpus": 0
       },
       "policy": "glossary-homophone"
@@ -3535,6 +3559,30 @@
       "policy": "glossary-homophone"
     },
     {
+      "sentenceIndex": 715,
+      "sentenceId": "seg-0716",
+      "compStart": 11,
+      "compEnd": 12,
+      "asrDelta": "值",
+      "referenceDelta": "執",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "我值",
+        "我執"
+      ],
+      "refContexts": [
+        "我執"
+      ],
+      "glossary": {
+        "term": "我執",
+        "frequency": 130,
+        "asrSpan": "我值",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
+    },
+    {
       "sentenceIndex": 718,
       "sentenceId": "seg-0719",
       "compStart": 11,
@@ -4806,6 +4854,30 @@
       "note": "editorial-divergence"
     },
     {
+      "sentenceIndex": 13,
+      "sentenceId": "seg-0014",
+      "compStart": 18,
+      "compEnd": 19,
+      "asrDelta": "甲",
+      "referenceDelta": "假",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "由分別甲",
+        "由分別假"
+      ],
+      "refContexts": [
+        "由分別假"
+      ],
+      "glossary": {
+        "term": "由分別假",
+        "frequency": 6,
+        "asrSpan": "由分別甲",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
       "sentenceIndex": 15,
       "sentenceId": "seg-0016",
       "compStart": 17,
@@ -4882,6 +4954,54 @@
       "note": "editorial-divergence"
     },
     {
+      "sentenceIndex": 26,
+      "sentenceId": "seg-0027",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "陷",
+      "referenceDelta": "現",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "心中陷起",
+        "心中現起"
+      ],
+      "refContexts": [
+        "心中現起"
+      ],
+      "glossary": {
+        "term": "心中現起",
+        "frequency": 6,
+        "asrSpan": "心中陷起",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 26,
+      "sentenceId": "seg-0027",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "陷",
+      "referenceDelta": "現",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "們心中陷起",
+        "們心中現起"
+      ],
+      "refContexts": [
+        "們心中現起"
+      ],
+      "glossary": {
+        "term": "們心中現起",
+        "frequency": 3,
+        "asrSpan": "們心中陷起",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
       "sentenceIndex": 27,
       "sentenceId": "seg-0028",
       "compStart": 1,
@@ -4937,1117 +5057,6 @@
       "note": "editorial-divergence"
     },
     {
-      "sentenceIndex": 34,
-      "sentenceId": "seg-0035",
-      "compStart": 4,
-      "compEnd": 4,
-      "asrDelta": "",
-      "referenceDelta": "那",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.571,
-      "asrContexts": [
-        "此",
-        "要"
-      ],
-      "refContexts": [
-        "此那",
-        "那要"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 39,
-      "sentenceId": "seg-0040",
-      "compStart": 6,
-      "compEnd": 11,
-      "asrDelta": "透由修道而",
-      "referenceDelta": "",
-      "changeChars": 5,
-      "sentenceSimilarity": 0.56,
-      "asrContexts": [
-        "道透由修道而",
-        "透由修道而破"
-      ],
-      "refContexts": [
-        "道",
-        "破"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 65,
-      "sentenceId": "seg-0066",
-      "compStart": 3,
-      "compEnd": 5,
-      "asrDelta": "稱為",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.609,
-      "asrContexts": [
-        "種稱為",
-        "稱為道"
-      ],
-      "refContexts": [
-        "種",
-        "道"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 77,
-      "sentenceId": "seg-0078",
-      "compStart": 0,
-      "compEnd": 2,
-      "asrDelta": "如果",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.593,
-      "asrContexts": [
-        "如果它"
-      ],
-      "refContexts": [
-        "它"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 82,
-      "sentenceId": "seg-0083",
-      "compStart": 5,
-      "compEnd": 5,
-      "asrDelta": "",
-      "referenceDelta": "先推翻",
-      "changeChars": 3,
-      "sentenceSimilarity": 0.595,
-      "asrContexts": [
-        "要",
-        "破"
-      ],
-      "refContexts": [
-        "要先推翻",
-        "先推翻破"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 82,
-      "sentenceId": "seg-0083",
-      "compStart": 2,
-      "compEnd": 4,
-      "asrDelta": "現在",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.595,
-      "asrContexts": [
-        "們現在",
-        "現在要"
-      ],
-      "refContexts": [
-        "們",
-        "要"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 82,
-      "sentenceId": "seg-0083",
-      "compStart": 0,
-      "compEnd": 0,
-      "asrDelta": "",
-      "referenceDelta": "目前",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.595,
-      "asrContexts": [
-        "我"
-      ],
-      "refContexts": [
-        "目前我"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 109,
-      "sentenceId": "seg-0110",
-      "compStart": 2,
-      "compEnd": 4,
-      "asrDelta": "我們",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.55,
-      "asrContexts": [
-        "以我們",
-        "我們必"
-      ],
-      "refContexts": [
-        "以",
-        "必"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 251,
-      "sentenceId": "seg-0252",
-      "compStart": 8,
-      "compEnd": 9,
-      "asrDelta": "持",
-      "referenceDelta": "實",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.55,
-      "asrContexts": [
-        "主持",
-        "持有"
-      ],
-      "refContexts": [
-        "主實",
-        "實有"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 261,
-      "sentenceId": "seg-0262",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "持",
-      "referenceDelta": "實",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.591,
-      "asrContexts": [
-        "主持",
-        "持有"
-      ],
-      "refContexts": [
-        "主實",
-        "實有"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 265,
-      "sentenceId": "seg-0266",
-      "compStart": 12,
-      "compEnd": 13,
-      "asrDelta": "持",
-      "referenceDelta": "實",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.583,
-      "asrContexts": [
-        "主持",
-        "持有"
-      ],
-      "refContexts": [
-        "主實",
-        "實有"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 267,
-      "sentenceId": "seg-0268",
-      "compStart": 5,
-      "compEnd": 5,
-      "asrDelta": "",
-      "referenceDelta": "非常重要但",
-      "changeChars": 5,
-      "sentenceSimilarity": 0.556,
-      "asrContexts": [
-        "點",
-        "也"
-      ],
-      "refContexts": [
-        "點非常重要但",
-        "非常重要但也"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 267,
-      "sentenceId": "seg-0268",
-      "compStart": 0,
-      "compEnd": 2,
-      "asrDelta": "但是",
-      "referenceDelta": "我",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.556,
-      "asrContexts": [
-        "但是這"
-      ],
-      "refContexts": [
-        "我這"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 270,
-      "sentenceId": "seg-0271",
-      "compStart": 9,
-      "compEnd": 10,
-      "asrDelta": "來",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.564,
-      "asrContexts": [
-        "識來",
-        "來學"
-      ],
-      "refContexts": [
-        "識",
-        "學"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 302,
-      "sentenceId": "seg-0303",
-      "compStart": 17,
-      "compEnd": 18,
-      "asrDelta": "般",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.627,
-      "asrContexts": [
-        "那般"
-      ],
-      "refContexts": [
-        "那"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 302,
-      "sentenceId": "seg-0303",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "瞭",
-      "referenceDelta": "了",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.627,
-      "asrContexts": [
-        "實瞭",
-        "瞭解"
-      ],
-      "refContexts": [
-        "實了",
-        "了解"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 307,
-      "sentenceId": "seg-0308",
-      "compStart": 3,
-      "compEnd": 4,
-      "asrDelta": "當",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.564,
-      "asrContexts": [
-        "論當",
-        "當中"
-      ],
-      "refContexts": [
-        "論",
-        "中"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 409,
-      "sentenceId": "seg-0410",
-      "compStart": 0,
-      "compEnd": 0,
-      "asrDelta": "",
-      "referenceDelta": "道路",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.647,
-      "asrContexts": [
-        "雖"
-      ],
-      "refContexts": [
-        "道路雖"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 466,
-      "sentenceId": "seg-0467",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "你",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.564,
-      "asrContexts": [
-        "看你",
-        "你自"
-      ],
-      "refContexts": [
-        "看",
-        "自"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 508,
-      "sentenceId": "seg-0509",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "把",
-      "referenceDelta": "將",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.591,
-      "asrContexts": [
-        "們把",
-        "把苦"
-      ],
-      "refContexts": [
-        "們將",
-        "將苦"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 521,
-      "sentenceId": "seg-0522",
-      "compStart": 12,
-      "compEnd": 12,
-      "asrDelta": "",
-      "referenceDelta": "追根究柢之後",
-      "changeChars": 6,
-      "sentenceSimilarity": 0.579,
-      "asrContexts": [
-        "體"
-      ],
-      "refContexts": [
-        "體追根究柢之後"
-      ],
-      "note": "stale-position"
-    },
-    {
-      "sentenceIndex": 522,
-      "sentenceId": "seg-0523",
-      "compStart": 0,
-      "compEnd": 3,
-      "asrDelta": "為什麼",
-      "referenceDelta": "",
-      "changeChars": 3,
-      "sentenceSimilarity": 0.552,
-      "asrContexts": [
-        "為什麼我"
-      ],
-      "refContexts": [
-        "我"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 526,
-      "sentenceId": "seg-0527",
-      "compStart": 5,
-      "compEnd": 6,
-      "asrDelta": "意",
-      "referenceDelta": "業",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.55,
-      "asrContexts": [
-        "和意",
-        "意束"
-      ],
-      "refContexts": [
-        "和業",
-        "業束"
-      ],
-      "note": "unattested-homophone"
-    },
-    {
-      "sentenceIndex": 576,
-      "sentenceId": "seg-0577",
-      "compStart": 8,
-      "compEnd": 9,
-      "asrDelta": "比",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.585,
-      "asrContexts": [
-        "苦比",
-        "比較"
-      ],
-      "refContexts": [
-        "苦",
-        "較"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 589,
-      "sentenceId": "seg-0590",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "是",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.655,
-      "asrContexts": [
-        "都是",
-        "是來"
-      ],
-      "refContexts": [
-        "都",
-        "來"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 594,
-      "sentenceId": "seg-0595",
-      "compStart": 10,
-      "compEnd": 11,
-      "asrDelta": "重",
-      "referenceDelta": "眾",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.565,
-      "asrContexts": [
-        "是重",
-        "重過"
-      ],
-      "refContexts": [
-        "是眾",
-        "眾過"
-      ],
-      "note": "unattested-homophone"
-    },
-    {
-      "sentenceIndex": 596,
-      "sentenceId": "seg-0597",
-      "compStart": 5,
-      "compEnd": 6,
-      "asrDelta": "夠",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.577,
-      "asrContexts": [
-        "能夠",
-        "夠藉"
-      ],
-      "refContexts": [
-        "能",
-        "藉"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 596,
-      "sentenceId": "seg-0597",
-      "compStart": 2,
-      "compEnd": 4,
-      "asrDelta": "不是",
-      "referenceDelta": "否",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.577,
-      "asrContexts": [
-        "是不是",
-        "不是能"
-      ],
-      "refContexts": [
-        "是否",
-        "否能"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 645,
-      "sentenceId": "seg-0646",
-      "compStart": 16,
-      "compEnd": 16,
-      "asrDelta": "",
-      "referenceDelta": "換",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.722,
-      "asrContexts": [
-        "脫"
-      ],
-      "refContexts": [
-        "脫換"
-      ],
-      "note": "stale-position"
-    },
-    {
-      "sentenceIndex": 645,
-      "sentenceId": "seg-0646",
-      "compStart": 13,
-      "compEnd": 13,
-      "asrDelta": "",
-      "referenceDelta": "斷除我執",
-      "changeChars": 4,
-      "sentenceSimilarity": 0.722,
-      "asrContexts": [
-        "惱",
-        "的"
-      ],
-      "refContexts": [
-        "惱斷除我執",
-        "斷除我執的"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 645,
-      "sentenceId": "seg-0646",
-      "compStart": 9,
-      "compEnd": 9,
-      "asrDelta": "",
-      "referenceDelta": "什麼",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.722,
-      "asrContexts": [
-        "是",
-        "斷"
-      ],
-      "refContexts": [
-        "是什麼",
-        "什麼斷"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 645,
-      "sentenceId": "seg-0646",
-      "compStart": 0,
-      "compEnd": 3,
-      "asrDelta": "佛告訴",
-      "referenceDelta": "",
-      "changeChars": 3,
-      "sentenceSimilarity": 0.722,
-      "asrContexts": [
-        "佛告訴我"
-      ],
-      "refContexts": [
-        "我"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 650,
-      "sentenceId": "seg-0651",
-      "compStart": 3,
-      "compEnd": 5,
-      "asrDelta": "彼此",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.55,
-      "asrContexts": [
-        "者彼此",
-        "彼此之"
-      ],
-      "refContexts": [
-        "者",
-        "之"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 664,
-      "sentenceId": "seg-0665",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "要",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.731,
-      "asrContexts": [
-        "想要",
-        "要趕"
-      ],
-      "refContexts": [
-        "想",
-        "趕"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 664,
-      "sentenceId": "seg-0665",
-      "compStart": 3,
-      "compEnd": 3,
-      "asrDelta": "",
-      "referenceDelta": "我",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.731,
-      "asrContexts": [
-        "是",
-        "想"
-      ],
-      "refContexts": [
-        "是我",
-        "我想"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 664,
-      "sentenceId": "seg-0665",
-      "compStart": 2,
-      "compEnd": 2,
-      "asrDelta": "",
-      "referenceDelta": "只",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.731,
-      "asrContexts": [
-        "該",
-        "是"
-      ],
-      "refContexts": [
-        "該只",
-        "只是"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 664,
-      "sentenceId": "seg-0665",
-      "compStart": 0,
-      "compEnd": 0,
-      "asrDelta": "",
-      "referenceDelta": "想的",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.731,
-      "asrContexts": [
-        "應"
-      ],
-      "refContexts": [
-        "想的應"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 666,
-      "sentenceId": "seg-0667",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "要",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.585,
-      "asrContexts": [
-        "想要",
-        "要跳"
-      ],
-      "refContexts": [
-        "想",
-        "跳"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 707,
-      "sentenceId": "seg-0708",
-      "compStart": 8,
-      "compEnd": 10,
-      "asrDelta": "比較",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.591,
-      "asrContexts": [
-        "些比較",
-        "比較奇"
-      ],
-      "refContexts": [
-        "些",
-        "奇"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 713,
-      "sentenceId": "seg-0714",
-      "compStart": 10,
-      "compEnd": 11,
-      "asrDelta": "詞",
-      "referenceDelta": "字",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.571,
-      "asrContexts": [
-        "個詞",
-        "詞換"
-      ],
-      "refContexts": [
-        "個字",
-        "字換"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 715,
-      "sentenceId": "seg-0716",
-      "compStart": 11,
-      "compEnd": 12,
-      "asrDelta": "值",
-      "referenceDelta": "執會",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.612,
-      "asrContexts": [
-        "我值",
-        "值有"
-      ],
-      "refContexts": [
-        "我執會",
-        "執會有"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 814,
-      "sentenceId": "seg-0815",
-      "compStart": 4,
-      "compEnd": 4,
-      "asrDelta": "",
-      "referenceDelta": "去",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.564,
-      "asrContexts": [
-        "會",
-        "找"
-      ],
-      "refContexts": [
-        "會去",
-        "去找"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 845,
-      "sentenceId": "seg-0846",
-      "compStart": 2,
-      "compEnd": 2,
-      "asrDelta": "",
-      "referenceDelta": "知道自己",
-      "changeChars": 4,
-      "sentenceSimilarity": 0.556,
-      "asrContexts": [
-        "們",
-        "的"
-      ],
-      "refContexts": [
-        "們知道自己",
-        "知道自己的"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 845,
-      "sentenceId": "seg-0846",
-      "compStart": 0,
-      "compEnd": 0,
-      "asrDelta": "",
-      "referenceDelta": "常當",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.556,
-      "asrContexts": [
-        "我"
-      ],
-      "refContexts": [
-        "常當我"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 851,
-      "sentenceId": "seg-0852",
-      "compStart": 13,
-      "compEnd": 13,
-      "asrDelta": "",
-      "referenceDelta": "所以這個蘊體",
-      "changeChars": 6,
-      "sentenceSimilarity": 0.6,
-      "asrContexts": [
-        "體"
-      ],
-      "refContexts": [
-        "體所以這個蘊體"
-      ],
-      "note": "stale-position"
-    },
-    {
-      "sentenceIndex": 910,
-      "sentenceId": "seg-0911",
-      "compStart": 1,
-      "compEnd": 3,
-      "asrDelta": "什麼",
-      "referenceDelta": "何",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.593,
-      "asrContexts": [
-        "為什麼",
-        "什麼要"
-      ],
-      "refContexts": [
-        "為何",
-        "何要"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 912,
-      "sentenceId": "seg-0913",
-      "compStart": 10,
-      "compEnd": 11,
-      "asrDelta": "現",
-      "referenceDelta": "",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.579,
-      "asrContexts": [
-        "個現",
-        "現狀"
-      ],
-      "refContexts": [
-        "個",
-        "狀"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 913,
-      "sentenceId": "seg-0914",
-      "compStart": 0,
-      "compEnd": 2,
-      "asrDelta": "如果",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.667,
-      "asrContexts": [
-        "如果我"
-      ],
-      "refContexts": [
-        "我"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 983,
-      "sentenceId": "seg-0984",
-      "compStart": 11,
-      "compEnd": 13,
-      "asrDelta": "去做",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.571,
-      "asrContexts": [
-        "力去做",
-        "去做的"
-      ],
-      "refContexts": [
-        "力",
-        "的"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 1007,
-      "sentenceId": "seg-1008",
-      "compStart": 3,
-      "compEnd": 3,
-      "asrDelta": "",
-      "referenceDelta": "追求解脫",
-      "changeChars": 4,
-      "sentenceSimilarity": 0.649,
-      "asrContexts": [
-        "們",
-        "追"
-      ],
-      "refContexts": [
-        "們追求解脫",
-        "追求解脫追"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 1007,
-      "sentenceId": "seg-1008",
-      "compStart": 0,
-      "compEnd": 0,
-      "asrDelta": "",
-      "referenceDelta": "時",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.649,
-      "asrContexts": [
-        "要"
-      ],
-      "refContexts": [
-        "時要"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 1018,
-      "sentenceId": "seg-1019",
-      "compStart": 2,
-      "compEnd": 2,
-      "asrDelta": "",
-      "referenceDelta": "會",
-      "changeChars": 1,
-      "sentenceSimilarity": 0.638,
-      "asrContexts": [
-        "該",
-        "比"
-      ],
-      "refContexts": [
-        "該會",
-        "會比"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 1027,
-      "sentenceId": "seg-1028",
-      "compStart": 3,
-      "compEnd": 5,
-      "asrDelta": "我們",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.571,
-      "asrContexts": [
-        "多我們",
-        "我們平"
-      ],
-      "refContexts": [
-        "多",
-        "平"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 1086,
-      "sentenceId": "seg-1087",
-      "compStart": 11,
-      "compEnd": 11,
-      "asrDelta": "",
-      "referenceDelta": "謝謝各位",
-      "changeChars": 4,
-      "sentenceSimilarity": 0.562,
-      "asrContexts": [
-        "向"
-      ],
-      "refContexts": [
-        "向謝謝各位"
-      ],
-      "note": "stale-position"
-    },
-    {
-      "sentenceIndex": 1086,
-      "sentenceId": "seg-1087",
-      "compStart": 7,
-      "compEnd": 9,
-      "asrDelta": "來做",
-      "referenceDelta": "",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.562,
-      "asrContexts": [
-        "式來做",
-        "來做迴"
-      ],
-      "refContexts": [
-        "式",
-        "迴"
-      ],
-      "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 13,
-      "sentenceId": "seg-0014",
-      "compStart": 18,
-      "compEnd": 19,
-      "asrDelta": "甲",
-      "referenceDelta": "假",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "分別甲",
-        "分別假"
-      ],
-      "refContexts": [
-        "分別假"
-      ],
-      "glossary": {
-        "term": "分別假",
-        "frequency": 14,
-        "asrSpan": "分別甲",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 13,
-      "sentenceId": "seg-0014",
-      "compStart": 18,
-      "compEnd": 19,
-      "asrDelta": "甲",
-      "referenceDelta": "假",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "由分別甲",
-        "由分別假"
-      ],
-      "refContexts": [
-        "由分別假"
-      ],
-      "glossary": {
-        "term": "由分別假",
-        "frequency": 6,
-        "asrSpan": "由分別甲",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 26,
-      "sentenceId": "seg-0027",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "陷",
-      "referenceDelta": "現",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "心中陷起",
-        "心中現起"
-      ],
-      "refContexts": [
-        "心中現起"
-      ],
-      "glossary": {
-        "term": "心中現起",
-        "frequency": 6,
-        "asrSpan": "心中陷起",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 26,
-      "sentenceId": "seg-0027",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "陷",
-      "referenceDelta": "現",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "們心中陷起",
-        "們心中現起"
-      ],
-      "refContexts": [
-        "們心中現起"
-      ],
-      "glossary": {
-        "term": "們心中現起",
-        "frequency": 3,
-        "asrSpan": "們心中陷起",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
       "sentenceIndex": 33,
       "sentenceId": "seg-0034",
       "compStart": 15,
@@ -6096,6 +5105,25 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 34,
+      "sentenceId": "seg-0035",
+      "compStart": 4,
+      "compEnd": 4,
+      "asrDelta": "",
+      "referenceDelta": "那",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.571,
+      "asrContexts": [
+        "此",
+        "要"
+      ],
+      "refContexts": [
+        "此那",
+        "那要"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 39,
       "sentenceId": "seg-0040",
       "compStart": 19,
@@ -6142,6 +5170,25 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 39,
+      "sentenceId": "seg-0040",
+      "compStart": 6,
+      "compEnd": 11,
+      "asrDelta": "透由修道而",
+      "referenceDelta": "",
+      "changeChars": 5,
+      "sentenceSimilarity": 0.56,
+      "asrContexts": [
+        "道透由修道而",
+        "透由修道而破"
+      ],
+      "refContexts": [
+        "道",
+        "破"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 44,
@@ -6910,6 +5957,116 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 65,
+      "sentenceId": "seg-0066",
+      "compStart": 3,
+      "compEnd": 5,
+      "asrDelta": "稱為",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.609,
+      "asrContexts": [
+        "種稱為",
+        "稱為道"
+      ],
+      "refContexts": [
+        "種",
+        "道"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 77,
+      "sentenceId": "seg-0078",
+      "compStart": 0,
+      "compEnd": 2,
+      "asrDelta": "如果",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.593,
+      "asrContexts": [
+        "如果它"
+      ],
+      "refContexts": [
+        "它"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 82,
+      "sentenceId": "seg-0083",
+      "compStart": 5,
+      "compEnd": 5,
+      "asrDelta": "",
+      "referenceDelta": "先推翻",
+      "changeChars": 3,
+      "sentenceSimilarity": 0.595,
+      "asrContexts": [
+        "要",
+        "破"
+      ],
+      "refContexts": [
+        "要先推翻",
+        "先推翻破"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 82,
+      "sentenceId": "seg-0083",
+      "compStart": 2,
+      "compEnd": 4,
+      "asrDelta": "現在",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.595,
+      "asrContexts": [
+        "們現在",
+        "現在要"
+      ],
+      "refContexts": [
+        "們",
+        "要"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 82,
+      "sentenceId": "seg-0083",
+      "compStart": 0,
+      "compEnd": 0,
+      "asrDelta": "",
+      "referenceDelta": "目前",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.595,
+      "asrContexts": [
+        "我"
+      ],
+      "refContexts": [
+        "目前我"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 109,
+      "sentenceId": "seg-0110",
+      "compStart": 2,
+      "compEnd": 4,
+      "asrDelta": "我們",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.55,
+      "asrContexts": [
+        "以我們",
+        "我們必"
+      ],
+      "refContexts": [
+        "以",
+        "必"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 117,
@@ -7728,6 +6885,118 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 251,
+      "sentenceId": "seg-0252",
+      "compStart": 8,
+      "compEnd": 9,
+      "asrDelta": "持",
+      "referenceDelta": "實",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.55,
+      "asrContexts": [
+        "主持",
+        "持有"
+      ],
+      "refContexts": [
+        "主實",
+        "實有"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 261,
+      "sentenceId": "seg-0262",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "持",
+      "referenceDelta": "實",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.591,
+      "asrContexts": [
+        "主持",
+        "持有"
+      ],
+      "refContexts": [
+        "主實",
+        "實有"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 265,
+      "sentenceId": "seg-0266",
+      "compStart": 12,
+      "compEnd": 13,
+      "asrDelta": "持",
+      "referenceDelta": "實",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.583,
+      "asrContexts": [
+        "主持",
+        "持有"
+      ],
+      "refContexts": [
+        "主實",
+        "實有"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 267,
+      "sentenceId": "seg-0268",
+      "compStart": 5,
+      "compEnd": 5,
+      "asrDelta": "",
+      "referenceDelta": "非常重要但",
+      "changeChars": 5,
+      "sentenceSimilarity": 0.556,
+      "asrContexts": [
+        "點",
+        "也"
+      ],
+      "refContexts": [
+        "點非常重要但",
+        "非常重要但也"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 267,
+      "sentenceId": "seg-0268",
+      "compStart": 0,
+      "compEnd": 2,
+      "asrDelta": "但是",
+      "referenceDelta": "我",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.556,
+      "asrContexts": [
+        "但是這"
+      ],
+      "refContexts": [
+        "我這"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 270,
+      "sentenceId": "seg-0271",
+      "compStart": 9,
+      "compEnd": 10,
+      "asrDelta": "來",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.564,
+      "asrContexts": [
+        "識來",
+        "來學"
+      ],
+      "refContexts": [
+        "識",
+        "學"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 280,
       "sentenceId": "seg-0281",
       "compStart": 11,
@@ -7798,6 +7067,61 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 302,
+      "sentenceId": "seg-0303",
+      "compStart": 17,
+      "compEnd": 18,
+      "asrDelta": "般",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.627,
+      "asrContexts": [
+        "那般"
+      ],
+      "refContexts": [
+        "那"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 302,
+      "sentenceId": "seg-0303",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "瞭",
+      "referenceDelta": "了",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.627,
+      "asrContexts": [
+        "實瞭",
+        "瞭解"
+      ],
+      "refContexts": [
+        "實了",
+        "了解"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 307,
+      "sentenceId": "seg-0308",
+      "compStart": 3,
+      "compEnd": 4,
+      "asrDelta": "當",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.564,
+      "asrContexts": [
+        "論當",
+        "當中"
+      ],
+      "refContexts": [
+        "論",
+        "中"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 350,
@@ -8136,6 +7460,23 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 409,
+      "sentenceId": "seg-0410",
+      "compStart": 0,
+      "compEnd": 0,
+      "asrDelta": "",
+      "referenceDelta": "道路",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.647,
+      "asrContexts": [
+        "雖"
+      ],
+      "refContexts": [
+        "道路雖"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 413,
       "sentenceId": "seg-0414",
       "compStart": 12,
@@ -8278,6 +7619,25 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 466,
+      "sentenceId": "seg-0467",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "你",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.564,
+      "asrContexts": [
+        "看你",
+        "你自"
+      ],
+      "refContexts": [
+        "看",
+        "自"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 482,
@@ -8592,6 +7952,25 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 508,
+      "sentenceId": "seg-0509",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "把",
+      "referenceDelta": "將",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.591,
+      "asrContexts": [
+        "們把",
+        "把苦"
+      ],
+      "refContexts": [
+        "們將",
+        "將苦"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 515,
       "sentenceId": "seg-0516",
       "compStart": 4,
@@ -8758,6 +8137,59 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 521,
+      "sentenceId": "seg-0522",
+      "compStart": 12,
+      "compEnd": 12,
+      "asrDelta": "",
+      "referenceDelta": "追根究柢之後",
+      "changeChars": 6,
+      "sentenceSimilarity": 0.579,
+      "asrContexts": [
+        "體"
+      ],
+      "refContexts": [
+        "體追根究柢之後"
+      ],
+      "note": "stale-position"
+    },
+    {
+      "sentenceIndex": 522,
+      "sentenceId": "seg-0523",
+      "compStart": 0,
+      "compEnd": 3,
+      "asrDelta": "為什麼",
+      "referenceDelta": "",
+      "changeChars": 3,
+      "sentenceSimilarity": 0.552,
+      "asrContexts": [
+        "為什麼我"
+      ],
+      "refContexts": [
+        "我"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 526,
+      "sentenceId": "seg-0527",
+      "compStart": 5,
+      "compEnd": 6,
+      "asrDelta": "意",
+      "referenceDelta": "業",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.55,
+      "asrContexts": [
+        "和意",
+        "意束"
+      ],
+      "refContexts": [
+        "和業",
+        "業束"
+      ],
+      "note": "unattested-homophone"
     },
     {
       "sentenceIndex": 529,
@@ -9264,6 +8696,25 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 576,
+      "sentenceId": "seg-0577",
+      "compStart": 8,
+      "compEnd": 9,
+      "asrDelta": "比",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.585,
+      "asrContexts": [
+        "苦比",
+        "比較"
+      ],
+      "refContexts": [
+        "苦",
+        "較"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 579,
       "sentenceId": "seg-0580",
       "compStart": 2,
@@ -9286,6 +8737,25 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 589,
+      "sentenceId": "seg-0590",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "是",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.655,
+      "asrContexts": [
+        "都是",
+        "是來"
+      ],
+      "refContexts": [
+        "都",
+        "來"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 590,
@@ -9430,6 +8900,63 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 594,
+      "sentenceId": "seg-0595",
+      "compStart": 10,
+      "compEnd": 11,
+      "asrDelta": "重",
+      "referenceDelta": "眾",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.565,
+      "asrContexts": [
+        "是重",
+        "重過"
+      ],
+      "refContexts": [
+        "是眾",
+        "眾過"
+      ],
+      "note": "unattested-homophone"
+    },
+    {
+      "sentenceIndex": 596,
+      "sentenceId": "seg-0597",
+      "compStart": 5,
+      "compEnd": 6,
+      "asrDelta": "夠",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.577,
+      "asrContexts": [
+        "能夠",
+        "夠藉"
+      ],
+      "refContexts": [
+        "能",
+        "藉"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 596,
+      "sentenceId": "seg-0597",
+      "compStart": 2,
+      "compEnd": 4,
+      "asrDelta": "不是",
+      "referenceDelta": "否",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.577,
+      "asrContexts": [
+        "是不是",
+        "不是能"
+      ],
+      "refContexts": [
+        "是否",
+        "否能"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 598,
@@ -9744,6 +9271,78 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 645,
+      "sentenceId": "seg-0646",
+      "compStart": 16,
+      "compEnd": 16,
+      "asrDelta": "",
+      "referenceDelta": "換",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.722,
+      "asrContexts": [
+        "脫"
+      ],
+      "refContexts": [
+        "脫換"
+      ],
+      "note": "stale-position"
+    },
+    {
+      "sentenceIndex": 645,
+      "sentenceId": "seg-0646",
+      "compStart": 13,
+      "compEnd": 13,
+      "asrDelta": "",
+      "referenceDelta": "斷除我執",
+      "changeChars": 4,
+      "sentenceSimilarity": 0.722,
+      "asrContexts": [
+        "惱",
+        "的"
+      ],
+      "refContexts": [
+        "惱斷除我執",
+        "斷除我執的"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 645,
+      "sentenceId": "seg-0646",
+      "compStart": 9,
+      "compEnd": 9,
+      "asrDelta": "",
+      "referenceDelta": "什麼",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.722,
+      "asrContexts": [
+        "是",
+        "斷"
+      ],
+      "refContexts": [
+        "是什麼",
+        "什麼斷"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 645,
+      "sentenceId": "seg-0646",
+      "compStart": 0,
+      "compEnd": 3,
+      "asrDelta": "佛告訴",
+      "referenceDelta": "",
+      "changeChars": 3,
+      "sentenceSimilarity": 0.722,
+      "asrContexts": [
+        "佛告訴我"
+      ],
+      "refContexts": [
+        "我"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 646,
       "sentenceId": "seg-0647",
       "compStart": 12,
@@ -9792,6 +9391,25 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 650,
+      "sentenceId": "seg-0651",
+      "compStart": 3,
+      "compEnd": 5,
+      "asrDelta": "彼此",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.55,
+      "asrContexts": [
+        "者彼此",
+        "彼此之"
+      ],
+      "refContexts": [
+        "者",
+        "之"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 653,
       "sentenceId": "seg-0654",
       "compStart": 4,
@@ -9838,6 +9456,99 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 664,
+      "sentenceId": "seg-0665",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "要",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.731,
+      "asrContexts": [
+        "想要",
+        "要趕"
+      ],
+      "refContexts": [
+        "想",
+        "趕"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 664,
+      "sentenceId": "seg-0665",
+      "compStart": 3,
+      "compEnd": 3,
+      "asrDelta": "",
+      "referenceDelta": "我",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.731,
+      "asrContexts": [
+        "是",
+        "想"
+      ],
+      "refContexts": [
+        "是我",
+        "我想"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 664,
+      "sentenceId": "seg-0665",
+      "compStart": 2,
+      "compEnd": 2,
+      "asrDelta": "",
+      "referenceDelta": "只",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.731,
+      "asrContexts": [
+        "該",
+        "是"
+      ],
+      "refContexts": [
+        "該只",
+        "只是"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 664,
+      "sentenceId": "seg-0665",
+      "compStart": 0,
+      "compEnd": 0,
+      "asrDelta": "",
+      "referenceDelta": "想的",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.731,
+      "asrContexts": [
+        "應"
+      ],
+      "refContexts": [
+        "想的應"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 666,
+      "sentenceId": "seg-0667",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "要",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.585,
+      "asrContexts": [
+        "想要",
+        "要跳"
+      ],
+      "refContexts": [
+        "想",
+        "跳"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 678,
@@ -10008,6 +9719,25 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 707,
+      "sentenceId": "seg-0708",
+      "compStart": 8,
+      "compEnd": 10,
+      "asrDelta": "比較",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.591,
+      "asrContexts": [
+        "些比較",
+        "比較奇"
+      ],
+      "refContexts": [
+        "些",
+        "奇"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 708,
       "sentenceId": "seg-0709",
       "compStart": 13,
@@ -10056,28 +9786,42 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 713,
+      "sentenceId": "seg-0714",
+      "compStart": 10,
+      "compEnd": 11,
+      "asrDelta": "詞",
+      "referenceDelta": "字",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.571,
+      "asrContexts": [
+        "個詞",
+        "詞換"
+      ],
+      "refContexts": [
+        "個字",
+        "字換"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 715,
       "sentenceId": "seg-0716",
       "compStart": 11,
       "compEnd": 12,
       "asrDelta": "值",
-      "referenceDelta": "執",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
+      "referenceDelta": "執會",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.612,
       "asrContexts": [
         "我值",
-        "我執"
+        "值有"
       ],
       "refContexts": [
-        "我執"
+        "我執會",
+        "執會有"
       ],
-      "glossary": {
-        "term": "我執",
-        "frequency": 130,
-        "asrSpan": "我值",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 715,
@@ -10368,6 +10112,25 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 814,
+      "sentenceId": "seg-0815",
+      "compStart": 4,
+      "compEnd": 4,
+      "asrDelta": "",
+      "referenceDelta": "去",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.564,
+      "asrContexts": [
+        "會",
+        "找"
+      ],
+      "refContexts": [
+        "會去",
+        "去找"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 827,
       "sentenceId": "seg-0828",
       "compStart": 5,
@@ -10512,6 +10275,59 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 845,
+      "sentenceId": "seg-0846",
+      "compStart": 2,
+      "compEnd": 2,
+      "asrDelta": "",
+      "referenceDelta": "知道自己",
+      "changeChars": 4,
+      "sentenceSimilarity": 0.556,
+      "asrContexts": [
+        "們",
+        "的"
+      ],
+      "refContexts": [
+        "們知道自己",
+        "知道自己的"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 845,
+      "sentenceId": "seg-0846",
+      "compStart": 0,
+      "compEnd": 0,
+      "asrDelta": "",
+      "referenceDelta": "常當",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.556,
+      "asrContexts": [
+        "我"
+      ],
+      "refContexts": [
+        "常當我"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 851,
+      "sentenceId": "seg-0852",
+      "compStart": 13,
+      "compEnd": 13,
+      "asrDelta": "",
+      "referenceDelta": "所以這個蘊體",
+      "changeChars": 6,
+      "sentenceSimilarity": 0.6,
+      "asrContexts": [
+        "體"
+      ],
+      "refContexts": [
+        "體所以這個蘊體"
+      ],
+      "note": "stale-position"
+    },
+    {
       "sentenceIndex": 852,
       "sentenceId": "seg-0853",
       "compStart": 11,
@@ -10654,6 +10470,61 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 910,
+      "sentenceId": "seg-0911",
+      "compStart": 1,
+      "compEnd": 3,
+      "asrDelta": "什麼",
+      "referenceDelta": "何",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.593,
+      "asrContexts": [
+        "為什麼",
+        "什麼要"
+      ],
+      "refContexts": [
+        "為何",
+        "何要"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 912,
+      "sentenceId": "seg-0913",
+      "compStart": 10,
+      "compEnd": 11,
+      "asrDelta": "現",
+      "referenceDelta": "",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.579,
+      "asrContexts": [
+        "個現",
+        "現狀"
+      ],
+      "refContexts": [
+        "個",
+        "狀"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 913,
+      "sentenceId": "seg-0914",
+      "compStart": 0,
+      "compEnd": 2,
+      "asrDelta": "如果",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.667,
+      "asrContexts": [
+        "如果我"
+      ],
+      "refContexts": [
+        "我"
+      ],
+      "note": "editorial-divergence"
     },
     {
       "sentenceIndex": 917,
@@ -10824,6 +10695,99 @@
       "note": "overlap-skipped"
     },
     {
+      "sentenceIndex": 983,
+      "sentenceId": "seg-0984",
+      "compStart": 11,
+      "compEnd": 13,
+      "asrDelta": "去做",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.571,
+      "asrContexts": [
+        "力去做",
+        "去做的"
+      ],
+      "refContexts": [
+        "力",
+        "的"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 1007,
+      "sentenceId": "seg-1008",
+      "compStart": 3,
+      "compEnd": 3,
+      "asrDelta": "",
+      "referenceDelta": "追求解脫",
+      "changeChars": 4,
+      "sentenceSimilarity": 0.649,
+      "asrContexts": [
+        "們",
+        "追"
+      ],
+      "refContexts": [
+        "們追求解脫",
+        "追求解脫追"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 1007,
+      "sentenceId": "seg-1008",
+      "compStart": 0,
+      "compEnd": 0,
+      "asrDelta": "",
+      "referenceDelta": "時",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.649,
+      "asrContexts": [
+        "要"
+      ],
+      "refContexts": [
+        "時要"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 1018,
+      "sentenceId": "seg-1019",
+      "compStart": 2,
+      "compEnd": 2,
+      "asrDelta": "",
+      "referenceDelta": "會",
+      "changeChars": 1,
+      "sentenceSimilarity": 0.638,
+      "asrContexts": [
+        "該",
+        "比"
+      ],
+      "refContexts": [
+        "該會",
+        "會比"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 1027,
+      "sentenceId": "seg-1028",
+      "compStart": 3,
+      "compEnd": 5,
+      "asrDelta": "我們",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.571,
+      "asrContexts": [
+        "多我們",
+        "我們平"
+      ],
+      "refContexts": [
+        "多",
+        "平"
+      ],
+      "note": "editorial-divergence"
+    },
+    {
       "sentenceIndex": 1084,
       "sentenceId": "seg-1085",
       "compStart": 0,
@@ -10846,6 +10810,42 @@
         "asrSpanInCorpus": 0
       },
       "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 1086,
+      "sentenceId": "seg-1087",
+      "compStart": 11,
+      "compEnd": 11,
+      "asrDelta": "",
+      "referenceDelta": "謝謝各位",
+      "changeChars": 4,
+      "sentenceSimilarity": 0.562,
+      "asrContexts": [
+        "向"
+      ],
+      "refContexts": [
+        "向謝謝各位"
+      ],
+      "note": "stale-position"
+    },
+    {
+      "sentenceIndex": 1086,
+      "sentenceId": "seg-1087",
+      "compStart": 7,
+      "compEnd": 9,
+      "asrDelta": "來做",
+      "referenceDelta": "",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.562,
+      "asrContexts": [
+        "式來做",
+        "來做迴"
+      ],
+      "refContexts": [
+        "式",
+        "迴"
+      ],
+      "note": "editorial-divergence"
     }
   ]
 }

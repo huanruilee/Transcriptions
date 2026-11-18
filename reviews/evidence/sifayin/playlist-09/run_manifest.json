@@ -2,8 +2,8 @@
   "runId": "si-fa-yin-9-run1",
   "sessionId": "session_09",
   "courseId": "si-fa-yin",
-  "startedAt": "2026-11-19 05:24:14",
-  "completedAt": "2026-11-18 21:38:20",
+  "startedAt": "2026-11-19 06:01:42",
+  "completedAt": "2026-11-18 22:17:10",
   "stages": [
     {
       "stage": "S1-fetch",
@@ -18,12 +18,12 @@
     {
       "stage": "S3-align",
       "tool": "difflib char-level alignment vs 官方整編稿",
-      "result": "46 auto fixes, 177 documented divergences"
+      "result": "49 auto fixes, 174 documented divergences"
     },
     {
       "stage": "S4-correct",
       "tool": "python-difflib 對齊官方整編稿＋同音/近音名相規則（scripts/sifayin_build_transcript.py）",
-      "result": "{\"glossary-homophone\": 25, \"strict-homophone\": 16, \"near-homophone-term\": 5}"
+      "result": "{\"glossary-homophone\": 28, \"strict-homophone\": 16, \"near-homophone-term\": 5}"
     },
     {
       "stage": "S5-section",
@@ -33,7 +33,7 @@
     {
       "stage": "S6-overview",
       "tool": "eNeural glm53-flash（生成＋獨立證據審查）",
-      "result": "{\"mainPoints\": 3, \"discussionTopics\": 2, \"referenceViews\": 2}"
+      "result": "{\"mainPoints\": 2, \"discussionTopics\": 2, \"referenceViews\": 1}"
     }
   ],
   "models": [
@@ -62,7 +62,7 @@
     }
   ],
   "gates": {
-    "charRatio": 0.9997,
+    "charRatio": 1.0001,
     "charRatioThreshold": 0.6,
     "charRatioPass": true,
     "audioShaMatchesIntake": true,
@@ -72,18 +72,18 @@
     "paragraphsMatchOutline": true,
     "pendingHumanReview": 2,
     "unresolvedNotes": {
-      "punctuation-gap": 3,
+      "overlap-skipped": 57,
       "editorial-divergence": 101,
+      "punctuation-gap": 2,
       "stale-position": 9,
       "unattested-homophone": 2,
-      "orthographic-variant": 3,
-      "overlap-skipped": 59
+      "orthographic-variant": 3
     },
     "unknownUnresolvedNotes": [
       "overlap-skipped",
       "stale-position"
     ],
-    "overviewEvidenceTotal": 7,
+    "overviewEvidenceTotal": 5,
     "overviewUnsupported": 0,
     "overviewPass": true,
     "humanListened": false,
@@ -91,12 +91,12 @@
   },
   "artifacts": {
     "rawAsr": "sha256:244f6fbb32c711c72b70f99f68a6ab99857e6d4717174a54d7362ee8c6e27944",
-    "candidate": "sha256:6595df149e5b88f4331fe7a49773dd31cf7b647945b88c438a567b4f94dc6550",
-    "correctionCandidates": "sha256:093cdafbf11edeb1826f28253d65348addbab0b26ecbddd8c28dd5fd9477bb9a",
+    "candidate": "sha256:0c1821818085ca52df60a94dc2d7e90e3a202e2771249343f83b5b85b7866405",
+    "correctionCandidates": "sha256:303f892b814197800948ec9df140f4da32752904c1b4e21151979e8d35c1c8ff",
     "outline": "sha256:37125f2bfe6d0926b1a103160926d73f11d8202696be44ce16677e362d4e1f3e",
-    "contentReview": "sha256:4c16b7f8eec7e20dd491c271feed3460210502c48cbddf7f597b5469a6843203",
-    "contentReviewManifest": "sha256:484e3ffa6c9624b382757e0e065341fc8e7cd4aed7d8c7b0e1e2a89eedfc41da",
-    "finalSession": "sha256:5c1f66a519de28cc01ed5fb2dc7b5cbecc767c6a13ef58531f52ca11674a403f",
+    "contentReview": "sha256:9d81136be7486760b94c761e5bb4cab0d70b38e0f2b909f7879a112b486e00fa",
+    "contentReviewManifest": "sha256:46234085da59d6f600b69e0390759b9502452317eb2c0d89db0972e0f5078bb0",
+    "finalSession": "sha256:8dcb9199d013afcea961aebb683195826a6a4c3067484ff05fadacdf6ad61d56",
     "baseText": "sha256:8522d0ea52c119efdbee4ca28c4a17d1db736460446ca3aa3a4870d9dea1d240"
   }
 }

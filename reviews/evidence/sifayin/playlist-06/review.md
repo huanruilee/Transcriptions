@@ -4,8 +4,8 @@
 - 音檔：講師官方 MP3，5208.696 秒，sha256:c595dd8670e81d3f6408857e37bb91f41bcb81961f7d78a04867c9bf4eaea215
 - 底本：講師官方整編逐字稿 PDF（sha256:da401b224779aeb445f4575af96addc07f0c2d03876322b5545473163d1f272b），抽取文字 13588 字（courses/四法印/source_text/lecture_06.txt）
 - ASR：faster-whisper-large-v3-turbo，1548 段 / 16448 字，RTF 0.14764，尾差 -3.95 秒
-- 對校：官方提綱 8 段全部成為段落邊界；自動校字 111 處；記錄差異 341 處（{"editorial-divergence": 255, "stale-position": 9, "punctuation-gap": 3, "orthographic-variant": 5, "overlap-skipped": 69}）
-- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 2, "discussionTopics": 1, "referenceViews": 2}，逐字回查不通過 0 條
+- 對校：官方提綱 8 段全部成為段落邊界；自動校字 113 處；記錄差異 339 處（{"editorial-divergence": 255, "overlap-skipped": 67, "stale-position": 9, "punctuation-gap": 3, "orthographic-variant": 5}）
+- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 2, "discussionTopics": 2, "referenceViews": 1}，逐字回查不通過 0 條
 - 狀態：candidate-review-required（尚未逐句人工聽核）
 
 ## 自動套用之校字（僅同音／近音名相，保留 ASR 口語）
@@ -24,6 +24,7 @@
 | seg-0027 | 巨 | 俱 | glossary-homophone | None |
 | seg-0028 | 進 | 近 | strict-homophone | 0.771 |
 | seg-0041 | 進 | 近 | strict-homophone | 0.565 |
+| seg-0046 | 席 | 習 | glossary-homophone | None |
 | seg-0047 | 席 | 習 | glossary-homophone | None |
 | seg-0060 | 席 | 習 | glossary-homophone | None |
 | seg-0061 | 席 | 習 | glossary-homophone | None |
@@ -42,6 +43,7 @@
 | seg-0166 | 維 | 惟 | glossary-homophone | None |
 | seg-0167 | 維 | 惟 | glossary-homophone | None |
 | seg-0168 | 維 | 惟 | glossary-homophone | None |
+| seg-0169 | 維 | 惟 | glossary-homophone | None |
 | seg-0171 | 維 | 惟 | glossary-homophone | None |
 | seg-0171 | 維 | 惟 | glossary-homophone | None |
 | seg-0172 | 維 | 惟 | glossary-homophone | None |
@@ -84,7 +86,7 @@
 | seg-0489 | 進 | 近 | strict-homophone | 0.578 |
 | seg-0538 | 進 | 近 | glossary-homophone | None |
 | seg-0539 | 違 | 為 | strict-homophone | 0.606 |
-| seg-0541 | 關帶 | 觀待 | strict-homophone | 0.565 |
+| seg-0541 | 帶 | 待 | glossary-homophone | None |
 | seg-0543 | 進 | 近 | glossary-homophone | None |
 | seg-0573 | 維 | 惟 | glossary-homophone | None |
 | seg-0574 | 維 | 惟 | glossary-homophone | None |

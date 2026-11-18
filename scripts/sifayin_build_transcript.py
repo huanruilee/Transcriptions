@@ -85,11 +85,29 @@ def comparable_with_map(text: str):
     return "".join(chars), mapping
 
 
+PAUSE_MARK = re.compile(r"[\ufffd\uff3cＡ-Ｚａ-ｚ]")
+
+
+def count_pause_markers(text: str) -> int:
+    return len(PAUSE_MARK.findall(text))
+
+
 def normalize_punctuation(text: str) -> str:
-    out = JUNK_CHARS.sub("", text)
+    """ASR 的停頓標記必須變成讀者可用的讀號，不能直接刪。
+
+    Whisper GPU 服務用 U+FFFD、全形反斜線 `＼`、全形英文字母（Ｖ、Ｂ…）
+    作為停頓／雜訊標記；若當成雜訊直接刪掉，整段會變成毫無標點的連寫
+    （PR #444 的 P1 審查意見即此）。这里一律轉成全形讀號；
+    ASR 的未正規化原貌永久保留在 raw_asr.json。
+    """
+    out = PAUSE_MARK.sub("，", text)
+    out = JUNK_CHARS.sub("", out)
     out = out.replace(",", "，").replace("?", "？").replace("!", "！")
     out = out.replace(":", "：").replace(";", "；")
     out = re.sub(r"\s+", "", out)
+    out = re.sub(r"，{2,}", "，", out)
+    out = re.sub(r"，([。！？；：、」』）】])", r"\1", out)
+    out = re.sub(r"([「『（【])，", r"\1", out)
     out = re.sub(r"([，、])。", r"\1", out)
     out = re.sub(r"。{2,}", "。", out)
     return out.strip("，、")
@@ -295,7 +313,15 @@ def apply_candidates(segments, candidates, corpus):
     unresolved = []
     for seg_index, group in sorted(by_sentence.items()):
         seg = segments[seg_index]
+        taken = []  # 只有「真的套用了」的區間才算被佔用
         for candidate in sorted(group, key=lambda c: c["compStart"], reverse=True):
+            c_start0, c_end0 = candidate["compStart"], candidate["compEnd"]
+            if any(c_start0 < a_end and a_start < c_end0 for a_start, a_end in taken):
+                # 只有「已套用」的校正會佔位，所以被擠掉的候選其位置已被
+                # 另一個有佐證的校正處理過，不必再標人工聽核。
+                candidate["note"] = "overlap-skipped"
+                unresolved.append(candidate)
+                continue
             comp, mapping = comparable_with_map(seg["text"])
             c_start, c_end = candidate["compStart"], candidate["compEnd"]
             if comp[c_start:c_end] != candidate["asrDelta"]:
@@ -329,6 +355,7 @@ def apply_candidates(segments, candidates, corpus):
                 continue
             candidate["policy"] = policy
             seg["text"] = seg["text"][:text_start] + candidate["referenceDelta"] + seg["text"][text_end:]
+            taken.append((c_start0, c_end0))
             applied.append(candidate)
     return applied, unresolved
 
@@ -517,8 +544,11 @@ def main() -> int:
         segments = []
         droppedFiller = 0
         hallucinationSuspects = 0
+        pauseMarkers = 0
         for seg in raw["segments"]:
-            normalized = normalize_punctuation(CONVERTER.convert(seg["text"]))
+            converted = CONVERTER.convert(seg["text"])
+            pauseMarkers += count_pause_markers(converted)
+            normalized = normalize_punctuation(converted)
             if not normalized or re.fullmatch(r"[呃嗯啊喔欸，。！？、\s]+", normalized):
                 droppedFiller += 1
                 continue
@@ -545,21 +575,10 @@ def main() -> int:
                    candidate["asrDelta"], candidate["referenceDelta"])
             if key not in seen_spans:
                 candidates.append(candidate)
-        # 同一字被兩個假說搶改時，保留先提出的（對齊-derived 在前），
-        # 後者記錄為 overlap-skipped，不悄悄丟掉。
-        occupied: dict[int, set] = {}
-        deduped, overlaps = [], []
-        for candidate in candidates:
-            used = occupied.setdefault(candidate["sentenceIndex"], set())
-            span = range(candidate["compStart"], candidate["compEnd"])
-            if any(i in used for i in span):
-                candidate["note"] = "overlap-skipped"
-                overlaps.append(candidate)
-                continue
-            used.update(span)
-            deduped.append(candidate)
-        applied, unresolved = apply_candidates(segments, deduped, corpus)
-        unresolved.extend(overlaps)
+        # 重疊只在 apply_candidates 內對「已套用」的區間判定：
+        # 未被套用的候選（整編差異、標點差異、過大編輯）不得佔位，
+        # 否則會擋掉同位置有效且有詞頻佐證的名相校正（PR #444 的 P2 意見）。
+        applied, unresolved = apply_candidates(segments, candidates, corpus)
 
         NOISE_NOTES = ("editorial-divergence", "orthographic-variant", "overlap-skipped",
                        "stale-position", "punctuation-gap")
@@ -571,6 +590,16 @@ def main() -> int:
             segments[candidate["sentenceIndex"]]["reviewNeeded"] = True
 
         paragraphs = paragraphize(segments, outline["sections"])
+        # 段落末句若沒有句終標點，補上句號：ASR 常用停頓讀號一路連寫，
+        # 段落結尾留一個逗號會讓讀者找不到句界（只補標點，不改字）。
+        terminatorsAdded = 0
+        for para in paragraphs:
+            if not para["sentences"]:
+                continue
+            last = para["sentences"][-1]
+            if not re.search(r"[。！？；：」』）】]$", last["text"]):
+                last["text"] = last["text"].rstrip("，、") + "。"
+                terminatorsAdded += 1
         sentence_total = sum(len(p["sentences"]) for p in paragraphs)
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         flagged = sum(1 for s in segments if s["reviewNeeded"])
@@ -604,6 +633,8 @@ def main() -> int:
                 "asrModel": raw["model"],
                 "asrSegments": raw["segmentCount"],
                 "fillerOnlySentencesDropped": droppedFiller,
+                "asrPauseMarkersNormalized": pauseMarkers,
+                "paragraphEndTerminatorsAdded": terminatorsAdded,
                 "hallucinationSuspects": hallucinationSuspects,
                 "correctionsAutoApplied": len(applied),
                 "correctionsByPolicy": dict(policy_counts),

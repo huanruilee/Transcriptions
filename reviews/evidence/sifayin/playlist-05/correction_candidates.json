@@ -13,13 +13,13 @@
   },
   "maxAutoChangeChars": 6,
   "minSentenceSimilarity": 0.55,
-  "appliedCount": 69,
+  "appliedCount": 72,
   "appliedByPolicy": {
-    "strict-homophone": 36,
-    "near-homophone-term": 9,
-    "glossary-homophone": 24
+    "strict-homophone": 33,
+    "glossary-homophone": 30,
+    "near-homophone-term": 9
   },
-  "unresolvedCount": 542,
+  "unresolvedCount": 539,
   "applied": [
     {
       "sentenceIndex": 1,
@@ -100,21 +100,26 @@
     {
       "sentenceIndex": 8,
       "sentenceId": "seg-0009",
-      "compStart": 97,
+      "compStart": 98,
       "compEnd": 99,
-      "asrDelta": "蓄留",
-      "referenceDelta": "續流",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.728,
+      "asrDelta": "留",
+      "referenceDelta": "流",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
       "asrContexts": [
-        "考蓄留",
-        "蓄留的"
+        "留的無常",
+        "流的無常"
       ],
       "refContexts": [
-        "考續流",
-        "續流的"
+        "流的無常"
       ],
-      "policy": "strict-homophone"
+      "glossary": {
+        "term": "流的無常",
+        "frequency": 9,
+        "asrSpan": "留的無常",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
     },
     {
       "sentenceIndex": 8,
@@ -138,21 +143,26 @@
     {
       "sentenceIndex": 8,
       "sentenceId": "seg-0009",
-      "compStart": 3,
+      "compStart": 4,
       "compEnd": 5,
-      "asrDelta": "關戴",
-      "referenceDelta": "觀待",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.728,
+      "asrDelta": "戴",
+      "referenceDelta": "待",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
       "asrContexts": [
-        "要關戴",
-        "關戴眾"
+        "戴眾多的因",
+        "待眾多的因"
       ],
       "refContexts": [
-        "要觀待",
-        "觀待眾"
+        "待眾多的因"
       ],
-      "policy": "strict-homophone"
+      "glossary": {
+        "term": "待眾多的因",
+        "frequency": 6,
+        "asrSpan": "戴眾多的因",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
     },
     {
       "sentenceIndex": 9,
@@ -176,21 +186,26 @@
     {
       "sentenceIndex": 9,
       "sentenceId": "seg-0010",
-      "compStart": 25,
+      "compStart": 26,
       "compEnd": 27,
-      "asrDelta": "惠河",
-      "referenceDelta": "會合",
-      "changeChars": 2,
-      "sentenceSimilarity": 0.717,
+      "asrDelta": "河",
+      "referenceDelta": "合",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
       "asrContexts": [
-        "落惠河",
-        "惠河終"
+        "河終別",
+        "合終別"
       ],
       "refContexts": [
-        "落會合",
-        "會合終"
+        "合終別"
       ],
-      "policy": "strict-homophone"
+      "glossary": {
+        "term": "合終別",
+        "frequency": 3,
+        "asrSpan": "河終別",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
     },
     {
       "sentenceIndex": 9,
@@ -480,6 +495,30 @@
     {
       "sentenceIndex": 14,
       "sentenceId": "seg-0015",
+      "compStart": 38,
+      "compEnd": 39,
+      "asrDelta": "靜",
+      "referenceDelta": "境",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "在對靜",
+        "在對境"
+      ],
+      "refContexts": [
+        "在對境"
+      ],
+      "glossary": {
+        "term": "在對境",
+        "frequency": 7,
+        "asrSpan": "在對靜",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
+    },
+    {
+      "sentenceIndex": 14,
+      "sentenceId": "seg-0015",
       "compStart": 19,
       "compEnd": 20,
       "asrDelta": "靜",
@@ -542,6 +581,30 @@
     {
       "sentenceIndex": 16,
       "sentenceId": "seg-0017",
+      "compStart": 104,
+      "compEnd": 105,
+      "asrDelta": "嗔",
+      "referenceDelta": "瞋",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的貪嗔",
+        "的貪瞋"
+      ],
+      "refContexts": [
+        "的貪瞋"
+      ],
+      "glossary": {
+        "term": "的貪瞋",
+        "frequency": 7,
+        "asrSpan": "的貪嗔",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
+    },
+    {
+      "sentenceIndex": 16,
+      "sentenceId": "seg-0017",
       "compStart": 100,
       "compEnd": 101,
       "asrDelta": "升",
@@ -557,6 +620,30 @@
         "生起"
       ],
       "policy": "strict-homophone"
+    },
+    {
+      "sentenceIndex": 16,
+      "sentenceId": "seg-0017",
+      "compStart": 69,
+      "compEnd": 70,
+      "asrDelta": "式",
+      "referenceDelta": "時",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "式你",
+        "時你"
+      ],
+      "refContexts": [
+        "時你"
+      ],
+      "glossary": {
+        "term": "時你",
+        "frequency": 24,
+        "asrSpan": "式你",
+        "asrSpanInCorpus": 0
+      },
+      "policy": "glossary-homophone"
     },
     {
       "sentenceIndex": 16,
@@ -2265,7 +2352,7 @@
       "refContexts": [
         "握"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 7,
@@ -2403,6 +2490,25 @@
     {
       "sentenceIndex": 8,
       "sentenceId": "seg-0009",
+      "compStart": 97,
+      "compEnd": 99,
+      "asrDelta": "蓄留",
+      "referenceDelta": "續流",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.728,
+      "asrContexts": [
+        "考蓄留",
+        "蓄留的"
+      ],
+      "refContexts": [
+        "考續流",
+        "續流的"
+      ],
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 8,
+      "sentenceId": "seg-0009",
       "compStart": 88,
       "compEnd": 94,
       "asrDelta": "這時候我們就",
@@ -2417,7 +2523,7 @@
         "解可以",
         "可以先"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 8,
@@ -2591,6 +2697,25 @@
       "note": "editorial-divergence"
     },
     {
+      "sentenceIndex": 8,
+      "sentenceId": "seg-0009",
+      "compStart": 3,
+      "compEnd": 5,
+      "asrDelta": "關戴",
+      "referenceDelta": "觀待",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.728,
+      "asrContexts": [
+        "要關戴",
+        "關戴眾"
+      ],
+      "refContexts": [
+        "要觀待",
+        "觀待眾"
+      ],
+      "note": "overlap-skipped"
+    },
+    {
       "sentenceIndex": 9,
       "sentenceId": "seg-0010",
       "compStart": 59,
@@ -2645,7 +2770,7 @@
         "的有",
         "有以"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 9,
@@ -2684,6 +2809,49 @@
         "針對這"
       ],
       "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 9,
+      "sentenceId": "seg-0010",
+      "compStart": 26,
+      "compEnd": 27,
+      "asrDelta": "河",
+      "referenceDelta": "合",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "河終別離",
+        "合終別離"
+      ],
+      "refContexts": [
+        "合終別離"
+      ],
+      "glossary": {
+        "term": "合終別離",
+        "frequency": 3,
+        "asrSpan": "河終別離",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 9,
+      "sentenceId": "seg-0010",
+      "compStart": 25,
+      "compEnd": 27,
+      "asrDelta": "惠河",
+      "referenceDelta": "會合",
+      "changeChars": 2,
+      "sentenceSimilarity": 0.717,
+      "asrContexts": [
+        "落惠河",
+        "惠河終"
+      ],
+      "refContexts": [
+        "落會合",
+        "會合終"
+      ],
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 9,
@@ -3462,7 +3630,55 @@
         "對境",
         "境時"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
+    },
+    {
+      "sentenceIndex": 14,
+      "sentenceId": "seg-0015",
+      "compStart": 38,
+      "compEnd": 39,
+      "asrDelta": "靜",
+      "referenceDelta": "境",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "們在對靜",
+        "們在對境"
+      ],
+      "refContexts": [
+        "們在對境"
+      ],
+      "glossary": {
+        "term": "們在對境",
+        "frequency": 5,
+        "asrSpan": "們在對靜",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 14,
+      "sentenceId": "seg-0015",
+      "compStart": 38,
+      "compEnd": 39,
+      "asrDelta": "靜",
+      "referenceDelta": "境",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "我們在對靜",
+        "我們在對境"
+      ],
+      "refContexts": [
+        "我們在對境"
+      ],
+      "glossary": {
+        "term": "我們在對境",
+        "frequency": 5,
+        "asrSpan": "我們在對靜",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 14,
@@ -3633,7 +3849,7 @@
         "貪瞋",
         "瞋力"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 16,
@@ -3728,7 +3944,7 @@
         "避罷了",
         "罷了並"
       ],
-      "note": "editorial-divergence"
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 16,
@@ -4018,6 +4234,30 @@
     {
       "sentenceIndex": 17,
       "sentenceId": "seg-0018",
+      "compStart": 62,
+      "compEnd": 63,
+      "asrDelta": "知",
+      "referenceDelta": "執",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "心中的我知",
+        "心中的我執"
+      ],
+      "refContexts": [
+        "心中的我執"
+      ],
+      "glossary": {
+        "term": "心中的我執",
+        "frequency": 14,
+        "asrSpan": "心中的我知",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 17,
+      "sentenceId": "seg-0018",
       "compStart": 44,
       "compEnd": 46,
       "asrDelta": "叫做",
@@ -4165,7 +4405,7 @@
         "這個角度思考",
         "個角度思考心"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 18,
@@ -4467,7 +4707,7 @@
         "避",
         "就"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 20,
@@ -5553,6 +5793,54 @@
     {
       "sentenceIndex": 27,
       "sentenceId": "seg-0028",
+      "compStart": 95,
+      "compEnd": 96,
+      "asrDelta": "升",
+      "referenceDelta": "生",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "得增上升",
+        "得增上生"
+      ],
+      "refContexts": [
+        "得增上生"
+      ],
+      "glossary": {
+        "term": "得增上生",
+        "frequency": 15,
+        "asrSpan": "得增上升",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 27,
+      "sentenceId": "seg-0028",
+      "compStart": 95,
+      "compEnd": 96,
+      "asrDelta": "升",
+      "referenceDelta": "生",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "獲得增上升",
+        "獲得增上生"
+      ],
+      "refContexts": [
+        "獲得增上生"
+      ],
+      "glossary": {
+        "term": "獲得增上生",
+        "frequency": 15,
+        "asrSpan": "獲得增上升",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 27,
+      "sentenceId": "seg-0028",
       "compStart": 76,
       "compEnd": 78,
       "asrDelta": "我們",
@@ -5834,6 +6122,30 @@
         "因此我"
       ],
       "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 29,
+      "sentenceId": "seg-0030",
+      "compStart": 14,
+      "compEnd": 15,
+      "asrDelta": "去",
+      "referenceDelta": "趣",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "投生善去",
+        "投生善趣"
+      ],
+      "refContexts": [
+        "投生善趣"
+      ],
+      "glossary": {
+        "term": "投生善趣",
+        "frequency": 10,
+        "asrSpan": "投生善去",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 29,
@@ -6249,7 +6561,7 @@
         "假使",
         "使你"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 32,
@@ -6458,7 +6770,7 @@
         "是",
         "有"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 33,
@@ -6627,7 +6939,7 @@
         "配",
         "控"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 34,
@@ -6758,7 +7070,7 @@
         "計畫",
         "畫在"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 35,
@@ -7212,7 +7524,7 @@
         "的事情",
         "事情對"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 37,
@@ -7364,7 +7676,7 @@
         "疑",
         "我"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 38,
@@ -7989,7 +8301,7 @@
         "後世對此",
         "世對此我"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 42,
@@ -8462,7 +8774,7 @@
         "時其中",
         "其中一"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 46,
@@ -9522,7 +9834,7 @@
         "色",
         "意"
       ],
-      "note": "editorial-divergence"
+      "note": "punctuation-gap"
     },
     {
       "sentenceIndex": 53,
@@ -9770,6 +10082,174 @@
       "note": "editorial-divergence"
     },
     {
+      "sentenceIndex": 92,
+      "sentenceId": "seg-0093",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 92,
+      "sentenceId": "seg-0093",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 92,
+      "sentenceId": "seg-0093",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 92,
+      "sentenceId": "seg-0093",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因是什",
+        "近取因是什"
+      ],
+      "refContexts": [
+        "近取因是什"
+      ],
+      "glossary": {
+        "term": "近取因是什",
+        "frequency": 6,
+        "asrSpan": "進取因是什",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 96,
+      "sentenceId": "seg-0097",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 96,
+      "sentenceId": "seg-0097",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 96,
+      "sentenceId": "seg-0097",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
       "sentenceIndex": 130,
       "sentenceId": "seg-0131",
       "compStart": 11,
@@ -9808,6 +10288,246 @@
       "note": "editorial-divergence"
     },
     {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "意識的進",
+        "意識的近"
+      ],
+      "refContexts": [
+        "意識的近"
+      ],
+      "glossary": {
+        "term": "意識的近",
+        "frequency": 13,
+        "asrSpan": "意識的進",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "識的進取",
+        "識的近取"
+      ],
+      "refContexts": [
+        "識的近取"
+      ],
+      "glossary": {
+        "term": "識的近取",
+        "frequency": 13,
+        "asrSpan": "識的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "意識的進取",
+        "意識的近取"
+      ],
+      "refContexts": [
+        "意識的近取"
+      ],
+      "glossary": {
+        "term": "意識的近取",
+        "frequency": 13,
+        "asrSpan": "意識的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 132,
+      "sentenceId": "seg-0133",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "識的進取因",
+        "識的近取因"
+      ],
+      "refContexts": [
+        "識的近取因"
+      ],
+      "glossary": {
+        "term": "識的近取因",
+        "frequency": 13,
+        "asrSpan": "識的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 157,
+      "sentenceId": "seg-0158",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 157,
+      "sentenceId": "seg-0158",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 157,
+      "sentenceId": "seg-0158",
+      "compStart": 6,
+      "compEnd": 7,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
       "sentenceIndex": 158,
       "sentenceId": "seg-0159",
       "compStart": 4,
@@ -9825,6 +10545,78 @@
         "將一"
       ],
       "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 159,
+      "sentenceId": "seg-0160",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 159,
+      "sentenceId": "seg-0160",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 159,
+      "sentenceId": "seg-0160",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 161,
@@ -9863,6 +10655,462 @@
         "就"
       ],
       "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "意識的進",
+        "意識的近"
+      ],
+      "refContexts": [
+        "意識的近"
+      ],
+      "glossary": {
+        "term": "意識的近",
+        "frequency": 13,
+        "asrSpan": "意識的進",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "識的進取",
+        "識的近取"
+      ],
+      "refContexts": [
+        "識的近取"
+      ],
+      "glossary": {
+        "term": "識的近取",
+        "frequency": 13,
+        "asrSpan": "識的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "意識的進取",
+        "意識的近取"
+      ],
+      "refContexts": [
+        "意識的近取"
+      ],
+      "glossary": {
+        "term": "意識的近取",
+        "frequency": 13,
+        "asrSpan": "意識的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 164,
+      "sentenceId": "seg-0165",
+      "compStart": 7,
+      "compEnd": 8,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "識的進取因",
+        "識的近取因"
+      ],
+      "refContexts": [
+        "識的近取因"
+      ],
+      "glossary": {
+        "term": "識的近取因",
+        "frequency": 13,
+        "asrSpan": "識的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 165,
+      "sentenceId": "seg-0166",
+      "compStart": 8,
+      "compEnd": 9,
+      "asrDelta": "聚",
+      "referenceDelta": "俱",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "識的聚生",
+        "識的俱生"
+      ],
+      "refContexts": [
+        "識的俱生"
+      ],
+      "glossary": {
+        "term": "識的俱生",
+        "frequency": 3,
+        "asrSpan": "識的聚生",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 165,
+      "sentenceId": "seg-0166",
+      "compStart": 8,
+      "compEnd": 9,
+      "asrDelta": "聚",
+      "referenceDelta": "俱",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "意識的聚生",
+        "意識的俱生"
+      ],
+      "refContexts": [
+        "意識的俱生"
+      ],
+      "glossary": {
+        "term": "意識的俱生",
+        "frequency": 3,
+        "asrSpan": "意識的聚生",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 166,
+      "sentenceId": "seg-0167",
+      "compStart": 9,
+      "compEnd": 10,
+      "asrDelta": "聚",
+      "referenceDelta": "俱",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "識的聚生",
+        "識的俱生"
+      ],
+      "refContexts": [
+        "識的俱生"
+      ],
+      "glossary": {
+        "term": "識的俱生",
+        "frequency": 3,
+        "asrSpan": "識的聚生",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 166,
+      "sentenceId": "seg-0167",
+      "compStart": 9,
+      "compEnd": 10,
+      "asrDelta": "聚",
+      "referenceDelta": "俱",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "意識的聚生",
+        "意識的俱生"
+      ],
+      "refContexts": [
+        "意識的俱生"
+      ],
+      "glossary": {
+        "term": "意識的俱生",
+        "frequency": 3,
+        "asrSpan": "意識的聚生",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 167,
+      "sentenceId": "seg-0168",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 167,
+      "sentenceId": "seg-0168",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 167,
+      "sentenceId": "seg-0168",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 167,
+      "sentenceId": "seg-0168",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因是什",
+        "近取因是什"
+      ],
+      "refContexts": [
+        "近取因是什"
+      ],
+      "glossary": {
+        "term": "近取因是什",
+        "frequency": 6,
+        "asrSpan": "進取因是什",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 168,
+      "sentenceId": "seg-0169",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 168,
+      "sentenceId": "seg-0169",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 168,
+      "sentenceId": "seg-0169",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 168,
+      "sentenceId": "seg-0169",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因是什",
+        "近取因是什"
+      ],
+      "refContexts": [
+        "近取因是什"
+      ],
+      "glossary": {
+        "term": "近取因是什",
+        "frequency": 6,
+        "asrSpan": "進取因是什",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 169,
@@ -9958,6 +11206,150 @@
         "那個果"
       ],
       "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 174,
+      "sentenceId": "seg-0175",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 174,
+      "sentenceId": "seg-0175",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 174,
+      "sentenceId": "seg-0175",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 190,
+      "sentenceId": "seg-0191",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取",
+        "的近取"
+      ],
+      "refContexts": [
+        "的近取"
+      ],
+      "glossary": {
+        "term": "的近取",
+        "frequency": 21,
+        "asrSpan": "的進取",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 190,
+      "sentenceId": "seg-0191",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 190,
+      "sentenceId": "seg-0191",
+      "compStart": 2,
+      "compEnd": 3,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "的進取因",
+        "的近取因"
+      ],
+      "refContexts": [
+        "的近取因"
+      ],
+      "glossary": {
+        "term": "的近取因",
+        "frequency": 21,
+        "asrSpan": "的進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 190,
@@ -10087,6 +11479,54 @@
         "對於前"
       ],
       "note": "editorial-divergence"
+    },
+    {
+      "sentenceIndex": 278,
+      "sentenceId": "seg-0279",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
+    },
+    {
+      "sentenceIndex": 280,
+      "sentenceId": "seg-0281",
+      "compStart": 4,
+      "compEnd": 5,
+      "asrDelta": "進",
+      "referenceDelta": "近",
+      "changeChars": 1,
+      "sentenceSimilarity": null,
+      "asrContexts": [
+        "進取因",
+        "近取因"
+      ],
+      "refContexts": [
+        "近取因"
+      ],
+      "glossary": {
+        "term": "近取因",
+        "frequency": 26,
+        "asrSpan": "進取因",
+        "asrSpanInCorpus": 0
+      },
+      "note": "overlap-skipped"
     },
     {
       "sentenceIndex": 285,
@@ -10565,1446 +12005,6 @@
         "地學法拼"
       ],
       "note": "editorial-divergence"
-    },
-    {
-      "sentenceIndex": 8,
-      "sentenceId": "seg-0009",
-      "compStart": 98,
-      "compEnd": 99,
-      "asrDelta": "留",
-      "referenceDelta": "流",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "留的無常",
-        "流的無常"
-      ],
-      "refContexts": [
-        "流的無常"
-      ],
-      "glossary": {
-        "term": "流的無常",
-        "frequency": 9,
-        "asrSpan": "留的無常",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 8,
-      "sentenceId": "seg-0009",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "戴",
-      "referenceDelta": "待",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "戴眾多的因",
-        "待眾多的因"
-      ],
-      "refContexts": [
-        "待眾多的因"
-      ],
-      "glossary": {
-        "term": "待眾多的因",
-        "frequency": 6,
-        "asrSpan": "戴眾多的因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 9,
-      "sentenceId": "seg-0010",
-      "compStart": 26,
-      "compEnd": 27,
-      "asrDelta": "河",
-      "referenceDelta": "合",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "河終別",
-        "合終別"
-      ],
-      "refContexts": [
-        "合終別"
-      ],
-      "glossary": {
-        "term": "合終別",
-        "frequency": 3,
-        "asrSpan": "河終別",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 9,
-      "sentenceId": "seg-0010",
-      "compStart": 26,
-      "compEnd": 27,
-      "asrDelta": "河",
-      "referenceDelta": "合",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "河終別離",
-        "合終別離"
-      ],
-      "refContexts": [
-        "合終別離"
-      ],
-      "glossary": {
-        "term": "合終別離",
-        "frequency": 3,
-        "asrSpan": "河終別離",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 14,
-      "sentenceId": "seg-0015",
-      "compStart": 38,
-      "compEnd": 39,
-      "asrDelta": "靜",
-      "referenceDelta": "境",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "在對靜",
-        "在對境"
-      ],
-      "refContexts": [
-        "在對境"
-      ],
-      "glossary": {
-        "term": "在對境",
-        "frequency": 7,
-        "asrSpan": "在對靜",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 14,
-      "sentenceId": "seg-0015",
-      "compStart": 38,
-      "compEnd": 39,
-      "asrDelta": "靜",
-      "referenceDelta": "境",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "們在對靜",
-        "們在對境"
-      ],
-      "refContexts": [
-        "們在對境"
-      ],
-      "glossary": {
-        "term": "們在對境",
-        "frequency": 5,
-        "asrSpan": "們在對靜",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 14,
-      "sentenceId": "seg-0015",
-      "compStart": 38,
-      "compEnd": 39,
-      "asrDelta": "靜",
-      "referenceDelta": "境",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "我們在對靜",
-        "我們在對境"
-      ],
-      "refContexts": [
-        "我們在對境"
-      ],
-      "glossary": {
-        "term": "我們在對境",
-        "frequency": 5,
-        "asrSpan": "我們在對靜",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 16,
-      "sentenceId": "seg-0017",
-      "compStart": 69,
-      "compEnd": 70,
-      "asrDelta": "式",
-      "referenceDelta": "時",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "式你",
-        "時你"
-      ],
-      "refContexts": [
-        "時你"
-      ],
-      "glossary": {
-        "term": "時你",
-        "frequency": 24,
-        "asrSpan": "式你",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 16,
-      "sentenceId": "seg-0017",
-      "compStart": 104,
-      "compEnd": 105,
-      "asrDelta": "嗔",
-      "referenceDelta": "瞋",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的貪嗔",
-        "的貪瞋"
-      ],
-      "refContexts": [
-        "的貪瞋"
-      ],
-      "glossary": {
-        "term": "的貪瞋",
-        "frequency": 7,
-        "asrSpan": "的貪嗔",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 17,
-      "sentenceId": "seg-0018",
-      "compStart": 62,
-      "compEnd": 63,
-      "asrDelta": "知",
-      "referenceDelta": "執",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "心中的我知",
-        "心中的我執"
-      ],
-      "refContexts": [
-        "心中的我執"
-      ],
-      "glossary": {
-        "term": "心中的我執",
-        "frequency": 14,
-        "asrSpan": "心中的我知",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 27,
-      "sentenceId": "seg-0028",
-      "compStart": 95,
-      "compEnd": 96,
-      "asrDelta": "升",
-      "referenceDelta": "生",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "得增上升",
-        "得增上生"
-      ],
-      "refContexts": [
-        "得增上生"
-      ],
-      "glossary": {
-        "term": "得增上生",
-        "frequency": 15,
-        "asrSpan": "得增上升",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 27,
-      "sentenceId": "seg-0028",
-      "compStart": 95,
-      "compEnd": 96,
-      "asrDelta": "升",
-      "referenceDelta": "生",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "獲得增上升",
-        "獲得增上生"
-      ],
-      "refContexts": [
-        "獲得增上生"
-      ],
-      "glossary": {
-        "term": "獲得增上生",
-        "frequency": 15,
-        "asrSpan": "獲得增上升",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 29,
-      "sentenceId": "seg-0030",
-      "compStart": 14,
-      "compEnd": 15,
-      "asrDelta": "去",
-      "referenceDelta": "趣",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "投生善去",
-        "投生善趣"
-      ],
-      "refContexts": [
-        "投生善趣"
-      ],
-      "glossary": {
-        "term": "投生善趣",
-        "frequency": 10,
-        "asrSpan": "投生善去",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 92,
-      "sentenceId": "seg-0093",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 92,
-      "sentenceId": "seg-0093",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 92,
-      "sentenceId": "seg-0093",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 92,
-      "sentenceId": "seg-0093",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因是什",
-        "近取因是什"
-      ],
-      "refContexts": [
-        "近取因是什"
-      ],
-      "glossary": {
-        "term": "近取因是什",
-        "frequency": 6,
-        "asrSpan": "進取因是什",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 96,
-      "sentenceId": "seg-0097",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 96,
-      "sentenceId": "seg-0097",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 96,
-      "sentenceId": "seg-0097",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "意識的進",
-        "意識的近"
-      ],
-      "refContexts": [
-        "意識的近"
-      ],
-      "glossary": {
-        "term": "意識的近",
-        "frequency": 13,
-        "asrSpan": "意識的進",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "識的進取",
-        "識的近取"
-      ],
-      "refContexts": [
-        "識的近取"
-      ],
-      "glossary": {
-        "term": "識的近取",
-        "frequency": 13,
-        "asrSpan": "識的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "意識的進取",
-        "意識的近取"
-      ],
-      "refContexts": [
-        "意識的近取"
-      ],
-      "glossary": {
-        "term": "意識的近取",
-        "frequency": 13,
-        "asrSpan": "意識的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 132,
-      "sentenceId": "seg-0133",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "識的進取因",
-        "識的近取因"
-      ],
-      "refContexts": [
-        "識的近取因"
-      ],
-      "glossary": {
-        "term": "識的近取因",
-        "frequency": 13,
-        "asrSpan": "識的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 157,
-      "sentenceId": "seg-0158",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 157,
-      "sentenceId": "seg-0158",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 157,
-      "sentenceId": "seg-0158",
-      "compStart": 6,
-      "compEnd": 7,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 159,
-      "sentenceId": "seg-0160",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 159,
-      "sentenceId": "seg-0160",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 159,
-      "sentenceId": "seg-0160",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "意識的進",
-        "意識的近"
-      ],
-      "refContexts": [
-        "意識的近"
-      ],
-      "glossary": {
-        "term": "意識的近",
-        "frequency": 13,
-        "asrSpan": "意識的進",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "識的進取",
-        "識的近取"
-      ],
-      "refContexts": [
-        "識的近取"
-      ],
-      "glossary": {
-        "term": "識的近取",
-        "frequency": 13,
-        "asrSpan": "識的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "意識的進取",
-        "意識的近取"
-      ],
-      "refContexts": [
-        "意識的近取"
-      ],
-      "glossary": {
-        "term": "意識的近取",
-        "frequency": 13,
-        "asrSpan": "意識的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 164,
-      "sentenceId": "seg-0165",
-      "compStart": 7,
-      "compEnd": 8,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "識的進取因",
-        "識的近取因"
-      ],
-      "refContexts": [
-        "識的近取因"
-      ],
-      "glossary": {
-        "term": "識的近取因",
-        "frequency": 13,
-        "asrSpan": "識的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 165,
-      "sentenceId": "seg-0166",
-      "compStart": 8,
-      "compEnd": 9,
-      "asrDelta": "聚",
-      "referenceDelta": "俱",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "識的聚生",
-        "識的俱生"
-      ],
-      "refContexts": [
-        "識的俱生"
-      ],
-      "glossary": {
-        "term": "識的俱生",
-        "frequency": 3,
-        "asrSpan": "識的聚生",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 165,
-      "sentenceId": "seg-0166",
-      "compStart": 8,
-      "compEnd": 9,
-      "asrDelta": "聚",
-      "referenceDelta": "俱",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "意識的聚生",
-        "意識的俱生"
-      ],
-      "refContexts": [
-        "意識的俱生"
-      ],
-      "glossary": {
-        "term": "意識的俱生",
-        "frequency": 3,
-        "asrSpan": "意識的聚生",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 166,
-      "sentenceId": "seg-0167",
-      "compStart": 9,
-      "compEnd": 10,
-      "asrDelta": "聚",
-      "referenceDelta": "俱",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "識的聚生",
-        "識的俱生"
-      ],
-      "refContexts": [
-        "識的俱生"
-      ],
-      "glossary": {
-        "term": "識的俱生",
-        "frequency": 3,
-        "asrSpan": "識的聚生",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 166,
-      "sentenceId": "seg-0167",
-      "compStart": 9,
-      "compEnd": 10,
-      "asrDelta": "聚",
-      "referenceDelta": "俱",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "意識的聚生",
-        "意識的俱生"
-      ],
-      "refContexts": [
-        "意識的俱生"
-      ],
-      "glossary": {
-        "term": "意識的俱生",
-        "frequency": 3,
-        "asrSpan": "意識的聚生",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 167,
-      "sentenceId": "seg-0168",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 167,
-      "sentenceId": "seg-0168",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 167,
-      "sentenceId": "seg-0168",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 167,
-      "sentenceId": "seg-0168",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因是什",
-        "近取因是什"
-      ],
-      "refContexts": [
-        "近取因是什"
-      ],
-      "glossary": {
-        "term": "近取因是什",
-        "frequency": 6,
-        "asrSpan": "進取因是什",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 168,
-      "sentenceId": "seg-0169",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 168,
-      "sentenceId": "seg-0169",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 168,
-      "sentenceId": "seg-0169",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 168,
-      "sentenceId": "seg-0169",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因是什",
-        "近取因是什"
-      ],
-      "refContexts": [
-        "近取因是什"
-      ],
-      "glossary": {
-        "term": "近取因是什",
-        "frequency": 6,
-        "asrSpan": "進取因是什",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 174,
-      "sentenceId": "seg-0175",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 174,
-      "sentenceId": "seg-0175",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 174,
-      "sentenceId": "seg-0175",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 190,
-      "sentenceId": "seg-0191",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取",
-        "的近取"
-      ],
-      "refContexts": [
-        "的近取"
-      ],
-      "glossary": {
-        "term": "的近取",
-        "frequency": 21,
-        "asrSpan": "的進取",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 190,
-      "sentenceId": "seg-0191",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 190,
-      "sentenceId": "seg-0191",
-      "compStart": 2,
-      "compEnd": 3,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "的進取因",
-        "的近取因"
-      ],
-      "refContexts": [
-        "的近取因"
-      ],
-      "glossary": {
-        "term": "的近取因",
-        "frequency": 21,
-        "asrSpan": "的進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 278,
-      "sentenceId": "seg-0279",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
-    },
-    {
-      "sentenceIndex": 280,
-      "sentenceId": "seg-0281",
-      "compStart": 4,
-      "compEnd": 5,
-      "asrDelta": "進",
-      "referenceDelta": "近",
-      "changeChars": 1,
-      "sentenceSimilarity": null,
-      "asrContexts": [
-        "進取因",
-        "近取因"
-      ],
-      "refContexts": [
-        "近取因"
-      ],
-      "glossary": {
-        "term": "近取因",
-        "frequency": 26,
-        "asrSpan": "進取因",
-        "asrSpanInCorpus": 0
-      },
-      "note": "overlap-skipped"
     }
   ]
 }

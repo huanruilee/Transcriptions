@@ -4,8 +4,8 @@
 - 音檔：講師官方 MP3，3820.008 秒，sha256:68fb19a8fcf0ced342748eb852a10924cf4da429a6b29f353c27b96d3dbe5b48
 - 底本：講師官方整編逐字稿 PDF（sha256:793fdc4e6303c911576fcc2fa910bbc5b96d032ec3534bfb75d3ef3563e2225d），抽取文字 9337 字（courses/四法印/source_text/lecture_10.txt）
 - ASR：faster-whisper-large-v3-turbo，1188 段 / 11438 字，RTF 0.10418，尾差 1.7 秒
-- 對校：官方提綱 6 段全部成為段落邊界；自動校字 107 處；記錄差異 207 處（{"editorial-divergence": 106, "unattested-homophone": 1, "stale-position": 6, "overlap-skipped": 94}）
-- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 2, "discussionTopics": 1, "referenceViews": 2}，逐字回查不通過 0 條
+- 對校：官方提綱 6 段全部成為段落邊界；自動校字 110 處；記錄差異 204 處（{"editorial-divergence": 105, "overlap-skipped": 92, "unattested-homophone": 1, "stale-position": 6}）
+- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 3, "discussionTopics": 2, "referenceViews": 1}，逐字回查不通過 0 條
 - 狀態：candidate-review-required（尚未逐句人工聽核）
 
 ## 自動套用之校字（僅同音／近音名相，保留 ASR 口語）
@@ -58,10 +58,12 @@
 | seg-0674 | 出 | 除 | glossary-homophone | None |
 | seg-0738 | 值 | 執 | glossary-homophone | None |
 | seg-0747 | 值 | 執 | strict-homophone | 0.632 |
+| seg-0772 | 像 | 想 | glossary-homophone | None |
 | seg-0780 | 力 | 立 | strict-homophone | 0.619 |
 | seg-0780 | 韻 | 蘊 | strict-homophone | 0.619 |
 | seg-0781 | 韻 | 蘊 | glossary-homophone | None |
 | seg-0783 | 力 | 立 | strict-homophone | 0.588 |
+| seg-0783 | 韻 | 蘊 | glossary-homophone | None |
 | seg-0785 | 力 | 立 | glossary-homophone | None |
 | seg-0785 | 韻 | 蘊 | glossary-homophone | None |
 | seg-0786 | 社 | 攝 | glossary-homophone | None |
@@ -90,6 +92,7 @@
 | seg-0921 | 利 | 立 | strict-homophone | 0.578 |
 | seg-0925 | 利 | 立 | glossary-homophone | None |
 | seg-0926 | 利 | 立 | glossary-homophone | None |
+| seg-0927 | 象 | 想 | glossary-homophone | None |
 | seg-0931 | 襲 | 習 | glossary-homophone | None |
 | seg-1024 | 例 | 立 | glossary-homophone | None |
 | seg-1037 | 陷 | 現 | glossary-homophone | None |
@@ -126,5 +129,5 @@
 |---|---|---|---|
 | seg-0032 | 的 | 地 | unattested-homophone |
 
-- 整段口語刪節／改寫（editorial-divergence）共 106 處、標點差異 0 處、正寫法差異 0 處：一律保留 ASR 原樣，完整清單見 `correction_candidates.json`。
+- 整段口語刪節／改寫（editorial-divergence）共 105 處、標點差異 0 處、正寫法差異 0 處：一律保留 ASR 原樣，完整清單見 `correction_candidates.json`。
 

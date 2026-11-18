@@ -2,8 +2,8 @@
   "runId": "si-fa-yin-6-run1",
   "sessionId": "session_06",
   "courseId": "si-fa-yin",
-  "startedAt": "2026-11-19 05:24:09",
-  "completedAt": "2026-11-18 21:38:15",
+  "startedAt": "2026-11-19 06:01:38",
+  "completedAt": "2026-11-18 22:17:10",
   "stages": [
     {
       "stage": "S1-fetch",
@@ -18,12 +18,12 @@
     {
       "stage": "S3-align",
       "tool": "difflib char-level alignment vs 官方整編稿",
-      "result": "111 auto fixes, 341 documented divergences"
+      "result": "113 auto fixes, 339 documented divergences"
     },
     {
       "stage": "S4-correct",
       "tool": "python-difflib 對齊官方整編稿＋同音/近音名相規則（scripts/sifayin_build_transcript.py）",
-      "result": "{\"strict-homophone\": 26, \"glossary-homophone\": 85}"
+      "result": "{\"strict-homophone\": 25, \"glossary-homophone\": 88}"
     },
     {
       "stage": "S5-section",
@@ -33,7 +33,7 @@
     {
       "stage": "S6-overview",
       "tool": "eNeural glm53-flash（生成＋獨立證據審查）",
-      "result": "{\"mainPoints\": 2, \"discussionTopics\": 1, \"referenceViews\": 2}"
+      "result": "{\"mainPoints\": 2, \"discussionTopics\": 2, \"referenceViews\": 1}"
     }
   ],
   "models": [
@@ -62,7 +62,7 @@
     }
   ],
   "gates": {
-    "charRatio": 0.9557,
+    "charRatio": 0.9558,
     "charRatioThreshold": 0.6,
     "charRatioPass": true,
     "audioShaMatchesIntake": true,
@@ -73,10 +73,10 @@
     "pendingHumanReview": 0,
     "unresolvedNotes": {
       "editorial-divergence": 255,
+      "overlap-skipped": 67,
       "stale-position": 9,
       "punctuation-gap": 3,
-      "orthographic-variant": 5,
-      "overlap-skipped": 69
+      "orthographic-variant": 5
     },
     "unknownUnresolvedNotes": [
       "overlap-skipped",
@@ -90,12 +90,12 @@
   },
   "artifacts": {
     "rawAsr": "sha256:4a624a6b1d3c7499e8f5df63fc6b246bc736f3c5b1c51796b652156746515eb5",
-    "candidate": "sha256:781e5b287cd47604de4fc95159729b9077e3f9d5f7ea7c324ca939dcfdd16b34",
-    "correctionCandidates": "sha256:6a790e7cc623c5e371fc787dfb3bddd2de779f89d330c75c3d1a98f2ff96cd20",
+    "candidate": "sha256:c567fd93d9a8b7e28e0b716d407ad29833e6dacdd46e18ca168e4e5ae2cf0a8a",
+    "correctionCandidates": "sha256:59d684c6c9f5511623d89c49dd5585a9ada855c1648da223adc0577d65e34809",
     "outline": "sha256:368c643be4f1aeeeb0a0134514d21889079043e87f9f0dd249108d7480870f52",
-    "contentReview": "sha256:f215d89674a5d5cac6ac36eb25000e78813b4b2d2ab333b594096919e81dbc06",
-    "contentReviewManifest": "sha256:39e38a02e62416a404577dac0bff191c97bbe3e0856dcadcc61d797abb18f3f7",
-    "finalSession": "sha256:f538230d389b90dc901ba949345129bdd849219b5051909cab44fda400e2be27",
+    "contentReview": "sha256:389bcde7108acb78bf2ca410b980a28d869694545adc020e7bbcd8f8a75ba336",
+    "contentReviewManifest": "sha256:0ea7cea55042857f5b0a6c22059e6d109fed3f28c9d4cd6a4897381d1ed456fc",
+    "finalSession": "sha256:a4dd77c5f5993a21936d996d747dfb0f35cc162e9badc572811155c40e7e6752",
     "baseText": "sha256:cf596b4df2ed40e012ca2b029808870a630a79e009d1b292a0e414c1132c6ef1"
   }
 }

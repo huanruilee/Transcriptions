@@ -4,7 +4,7 @@
 - 音檔：講師官方 MP3，3489.048 秒，sha256:1772bca26d6eb1785658bfbe7ebeb0287bf82ffc70aaa61be2d7a38c29e0a004
 - 底本：講師官方整編逐字稿 PDF（sha256:6a8edadcb02681ae73485480ece9741b8d959022dc78957cc2fc13fc074938b2），抽取文字 8639 字（courses/四法印/source_text/lecture_11.txt）
 - ASR：faster-whisper-large-v3-turbo，1089 段 / 10196 字，RTF 0.0837，尾差 9.03 秒
-- 對校：官方提綱 8 段全部成為段落邊界；自動校字 196 處；記錄差異 278 處（{"editorial-divergence": 68, "stale-position": 4, "unattested-homophone": 2, "overlap-skipped": 204}）
+- 對校：官方提綱 8 段全部成為段落邊界；自動校字 198 處；記錄差異 276 處（{"editorial-divergence": 68, "overlap-skipped": 202, "stale-position": 4, "unattested-homophone": 2}）
 - 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 3, "discussionTopics": 1, "referenceViews": 1}，逐字回查不通過 0 條
 - 狀態：candidate-review-required（尚未逐句人工聽核）
 
@@ -21,6 +21,7 @@
 | seg-0010 | 利 | 立 | glossary-homophone | None |
 | seg-0011 | 孕 | 蘊 | glossary-homophone | None |
 | seg-0011 | 孕 | 蘊 | glossary-homophone | None |
+| seg-0014 | 甲 | 假 | glossary-homophone | None |
 | seg-0014 | 孕 | 蘊 | strict-homophone | 0.6 |
 | seg-0024 | 利 | 立 | glossary-homophone | None |
 | seg-0027 | 陷 | 現 | glossary-homophone | None |
@@ -164,6 +165,7 @@
 | seg-0704 | 值 | 執 | glossary-homophone | None |
 | seg-0706 | 值 | 執 | glossary-homophone | None |
 | seg-0709 | 值 | 執 | glossary-homophone | None |
+| seg-0716 | 值 | 執 | glossary-homophone | None |
 | seg-0719 | 墨 | 末 | glossary-homophone | None |
 | seg-0720 | 墨 | 末 | glossary-homophone | None |
 | seg-0721 | 墨 | 末 | glossary-homophone | None |

@@ -4,7 +4,7 @@
   "mediaType": "video/youtube",
   "youtubeVideoId": "dAyrtR6hQik",
   "youtubeUrl": "https://www.youtube.com/watch?v=dAyrtR6hQik",
-  "lastUpdated": "2026-11-19 05:24:02",
+  "lastUpdated": "2026-11-19 06:01:30",
   "publicationState": "candidate-review-required",
   "audioAvailable": true,
   "paragraphs": [
@@ -5005,11 +5005,13 @@
     "total_paragraphs": 3,
     "total_sentences": 551,
     "charCount": 5863,
-    "processed_at": "2026-11-19 05:24:02",
+    "processed_at": "2026-11-19 06:01:30",
     "audioDurationSec": 2177.52,
     "asrModel": "faster-whisper-large-v3-turbo",
     "asrSegments": 551,
     "fillerOnlySentencesDropped": 0,
+    "asrPauseMarkersNormalized": 0,
+    "paragraphEndTerminatorsAdded": 0,
     "hallucinationSuspects": 0,
     "correctionsAutoApplied": 46,
     "correctionsByPolicy": {
@@ -5034,78 +5036,86 @@
     "sourceTranscriptId": "si-fa-yin/session_01",
     "sourceDigest": "sha256:5d4505fa89a4704c07c66d3585db5bf8cff7398985f88610e2b898d3f9b9c345",
     "generatedBy": "MiniMax-M3",
-    "generatedAt": "2026-11-18T21:26:34.061Z",
+    "generatedAt": "2026-11-18T22:02:15.184Z",
     "mainPoints": [
       {
-        "text": "佛法的內涵可統攝在見與行兩者當中。",
+        "text": "初學者應先學習四聖諦與四法印，了解佛法的中心思想。",
         "evidence": [
           {
-            "sentenceId": "seg-0035",
-            "quote": "佛法的內涵可以統攝在見、行這兩者當中。"
+            "sentenceId": "seg-0151",
+            "quote": "你都應該先了解佛法的中心思想是什麼。"
+          },
+          {
+            "sentenceId": "seg-0153",
+            "quote": "你應該花一點時間去學習四聖諦、四法印"
           }
         ]
       },
       {
-        "text": "佛法的科學從佛法角度探討物質、心的內涵及兩者關聯。",
+        "text": "佛法的內涵可統攝於「見」與「行」，並強調見行合一的修學觀念。",
         "evidence": [
           {
-            "sentenceId": "seg-0072",
-            "quote": "所謂佛法的科學，是從佛法的角度去探討，什麼叫物質？"
+            "sentenceId": "seg-0035",
+            "quote": "佛法的內涵可以統攝在見、行這兩者當中。"
           },
           {
-            "sentenceId": "seg-0073",
-            "quote": "什麼叫心？"
-          },
-          {
-            "sentenceId": "seg-0074",
-            "quote": "物質和心，這兩者有什麼關聯性？"
+            "sentenceId": "seg-0044",
+            "quote": "見、行、合、一這個觀念。"
           }
         ]
       }
     ],
     "discussionTopics": [
       {
-        "text": "學法者是否一定要學習攝類學、心類學等基礎課程？",
+        "text": "學佛者應先釐清自己的學習目標與學法初衷。",
         "evidence": [
           {
-            "sentenceId": "seg-0324",
-            "quote": "是不是一定要學攝類學、心類學？"
-          }
-        ]
-      },
-      {
-        "text": "學佛者應先釐清自己的學習目標與初衷為何？",
-        "evidence": [
+            "sentenceId": "seg-0401",
+            "quote": "你先問問自己"
+          },
           {
             "sentenceId": "seg-0402",
             "quote": "我為什麼要學佛法？"
-          },
-          {
-            "sentenceId": "seg-0403",
-            "quote": "我學習佛法的初衷是什麼？"
           },
           {
             "sentenceId": "seg-0404",
             "quote": "我學習佛法想要達到的目標是什麼？"
           }
         ]
+      },
+      {
+        "text": "成為佛教徒是否必然更善良，且能確保來生投生善趣？",
+        "evidence": [
+          {
+            "sentenceId": "seg-0474",
+            "quote": "佛教徒不一定是善良的人。"
+          },
+          {
+            "sentenceId": "seg-0484",
+            "quote": "來生就能夠投生善趣？"
+          },
+          {
+            "sentenceId": "seg-0497",
+            "quote": "當了佛教徒"
+          }
+        ]
       }
     ],
     "referenceViews": [
       {
-        "text": "即使請教有經驗的人，學法者仍須為自己的決定負責。",
+        "text": "若目標只是來生增上生，信心是關鍵，智慧則是輔助。",
         "evidence": [
           {
-            "sentenceId": "seg-0536",
-            "quote": "即便你去問有經驗的人"
+            "sentenceId": "seg-0327",
+            "quote": "如果你學佛的目標只是為了獲得來生的增上生"
           },
           {
-            "sentenceId": "seg-0537",
-            "quote": "最終下決定的還是你自己。"
+            "sentenceId": "seg-0330",
+            "quote": "信心是關鍵"
           },
           {
-            "sentenceId": "seg-0538",
-            "quote": "既然下決定的人是你"
+            "sentenceId": "seg-0331",
+            "quote": "智慧是輔助。"
           }
         ]
       }
@@ -5117,31 +5127,31 @@
           "group": "mainPoints",
           "index": 0,
           "verdict": "supported",
-          "reason": "原句直接支持"
+          "reason": "原文要求先了解中心思想並學四聖諦四法印"
         },
         {
           "group": "mainPoints",
           "index": 1,
           "verdict": "supported",
-          "reason": "引句完整界定內容與關聯"
+          "reason": "原文明稱統攝於見行，並強調見行合一。"
         },
         {
           "group": "discussionTopics",
           "index": 0,
           "verdict": "supported",
-          "reason": "原文明確提出該疑問"
+          "reason": "原文要求先自問初衷與目標"
         },
         {
           "group": "discussionTopics",
           "index": 1,
           "verdict": "supported",
-          "reason": "原文明示先自問初衷與目標"
+          "reason": "原文明言佛教徒未必善良，且善趣無保障"
         },
         {
           "group": "referenceViews",
           "index": 0,
           "verdict": "supported",
-          "reason": "原文明言最終仍由自己決定"
+          "reason": "原文明言信心關鍵、智慧輔助"
         }
       ]
     },

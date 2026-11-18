@@ -2,8 +2,8 @@
   "runId": "si-fa-yin-10-run1",
   "sessionId": "session_10",
   "courseId": "si-fa-yin",
-  "startedAt": "2026-11-19 05:24:15",
-  "completedAt": "2026-11-18 21:38:20",
+  "startedAt": "2026-11-19 06:01:43",
+  "completedAt": "2026-11-18 22:17:10",
   "stages": [
     {
       "stage": "S1-fetch",
@@ -18,12 +18,12 @@
     {
       "stage": "S3-align",
       "tool": "difflib char-level alignment vs 官方整編稿",
-      "result": "107 auto fixes, 207 documented divergences"
+      "result": "110 auto fixes, 204 documented divergences"
     },
     {
       "stage": "S4-correct",
       "tool": "python-difflib 對齊官方整編稿＋同音/近音名相規則（scripts/sifayin_build_transcript.py）",
-      "result": "{\"glossary-homophone\": 85, \"strict-homophone\": 22}"
+      "result": "{\"glossary-homophone\": 88, \"strict-homophone\": 22}"
     },
     {
       "stage": "S5-section",
@@ -33,7 +33,7 @@
     {
       "stage": "S6-overview",
       "tool": "eNeural glm53-flash（生成＋獨立證據審查）",
-      "result": "{\"mainPoints\": 2, \"discussionTopics\": 1, \"referenceViews\": 2}"
+      "result": "{\"mainPoints\": 3, \"discussionTopics\": 2, \"referenceViews\": 1}"
     }
   ],
   "models": [
@@ -72,16 +72,16 @@
     "paragraphsMatchOutline": true,
     "pendingHumanReview": 1,
     "unresolvedNotes": {
-      "editorial-divergence": 106,
+      "editorial-divergence": 105,
+      "overlap-skipped": 92,
       "unattested-homophone": 1,
-      "stale-position": 6,
-      "overlap-skipped": 94
+      "stale-position": 6
     },
     "unknownUnresolvedNotes": [
       "overlap-skipped",
       "stale-position"
     ],
-    "overviewEvidenceTotal": 5,
+    "overviewEvidenceTotal": 6,
     "overviewUnsupported": 0,
     "overviewPass": true,
     "humanListened": false,
@@ -89,12 +89,12 @@
   },
   "artifacts": {
     "rawAsr": "sha256:aca4844bcfa1436000d17f68024728a56c46ad225689709c2dece6fb7e986d08",
-    "candidate": "sha256:980c912bba710d74bf007b66ecead0bb717757a0dc42a730d607081d4bf51da0",
-    "correctionCandidates": "sha256:996b62e1c8f27c5301541f36c387b8c4e04d4bbd215357efd81d1967353578f6",
+    "candidate": "sha256:80d19f1541b15fe9497812d56f6724a8d75be0c690d9cefa36ca1e5e5fb59523",
+    "correctionCandidates": "sha256:84662d396e3d2d05925f79447f84585e3c7c67f4c0f60a62ede72e81ba88f810",
     "outline": "sha256:4fe058e537cfdfc097e39500386291893f61e0cdb7a2b25c098f64d1496fdbaa",
-    "contentReview": "sha256:289d4e1ad3fbd80ebd8dc5fc48bca6212ec17feb86d855cde8393cf531873f8e",
-    "contentReviewManifest": "sha256:639063a8af08e7da04772a91277e4a177196cfce73bec8a3d48597c378b8b718",
-    "finalSession": "sha256:074f462a0059f4f0ee5496c83329519cdadcfecb92a4432309df9b0e3ee059fe",
+    "contentReview": "sha256:30493db4f63c1c7092361ec4d9f8c489c884a997b059f6af73fe38e1426d1fde",
+    "contentReviewManifest": "sha256:af28e3ddc4b21481196b69e5d5e4f79d83fa46786c664784b70681c1a76a87dd",
+    "finalSession": "sha256:2934de19b7ac3ebaecb9fa8c4faa259bd998476e5b8ef0c1d5053f1bb4409361",
     "baseText": "sha256:436fff16a2513fe84c8e4b7f9e2415bfbf825af9e64375c72a60bfc60d07031c"
   }
 }

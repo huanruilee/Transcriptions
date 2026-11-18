@@ -4,8 +4,8 @@
 - 音檔：講師官方 MP3，3851.76 秒，sha256:9d3593c35e9663c37abeefe8369b08bcf60533bd59fe4f765b17548e138be2eb
 - 底本：講師官方整編逐字稿 PDF（sha256:4aa37073f216bf7cb331e88e2595a1455bad04469e0398dd2921c4e6a576c55b），抽取文字 10003 字（courses/四法印/source_text/lecture_08.txt）
 - ASR：faster-whisper-large-v3-turbo，1247 段 / 11854 字，RTF 0.38768，尾差 9.49 秒
-- 對校：官方提綱 6 段全部成為段落邊界；自動校字 119 處；記錄差異 257 處（{"editorial-divergence": 106, "orthographic-variant": 3, "unattested-homophone": 1, "stale-position": 3, "overlap-skipped": 144}）
-- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 2, "discussionTopics": 2, "referenceViews": 1}，逐字回查不通過 0 條
+- 對校：官方提綱 6 段全部成為段落邊界；自動校字 119 處；記錄差異 257 處（{"editorial-divergence": 106, "orthographic-variant": 3, "overlap-skipped": 144, "unattested-homophone": 1, "stale-position": 3}）
+- 摘要：glm53-flash 生成＋獨立證據審查，{"mainPoints": 2, "discussionTopics": 2, "referenceViews": 2}，逐字回查不通過 0 條
 - 狀態：candidate-review-required（尚未逐句人工聽核）
 
 ## 自動套用之校字（僅同音／近音名相，保留 ASR 口語）

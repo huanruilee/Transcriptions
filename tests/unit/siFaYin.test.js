@@ -340,12 +340,19 @@ test('四法印 transcripts are pure traditional Chinese with no prompt leakage 
       for (const pattern of PROMPT_LEAK) {
         assert.ok(!pattern.test(paragraph.heading || ''), `${sessionId} 小標疑似 prompt 外洩`);
       }
+      const lastSentence = paragraph.sentences.at(-1);
+      if (lastSentence) {
+      assert.ok(/[。！？；：」』）】]$/.test(lastSentence.text),
+        `${sessionId} ${paragraph.id} 段落末句缺少句終標點`);
+      }
       for (const sentence of paragraph.sentences) {
         for (const pattern of PROMPT_LEAK) {
           assert.ok(!pattern.test(sentence.text), `${sessionId} ${sentence.id} 疑似 prompt 外洩`);
         }
         assert.ok(!PUNCT_ONLY.test(sentence.text), `${sessionId} ${sentence.id} 只有標點`);
-        assert.ok(!/[\uFFFD]/.test(sentence.text), `${sessionId} ${sentence.id} 含替換字元`);
+        assert.ok(!/[\uFFFD\uFF3C]/.test(sentence.text), `${sessionId} ${sentence.id} 含替換字元或全形反斜線`);
+        // ASR 的停頓／雜訊標記（全形英文字母）不得出現在讀者看到的 text
+        assert.ok(!/[Ａ-Ｚａ-ｚ]/.test(sentence.text), `${sessionId} ${sentence.id} 含全形英文雜訊`);
       }
     }
   }
