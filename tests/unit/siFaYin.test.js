@@ -32,7 +32,7 @@ const SIMPLIFIED_CHARS = new Set([
   '觉', '关', '开', '边', '过', '问', '题', '时', '间', '还', '会', '点', '现', '显', '义', '极',
   '胜', '广', '当', '无', '师', '发', '与', '见', '随', '应', '处', '观', '摄', '识', '别', '业',
   '释', '难', '车', '声', '闻', '缘', '执', '许', '计', '总', '种', '听', '讲', '话', '导', '读',
-  '记', '诵', '传', '萨', '罗', '蜜', '辩', '净', '谛', '学', '习', '态', '灵', '产', '亲',
+  '记', '诵', '传', '萨', '罗', '蜜', '辩', '净', '谛', '学', '习', '态', '灵', '产', '亲', '晒',
 ]);
 
 test('四法印 course.json registers the series with the verified instructor and official playlist', () => {
@@ -271,15 +271,20 @@ test('every session carries a reviewed contentOverview whose quotes are verbatim
     const overview = session.contentOverview;
     assert.ok(overview, `${sessionId} 缺 contentOverview`);
     assert.equal(overview.status, 'ai-reviewed', `${sessionId} contentOverview 未經審閱`);
-    assert.equal(overview.sourceTranscriptId, `四法印/session_${sessionId}`);
+    assert.equal(overview.sourceTranscriptId, `si-fa-yin/session_${sessionId}`);
     assert.ok(['eNeural-glm53-flash', 'MiniMax-M3'].includes(overview.generatedBy), `${sessionId} generatedBy 非法`);
-    assert.ok(overview.mainPoints.length >= 3, `${sessionId} 要點過少`);
-    assert.ok(overview.discussionTopics.length >= 2, `${sessionId} 研討題目過少`);
+    // 平台閘門：mainPoints 2〜4、discussionTopics 1〜4、referenceViews 1〜4，三組合計 5〜8
+    assert.ok(overview.mainPoints.length >= 2, `${sessionId} 要點過少`);
+    assert.ok(overview.discussionTopics.length >= 1, `${sessionId} 研討題目過少`);
+    assert.ok(overview.mainPoints.length + overview.discussionTopics.length
+      + overview.referenceViews.length >= 5, `${sessionId} 三組合計要點過少`);
 
     const byId = new Map(session.paragraphs.flatMap((p) => p.sentences).map((s) => [s.id, s.text]));
     for (const group of ['mainPoints', 'discussionTopics', 'referenceViews']) {
       for (const item of overview[group] || []) {
-        assert.ok(item.evidence?.length >= 2, `${sessionId} ${group} 證據不足`);
+        // 平台閘門：每項證據 1〜3 條（scripts/content_overview_pipeline.mjs:339）
+        assert.ok(item.evidence?.length >= 1 && item.evidence.length <= 3,
+          `${sessionId} ${group} 證據條數不符平台閘門`);
         for (const evidence of item.evidence) {
           const text = byId.get(evidence.sentenceId);
           assert.ok(text !== undefined, `${sessionId} 證據句 ${evidence.sentenceId} 不存在`);
@@ -312,7 +317,7 @@ test('every session carries the six-file evidence set with gate results', () => 
 
     const reviewManifest = readJson(path.join(dir, 'content_review_manifest.json'));
     assert.equal(reviewManifest.evidenceValidation.unsupported, 0, `${sessionId} contentOverview 有無證據要點`);
-    assert.ok(reviewManifest.counts.mainPoints >= 3);
+    assert.ok(reviewManifest.counts.mainPoints >= 2);
 
     // review.md 必須記錄存疑句，讓人工接手時不用從頭猜
     const reviewMd = fs.readFileSync(path.join(dir, 'review.md'), 'utf8');

@@ -1,0 +1,101 @@
+{
+  "runId": "si-fa-yin-6-run1",
+  "sessionId": "session_06",
+  "courseId": "si-fa-yin",
+  "startedAt": "2026-11-19 05:24:09",
+  "completedAt": "2026-11-18 21:38:15",
+  "stages": [
+    {
+      "stage": "S1-fetch",
+      "tool": "curl(drive)",
+      "result": "source.mp3 sha256=c595dd8670e81d3f… 5208.696s；官方 PDF sha256=da401b224779aeb4…"
+    },
+    {
+      "stage": "S2-asr",
+      "tool": "whisper-gpu-service:8010",
+      "result": "1548 segments, 16448 chars, RTF=0.14764, tailGap=-3.95s"
+    },
+    {
+      "stage": "S3-align",
+      "tool": "difflib char-level alignment vs 官方整編稿",
+      "result": "111 auto fixes, 341 documented divergences"
+    },
+    {
+      "stage": "S4-correct",
+      "tool": "python-difflib 對齊官方整編稿＋同音/近音名相規則（scripts/sifayin_build_transcript.py）",
+      "result": "{\"strict-homophone\": 26, \"glossary-homophone\": 85}"
+    },
+    {
+      "stage": "S5-section",
+      "tool": "official outline timestamps",
+      "result": "8 paragraphs"
+    },
+    {
+      "stage": "S6-overview",
+      "tool": "eNeural glm53-flash（生成＋獨立證據審查）",
+      "result": "{\"mainPoints\": 2, \"discussionTopics\": 1, \"referenceViews\": 2}"
+    }
+  ],
+  "models": [
+    {
+      "role": "asr",
+      "model": "faster-whisper-large-v3-turbo",
+      "endpoint": "127.0.0.1:8010"
+    },
+    {
+      "role": "correction-rule",
+      "model": "deterministic-python",
+      "endpoint": "scripts/sifayin_build_transcript.py",
+      "policy": {
+        "strict-homophone": "等長 ≤3 字且每字聲韻相同（pypinyin 不計聲調）",
+        "near-homophone-term": "等長 ≤4 字、每字同音或近音（同聲母且韻母 edit distance ≤1），且底本詞頻 ≥2、ASR 寫法在 11 份底本零出現",
+        "editorial-divergence": "其餘差異＝整編稿的口語刪節／改寫，不套用、不標存疑",
+        "orthographic-variant": "他/它、做/作、佔/占 等正寫法差異：不套用、不標存疑",
+        "unattested-homophone": "同音但底本無詞頻佐證：不自動改，標記 reviewNeeded 交人工",
+        "glossary-homophone": "詞表同音校正：句內 2〜5 字區間與底本某詞只差一字且該字聲韻完全相同；該詞須通過收詞條件（兩字詞頻≥20／3〜5字词頻≥3 且緊縮比≥0.4），ASR 寫法在 11 份底本零出現，同位置同音候選詞唯一，被換的字不屬虛詞，才自動套用"
+      }
+    },
+    {
+      "role": "overview",
+      "model": "glm53-flash",
+      "endpoint": "agents.eneural.ai"
+    }
+  ],
+  "gates": {
+    "charRatio": 0.9557,
+    "charRatioThreshold": 0.6,
+    "charRatioPass": true,
+    "audioShaMatchesIntake": true,
+    "tailGapSec": -3.95,
+    "paragraphs": 8,
+    "outlineItems": 8,
+    "paragraphsMatchOutline": true,
+    "pendingHumanReview": 0,
+    "unresolvedNotes": {
+      "editorial-divergence": 255,
+      "stale-position": 9,
+      "punctuation-gap": 3,
+      "orthographic-variant": 5,
+      "overlap-skipped": 69
+    },
+    "unknownUnresolvedNotes": [
+      "overlap-skipped",
+      "stale-position"
+    ],
+    "overviewEvidenceTotal": 5,
+    "overviewUnsupported": 0,
+    "overviewPass": true,
+    "humanListened": false,
+    "publicationState": "candidate-review-required"
+  },
+  "artifacts": {
+    "rawAsr": "sha256:4a624a6b1d3c7499e8f5df63fc6b246bc736f3c5b1c51796b652156746515eb5",
+    "candidate": "sha256:781e5b287cd47604de4fc95159729b9077e3f9d5f7ea7c324ca939dcfdd16b34",
+    "correctionCandidates": "sha256:6a790e7cc623c5e371fc787dfb3bddd2de779f89d330c75c3d1a98f2ff96cd20",
+    "outline": "sha256:368c643be4f1aeeeb0a0134514d21889079043e87f9f0dd249108d7480870f52",
+    "contentReview": "sha256:f215d89674a5d5cac6ac36eb25000e78813b4b2d2ab333b594096919e81dbc06",
+    "contentReviewManifest": "sha256:39e38a02e62416a404577dac0bff191c97bbe3e0856dcadcc61d797abb18f3f7",
+    "finalSession": "sha256:f538230d389b90dc901ba949345129bdd849219b5051909cab44fda400e2be27",
+    "baseText": "sha256:cf596b4df2ed40e012ca2b029808870a630a79e009d1b292a0e414c1132c6ef1"
+  }
+}

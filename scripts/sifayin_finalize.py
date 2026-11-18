@@ -37,8 +37,17 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def text_of(session: dict) -> str:
-    return "\n".join(p["text"] for p in session["paragraphs"])
+def text_of(doc: dict) -> str:
+    """session 的段落是 sentences 陣列；舊的 raw 檔可能直接有 text。""" 
+    parts = []
+    for para in doc.get("paragraphs", []):
+        if isinstance(para.get("text"), str):
+            parts.append(para["text"])
+        else:
+            parts.extend(s["text"] for s in para.get("sentences", []))
+    if not parts and isinstance(doc.get("text"), str):
+        parts.append(doc["text"])
+    return "\n".join(parts)
 
 
 def session_ids(args: str) -> list[str]:
