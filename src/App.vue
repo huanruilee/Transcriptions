@@ -377,6 +377,7 @@
               </button>
               <button
                 id="toggle-study-guide-btn"
+                v-if="currentStudyGuideUrl"
                 type="button"
                 class="session-download-btn"
                 data-testid="toggle-study-guide-btn"
@@ -987,6 +988,7 @@ const navInfo = computed(() => {
 });
 
 const currentPublicationState = ref('');
+const currentCourseStudyGuides = ref<string[] | null>(null);
 const currentAgentReviewStatus = ref('');
 const currentAgentReviewedCount = ref(0);
 const currentAgentUncertainCount = ref(0);
@@ -1015,18 +1017,25 @@ const currentStudyGuideUrl = computed(() => {
   if (!cPath) return '';
   const base = import.meta.env.BASE_URL || '/';
   const explicitPage = currentSessionInfo.value?.studyGuidePage;
+  let page: string;
   if (explicitPage) {
-    return `${base}${cPath}/${explicitPage}`;
+    page = explicitPage;
+  } else {
+    const code = resolveStudyGuideCode(
+      courseStore.currentCourseId,
+      sid,
+      currentSessionInfo.value?.displaySessionId,
+    );
+    page = `publications/lecture_${code}_study_guide.html`;
   }
-  const code = resolveStudyGuideCode(
-    courseStore.currentCourseId,
-    sid,
-    currentSessionInfo.value?.displaySessionId,
-  );
-  return `${base}${cPath}/publications/lecture_${code}_study_guide.html`;
+  // Manifest gate: only offer a study guide when the asset actually exists.
+  const manifest = currentCourseStudyGuides.value;
+  if (Array.isArray(manifest) && !manifest.includes(page)) return '';
+  return `${base}${cPath}/${page}`;
 });
 
 function toggleStudyGuideDrawer() {
+  if (!currentStudyGuideUrl.value) return;
   isStudyGuideOpen.value = !isStudyGuideOpen.value;
 }
 
@@ -1064,8 +1073,9 @@ const currentTranscriptStatus = computed(() =>
 const currentTranscriptLabel = computed(() => {
   const labels: Record<string, string> = {
     approved: '✅ 已校勘核定',
+    published: '✅ 已發布',
     'review-ready': '🟡 待審閱',
-    candidate: '🟡 候選稿',
+    candidate: '🟡 候選稿，待內容核定',
     'candidate-review-required': '🟡 待審閱候選稿',
     'not-transcribed': '🎬 影片已上架・逐字稿待製作',
     unmarked: '⚪ 尚未標示校勘狀態',
@@ -1875,6 +1885,7 @@ async function loadRealCourseData() {
     if (resCourse.ok) {
       const data = await resCourse.json();
       currentPublicationState.value = data.transcriptPublicationState || '';
+      currentCourseStudyGuides.value = Array.isArray(data.studyGuides) ? data.studyGuides : null;
       const sessions = [
         ...(data.sessions || []),
         ...(data.pendingSessions || []).map((session: any) => ({
