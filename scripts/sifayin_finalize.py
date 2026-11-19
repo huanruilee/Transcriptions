@@ -80,6 +80,7 @@ def main() -> int:
         # 證據用內容審查檔（content_review.json / _manifest.json）由正式逐字稿的
         # contentOverview 重新回查產生：sentenceId 存在＋quote 逐字相符才算通過。
         overview = session["contentOverview"]
+        titled_paragraphs = [p["heading"] for p in session["paragraphs"] if p.get("heading")]
         sentence_map = {s["id"]: s["text"] for para in session["paragraphs"] for s in para["sentences"]}
         unsupported = 0
         partial = 0
@@ -152,7 +153,11 @@ def main() -> int:
                  "result": f"{len(corrections['applied'])} auto fixes, "
                            f"{len(corrections['unresolved'])} documented divergences"},
                 {"stage": "S4-correct", "tool": ALIGN_RULE,
-                 "result": json.dumps(corrections["appliedByPolicy"], ensure_ascii=False)},
+                 "result": json.dumps(
+                     {"policies": corrections.get("correctionPolicy", []),
+                      "appliedCount": corrections.get("appliedCount", len(corrections.get("applied", []))),
+                      "unresolvedCount": corrections.get("unresolvedCount", len(corrections.get("unresolved", [])))},
+                     ensure_ascii=False)},
                 {"stage": "S5-section", "tool": "official outline timestamps",
                  "result": f"{len(session['paragraphs'])} paragraphs"},
                 {"stage": "S6-overview", "tool": OVERVIEW_MODEL,
@@ -173,7 +178,10 @@ def main() -> int:
                 "tailGapSec": raw["tailGapSec"],
                 "paragraphs": len(session["paragraphs"]),
                 "outlineItems": len(outline["sections"]),
-                "paragraphsMatchOutline": len(session["paragraphs"]) == len(outline["sections"]),
+                # v3 依語意與標點再細分段落，續段 heading 為 null；
+                # 因此檢查「帶小標的段落依序等於官方提綱」而非段落總數相等。
+                "titledParagraphs": len(titled_paragraphs),
+                "paragraphsMatchOutline": titled_paragraphs == [s["heading"] for s in outline["sections"]],
                 "pendingHumanReview": pending_review,
                 "unresolvedNotes": notes,
                 "unknownUnresolvedNotes": unknown_notes,
@@ -220,10 +228,10 @@ def main() -> int:
             "",
         ]
         if applied:
-            lines += ["| sentenceId | ASR | 底本 | 規則 | 句相似度 |", "|---|---|---|---|---|"]
+            lines += ["| sentenceId | ASR | 底本 | 規則 |", "|---|---|---|---|"]
             for item in applied:
                 lines.append(f"| {item['sentenceId']} | {item['asrDelta']} | {item['referenceDelta']} "
-                             f"| {item['policy']} | {item['sentenceSimilarity']} |")
+                             f"| {item.get('policy') or item.get('kind', '')} |")
         else:
             lines.append("（無）")
         lines += ["", "## 需人工聽核的句子（同音但無詞頻佐證等語意疑義）", ""]

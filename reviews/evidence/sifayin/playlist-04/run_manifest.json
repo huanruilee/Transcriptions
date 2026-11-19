@@ -2,8 +2,8 @@
   "runId": "si-fa-yin-4-run1",
   "sessionId": "session_04",
   "courseId": "si-fa-yin",
-  "startedAt": "2026-11-19 06:01:35",
-  "completedAt": "2026-11-18 22:17:10",
+  "startedAt": "2026-11-19 12:46:28",
+  "completedAt": "2026-11-19 07:10:19",
   "stages": [
     {
       "stage": "S1-fetch",
@@ -18,22 +18,22 @@
     {
       "stage": "S3-align",
       "tool": "difflib char-level alignment vs 官方整編稿",
-      "result": "49 auto fixes, 197 documented divergences"
+      "result": "79 auto fixes, 0 documented divergences"
     },
     {
       "stage": "S4-correct",
       "tool": "python-difflib 對齊官方整編稿＋同音/近音名相規則（scripts/sifayin_build_transcript.py）",
-      "result": "{\"glossary-homophone\": 39, \"near-homophone-term\": 2, \"strict-homophone\": 8}"
+      "result": "{\"policies\": [\"same-length-homophone\", \"glossary-homophone\", \"bigram-homophone\", \"single-char-attestation\"], \"appliedCount\": 79, \"unresolvedCount\": 0}"
     },
     {
       "stage": "S5-section",
       "tool": "official outline timestamps",
-      "result": "10 paragraphs"
+      "result": "46 paragraphs"
     },
     {
       "stage": "S6-overview",
       "tool": "eNeural glm53-flash（生成＋獨立證據審查）",
-      "result": "{\"mainPoints\": 2, \"discussionTopics\": 2, \"referenceViews\": 2}"
+      "result": "{\"mainPoints\": 2, \"discussionTopics\": 2, \"referenceViews\": 1}"
     }
   ],
   "models": [
@@ -46,14 +46,12 @@
       "role": "correction-rule",
       "model": "deterministic-python",
       "endpoint": "scripts/sifayin_build_transcript.py",
-      "policy": {
-        "strict-homophone": "等長 ≤3 字且每字聲韻相同（pypinyin 不計聲調）",
-        "near-homophone-term": "等長 ≤4 字、每字同音或近音（同聲母且韻母 edit distance ≤1），且底本詞頻 ≥2、ASR 寫法在 11 份底本零出現",
-        "editorial-divergence": "其餘差異＝整編稿的口語刪節／改寫，不套用、不標存疑",
-        "orthographic-variant": "他/它、做/作、佔/占 等正寫法差異：不套用、不標存疑",
-        "unattested-homophone": "同音但底本無詞頻佐證：不自動改，標記 reviewNeeded 交人工",
-        "glossary-homophone": "詞表同音校正：句內 2〜5 字區間與底本某詞只差一字且該字聲韻完全相同；該詞須通過收詞條件（兩字詞頻≥20／3〜5字词頻≥3 且緊縮比≥0.4），ASR 寫法在 11 份底本零出現，同位置同音候選詞唯一，被換的字不屬虛詞，才自動套用"
-      }
+      "policy": [
+        "same-length-homophone",
+        "glossary-homophone",
+        "bigram-homophone",
+        "single-char-attestation"
+      ]
     },
     {
       "role": "overview",
@@ -62,27 +60,19 @@
     }
   ],
   "gates": {
-    "charRatio": 0.9496,
+    "charRatio": 0.9999,
     "charRatioThreshold": 0.6,
     "charRatioPass": true,
     "audioShaMatchesIntake": true,
     "tailGapSec": 8.65,
-    "paragraphs": 10,
+    "paragraphs": 46,
     "outlineItems": 10,
+    "titledParagraphs": 10,
     "paragraphsMatchOutline": true,
-    "pendingHumanReview": 2,
-    "unresolvedNotes": {
-      "editorial-divergence": 131,
-      "overlap-skipped": 56,
-      "stale-position": 5,
-      "unattested-homophone": 2,
-      "orthographic-variant": 3
-    },
-    "unknownUnresolvedNotes": [
-      "overlap-skipped",
-      "stale-position"
-    ],
-    "overviewEvidenceTotal": 6,
+    "pendingHumanReview": 0,
+    "unresolvedNotes": {},
+    "unknownUnresolvedNotes": [],
+    "overviewEvidenceTotal": 5,
     "overviewUnsupported": 0,
     "overviewPass": true,
     "humanListened": false,
@@ -91,11 +81,11 @@
   "artifacts": {
     "rawAsr": "sha256:70d7c33b7d93976148de38cf2183bca9bba41c7d017571bd7ca46701b66495e1",
     "candidate": "sha256:d66f882b6108a4548405ca3d5e8afc249041e8d35d9bbe9b751b72d8814de374",
-    "correctionCandidates": "sha256:13bda16acfeafd119f4960957c0a49993b217a46a891dbe38b169806f4d6e735",
+    "correctionCandidates": "sha256:9e7702ea4f21b65cbb0b83f2d53ca1227d402d46fe6d4a35eeb82011d7308910",
     "outline": "sha256:452dbd92b7fdbe528cc6acde11e027ecfd4f71214e8653552342353504784276",
-    "contentReview": "sha256:63de3eaebcdcbe2f44a09c2a70250158857b749ef28abd24d30bcb6e929d015a",
-    "contentReviewManifest": "sha256:c37509200caf533ebdcd9e81907c6eeb2176cb3533b836903c62b5c7d39d6b12",
-    "finalSession": "sha256:be219c0c9e8811a15aadf21f0d932548207c866908f7c2f9b65cd0357eed26f6",
+    "contentReview": "sha256:f5f5dd5724b5bc3a79518ba3377b4b7e39f05ad4ef594f0bf4a0b2dde2b02c5d",
+    "contentReviewManifest": "sha256:e39366216418e011bef8fbdfc1a416e5071e329feec35f32344d38f0460751f2",
+    "finalSession": "sha256:ea6ec8df7bff668ea3ba84b3184ca305d4f418d1854c0e75673cb58dfc7e91bc",
     "baseText": "sha256:359f45b4e8dd1caebd85ce889627a19ae78558f0103af97e6d5e2e922399cebe"
   }
 }

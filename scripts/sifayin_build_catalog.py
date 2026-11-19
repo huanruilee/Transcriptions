@@ -83,27 +83,38 @@ def write_learned_corrections() -> int:
     只收有詞頻佐證的對子（glossary 條目自帶底本詞頻），並記錄政策與出現次數，
     讓後續同講師音檔的 ASR 可以直接沿用；單次且無佐證的改動一律不收。
     """
-    terms: dict[str, dict] = {}
+    corpus = "".join(
+        (COURSE_DIR / "source_text" / f"lecture_{sid}.txt").read_text(encoding="utf-8")
+        for sid in ("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"))
+    raw: dict[str, dict] = {}
     for path in sorted(EVIDENCE.glob("playlist-*/correction_candidates.json")):
         session_id = path.parent.name.replace("playlist-", "")
         data = load_json(path)
         for fix in data.get("applied", []):
-            glossary = fix.get("glossary") or {}
-            asr_form = glossary.get("asrSpan") or fix["asrDelta"]
-            corrected = glossary.get("term") or fix["referenceDelta"]
+            asr_form = fix["asrDelta"]
+            corrected = fix["referenceDelta"]
+            policy = fix.get("policy") or fix.get("kind", "")
             if len(corrected) < 2 or asr_form == corrected:
                 continue
-            entry = terms.setdefault(asr_form, {
+            if corrected not in corpus:
+                continue  # 目標詞在官方底本查無 → 不入術語庫
+            if asr_form in corpus:
+                continue  # ASR 寫法底本本來就有 → 屬口語用字，不是錯字
+            entry = raw.setdefault(asr_form, {
                 "corrected": corrected,
                 "category": "佛法名相",
-                "reasoning": (f"官方整編逐字稿作詞頻佐證（底本 {glossary.get('frequency', '—')} 次）；"
-                              f"ASR 寫法在 11 份底本零出現；政策 {fix.get('policy', '')}"),
-                "policy": fix.get("policy", ""),
-                "baseFrequency": glossary.get("frequency"),
+                "reasoning": (f"官方整編逐字稿作詞頻佐證（底本 {corpus.count(corrected)} 次）；"
+                              f"ASR 寫法在 11 份底本零出現；政策 {policy}"),
+                "policy": policy,
+                "baseFrequency": corpus.count(corrected),
                 "observedIn": [],
             })
+            if entry["corrected"] != corrected:
+                entry["ambiguous"] = True  # 同一 ASR 寫法對應多個目標 → 不收
+                continue
             if session_id not in entry["observedIn"]:
                 entry["observedIn"].append(session_id)
+    terms = {k: v for k, v in raw.items() if not v.get("ambiguous")}
     payload = {
         "_metadata": {
             "course": "四法印",

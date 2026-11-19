@@ -116,8 +116,9 @@ test('every session follows the canonical transcript contract with ASR-only time
     assert.ok(session.paragraphs.length >= 3, `${sessionId} 至少要有官方提綱的段落數`);
 
     let previousEnd = 0;
+    let previousSegmentId = null;
     for (const paragraph of session.paragraphs) {
-      assert.ok(paragraph.id && paragraph.heading, `${sessionId} 段落缺 id／小標`);
+      assert.ok(paragraph.id, `${sessionId} 段落缺 id`);
       const inner = paragraph.sentences;
       assert.ok(inner.length > 0, `${sessionId} ${paragraph.id} 段落是空的`);
       assert.ok(Math.abs(paragraph.start - inner[0].start) < 0.05, `${sessionId} ${paragraph.id} start 未對齊首句`);
@@ -127,23 +128,46 @@ test('every session follows the canonical transcript contract with ASR-only time
         assert.equal(typeof sentence.reviewNeeded, 'boolean');
         assert.ok(sentence.rawText.length > 0);
         assert.ok(sentence.end >= sentence.start);
-        assert.ok(sentence.start >= previousEnd - 0.05, `${sessionId} ${sentence.id} 時間碼倒退`);
-        previousEnd = sentence.end;
+        // 時間碼不倒退；唯一例外：同一個 ASR 片段被切成兩句（一句接在另一半之後，
+        // 其起點當然是同一片段的起點，這種情況下時間碼仍全部來自 ASR）。
+        const sharesSegment = sentence.rawAsrSegmentId === previousSegmentId;
+        assert.ok(sharesSegment || sentence.start >= previousEnd - 0.05,
+          `${sessionId} ${sentence.id} 時間碼倒退`);
+        previousEnd = Math.max(previousEnd, sentence.end);
+        previousSegmentId = sentence.rawAsrEndSegmentId ?? sentence.rawAsrSegmentId;
       }
     }
 
-    // 時間碼與 ASR 證據一一對應（只允許整句發語詞被丟棄）
+    // 時間碼一律來自 ASR：每句的起點＝首片段起點、終點＝尾片段終點，
+    // 且每個 ASR 片段都被恰好一句覆蓋（不得有時間空洞、不得重複計算）。
     const asrById = new Map(rawAsr.segments.map((seg) => [seg.id, seg]));
-    let dropped = 0;
+    const segIndex = new Map(rawAsr.segments.map((seg, i) => [seg.id, i]));
+    const covered = new Set();
+    let prevFirst = 0;
+    let prevLast = 0;
     for (const sentence of sentences) {
-      const seg = asrById.get(sentence.rawAsrSegmentId);
-      assert.ok(seg, `${sessionId} ${sentence.id} 找不到對應 ASR 片段`);
-      assert.ok(Math.abs(sentence.start - seg.start) < 0.05, `${sessionId} ${sentence.id} start 偏離 ASR`);
-      assert.ok(Math.abs(sentence.end - seg.end) < 0.05, `${sessionId} ${sentence.id} end 偏離 ASR`);
+      const first = asrById.get(sentence.rawAsrSegmentId);
+      const last = asrById.get(sentence.rawAsrEndSegmentId ?? sentence.rawAsrSegmentId);
+      assert.ok(first && last, `${sessionId} ${sentence.id} 找不到對應 ASR 片段`);
+      assert.ok(Math.abs(sentence.start - first.start) < 0.05, `${sessionId} ${sentence.id} start 偏離 ASR`);
+      assert.ok(Math.abs(sentence.end - last.end) < 0.05, `${sessionId} ${sentence.id} end 偏離 ASR`);
+      const firstIdx = segIndex.get(first.id);
+      const lastIdx = segIndex.get(last.id);
+      assert.ok(firstIdx >= prevFirst && lastIdx >= prevLast,
+        `${sessionId} ${sentence.id} 對應的 ASR 片段範圍倒退`);
+      prevFirst = firstIdx;
+      prevLast = lastIdx;
+      for (let i = firstIdx; i <= lastIdx; i += 1) {
+        covered.add(i);
+      }
     }
-    dropped = rawAsr.segments.length - sentences.length;
-    assert.ok(dropped >= 0 && dropped / rawAsr.segments.length < 0.05,
-      `${sessionId} 丟棄的 ASR 片段比例過高：${dropped}/${rawAsr.segments.length}`);
+    // 完整性：每個「有內容」的 ASR 片段都要出現在某一句（不得有時間空洞）；
+    // 允許一個片段被切成兩句。唯一可未被覆蓋的是正規化後沒有漢字的片段
+    // （純停頓／雜訊標記），這類片段不構成可讀文字。
+    const uncovered = rawAsr.segments.filter((_, i) => !covered.has(i));
+    const withContent = uncovered.filter((seg) => /[\p{Script=Han}]/u.test(seg.text));
+    assert.deepEqual(withContent.map((seg) => [seg.id, seg.text]), [],
+      `${sessionId} 有含字的 ASR 片段未被覆蓋：${uncovered.length}/${rawAsr.segments.length}`);
 
     // 存疑句只能是低比例，不得全講標紅
     const flagged = sentences.filter((s) => s.reviewNeeded).length;
@@ -165,11 +189,22 @@ test('paragraph headings come from the official timestamped course outline', () 
     const session = readJson(path.join(courseDir, 'sessions', `session_${sessionId}.json`));
 
     assert.ok(outline.sections.length >= 3, `${sessionId} 官方提綱段數異常`);
-    const headings = session.paragraphs.map((p) => p.heading);
-    assert.deepEqual(headings, outline.sections.map((s) => s.heading), `${sessionId} 小標必須等於官方提綱`);
-    for (const [index, paragraph] of session.paragraphs.entries()) {
+    // 帶小標的段落必須依序等於官方提綱（續段不另造小標，heading 為 null）
+    const titled = session.paragraphs.filter((p) => p.heading);
+    assert.deepEqual(titled.map((p) => p.heading), outline.sections.map((s) => s.heading),
+      `${sessionId} 小標必須等於官方提綱且不憑空新增`);
+    for (const [index, paragraph] of titled.entries()) {
       assert.ok(Math.abs(paragraph.start - outline.sections[index].startSec) < 120,
         `${sessionId} ${paragraph.id} 起點與官方提綱時間差過大`);
+    }
+    // 可讀性閘門（2026-11-19 重新審查）：每段不得過長、每句必須有句終標點
+    const perParagraph = session.paragraphs.map((p) => p.sentences.length);
+    assert.ok(Math.max(...perParagraph) <= 24,
+      `${sessionId} 有段落過長（最多句數 ${Math.max(...perParagraph)}）`);
+    for (const sentence of session.paragraphs.flatMap((p) => p.sentences)) {
+      assert.ok(/[。！？]$/.test(sentence.text), `${sessionId} ${sentence.id} 缺句終標點`);
+      assert.ok(!/^[，、；：]/.test(sentence.text), `${sessionId} ${sentence.id} 句首多餘標點`);
+      assert.ok(sentence.text.length <= 160, `${sessionId} ${sentence.id} 句子過長`);
     }
   }
 });
