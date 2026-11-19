@@ -121,7 +121,7 @@ function selectPopoverSession(sid: string) {
 }
 
 function formatTime(seconds: number): string {
-  if (!seconds || seconds <= 0) return '';
+  if (!Number.isFinite(seconds) || seconds < 0) return '';
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
   return `${m}:${s.toString().padStart(2, '0')}`;
@@ -221,7 +221,7 @@ const TOCNodeBranch: any = defineComponent({
           );
         }
 
-        if (ts > 0 && (node.sessionId === props.activeSessionId || currentScope.value === 'book')) {
+        if ((ts > 0 || (ts === 0 && node.timingMethod === 'source-window' && node.sourceSentenceId)) && (node.sessionId === props.activeSessionId || currentScope.value === 'book')) {
           linkChildren.push(
             h('span', { class: 'toc-timestamp-badge' }, formatTime(ts)),
           );
@@ -235,7 +235,7 @@ const TOCNodeBranch: any = defineComponent({
                 'toc-link',
                 {
                   active: matchesActive,
-                  'toc-timestamp-pending': !ts || ts === 0,
+                  'toc-timestamp-pending': ts === 0 && !(node.timingMethod === 'source-window' && node.sourceSentenceId),
                   'toc-current-position': currentPositionNodeId.value === posKey,
                 },
               ],
