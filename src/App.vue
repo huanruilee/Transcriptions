@@ -2189,7 +2189,7 @@ function findTOCNodeAtParagraphStart(paraStart: number, sessionId: string, toler
     for (const node of nodes) {
       const sessionMatch = node.sessionId === sessionId;
       const ts = typeof node.timestamp === 'number' ? node.timestamp : 0;
-      if (sessionMatch && ts > 0 && Math.abs(ts - paraStart) <= tolerance) {
+      if (sessionMatch && (ts > 0 || (ts === 0 && currentTocProjection.value !== null)) && Math.abs(ts - paraStart) <= tolerance) {
         match = { title: node.title, timestamp: ts, page: node.page, sessionId: node.sessionId };
       }
       if (node.children && node.children.length > 0) {

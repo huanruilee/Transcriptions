@@ -17,3 +17,7 @@ it('uses only source-bound session anchors and never leaks them to another lectu
  expect(sessionTocProjection({...review,tocProjection:{...review.tocProjection,sourceDigest:'wrong'}},'38A')).toBeNull();
  expect(sessionTocProjection({...review,tocProjection:{...review.tocProjection,nodes:[{title:'bad',sessionId:'38B',timestamp:2}]}},'38A')).toBeNull();
 });
+it('shows an explicitly source-bound zero-second anchor as timed while legacy zero stays pending',()=>{
+ const wrapper=mount(TOCAccordion,{props:{activeSessionId:'51A',tocNodes:[{title:'正式零秒',sessionId:'51A',timestamp:0,timingMethod:'source-window',sourceSentenceId:'sent-0'},{title:'舊待標註',sessionId:'51A',timestamp:0}]}});
+ const links=wrapper.findAll('.toc-link');expect(links[0].classes()).not.toContain('toc-timestamp-pending');expect(links[0].text()).toContain('0:00');expect(links[1].classes()).toContain('toc-timestamp-pending');wrapper.unmount();
+});
