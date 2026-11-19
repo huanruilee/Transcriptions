@@ -648,6 +648,7 @@ def build_session(session_id: str, corpus: Counter, glossary: dict,
     # ---- 證據：句內位置稽核（切點已避开校正區間，故每筆校正必落在同一句內）----
     by_id = {s["id"]: s for s in sentences}
     applied: list[dict] = []
+    verbatim_applied: list[dict] = []
     unmapped: list[dict] = []
     prefix = 0
     for sentence in sentences:
@@ -676,7 +677,25 @@ def build_session(session_id: str, corpus: Counter, glossary: dict,
 
     # ---- verbatim QA 修復階段（小檢 2026-11 複驗報告；在等長稽核後執行，不受 len 約束）----
     qa_applied = apply_verbatim_fixes(session_id, sentences)
-    applied.extend(qa_applied)
+    verbatim_applied.extend(qa_applied)
+    # verbatim 修復可能覆寫稽核迴圈套用的字（例：那種→種 被 那種請合掌→大眾請合掌 覆寫），
+    # 依最終 text/rawText 重新驗證位置契約，剔除已不成立的稽核條目。
+    import re as _re
+    _han = lambda t: "".join(ch for ch in t if "\u3400" <= ch <= "\u9fff")
+    _by_id = {s["id"]: s for s in sentences}
+    _kept = []
+    for _f in applied:
+        _s = _by_id.get(_f["sentenceId"])
+        if not _s:
+            continue
+        _rh, _th = _han(_s["rawText"]), _han(_s["text"])
+        if (_f["referenceDelta"] in _s["text"] and _f["asrDelta"] in _s["rawText"]
+                and _rh[_f["compStart"]:_f["compEnd"]] == _f["asrDelta"]
+                and _th[_f["compStart"]:_f["compEnd"]] == _f["referenceDelta"]):
+            _kept.append(_f)
+    if len(_kept) != len(applied):
+        print(f"[build] {session_id}: verbatim 覆寫剔除 {len(applied) - len(_kept)} 筆稽核校正")
+    applied = _kept
     sentences = [s for s in sentences if s["text"].strip()]
     for para in paragraphs:
         para["sentences"] = [s for s in para["sentences"] if s["text"].strip()]
@@ -699,6 +718,7 @@ def build_session(session_id: str, corpus: Counter, glossary: dict,
         "unmappedCorrections": len(unmapped),
     }
     return {"sessionId": session_id, "paragraphs": paragraphs, "applied": applied,
+            "verbatimApplied": verbatim_applied,
             "unmapped": unmapped, "stats": stats, "outline": outline, "rawMeta": raw,
             "baseText": f"courses/四法印/source_text/lecture_{session_id}.txt"}
 
@@ -877,6 +897,8 @@ def write_session(result: dict, now: str) -> None:
                              "bigram-homophone", "single-char-attestation"],
         "appliedCount": len(result["applied"]),
         "applied": result["applied"],
+        "verbatimAppliedCount": len(result.get("verbatimApplied", [])),
+        "verbatimApplied": result.get("verbatimApplied", []),
         "unresolvedCount": 0,
         "unresolved": [],
     }
