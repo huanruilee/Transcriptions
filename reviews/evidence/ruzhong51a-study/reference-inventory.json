@@ -1,0 +1,54 @@
+{
+  "taskId": "RUZHONG-51A-STUDY",
+  "sourceCommit": "83f9d5770377f19243d769fac22ab3d7ab4d419c",
+  "checkedAt": "2026-11-19T15:11:32.162395+08:00",
+  "officialIndex": {
+    "url": "https://buddha.flyday.com.tw/ViewVoiceList.aspx?flag=68",
+    "sha256": "5d218065504951936cc941940fc0bd1436e00f7113ad6539df1123c4d15a01dd",
+    "status": "retrieved-browser-user-agent",
+    "failedProbe": "Python urllib HTTP403; bounded retry curl Mozilla succeeded"
+  },
+  "textbook": {
+    "url": "https://buddha.flyday.com.tw/68%20%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F%202016/%E5%85%A5%E4%B8%AD%E8%AB%96%E5%96%84%E9%A1%AF%E5%AF%86%E6%84%8F%E7%96%8F%28%E5%BD%B1%E5%8D%B0%E7%94%A8%E4%B8%8A%E8%AA%B2%E7%89%88-2016%29.pdf",
+    "sha256": "bfd663a4b3d3bf74ded9f0fa1798a2aca0d0e571ce0b0a9f1091555460b7c1b1",
+    "edition": "影印用上課版2016",
+    "pages": [
+      155,
+      156,
+      157
+    ],
+    "role": "terminology-and-editorial-reference-not-audio",
+    "status": "hash-matches-prior-official-cache; PDF pages visually checked this turn",
+    "unreadBoundary": "p157戌二釋餘意識難正文不補入本講"
+  },
+  "source": {
+    "path": "source-session.json",
+    "sha256": "517f51e2e2c2f6abcdc27f0f604ef964a05fe0fbfe35237eef44793900bab1c4",
+    "type": "old-machine-proofread-not-raw-ASR",
+    "sentences": 495
+  },
+  "audio": {
+    "audio51A": {
+      "sha256": "349516d524ff5cda443a6bb819722bc308018715aa70e41738992eb2de42adfd",
+      "headerSeconds": 3635.606,
+      "decodedSeconds": 3652.7281875,
+      "decodedMethod": "full ffmpeg mono16k s16le byte count /32000",
+      "lastLegacyEnd": 3651.36
+    },
+    "next51B": {
+      "url": "https://buddha.flyday.com.tw/68%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f%202016/20170722-B%20%e5%85%a5%e4%b8%ad%e8%ab%96%e5%96%84%e9%a1%af%e5%af%86%e6%84%8f%e7%96%8f-%e7%ac%ac%e5%85%ad%e7%8f%be%e5%89%8d%e5%9c%b0p157(51).MP3",
+      "partialDownloadOnly": true,
+      "openingClipSHA256": "41b529cdbf84153ebdd949c2ed8b5ba2a7668ba1c22c54bf8529e9937e5a9266",
+      "clipSeconds": 35,
+      "humanListened": false,
+      "role": "local ASR cross-check; not audio gold"
+    },
+    "status": "per-page reference and source mapping pending"
+  },
+  "humanListened": false,
+  "limitations": [
+    "無人工逐句聽核，所有研讀播放為來源區間非聲學對齊。",
+    "未以底本補列冒充講者當堂逐字讀誦；source250明說其他不念。",
+    "現比量宗派限定、問答分界及藏文音寫待核。"
+  ]
+}
