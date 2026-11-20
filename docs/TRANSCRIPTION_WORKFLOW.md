@@ -6,9 +6,10 @@
 ## 1. 權威與適用順序
 
 1. 使用者對本次任務的明確指示。
-2. 本文件與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md)：Stage 0 ～ Stage 7 單向轉稿與品管流水線、口語冗詞清除與依語意順句規範。
-3. [品質契約](TRANSCRIPT_PROOFREADING_QUALITY_CONTRACT.md)、[資料 Schema](DATA_SCHEMA.md)、[專案規格](SPECIFICATION.md) 等領域細節；涉及本流程的舊敘述以本文件與 `EDITORIAL_FORMATTING_PLAN.md` 為準，Schema 不得未經協調直接改動。
-4. 舊 SOP、交接、skill 與歷史報告僅作背景和工具參考。Draft 文件／PR 不改變正式流程。
+2. 課程專屬指導：`courses/<課程名>/COURSE_GUIDE.md`（若存在）與 `courses/<課程名>/grounding.json`，定義該課程獨有的底本用法、名相禁忌、特殊格式與參考文件入口；在不牴觸全域紅線前提下優先適用。
+3. 本文件與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md)：Stage 0 ～ Stage 7 單向轉稿與品管流水線、口語冗詞清除與依語意順句規範。
+4. [品質契約](TRANSCRIPT_PROOFREADING_QUALITY_CONTRACT.md)、[資料 Schema](DATA_SCHEMA.md)、[專案規格](SPECIFICATION.md) 等領域細節；涉及本流程的舊敘述以本文件與 `EDITORIAL_FORMATTING_PLAN.md` 為準，Schema 不得未經協調直接改動。
+5. 舊 SOP、交接、skill 與歷史報告僅作背景和工具參考。Draft 文件／PR 不改變正式流程。
 
 若現有程式、Schema 或文件尚未支援要求，明列缺口並採可稽核的人工步驟；不得宣稱已有自動強制攔截。不得以「測試全綠」代替音訊或論義已人工核定。
 
@@ -45,6 +46,7 @@
 | 產物 | 位置 | 說明 |
 | --- | --- | --- |
 | 課程基礎知識包 | `courses/<course>/grounding.json` | 實體庫、名相對照表、章節對照、來源清單 |
+| 課程專屬指導書（有特殊規則時必建） | `courses/<course>/COURSE_GUIDE.md` | 該課程獨有的底本正規化／對齊規則、名相消歧禁忌、講者口語習慣、專用腳本與參考文件入口 |
 | 參考資料 inventory | `reviews/evidence/<course>/reference/README.md` | 每份來源：`referenceId`、類型、URL、本機路徑、SHA256、取得日期、核對狀態、允許用途 |
 
 **沒有 `grounding.json` 的課程視為未完成 Step 0。**
@@ -222,7 +224,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
-| 1.6 | 2026-11-20 | 納入《四法印》成果覆盤教訓：強制開工／查現況前 `git fetch origin`、外部底本匯入前 Unicode NFKC 正規化與官方底本專名強制對齊、禁止僅靠 YouTube 粗綱造成超大單段、Stage 6 前清零 `correctionsPending`/`hallucinationSuspects`，並新增「最低閱讀品質量化門檻」（適用待閱校版）與全課程 3～7 題討論問題規範 |
+| 1.6 | 2026-11-20 | 納入《四法印》成果覆盤教訓：強制開工／查現況前 `git fetch origin`、確立「全域標準＋課程目錄 `COURSE_GUIDE.md`」兩層指導架構、外部底本匯入前 Unicode NFKC 正規化與官方底本專名強制對齊、禁止僅靠 YouTube 粗綱造成超大單段、Stage 6 前清零 `correctionsPending`/`hallucinationSuspects`，並新增「最低閱讀品質量化門檻」（適用待閱校版）與全課程 3～7 題討論問題規範 |
 | 1.5 | 2026-11-15 | 正式合入低 Token 漏斗共用模組（`scripts/lib/eneuralClient.mjs`、`scripts/lib/transcriptGuards.mjs`）、`config/locked-sessions.json` 前置鎖定檢查與最小差異輸出（`fixes + breaks`），並新增全流程交接手冊 `docs/AGENT_HANDOFF_PLAYBOOK.md` |
 | 1.4 | 2026-11-14 | 對齊 Stage 0～7 單向流水線；廢除「保留口頭禪／禁止刪合碎句」舊規，改為強制清除口語冗詞（呃、嗯、啊、好，那）、合併破碎短句並依語意補順句子，且導讀同步移至 Stage 5 專家終審定稿之後 |
 | 1.3 | 2026-11-13 | 納入讀者體驗改進：連續閱讀與對照雙模式、ASR 幻覺收折膠囊標記、講記雙向跳轉與名相懸浮註釋規範 |

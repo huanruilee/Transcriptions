@@ -1,6 +1,6 @@
 # 所有 Agent 的專案入口
 
-適用本儲存庫全部路徑。進行音訊轉寫、逐字稿校字、導讀、講記、科判、內容同步與發布前，完整閱讀 [最新版逐字稿流程](docs/TRANSCRIPTION_WORKFLOW.md)，再讀 [START_HERE.md](START_HERE.md) 與本次任務需要的文件。
+適用本儲存庫全部路徑。進行音訊轉寫、逐字稿校字、導讀、講記、科判、內容同步與發布前，完整閱讀 [最新版逐字稿流程](docs/TRANSCRIPTION_WORKFLOW.md)，再讀 [START_HERE.md](START_HERE.md) 與本次任務需要的文件。**採「全域標準＋課程專屬」兩層指導：操作任一課程前，除了讀取 `courses/<課程名>/grounding.json`，若該目錄下存在 `courses/<課程名>/COURSE_GUIDE.md`，必須優先完整閱讀並遵守該課程專屬規則與參考文件指示。**
 
 `docs/TRANSCRIPTION_WORKFLOW.md` 是已合併版本中的流程權威入口；以目前 GitHub `main` 的該檔為準，不自行挑選舊 SOP、對話記憶或 Draft PR 當作較新規則。使用者本次明確指示優先；發現規則與程式不符時保留資料、記錄缺口，不宣稱功能已實作。
 
