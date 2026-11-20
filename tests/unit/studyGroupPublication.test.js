@@ -16,13 +16,13 @@ test('study-group publication exposes every processed playlist entry', () => {
   const entry = catalog.courses.find((course) => course.id === 'shi-liang-lun-study-group-2025');
   assert.ok(entry, 'study-group course must be registered in the catalog');
   assert.equal(entry.path, 'courses/2025釋量論第二品大組共學');
-  assert.equal(entry.totalSessions, 47);
+  assert.equal(entry.totalSessions, 49);
 
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.equal(course.sessions.length, 47);
+  assert.equal(course.sessions.length, 49);
   assert.deepEqual(
     course.sessions.map((session) => session.sessionId),
-    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B', '43', '44', '45', '46'],
+    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B', '43', '44', '45', '46', '47', '48'],
   );
 
   for (const session of course.sessions) {
@@ -47,6 +47,8 @@ test('study-group publication exposes every processed playlist entry', () => {
   assert.equal(course.sessions.find((session) => session.sessionId === '44').displaySessionId, '28上');
   assert.equal(course.sessions.find((session) => session.sessionId === '45').displaySessionId, '28下');
   assert.equal(course.sessions.find((session) => session.sessionId === '46').displaySessionId, '29上');
+  assert.equal(course.sessions.find((session) => session.sessionId === '47').displaySessionId, '29下');
+  assert.equal(course.sessions.find((session) => session.sessionId === '48').displaySessionId, '30上');
   assert.deepEqual(course.pendingSessions, []);
 });
 

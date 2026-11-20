@@ -1133,11 +1133,11 @@ test('saved checkpoint batches are revalidated before resume', () => {
 
 test('repository inventory and pilot are deterministic across all courses', () => {
   const inventory = discoverTranscriptSessions(ROOT);
-  assert.equal(inventory.length, 368);
+  assert.equal(inventory.length, 370);
   assert.deepEqual(
     Object.fromEntries(Object.entries(Object.groupBy(inventory, (item) => item.course)).map(([course, rows]) => [course, rows.length])),
     {
-      '2025釋量論第二品大組共學': 47,
+      '2025釋量論第二品大組共學': 49,
       '入中論善顯密意疏': 220,
       '三主要道': 24,
       '四念住': 8,
