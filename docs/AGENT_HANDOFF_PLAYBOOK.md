@@ -36,6 +36,7 @@
 | 鎖定講次清冊 | [config/locked-sessions.json](../config/locked-sessions.json) | 集中宣告 SHA-256 合約鎖定講次，供批次腳本預檢跳過 |
 | eNeural 串流客戶端 | [scripts/lib/eneuralClient.mjs](../scripts/lib/eneuralClient.mjs) | IPv4 SSE 串流呼叫 `glm53-flash`、重試、`extractJsonObject`、快取與並發池 |
 | 逐字稿安全護欄 | [scripts/lib/transcriptGuards.mjs](../scripts/lib/transcriptGuards.mjs) | `isLockedSession`、`maskUrls`/`unmaskUrls`、`assertRawTextPreserved`、`syncContentOverview` |
+| 紅黃燈品質稽核與雷達裁決 | [audit_reading_quality.mjs](../scripts/audit_reading_quality.mjs) & [radarAdjudicator.mjs](../scripts/lib/radarAdjudicator.mjs) | 紅燈（R1–R4）自動阻擋合併；黃燈（Y1–Y4）輸出精簡小卡交由 `glm53-flash` 低價模型批量裁決並同步 `sourceDigest` |
 | 導讀摘要與 Digest | [scripts/content_overview_pipeline.mjs](../scripts/content_overview_pipeline.mjs) | 任何句子增刪改後重新對齊四個 `evidence[]` 與重算 `sourceDigest` |
 | 大組共學工作流範本 | [docs/STUDY_GROUP_WORKFLOW_V3.md](STUDY_GROUP_WORKFLOW_V3.md) & [upgrade_study_group_course.mjs](../scripts/upgrade_study_group_course.mjs) | 共學問答型（討論題收斂 3–7 題、`【法師】`/`【學員】`、講記 `.md`/`.html` 原話抽屜） |
 | 單人講經工作流範本 | [upgrade_sinianzhu_course.mjs](../scripts/upgrade_sinianzhu_course.mjs) | 單人講經型（`fixes + breaks` 最小差異校字、150–350 字自然段重組與編號小標） |
