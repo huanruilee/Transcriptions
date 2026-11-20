@@ -1,6 +1,6 @@
 # 逐字稿標準流程
 
-版本：1.6。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.7。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
@@ -103,7 +103,7 @@
 
 1. **Stage 1（原始 ASR 轉寫與備份）**：在隔離沙盒跑指定講次，保留原始辨識與時間戳備查。
 2. **Stage 2（佛法名相／異常偵測 ＋ GX10 Whisper 局部重辨識與幻覺修復）**：
-   - 在進行任何順句之前，必須先執行規則掃描（`dharmaTermAudit.js`）與 LLM 語意異常偵測（`llmOmissionAudit.js`），針對疑似聽錯名相、頁碼誤辨、連續重複 3 次以上之 Whisper 幻覺或外文亂碼，透過 SSH 呼叫 GX10 Whisper（`100.113.144.100:8010`）切出目標音訊窗進行雙軌重辨識並還原正字。
+   - 在進行任何順句之前，必須先執行規則掃描（`dharmaTermAudit.js`）、LLM 語意異常偵測（`llmOmissionAudit.js`）與 **語音時間密度異常偵測**（`findLowDensitySegments()`，於 `scripts/lib/transcriptGuards.mjs`）：凡單句時間跨度 `> 20 秒` 且字速 `< 1.0 字/秒`（常見於片頭大眾合唱《開經偈》或結尾迴向遭原 ASR 壓縮漏辨，如《四法印》`session_09` `32–102s` 壓縮為「聖誠」一詞），以及疑似聽錯名相、頁碼誤辨、連續重複 3 次以上之 Whisper 幻覺或外文亂碼，必須透過 SSH 呼叫 GX10 Whisper（`100.113.144.100:8010`）切出目標音訊窗進行雙軌重辨識並還原正字（即使官方文字底本省略課前儀軌，仍須以實音為準補齊）。
 3. **Stage 3（清除口語冗詞、合併破碎短句與依語意補順）**：
    - **不整段改寫、不捏造未講內容，但必須清除口語冗詞並依語意補順句子**：
      - **刪除純發語詞與口頭禪**：徹底清除 `呃`、`嗯`、`啊`、`喔`、`欸`、句首無實義的 `好，那`、`那，`、`好，`、`就是說，`、結巴重複（`這個這個`、`然後，然後呢`）。若某個 `sent-X` 整句僅含發語詞或冗詞，直接從 `sentences[]` 移除該物件（嚴禁設為空字串 `""`）。
@@ -224,6 +224,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.7 | 2026-11-20 | 新增 Stage 2「語音時間密度異常偵測」紅線（單句跨度 `> 20s` 且字速 `< 1.0 字/秒`，於 `transcriptGuards.mjs` 提供 `findLowDensitySegments()`），防範片頭《開經偈》合唱或尾段遭原 ASR 壓縮漏辨且底本未收錄之盲點 |
 | 1.6 | 2026-11-20 | 納入《四法印》成果覆盤教訓：強制開工／查現況前 `git fetch origin`、確立「全域標準＋課程目錄 `COURSE_GUIDE.md`」兩層指導架構、外部底本匯入前 Unicode NFKC 正規化與官方底本專名強制對齊、禁止僅靠 YouTube 粗綱造成超大單段、Stage 6 前清零 `correctionsPending`/`hallucinationSuspects`，並新增「最低閱讀品質量化門檻」（適用待閱校版）與全課程 3～7 題討論問題規範 |
 | 1.5 | 2026-11-15 | 正式合入低 Token 漏斗共用模組（`scripts/lib/eneuralClient.mjs`、`scripts/lib/transcriptGuards.mjs`）、`config/locked-sessions.json` 前置鎖定檢查與最小差異輸出（`fixes + breaks`），並新增全流程交接手冊 `docs/AGENT_HANDOFF_PLAYBOOK.md` |
 | 1.4 | 2026-11-14 | 對齊 Stage 0～7 單向流水線；廢除「保留口頭禪／禁止刪合碎句」舊規，改為強制清除口語冗詞（呃、嗯、啊、好，那）、合併破碎短句並依語意補順句子，且導讀同步移至 Stage 5 專家終審定稿之後 |

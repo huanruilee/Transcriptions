@@ -22,6 +22,7 @@
    - **標準做法**：以共用模組 [eneuralClient.mjs](../scripts/lib/eneuralClient.mjs) 透過 **Node IPv4 SSE 串流** 直連 `eNeural / glm53-flash`（`family: 4`、`stream: true`、`reasoning_effort: 'none'`、`response_format: { type: 'json_object' }`），避開 `hermes chat` CLI 的 `state.db` 鎖定與 IPv6 卡頓。
    - 每批送 60～80 句（`id|text`），要求模型**僅回傳需要修改的句子 `fixes` 與段落/小標起點 `breaks`**，節省 >85% 輸出 Token 並確保不漏句、不改動 `id / start / end / rawText`。
    - 所有批次回應快取於 `/tmp/`，支援斷點續跑；先跑 **1 講試點 → 抽查修正腳本 → 分波推展全課**。
+   - **語音時間密度異常預檢（防片頭／合唱漏辨）**：改版前必跑 `findLowDensitySegments()`（位於 [transcriptGuards.mjs](../scripts/lib/transcriptGuards.mjs)）；凡單句時長 `> 20 秒` 且字速 `< 1.0 字/秒`（常見於《開經偈》合唱遭 ASR 壓縮且官方底本未收錄儀軌），必須切音訊送 GX10 Whisper 重聽還原，不得僅依文字底本跳過。
 5. **待閱校狀態誠實標示**：
    - 未經人工逐句聽核時，課程 `publicationState` 維持 `"candidate-review-required"`，不得填入 `humanListened: true`。
    - **重要 UX 準則**：整講待閱校由頂部 `publicationState` 呈現即可，**切勿將全講 100% 句子都標成 `reviewNeeded: true`**（會導致閱讀頁每句後方出現橘色 `🔍 待核定` 膠囊干擾閱讀）；`reviewNeeded: true` 僅保留給低信心存疑句。
