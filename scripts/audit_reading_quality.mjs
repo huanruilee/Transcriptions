@@ -11,7 +11,7 @@ const NON_NFKC_CJK_RE = /[\u2F00-\u2FDF\u3190-\u319F\u3200-\u32FF\u3300-\u33FF\u
 const WHISPER_HALLUCINATION_RE = /(明鏡與點點欄目|明镜与点点栏目|不吝點讚|不吝点赞|訂閱打賞|打赏支持|Amara\.org|Subtitles by|請不吝點讚)/iu;
 
 // R3: Trailing dangling connective cut by period (near-zero false positive)
-const TRAILING_DANGLING_CONNECTIVE_RE = /[，。；：]\s*(因此|所以|同時|此外|此時|但是|不過|然而|也就是說|也就是|換句話說|而且|並且)[。]$/u;
+const TRAILING_DANGLING_CONNECTIVE_RE = /[，。；：]\s*(因此|所以|同時|此外|此時|但是|不過|然而|也就是說|也就是|換句話說|而且|並且|接著|最後|相同的|同樣的|實際上|事實上)[。]$/u;
 
 // Y1: Suspect chopped incomplete clause ending in period (Yellow Radar)
 const CHOPPED_CLAUSE_WHITELIST_RE = /(是的|肯定的|否定的|沒有|有的|不是|對的|錯的|正確的|錯誤的|必然的|自然的|真實的|一樣的|相同的|不同的|重要的|清楚的|明顯的|這樣的|那樣的|如此的)[。]$/u;
@@ -342,6 +342,29 @@ export function auditSession(session, opts = {}) {
     }
   }
 
+  const consolidatedCards = [];
+  const cardById = new Map();
+  for (const card of radarCards) {
+    const existing = cardById.get(card.id);
+    if (!existing) {
+      const cloned = { ...card, allowedActions: [...(card.allowedActions || [])] };
+      cardById.set(card.id, cloned);
+      consolidatedCards.push(cloned);
+    } else {
+      if (!existing.ruleCode.split('+').includes(card.ruleCode)) {
+        existing.ruleCode = `${existing.ruleCode}+${card.ruleCode}`;
+      }
+      if (card.hint && !existing.hint.includes(card.hint)) {
+        existing.hint = `${existing.hint}；${card.hint}`;
+      }
+      if (card.heading && !existing.heading) existing.heading = card.heading;
+      if (card.paragraphId && !existing.paragraphId) existing.paragraphId = card.paragraphId;
+      for (const act of card.allowedActions || []) {
+        if (!existing.allowedActions.includes(act)) existing.allowedActions.push(act);
+      }
+    }
+  }
+
   return {
     sessionId: session.sessionId || null,
     ok: violations.length === 0,
@@ -364,7 +387,7 @@ export function auditSession(session, opts = {}) {
     },
     violations,
     warnings,
-    radarCards,
+    radarCards: consolidatedCards,
   };
 }
 
