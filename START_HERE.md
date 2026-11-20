@@ -45,15 +45,15 @@
 
 ---
 
-## 3. 小法讀取順序 (Required Reading Order)
+## 3. 讀取順序 (Required Reading Order)
 
-逐字稿相關任務的前置必讀：[TRANSCRIPTION_WORKFLOW.md](docs/TRANSCRIPTION_WORKFLOW.md)。其餘治理與 Schema 文件仍依下列順序閱讀。
+所有 Agent 統一依 [AGENTS.md](AGENTS.md) 兩層架構進入：
 
-1. `START_HERE.md`（本檔案：定位、GGF 與 QMS 原則）
-2. `docs/AGENT_GUIDELINES.md`（小法作業流程、GGF/QMS SOP 與自主權聲明）
-3. `docs/SPECIFICATION.md`（最終交付成果與 UI/UX 驗收要求）
-4. `docs/DATA_SCHEMA.md`（數據格式標準）
-5. `docs/TASKS.md`（高階里程碑與 Task 清單）
+1. `AGENTS.md`（超薄總入口：先 `git fetch origin`、確認權威與紅線）
+2. `docs/TRANSCRIPTION_WORKFLOW.md`（單向轉稿與品管流程 SSOT，涵蓋 Stage 0～7 與自動化品質門檻）
+3. `courses/<課程名>/COURSE_GUIDE.md`（若存在）與 `grounding.json`（課程專屬規則與底本對齊）
+4. `START_HERE.md`（本檔案：GGF / QMS 治理定位與本機預覽環境說明）
+5. 按需查閱：`docs/AGENT_GUIDELINES.md`、`docs/SPECIFICATION.md`、`docs/DATA_SCHEMA.md`、`docs/TASKS.md`
 
 **按任務類型另讀**（非全部需讀）：
 

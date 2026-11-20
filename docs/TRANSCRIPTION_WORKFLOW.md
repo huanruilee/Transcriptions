@@ -1,6 +1,6 @@
 # 逐字稿標準流程
 
-版本：1.6。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.7。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
@@ -106,13 +106,13 @@
    - 在進行任何順句之前，必須先執行規則掃描（`dharmaTermAudit.js`）與 LLM 語意異常偵測（`llmOmissionAudit.js`），針對疑似聽錯名相、頁碼誤辨、連續重複 3 次以上之 Whisper 幻覺或外文亂碼，透過 SSH 呼叫 GX10 Whisper（`100.113.144.100:8010`）切出目標音訊窗進行雙軌重辨識並還原正字。
 3. **Stage 3（清除口語冗詞、合併破碎短句與依語意補順）**：
    - **不整段改寫、不捏造未講內容，但必須清除口語冗詞並依語意補順句子**：
-     - **刪除純發語詞與口頭禪**：徹底清除 `呃`、`嗯`、`啊`、`喔`、`欸`、句首無實義的 `好，那`、`那，`、`好，`、`就是說，`、結巴重複（`這個這個`、`然後，然後呢`）。若某個 `sent-X` 整句僅含發語詞或冗詞，直接從 `sentences[]` 移除該物件（嚴禁設為空字串 `""`）。
+     - **區分「修辭重複」與「口語冗詞／結巴」**：保留講者為強調義理而刻意反覆的修辭重複；徹底清除 `呃`、`嗯`、`啊`、`喔`、`欸`、句首無實義的 `好，那`、`那，`、`好，`、`就是說，`、以及口吃結巴重複（`這個這個`、`然後，然後呢`）。若某個 `sent-X` 整句僅含發語詞、冗詞或無實義單字應答，直接從 `sentences[]` 移除該物件（嚴禁設為空字串 `""`）。
      - **合併被切碎的單詞與子句**：當同一個詞或同一個連貫子句被 ASR 切成多個 1～4 字碎片（如 `傳，` + `達出去，`），合併為單一完整 `sent-X`，時間軸更新為 `start = 首句.start`、`end = 末句.end`，消除詞語中間的碎逗號。
      - **依語意補順與出版級標點**：將口語半截斷句或倒裝依語意順為自然通順的句子，補齊殘缺名相與連接詞，並套用臺灣繁體出版級標點（《釋量論·成量品 32-1.pdf》標準）。
      - **保護實義詞彙**：時間、程度、邏輯與否定詞（`剛好`、`已經`、`因為`、`所以`、`如果`、`但是`、`沒有`、`不要`）及師生問答必須完整保留。
-4. **Stage 4（自然段重組與主題編號小標）**：
-   - 在冗詞清除、碎句合併定型後，由 `paragraphLayoutPlanner.js` 將段落重組為每段 **150～350 字** 的自然段（同步更新 `paragraph.start = 首句.start`、`paragraph.end = 末句.end`），並每 3～6 段配置 `1. ...`、`2. ...` 編號義理小標。
-   - **禁止僅以 YouTube 影片描述的粗綱時間碼作為唯一切段依據**：若單一章節超過閱讀密度上限（例如超過 40～60 句或 5 分鐘），必須進一步執行二級語意分段並補上子標題，杜絕數百句擠成同一段落。
+4. **Stage 4（兩級分段與主題編號小標）**：
+   - **一級章節（大標）**：取自 YouTube 影片提綱或課程科判，僅作章節邊界，**嚴禁作為唯一切段依據**。
+   - **二級自然段（正文段落）**：在冗詞清除、碎句合併定型後，由 `paragraphLayoutPlanner.js` 或語意切段規則將章節內正文切分為每段 **150～350 字（約 8～20 句；硬上限 35 句）** 的自然段（同步更新 `paragraph.start = 首句.start`、`paragraph.end = 末句.end`），並每 3～6 段配置 `1. ...`、`2. ...` 編號義理小標，杜絕數百句擠成同一段落。
 5. **Stage 5（Agent 佛法專家逐段通讀審核）**：
    - 主控 Agent 必須親自逐段通讀全文，同時驗收「佛法名相與義理 100% 正確」及「零發語詞殘留（無 `呃/嗯/啊`）、無破碎逗號斷句、文句自然流暢」。遇有疑義音段立即調用 GX10 Whisper 重聽確認。
 
@@ -131,6 +131,16 @@ python3 scripts/sync_study_guide_to_session.py SID --overview-file tmp/workflow/
 ```
 
 `--candidate-dir` 與 `--overview-file` 不可混用。渲染時明列單一 Markdown 路徑，避免無參數批次重寫出版品。新科判需核對原典物理頁／行及當講截止點；不得因提到關鍵詞就掛到未講的後續科判。
+
+### 5.2 學習鷹架（`studyScaffolding`）底本與時間軸強制規範
+
+為杜絕偈頌張冠李戴與時間戳估算偏差，產製或更新 `sessions/session_*.json` 中的 `studyScaffolding` 時，必須遵守以下兩項紅線：
+
+1. **偈頌原文必須逐字取自課程底本（禁止模型憑記憶補寫）**：
+   - `studyScaffolding.verses` 內每一首偈頌的中文譯文，必須逐字複製自該課程對應的底本或講記原文（如 `publications/lecture_*_dialogue_transcript.md` 或 `source_text/page_*.txt`），嚴禁由模型憑記憶生成或改寫。
+2. **時間戳必須從定稿逐字稿實際句子反查（禁止估算填寫）**：
+   - `verseMappings`、`compassMaps` 與 `pauseBoxes` 的所有時間戳（秒數），必須在逐字稿定稿後，從 `sessions/session_*.json` 內實際對應句子的 `start` 時間程式化反查取得，不得憑印象或分段比例估算。
+   - 提交 PR 前必須跑過 `npm run summaries:audit`、`npm test` 與 `npm run test:v2`，並在部署至 GitHub Pages 後實地開啟線上網頁抽查確認。
 
 ## 6. 待閱校版可以先上線
 
@@ -172,11 +182,12 @@ python3 scripts/sync_study_guide_to_session.py SID --overview-file tmp/workflow/
 
 升級「已確認版」須由使用者明確確認範圍；未解決高風險疑點明列，不能以模型票數或使用者曾開啟頁面自動核定。
 
-## 8. 驗證、提交與部署
+## 8. Stage 7：驗證、自動化品質門檻、提交與部署
 
 迭代時跑相關測試；固定最終成果後執行：
 
 ```sh
+npm run audit:reading-quality -- courses/<課程名>
 npm run test:v2
 npm test
 npm run summaries:audit
@@ -184,11 +195,11 @@ node --test tests/acceptance/goldenStandard.test.js
 npm run build:v2
 ```
 
-另跑本課程所需來源／ledger 稽核；不修改 gate 或測試預期來掩蓋正文錯誤。發現歷史 skip 或門檻只掃部分 engine，報告範圍，不宣稱全庫皆驗證。公開文字要求繁體中文、零適用禁止同音錯字、零殘留發語詞（`呃/嗯/啊`）與零破碎孤立斷句；原始辨識證據則保留原貌。新訂正規則不能因湊零禁字而誤改實詞。
+另跑本課程所需來源／ledger 稽核；不修改 gate 或測試預期來掩蓋正文錯誤。發現歷史 skip 或門檻只掃部分 engine，報告範圍，不宣稱全庫皆驗證。公開文字要求繁體中文、零適用禁止同音錯字、零殘留純發語詞（`呃/嗯/啊`），且符合下表之最低閱讀品質量化門檻；原始辨識證據（`rawText`）則保留原貌。新訂正規則不能因湊零禁字而誤改實詞。
 
 ### 最低閱讀品質量化門檻（Minimum Reading Quality Gate，含「待閱校版」）
 
-即使以「待閱校版（`candidate-review-required`）」先上線，仍須滿足以下最低閱讀品質紅線，**不得以「Schema 合法、無空字串」代替閱讀品質驗收，亦禁止以未整編的 Raw ASR 原始段直接套粗綱充數**：
+即使以「待閱校版（`candidate-review-required`）」先上線，仍須通過 `npm run audit:reading-quality -- courses/<課程名>` 自動化稽核與以下紅線，**不得以「Schema 合法、無空字串」代替閱讀品質驗收，亦禁止以未整編的 Raw ASR 原始段直接套粗綱充數**：
 
 | 檢查項目 | 紅線門檻 | 說明 |
 | --- | --- | --- |
@@ -196,11 +207,11 @@ npm run build:v2
 | 1～3 字孤立碎句比例 | `< 2%` | 「第一點」「例如」等未完碎片須與前後子句合併並繼承首尾時間軸 |
 | 純冗詞／無實義單字句 | `0` | 「呃」「嗯」「啊」或無實義單字應答句須直接移除該 `sentence` 物件 |
 | `_meta.correctionsPending` 與 `hallucinationSuspects` | `0`（或附人工裁決紀錄） | 必須於生成 `contentOverview`（Stage 6）與合併前清零 |
-| 單段閱讀粒度 | 禁止數百句擠成一段 | YouTube 粗綱僅作一級章節；超過約 40～60 句須執行二級語意分段 |
-| 官方底本專名對齊（`noBaseText: false`） | 零已知高頻專名衝突 | 匯入底本先做 Unicode NFKC 正規化，並抽取底本專名強制比對 ASR |
+| 單段閱讀粒度 | 目標 150～350 字（硬上限 35 句） | YouTube 粗綱／科判僅作一級章節；章節內一律切分為二級自然段 |
+| 官方底本專名對齊（`noBaseText: false`） | NFKC 零相容字元 ＋ 零高頻專名衝突 | 匯入底本先做 Unicode NFKC 正規化，並抽取底本專名強制比對 ASR |
 | `discussionTopics` / `discussionQuestions` | 3～7 題且全形 `？` 結尾 | 適用所有課程，嚴禁僅產 1～2 題交差 |
 
-（註：本表為作業與 Review 強制要求；若現有自動化腳本尚未全面攔截，執行 Agent 與獨立 Reviewer 須以稽核腳本或抽查紀錄手動驗證，不得宣稱已有程式自動 gate。）
+（註：上述靜態指標已由 `scripts/audit_reading_quality.mjs` 提供自動化檢查；專名語意衝突與高風險義理仍須由執行 Agent 與獨立 Reviewer 抽查覆核。）
 
 瀏覽器確認閱讀頁、原話、導讀、待閱校標示、寬窄排版、下載完整性及末句音訊。閱讀器程式與發布路徑依 [閱讀器發布 Test Patterns](../TESTING.md#閱讀器發布-test-patterns2026-10-24) 分別驗證原入口、失敗回退、資料保真、實際下載與部署版本；Pages workflow 的 artifact／deployed smoke 皆通過才算工程部署驗收完成。獨立 reviewer 看固定 commit 與證據；工程 PASS、內容核定、發布與人工聽核分開記錄。
 
@@ -224,6 +235,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.7 | 2026-11-20 | 消除跨檔矛盾與冗餘：`AGENTS.md` 瘦身為 SSOT 路由並移除過時 Draft／重複語句、區分修辭重複與結巴重複、統一兩級分段（150～350 字／硬上限 35 句）、將 `studyScaffolding` 整併入 §5.2 並對齊 Stage 0～7、新增自動化稽核腳本 `scripts/audit_reading_quality.mjs`（`npm run audit:reading-quality`），並下放《入中論》《四法印》《三主要道》專屬規則至各自 `COURSE_GUIDE.md` |
 | 1.6 | 2026-11-20 | 納入《四法印》成果覆盤教訓：強制開工／查現況前 `git fetch origin`、確立「全域標準＋課程目錄 `COURSE_GUIDE.md`」兩層指導架構、外部底本匯入前 Unicode NFKC 正規化與官方底本專名強制對齊、禁止僅靠 YouTube 粗綱造成超大單段、Stage 6 前清零 `correctionsPending`/`hallucinationSuspects`，並新增「最低閱讀品質量化門檻」（適用待閱校版）與全課程 3～7 題討論問題規範 |
 | 1.5 | 2026-11-15 | 正式合入低 Token 漏斗共用模組（`scripts/lib/eneuralClient.mjs`、`scripts/lib/transcriptGuards.mjs`）、`config/locked-sessions.json` 前置鎖定檢查與最小差異輸出（`fixes + breaks`），並新增全流程交接手冊 `docs/AGENT_HANDOFF_PLAYBOOK.md` |
 | 1.4 | 2026-11-14 | 對齊 Stage 0～7 單向流水線；廢除「保留口頭禪／禁止刪合碎句」舊規，改為強制清除口語冗詞（呃、嗯、啊、好，那）、合併破碎短句並依語意補順句子，且導讀同步移至 Stage 5 專家終審定稿之後 |
@@ -233,15 +245,3 @@ gh pr merge PR_NUMBER --merge
 | 1.0 | 2026-10-23 | 統一原話優先、精煉另軌、待閱校可發布、保真追溯與驗證交接；取代舊 SOP 相衝突的流程敘述 |
 
 低 Token 漏斗工作流與實戰操作規範已正式收錄於 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 與 [大組共學工作流 v3](STUDY_GROUP_WORKFLOW_V3.md)；PR #271 與 PR #281 若仍屬歷史獨立 Draft，採用前仍須先核對實際合併狀態與程式。
-
----
-
-## 八、學習鷹架（`studyScaffolding`）底本與時間軸強制規範（v1.5 試辦定版）
-
-為杜絕偈頌張冠李戴與時間戳估算偏差，產製或更新 `sessions/session_*.json` 中的 `studyScaffolding` 時，必須遵守以下兩項紅線：
-
-1. **偈頌原文必須逐字取自課程底本（禁止模型憑記憶補寫）**：
-   - `studyScaffolding.verses` 內每一首偈頌的中文譯文，必須逐字複製自該課程對應的底本或講記原文（如 `publications/lecture_*_dialogue_transcript.md` 或 `source_text/page_*.txt`），嚴禁由模型憑記憶生成或改寫。
-2. **時間戳必須從定稿逐字稿實際句子反查（禁止估算填寫）**：
-   - `verseMappings`、`compassMaps` 與 `pauseBoxes` 的所有時間戳（秒數），必須在逐字稿定稿後，從 `sessions/session_*.json` 內實際對應句子的 `start` 時間程式化反查取得，不得憑印象或分段比例估算。
-   - 提交 PR 前必須跑過 `npm run summaries:audit`、`npm test` 與 `npm run test:v2`，並在部署至 GitHub Pages 後實地開啟線上網頁抽查確認。
