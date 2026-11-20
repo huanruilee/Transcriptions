@@ -1,0 +1,54 @@
+{
+  "GX10Whisper": {
+    "calls": 8,
+    "callLimit": 8,
+    "modelSnapshot": "0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+    "actualAudioSeconds": [
+      45.0,
+      150.0,
+      175.0,
+      175.0,
+      170.0,
+      128.0,
+      73.066125,
+      40.0
+    ],
+    "tokens": "unknown-not-reported",
+    "humanListened": false
+  },
+  "GX10Text": {
+    "calls": 3,
+    "callLimit": 3,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "individual": {
+      "anomaly": {
+        "prompt_tokens": 663,
+        "completion_tokens": 383,
+        "total_tokens": 1046,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "radar": {
+        "prompt_tokens": 1252,
+        "completion_tokens": 308,
+        "total_tokens": 1560,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "overview": {
+        "prompt_tokens": 1793,
+        "completion_tokens": 728,
+        "total_tokens": 2521,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "reportedTotalTokens": 5127
+  },
+  "externalProviderCalls": 0,
+  "Codex": "unknown",
+  "overall": "unknown"
+}

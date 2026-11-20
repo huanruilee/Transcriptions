@@ -1,0 +1,141 @@
+{
+  "scope": "11 bounded suspect cards;not full transcript audit",
+  "sourceIndices": [
+    0,
+    58,
+    109,
+    126,
+    270,
+    296,
+    319,
+    349,
+    451,
+    480,
+    486
+  ],
+  "calls": 1,
+  "findings": [
+    {
+      "sentenceId": "sent-0",
+      "paragraphId": "suspect-cards",
+      "heading": null,
+      "start": 1.63,
+      "end": 12.43,
+      "text": "自破他語音什麼 從那邊開始嘛 自己破他的時候 持有有何能諍。",
+      "prevText": "",
+      "nextText": "著目 能著目的作者 著目之目 對還有就是說著目這件事情非一 故作彼是能政治不應真理。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "自破他語音什麼 從那邊開始嘛 自己破他的時候 持有有何能諍。",
+          "suggestedTerm": "執有/執著",
+          "reason": "「持有」疑似為「執有」或「執著」之誤，且句末語法不完整，缺主詞或動詞。",
+          "promptHints": [
+            "自破他",
+            "執有",
+            "能諍"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-58",
+      "paragraphId": "suspect-cards",
+      "heading": null,
+      "start": 474.8,
+      "end": 492.72,
+      "text": "著目 能著目的作者 著目之目 對還有就是說著目這件事情非一 故作彼是能政治不應真理。",
+      "prevText": "自破他語音什麼 從那邊開始嘛 自己破他的時候 持有有何能諍。",
+      "nextText": "極微，極微二相的，極微，這是在講五方分的極微，這樣可以嗎？對，二相。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "著目 能著目的作者 著目之目 對還有就是說著目這件事情非一 故作彼是能政治不應真理。",
+          "suggestedTerm": "正理/證成",
+          "reason": "LLM 語意稽核疑似漏字",
+          "promptHints": [
+            "著目",
+            "非一",
+            "正理",
+            "應道理"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-126",
+      "paragraphId": "suspect-cards",
+      "heading": null,
+      "start": 950.71,
+      "end": 952.21,
+      "text": "若以比量能安立所證所證者。",
+      "prevText": "極微，極微二相的，極微，這是在講五方分的極微，這樣可以嗎？對，二相。",
+      "nextText": "何以故 有一個稍微有 有一點 不一樣的說法吧 這該怎麼講的。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "若以比量能安立所證所證者。",
+          "suggestedTerm": "因/喻/之",
+          "reason": "LLM 語意稽核疑似漏字",
+          "promptHints": [
+            "比量",
+            "安立",
+            "所證",
+            "因"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-319",
+      "paragraphId": "suspect-cards",
+      "heading": null,
+      "start": 2417.06,
+      "end": 2423.14,
+      "text": "老師你剛剛說 描述自行空是緣起固 你講的論識是這個嘛 嗯 然後 為了解論識。",
+      "prevText": "這樣的話 就是變成 聖義諦是方便 世俗諦就會變成方便所生 會變成這樣。",
+      "nextText": "非常非常的努力的建構，以他啟示自性有，自相有，這樣幹嘛？OK，在這個前提下。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "老師你剛剛說 描述自行空是緣起固 你講的論識是這個嘛 嗯 然後 為了解論識。",
+          "suggestedTerm": "故/唯識",
+          "reason": "LLM 語意稽核疑似漏字",
+          "promptHints": [
+            "自性空",
+            "緣起",
+            "論識"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-480",
+      "paragraphId": "suspect-cards",
+      "heading": null,
+      "start": 3484.74,
+      "end": 3504.2,
+      "text": "除二法，愚者，愚未縮者，愚未縮者，要逆之將。大概這樣OK。又云：誰說世俗為聖義。",
+      "prevText": "不是反話 真的。",
+      "nextText": "大概這樣，我們先休息一下，謝謝大家，謝謝大家，謝謝大家。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "除二法，愚者，愚未縮者，愚未縮者，要逆之將。大概這樣OK。又云：誰說世俗為聖義。",
+          "suggestedTerm": "愚癡/未證",
+          "reason": "LLM 語意稽核疑似漏字",
+          "promptHints": [
+            "愚者",
+            "世俗諦",
+            "聖義諦"
+          ]
+        }
+      ]
+    }
+  ]
+}
