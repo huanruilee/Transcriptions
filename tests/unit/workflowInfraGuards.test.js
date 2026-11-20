@@ -3,6 +3,7 @@ import test from 'node:test';
 import { extractJsonObject } from '../../scripts/lib/eneuralClient.mjs';
 import {
   assertRawTextPreserved,
+  findLowDensitySegments,
   isLockedSession,
   loadLockedSessions,
   maskUrls,
@@ -55,4 +56,22 @@ test('assertRawTextPreserved throws when rawText is mutated', () => {
   };
   assert.doesNotThrow(() => assertRawTextPreserved(before, validAfter));
   assert.throws(() => assertRawTextPreserved(before, invalidAfter), /rawText mutation detected/);
+});
+
+test('findLowDensitySegments flags compressed opening chants and ignores normal speech', () => {
+  const session = {
+    paragraphs: [
+      {
+        sentences: [
+          { id: 'seg-0001', start: 32.06, end: 101.99, text: '聖誠，昨天我們提到，在輪迴中，我們無時無刻' },
+          { id: 'seg-0002', start: 101.99, end: 112.0, text: '不被業和煩惱束縛，當我們被業和煩惱束縛時處在不自主狀態。' },
+        ],
+      },
+    ],
+  };
+  const flagged = findLowDensitySegments(session);
+  assert.equal(flagged.length, 1);
+  assert.equal(flagged[0].id, 'seg-0001');
+  assert.ok(flagged[0].durationSec > 60);
+  assert.ok(flagged[0].charsPerSec < 1.0);
 });
