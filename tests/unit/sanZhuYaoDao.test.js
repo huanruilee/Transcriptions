@@ -18,17 +18,17 @@ test('三主要道 course.json registers the series with the verified instructor
   assert.equal(course.courseId, 'san-zhu-yao-dao');
   assert.equal(course.title, '三主要道');
   assert.equal(course.master, '如性法師');
-  assert.equal(course.totalSessions, 21);
+  assert.equal(course.totalSessions, 24);
   assert.equal(course.publicationState, 'published');
   assert.match(course.sourcePlaylist, /PLMngxNMnjFcM41At4494GCubGnQ5OqZC1/);
 });
 
-test('toc.json lists all 21 lectures with video ids and durations', () => {
+test('toc.json lists all 24 lectures with video ids and durations', () => {
   const toc = readJson(tocPath);
 
-  assert.equal(toc.sections.length, 21);
+  assert.equal(toc.sections.length, 24);
   assert.equal(toc.lecturer, '如性法師');
-  assert.equal(new Set(toc.sections.map((section) => section.videoId)).size, 21);
+  assert.equal(new Set(toc.sections.map((section) => section.videoId)).size, 24);
   for (const section of toc.sections) {
     assert.match(section.videoId, /^[A-Za-z0-9_-]{11}$/);
     assert.ok(section.durationSec > 600, `${section.id} duration too short`);
@@ -138,13 +138,13 @@ test('course.json exposes the reader inventory and publication state', () => {
   const course = readJson(coursePath);
 
   assert.equal(course.transcriptPublicationState, 'candidate-review-required');
-  assert.equal(course.sessions.length, 21);
+  assert.equal(course.sessions.length, 24);
   assert.equal(course.sessions[0].sessionId, '01');
   assert.equal(course.sessions[0].status, 'candidate');
   assert.equal(course.sessions[0].jsonUrl, 'courses/三主要道/sessions/session_01.json');
   assert.equal(course.sessions[0].youtubeVideoId, 'eergIaUzRQg');
   assert.equal(course.pendingSessions.length, 0);
-  assert.equal(course.sessions.length + course.pendingSessions.length, 21);
+  assert.equal(course.sessions.length + course.pendingSessions.length, 24);
   assert.match(course.qualityReview.readerNotice, /待閱校版/u);
 });
 
@@ -219,5 +219,5 @@ test('catalog.json registers 三主要道 exactly once', () => {
   assert.equal(entries.length, 1);
   assert.equal(entries[0].title, '三主要道');
   assert.equal(entries[0].master, '如性法師');
-  assert.equal(entries[0].totalSessions, 21);
+  assert.equal(entries[0].totalSessions, 24);
 });
