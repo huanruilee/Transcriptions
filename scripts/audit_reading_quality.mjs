@@ -125,21 +125,28 @@ export function auditSession(session, opts = {}) {
     session.discussionQuestions ??
     null;
 
-  if (Array.isArray(topics)) {
+  if (!Array.isArray(topics)) {
+    violations.push({
+      code: 'DISCUSSION_TOPICS_COUNT',
+      message: `discussionTopics/discussionQuestions is missing; expected ${cfg.minDiscussionTopics}..${cfg.maxDiscussionTopics}.`,
+    });
+  } else {
     if (topics.length < cfg.minDiscussionTopics || topics.length > cfg.maxDiscussionTopics) {
       violations.push({
         code: 'DISCUSSION_TOPICS_COUNT',
         message: `discussionTopics/discussionQuestions count is ${topics.length}; expected ${cfg.minDiscussionTopics}..${cfg.maxDiscussionTopics}.`,
       });
     }
-    const missingQMark = topics.filter((item) => {
-      const q = typeof item === 'string' ? item.trim() : String(item?.text ?? '').trim();
-      return q.length > 0 && !q.endsWith('？');
+    const invalidQMark = topics.filter((item) => {
+      const q = typeof item === 'string'
+        ? item.trim()
+        : String(item?.displayQuestion ?? item?.text ?? item?.rawQuestion ?? '').trim();
+      return q.length === 0 || !q.endsWith('？');
     });
-    if (missingQMark.length > 0) {
+    if (invalidQMark.length > 0) {
       violations.push({
         code: 'DISCUSSION_TOPICS_QUESTION_MARK',
-        message: `${missingQMark.length} discussion topic(s) do not end with full-width "？".`,
+        message: `${invalidQMark.length} discussion topic(s) are empty or do not end with full-width "？".`,
       });
     }
   }
@@ -159,7 +166,7 @@ export function auditSession(session, opts = {}) {
       maxParagraphSentences,
       correctionsPending,
       hallucinationSuspects,
-      discussionTopicCount: Array.isArray(topics) ? topics.length : null,
+      discussionTopicCount: Array.isArray(topics) ? topics.length : 0,
     },
     violations,
   };
@@ -206,12 +213,23 @@ export function auditCourseDir(courseDir, opts = {}) {
     }
   }
 
+  const errors = [];
+  if (sessionReports.length === 0) {
+    errors.push({
+      code: 'NO_SESSIONS_FOUND',
+      message: 'No sessions/session_*.json files found in course directory.',
+    });
+  }
+
   const ok =
-    sessionReports.every((r) => r.ok) && sourceTextReports.every((r) => r.ok);
+    errors.length === 0 &&
+    sessionReports.every((r) => r.ok) &&
+    sourceTextReports.every((r) => r.ok);
 
   return {
     courseDir,
     ok,
+    errors,
     sessions: sessionReports,
     sourceTexts: sourceTextReports,
   };
@@ -241,6 +259,9 @@ function main(argv) {
     console.log(JSON.stringify(report, null, 2));
   } else if (stat.isDirectory()) {
     console.log(`Reading Quality Audit: ${target} -> ${report.ok ? 'PASS' : 'FAIL'}`);
+    for (const err of report.errors || []) {
+      console.log(`  [FAIL] ${err.code}: ${err.message}`);
+    }
     for (const s of report.sessions) {
       const status = s.ok ? 'PASS' : 'FAIL';
       console.log(`  [${status}] ${s.file} (sents=${s.metrics.totalSentences}, noPunct=${(s.metrics.missingEndPunctRatio * 100).toFixed(1)}%, short=${(s.metrics.shortFragmentRatio * 100).toFixed(1)}%, maxPara=${s.metrics.maxParagraphSentences})`);

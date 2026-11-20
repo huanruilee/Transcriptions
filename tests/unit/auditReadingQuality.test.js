@@ -139,10 +139,55 @@ test('auditCourseDir scans sessions/ and source_text/ inside a course directory'
 
     const report = auditCourseDir(tmpDir);
     assert.equal(report.ok, false);
+    assert.equal(report.errors.length, 0);
     assert.equal(report.sessions.length, 1);
     assert.equal(report.sessions[0].ok, true);
     assert.equal(report.sourceTexts.length, 1);
     assert.equal(report.sourceTexts[0].ok, false);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('fails when both contentOverview.discussionTopics and discussionQuestions are missing', () => {
+  const s = makeHealthySession();
+  delete s.contentOverview;
+  const result = auditSession(s);
+  assert.equal(result.ok, false);
+  assert.equal(result.metrics.discussionTopicCount, 0);
+  assert.ok(result.violations.some((v) => v.code === 'DISCUSSION_TOPICS_COUNT'));
+});
+
+test('reads displayQuestion/rawQuestion on discussionQuestions and rejects empty or non-question entries', () => {
+  const s = makeHealthySession();
+  delete s.contentOverview;
+  s.discussionQuestions = [
+    { displayQuestion: '為何學法前要調整動機。' },
+    { rawQuestion: '' },
+    { displayQuestion: '如何區分二諦與四諦？' },
+  ];
+  const result = auditSession(s);
+  assert.equal(result.ok, false);
+  assert.ok(result.violations.some((v) => v.code === 'DISCUSSION_TOPICS_QUESTION_MARK'));
+
+  const sPass = makeHealthySession();
+  delete sPass.contentOverview;
+  sPass.discussionQuestions = [
+    { displayQuestion: '為何學法前要調整動機？' },
+    { rawQuestion: '如何區分二諦與四諦？' },
+    { text: '如何檢視聞思是否成為解脫正因？' },
+  ];
+  const passRes = auditSession(sPass);
+  assert.equal(passRes.ok, true, JSON.stringify(passRes.violations));
+});
+
+test('auditCourseDir fails when zero sessions/session_*.json files are found', () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'audit-rq-empty-'));
+  try {
+    const report = auditCourseDir(tmpDir);
+    assert.equal(report.ok, false);
+    assert.equal(report.sessions.length, 0);
+    assert.ok(report.errors.some((e) => e.code === 'NO_SESSIONS_FOUND'));
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
