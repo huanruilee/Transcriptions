@@ -44,7 +44,7 @@ test('the 三主要道 correction-dates page covers all delivered lectures', () 
   const html = fs.readFileSync(path.join(dir, 'correction-dates.html'), 'utf8');
   const course = readJson(path.join(dir, 'course.json'));
 
-  assert.equal(course.sessions.length, 21);
-  assert.ok(html.includes('共 21 講'), 'the page must report the number of lectures with transcripts');
+  assert.equal(course.sessions.length, 24);
+  assert.ok(html.includes('共 24 講'), 'the page must report the number of lectures with transcripts');
   assert.ok(html.includes('#session-02"'), 'delivered lectures must be listed');
 });
