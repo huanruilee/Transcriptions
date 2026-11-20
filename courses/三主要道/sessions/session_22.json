@@ -4,7 +4,7 @@
   "mediaType": "video/youtube",
   "youtubeVideoId": "TD8tMTQP17w",
   "youtubeUrl": "https://www.youtube.com/watch?v=TD8tMTQP17w",
-  "lastUpdated": "2026-11-20 17:50:00",
+  "lastUpdated": "2026-11-20 20:25:00",
   "publicationState": "candidate-review-required",
   "candidatePath": "courses/三主要道/sessions/session_22/candidate.json",
   "audioAvailable": true,
@@ -13,11 +13,18 @@
     "proofread": "opencc-s2twp + grounding-terms + eNeural-glm53-flash",
     "humanProofread": false,
     "noBaseText": true,
-    "total_paragraphs": 45,
-    "total_sentences": 549,
+    "total_paragraphs": 32,
+    "total_sentences": 546,
     "correctionsPending": 0,
     "hallucinationSuspects": 0,
-    "sourceVerification": "ops-pipeline (no base text; ASR + 詞庫校正 + 官方提綱切段)"
+    "sourceVerification": "ops-pipeline (no base text; ASR + 詞庫校正 + 官方提綱切段)",
+    "audioDurationSec": 3315.05,
+    "youtubeDurationSec": 3379,
+    "timeAlignment": {
+      "offsetSec": 20.5,
+      "offsetCalibrated": true,
+      "method": "official-gdrive-mp3 + 20.5s YouTube intro title-card offset"
+    }
   },
   "qualityReview": {
     "readerNotice": "三主要道 系列・待閱校版：本系列逐字稿由本地 ASR 轉寫後經詞庫與 AI 校讀校正，尚未經人工逐句聽核。請以音檔為準。",
@@ -27,13 +34,13 @@
     {
       "id": "p-1",
       "heading": "1. 重點複習與補充說明",
-      "start": 0.95,
-      "end": 89.61,
+      "start": 21.45,
+      "end": 148.71,
       "sentences": [
         {
           "id": "seg-0001",
-          "start": 0.95,
-          "end": 38.23,
+          "start": 21.45,
+          "end": 58.73,
           "rawText": "上一堂课,我們介紹的是第一個部分。佛法所說的苦是指省。我們稍微複習一下,並做一些補充說明。佛法將苦分為三個層次,由淺、入深,分別是苦苦、壞苦及行苦。苦苦是指身心上的痛苦,這不需要多做解釋。壞苦指的是世間的安樂。",
           "text": "上一堂課，我們介紹的是第一個部分：佛法所說的苦是指什麼。我們稍微複習一下，並做一些補充說明。佛法將苦分為三個層次，由淺入深，分別是苦苦、壞苦及行苦。苦苦是指身心上的痛苦，這不需要多做解釋。壞苦指的是世間的安樂。",
           "reviewNeeded": false,
@@ -41,8 +48,8 @@
         },
         {
           "id": "seg-0002",
-          "start": 38.23,
-          "end": 54.71,
+          "start": 58.73,
+          "end": 75.21,
           "rawText": "思考壞苦時,可以著重在兩個面向。一、所有世間的快樂,都需要關在淺、苦的減輕,才能成立。",
           "text": "思考壞苦時，可以著重在兩個面向。一、所有世間的快樂，都需要觀待前苦的減輕，才能成立。",
           "reviewNeeded": false,
@@ -50,8 +57,8 @@
         },
         {
           "id": "seg-0003",
-          "start": 56.13,
-          "end": 73.78,
+          "start": 76.63,
+          "end": 94.28,
           "rawText": "換句話說,它只是苦在消退的一種狀態,而不是純粹的樂。這個詞,道次第當中,是用自信樂來描述。",
           "text": "換句話說，它只是苦在消退的一種狀態，而不是純粹的樂。這個詞，道次第當中，是用「自性樂」來描述。",
           "reviewNeeded": false,
@@ -59,25 +66,17 @@
         },
         {
           "id": "seg-0004",
-          "start": 73.78,
-          "end": 89.61,
+          "start": 94.28,
+          "end": 110.11,
           "rawText": "第二點,更重要的是,這種快樂,依著因緣而生,所以無法長久維持,終將隨著因緣而散。",
           "text": "第二點，更重要的是，這種快樂，依著因緣而生，所以無法長久維持，終將隨著因緣而散。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0004"
-        }
-      ]
-    },
-    {
-      "id": "p-2",
-      "heading": null,
-      "start": 91.67,
-      "end": 191.49,
-      "sentences": [
+        },
         {
           "id": "seg-0005",
-          "start": 91.67,
-          "end": 99.53,
+          "start": 112.17,
+          "end": 120.03,
           "rawText": "辛苦是三者當中,最細微,也最根本的一層。",
           "text": "行苦是三者當中，最細微，也最根本的一層。",
           "reviewNeeded": false,
@@ -85,8 +84,8 @@
         },
         {
           "id": "seg-0006",
-          "start": 99.53,
-          "end": 115.05,
+          "start": 120.03,
+          "end": 135.55,
           "rawText": "辛苦指的是,我們的五蕴是在夜與煩惱的束縛下取得的。取得之後,也是靠夜與煩惱在維繫。",
           "text": "行苦指的是，我們的五蘊是在業與煩惱的束縛下取得的。取得之後，也是靠業與煩惱在維繫。",
           "reviewNeeded": false,
@@ -94,17 +93,25 @@
         },
         {
           "id": "seg-0007",
-          "start": 116.55,
-          "end": 128.21,
+          "start": 137.05,
+          "end": 148.71,
           "rawText": "其中,最主要的煩惱就是貪愛。因為貪愛而想取,這是苦不斷循環的推手。",
           "text": "其中，最主要的煩惱就是貪愛。因為貪愛而想取，這是苦不斷迴圈的推手。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0007"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-2",
+      "heading": null,
+      "start": 148.71,
+      "end": 264.16,
+      "sentences": [
         {
           "id": "seg-0008",
-          "start": 128.21,
-          "end": 137.65,
+          "start": 148.71,
+          "end": 158.15,
           "rawText": "此外,辛苦不是感受層面的問題,而是處境層面的問題。",
           "text": "此外，行苦不是感受層面的問題，而是處境層面的問題。",
           "reviewNeeded": false,
@@ -112,8 +119,8 @@
         },
         {
           "id": "seg-0009",
-          "start": 139.36,
-          "end": 145.82,
+          "start": 159.86,
+          "end": 166.32,
           "rawText": "就像一個被關在牢笼裡的囚犯,表現不好,就會被鞭打。",
           "text": "就像一個被關在牢籠裡的囚犯，表現不好，就會被鞭打。",
           "reviewNeeded": false,
@@ -121,8 +128,8 @@
         },
         {
           "id": "seg-0010",
-          "start": 146.76,
-          "end": 149.96,
+          "start": 167.26,
+          "end": 170.46,
           "rawText": "表現好,才能暫時不被鞭打。",
           "text": "表現好，才能暫時不被鞭打。",
           "reviewNeeded": false,
@@ -130,8 +137,8 @@
         },
         {
           "id": "seg-0011",
-          "start": 151.33,
-          "end": 158.51,
+          "start": 171.83,
+          "end": 179.01,
           "rawText": "但就算沒有被鞭打,他也從來沒有走出過那個牢笼,獲得真正的自由。",
           "text": "但就算沒有被鞭打，他也從來沒有走出過那個牢籠，獲得真正的自由。",
           "reviewNeeded": false,
@@ -139,8 +146,8 @@
         },
         {
           "id": "seg-0012",
-          "start": 158.51,
-          "end": 173.14,
+          "start": 179.01,
+          "end": 193.64,
           "rawText": "這個譬喻當中,表現不好,被鞭打,是指苦苦。表現好,沒有被鞭打,是指坏苦。",
           "text": "這個譬喻當中，表現不好，被鞭打，是指苦苦。表現好，沒有被鞭打，是指壞苦。",
           "reviewNeeded": false,
@@ -148,8 +155,8 @@
         },
         {
           "id": "seg-0013",
-          "start": 174.02,
-          "end": 176.2,
+          "start": 194.52,
+          "end": 196.7,
           "rawText": "牢笼,则是辛苦。",
           "text": "牢籠，則是行苦。",
           "reviewNeeded": false,
@@ -157,8 +164,8 @@
         },
         {
           "id": "seg-0014",
-          "start": 177.94,
-          "end": 187.17,
+          "start": 198.44,
+          "end": 207.67,
           "rawText": "這也是為什麼,只要這個韵體還在,我們就一直身處在苦苦與壞苦交替的處境裡。",
           "text": "這也是為什麼，只要這個蘊體還在，我們就一直身處在苦苦與壞苦交替的處境裡。",
           "reviewNeeded": false,
@@ -166,25 +173,17 @@
         },
         {
           "id": "seg-0015",
-          "start": 188.53,
-          "end": 191.49,
+          "start": 209.03,
+          "end": 211.99,
           "rawText": "苦就永遠不會真正結束。",
           "text": "苦就永遠不會真正結束。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0015"
-        }
-      ]
-    },
-    {
-      "id": "p-3",
-      "heading": null,
-      "start": 191.61,
-      "end": 243.66,
-      "sentences": [
+        },
         {
           "id": "seg-0016",
-          "start": 191.61,
-          "end": 197.15,
+          "start": 212.11,
+          "end": 217.65,
           "rawText": "講到這裡,有一個問題值得思考。",
           "text": "講到這裡，有一個問題值得思考。",
           "reviewNeeded": false,
@@ -192,8 +191,8 @@
         },
         {
           "id": "seg-0017",
-          "start": 197.15,
-          "end": 210.59,
+          "start": 217.65,
+          "end": 231.09,
           "rawText": "早上在研討的時候,有一組的同學問道,難道世間所有的快樂,真的都是苦的減輕嗎?",
           "text": "早上在研討的時候，有一組的同學問道，難道世間所有的快樂，真的都是苦的減輕嗎？",
           "reviewNeeded": false,
@@ -201,8 +200,8 @@
         },
         {
           "id": "seg-0018",
-          "start": 212.29,
-          "end": 224.36,
+          "start": 232.79,
+          "end": 244.86,
           "rawText": "他們舉了一個例子,對統一發票,意外中了兩百塊,那份驚喜也是苦的減輕嗎?",
           "text": "他們舉了一個例子：對統一發票，意外中了兩百塊，那份驚喜也是苦的減輕嗎？",
           "reviewNeeded": false,
@@ -210,8 +209,8 @@
         },
         {
           "id": "seg-0019",
-          "start": 225.87,
-          "end": 232.54,
+          "start": 246.37,
+          "end": 253.04,
           "rawText": "如果是,難道我在中獎之前,有沒中獎的痛苦嗎?",
           "text": "如果是，難道我在中獎之前，有沒中獎的痛苦嗎？",
           "reviewNeeded": false,
@@ -219,8 +218,8 @@
         },
         {
           "id": "seg-0020",
-          "start": 232.6,
-          "end": 239.03,
+          "start": 253.1,
+          "end": 259.53,
           "rawText": "難道這種小確幸不是一種純粹的快樂嗎?",
           "text": "難道這種小確幸不是一種純粹的快樂嗎？",
           "reviewNeeded": false,
@@ -228,8 +227,8 @@
         },
         {
           "id": "seg-0021",
-          "start": 239.03,
-          "end": 243.66,
+          "start": 259.53,
+          "end": 264.16,
           "rawText": "這個問題值得思考。",
           "text": "這個問題值得思考。",
           "reviewNeeded": false,
@@ -238,15 +237,15 @@
       ]
     },
     {
-      "id": "p-4",
-      "heading": "從壞苦切入的兩個省思",
-      "start": 245.24,
-      "end": 290.41,
+      "id": "p-3",
+      "heading": null,
+      "start": 265.74,
+      "end": 382.38,
       "sentences": [
         {
           "id": "seg-0022",
-          "start": 245.24,
-          "end": 253.67,
+          "start": 265.74,
+          "end": 274.17,
           "rawText": "複習完三苦的內容後,我們從壞苦切入,深入觀察,可以得到兩個省思。",
           "text": "複習完三苦的內容後，我們從壞苦切入，深入觀察，可以得到兩個省思。",
           "reviewNeeded": false,
@@ -254,8 +253,8 @@
         },
         {
           "id": "seg-0023",
-          "start": 255.05,
-          "end": 262.08,
+          "start": 275.55,
+          "end": 282.58,
           "rawText": "一,世間所有的快樂,都必須用一段苦來換。",
           "text": "一，世間所有的快樂，都必須用一段苦來換。",
           "reviewNeeded": false,
@@ -263,8 +262,8 @@
         },
         {
           "id": "seg-0024",
-          "start": 262.08,
-          "end": 274.49,
+          "start": 282.58,
+          "end": 294.99,
           "rawText": "也就是說,這個世界上沒有免費的快樂,每一份世間安樂,都必須以苦作為代價。",
           "text": "也就是說，這個世界上沒有免費的快樂，每一份世間安樂，都必須以苦作為代價。",
           "reviewNeeded": false,
@@ -272,25 +271,17 @@
         },
         {
           "id": "seg-0025",
-          "start": 276.32,
-          "end": 290.41,
+          "start": 296.82,
+          "end": 310.91,
           "rawText": "第二點,如果世間快樂的本質是苦的減輕,那是不是表示,想要更多的快樂,就必須先承受更多的苦。",
-          "text": "第二點，如果世間快樂的本質是苦的減輕，那是不是表示，想要更多的快樂，就必須先承受更多的苦。",
+          "text": "第二點，如果世間快樂的本質是苦的減輕，那是不是表示，想要更多的快樂，就必須先承受更多的苦？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0025"
-        }
-      ]
-    },
-    {
-      "id": "p-5",
-      "heading": null,
-      "start": 290.41,
-      "end": 332.69,
-      "sentences": [
+        },
         {
           "id": "seg-0026",
-          "start": 290.41,
-          "end": 296.71,
+          "start": 310.91,
+          "end": 317.21,
           "rawText": "仔細想想,各位不覺得這很荒謬嗎?",
           "text": "仔細想想，各位不覺得這很荒謬嗎？",
           "reviewNeeded": false,
@@ -298,8 +289,8 @@
         },
         {
           "id": "seg-0027",
-          "start": 299.46,
-          "end": 304.12,
+          "start": 319.96,
+          "end": 324.62,
           "rawText": "你想要得到飽足的快樂,就必須先承受飢餓。",
           "text": "你想要得到飽足的快樂，就必須先承受飢餓。",
           "reviewNeeded": false,
@@ -307,8 +298,8 @@
         },
         {
           "id": "seg-0028",
-          "start": 305.66,
-          "end": 309.64,
+          "start": 326.16,
+          "end": 330.14,
           "rawText": "你想要涼爽的快樂,就必須先承受酷熱。",
           "text": "你想要涼爽的快樂，就必須先承受酷熱。",
           "reviewNeeded": false,
@@ -316,8 +307,8 @@
         },
         {
           "id": "seg-0029",
-          "start": 311.45,
-          "end": 318.82,
+          "start": 331.95,
+          "end": 339.32,
           "rawText": "你想要成功的快樂,就必須先忍受失敗的痛苦,或是創業期間的艱苦。",
           "text": "你想要成功的快樂，就必須先忍受失敗的痛苦，或是創業期間的艱苦。",
           "reviewNeeded": false,
@@ -325,8 +316,8 @@
         },
         {
           "id": "seg-0030",
-          "start": 318.82,
-          "end": 326.23,
+          "start": 339.32,
+          "end": 346.73,
           "rawText": "你想要退休的快樂,就必須先承受數十年的奔波。",
           "text": "你想要退休的快樂，就必須先承受數十年的奔波。",
           "reviewNeeded": false,
@@ -334,25 +325,17 @@
         },
         {
           "id": "seg-0031",
-          "start": 327.9,
-          "end": 332.69,
+          "start": 348.4,
+          "end": 353.19,
           "rawText": "你想要被愛的快樂,就必須先承受孤獨。",
           "text": "你想要被愛的快樂，就必須先承受孤獨。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0031"
-        }
-      ]
-    },
-    {
-      "id": "p-6",
-      "heading": null,
-      "start": 335.38,
-      "end": 398.4,
-      "sentences": [
+        },
         {
           "id": "seg-0032",
-          "start": 335.38,
-          "end": 337.56,
+          "start": 355.88,
+          "end": 358.06,
           "rawText": "下一個問題,讓各位回答。",
           "text": "下一個問題，讓各位回答。",
           "reviewNeeded": false,
@@ -360,8 +343,8 @@
         },
         {
           "id": "seg-0033",
-          "start": 340.01,
-          "end": 351.14,
+          "start": 360.51,
+          "end": 371.64,
           "rawText": "有時候,我們到某些地方,Wi-Fi會突然斷線,怎麼連都連不上。",
           "text": "有時候，我們到某些地方，Wi-Fi會突然斷線，怎麼連都連不上。",
           "reviewNeeded": false,
@@ -369,8 +352,8 @@
         },
         {
           "id": "seg-0034",
-          "start": 353.01,
-          "end": 354.77,
+          "start": 373.51,
+          "end": 375.27,
           "rawText": "有沒有這樣的經驗? 有。",
           "text": "有沒有這樣的經驗？有。",
           "reviewNeeded": false,
@@ -378,17 +361,25 @@
         },
         {
           "id": "seg-0035",
-          "start": 354.77,
-          "end": 361.88,
+          "start": 375.27,
+          "end": 382.38,
           "rawText": "這時候,你想不想要Wi-Fi重新連上的快樂?",
           "text": "這時候，你想不想要Wi-Fi重新連上的快樂？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0036"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-4",
+      "heading": null,
+      "start": 382.38,
+      "end": 504.98,
+      "sentences": [
         {
           "id": "seg-0036",
-          "start": 361.88,
-          "end": 367.71,
+          "start": 382.38,
+          "end": 388.21,
           "rawText": "想,在這之前,需要承受什麼樣的痛苦?",
           "text": "想。在這之前，需要承受什麼樣的痛苦？",
           "reviewNeeded": false,
@@ -396,8 +387,8 @@
         },
         {
           "id": "seg-0037",
-          "start": 370.77,
-          "end": 380.49,
+          "start": 391.27,
+          "end": 400.99,
           "rawText": "訊號斷線的痛苦,訊號斷線的折磨,而且折磨得越久,連上線的那一瞬間,你越快樂。",
           "text": "訊號斷線的痛苦，訊號斷線的折磨，而且折磨得越久，連上線的那一瞬間，你越快樂。",
           "reviewNeeded": false,
@@ -405,8 +396,8 @@
         },
         {
           "id": "seg-0038",
-          "start": 381.34,
-          "end": 381.68,
+          "start": 401.84,
+          "end": 402.18,
           "rawText": "是不是這樣?",
           "text": "是不是這樣？",
           "reviewNeeded": false,
@@ -414,8 +405,8 @@
         },
         {
           "id": "seg-0039",
-          "start": 384.43,
-          "end": 392.98,
+          "start": 404.93,
+          "end": 413.48,
           "rawText": "這表示,我們想要越多的快樂,就必須先承受越多的痛苦。",
           "text": "這表示，我們想要越多的快樂，就必須先承受越多的痛苦。",
           "reviewNeeded": false,
@@ -423,43 +414,26 @@
         },
         {
           "id": "seg-0040",
-          "start": 392.98,
-          "end": 398.4,
+          "start": 413.48,
+          "end": 418.9,
           "rawText": "這件事情,極為荒謬。",
           "text": "這件事情，極為荒謬。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0041"
-        }
-      ]
-    },
-    {
-      "id": "p-7",
-      "heading": "為何仍入先苦後樂的結構",
-      "start": 400.98,
-      "end": 468.55,
-      "sentences": [
+        },
         {
           "id": "seg-0041",
-          "start": 400.98,
-          "end": 407.33,
-          "rawText": "既然這麼荒謬,為什麼我們還是一次,又一次地進入這個,",
-          "text": "既然這麼荒謬，為什麼我們還是一次又一次地進入這個。",
+          "start": 421.48,
+          "end": 430.73,
+          "rawText": "既然這麼荒謬,為什麼我們還是一次,又一次地進入這個, 先苦後樂的結構裡呢?",
+          "text": "既然這麼荒謬，為什麼我們還是一次又一次地進入這個，先苦後樂的結構裡呢？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0042"
         },
         {
-          "id": "seg-0042",
-          "start": 407.35,
-          "end": 410.23,
-          "rawText": "先苦後樂的結構裡呢?",
-          "text": "先苦後樂的結構裡呢？",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0043"
-        },
-        {
           "id": "seg-0043",
-          "start": 412.64,
-          "end": 416.08,
+          "start": 433.14,
+          "end": 436.58,
           "rawText": "還記得,前面講過的行苦嗎?",
           "text": "還記得，前面講過的行苦嗎？",
           "reviewNeeded": false,
@@ -467,8 +441,8 @@
         },
         {
           "id": "seg-0044",
-          "start": 417.65,
-          "end": 427.23,
+          "start": 438.15,
+          "end": 447.73,
           "rawText": "一旦獲得這個運體,我們就已經自動進入了苦苦與壞苦交替運作的處境當中。",
           "text": "一旦獲得這個蘊體，我們就已經自動進入了苦苦與壞苦交替運作的處境當中。",
           "reviewNeeded": false,
@@ -476,8 +450,8 @@
         },
         {
           "id": "seg-0045",
-          "start": 427.37,
-          "end": 433.58,
+          "start": 447.87,
+          "end": 454.08,
           "rawText": "與此同時,想要快樂是眾生的本性。",
           "text": "與此同時，想要快樂是眾生的本性。",
           "reviewNeeded": false,
@@ -485,8 +459,8 @@
         },
         {
           "id": "seg-0046",
-          "start": 435.36,
-          "end": 441.17,
+          "start": 455.86,
+          "end": 461.67,
           "rawText": "在這樣的處境裡,能追求到的快樂也只剩下這一種。",
           "text": "在這樣的處境裡，能追求到的快樂也只剩下這一種。",
           "reviewNeeded": false,
@@ -494,8 +468,8 @@
         },
         {
           "id": "seg-0047",
-          "start": 441.17,
-          "end": 450.92,
+          "start": 461.67,
+          "end": 471.42,
           "rawText": "苦在減輕的那個瞬間,除此之外,沒有其他的快樂。",
           "text": "苦在減輕的那個瞬間，除此之外，沒有其他的快樂。",
           "reviewNeeded": false,
@@ -503,25 +477,17 @@
         },
         {
           "id": "seg-0048",
-          "start": 454.55,
-          "end": 468.55,
+          "start": 475.05,
+          "end": 489.05,
           "rawText": "換句話說,不是我們選擇先苦後樂,而是在辛苦的結構下,這就是快樂唯一可能的樣子。",
           "text": "換句話說，不是我們選擇先苦後樂，而是在行苦的結構下，這就是快樂唯一可能的樣子。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0049"
-        }
-      ]
-    },
-    {
-      "id": "p-8",
-      "heading": null,
-      "start": 468.55,
-      "end": 544.54,
-      "sentences": [
+        },
         {
           "id": "seg-0049",
-          "start": 468.55,
-          "end": 477.48,
+          "start": 489.05,
+          "end": 497.98,
           "rawText": "世間人一生忙忙碌碌碌,本質上都在做同一件事。",
           "text": "世間人一生忙忙碌碌，本質上都在做同一件事。",
           "reviewNeeded": false,
@@ -529,17 +495,25 @@
         },
         {
           "id": "seg-0050",
-          "start": 479.15,
-          "end": 484.48,
+          "start": 499.65,
+          "end": 504.98,
           "rawText": "我們被貪愛驱使,一次又一次取這個運體。",
           "text": "我們被貪愛驅使，一次又一次取這個蘊體。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0051"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-5",
+      "heading": null,
+      "start": 506.54,
+      "end": 622.61,
+      "sentences": [
         {
           "id": "seg-0051",
-          "start": 486.04,
-          "end": 490.67,
+          "start": 506.54,
+          "end": 511.17,
           "rawText": "取來之後,便不得不承受它會帶來的痛苦。",
           "text": "取來之後，便不得不承受它會帶來的痛苦。",
           "reviewNeeded": false,
@@ -547,8 +521,8 @@
         },
         {
           "id": "seg-0052",
-          "start": 490.67,
-          "end": 500.61,
+          "start": 511.17,
+          "end": 521.11,
           "rawText": "然後設法減輕那些痛苦,再把減輕苦的過程取名為快樂。",
           "text": "然後設法減輕那些痛苦，再把減輕苦的過程取名為快樂。",
           "reviewNeeded": false,
@@ -556,8 +530,8 @@
         },
         {
           "id": "seg-0053",
-          "start": 502.02,
-          "end": 508.04,
+          "start": 522.52,
+          "end": 528.54,
           "rawText": "這也是佛法把五運又稱為進取運的原因。",
           "text": "這也是佛法把五蘊又稱為近取蘊的原因。",
           "reviewNeeded": false,
@@ -565,8 +539,8 @@
         },
         {
           "id": "seg-0054",
-          "start": 510.08,
-          "end": 512.94,
+          "start": 530.58,
+          "end": 533.44,
           "rawText": "取這個字,點出了一件事情。",
           "text": "取這個字，點出了一件事情。",
           "reviewNeeded": false,
@@ -574,8 +548,8 @@
         },
         {
           "id": "seg-0055",
-          "start": 514.35,
-          "end": 521.78,
+          "start": 534.85,
+          "end": 542.28,
           "rawText": "我們不是被動得到這個運體,而是被貪愛推著,主動取來的。",
           "text": "我們不是被動得到這個蘊體，而是被貪愛推著，主動取來的。",
           "reviewNeeded": false,
@@ -583,8 +557,8 @@
         },
         {
           "id": "seg-0056",
-          "start": 521.78,
-          "end": 529.43,
+          "start": 542.28,
+          "end": 549.93,
           "rawText": "一旦取得這個運體,想要快樂,就必須先苦後樂。",
           "text": "一旦取得這個身體，想要快樂，就必須先苦後樂。",
           "reviewNeeded": false,
@@ -592,8 +566,8 @@
         },
         {
           "id": "seg-0057",
-          "start": 531.26,
-          "end": 541.86,
+          "start": 551.76,
+          "end": 562.36,
           "rawText": "換言之,從頭到尾,我們從未真正脫離過苦,只是苦的樣貌不斷在變。",
           "text": "換言之，從頭到尾，我們從未真正脫離過苦，只是苦的樣貌不斷在變。",
           "reviewNeeded": false,
@@ -601,25 +575,17 @@
         },
         {
           "id": "seg-0058",
-          "start": 543.04,
-          "end": 544.54,
+          "start": 563.54,
+          "end": 565.04,
           "rawText": "這就是我們的現狀。",
           "text": "這就是我們的現狀。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0059"
-        }
-      ]
-    },
-    {
-      "id": "p-9",
-      "heading": null,
-      "start": 546.56,
-      "end": 651.85,
-      "sentences": [
+        },
         {
           "id": "seg-0059",
-          "start": 546.56,
-          "end": 550.84,
+          "start": 567.06,
+          "end": 571.34,
           "rawText": "看清楚這一點之後,我們可以問自己兩個問題。",
           "text": "看清楚這一點之後，我們可以問自己兩個問題。",
           "reviewNeeded": false,
@@ -627,8 +593,8 @@
         },
         {
           "id": "seg-0060",
-          "start": 552.07,
-          "end": 558.56,
+          "start": 572.57,
+          "end": 579.06,
           "rawText": "第一個問題,世間既然沒有真正的樂可以追逐,",
           "text": "第一個問題，世間既然沒有真正的樂可以追逐。",
           "reviewNeeded": false,
@@ -636,8 +602,8 @@
         },
         {
           "id": "seg-0061",
-          "start": 558.56,
-          "end": 562.47,
+          "start": 579.06,
+          "end": 582.97,
           "rawText": "為什麼我還要這麼拼命地追?",
           "text": "為什麼我還要這麼拼命地追？",
           "reviewNeeded": false,
@@ -645,8 +611,8 @@
         },
         {
           "id": "seg-0062",
-          "start": 564.52,
-          "end": 566.46,
+          "start": 585.02,
+          "end": 586.96,
           "rawText": "我到底想要得到什麼?",
           "text": "我到底想要得到什麼？",
           "reviewNeeded": false,
@@ -654,8 +620,8 @@
         },
         {
           "id": "seg-0063",
-          "start": 568.19,
-          "end": 574.02,
+          "start": 588.69,
+          "end": 594.52,
           "rawText": "第二個問題,既然追到的只是苦的減輕,",
           "text": "第二個問題，既然追到的只是苦的減輕。",
           "reviewNeeded": false,
@@ -663,8 +629,8 @@
         },
         {
           "id": "seg-0064",
-          "start": 575.72,
-          "end": 580.16,
+          "start": 596.22,
+          "end": 600.66,
           "rawText": "為什麼我不直接找一條斷除苦的根本的路?",
           "text": "為什麼我不直接找一條斷除苦的根本的路？",
           "reviewNeeded": false,
@@ -672,8 +638,8 @@
         },
         {
           "id": "seg-0065",
-          "start": 581.64,
-          "end": 583.26,
+          "start": 602.14,
+          "end": 603.76,
           "rawText": "我還在等什麼?",
           "text": "我還在等什麼？",
           "reviewNeeded": false,
@@ -681,8 +647,8 @@
         },
         {
           "id": "seg-0066",
-          "start": 584.69,
-          "end": 589.16,
+          "start": 605.19,
+          "end": 609.66,
           "rawText": "第一個問題,希望透由思維這個問題,",
           "text": "第一個問題，希望透由思惟這個問題。",
           "reviewNeeded": false,
@@ -690,8 +656,8 @@
         },
         {
           "id": "seg-0067",
-          "start": 590.11,
-          "end": 593.75,
+          "start": 610.61,
+          "end": 614.25,
           "rawText": "藉此鬆動我們對世間安樂的貪愛。",
           "text": "藉此鬆動我們對世間安樂的貪愛。",
           "reviewNeeded": false,
@@ -699,17 +665,25 @@
         },
         {
           "id": "seg-0068",
-          "start": 593.75,
-          "end": 602.11,
+          "start": 614.25,
+          "end": 622.61,
           "rawText": "第二個問題,透由思維,我們要意識到,",
           "text": "第二個問題，透由思惟，我們要意識到。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0069"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-6",
+      "heading": null,
+      "start": 622.61,
+      "end": 654.83,
+      "sentences": [
         {
           "id": "seg-0069",
-          "start": 602.11,
-          "end": 606.5,
+          "start": 622.61,
+          "end": 627,
           "rawText": "我需要找一條究竟的路。",
           "text": "我需要找一條究竟的路。",
           "reviewNeeded": false,
@@ -717,8 +691,8 @@
         },
         {
           "id": "seg-0070",
-          "start": 608.17,
-          "end": 611.86,
+          "start": 628.67,
+          "end": 632.36,
           "rawText": "這兩個問題,請各位先放在心裡,",
           "text": "這兩個問題，請各位先放在心裡。",
           "reviewNeeded": false,
@@ -726,8 +700,8 @@
         },
         {
           "id": "seg-0071",
-          "start": 613.68,
-          "end": 617.04,
+          "start": 634.18,
+          "end": 637.54,
           "rawText": "帶著這兩個問題進入接下來的課程,",
           "text": "帶著這兩個問題進入接下來的課程。",
           "reviewNeeded": false,
@@ -735,8 +709,8 @@
         },
         {
           "id": "seg-0072",
-          "start": 617.52,
-          "end": 621.04,
+          "start": 638.02,
+          "end": 641.54,
           "rawText": "說不定答案會一一在你心裡浮現。",
           "text": "說不定答案會一一在你心裡浮現。",
           "reviewNeeded": false,
@@ -744,8 +718,8 @@
         },
         {
           "id": "seg-0073",
-          "start": 622.67,
-          "end": 630.44,
+          "start": 643.17,
+          "end": 650.94,
           "rawText": "此外,今天的課程內容, 也會更深入分析上一堂課的一些重要觀念。",
           "text": "此外，今天的課程內容，也會更深入分析上一堂課的一些重要觀念。",
           "reviewNeeded": false,
@@ -753,17 +727,25 @@
         },
         {
           "id": "seg-0074",
-          "start": 630.44,
-          "end": 634.33,
+          "start": 650.94,
+          "end": 654.83,
           "rawText": "接著我們看到第二個部分,",
           "text": "接著我們看到第二個部分。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0076"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-7",
+      "heading": "2. 苦苦與煩惱的關係",
+      "start": 655.49,
+      "end": 740.33,
+      "sentences": [
         {
           "id": "seg-0075",
-          "start": 634.99,
-          "end": 638.59,
+          "start": 655.49,
+          "end": 659.09,
           "rawText": "苦與煩惱之間有何關聯?",
           "text": "苦與煩惱之間有何關聯？",
           "reviewNeeded": false,
@@ -771,8 +753,8 @@
         },
         {
           "id": "seg-0076",
-          "start": 638.59,
-          "end": 644.24,
+          "start": 659.09,
+          "end": 664.74,
           "rawText": "這個部分,我們從四個角度來分析。",
           "text": "這個部分，我們從四個角度來分析。",
           "reviewNeeded": false,
@@ -780,8 +762,8 @@
         },
         {
           "id": "seg-0077",
-          "start": 645.15,
-          "end": 647.82,
+          "start": 665.65,
+          "end": 668.32,
           "rawText": "一,苦苦與煩惱的關係。",
           "text": "一，苦苦與煩惱的關係。",
           "reviewNeeded": false,
@@ -789,25 +771,17 @@
         },
         {
           "id": "seg-0078",
-          "start": 649.32,
-          "end": 651.85,
+          "start": 669.82,
+          "end": 672.35,
           "rawText": "二,壞苦與煩惱的關係。",
           "text": "二，壞苦與煩惱的關係。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0080"
-        }
-      ]
-    },
-    {
-      "id": "p-10",
-      "heading": "2. 苦苦與煩惱的關係",
-      "start": 653.34,
-      "end": 748.41,
-      "sentences": [
+        },
         {
           "id": "seg-0079",
-          "start": 653.34,
-          "end": 659.16,
+          "start": 673.84,
+          "end": 679.66,
           "rawText": "三,辛苦與煩惱的關係。 四,統赦。",
           "text": "三，行苦與煩惱的關係。四，總結。",
           "reviewNeeded": false,
@@ -815,8 +789,8 @@
         },
         {
           "id": "seg-0080",
-          "start": 660.18,
-          "end": 663,
+          "start": 680.68,
+          "end": 683.5,
           "rawText": "只要有煩惱,就離不開苦。",
           "text": "只要有煩惱，就離不開苦。",
           "reviewNeeded": false,
@@ -824,8 +798,8 @@
         },
         {
           "id": "seg-0081",
-          "start": 665.3,
-          "end": 670.06,
+          "start": 685.8,
+          "end": 690.56,
           "rawText": "我們先從三苦中最容易感受的苦苦開始。",
           "text": "我們先從三苦中最容易感受的苦苦開始。",
           "reviewNeeded": false,
@@ -833,8 +807,8 @@
         },
         {
           "id": "seg-0082",
-          "start": 672.18,
-          "end": 675,
+          "start": 692.68,
+          "end": 695.5,
           "rawText": "苦苦指的是身心上的痛苦。",
           "text": "苦苦指的是身心上的痛苦。",
           "reviewNeeded": false,
@@ -842,8 +816,8 @@
         },
         {
           "id": "seg-0083",
-          "start": 675,
-          "end": 679.19,
+          "start": 695.5,
+          "end": 699.69,
           "rawText": "對此,我們先想一個問題。",
           "text": "對此，我們先想一個問題。",
           "reviewNeeded": false,
@@ -851,8 +825,8 @@
         },
         {
           "id": "seg-0084",
-          "start": 681.62,
-          "end": 684.84,
+          "start": 702.12,
+          "end": 705.34,
           "rawText": "同樣是被他人當眾批評。",
           "text": "同樣是被他人當眾批評。",
           "reviewNeeded": false,
@@ -860,8 +834,8 @@
         },
         {
           "id": "seg-0085",
-          "start": 686.35,
-          "end": 688.13,
+          "start": 706.85,
+          "end": 708.63,
           "rawText": "為什麼有人當下崩潰?",
           "text": "為什麼有人當下崩潰？",
           "reviewNeeded": false,
@@ -869,8 +843,8 @@
         },
         {
           "id": "seg-0086",
-          "start": 689.44,
-          "end": 691.34,
+          "start": 709.94,
+          "end": 711.84,
           "rawText": "有人感到憤憤不平。",
           "text": "有人感到憤憤不平？",
           "reviewNeeded": false,
@@ -878,8 +852,8 @@
         },
         {
           "id": "seg-0087",
-          "start": 692.77,
-          "end": 695.55,
+          "start": 713.27,
+          "end": 716.05,
           "rawText": "有人却能冷靜回應。",
           "text": "有人卻能冷靜回應。",
           "reviewNeeded": false,
@@ -887,8 +861,8 @@
         },
         {
           "id": "seg-0088",
-          "start": 697.83,
-          "end": 698.69,
+          "start": 718.33,
+          "end": 719.19,
           "rawText": "另外一個例子。",
           "text": "另外一個例子。",
           "reviewNeeded": false,
@@ -896,8 +870,8 @@
         },
         {
           "id": "seg-0089",
-          "start": 699.84,
-          "end": 701.34,
+          "start": 720.34,
+          "end": 721.84,
           "rawText": "同樣是失去親人。",
           "text": "同樣是失去親人。",
           "reviewNeeded": false,
@@ -905,8 +879,8 @@
         },
         {
           "id": "seg-0090",
-          "start": 702.74,
-          "end": 704.54,
+          "start": 723.24,
+          "end": 725.04,
           "rawText": "為什麼有人悲痛欲絕?",
           "text": "為什麼有人悲痛欲絕？",
           "reviewNeeded": false,
@@ -914,8 +888,8 @@
         },
         {
           "id": "seg-0091",
-          "start": 704.54,
-          "end": 707.16,
+          "start": 725.04,
+          "end": 727.66,
           "rawText": "長期陷入焦慮。",
           "text": "長期陷入焦慮？",
           "reviewNeeded": false,
@@ -923,8 +897,8 @@
         },
         {
           "id": "seg-0092",
-          "start": 708.19,
-          "end": 711.87,
+          "start": 728.69,
+          "end": 732.37,
           "rawText": "有人却能在悲傷之后重新站起來。",
           "text": "有人卻能在悲傷之後重新站起來。",
           "reviewNeeded": false,
@@ -932,8 +906,8 @@
         },
         {
           "id": "seg-0093",
-          "start": 713.75,
-          "end": 715.67,
+          "start": 734.25,
+          "end": 736.17,
           "rawText": "明明外境是一樣的。",
           "text": "明明外境是一樣的。",
           "reviewNeeded": false,
@@ -941,17 +915,25 @@
         },
         {
           "id": "seg-0094",
-          "start": 716.95,
-          "end": 719.83,
+          "start": 737.45,
+          "end": 740.33,
           "rawText": "他們所遭遇的逆境是相同的。",
           "text": "他們所遭遇的逆境是相同的。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0097"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-8",
+      "heading": null,
+      "start": 742.61,
+      "end": 846.63,
+      "sentences": [
         {
           "id": "seg-0095",
-          "start": 722.11,
-          "end": 725.22,
+          "start": 742.61,
+          "end": 745.72,
           "rawText": "但苦的程度却大不相同。",
           "text": "但苦的程度卻大不相同。",
           "reviewNeeded": false,
@@ -959,8 +941,8 @@
         },
         {
           "id": "seg-0096",
-          "start": 727.74,
-          "end": 729.06,
+          "start": 748.24,
+          "end": 749.56,
           "rawText": "這說明了一件事情。",
           "text": "這說明了一件事情。",
           "reviewNeeded": false,
@@ -968,8 +950,8 @@
         },
         {
           "id": "seg-0097",
-          "start": 730.48,
-          "end": 732.82,
+          "start": 750.98,
+          "end": 753.32,
           "rawText": "雖然外境會帶來苦。",
           "text": "雖然外境會帶來苦。",
           "reviewNeeded": false,
@@ -977,8 +959,8 @@
         },
         {
           "id": "seg-0098",
-          "start": 734.64,
-          "end": 740.93,
+          "start": 755.14,
+          "end": 761.43,
           "rawText": "但真正決定苦有多深, 苦會維持多久的。",
           "text": "但真正決定苦有多深，苦會維持多久的。",
           "reviewNeeded": false,
@@ -986,8 +968,8 @@
         },
         {
           "id": "seg-0099",
-          "start": 741.07,
-          "end": 743.35,
+          "start": 761.57,
+          "end": 763.85,
           "rawText": "往往是我們內心的煩惱。",
           "text": "往往是我們內心的煩惱。",
           "reviewNeeded": false,
@@ -995,25 +977,17 @@
         },
         {
           "id": "seg-0100",
-          "start": 743.35,
-          "end": 748.41,
+          "start": 763.85,
+          "end": 768.91,
           "rawText": "所以煩惱在苦苦的這一層",
           "text": "所以煩惱在苦苦的這一層。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0104"
-        }
-      ]
-    },
-    {
-      "id": "p-11",
-      "heading": null,
-      "start": 748.41,
-      "end": 793.41,
-      "sentences": [
+        },
         {
           "id": "seg-0101",
-          "start": 748.41,
-          "end": 751.43,
+          "start": 768.91,
+          "end": 771.93,
           "rawText": "扮演的是助燃物的角色。",
           "text": "扮演的是助燃物的角色。",
           "reviewNeeded": false,
@@ -1021,8 +995,8 @@
         },
         {
           "id": "seg-0102",
-          "start": 752.45,
-          "end": 756.73,
+          "start": 772.95,
+          "end": 777.23,
           "rawText": "讓原本的痛苦被放大、被延長。",
           "text": "讓原本的痛苦被放大、被延長。",
           "reviewNeeded": false,
@@ -1030,8 +1004,8 @@
         },
         {
           "id": "seg-0103",
-          "start": 759.25,
-          "end": 760.15,
+          "start": 779.75,
+          "end": 780.65,
           "rawText": "同樣的外境。",
           "text": "同樣的外境。",
           "reviewNeeded": false,
@@ -1039,8 +1013,8 @@
         },
         {
           "id": "seg-0104",
-          "start": 761.45,
-          "end": 765.49,
+          "start": 781.95,
+          "end": 785.99,
           "rawText": "煩惱越重,苦被放大的越厉害。",
           "text": "煩惱越重，苦被放大的程度越厲害。",
           "reviewNeeded": false,
@@ -1048,8 +1022,8 @@
         },
         {
           "id": "seg-0105",
-          "start": 766.86,
-          "end": 770.02,
+          "start": 787.36,
+          "end": 790.52,
           "rawText": "煩惱越輕,苦的衝擊就越小。",
           "text": "煩惱越輕，苦的衝擊就越小。",
           "reviewNeeded": false,
@@ -1057,8 +1031,8 @@
         },
         {
           "id": "seg-0106",
-          "start": 771.5,
-          "end": 773.84,
+          "start": 792,
+          "end": 794.34,
           "rawText": "我們用兩個具體的例子來說明。",
           "text": "我們用兩個具體的例子來說明。",
           "reviewNeeded": false,
@@ -1066,8 +1040,8 @@
         },
         {
           "id": "seg-0107",
-          "start": 775.65,
-          "end": 780.25,
+          "start": 796.15,
+          "end": 800.75,
           "rawText": "一、生病時的疼痛感是苦苦。",
           "text": "一、生病時的疼痛感是苦苦。",
           "reviewNeeded": false,
@@ -1075,8 +1049,8 @@
         },
         {
           "id": "seg-0108",
-          "start": 780.25,
-          "end": 787.41,
+          "start": 800.75,
+          "end": 807.91,
           "rawText": "但在疼痛之上, 我們的心往往會再加一層。",
           "text": "但在疼痛之上，我們的心往往會再加一層。",
           "reviewNeeded": false,
@@ -1084,8 +1058,8 @@
         },
         {
           "id": "seg-0109",
-          "start": 789.04,
-          "end": 790.56,
+          "start": 809.54,
+          "end": 811.06,
           "rawText": "為什麼偏偏是我?",
           "text": "為什麼偏偏是我？",
           "reviewNeeded": false,
@@ -1093,25 +1067,17 @@
         },
         {
           "id": "seg-0110",
-          "start": 792.11,
-          "end": 793.41,
+          "start": 812.61,
+          "end": 813.91,
           "rawText": "這樣下去該怎麼辦?",
           "text": "這樣下去該怎麼辦？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0115"
-        }
-      ]
-    },
-    {
-      "id": "p-12",
-      "heading": null,
-      "start": 795.7,
-      "end": 849.26,
-      "sentences": [
+        },
         {
           "id": "seg-0111",
-          "start": 795.7,
-          "end": 801.37,
+          "start": 816.2,
+          "end": 821.87,
           "rawText": "我以後還能恢復正常嗎? 請問,",
           "text": "我以後還能恢復正常嗎？請問。",
           "reviewNeeded": false,
@@ -1119,8 +1085,8 @@
         },
         {
           "id": "seg-0112",
-          "start": 803.81,
-          "end": 814.86,
+          "start": 824.31,
+          "end": 835.36,
           "rawText": "這些想法所帶來的苦 是那個病痛本身造成的嗎? 應該不是。",
           "text": "這些想法所帶來的苦，是那個病痛本身造成的嗎？應該不是。",
           "reviewNeeded": false,
@@ -1128,8 +1094,8 @@
         },
         {
           "id": "seg-0113",
-          "start": 816.36,
-          "end": 819.32,
+          "start": 836.86,
+          "end": 839.82,
           "rawText": "這些不是病痛本身帶來的。",
           "text": "這些不是病痛本身帶來的。",
           "reviewNeeded": false,
@@ -1137,17 +1103,25 @@
         },
         {
           "id": "seg-0114",
-          "start": 819.32,
-          "end": 826.13,
+          "start": 839.82,
+          "end": 846.63,
           "rawText": "而是煩惱在病痛之上堆疊出來第二層的苦。",
           "text": "而是煩惱在病痛之上堆疊出來第二層的苦。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0122"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-9",
+      "heading": null,
+      "start": 846.63,
+      "end": 969.05,
+      "sentences": [
         {
           "id": "seg-0115",
-          "start": 826.13,
-          "end": 835.8,
+          "start": 846.63,
+          "end": 856.3,
           "rawText": "也可以說, 這些問題是煩惱在痛苦之上編造出來的故事。",
           "text": "也可以說，這些問題是煩惱在痛苦之上編造出來的故事。",
           "reviewNeeded": false,
@@ -1155,8 +1129,8 @@
         },
         {
           "id": "seg-0116",
-          "start": 837.56,
-          "end": 840.98,
+          "start": 858.06,
+          "end": 861.48,
           "rawText": "我們以為自己在承受外境的苦。",
           "text": "我們以為自己在承受外境的苦。",
           "reviewNeeded": false,
@@ -1164,25 +1138,17 @@
         },
         {
           "id": "seg-0117",
-          "start": 840.98,
-          "end": 849.26,
+          "start": 861.48,
+          "end": 869.76,
           "rawText": "但很多時候真正壓垮我們的正是這個故事。 對此,",
           "text": "但很多時候真正壓垮我們的正是這個故事，對此。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0126"
-        }
-      ]
-    },
-    {
-      "id": "p-13",
-      "heading": "佛陀的第二支劍之喻",
-      "start": 849.26,
-      "end": 967.37,
-      "sentences": [
+        },
         {
           "id": "seg-0118",
-          "start": 849.26,
-          "end": 855.02,
+          "start": 869.76,
+          "end": 875.52,
           "rawText": "佛陀在《雜案寒經》當中曾說到,",
           "text": "佛陀在《雜阿含經》當中曾說到。",
           "reviewNeeded": false,
@@ -1190,8 +1156,8 @@
         },
         {
           "id": "seg-0119",
-          "start": 855.02,
-          "end": 860.97,
+          "start": 875.52,
+          "end": 881.47,
           "rawText": "人、生病或受傷時就像中了第一支劍。",
           "text": "人生病或受傷時，就像中了第一支劍。",
           "reviewNeeded": false,
@@ -1199,8 +1165,8 @@
         },
         {
           "id": "seg-0120",
-          "start": 862.28,
-          "end": 863.68,
+          "start": 882.78,
+          "end": 884.18,
           "rawText": "這是生理的苦。",
           "text": "這是生理的苦。",
           "reviewNeeded": false,
@@ -1208,8 +1174,8 @@
         },
         {
           "id": "seg-0121",
-          "start": 865.69,
-          "end": 867.83,
+          "start": 886.19,
+          "end": 888.33,
           "rawText": "這是身體的自然反應。",
           "text": "這是身體的自然反應。",
           "reviewNeeded": false,
@@ -1217,8 +1183,8 @@
         },
         {
           "id": "seg-0122",
-          "start": 868.7,
-          "end": 869.76,
+          "start": 889.2,
+          "end": 890.26,
           "rawText": "而且難以避免。",
           "text": "而且難以避免。",
           "reviewNeeded": false,
@@ -1226,8 +1192,8 @@
         },
         {
           "id": "seg-0123",
-          "start": 871.27,
-          "end": 873.53,
+          "start": 891.77,
+          "end": 894.03,
           "rawText": "但如果我們因此感到委屈、",
           "text": "但如果我們因此感到委屈。",
           "reviewNeeded": false,
@@ -1235,8 +1201,8 @@
         },
         {
           "id": "seg-0124",
-          "start": 874.72,
-          "end": 886.04,
+          "start": 895.22,
+          "end": 906.54,
           "rawText": "焦慮、恐懼、憤怒, 就如同在傷口上誘重的第二支劍、心理的苦。",
           "text": "焦慮、恐懼、憤怒，就如同在傷口上又重的第二支劍、心理的苦。",
           "reviewNeeded": false,
@@ -1244,8 +1210,8 @@
         },
         {
           "id": "seg-0125",
-          "start": 887.62,
-          "end": 891.72,
+          "start": 908.12,
+          "end": 912.22,
           "rawText": "其實修行的目的不是讓我們變成銅牆鐵壁。",
           "text": "其實修行的目的不是讓我們變成銅牆鐵壁。",
           "reviewNeeded": false,
@@ -1253,8 +1219,8 @@
         },
         {
           "id": "seg-0126",
-          "start": 892.53,
-          "end": 896.42,
+          "start": 913.03,
+          "end": 916.92,
           "rawText": "修行不是要我們不再生病,",
           "text": "修行不是要我們不再生病。",
           "reviewNeeded": false,
@@ -1262,8 +1228,8 @@
         },
         {
           "id": "seg-0127",
-          "start": 897.78,
-          "end": 904.66,
+          "start": 918.28,
+          "end": 925.16,
           "rawText": "不是要我們不會老化, 而是透過覺察與放下執著,",
           "text": "不是要我們不會老化，而是透過覺察與放下執著。",
           "reviewNeeded": false,
@@ -1271,8 +1237,8 @@
         },
         {
           "id": "seg-0128",
-          "start": 905.68,
-          "end": 908.8,
+          "start": 926.18,
+          "end": 929.3,
           "rawText": "讓我們學會接受生理的痛舉,",
           "text": "讓我們學會接受生理的痛楚。",
           "reviewNeeded": false,
@@ -1280,8 +1246,8 @@
         },
         {
           "id": "seg-0129",
-          "start": 910.39,
-          "end": 916.51,
+          "start": 930.89,
+          "end": 937.01,
           "rawText": "但不給它貼上我好慘或這不公平的標籤。",
           "text": "但不給它貼上我好慘或這不公平的標籤。",
           "reviewNeeded": false,
@@ -1289,8 +1255,8 @@
         },
         {
           "id": "seg-0130",
-          "start": 916.51,
-          "end": 924.98,
+          "start": 937.01,
+          "end": 945.48,
           "rawText": "試著切斷連鎖反應, 让痛苦止步於神經傳導,",
           "text": "試著切斷連鎖反應，讓痛苦止步於神經傳導。",
           "reviewNeeded": false,
@@ -1298,8 +1264,8 @@
         },
         {
           "id": "seg-0131",
-          "start": 927.02,
-          "end": 929.74,
+          "start": 947.52,
+          "end": 950.24,
           "rawText": "而不要蔓延成心靈上的折磨。",
           "text": "而不要蔓延成心靈上的折磨。",
           "reviewNeeded": false,
@@ -1307,8 +1273,8 @@
         },
         {
           "id": "seg-0132",
-          "start": 931.85,
-          "end": 938.75,
+          "start": 952.35,
+          "end": 959.25,
           "rawText": "很多時候, 我們生病並不是被那個病情折磨,",
           "text": "很多時候，我們生病並不是被那個病情折磨。",
           "reviewNeeded": false,
@@ -1316,8 +1282,8 @@
         },
         {
           "id": "seg-0133",
-          "start": 940.74,
-          "end": 943.62,
+          "start": 961.24,
+          "end": 964.12,
           "rawText": "而是被我們的心理狀態折磨。",
           "text": "而是被我們的心理狀態折磨。",
           "reviewNeeded": false,
@@ -1325,17 +1291,25 @@
         },
         {
           "id": "seg-0134",
-          "start": 944.73,
-          "end": 948.55,
+          "start": 965.23,
+          "end": 969.05,
           "rawText": "簡單來說, 生理的苦是痛,",
           "text": "簡單來說，生理的苦是痛。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0148"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-10",
+      "heading": null,
+      "start": 970.64,
+      "end": 1089.28,
+      "sentences": [
         {
           "id": "seg-0135",
-          "start": 950.14,
-          "end": 953.62,
+          "start": 970.64,
+          "end": 974.12,
           "rawText": "煩惱加上的苦才是真正的苦。",
           "text": "煩惱加上的苦才是真正的苦。",
           "reviewNeeded": false,
@@ -1343,8 +1317,8 @@
         },
         {
           "id": "seg-0136",
-          "start": 953.62,
-          "end": 961.91,
+          "start": 974.12,
+          "end": 982.41,
           "rawText": "痛可以存在, 但苦是可以選擇不要的。",
           "text": "痛可以存在，但苦是可以選擇不要的。",
           "reviewNeeded": false,
@@ -1352,25 +1326,17 @@
         },
         {
           "id": "seg-0137",
-          "start": 963.19,
-          "end": 967.37,
+          "start": 983.69,
+          "end": 987.87,
           "rawText": "這就是佛法所說的, 生苦心不苦。",
           "text": "這就是佛法所說的，身苦心不苦。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0153"
-        }
-      ]
-    },
-    {
-      "id": "p-14",
-      "heading": null,
-      "start": 969.15,
-      "end": 1016.78,
-      "sentences": [
+        },
         {
           "id": "seg-0138",
-          "start": 969.15,
-          "end": 977.87,
+          "start": 989.65,
+          "end": 998.37,
           "rawText": "第二個例子, 兩個人去健身房做了同樣的訓練。 隔天,",
           "text": "第二個例子，兩個人去健身房做了同樣的訓練，隔天。",
           "reviewNeeded": false,
@@ -1378,8 +1344,8 @@
         },
         {
           "id": "seg-0139",
-          "start": 978.41,
-          "end": 985.54,
+          "start": 998.91,
+          "end": 1006.04,
           "rawText": "肌肉酸痛程度都一樣, 但其中一人覺得自己正在進步,",
           "text": "肌肉痠痛程度都一樣，但其中一人覺得自己正在進步。",
           "reviewNeeded": false,
@@ -1387,8 +1353,8 @@
         },
         {
           "id": "seg-0140",
-          "start": 987.1,
-          "end": 990.26,
+          "start": 1007.6,
+          "end": 1010.76,
           "rawText": "另一人卻覺得難以忍受。",
           "text": "另一人卻覺得難以忍受。",
           "reviewNeeded": false,
@@ -1396,8 +1362,8 @@
         },
         {
           "id": "seg-0141",
-          "start": 990.26,
-          "end": 996.2,
+          "start": 1010.76,
+          "end": 1016.7,
           "rawText": "後者不只是在承受身體的疼痛,",
           "text": "後者不只是在承受身體的疼痛。",
           "reviewNeeded": false,
@@ -1405,8 +1371,8 @@
         },
         {
           "id": "seg-0142",
-          "start": 998.42,
-          "end": 1002.06,
+          "start": 1018.92,
+          "end": 1022.56,
           "rawText": "更同時在心理加上了, 我怎麼這麼弱,",
           "text": "更同時在心理加上了，我怎麼這麼弱。",
           "reviewNeeded": false,
@@ -1414,8 +1380,8 @@
         },
         {
           "id": "seg-0143",
-          "start": 1003.18,
-          "end": 1006.95,
+          "start": 1023.68,
+          "end": 1027.45,
           "rawText": "我怎麼比別人差, 我做這件事情,",
           "text": "我怎麼比別人差，我做這件事情。",
           "reviewNeeded": false,
@@ -1423,8 +1389,8 @@
         },
         {
           "id": "seg-0144",
-          "start": 1007.37,
-          "end": 1010.67,
+          "start": 1027.87,
+          "end": 1031.17,
           "rawText": "根本沒有任何意義這類的批判。",
           "text": "根本沒有任何意義這類的批判。",
           "reviewNeeded": false,
@@ -1432,25 +1398,17 @@
         },
         {
           "id": "seg-0145",
-          "start": 1012.58,
-          "end": 1016.78,
+          "start": 1033.08,
+          "end": 1037.28,
           "rawText": "這一層苦, 才是真正讓它撐不下去的原因。",
           "text": "這一層苦，才是真正讓他撐不下去的原因。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0167"
-        }
-      ]
-    },
-    {
-      "id": "p-15",
-      "heading": null,
-      "start": 1018.94,
-      "end": 1100.14,
-      "sentences": [
+        },
         {
           "id": "seg-0146",
-          "start": 1018.94,
-          "end": 1022.56,
+          "start": 1039.44,
+          "end": 1043.06,
           "rawText": "很多時候, 真正讓我們難以忍受的,",
           "text": "很多時候，真正讓我們難以忍受的。",
           "reviewNeeded": false,
@@ -1458,8 +1416,8 @@
         },
         {
           "id": "seg-0147",
-          "start": 1022.56,
-          "end": 1030.08,
+          "start": 1043.06,
+          "end": 1050.58,
           "rawText": "根本不是外境, 而是煩惱在外境上加工出來的那一層。",
           "text": "根本不是外境，而是煩惱在外境上加工出來的那一層。",
           "reviewNeeded": false,
@@ -1467,8 +1425,8 @@
         },
         {
           "id": "seg-0148",
-          "start": 1031.94,
-          "end": 1036.88,
+          "start": 1052.44,
+          "end": 1057.38,
           "rawText": "煩惱在外境上所編造出的那個故事。",
           "text": "煩惱在外境上所編造出的那個故事。",
           "reviewNeeded": false,
@@ -1476,8 +1434,8 @@
         },
         {
           "id": "seg-0149",
-          "start": 1039.16,
-          "end": 1041.04,
+          "start": 1059.66,
+          "end": 1061.54,
           "rawText": "而且這個關係是雙向的,",
           "text": "而且這個關係是雙向的。",
           "reviewNeeded": false,
@@ -1485,8 +1443,8 @@
         },
         {
           "id": "seg-0150",
-          "start": 1042.31,
-          "end": 1047.12,
+          "start": 1062.81,
+          "end": 1067.62,
           "rawText": "苦會触發煩惱, 煩惱又放大苦。",
           "text": "苦會觸發煩惱，煩惱又放大苦。",
           "reviewNeeded": false,
@@ -1494,8 +1452,8 @@
         },
         {
           "id": "seg-0151",
-          "start": 1048.51,
-          "end": 1051.89,
+          "start": 1069.01,
+          "end": 1072.39,
           "rawText": "被放大的那個苦, 再次触發煩惱。",
           "text": "被放大的那個苦，再次觸發煩惱。",
           "reviewNeeded": false,
@@ -1503,8 +1461,8 @@
         },
         {
           "id": "seg-0152",
-          "start": 1051.89,
-          "end": 1056.86,
+          "start": 1072.39,
+          "end": 1077.36,
           "rawText": "煩惱又會再次把那個苦放大,",
           "text": "煩惱又會再次把那個苦放大。",
           "reviewNeeded": false,
@@ -1512,8 +1470,8 @@
         },
         {
           "id": "seg-0153",
-          "start": 1056.86,
-          "end": 1064.18,
+          "start": 1077.36,
+          "end": 1084.68,
           "rawText": "形成一個惡性循環, 讓我們越陷越深。 例如,",
           "text": "形成一個惡性迴圈，讓我們越陷越深。例如。",
           "reviewNeeded": false,
@@ -1521,17 +1479,25 @@
         },
         {
           "id": "seg-0154",
-          "start": 1065.26,
-          "end": 1068.78,
+          "start": 1085.76,
+          "end": 1089.28,
           "rawText": "身體生病, 對某些人來說,",
           "text": "身體生病，對某些人來說。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0183"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-11",
+      "heading": null,
+      "start": 1090.08,
+      "end": 1187.06,
+      "sentences": [
         {
           "id": "seg-0155",
-          "start": 1069.58,
-          "end": 1070.74,
+          "start": 1090.08,
+          "end": 1091.24,
           "rawText": "這會帶來焦慮。",
           "text": "這會帶來焦慮。",
           "reviewNeeded": false,
@@ -1539,8 +1505,8 @@
         },
         {
           "id": "seg-0156",
-          "start": 1072.64,
-          "end": 1078.74,
+          "start": 1093.14,
+          "end": 1099.24,
           "rawText": "焦慮會讓免疫力下降, 讓身體更難恢復。",
           "text": "焦慮會讓免疫力下降，讓身體更難恢復。",
           "reviewNeeded": false,
@@ -1548,8 +1514,8 @@
         },
         {
           "id": "seg-0157",
-          "start": 1080.17,
-          "end": 1082.79,
+          "start": 1100.67,
+          "end": 1103.29,
           "rawText": "在這樣的情況下, 它更加焦慮。",
           "text": "在這樣的情況下，他更加焦慮。",
           "reviewNeeded": false,
@@ -1557,8 +1523,8 @@
         },
         {
           "id": "seg-0158",
-          "start": 1084.91,
-          "end": 1086.53,
+          "start": 1105.41,
+          "end": 1107.03,
           "rawText": "有沒有這樣的可能? 有。",
           "text": "有沒有這樣的可能？有。",
           "reviewNeeded": false,
@@ -1566,8 +1532,8 @@
         },
         {
           "id": "seg-0159",
-          "start": 1088.03,
-          "end": 1090.29,
+          "start": 1108.53,
+          "end": 1110.79,
           "rawText": "所以這種關係是雙向的。",
           "text": "所以這種關係是雙向的。",
           "reviewNeeded": false,
@@ -1575,8 +1541,8 @@
         },
         {
           "id": "seg-0160",
-          "start": 1090.29,
-          "end": 1097.32,
+          "start": 1110.79,
+          "end": 1117.82,
           "rawText": "這個循環一旦啟動, 苦就會像滾雪球一樣,",
           "text": "這個迴圈一旦啟動，苦就會像滾雪球一樣。",
           "reviewNeeded": false,
@@ -1584,25 +1550,17 @@
         },
         {
           "id": "seg-0161",
-          "start": 1097.56,
-          "end": 1100.14,
+          "start": 1118.06,
+          "end": 1120.64,
           "rawText": "越滾越大, 一發不可收拾。",
           "text": "越滾越大，一發不可收拾。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0195"
-        }
-      ]
-    },
-    {
-      "id": "p-16",
-      "heading": "火花與甘草堆之喻",
-      "start": 1102.4,
-      "end": 1150.34,
-      "sentences": [
+        },
         {
           "id": "seg-0162",
-          "start": 1102.4,
-          "end": 1104.7,
+          "start": 1122.9,
+          "end": 1125.2,
           "rawText": "所以苦苦與煩惱的關係,",
           "text": "所以苦苦與煩惱的關係。",
           "reviewNeeded": false,
@@ -1610,8 +1568,8 @@
         },
         {
           "id": "seg-0163",
-          "start": 1105.04,
-          "end": 1105.86,
+          "start": 1125.54,
+          "end": 1126.36,
           "rawText": "可以這樣理解。",
           "text": "可以這樣理解。",
           "reviewNeeded": false,
@@ -1619,8 +1577,8 @@
         },
         {
           "id": "seg-0164",
-          "start": 1107.31,
-          "end": 1114,
+          "start": 1127.81,
+          "end": 1134.5,
           "rawText": "外境像是火花, 煩惱則是甘草堆,",
           "text": "外境像是火花，煩惱則是甘草堆。",
           "reviewNeeded": false,
@@ -1628,8 +1586,8 @@
         },
         {
           "id": "seg-0165",
-          "start": 1115.25,
-          "end": 1117.91,
+          "start": 1135.75,
+          "end": 1138.41,
           "rawText": "也就是我們剛才所說的助燃物。",
           "text": "也就是我們剛才所說的助燃物。",
           "reviewNeeded": false,
@@ -1637,8 +1595,8 @@
         },
         {
           "id": "seg-0166",
-          "start": 1119.88,
-          "end": 1124.34,
+          "start": 1140.38,
+          "end": 1144.84,
           "rawText": "火花一旦落下, 甘草越多,",
           "text": "火花一旦落下，甘草越多。",
           "reviewNeeded": false,
@@ -1646,8 +1604,8 @@
         },
         {
           "id": "seg-0167",
-          "start": 1124.98,
-          "end": 1126.48,
+          "start": 1145.48,
+          "end": 1146.98,
           "rawText": "火勢就越猛烈。",
           "text": "火勢就越猛烈。",
           "reviewNeeded": false,
@@ -1655,8 +1613,8 @@
         },
         {
           "id": "seg-0168",
-          "start": 1126.66,
-          "end": 1130.56,
+          "start": 1147.16,
+          "end": 1151.06,
           "rawText": "如果現場沒有任何的助燃物,",
           "text": "如果現場沒有任何的助燃物。",
           "reviewNeeded": false,
@@ -1664,8 +1622,8 @@
         },
         {
           "id": "seg-0169",
-          "start": 1132.92,
-          "end": 1137.78,
+          "start": 1153.42,
+          "end": 1158.28,
           "rawText": "外境上有再多火花, 也都不會起火。",
           "text": "外境上有再多火花，也都不會起火。",
           "reviewNeeded": false,
@@ -1673,8 +1631,8 @@
         },
         {
           "id": "seg-0170",
-          "start": 1137.78,
-          "end": 1143.63,
+          "start": 1158.28,
+          "end": 1164.13,
           "rawText": "所以苦苦本身難以完全避免,",
           "text": "所以苦苦本身難以完全避免。",
           "reviewNeeded": false,
@@ -1682,25 +1640,17 @@
         },
         {
           "id": "seg-0171",
-          "start": 1144.9,
-          "end": 1150.34,
+          "start": 1165.4,
+          "end": 1170.84,
           "rawText": "但煩惱決定了苦苦燒得多深, 燒得多久。",
           "text": "但煩惱決定了苦苦燒得多深，燒得多久。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0209"
-        }
-      ]
-    },
-    {
-      "id": "p-17",
-      "heading": null,
-      "start": 1152.2,
-      "end": 1217.85,
-      "sentences": [
+        },
         {
           "id": "seg-0172",
-          "start": 1152.2,
-          "end": 1155.36,
+          "start": 1172.7,
+          "end": 1175.86,
           "rawText": "這給了我們一個很重要的修行方向。",
           "text": "這給了我們一個很重要的修行方向。",
           "reviewNeeded": false,
@@ -1708,8 +1658,8 @@
         },
         {
           "id": "seg-0173",
-          "start": 1157.5,
-          "end": 1161.71,
+          "start": 1178,
+          "end": 1182.21,
           "rawText": "修行的目的不是把自己變成無感的人,",
           "text": "修行的目的不是把自己變成無感的人。",
           "reviewNeeded": false,
@@ -1717,17 +1667,25 @@
         },
         {
           "id": "seg-0174",
-          "start": 1161.71,
-          "end": 1166.56,
+          "start": 1182.21,
+          "end": 1187.06,
           "rawText": "對任何事情都沒有感覺,",
           "text": "對任何事情都沒有感覺。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0213"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-12",
+      "heading": null,
+      "start": 1188.74,
+      "end": 1217.46,
+      "sentences": [
         {
           "id": "seg-0175",
-          "start": 1168.24,
-          "end": 1171.39,
+          "start": 1188.74,
+          "end": 1191.89,
           "rawText": "還告訴自己, 我不要起分別,",
           "text": "還告訴自己，我不要起分別。",
           "reviewNeeded": false,
@@ -1735,8 +1693,8 @@
         },
         {
           "id": "seg-0176",
-          "start": 1172.45,
-          "end": 1175.43,
+          "start": 1192.95,
+          "end": 1195.93,
           "rawText": "而是讓內心的煩惱越來越少。",
           "text": "而是讓內心的煩惱越來越少。",
           "reviewNeeded": false,
@@ -1744,8 +1702,8 @@
         },
         {
           "id": "seg-0177",
-          "start": 1176.82,
-          "end": 1180.49,
+          "start": 1197.32,
+          "end": 1200.99,
           "rawText": "當煩惱減少, 即使同樣的外境出現,",
           "text": "當煩惱減少，即使同樣的外境出現。",
           "reviewNeeded": false,
@@ -1753,8 +1711,8 @@
         },
         {
           "id": "seg-0178",
-          "start": 1181.05,
-          "end": 1187.36,
+          "start": 1201.55,
+          "end": 1207.86,
           "rawText": "苦也不會被放大, 甚至能在當下保持清醒,",
           "text": "苦也不會被放大，甚至能在當下保持清醒。",
           "reviewNeeded": false,
@@ -1762,8 +1720,8 @@
         },
         {
           "id": "seg-0179",
-          "start": 1188.22,
-          "end": 1192.72,
+          "start": 1208.72,
+          "end": 1213.22,
           "rawText": "不會被煩惱牽著走。 以上,",
           "text": "苦也不會被放大，甚至能在當下保持清醒，不會被煩惱牽著走。",
           "reviewNeeded": false,
@@ -1771,17 +1729,25 @@
         },
         {
           "id": "seg-0180",
-          "start": 1193.24,
-          "end": 1196.96,
+          "start": 1213.74,
+          "end": 1217.46,
           "rawText": "我們介紹的是苦苦與煩惱的關係。",
           "text": "我們介紹的是苦苦與煩惱的關係。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0223"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-13",
+      "heading": "3. 壞苦與煩惱的關係",
+      "start": 1220,
+      "end": 1329.22,
+      "sentences": [
         {
           "id": "seg-0181",
-          "start": 1199.5,
-          "end": 1203.78,
+          "start": 1220,
+          "end": 1224.28,
           "rawText": "第二個部分, 壞苦與煩惱的關係。",
           "text": "第二個部分，壞苦與煩惱的關係。",
           "reviewNeeded": false,
@@ -1789,8 +1755,8 @@
         },
         {
           "id": "seg-0182",
-          "start": 1206.59,
-          "end": 1213.27,
+          "start": 1227.09,
+          "end": 1233.77,
           "rawText": "壞苦是指世間的安樂, 由於這種快樂是依著因緣而形成,",
           "text": "壞苦是指世間的安樂，由於這種快樂是依著因緣而形成。",
           "reviewNeeded": false,
@@ -1798,25 +1764,17 @@
         },
         {
           "id": "seg-0183",
-          "start": 1214.01,
-          "end": 1217.85,
+          "start": 1234.51,
+          "end": 1238.35,
           "rawText": "因此會不斷改變, 無法長久維持,",
           "text": "因此會不斷改變，無法長久維持。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0228"
-        }
-      ]
-    },
-    {
-      "id": "p-18",
-      "heading": "3. 壞苦與煩惱的關係",
-      "start": 1219.32,
-      "end": 1270.86,
-      "sentences": [
+        },
         {
           "id": "seg-0184",
-          "start": 1219.32,
-          "end": 1222.72,
+          "start": 1239.82,
+          "end": 1243.22,
           "rawText": "甚至在某些情況下, 會轉變為痛苦。",
           "text": "甚至在某些情況下，會轉變為痛苦。",
           "reviewNeeded": false,
@@ -1824,8 +1782,8 @@
         },
         {
           "id": "seg-0185",
-          "start": 1225.08,
-          "end": 1227.18,
+          "start": 1245.58,
+          "end": 1247.68,
           "rawText": "這裡有一個值得思考的問題,",
           "text": "這裡有一個值得思考的問題。",
           "reviewNeeded": false,
@@ -1833,8 +1791,8 @@
         },
         {
           "id": "seg-0186",
-          "start": 1229.74,
-          "end": 1233.96,
+          "start": 1250.24,
+          "end": 1254.46,
           "rawText": "快樂消失後, 為何會轉變成痛苦?",
           "text": "快樂消失後，為何會轉變成痛苦？",
           "reviewNeeded": false,
@@ -1842,8 +1800,8 @@
         },
         {
           "id": "seg-0187",
-          "start": 1235.56,
-          "end": 1244.2,
+          "start": 1256.06,
+          "end": 1264.7,
           "rawText": "問題是出在快樂消失, 還是我們不願意它消失?",
           "text": "問題是出在快樂消失，還是我們不願意它消失？",
           "reviewNeeded": false,
@@ -1851,8 +1809,8 @@
         },
         {
           "id": "seg-0188",
-          "start": 1246.02,
-          "end": 1251.95,
+          "start": 1266.52,
+          "end": 1272.45,
           "rawText": "舉個例子, 某個令人開心的活動結束之後,",
           "text": "舉個例子，某個令人開心的活動結束之後。",
           "reviewNeeded": false,
@@ -1860,17 +1818,17 @@
         },
         {
           "id": "seg-0189",
-          "start": 1253.19,
-          "end": 1255.79,
+          "start": 1273.69,
+          "end": 1276.29,
           "rawText": "為什麼有人感到若有所失,",
-          "text": "為什麼有人感到若有所失。",
+          "text": "為什麼有人感到若有所失，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0239"
         },
         {
           "id": "seg-0190",
-          "start": 1257,
-          "end": 1259.26,
+          "start": 1277.5,
+          "end": 1279.76,
           "rawText": "有人卻心滿意足地離開?",
           "text": "有人卻心滿意足地離開？",
           "reviewNeeded": false,
@@ -1878,8 +1836,8 @@
         },
         {
           "id": "seg-0191",
-          "start": 1261.54,
-          "end": 1263.46,
+          "start": 1282.04,
+          "end": 1283.96,
           "rawText": "同樣是快樂消失了。",
           "text": "同樣是快樂消失了。",
           "reviewNeeded": false,
@@ -1887,8 +1845,8 @@
         },
         {
           "id": "seg-0192",
-          "start": 1263.46,
-          "end": 1267.75,
+          "start": 1283.96,
+          "end": 1288.25,
           "rawText": "為什麼結果卻大不相同?",
           "text": "為什麼結果卻大不相同？",
           "reviewNeeded": false,
@@ -1896,25 +1854,17 @@
         },
         {
           "id": "seg-0193",
-          "start": 1270.1,
-          "end": 1270.86,
+          "start": 1290.6,
+          "end": 1291.36,
           "rawText": "這說明什麼?",
           "text": "這說明什麼？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0243"
-        }
-      ]
-    },
-    {
-      "id": "p-19",
-      "heading": null,
-      "start": 1272.84,
-      "end": 1375.25,
-      "sentences": [
+        },
         {
           "id": "seg-0194",
-          "start": 1272.84,
-          "end": 1281.08,
+          "start": 1293.34,
+          "end": 1301.58,
           "rawText": "這說明了快樂消失本身並不會造成痛苦。 如果會,",
           "text": "這說明了快樂消失本身並不會造成痛苦，如果會。",
           "reviewNeeded": false,
@@ -1922,8 +1872,8 @@
         },
         {
           "id": "seg-0195",
-          "start": 1282.88,
-          "end": 1287.88,
+          "start": 1303.38,
+          "end": 1308.38,
           "rawText": "那在活動結束之後, 每一個人都應該愁眉苦臉,",
           "text": "那在活動結束之後，每一個人都應該愁眉苦臉。",
           "reviewNeeded": false,
@@ -1931,8 +1881,8 @@
         },
         {
           "id": "seg-0196",
-          "start": 1289.85,
-          "end": 1291.43,
+          "start": 1310.35,
+          "end": 1311.93,
           "rawText": "但事實卻非如此。",
           "text": "但事實卻非如此。",
           "reviewNeeded": false,
@@ -1940,8 +1890,8 @@
         },
         {
           "id": "seg-0197",
-          "start": 1292.78,
-          "end": 1297.2,
+          "start": 1313.28,
+          "end": 1317.7,
           "rawText": "這就表示快樂消失本身並不會造成痛苦。",
           "text": "這就表示快樂消失本身並不會造成痛苦。",
           "reviewNeeded": false,
@@ -1949,8 +1899,8 @@
         },
         {
           "id": "seg-0198",
-          "start": 1298.67,
-          "end": 1300.25,
+          "start": 1319.17,
+          "end": 1320.75,
           "rawText": "那真正的原因是什麼?",
           "text": "那真正的原因是什麼？",
           "reviewNeeded": false,
@@ -1958,8 +1908,8 @@
         },
         {
           "id": "seg-0199",
-          "start": 1301.86,
-          "end": 1306.57,
+          "start": 1322.36,
+          "end": 1327.07,
           "rawText": "真正的原因在於, 我們希望快樂不要消失,",
           "text": "真正的原因在於，我們希望快樂不要消失。",
           "reviewNeeded": false,
@@ -1967,17 +1917,25 @@
         },
         {
           "id": "seg-0200",
-          "start": 1306.61,
-          "end": 1308.72,
+          "start": 1327.11,
+          "end": 1329.22,
           "rawText": "能一直持續。",
           "text": "能一直持續。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0253"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-14",
+      "heading": null,
+      "start": 1330.54,
+      "end": 1450.94,
+      "sentences": [
         {
           "id": "seg-0201",
-          "start": 1310.04,
-          "end": 1318.25,
+          "start": 1330.54,
+          "end": 1338.75,
           "rawText": "這種貪愛與持取, 才是造成痛苦的關鍵所在。 實際上,",
           "text": "這種貪愛與執取，才是造成痛苦的關鍵所在。",
           "reviewNeeded": false,
@@ -1985,8 +1943,8 @@
         },
         {
           "id": "seg-0202",
-          "start": 1319.19,
-          "end": 1322.45,
+          "start": 1339.69,
+          "end": 1342.95,
           "rawText": "世間安樂是依著因緣而生的,",
           "text": "世間安樂是依著因緣而生的。",
           "reviewNeeded": false,
@@ -1994,8 +1952,8 @@
         },
         {
           "id": "seg-0203",
-          "start": 1323.04,
-          "end": 1328.64,
+          "start": 1343.54,
+          "end": 1349.14,
           "rawText": "本來就會變, 但我們卻把它當成真正的依靠,",
           "text": "本來就會變，但我們卻把它當成真正的依靠。",
           "reviewNeeded": false,
@@ -2003,8 +1961,8 @@
         },
         {
           "id": "seg-0204",
-          "start": 1329.79,
-          "end": 1334.34,
+          "start": 1350.29,
+          "end": 1354.84,
           "rawText": "以為只要得到它, 就能獲得快樂。",
           "text": "以為只要得到它，就能獲得快樂。",
           "reviewNeeded": false,
@@ -2012,8 +1970,8 @@
         },
         {
           "id": "seg-0205",
-          "start": 1334.34,
-          "end": 1335.96,
+          "start": 1354.84,
+          "end": 1356.46,
           "rawText": "什麼叫做真正的依靠?",
           "text": "什麼叫做真正的依靠？",
           "reviewNeeded": false,
@@ -2021,8 +1979,8 @@
         },
         {
           "id": "seg-0206",
-          "start": 1337.98,
-          "end": 1344.24,
+          "start": 1358.48,
+          "end": 1364.74,
           "rawText": "只要有它, 我就會快樂, 反之, 就會痛苦。",
           "text": "只要有它，我就會快樂，反之，就會痛苦。",
           "reviewNeeded": false,
@@ -2030,8 +1988,8 @@
         },
         {
           "id": "seg-0207",
-          "start": 1345.8,
-          "end": 1353.38,
+          "start": 1366.3,
+          "end": 1373.88,
           "rawText": "更嚴重一點, 非得這樣, 我才快樂, 否則, 我就痛苦。",
           "text": "更嚴重一點，非得這樣，我才快樂，否則，我就痛苦。",
           "reviewNeeded": false,
@@ -2039,8 +1997,8 @@
         },
         {
           "id": "seg-0208",
-          "start": 1353.38,
-          "end": 1360.06,
+          "start": 1373.88,
+          "end": 1380.56,
           "rawText": "我們把很多的世間安樂都當成真正的依靠。",
           "text": "我們把很多的世間安樂都當成真正的依靠。",
           "reviewNeeded": false,
@@ -2048,8 +2006,8 @@
         },
         {
           "id": "seg-0209",
-          "start": 1360.06,
-          "end": 1367,
+          "start": 1380.56,
+          "end": 1387.5,
           "rawText": "一旦我們將世間安樂視為真正的依靠時,",
           "text": "一旦我們將世間安樂視為真正的依靠時。",
           "reviewNeeded": false,
@@ -2057,8 +2015,8 @@
         },
         {
           "id": "seg-0210",
-          "start": 1367.65,
-          "end": 1369.95,
+          "start": 1388.15,
+          "end": 1390.45,
           "rawText": "這本身就是痛苦的源頭,",
           "text": "這本身就是痛苦的源頭。",
           "reviewNeeded": false,
@@ -2066,25 +2024,17 @@
         },
         {
           "id": "seg-0211",
-          "start": 1371.57,
-          "end": 1375.25,
+          "start": 1392.07,
+          "end": 1395.75,
           "rawText": "因為一旦事與願違, 我們就會痛苦。",
           "text": "因為一旦事與願違，我們就會痛苦。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0275"
-        }
-      ]
-    },
-    {
-      "id": "p-20",
-      "heading": null,
-      "start": 1377.12,
-      "end": 1430.44,
-      "sentences": [
+        },
         {
           "id": "seg-0212",
-          "start": 1377.12,
-          "end": 1384.11,
+          "start": 1397.62,
+          "end": 1404.61,
           "rawText": "這一段的思維邏輯是, 我們對世間的快樂會產生貪愛,",
           "text": "這一段的思惟邏輯是，我們對世間的快樂會產生貪愛。",
           "reviewNeeded": false,
@@ -2092,8 +2042,8 @@
         },
         {
           "id": "seg-0213",
-          "start": 1384.97,
-          "end": 1387.21,
+          "start": 1405.47,
+          "end": 1407.71,
           "rawText": "希望它一直持續下去。",
           "text": "希望它一直持續下去。",
           "reviewNeeded": false,
@@ -2101,8 +2051,8 @@
         },
         {
           "id": "seg-0214",
-          "start": 1389.19,
-          "end": 1393.46,
+          "start": 1409.69,
+          "end": 1413.96,
           "rawText": "換句話說, 這是我們對於世間快樂的直取,",
           "text": "換句話說，這是我們對於世間快樂的執取。",
           "reviewNeeded": false,
@@ -2110,8 +2060,8 @@
         },
         {
           "id": "seg-0215",
-          "start": 1396.11,
-          "end": 1399.7,
+          "start": 1416.61,
+          "end": 1420.2,
           "rawText": "但問題是, 快樂是依著因緣而生,",
           "text": "但問題是，快樂是依著因緣而生。",
           "reviewNeeded": false,
@@ -2119,8 +2069,8 @@
         },
         {
           "id": "seg-0216",
-          "start": 1401.1,
-          "end": 1404.61,
+          "start": 1421.6,
+          "end": 1425.11,
           "rawText": "必然會改變, 一旦發生變化,",
           "text": "必然會改變，一旦發生變化。",
           "reviewNeeded": false,
@@ -2128,8 +2078,8 @@
         },
         {
           "id": "seg-0217",
-          "start": 1404.99,
-          "end": 1407.43,
+          "start": 1425.49,
+          "end": 1427.93,
           "rawText": "就會產生失落與痛苦。",
           "text": "就會產生失落與痛苦。",
           "reviewNeeded": false,
@@ -2137,8 +2087,8 @@
         },
         {
           "id": "seg-0218",
-          "start": 1409.39,
-          "end": 1414.41,
+          "start": 1429.89,
+          "end": 1434.91,
           "rawText": "所以問題的根源, 並不是快樂是否消失了,",
           "text": "所以問題的根源，並不是快樂是否消失了。",
           "reviewNeeded": false,
@@ -2146,8 +2096,8 @@
         },
         {
           "id": "seg-0219",
-          "start": 1415.54,
-          "end": 1424.33,
+          "start": 1436.04,
+          "end": 1444.83,
           "rawText": "問題的根源是, 我們對於快樂產生了錯誤的直取。 因此,",
           "text": "問題的根源是，我們對於快樂產生了錯誤的執取。",
           "reviewNeeded": false,
@@ -2155,8 +2105,8 @@
         },
         {
           "id": "seg-0220",
-          "start": 1425.41,
-          "end": 1430.44,
+          "start": 1445.91,
+          "end": 1450.94,
           "rawText": "在理解快苦時, 重點不在於快樂會不會消失,",
           "text": "因此，在理解壞苦時，重點不在於快樂會不會消失。",
           "reviewNeeded": false,
@@ -2165,15 +2115,15 @@
       ]
     },
     {
-      "id": "p-21",
-      "heading": "關鍵在於是否當成真正的依靠",
-      "start": 1431.98,
-      "end": 1506.29,
+      "id": "p-15",
+      "heading": null,
+      "start": 1452.48,
+      "end": 1572.79,
       "sentences": [
         {
           "id": "seg-0221",
-          "start": 1431.98,
-          "end": 1436.16,
+          "start": 1452.48,
+          "end": 1456.66,
           "rawText": "而在於我們是否把它當成真正的依靠。",
           "text": "而在於我們是否把它當成真正的依靠。",
           "reviewNeeded": false,
@@ -2181,8 +2131,8 @@
         },
         {
           "id": "seg-0222",
-          "start": 1438.7,
-          "end": 1440.92,
+          "start": 1459.2,
+          "end": 1461.42,
           "rawText": "我們用一個具體的例子來說明,",
           "text": "我們用一個具體的例子來說明。",
           "reviewNeeded": false,
@@ -2190,8 +2140,8 @@
         },
         {
           "id": "seg-0223",
-          "start": 1442.66,
-          "end": 1447.61,
+          "start": 1463.16,
+          "end": 1468.11,
           "rawText": "假設你計畫了很久的出國度假旅遊,",
           "text": "假設你計畫了很久的出國度假旅遊。",
           "reviewNeeded": false,
@@ -2199,8 +2149,8 @@
         },
         {
           "id": "seg-0224",
-          "start": 1448.28,
-          "end": 1454.07,
+          "start": 1468.78,
+          "end": 1474.57,
           "rawText": "終於成行, 旅途當中, 欣賞美麗的風景,",
           "text": "終於成行，旅途當中，欣賞美麗的風景。",
           "reviewNeeded": false,
@@ -2208,8 +2158,8 @@
         },
         {
           "id": "seg-0225",
-          "start": 1455.2,
-          "end": 1459.43,
+          "start": 1475.7,
+          "end": 1479.93,
           "rawText": "享受輕鬆的步調, 遠離工作壓力,",
           "text": "享受輕鬆的步調，遠離工作壓力。",
           "reviewNeeded": false,
@@ -2217,8 +2167,8 @@
         },
         {
           "id": "seg-0226",
-          "start": 1460.27,
-          "end": 1462.29,
+          "start": 1480.77,
+          "end": 1482.79,
           "rawText": "這些都是令人快樂的事。",
           "text": "這些都是令人快樂的事。",
           "reviewNeeded": false,
@@ -2226,8 +2176,8 @@
         },
         {
           "id": "seg-0227",
-          "start": 1464.5,
-          "end": 1470.2,
+          "start": 1485,
+          "end": 1490.7,
           "rawText": "這些世間的安樂, 都是依著因緣而生起的樂壽。",
           "text": "這些世間的安樂，都是依著因緣而生起的樂受。",
           "reviewNeeded": false,
@@ -2235,8 +2185,8 @@
         },
         {
           "id": "seg-0228",
-          "start": 1471.36,
-          "end": 1479.31,
+          "start": 1491.86,
+          "end": 1499.81,
           "rawText": "沒有任何問題, 佛法並不是想要否定這些快樂,",
           "text": "沒有任何問題，佛法並不是想要否定這些快樂。",
           "reviewNeeded": false,
@@ -2244,8 +2194,8 @@
         },
         {
           "id": "seg-0229",
-          "start": 1480.83,
-          "end": 1486.89,
+          "start": 1501.33,
+          "end": 1507.39,
           "rawText": "也不是告訴我們, 不可以享受這些快樂, 都不是。",
           "text": "也不是告訴我們，不可以享受這些快樂，都不是。",
           "reviewNeeded": false,
@@ -2253,43 +2203,26 @@
         },
         {
           "id": "seg-0230",
-          "start": 1486.89,
-          "end": 1494.19,
-          "rawText": "真正的問題是, 如果在過程當中,",
-          "text": "真正的問題是，如果在過程當中。",
+          "start": 1507.39,
+          "end": 1522.34,
+          "rawText": "真正的問題是, 如果在過程當中, 我們的心裡有貪愛, 進而把那段快樂當成真正的依靠,",
+          "text": "真正的問題是，如果在過程當中，我們的心裡有貪愛，進而把那段快樂當成真正的依靠。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0310"
         },
         {
-          "id": "seg-0231",
-          "start": 1494.93,
-          "end": 1501.84,
-          "rawText": "我們的心裡有貪愛, 進而把那段快樂當成真正的依靠,",
-          "text": "我們的心裡有貪愛，進而把那段快樂當成真正的依靠。",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0312"
-        },
-        {
           "id": "seg-0232",
-          "start": 1502.81,
-          "end": 1506.29,
+          "start": 1523.31,
+          "end": 1526.79,
           "rawText": "苦就已經悄悄開始酝酿。",
           "text": "苦就已經悄悄開始醞釀。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0314"
-        }
-      ]
-    },
-    {
-      "id": "p-22",
-      "heading": null,
-      "start": 1506.29,
-      "end": 1595.86,
-      "sentences": [
+        },
         {
           "id": "seg-0233",
-          "start": 1506.29,
-          "end": 1511.85,
+          "start": 1526.79,
+          "end": 1532.35,
           "rawText": "為什麼這麼說, 當行程過了一半,",
           "text": "為什麼這麼說？當行程過了一半。",
           "reviewNeeded": false,
@@ -2297,8 +2230,8 @@
         },
         {
           "id": "seg-0234",
-          "start": 1513.82,
-          "end": 1521.43,
+          "start": 1534.32,
+          "end": 1541.93,
           "rawText": "心裡就會開始想, 怎麼這麼快就過了一半呢? 這時候,",
           "text": "心裡就會開始想，怎麼這麼快就過了一半呢？這時候。",
           "reviewNeeded": false,
@@ -2306,8 +2239,8 @@
         },
         {
           "id": "seg-0235",
-          "start": 1521.93,
-          "end": 1525.08,
+          "start": 1542.43,
+          "end": 1545.58,
           "rawText": "他心裡會產生擔憂吧?",
           "text": "他心裡會產生擔憂吧？",
           "reviewNeeded": false,
@@ -2315,8 +2248,8 @@
         },
         {
           "id": "seg-0236",
-          "start": 1527.66,
-          "end": 1532.54,
+          "start": 1548.16,
+          "end": 1553.04,
           "rawText": "行程的倒數第二天, 眼前的風景還在,",
           "text": "行程的倒數第二天，眼前的風景還在。",
           "reviewNeeded": false,
@@ -2324,8 +2257,8 @@
         },
         {
           "id": "seg-0237",
-          "start": 1534.51,
-          "end": 1540.34,
+          "start": 1555.01,
+          "end": 1560.84,
           "rawText": "美食依舊在他的面前, 但他腦子裡面已經在想,",
           "text": "美食依舊在他的面前，但他腦子裡面已經在想。",
           "reviewNeeded": false,
@@ -2333,26 +2266,25 @@
         },
         {
           "id": "seg-0238",
-          "start": 1541.28,
-          "end": 1546.08,
-          "rawText": "我再過兩天就要回去了。 請問,",
-          "text": "我再過兩天就要回去了，請問。",
+          "start": 1561.78,
+          "end": 1572.79,
+          "rawText": "我再過兩天就要回去了。 請問, 在那個當下, 那個人是在享受假期,",
+          "text": "我再過兩天就要回去了，請問，在那個當下，那個人是在享受假期。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0325"
-        },
-        {
-          "id": "seg-0239",
-          "start": 1547.03,
-          "end": 1552.29,
-          "rawText": "在那個當下, 那個人是在享受假期,",
-          "text": "在那個當下，那個人是在享受假期。",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0327"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-16",
+      "heading": null,
+      "start": 1573.64,
+      "end": 1659.71,
+      "sentences": [
         {
           "id": "seg-0240",
-          "start": 1553.14,
-          "end": 1556.26,
+          "start": 1573.64,
+          "end": 1576.76,
           "rawText": "還是在承受即將失去的焦慮?",
           "text": "還是在承受即將失去的焦慮？",
           "reviewNeeded": false,
@@ -2360,8 +2292,8 @@
         },
         {
           "id": "seg-0241",
-          "start": 1558.77,
-          "end": 1562.71,
+          "start": 1579.27,
+          "end": 1583.21,
           "rawText": "他那時候快樂嗎? 不快樂。",
           "text": "他那時候快樂嗎？不快樂。",
           "reviewNeeded": false,
@@ -2369,8 +2301,8 @@
         },
         {
           "id": "seg-0242",
-          "start": 1564.67,
-          "end": 1567.87,
+          "start": 1585.17,
+          "end": 1588.37,
           "rawText": "難道他眼前的美景消失了嗎?",
           "text": "難道他眼前的美景消失了嗎？",
           "reviewNeeded": false,
@@ -2378,8 +2310,8 @@
         },
         {
           "id": "seg-0243",
-          "start": 1568.81,
-          "end": 1569.85,
+          "start": 1589.31,
+          "end": 1590.35,
           "rawText": "沒有消失啊。",
           "text": "沒有消失啊。",
           "reviewNeeded": false,
@@ -2387,8 +2319,8 @@
         },
         {
           "id": "seg-0244",
-          "start": 1571.56,
-          "end": 1573.66,
+          "start": 1592.06,
+          "end": 1594.16,
           "rawText": "他面前的美食消失了嗎?",
           "text": "他面前的美食消失了嗎？",
           "reviewNeeded": false,
@@ -2396,8 +2328,8 @@
         },
         {
           "id": "seg-0245",
-          "start": 1574.4,
-          "end": 1575.64,
+          "start": 1594.9,
+          "end": 1596.14,
           "rawText": "也沒有消失啊。",
           "text": "也沒有消失啊。",
           "reviewNeeded": false,
@@ -2405,8 +2337,8 @@
         },
         {
           "id": "seg-0246",
-          "start": 1577.29,
-          "end": 1578.45,
+          "start": 1597.79,
+          "end": 1598.95,
           "rawText": "吃起來不快樂嗎?",
           "text": "吃起來不快樂嗎？",
           "reviewNeeded": false,
@@ -2414,8 +2346,8 @@
         },
         {
           "id": "seg-0247",
-          "start": 1580.95,
-          "end": 1582.55,
+          "start": 1601.45,
+          "end": 1603.05,
           "rawText": "應該還是會快樂吧。",
           "text": "應該還是會快樂吧。",
           "reviewNeeded": false,
@@ -2423,8 +2355,8 @@
         },
         {
           "id": "seg-0248",
-          "start": 1583.45,
-          "end": 1588.55,
+          "start": 1603.95,
+          "end": 1609.05,
           "rawText": "眼前的風景望去, 心裡面還是會有一種舒服的感覺,",
           "text": "眼前的風景望去，心裡面還是會有一種舒服的感覺。",
           "reviewNeeded": false,
@@ -2432,25 +2364,17 @@
         },
         {
           "id": "seg-0249",
-          "start": 1588.55,
-          "end": 1595.86,
+          "start": 1609.05,
+          "end": 1616.36,
           "rawText": "但時不時就想到, 這一趟旅程快結束了。",
           "text": "但時不時就想到，這一趟旅程快結束了。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0340"
-        }
-      ]
-    },
-    {
-      "id": "p-23",
-      "heading": null,
-      "start": 1597.43,
-      "end": 1644.76,
-      "sentences": [
+        },
         {
           "id": "seg-0250",
-          "start": 1597.43,
-          "end": 1601.25,
+          "start": 1617.93,
+          "end": 1621.75,
           "rawText": "所以他是不是處在苦樂參半的狀態中?",
           "text": "所以他是不是處在苦樂參半的狀態中？",
           "reviewNeeded": false,
@@ -2458,8 +2382,8 @@
         },
         {
           "id": "seg-0251",
-          "start": 1602.41,
-          "end": 1603.51,
+          "start": 1622.91,
+          "end": 1624.01,
           "rawText": "應該可以這麼說吧。",
           "text": "應該可以這麼說吧。",
           "reviewNeeded": false,
@@ -2467,8 +2391,8 @@
         },
         {
           "id": "seg-0252",
-          "start": 1604.87,
-          "end": 1609.93,
+          "start": 1625.37,
+          "end": 1630.43,
           "rawText": "如果說在那個時間點, 完全沒有快樂可言,",
           "text": "如果說在那個時間點，完全沒有快樂可言。",
           "reviewNeeded": false,
@@ -2476,8 +2400,8 @@
         },
         {
           "id": "seg-0253",
-          "start": 1611.91,
-          "end": 1613.05,
+          "start": 1632.41,
+          "end": 1633.55,
           "rawText": "似乎不太合理。",
           "text": "似乎不太合理。",
           "reviewNeeded": false,
@@ -2485,8 +2409,8 @@
         },
         {
           "id": "seg-0254",
-          "start": 1614.58,
-          "end": 1618.48,
+          "start": 1635.08,
+          "end": 1638.98,
           "rawText": "所以我們說, 他處在苦樂參半的狀態中,",
           "text": "所以我們說，他處在苦樂參半的狀態中。",
           "reviewNeeded": false,
@@ -2494,8 +2418,8 @@
         },
         {
           "id": "seg-0255",
-          "start": 1620.22,
-          "end": 1621.12,
+          "start": 1640.72,
+          "end": 1641.62,
           "rawText": "這說明什麼?",
           "text": "這說明什麼？",
           "reviewNeeded": false,
@@ -2503,8 +2427,8 @@
         },
         {
           "id": "seg-0256",
-          "start": 1623.6,
-          "end": 1629.06,
+          "start": 1644.1,
+          "end": 1649.56,
           "rawText": "即使快樂還在, 苦就已經開始了。",
           "text": "即使快樂還在，苦就已經開始了。",
           "reviewNeeded": false,
@@ -2512,8 +2436,8 @@
         },
         {
           "id": "seg-0257",
-          "start": 1629.06,
-          "end": 1631.86,
+          "start": 1649.56,
+          "end": 1652.36,
           "rawText": "為什麼說快樂還在?",
           "text": "為什麼說快樂還在？",
           "reviewNeeded": false,
@@ -2521,8 +2445,8 @@
         },
         {
           "id": "seg-0258",
-          "start": 1631.86,
-          "end": 1634.36,
+          "start": 1652.36,
+          "end": 1654.86,
           "rawText": "行程還沒有結束啊。",
           "text": "行程還沒有結束啊。",
           "reviewNeeded": false,
@@ -2530,34 +2454,34 @@
         },
         {
           "id": "seg-0259",
-          "start": 1636.32,
-          "end": 1639.21,
+          "start": 1656.82,
+          "end": 1659.71,
           "rawText": "所以快樂還是存在的。",
           "text": "所以快樂還是存在的。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0354"
-        },
-        {
-          "id": "seg-0260",
-          "start": 1640.56,
-          "end": 1644.76,
-          "rawText": "但在那個人心中, 苦就已經開始冒出來了。",
-          "text": "但在那個人心中，苦就已經開始冒出來了。",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0355"
         }
       ]
     },
     {
-      "id": "p-24",
-      "heading": "旅程結束後的失落與不滿",
-      "start": 1646.94,
-      "end": 1733.32,
+      "id": "p-17",
+      "heading": null,
+      "start": 1661.06,
+      "end": 1776.6,
       "sentences": [
         {
+          "id": "seg-0260",
+          "start": 1661.06,
+          "end": 1665.26,
+          "rawText": "但在那個人心中, 苦就已經開始冒出來了。",
+          "text": "但在那個人心中，苦就已經開始冒出來了。",
+          "reviewNeeded": false,
+          "rawAsrSegmentId": "seg-0355"
+        },
+        {
           "id": "seg-0261",
-          "start": 1646.94,
-          "end": 1651.82,
+          "start": 1667.44,
+          "end": 1672.32,
           "rawText": "回到家之後, 快樂立刻轉變成失落,",
           "text": "回到家之後，快樂立刻轉變成失落。",
           "reviewNeeded": false,
@@ -2565,8 +2489,8 @@
         },
         {
           "id": "seg-0262",
-          "start": 1653.96,
-          "end": 1657.4,
+          "start": 1674.46,
+          "end": 1677.9,
           "rawText": "甚至對眼前的日常生活更加不滿,",
           "text": "甚至對眼前的日常生活更加不滿。",
           "reviewNeeded": false,
@@ -2574,8 +2498,8 @@
         },
         {
           "id": "seg-0263",
-          "start": 1658.1,
-          "end": 1659.3,
+          "start": 1678.6,
+          "end": 1679.8,
           "rawText": "心裡不斷低估。",
           "text": "心裡不斷嘀咕。",
           "reviewNeeded": false,
@@ -2583,8 +2507,8 @@
         },
         {
           "id": "seg-0264",
-          "start": 1660.52,
-          "end": 1663.12,
+          "start": 1681.02,
+          "end": 1683.62,
           "rawText": "平常的生活怎麼這麼無聊,",
           "text": "平常的生活怎麼這麼無聊。",
           "reviewNeeded": false,
@@ -2592,8 +2516,8 @@
         },
         {
           "id": "seg-0265",
-          "start": 1664.44,
-          "end": 1665.22,
+          "start": 1684.94,
+          "end": 1685.72,
           "rawText": "這麼痛苦?",
           "text": "這麼痛苦？",
           "reviewNeeded": false,
@@ -2601,8 +2525,8 @@
         },
         {
           "id": "seg-0266",
-          "start": 1665.22,
-          "end": 1673.58,
+          "start": 1685.72,
+          "end": 1694.08,
           "rawText": "這些是快樂消失之後因為貪愛而造成的苦。",
           "text": "這些是快樂消失之後因為貪愛而造成的苦。",
           "reviewNeeded": false,
@@ -2610,8 +2534,8 @@
         },
         {
           "id": "seg-0267",
-          "start": 1674.22,
-          "end": 1677.44,
+          "start": 1694.72,
+          "end": 1697.94,
           "rawText": "這沒有問題, 畢竟他回到家了,",
           "text": "這沒有問題，畢竟他回到家了。",
           "reviewNeeded": false,
@@ -2619,8 +2543,8 @@
         },
         {
           "id": "seg-0268",
-          "start": 1679.25,
-          "end": 1680.25,
+          "start": 1699.75,
+          "end": 1700.75,
           "rawText": "行程結束了。",
           "text": "行程結束了。",
           "reviewNeeded": false,
@@ -2628,8 +2552,8 @@
         },
         {
           "id": "seg-0269",
-          "start": 1681.76,
-          "end": 1687.53,
+          "start": 1702.26,
+          "end": 1708.03,
           "rawText": "在這樣的情況下, 他會覺得他原本的生活非常無趣,",
           "text": "在這樣的情況下，他會覺得他原本的生活非常無趣。",
           "reviewNeeded": false,
@@ -2637,8 +2561,8 @@
         },
         {
           "id": "seg-0270",
-          "start": 1687.89,
-          "end": 1695.64,
+          "start": 1708.39,
+          "end": 1716.14,
           "rawText": "非常單調, 而且比還沒有去旅遊之前更讓他痛苦。",
           "text": "非常單調，而且比還沒有去旅遊之前更讓他痛苦。",
           "reviewNeeded": false,
@@ -2646,8 +2570,8 @@
         },
         {
           "id": "seg-0271",
-          "start": 1695.64,
-          "end": 1700.95,
+          "start": 1716.14,
+          "end": 1721.45,
           "rawText": "這個多出來的苦是怎麼冒出來的?",
           "text": "這個多出來的苦是怎麼冒出來的？",
           "reviewNeeded": false,
@@ -2655,8 +2579,8 @@
         },
         {
           "id": "seg-0272",
-          "start": 1700.95,
-          "end": 1715.14,
+          "start": 1721.45,
+          "end": 1735.64,
           "rawText": "是不是因為他對於去旅遊之後所產生的快樂升起了貪愛而造就了多出來的那一份痛苦? 應該是嘛。",
           "text": "是不是因為他對於去旅遊之後所產生的快樂升起了貪愛，而造就了多出來的那一份痛苦？應該是嘛。",
           "reviewNeeded": false,
@@ -2664,8 +2588,8 @@
         },
         {
           "id": "seg-0273",
-          "start": 1717.51,
-          "end": 1722.15,
+          "start": 1738.01,
+          "end": 1742.65,
           "rawText": "從這一趟旅程來看, 我們可以清楚得知一件事,",
           "text": "從這一趟旅程來看，我們可以清楚得知一件事。",
           "reviewNeeded": false,
@@ -2673,8 +2597,8 @@
         },
         {
           "id": "seg-0274",
-          "start": 1723.88,
-          "end": 1728.39,
+          "start": 1744.38,
+          "end": 1748.89,
           "rawText": "苦的根本不是因為行程結束了,",
           "text": "苦的根本不是因為行程結束了。",
           "reviewNeeded": false,
@@ -2682,25 +2606,17 @@
         },
         {
           "id": "seg-0275",
-          "start": 1729.88,
-          "end": 1733.32,
+          "start": 1750.38,
+          "end": 1753.82,
           "rawText": "苦的根本不是因為快樂消失了,",
           "text": "苦的根本不是因為快樂消失了。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0377"
-        }
-      ]
-    },
-    {
-      "id": "p-25",
-      "heading": null,
-      "start": 1734.26,
-      "end": 1788.94,
-      "sentences": [
+        },
         {
           "id": "seg-0276",
-          "start": 1734.26,
-          "end": 1740.11,
+          "start": 1754.76,
+          "end": 1760.61,
           "rawText": "而是貪愛本身。 貪愛在, 苦就在,",
           "text": "而是貪愛本身，貪愛在，苦就在。",
           "reviewNeeded": false,
@@ -2708,8 +2624,8 @@
         },
         {
           "id": "seg-0277",
-          "start": 1741.34,
-          "end": 1746.44,
+          "start": 1761.84,
+          "end": 1766.94,
           "rawText": "不需要等快樂消失, 苦就已經悄悄地冒出來了。",
           "text": "不需要等快樂消失，苦就已經悄悄地冒出來了。",
           "reviewNeeded": false,
@@ -2717,17 +2633,25 @@
         },
         {
           "id": "seg-0278",
-          "start": 1749.5,
-          "end": 1756.1,
+          "start": 1770,
+          "end": 1776.6,
           "rawText": "快樂消失, 這個助緣只是讓苦浮出水面,",
           "text": "快樂消失，這個助緣只是讓苦浮出水面。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0383"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-18",
+      "heading": null,
+      "start": 1776.6,
+      "end": 1903.29,
+      "sentences": [
         {
           "id": "seg-0279",
-          "start": 1756.1,
-          "end": 1758.51,
+          "start": 1776.6,
+          "end": 1779.01,
           "rawText": "變得更明顯罷了。",
           "text": "變得更明顯罷了。",
           "reviewNeeded": false,
@@ -2735,8 +2659,8 @@
         },
         {
           "id": "seg-0280",
-          "start": 1759.87,
-          "end": 1763.39,
+          "start": 1780.37,
+          "end": 1783.89,
           "rawText": "但苦的種子是在什麼時候種下去的?",
           "text": "但苦的種子是在什麼時候種下去的？",
           "reviewNeeded": false,
@@ -2744,8 +2668,8 @@
         },
         {
           "id": "seg-0281",
-          "start": 1763.39,
-          "end": 1768.8,
+          "start": 1783.89,
+          "end": 1789.3,
           "rawText": "在生起貪愛的那一刻就已經種下去了。",
           "text": "在生起貪愛的那一刻就已經種下去了。",
           "reviewNeeded": false,
@@ -2753,8 +2677,8 @@
         },
         {
           "id": "seg-0282",
-          "start": 1771.1,
-          "end": 1776.52,
+          "start": 1791.6,
+          "end": 1797.02,
           "rawText": "這也正是為什麼佛法說苦的根源不在外境,",
           "text": "這也正是為什麼佛法說苦的根源不在外境。",
           "reviewNeeded": false,
@@ -2762,8 +2686,8 @@
         },
         {
           "id": "seg-0283",
-          "start": 1777.57,
-          "end": 1781.15,
+          "start": 1798.07,
+          "end": 1801.65,
           "rawText": "而在我們內心那個緊緊抓住的力量,",
           "text": "而在我們內心那個緊緊抓住的力量。",
           "reviewNeeded": false,
@@ -2771,8 +2695,8 @@
         },
         {
           "id": "seg-0284",
-          "start": 1783.2,
-          "end": 1786.11,
+          "start": 1803.7,
+          "end": 1806.61,
           "rawText": "因為貪愛而想要去。",
           "text": "因為貪愛而想要去抓取。",
           "reviewNeeded": false,
@@ -2780,25 +2704,17 @@
         },
         {
           "id": "seg-0285",
-          "start": 1787.54,
-          "end": 1788.94,
+          "start": 1808.04,
+          "end": 1809.44,
           "rawText": "這才是苦的根源。",
           "text": "這才是苦的根源。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0391"
-        }
-      ]
-    },
-    {
-      "id": "p-26",
-      "heading": null,
-      "start": 1790.42,
-      "end": 1841.94,
-      "sentences": [
+        },
         {
           "id": "seg-0286",
-          "start": 1790.42,
-          "end": 1793.06,
+          "start": 1810.92,
+          "end": 1813.56,
           "rawText": "那個度假的快樂本身沒有問題。",
           "text": "那個度假的快樂本身沒有問題。",
           "reviewNeeded": false,
@@ -2806,8 +2722,8 @@
         },
         {
           "id": "seg-0287",
-          "start": 1793.06,
-          "end": 1798.3,
+          "start": 1813.56,
+          "end": 1818.8,
           "rawText": "問題在於我們對快樂的態度,",
           "text": "問題在於我們對快樂的態度。",
           "reviewNeeded": false,
@@ -2815,8 +2731,8 @@
         },
         {
           "id": "seg-0288",
-          "start": 1800.26,
-          "end": 1805.58,
+          "start": 1820.76,
+          "end": 1826.08,
           "rawText": "我們試圖用貪愛緊緊抓住它, 不讓它走。",
           "text": "我們試圖用貪愛緊緊抓住它，不讓它走。",
           "reviewNeeded": false,
@@ -2824,8 +2740,8 @@
         },
         {
           "id": "seg-0289",
-          "start": 1807.43,
-          "end": 1808.77,
+          "start": 1827.93,
+          "end": 1829.27,
           "rawText": "這才是問題所在。",
           "text": "這才是問題所在。",
           "reviewNeeded": false,
@@ -2833,8 +2749,8 @@
         },
         {
           "id": "seg-0290",
-          "start": 1810.29,
-          "end": 1816.83,
+          "start": 1830.79,
+          "end": 1837.33,
           "rawText": "如果是輕輕地拿著, 知道這趟旅程最終會結束,",
           "text": "如果是輕輕地拿著，知道這趟旅程最終會結束。",
           "reviewNeeded": false,
@@ -2842,8 +2758,8 @@
         },
         {
           "id": "seg-0291",
-          "start": 1818.44,
-          "end": 1822.37,
+          "start": 1838.94,
+          "end": 1842.87,
           "rawText": "知道它會過去, 這是享受。",
           "text": "知道它會過去，這是享受。",
           "reviewNeeded": false,
@@ -2851,8 +2767,8 @@
         },
         {
           "id": "seg-0292",
-          "start": 1823.88,
-          "end": 1827.58,
+          "start": 1844.38,
+          "end": 1848.08,
           "rawText": "但如果死命地握著, 不願意放開,",
           "text": "但如果死命地握著，不願意放開。",
           "reviewNeeded": false,
@@ -2860,8 +2776,8 @@
         },
         {
           "id": "seg-0293",
-          "start": 1828.14,
-          "end": 1831.79,
+          "start": 1848.64,
+          "end": 1852.29,
           "rawText": "這是直取, 也是痛苦的主因。",
           "text": "這是執取，也是痛苦的主因。",
           "reviewNeeded": false,
@@ -2869,8 +2785,8 @@
         },
         {
           "id": "seg-0294",
-          "start": 1831.79,
-          "end": 1837.35,
+          "start": 1852.29,
+          "end": 1857.85,
           "rawText": "平時我們以為失去旧會苦,",
           "text": "平時我們以為失去舊的會苦。",
           "reviewNeeded": false,
@@ -2878,25 +2794,17 @@
         },
         {
           "id": "seg-0295",
-          "start": 1838.58,
-          "end": 1841.94,
+          "start": 1859.08,
+          "end": 1862.44,
           "rawText": "其實想抓住才是苦。",
           "text": "其實想抓住才是苦。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0406"
-        }
-      ]
-    },
-    {
-      "id": "p-27",
-      "heading": "壞苦與煩惱的關係",
-      "start": 1844.29,
-      "end": 1905.1,
-      "sentences": [
+        },
         {
           "id": "seg-0296",
-          "start": 1844.29,
-          "end": 1848.81,
+          "start": 1864.79,
+          "end": 1869.31,
           "rawText": "所以壞苦與煩惱的關係比苦苦更深一層。",
           "text": "所以壞苦與煩惱的關係比苦苦更深一層。",
           "reviewNeeded": false,
@@ -2904,8 +2812,8 @@
         },
         {
           "id": "seg-0297",
-          "start": 1850.37,
-          "end": 1853.66,
+          "start": 1870.87,
+          "end": 1874.16,
           "rawText": "在苦苦的那一層, 煩惱是助燃物,",
           "text": "在苦苦的那一層，煩惱是助燃物。",
           "reviewNeeded": false,
@@ -2913,8 +2821,8 @@
         },
         {
           "id": "seg-0298",
-          "start": 1855.58,
-          "end": 1859.37,
+          "start": 1876.08,
+          "end": 1879.87,
           "rawText": "讓苦燒得更深更久。",
           "text": "讓苦燒得更深更久。",
           "reviewNeeded": false,
@@ -2922,8 +2830,8 @@
         },
         {
           "id": "seg-0299",
-          "start": 1860.79,
-          "end": 1864.15,
+          "start": 1881.29,
+          "end": 1884.65,
           "rawText": "在壞苦的這一層, 煩惱是製造者,",
           "text": "在壞苦的這一層，煩惱是製造者。",
           "reviewNeeded": false,
@@ -2931,8 +2839,8 @@
         },
         {
           "id": "seg-0300",
-          "start": 1865.37,
-          "end": 1867.95,
+          "start": 1885.87,
+          "end": 1888.45,
           "rawText": "直接讓快樂轉變為痛苦。",
           "text": "直接讓快樂轉變為痛苦。",
           "reviewNeeded": false,
@@ -2940,8 +2848,8 @@
         },
         {
           "id": "seg-0301",
-          "start": 1867.95,
-          "end": 1872.66,
+          "start": 1888.45,
+          "end": 1893.16,
           "rawText": "甚至不需要等快樂消失。",
           "text": "甚至不需要等快樂消失。",
           "reviewNeeded": false,
@@ -2949,8 +2857,8 @@
         },
         {
           "id": "seg-0302",
-          "start": 1873.7,
-          "end": 1879.03,
+          "start": 1894.2,
+          "end": 1899.53,
           "rawText": "當貪愛升起的那一刻, 苦就已經在酝酿之中。",
           "text": "當貪愛生起的那一刻，苦就已經在醞釀之中。",
           "reviewNeeded": false,
@@ -2958,17 +2866,25 @@
         },
         {
           "id": "seg-0303",
-          "start": 1879.71,
-          "end": 1882.79,
+          "start": 1900.21,
+          "end": 1903.29,
           "rawText": "只是我們還沒有察覺罷了。",
           "text": "只是我們還沒有察覺罷了。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0417"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-19",
+      "heading": "4. 行苦與煩惱的關係",
+      "start": 1904.81,
+      "end": 2015.22,
+      "sentences": [
         {
           "id": "seg-0304",
-          "start": 1884.31,
-          "end": 1888.35,
+          "start": 1904.81,
+          "end": 1908.85,
           "rawText": "接著我們看到第三點, 辛苦與煩惱的關係。",
           "text": "接著我們看到第三點，行苦與煩惱的關係。",
           "reviewNeeded": false,
@@ -2976,8 +2892,8 @@
         },
         {
           "id": "seg-0305",
-          "start": 1890.7,
-          "end": 1895.4,
+          "start": 1911.2,
+          "end": 1915.9,
           "rawText": "前面我們已經說過, 辛苦指的不是一種感受,",
           "text": "前面我們已經說過，行苦指的不是一種感受。",
           "reviewNeeded": false,
@@ -2985,8 +2901,8 @@
         },
         {
           "id": "seg-0306",
-          "start": 1896.14,
-          "end": 1897.52,
+          "start": 1916.64,
+          "end": 1918.02,
           "rawText": "而是一種處境。",
           "text": "而是一種處境。",
           "reviewNeeded": false,
@@ -2994,25 +2910,17 @@
         },
         {
           "id": "seg-0307",
-          "start": 1899.36,
-          "end": 1905.1,
+          "start": 1919.86,
+          "end": 1925.6,
           "rawText": "也就是我們的五蕴, 是在夜與煩惱的束縛下取得的。",
           "text": "也就是我們的五蘊，是在業與煩惱的束縛下取得的。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0423"
-        }
-      ]
-    },
-    {
-      "id": "p-28",
-      "heading": "4. 行苦與煩惱的關係",
-      "start": 1905.1,
-      "end": 1970.43,
-      "sentences": [
+        },
         {
           "id": "seg-0308",
-          "start": 1905.1,
-          "end": 1909.13,
+          "start": 1925.6,
+          "end": 1929.63,
           "rawText": "這個韵體本身就是辛苦。",
           "text": "這個蘊體本身就是行苦。",
           "reviewNeeded": false,
@@ -3020,8 +2928,8 @@
         },
         {
           "id": "seg-0309",
-          "start": 1911.07,
-          "end": 1914.15,
+          "start": 1931.57,
+          "end": 1934.65,
           "rawText": "那麼煩惱在辛苦的這一層,",
           "text": "那麼煩惱在行苦的這一層。",
           "reviewNeeded": false,
@@ -3029,8 +2937,8 @@
         },
         {
           "id": "seg-0310",
-          "start": 1915.27,
-          "end": 1917.19,
+          "start": 1935.77,
+          "end": 1937.69,
           "rawText": "扮演什麼樣的角色呢?",
           "text": "扮演什麼樣的角色呢？",
           "reviewNeeded": false,
@@ -3038,8 +2946,8 @@
         },
         {
           "id": "seg-0311",
-          "start": 1919.2,
-          "end": 1922.46,
+          "start": 1939.7,
+          "end": 1942.96,
           "rawText": "煩惱扮演的是推動者的角色。",
           "text": "煩惱扮演的是推動者的角色。",
           "reviewNeeded": false,
@@ -3047,8 +2955,8 @@
         },
         {
           "id": "seg-0312",
-          "start": 1925.11,
-          "end": 1929.18,
+          "start": 1945.61,
+          "end": 1949.68,
           "rawText": "煩惱驱使我們不斷取這個韵體,",
           "text": "煩惱驅使我們不斷取這個蘊體。",
           "reviewNeeded": false,
@@ -3056,8 +2964,8 @@
         },
         {
           "id": "seg-0313",
-          "start": 1930.65,
-          "end": 1934.67,
+          "start": 1951.15,
+          "end": 1955.17,
           "rawText": "並且讓這個苦的循環一直延續下去。",
           "text": "並且讓這個苦的迴圈一直延續下去。",
           "reviewNeeded": false,
@@ -3065,8 +2973,8 @@
         },
         {
           "id": "seg-0314",
-          "start": 1936.79,
-          "end": 1941.47,
+          "start": 1957.29,
+          "end": 1961.97,
           "rawText": "而這個取的動作, 不只發生在投生的那一刻,",
           "text": "而這個取的動作，不只發生在投生的那一刻。",
           "reviewNeeded": false,
@@ -3074,8 +2982,8 @@
         },
         {
           "id": "seg-0315",
-          "start": 1942.49,
-          "end": 1945.71,
+          "start": 1962.99,
+          "end": 1966.21,
           "rawText": "也發生在投生之後的每一天。",
           "text": "也發生在投生之後的每一天。",
           "reviewNeeded": false,
@@ -3083,8 +2991,8 @@
         },
         {
           "id": "seg-0316",
-          "start": 1945.71,
-          "end": 1952.34,
+          "start": 1966.21,
+          "end": 1972.84,
           "rawText": "投生時在取, 投生後也在取,",
           "text": "投生時在取，投生後也在取。",
           "reviewNeeded": false,
@@ -3092,8 +3000,8 @@
         },
         {
           "id": "seg-0317",
-          "start": 1954.23,
-          "end": 1959.06,
+          "start": 1974.73,
+          "end": 1979.56,
           "rawText": "而背後最核心的推手就是貪愛。",
           "text": "而背後最核心的推手就是貪愛。",
           "reviewNeeded": false,
@@ -3101,8 +3009,8 @@
         },
         {
           "id": "seg-0318",
-          "start": 1960.32,
-          "end": 1965.68,
+          "start": 1980.82,
+          "end": 1986.18,
           "rawText": "因為貪愛讓我們想取, 因為取,",
           "text": "因為貪愛讓我們想取，因為取。",
           "reviewNeeded": false,
@@ -3110,25 +3018,17 @@
         },
         {
           "id": "seg-0319",
-          "start": 1966.33,
-          "end": 1970.43,
+          "start": 1986.83,
+          "end": 1990.93,
           "rawText": "我們持續承擔這個韵體所帶來的苦。",
           "text": "我們持續承擔這個蘊體所帶來的苦。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0439"
-        }
-      ]
-    },
-    {
-      "id": "p-29",
-      "heading": null,
-      "start": 1972.39,
-      "end": 2025.97,
-      "sentences": [
+        },
         {
           "id": "seg-0320",
-          "start": 1972.39,
-          "end": 1976.04,
+          "start": 1992.89,
+          "end": 1996.54,
           "rawText": "到這個地方, 我們可以停下來想一想,",
           "text": "到這個地方，我們可以停下來想一想。",
           "reviewNeeded": false,
@@ -3136,17 +3036,17 @@
         },
         {
           "id": "seg-0321",
-          "start": 1977.64,
-          "end": 1981.08,
+          "start": 1998.14,
+          "end": 2001.58,
           "rawText": "為什麼我們每天都在不斷地取,",
-          "text": "為什麼我們每天都在不斷地取。",
+          "text": "為什麼我們每天都在不斷地取，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0442"
         },
         {
           "id": "seg-0322",
-          "start": 1981.08,
-          "end": 1990.57,
+          "start": 2001.58,
+          "end": 2011.07,
           "rawText": "取得資訊, 取得認可, 取得安全感。",
           "text": "取得資訊，取得認可，取得安全感。",
           "reviewNeeded": false,
@@ -3154,17 +3054,25 @@
         },
         {
           "id": "seg-0323",
-          "start": 1992.18,
-          "end": 1994.72,
+          "start": 2012.68,
+          "end": 2015.22,
           "rawText": "這種不斷想抓住什麼的衝動,",
           "text": "這種不斷想抓住什麼的衝動。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0446"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-20",
+      "heading": null,
+      "start": 2016.09,
+      "end": 2144.35,
+      "sentences": [
         {
           "id": "seg-0324",
-          "start": 1995.59,
-          "end": 1997.27,
+          "start": 2016.09,
+          "end": 2017.77,
           "rawText": "究竟是為了填滿什麼?",
           "text": "究竟是為了填滿什麼？",
           "reviewNeeded": false,
@@ -3172,8 +3080,8 @@
         },
         {
           "id": "seg-0325",
-          "start": 1999.06,
-          "end": 2003.77,
+          "start": 2019.56,
+          "end": 2024.27,
           "rawText": "難道是為了填滿我們空虛的心嗎? 如果是,",
           "text": "難道是為了填滿我們空虛的心嗎？如果是。",
           "reviewNeeded": false,
@@ -3181,8 +3089,8 @@
         },
         {
           "id": "seg-0326",
-          "start": 2004.98,
-          "end": 2009.55,
+          "start": 2025.48,
+          "end": 2030.05,
           "rawText": "到目前為止, 我們取了這麼多的東西,",
           "text": "到目前為止，我們取了這麼多的東西。",
           "reviewNeeded": false,
@@ -3190,8 +3098,8 @@
         },
         {
           "id": "seg-0327",
-          "start": 2010.38,
-          "end": 2013.44,
+          "start": 2030.88,
+          "end": 2033.94,
           "rawText": "我們的心有稍微被填滿嗎?",
           "text": "我們的心有稍微被填滿嗎？",
           "reviewNeeded": false,
@@ -3199,8 +3107,8 @@
         },
         {
           "id": "seg-0328",
-          "start": 2013.44,
-          "end": 2016.42,
+          "start": 2033.94,
+          "end": 2036.92,
           "rawText": "我們不要說完全被填滿,",
           "text": "我們不要說完全被填滿。",
           "reviewNeeded": false,
@@ -3208,8 +3116,8 @@
         },
         {
           "id": "seg-0329",
-          "start": 2016.42,
-          "end": 2019,
+          "start": 2036.92,
+          "end": 2039.5,
           "rawText": "有稍微被填滿嗎?",
           "text": "有稍微被填滿嗎？",
           "reviewNeeded": false,
@@ -3217,25 +3125,17 @@
         },
         {
           "id": "seg-0330",
-          "start": 2019.06,
-          "end": 2025.97,
+          "start": 2039.56,
+          "end": 2046.47,
           "rawText": "似乎沒有。 那請問, 還要繼續取嗎?",
           "text": "似乎沒有，那請問，還要繼續取嗎？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0455"
-        }
-      ]
-    },
-    {
-      "id": "p-30",
-      "heading": null,
-      "start": 2027.72,
-      "end": 2098.42,
-      "sentences": [
+        },
         {
           "id": "seg-0331",
-          "start": 2027.72,
-          "end": 2034.14,
+          "start": 2048.22,
+          "end": 2054.64,
           "rawText": "繼續取之後, 我們的心真的有機會被填滿嗎?",
           "text": "繼續取之後，我們的心真的有機會被填滿嗎？",
           "reviewNeeded": false,
@@ -3243,8 +3143,8 @@
         },
         {
           "id": "seg-0332",
-          "start": 2035.8,
-          "end": 2040.8,
+          "start": 2056.3,
+          "end": 2061.3,
           "rawText": "我們應該問自己, 為什麼我要一直重複這個動作?",
           "text": "我們應該問自己，為什麼我要一直重複這個動作？",
           "reviewNeeded": false,
@@ -3252,8 +3152,8 @@
         },
         {
           "id": "seg-0333",
-          "start": 2041.83,
-          "end": 2042.63,
+          "start": 2062.33,
+          "end": 2063.13,
           "rawText": "我是為了什麼?",
           "text": "我是為了什麼？",
           "reviewNeeded": false,
@@ -3261,8 +3161,8 @@
         },
         {
           "id": "seg-0334",
-          "start": 2042.63,
-          "end": 2046.81,
+          "start": 2063.13,
+          "end": 2067.31,
           "rawText": "其實仔細觀察, 就會發現,",
           "text": "其實仔細觀察，就會發現。",
           "reviewNeeded": false,
@@ -3270,8 +3170,8 @@
         },
         {
           "id": "seg-0335",
-          "start": 2047.88,
-          "end": 2053.73,
+          "start": 2068.38,
+          "end": 2074.23,
           "rawText": "我們的心從來沒有被填滿過, 為什麼? 得到了,",
           "text": "我們的心從來沒有被填滿過，為什麼？得到了。",
           "reviewNeeded": false,
@@ -3279,8 +3179,8 @@
         },
         {
           "id": "seg-0336",
-          "start": 2054.61,
-          "end": 2058.42,
+          "start": 2075.11,
+          "end": 2078.92,
           "rawText": "很快又會想要下一個, 得不到,",
           "text": "很快又會想要下一個，得不到。",
           "reviewNeeded": false,
@@ -3288,8 +3188,8 @@
         },
         {
           "id": "seg-0337",
-          "start": 2058.96,
-          "end": 2062.48,
+          "start": 2079.46,
+          "end": 2082.98,
           "rawText": "就會感到焦慮不安, 更想得到,",
           "text": "就會感到焦慮不安，更想得到。",
           "reviewNeeded": false,
@@ -3297,8 +3197,8 @@
         },
         {
           "id": "seg-0338",
-          "start": 2064.01,
-          "end": 2068.01,
+          "start": 2084.51,
+          "end": 2088.51,
           "rawText": "弄到最後, 心還是不滿足,",
           "text": "弄到最後，心還是不滿足。",
           "reviewNeeded": false,
@@ -3306,8 +3206,8 @@
         },
         {
           "id": "seg-0339",
-          "start": 2069.96,
-          "end": 2072.94,
+          "start": 2090.46,
+          "end": 2093.44,
           "rawText": "到目前為止, 也沒有覺得夠了,",
           "text": "到目前為止，也沒有覺得夠了。",
           "reviewNeeded": false,
@@ -3315,8 +3215,8 @@
         },
         {
           "id": "seg-0340",
-          "start": 2073.72,
-          "end": 2079,
+          "start": 2094.22,
+          "end": 2099.5,
           "rawText": "我很滿足了, 時不時的, 還是想要取,",
           "text": "我很滿足了，時不時地還是想要取。",
           "reviewNeeded": false,
@@ -3324,8 +3224,8 @@
         },
         {
           "id": "seg-0341",
-          "start": 2080.07,
-          "end": 2087.48,
+          "start": 2100.57,
+          "end": 2107.98,
           "rawText": "時不時的, 還是想要抓, 這不是因為我們得到的還不夠,",
           "text": "時不時地還是想要抓。這不是因為我們得到的還不夠。",
           "reviewNeeded": false,
@@ -3333,8 +3233,8 @@
         },
         {
           "id": "seg-0342",
-          "start": 2088.66,
-          "end": 2092.04,
+          "start": 2109.16,
+          "end": 2112.54,
           "rawText": "而是因為這個一直想取得的慣性,",
           "text": "而是因為這個一直想取得的慣性。",
           "reviewNeeded": false,
@@ -3342,25 +3242,17 @@
         },
         {
           "id": "seg-0343",
-          "start": 2092.8,
-          "end": 2098.42,
+          "start": 2113.3,
+          "end": 2118.92,
           "rawText": "本身就是問題所在, 這就是辛苦的運作方式,",
           "text": "本身就是問題所在，這就是行苦的運作方式。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0483"
-        }
-      ]
-    },
-    {
-      "id": "p-31",
-      "heading": "行苦：不斷想取得的慣性",
-      "start": 2099.16,
-      "end": 2142.4,
-      "sentences": [
+        },
         {
           "id": "seg-0344",
-          "start": 2099.16,
-          "end": 2101.86,
+          "start": 2119.66,
+          "end": 2122.36,
           "rawText": "不需要有痛苦的事件發生,",
           "text": "不需要有痛苦的事件發生。",
           "reviewNeeded": false,
@@ -3368,8 +3260,8 @@
         },
         {
           "id": "seg-0345",
-          "start": 2103.56,
-          "end": 2110.45,
+          "start": 2124.06,
+          "end": 2130.95,
           "rawText": "光是這種不斷想取得, 不斷想維持的慣性本身,",
           "text": "光是這種不斷想取得，不斷想維持的慣性本身。",
           "reviewNeeded": false,
@@ -3377,8 +3269,8 @@
         },
         {
           "id": "seg-0346",
-          "start": 2110.83,
-          "end": 2118.24,
+          "start": 2131.33,
+          "end": 2138.74,
           "rawText": "就是一種苦, 換句話說, 這種慣性本身,",
           "text": "就是一種苦。換句話說，這種慣性本身。",
           "reviewNeeded": false,
@@ -3386,17 +3278,25 @@
         },
         {
           "id": "seg-0347",
-          "start": 2118.74,
-          "end": 2123.85,
+          "start": 2139.24,
+          "end": 2144.35,
           "rawText": "就是我們的缺陷, 對於這一點,",
           "text": "就是我們的缺陷。對於這一點。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0491"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-21",
+      "heading": "5. 關鍵在於取的動機",
+      "start": 2147.01,
+      "end": 2269.52,
+      "sentences": [
         {
           "id": "seg-0348",
-          "start": 2126.51,
-          "end": 2131.15,
+          "start": 2147.01,
+          "end": 2151.65,
           "rawText": "應該會有人提出質疑, 剛才說,",
           "text": "應該會有人提出質疑：剛才說。",
           "reviewNeeded": false,
@@ -3404,8 +3304,8 @@
         },
         {
           "id": "seg-0349",
-          "start": 2131.67,
-          "end": 2137.06,
+          "start": 2152.17,
+          "end": 2157.56,
           "rawText": "取是苦的根源, 那我每天努力工作,",
           "text": "取是苦的根源，那我每天努力工作。",
           "reviewNeeded": false,
@@ -3413,25 +3313,17 @@
         },
         {
           "id": "seg-0350",
-          "start": 2137.58,
-          "end": 2142.4,
+          "start": 2158.08,
+          "end": 2162.9,
           "rawText": "提升自己, 是為了給家人更好的生活,",
           "text": "提升自己，是為了給家人更好的生活。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0497"
-        }
-      ]
-    },
-    {
-      "id": "p-32",
-      "heading": "5. 關鍵在於取的動機",
-      "start": 2143.3,
-      "end": 2203.59,
-      "sentences": [
+        },
         {
           "id": "seg-0351",
-          "start": 2143.3,
-          "end": 2144.94,
+          "start": 2163.8,
+          "end": 2165.44,
           "rawText": "這不也是一種取嗎?",
           "text": "這不也是一種取嗎？",
           "reviewNeeded": false,
@@ -3439,8 +3331,8 @@
         },
         {
           "id": "seg-0352",
-          "start": 2147.3,
-          "end": 2153.98,
+          "start": 2167.8,
+          "end": 2174.48,
           "rawText": "如果放下這個取, 我不就變成一個沒有上進心的躺平族了嗎?",
           "text": "如果放下這個取，我不就變成一個沒有上進心的躺平族了嗎？",
           "reviewNeeded": false,
@@ -3448,8 +3340,8 @@
         },
         {
           "id": "seg-0353",
-          "start": 2153.98,
-          "end": 2160.73,
+          "start": 2174.48,
+          "end": 2181.23,
           "rawText": "況且修行人想要取得解脫,",
           "text": "況且修行人想要取得解脫。",
           "reviewNeeded": false,
@@ -3457,8 +3349,8 @@
         },
         {
           "id": "seg-0354",
-          "start": 2162.31,
-          "end": 2168.73,
+          "start": 2182.81,
+          "end": 2189.23,
           "rawText": "想要獲得佛果位, 難道這不也是在取嗎?",
           "text": "想要獲得佛果位，難道這不也是在取嗎？",
           "reviewNeeded": false,
@@ -3466,8 +3358,8 @@
         },
         {
           "id": "seg-0355",
-          "start": 2170.36,
-          "end": 2177.4,
+          "start": 2190.86,
+          "end": 2197.9,
           "rawText": "這是一個重要的問題, 佛法對此有個微妙的觀點,",
           "text": "這是一個重要的問題。佛法對此有個微妙的觀點。",
           "reviewNeeded": false,
@@ -3475,8 +3367,8 @@
         },
         {
           "id": "seg-0356",
-          "start": 2179.04,
-          "end": 2186.43,
+          "start": 2199.54,
+          "end": 2206.93,
           "rawText": "取本身不是問題, 問題在於取的動機為何?",
           "text": "取本身不是問題，問題在於取的動機為何。",
           "reviewNeeded": false,
@@ -3484,8 +3376,8 @@
         },
         {
           "id": "seg-0357",
-          "start": 2187.91,
-          "end": 2193.82,
+          "start": 2208.41,
+          "end": 2214.32,
           "rawText": "我們想取的動機, 也就是內心的狀態,",
           "text": "我們想取的動機，也就是內心的狀態。",
           "reviewNeeded": false,
@@ -3493,8 +3385,8 @@
         },
         {
           "id": "seg-0358",
-          "start": 2194.7,
-          "end": 2198.02,
+          "start": 2215.2,
+          "end": 2218.52,
           "rawText": "是靈活的, 還是緊繃的?",
           "text": "是靈活的，還是緊繃的？",
           "reviewNeeded": false,
@@ -3502,25 +3394,17 @@
         },
         {
           "id": "seg-0359",
-          "start": 2199.42,
-          "end": 2203.59,
+          "start": 2219.92,
+          "end": 2224.09,
           "rawText": "對於這一點, 我們先從生活中的例子來看,",
           "text": "對於這一點，我們先從生活中的例子來看。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0513"
-        }
-      ]
-    },
-    {
-      "id": "p-33",
-      "heading": null,
-      "start": 2205.58,
-      "end": 2293.93,
-      "sentences": [
+        },
         {
           "id": "seg-0360",
-          "start": 2205.58,
-          "end": 2212.66,
+          "start": 2226.08,
+          "end": 2233.16,
           "rawText": "同樣是努力工作, 我們從兩種角度來分析, 第一種,",
           "text": "同樣是努力工作，我們從兩種角度來分析：第一種。",
           "reviewNeeded": false,
@@ -3528,8 +3412,8 @@
         },
         {
           "id": "seg-0361",
-          "start": 2213.76,
-          "end": 2219.27,
+          "start": 2234.26,
+          "end": 2239.77,
           "rawText": "積極的狀態, 第二種, 直取的狀態,",
           "text": "積極的狀態；第二種，執取的狀態。",
           "reviewNeeded": false,
@@ -3537,8 +3421,8 @@
         },
         {
           "id": "seg-0362",
-          "start": 2220.47,
-          "end": 2224.89,
+          "start": 2240.97,
+          "end": 2245.39,
           "rawText": "積極的狀態, 是專注于做好每一件事,",
           "text": "積極的狀態，是專注於做好每一件事。",
           "reviewNeeded": false,
@@ -3546,8 +3430,8 @@
         },
         {
           "id": "seg-0363",
-          "start": 2227.23,
-          "end": 2230.21,
+          "start": 2247.73,
+          "end": 2250.71,
           "rawText": "完成了一件事情, 內心感到踏實,",
           "text": "完成了一件事情，內心感到踏實。",
           "reviewNeeded": false,
@@ -3555,8 +3439,8 @@
         },
         {
           "id": "seg-0364",
-          "start": 2231.86,
-          "end": 2237.96,
+          "start": 2252.36,
+          "end": 2258.46,
           "rawText": "沒完成就繼續努力, 他的心是靈活的,",
           "text": "沒完成就繼續努力。他的心是靈活的。",
           "reviewNeeded": false,
@@ -3564,8 +3448,8 @@
         },
         {
           "id": "seg-0365",
-          "start": 2239.79,
-          "end": 2243.89,
+          "start": 2260.29,
+          "end": 2264.39,
           "rawText": "即使暫時遇到挫折, 也能想辦法調整,",
           "text": "即使暫時遇到挫折，也能想辦法調整。",
           "reviewNeeded": false,
@@ -3573,17 +3457,25 @@
         },
         {
           "id": "seg-0366",
-          "start": 2245.3,
-          "end": 2249.02,
+          "start": 2265.8,
+          "end": 2269.52,
           "rawText": "不會因此乱了正腳, 甚至一蹶不振,",
           "text": "不會因此亂了陣腳，甚至一蹶不振。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0529"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-22",
+      "heading": null,
+      "start": 2269.52,
+      "end": 2381.11,
+      "sentences": [
         {
           "id": "seg-0367",
-          "start": 2249.02,
-          "end": 2252.53,
+          "start": 2269.52,
+          "end": 2273.03,
           "rawText": "這就是入行論當中所說的,",
           "text": "這就是《入行論》當中所說的。",
           "reviewNeeded": false,
@@ -3591,8 +3483,8 @@
         },
         {
           "id": "seg-0368",
-          "start": 2252.53,
-          "end": 2256.11,
+          "start": 2273.03,
+          "end": 2276.61,
           "rawText": "弱勢尚可為, 云和不歡喜,",
           "text": "「弱勢尚可為，云何不歡喜。",
           "reviewNeeded": false,
@@ -3600,8 +3492,8 @@
         },
         {
           "id": "seg-0369",
-          "start": 2258.18,
-          "end": 2261.52,
+          "start": 2278.68,
+          "end": 2282.02,
           "rawText": "若以不計事, 悠腦有何以,",
           "text": "若以不濟事，憂惱有何益？」",
           "reviewNeeded": false,
@@ -3609,8 +3501,8 @@
         },
         {
           "id": "seg-0370",
-          "start": 2263.94,
-          "end": 2268.52,
+          "start": 2284.44,
+          "end": 2289.02,
           "rawText": "遇到問題, 能調整的, 能改善的,",
           "text": "遇到問題，能調整的、能改善的。",
           "reviewNeeded": false,
@@ -3618,8 +3510,8 @@
         },
         {
           "id": "seg-0371",
-          "start": 2268.88,
-          "end": 2273.96,
+          "start": 2289.38,
+          "end": 2294.46,
           "rawText": "积极面對, 无法調整的, 无法改善的,",
           "text": "積極面對；無法調整的、無法改善的。",
           "reviewNeeded": false,
@@ -3627,8 +3519,8 @@
         },
         {
           "id": "seg-0372",
-          "start": 2274.3,
-          "end": 2280.57,
+          "start": 2294.8,
+          "end": 2301.07,
           "rawText": "你再憂慮, 也无济于事, 这种状態的核心,",
           "text": "你再憂慮，也無濟於事。這種狀態的核心。",
           "reviewNeeded": false,
@@ -3636,8 +3528,8 @@
         },
         {
           "id": "seg-0373",
-          "start": 2281.01,
-          "end": 2286.76,
+          "start": 2301.51,
+          "end": 2307.26,
           "rawText": "是專注在事情本身, 也就是这件事情,",
           "text": "是專注在事情本身，也就是這件事情。",
           "reviewNeeded": false,
@@ -3645,25 +3537,17 @@
         },
         {
           "id": "seg-0374",
-          "start": 2287.1,
-          "end": 2293.93,
+          "start": 2307.6,
+          "end": 2314.43,
           "rawText": "我能不能够把它做好, 焦点是放在这件事情上,",
           "text": "我能不能夠把它做好，焦點是放在這件事情上。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0547"
-        }
-      ]
-    },
-    {
-      "id": "p-34",
-      "heading": null,
-      "start": 2295.9,
-      "end": 2388.39,
-      "sentences": [
+        },
         {
           "id": "seg-0375",
-          "start": 2295.9,
-          "end": 2301.41,
+          "start": 2316.4,
+          "end": 2321.91,
           "rawText": "而不是在维护一个我, 直取的状态呢,",
           "text": "而不是在維護一個我。執取的狀態呢？",
           "reviewNeeded": false,
@@ -3671,8 +3555,8 @@
         },
         {
           "id": "seg-0376",
-          "start": 2302.36,
-          "end": 2306.64,
+          "start": 2322.86,
+          "end": 2327.14,
           "rawText": "做的是同样的事, 但心里却不断在想,",
           "text": "做的是同樣的事，但心裡卻不斷在想。",
           "reviewNeeded": false,
@@ -3680,8 +3564,8 @@
         },
         {
           "id": "seg-0377",
-          "start": 2307.94,
-          "end": 2312.06,
+          "start": 2328.44,
+          "end": 2332.56,
           "rawText": "我够不够好, 我做这件事,",
           "text": "我夠不夠好？我做這件事。",
           "reviewNeeded": false,
@@ -3689,8 +3573,8 @@
         },
         {
           "id": "seg-0378",
-          "start": 2312.42,
-          "end": 2317.34,
+          "start": 2332.92,
+          "end": 2337.84,
           "rawText": "别人怎么看我, 万一失败了, 怎么办,",
           "text": "別人怎麼看我？萬一失敗了，怎麼辦？",
           "reviewNeeded": false,
@@ -3698,8 +3582,8 @@
         },
         {
           "id": "seg-0379",
-          "start": 2318.9,
-          "end": 2322.32,
+          "start": 2339.4,
+          "end": 2342.82,
           "rawText": "这件事做得好, 会不会有人赞美我,",
           "text": "這件事做得好，會不會有人讚美我？",
           "reviewNeeded": false,
@@ -3707,17 +3591,17 @@
         },
         {
           "id": "seg-0380",
-          "start": 2322.32,
-          "end": 2327.4,
+          "start": 2342.82,
+          "end": 2347.9,
           "rawText": "请问他在做这件事情的过程中,",
-          "text": "請問他在做這件事情的過程中。",
+          "text": "請問他在做這件事情的過程中，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0560"
         },
         {
           "id": "seg-0381",
-          "start": 2329.48,
-          "end": 2332.7,
+          "start": 2349.98,
+          "end": 2353.2,
           "rawText": "重点是放在这件事情上,",
           "text": "重點是放在這件事情上。",
           "reviewNeeded": false,
@@ -3725,8 +3609,8 @@
         },
         {
           "id": "seg-0382",
-          "start": 2333.62,
-          "end": 2338.43,
+          "start": 2354.12,
+          "end": 2358.93,
           "rawText": "还是放在维护自我上, 这时的重点,",
           "text": "還是放在維護自我上？這時的重點。",
           "reviewNeeded": false,
@@ -3734,8 +3618,8 @@
         },
         {
           "id": "seg-0383",
-          "start": 2338.93,
-          "end": 2341.93,
+          "start": 2359.43,
+          "end": 2362.43,
           "rawText": "已经不在于把事情做好,",
           "text": "已經不在於把事情做好。",
           "reviewNeeded": false,
@@ -3743,8 +3627,8 @@
         },
         {
           "id": "seg-0384",
-          "start": 2343.85,
-          "end": 2347.51,
+          "start": 2364.35,
+          "end": 2368.01,
           "rawText": "而是在于对自我价值的过度维护,",
           "text": "而是在於對自我價值的過度維護。",
           "reviewNeeded": false,
@@ -3752,8 +3636,8 @@
         },
         {
           "id": "seg-0385",
-          "start": 2348.76,
-          "end": 2353.88,
+          "start": 2369.26,
+          "end": 2374.38,
           "rawText": "做任何一个动作, 都想着别人怎么看我,",
           "text": "做任何一個動作，都想著別人怎麼看我。",
           "reviewNeeded": false,
@@ -3761,44 +3645,52 @@
         },
         {
           "id": "seg-0386",
-          "start": 2356.15,
-          "end": 2360.61,
+          "start": 2376.65,
+          "end": 2381.11,
           "rawText": "我会不会得到赞美, 如果做不好,",
-          "text": "我會不會得到讚美，如果做不好。",
+          "text": "我會不會得到讚美，如果做不好？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0568"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-23",
+      "heading": null,
+      "start": 2381.87,
+      "end": 2497.36,
+      "sentences": [
         {
           "id": "seg-0387",
-          "start": 2361.37,
-          "end": 2363.67,
+          "start": 2381.87,
+          "end": 2384.17,
           "rawText": "我该如何面对其他的人,",
-          "text": "我該如何面對其他的人。",
+          "text": "我該如何面對其他的人？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0570"
         },
         {
           "id": "seg-0388",
-          "start": 2365.27,
-          "end": 2367.17,
+          "start": 2385.77,
+          "end": 2387.67,
           "rawText": "我会不会被别人看不起,",
-          "text": "我會不會被別人看不起。",
+          "text": "我會不會被別人看不起？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0571"
         },
         {
           "id": "seg-0389",
-          "start": 2368.35,
-          "end": 2373.2,
+          "start": 2388.85,
+          "end": 2393.7,
           "rawText": "我是不是比别人差, 虽然人在做事,",
-          "text": "我是不是比別人差，雖然人在做事。",
+          "text": "我是不是比別人差？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0572"
         },
         {
           "id": "seg-0390",
-          "start": 2374.04,
-          "end": 2377.39,
+          "start": 2394.54,
+          "end": 2397.89,
           "rawText": "但实际上他心中想的都是自我,",
           "text": "但實際上他心中想的都是自我。",
           "reviewNeeded": false,
@@ -3806,8 +3698,8 @@
         },
         {
           "id": "seg-0391",
-          "start": 2378.68,
-          "end": 2383.24,
+          "start": 2399.18,
+          "end": 2403.74,
           "rawText": "这种因焦虑而被迫持续的惯性,",
           "text": "這種因焦慮而被迫持續的慣性。",
           "reviewNeeded": false,
@@ -3815,25 +3707,17 @@
         },
         {
           "id": "seg-0392",
-          "start": 2383.24,
-          "end": 2388.39,
+          "start": 2403.74,
+          "end": 2408.89,
           "rawText": "说到底就是过度贪爱自我的表现,",
           "text": "說到底就是過度貪愛自我的表現。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0576"
-        }
-      ]
-    },
-    {
-      "id": "p-35",
-      "heading": "以拿杯子為喻說明執取",
-      "start": 2389.87,
-      "end": 2476.86,
-      "sentences": [
+        },
         {
           "id": "seg-0393",
-          "start": 2389.87,
-          "end": 2393.25,
+          "start": 2410.37,
+          "end": 2413.75,
           "rawText": "我们用拿杯子喝水来进一步说明,",
           "text": "我們用拿杯子喝水來進一步說明。",
           "reviewNeeded": false,
@@ -3841,8 +3725,8 @@
         },
         {
           "id": "seg-0394",
-          "start": 2393.9,
-          "end": 2400.79,
+          "start": 2414.4,
+          "end": 2421.29,
           "rawText": "这种紧绷如何造成苦, 当我口渴了,",
           "text": "這種緊繃如何造成苦？當我口渴了。",
           "reviewNeeded": false,
@@ -3850,8 +3734,8 @@
         },
         {
           "id": "seg-0395",
-          "start": 2401.7,
-          "end": 2406.38,
+          "start": 2422.2,
+          "end": 2426.88,
           "rawText": "伸手拿杯子, 喝完水, 把杯子放下,",
           "text": "伸手拿杯子，喝完水，把杯子放下。",
           "reviewNeeded": false,
@@ -3859,8 +3743,8 @@
         },
         {
           "id": "seg-0396",
-          "start": 2407.88,
-          "end": 2413.55,
+          "start": 2428.38,
+          "end": 2434.05,
           "rawText": "这个动作很自然, 但如果喝完水之后,",
           "text": "這個動作很自然，但如果喝完水之後。",
           "reviewNeeded": false,
@@ -3868,8 +3752,8 @@
         },
         {
           "id": "seg-0397",
-          "start": 2414.03,
-          "end": 2419.68,
+          "start": 2434.53,
+          "end": 2440.18,
           "rawText": "因为害怕下次没水喝, 死死地抓着杯子不放,",
           "text": "因為害怕下次沒水喝，死死地抓著杯子不放。",
           "reviewNeeded": false,
@@ -3877,8 +3761,8 @@
         },
         {
           "id": "seg-0398",
-          "start": 2419.68,
-          "end": 2426.63,
+          "start": 2440.18,
+          "end": 2447.13,
           "rawText": "即使手酸了, 手麻了, 也不愿意松手,",
           "text": "即使手痠了，手麻了，也不願意鬆手。",
           "reviewNeeded": false,
@@ -3886,8 +3770,8 @@
         },
         {
           "id": "seg-0399",
-          "start": 2428,
-          "end": 2433.82,
+          "start": 2448.5,
+          "end": 2454.32,
           "rawText": "这时候杯子变成什么, 这时候杯子变成了累赘,",
           "text": "這時候杯子變成什麼？這時候杯子變成了累贅。",
           "reviewNeeded": false,
@@ -3895,8 +3779,8 @@
         },
         {
           "id": "seg-0400",
-          "start": 2435.67,
-          "end": 2440.03,
+          "start": 2456.17,
+          "end": 2460.53,
           "rawText": "手也因为长期的紧绷而疼痛,",
           "text": "手也因為長期的緊繃而疼痛。",
           "reviewNeeded": false,
@@ -3904,8 +3788,8 @@
         },
         {
           "id": "seg-0401",
-          "start": 2442.35,
-          "end": 2445.61,
+          "start": 2462.85,
+          "end": 2466.11,
           "rawText": "其实原本拿杯子的这个动作是中性,",
           "text": "其實原本拿杯子的這個動作是中性的。",
           "reviewNeeded": false,
@@ -3913,8 +3797,8 @@
         },
         {
           "id": "seg-0402",
-          "start": 2447.4,
-          "end": 2449.26,
+          "start": 2467.9,
+          "end": 2469.76,
           "rawText": "它并不会造成我们的痛苦,",
           "text": "它並不會造成我們的痛苦。",
           "reviewNeeded": false,
@@ -3922,8 +3806,8 @@
         },
         {
           "id": "seg-0403",
-          "start": 2451.61,
-          "end": 2455.96,
+          "start": 2472.11,
+          "end": 2476.46,
           "rawText": "一旦我们直取这件事, 直取什么事,",
           "text": "一旦我們執取這件事。執取什麼事？",
           "reviewNeeded": false,
@@ -3931,8 +3815,8 @@
         },
         {
           "id": "seg-0404",
-          "start": 2457.1,
-          "end": 2460.92,
+          "start": 2477.6,
+          "end": 2481.42,
           "rawText": "如果我不紧握杯子, 我下次就喝不到水,",
           "text": "如果我不緊握杯子，我下次就喝不到水。",
           "reviewNeeded": false,
@@ -3940,8 +3824,8 @@
         },
         {
           "id": "seg-0405",
-          "start": 2460.98,
-          "end": 2469.69,
+          "start": 2481.48,
+          "end": 2490.19,
           "rawText": "这样我渴了, 该怎么办, 所以死命地抓着杯子不放,",
           "text": "這樣我渴了該怎麼辦？所以死命地抓著杯子不放。",
           "reviewNeeded": false,
@@ -3949,8 +3833,8 @@
         },
         {
           "id": "seg-0406",
-          "start": 2472.14,
-          "end": 2476.86,
+          "start": 2492.64,
+          "end": 2497.36,
           "rawText": "抓了一个小时, 两个小时, 手酸了, 手麻了,",
           "text": "抓了一個小時，兩個小時，手痠了，手麻了。",
           "reviewNeeded": false,
@@ -3959,15 +3843,15 @@
       ]
     },
     {
-      "id": "p-36",
+      "id": "p-24",
       "heading": null,
-      "start": 2477.06,
-      "end": 2607.61,
+      "start": 2497.56,
+      "end": 2605.99,
       "sentences": [
         {
           "id": "seg-0407",
-          "start": 2477.06,
-          "end": 2486.01,
+          "start": 2497.56,
+          "end": 2506.51,
           "rawText": "依旧不放, 请问这个苦, 是拿杯子的这个动作造成的吗? 不是,",
           "text": "依舊不放。請問這個苦，是拿杯子的這個動作造成的嗎？不是。",
           "reviewNeeded": false,
@@ -3975,8 +3859,8 @@
         },
         {
           "id": "seg-0408",
-          "start": 2487.22,
-          "end": 2489.8,
+          "start": 2507.72,
+          "end": 2510.3,
           "rawText": "而是我们心中的直取造成的,",
           "text": "而是我們心中的執取造成的。",
           "reviewNeeded": false,
@@ -3984,8 +3868,8 @@
         },
         {
           "id": "seg-0409",
-          "start": 2492.23,
-          "end": 2496.36,
+          "start": 2512.73,
+          "end": 2516.86,
           "rawText": "是这样的直取, 成为了苦的根源,",
           "text": "是這樣的執取，成為了苦的根源。",
           "reviewNeeded": false,
@@ -3993,8 +3877,8 @@
         },
         {
           "id": "seg-0410",
-          "start": 2498.26,
-          "end": 2504.86,
+          "start": 2518.76,
+          "end": 2525.36,
           "rawText": "换句话说, 世俗的取, 是为了巩固自我, 动力,",
           "text": "換句話說，世俗的取，是為了鞏固自我，動力。",
           "reviewNeeded": false,
@@ -4002,8 +3886,8 @@
         },
         {
           "id": "seg-0411",
-          "start": 2504.86,
-          "end": 2511.34,
+          "start": 2525.36,
+          "end": 2531.84,
           "rawText": "来自烦恼, 我不够好, 我需要更多,",
           "text": "來自煩惱，我不夠好，我需要更多。",
           "reviewNeeded": false,
@@ -4011,8 +3895,8 @@
         },
         {
           "id": "seg-0412",
-          "start": 2512.16,
-          "end": 2516.38,
+          "start": 2532.66,
+          "end": 2536.88,
           "rawText": "我害怕失去, 怕自己不够好,",
           "text": "我害怕失去，怕自己不夠好。",
           "reviewNeeded": false,
@@ -4020,8 +3904,8 @@
         },
         {
           "id": "seg-0413",
-          "start": 2517,
-          "end": 2522.73,
+          "start": 2537.5,
+          "end": 2543.23,
           "rawText": "刻意表现的好一点, 怕自己拥有的不够多,",
           "text": "刻意表現得好一點；怕自己擁有的不夠多。",
           "reviewNeeded": false,
@@ -4029,8 +3913,8 @@
         },
         {
           "id": "seg-0414",
-          "start": 2523.33,
-          "end": 2528.7,
+          "start": 2543.83,
+          "end": 2549.2,
           "rawText": "不断的争取, 紧抓着自己拥有的这一切不放,",
           "text": "不斷地爭取，緊抓著自己擁有的這一切不放。",
           "reviewNeeded": false,
@@ -4038,8 +3922,8 @@
         },
         {
           "id": "seg-0415",
-          "start": 2528.7,
-          "end": 2535.15,
+          "start": 2549.2,
+          "end": 2555.65,
           "rawText": "这种取是在做加法, 不断的往上堆叠,",
           "text": "這種取是在做加法，不斷地往上堆疊。",
           "reviewNeeded": false,
@@ -4047,8 +3931,8 @@
         },
         {
           "id": "seg-0416",
-          "start": 2536.62,
-          "end": 2539.88,
+          "start": 2557.12,
+          "end": 2560.38,
           "rawText": "导致我们身上的包袱越来越重,",
           "text": "導致我們身上的包袱越來越重。",
           "reviewNeeded": false,
@@ -4056,8 +3940,8 @@
         },
         {
           "id": "seg-0417",
-          "start": 2542.01,
-          "end": 2543.67,
+          "start": 2562.51,
+          "end": 2564.17,
           "rawText": "追求解脱的取呢?",
           "text": "追求解脫的取呢？",
           "reviewNeeded": false,
@@ -4065,8 +3949,8 @@
         },
         {
           "id": "seg-0418",
-          "start": 2545.04,
-          "end": 2550.74,
+          "start": 2565.54,
+          "end": 2571.24,
           "rawText": "追求解脱的取是为了松动自我, 动力,",
           "text": "追求解脫的取是為了鬆動自我，動力。",
           "reviewNeeded": false,
@@ -4074,8 +3958,8 @@
         },
         {
           "id": "seg-0419",
-          "start": 2551.3,
-          "end": 2555.76,
+          "start": 2571.8,
+          "end": 2576.26,
           "rawText": "来自智慧, 我看清了苦的根源,",
           "text": "來自智慧，我看清了苦的根源。",
           "reviewNeeded": false,
@@ -4083,8 +3967,8 @@
         },
         {
           "id": "seg-0420",
-          "start": 2557,
-          "end": 2563.38,
+          "start": 2577.5,
+          "end": 2583.88,
           "rawText": "我想从中出离, 这种取是在做减法,",
           "text": "我想從中出離。這種取是在做減法。",
           "reviewNeeded": false,
@@ -4092,8 +3976,8 @@
         },
         {
           "id": "seg-0421",
-          "start": 2565.7,
-          "end": 2572.48,
+          "start": 2586.2,
+          "end": 2592.98,
           "rawText": "练习舍掉贪, 撑, 吃, 让身上的包袱越来越轻,",
           "text": "練習捨掉貪、瞋、痴，讓身上的包袱越來越輕。",
           "reviewNeeded": false,
@@ -4101,8 +3985,8 @@
         },
         {
           "id": "seg-0422",
-          "start": 2573.99,
-          "end": 2580.04,
+          "start": 2594.49,
+          "end": 2600.54,
           "rawText": "所以两种取, 字面上虽然都用取这个字,",
           "text": "所以兩種取，字面上雖然都用取這個字。",
           "reviewNeeded": false,
@@ -4110,17 +3994,25 @@
         },
         {
           "id": "seg-0423",
-          "start": 2581.74,
-          "end": 2585.49,
+          "start": 2602.24,
+          "end": 2605.99,
           "rawText": "但它背后的动机天差地缘,",
           "text": "但它背後的動機天差地遠。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0642"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-25",
+      "heading": "6. 區分善法欲與對法的執著",
+      "start": 2607.08,
+      "end": 2722.85,
+      "sentences": [
         {
           "id": "seg-0424",
-          "start": 2586.58,
-          "end": 2589.64,
+          "start": 2607.08,
+          "end": 2610.14,
           "rawText": "这里还有一个问题需要厘清,",
           "text": "這裡還有一個問題需要釐清。",
           "reviewNeeded": false,
@@ -4128,8 +4020,8 @@
         },
         {
           "id": "seg-0425",
-          "start": 2591.66,
-          "end": 2596.78,
+          "start": 2612.16,
+          "end": 2617.28,
           "rawText": "有人可能会问, 佛教徒说我一定要解脱,",
           "text": "有人可能會問：「佛教徒說我一定要解脫。",
           "reviewNeeded": false,
@@ -4137,8 +4029,8 @@
         },
         {
           "id": "seg-0426",
-          "start": 2598.31,
-          "end": 2601.13,
+          "start": 2618.81,
+          "end": 2621.63,
           "rawText": "这难道不是另一种形式的取吗?",
           "text": "這難道不是另一種形式的取嗎？",
           "reviewNeeded": false,
@@ -4146,34 +4038,26 @@
         },
         {
           "id": "seg-0427",
-          "start": 2602.75,
-          "end": 2607.61,
+          "start": 2623.25,
+          "end": 2628.11,
           "rawText": "这究竟是善法欲, 还是对法的执着?",
           "text": "這究竟是善法欲，還是對法的執著？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0647"
-        }
-      ]
-    },
-    {
-      "id": "p-37",
-      "heading": "6. 區分善法欲與對法的執著",
-      "start": 2610.86,
-      "end": 2677,
-      "sentences": [
+        },
         {
           "id": "seg-0428",
-          "start": 2610.86,
-          "end": 2620.06,
+          "start": 2631.36,
+          "end": 2640.56,
           "rawText": "我想解脱, 我想成佛, 请问这是善法欲,",
-          "text": "我想解脫、我想成佛，請問這是善法欲。",
+          "text": "我想解脫、我想成佛，請問這是善法欲，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0649"
         },
         {
           "id": "seg-0429",
-          "start": 2621.38,
-          "end": 2622.9,
+          "start": 2641.88,
+          "end": 2643.4,
           "rawText": "还是对法的执着?",
           "text": "還是對法的執著？",
           "reviewNeeded": false,
@@ -4181,8 +4065,8 @@
         },
         {
           "id": "seg-0430",
-          "start": 2625.38,
-          "end": 2629.19,
+          "start": 2645.88,
+          "end": 2649.69,
           "rawText": "这个问题的答案, 不在于这句话本身,",
           "text": "這個問題的答案，不在於這句話本身。",
           "reviewNeeded": false,
@@ -4190,8 +4074,8 @@
         },
         {
           "id": "seg-0431",
-          "start": 2631.51,
-          "end": 2633.89,
+          "start": 2652.01,
+          "end": 2654.39,
           "rawText": "而在于背后的心理状态,",
           "text": "而在於背後的心理狀態。",
           "reviewNeeded": false,
@@ -4199,8 +4083,8 @@
         },
         {
           "id": "seg-0432",
-          "start": 2636,
-          "end": 2638.84,
+          "start": 2656.5,
+          "end": 2659.34,
           "rawText": "同样是说, 我一定要解脱,",
           "text": "同樣是說「我一定要解脫」。",
           "reviewNeeded": false,
@@ -4208,8 +4092,8 @@
         },
         {
           "id": "seg-0433",
-          "start": 2638.84,
-          "end": 2644.22,
+          "start": 2659.34,
+          "end": 2664.72,
           "rawText": "如果背后是我清楚看见了轮回的苦,",
           "text": "如果背後是我清楚看見了輪迴的苦。",
           "reviewNeeded": false,
@@ -4217,8 +4101,8 @@
         },
         {
           "id": "seg-0434",
-          "start": 2645.6,
-          "end": 2651.3,
+          "start": 2666.1,
+          "end": 2671.8,
           "rawText": "生起强烈的出离心, 并愿意为此付出一切努力,",
           "text": "生起強烈的出離心，並願意為此付出一切努力。",
           "reviewNeeded": false,
@@ -4226,8 +4110,8 @@
         },
         {
           "id": "seg-0435",
-          "start": 2653.02,
-          "end": 2657.18,
+          "start": 2673.52,
+          "end": 2677.68,
           "rawText": "这是一种坚定的志向, 是善法欲,",
           "text": "這是一種堅定的志向，是善法欲。",
           "reviewNeeded": false,
@@ -4235,8 +4119,8 @@
         },
         {
           "id": "seg-0436",
-          "start": 2659.07,
-          "end": 2663.37,
+          "start": 2679.57,
+          "end": 2683.87,
           "rawText": "但如果背后是, 要是我这样修,",
           "text": "但如果背後是「要是我這樣修。",
           "reviewNeeded": false,
@@ -4244,8 +4128,8 @@
         },
         {
           "id": "seg-0437",
-          "start": 2664.45,
-          "end": 2666.63,
+          "start": 2684.95,
+          "end": 2687.13,
           "rawText": "最终还是没有得到解脱,",
           "text": "最終還是沒有得到解脫。",
           "reviewNeeded": false,
@@ -4253,8 +4137,8 @@
         },
         {
           "id": "seg-0438",
-          "start": 2666.97,
-          "end": 2667.69,
+          "start": 2687.47,
+          "end": 2688.19,
           "rawText": "该怎么办?",
           "text": "該怎麼辦？",
           "reviewNeeded": false,
@@ -4262,8 +4146,8 @@
         },
         {
           "id": "seg-0439",
-          "start": 2668.84,
-          "end": 2673.02,
+          "start": 2689.34,
+          "end": 2693.52,
           "rawText": "我修得好像不够快, 不够好,",
           "text": "我修得好像不夠快、不夠好。",
           "reviewNeeded": false,
@@ -4271,25 +4155,17 @@
         },
         {
           "id": "seg-0440",
-          "start": 2674.6,
-          "end": 2677,
+          "start": 2695.1,
+          "end": 2697.5,
           "rawText": "我好像比其他的同行差,",
           "text": "我好像比其他的同行差。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0669"
-        }
-      ]
-    },
-    {
-      "id": "p-38",
-      "heading": null,
-      "start": 2678.66,
-      "end": 2750.65,
-      "sentences": [
+        },
         {
           "id": "seg-0441",
-          "start": 2678.66,
-          "end": 2687.47,
+          "start": 2699.16,
+          "end": 2707.97,
           "rawText": "为此感到焦虑, 这代表, 它的背后隐藏着不安与匮乏,",
           "text": "為此感到焦慮，這代表，它的背後隱藏著不安與匱乏。",
           "reviewNeeded": false,
@@ -4297,8 +4173,8 @@
         },
         {
           "id": "seg-0442",
-          "start": 2687.47,
-          "end": 2694.17,
+          "start": 2707.97,
+          "end": 2714.67,
           "rawText": "而且这时候的焦点, 应该不是放在解脱这件事情上,",
           "text": "而且這時候的焦點，應該不是放在解脫這件事情上。",
           "reviewNeeded": false,
@@ -4306,17 +4182,25 @@
         },
         {
           "id": "seg-0443",
-          "start": 2695.62,
-          "end": 2702.35,
+          "start": 2716.12,
+          "end": 2722.85,
           "rawText": "而是放在我身上, 虽然嘴巴上说我想解脱,",
           "text": "而是放在我身上，雖然嘴巴上說我想解脫。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0675"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-26",
+      "heading": null,
+      "start": 2724.28,
+      "end": 2841.23,
+      "sentences": [
         {
           "id": "seg-0444",
-          "start": 2703.78,
-          "end": 2707.56,
+          "start": 2724.28,
+          "end": 2728.06,
           "rawText": "但这四个字当中, 我才是重点,",
           "text": "但這四個字當中，我才是重點。",
           "reviewNeeded": false,
@@ -4324,8 +4208,8 @@
         },
         {
           "id": "seg-0445",
-          "start": 2708.8,
-          "end": 2712.26,
+          "start": 2729.3,
+          "end": 2732.76,
           "rawText": "一旦把重心放在我身上,",
           "text": "一旦把重心放在我身上。",
           "reviewNeeded": false,
@@ -4333,8 +4217,8 @@
         },
         {
           "id": "seg-0446",
-          "start": 2713.82,
-          "end": 2718.48,
+          "start": 2734.32,
+          "end": 2738.98,
           "rawText": "那应该是对法的执着, 而不是善法欲,",
           "text": "那應該是對法的執著，而不是善法欲。",
           "reviewNeeded": false,
@@ -4342,8 +4226,8 @@
         },
         {
           "id": "seg-0447",
-          "start": 2720,
-          "end": 2723.4,
+          "start": 2740.5,
+          "end": 2743.9,
           "rawText": "所以判断的标准, 不在于怎么说,",
           "text": "所以判斷的標準，不在於怎麼說。",
           "reviewNeeded": false,
@@ -4351,8 +4235,8 @@
         },
         {
           "id": "seg-0448",
-          "start": 2724.55,
-          "end": 2728.26,
+          "start": 2745.05,
+          "end": 2748.76,
           "rawText": "而在于怎么想, 所谓的善法欲,",
           "text": "而在於怎麼想，所謂的善法欲。",
           "reviewNeeded": false,
@@ -4360,8 +4244,8 @@
         },
         {
           "id": "seg-0449",
-          "start": 2728.58,
-          "end": 2734.66,
+          "start": 2749.08,
+          "end": 2755.16,
           "rawText": "是基于对真相的渴望, 越修心越笃定,",
           "text": "是基於對真相的渴望，越修心越篤定。",
           "reviewNeeded": false,
@@ -4369,8 +4253,8 @@
         },
         {
           "id": "seg-0450",
-          "start": 2736.09,
-          "end": 2744.24,
+          "start": 2756.59,
+          "end": 2764.74,
           "rawText": "越修心越宽广, 也就是他一步步的朝向解脱,",
           "text": "越修心越寬廣，也就是說他一步步地朝向解脫。",
           "reviewNeeded": false,
@@ -4378,34 +4262,26 @@
         },
         {
           "id": "seg-0451",
-          "start": 2746.29,
-          "end": 2750.65,
+          "start": 2766.79,
+          "end": 2771.15,
           "rawText": "解脱才是他的目标, 换句话说,",
           "text": "解脫才是他的目標。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0690"
-        }
-      ]
-    },
-    {
-      "id": "p-39",
-      "heading": null,
-      "start": 2751.05,
-      "end": 2871.08,
-      "sentences": [
+        },
         {
           "id": "seg-0452",
-          "start": 2751.05,
-          "end": 2756.43,
+          "start": 2771.55,
+          "end": 2776.93,
           "rawText": "我想解脱, 这四个字对他而言,",
-          "text": "換句話說，我想解脫，這四個字對他而言。",
+          "text": "換句話說，我想解脫，這四個字對他而言，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0692"
         },
         {
           "id": "seg-0453",
-          "start": 2757.32,
-          "end": 2762.41,
+          "start": 2777.82,
+          "end": 2782.91,
           "rawText": "解脱才是重心, 但对法的执着呢,",
           "text": "解脫才是重心，但對法的執著呢？",
           "reviewNeeded": false,
@@ -4413,8 +4289,8 @@
         },
         {
           "id": "seg-0454",
-          "start": 2762.41,
-          "end": 2769.98,
+          "start": 2782.91,
+          "end": 2790.48,
           "rawText": "是被焦虑驱动, 把重心都放在我身上,",
           "text": "是被焦慮驅動，把重心都放在我身上。",
           "reviewNeeded": false,
@@ -4422,8 +4298,8 @@
         },
         {
           "id": "seg-0455",
-          "start": 2772.02,
-          "end": 2779.2,
+          "start": 2792.52,
+          "end": 2799.7,
           "rawText": "越修越紧绷, 越修越沉重, 对此,",
           "text": "越修越緊繃，越修越沉重，對此。",
           "reviewNeeded": false,
@@ -4431,8 +4307,8 @@
         },
         {
           "id": "seg-0456",
-          "start": 2779.94,
-          "end": 2786.08,
+          "start": 2800.44,
+          "end": 2806.58,
           "rawText": "金刚经说, 法上应舍, 何况非法,",
           "text": "《金剛經》說：「法尚應捨，何況非法。」",
           "reviewNeeded": false,
@@ -4440,8 +4316,8 @@
         },
         {
           "id": "seg-0457",
-          "start": 2787.62,
-          "end": 2792.43,
+          "start": 2808.12,
+          "end": 2812.93,
           "rawText": "这告诉我们什么, 追求解脱的念头,",
           "text": "這告訴我們什麼，追求解脫的念頭。",
           "reviewNeeded": false,
@@ -4449,8 +4325,8 @@
         },
         {
           "id": "seg-0458",
-          "start": 2793.52,
-          "end": 2796.84,
+          "start": 2814.02,
+          "end": 2817.34,
           "rawText": "就像过河时使用的主法,",
           "text": "就像過河時使用的筏。",
           "reviewNeeded": false,
@@ -4458,8 +4334,8 @@
         },
         {
           "id": "seg-0459",
-          "start": 2798.67,
-          "end": 2801.05,
+          "start": 2819.17,
+          "end": 2821.55,
           "rawText": "它是我们到达彼岸的工具,",
           "text": "它是我們到達彼岸的工具。",
           "reviewNeeded": false,
@@ -4467,8 +4343,8 @@
         },
         {
           "id": "seg-0460",
-          "start": 2801.05,
-          "end": 2807.61,
+          "start": 2821.55,
+          "end": 2828.11,
           "rawText": "而不是彼岸本身, 当你真正过河,",
           "text": "而不是彼岸本身，當你真正過河。",
           "reviewNeeded": false,
@@ -4476,8 +4352,8 @@
         },
         {
           "id": "seg-0461",
-          "start": 2808.3,
-          "end": 2812.67,
+          "start": 2828.8,
+          "end": 2833.17,
           "rawText": "到达了彼岸, 连追求解脱的这个念头,",
           "text": "到達了彼岸，連追求解脫的這個念頭。",
           "reviewNeeded": false,
@@ -4485,8 +4361,8 @@
         },
         {
           "id": "seg-0462",
-          "start": 2813.01,
-          "end": 2816.82,
+          "start": 2833.51,
+          "end": 2837.32,
           "rawText": "也要放下, 所以真正的果位,",
           "text": "也要放下，所以真正的果位。",
           "reviewNeeded": false,
@@ -4494,17 +4370,25 @@
         },
         {
           "id": "seg-0463",
-          "start": 2817.85,
-          "end": 2820.73,
+          "start": 2838.35,
+          "end": 2841.23,
           "rawText": "不是得到了什么外在的新东西,",
           "text": "不是得到了什麼外在的新東西。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0714"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-27",
+      "heading": null,
+      "start": 2842.11,
+      "end": 2876.05,
+      "sentences": [
         {
           "id": "seg-0464",
-          "start": 2821.61,
-          "end": 2825.61,
+          "start": 2842.11,
+          "end": 2846.11,
           "rawText": "而是还原了心本来就有的清净,",
           "text": "而是還原了心本來就有的清淨。",
           "reviewNeeded": false,
@@ -4512,8 +4396,8 @@
         },
         {
           "id": "seg-0465",
-          "start": 2826.89,
-          "end": 2829.93,
+          "start": 2847.39,
+          "end": 2850.43,
           "rawText": "当所有的执着都放下之后,",
           "text": "當所有的執著都放下之後。",
           "reviewNeeded": false,
@@ -4521,8 +4405,8 @@
         },
         {
           "id": "seg-0466",
-          "start": 2829.93,
-          "end": 2835.31,
+          "start": 2850.43,
+          "end": 2855.81,
           "rawText": "心本具的清净状态就会自然显现,",
           "text": "心本具的清淨狀態就會自然顯現。",
           "reviewNeeded": false,
@@ -4530,8 +4414,8 @@
         },
         {
           "id": "seg-0467",
-          "start": 2836.83,
-          "end": 2840.36,
+          "start": 2857.33,
+          "end": 2860.86,
           "rawText": "换句话说, 追求解脱的过程,",
           "text": "換句話說，追求解脫的過程。",
           "reviewNeeded": false,
@@ -4539,8 +4423,8 @@
         },
         {
           "id": "seg-0468",
-          "start": 2841.54,
-          "end": 2851.12,
+          "start": 2862.04,
+          "end": 2871.62,
           "rawText": "不是在学习得到更多, 而是在学习如何把执着一层一层的放下,",
           "text": "不是在學習得到更多，而是在學習如何把執著一層一層地放下。",
           "reviewNeeded": false,
@@ -4548,17 +4432,25 @@
         },
         {
           "id": "seg-0469",
-          "start": 2852.6,
-          "end": 2855.55,
+          "start": 2873.1,
+          "end": 2876.05,
           "rawText": "从这当中, 我们也可以看见,",
           "text": "從這當中，我們也可以看見。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0722"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-28",
+      "heading": "7. 以喻說明三苦的關係",
+      "start": 2876.69,
+      "end": 2993.76,
+      "sentences": [
         {
           "id": "seg-0470",
-          "start": 2856.19,
-          "end": 2860.82,
+          "start": 2876.69,
+          "end": 2881.32,
           "rawText": "辛苦与前两种苦, 有一个根本的差异,",
           "text": "行苦與前兩種苦，有一個根本的差異。",
           "reviewNeeded": false,
@@ -4566,8 +4458,8 @@
         },
         {
           "id": "seg-0471",
-          "start": 2862.36,
-          "end": 2866.52,
+          "start": 2882.86,
+          "end": 2887.02,
           "rawText": "苦苦是在特定的情境下生起的痛苦,",
           "text": "苦苦是在特定的情境下生起的痛苦。",
           "reviewNeeded": false,
@@ -4575,25 +4467,17 @@
         },
         {
           "id": "seg-0472",
-          "start": 2866.52,
-          "end": 2871.08,
+          "start": 2887.02,
+          "end": 2891.58,
           "rawText": "它有一个明显的触发点,",
           "text": "它有一個明顯的觸發點。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0727"
-        }
-      ]
-    },
-    {
-      "id": "p-40",
-      "heading": "7. 以喻說明三苦的關係",
-      "start": 2872.67,
-      "end": 2993.6,
-      "sentences": [
+        },
         {
           "id": "seg-0473",
-          "start": 2872.67,
-          "end": 2877.65,
+          "start": 2893.17,
+          "end": 2898.15,
           "rawText": "例如生病, 失去亲人, 遇到挫折,",
           "text": "例如生病、失去親人、遇到挫折。",
           "reviewNeeded": false,
@@ -4601,8 +4485,8 @@
         },
         {
           "id": "seg-0474",
-          "start": 2879.3,
-          "end": 2883.75,
+          "start": 2899.8,
+          "end": 2904.25,
           "rawText": "坏苦是指快乐的本质处于不稳定,",
           "text": "壞苦是指快樂的本質處於不穩定。",
           "reviewNeeded": false,
@@ -4610,8 +4494,8 @@
         },
         {
           "id": "seg-0475",
-          "start": 2884.23,
-          "end": 2892.31,
+          "start": 2904.73,
+          "end": 2912.81,
           "rawText": "随时会改变的状态, 而且随时都有可能从乐转变为苦,",
           "text": "隨時會改變的狀態，而且隨時都有可能從樂轉變為苦。",
           "reviewNeeded": false,
@@ -4619,8 +4503,8 @@
         },
         {
           "id": "seg-0476",
-          "start": 2894.57,
-          "end": 2898.17,
+          "start": 2915.07,
+          "end": 2918.67,
           "rawText": "但辛苦不是某一种经历,",
           "text": "但行苦不是某一種經歷。",
           "reviewNeeded": false,
@@ -4628,8 +4512,8 @@
         },
         {
           "id": "seg-0477",
-          "start": 2899.58,
-          "end": 2903,
+          "start": 2920.08,
+          "end": 2923.5,
           "rawText": "而是我们存在的状态本身就有问题,",
           "text": "而是我們存在的狀態本身就有問題。",
           "reviewNeeded": false,
@@ -4637,8 +4521,8 @@
         },
         {
           "id": "seg-0478",
-          "start": 2904.71,
-          "end": 2912.7,
+          "start": 2925.21,
+          "end": 2933.2,
           "rawText": "不需要任何触发, 只要午蕴是在夜与烦恼的束缚下取得的,",
           "text": "不需要任何觸發，只要五取蘊是在業與煩惱的束縛下取得的。",
           "reviewNeeded": false,
@@ -4646,8 +4530,8 @@
         },
         {
           "id": "seg-0479",
-          "start": 2913.58,
-          "end": 2920.51,
+          "start": 2934.08,
+          "end": 2941.01,
           "rawText": "辛苦就始终在那里, 我们用漏水的房子来做比喻,",
           "text": "行苦就始終在那裡。我們用漏水的房子來做比喻。",
           "reviewNeeded": false,
@@ -4655,8 +4539,8 @@
         },
         {
           "id": "seg-0480",
-          "start": 2921.58,
-          "end": 2926.2,
+          "start": 2942.08,
+          "end": 2946.7,
           "rawText": "苦苦是雨天时屋顶漏水,",
           "text": "苦苦是雨天時屋頂漏水。",
           "reviewNeeded": false,
@@ -4664,8 +4548,8 @@
         },
         {
           "id": "seg-0481",
-          "start": 2928.39,
-          "end": 2931.7,
+          "start": 2948.89,
+          "end": 2952.2,
           "rawText": "它有一个触发点, 就是下雨,",
           "text": "它有一個觸發點，就是下雨。",
           "reviewNeeded": false,
@@ -4673,8 +4557,8 @@
         },
         {
           "id": "seg-0482",
-          "start": 2933.08,
-          "end": 2936.43,
+          "start": 2953.58,
+          "end": 2956.93,
           "rawText": "雨停了就暂时不会再滴水,",
           "text": "雨停了就暫時不會再滴水。",
           "reviewNeeded": false,
@@ -4682,8 +4566,8 @@
         },
         {
           "id": "seg-0483",
-          "start": 2937.8,
-          "end": 2942.61,
+          "start": 2958.3,
+          "end": 2963.11,
           "rawText": "坏苦雨停之后的暂时干爽,",
           "text": "壞苦是雨停之後的暫時乾爽。",
           "reviewNeeded": false,
@@ -4691,8 +4575,8 @@
         },
         {
           "id": "seg-0484",
-          "start": 2942.61,
-          "end": 2950.19,
+          "start": 2963.11,
+          "end": 2970.69,
           "rawText": "表面看似是乐, 但因为雨随时会再下,",
           "text": "表面看似是樂，但因為雨隨時會再下。",
           "reviewNeeded": false,
@@ -4700,8 +4584,8 @@
         },
         {
           "id": "seg-0485",
-          "start": 2950.92,
-          "end": 2953.5,
+          "start": 2971.42,
+          "end": 2974,
           "rawText": "这份干爽本身就带着不安,",
           "text": "這份乾爽本身就帶著不安。",
           "reviewNeeded": false,
@@ -4709,8 +4593,8 @@
         },
         {
           "id": "seg-0486",
-          "start": 2955.66,
-          "end": 2960.31,
+          "start": 2976.16,
+          "end": 2980.81,
           "rawText": "辛苦是这栋房子的结构本身就有问题,",
           "text": "行苦是這棟房子的結構本身就有問題。",
           "reviewNeeded": false,
@@ -4718,8 +4602,8 @@
         },
         {
           "id": "seg-0487",
-          "start": 2961.85,
-          "end": 2964.86,
+          "start": 2982.35,
+          "end": 2985.36,
           "rawText": "不需要下雨, 问题就在那里,",
           "text": "不需要下雨，問題就在那裡。",
           "reviewNeeded": false,
@@ -4727,8 +4611,8 @@
         },
         {
           "id": "seg-0488",
-          "start": 2966.96,
-          "end": 2969.62,
+          "start": 2987.46,
+          "end": 2990.12,
           "rawText": "而造成这个问题的根本原因,",
           "text": "而造成這個問題的根本原因。",
           "reviewNeeded": false,
@@ -4736,17 +4620,25 @@
         },
         {
           "id": "seg-0489",
-          "start": 2970.56,
-          "end": 2973.26,
+          "start": 2991.06,
+          "end": 2993.76,
           "rawText": "就是建造这栋房子的材料,",
           "text": "就是建造這棟房子的材料。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0752"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-29",
+      "heading": null,
+      "start": 2994.82,
+      "end": 3077.64,
+      "sentences": [
         {
           "id": "seg-0490",
-          "start": 2974.32,
-          "end": 2980.5,
+          "start": 2994.82,
+          "end": 3001,
           "rawText": "业与烦恼有问题, 只要用同样的材料继续盖房子,",
           "text": "業與煩惱有問題，只要用同樣的材料繼續蓋房子。",
           "reviewNeeded": false,
@@ -4754,8 +4646,8 @@
         },
         {
           "id": "seg-0491",
-          "start": 2980.5,
-          "end": 2984.87,
+          "start": 3001,
+          "end": 3005.37,
           "rawText": "问题就会一再出现无法根除,",
           "text": "問題就會一再出現，無法根除。",
           "reviewNeeded": false,
@@ -4763,25 +4655,17 @@
         },
         {
           "id": "seg-0492",
-          "start": 2986.72,
-          "end": 2993.6,
+          "start": 3007.22,
+          "end": 3014.1,
           "rawText": "这也解释了, 为什么辛苦才是三苦当中最根本的那一层,",
           "text": "這也解釋了，為什麼行苦才是三苦當中最根本的那一層。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0756"
-        }
-      ]
-    },
-    {
-      "id": "p-41",
-      "heading": null,
-      "start": 2995.54,
-      "end": 3081.76,
-      "sentences": [
+        },
         {
           "id": "seg-0493",
-          "start": 2995.54,
-          "end": 3002.84,
+          "start": 3016.04,
+          "end": 3023.34,
           "rawText": "辛苦是业与烦恼所形成的有缺陷的状态, 这是因,",
           "text": "行苦是業與煩惱所形成的有缺陷的狀態，這是因。",
           "reviewNeeded": false,
@@ -4789,8 +4673,8 @@
         },
         {
           "id": "seg-0494",
-          "start": 3004.48,
-          "end": 3013.3,
+          "start": 3024.98,
+          "end": 3033.8,
           "rawText": "苦苦与坏苦则是这种状态下不断显现的结果, 这是苦,",
           "text": "苦苦與壞苦則是這種狀態下不斷顯現的結果，這是果。",
           "reviewNeeded": false,
@@ -4798,8 +4682,8 @@
         },
         {
           "id": "seg-0495",
-          "start": 3015.44,
-          "end": 3021.91,
+          "start": 3035.94,
+          "end": 3042.41,
           "rawText": "只要烦恼还没被断除, 取运就会不断发生,",
           "text": "只要煩惱還沒被斷除，取蘊就會不斷發生。",
           "reviewNeeded": false,
@@ -4807,8 +4691,8 @@
         },
         {
           "id": "seg-0496",
-          "start": 3022.8,
-          "end": 3031.58,
+          "start": 3043.3,
+          "end": 3052.08,
           "rawText": "辛苦就会不断延续, 苦苦与坏苦也就会以各种形式相继出现,",
           "text": "辛苦就會不斷延續，苦苦與壞苦也就會以各種形式相繼出現。",
           "reviewNeeded": false,
@@ -4816,8 +4700,8 @@
         },
         {
           "id": "seg-0497",
-          "start": 3032.7,
-          "end": 3039.09,
+          "start": 3053.2,
+          "end": 3059.59,
           "rawText": "这是无法避免的, 所以想要真正离苦,",
           "text": "這是無法避免的，所以想要真正離苦。",
           "reviewNeeded": false,
@@ -4825,8 +4709,8 @@
         },
         {
           "id": "seg-0498",
-          "start": 3039.97,
-          "end": 3043.41,
+          "start": 3060.47,
+          "end": 3063.91,
           "rawText": "关键不在, 想办法遮风避雨,",
           "text": "關鍵不在想辦法遮風避雨。",
           "reviewNeeded": false,
@@ -4834,8 +4718,8 @@
         },
         {
           "id": "seg-0499",
-          "start": 3043.41,
-          "end": 3053.49,
+          "start": 3063.91,
+          "end": 3073.99,
           "rawText": "也不是在等雨停了没, 而在于设法换掉这栋房子的材料,",
           "text": "也不是在等雨停了沒，而在於設法換掉這棟房子的材料。",
           "reviewNeeded": false,
@@ -4843,17 +4727,25 @@
         },
         {
           "id": "seg-0500",
-          "start": 3055.34,
-          "end": 3057.14,
+          "start": 3075.84,
+          "end": 3077.64,
           "rawText": "这才是我们该做的事情,",
           "text": "這才是我們該做的事情。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0772"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-30",
+      "heading": "8. 只要有煩惱就離不開苦",
+      "start": 3079.04,
+      "end": 3186.11,
+      "sentences": [
         {
           "id": "seg-0501",
-          "start": 3058.54,
-          "end": 3062.7,
+          "start": 3079.04,
+          "end": 3083.2,
           "rawText": "接着我们看到第四个部分, 统设,",
           "text": "接著我們看到第四個部分，總說。",
           "reviewNeeded": false,
@@ -4861,8 +4753,8 @@
         },
         {
           "id": "seg-0502",
-          "start": 3064.49,
-          "end": 3067.4,
+          "start": 3084.99,
+          "end": 3087.9,
           "rawText": "只要有烦恼就离不开苦,",
           "text": "只要有煩惱就離不開苦。",
           "reviewNeeded": false,
@@ -4870,8 +4762,8 @@
         },
         {
           "id": "seg-0503",
-          "start": 3069.49,
-          "end": 3073.35,
+          "start": 3089.99,
+          "end": 3093.85,
           "rawText": "从以上三个层次一路看下来,",
           "text": "從以上三個層次一路看下來。",
           "reviewNeeded": false,
@@ -4879,8 +4771,8 @@
         },
         {
           "id": "seg-0504",
-          "start": 3074.66,
-          "end": 3078.4,
+          "start": 3095.16,
+          "end": 3098.9,
           "rawText": "我们已经清楚了苦与烦恼的关系,",
           "text": "我們已經清楚了苦與煩惱的關係。",
           "reviewNeeded": false,
@@ -4888,25 +4780,17 @@
         },
         {
           "id": "seg-0505",
-          "start": 3078.4,
-          "end": 3081.76,
+          "start": 3098.9,
+          "end": 3102.26,
           "rawText": "现在把它们放在一起,",
           "text": "現在把它們放在一起。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0778"
-        }
-      ]
-    },
-    {
-      "id": "p-42",
-      "heading": "8. 只要有煩惱就離不開苦",
-      "start": 3082.65,
-      "end": 3145.42,
-      "sentences": [
+        },
         {
           "id": "seg-0506",
-          "start": 3082.65,
-          "end": 3085.05,
+          "start": 3103.15,
+          "end": 3105.55,
           "rawText": "会看见一件非常清楚的事,",
           "text": "會看見一件非常清楚的事。",
           "reviewNeeded": false,
@@ -4914,8 +4798,8 @@
         },
         {
           "id": "seg-0507",
-          "start": 3086.02,
-          "end": 3093.42,
+          "start": 3106.52,
+          "end": 3113.92,
           "rawText": "不管是哪一种苦, 烦恼始终都在其中扮演关键的角色,",
           "text": "不管是哪一種苦，煩惱始終都在其中扮演關鍵的角色。",
           "reviewNeeded": false,
@@ -4923,8 +4807,8 @@
         },
         {
           "id": "seg-0508",
-          "start": 3095.15,
-          "end": 3098.24,
+          "start": 3115.65,
+          "end": 3118.74,
           "rawText": "我们回顾一下这三者的关系,",
           "text": "我們回顧一下這三者的關係。",
           "reviewNeeded": false,
@@ -4932,8 +4816,8 @@
         },
         {
           "id": "seg-0509",
-          "start": 3099.91,
-          "end": 3103.89,
+          "start": 3120.41,
+          "end": 3124.39,
           "rawText": "苦苦这一层, 烦恼是助燃物,",
           "text": "苦苦這一層，煩惱是助燃物。",
           "reviewNeeded": false,
@@ -4941,8 +4825,8 @@
         },
         {
           "id": "seg-0510",
-          "start": 3105.43,
-          "end": 3111.82,
+          "start": 3125.93,
+          "end": 3132.32,
           "rawText": "让苦烧得更深更久, 坏苦这一层,",
           "text": "讓苦燒得更深更久，壞苦這一層。",
           "reviewNeeded": false,
@@ -4950,8 +4834,8 @@
         },
         {
           "id": "seg-0511",
-          "start": 3112.42,
-          "end": 3116.77,
+          "start": 3132.92,
+          "end": 3137.27,
           "rawText": "烦恼是制造者, 正是因为贪爱,",
           "text": "煩惱是製造者，正是因為貪愛。",
           "reviewNeeded": false,
@@ -4959,8 +4843,8 @@
         },
         {
           "id": "seg-0512",
-          "start": 3116.77,
-          "end": 3121.36,
+          "start": 3137.27,
+          "end": 3141.86,
           "rawText": "快乐才会转变成强烈的痛苦,",
           "text": "快樂才會轉變成強烈的痛苦。",
           "reviewNeeded": false,
@@ -4968,8 +4852,8 @@
         },
         {
           "id": "seg-0513",
-          "start": 3122.98,
-          "end": 3126.36,
+          "start": 3143.48,
+          "end": 3146.86,
           "rawText": "辛苦这一层, 烦恼是推动者,",
           "text": "行苦這一層，煩惱是推動者。",
           "reviewNeeded": false,
@@ -4977,8 +4861,8 @@
         },
         {
           "id": "seg-0514",
-          "start": 3127.42,
-          "end": 3130.54,
+          "start": 3147.92,
+          "end": 3151.04,
           "rawText": "它驱使我们不断取得运体,",
           "text": "它驅使我們不斷取得蘊體。",
           "reviewNeeded": false,
@@ -4986,8 +4870,8 @@
         },
         {
           "id": "seg-0515",
-          "start": 3131.48,
-          "end": 3134.4,
+          "start": 3151.98,
+          "end": 3154.9,
           "rawText": "并让这种状态一直延续,",
           "text": "並讓這種狀態一直延續。",
           "reviewNeeded": false,
@@ -4995,8 +4879,8 @@
         },
         {
           "id": "seg-0516",
-          "start": 3135.46,
-          "end": 3140.32,
+          "start": 3155.96,
+          "end": 3160.82,
           "rawText": "这三者有一个共通点, 只要烦恼还在,",
           "text": "這三者有一個共通點，只要煩惱還在。",
           "reviewNeeded": false,
@@ -5004,25 +4888,17 @@
         },
         {
           "id": "seg-0517",
-          "start": 3141,
-          "end": 3145.42,
+          "start": 3161.5,
+          "end": 3165.92,
           "rawText": "就离不开苦, 这就是整段的重心,",
           "text": "就離不開苦，這就是整段的重心。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0796"
-        }
-      ]
-    },
-    {
-      "id": "p-43",
-      "heading": null,
-      "start": 3146.74,
-      "end": 3233.97,
-      "sentences": [
+        },
         {
           "id": "seg-0518",
-          "start": 3146.74,
-          "end": 3151.58,
+          "start": 3167.24,
+          "end": 3172.08,
           "rawText": "平时面对苦, 我们习惯的反应是,",
           "text": "平時面對苦，我們習慣的反應是。",
           "reviewNeeded": false,
@@ -5030,8 +4906,8 @@
         },
         {
           "id": "seg-0519",
-          "start": 3152.18,
-          "end": 3157.18,
+          "start": 3172.68,
+          "end": 3177.68,
           "rawText": "试图改变外境, 例如, 换个工作,",
           "text": "試圖改變外境，例如，換個工作。",
           "reviewNeeded": false,
@@ -5039,17 +4915,25 @@
         },
         {
           "id": "seg-0520",
-          "start": 3158.87,
-          "end": 3165.61,
+          "start": 3179.37,
+          "end": 3186.11,
           "rawText": "换个环境, 甚至换个伴侣, 有时候,",
           "text": "換個環境，甚至換個伴侶，有時候。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0803"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-31",
+      "heading": null,
+      "start": 3187.32,
+      "end": 3287.54,
+      "sentences": [
         {
           "id": "seg-0521",
-          "start": 3166.82,
-          "end": 3170.64,
+          "start": 3187.32,
+          "end": 3191.14,
           "rawText": "这些改变, 确实带来了暂时的舒缓,",
           "text": "這些改變，確實帶來了暫時的舒緩。",
           "reviewNeeded": false,
@@ -5057,8 +4941,8 @@
         },
         {
           "id": "seg-0522",
-          "start": 3171.86,
-          "end": 3175.83,
+          "start": 3192.36,
+          "end": 3196.33,
           "rawText": "但从三苦的角度来看, 这些改变,",
           "text": "但從三苦的角度來看，這些改變。",
           "reviewNeeded": false,
@@ -5066,17 +4950,17 @@
         },
         {
           "id": "seg-0523",
-          "start": 3176.6,
-          "end": 3179.58,
+          "start": 3197.1,
+          "end": 3200.08,
           "rawText": "大多只是暂时减轻苦苦,",
-          "text": "大多隻是暫時減輕苦苦。",
+          "text": "大多只是暫時減輕苦苦。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0810"
         },
         {
           "id": "seg-0524",
-          "start": 3180.92,
-          "end": 3184.02,
+          "start": 3201.42,
+          "end": 3204.52,
           "rawText": "完全没有触及坏苦与辛苦,",
           "text": "完全沒有觸及壞苦與辛苦。",
           "reviewNeeded": false,
@@ -5084,17 +4968,17 @@
         },
         {
           "id": "seg-0525",
-          "start": 3185.8,
-          "end": 3187.86,
+          "start": 3206.3,
+          "end": 3208.36,
           "rawText": "这就是为什么很多人会发现,",
-          "text": "這就是為什麼很多人會發現。",
+          "text": "這就是為什麼很多人會發現，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0812"
         },
         {
           "id": "seg-0526",
-          "start": 3187.9,
-          "end": 3192.1,
+          "start": 3208.4,
+          "end": 3212.6,
           "rawText": "换了新工作, 很快又有新的不满,",
           "text": "換了新工作，很快又有新的不滿。",
           "reviewNeeded": false,
@@ -5102,8 +4986,8 @@
         },
         {
           "id": "seg-0527",
-          "start": 3194.2,
-          "end": 3198.66,
+          "start": 3214.7,
+          "end": 3219.16,
           "rawText": "解决了一件担心的事, 马上又开始担心下一件事,",
           "text": "解決了一件擔心的事，馬上又開始擔心下一件事。",
           "reviewNeeded": false,
@@ -5111,8 +4995,8 @@
         },
         {
           "id": "seg-0528",
-          "start": 3199.85,
-          "end": 3205.46,
+          "start": 3220.35,
+          "end": 3225.96,
           "rawText": "问题不在于, 我们不够努力, 而在于,",
           "text": "問題不在於，我們不夠努力，而在於。",
           "reviewNeeded": false,
@@ -5120,8 +5004,8 @@
         },
         {
           "id": "seg-0529",
-          "start": 3206.29,
-          "end": 3210.19,
+          "start": 3226.79,
+          "end": 3230.69,
           "rawText": "我们处理的始终只是事情,",
           "text": "我們處理的始終只是事情。",
           "reviewNeeded": false,
@@ -5129,8 +5013,8 @@
         },
         {
           "id": "seg-0530",
-          "start": 3211.15,
-          "end": 3215.73,
+          "start": 3231.65,
+          "end": 3236.23,
           "rawText": "却没有处理烦恼, 也就是说,",
           "text": "卻沒有處理煩惱。",
           "reviewNeeded": false,
@@ -5138,8 +5022,8 @@
         },
         {
           "id": "seg-0531",
-          "start": 3216.36,
-          "end": 3220.6,
+          "start": 3236.86,
+          "end": 3241.1,
           "rawText": "真正的问题, 不是烦心的事情一直出现,",
           "text": "也就是說，真正的問題，不是煩心的事情一直出現。",
           "reviewNeeded": false,
@@ -5147,8 +5031,8 @@
         },
         {
           "id": "seg-0532",
-          "start": 3222.72,
-          "end": 3225.4,
+          "start": 3243.22,
+          "end": 3245.9,
           "rawText": "而是我们的烦恼一直没停过,",
           "text": "而是我們的煩惱一直沒停過。",
           "reviewNeeded": false,
@@ -5156,8 +5040,8 @@
         },
         {
           "id": "seg-0533",
-          "start": 3227.2,
-          "end": 3230.26,
+          "start": 3247.7,
+          "end": 3250.76,
           "rawText": "只要还有烦恼, 苦就不会消失,",
           "text": "只要還有煩惱，苦就不會消失。",
           "reviewNeeded": false,
@@ -5165,25 +5049,17 @@
         },
         {
           "id": "seg-0534",
-          "start": 3230.26,
-          "end": 3233.97,
+          "start": 3250.76,
+          "end": 3254.47,
           "rawText": "只是换了一种形式出现,",
           "text": "只是換了一種形式出現。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0828"
-        }
-      ]
-    },
-    {
-      "id": "p-44",
-      "heading": null,
-      "start": 3236.46,
-      "end": 3286.74,
-      "sentences": [
+        },
         {
           "id": "seg-0535",
-          "start": 3236.46,
-          "end": 3240.93,
+          "start": 3256.96,
+          "end": 3261.43,
           "rawText": "这也让我们看见, 佛法所说的离苦,",
           "text": "這也讓我們看見，佛法所說的離苦。",
           "reviewNeeded": false,
@@ -5191,8 +5067,8 @@
         },
         {
           "id": "seg-0536",
-          "start": 3242.37,
-          "end": 3248.04,
+          "start": 3262.87,
+          "end": 3268.54,
           "rawText": "重点不是远离恶劣的人事物, 也就是,",
           "text": "重點不是遠離惡劣的人事物。",
           "reviewNeeded": false,
@@ -5200,8 +5076,8 @@
         },
         {
           "id": "seg-0537",
-          "start": 3248.68,
-          "end": 3251.78,
+          "start": 3269.18,
+          "end": 3272.28,
           "rawText": "它并不是要我们远离恶劣的环境,",
           "text": "也就是，它並不是要我們遠離惡劣的環境。",
           "reviewNeeded": false,
@@ -5209,8 +5085,8 @@
         },
         {
           "id": "seg-0538",
-          "start": 3252.67,
-          "end": 3258.35,
+          "start": 3273.17,
+          "end": 3278.85,
           "rawText": "佛法所说的离苦, 是希望我们对质并断除烦恼,",
           "text": "佛法所說的離苦，是希望我們對治並斷除煩惱。",
           "reviewNeeded": false,
@@ -5218,8 +5094,8 @@
         },
         {
           "id": "seg-0539",
-          "start": 3259.91,
-          "end": 3262.61,
+          "start": 3280.41,
+          "end": 3283.11,
           "rawText": "想离苦就必须对质烦恼,",
           "text": "想離苦就必須對治煩惱。",
           "reviewNeeded": false,
@@ -5227,17 +5103,25 @@
         },
         {
           "id": "seg-0540",
-          "start": 3263.88,
-          "end": 3267.04,
+          "start": 3284.38,
+          "end": 3287.54,
           "rawText": "想彻底离苦就必须断除烦恼,",
           "text": "想徹底離苦就必須斷除煩惱。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0837"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-32",
+      "heading": null,
+      "start": 3288.75,
+      "end": 3334.64,
+      "sentences": [
         {
           "id": "seg-0541",
-          "start": 3268.25,
-          "end": 3273.7,
+          "start": 3288.75,
+          "end": 3294.2,
           "rawText": "没有其他的方法, 因此调整外境,",
           "text": "沒有其他的方法，因此調整外境。",
           "reviewNeeded": false,
@@ -5245,8 +5129,8 @@
         },
         {
           "id": "seg-0542",
-          "start": 3274.44,
-          "end": 3281.18,
+          "start": 3294.94,
+          "end": 3301.68,
           "rawText": "顶多让苦暂时减轻, 或者是换个面貌出现,",
           "text": "頂多讓苦暫時減輕，或者是換個面貌出現。",
           "reviewNeeded": false,
@@ -5254,25 +5138,17 @@
         },
         {
           "id": "seg-0543",
-          "start": 3282.23,
-          "end": 3286.74,
+          "start": 3302.73,
+          "end": 3307.24,
           "rawText": "无法根本解决问题, 只有断除烦恼,",
           "text": "無法根本解決問題，只有斷除煩惱。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0842"
-        }
-      ]
-    },
-    {
-      "id": "p-45",
-      "heading": "煩惱從哪裡來？",
-      "start": 3287.14,
-      "end": 3314.14,
-      "sentences": [
+        },
         {
           "id": "seg-0544",
-          "start": 3287.14,
-          "end": 3292.36,
+          "start": 3307.64,
+          "end": 3312.86,
           "rawText": "才能将苦连根拔除, 说到这里,",
           "text": "才能將苦連根拔除，說到這裡。",
           "reviewNeeded": false,
@@ -5280,8 +5156,8 @@
         },
         {
           "id": "seg-0545",
-          "start": 3293.76,
-          "end": 3295.68,
+          "start": 3314.26,
+          "end": 3316.18,
           "rawText": "一个最关键的问题来了,",
           "text": "一個最關鍵的問題來了。",
           "reviewNeeded": false,
@@ -5289,8 +5165,8 @@
         },
         {
           "id": "seg-0546",
-          "start": 3297.44,
-          "end": 3300.59,
+          "start": 3317.94,
+          "end": 3321.09,
           "rawText": "烦恼究竟从哪里来的?",
           "text": "煩惱究竟從哪裡來的？",
           "reviewNeeded": false,
@@ -5298,8 +5174,8 @@
         },
         {
           "id": "seg-0547",
-          "start": 3302.89,
-          "end": 3306.49,
+          "start": 3323.39,
+          "end": 3326.99,
           "rawText": "下一堂课, 我们介绍的就是第三个部分,",
           "text": "下一堂課，我們介紹的就是第三個部分。",
           "reviewNeeded": false,
@@ -5307,8 +5183,8 @@
         },
         {
           "id": "seg-0548",
-          "start": 3307.13,
-          "end": 3309.67,
+          "start": 3327.63,
+          "end": 3330.17,
           "rawText": "为何我们会生起烦恼?",
           "text": "為何我們會生起煩惱？",
           "reviewNeeded": false,
@@ -5316,8 +5192,8 @@
         },
         {
           "id": "seg-0549",
-          "start": 3312.06,
-          "end": 3314.14,
+          "start": 3332.56,
+          "end": 3334.64,
           "rawText": "我们今天的课就上到这个地方。",
           "text": "我們今天的課就上到這個地方。",
           "reviewNeeded": false,
@@ -5330,9 +5206,9 @@
     "schemaVersion": 1,
     "status": "ai-reviewed",
     "sourceTranscriptId": "san-zhu-yao-dao/session_22",
-    "sourceDigest": "sha256:9ae235f8d29d9e6f4fc845ff99088cc605692a118fc28b7ed03ba916d14f8847",
+    "sourceDigest": "sha256:82468247bca9560fe71378eee7059f578c484794ffa1a23ff005c49e97ad4f90",
     "generatedBy": "eNeural-glm53-flash",
-    "generatedAt": "2026-11-20T09:55:57.974Z",
+    "generatedAt": "2026-11-20T12:16:53.709Z",
     "mainPoints": [
       {
         "text": "佛法將苦分為苦苦、壞苦、行苦三個層次：苦苦是身心上的痛苦，壞苦是世間的安樂，行苦則是五蘊在業與煩惱的束縛下取得並維繫的處境，而非感受層面的問題。",

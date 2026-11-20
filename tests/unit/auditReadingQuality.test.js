@@ -367,3 +367,39 @@ test('radarAdjudicator keeps system prompt compact and applies FIX / MERGE_NEXT 
   assert.equal(s.paragraphs[0].sentences[1].rawText, origRaw3, 'FIX must never mutate rawText');
   assert.equal(s.contentOverview.sourceDigest, computeSourceDigest(s), 'sourceDigest must be re-synced');
 });
+
+test('consolidates multi-rule radar cards per sentence and preserves FIX over duplicate KEEP', () => {
+  const s = makeHealthySession();
+  s.paragraphs[0].sentences[0].text = '請問我們是不是覺得。';
+  const audit = auditSession(s);
+  const seg1Cards = audit.radarCards.filter((c) => c.id === 'seg-0001');
+  assert.equal(seg1Cards.length, 1, 'Multiple rules on one sentence must emit a single consolidated card');
+  assert.ok(seg1Cards[0].ruleCode.includes('Y1_SUSPECT_CHOPPED_CLAUSE'));
+  assert.ok(seg1Cards[0].ruleCode.includes('Y2_SUSPECT_QUESTION_PERIOD'));
+
+  const summary = applyRadarDecisions(s, [
+    { id: 'seg-0001', action: 'FIX', text: '請問我們是不是覺得？' },
+    { id: 'seg-0001', action: 'KEEP' },
+  ]);
+  assert.equal(summary.fixedCount, 1);
+  assert.equal(s.paragraphs[0].sentences[0].text, '請問我們是不是覺得？');
+});
+
+test('MERGE_NEXT applies successor FIX before merging and supports chained merges', () => {
+  const s = makeHealthySession();
+  s.paragraphs[0].sentences[0].text = '我們認為。';
+  s.paragraphs[0].sentences[1].text = '這是二地的意義。';
+  const origRaw1 = s.paragraphs[0].sentences[0].rawText;
+  const origRaw2 = s.paragraphs[0].sentences[1].rawText;
+
+  const summary = applyRadarDecisions(s, [
+    { id: 'seg-0001', action: 'MERGE_NEXT' },
+    { id: 'seg-0002', action: 'FIX', text: '這是二諦的意義。' },
+  ]);
+  assert.equal(summary.mergedCount, 1);
+  assert.equal(summary.fixedCount, 1);
+  assert.equal(s.paragraphs[0].sentences.length, 3);
+  assert.equal(s.paragraphs[0].sentences[0].text, '我們認為，這是二諦的意義。');
+  assert.equal(s.paragraphs[0].sentences[0].rawText, `${origRaw1} ${origRaw2}`);
+  assert.equal(s.paragraphs[0].sentences[0].end, 30);
+});

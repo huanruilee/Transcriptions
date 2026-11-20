@@ -71,11 +71,16 @@ export async function adjudicateRadarCards(
  * - On MERGE_NEXT, merges cur + next within the same paragraph (preserving concatenated rawText & [cur.start, next.end]).
  * - Automatically updates _meta.total_sentences and re-syncs contentOverview if present.
  */
+const ACTION_PRIORITY = { KEEP: 1, FIX: 2, MERGE_NEXT: 3 };
+
 export function applyRadarDecisions(session, decisions = []) {
   const decisionMap = new Map();
   for (const d of decisions) {
-    if (d?.id && ['FIX', 'MERGE_NEXT', 'KEEP'].includes(d.action)) {
-      decisionMap.set(d.id, d);
+    if (d?.id && ACTION_PRIORITY[d.action]) {
+      const prev = decisionMap.get(d.id);
+      if (!prev || ACTION_PRIORITY[d.action] >= ACTION_PRIORITY[prev.action]) {
+        decisionMap.set(d.id, d);
+      }
     }
   }
 
@@ -88,7 +93,7 @@ export function applyRadarDecisions(session, decisions = []) {
     const nextSents = [];
     for (let i = 0; i < sents.length; i += 1) {
       const cur = { ...sents[i] };
-      const dec = decisionMap.get(cur.id);
+      let dec = decisionMap.get(cur.id);
       if (!dec || dec.action === 'KEEP') {
         if (dec?.action === 'KEEP') keptCount += 1;
         nextSents.push(cur);
@@ -101,18 +106,29 @@ export function applyRadarDecisions(session, decisions = []) {
         continue;
       }
       if (dec.action === 'MERGE_NEXT' && i + 1 < sents.length) {
-        const nxt = sents[i + 1];
-        const baseText = (typeof dec.text === 'string' && dec.text.trim() ? dec.text.trim() : cur.text)
-          .replace(/[。]+$/, '');
-        const joiner = /[，、：；？！]$/.test(baseText) ? '' : '，';
-        cur.text = `${baseText}${joiner}${String(nxt.text || '').trim()}`;
-        cur.end = Math.max(Number(cur.end), Number(nxt.end));
-        if (cur.rawText !== undefined || nxt.rawText !== undefined) {
-          cur.rawText = `${cur.rawText ?? ''} ${nxt.rawText ?? ''}`.trim();
+        while (dec?.action === 'MERGE_NEXT' && i + 1 < sents.length) {
+          const nxt = sents[i + 1];
+          const nxtDec = decisionMap.get(nxt.id);
+          let nxtText = String(nxt.text || '').trim();
+          if (nxtDec && (nxtDec.action === 'FIX' || nxtDec.action === 'MERGE_NEXT') && typeof nxtDec.text === 'string' && nxtDec.text.trim()) {
+            nxtText = nxtDec.text.trim();
+            fixedCount += 1;
+          } else if (nxtDec?.action === 'KEEP') {
+            keptCount += 1;
+          }
+          const baseText = (typeof dec.text === 'string' && dec.text.trim() ? dec.text.trim() : cur.text)
+            .replace(/[。]+$/, '');
+          const joiner = /[，、：；？！]$/.test(baseText) ? '' : '，';
+          cur.text = `${baseText}${joiner}${nxtText}`;
+          cur.end = Math.max(Number(cur.end), Number(nxt.end));
+          if (cur.rawText !== undefined || nxt.rawText !== undefined) {
+            cur.rawText = `${cur.rawText ?? ''} ${nxt.rawText ?? ''}`.trim();
+          }
+          mergedCount += 1;
+          i += 1;
+          dec = nxtDec?.action === 'MERGE_NEXT' ? { ...nxtDec, text: undefined } : null;
         }
-        mergedCount += 1;
         nextSents.push(cur);
-        i += 1; // consume next sentence
         continue;
       }
       nextSents.push(cur);
