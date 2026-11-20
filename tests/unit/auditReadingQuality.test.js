@@ -403,3 +403,40 @@ test('MERGE_NEXT applies successor FIX before merging and supports chained merge
   assert.equal(s.paragraphs[0].sentences[0].rawText, `${origRaw1} ${origRaw2}`);
   assert.equal(s.paragraphs[0].sentences[0].end, 30);
 });
+
+test("R2 whitelist allows standard Buddhist triple-recitation chant (<=3) but catches 4+ repeats", () => {
+  const s3 = makeHealthySession();
+  s3.paragraphs[0].sentences[0].text = "南無本師釋迦牟尼佛。";
+  s3.paragraphs[0].sentences[1].text = "南無本師釋迦牟尼佛。";
+  s3.paragraphs[0].sentences[2].text = "南無本師釋迦牟尼佛。";
+  const r3 = auditSession(s3);
+  assert.equal(r3.violations.some((v) => v.code === "WHISPER_HALLUCINATION"), false);
+
+  const s4 = makeHealthySession();
+  s4.paragraphs[0].sentences.push({ id: "seg-0005", start: 40, end: 50, text: "南無本師釋迦牟尼佛。", rawText: "南無本師釋迦牟尼佛。" });
+  for (let i = 0; i < 4; i += 1) s4.paragraphs[0].sentences[i].text = "南無本師釋迦牟尼佛。";
+  const r4 = auditSession(s4);
+  assert.equal(r4.violations.some((v) => v.code === "WHISPER_HALLUCINATION"), true);
+});
+
+test("prefers non-empty session.discussionQuestions over legacy contentOverview.discussionTopics", () => {
+  const s = makeHealthySession();
+  s.contentOverview.discussionTopics = ["只有一題？"];
+  s.discussionQuestions = [
+    { id: "q-1", displayQuestion: "第1題：何謂心的自性？" },
+    { id: "q-2", displayQuestion: "第2題：為何無我慧能傷害我執？" },
+    { id: "q-3", displayQuestion: "第3題：猶豫知是否為心的自性？" },
+  ];
+  const r = auditSession(s);
+  assert.equal(r.violations.some((v) => v.code === "DISCUSSION_TOPICS_COUNT"), false);
+  assert.equal(r.violations.some((v) => v.code === "DISCUSSION_TOPICS_QUESTION_MARK"), false);
+});
+
+test("Y5 radar flags suspect multi-speaker transition cue inside a long 學員 paragraph", () => {
+  const s = makeHealthySession();
+  s.paragraphs[0].speaker = "學員";
+  s.paragraphs[0].sentences[0].text = "因為你剛剛是從自性光明的那個角度來說明，我覺得比較像是認知的性相那個部分，但是這邊強調的心自性到底強調的是什麼，可以再進一步看一下。好的，謝謝師兄。接下來我們再請第二位同學發表，法師好，大家好，我認為心的自性是如實取境。";
+  const r = auditSession(s);
+  assert.equal(r.warnings.some((w) => w.code === "Y5_SUSPECT_SPEAKER_MIX"), true);
+  assert.equal(r.radarCards.some((c) => c.ruleCode === "Y5_SUSPECT_SPEAKER_MIX"), true);
+});
