@@ -440,3 +440,14 @@ test("Y5 radar flags suspect multi-speaker transition cue inside a long 學員 p
   assert.equal(r.warnings.some((w) => w.code === "Y5_SUSPECT_SPEAKER_MIX"), true);
   assert.equal(r.radarCards.some((c) => c.ruleCode === "Y5_SUSPECT_SPEAKER_MIX"), true);
 });
+
+test('Y4 radar catches 《釋量論》 doctrinal term traps 一切遍知 and 異門意知', () => {
+  const s = makeHealthySession();
+  s.paragraphs[0].sentences[0].text = '我們心中本來就有一切遍知。';
+  s.paragraphs[0].sentences[1].text = '剛才講到異門意知也就是認知的性相。';
+  const r = auditSession(s);
+  const y4 = r.radarCards.filter((c) => c.ruleCode.includes('Y4_SUSPECT_HOMOPHONE_TERM'));
+  assert.equal(y4.length, 2);
+  assert.ok(y4[0].hint.includes('一切遍智'));
+  assert.ok(y4[1].hint.includes('既明亦知'));
+});
