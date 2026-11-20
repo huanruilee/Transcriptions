@@ -1,6 +1,6 @@
 # 逐字稿標準流程
 
-版本：1.8。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.9。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
@@ -211,7 +211,15 @@ npm run build:v2
 | 官方底本專名對齊（`noBaseText: false`） | NFKC 零相容字元 ＋ 零高頻專名衝突 | 匯入底本先做 Unicode NFKC 正規化，並抽取底本專名強制比對 ASR |
 | `discussionTopics` / `discussionQuestions` | 3～7 題且全形 `？` 結尾 | 適用所有課程，嚴禁僅產 1～2 題交差 |
 
-（註：上述靜態指標已由 `scripts/audit_reading_quality.mjs` 提供自動化檢查；專名語意衝突與高風險義理仍須由執行 Agent 與獨立 Reviewer 抽查覆核。）
+#### 紅黃燈分流與低成本模型複核閉環（v1.9）
+- **紅燈（Hard Gate，exit 1，0 假陽性）**：除上表基礎紅線外，另包含 **R1 音視時長落差**（`|audioDurationSec - youtubeDurationSec| > 10s` 且無 `timeAlignment.offsetSec` 校準紀錄）、**R2 Whisper 幻覺片語／3 次以上重複迴圈**、**R3 尾端懸空過渡詞**（如 `，此外。`、`。此時。`、`。因此。`）。紅燈未過一律阻擋合併。
+- **黃燈（Review Radar，僅輸出爭議小卡，不炸 CI）**：偵測 **Y1 疑似未完子句誤加句號**（排除合法句尾白名單）、**Y2 疑似疑問句誤加句號**、**Y3 一級章節首句與標題脫節**、**Y4 高風險佛法同音陷阱詞**（如 `稱心`/`對峙`/`關帶`/`自信樂`/`淺苦`）。
+- **低成本模型兩步閉環**（專為 `glm53-flash` 等低價模型設計，系統提示 `< 250 tokens`，只掃本次新增／修改講次）：
+  ```sh
+  npm run audit:reading-quality -- courses/<課程名>/sessions/session_XX.json --radar-out /tmp/radar.json
+  node scripts/lib/radarAdjudicator.mjs --session courses/<課程名>/sessions/session_XX.json --radar /tmp/radar.json --apply
+  ```
+  `radarAdjudicator.mjs` 會對小卡輸出 `FIX` / `MERGE_NEXT` / `KEEP` 決議，確定性套用（嚴格保護 `rawText`）並自動呼叫 `syncContentOverview()` 重算 `sourceDigest`。
 
 瀏覽器確認閱讀頁、原話、導讀、待閱校標示、寬窄排版、下載完整性及末句音訊。閱讀器程式與發布路徑依 [閱讀器發布 Test Patterns](../TESTING.md#閱讀器發布-test-patterns2026-10-24) 分別驗證原入口、失敗回退、資料保真、實際下載與部署版本；Pages workflow 的 artifact／deployed smoke 皆通過才算工程部署驗收完成。獨立 reviewer 看固定 commit 與證據；工程 PASS、內容核定、發布與人工聽核分開記錄。
 
@@ -235,6 +243,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.9 | 2026-11-20 | 建立「紅黃燈分流」自動化品質稽核與低成本模型複核閉環：`scripts/audit_reading_quality.mjs` 新增 R1（音視時長偏移）、R2（Whisper 幻覺）、R3（尾端懸空過渡詞）硬紅線與 Y1–Y4 黃燈雷達（`--radar-out`）；新增 `scripts/lib/radarAdjudicator.mjs` 支援低價模型（`glm53-flash`）以 `< 250 tokens` 提示批量裁決 `FIX`/`MERGE_NEXT`/`KEEP` 並同步 `sourceDigest` |
 | 1.8 | 2026-11-20 | 消除跨檔矛盾與冗餘：`AGENTS.md` 瘦身為 SSOT 路由並移除過時 Draft／重複語句、區分修辭重複與結巴重複、統一兩級分段（150～350 字／硬上限 35 句）、將 `studyScaffolding` 整併入 §5.2 並對齊 Stage 0～7、新增自動化稽核腳本 `scripts/audit_reading_quality.mjs`（`npm run audit:reading-quality`），並下放《入中論》《四法印》《三主要道》專屬規則至各自 `COURSE_GUIDE.md` |
 | 1.7 | 2026-11-20 | 新增 Stage 2「語音時間密度異常偵測」紅線（單句跨度 `> 20s` 且字速 `< 1.0 字/秒`，於 `transcriptGuards.mjs` 提供 `findLowDensitySegments()`），防範片頭《開經偈》合唱或尾段遭原 ASR 壓縮漏辨且底本未收錄之盲點 |
 | 1.6 | 2026-11-20 | 納入《四法印》成果覆盤教訓：強制開工／查現況前 `git fetch origin`、確立「全域標準＋課程目錄 `COURSE_GUIDE.md`」兩層指導架構、外部底本匯入前 Unicode NFKC 正規化與官方底本專名強制對齊、禁止僅靠 YouTube 粗綱造成超大單段、Stage 6 前清零 `correctionsPending`/`hallucinationSuspects`，並新增「最低閱讀品質量化門檻」（適用待閱校版）與全課程 3～7 題討論問題規範 |
