@@ -54,6 +54,7 @@
     "test:rating": "node --test tests/unit/reviewRating.test.js",
     "audit:oral": "python3 scripts/audit_oral_references.py",
     "audit:transcript": "node scripts/transcript_candidate_auditor.mjs",
+    "audit:reading-quality": "node scripts/audit_reading_quality.mjs",
     "score": "python3 scripts/quality_scorer.py",
     "score:fix": "python3 scripts/quality_scorer.py --fix",
     "learn:eval": "python3 scripts/active_learning_manager.py --eval",
