@@ -1,20 +1,21 @@
 # 逐字稿標準流程
 
-版本：1.5。更新：2026-11-15（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.6。更新：2026-11-20（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
 
 1. 使用者對本次任務的明確指示。
-2. 本文件與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md)：Stage 0 ～ Stage 7 單向轉稿與品管流水線、口語冗詞清除與依語意順句規範。
-3. [品質契約](TRANSCRIPT_PROOFREADING_QUALITY_CONTRACT.md)、[資料 Schema](DATA_SCHEMA.md)、[專案規格](SPECIFICATION.md) 等領域細節；涉及本流程的舊敘述以本文件與 `EDITORIAL_FORMATTING_PLAN.md` 為準，Schema 不得未經協調直接改動。
-4. 舊 SOP、交接、skill 與歷史報告僅作背景和工具參考。Draft 文件／PR 不改變正式流程。
+2. 課程專屬指導：`courses/<課程名>/COURSE_GUIDE.md`（若存在）與 `courses/<課程名>/grounding.json`，定義該課程獨有的底本用法、名相禁忌、特殊格式與參考文件入口；在不牴觸全域紅線前提下優先適用。
+3. 本文件與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md)：Stage 0 ～ Stage 7 單向轉稿與品管流水線、口語冗詞清除與依語意順句規範。
+4. [品質契約](TRANSCRIPT_PROOFREADING_QUALITY_CONTRACT.md)、[資料 Schema](DATA_SCHEMA.md)、[專案規格](SPECIFICATION.md) 等領域細節；涉及本流程的舊敘述以本文件與 `EDITORIAL_FORMATTING_PLAN.md` 為準，Schema 不得未經協調直接改動。
+5. 舊 SOP、交接、skill 與歷史報告僅作背景和工具參考。Draft 文件／PR 不改變正式流程。
 
 若現有程式、Schema 或文件尚未支援要求，明列缺口並採可稽核的人工步驟；不得宣稱已有自動強制攔截。不得以「測試全綠」代替音訊或論義已人工核定。
 
 ## 2. 先確認本次交付
 
-開工先記錄 Task ID、講次、工作分支／隔離 checkout、來源 commit、來源檔 digest、允許的模型／provider、預期產物及發布範圍。保留別人的未提交內容。不直接改 main、不自動擴大全庫。
+開工或回報專案現況前，**必須先執行 `git fetch origin` 同步遠端最新 `origin/main` 狀態**（不可僅憑本地舊分支或過時快取做判斷），再記錄 Task ID、講次、工作分支／隔離 checkout、來源 commit、來源檔 digest、允許的模型／provider、預期產物及發布範圍。保留別人的未提交內容。不直接改 main、不自動擴大全庫。
 
 預設交付是**流暢原意閱讀版（不整篇改寫、必除口語冗詞、必合碎句並依語意補順）**。產物定位如下：
 
@@ -45,6 +46,7 @@
 | 產物 | 位置 | 說明 |
 | --- | --- | --- |
 | 課程基礎知識包 | `courses/<course>/grounding.json` | 實體庫、名相對照表、章節對照、來源清單 |
+| 課程專屬指導書（有特殊規則時必建） | `courses/<course>/COURSE_GUIDE.md` | 該課程獨有的底本正規化／對齊規則、名相消歧禁忌、講者口語習慣、專用腳本與參考文件入口 |
 | 參考資料 inventory | `reviews/evidence/<course>/reference/README.md` | 每份來源：`referenceId`、類型、URL、本機路徑、SHA256、取得日期、核對狀態、允許用途 |
 
 **沒有 `grounding.json` 的課程視為未完成 Step 0。**
@@ -68,10 +70,10 @@
 
 若找到同一講的整編講記，**必須**：
 
-1. 抓取全文存到 `reviews/evidence/<course>/reference/`，附抓取腳本與 SHA256
+1. 抓取全文存到 `reviews/evidence/<course>/reference/`，附抓取腳本與 SHA256；**若來源為 PDF／OCR 擷取，匯入 `source_text/` 前必須先執行 Unicode NFKC 正規化**（消除康熙部首或 CJK 相容字元如 `教㈻藍圖㆗`，並清理多餘斷行與頁碼雜訊），避免後續對齊失效
 2. 寫出**講記章節 ↔ 本課程講次**的對照表
 3. 建立**字串對齊工具**（見 `tools/sinianzhu_align_jiangji.py` 的實作），
-   以「本講無對應」為指標找出整句亂碼 —— 這是規則對照表抓不到的部分
+   以「本講無對應」為指標找出整句亂碼 —— 這是規則對照表抓不到的部分；同時**從官方底本自動抽取本課專有名詞與關鍵術語表，強制比對並攔截 ASR 同音／近音誤植**（例如「二地→二諦」「四地→四諦」「三歸一→三皈依」「十六形象→十六行相」），凡與底本衝突的高頻專名一律列為 `reviewRequired=true` 必檢項目，不得僅靠通用詞表放行
 4. 修正後以**法相詞頻對齊**驗證整體貼合度
    （講記是整理稿，逐句吻合率低是正常的，**不可用逐句比對判定好壞**）
 
@@ -110,13 +112,14 @@
      - **保護實義詞彙**：時間、程度、邏輯與否定詞（`剛好`、`已經`、`因為`、`所以`、`如果`、`但是`、`沒有`、`不要`）及師生問答必須完整保留。
 4. **Stage 4（自然段重組與主題編號小標）**：
    - 在冗詞清除、碎句合併定型後，由 `paragraphLayoutPlanner.js` 將段落重組為每段 **150～350 字** 的自然段（同步更新 `paragraph.start = 首句.start`、`paragraph.end = 末句.end`），並每 3～6 段配置 `1. ...`、`2. ...` 編號義理小標。
+   - **禁止僅以 YouTube 影片描述的粗綱時間碼作為唯一切段依據**：若單一章節超過閱讀密度上限（例如超過 40～60 句或 5 分鐘），必須進一步執行二級語意分段並補上子標題，杜絕數百句擠成同一段落。
 5. **Stage 5（Agent 佛法專家逐段通讀審核）**：
    - 主控 Agent 必須親自逐段通讀全文，同時驗收「佛法名相與義理 100% 正確」及「零發語詞殘留（無 `呃/嗯/啊`）、無破碎逗號斷句、文句自然流暢」。遇有疑義音段立即調用 GX10 Whisper 重聽確認。
 
 ## 5. Stage 6：導讀摘要（`contentOverview`）與資料同步
 
-**導讀摘要生成與同步必須排在 Stage 5 專家審核定稿之後執行**，避免內文修訂或碎句合併導致摘要引文失效：
-1. 導讀獨立標示為 AI 整理，引用定稿後之正文 `sent-X` ID 與文字，區分講者主張、他宗批評與學員提問。
+**導讀摘要生成與同步必須排在 Stage 5 專家審核定稿之後執行**（且 `_meta.correctionsPending` 與 `hallucinationSuspects` 須先清零或完成人工裁決、正文標點與碎句整併已定型），避免內文修訂或碎句合併導致摘要引文失效與重工：
+1. 導讀獨立標示為 AI 整理，引用定稿後之正文 `sent-X` ID 與文字，區分講者主張、他宗批評與學員提問；其中 `discussionTopics`（或 `discussionQuestions`）每講應收斂為 **3～7 題**緊扣法義的核心辨析問題，皆以全形問號 `？` 結尾。
 2. 任何講次內文有增刪、合併或修改句子文字時，必須同步更新 `contentOverview` 中所有包含 `evidence[]` 的四個陣列（`mainPoints`、`discussionTopics`、`sections`、`referenceViews`——過濾已刪除或被合併的舊 `sent-id`、更新 `quote` 與現行句子完全一致），並呼叫 `scripts/content_overview_pipeline.mjs` 的 `computeSourceDigest(transcript)` 重新計算寫入 `contentOverview.sourceDigest`。
 3. 同步工具先輸出候選，正式同步需對新正文有效的摘要審查；不可只更新 digest 讓驗證通過。例如《入中論》既有工具：
 
@@ -183,6 +186,22 @@ npm run build:v2
 
 另跑本課程所需來源／ledger 稽核；不修改 gate 或測試預期來掩蓋正文錯誤。發現歷史 skip 或門檻只掃部分 engine，報告範圍，不宣稱全庫皆驗證。公開文字要求繁體中文、零適用禁止同音錯字、零殘留發語詞（`呃/嗯/啊`）與零破碎孤立斷句；原始辨識證據則保留原貌。新訂正規則不能因湊零禁字而誤改實詞。
 
+### 最低閱讀品質量化門檻（Minimum Reading Quality Gate，含「待閱校版」）
+
+即使以「待閱校版（`candidate-review-required`）」先上線，仍須滿足以下最低閱讀品質紅線，**不得以「Schema 合法、無空字串」代替閱讀品質驗收，亦禁止以未整編的 Raw ASR 原始段直接套粗綱充數**：
+
+| 檢查項目 | 紅線門檻 | 說明 |
+| --- | --- | --- |
+| 無句尾標點句比例 | `< 5%` | 杜絕 ASR 原始段未補標點直接上線（如 2026-11-19《四法印》曾高達 60.6%） |
+| 1～3 字孤立碎句比例 | `< 2%` | 「第一點」「例如」等未完碎片須與前後子句合併並繼承首尾時間軸 |
+| 純冗詞／無實義單字句 | `0` | 「呃」「嗯」「啊」或無實義單字應答句須直接移除該 `sentence` 物件 |
+| `_meta.correctionsPending` 與 `hallucinationSuspects` | `0`（或附人工裁決紀錄） | 必須於生成 `contentOverview`（Stage 6）與合併前清零 |
+| 單段閱讀粒度 | 禁止數百句擠成一段 | YouTube 粗綱僅作一級章節；超過約 40～60 句須執行二級語意分段 |
+| 官方底本專名對齊（`noBaseText: false`） | 零已知高頻專名衝突 | 匯入底本先做 Unicode NFKC 正規化，並抽取底本專名強制比對 ASR |
+| `discussionTopics` / `discussionQuestions` | 3～7 題且全形 `？` 結尾 | 適用所有課程，嚴禁僅產 1～2 題交差 |
+
+（註：本表為作業與 Review 強制要求；若現有自動化腳本尚未全面攔截，執行 Agent 與獨立 Reviewer 須以稽核腳本或抽查紀錄手動驗證，不得宣稱已有程式自動 gate。）
+
 瀏覽器確認閱讀頁、原話、導讀、待閱校標示、寬窄排版、下載完整性及末句音訊。閱讀器程式與發布路徑依 [閱讀器發布 Test Patterns](../TESTING.md#閱讀器發布-test-patterns2026-10-24) 分別驗證原入口、失敗回退、資料保真、實際下載與部署版本；Pages workflow 的 artifact／deployed smoke 皆通過才算工程部署驗收完成。獨立 reviewer 看固定 commit 與證據；工程 PASS、內容核定、發布與人工聽核分開記錄。
 
 使用新分支。建立 PR 必須帶明列 base、head 及 body 檔，避免互動卡住：
@@ -205,6 +224,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.6 | 2026-11-20 | 納入《四法印》成果覆盤教訓：強制開工／查現況前 `git fetch origin`、確立「全域標準＋課程目錄 `COURSE_GUIDE.md`」兩層指導架構、外部底本匯入前 Unicode NFKC 正規化與官方底本專名強制對齊、禁止僅靠 YouTube 粗綱造成超大單段、Stage 6 前清零 `correctionsPending`/`hallucinationSuspects`，並新增「最低閱讀品質量化門檻」（適用待閱校版）與全課程 3～7 題討論問題規範 |
 | 1.5 | 2026-11-15 | 正式合入低 Token 漏斗共用模組（`scripts/lib/eneuralClient.mjs`、`scripts/lib/transcriptGuards.mjs`）、`config/locked-sessions.json` 前置鎖定檢查與最小差異輸出（`fixes + breaks`），並新增全流程交接手冊 `docs/AGENT_HANDOFF_PLAYBOOK.md` |
 | 1.4 | 2026-11-14 | 對齊 Stage 0～7 單向流水線；廢除「保留口頭禪／禁止刪合碎句」舊規，改為強制清除口語冗詞（呃、嗯、啊、好，那）、合併破碎短句並依語意補順句子，且導讀同步移至 Stage 5 專家終審定稿之後 |
 | 1.3 | 2026-11-13 | 納入讀者體驗改進：連續閱讀與對照雙模式、ASR 幻覺收折膠囊標記、講記雙向跳轉與名相懸浮註釋規範 |
