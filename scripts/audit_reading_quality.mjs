@@ -9,6 +9,8 @@ const NON_NFKC_CJK_RE = /[\u2F00-\u2FDF\u3190-\u319F\u3200-\u32FF\u3300-\u33FF\u
 
 // R2: Known Whisper hallucination phrases (near-zero false positive)
 const WHISPER_HALLUCINATION_RE = /(明鏡與點點欄目|明镜与点点栏目|不吝點讚|不吝点赞|訂閱打賞|打赏支持|Amara\.org|Subtitles by|請不吝點讚)/iu;
+const LITURGICAL_CHANT_RE = /^(南無本師釋迦牟尼佛|南無阿彌陀佛|南無觀世音菩薩|南無大悲觀世音菩薩|南無消災延壽藥師佛|南無藥師琉璃光如來|皈依佛|皈依法|皈依僧|阿彌陀佛)[。！？\s]*$/u;
+const SUSPECT_SPEAKER_MIX_RE = /(接下來我們.{0,8}請|請法師|法師請說|謝謝師[兄姐][。，！\s]*接下來)/u;
 
 // R3: Trailing dangling connective cut by period (near-zero false positive)
 const TRAILING_DANGLING_CONNECTIVE_RE = /[，。；：]\s*(因此|所以|同時|此外|此時|但是|不過|然而|也就是說|也就是|換句話說|而且|並且|接著|最後|相同的|同樣的|實際上|事實上)[。]$/u;
@@ -119,7 +121,8 @@ export function auditSession(session, opts = {}) {
     }
     if (i > 0 && txt === prevTxt && bare.length >= 4) {
       consecutiveDupCount += 1;
-      if (consecutiveDupCount >= 3) hasRepeatedLoop = true;
+      const dupThreshold = LITURGICAL_CHANT_RE.test(txt) ? 4 : 3;
+      if (consecutiveDupCount >= dupThreshold) hasRepeatedLoop = true;
     } else {
       consecutiveDupCount = 1;
     }
@@ -286,6 +289,26 @@ export function auditSession(session, opts = {}) {
         radarCards.push(card);
       }
     }
+
+    // Y5: Suspect multi-speaker transition merged inside a single 學員 paragraph (study-group)
+    if (p.speaker === "學員" && pSents.length > 0) {
+      const fullParaTxt = pSents.map((x) => String(x?.text || "")).join("");
+      if (fullParaTxt.length >= 120 && SUSPECT_SPEAKER_MIX_RE.test(fullParaTxt)) {
+        const firstSent = pSents[0];
+        const card = {
+          id: firstSent.id || p.id,
+          paragraphId: p.id,
+          ruleCode: "Y5_SUSPECT_SPEAKER_MIX",
+          prev: "",
+          cur: fullParaTxt.slice(0, 140),
+          next: "",
+          hint: "大組共學「學員」長段落內含主持人轉接語（如「請法師」「接下來請…」），請確認是否混入多講者並拆段",
+          allowedActions: ["KEEP", "SPLIT_SPEAKER_PARAGRAPH"],
+        };
+        warnings.push({ code: card.ruleCode, sentenceId: card.id, message: `Paragraph ${p.id} (學員) contains host transition cue` });
+        radarCards.push(card);
+      }
+    }
   }
   if (maxParagraphSentences > cfg.maxParagraphSentences) {
     violations.push({
@@ -312,8 +335,13 @@ export function auditSession(session, opts = {}) {
   }
 
   const topics =
+    (Array.isArray(session.discussionQuestions) && session.discussionQuestions.length > 0
+      ? session.discussionQuestions
+      : null) ??
+    (Array.isArray(session.discussionTopics) && session.discussionTopics.length > 0
+      ? session.discussionTopics
+      : null) ??
     session.contentOverview?.discussionTopics ??
-    session.discussionQuestions ??
     null;
 
   if (!Array.isArray(topics)) {
@@ -331,7 +359,7 @@ export function auditSession(session, opts = {}) {
     const invalidQMark = topics.filter((item) => {
       const q = typeof item === 'string'
         ? item.trim()
-        : String(item?.displayQuestion ?? item?.text ?? item?.rawQuestion ?? '').trim();
+        : String(item?.displayQuestion ?? item?.question ?? item?.title ?? item?.text ?? item?.rawQuestion ?? '').trim();
       return q.length === 0 || !q.endsWith('？');
     });
     if (invalidQMark.length > 0) {
