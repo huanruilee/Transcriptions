@@ -1,0 +1,330 @@
+{
+  "scope": "21 bounded real-neighbor cards;actual IDs retained;not full lecture model review",
+  "calls": 1,
+  "findings": [
+    {
+      "sentenceId": "sent-17",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "希求獲得這樣可以嗎 總之就是說想去菩提嘛 生的話是心 霸的話是永恆。",
+      "prevText": "為什麼他叫做現前地呢 就是輕易冷靜的修筆 就是變成對法界 現前法界。",
+      "nextText": "維斯當然就是維斯的解釋 對不對 對 所以我是覺得 如是三界 皆為有心。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "希求獲得這樣可以嗎 總之就是說想去菩提嘛 生的話是心 霸的話是永恆。",
+          "suggestedTerm": "菩提心/發心",
+          "reason": "「生的話是心」語法斷裂，且後文提到「永恆的心」，疑似漏掉「菩提心」或「發心」等關鍵詞。",
+          "promptHints": [
+            "菩提心",
+            "發心"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-66",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "維斯當然就是維斯的解釋 對不對 對 所以我是覺得 如是三界 皆為有心。",
+      "prevText": "希求獲得這樣可以嗎 總之就是說想去菩提嘛 生的話是心 霸的話是永恆。",
+      "nextText": "能夠了解吧 這個我好像也沒有解釋好 對。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "維斯當然就是維斯的解釋 對不對 對 所以我是覺得 如是三界 皆為有心。",
+          "suggestedTerm": "唯/造",
+          "reason": "「皆為有心」在佛教名相中極少見，通常為「三界唯心」或「一切唯心造」，疑似漏字或誤聽。",
+          "promptHints": [
+            "三界唯心",
+            "一切唯心造"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-95",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "所以彌勒論的話，就像《現觀莊嚴論》，還有就是說，像《阿毗達磨俱舍論》，對吧？",
+      "prevText": "能夠了解吧 這個我好像也沒有解釋好 對。",
+      "nextText": "土觀活佛的弟子。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以彌勒論的話，就像《現觀莊嚴論》，還有就是說，像《阿毗達磨俱舍論》，對吧？",
+          "suggestedTerm": "謁見/親近/受學",
+          "reason": "「曾經建過彌勒菩薩」語義不通，應為「謁見」、「親近」或「從...受學」，疑似漏掉動詞或介詞結構。",
+          "promptHints": [
+            "無著菩薩",
+            "彌勒菩薩",
+            "五部大論"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-102",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "對，不是他的意趣，這樣可以嗎？那無著菩薩、世親菩薩應該就是他的想法了。",
+      "prevText": "土觀活佛的弟子。",
+      "nextText": "《十地經》的意思不是清辯論師講的那個樣子，任其經的第一段意思也不是清辯論師講的那個樣子。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "對，不是他的意趣，這樣可以嗎？那無著菩薩、世親菩薩應該就是他的想法了。",
+          "suggestedTerm": "作/寫",
+          "reason": "「解釋，為《二十唯識論》」語法突兀，疑似漏掉「作」或「寫」等動詞，變成「解釋作為...」。",
+          "promptHints": [
+            "二十唯識論",
+            "世親菩薩"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-164",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "你不應該說是那個解釋迷經 這樣可以嗎 解釋迷經雖然也是講了違心嘛。",
+      "prevText": "就是清辯論師講的那個樣子，雖然他的意思跟清辯論師講的一樣，但他是了意。",
+      "nextText": "這樣可以嗎 這個我解釋不出來 但是有地方解釋了 我也找了一下 沒找到。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "你不應該說是那個解釋迷經 這樣可以嗎 解釋迷經雖然也是講了違心嘛。",
+          "suggestedTerm": "楞伽/解深密",
+          "reason": "「解釋迷經」疑似為「《楞伽經》」或特定經名之誤聽/漏字，因前文談論唯心與經義。",
+          "promptHints": [
+            "楞伽經",
+            "解深密經"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-184",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "這樣可以嗎 這個我解釋不出來 但是有地方解釋了 我也找了一下 沒找到。",
+      "prevText": "你不應該說是那個解釋迷經 這樣可以嗎 解釋迷經雖然也是講了違心嘛。",
+      "nextText": "我覺得我的這個解釋 有點變成 該怎麼講 確實就是那個 稀釋 這樣可以嗎。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這樣可以嗎 這個我解釋不出來 但是有地方解釋了 我也找了一下 沒找到。",
+          "suggestedTerm": "自在天/大自在天",
+          "reason": "「資料去」語義不明，結合後文「造物主」、「相續」，疑似為「自在天」或特定外道名詞之誤聽/漏字。",
+          "promptHints": [
+            "數論師",
+            "勝論師",
+            "自在天"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-195",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "我覺得我的這個解釋 有點變成 該怎麼講 確實就是那個 稀釋 這樣可以嗎。",
+      "prevText": "這樣可以嗎 這個我解釋不出來 但是有地方解釋了 我也找了一下 沒找到。",
+      "nextText": "但他們如同外道，這樣可以嗎？他們不，怎麼要說不配嗎？還是要說什麼？",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "我覺得我的這個解釋 有點變成 該怎麼講 確實就是那個 稀釋 這樣可以嗎。",
+          "suggestedTerm": "細微/析破",
+          "reason": "「稀釋」在此處語義不通，結合後句「稀掉了」及前文討論作者/唯心，疑似為「細微」、「析破」或特定術語誤聽。",
+          "promptHints": [
+            "唯識",
+            "破執"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-241",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "修流圖是誰。",
+      "prevText": "但他們如同外道，這樣可以嗎？他們不，怎麼要說不配嗎？還是要說什麼？",
+      "nextText": "白淨斷到底是啥。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "修流圖是誰。",
+          "suggestedTerm": "耆那/尼乾陀",
+          "reason": "「修流圖」疑似為外道名詞誤聽，結合後文「裸形外道」、「無衣」，可能指「耆那教」或特定論師名。",
+          "promptHints": [
+            "裸形外道",
+            "數論師"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-264",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "白淨斷到底是啥。",
+      "prevText": "修流圖是誰。",
+      "nextText": "所以就是變成那個有點像是某一種結是，像年華的那個半一樣，增長廣大過去。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "白淨斷到底是啥。",
+          "suggestedTerm": "觀/定",
+          "reason": "「白淨斷」疑似漏字，佛教禪定中有「白淨觀」或四禪八定之名稱，此處語法不完整。",
+          "promptHints": [
+            "白淨觀",
+            "四禪"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-291",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "所以就是變成那個有點像是某一種結是，像年華的那個半一樣，增長廣大過去。",
+      "prevText": "白淨斷到底是啥。",
+      "nextText": "月亮出山到，對不對，四五六七八這樣，對，佛都收滿了。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "所以就是變成那個有點像是某一種結是，像年華的那個半一樣，增長廣大過去。",
+          "suggestedTerm": "月/輪",
+          "reason": "「像年華的那個半一樣」語義混亂，疑似漏掉關鍵比喻詞或名相，導致無法理解。",
+          "promptHints": [
+            "增長廣大",
+            "結"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-321",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "月亮出山到，對不對，四五六七八這樣，對，佛都收滿了。",
+      "prevText": "所以就是變成那個有點像是某一種結是，像年華的那個半一樣，增長廣大過去。",
+      "nextText": "若自知等，唯有心，顧破不離心外色者，何故如來與彼，今父所心，從之夜生。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "月亮出山到，對不對，四五六七八這樣，對，佛都收滿了。",
+          "suggestedTerm": "從/後",
+          "reason": "「月亮出山到」語法斷裂，疑似漏掉動詞或介詞，如「月亮從山後出來」或特定比喻。",
+          "promptHints": [
+            "空性",
+            "比喻"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-355",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "若自知等，唯有心，顧破不離心外色者，何故如來與彼，今父所心，從之夜生。",
+      "prevText": "月亮出山到，對不對，四五六七八這樣，對，佛都收滿了。",
+      "nextText": "這是一個坑叔，他只有一個弟子，就是他了。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "若自知等，唯有心，顧破不離心外色者，何故如來與彼，今父所心，從之夜生。",
+          "suggestedTerm": "經文原句",
+          "reason": "「今父所心，從之夜生」語句不通，疑似漏字或誤聽，應為引用經論原文（如《楞伽經》或唯識論典）。",
+          "promptHints": [
+            "唯識",
+            "如來藏"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-378",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "這是一個坑叔，他只有一個弟子，就是他了。",
+      "prevText": "若自知等，唯有心，顧破不離心外色者，何故如來與彼，今父所心，從之夜生。",
+      "nextText": "他那個老坑叔就是閉著眼睛，對，就一直講一直講一直講一直講，就講到自己。",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "這是一個坑叔，他只有一個弟子，就是他了。",
+          "suggestedTerm": "堪布/上師",
+          "reason": "「坑叔」疑似為「堪布」或特定稱謂之誤聽/漏字，結合上下文討論師徒關係。",
+          "promptHints": [
+            "堪布",
+            "弟子"
+          ]
+        }
+      ]
+    },
+    {
+      "sentenceId": "sent-382",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "他那個老坑叔就是閉著眼睛，對，就一直講一直講一直講一直講，就講到自己。",
+      "prevText": "這是一個坑叔，他只有一個弟子，就是他了。",
+      "nextText": "去什麼會議，但是問題是 OK，反正就是打瞌睡，類似這樣吧？",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "他那個老坑叔就是閉著眼睛，對，就一直講一直講一直講一直講，就講到自己。",
+          "suggestedTerm": "堪布",
+          "reason": "「老坑叔」同上，疑似為「老堪布」或特定人物稱謂之誤聽/漏字。",
+          "promptHints": [
+            "堪布",
+            "睡眠"
+          ]
+        }
+      ]
+    }
+  ]
+}
