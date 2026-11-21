@@ -32,7 +32,11 @@ test('金剛經1999 candidate inventory: identity, provenance and minimum readin
     assert.equal(data.transcriptPublicationState, 'candidate-review-required',
       id + ' must remain candidate-review-required until release gates pass');
     assert.equal(data.audioAvailable, true, id + ' audio must be playable (externally hosted, URLs verified 200)');
-    assert.ok(/^https?:\/\/.+\.mp3$/.test(data.audioUrl), id + ' audioUrl must be a provenanced mp3 URL');
+    // Accepts provenanced external mp3: direct .mp3 URL, or Google Drive direct
+    // download (audio/mpeg, range-capable; same pattern as 釋量論第二品).
+    const isMp3Url = /^https?:\/\/.+\.(mp3|MP3)$/.test(data.audioUrl);
+    const isDriveAudio = /^https:\/\/drive\.google\.com\/uc\?export=download&id=[\w-]+$/.test(data.audioUrl);
+    assert.ok(isMp3Url || isDriveAudio, id + ' audioUrl must be a provenanced mp3 URL');
     assert.ok(data.durationSec > 0, id + ' durationSec must be recorded');
     assert.ok(data._meta?.candidateReviewRequired, id + ' must retain review-required provenance');
     assert.ok(data._meta?.source_url, id + ' must record external source URL');
@@ -100,7 +104,8 @@ test('金剛經1999 release gate: playable audio and zero pending review', { ski
   for (const { id, data } of loadSessions()) {
     const playable = data.audioAvailable === true
       && typeof data.audioUrl === 'string'
-      && new RegExp('^(audio/[-\\w]+\\.mp3|https?://.+\\.mp3)$', 'i').test(data.audioUrl);
+      && (new RegExp('^(audio/[-\\w]+\\.mp3|https?://.+\\.mp3)$', 'i').test(data.audioUrl)
+        || /^https:\/\/drive\.google\.com\/uc\?export=download&id=[\w-]+$/.test(data.audioUrl));
     const pending = data.paragraphs.flatMap((p) => p.sentences || []).filter((s) => s.reviewNeeded === true);
     if (!playable) failures.push(id + ': audio not playable/provenanced');
     if (pending.length > 0) failures.push(id + ': ' + pending.length + ' sentences still require review');

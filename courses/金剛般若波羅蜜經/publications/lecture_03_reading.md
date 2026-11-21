@@ -1,10 +1,10 @@
 # 《金剛般若波羅蜜經》第 3 講 — 閱讀版
 
-> **待閱校版：經 ASR 與 AI 輔助整理，尚未人工完整校訂；疑義請配合[原音](https://github.com/huanruilee/Transcriptions/releases/download/jjj1999-audio/R06d_003.mp3)核對。**
+> **待閱校版：經 ASR 與 AI 輔助整理，尚未人工完整校訂；疑義請配合[原音](https://drive.google.com/uc?export=download&id=1ZIvem4_T5SYi4GjlwOc6dZD1QUwlykMg)核對。**
 
 - **講者**：玅境長老
 - **時間／地點**：1999 年・台灣埔里法雲講堂
-- **音源**：[R06d_003.mp3](https://github.com/huanruilee/Transcriptions/releases/download/jjj1999-audio/R06d_003.mp3)（外部連結）
+- **音源**：[R06d_003.mp3](https://drive.google.com/uc?export=download&id=1ZIvem4_T5SYi4GjlwOc6dZD1QUwlykMg)（外部連結）
 - **逐字稿 JSON**：`courses/金剛般若波羅蜜經/sessions/session_03.json`
 - **publicationState**：`candidate-review-required`
 
