@@ -9,3 +9,5 @@ source-session為aca963c2384bf6ad65aa172545b072a37da10968基線舊機校稿，�
 來源hash/映射/待核見plan/ledger/editorial-mapping/reference-inventory。完整音檔PDF不提交Git。legacyrenderer只單一沙盒MD；sync候選拒絕未採，正式source-bound publisher不用字數插值、不刪原話。
 
 獨立覆核修正：初版末段底本補兩個未報子科判，與已報標題說明不符；最終19th引文縮到午三標題分二，不含兩子科判。對immutable8a版本重現RED，新截止回歸GREEN；所有新引句重新逐項導讀覆核，初版request/response/review以overview-initial完整保留，文字實際4calls，未盲改digest。
+
+差異複審再修正：本地make-plan重跑會在P21重插相鄰編者註，已移除非冪等追加步驟且只留一次；immutable9cd重現RED、新版dedupe回歸GREEN。8完整導讀及引證deepEqual證明review可重用，記錄overview-review-reuse；沒有第五次模型呼叫。
