@@ -1,0 +1,54 @@
+{
+  "findings": [
+    {
+      "sentenceId": "idx-344",
+      "paragraphId": "p_173",
+      "heading": null,
+      "start": 2599.71,
+      "end": 2601.59,
+      "text": "無過世的名言建立。",
+      "prevText": "就會有些分別，誤入那個基圖，詞明未知無過世的，對，你看這邊再一次說。",
+      "nextText": "無過世的名言建立。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "無過世的名言建立。",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    },
+    {
+      "sentenceId": "idx-345",
+      "paragraphId": "p_173",
+      "heading": null,
+      "start": 2602.94,
+      "end": 2604.6,
+      "text": "無過世的名言建立。",
+      "prevText": "無過世的名言建立。",
+      "nextText": "如果沒有了，如果沒有無過世的名言建立的話，必不能通達勝義諦，對不對？",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-loop",
+          "severity": "high",
+          "matchedText": "無過世的名言建立。",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 跨句連續重複幻覺（連續 3 句以上相同短句），需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    }
+  ],
+  "density": [
+    {
+      "start": 2014.7,
+      "end": 2064.48,
+      "durationSec": 49.78,
+      "charCount": 30,
+      "charsPerSec": 0.603,
+      "text": "何以故 有一個稍微有 有一點 不一樣的說法吧 這該怎麼講的。"
+    }
+  ]
+}
