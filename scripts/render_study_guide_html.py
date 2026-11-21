@@ -173,7 +173,7 @@ def md_to_html(md_path: Path) -> Path:
     if not verbatim_map and session_data and not md_path.stem.endswith("_dialogue_transcript"):
         para_seconds = []
         for b in raw_blocks:
-            if b.startswith(('<h', '<blockquote', '<hr', '---', '<div', '<details')) or re.match(r'^\d+\.\s', b):
+            if b.startswith(('<h', '<blockquote', '<hr', '---', '<div', '<details', '<table')) or re.match(r'^\d+\.\s', b):
                 continue
             if any(line.strip().startswith(('* ', '- ')) for line in b.split('\n')):
                 continue

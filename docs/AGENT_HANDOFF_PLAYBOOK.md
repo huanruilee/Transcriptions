@@ -22,6 +22,7 @@
    - **標準做法**：以共用模組 [eneuralClient.mjs](../scripts/lib/eneuralClient.mjs) 透過 **Node IPv4 SSE 串流** 直連 `eNeural / glm53-flash`（`family: 4`、`stream: true`、`reasoning_effort: 'none'`、`response_format: { type: 'json_object' }`），避開 `hermes chat` CLI 的 `state.db` 鎖定與 IPv6 卡頓。
    - 每批送 60～80 句（`id|text`），要求模型**僅回傳需要修改的句子 `fixes` 與段落/小標起點 `breaks`**，節省 >85% 輸出 Token 並確保不漏句、不改動 `id / start / end / rawText`。
    - 所有批次回應快取於 `/tmp/`，支援斷點續跑；先跑 **1 講試點 → 抽查修正腳本 → 分波推展全課**。
+   - **語音時間密度異常預檢（防片頭／合唱漏辨）**：改版前必跑 `findLowDensitySegments()`（位於 [transcriptGuards.mjs](../scripts/lib/transcriptGuards.mjs)）；凡單句時長 `> 20 秒` 且字速 `< 1.0 字/秒`（常見於《開經偈》合唱遭 ASR 壓縮且官方底本未收錄儀軌），必須切音訊送 GX10 Whisper 重聽還原，不得僅依文字底本跳過。
 5. **待閱校狀態誠實標示**：
    - 未經人工逐句聽核時，課程 `publicationState` 維持 `"candidate-review-required"`，不得填入 `humanListened: true`。
    - **重要 UX 準則**：整講待閱校由頂部 `publicationState` 呈現即可，**切勿將全講 100% 句子都標成 `reviewNeeded: true`**（會導致閱讀頁每句後方出現橘色 `🔍 待核定` 膠囊干擾閱讀）；`reviewNeeded: true` 僅保留給低信心存疑句。
@@ -35,6 +36,7 @@
 | 鎖定講次清冊 | [config/locked-sessions.json](../config/locked-sessions.json) | 集中宣告 SHA-256 合約鎖定講次，供批次腳本預檢跳過 |
 | eNeural 串流客戶端 | [scripts/lib/eneuralClient.mjs](../scripts/lib/eneuralClient.mjs) | IPv4 SSE 串流呼叫 `glm53-flash`、重試、`extractJsonObject`、快取與並發池 |
 | 逐字稿安全護欄 | [scripts/lib/transcriptGuards.mjs](../scripts/lib/transcriptGuards.mjs) | `isLockedSession`、`maskUrls`/`unmaskUrls`、`assertRawTextPreserved`、`syncContentOverview` |
+| 紅黃燈品質稽核與雷達裁決 | [audit_reading_quality.mjs](../scripts/audit_reading_quality.mjs) & [radarAdjudicator.mjs](../scripts/lib/radarAdjudicator.mjs) | 紅燈（R1–R4）自動阻擋合併；黃燈（Y1–Y4）輸出精簡小卡交由 `glm53-flash` 低價模型批量裁決並同步 `sourceDigest` |
 | 導讀摘要與 Digest | [scripts/content_overview_pipeline.mjs](../scripts/content_overview_pipeline.mjs) | 任何句子增刪改後重新對齊四個 `evidence[]` 與重算 `sourceDigest` |
 | 大組共學工作流範本 | [docs/STUDY_GROUP_WORKFLOW_V3.md](STUDY_GROUP_WORKFLOW_V3.md) & [upgrade_study_group_course.mjs](../scripts/upgrade_study_group_course.mjs) | 共學問答型（討論題收斂 3–7 題、`【法師】`/`【學員】`、講記 `.md`/`.html` 原話抽屜） |
 | 單人講經工作流範本 | [upgrade_sinianzhu_course.mjs](../scripts/upgrade_sinianzhu_course.mjs) | 單人講經型（`fixes + breaks` 最小差異校字、150–350 字自然段重組與編號小標） |

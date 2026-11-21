@@ -70,3 +70,36 @@ export function syncContentOverview(session, timestamp = new Date().toISOString(
   session.contentOverview = hydrated;
   return session;
 }
+
+/**
+ * Detect abnormally low text density segments (e.g. >20s with <1.0 chars/sec),
+ * typically indicating dropped opening chants or collapsed ASR passages.
+ */
+export function findLowDensitySegments(
+  session,
+  { minDurationSec = 20, maxCharsPerSec = 1.0 } = {},
+) {
+  const flagged = [];
+  for (const p of session?.paragraphs || []) {
+    for (const s of p.sentences || []) {
+      const start = Number(s.start);
+      const end = Number(s.end);
+      if (!Number.isFinite(start) || !Number.isFinite(end)) continue;
+      const durationSec = end - start;
+      const charCount = String(s.text || '').trim().length;
+      const charsPerSec = durationSec > 0 ? charCount / durationSec : Infinity;
+      if (durationSec > minDurationSec && charsPerSec < maxCharsPerSec) {
+        flagged.push({
+          id: s.id,
+          start,
+          end,
+          durationSec: Number(durationSec.toFixed(2)),
+          charCount,
+          charsPerSec: Number(charsPerSec.toFixed(3)),
+          text: s.text || '',
+        });
+      }
+    }
+  }
+  return flagged;
+}

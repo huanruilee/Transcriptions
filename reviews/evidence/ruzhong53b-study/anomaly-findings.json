@@ -1,0 +1,30 @@
+{
+  "scope": "13 bounded cards;not full lecture model review",
+  "calls": 1,
+  "findings": [
+    {
+      "sentenceId": "sent-0",
+      "paragraphId": null,
+      "heading": null,
+      "start": 0,
+      "end": 0,
+      "text": "好,我們又繼續 接下去又云 不盡苦中說盡樂 不盡的苦中說盡樂 無我性中說有我。",
+      "prevText": "",
+      "nextText": "",
+      "findings": [
+        {
+          "ruleId": "llm-semantic-omission",
+          "severity": "medium",
+          "matchedText": "好,我們又繼續 接下去又云 不盡苦中說盡樂 不盡的苦中說盡樂 無我性中說有我。",
+          "suggestedTerm": "無常/常",
+          "reason": "「不盡苦中說盡樂」語意矛盾，應為「於無常中說有常」或類似對仗句，疑似漏字或錯亂",
+          "promptHints": [
+            "四顛倒",
+            "無常",
+            "常"
+          ]
+        }
+      ]
+    }
+  ]
+}

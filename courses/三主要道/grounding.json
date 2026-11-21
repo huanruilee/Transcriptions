@@ -1,0 +1,132 @@
+{
+  "courseId": "san-zhu-yao-dao",
+  "title": "三主要道（如性法師主講・佛法實修系列一）",
+  "verified_at": "2026-11-20",
+  "step0_entity_grounding": {
+    "note": "依 docs/TRANSCRIPTION_WORKFLOW.md §3 Step 0 與 §8 v1.8 執行。本系列官方提供 Google Drive 聲音檔與 YouTube 說明欄時間碼提綱，未提供官方整編文字檔 PDF（noBaseText: true），佛法名相參照同講師、同頻道之《四法印》官方底本及《釋量論》等平台已核證詞庫。",
+    "probe_1_channel_and_instructor": {
+      "query": "三主要道 如性法師 如來法性影音頻道 佛法實修系列一",
+      "result": "如來法性影音頻道（channelId UCcL81Q7idwmC-AIFGtKt8Pg）播放列表 PLMngxNMnjFcM41At4494GCubGnQ5OqZC1，共 24 支：第 01–21 講已上線，最新第 22–24 講分別於 2026-11-01、2026-11-11、2026-11-20 上傳。",
+      "status": "verified"
+    },
+    "probe_2_textbook": {
+      "query": "三主要道 宗喀巴大師 如性法師 課程提綱 聲音檔",
+      "result": "本課程依止宗喀巴大師造《三主要道》，著重探討出離心、菩提心與空正見；第 22–24 講聚焦三苦、煩惱、無明我執、非理作意及以因果緣起、支分緣起鬆動煩惱。每講 YouTube 說明欄附官方 Google Drive MP3 與完整時間碼課程提綱，無官方文字底本。",
+      "status": "verified"
+    },
+    "probe_3_related_courses": {
+      "query": "如性法師 四法印 釋量論第二品 平台既有課程",
+      "result": "同講師同頻道《四法印》（11 講官方整編底本）與《釋量論第二品》已於本平台建檔，確認官方用詞為「如性法師」「二諦」「四諦」「三皈依」「十六行相」「苦諦、集諦、滅諦、道諦」。",
+      "status": "verified"
+    }
+  },
+  "entities": {
+    "channel": {
+      "name": "如來法性影音頻道",
+      "channel_id": "UCcL81Q7idwmC-AIFGtKt8Pg",
+      "playlist_id": "PLMngxNMnjFcM41At4494GCubGnQ5OqZC1",
+      "playlist_url": "https://www.youtube.com/playlist?list=PLMngxNMnjFcM41At4494GCubGnQ5OqZC1"
+    },
+    "instructor": {
+      "name": "如性法師",
+      "tradition": "漢傳佛教・兼修藏傳格魯派五部大論",
+      "common_misrecognitions": [
+        "如信法師",
+        "如心法師",
+        "如興法師",
+        "人性法師"
+      ]
+    },
+    "root_treatise": {
+      "title": "《三主要道》",
+      "author": "宗喀巴大師"
+    }
+  },
+  "high_frequency_doctrinal_terms": [
+    "三主要道",
+    "出離心",
+    "菩提心",
+    "空正見",
+    "三苦",
+    "苦苦",
+    "壞苦",
+    "行苦",
+    "善法欲",
+    "無明我執",
+    "非理作意",
+    "遍計我執",
+    "俱生我執",
+    "因果緣起",
+    "支分緣起",
+    "對治",
+    "觀待",
+    "不假於分別假立",
+    "自方成立",
+    "二諦",
+    "世俗諦",
+    "勝義諦",
+    "四諦",
+    "苦諦",
+    "集諦",
+    "滅諦",
+    "道諦",
+    "三皈依",
+    "十六行相",
+    "五取蘊",
+    "仁波切",
+    "應成派",
+    "宗喀巴大師",
+    "如性法師"
+  ],
+  "observed_homophone_corrections": [
+    { "asr": "對峙", "official": "對治", "note": "對治煩惱為本系列固定用法" },
+    { "asr": "關帶", "official": "觀待", "note": "依待／觀待" },
+    { "asr": "二地", "official": "二諦", "note": "世俗諦與勝義諦" },
+    { "asr": "四地", "official": "四諦", "note": "苦集滅道四聖諦" },
+    { "asr": "三歸一", "official": "三皈依", "note": "同頻道官方《四法印》底本寫法" },
+    { "asr": "十六形象", "official": "十六行相", "note": "四諦十六行相" },
+    { "asr": "五蕴", "official": "五蘊", "note": "繁體正字" },
+    { "asr": "無名我直", "official": "無明我執", "note": "同音誤植" },
+    { "asr": "苦地", "official": "苦諦", "note": "四諦之一" },
+    { "asr": "極地", "official": "集諦", "note": "四諦之一" },
+    { "asr": "營隊", "official": "研討", "note": "本系列為研討課程" },
+    { "asr": "任波切", "official": "仁波切", "note": "藏傳上師尊稱" },
+    { "asr": "不關在分別假立", "official": "不假於分別假立", "note": "如性法師本講界定無明我執用語" },
+    { "asr": "侵褫", "official": "侵蝕", "note": "同音誤植" }
+  ],
+  "reference_materials": [
+    {
+      "referenceId": "yt-playlist-san-zhu-yao-dao",
+      "type": "official-youtube-playlist",
+      "title": "佛法實修・系列一：《三主要道》（24 講官方播放清單與時間碼提綱）",
+      "url": "https://www.youtube.com/playlist?list=PLMngxNMnjFcM41At4494GCubGnQ5OqZC1",
+      "retrieved_at": "2026-11-20"
+    },
+    {
+      "referenceId": "gdrive-audio-22",
+      "type": "official-audio",
+      "title": "第22講 苦與煩惱之間的關聯 官方聲音檔",
+      "url": "https://drive.google.com/file/d/1EXpp9Q36fQzVQ7TX4eO9Ty0wpOolkxAs/view",
+      "retrieved_at": "2026-11-20"
+    },
+    {
+      "referenceId": "gdrive-audio-23",
+      "type": "official-audio",
+      "title": "第23講 為何我們會生起煩惱 官方聲音檔",
+      "url": "https://drive.google.com/file/d/16PZobJQwkBO7zy4PUJRQZcjHhEakF8My/view",
+      "retrieved_at": "2026-11-20"
+    },
+    {
+      "referenceId": "gdrive-audio-24",
+      "type": "official-audio",
+      "title": "第24講 如何鬆動煩惱 官方聲音檔",
+      "url": "https://drive.google.com/file/d/1W84Ae1Y4mQYixbMWLpWJUcu7UR8neydK/view",
+      "retrieved_at": "2026-11-20"
+    }
+  ],
+  "alignment_method": {
+    "asr": "GX10 faster-whisper-large-v3-turbo (127.0.0.1:8010, response_format=verbose_json, language=zh, beam_size=10, temperature=0, no_speech_threshold=0.6, vad_filter=true)",
+    "proofread": "OpenCC s2twp + 領域規則詞庫 + eNeural (glm53-flash) 低 Token 最小差異（fixes + breaks）與逐段審計",
+    "segmentation": "兩級分段：一級章節取自官方 YouTube 課程提綱時間碼，二級自然段依 150–350 字（<= 35 句）切分"
+  }
+}

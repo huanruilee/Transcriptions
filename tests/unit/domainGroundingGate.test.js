@@ -22,8 +22,6 @@ const SELF_PATH = 'tests/unit/domainGroundingGate.test.js';
 
 /** 尚未進入校對流程的課程；一旦開始校對必須從此清單移除 */
 const PENDING_WHITELIST = {
-  '入中論善顯密意疏': '既有逐字稿已完成；本次未重做流程，Step 0 產物待補。',
-  '三主要道': '既有逐字稿已完成；本次未重做流程，Step 0 產物待補。',
   '釋量論第二品': '既有逐字稿已完成；本次未重做流程，Step 0 產物待補。',
 };
 /** 課程目錄名 → reviews/evidence/ 下的目錄名（兩者不一定同名） */
