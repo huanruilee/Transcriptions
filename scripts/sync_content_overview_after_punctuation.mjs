@@ -9,7 +9,8 @@ import {
   hydrateEvidenceQuotes,
 } from './content_overview_pipeline.mjs';
 
-const REPO = '/home/henry/.gx10/xiaofa/workspace/Transcriptions';
+const REPO = process.env.SYNC_REPO_ROOT
+  || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function listSessions(dir) {
   const out = [];

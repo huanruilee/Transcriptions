@@ -764,7 +764,7 @@ export function buildOverviewGenerationMessages(target, transcript, retryFeedbac
     .join('；');
   const missingGroupInstruction = targetedGroups.length > 0
     ? `本輪只補充區塊：${targetedGroups.join(', ')}；數量要求：${requestedCountInstruction}；其他區塊輸出空陣列，已通過內容會由程式合併。只提供新的、最容易被完整原句直接證成的簡單條目。${acceptedTextInstruction}`
-    : '主要內容 2-3 點；討論議題 1-2 點；參考答案或觀點 1-2 點。';
+    : '主要內容 2-3 點；討論議題 3-4 點（workflow v1.6 要求每講 3～7 題，每題以全形「？」結尾，且須是原文明確提出或實質討論的問題）；參考答案或觀點 1-2 點；三組合計最多 8 點（總數上限 8，若會超過請優先取 主要內容 2 點、討論議題 4 點、參考觀點 2 點），且三組條目不得重複或近義改寫同一內容（跨組也必須互斥）。';
   const lateRecoveryInstruction = targetedGroups.length > 0 && Number(retryFeedback?.attempt || 0) >= 3
     ? '最後修復模式：每一指定區塊只產生 1 點。mainPoints 或 referenceViews 應優先直接節錄或僅微改單一語意完整的陳述句；discussionTopics 應優先取單一完整問句。不得跨句綜合或補充因果、範圍與立場。'
     : '';
