@@ -56,6 +56,13 @@ export const useCourseStore = defineStore('course', {
         mediaType: 'audio/mp3',
       },
       {
+        id: 'jin-gang-jing-1999',
+        title: '金剛般若波羅蜜經',
+        master: '玅境長老',
+        path: 'courses/金剛般若波羅蜜經',
+        mediaType: 'audio/mp3',
+      },
+      {
         id: 'si-nian-zhu',
         title: '四念住',
         master: '待審校',
