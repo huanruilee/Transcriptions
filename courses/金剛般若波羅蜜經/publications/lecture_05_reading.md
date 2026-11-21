@@ -1,10 +1,10 @@
 # 《金剛般若波羅蜜經》第 5 講 — 閱讀版
 
-> **待閱校版：經 ASR 與 AI 輔助整理，尚未人工完整校訂；疑義請配合[原音](https://drive.google.com/uc?export=download&id=1UbIaGbPCqamWjeyh-77tALZvSyFGHxEV)核對。**
+> **待閱校版：經 ASR 與 AI 輔助整理，尚未人工完整校訂；疑義請配合[原音](https://huanruilee.github.io/Transcriptions/courses/%E9%87%91%E5%89%9B%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E7%B6%93/audio/R06d_005.mp3)核對。**
 
 - **講者**：玅境長老
 - **時間／地點**：1999 年・台灣埔里法雲講堂
-- **音源**：[R06d_005.mp3](https://drive.google.com/uc?export=download&id=1UbIaGbPCqamWjeyh-77tALZvSyFGHxEV)（外部連結）
+- **音源**：[R06d_005.mp3](https://huanruilee.github.io/Transcriptions/courses/%E9%87%91%E5%89%9B%E8%88%AC%E8%8B%A5%E6%B3%A2%E7%BE%85%E8%9C%9C%E7%B6%93/audio/R06d_005.mp3)（外部連結）
 - **逐字稿 JSON**：`courses/金剛般若波羅蜜經/sessions/session_05.json`
 - **publicationState**：`candidate-review-required`
 
