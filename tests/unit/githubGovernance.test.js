@@ -104,3 +104,16 @@ test('GitHub governance: current documentation matches the canonical session cou
   assert.match(acceptance, new RegExp(`exactly the accepted ${count} sessions`),
     'Completion acceptance documentation must match course.json');
 });
+
+test('GitHub governance: Pages artifact upload finishes in a separate prerequisite job', () => {
+  const workflow = read('.github/workflows/deploy.yml');
+  const jobs = Object.fromEntries([...workflow.matchAll(/^  ([\w-]+):\n([\s\S]*?)(?=^  [\w-]+:\n|$(?![\s\S]))/gm)].map(m => [m[1],m[2]]));
+  assert.ok(jobs.build, 'A completed build job must finalize the upload before deployment starts');
+  assert.match(jobs.build, /Verify original reader URL in the exact site artifact[\s\S]*Upload artifact[\s\S]*actions\/upload-pages-artifact@/);
+  assert.doesNotMatch(jobs.build, /actions\/deploy-pages@/);
+  assert.match(jobs.deploy, /needs:\s*build\b/);
+  assert.doesNotMatch(jobs.deploy, /actions\/upload-pages-artifact@/);
+  assert.doesNotMatch(jobs.deploy, /^    if:\s*(?:always|successOrFailure)/m);
+  assert.match(jobs.deploy, /actions\/deploy-pages@[a-f0-9]{40}[\s\S]*Verify published original reader URL[\s\S]*npm run test:reader-smoke/);
+  for (const job of [jobs.build,jobs.deploy]) assert.match(job, /ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha\s*\}\}/);
+});

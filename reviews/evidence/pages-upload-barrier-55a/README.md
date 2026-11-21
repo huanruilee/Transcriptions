@@ -1,0 +1,9 @@
+55A publication recovery: Pages upload/deploy job barrier
+
+55A content PR474 merge4d3c0cacf191ba7c3958c744920fe31c86f7f422 passed Completion Acceptance44890119890 (attempts1/2), but Pages44890358002 and44890857770 each failed before creating a deployment: the internal artifact list returned0 immediately after upload; the REST API subsequently listed one nonexpired github-pages artifact in each run. Full logs and REST inventories are retained locally in work/ruzhong55a/pages-attempt{1,2}-*.
+
+Official upstream issue https://github.com/actions/deploy-pages/issues/451 describes the same versions and same-job upload/finalization visibility race, and reports moving upload into an earlier job as a mitigation. Official guidance https://github.com/actions/deploy-pages/blob/main/README.md recommends a dedicated deployment job with needs:build. This is evidence for the mitigation, not proof of GitHub's internal root cause in our runs.
+
+The change separates build/upload and deploy with needs:build. The successful-main-push acceptance condition stays on build; deploy cannot run unless build and exact-artifact browser validation succeed. Both jobs check out workflow_run.head_sha. All action pins, permissions, Pages deployment concurrency, exact-artifact tests and deployed desktop/mobile tests remain. The fresh deploy job restores Node/browser dependencies and builds the same checked-out version for the existing live asset comparison. No transcript, date, source, model evidence, formal transcription workflow threshold or memory is changed.
+
+Regression: githubGovernance now fails if upload and deploy share a job or deploy lacks its successful build prerequisite, exact-SHA checkout or live browser gate. RED on original workflow, GREEN7/7 after split. Live GitHub CI/Pages and formal55A checks remain required; local structural green alone is not publication proof.
