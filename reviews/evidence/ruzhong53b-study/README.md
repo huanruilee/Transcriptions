@@ -6,4 +6,4 @@ source-session.json為8b7ce66a基線舊機校原稿，不是原始ASR或人工�
 
 GX10本地語音8次，文字3次；provider-usage實際報告，外部0，Codex/總量unknown。模型不等於聽核：異常工具返回僅sent0是stub ID索引限制，完整13張真正相鄰上下文及8條回應都保存，控制者逐項核查；拒絕模型阿叉囉=自在、金剛論等無根據說法。紅藍筆的入中論/月稱與佛護論/佛護分歧不裁定，低密度候選補回明標未聽核。
 
-legacy同步與renderer只沙盒驗證，不採內插時間或丟原話結果；user明確授權及source-bound publisher優先。無音檔PDF提交。
+legacy同步只輸出candidate並拒絕丟原話；renderer誤以--help為安全旗標，實際重寫過本講HTML，已即刻由source-bound publisher恢復並重新驗證。未採內插時間或丟原話結果；user明確授權及source-bound publisher優先。無音檔PDF提交。
