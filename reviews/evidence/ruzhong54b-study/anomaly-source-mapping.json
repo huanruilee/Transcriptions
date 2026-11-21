@@ -1,0 +1,326 @@
+[
+  {
+    "sentenceId": "sent-17",
+    "actualSourceCard": {
+      "id": "sent-17",
+      "prev": "菩提沙多這樣可以嗎 菩提指的是菩提嘛 對不對 沙多指的就是說 思或者說希求。",
+      "cur": "希求獲得這樣可以嗎 總之就是說想去菩提嘛 生的話是心 霸的話是永恆。",
+      "next": "所以變成對菩提永恆的心 總之因為是對希求菩提的心 所以叫做對菩提永恆的心。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "希求獲得這樣可以嗎 總之就是說想去菩提嘛 生的話是心 霸的話是永恆。",
+        "suggestedTerm": "菩提心/發心",
+        "reason": "「生的話是心」語法斷裂，且後文提到「永恆的心」，疑似漏掉「菩提心」或「發心」等關鍵詞。",
+        "promptHints": [
+          "菩提心",
+          "發心"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-66",
+    "actualSourceCard": {
+      "id": "sent-66",
+      "prev": "中觀是這樣解讀 所以他的那個解釋上面 就不是維斯講的那種 三界維心的這個概念。",
+      "cur": "維斯當然就是維斯的解釋 對不對 對 所以我是覺得 如是三界 皆為有心。",
+      "next": "對 純粹這句的話 你按照維斯那個解釋 我們也沒責啊 對 可是這麼長一段。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "維斯當然就是維斯的解釋 對不對 對 所以我是覺得 如是三界 皆為有心。",
+        "suggestedTerm": "唯/造",
+        "reason": "「皆為有心」在佛教名相中極少見，通常為「三界唯心」或「一切唯心造」，疑似漏字或誤聽。",
+        "promptHints": [
+          "三界唯心",
+          "一切唯心造"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-95",
+    "actualSourceCard": {
+      "id": "sent-95",
+      "prev": "因為無著菩薩是在天界，曾經建過彌勒菩薩的嘛，對不對？彌勒論，對。",
+      "cur": "所以彌勒論的話，就像《現觀莊嚴論》，還有就是說，像《阿毗達磨俱舍論》，對吧？",
+      "next": "對，這些的觀點不是這個樣子的。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "所以彌勒論的話，就像《現觀莊嚴論》，還有就是說，像《阿毗達磨俱舍論》，對吧？",
+        "suggestedTerm": "謁見/親近/受學",
+        "reason": "「曾經建過彌勒菩薩」語義不通，應為「謁見」、「親近」或「從...受學」，疑似漏掉動詞或介詞結構。",
+        "promptHints": [
+          "無著菩薩",
+          "彌勒菩薩",
+          "五部大論"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-102",
+    "actualSourceCard": {
+      "id": "sent-102",
+      "prev": "就是針對弟子的根器來講的，《攝大乘論》。",
+      "cur": "對，不是他的意趣，這樣可以嗎？那無著菩薩、世親菩薩應該就是他的想法了。",
+      "next": "對，他是真心誠意的解釋，為《二十唯識論》，這樣可以嗎？真心的覺得，對，老師是這麼教的嘛。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "對，不是他的意趣，這樣可以嗎？那無著菩薩、世親菩薩應該就是他的想法了。",
+        "suggestedTerm": "作/寫",
+        "reason": "「解釋，為《二十唯識論》」語法突兀，疑似漏掉「作」或「寫」等動詞，變成「解釋作為...」。",
+        "promptHints": [
+          "二十唯識論",
+          "世親菩薩"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-164",
+    "actualSourceCard": {
+      "id": "sent-164",
+      "prev": "對不對 實地經所講的那個違心之意 這樣可以嗎 所以這個解釋應該指向那個實地經。",
+      "cur": "你不應該說是那個解釋迷經 這樣可以嗎 解釋迷經雖然也是講了違心嘛。",
+      "next": "對不對 但問題是說 人家那個不是那個意思嘛 對。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "你不應該說是那個解釋迷經 這樣可以嗎 解釋迷經雖然也是講了違心嘛。",
+        "suggestedTerm": "楞伽/解深密",
+        "reason": "「解釋迷經」疑似為「《楞伽經》」或特定經名之誤聽/漏字，因前文談論唯心與經義。",
+        "promptHints": [
+          "楞伽經",
+          "解深密經"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-184",
+    "actualSourceCard": {
+      "id": "sent-184",
+      "prev": "反正我比較搞不 就是變成 你看 就是資料去 是啥東西 相續啊 孕啊 這些要怎麼解釋。",
+      "cur": "這樣可以嗎 這個我解釋不出來 但是有地方解釋了 我也找了一下 沒找到。",
+      "next": "這樣可以嗎 就是變成至少 就是說資料去 或者是造物主犯天 什麼之類的。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "這樣可以嗎 這個我解釋不出來 但是有地方解釋了 我也找了一下 沒找到。",
+        "suggestedTerm": "自在天/大自在天",
+        "reason": "「資料去」語義不明，結合後文「造物主」、「相續」，疑似為「自在天」或特定外道名詞之誤聽/漏字。",
+        "promptHints": [
+          "數論師",
+          "勝論師",
+          "自在天"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-195",
+    "actualSourceCard": {
+      "id": "sent-195",
+      "prev": "運是什麼 說 什麼 相續是什麼 這樣 佛就是說 這些都不是作者 嗯 唯心才是。",
+      "cur": "我覺得我的這個解釋 有點變成 該怎麼講 確實就是那個 稀釋 這樣可以嗎。",
+      "next": "稀掉了。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "我覺得我的這個解釋 有點變成 該怎麼講 確實就是那個 稀釋 這樣可以嗎。",
+        "suggestedTerm": "細微/析破",
+        "reason": "「稀釋」在此處語義不通，結合後句「稀掉了」及前文討論作者/唯心，疑似為「細微」、「析破」或特定術語誤聽。",
+        "promptHints": [
+          "唯識",
+          "破執"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-241",
+    "actualSourceCard": {
+      "id": "sent-241",
+      "prev": "那個就是屬於數論師，就對了，數論師，還有這個修流圖，這樣可以嗎。",
+      "cur": "修流圖是誰。",
+      "next": "反正就是有一個修流圖，就對了，無衣的話，是叫什麼裸形外道，對不對，現在會講什麼。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "修流圖是誰。",
+        "suggestedTerm": "耆那/尼乾陀",
+        "reason": "「修流圖」疑似為外道名詞誤聽，結合後文「裸形外道」、「無衣」，可能指「耆那教」或特定論師名。",
+        "promptHints": [
+          "裸形外道",
+          "數論師"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-264",
+    "actualSourceCard": {
+      "id": "sent-264",
+      "prev": "名字叫作白淨靜慮者，對，總之就是那個上面的，那個白淨斷，這樣可以嗎。",
+      "cur": "白淨斷到底是啥。",
+      "next": "怎麼回事，就講了好幾種，對不對，這樣的狀態，這樣的狀態，這樣。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "白淨斷到底是啥。",
+        "suggestedTerm": "觀/定",
+        "reason": "「白淨斷」疑似漏字，佛教禪定中有「白淨觀」或四禪八定之名稱，此處語法不完整。",
+        "promptHints": [
+          "白淨觀",
+          "四禪"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-291",
+    "actualSourceCard": {
+      "id": "sent-291",
+      "prev": "結的話就是變成廣真、增長廣大，對。",
+      "cur": "所以就是變成那個有點像是某一種結是，像年華的那個半一樣，增長廣大過去。",
+      "next": "結，所以叫做雙結，這樣可以嗎？所以其實這邊要講的是說。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "所以就是變成那個有點像是某一種結是，像年華的那個半一樣，增長廣大過去。",
+        "suggestedTerm": "月/輪",
+        "reason": "「像年華的那個半一樣」語義混亂，疑似漏掉關鍵比喻詞或名相，導致無法理解。",
+        "promptHints": [
+          "增長廣大",
+          "結"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-321",
+    "actualSourceCard": {
+      "id": "sent-321",
+      "prev": "沒辦法描述，但就是有進步的空間，但是問題是，他們都像那個，就是說。",
+      "cur": "月亮出山到，對不對，四五六七八這樣，對，佛都收滿了。",
+      "next": "所以就是變成，這個是針對空性的，總之，很難講嘛，對不對，我們很難講。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "月亮出山到，對不對，四五六七八這樣，對，佛都收滿了。",
+        "suggestedTerm": "從/後",
+        "reason": "「月亮出山到」語法斷裂，疑似漏掉動詞或介詞，如「月亮從山後出來」或特定比喻。",
+        "promptHints": [
+          "空性",
+          "比喻"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-355",
+    "actualSourceCard": {
+      "id": "sent-355",
+      "prev": "這個有什麼問題，就談到宋約。",
+      "cur": "若自知等，唯有心，顧破不離心外色者，何故如來與彼，今父所心，從之夜生。",
+      "next": "對。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "若自知等，唯有心，顧破不離心外色者，何故如來與彼，今父所心，從之夜生。",
+        "suggestedTerm": "經文原句",
+        "reason": "「今父所心，從之夜生」語句不通，疑似漏字或誤聽，應為引用經論原文（如《楞伽經》或唯識論典）。",
+        "promptHints": [
+          "唯識",
+          "如來藏"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-378",
+    "actualSourceCard": {
+      "id": "sent-378",
+      "prev": "在舍拉斯非常有名的人。",
+      "cur": "這是一個坑叔，他只有一個弟子，就是他了。",
+      "next": "對，問題是說，就是中午吃飽飯，對不對，就輪到他去上課。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "這是一個坑叔，他只有一個弟子，就是他了。",
+        "suggestedTerm": "堪布/上師",
+        "reason": "「坑叔」疑似為「堪布」或特定稱謂之誤聽/漏字，結合上下文討論師徒關係。",
+        "promptHints": [
+          "堪布",
+          "弟子"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  },
+  {
+    "sentenceId": "sent-382",
+    "actualSourceCard": {
+      "id": "sent-382",
+      "prev": "對，那很多時候，那個老坑叔完全就不知道他睡著了，對，很多時候就是已經五點鐘了。",
+      "cur": "他那個老坑叔就是閉著眼睛，對，就一直講一直講一直講一直講，就講到自己。",
+      "next": "自己覺得差不多了，對，就會醒過來，對，很多時候就是打他的頭，喂喂。"
+    },
+    "advisoryFindings": [
+      {
+        "ruleId": "llm-semantic-omission",
+        "severity": "medium",
+        "matchedText": "他那個老坑叔就是閉著眼睛，對，就一直講一直講一直講一直講，就講到自己。",
+        "suggestedTerm": "堪布",
+        "reason": "「老坑叔」同上，疑似為「老堪布」或特定人物稱謂之誤聽/漏字。",
+        "promptHints": [
+          "堪布",
+          "睡眠"
+        ]
+      }
+    ],
+    "moduleMetadataWarning": "module generated prev/next from selected IDs;ignore those result metadata, request used real source neighbors"
+  }
+]
