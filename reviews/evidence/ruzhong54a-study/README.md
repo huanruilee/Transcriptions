@@ -1,0 +1,9 @@
+54A來源與版本
+
+source-session.json為040a28ed基線舊機校稿，非原始ASR或人工聽核。473句完整原有欄位、順序與時間保留；22段44來源區間及19處文字疑點，ledger/plan/editorial-mapping綁來源hash。來源區間非逐字聲學對齊。完整解碼3249.7371875秒，原稿最後end3249.29未超界。
+
+官方索引匹配54A54B，PDF當次下載同hash；物理163164165166渲染核實，正文實際165頁，開頭163/第幾頁未定；9完整底本引文均明標編者補列。54B開頭逐句疏釋未補入。模型與語音使用界線見controller-source-review；機器結果不等於人工聽核。
+
+Anomaly實際16張真相鄰卡回應保存，module返回因stub ID限制作空，完整response9項由控制者逐一審查，不把module空當零疑點。Radar有效JSON array與工具要求wrapper不同，原回應完整保存，確定解析5張、控制者採兩處問號，不重呼模型。overview8項supported，兩非引句標點變動完整items完全相同可證明review重用。
+
+GX10語音8次、文字3次；provider-usage實報，外部0，Codex/總量unknown。完整音檔PDF只本地不Git。legacyrenderer只跑沙盒單一MD；synccandidate未寫正式檔，拒絕或無法解析不採用；正式source-bound publisher保留原話與實際來源時間。
