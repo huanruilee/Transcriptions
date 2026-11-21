@@ -1,10 +1,10 @@
 # 《金剛般若波羅蜜經》第 10 講 — 閱讀版
 
-> **待閱校版：經 ASR 與 AI 輔助整理，尚未人工完整校訂；疑義請配合[原音](https://drive.google.com/uc?export=download&id=1FHwvI8NJITBm02HPqgOWGNJEt3B5amnv)核對。**
+> **待閱校版：經 ASR 與 AI 輔助整理，尚未人工完整校訂；疑義請配合[原音](https://gx10-2887.tail378c21.ts.net/audio/jin-gang-jing-1999/R06d_010.mp3)核對。**
 
 - **講者**：玅境長老
 - **時間／地點**：1999 年・台灣埔里法雲講堂
-- **音源**：[R06d_010.mp3](https://drive.google.com/uc?export=download&id=1FHwvI8NJITBm02HPqgOWGNJEt3B5amnv)（外部連結）
+- **音源**：[R06d_010.mp3](https://gx10-2887.tail378c21.ts.net/audio/jin-gang-jing-1999/R06d_010.mp3)（外部連結）
 - **逐字稿 JSON**：`courses/金剛般若波羅蜜經/sessions/session_10.json`
 - **publicationState**：`candidate-review-required`
 
