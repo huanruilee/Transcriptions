@@ -1,0 +1,28 @@
+{
+  "all368Read": true,
+  "humanListened": false,
+  "rulesFirst": true,
+  "densityFindingCount": 0,
+  "rule7": "重複一輪ASR亦有且是反覆學習語意，原話留存；正文去結巴不改意思。",
+  "anomalyDecisions": [
+    "28常邊有上下常法無常法支持，非長邊",
+    "61佛護月稱清辯依ASR暫辨，首名仍標待核",
+    "79二勝六莊嚴暫讀不補名單",
+    "96模型辯經不採，字典與語文課語境支持藏文",
+    "134模型消通替消不通不採，講者卡住與不知道須保留",
+    "140無方分據語境，但唯識否定/改口保留待核",
+    "162模型地大替種子不採，原為功能譬喻",
+    "314模型無形色/無色不採，底本以識為緣生名色才是對讀指向"
+  ],
+  "boundaryCheck": [
+    "48窗口首尾原句逐項核對存boundary-audit",
+    "寺院與絕對信心回放61–74，不移75之後",
+    "第二條攝大乘引文開始302，與蘆束304整體同窗",
+    "學員結論353連入前窗，交接354–355不分造聲學time"
+  ],
+  "radar": "4KEEP：不曉得對不對是自述保留，非必須向他人發問，未機械改問號。",
+  "overview": "首8項7supported1unsupported；縮窄不支持問題後僅重審1supported；七項deepEqual，邊界修正後8items含evidence仍deepEqual，未盲換digest。",
+  "tail": "原長closing辨識在物理末後仍重複我去幫助等幻覺；只2625–2640.24短窗重試一次，支持先休息我看一下再說，未採幻覺。",
+  "next56b": "開頭仍談兩人說什麼及如何消通，不移56B稍後應該是對的判斷到56A。",
+  "parser": "pure-read; no mutatingdraft replacements"
+}
