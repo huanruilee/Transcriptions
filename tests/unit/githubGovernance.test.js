@@ -28,8 +28,9 @@ test('GitHub governance: production deploy waits for successful main acceptance'
   assert.match(workflow, /ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha\s*\}\}/,
     'Deployment must check out the exact commit that passed acceptance');
   const deployJob = workflow.slice(workflow.indexOf('\n  deploy:'));
-  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('\njobs:')), /concurrency:/,
-    'Workflow-level concurrency must not let skipped workflow_run events cancel a valid deploy');
+  const top = workflow.slice(0, workflow.indexOf('\njobs:'));
+  if (/concurrency:/.test(top)) assert.match(top, /&& 'release' \|\| github\.run_id/,
+    'Skipped workflow_run events need a unique group so they cannot cancel a valid release');
   assert.match(deployJob, /\n    concurrency:\s*\n\s+group:\s*["']?pages["']?\s*\n\s+cancel-in-progress:\s*true/,
     'A newer accepted main commit must supersede an older pending deployment');
 });
@@ -116,4 +117,23 @@ test('GitHub governance: Pages artifact upload finishes in a separate prerequisi
   assert.doesNotMatch(jobs.deploy, /^    if:\s*(?:always|successOrFailure)/m);
   assert.match(jobs.deploy, /actions\/deploy-pages@[a-f0-9]{40}[\s\S]*Verify published original reader URL[\s\S]*npm run test:reader-smoke/);
   for (const job of [jobs.build,jobs.deploy]) assert.match(job, /ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha\s*\}\}/);
+});
+
+test('GitHub governance: only the latest accepted main run shares publication cancellation', () => {
+  const workflow = read('.github/workflows/deploy.yml');
+  const top = workflow.slice(0, workflow.indexOf('\njobs:'));
+  assert.match(top, /concurrency:[\s\S]*group:\s*pages-accepted-main-\$\{\{/);
+  for(const clause of ["workflow_run.conclusion == 'success'","workflow_run.event == 'push'","workflow_run.head_branch == 'main'","workflow_run.head_sha == github.sha"])assert.ok(top.includes(clause),clause);
+  assert.match(top, /&& 'release' \|\| github\.run_id/);
+  const build=workflow.slice(workflow.indexOf('\n  build:'),workflow.indexOf('\n  deploy:'));
+  assert.match(build,/workflow_run\.head_sha == github\.sha/);
+});
+
+test('GitHub governance: live asset comparison uses the exact uploaded Pages artifact', () => {
+  const deploy=read('.github/workflows/deploy.yml').split('\n  deploy:')[1];
+  assert.match(deploy,/actions\/download-artifact@[a-f0-9]{40}/);
+  assert.match(deploy,/name: github-pages/);
+  assert.match(deploy,/tar -xf [^\n]*artifact\.tar[^\n]* -C dist/);
+  assert.doesNotMatch(deploy,/vite build/);
+  assert.ok(deploy.indexOf('tar -xf')<deploy.indexOf('actions/deploy-pages@'));
 });

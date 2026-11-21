@@ -10,6 +10,11 @@ permissions:
   pages: write
   id-token: write
 
+# Skipped PR/failed/stale events use an isolated group and cannot cancel a release.
+concurrency:
+  group: pages-accepted-main-${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_sha == github.sha && 'release' || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   # Finish upload in an earlier job: deploy-pages may miss a just-finalized
   # artifact in the same job (actions/deploy-pages#451).
@@ -17,7 +22,8 @@ jobs:
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'main'
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_sha == github.sha
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -83,8 +89,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Vue 3 Modern UI
-        run: npx vite build --base=/Transcriptions/
+      - name: Download validated Pages artifact
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/pages-artifact
+
+      - name: Restore exact build for published asset comparison
+        run: |
+          mkdir -p dist
+          tar -xf "$RUNNER_TEMP/pages-artifact/artifact.tar" -C dist
 
       - name: Install release browser
         run: npx playwright install --with-deps chromium
