@@ -7,3 +7,5 @@ source-session為aca963c2384bf6ad65aa172545b072a37da10968基線舊機校稿，�
 規則140英文Colorful非亂碼，局部ASR支持；零低密度命中不代內容合格。Whisper8初始clips後長尾循環，只一次短尾重試，9calls。異常卡用sharedparseLlmSuspectsJson，直接原ID/start/end真前後句回配且assert，修正上一輪錯metadata問題；15cards回5findings逐一核，拒勝論師、五方向等教義補寫。Radar3KEEP後才overview8supported。語音/模型為未信任候選，非人工聽核；provider-usage逐項實報，Codex/總量unknown，不宣稱節省比例。
 
 來源hash/映射/待核見plan/ledger/editorial-mapping/reference-inventory。完整音檔PDF不提交Git。legacyrenderer只單一沙盒MD；sync候選拒絕未採，正式source-bound publisher不用字數插值、不刪原話。
+
+獨立覆核修正：初版末段底本補兩個未報子科判，與已報標題說明不符；最終19th引文縮到午三標題分二，不含兩子科判。對immutable8a版本重現RED，新截止回歸GREEN；所有新引句重新逐項導讀覆核，初版request/response/review以overview-initial完整保留，文字實際4calls，未盲改digest。

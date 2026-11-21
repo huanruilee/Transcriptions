@@ -26,7 +26,7 @@
       }
     },
     {
-      "task": "overview",
+      "task": "overview-initial",
       "model": "qwen3.8-flash-next-iq3_s",
       "usage": {
         "prompt_tokens": 1400,
@@ -36,14 +36,27 @@
           "cached_tokens": 0
         }
       }
+    },
+    {
+      "task": "overview",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1356,
+        "completion_tokens": 476,
+        "total_tokens": 1832,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
     }
   ],
-  "textTotalTokens": 5688,
+  "textTotalTokens": 7520,
   "whisperCalls": 9,
   "whisperRetry": 1,
   "whisperRetryReason": "closinglongASRrepetition;one35secondretry",
   "whisperTokens": "unknown",
   "externalCalls": 0,
   "codexTokens": "unknown",
-  "overallUsage": "unknown"
+  "overallUsage": "unknown",
+  "additionalReviewReason": "Independent review found unannounced child outlines;trimmed to actualheadinganddivision;all8newquotesfreshreview"
 }
