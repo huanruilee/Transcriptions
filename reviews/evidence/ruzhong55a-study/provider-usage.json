@@ -1,0 +1,49 @@
+{
+  "provider": "GX10local",
+  "textCalls": [
+    {
+      "task": "anomaly",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1552,
+        "completion_tokens": 462,
+        "total_tokens": 2014,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "task": "radar",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1474,
+        "completion_tokens": 309,
+        "total_tokens": 1783,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "task": "overview",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1400,
+        "completion_tokens": 491,
+        "total_tokens": 1891,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  ],
+  "textTotalTokens": 5688,
+  "whisperCalls": 9,
+  "whisperRetry": 1,
+  "whisperRetryReason": "closinglongASRrepetition;one35secondretry",
+  "whisperTokens": "unknown",
+  "externalCalls": 0,
+  "codexTokens": "unknown",
+  "overallUsage": "unknown"
+}

@@ -1,0 +1,81 @@
+{
+  "scope": "15bounded cards,actual original ID/start/end/neighbors asserted",
+  "calls": 1,
+  "findings": [
+    {
+      "sentenceId": "sent-13",
+      "reason": "「楞潔經」應為佛教經典名相，疑似ASR誤聽或漏字，正確應為《楞伽經》。",
+      "suspectedMissingTerm": "楞伽經",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-13",
+        "sourceIndex": 13,
+        "start": 82.97,
+        "end": 123.52,
+        "prev": "上次沒講還是隻有講。",
+        "cur": "一點還是什麼一點 可是在哪裡也找不到 好奇怪 嗯 比丘 楞潔經 上次楞潔經已經講過了的樣子。",
+        "next": "不對。"
+      }
+    },
+    {
+      "sentenceId": "sent-257",
+      "reason": "「畫素倫師」語意不通，結合上下文外道論師及佛教因明背景，極可能為「勝論師」（Vaisheshika）之誤聽。",
+      "suspectedMissingTerm": "勝論師",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-257",
+        "sourceIndex": 257,
+        "start": 1999.2,
+        "end": 2004.26,
+        "prev": "就是變成 無論是外道 畫素倫師 還是什麼的 其實他們在講外 外界的這些內容的時候。",
+        "cur": "都會講一些 像五方分的圍城 等等等等 這樣一個狀態 由這個所建造的。",
+        "next": "瓶子也好 什麼也好 都叫做外色。"
+      }
+    },
+    {
+      "sentenceId": "sent-257",
+      "reason": "「五方分」在佛教因明討論極微或外境時，常指「五方分」（東西南北中）或特定論典用語，但此處語句破碎，需確認是否漏字如「五方分圍城」之完整表述。",
+      "suspectedMissingTerm": "",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-257",
+        "sourceIndex": 257,
+        "start": 1999.2,
+        "end": 2004.26,
+        "prev": "就是變成 無論是外道 畫素倫師 還是什麼的 其實他們在講外 外界的這些內容的時候。",
+        "cur": "都會講一些 像五方分的圍城 等等等等 這樣一個狀態 由這個所建造的。",
+        "next": "瓶子也好 什麼也好 都叫做外色。"
+      }
+    },
+    {
+      "sentenceId": "sent-342",
+      "reason": "「既須須有外境故」語句重複且不通，結合後文「不須須有外境」，推測前句應為「既須有外境故」或類似論述，ASR可能多字或漏字導致邏輯混亂。",
+      "suspectedMissingTerm": "",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-342",
+        "sourceIndex": 342,
+        "start": 2570.45,
+        "end": 2576.54,
+        "prev": "反正就是說 以須有色法。",
+        "cur": "既須須有外境故 這樣可以嗎 對 反正就是說 色法跟外境故一樣就對了。",
+        "next": "以事當之 雖須以原 為 以事為原 生明色等 不須須有外境 可為此而說。"
+      }
+    },
+    {
+      "sentenceId": "sent-374",
+      "reason": "「五二嗎？五三，結論結晶」語意極不明確，疑似漏掉章節標題或論典名相（如《入中論》某章），無法確定具體漏字詞。",
+      "suspectedMissingTerm": "",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-374",
+        "sourceIndex": 374,
+        "start": 2842.91,
+        "end": 2849.23,
+        "prev": "大概就這樣，這樣可以嗎？",
+        "cur": "接下去的話，就談到五二嗎？五三，結論結晶，所謂行之密，一分二。",
+        "next": "等等等等。"
+      }
+    }
+  ]
+}
