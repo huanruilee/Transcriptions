@@ -11,7 +11,7 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
 }
 
-test('newly public official YouTube videos (43-46) are transcribed and registered in course.json', () => {
+test('newly public official YouTube videos (43-48) are transcribed and registered in course.json', () => {
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
   const expected = [
     {
@@ -38,6 +38,18 @@ test('newly public official YouTube videos (43-46) are transcribed and registere
       videoId: 'wJn8cpcsYBQ',
       title: '第29講 無我慧才是解脫道（上）｜2025《釋量論・第二品》大組共學',
     },
+    {
+      sessionId: '47',
+      displaySessionId: '29下',
+      videoId: 'IQxfpRRoDNE',
+      title: '第29講 無我慧才是解脫道（下）｜2025《釋量論・第二品》大組共學',
+    },
+    {
+      sessionId: '48',
+      displaySessionId: '30上',
+      videoId: 'a_d4qmx4YUg',
+      title: '第30講 我執是輪迴的根本（上）｜2025《釋量論・第二品》大組共學',
+    },
   ];
 
   for (const item of expected) {
@@ -52,13 +64,13 @@ test('newly public official YouTube videos (43-46) are transcribed and registere
   }
 });
 
-test('current playlist inventory records 47 total sessions after filling 43-46', () => {
+test('current playlist inventory records 49 total sessions after filling 43-48', () => {
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
   assert.equal(course.unavailableSessions.length, 0);
 
   const catalog = readJson('courses/catalog.json');
   const entry = catalog.courses.find((item) => item.id === 'shi-liang-lun-study-group-2025');
-  assert.equal(entry.totalSessions, 47);
+  assert.equal(entry.totalSessions, 49);
 });
 
 test('historical prototype-44 evidence is explicitly remapped to current playlist item 42 by video identity', () => {
