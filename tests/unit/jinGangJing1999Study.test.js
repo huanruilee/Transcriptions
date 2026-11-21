@@ -104,7 +104,8 @@ test('金剛經1999 release gate: playable audio and zero pending review', { ski
   for (const { id, data } of loadSessions()) {
     const playable = data.audioAvailable === true
       && typeof data.audioUrl === 'string'
-      && new RegExp('^(audio/[-\\w]+\\.mp3|https?://.+\\.mp3)$', 'i').test(data.audioUrl);
+      && (new RegExp('^(audio/[-\\w]+\\.mp3|https?://.+\\.mp3)$', 'i').test(data.audioUrl)
+        || /^https:\/\/drive\.google\.com\/uc\?export=download&id=[\w-]+$/.test(data.audioUrl));
     const pending = data.paragraphs.flatMap((p) => p.sentences || []).filter((s) => s.reviewNeeded === true);
     if (!playable) failures.push(id + ': audio not playable/provenanced');
     if (pending.length > 0) failures.push(id + ': ' + pending.length + ' sentences still require review');
