@@ -32,7 +32,11 @@ test('金剛經1999 candidate inventory: identity, provenance and minimum readin
     assert.equal(data.transcriptPublicationState, 'candidate-review-required',
       id + ' must remain candidate-review-required until release gates pass');
     assert.equal(data.audioAvailable, true, id + ' audio must be playable (externally hosted, URLs verified 200)');
-    assert.ok(/^https?:\/\/.+\.mp3$/.test(data.audioUrl), id + ' audioUrl must be a provenanced mp3 URL');
+    // Accepts provenanced external mp3: direct .mp3 URL, or Google Drive direct
+    // download (audio/mpeg, range-capable; same pattern as 釋量論第二品).
+    const isMp3Url = /^https?:\/\/.+\.(mp3|MP3)$/.test(data.audioUrl);
+    const isDriveAudio = /^https:\/\/drive\.google\.com\/uc\?export=download&id=[\w-]+$/.test(data.audioUrl);
+    assert.ok(isMp3Url || isDriveAudio, id + ' audioUrl must be a provenanced mp3 URL');
     assert.ok(data.durationSec > 0, id + ' durationSec must be recorded');
     assert.ok(data._meta?.candidateReviewRequired, id + ' must retain review-required provenance');
     assert.ok(data._meta?.source_url, id + ' must record external source URL');
