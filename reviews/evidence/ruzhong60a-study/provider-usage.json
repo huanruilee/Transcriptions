@@ -1,0 +1,64 @@
+{
+  "whisperCalls": 11,
+  "whisperTokens": "unknown",
+  "textModelCalls": [
+    {
+      "stage": "anomaly",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1713,
+        "completion_tokens": 1563,
+        "total_tokens": 3276,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "overview",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1514,
+        "completion_tokens": 506,
+        "total_tokens": 2020,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "radar",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 731,
+        "completion_tokens": 193,
+        "total_tokens": 924,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  ],
+  "externalHelperCalls": 0,
+  "codexTokens": "unknown",
+  "totalTokens": "unknown",
+  "connectionAttempts": [
+    {
+      "stage": "overview-initial",
+      "outcome": "SSH connect timeout6seconds;remote API not reached",
+      "providerCalls": 0,
+      "tokens": "unknown"
+    },
+    {
+      "stage": "health-before-retry",
+      "outcome": "SSH connect timeout6seconds;read-only check",
+      "providerCalls": 0
+    }
+  ],
+  "generationAttemptCount": 4,
+  "successfulGenerationCalls": 3,
+  "retryBound": "overview exactly one retry after radar successful;no more"
+}
