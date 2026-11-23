@@ -1,0 +1,105 @@
+{
+  "findings": [
+    {
+      "sentenceId": "idx-165",
+      "paragraphId": "p_83",
+      "heading": null,
+      "start": 1128.24,
+      "end": 1135.41,
+      "text": "大概就是這樣嘛 對對 對 ok 那個時候我們就有很多的表現嘛 對那那個表現是因為。",
+      "prevText": "就會產生貪跟痴什麼之類的 還不止了 什麼嫉妒啦 對不對 我慢啦 什麼都會出來的了。",
+      "nextText": "你有一些什麼想法 才會會有這個表現啊。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "大概就是這樣嘛 對對 對 ok",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    },
+    {
+      "sentenceId": "idx-302",
+      "paragraphId": "p_152",
+      "heading": null,
+      "start": 2073.92,
+      "end": 2084.18,
+      "text": "這個可以回答的了 是常 我們也可以說對 對不對 不對 對 對啊 就是變成是無常是yes。",
+      "prevText": "這個論識出來的時候 就是變成 比方說身因偽有法 是無常 我們會說對。",
+      "nextText": "對不對 是常 no 應該是無常 yes 應該是常 no 就是可以這樣講嘛。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "這個可以回答的了 是常 我們也可以說對 對不對 不對 對 對",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    },
+    {
+      "sentenceId": "idx-303",
+      "paragraphId": "p_152",
+      "heading": null,
+      "start": 2084.18,
+      "end": 2091.72,
+      "text": "對不對 是常 no 應該是無常 yes 應該是常 no 就是可以這樣講嘛。",
+      "prevText": "這個可以回答的了 是常 我們也可以說對 對不對 不對 對 對啊 就是變成是無常是yes。",
+      "nextText": "可是 他有 大概是這樣 這樣 對吧 所以這邊的話就是變成 嗯。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "對不對 是常 no 應該是無常 yes 應該是常 no",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    },
+    {
+      "sentenceId": "idx-313",
+      "paragraphId": "p_157",
+      "heading": null,
+      "start": 2149.4,
+      "end": 2154.76,
+      "text": "這樣對嘛 是無常的時候 我們可以答yes no 以是什麼什麼故的時候。",
+      "prevText": "這樣對嘛 而且就是變成無的話 嗯 OK 反正這個是第一 嗯 比方說身因偽有法是無常。",
+      "nextText": "會出來兩個 就是變成身因偽有法是無常 以是所作性故 也是yes。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "這樣對嘛 是無常的時候 我們可以答yes no",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    },
+    {
+      "sentenceId": "idx-314",
+      "paragraphId": "p_158",
+      "heading": null,
+      "start": 2154.76,
+      "end": 2161.74,
+      "text": "會出來兩個 就是變成身因偽有法是無常 以是所作性故 也是yes。",
+      "prevText": "這樣對嘛 是無常的時候 我們可以答yes no 以是什麼什麼故的時候。",
+      "nextText": "對不對 但是就是變成以是無常 以是常法故的話 真意無有法是無常。",
+      "findings": [
+        {
+          "ruleId": "whisper-hallucination-gibberish",
+          "severity": "high",
+          "matchedText": "會出來兩個 就是變成身因偽有法是無常 以是所作性故 也是ye",
+          "suggestedTerm": null,
+          "reason": "偵測到疑似 Whisper 亂碼／外文雜訊崩潰，需局部重辨識還原",
+          "promptHints": []
+        }
+      ]
+    }
+  ],
+  "density": []
+}
