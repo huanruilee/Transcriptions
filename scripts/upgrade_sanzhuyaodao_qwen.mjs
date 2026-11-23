@@ -5,6 +5,7 @@
  * natural paragraphing (150-350 chars), numbered headings, and Stage 6 sourceDigest sync.
  */
 import { execFileSync } from 'node:child_process';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
@@ -160,9 +161,18 @@ function callGx10Qwen(messages, { maxTokens = 2400, temperature = 0.1, timeoutMs
 }
 
 async function processBatchWithQwen(sessionId, batchIndex, batchSentences, title) {
-  const cachePath = path.join(CACHE_DIR, `s${sessionId}_b${String(batchIndex).padStart(3, '0')}_qwen.json`);
+  const terms = (GROUNDING.high_frequency_doctrinal_terms || []).slice(0, 25).join('、');
+  const lines = batchSentences.map((s) => `${s.id}|${s.text}`).join('\n');
+  const inputHash = crypto
+    .createHash('sha256')
+    .update(`${GX10_QWEN_MODEL}\n${terms}\n${lines}`)
+    .digest('hex')
+    .slice(0, 12);
+  const cachePath = path.join(
+    CACHE_DIR,
+    `s${sessionId}_b${String(batchIndex).padStart(3, '0')}_${inputHash}_qwen.json`,
+  );
   return cachedJsonCall(cachePath, async () => {
-    const terms = (GROUNDING.high_frequency_doctrinal_terms || []).slice(0, 25).join('、');
     const systemPrompt = [
       `你是漢傳與藏傳格魯派佛學《三主要道》（如性法師主講）專業逐字稿校對與分段編輯。高頻名相：${terms}。`,
       '任務：針對給定的連續句子（id|text），僅輸出 JSON：{"fixes":[{"id":"seg-xxx","text":"..."}],"breaks":[{"id":"seg-yyy","heading":"小標或空字串"}]}',
@@ -171,8 +181,6 @@ async function processBatchWithQwen(sessionId, batchIndex, batchSentences, title
       '2. 嚴禁整句改寫、摘要或捏造未講內容；忠實保留如性法師口語實義。',
       '3. breaks 標記自然段起點 sentence id：每段約 150～350 字（4～12 句），依語意轉折切分。每逢義理主題轉換（約每 3～5 段）在 heading 填入簡明小標（8～20字），其餘分段 heading 設為 ""。',
     ].join('\n');
-
-    const lines = batchSentences.map((s) => `${s.id}|${s.text}`).join('\n');
     const userPrompt = `講次：${title}（第 ${sessionId} 講，批次 ${batchIndex + 1}）\n句段清單：\n${lines}`;
 
     let lastErr;
@@ -243,7 +251,24 @@ function fetchYoutubeOutline(youtubeUrl, youtubeVideoId) {
   return outline;
 }
 
-const FORWARD_OPENER_RE = /^(?:[一二三四五六七八九十]+、|第[一二三四五六七八九十]+[層點部分]|例如|比如|首先|其次|最後)/;
+const FORWARD_OPENER_RE =
+  /^(?:[一二三四五六七八九十]+、|第[一二三四五六七八九十]+[層點部分]|例如|比如|首先|其次|最後|心裡|內心|如果|因為|所以|但是|不過|而且|因此|換言之|換句話說|也就是|請放掌)/;
+
+function appendMergedRawRecord(target, source) {
+  const existing = Array.isArray(target.mergedRawSegments) ? target.mergedRawSegments : [];
+  const next = Array.isArray(source.mergedRawSegments) ? source.mergedRawSegments : [];
+  target.mergedRawSegments = [
+    ...existing,
+    ...next,
+    {
+      id: source.id,
+      ...(source.rawAsrSegmentId ? { rawAsrSegmentId: source.rawAsrSegmentId } : {}),
+      start: source.start,
+      end: source.end,
+      ...(typeof source.rawText === 'string' ? { rawText: source.rawText } : {}),
+    },
+  ];
+}
 
 function consolidateShortFragments(sentences) {
   const out = [];
@@ -251,7 +276,7 @@ function consolidateShortFragments(sentences) {
   let pendingPrefix = null;
 
   for (let i = 0; i < sentences.length; i++) {
-    let s = { ...sentences[i], text: (sentences[i].text || '').trim() };
+    const s = { ...sentences[i], text: (sentences[i].text || '').trim() };
     if (!s.text) continue;
 
     if (pendingPrefix) {
@@ -259,11 +284,15 @@ function consolidateShortFragments(sentences) {
       const sep = pendingPrefix.text.endsWith('、') ? '' : '，';
       s.text = `${pendingPrefix.text.replace(/[。！？，]$/, '')}${sep}${s.text}`;
       s.start = pendingPrefix.start;
+      appendMergedRawRecord(s, pendingPrefix);
       pendingPrefix = null;
     }
 
-    // Forward-merge short openers instead of attaching them to the previous sentence
-    if (i < sentences.length - 1 && s.text.length <= 6 && FORWARD_OPENER_RE.test(s.text)) {
+    const prevEnded = out.length > 0 && /[。！？]$/.test(out[out.length - 1].text);
+    const isShortFragment = s.text.length <= 3 || (s.text.length <= 6 && FORWARD_OPENER_RE.test(s.text));
+
+    // Forward-merge openers or fragments following a sentence-final boundary
+    if (i < sentences.length - 1 && isShortFragment && (FORWARD_OPENER_RE.test(s.text) || prevEnded)) {
       pendingPrefix = s;
       continue;
     }
@@ -271,8 +300,9 @@ function consolidateShortFragments(sentences) {
     // Merge tiny <=3 char trailing fragments into previous sentence
     if (out.length > 0 && s.text.length <= 3) {
       const prev = out[out.length - 1];
-      prev.text = `${prev.text.replace(/[，、]$/, '')}${s.text}`;
+      prev.text = deterministicCleanText(`${prev.text.replace(/[，、]$/, '')}${s.text}`);
       prev.end = s.end;
+      appendMergedRawRecord(prev, s);
       remap.set(s.id, prev.id);
       continue;
     }

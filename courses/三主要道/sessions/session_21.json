@@ -23,7 +23,7 @@
       "id": "p-001",
       "heading": "1. 課程架構",
       "start": 20.6,
-      "end": 162.26,
+      "end": 184.06,
       "sentences": [
         {
           "id": "seg-0002",
@@ -82,20 +82,29 @@
         {
           "id": "seg-0008",
           "start": 75.26,
-          "end": 83.92,
+          "end": 78.44,
           "rawText": "愿解如来真实意",
-          "text": "願解如來真實義請放掌，",
+          "text": "願解如來真實義，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0008"
         },
         {
           "id": "seg-0010",
-          "start": 85.78,
+          "start": 82.52,
           "end": 92.4,
           "rawText": "这次的课程是接续2024年底三主要道的应对",
-          "text": "這次的課程是接續2024年底三主要道的研討，",
+          "text": "請放掌，這次的課程是接續2024年底三主要道的研討，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0010"
+          "rawAsrSegmentId": "seg-0010",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0009",
+              "rawAsrSegmentId": "seg-0009",
+              "start": 82.52,
+              "end": 83.92,
+              "rawText": "请放掌"
+            }
+          ]
         },
         {
           "id": "seg-0011",
@@ -113,7 +122,16 @@
           "rawText": "这次将进一步探讨三主要道的最后一个部分",
           "text": "這次將進一步探討三主要道的最後一個部分空正見，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0012"
+          "rawAsrSegmentId": "seg-0012",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0013",
+              "rawAsrSegmentId": "seg-0013",
+              "start": 107.4,
+              "end": 108.4,
+              "rawText": "空正"
+            }
+          ]
         },
         {
           "id": "seg-0014",
@@ -210,17 +228,10 @@
           "start": 160.4,
           "end": 162.26,
           "rawText": "究竟有什么关系",
-          "text": "究竟有什麼關係。",
+          "text": "究竟有什麼關係，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0024"
-        }
-      ]
-    },
-    {
-      "id": "p-002",
-      "start": 163.26,
-      "end": 217.34,
-      "sentences": [
+        },
         {
           "id": "seg-0025",
           "start": 163.26,
@@ -244,7 +255,7 @@
           "start": 168.4,
           "end": 170.04,
           "rawText": "以及在我们的博舍那等课程当中",
-          "text": "以及在我們的般若經等課程當中，",
+          "text": "以及在我們的《菩提道次第廣論》等課程當中，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0027"
         },
@@ -271,10 +282,17 @@
           "start": 180.18,
           "end": 184.06,
           "rawText": "希望能对各位理解空正见有所帮助",
-          "text": "希望能對各位理解空正見有所幫助，",
+          "text": "希望能對各位理解空正見有所幫助。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0030"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-002",
+      "start": 186.1,
+      "end": 273.32,
+      "sentences": [
         {
           "id": "seg-0031",
           "start": 186.1,
@@ -325,17 +343,10 @@
           "start": 211.76,
           "end": 217.34,
           "rawText": "正行则分为出离心 菩提心 空正见",
-          "text": "正行則分為出離心菩提心空正見。",
+          "text": "正行則分為出離心、菩提心、空正見，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0036"
-        }
-      ]
-    },
-    {
-      "id": "p-003",
-      "start": 218.98,
-      "end": 281.8,
-      "sentences": [
+        },
         {
           "id": "seg-0037",
           "start": 218.98,
@@ -368,7 +379,7 @@
           "start": 230.18,
           "end": 234.34,
           "rawText": "而是环环相扣层层递进",
-          "text": "而是環環相扣層層遞進，",
+          "text": "而是環環相扣、層層遞進，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0040"
         },
@@ -404,7 +415,7 @@
           "start": 254.1,
           "end": 257.12,
           "rawText": "菩提心是在出离心之中解脱的心",
-          "text": "菩提心是在出離心的基礎上，",
+          "text": "菩提心是在出離心之中解脫的心，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0044"
         },
@@ -431,10 +442,17 @@
           "start": 269.42,
           "end": 273.32,
           "rawText": "这两者谈的都是修行的动机",
-          "text": "這兩者談的都是修行的動機，",
+          "text": "這兩者談的都是修行的動機。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0047"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-003",
+      "start": 275.04,
+      "end": 323.7,
+      "sentences": [
         {
           "id": "seg-0048",
           "start": 275.04,
@@ -449,23 +467,16 @@
           "start": 279.08,
           "end": 281.8,
           "rawText": "后者以利他为主",
-          "text": "後者以利他為主。",
+          "text": "後者以利他為主，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0049"
-        }
-      ]
-    },
-    {
-      "id": "p-004",
-      "start": 284.36,
-      "end": 365.88,
-      "sentences": [
+        },
         {
           "id": "seg-0050",
           "start": 284.36,
           "end": 287.1,
           "rawText": "但只有动机就只有理论之道",
-          "text": "但只有動機就只有理論之道，",
+          "text": "但只有動機就只有理論之道，就真的能達成目標嗎？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0050"
         },
@@ -546,10 +557,17 @@
           "start": 319.4,
           "end": 323.7,
           "rawText": "因此想要真正达到这两个目标",
-          "text": "因此想要真正達到這兩個目標，",
+          "text": "因此想要真正達到這兩個目標。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0059"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-004",
+      "start": 323.7,
+      "end": 402.46,
+      "sentences": [
         {
           "id": "seg-0060",
           "start": 323.7,
@@ -620,7 +638,16 @@
           "rawText": "如何真正抵达",
           "text": "如何真正抵達目標，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0068"
+          "rawAsrSegmentId": "seg-0068",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0069",
+              "rawAsrSegmentId": "seg-0069",
+              "start": 347.08,
+              "end": 347.64,
+              "rawText": "目标"
+            }
+          ]
         },
         {
           "id": "seg-0070",
@@ -672,17 +699,10 @@
           "start": 363.22,
           "end": 365.88,
           "rawText": "则无法达成目标",
-          "text": "則無法達成目標。",
+          "text": "則無法達成目標，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0075"
-        }
-      ]
-    },
-    {
-      "id": "p-005",
-      "start": 368.02,
-      "end": 424.76,
-      "sentences": [
+        },
         {
           "id": "seg-0076",
           "start": 368.02,
@@ -690,7 +710,16 @@
           "rawText": "之前提到",
           "text": "之前提到空正見，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0076"
+          "rawAsrSegmentId": "seg-0076",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0077",
+              "rawAsrSegmentId": "seg-0077",
+              "start": 369.74,
+              "end": 370.94,
+              "rawText": "空正见"
+            }
+          ]
         },
         {
           "id": "seg-0078",
@@ -708,7 +737,16 @@
           "rawText": "无明我执唯一的方法",
           "text": "無明我執唯一的方法對此，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0079"
+          "rawAsrSegmentId": "seg-0079",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0080",
+              "rawAsrSegmentId": "seg-0080",
+              "start": 376.36,
+              "end": 377.72,
+              "rawText": "对此"
+            }
+          ]
         },
         {
           "id": "seg-0081",
@@ -726,7 +764,16 @@
           "rawText": "佛法所说的苦是指什么",
           "text": "一、佛法所說的苦是指什麼，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0083"
+          "rawAsrSegmentId": "seg-0083",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0082",
+              "rawAsrSegmentId": "seg-0082",
+              "start": 381.66,
+              "end": 382.34,
+              "rawText": "一"
+            }
+          ]
         },
         {
           "id": "seg-0085",
@@ -735,7 +782,16 @@
           "rawText": "苦与烦恼之间有何关联",
           "text": "二、苦與煩惱之間有何關聯，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0085"
+          "rawAsrSegmentId": "seg-0085",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0084",
+              "rawAsrSegmentId": "seg-0084",
+              "start": 387.6,
+              "end": 388.28,
+              "rawText": "二"
+            }
+          ]
         },
         {
           "id": "seg-0087",
@@ -744,17 +800,42 @@
           "rawText": "为何我们会生起烦恼",
           "text": "三、為何我們會生起煩惱，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0087"
+          "rawAsrSegmentId": "seg-0087",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0086",
+              "rawAsrSegmentId": "seg-0086",
+              "start": 393.58,
+              "end": 394.26,
+              "rawText": "三"
+            }
+          ]
         },
         {
           "id": "seg-0089",
           "start": 398.8,
           "end": 402.46,
           "rawText": "如何松动烦恼",
-          "text": "四、如何鬆動煩惱，",
+          "text": "四、如何鬆動煩惱。",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0089"
-        },
+          "rawAsrSegmentId": "seg-0089",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0088",
+              "rawAsrSegmentId": "seg-0088",
+              "start": 398.8,
+              "end": 399.48,
+              "rawText": "四"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-005",
+      "start": 403.72,
+      "end": 424.76,
+      "sentences": [
         {
           "id": "seg-0091",
           "start": 403.72,
@@ -762,7 +843,16 @@
           "rawText": "如何以空正见",
           "text": "五、如何以空正見，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0091"
+          "rawAsrSegmentId": "seg-0091",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0090",
+              "rawAsrSegmentId": "seg-0090",
+              "start": 403.72,
+              "end": 404.4,
+              "rawText": "五"
+            }
+          ]
         },
         {
           "id": "seg-0092",
@@ -834,7 +924,16 @@
           "rawText": "如何在生活中",
           "text": "六、如何在生活中，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0100"
+          "rawAsrSegmentId": "seg-0100",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0099",
+              "rawAsrSegmentId": "seg-0099",
+              "start": 419.52,
+              "end": 420.12,
+              "rawText": "六"
+            }
+          ]
         },
         {
           "id": "seg-0101",
@@ -887,7 +986,16 @@
           "rawText": "分为三个层次",
           "text": "分為三個層次這三層，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0106"
+          "rawAsrSegmentId": "seg-0106",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0107",
+              "rawAsrSegmentId": "seg-0107",
+              "start": 438.16,
+              "end": 439.34,
+              "rawText": "这三层"
+            }
+          ]
         },
         {
           "id": "seg-0108",
@@ -923,7 +1031,16 @@
           "rawText": "从最明显的痛苦",
           "text": "從最明顯的痛苦一路，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0111"
+          "rawAsrSegmentId": "seg-0111",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0112",
+              "rawAsrSegmentId": "seg-0112",
+              "start": 450.94,
+              "end": 451.18,
+              "rawText": "一路"
+            }
+          ]
         },
         {
           "id": "seg-0113",
@@ -950,7 +1067,16 @@
           "rawText": "苦苦",
           "text": "首先第一層，苦苦，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0116"
+          "rawAsrSegmentId": "seg-0116",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0115",
+              "rawAsrSegmentId": "seg-0115",
+              "start": 462.04,
+              "end": 463.38,
+              "rawText": "首先第一层"
+            }
+          ]
         },
         {
           "id": "seg-0117",
@@ -968,7 +1094,16 @@
           "rawText": "身体的病痛",
           "text": "例如，身體的病痛，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0119"
+          "rawAsrSegmentId": "seg-0119",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0118",
+              "rawAsrSegmentId": "seg-0118",
+              "start": 470.3,
+              "end": 470.52,
+              "rawText": "例如"
+            }
+          ]
         },
         {
           "id": "seg-0120",
@@ -977,7 +1112,23 @@
           "rawText": "或心理的悲伤",
           "text": "或心理的悲傷焦慮恐懼，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0120"
+          "rawAsrSegmentId": "seg-0120",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0121",
+              "rawAsrSegmentId": "seg-0121",
+              "start": 475.66,
+              "end": 476.06,
+              "rawText": "焦虑"
+            },
+            {
+              "id": "seg-0122",
+              "rawAsrSegmentId": "seg-0122",
+              "start": 476.7,
+              "end": 477.18,
+              "rawText": "恐惧"
+            }
+          ]
         },
         {
           "id": "seg-0123",
@@ -1057,7 +1208,23 @@
           "rawText": "坏苦指的不是痛苦的感受",
           "text": "第二層，壞苦，壞苦指的不是痛苦的感受，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0132"
+          "rawAsrSegmentId": "seg-0132",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0130",
+              "rawAsrSegmentId": "seg-0130",
+              "start": 502.74,
+              "end": 503.56,
+              "rawText": "第二层"
+            },
+            {
+              "id": "seg-0131",
+              "rawAsrSegmentId": "seg-0131",
+              "start": 502.74,
+              "end": 504.62,
+              "rawText": "坏苦"
+            }
+          ]
         },
         {
           "id": "seg-0133",
@@ -1075,7 +1242,16 @@
           "rawText": "饿了吃东西",
           "text": "例如，餓了吃東西，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0135"
+          "rawAsrSegmentId": "seg-0135",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0134",
+              "rawAsrSegmentId": "seg-0134",
+              "start": 511.56,
+              "end": 511.9,
+              "rawText": "例如"
+            }
+          ]
         },
         {
           "id": "seg-0136",
@@ -1156,16 +1332,34 @@
           "rawText": "也就是道次第当中所说的",
           "text": "也就是道次第當中所說的前苦，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0144"
+          "rawAsrSegmentId": "seg-0144",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0145",
+              "rawAsrSegmentId": "seg-0145",
+              "start": 538.72,
+              "end": 539.52,
+              "rawText": "前苦"
+            }
+          ]
         },
         {
           "id": "seg-0146",
           "start": 539.52,
           "end": 545.34,
           "rawText": "犹大渐减",
-          "text": "猶大漸減吃東西，",
+          "text": "猶如漸減吃東西，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0146"
+          "rawAsrSegmentId": "seg-0146",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0147",
+              "rawAsrSegmentId": "seg-0147",
+              "start": 544.14,
+              "end": 545.34,
+              "rawText": "吃东西"
+            }
+          ]
         },
         {
           "id": "seg-0148",
@@ -1183,7 +1377,16 @@
           "rawText": "其实只是饥饿感在消退",
           "text": "其實只是飢餓感在消退休息，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0149"
+          "rawAsrSegmentId": "seg-0149",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0150",
+              "rawAsrSegmentId": "seg-0150",
+              "start": 552.14,
+              "end": 553.26,
+              "rawText": "休息"
+            }
+          ]
         },
         {
           "id": "seg-0151",
@@ -1255,7 +1458,16 @@
           "rawText": "而只是苦",
           "text": "而只是苦在慢慢，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0158"
+          "rawAsrSegmentId": "seg-0158",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0159",
+              "rawAsrSegmentId": "seg-0159",
+              "start": 579.9,
+              "end": 580.4,
+              "rawText": "在慢慢"
+            }
+          ]
         },
         {
           "id": "seg-0160",
@@ -1397,7 +1609,16 @@
           "rawText": "我们以为自己在追求快乐",
           "text": "我們以為自己在追求快樂實際上，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0174"
+          "rawAsrSegmentId": "seg-0174",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0175",
+              "rawAsrSegmentId": "seg-0175",
+              "start": 622.1,
+              "end": 623.44,
+              "rawText": "实际上"
+            }
+          ]
         },
         {
           "id": "seg-0176",
@@ -1458,7 +1679,7 @@
     {
       "id": "p-009",
       "start": 643.26,
-      "end": 706.08,
+      "end": 710.48,
       "sentences": [
         {
           "id": "seg-0182",
@@ -1521,7 +1742,23 @@
           "rawText": "当我们很饿的时候",
           "text": "例如，當我們很餓的時候吃東西，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0189"
+          "rawAsrSegmentId": "seg-0189",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0188",
+              "rawAsrSegmentId": "seg-0188",
+              "start": 658.82,
+              "end": 659.58,
+              "rawText": "例如"
+            },
+            {
+              "id": "seg-0190",
+              "rawAsrSegmentId": "seg-0190",
+              "start": 662.8,
+              "end": 663.8,
+              "rawText": "吃东西"
+            }
+          ]
         },
         {
           "id": "seg-0191",
@@ -1546,18 +1783,9 @@
           "start": 669.44,
           "end": 670.12,
           "rawText": "这个快乐",
-          "text": "這個快樂，",
+          "text": "這個快樂就會慢慢消失，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0194"
-        },
-        {
-          "id": "seg-0195",
-          "start": 670.12,
-          "end": 671.98,
-          "rawText": "就会慢慢消失",
-          "text": "就會慢慢消失，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0195"
         },
         {
           "id": "seg-0196",
@@ -1611,7 +1839,16 @@
           "rawText": "就不会痛苦了",
           "text": "就不會痛苦了沒錯，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0201"
+          "rawAsrSegmentId": "seg-0201",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0202",
+              "rawAsrSegmentId": "seg-0202",
+              "start": 690.52,
+              "end": 691.32,
+              "rawText": "没错"
+            }
+          ]
         },
         {
           "id": "seg-0203",
@@ -1625,20 +1862,29 @@
         {
           "id": "seg-0204",
           "start": 693.56,
-          "end": 698.58,
+          "end": 697,
           "rawText": "确实可以减少很多不必要的痛苦",
-          "text": "確實可以減少很多不必要的痛苦不過，",
+          "text": "確實可以減少很多不必要的痛苦，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0204"
         },
         {
           "id": "seg-0206",
-          "start": 699.48,
+          "start": 697.84,
           "end": 701.7,
           "rawText": "即使你吃得刚刚好",
-          "text": "即使你吃得剛剛好，",
+          "text": "不過，即使你吃得剛剛好，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0206"
+          "rawAsrSegmentId": "seg-0206",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0205",
+              "rawAsrSegmentId": "seg-0205",
+              "start": 697.84,
+              "end": 698.58,
+              "rawText": "不过"
+            }
+          ]
         },
         {
           "id": "seg-0207",
@@ -1654,26 +1900,26 @@
           "start": 704.8,
           "end": 706.08,
           "rawText": "但那个快乐",
-          "text": "但那個快樂。",
+          "text": "但那個快樂會一直維持嗎？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0208"
+        },
+        {
+          "id": "seg-0210",
+          "start": 709.74,
+          "end": 710.48,
+          "rawText": "会吗",
+          "text": "並不會。",
+          "reviewNeeded": false,
+          "rawAsrSegmentId": "seg-0210"
         }
       ]
     },
     {
       "id": "p-010",
-      "start": 706.08,
+      "start": 713.74,
       "end": 750.64,
       "sentences": [
-        {
-          "id": "seg-0209",
-          "start": 706.08,
-          "end": 712.4,
-          "rawText": "会一直维持吗",
-          "text": "會一直維持嗎會嗎並不會，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0209"
-        },
         {
           "id": "seg-0212",
           "start": 713.74,
@@ -1738,22 +1984,22 @@
           "rawAsrSegmentId": "seg-0218"
         },
         {
-          "id": "seg-0219",
-          "start": 731.92,
-          "end": 733.04,
-          "rawText": "换句话说",
-          "text": "換句話說，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0219"
-        },
-        {
           "id": "seg-0220",
-          "start": 733.84,
+          "start": 731.92,
           "end": 735.34,
           "rawText": "就算你每一次",
-          "text": "就算你每一次，",
+          "text": "換句話說，就算你每一次，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0220"
+          "rawAsrSegmentId": "seg-0220",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0219",
+              "rawAsrSegmentId": "seg-0219",
+              "start": 731.92,
+              "end": 733.04,
+              "rawText": "换句话说"
+            }
+          ]
         },
         {
           "id": "seg-0221",
@@ -1780,7 +2026,16 @@
           "rawText": "还是会结束",
           "text": "還是會結束結束後，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0223"
+          "rawAsrSegmentId": "seg-0223",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0224",
+              "rawAsrSegmentId": "seg-0224",
+              "start": 741.9,
+              "end": 743.02,
+              "rawText": "结束后"
+            }
+          ]
         },
         {
           "id": "seg-0225",
@@ -1792,22 +2047,22 @@
           "rawAsrSegmentId": "seg-0225"
         },
         {
-          "id": "seg-0226",
-          "start": 747.42,
-          "end": 748.76,
-          "rawText": "而且这个过程",
-          "text": "而且這個過程，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0226"
-        },
-        {
           "id": "seg-0227",
-          "start": 748.76,
+          "start": 747.42,
           "end": 750.64,
           "rawText": "会不断重复",
-          "text": "會不斷重複。",
+          "text": "而且這個過程，會不斷重複。",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0227"
+          "rawAsrSegmentId": "seg-0227",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0226",
+              "rawAsrSegmentId": "seg-0226",
+              "start": 747.42,
+              "end": 748.76,
+              "rawText": "而且这个过程"
+            }
+          ]
         }
       ]
     },
@@ -1882,20 +2137,29 @@
         {
           "id": "seg-0235",
           "start": 773.34,
-          "end": 777.42,
+          "end": 775.06,
           "rawText": "而在于值的问题",
-          "text": "而在於質的問題換言之，",
+          "text": "而在於質的問題，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0235"
         },
         {
           "id": "seg-0237",
-          "start": 778.72,
+          "start": 776.48,
           "end": 779.88,
           "rawText": "重点不在于",
-          "text": "重點不在於，",
+          "text": "換言之，重點不在於，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0237"
+          "rawAsrSegmentId": "seg-0237",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0236",
+              "rawAsrSegmentId": "seg-0236",
+              "start": 776.48,
+              "end": 777.42,
+              "rawText": "换言之"
+            }
+          ]
         },
         {
           "id": "seg-0238",
@@ -2130,22 +2394,22 @@
           "rawAsrSegmentId": "seg-0262"
         },
         {
-          "id": "seg-0263",
-          "start": 850.88,
-          "end": 852.78,
-          "rawText": "因此从一开始",
-          "text": "因此從一開始，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0263"
-        },
-        {
           "id": "seg-0264",
-          "start": 853.32,
+          "start": 850.88,
           "end": 856.02,
           "rawText": "就注定无法长久维持",
-          "text": "就註定無法長久維持。",
+          "text": "因此從一開始，就註定無法長久維持。",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0264"
+          "rawAsrSegmentId": "seg-0264",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0263",
+              "rawAsrSegmentId": "seg-0263",
+              "start": 850.88,
+              "end": 852.78,
+              "rawText": "因此从一开始"
+            }
+          ]
         }
       ]
     },
@@ -2153,7 +2417,7 @@
       "id": "p-013",
       "heading": "4. 如何看待世間安樂",
       "start": 858.7,
-      "end": 929.34,
+      "end": 959.7,
       "sentences": [
         {
           "id": "seg-0265",
@@ -2180,7 +2444,16 @@
           "rawText": "虽然佛法说",
           "text": "雖然佛法說壞苦，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0267"
+          "rawAsrSegmentId": "seg-0267",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0268",
+              "rawAsrSegmentId": "seg-0268",
+              "start": 866.64,
+              "end": 867.14,
+              "rawText": "坏苦"
+            }
+          ]
         },
         {
           "id": "seg-0269",
@@ -2214,7 +2487,7 @@
           "start": 876.8,
           "end": 880.46,
           "rawText": "不然人生不就一点乐趣都没有吗",
-          "text": "不然人生不就一點樂趣都沒有嗎，",
+          "text": "不然人生不就一點樂趣都沒有嗎？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0272"
         },
@@ -2223,7 +2496,7 @@
           "start": 881.24,
           "end": 883.8,
           "rawText": "这样活着还有什么意义呢",
-          "text": "這樣活著還有什麼意義呢，",
+          "text": "這樣活著還有什麼意義呢？",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0273"
         },
@@ -2261,7 +2534,16 @@
           "rawText": "来支撑我们的生活",
           "text": "來支撐我們的生活然而，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0277"
+          "rawAsrSegmentId": "seg-0277",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0278",
+              "rawAsrSegmentId": "seg-0278",
+              "start": 898.12,
+              "end": 899.04,
+              "rawText": "然而"
+            }
+          ]
         },
         {
           "id": "seg-0279",
@@ -2280,15 +2562,6 @@
           "text": "而是要我們看見，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0280"
-        },
-        {
-          "id": "seg-0281",
-          "start": 906.16,
-          "end": 906.24,
-          "rawText": "我们要看清楚",
-          "text": "我們要看清楚，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0281"
         },
         {
           "id": "seg-0282",
@@ -2315,7 +2588,16 @@
           "rawText": "无法长久维持",
           "text": "無法長久維持一旦，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0284"
+          "rawAsrSegmentId": "seg-0284",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0285",
+              "rawAsrSegmentId": "seg-0285",
+              "start": 914.84,
+              "end": 915.74,
+              "rawText": "一旦"
+            }
+          ]
         },
         {
           "id": "seg-0286",
@@ -2336,30 +2618,30 @@
           "rawAsrSegmentId": "seg-0287"
         },
         {
-          "id": "seg-0288",
-          "start": 923.44,
-          "end": 924.96,
-          "rawText": "所以问题不是",
-          "text": "所以問題不是，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0288"
-        },
-        {
           "id": "seg-0289",
-          "start": 924.96,
+          "start": 923.44,
           "end": 929.34,
           "rawText": "要不要享受这些快乐",
-          "text": "要不要享受這些快樂而是。",
+          "text": "所以問題不是，要不要享受這些快樂而是，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0289"
-        }
-      ]
-    },
-    {
-      "id": "p-014",
-      "start": 929.34,
-      "end": 959.7,
-      "sentences": [
+          "rawAsrSegmentId": "seg-0289",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0288",
+              "rawAsrSegmentId": "seg-0288",
+              "start": 923.44,
+              "end": 924.96,
+              "rawText": "所以问题不是"
+            },
+            {
+              "id": "seg-0290",
+              "rawAsrSegmentId": "seg-0290",
+              "start": 928.64,
+              "end": 929.34,
+              "rawText": "而是"
+            }
+          ]
+        },
         {
           "id": "seg-0291",
           "start": 929.34,
@@ -2394,7 +2676,30 @@
           "rawText": "什么叫做暂时的因缘",
           "text": "什麼叫做暫時的因緣有很好沒有，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0294"
+          "rawAsrSegmentId": "seg-0294",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0295",
+              "rawAsrSegmentId": "seg-0295",
+              "start": 943.2,
+              "end": 943.8,
+              "rawText": "有"
+            },
+            {
+              "id": "seg-0296",
+              "rawAsrSegmentId": "seg-0296",
+              "start": 944.38,
+              "end": 944.88,
+              "rawText": "很好"
+            },
+            {
+              "id": "seg-0297",
+              "rawAsrSegmentId": "seg-0297",
+              "start": 945.9,
+              "end": 946.5,
+              "rawText": "没有"
+            }
+          ]
         },
         {
           "id": "seg-0298",
@@ -2435,7 +2740,7 @@
       ]
     },
     {
-      "id": "p-015",
+      "id": "p-014",
       "start": 960.32,
       "end": 1029.78,
       "sentences": [
@@ -2518,7 +2823,16 @@
           "rawText": "只是我们不会把",
           "text": "只是我們不會把好天氣，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0310"
+          "rawAsrSegmentId": "seg-0310",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0311",
+              "rawAsrSegmentId": "seg-0311",
+              "start": 984.86,
+              "end": 985.8,
+              "rawText": "好天气"
+            }
+          ]
         },
         {
           "id": "seg-0312",
@@ -2599,7 +2913,16 @@
           "rawText": "当成是一个永恒不变的状态",
           "text": "當成是一個永恆不變的狀態對此，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0320"
+          "rawAsrSegmentId": "seg-0320",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0321",
+              "rawAsrSegmentId": "seg-0321",
+              "start": 1014.36,
+              "end": 1014.96,
+              "rawText": "对此"
+            }
+          ]
         },
         {
           "id": "seg-0322",
@@ -2649,7 +2972,7 @@
       ]
     },
     {
-      "id": "p-016",
+      "id": "p-015",
       "start": 1030.78,
       "end": 1081.72,
       "sentences": [
@@ -2732,7 +3055,16 @@
           "rawText": "这才是问题所在",
           "text": "這才是問題所在雖然，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0335"
+          "rawAsrSegmentId": "seg-0335",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0336",
+              "rawAsrSegmentId": "seg-0336",
+              "start": 1055.92,
+              "end": 1056.78,
+              "rawText": "虽然"
+            }
+          ]
         },
         {
           "id": "seg-0337",
@@ -2795,7 +3127,16 @@
           "rawText": "感到失落",
           "text": "感到失落不安，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0343"
+          "rawAsrSegmentId": "seg-0343",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0344",
+              "rawAsrSegmentId": "seg-0344",
+              "start": 1079.64,
+              "end": 1080,
+              "rawText": "不安"
+            }
+          ]
         },
         {
           "id": "seg-0345",
@@ -2809,7 +3150,7 @@
       ]
     },
     {
-      "id": "p-017",
+      "id": "p-016",
       "start": 1083.18,
       "end": 1174.76,
       "sentences": [
@@ -2960,7 +3301,7 @@
       ]
     },
     {
-      "id": "p-018",
+      "id": "p-017",
       "start": 1176.64,
       "end": 1259.74,
       "sentences": [
@@ -3088,7 +3429,16 @@
           "rawText": "是会随着环境而改变的",
           "text": "是會隨著環境而改變的比較，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0375"
+          "rawAsrSegmentId": "seg-0375",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0376",
+              "rawAsrSegmentId": "seg-0376",
+              "start": 1230.44,
+              "end": 1231.46,
+              "rawText": "比较"
+            }
+          ]
         },
         {
           "id": "seg-0377",
@@ -3142,7 +3492,16 @@
           "rawText": "现在年薪300万",
           "text": "現在年薪300萬那一刻，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0382"
+          "rawAsrSegmentId": "seg-0382",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0383",
+              "rawAsrSegmentId": "seg-0383",
+              "start": 1254.06,
+              "end": 1254.92,
+              "rawText": "那一刻"
+            }
+          ]
         },
         {
           "id": "seg-0384",
@@ -3165,9 +3524,9 @@
       ]
     },
     {
-      "id": "p-019",
+      "id": "p-018",
       "start": 1262.12,
-      "end": 1327.44,
+      "end": 1329.48,
       "sentences": [
         {
           "id": "seg-0386",
@@ -3179,22 +3538,22 @@
           "rawAsrSegmentId": "seg-0386"
         },
         {
-          "id": "seg-0387",
-          "start": 1263.48,
-          "end": 1266.22,
-          "rawText": "内心一阵寒酸",
-          "text": "內心一陣寒酸，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0387"
-        },
-        {
           "id": "seg-0388",
-          "start": 1268.46,
+          "start": 1263.48,
           "end": 1269.8,
           "rawText": "这说明什么",
-          "text": "這說明什麼？",
+          "text": "內心一陣寒酸，這說明什麼？",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0388"
+          "rawAsrSegmentId": "seg-0388",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0387",
+              "rawAsrSegmentId": "seg-0387",
+              "start": 1263.48,
+              "end": 1266.22,
+              "rawText": "内心一阵寒酸"
+            }
+          ]
         },
         {
           "id": "seg-0389",
@@ -3329,7 +3688,16 @@
           "rawText": "需求在别",
           "text": "第三點，需求在變，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0404"
+          "rawAsrSegmentId": "seg-0404",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0403",
+              "rawAsrSegmentId": "seg-0403",
+              "start": 1313.48,
+              "end": 1314.44,
+              "rawText": "第三点"
+            }
+          ]
         },
         {
           "id": "seg-0405",
@@ -3347,7 +3715,16 @@
           "rawText": "觉得月薪5万",
           "text": "覺得月薪5萬就夠用，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0406"
+          "rawAsrSegmentId": "seg-0406",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0407",
+              "rawAsrSegmentId": "seg-0407",
+              "start": 1320.94,
+              "end": 1322.62,
+              "rawText": "就够用"
+            }
+          ]
         },
         {
           "id": "seg-0408",
@@ -3363,42 +3740,35 @@
           "start": 1326.26,
           "end": 1327.44,
           "rawText": "发现不行",
-          "text": "發現不行。",
+          "text": "發現不行，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0409"
-        }
-      ]
-    },
-    {
-      "id": "p-020",
-      "start": 1327.44,
-      "end": 1331.04,
-      "sentences": [
+        },
         {
           "id": "seg-0410",
           "start": 1327.44,
           "end": 1329.48,
           "rawText": "要7万才够",
-          "text": "要7萬才夠，",
+          "text": "要7萬才夠。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0410"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-019",
+      "start": 1329.48,
+      "end": 1403.4,
+      "sentences": [
         {
           "id": "seg-0411",
           "start": 1329.48,
           "end": 1331.04,
           "rawText": "到了7万",
-          "text": "到了7萬。",
+          "text": "到了7萬，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0411"
-        }
-      ]
-    },
-    {
-      "id": "p-021",
-      "start": 1331.04,
-      "end": 1397.26,
-      "sentences": [
+        },
         {
           "id": "seg-0412",
           "start": 1331.04,
@@ -3449,9 +3819,18 @@
           "start": 1345.54,
           "end": 1351.56,
           "rawText": "请问你真的快乐吗",
-          "text": "請問你真的快樂嗎？一開始，",
+          "text": "請問你真的快樂嗎一開始，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0417"
+          "rawAsrSegmentId": "seg-0417",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0418",
+              "rawAsrSegmentId": "seg-0418",
+              "start": 1350.54,
+              "end": 1351.56,
+              "rawText": "一开始"
+            }
+          ]
         },
         {
           "id": "seg-0419",
@@ -3528,20 +3907,29 @@
         {
           "id": "seg-0427",
           "start": 1373.5,
-          "end": 1377.82,
+          "end": 1375.56,
           "rawText": "又想要10万",
-          "text": "又想要10萬。請問，",
+          "text": "又想要10萬。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0427"
         },
         {
           "id": "seg-0429",
-          "start": 1378.58,
+          "start": 1376.82,
           "end": 1381,
           "rawText": "我们处在那种状态下",
-          "text": "我們處在那種狀態下，",
+          "text": "請問，我們處在那種狀態下，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0429"
+          "rawAsrSegmentId": "seg-0429",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0428",
+              "rawAsrSegmentId": "seg-0428",
+              "start": 1376.82,
+              "end": 1377.82,
+              "rawText": "请问"
+            }
+          ]
         },
         {
           "id": "seg-0430",
@@ -3593,17 +3981,10 @@
           "start": 1395.6,
           "end": 1397.26,
           "rawText": "而是环境",
-          "text": "而是環境。",
+          "text": "而是環境、",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0435"
-        }
-      ]
-    },
-    {
-      "id": "p-022",
-      "start": 1397.26,
-      "end": 1456.78,
-      "sentences": [
+        },
         {
           "id": "seg-0436",
           "start": 1397.26,
@@ -3630,7 +4011,14 @@
           "text": "共同決定。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0438"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-020",
+      "start": 1404.9,
+      "end": 1464.8,
+      "sentences": [
         {
           "id": "seg-0439",
           "start": 1404.9,
@@ -3659,22 +4047,22 @@
           "rawAsrSegmentId": "seg-0441"
         },
         {
-          "id": "seg-0442",
-          "start": 1412.94,
-          "end": 1414.1,
-          "rawText": "换句话说",
-          "text": "換句話說，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0442"
-        },
-        {
           "id": "seg-0443",
-          "start": 1414.64,
+          "start": 1412.94,
           "end": 1416.82,
           "rawText": "如果我们要依靠外境",
-          "text": "如果我們要依靠外境，",
+          "text": "換句話說，如果我們要依靠外境，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0443"
+          "rawAsrSegmentId": "seg-0443",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0442",
+              "rawAsrSegmentId": "seg-0442",
+              "start": 1412.94,
+              "end": 1414.1,
+              "rawText": "换句话说"
+            }
+          ]
         },
         {
           "id": "seg-0444",
@@ -3706,20 +4094,29 @@
         {
           "id": "seg-0447",
           "start": 1425.38,
-          "end": 1430.42,
+          "end": 1428.1,
           "rawText": "都不在我们的掌控范围内",
-          "text": "都不在我們的掌控範圍內。因此，",
+          "text": "都不在我們的掌控範圍內。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0447"
         },
         {
           "id": "seg-0449",
-          "start": 1431.92,
+          "start": 1429.62,
           "end": 1433.26,
           "rawText": "问题不在于",
-          "text": "問題不在於，",
+          "text": "因此，問題不在於，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0449"
+          "rawAsrSegmentId": "seg-0449",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0448",
+              "rawAsrSegmentId": "seg-0448",
+              "start": 1429.62,
+              "end": 1430.42,
+              "rawText": "因此"
+            }
+          ]
         },
         {
           "id": "seg-0450",
@@ -3728,7 +4125,16 @@
           "rawText": "金钱重不重要",
           "text": "金錢重不重要而在於，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0450"
+          "rawAsrSegmentId": "seg-0450",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0451",
+              "rawAsrSegmentId": "seg-0451",
+              "start": 1435.62,
+              "end": 1436.56,
+              "rawText": "而在于"
+            }
+          ]
         },
         {
           "id": "seg-0452",
@@ -3798,17 +4204,10 @@
           "start": 1453.94,
           "end": 1456.78,
           "rawText": "不是否定金钱的重要性",
-          "text": "不是否定金錢的重要性。",
+          "text": "不是否定金錢的重要性，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0459"
-        }
-      ]
-    },
-    {
-      "id": "p-023",
-      "start": 1457.92,
-      "end": 1464.8,
-      "sentences": [
+        },
         {
           "id": "seg-0460",
           "start": 1457.92,
@@ -3839,7 +4238,7 @@
       ]
     },
     {
-      "id": "p-024",
+      "id": "p-021",
       "start": 1467,
       "end": 1517.32,
       "sentences": [
@@ -3886,7 +4285,16 @@
           "rawText": "我一个月想赚多少钱",
           "text": "例如：，我一個月想賺多少錢？",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0468"
+          "rawAsrSegmentId": "seg-0468",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0467",
+              "rawAsrSegmentId": "seg-0467",
+              "start": 1477.06,
+              "end": 1477.98,
+              "rawText": "例如"
+            }
+          ]
         },
         {
           "id": "seg-0469",
@@ -3947,7 +4355,7 @@
           "start": 1497.4,
           "end": 1499.52,
           "rawText": "是不是还是会经常担心",
-          "text": "是不是還是會經常擔心，",
+          "text": "是不是還是會經常擔心：",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0475"
         },
@@ -3988,27 +4396,27 @@
           "rawAsrSegmentId": "seg-0479"
         },
         {
-          "id": "seg-0480",
-          "start": 1513.4,
-          "end": 1513.96,
-          "rawText": "也就是说",
-          "text": "也就是說，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0480"
-        },
-        {
           "id": "seg-0481",
-          "start": 1513.96,
+          "start": 1513.4,
           "end": 1517.32,
           "rawText": "金钱虽然可以解决生活的问题",
-          "text": "金錢雖然可以解決生活的問題。",
+          "text": "也就是說，金錢雖然可以解決生活的問題。",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0481"
+          "rawAsrSegmentId": "seg-0481",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0480",
+              "rawAsrSegmentId": "seg-0480",
+              "start": 1513.4,
+              "end": 1513.96,
+              "rawText": "也就是说"
+            }
+          ]
         }
       ]
     },
     {
-      "id": "p-025",
+      "id": "p-022",
       "start": 1518.12,
       "end": 1582.16,
       "sentences": [
@@ -4190,7 +4598,16 @@
           "rawText": "本质上不是真正的乐",
           "text": "本質上不是真正的樂而是苦，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0501"
+          "rawAsrSegmentId": "seg-0501",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0502",
+              "rawAsrSegmentId": "seg-0502",
+              "start": 1576.14,
+              "end": 1577.2,
+              "rawText": "而是苦"
+            }
+          ]
         },
         {
           "id": "seg-0503",
@@ -4213,7 +4630,7 @@
       ]
     },
     {
-      "id": "p-026",
+      "id": "p-023",
       "start": 1583.34,
       "end": 1647.72,
       "sentences": [
@@ -4263,22 +4680,22 @@
           "rawAsrSegmentId": "seg-0509"
         },
         {
-          "id": "seg-0510",
-          "start": 1597.82,
-          "end": 1599.04,
-          "rawText": "换句话说",
-          "text": "換句話說，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0510"
-        },
-        {
           "id": "seg-0511",
-          "start": 1599.04,
+          "start": 1597.82,
           "end": 1601.68,
           "rawText": "它只是苦在消退",
-          "text": "它只是苦在消退，",
+          "text": "換句話說，它只是苦在消退，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0511"
+          "rawAsrSegmentId": "seg-0511",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0510",
+              "rawAsrSegmentId": "seg-0510",
+              "start": 1597.82,
+              "end": 1599.04,
+              "rawText": "换句话说"
+            }
+          ]
         },
         {
           "id": "seg-0512",
@@ -4400,10 +4817,10 @@
       ]
     },
     {
-      "id": "p-027",
+      "id": "p-024",
       "heading": "5. 認識行苦",
       "start": 1649.2,
-      "end": 1729.9,
+      "end": 1728.06,
       "sentences": [
         {
           "id": "seg-0525",
@@ -4412,7 +4829,16 @@
           "rawText": "接着第三层",
           "text": "接著第三層行苦，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0525"
+          "rawAsrSegmentId": "seg-0525",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0526",
+              "rawAsrSegmentId": "seg-0526",
+              "start": 1650.96,
+              "end": 1651.82,
+              "rawText": "行苦"
+            }
+          ]
         },
         {
           "id": "seg-0527",
@@ -4493,7 +4919,16 @@
           "rawText": "内心一直处在平稳的状态",
           "text": "內心一直處在平穩的狀態請問，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0535"
+          "rawAsrSegmentId": "seg-0535",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0536",
+              "rawAsrSegmentId": "seg-0536",
+              "start": 1687.04,
+              "end": 1687.98,
+              "rawText": "请问"
+            }
+          ]
         },
         {
           "id": "seg-0537",
@@ -4597,27 +5032,36 @@
         {
           "id": "seg-0548",
           "start": 1725.56,
-          "end": 1729.9,
+          "end": 1728.06,
           "rawText": "即使一切都还不错",
-          "text": "即使一切都還不錯心裡。",
+          "text": "即使一切都還不錯。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0548"
         }
       ]
     },
     {
-      "id": "p-028",
-      "start": 1729.9,
+      "id": "p-025",
+      "start": 1729.02,
       "end": 1791.06,
       "sentences": [
         {
           "id": "seg-0550",
-          "start": 1729.9,
+          "start": 1729.02,
           "end": 1732.92,
           "rawText": "仍然会有一种说不上来的不安",
-          "text": "仍然會有一種說不上來的不安，",
+          "text": "心裡，仍然會有一種說不上來的不安，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0550"
+          "rawAsrSegmentId": "seg-0550",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0549",
+              "rawAsrSegmentId": "seg-0549",
+              "start": 1729.02,
+              "end": 1729.9,
+              "rawText": "心里"
+            }
+          ]
         },
         {
           "id": "seg-0551",
@@ -4674,22 +5118,22 @@
           "rawAsrSegmentId": "seg-0556"
         },
         {
-          "id": "seg-0557",
-          "start": 1756.64,
-          "end": 1758.94,
-          "rawText": "也就是身心",
-          "text": "也就是身心，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0557"
-        },
-        {
           "id": "seg-0558",
-          "start": 1760.16,
+          "start": 1756.64,
           "end": 1764.58,
           "rawText": "是在业与烦恼的束缚下取得的",
-          "text": "是在業與煩惱的束縛下取得的；",
+          "text": "也就是身心，是在業與煩惱的束縛下取得的；",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0558"
+          "rawAsrSegmentId": "seg-0558",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0557",
+              "rawAsrSegmentId": "seg-0557",
+              "start": 1756.64,
+              "end": 1758.94,
+              "rawText": "也就是身心"
+            }
+          ]
         },
         {
           "id": "seg-0559",
@@ -4748,7 +5192,7 @@
       ]
     },
     {
-      "id": "p-029",
+      "id": "p-026",
       "start": 1793.28,
       "end": 1883.88,
       "sentences": [
@@ -4759,7 +5203,16 @@
           "rawText": "这里有几点值得特别强调一下",
           "text": "這裡有幾點值得特別強調一下：第一，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0565"
+          "rawAsrSegmentId": "seg-0565",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0566",
+              "rawAsrSegmentId": "seg-0566",
+              "start": 1797.28,
+              "end": 1798.28,
+              "rawText": "第一"
+            }
+          ]
         },
         {
           "id": "seg-0567",
@@ -4775,7 +5228,7 @@
           "start": 1805.42,
           "end": 1809.58,
           "rawText": "所以五蕴又称为进取蕴",
-          "text": "所以五蘊又稱為「近取蘊」，",
+          "text": "所以五蘊又稱為近取蘊。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0568"
         },
@@ -4793,7 +5246,7 @@
           "start": 1813.64,
           "end": 1817.22,
           "rawText": "我们不由自主的一再取蕴",
-          "text": "我們不由自主地一再取蘊，",
+          "text": "我們不由自主的一再取蘊，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0570"
         },
@@ -4831,7 +5284,16 @@
           "rawText": "行苦不是感受层面的问题",
           "text": "第二點，行苦不是感受層面的問題，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0575"
+          "rawAsrSegmentId": "seg-0575",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0574",
+              "rawAsrSegmentId": "seg-0574",
+              "start": 1829.48,
+              "end": 1830.34,
+              "rawText": "第二点"
+            }
+          ]
         },
         {
           "id": "seg-0576",
@@ -4919,7 +5381,7 @@
           "start": 1866.92,
           "end": 1868.18,
           "rawText": "不由自主的一再取蕴",
-          "text": "不由自主地一再取蘊。",
+          "text": "不由自主的一再取蘊。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0585"
         },
@@ -4962,7 +5424,7 @@
       ]
     },
     {
-      "id": "p-030",
+      "id": "p-027",
       "start": 1884.5,
       "end": 1930.62,
       "sentences": [
@@ -4989,7 +5451,7 @@
           "start": 1893.66,
           "end": 1896.5,
           "rawText": "他也从未真正自由过",
-          "text": "他也從未真正自由過，",
+          "text": "他也從未真正自由過。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0592"
         },
@@ -5034,7 +5496,7 @@
           "start": 1914.36,
           "end": 1917.76,
           "rawText": "因此可以说行苦是根",
-          "text": "因此可以說，行苦是根，",
+          "text": "因此可以說行苦是根，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0597"
         },
@@ -5077,7 +5539,7 @@
       ]
     },
     {
-      "id": "p-031",
+      "id": "p-028",
       "heading": "6. 以喻統攝三苦的關係",
       "start": 1931.4,
       "end": 2012.16,
@@ -5087,7 +5549,7 @@
           "start": 1931.4,
           "end": 1935.88,
           "rawText": "我们用一个比喻来说明三种苦的关系",
-          "text": "我們用一個比喻來說明三種苦的關係。",
+          "text": "我們用一個比喻來說明三種苦的關係，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0602"
         },
@@ -5105,7 +5567,7 @@
           "start": 1943.02,
           "end": 1944.46,
           "rawText": "苦苦指的是什么",
-          "text": "苦苦指的是什麼？",
+          "text": "苦苦指的是什麼，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0604"
         },
@@ -5159,7 +5621,7 @@
           "start": 1961.5,
           "end": 1962.88,
           "rawText": "坏苦指的是什么",
-          "text": "壞苦指的是什麼？",
+          "text": "壞苦指的是什麼，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0610"
         },
@@ -5292,7 +5754,7 @@
       ]
     },
     {
-      "id": "p-032",
+      "id": "p-029",
       "start": 2014.04,
       "end": 2091.88,
       "sentences": [
@@ -5427,7 +5889,7 @@
           "start": 2063.88,
           "end": 2067.58,
           "rawText": "所以苦接二连三的发生",
-          "text": "所以苦接二連三地發生。",
+          "text": "所以苦接二連三的發生，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0639"
         },
@@ -5447,7 +5909,16 @@
           "rawText": "都用在处理苦苦上",
           "text": "都用在處理苦苦上能處理，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0641"
+          "rawAsrSegmentId": "seg-0641",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0642",
+              "rawAsrSegmentId": "seg-0642",
+              "start": 2077.06,
+              "end": 2078.18,
+              "rawText": "能处理"
+            }
+          ]
         },
         {
           "id": "seg-0643",
@@ -5472,7 +5943,7 @@
           "start": 2083.86,
           "end": 2085.54,
           "rawText": "如果不能处理呢",
-          "text": "如果不能處理呢？",
+          "text": "如果不能處理呢，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0645"
         },
@@ -5497,9 +5968,9 @@
       ]
     },
     {
-      "id": "p-033",
+      "id": "p-030",
       "start": 2093.48,
-      "end": 2166.8,
+      "end": 2169.3,
       "sentences": [
         {
           "id": "seg-0648",
@@ -5605,9 +6076,18 @@
           "start": 2129.02,
           "end": 2131.42,
           "rawText": "我过得不错",
-          "text": "我過得不錯很開心，",
+          "text": "「我過得不錯，很開心。」很開心，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0659"
+          "rawAsrSegmentId": "seg-0659",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0660",
+              "rawAsrSegmentId": "seg-0660",
+              "start": 2130.22,
+              "end": 2131.42,
+              "rawText": "很开心"
+            }
+          ]
         },
         {
           "id": "seg-0661",
@@ -5646,22 +6126,22 @@
           "rawAsrSegmentId": "seg-0664"
         },
         {
-          "id": "seg-0665",
-          "start": 2149.68,
-          "end": 2151.8,
-          "rawText": "如果认真思考",
-          "text": "如果認真思考，",
-          "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0665"
-        },
-        {
           "id": "seg-0666",
-          "start": 2153.42,
+          "start": 2149.68,
           "end": 2154.96,
           "rawText": "我们真的会说",
-          "text": "我們真的會說，",
+          "text": "如果認真思考，我們真的會說，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0666"
+          "rawAsrSegmentId": "seg-0666",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0665",
+              "rawAsrSegmentId": "seg-0665",
+              "start": 2149.68,
+              "end": 2151.8,
+              "rawText": "如果认真思考"
+            }
+          ]
         },
         {
           "id": "seg-0667",
@@ -5695,26 +6175,26 @@
           "start": 2165.02,
           "end": 2166.8,
           "rawText": "不是每到了下雨天",
-          "text": "不是每到了下雨天。",
+          "text": "不是每到了下雨天，",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0670"
-        }
-      ]
-    },
-    {
-      "id": "p-034",
-      "start": 2167.64,
-      "end": 2199.82,
-      "sentences": [
+        },
         {
           "id": "seg-0671",
           "start": 2167.64,
           "end": 2169.3,
           "rawText": "就拿桶子接水",
-          "text": "就拿桶子接水，",
+          "text": "就拿桶子接水。",
           "reviewNeeded": false,
           "rawAsrSegmentId": "seg-0671"
-        },
+        }
+      ]
+    },
+    {
+      "id": "p-031",
+      "start": 2170.08,
+      "end": 2199.82,
+      "sentences": [
         {
           "id": "seg-0672",
           "start": 2170.08,
@@ -5817,7 +6297,7 @@
       ]
     },
     {
-      "id": "p-035",
+      "id": "p-032",
       "start": 2202.1,
       "end": 2293.84,
       "sentences": [
@@ -5954,7 +6434,16 @@
           "rawText": "我们下一堂课再做介绍",
           "text": "我們下一堂課再做介紹好，",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0697"
+          "rawAsrSegmentId": "seg-0697",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0698",
+              "rawAsrSegmentId": "seg-0698",
+              "start": 2258.84,
+              "end": 2259.44,
+              "rawText": "好"
+            }
+          ]
         },
         {
           "id": "seg-0699",
@@ -5970,9 +6459,18 @@
           "start": 2293.7,
           "end": 2293.84,
           "rawText": "我们下期再见",
-          "text": "我們下期再見再見。",
+          "text": "我們下期再見，再見。",
           "reviewNeeded": false,
-          "rawAsrSegmentId": "seg-0700"
+          "rawAsrSegmentId": "seg-0700",
+          "mergedRawSegments": [
+            {
+              "id": "seg-0701",
+              "rawAsrSegmentId": "seg-0701",
+              "start": 2293.82,
+              "end": 2293.84,
+              "rawText": "再见"
+            }
+          ]
         }
       ]
     }
@@ -5981,9 +6479,9 @@
     "schemaVersion": 1,
     "status": "ai-reviewed",
     "sourceTranscriptId": "san-zhu-yao-dao/session_21",
-    "sourceDigest": "sha256:83fa855edd72da7146e0a0d36804e3e15f798f4b1750fdc9851b1d66a621f5f8",
+    "sourceDigest": "sha256:4742816048806364b3fd4040b28accc3f1750c2894ffaae3e2db3fcc73419c39",
     "generatedBy": "MiniMax-M3",
-    "generatedAt": "2026-11-23T14:20:16.544Z",
+    "generatedAt": "2026-11-23T14:39:03.557Z",
     "mainPoints": [
       {
         "text": "第21講 介紹佛法所說的苦之主要修持義理與法義開示。",
