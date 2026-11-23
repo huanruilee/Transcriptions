@@ -16,6 +16,19 @@
       }
     },
     {
+      "stage": "overview-patch",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 66,
+        "total_tokens": 261,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
       "stage": "overview",
       "provider": "GX10-local",
       "model": "qwen3.8-flash-next-iq3_s",
@@ -58,7 +71,7 @@
       "providerCalls": 0
     }
   ],
-  "generationAttemptCount": 4,
-  "successfulGenerationCalls": 3,
+  "generationAttemptCount": 5,
+  "successfulGenerationCalls": 4,
   "retryBound": "overview exactly one retry after radar successful;no more"
 }
