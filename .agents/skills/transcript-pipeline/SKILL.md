@@ -9,7 +9,7 @@ description: Stage 0～7 單向轉稿與品管流水線（含 Re-ASR、冗詞清
 2. **Stage 1（Raw ASR）**：以 Whisper large-v3 轉出帶 `[start, end]` 時間戳的原始 `sent-X`。
 3. **Stage 2（名相偵測 ＋ GX10 Re-ASR）**：先以規則與 LLM 找出疑似聽錯、漏字與幻覺區間，呼叫 GX10 Whisper（`100.113.144.100:8010`）雙軌重辨識還原正字（若該講次已完成 Stage 1/2/5 定稿，可用 `--skip-reasr=true` 略過）。
 4. **Stage 3A／3B（冗詞清除、碎句整併與依語意順句）**：執行 `consolidateFillersAndFragments`、`generateFluentPolishProposals`（`eNeural glm53-flash` 優先，次之 `GX10 Qwen3.8-27B`，`concurrency = 1`）與 `ensureParagraphPunctuation`。
-5. **Stage 4（自然段重組與編號小標）**：重組為 150～350 字自然段並配置 `1. ...`、`2. ...` 編號義理小標。
+5. **Stage 4（官方提綱優先與自然段重組）**：只要該講 YouTube 說明欄附有時間碼提綱，直接以官方時間碼與標題為唯一章節切點並停用模型自創標題；章節內切分為無標題之 150～350 字自然段。僅於無官方提綱時，方配置模型或科判 `1. ...`、`2. ...` 編號義理小標。
 6. **Stage 5（Agent 佛法專家逐段通讀審核，不可省略）**：主控 Agent 親自通讀全文，同時驗收「佛法名相／義理 100% 正確」及「零發語詞（無 `呃/嗯/啊`）、無破碎逗號斷句」。
 7. **Stage 6（`contentOverview` 與 `sourceDigest` 同步）**：內文與 `sent-X` 定稿後才同步 `evidence[]` 與 `computeSourceDigest(transcript)`。
 8. **Stage 7（CI 閘門與上線驗證）**：通過 `npm run summaries:audit`、`npm run test:v2`、`npm test` 後提交 PR（`--merge`），並確認 `deploy.yml` 與 `github.io` 實頁上線。
