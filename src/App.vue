@@ -1904,6 +1904,8 @@ onMounted(async () => {
     const courseParam = urlParams.get('course');
     if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
       courseStore.currentCourseId = courseParam;
+      // 深連結進入也要記錄最近觀看（Codex review 2026-11-24）
+      recordRecentCourse(courseParam);
     } else {
       isCourseChooserOpen.value = true;
       loadRecentCourses();
@@ -2025,6 +2027,8 @@ async function loadRealCourseData() {
 watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
   if (!isInitialMounted) return;
   if (newCourseId === oldCourseId) return;
+  // 切換課程也記錄最近觀看（Codex review 2026-11-24）
+  recordRecentCourse(newCourseId);
   if (typeof window !== 'undefined') {
     const url = new URL(window.location.href);
     url.searchParams.set('course', newCourseId);
