@@ -466,17 +466,22 @@ function buildBalancedParagraphs(sentences, breakMap, ytOutline = []) {
     for (let k = 0; k < g.sentences.length; k++) {
       const s = g.sentences[k];
       const prevSent = sub.sentences.length > 0 ? sub.sentences[sub.sentences.length - 1] : null;
-      const prevComplete = prevSent && /[。！？]$/.test(prevSent.text.trim());
+      const prevText = prevSent ? prevSent.text.trim() : '';
+      const prevComplete = /[。！？]$/.test(prevText);
+      const prevIsDependent = /(?:之前|之後|時|的時候|的話|來說|而言|方面|情況下|狀態下)[，,]?$/.test(prevText);
       const remainingChars = g.sentences.slice(k).reduce((a, x) => a + x.text.length, 0);
       const nextStartsClause = /^(?:但|所以|因此|換句話說|如果|而|這就是|我們|對於|首先|其次|最後)/.test(
         s.text.trim(),
       );
+      const hardCapHit = sub.sentences.length >= 34;
       if (
-        sub.sentences.length >= 5 &&
-        remainingChars >= 60 &&
-        ((prevComplete && (subChars >= 160 || sub.sentences.length >= 16)) ||
-          (sub.sentences.length >= 24 && nextStartsClause) ||
-          sub.sentences.length >= 28)
+        hardCapHit ||
+        (sub.sentences.length >= 5 &&
+          remainingChars >= 60 &&
+          !prevIsDependent &&
+          ((prevComplete && (subChars >= 160 || sub.sentences.length >= 16)) ||
+            (sub.sentences.length >= 24 && nextStartsClause) ||
+            sub.sentences.length >= 28))
       ) {
         finalGroups.push(sub);
         sub = { heading: '', sentences: [] };
