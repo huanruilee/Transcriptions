@@ -1,0 +1,186 @@
+{
+  "scope": "15bounded cards,actual original ID/start/end/neighbors asserted",
+  "calls": 1,
+  "findings": [
+    {
+      "sentenceId": "sent-19",
+      "reason": "中觀破四生邏輯，有因生必墮自、他、共生。此處漏掉關鍵名相「自生」或「他生」等具體類別，導致語意不完整。",
+      "suspectedMissingTerm": "自生/他生/共生",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-19",
+        "sourceIndex": 19,
+        "start": 98.37,
+        "end": 108.29,
+        "prev": "順世派的話 就不談來世 所以他們就會說 自然生了。",
+        "cur": "總之如果 有因生的話 如果有因而生的話 那會 觀待彼果 對不對 總之。",
+        "next": "只要有因生 那就 一定是自生 或者是他生 或者是共生 那自生 他生 共生。"
+      }
+    },
+    {
+      "sentenceId": "sent-37",
+      "reason": "孔雀與底底利鳥（Dhatri）是經典比喻，通常對比其羽毛顏色或種子特性。此處語句斷裂，疑似漏掉具體比較對象或結果描述。",
+      "suspectedMissingTerm": "羽毛/顏色/種子",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-37",
+        "sourceIndex": 37,
+        "start": 202.72,
+        "end": 211.74,
+        "prev": "大概這樣。",
+        "cur": "外物是這個樣子，內界也是一樣，像孔雀、孔雀，還有底底利鳥，到底是什麼。",
+        "next": "水。"
+      }
+    },
+    {
+      "sentenceId": "sent-82",
+      "reason": "「拿錯意識」極可能是ASR誤聽，結合上下文「過去」、「不復生」，應為佛教名相如「念住」、「識」或特定術語。但因不確定具體詞彙，僅標記疑似漏字/錯字導致的語意缺失。",
+      "suspectedMissingTerm": "念/識/心",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-82",
+        "sourceIndex": 82,
+        "start": 606.55,
+        "end": 609.09,
+        "prev": "莫具。",
+        "cur": "拿錯意識 意為 過去。",
+        "next": "不畏 不復生 這樣。"
+      }
+    },
+    {
+      "sentenceId": "sent-151",
+      "reason": "因明論式「身因為有法是無常」中，「以眼見為因」明顯錯誤。身（身體）非眼所見之直接因，此處應為「所作性故」或類似正因。漏掉正確因名相導致論式荒謬。",
+      "suspectedMissingTerm": "所作性/無常因",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-151",
+        "sourceIndex": 151,
+        "start": 1169.04,
+        "end": 1180.47,
+        "prev": "所舉 同欲 而不缺 所立法 則所 建立 之正因 亦 亦弊 亦弊 反正我們的這個中英語是OK的。",
+        "cur": "前說成立身是無常 以眼見為因 這樣都會犯不成過 這樣可以嗎 身因為有法是無常。",
+        "next": "也是眼見過 這樣可以嗎 這樣都會變成 這個因是 這個 這個因是 那個。"
+      }
+    },
+    {
+      "sentenceId": "sent-169",
+      "reason": "「他事唯有實」語意不通，結合後文「既成證知」，應涉及因明中「所立」、「能立」或「自性有/無」的討論。疑似漏掉關鍵判斷詞如「非」、「無」。",
+      "suspectedMissingTerm": "非/無",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-169",
+        "sourceIndex": 169,
+        "start": 1318.7,
+        "end": 1329.4,
+        "prev": "若為如字中意，應同犯此過，你們可能也有這個問題。",
+        "cur": "做事說我答，他事唯有實，這樣可以嗎？他是說沒有前事、來事，我是答。",
+        "next": "他是唯有，反正就是說他是有，就對了，既成證知，所知信，對，這個就不是顛倒。"
+      }
+    },
+    {
+      "sentenceId": "sent-195",
+      "reason": "「若即主法有自生」中「主法」疑為「因法」或「果法」之誤，且後文接「決定無異」，這是破自生的標準論證（因與果若有自性則應無異）。此處語句結構鬆散，疑似漏掉連接詞或主語。",
+      "suspectedMissingTerm": "因/果",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-195",
+        "sourceIndex": 195,
+        "start": 1508.57,
+        "end": 1512.26,
+        "prev": "從和而生。",
+        "cur": "就談到，若即主法有自生的話。",
+        "next": "若即主法有自生，決定無異，嗯。"
+      }
+    },
+    {
+      "sentenceId": "sent-209",
+      "reason": "「五因生」應為「無因生」。中觀破四生（自、他、共、無因），此處將「無因」誤聽或漏字為「五因」，導致名相錯誤。",
+      "suspectedMissingTerm": "無因",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-209",
+        "sourceIndex": 209,
+        "start": 1610.5,
+        "end": 1620.58,
+        "prev": "等為因 亦不能出 上面所說的過失。",
+        "cur": "反正它不會是 五因生 所以 對 顧 顧第五因能生 這樣可以嗎 這個 這是我們破自身。",
+        "next": "他身 二身 五因生之後 不需要破到 第五種 反正就是沒有 嗯 大概就是這樣。"
+      }
+    },
+    {
+      "sentenceId": "sent-222",
+      "reason": "「言無四邊生」應指破斥自、他、共、無因四種生。後文列舉「無自身、他身...」，此處「言無四邊生」語意模糊，疑似漏掉具體指涉或誤聽「四句」。",
+      "suspectedMissingTerm": "四句/四生",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-222",
+        "sourceIndex": 222,
+        "start": 1717.16,
+        "end": 1727.23,
+        "prev": "依止正因，隱身比量之力。",
+        "cur": "這樣，嗯，言無四邊生的話，指的是即正因，總的來說就是，苗無有法，無自生。",
+        "next": "以無自身、他身、二身、無因生，自故，就是這個音，對不對？這個論式，苗無有法。"
+      }
+    },
+    {
+      "sentenceId": "sent-256",
+      "reason": "討論正因與所立關係。若通達能立（因）即通達所立（果），則因不成為正因。此處語句「似乎要了解 苗是自性空」邏輯跳躍，疑似漏掉「若...則...」的假設結構或關鍵名相「自性有」。",
+      "suspectedMissingTerm": "自性有/若",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-256",
+        "sourceIndex": 256,
+        "start": 1929.95,
+        "end": 1939.59,
+        "prev": "通達無他身。",
+        "cur": "這樣可以嗎 可是問題是 苗上面 瞭解無他身的時候 似乎要了解 苗是自性空。",
+        "next": "對 所以就變成 通達能立的時候 似乎通達了所立 那這樣的話 這個就不是正因。"
+      }
+    },
+    {
+      "sentenceId": "sent-288",
+      "reason": "「通達能力（能知）的時候，還不算通達所（索）利（所知）」中，括號內為講者自我修正。ASR可能漏掉關鍵名相如「因」與「果」的對應關係，導致語意不清。",
+      "suspectedMissingTerm": "因/果",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-288",
+        "sourceIndex": 288,
+        "start": 2119.88,
+        "end": 2129.61,
+        "prev": "可是這個是不是描上面的空性？如果不是的話，就會有一種機緣。",
+        "cur": "也就是說，通達能力（能知）的時候，還不算通達所（索）利（所知），對不對？這樣可以嗎？所以就是變成。",
+        "next": "自性有的因，生自性有的果。通達這個的時候，無了，無自性有的因。"
+      }
+    },
+    {
+      "sentenceId": "sent-315",
+      "reason": "「苗不是自生有的生」語法混亂，應為「苗非自性有之生」。此處漏掉關鍵名相「自性有」或誤聽導致語意不明。",
+      "suspectedMissingTerm": "自性有",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-315",
+        "sourceIndex": 315,
+        "start": 2342.41,
+        "end": 2346.73,
+        "prev": "二生、二生，我是覺得這個論式應該是苗不是自生有的生，不是自生生。",
+        "cur": "這個有點差別嗎？因為我們在講過四生的時候，我也不知道有什麼差別。",
+        "next": "你說有什麼差別。"
+      }
+    },
+    {
+      "sentenceId": "sent-355",
+      "reason": "「虛密」極可能是「回向」、「發願」或課程結束語的ASR誤聽/漏字。作為結尾句，語意完全缺失。",
+      "suspectedMissingTerm": "回向/發願/下課",
+      "promptHints": [],
+      "actualSourceCard": {
+        "id": "sent-355",
+        "sourceIndex": 355,
+        "start": 2602.42,
+        "end": 2603.08,
+        "prev": "今天我們就 大概就講到這邊。",
+        "cur": "虛密。",
+        "next": ""
+      }
+    }
+  ]
+}

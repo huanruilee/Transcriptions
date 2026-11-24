@@ -1,0 +1,48 @@
+{
+  "whisperCalls": 12,
+  "whisperTokens": "unknown",
+  "textModelCalls": [
+    {
+      "stage": "anomaly",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1545,
+        "completion_tokens": 988,
+        "total_tokens": 2533,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "radar",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1298,
+        "completion_tokens": 298,
+        "total_tokens": 1596,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "overview",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1390,
+        "completion_tokens": 460,
+        "total_tokens": 1850,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  ],
+  "externalHelperCalls": 0,
+  "codexTokens": "unknown",
+  "totalTokens": "unknown"
+}

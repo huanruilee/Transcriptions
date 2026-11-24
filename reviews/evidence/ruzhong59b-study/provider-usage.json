@@ -1,0 +1,34 @@
+{
+  "whisperCalls": 11,
+  "whisperTokens": "unknown",
+  "textModelCalls": [],
+  "externalHelperCalls": 0,
+  "codexTokens": "unknown",
+  "totalTokens": "unknown",
+  "textModelAttempts": [
+    {
+      "stage": "anomaly-initial",
+      "status": "timeout150s-zero-response",
+      "tokens": "unknown",
+      "evidence": "anomaly.log",
+      "errorDigest": "2960ea13cb5ae63e590a0d1702669780469f7cecdff1d19baa949f118d2e3fd7"
+    },
+    {
+      "stage": "overview-initial",
+      "status": "timeout150s-zero-response",
+      "tokens": "unknown",
+      "evidence": "overview-review.log",
+      "errorDigest": "e27f6a82bb85a3d9208ba03213127e3e2674bac14767f15335bd1b7ec9ca2415"
+    },
+    {
+      "stage": "anomaly-retry1",
+      "status": "timeout150s-zero-response",
+      "tokens": "unknown",
+      "evidence": "anomaly-retry.log",
+      "errorDigest": "2960ea13cb5ae63e590a0d1702669780469f7cecdff1d19baa949f118d2e3fd7"
+    }
+  ],
+  "textModelAttemptCount": 3,
+  "textModelSuccessfulCalls": 0,
+  "localModelFailureDisposition": "No further retry;Codex controller reviewed15cards and independent fixed-head reviewer checks8guideclaims;no local success claimed"
+}

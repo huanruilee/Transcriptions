@@ -1,0 +1,74 @@
+{
+  "whisperCalls": 13,
+  "whisperTokens": "unknown",
+  "textModelCalls": [
+    {
+      "stage": "anomaly",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1721,
+        "completion_tokens": 895,
+        "total_tokens": 2616,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "radar",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1765,
+        "completion_tokens": 422,
+        "total_tokens": 2187,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "overview",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 1340,
+        "completion_tokens": 443,
+        "total_tokens": 1783,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "overview-patch",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 220,
+        "completion_tokens": 67,
+        "total_tokens": 287,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "stage": "overview-independent-patch",
+      "provider": "GX10-local",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "usage": {
+        "prompt_tokens": 434,
+        "completion_tokens": 72,
+        "total_tokens": 506,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  ],
+  "externalHelperCalls": 0,
+  "codexTokens": "unknown",
+  "totalTokens": "unknown"
+}

@@ -1,0 +1,64 @@
+{
+  "textCalls": [
+    {
+      "provider": "GX10local",
+      "task": "anomaly",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 1576,
+        "completion_tokens": 640,
+        "total_tokens": 2216,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "provider": "GX10local",
+      "task": "radar",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 1581,
+        "completion_tokens": 386,
+        "total_tokens": 1967,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "provider": "GX10local",
+      "task": "overview",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 1316,
+        "completion_tokens": 498,
+        "total_tokens": 1814,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "provider": "GX10local",
+      "task": "overview-patch",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 219,
+        "completion_tokens": 35,
+        "total_tokens": 254,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  ],
+  "whisperCalls": 9,
+  "externalHelperCalls": 0,
+  "codexUsage": "unknown",
+  "totalUsage": "unknown"
+}
