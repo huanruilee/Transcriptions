@@ -23,7 +23,7 @@ describe('Playback regressions', () => {
     expect(player.activeSentenceId).toBeNull();
   });
 
-  it('waits for media ended and preserves iframe when toggling floating view', async () => {
+  it('preserves the same iframe across inline → floating → mini video modes', async () => {
     setActivePinia(createPinia());
     window.history.replaceState({}, '', '/?course=shi-liang-lun-er#session-28');
     vi.stubGlobal('fetch', vi.fn(async (url: string) => ({ ok: true, json: async () =>
@@ -38,12 +38,23 @@ describe('Playback regressions', () => {
     const iframe = wrapper.find('#youtube-iframe').element;
     const toggle = wrapper.find('[data-testid="floating-video-toggle"]');
     expect(toggle.exists()).toBe(true);
-    expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(true);
+    // 預設內嵌：不浮動、不靠邊
+    expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(false);
+    expect(wrapper.find('.youtube-player-container.is-mini').exists()).toBe(false);
+    // inline → floating
     await toggle.trigger('click');
+    expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(true);
+    expect(wrapper.find('#youtube-iframe').element).toBe(iframe);
+    // floating → mini
+    await toggle.trigger('click');
+    expect(wrapper.find('.youtube-player-container.is-mini').exists()).toBe(true);
     expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(false);
     expect(wrapper.find('#youtube-iframe').element).toBe(iframe);
+    // mini → inline
     await toggle.trigger('click');
-    expect(wrapper.find('.youtube-player-container.is-floating').exists()).toBe(true);
+    expect(wrapper.find('.youtube-player-container.is-mini').exists()).toBe(false);
+    expect(wrapper.find('#youtube-iframe').element).toBe(iframe);
+    // 播放結束判定只信來自 iframe 本身的 postMessage
     window.dispatchEvent(new MessageEvent('message', { origin: 'https://www.youtube.com', data: { event: 'onStateChange', info: 0 } }));
     await flushPromises();
     expect(wrapper.find('.end-of-session-card').exists()).toBe(false);
