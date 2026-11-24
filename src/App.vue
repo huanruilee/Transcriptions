@@ -3924,6 +3924,7 @@ if (typeof window !== 'undefined') {
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
+  box-sizing: border-box; /* padding/border 含入寬度，避免手機水平溢出（Codex review P2） */
   display: flex;
   flex-direction: column;
   gap: 18px;
