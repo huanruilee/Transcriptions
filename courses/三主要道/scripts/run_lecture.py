@@ -379,7 +379,8 @@ def run_stage(stage, n):
         blk_lists = []
         for pi in range(len(src['paragraphs'])):
             blk_lists += blocks_of(sents, pi)
-        ledger = []
+        # 不要在此重置 ledger：round-0 的 rulebook 替換必須一併寫入，
+        # 否則審閱者看不到確定性詞庫的校字（Codex review 2026-11-24）。
         for rnd in (1, 2):
             stats = {'propose': 0, 'mech_ok': 0, 'accepted': 0}
             for blk in blk_lists:
