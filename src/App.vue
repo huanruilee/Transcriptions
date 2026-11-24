@@ -1,6 +1,17 @@
 <template>
-  <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
+  <div class="app-root" :class="{ 'video-mini-active': videoMode === 'mini' }" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
     <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
+      <button
+        v-if="canResumeReading"
+        class="glass-back-btn glass-back-chooser"
+        type="button"
+        data-testid="glass-back-chooser"
+        aria-label="返回上次閱讀"
+        title="返回上次閱讀"
+        @click="resumeReading"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" /></svg>
+      </button>
       <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
         <header class="chooser-header">
           <h1 id="course-chooser-title">請選擇課程</h1>
@@ -32,22 +43,25 @@
           />
         </div>
 
-        <div class="course-choice-list">
+        <div class="course-choice-grid">
           <button
             v-for="course in displayedCourses"
             :key="course.id"
             class="course-choice"
             :disabled="isChoosingCourse"
+            :title="`${course.master}${course.sessionLabel || (course.sessionCount ? ` · ${course.sessionCount} 講` : '')}${course.description ? `\n${course.description}` : ''}`"
             @click="chooseInitialCourse(course.id)"
           >
-            <span class="course-choice-top">
-              <strong>{{ course.title }}</strong>
+            <span
+              class="course-choice-icon"
+              :style="course.accent ? { background: course.accent } : undefined"
+              aria-hidden="true"
+            >{{ course.icon || '📚' }}</span>
+            <span class="course-choice-label">{{ course.title }}</span>
+            <span class="course-choice-badge">
               <span class="course-media-badge" aria-hidden="true">{{ course.mediaType === 'video/youtube' ? '🎬' : '🎧' }}</span>
-            </span>
-            <span class="course-choice-meta">
               <span>{{ course.master }}</span>
               <span v-if="course.sessionLabel || course.sessionCount">· {{ course.sessionLabel || `${course.sessionCount} 講` }}</span>
-              <span v-if="course.updatedAt">· 更新 {{ course.updatedAt }}</span>
             </span>
             <span v-if="course.description" class="course-choice-desc">{{ course.description }}</span>
           </button>
@@ -60,6 +74,17 @@
       </section>
     </main>
     <template v-else>
+    <!-- 閱讀頁右上角玻璃返回鈕（手機限定；桌機由 header 右群導航） -->
+    <button
+      class="glass-back-btn glass-back-reader"
+      type="button"
+      data-testid="glass-back-reader"
+      aria-label="返回課程選擇"
+      title="返回課程選擇"
+      @click="openCourseChooserFromReader"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" /></svg>
+    </button>
     <!-- 頂部 3 段式導航欄 (Sticky Header) -->
     <header class="app-header">
       <div class="header-left">
@@ -463,14 +488,15 @@
             <div
               v-if="activeMediaType === 'video/youtube' && currentYoutubeVideoId"
               class="youtube-player-container"
-              :class="{ 'is-floating': isVideoFloating }"
+              :class="{ 'is-floating': videoMode === 'floating', 'is-mini': videoMode === 'mini' }"
+              :data-video-mode="videoMode"
             >
               <button
                 class="floating-video-toggle"
                 data-testid="floating-video-toggle"
-                :aria-pressed="isVideoFloating"
-                @click="isVideoFloating = !isVideoFloating"
-              >{{ isVideoFloating ? '↙ 還原影片' : '📌 浮動置頂' }}</button>
+                :aria-pressed="videoMode !== 'inline'"
+                @click="cycleVideoMode"
+              >{{ videoModeToggleLabels[videoMode] }}</button>
               <iframe
                 id="youtube-iframe"
                 class="youtube-iframe"
@@ -1029,10 +1055,48 @@ function chooseInitialCourse(courseId: string) {
   })();
 }
 
+// 玻璃返回鈕：記錄上次閱讀點，供課程選擇頁「返回上次閱讀」使用。
+// App 內網址一律 replaceState（無 pushState），故不用 history.back()，
+// 改以狀態還原：同課直接 loadSession；異課設 pendingRestoreSessionId 後由 watcher 還原。
+const lastReadingPoint = ref<{ courseId: string; sessionId: string } | null>(null);
+const pendingRestoreSessionId = ref<string | null>(null);
+const canResumeReading = computed(() => Boolean(lastReadingPoint.value) || recentCourses.value.length > 0);
+
+function resumeReading() {
+  const point = lastReadingPoint.value;
+  if (point) {
+    if (point.courseId === courseStore.currentCourseId) {
+      void loadSession(point.sessionId);
+    } else {
+      pendingRestoreSessionId.value = point.sessionId;
+      courseStore.currentCourseId = point.courseId; // watcher 載入後優先使用 pendingRestoreSessionId
+    }
+  } else if (recentCourses.value.length) {
+    chooseInitialCourse(recentCourses.value[0].id);
+  }
+  isCourseChooserOpen.value = false;
+}
+
+function openCourseChooserFromReader() {
+  loadRecentCourses();
+  isCourseChooserOpen.value = true;
+}
+
 // 彈窗狀態
-// Keep the player visible while the transcript scrolls; users can restore it
-// inline with the same toggle whenever they prefer the embedded layout.
-const isVideoFloating = ref(true);
+// YouTube 三態：inline（內嵌於文章）→ floating（浮動置頂）→ mini（靠邊縮小）。
+// 預設內嵌；單一 #youtube-iframe 元素只切換 class，切換時不重建 iframe。
+type VideoMode = 'inline' | 'floating' | 'mini';
+const videoMode = ref<VideoMode>('inline');
+const VIDEO_MODE_CYCLE: VideoMode[] = ['inline', 'floating', 'mini'];
+const videoModeToggleLabels: Record<VideoMode, string> = {
+  inline: '📌 浮動置頂',
+  floating: '🔻 靠邊縮小',
+  mini: '⤢ 還原影片',
+};
+function cycleVideoMode() {
+  const idx = VIDEO_MODE_CYCLE.indexOf(videoMode.value);
+  videoMode.value = VIDEO_MODE_CYCLE[(idx + 1) % VIDEO_MODE_CYCLE.length];
+}
 const hasMediaEnded = ref(false);
 const isSyncModalOpen = ref(false);
 const isReviewModalOpen = ref(false);
@@ -2035,7 +2099,13 @@ watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
     window.history.replaceState({}, '', url.toString());
   }
   await loadRealCourseData();
-  const firstSession = courseStore.sessions[0]?.id || '';
+  // 若是「返回上次閱讀」跨課還原：優先還原到原講次（僅當該講存在，絕不臆造）。
+  const restoreSessionId = pendingRestoreSessionId.value;
+  pendingRestoreSessionId.value = null;
+  const firstSession =
+    (restoreSessionId && courseStore.sessions.some((s) => s.id === restoreSessionId)
+      ? restoreSessionId
+      : courseStore.sessions[0]?.id) || '';
   if (!firstSession) {
     // 本課程尚無逐字稿：不呼叫 loadSession，直接顯示空狀態。
     showEmptyTranscriptState();
@@ -2048,6 +2118,7 @@ async function loadSession(sessionId: string) {
   if (isReaderDisposed) return;
   hasEmptyTranscript.value = false;
   currentTocProjection.value = null;
+  lastReadingPoint.value = { courseId: courseStore.currentCourseId, sessionId };
   currentReaderNotice.value = '';
   currentReaderRebuiltAt.value = '';
   currentVerbatimLabel.value = '';
@@ -3020,6 +3091,31 @@ if (typeof window !== 'undefined') {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
+/* 靠邊縮小（mini）：右下角固定小窗，避開底部播放列 */
+.youtube-player-container.is-mini {
+  position: fixed;
+  right: 10px;
+  bottom: 120px;
+  top: auto;
+  z-index: 92;
+  width: 132px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  padding-bottom: 0;
+  margin-top: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* mini 時 FAB 上移避開小窗 */
+.video-mini-active .floating-fab {
+  bottom: calc(var(--player-height, 80px) + 120px);
+}
+.video-mini-active .floating-fab-toc {
+  bottom: calc(var(--player-height, 80px) + 166px);
+}
+
 .youtube-iframe {
   position: absolute;
   top: 0;
@@ -3809,43 +3905,58 @@ if (typeof window !== 'undefined') {
   transform: translateY(-10px) scale(0.95);
 }
 
-/* ── 課程選擇頁（course chooser）────────────────────────────── */
+/* ── 課程選擇頁（course chooser，iOS 主畫面風格）────────────── */
+/* 頂層入口頁採核准 mockup（ios_style_chooser.html）之原生 iOS 桌布值，跨主題一致 */
 .course-chooser {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 48px 20px 32px;
-  background-color: var(--bg-color);
+  padding: 88px 14px 36px;
+  color: #fff;
+  background:
+    linear-gradient(rgba(20, 18, 28, 0.35), rgba(20, 18, 28, 0.35)),
+    radial-gradient(120% 80% at 18% 12%, #4b3b6e 0%, transparent 55%),
+    radial-gradient(100% 70% at 88% 22%, #8a4a52 0%, transparent 52%),
+    radial-gradient(120% 90% at 50% 100%, #1e3350 0%, transparent 60%),
+    linear-gradient(160deg, #241f38 0%, #17151f 60%, #0d0f16 100%);
+  background-attachment: fixed;
 }
 
 .course-chooser-inner {
   width: 100%;
   max-width: 720px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 18px;
+  padding: 20px 16px 26px;
+  border-radius: 32px;
+  background: rgba(120, 118, 128, 0.22);
+  backdrop-filter: blur(26px) saturate(1.35);
+  -webkit-backdrop-filter: blur(26px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .chooser-header h1 {
-  margin: 0 0 6px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-main);
+  margin: 0 0 4px;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   font-family: var(--font-serif);
 }
 
 .chooser-subtitle {
   margin: 0;
-  color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
+  color: #cbc7d6;
 }
 
 .chooser-section-label {
   display: block;
   margin-bottom: 8px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: #cbc7d6;
 }
 
 .chooser-recent-list {
@@ -3857,122 +3968,189 @@ if (typeof window !== 'undefined') {
 .recent-choice {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid var(--border-color);
-  background: var(--surface-bg);
-  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition-smooth);
 }
 
 .recent-choice:hover:not(:disabled) {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
+  border-color: #fff;
 }
 
 .chooser-search input {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  background: var(--input-bg);
-  color: var(--text-main);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   font-size: 1rem;
   font-family: var(--font-serif);
 }
 
-.chooser-search input:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 1px;
-  border-color: var(--accent-color);
+.chooser-search input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
 }
 
-.course-choice-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.chooser-search input:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.course-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px 10px;
 }
 
 .course-choice {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 8px;
   text-align: left;
-  padding: 16px 20px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-main);
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
   cursor: pointer;
   transition: var(--transition-smooth);
   font-family: var(--font-serif);
 }
 
 .course-choice:hover:not(:disabled) {
-  border-color: var(--accent-color);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 10px var(--box-bg);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
 
-.course-choice-top {
+.course-choice-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: center;
+  font-size: 27px;
+  background: var(--accent-color);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
-.course-choice-top strong {
-  font-size: 1.1rem;
+.course-choice-label {
+  font-size: 0.85rem;
   font-weight: 700;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.course-choice-badge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #cbc7d6;
 }
 
 .course-media-badge {
-  flex-shrink: 0;
-  font-size: 0.95rem;
-  opacity: 0.85;
-}
-
-.course-choice-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  opacity: 0.9;
 }
 
 .course-choice-desc {
-  font-size: 0.9rem;
-  line-height: var(--line-height);
-  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .chooser-empty {
   margin: 0;
   padding: 24px 0;
   text-align: center;
-  color: var(--text-muted);
+  color: #cbc7d6;
+  grid-column: 1 / -1;
 }
 
 .chooser-footer {
-  margin-top: 8px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   padding-top: 14px;
 }
 
 .chooser-footer p {
   margin: 0;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── 玻璃返回鈕（核准值：44×88 r22 深灰半透明＋白箭頭，跨三主題一致）── */
+.glass-back-btn {
+  position: fixed;
+  top: 64px;
+  right: 8px;
+  width: 44px;
+  height: 88px;
+  border-radius: 22px;
+  background: rgba(58, 56, 60, 0.42);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 60;
+  cursor: pointer;
+}
+
+.glass-back-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: #fff;
+  stroke-width: 3.2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.glass-back-btn:active {
+  transform: scale(0.96);
+}
+
+/* 閱讀頁玻璃鈕：桌機由 header 右群導航，僅手機顯示 */
+.glass-back-reader {
+  top: 12px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .glass-back-reader {
+    display: flex;
+  }
+
+  .youtube-player-container.is-floating {
+    width: min(240px, 60vw);
+    right: 10px;
+  }
 }
 
 @media (max-width: 560px) {
   .course-chooser {
-    padding: 32px 14px 24px;
+    padding: 72px 10px 24px;
   }
 
   .chooser-header h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
 </style>

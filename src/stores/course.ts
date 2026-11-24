@@ -42,6 +42,10 @@ export interface CourseMeta {
   updatedAt?: string;
   /** 課程說明（顯示於課程選擇頁卡片） */
   description?: string;
+  /** 課程選擇頁 iOS 圖示 emoji */
+  icon?: string;
+  /** 課程選擇頁 iOS 圖示漸層（完整 CSS background 值） */
+  accent?: string;
 }
 
 export const useCourseStore = defineStore('course', {
@@ -50,6 +54,8 @@ export const useCourseStore = defineStore('course', {
     catalog: [
       {
         id: 'ru-zhong-lun',
+        icon: '📖',
+        accent: 'linear-gradient(160deg, #8C6239, #5D4037)',
         title: '入中論善顯密意疏',
         master: '見悲青增格西',
         path: 'courses/入中論善顯密意疏',
@@ -60,6 +66,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'shi-liang-lun-er',
+        icon: '🕉',
+        accent: 'linear-gradient(160deg, #C96F3B, #8E3B23)',
         title: '釋量論第二品',
         master: '如性法師',
         path: 'courses/釋量論第二品',
@@ -70,6 +78,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'shi-liang-lun-study-group-2025',
+        icon: '🪷',
+        accent: 'linear-gradient(160deg, #5C8A6B, #2F4F3A)',
         title: '2025《釋量論・第二品》大組共學',
         master: '大組共學',
         path: 'courses/2025釋量論第二品大組共學',
@@ -80,6 +90,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'jin-gang-jing-1999',
+        icon: '💎',
+        accent: 'linear-gradient(160deg, #4A6FA5, #25385C)',
         title: '金剛般若波羅蜜經',
         master: '玅境長老',
         path: 'courses/金剛般若波羅蜜經',
@@ -90,6 +102,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'si-nian-zhu',
+        icon: '☸️',
+        accent: 'linear-gradient(160deg, #8E6BA8, #4E3A66)',
         title: '四念住',
         master: '玅境長老',
         path: 'courses/四念住',
@@ -99,6 +113,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'san-zhu-yao-dao',
+        icon: '🛕',
+        accent: 'linear-gradient(160deg, #B08D57, #6E5630)',
         title: '三主要道',
         master: '如性法師',
         path: 'courses/三主要道',
@@ -110,6 +126,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'pusa-jiu-shi-zhe-yang-cheng-fo',
+        icon: '⚡',
+        accent: 'linear-gradient(160deg, #C25B4A, #7A2F22)',
         title: '菩薩就是這樣成佛',
         master: '智善法師',
         path: 'courses/菩薩就是這樣成佛',
@@ -120,6 +138,8 @@ export const useCourseStore = defineStore('course', {
       },
       {
         id: 'si-fa-yin',
+        icon: '🏵️',
+        accent: 'linear-gradient(160deg, #3E8A8A, #1F4F4F)',
         title: '四法印',
         master: '如性法師',
         path: 'courses/四法印',
