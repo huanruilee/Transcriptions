@@ -325,6 +325,82 @@ function remapOverviewEvidenceIds(overview, remap) {
   }
 }
 
+async function segmentSemanticsWithQwen(sessionId, consolidated, ytOutline, title) {
+  const useYtOutline = ytOutline.length >= 2;
+  const totalChars = consolidated.reduce((a, s) => a + s.text.length, 0);
+  const WINDOW_SIZE = 220;
+  const OVERLAP = 40;
+
+  const windows = [];
+  if (totalChars <= 7000 && consolidated.length <= 700) {
+    windows.push({ start: 0, end: consolidated.length, coreStart: 0, coreEnd: consolidated.length });
+  } else {
+    let start = 0;
+    while (start < consolidated.length) {
+      const end = Math.min(consolidated.length, start + WINDOW_SIZE);
+      const isFirst = start === 0;
+      const isLast = end === consolidated.length;
+      const coreStart = isFirst ? 0 : start + Math.floor(OVERLAP / 2);
+      const coreEnd = isLast ? consolidated.length : end - Math.floor(OVERLAP / 2);
+      windows.push({ start, end, coreStart, coreEnd });
+      if (isLast) break;
+      start = end - OVERLAP;
+    }
+  }
+
+  const breakMap = new Map();
+  for (let wIdx = 0; wIdx < windows.length; wIdx++) {
+    const w = windows[wIdx];
+    const slice = consolidated.slice(w.start, w.end);
+    const lines = slice.map((s) => `${s.id}|${s.text}`).join('\n');
+    const outlineHint = useYtOutline
+      ? `官方章節提綱：${ytOutline.map((x) => `${x.num}.${x.title}`).join('、')}（標題已固定，heading 請一律留空字串 ""）`
+      : '若無官方章節提綱，可於每 3～6 段主題轉換處在 heading 填入簡明小標，其餘設為 ""';
+    const inputHash = crypto
+      .createHash('sha256')
+      .update(`seg-v2\n${GX10_QWEN_MODEL}\n${outlineHint}\n${lines}`)
+      .digest('hex')
+      .slice(0, 12);
+    const cachePath = path.join(CACHE_DIR, `s${sessionId}_seg_w${wIdx}_${inputHash}_qwen.json`);
+
+    const res = await cachedJsonCall(cachePath, async () => {
+      const systemPrompt = [
+        `你是《三主要道》（如性法師主講）專業逐字稿分段編輯。${outlineHint}。`,
+        '任務：通讀整段講記脈絡，依「文義完整性、論點／舉例／問答轉換」標記自然段起點，僅輸出 JSON：{"breaks":[{"id":"seg-xxx","heading":""}]}',
+        '嚴格規則：',
+        '1. **嚴禁在未完子句或逗號（，）處換段**；換段起點 id 的前一句必須已經是語意完整結束的句子（例如句尾為 。！？）。',
+        '2. 每段目標 **150～380 字（約 5～24 句）**；同一個完整比喻、列舉或推論（例如「環境／比較／需求」三個例子與小結）應盡量留在同一段或於完整論點處切換，不要切出僅 1～2 句的零碎孤段。',
+        '3. 輸出僅包含 breaks 陣列，不要修改文字。',
+      ].join('\n');
+      const userPrompt = `講次：${title}（第 ${sessionId} 講，分段視窗 ${wIdx + 1}/${windows.length}）\n請依文義選出換段起點 id：\n${lines}`;
+
+      let lastErr;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const raw = await callGx10Qwen([
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt },
+          ], 120000);
+          const parsed = extractJsonObject(raw);
+          return { breaks: Array.isArray(parsed.breaks) ? parsed.breaks : [] };
+        } catch (err) {
+          lastErr = err;
+          await new Promise((r) => setTimeout(r, 1000 * attempt));
+        }
+      }
+      throw lastErr;
+    });
+
+    const coreIds = new Set(consolidated.slice(w.coreStart, w.coreEnd).map((s) => s.id));
+    for (const br of res.breaks || []) {
+      if (br && typeof br.id === 'string' && coreIds.has(br.id)) {
+        breakMap.set(br.id, { heading: typeof br.heading === 'string' ? br.heading : '' });
+      }
+    }
+  }
+  return breakMap;
+}
+
 function buildBalancedParagraphs(sentences, breakMap, ytOutline = []) {
   const useYtOutline = ytOutline.length >= 2;
   const ytHeadingBySentIdx = new Map();
@@ -347,14 +423,15 @@ function buildBalancedParagraphs(sentences, breakMap, ytOutline = []) {
 
   for (let i = 0; i < sentences.length; i++) {
     const s = sentences[i];
+    const prev = i > 0 ? sentences[i - 1] : null;
+    const prevEndsSentence = !prev || /[。！？]$/.test(prev.text.trim());
     const ytHeading = ytHeadingBySentIdx.get(i);
     const br = breakMap.get(s.id);
     const currentChars = current ? current.sentences.reduce((a, x) => a + x.text.length, 0) : 0;
     const shouldStartNew =
       !current ||
       Boolean(ytHeading) ||
-      (br && (currentChars >= 140 || (!useYtOutline && br.heading))) ||
-      currentChars >= 360;
+      (br && prevEndsSentence && (currentChars >= 100 || (!useYtOutline && br.heading)));
 
     if (shouldStartNew) {
       const heading = useYtOutline ? ytHeading || '' : br?.heading ? br.heading.trim() : '';
@@ -365,29 +442,42 @@ function buildBalancedParagraphs(sentences, breakMap, ytOutline = []) {
     }
   }
 
-  // Merge tiny paragraphs (< 90 chars) without heading
+  // Merge tiny paragraphs (< 80 chars) without heading
   const merged = [];
   for (const g of groups) {
     const chars = g.sentences.reduce((a, x) => a + x.text.length, 0);
-    if (merged.length > 0 && chars < 90 && !g.heading) {
+    if (merged.length > 0 && chars < 80 && !g.heading) {
       merged[merged.length - 1].sentences.push(...g.sentences);
     } else {
       merged.push(g);
     }
   }
 
-  // Split oversized paragraphs (> 420 chars or > 28 sentences)
+  // Safety split ONLY when exceeding hard cap (> 32 sentences or > 580 chars), strictly at sentence-ending [。！？]
   const finalGroups = [];
   for (const g of merged) {
     const chars = g.sentences.reduce((a, x) => a + x.text.length, 0);
-    if ((chars <= 420 && g.sentences.length <= 28) || g.sentences.length <= 2) {
+    if ((chars <= 580 && g.sentences.length <= 32) || g.sentences.length <= 3) {
       finalGroups.push(g);
       continue;
     }
     let sub = { heading: g.heading, sentences: [] };
     let subChars = 0;
-    for (const s of g.sentences) {
-      if (sub.sentences.length > 0 && (subChars >= 220 || sub.sentences.length >= 22)) {
+    for (let k = 0; k < g.sentences.length; k++) {
+      const s = g.sentences[k];
+      const prevSent = sub.sentences.length > 0 ? sub.sentences[sub.sentences.length - 1] : null;
+      const prevComplete = prevSent && /[。！？]$/.test(prevSent.text.trim());
+      const remainingChars = g.sentences.slice(k).reduce((a, x) => a + x.text.length, 0);
+      const nextStartsClause = /^(?:但|所以|因此|換句話說|如果|而|這就是|我們|對於|首先|其次|最後)/.test(
+        s.text.trim(),
+      );
+      if (
+        sub.sentences.length >= 5 &&
+        remainingChars >= 60 &&
+        ((prevComplete && (subChars >= 160 || sub.sentences.length >= 16)) ||
+          (sub.sentences.length >= 24 && nextStartsClause) ||
+          sub.sentences.length >= 28)
+      ) {
         finalGroups.push(sub);
         sub = { heading: '', sentences: [] };
         subChars = 0;
@@ -516,7 +606,14 @@ async function upgradeSession(fileName) {
   }
   const { consolidated, remap } = consolidateShortFragments(fixedFlat);
   remapOverviewEvidenceIds(session.contentOverview, remap);
-  session.paragraphs = buildBalancedParagraphs(consolidated, breakMap, ytOutline);
+  const semanticBreakMap = await segmentSemanticsWithQwen(
+    sid,
+    consolidated,
+    ytOutline,
+    session.title || `第${sid}講`,
+  );
+  console.log(`[session_${sid}] Semantic segmentation breaks=${semanticBreakMap.size}`);
+  session.paragraphs = buildBalancedParagraphs(consolidated, semanticBreakMap, ytOutline);
   session.lastUpdated = '2026-11-23 22:00:00';
 
   assertRawTextPreserved(originalSession, session);
