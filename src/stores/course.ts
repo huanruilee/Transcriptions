@@ -30,6 +30,20 @@ export interface TOCNode {
   children?: TOCNode[];
 }
 
+export interface CourseMeta {
+  id: string;
+  title: string;
+  master: string;
+  path: string;
+  mediaType: string;
+  sessionCount?: number;
+  /** 覆寫講數顯示文字（例：含上下節的課程） */
+  sessionLabel?: string;
+  updatedAt?: string;
+  /** 課程說明（顯示於課程選擇頁卡片） */
+  description?: string;
+}
+
 export const useCourseStore = defineStore('course', {
   state: () => ({
     currentCourseId: 'ru-zhong-lun',
@@ -40,6 +54,9 @@ export const useCourseStore = defineStore('course', {
         master: '見悲青增格西',
         path: 'courses/入中論善顯密意疏',
         mediaType: 'audio/mp3',
+        sessionCount: 219,
+        description:
+          '宗喀巴大師《入中論善顯密意疏》講記，見悲青增格西開示。透過逐字稿與音檔雙向同步，導讀中觀應成派無自性空性正見。',
       },
       {
         id: 'shi-liang-lun-er',
@@ -47,6 +64,9 @@ export const useCourseStore = defineStore('course', {
         master: '如性法師',
         path: 'courses/釋量論第二品',
         mediaType: 'video/youtube',
+        sessionCount: 32,
+        description:
+          '依據法稱論師《釋量論・成量品》根本頌（法尊法師譯），詳細闡釋量士夫、前後世成立、四諦十六行相與解脫正道。',
       },
       {
         id: 'shi-liang-lun-study-group-2025',
@@ -54,6 +74,9 @@ export const useCourseStore = defineStore('course', {
         master: '大組共學',
         path: 'courses/2025釋量論第二品大組共學',
         mediaType: 'audio/mp3',
+        sessionCount: 49,
+        sessionLabel: '49 講（含上下節）',
+        description: '2025 年依討論問題研讀《釋量論・第二品》，每題附法師開示摘要。',
       },
       {
         id: 'jin-gang-jing-1999',
@@ -61,13 +84,18 @@ export const useCourseStore = defineStore('course', {
         master: '玅境長老',
         path: 'courses/金剛般若波羅蜜經',
         mediaType: 'audio/mp3',
+        sessionCount: 12,
+        description:
+          '玅境長老 1999 年於台灣埔里法雲講堂宣講《金剛般若波羅蜜經》，共十二講。逐字稿由音檔 ASR 產出，屬待閱校版。',
       },
       {
         id: 'si-nian-zhu',
         title: '四念住',
-        master: '待審校',
+        master: '玅境長老',
         path: 'courses/四念住',
         mediaType: 'audio/mp3',
+        sessionCount: 8,
+        description: '玅境長老開示四念住法門，共 8 講。逐字稿屬待閱校版。',
       },
       {
         id: 'san-zhu-yao-dao',
@@ -75,6 +103,10 @@ export const useCourseStore = defineStore('course', {
         master: '如性法師',
         path: 'courses/三主要道',
         mediaType: 'video/youtube',
+        sessionCount: 24,
+        updatedAt: '2026-11-20',
+        description:
+          '如性法師 2022 年起之研討課程，共 24 講。依《三主要道》偈頌講述出離心、菩提心與空性正見的修道次第。',
       },
       {
         id: 'pusa-jiu-shi-zhe-yang-cheng-fo',
@@ -82,6 +114,9 @@ export const useCourseStore = defineStore('course', {
         master: '智善法師',
         path: 'courses/菩薩就是這樣成佛',
         mediaType: 'video/youtube',
+        sessionCount: 26,
+        description:
+          '智善法師講述《菩薩就是這樣成佛》，共 26 講。從課本簡介、菩提心到福慧資糧，次第引導菩薩道修學。',
       },
       {
         id: 'si-fa-yin',
@@ -89,8 +124,12 @@ export const useCourseStore = defineStore('course', {
         master: '如性法師',
         path: 'courses/四法印',
         mediaType: 'video/youtube',
+        sessionCount: 11,
+        updatedAt: '2026-11-20',
+        description:
+          '如性法師主講，2020 年 7 月導論與臺灣營隊十講，共 11 講。闡釋諸行無常、有漏皆苦、諸法無我、涅槃寂靜四法印。',
       },
-    ],
+    ] as CourseMeta[],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],
   }),

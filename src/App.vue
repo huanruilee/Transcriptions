@@ -2,12 +2,61 @@
   <div class="app-root" :style="{ '--font-scale': uiStore.fontSizeRatio, '--sidebar-width': `${sidebarWidth}px` }">
     <main v-if="isCourseChooserOpen" id="course-chooser" class="course-chooser">
       <section class="course-chooser-inner" aria-labelledby="course-chooser-title">
-        <h1 id="course-chooser-title">請選擇課程</h1>
-        <div class="course-choice-list">
-          <button v-for="course in courseStore.catalog" :key="course.id" class="course-choice" :disabled="isChoosingCourse" @click="chooseInitialCourse(course.id)">
-            <strong>{{ course.title }}</strong>
-          </button>
+        <header class="chooser-header">
+          <h1 id="course-chooser-title">請選擇課程</h1>
+          <p class="chooser-subtitle">逐字稿閱讀平台 · 共 {{ courseStore.catalog.length }} 門課程</p>
+        </header>
+
+        <div v-if="recentCourses.length && !chooserSearch.trim()" class="chooser-recent">
+          <span class="chooser-section-label">最近觀看</span>
+          <div class="chooser-recent-list">
+            <button
+              v-for="c in recentCourses"
+              :key="'recent-' + c.id"
+              class="recent-choice"
+              :disabled="isChoosingCourse"
+              @click="chooseInitialCourse(c.id)"
+            >
+              {{ c.title }}
+            </button>
+          </div>
         </div>
+
+        <div class="chooser-search">
+          <input
+            id="course-chooser-search"
+            v-model="chooserSearch"
+            type="search"
+            placeholder="搜尋課程名稱、法師或說明…"
+            aria-label="搜尋課程"
+          />
+        </div>
+
+        <div class="course-choice-list">
+          <button
+            v-for="course in displayedCourses"
+            :key="course.id"
+            class="course-choice"
+            :disabled="isChoosingCourse"
+            @click="chooseInitialCourse(course.id)"
+          >
+            <span class="course-choice-top">
+              <strong>{{ course.title }}</strong>
+              <span class="course-media-badge" aria-hidden="true">{{ course.mediaType === 'video/youtube' ? '🎬' : '🎧' }}</span>
+            </span>
+            <span class="course-choice-meta">
+              <span>{{ course.master }}</span>
+              <span v-if="course.sessionLabel || course.sessionCount">· {{ course.sessionLabel || `${course.sessionCount} 講` }}</span>
+              <span v-if="course.updatedAt">· 更新 {{ course.updatedAt }}</span>
+            </span>
+            <span v-if="course.description" class="course-choice-desc">{{ course.description }}</span>
+          </button>
+          <p v-if="!displayedCourses.length" class="chooser-empty">沒有符合「{{ chooserSearch }}」的課程。</p>
+        </div>
+
+        <footer class="chooser-footer">
+          <p>逐字稿由音檔轉寫產出；未經人工校稿者標示為待閱校版。</p>
+        </footer>
       </section>
     </main>
     <template v-else>
@@ -865,7 +914,7 @@ import { applyTimingOverlay } from './utils/audioCalibrationOverlay.js';
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import StudyScaffoldingPanel from './components/StudyScaffoldingPanel.vue';
 import { usePlayerStore } from './stores/player';
-import { useCourseStore } from './stores/course';
+import { useCourseStore, type CourseMeta } from './stores/course';
 import { useUIStore } from './stores/ui';
 import { useAnnotationStore } from './stores/annotation';
 import SentenceEditorModal from './components/modals/SentenceEditorModal.vue';
@@ -915,9 +964,54 @@ const isAudioLoading = ref(false);
 const isCourseChooserOpen = ref(false);
 const isChoosingCourse = ref(false);
 
+// ── 課程選擇頁：搜尋與最近觀看 ────────────────────────────────
+const RECENT_COURSES_KEY = 'szyd-recent-courses';
+const chooserSearch = ref('');
+const recentCourseIds = ref<string[]>([]);
+
+function loadRecentCourses() {
+  try {
+    const raw = localStorage.getItem(RECENT_COURSES_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(parsed)) return;
+    // 僅保留 catalog 中仍存在的課程，最多 3 筆
+    recentCourseIds.value = parsed
+      .filter((id: unknown) => typeof id === 'string' && courseStore.catalog.some((c: CourseMeta) => c.id === id))
+      .slice(0, 3);
+  } catch {
+    recentCourseIds.value = [];
+  }
+}
+
+function recordRecentCourse(courseId: string) {
+  try {
+    const next = [courseId, ...recentCourseIds.value.filter((id) => id !== courseId)].slice(0, 3);
+    recentCourseIds.value = next;
+    localStorage.setItem(RECENT_COURSES_KEY, JSON.stringify(next));
+  } catch {
+    // localStorage 不可用（隱私模式等）：忽略，不影響選課流程
+  }
+}
+
+const recentCourses = computed<CourseMeta[]>(() =>
+  recentCourseIds.value
+    .map((id) => courseStore.catalog.find((c: CourseMeta) => c.id === id))
+    .filter((c): c is CourseMeta => Boolean(c)),
+);
+
+const displayedCourses = computed<CourseMeta[]>(() => {
+  const q = chooserSearch.value.trim().toLowerCase();
+  if (!q) return courseStore.catalog as CourseMeta[];
+  return (courseStore.catalog as CourseMeta[]).filter((c) =>
+    [c.title, c.master, c.description].some((t) => (t || '').toLowerCase().includes(q)),
+  );
+});
+// ─────────────────────────────────────────────────────────────
+
 function chooseInitialCourse(courseId: string) {
   if (isChoosingCourse.value) return;
   isChoosingCourse.value = true;
+  recordRecentCourse(courseId);
   courseStore.currentCourseId = courseId;
   const url = new URL(window.location.href);
   url.searchParams.set('course', courseId);
@@ -1810,8 +1904,11 @@ onMounted(async () => {
     const courseParam = urlParams.get('course');
     if (courseParam && courseStore.catalog.some((c: any) => c.id === courseParam)) {
       courseStore.currentCourseId = courseParam;
+      // 深連結進入也要記錄最近觀看（Codex review 2026-11-24）
+      recordRecentCourse(courseParam);
     } else {
       isCourseChooserOpen.value = true;
+      loadRecentCourses();
       return;
     }
   }
@@ -1930,6 +2027,8 @@ async function loadRealCourseData() {
 watch(() => courseStore.currentCourseId, async (newCourseId, oldCourseId) => {
   if (!isInitialMounted) return;
   if (newCourseId === oldCourseId) return;
+  // 切換課程也記錄最近觀看（Codex review 2026-11-24）
+  recordRecentCourse(newCourseId);
   if (typeof window !== 'undefined') {
     const url = new URL(window.location.href);
     url.searchParams.set('course', newCourseId);
@@ -3708,5 +3807,172 @@ if (typeof window !== 'undefined') {
 .toast-fade-leave-to {
   opacity: 0;
   transform: translateY(-10px) scale(0.95);
+}
+
+/* ── 課程選擇頁（course chooser）────────────────────────────── */
+.course-chooser {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 32px;
+  background-color: var(--bg-color);
+}
+
+.course-chooser-inner {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chooser-header h1 {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--font-serif);
+}
+
+.chooser-subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.chooser-section-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.chooser-recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recent-choice {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-bg);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.recent-choice:hover:not(:disabled) {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.chooser-search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-family: var(--font-serif);
+}
+
+.chooser-search input:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+  border-color: var(--accent-color);
+}
+
+.course-choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.course-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-family: var(--font-serif);
+}
+
+.course-choice:hover:not(:disabled) {
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px var(--box-bg);
+}
+
+.course-choice-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.course-choice-top strong {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.course-media-badge {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.course-choice-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.course-choice-desc {
+  font-size: 0.9rem;
+  line-height: var(--line-height);
+  color: var(--text-muted);
+}
+
+.chooser-empty {
+  margin: 0;
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.chooser-footer {
+  margin-top: 8px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+}
+
+.chooser-footer p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 560px) {
+  .course-chooser {
+    padding: 32px 14px 24px;
+  }
+
+  .chooser-header h1 {
+    font-size: 1.6rem;
+  }
 }
 </style>
