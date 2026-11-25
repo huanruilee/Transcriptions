@@ -1,8 +1,16 @@
 # 《2025 釋量論・第二品》大組共學課程專屬指導（COURSE_GUIDE）
 
-本文件適用 `courses/2025釋量論第二品大組共學/`（`courseId: shi-liang-lun-study-group-2025`，如性法師指導・如來法性影音頻道），為本課程在全域 [docs/TRANSCRIPTION_WORKFLOW.md](../../docs/TRANSCRIPTION_WORKFLOW.md)（v1.9）之下的**課程層單一事實來源（SSOT）**。
+本文件適用 `courses/2025釋量論第二品大組共學/`（`courseId: shi-liang-lun-study-group-2025`，如性法師指導・如來法性影音頻道），為本課程在全域 [docs/TRANSCRIPTION_WORKFLOW.md](../../docs/TRANSCRIPTION_WORKFLOW.md)（v1.12）之下的**課程層單一事實來源（SSOT）**。
 
 > 歷史文件定位：[docs/STUDY_GROUP_WORKFLOW_V3.md](../../docs/STUDY_GROUP_WORKFLOW_V3.md) 記錄既有 47 講（Wave 1–4）的批次精煉與 Prompt 演進；[docs/STUDY_GROUP_2025_TRANSCRIPTION_PLAN.md](../../docs/STUDY_GROUP_2025_TRANSCRIPTION_PLAN.md) 為早期盤點封存檔。**自本版起，所有新講產出與既有講次翻新，一律以本文件為準。**
+
+---
+
+## 0. 快速開工與關聯檔清單（3 行入口）
+
+- **收斂討論題必同步檔案**：修改 `sessions/session_XX.json` 的 `discussionQuestions`（3～7 題）或題號時，必須同步核對並更新 `toc.json`、`source_outlines/32-XX.json`（若存在）與 `reviews/evidence/study-group-2025/playlist-XX/remote_reviewer_bundle.json`（若存在）。
+- **嚴守先合句校字再標點與導讀重寫**：不可用「漢字零改動守衛」對碎行硬塞句號；若舊 `contentOverview.mainPoints` 漏掉後半段核心討論題，須重新生成全講導讀。
+- **標準驗證指令**：`npm run audit:reading-quality -- courses/2025釋量論第二品大組共學 && npm run summaries:audit && npm run test:v2 && NODE_OPTIONS="--max-old-space-size=4096" npm test`
 
 ---
 
