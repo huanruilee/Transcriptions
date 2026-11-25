@@ -17,6 +17,7 @@ jobs:
   test:
     name: Unit and acceptance tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Check out repository
@@ -54,6 +55,8 @@ jobs:
         run: python3 scripts/build_human_review_package.py --check
 
       - name: Run completion gate
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: npm test
 
       - name: Run Vue/Vitest regression gate
@@ -62,6 +65,7 @@ jobs:
   reader-browser:
     name: Reader browser release contract
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -76,7 +80,17 @@ jobs:
           cp -r dist/* _site/
           rm -rf _site/courses
           cp -r courses _site/courses
-      - run: npx playwright install --with-deps chromium
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+      - name: Install release browser binaries
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium
+      - name: Install release browser OS dependencies
+        run: npx playwright install-deps chromium
       - run: bash scripts/test_reader_artifact.sh
       - name: Save reader browser evidence
         if: always()
