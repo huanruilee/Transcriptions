@@ -395,6 +395,29 @@
               <button type="button" @click="seekToSentence(question.sentenceId)">
                 {{ question.displayQuestion }}
               </button>
+              <p
+                v-if="disclosureSegments(question).length || disclosureAnchors(question).length"
+                class="disclosure-links"
+              >
+                <a
+                  v-for="link in disclosureSegments(question)"
+                  :key="`${question.id}-seg-${link.seconds}`"
+                  class="disclosure-link disclosure-link--segment"
+                  :href="link.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ link.label }}</a>
+                <template v-if="!disclosureSegments(question).length">
+                  <a
+                    v-for="link in disclosureAnchors(question)"
+                    :key="`${question.id}-anchor-${link.seconds}`"
+                    class="disclosure-link disclosure-link--anchor"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >{{ link.label }}</a>
+                </template>
+              </p>
             </li>
           </ol>
         </section>
@@ -697,7 +720,18 @@
             <section v-if="p.teacherSummary" class="teacher-summary" :data-linked-to-audio="p.teacherSummary.linkedToAudio">
               <h4 class="teacher-summary-heading">{{ p.teacherSummary.heading || '法師開示摘要' }}</h4>
               <ul class="teacher-summary-list">
-                <li v-for="(item, itemIndex) in p.teacherSummary.items" :key="`${p.id}-summary-${itemIndex}`">{{ item }}</li>
+                <li v-for="(item, itemIndex) in p.teacherSummary.items" :key="`${p.id}-summary-${itemIndex}`">
+                  <template v-if="summaryAnchorParts(item) && disclosureUrlForItem(item)">
+                    <a
+                      class="summary-time-link"
+                      :href="disclosureUrlForItem(item)"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      :title="'跳至 YouTube 對應時刻（' + summaryAnchorParts(item)!.ts + '）'"
+                    >▶ {{ summaryAnchorParts(item)!.ts }}</a>{{ summaryAnchorParts(item)!.rest }}
+                  </template>
+                  <template v-else>{{ item }}</template>
+                </li>
               </ul>
             </section>
           </div>
@@ -1558,6 +1592,46 @@ function onSeekSliderChange(e: Event) {
 
 function questionFor(questionId: string | null) {
   return currentDiscussionQuestions.value.find((question) => question.id === questionId) || null;
+}
+
+// ── 法師開示深連結（session_01 試點）────────────────────────────
+// 每個討論題目的 disclosureLinks 帶開示區間與摘要時間錨；此處建立
+// 秒數 → 連結 的對照表，讓法師開示摘要中的 [▶ mm:ss] 直接可點。
+const disclosureBySeconds = computed(() => {
+  const map = new Map<number, any>();
+  for (const question of currentDiscussionQuestions.value) {
+    for (const link of question.disclosureLinks || []) {
+      if (typeof link?.seconds === 'number' && !map.has(link.seconds)) {
+        map.set(link.seconds, link);
+      }
+    }
+  }
+  return map;
+});
+
+function summaryAnchorParts(item: unknown): { ts: string; seconds: number; rest: string } | null {
+  const text = String(item ?? '');
+  const match = text.match(/^\[\s*▶\s*([\d:]{4,8})\s*\]\s*/);
+  if (!match) return null;
+  const parts = match[1].split(':').map((n) => Number(n));
+  if (parts.some((n) => !Number.isFinite(n))) return null;
+  const seconds = parts.reduce((acc, n) => acc * 60 + n, 0);
+  return { ts: match[1], seconds, rest: text.slice(match[0].length) };
+}
+
+function disclosureUrlForItem(item: unknown): string {
+  const anchor = summaryAnchorParts(item);
+  if (!anchor) return '';
+  const link = disclosureBySeconds.value.get(anchor.seconds);
+  return link?.url || '';
+}
+
+function disclosureSegments(question: any): any[] {
+  return (question?.disclosureLinks || []).filter((link: any) => link.kind === 'segment');
+}
+
+function disclosureAnchors(question: any): any[] {
+  return (question?.disclosureLinks || []).filter((link: any) => link.kind === 'summary-anchor');
 }
 
 function isQuestionStart(paragraph: any) {
@@ -3455,6 +3529,46 @@ if (typeof window !== 'undefined') {
 .teacher-summary-list {
   margin: 0;
   padding-left: 1.25rem;
+}
+
+/* 法師開示深連結（session_01 試點） */
+.disclosure-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 2px;
+}
+
+.disclosure-link {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.disclosure-link--segment {
+  background: rgba(40, 83, 68, 0.12);
+  color: #285344;
+  font-weight: 650;
+}
+
+.disclosure-link--anchor {
+  background: rgba(183, 121, 31, 0.14);
+  color: #8a5a12;
+}
+
+.summary-time-link {
+  color: #8a5a12;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.summary-time-link:hover {
+  text-decoration: underline;
 }
 
 .sentence.active {

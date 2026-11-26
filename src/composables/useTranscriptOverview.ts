@@ -5,6 +5,17 @@ export interface TranscriptOverview {
   source: 'reviewed' | 'ai-reviewed' | 'derived';
 }
 
+/** 法師開示深連結：kind='segment' 為開示區間，'summary-anchor' 為摘要時間錨。 */
+export interface DisclosureLink {
+  kind: 'segment' | 'summary-anchor';
+  label: string;
+  seconds: number;
+  endSeconds?: number;
+  'mm:ss'?: string;
+  url: string;
+  source?: string;
+}
+
 interface EvidenceBearingOverviewItem {
   text?: string;
   evidence?: Array<{ sentenceId?: string; quote?: string }>;
@@ -25,6 +36,7 @@ interface OverviewInput {
     displayQuestion?: string;
     rawQuestion?: string;
     teacherSummary?: { items?: string[] };
+    disclosureLinks?: DisclosureLink[];
   }>;
   paragraphs?: Array<{
     heading?: string | null;
