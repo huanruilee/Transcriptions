@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { computeSessionMetrics } from '../../scripts/check_session.mjs';
+import { computeSessionMetrics, evaluateStrictSession, inspectSessionByFile } from '../../scripts/check_session.mjs';
 import { cleanStudyGroupText } from '../../scripts/study_group_preflight.mjs';
 
 const ROOT = process.cwd();
@@ -71,4 +71,24 @@ test('publicationState honesty gate: published courses outside legacy debt allow
       assert.ok(m.paraSents.max <= 35, `${course.id}/${file}: paraSents.max=${m.paraSents.max}`);
     }
   }
+});
+
+test('evaluateStrictSession and --file --strict pass on session_49.json and fail on qualityFlags violations', () => {
+  const s49 = inspectSessionByFile('courses/2025釋量論第二品大組共學/sessions/session_49.json');
+  assert.deepEqual(evaluateStrictSession(s49), { pass: true, violations: [] });
+
+  const bad = evaluateStrictSession({
+    noEndPunctPct: 6,
+    shortFragmentPct: 2.5,
+    maxParaOver35: 1,
+    qualityFlags: { emptyParas: 1, missingParaIds: 1, missingReviewNeeded: 1, simplifiedChars: 1, curlyQuotes: 1, possibleNameLeaks: 1 },
+  });
+  assert.equal(bad.pass, false);
+  assert.equal(bad.violations.length, 9);
+
+  const stdout = execFileSync('node', ['scripts/check_session.mjs', '--file', 'courses/2025釋量論第二品大組共學/sessions/session_49.json', '--strict'], {
+    cwd: ROOT,
+    encoding: 'utf8',
+  });
+  assert.equal(JSON.parse(stdout).courseId, 'shi-liang-lun-study-group-2025');
 });

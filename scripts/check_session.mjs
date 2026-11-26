@@ -189,13 +189,56 @@ export function inspectSession(courseArg, sessionArg, rootDir = process.cwd()) {
   };
 }
 
+
+export function evaluateStrictSession(summary) {
+  const violations = [];
+  if (summary.noEndPunctPct >= 5) violations.push(`noEndPunctPct=${summary.noEndPunctPct} (>= 5%)`);
+  if (summary.shortFragmentPct >= 2) violations.push(`shortFragmentPct=${summary.shortFragmentPct} (>= 2%)`);
+  if (summary.maxParaOver35 > 0) violations.push(`maxParaOver35=${summary.maxParaOver35}`);
+  const qf = summary.qualityFlags || {};
+  if ((qf.emptyParas || 0) > 0) violations.push(`emptyParas=${qf.emptyParas}`);
+  if ((qf.missingParaIds || 0) > 0) violations.push(`missingParaIds=${qf.missingParaIds}`);
+  if ((qf.missingReviewNeeded || 0) > 0) violations.push(`missingReviewNeeded=${qf.missingReviewNeeded}`);
+  if ((qf.simplifiedChars || 0) > 0) violations.push(`simplifiedChars=${qf.simplifiedChars}`);
+  if ((qf.curlyQuotes || 0) > 0) violations.push(`curlyQuotes=${qf.curlyQuotes}`);
+  if ((qf.possibleNameLeaks || 0) > 0) violations.push(`possibleNameLeaks=${qf.possibleNameLeaks}`);
+  return { pass: violations.length === 0, violations };
+}
+
+export function inspectSessionByFile(filePath, rootDir = process.cwd()) {
+  const relPath = path.isAbsolute(filePath) ? path.relative(rootDir, filePath) : filePath;
+  const norm = relPath.replace(/\\/g, "/");
+  const catalog = JSON.parse(fs.readFileSync(path.join(rootDir, "courses/catalog.json"), "utf8"));
+  const course = (catalog.courses || []).find(c => c.path && norm.startsWith(`${c.path}/`));
+  const absSessionPath = path.join(rootDir, norm);
+  if (!fs.existsSync(absSessionPath)) {
+    throw new Error(`Session file not found: ${norm}`);
+  }
+  const session = JSON.parse(fs.readFileSync(absSessionPath, "utf8"));
+  const metrics = computeSessionMetrics(session, rootDir, norm);
+  return {
+    courseId: course ? course.id : null,
+    sessionFile: norm,
+    publicationState: course ? (course.publicationState ?? null) : null,
+    hasGrounding: course ? fs.existsSync(path.join(rootDir, course.path, "grounding.json")) : false,
+    hasCourseGuide: course ? fs.existsSync(path.join(rootDir, course.path, "COURSE_GUIDE.md")) : false,
+    ...metrics,
+    relatedFiles: course ? collectRelatedFiles(rootDir, course.id, course.path, norm) : [],
+  };
+}
+
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
-  const [courseArg, sessionArg] = process.argv.slice(2);
-  if (!courseArg || !sessionArg) {
-    console.error('Usage: node scripts/check_session.mjs <course_dir_or_id> <session_num_or_file>');
+  const rawArgs = process.argv.slice(2);
+  const strict = rawArgs.includes('--strict');
+  const fileIdx = rawArgs.indexOf('--file');
+  const fileArg = fileIdx >= 0 ? rawArgs[fileIdx + 1] : null;
+  const positional = rawArgs.filter((a, i) => !a.startsWith('--') && (fileIdx < 0 || i !== fileIdx + 1));
+
+  if (!fileArg && positional.length < 2) {
+    console.error('Usage: node scripts/check_session.mjs <course_dir_or_id> <session_num_or_file> [--strict] | --file <path> [--strict]');
     process.exit(2);
   }
-  const summary = inspectSession(courseArg, sessionArg);
+  const summary = fileArg ? inspectSessionByFile(fileArg) : inspectSession(positional[0], positional[1]);
   const compact = Object.fromEntries(
     Object.entries(summary).map(([k, v]) => [k, v])
   );
@@ -208,4 +251,11 @@ if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) 
   });
   lines.push('}');
   console.log(lines.join('\n'));
+  if (strict) {
+    const res = evaluateStrictSession(summary);
+    if (!res.pass) {
+      console.error(`STRICT_CHECK_FAILED: ${res.violations.join(', ')}`);
+      process.exit(1);
+    }
+  }
 }

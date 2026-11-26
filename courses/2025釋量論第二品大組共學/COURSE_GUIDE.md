@@ -1,6 +1,6 @@
 # 《2025 釋量論・第二品》大組共學課程專屬指導（COURSE_GUIDE）
 
-本文件適用 `courses/2025釋量論第二品大組共學/`（`courseId: shi-liang-lun-study-group-2025`，如性法師指導・如來法性影音頻道），為本課程在全域 [docs/TRANSCRIPTION_WORKFLOW.md](../../docs/TRANSCRIPTION_WORKFLOW.md)（v1.12）之下的**課程層單一事實來源（SSOT）**。
+本文件適用 `courses/2025釋量論第二品大組共學/`（`courseId: shi-liang-lun-study-group-2025`，如性法師指導・如來法性影音頻道），為本課程在全域 [docs/TRANSCRIPTION_WORKFLOW.md](../../docs/TRANSCRIPTION_WORKFLOW.md)（v1.13）之下的**課程層單一事實來源（SSOT）**。
 
 > 歷史文件定位：[docs/STUDY_GROUP_WORKFLOW_V3.md](../../docs/STUDY_GROUP_WORKFLOW_V3.md) 記錄既有 47 講（Wave 1–4）的批次精煉與 Prompt 演進；[docs/STUDY_GROUP_2025_TRANSCRIPTION_PLAN.md](../../docs/STUDY_GROUP_2025_TRANSCRIPTION_PLAN.md) 為早期盤點封存檔。**自本版起，所有新講產出與既有講次翻新，一律以本文件為準。**
 
@@ -95,8 +95,8 @@
    - 執行 `python3 scripts/render_study_guide_html.py courses/2025釋量論第二品大組共學/publications/lecture_XX_study_guide.md` 同步產出 `.html` 與 `.txt`。
 5. **Step 4 註冊與同步清單**：
    - 更新 `course.json`（新增 session 項目，並於 `studyGuides[]` 註冊 `publications/lecture_XX_study_guide.html`）。
-   - 更新 `toc.json`（`sessionId` 對應之節點數與 `discussionQuestions` 1:1 一致）、`catalog.json`、`correction-dates.html`。
-   - **同步更新寫死數量的測試合約**：若新增講次，須同步更新 [tests/unit/studyGroup27Prototype.test.js](../../tests/unit/studyGroup27Prototype.test.js) 中的 `course.sessions.length` 斷言（原為 `47`）。
+   - 更新 `toc.json`（`sessionId` 對應之節點數與 `discussionQuestions` 1:1 一致）、`catalog.json`（切勿誤提交無關課程之 `correction-dates.html`）。
+   - **同步更新寫死數量的測試合約**：若新增講次，須同步更新與講次／總數綁定的單元測試斷言（如 `studyGroup27Prototype.test.js`、`studyGroupPublication.test.js`、`studyGroupStructuralAudit.test.js`、`contentOverviewPipeline.test.js`、`transcriptProofreadingPipeline.test.js`）。
 6. **Step 5 驗收與上線紅線**：
    - 必跑且全綠：
      - `node scripts/audit_reading_quality.mjs courses/2025釋量論第二品大組共學/sessions/session_XX.json`（新增／翻新講次須 `0` 紅燈）
