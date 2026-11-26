@@ -73,3 +73,48 @@ describe('TOCAccordion Test Pattern (TDD)', () => {
     expect(wrapper.text()).toContain('2:07');
   });
 });
+
+
+describe('TOCAccordion legacy missing titles', () => {
+  it('renders a navigable fallback for untitled entries and keeps normal titles intact', async () => {
+    const { mount } = await import('@vue/test-utils');
+    const TOCAccordion = (await import('../../src/components/TOCAccordion.vue')).default;
+    const wrapper = mount(TOCAccordion, {
+      props: {
+        activeSessionId: '01',
+        tocNodes: [
+          { id: 'q-01', sessionId: '01', timestamp: 448.82 },
+          { id: 'q-02', title: '已存在的討論題', sessionId: '01', timestamp: 2286 },
+        ],
+      },
+    });
+    const links = wrapper.findAll('.toc-link');
+    expect(links).toHaveLength(2);
+    expect(links[0].text()).toContain('未命名章節');
+    expect(links[1].text()).toContain('已存在的討論題');
+    await links[0].trigger('click');
+    expect(wrapper.emitted('seek')).toEqual([['01', 448.82]]);
+    await wrapper.setProps({ activeSessionId: '03', tocNodes: [
+      { id: 'q-03', title: '本講完整題目', sessionId: '03', timestamp: 425 },
+    ] });
+    expect(wrapper.findAll('.toc-link')).toHaveLength(1);
+    expect(wrapper.get('.toc-link').text()).toContain('本講完整題目');
+    wrapper.unmount();
+  });
+
+  it('shows an untitled ancestor without hiding the active descendant', async () => {
+    const { mount } = await import('@vue/test-utils');
+    const TOCAccordion = (await import('../../src/components/TOCAccordion.vue')).default;
+    const wrapper = mount(TOCAccordion, {
+      props: {
+        activeSessionId: '03',
+        tocNodes: [{ id: 'parent', children: [
+          { id: 'child', title: '第1題', sessionId: '03', timestamp: 425 },
+        ] }],
+      },
+    });
+    expect(wrapper.get('.toc-ancestor').text()).toBe('未命名章節');
+    expect(wrapper.get('.toc-link').text()).toContain('第1題');
+    wrapper.unmount();
+  });
+});

@@ -3,7 +3,7 @@ import { ref, computed, nextTick, defineComponent, h, type PropType } from 'vue'
 
 export interface TOCNodeData {
   id?: string;
-  title: string;
+  title?: string;
   timestamp?: number;
   start_time?: number;
   end_time?: number;
@@ -28,12 +28,16 @@ const emit = defineEmits<{
 const isOpen = ref(false);
 const currentScope = ref<'course' | 'book'>('course');
 
+function getNodeTitle(node: TOCNodeData): string {
+  return typeof node.title === 'string' && node.title.trim() ? node.title : '未命名章節';
+}
+
 function getNodeTime(node: TOCNodeData): number {
   return typeof node.timestamp === 'number' ? node.timestamp : (node.start_time ?? 0);
 }
 
 function getNodePositionKey(node: TOCNodeData): string {
-  return node.id || `${node.sessionId || ''}:${node.title}:${getNodeTime(node)}`;
+  return node.id || `${node.sessionId || ''}:${getNodeTitle(node)}:${getNodeTime(node)}`;
 }
 
 const currentPositionNodeId = computed(() => {
@@ -157,7 +161,8 @@ const TOCNodeBranch: any = defineComponent({
   setup(branchProps) {
     return () =>
       (branchProps.nodes || []).map((node, idx) => {
-        const key = node.id || `${node.title}-${idx}`;
+        const title = getNodeTitle(node);
+        const key = node.id || `${title}-${idx}`;
         const hasChildren = Boolean(node.children && node.children.length > 0);
         const sessions = getNodeSessions(node);
         const matchesActive = sessions.includes(props.activeSessionId);
@@ -168,7 +173,7 @@ const TOCNodeBranch: any = defineComponent({
           if (!matchesActive && containsActive && hasChildren) {
             return h('li', { key }, [
               h('details', { class: 'toc-sub', open: true }, [
-                h('summary', { class: 'toc-ancestor' }, node.title),
+                h('summary', { class: 'toc-ancestor' }, title),
                 h('ul', { class: 'toc-tree' }, [
                   h(TOCNodeBranch, { nodes: node.children! }),
                 ]),
@@ -185,7 +190,7 @@ const TOCNodeBranch: any = defineComponent({
         const ts = getNodeTime(node);
         const posKey = getNodePositionKey(node);
 
-        const linkChildren: any[] = [node.title];
+        const linkChildren: any[] = [title];
 
         if (sessions.length > 0) {
           linkChildren.push(
@@ -242,7 +247,7 @@ const TOCNodeBranch: any = defineComponent({
               href: `#session-${node.sessionId || props.activeSessionId}${ts ? '-t' + ts : ''}`,
               'data-session-id': node.sessionId || props.activeSessionId,
               'data-timestamp': String(ts || 0),
-              'data-testid': 'toc-node-' + node.title.substring(0, 8).replace(/\s/g, ''),
+              'data-testid': 'toc-node-' + title.substring(0, 8).replace(/\s/g, ''),
               'data-toc-position-id': posKey,
               onClick: (e: MouseEvent) => handleNodeClick(node, e),
             },
