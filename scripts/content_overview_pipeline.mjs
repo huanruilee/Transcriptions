@@ -299,13 +299,18 @@ export function validateContentOverview(
   const completeEditorialReview = actualReviewKeys.length === expectedReviewKeys.length
     && new Set(actualReviewKeys).size === expectedReviewKeys.length
     && actualReviewItems.every(item => Number.isInteger(item.index) && expectedReviewKeys.includes(`${item.group}:${item.index}`) && item.verdict === 'supported');
-  const isSourceBoundEditorial = overview.generatedBy === 'Codex-study-guide'
-    && transcript.readingEdition === 'study-guide'
-    && /^sha256:[a-f0-9]{64}$/.test(transcript._meta?.sourceDigest || '')
+  const hasSourceBoundEditorialReview = /^sha256:[a-f0-9]{64}$/.test(transcript._meta?.sourceDigest || '')
     && overview.editorialSourceDigest === transcript._meta.sourceDigest
     && overview.review?.sourceDigest === expectedSourceDigest
     && completeEditorialReview;
-  if (!isMiniMaxGenerated && !isEneuralGlmGenerated && !isDocumentedManualException && !isSourceBoundEditorial) {
+  const isSourceBoundEditorial = overview.generatedBy === 'Codex-study-guide'
+    && transcript.readingEdition === 'study-guide'
+    && hasSourceBoundEditorialReview;
+  // Transcript editors can record their actual provenance without claiming a
+  // different provider or changing the transcript into a study-guide edition.
+  const isSourceReviewedTranscript = overview.generatedBy === 'Codex-source-reviewed'
+    && hasSourceBoundEditorialReview;
+  if (!isMiniMaxGenerated && !isEneuralGlmGenerated && !isDocumentedManualException && !isSourceBoundEditorial && !isSourceReviewedTranscript) {
     errors.push(makeError('GENERATOR_MISMATCH', overview.generatedBy));
   }
 

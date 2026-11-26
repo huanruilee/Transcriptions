@@ -10,6 +10,7 @@ import {
   buildModelSourceText,
   buildMiniMaxResponsesRequest,
   buildSourceChunks,
+  computeSourceDigest,
   discoverTranscriptTargets,
   finalizeOverviewReview,
   generateAndReviewTarget,
@@ -1201,5 +1202,122 @@ test('an overfilled reviewed guide is deterministically reduced to eight points 
 
   function readJsonForTest(filePath) {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  }
+});
+
+
+function sourceReviewedEditorialFixture() {
+  const baseline = {
+    paragraphs: [{ sentences: [
+      { id: 's-1', text: '第一句完整支持主要內容' },
+      { id: 's-2', text: '第二句完整支持另一項主要內容' },
+      { id: 's-3', text: '此處明確提出討論問題' },
+      { id: 's-4', text: '講者明確提出參考觀點' },
+      { id: 's-5', text: '補充另一項參考觀點' },
+    ] }],
+  };
+  const transcript = structuredClone(baseline);
+  transcript._meta = { sourceDigest: computeSourceDigest(baseline) };
+  for (const sentence of transcript.paragraphs[0].sentences) sentence.text += '。';
+  const digest = computeSourceDigest(transcript);
+  const sourceTranscriptId = 'test/session_edited';
+  const item = (text, index) => ({
+    text,
+    evidence: [{ sentenceId: `s-${index}`, quote: transcript.paragraphs[0].sentences[index - 1].text }],
+  });
+  const overview = {
+    schemaVersion: 1, status: 'ai-reviewed', sourceTranscriptId,
+    generatedBy: 'Codex-source-reviewed',
+    sourceDigest: digest,
+    editorialSourceDigest: transcript._meta.sourceDigest,
+    mainPoints: [item('第一項主要內容。', 1), item('第二項主要內容。', 2)],
+    discussionTopics: [item('討論的問題是什麼？', 3)],
+    referenceViews: [item('講者提出第一項參考觀點。', 4), item('講者補充第二項參考觀點。', 5)],
+  };
+  overview.review = {
+    reviewedBy: 'Codex', sourceDigest: digest,
+    items: ['mainPoints', 'discussionTopics', 'referenceViews'].flatMap((group) =>
+      overview[group].map((_entry, index) => ({
+        group, index, verdict: 'supported', reason: '定稿逐字稿引句直接支持。',
+      }))),
+  };
+  return { baseline, transcript, overview, target: { sourceTranscriptId } };
+}
+
+test('source-reviewed transcript editorial overview accepts truthful attribution bound to baseline and final text', () => {
+  const { baseline, transcript, overview, target } = sourceReviewedEditorialFixture();
+  assert.equal(transcript.readingEdition, undefined, 'a transcript must not pretend to be a study guide');
+  assert.equal(overview.editorialSourceDigest, computeSourceDigest(baseline));
+  assert.notEqual(overview.editorialSourceDigest, computeSourceDigest(transcript));
+  assert.deepEqual(validateContentOverview(overview, transcript, target).errors, []);
+});
+
+test('source-reviewed transcript editorial overview rejects missing, malformed, or mismatched source bindings', () => {
+  const cases = [
+    ['missing baseline digest', ({ transcript }) => { delete transcript._meta.sourceDigest; }],
+    ['missing metadata', ({ transcript }) => { delete transcript._meta; }],
+    ['malformed baseline digest', ({ transcript, overview }) => {
+      transcript._meta.sourceDigest = 'baseline'; overview.editorialSourceDigest = 'baseline';
+    }],
+    ['non-hex baseline digest', ({ transcript, overview }) => {
+      transcript._meta.sourceDigest = `sha256:${'z'.repeat(64)}`;
+      overview.editorialSourceDigest = transcript._meta.sourceDigest;
+    }],
+    ['mismatched baseline binding', ({ overview }) => { overview.editorialSourceDigest = `sha256:${'a'.repeat(64)}`; }],
+    ['missing editorial binding', ({ overview }) => { delete overview.editorialSourceDigest; }],
+    ['missing reviewed final digest', ({ overview }) => { delete overview.review.sourceDigest; }],
+    ['review of baseline instead of final text', ({ overview }) => { overview.review.sourceDigest = overview.editorialSourceDigest; }],
+  ];
+  for (const [name, mutate] of cases) {
+    const fixture = sourceReviewedEditorialFixture();
+    mutate(fixture);
+    const { errors } = validateContentOverview(fixture.overview, fixture.transcript, fixture.target);
+    assert.ok(errors.some((error) => error.code === 'GENERATOR_MISMATCH'), name);
+  }
+});
+
+test('source-reviewed transcript editorial overview requires one supported review for every item', () => {
+  const cases = [
+    ['missing review', ({ overview }) => { delete overview.review; }],
+    ['missing item', ({ overview }) => { overview.review.items.pop(); }],
+    ['duplicate review key', ({ overview }) => { overview.review.items[1] = { ...overview.review.items[0] }; }],
+    ['unexpected review group', ({ overview }) => { overview.review.items[0].group = 'unknown'; }],
+    ['non-integer review index', ({ overview }) => { overview.review.items[0].index = '0'; }],
+    ['unsupported verdict', ({ overview }) => { overview.review.items[0].verdict = 'unsupported'; }],
+    ['extra review item', ({ overview }) => { overview.review.items.push({ group: 'mainPoints', index: 99, verdict: 'supported' }); }],
+  ];
+  for (const [name, mutate] of cases) {
+    const fixture = sourceReviewedEditorialFixture();
+    mutate(fixture);
+    const { errors } = validateContentOverview(fixture.overview, fixture.transcript, fixture.target);
+    assert.ok(errors.some((error) => error.code === 'GENERATOR_MISMATCH'), name);
+  }
+});
+
+test('source-reviewed transcript editorial overview still enforces final digest, quotes, and provider restrictions', () => {
+  const fixture = sourceReviewedEditorialFixture();
+  const { transcript, target } = fixture;
+  let overview = structuredClone(fixture.overview);
+  overview.sourceDigest = overview.editorialSourceDigest;
+  assert.ok(validateContentOverview(overview, transcript, target).errors.some((error) => error.code === 'SOURCE_DIGEST_MISMATCH'));
+  overview = structuredClone(fixture.overview);
+  overview.mainPoints[0].evidence[0].quote = '不在逐字稿中的句子';
+  assert.ok(validateContentOverview(overview, transcript, target).errors.some((error) => error.code === 'EVIDENCE_QUOTE_MISMATCH'));
+  for (const generatedBy of ['unrecognized-provider', 'Codex-study-guide']) {
+    overview = { ...structuredClone(fixture.overview), generatedBy };
+    assert.ok(validateContentOverview(overview, transcript, target).errors.some((error) => error.code === 'GENERATOR_MISMATCH'));
+  }
+  const studyGuide = { ...structuredClone(transcript), readingEdition: 'study-guide' };
+  overview = { ...structuredClone(fixture.overview), generatedBy: 'Codex-study-guide' };
+  assert.deepEqual(validateContentOverview(overview, studyGuide, target).errors, []);
+  delete overview.review.sourceDigest;
+  assert.ok(validateContentOverview(overview, studyGuide, target).errors.some((error) => error.code === 'GENERATOR_MISMATCH'));
+  for (const generatedBy of ['MiniMax-M3', 'eNeural-glm53-flash']) {
+    overview = { ...structuredClone(fixture.overview), generatedBy };
+    delete overview.editorialSourceDigest;
+    delete overview.review;
+    const providerTranscript = structuredClone(transcript);
+    delete providerTranscript._meta;
+    assert.deepEqual(validateContentOverview(overview, providerTranscript, target).errors, []);
   }
 });

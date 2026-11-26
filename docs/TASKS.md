@@ -2,6 +2,8 @@
 
 ## 流程權威入口（2026-10-23）
 
+- [ ] **STUDYGROUP03-REFRESH-01**：依 v1.12 與課程 v4 規範翻新第2講上（session_03）：三題/官方章節、校字合句、匿名角色、全講導讀、四層研讀講記、獨立覆核與正式部署。證據見 `reviews/evidence/study-group-2025/session03-refresh/README.md`。待閱校，不代表人工逐句聽核。
+
 - [ ] **RUZHONG01-STANDARD-01**：依v1.2流程重整入中論第01講，完整音源／底本預檢、346句保真帳本、局部校字及時間驗證、待閱校主入口與下載、固定版本獨立覆核、CI／Pages上線驗證。範圍及限制見[交付說明](RUZHONG01_STANDARD_REBUILD.md)。
 
 - [x] **STUDYGUIDE-AUDIT-TOOL-01**：將研讀講記「原話對照抽屜」唯讀稽核工具 `scripts/audit_study_guide_verbatim.py` 自 PR #345 抽出，獨立納入 main，使缺陷揭露可追溯驗證。工具檢查四項契約（C1 抽屜數==md時間戳段數／C2 抽屜內容逐字相符／C3 全部verbatim段落可見／C4 無空音檔且有音訊來源）。實測：乾淨 main 上 20 項檢查全 PASS（exit 0）；PR #345 head 上正確 FAIL 3 項（30 講 C1／C3、31 講 C3），證明非空轉工具。**本項僅交付稽核工具，不代表 PR #345 缺陷 2（抽屜索引錯位）已修復**；該缺陷仍待 #345 修正後由 PR #348 之時間錨點契約測試攔截。
