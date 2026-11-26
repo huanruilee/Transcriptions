@@ -56,7 +56,7 @@ test('27下 remains addressable inside the published study-group course', () => 
   assert.ok(course, 'study-group course must be registered');
   assert.equal(course.path, COURSE_PATH);
   assert.equal(course.mediaType, 'video/youtube');
-  assert.equal(course.totalSessions, 49);
+  assert.equal(course.totalSessions, 50);
 
   const store = fs.readFileSync(path.join(ROOT, 'src/stores/course.ts'), 'utf8');
   assert.match(store, new RegExp(COURSE_ID), 'Vue course selector must expose the prototype');
@@ -258,12 +258,12 @@ test('session 23 (12下) syncs 5 discussionQuestions to toc.json, preserves App.
   assert.doesNotMatch(html12B, /吳稱|扶撐|扶稱|福昌/);
 });
 
-test('all 49 study-group sessions sync curated questions to toc.json and maintain clean complete study guides', () => {
+test('all 50 study-group sessions sync curated questions to toc.json and maintain clean complete study guides', () => {
   const course = readJson(`${COURSE_PATH}/course.json`);
   const toc = readJson(`${COURSE_PATH}/toc.json`);
   const validSpeakers = new Set(['如性法師', '學員', '維那/主持']);
 
-  assert.equal(course.sessions.length, 49);
+  assert.equal(course.sessions.length, 50);
 
   for (const meta of course.sessions) {
     const sid = meta.sessionId;

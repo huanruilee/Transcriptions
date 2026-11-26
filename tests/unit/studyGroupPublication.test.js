@@ -16,13 +16,13 @@ test('study-group publication exposes every processed playlist entry', () => {
   const entry = catalog.courses.find((course) => course.id === 'shi-liang-lun-study-group-2025');
   assert.ok(entry, 'study-group course must be registered in the catalog');
   assert.equal(entry.path, 'courses/2025釋量論第二品大組共學');
-  assert.equal(entry.totalSessions, 49);
+  assert.equal(entry.totalSessions, 50);
 
   const course = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'course.json'), 'utf8'));
-  assert.equal(course.sessions.length, 49);
+  assert.equal(course.sessions.length, 50);
   assert.deepEqual(
     course.sessions.map((session) => session.sessionId),
-    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B', '43', '44', '45', '46', '47', '48'],
+    [...Array.from({ length: 42 }, (_, index) => String(index + 1).padStart(2, '0')), '27B', '43', '44', '45', '46', '47', '48', '49'],
   );
 
   for (const session of course.sessions) {
