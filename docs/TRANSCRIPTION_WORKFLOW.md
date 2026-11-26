@@ -1,6 +1,6 @@
 # 逐字稿標準流程
 
-版本：1.12。更新：2026-11-25（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.13。更新：2026-11-26（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
@@ -198,6 +198,12 @@ python3 scripts/sync_study_guide_to_session.py SID --overview-file tmp/workflow/
 
 ## 8. Stage 7：驗證、自動化品質門檻、提交與部署
 
+### GX10 執行與批次腳本紀律（v1.13 新增）
+- **單一 Agent 串行執行**：GX10 本地 Strata（`qwen`）僅有 2 個執行槽，嚴禁同時併發多個 Agent，避免雲端 fallback 時同時搶佔本地算力。
+- **批次腳本低併發上限**：校字、補標點與術語修正腳本採 **15～20 句／批**、`max_workers <= 2`；單句守衛失敗最多重試 1 次即轉 `auto-smart` 或規則收斂，嚴禁高併發（如 16 執行緒）重試 `auto-fast` 造成上游 429／斷路器雪崩。
+- **進度回報解耦**：長任務將階段摘要寫入工作區 `PROGRESS.md`，由外部排程讀取回報 Telegram，避免頻繁以 `peer dm` 打斷主代理迴圈。
+- **提交前全綠與乾淨工作區**：commit 前必跑 `check:session`（確認 `qualityFlags` 無異常）、`audit:reading-quality`、`summaries:audit`、`test:v2` 與全套 `NODE_OPTIONS="--max-old-space-size=4096" npm test`，並檢查 `git diff --name-only` 排除 `correction-dates.html`、`node_modules` 與音檔。
+
 迭代時跑相關測試；固定最終成果後執行：
 
 ```sh
@@ -257,6 +263,7 @@ gh pr merge PR_NUMBER --merge
 
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
+| 1.13 | 2026-11-26 | 依第 49 講實戰覆盤新增 GX10 單一 Agent 串行紀律、批次腳本 `max_workers <= 2` 與 15～20 句分批規範、進度回報與 `PROGRESS.md` 解耦、強化 `scripts/check_session.mjs`（`qualityFlags` 檢查空段／`id`／`reviewNeeded`／繁簡混用／講者清單），並要求提交前必跑全套 `npm test` 且排除 `correction-dates.html` |
 | 1.12 | 2026-11-25 | 依 PR #498 實戰覆盤補強 §2.1：明訂「先合句與校字，再補標點」（禁止以零改字守衛對碎行硬塞句號）、區分導讀重算與重寫（舊 `mainPoints` 漏段時須重生）、新增批次腳本導向 `auto-fast` 分流原則，並於《2025 釋量論大組共學》`COURSE_GUIDE.md` 頂端補齊快速開工與關聯檔清單 |
 | 1.11 | 2026-11-25 | 新增 §2.1 全倉通用原則與課程體裁分流：強制 `publicationState` 與閱讀品質門檻／歷史舊債分軌管理、確立獨講型與共學問答型雙體裁規範（區分法師／主持人／學員角色輪次與 `teacherSummary` 歸納標準）、禁止固定 7～8 句機械切片與過度碎段、收斂核心討論題並禁止長口語貼成小標，以及打破導讀固定 2 條模板改依全講單元動態覆蓋 |
 | 1.10 | 2026-11-23 | 確立全課程共同章節規範：只要該講 YouTube 說明欄附有時間碼提綱，直接以官方時間碼與標題為唯一章節切點並停用模型自創標題；章節內仍切分為無標題之 150～350 字二級自然段 |

@@ -10,7 +10,7 @@
 
 - **收斂討論題必同步檔案**：修改 `sessions/session_XX.json` 的 `discussionQuestions`（3～7 題）或題號時，必須同步核對並更新 `toc.json`、`source_outlines/32-XX.json`（若存在）與 `reviews/evidence/study-group-2025/playlist-XX/remote_reviewer_bundle.json`（若存在）。
 - **嚴守先合句校字再標點與導讀重寫**：不可用「漢字零改動守衛」對碎行硬塞句號；若舊 `contentOverview.mainPoints` 漏掉後半段核心討論題，須重新生成全講導讀。
-- **標準驗證指令**：`npm run audit:reading-quality -- courses/2025釋量論第二品大組共學 && npm run summaries:audit && npm run test:v2 && NODE_OPTIONS="--max-old-space-size=4096" npm test`
+- **標準驗證指令**：`npm run check:session -- shi-liang-lun-study-group-2025 <N> && npm run audit:reading-quality -- courses/2025釋量論第二品大組共學 && npm run summaries:audit && npm run test:v2 && NODE_OPTIONS="--max-old-space-size=4096" npm test`（commit 前必確認 `git diff --name-only` 排除 `correction-dates.html`／`node_modules`／音檔；GX10 採單一 Agent 串行與 `max_workers <= 2` 批次呼叫）
 
 ---
 
