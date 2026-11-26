@@ -1,28 +1,28 @@
 {
-  "testedProductionCommit": "d66ccda",
+  "testedProductionCommit": "repair following7689442; exact final commit recorded in independent review",
   "gates": {
     "full-final": {
-      "sha256": "34cb650fc81fe1d0648bfe34d82bd60a83ef4a7e4c6bfe4f4683103a0d40e63c",
+      "sha256": "7650999dee26f9b7dec3129eed3e64a97650e661a84c5f4f4c48a436440b5aac",
       "tail": [
         "# Subtest: raw and published timestamp permissions are explicitly separated",
-        "ok 979 - raw and published timestamp permissions are explicitly separated",
+        "ok 981 - raw and published timestamp permissions are explicitly separated",
         "  ---",
-        "  duration_ms: 0.564",
+        "  duration_ms: 0.102667",
         "  type: 'test'",
         "  ...",
-        "1..979",
-        "# tests 1111",
+        "1..981",
+        "# tests 1113",
         "# suites 9",
-        "# pass 1106",
+        "# pass 1108",
         "# fail 0",
         "# cancelled 0",
         "# skipped 5",
         "# todo 0",
-        "# duration_ms 58650.402959"
+        "# duration_ms 29223.73"
       ]
     },
     "final-vitest": {
-      "sha256": "11d66a5f80e24253427cb991d84d19a1c989d7f0c2faeea0015ef1ad68954698",
+      "sha256": "579ecb4aa3d697f3faea6298397a9fb3b72678083ae5702824dfdea455626ffc",
       "tail": [
         "    at patchDOMProp (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-dom/dist/runtime-dom.cjs.js:622:13)",
         "    at patchProp (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-dom/dist/runtime-dom.cjs.js:743:5)",
@@ -32,10 +32,10 @@
         "",
         " Test Files  40 passed (40)",
         "      Tests  144 passed (144)",
-        "   Start at  23:21:10",
-        "   Duration  12.93s (environment 47%, tests 39%, import 11%, transform 2%, worker 2%)",
+        "   Start at  23:25:46",
+        "   Duration  7.04s (environment 50%, tests 36%, import 12%, worker 1%, transform 1%)",
         "",
-        "Environment  happy-dom was created 40 times · 45.27s total, 47% of tracked time",
+        "Environment  happy-dom was created 40 times · 26.59s total, 50% of tracked time",
         "             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)",
         "             learn more: https://vitest.dev/guide/improving-performance#test-environments",
         ""
@@ -77,12 +77,12 @@
       ]
     },
     "reading": {
-      "sha256": "fe0e7ddd263ff1e1bb2bb23375f8ec756ac4e8342a36286651df29f064eca13a",
+      "sha256": "0ed1111a056294b60fc1ad794988845f1dedc0bee27527b3c0054ea153243441",
       "tail": [
         "npm notice run transcriptions-platform@1.1.0-dev audit:reading-quality",
-        "npm notice run node scripts/audit_reading_quality.mjs courses/2025釋量論第二品大組共學/sessions/session_03.json --radar-out /private/tmp/session03-final-radar.json",
+        "npm notice run node scripts/audit_reading_quality.mjs courses/2025釋量論第二品大組共學/sessions/session_03.json",
         "Reading Quality Audit: courses/2025釋量論第二品大組共學/sessions/session_03.json -> PASS (warnings=27)",
-        "  [YELLOW] 27 review radar warning(s) -> saved to /private/tmp/session03-final-radar.json"
+        "  [YELLOW] 27 review radar warning(s)"
       ]
     },
     "course-final": {
@@ -106,7 +106,7 @@
       ]
     },
     "build": {
-      "sha256": "74c13593d17eb541c46a3847027371e509c554f21c510a0ca4e9e416710efb5c",
+      "sha256": "ccf0f95669ee6449b2f36f68f089f28433bb30c3b26c42ca86f037eea50bbfa7",
       "tail": [
         "npm notice run transcriptions-platform@1.1.0-dev build:v2",
         "npm notice run vite build",
@@ -122,7 +122,7 @@
         "dist/assets/index-DSEuUuyw.css   63.47 kB │ gzip: 11.83 kB",
         "dist/assets/index-BgwnJhIm.js   193.12 kB │ gzip: 69.82 kB",
         "",
-        "✓ built in 1.76s"
+        "✓ built in 1.23s"
       ]
     },
     "golden": {

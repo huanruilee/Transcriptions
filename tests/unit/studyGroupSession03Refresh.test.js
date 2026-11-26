@@ -174,3 +174,18 @@ test('the study guide supplies four learning layers, visible candidate status, a
   assert.match(html, /verbatim-drawer/u);
   assert.match(html, /待閱校版/u);
 });
+
+test('teacher argument about merely retaining a thesis keeps its missing causal reasoning', () => {
+  const sentence = flatten(loadSession()).find(s => containsSource(s, 'seg-3075'));
+  assert.ok(sentence);
+  assert.match(sentence.text, /放在心裡面/u);
+  assert.match(sentence.text, /沒有去思考.*因/u);
+  assert.match(sentence.text, /很容易轉變為猶豫知/u);
+  assert.match(sentence.text, /我們真的認同嗎？/u);
+});
+
+test('merging the scripture example retains the teachers explicit negative conclusion', () => {
+  const sentence = flatten(loadSession()).find(s => containsSource(s, 'seg-1441'));
+  assert.ok(sentence);
+  assert.match(sentence.text, /這個也沒有辦法/u);
+});
