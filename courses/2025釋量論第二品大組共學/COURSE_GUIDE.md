@@ -87,7 +87,7 @@
 1. **Step 0 奠基與素材查核**：確認 `grounding.json`、YouTube 影片 ID／時長、`source_outlines/32-XX.json`（缺件時標 `pending`）。
 2. **Step 1 語音轉寫（GX10 本地 Whisper）**：下載音訊至 GX10 暫存並以本地 Whisper (`http://127.0.0.1:8010/v1/audio/transcriptions`) 轉寫；驗證音訊與 YouTube 時長無飄移（`R1`），完整保留 `rawText`。
 3. **Step 2 逐字稿整編與低成本雷達仲裁**：
-   - 本地規則去純冗詞、合併 1～3 字碎句、補標點、依 `grounding.json` 校對專名、切分講者與 `Q1..Qn`（含 `學員1, 學員2...` 去識別化）。
+   - **45 分鐘加速流水線（v1.13 標準）**：先執行確定性預處理 `node scripts/study_group_preflight.mjs courses/2025釋量論第二品大組共學/sessions/session_XX.json --apply`（完成彎引號轉全形、底本頌文／常見佛法名相正字與去識別化掃描），再採單趟 Batch LLM（每批 15～20 句、`max_workers <= 2`）合併執行順句校字與補標點（禁止分多支腳本重複掃全文或 16 執行緒打 `auto-fast`），並對含人名／頌文／法師開示段集中覆核。
    - 執行 `node scripts/audit_reading_quality.mjs courses/2025釋量論第二品大組共學/sessions/session_XX.json --radar-out /tmp/radar_XX.json`，並以低成本模型（`glm53-flash` / `scripts/lib/radarAdjudicator.mjs`）批次處理黃燈卡片（含 `Y5_SUSPECT_SPEAKER_MIX`）。
    - 補齊 `discussionQuestions`（3～7 題，`？` 結尾）、4～6 段 `teacherSummary`、`contentOverview`（重算 `sourceDigest`）。
 4. **Step 3 產出 v4 思辨研讀講記**：

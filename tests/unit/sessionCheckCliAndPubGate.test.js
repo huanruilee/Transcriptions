@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { computeSessionMetrics } from '../../scripts/check_session.mjs';
+import { cleanStudyGroupText } from '../../scripts/study_group_preflight.mjs';
 
 const ROOT = process.cwd();
 const LEGACY_PUBLISHED_DEBT_ALLOWLIST = new Set(['san-zhu-yao-dao']);
@@ -30,12 +31,14 @@ test('check:session CLI returns concise JSON schema and passing metrics for jin-
   assert.equal(summary.qualityFlags.emptyParas, 0);
   assert.equal(summary.qualityFlags.missingParaIds, 0);
   assert.equal(summary.qualityFlags.simplifiedChars, 0);
+  assert.equal(summary.qualityFlags.curlyQuotes, 0);
+  assert.equal(summary.qualityFlags.possibleNameLeaks, 0);
 });
 
 test('computeSessionMetrics qualityFlags catches emptyParas, missingParaIds, missingReviewNeeded, and simplifiedChars', () => {
   const m = computeSessionMetrics({
     paragraphs: [
-      { paragraphId: 'p_0001', speaker: '學員1', sentences: [{ id: 's1', text: '这是测试。' }] },
+      { paragraphId: 'p_0001', speaker: '學員1', sentences: [{ id: 's1', text: '“这是测试。”謝謝王小明。' }] },
       { id: 'p_0002', speaker: '如性法師', sentences: [] },
     ],
     discussionQuestions: [{ displayQuestion: '为何说不是瞋心？' }],
@@ -45,6 +48,9 @@ test('computeSessionMetrics qualityFlags catches emptyParas, missingParaIds, mis
   assert.equal(m.qualityFlags.missingParaIds, 1);
   assert.equal(m.qualityFlags.missingReviewNeeded, 1);
   assert.equal(m.qualityFlags.simplifiedChars, 3);
+  assert.equal(m.qualityFlags.curlyQuotes, 2);
+  assert.equal(m.qualityFlags.possibleNameLeaks, 1);
+  assert.equal(cleanStudyGroupText('“大主討論”'), '「大組討論」');
 });
 
 test('publicationState honesty gate: published courses outside legacy debt allowlist meet reading quality thresholds', () => {

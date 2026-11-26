@@ -3,9 +3,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
+import { findPossibleNameLeaks } from './study_group_preflight.mjs';
 
 const END_PUNCT_RE = /[。？！…」』）"'：；]$/;
-const SIMPLIFIED_ONLY_RE = /[虽却这为体学师义论说对问题发会国经时过还进]/g;
+const SIMPLIFIED_ONLY_RE = /[虽却这为体学师义论说对问题发会国经时过还进异间]/g;
+const CURLY_QUOTES_RE = /[“”‘’]/g;
 
 export function computeSessionMetrics(session, rootDir = process.cwd(), relPath = '') {
   const paras = Array.isArray(session.paragraphs) ? session.paragraphs : [];
@@ -20,6 +22,8 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
   let missingParaIds = 0;
   let missingReviewNeeded = 0;
   let simplifiedChars = 0;
+  let curlyQuotes = 0;
+  let possibleNameLeaks = 0;
   const speakersSet = new Set();
 
   const countSimplified = (str) => {
@@ -45,6 +49,9 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
       const t = String(st.text || '').trim();
       if (!t) continue;
       simplifiedChars += countSimplified(t);
+      const cq = t.match(CURLY_QUOTES_RE);
+      if (cq) curlyQuotes += cq.length;
+      possibleNameLeaks += findPossibleNameLeaks(t).length;
       if (t.length <= 3) shortFragments += 1;
       if (!END_PUNCT_RE.test(t)) noEndPunct += 1;
     }
@@ -119,6 +126,8 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
       missingParaIds,
       missingReviewNeeded,
       simplifiedChars,
+      curlyQuotes,
+      possibleNameLeaks,
     },
   };
 }
