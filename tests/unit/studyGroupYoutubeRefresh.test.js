@@ -64,13 +64,13 @@ test('newly public official YouTube videos (43-48) are transcribed and registere
   }
 });
 
-test('current playlist inventory records 49 total sessions after filling 43-48', () => {
+test('current playlist inventory records 50 total sessions after filling 43-49', () => {
   const course = readJson('courses/2025釋量論第二品大組共學/course.json');
   assert.equal(course.unavailableSessions.length, 0);
 
   const catalog = readJson('courses/catalog.json');
   const entry = catalog.courses.find((item) => item.id === 'shi-liang-lun-study-group-2025');
-  assert.equal(entry.totalSessions, 49);
+  assert.equal(entry.totalSessions, 50);
 });
 
 test('historical prototype-44 evidence is explicitly remapped to current playlist item 42 by video identity', () => {
@@ -80,14 +80,32 @@ test('historical prototype-44 evidence is explicitly remapped to current playlis
     path.join(ROOT, 'reviews/evidence/study-group-2025/playlist_index_remap_2026-09-28.md'),
     'utf8',
   );
-  const current = currentInventory.items.find((item) => item.videoId === historicalManifest.videoId);
 
   assert.equal(historicalManifest.playlistIndex, 44);
-  assert.equal(current.playlistIndex, 42);
   assert.match(remap, /historical playlist index \*\*44\*\*/i);
   assert.match(remap, /current playlist index \*\*42\*\*/i);
   assert.match(remap, /`lBOiFeGQblw`/);
   assert.match(remap, /video ID is the stable identity/i);
+
+  const historicalVideo = currentInventory.items.find((item) => item.videoId === historicalManifest.videoId);
+  if (historicalVideo) {
+    // Inventories retrieved up to 2026-09-28 still list lBOiFeGQblw at index 42.
+    assert.equal(historicalVideo.playlistIndex, 42);
+  } else {
+    // From the 2026-11-26 refresh onward lBOiFeGQblw left the playlist
+    // ("This video is unavailable"); the same title continues at index 42 via
+    // t4N3uKWRkKs, and the remap note documents this follow-up explicitly.
+    assert.ok(
+      /lBOiFeGQblw` no longer appears/i.test(remap),
+      'remap note must document the removal of lBOiFeGQblw from later inventories',
+    );
+    const replacement = currentInventory.items.find((item) => item.playlistIndex === 42);
+    assert.equal(replacement.videoId, 't4N3uKWRkKs');
+    assert.equal(
+      replacement.rawTitle,
+      '第26講 集諦與滅諦的行相（下）｜2025《釋量論・第二品》大組共學',
+    );
+  }
 });
 
 test('reader has an explicit transcript-pending state for video-only sessions', () => {

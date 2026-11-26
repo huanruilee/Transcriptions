@@ -22,24 +22,35 @@ test('study-group playlist inventory is a complete, source-grounded manifest', (
     inventory.playlistUrl,
     'https://www.youtube.com/playlist?list=PLlVfdhU37xZCXzlW90v10Y6z8w3Oue0Uh',
   );
-  assert.equal(inventory.declaredCount, 44);
-  assert.equal(inventory.visibleCount, 44);
-  assert.equal(inventory.hiddenOrUnavailableCount, 1);
+  assert.equal(inventory.declaredCount, 52);
+  assert.equal(inventory.visibleCount, 50);
+  assert.equal(inventory.hiddenOrUnavailableCount, 2);
   assert.equal(inventory.items.length, inventory.declaredCount);
   assert.deepEqual(
     inventory.items.map((item) => item.playlistIndex),
-    Array.from({ length: 44 }, (_, index) => index + 1),
+    Array.from({ length: 52 }, (_, index) => index + 1),
   );
 });
 
 test('unavailable playlist entries fail closed and are excluded from execution', () => {
   const inventory = loadInventory();
   const unavailable = inventory.items.filter((item) => !item.playable);
-  assert.deepEqual(unavailable.map((item) => item.videoId), ['C0yhUazs0CU']);
-  assert.deepEqual(unavailable.map((item) => item.availabilityStatus), ['unavailable']);
+  assert.deepEqual(unavailable.map((item) => item.videoId), [
+    'cE_jylkWGs4',
+    'UVXWTE_-hk4',
+  ]);
+  assert.deepEqual(
+    unavailable.map((item) => item.playlistIndex),
+    [51, 52],
+  );
+  assert.deepEqual(unavailable.map((item) => item.availabilityStatus), [
+    'unavailable',
+    'unavailable',
+  ]);
   assert.match(unavailable[0].availabilityDetail, /Private video/i);
-  assert.equal(inventory.scopeDecision.executableTranscriptScope, 43);
-  assert.equal(inventory.scopeDecision.excludedCount, 1);
+  assert.match(unavailable[1].availabilityDetail, /Private video/i);
+  assert.equal(inventory.scopeDecision.executableTranscriptScope, 50);
+  assert.equal(inventory.scopeDecision.excludedCount, 2);
 });
 
 test('normalization never invents lecture numbers for the review-only entry', () => {
@@ -60,4 +71,15 @@ test('every executable source has a stable YouTube identity and duration', () =>
     assert.equal(typeof item.durationMinutes, 'number');
     assert.ok(item.durationMinutes > 0);
   }
+});
+
+test('session 49 source is the playlist entry for 第30講（下）', () => {
+  const inventory = loadInventory();
+  const entry = inventory.items.find((item) => item.videoId === 'ZidYex1fsR4');
+  assert.ok(entry, 'ZidYex1fsR4 must be present in the playlist inventory');
+  assert.equal(entry.playlistIndex, 50);
+  assert.equal(entry.lecture, 30);
+  assert.equal(entry.segment, '下');
+  assert.match(entry.rawTitle, /第30講 我執是輪迴的根本（下）/);
+  assert.equal(entry.playable, true);
 });

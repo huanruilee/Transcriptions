@@ -21,3 +21,15 @@ their original paths and observations remain auditable.
 
 This remap resolves the index-name ambiguity without changing either the source
 diagnostic result or the current publication state.
+
+## Follow-up — inventory refresh 2026-11-26
+
+On 2026-11-26 the playlist was re-retrieved and `lBOiFeGQblw` no longer appears
+in it: `yt-dlp -F https://www.youtube.com/watch?v=lBOiFeGQblw` now returns
+`ERROR: [youtube] lBOiFeGQblw: This video is unavailable`, and the flat playlist
+listing shows index 42 occupied by `t4N3uKWRkKs` with the same title
+「第26講 集諦與滅諦的行相（下）」. The historical remap above therefore stays
+valid **as of its retrieval date**; in inventories retrieved on or after
+2026-11-26 there is no `lBOiFeGQblw` item to resolve, and the identity chain for
+第26講（下）continues through `t4N3uKWRkKs` at playlist index 42.
+
