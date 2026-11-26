@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 const END_PUNCT_RE = /[。？！…」』）"'：；]$/;
+const SIMPLIFIED_ONLY_RE = /[虽却这为体学师义论说对问题发会国经时过还进]/g;
 
 export function computeSessionMetrics(session, rootDir = process.cwd(), relPath = '') {
   const paras = Array.isArray(session.paragraphs) ? session.paragraphs : [];
@@ -15,16 +16,35 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
   let shortFragments = 0;
   let headingsCount = 0;
   let longHeadingsOver35Chars = 0;
+  let emptyParas = 0;
+  let missingParaIds = 0;
+  let missingReviewNeeded = 0;
+  let simplifiedChars = 0;
+  const speakersSet = new Set();
+
+  const countSimplified = (str) => {
+    if (!str) return 0;
+    const m = String(str).match(SIMPLIFIED_ONLY_RE);
+    return m ? m.length : 0;
+  };
 
   for (const p of paras) {
+    const spk = String(p.speaker || '').trim();
+    if (spk) speakersSet.add(spk);
+    if (!p.id) missingParaIds += 1;
+    const sents = Array.isArray(p.sentences) ? p.sentences : [];
+    if (sents.length === 0) emptyParas += 1;
     const h = String(p.heading || p.title || p.sectionTitle || '').trim();
     if (h) {
       headingsCount += 1;
       if (h.length > 35) longHeadingsOver35Chars += 1;
+      simplifiedChars += countSimplified(h);
     }
-    for (const st of p.sentences || []) {
+    for (const st of sents) {
+      if (typeof st.reviewNeeded !== 'boolean') missingReviewNeeded += 1;
       const t = String(st.text || '').trim();
       if (!t) continue;
+      simplifiedChars += countSimplified(t);
       if (t.length <= 3) shortFragments += 1;
       if (!END_PUNCT_RE.test(t)) noEndPunct += 1;
     }
@@ -67,6 +87,15 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
 
   const co = session.contentOverview || {};
   const dq = session.discussionQuestions || session.discussionTopics || [];
+  for (const item of dq) {
+    simplifiedChars += countSimplified(
+      typeof item === 'string' ? item : (item?.displayQuestion || item?.question || '')
+    );
+  }
+  simplifiedChars += countSimplified(co.sourceDigest);
+  for (const mp of co.mainPoints || []) {
+    simplifiedChars += countSimplified(typeof mp === 'string' ? mp : (mp?.text || mp?.summary || ''));
+  }
 
   return {
     paragraphs: paras.length,
@@ -84,6 +113,13 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
       hasSourceDigest: Boolean(co.sourceDigest),
     },
     rawTextDiffCount,
+    qualityFlags: {
+      speakers: [...speakersSet].sort(),
+      emptyParas,
+      missingParaIds,
+      missingReviewNeeded,
+      simplifiedChars,
+    },
   };
 }
 

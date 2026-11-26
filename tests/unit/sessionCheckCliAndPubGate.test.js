@@ -26,6 +26,25 @@ test('check:session CLI returns concise JSON schema and passing metrics for jin-
   assert.ok(summary.paraSents.max <= 35, `paraSents.max=${summary.paraSents.max}`);
   assert.ok(Array.isArray(summary.relatedFiles));
   assert.ok('rawTextDiffCount' in summary);
+  assert.ok(summary.qualityFlags && Array.isArray(summary.qualityFlags.speakers));
+  assert.equal(summary.qualityFlags.emptyParas, 0);
+  assert.equal(summary.qualityFlags.missingParaIds, 0);
+  assert.equal(summary.qualityFlags.simplifiedChars, 0);
+});
+
+test('computeSessionMetrics qualityFlags catches emptyParas, missingParaIds, missingReviewNeeded, and simplifiedChars', () => {
+  const m = computeSessionMetrics({
+    paragraphs: [
+      { paragraphId: 'p_0001', speaker: '學員1', sentences: [{ id: 's1', text: '这是测试。' }] },
+      { id: 'p_0002', speaker: '如性法師', sentences: [] },
+    ],
+    discussionQuestions: [{ displayQuestion: '为何说不是瞋心？' }],
+  });
+  assert.deepEqual(m.qualityFlags.speakers, ['如性法師', '學員1']);
+  assert.equal(m.qualityFlags.emptyParas, 1);
+  assert.equal(m.qualityFlags.missingParaIds, 1);
+  assert.equal(m.qualityFlags.missingReviewNeeded, 1);
+  assert.equal(m.qualityFlags.simplifiedChars, 3);
 });
 
 test('publicationState honesty gate: published courses outside legacy debt allowlist meet reading quality thresholds', () => {
