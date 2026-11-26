@@ -1,0 +1,230 @@
+{
+  "testedProductionCommit": "d66ccda",
+  "gates": {
+    "full-final": {
+      "sha256": "34cb650fc81fe1d0648bfe34d82bd60a83ef4a7e4c6bfe4f4683103a0d40e63c",
+      "tail": [
+        "# Subtest: raw and published timestamp permissions are explicitly separated",
+        "ok 979 - raw and published timestamp permissions are explicitly separated",
+        "  ---",
+        "  duration_ms: 0.564",
+        "  type: 'test'",
+        "  ...",
+        "1..979",
+        "# tests 1111",
+        "# suites 9",
+        "# pass 1106",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 5",
+        "# todo 0",
+        "# duration_ms 58650.402959"
+      ]
+    },
+    "final-vitest": {
+      "sha256": "11d66a5f80e24253427cb991d84d19a1c989d7f0c2faeea0015ef1ad68954698",
+      "tail": [
+        "    at patchDOMProp (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-dom/dist/runtime-dom.cjs.js:622:13)",
+        "    at patchProp (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-dom/dist/runtime-dom.cjs.js:743:5)",
+        "    at patchElement (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:5906:15)",
+        "    at processElement (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:5704:9)",
+        "    at patch (/Users/henry/Documents/huanruilee-github-repos/Transcriptions/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js:5554:11)",
+        "",
+        " Test Files  40 passed (40)",
+        "      Tests  144 passed (144)",
+        "   Start at  23:21:10",
+        "   Duration  12.93s (environment 47%, tests 39%, import 11%, transform 2%, worker 2%)",
+        "",
+        "Environment  happy-dom was created 40 times · 45.27s total, 47% of tracked time",
+        "             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)",
+        "             learn more: https://vitest.dev/guide/improving-performance#test-environments",
+        ""
+      ]
+    },
+    "summary-audit": {
+      "sha256": "e0e2c1d10ecfb7946f1aaf97620da9e16166d665b4ae24767e7adba3e30136b8",
+      "tail": [
+        "npm notice run transcriptions-platform@1.1.0-dev summaries:audit",
+        "npm notice run node scripts/content_overview_pipeline.mjs --audit",
+        "{",
+        "  \"total\": 382,",
+        "  \"valid\": 382,",
+        "  \"missing\": 0,",
+        "  \"needsReview\": 0,",
+        "  \"invalid\": 0,",
+        "  \"complete\": true",
+        "}"
+      ]
+    },
+    "check": {
+      "sha256": "5ecad89ae554dc135be85a93db0f3065d7051c0089549df4af671f8e56cc42ce",
+      "tail": [
+        "  \"hasCourseGuide\": true,",
+        "  \"paragraphs\": 367,",
+        "  \"paraSents\": {\"min\":1,\"avg\":2.1,\"max\":9},",
+        "  \"totalSentences\": 772,",
+        "  \"noEndPunctPct\": 2.5,",
+        "  \"shortFragmentPct\": 0.5,",
+        "  \"maxParaOver35\": 0,",
+        "  \"headingsCount\": 12,",
+        "  \"longHeadingsOver35Chars\": 0,",
+        "  \"discussionQuestionsCount\": 3,",
+        "  \"contentOverview\": {\"status\":\"ai-reviewed\",\"mainPointsCount\":4,\"hasSourceDigest\":true},",
+        "  \"rawTextDiffCount\": null,",
+        "  \"qualityFlags\": {\"speakers\":[\"如性法師\",\"學員\",\"維那/主持\"],\"emptyParas\":0,\"missingParaIds\":0,\"missingReviewNeeded\":0,\"simplifiedChars\":0},",
+        "  \"relatedFiles\": [\"courses/2025釋量論第二品大組共學/toc.json\",\"courses/2025釋量論第二品大組共學/source_outlines\"]",
+        "}"
+      ]
+    },
+    "reading": {
+      "sha256": "fe0e7ddd263ff1e1bb2bb23375f8ec756ac4e8342a36286651df29f064eca13a",
+      "tail": [
+        "npm notice run transcriptions-platform@1.1.0-dev audit:reading-quality",
+        "npm notice run node scripts/audit_reading_quality.mjs courses/2025釋量論第二品大組共學/sessions/session_03.json --radar-out /private/tmp/session03-final-radar.json",
+        "Reading Quality Audit: courses/2025釋量論第二品大組共學/sessions/session_03.json -> PASS (warnings=27)",
+        "  [YELLOW] 27 review radar warning(s) -> saved to /private/tmp/session03-final-radar.json"
+      ]
+    },
+    "course-final": {
+      "sha256": "0c13c8cfe4e002d2d0f395e2a8439301ff4124e05c71a6f09dc3a5371b8cf9c5",
+      "tail": [
+        "      - [RED] SHORT_FRAGMENT_RATIO: Isolated 1-3 char fragment ratio 3.0% exceeds 2.0% (63/2102).",
+        "      - [RED] WHISPER_HALLUCINATION: Detected Whisper hallucination (1 phrase match(es), repeatedLoop=true).",
+        "  [FAIL] session_44.json (sents=2091, noPunct=7.3%, short=4.2%, maxPara=8, warnings=83)",
+        "      - [RED] FILLER_ONLY_SENTENCES: Found 4 pure filler/single-word response sentence(s).",
+        "      - [RED] MISSING_END_PUNCTUATION: Missing end punctuation ratio 7.3% exceeds 5.0% (153/2091).",
+        "      - [RED] SHORT_FRAGMENT_RATIO: Isolated 1-3 char fragment ratio 4.2% exceeds 2.0% (87/2091).",
+        "      - [RED] WHISPER_HALLUCINATION: Detected Whisper hallucination (3 phrase match(es), repeatedLoop=true).",
+        "      - [RED] TRAILING_DANGLING_CONNECTIVE: Found 1 sentence(s) ending with a dangling connective + period (e.g. \"，此外。\" / \"。因此。\").",
+        "  [FAIL] session_45.json (sents=1862, noPunct=13.3%, short=1.5%, maxPara=8, warnings=88)",
+        "      - [RED] FILLER_ONLY_SENTENCES: Found 3 pure filler/single-word response sentence(s).",
+        "      - [RED] MISSING_END_PUNCTUATION: Missing end punctuation ratio 13.3% exceeds 5.0% (247/1862).",
+        "  [PASS] session_46.json (sents=2134, noPunct=0.0%, short=0.6%, maxPara=14, warnings=23)",
+        "  [PASS] session_47.json (sents=2160, noPunct=0.6%, short=0.6%, maxPara=10, warnings=33)",
+        "  [PASS] session_48.json (sents=2229, noPunct=0.6%, short=1.6%, maxPara=10, warnings=57)",
+        "  [PASS] session_49.json (sents=404, noPunct=0.0%, short=1.5%, maxPara=35, warnings=51)"
+      ]
+    },
+    "build": {
+      "sha256": "74c13593d17eb541c46a3847027371e509c554f21c510a0ca4e9e416710efb5c",
+      "tail": [
+        "npm notice run transcriptions-platform@1.1.0-dev build:v2",
+        "npm notice run vite build",
+        "(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:",
+        "  - `__dirname` (vite.config.ts:10:25). Use `import.meta.dirname` instead",
+        "Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.",
+        "vite v8.3.8 building client environment for production...",
+        "transforming...",
+        "✓ 75 modules transformed.",
+        "rendering chunks...",
+        "computing gzip size...",
+        "dist/index.html                   0.49 kB │ gzip:  0.38 kB",
+        "dist/assets/index-DSEuUuyw.css   63.47 kB │ gzip: 11.83 kB",
+        "dist/assets/index-BgwnJhIm.js   193.12 kB │ gzip: 69.82 kB",
+        "",
+        "✓ built in 1.76s"
+      ]
+    },
+    "golden": {
+      "sha256": "ce38c08f24d79be84873af63ea6f6f56ee38dfc19d0cf89df7176c2be0352d82",
+      "tail": [
+        "    1..8",
+        "ok 1 - 🌟 29A Golden Benchmark Quality Standard Test Suite",
+        "  ---",
+        "  duration_ms: 121.983625",
+        "  type: 'suite'",
+        "  ...",
+        "1..1",
+        "# tests 8",
+        "# suites 1",
+        "# pass 8",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 363.196417"
+      ]
+    },
+    "contract-final": {
+      "sha256": "3d2861e3e5602bee1fc6d096e75c60e70252a0c65db21d6d936ea6671eb640f6",
+      "tail": [
+        "# Subtest: the study guide supplies four learning layers, visible candidate status, and real-time anchors",
+        "ok 7 - the study guide supplies four learning layers, visible candidate status, and real-time anchors",
+        "  ---",
+        "  duration_ms: 6.341",
+        "  type: 'test'",
+        "  ...",
+        "1..7",
+        "# tests 7",
+        "# suites 0",
+        "# pass 7",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 161.688958"
+      ]
+    },
+    "toc-red": {
+      "sha256": "e157bdd7d656f0cce77ef0c12d5ac9097f89e5d4b25ef1cf5ac07306fe63c831",
+      "tail": [
+        "    114|       },",
+        "    115|     });",
+        "    116|     expect(wrapper.get('.toc-ancestor').text()).toBe('未命名章節');",
+        "       |                                                 ^",
+        "    117|     expect(wrapper.get('.toc-link').text()).toContain('第1題');",
+        "    118|     wrapper.unmount();",
+        "",
+        "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
+        "",
+        "",
+        " Test Files  1 failed (1)",
+        "      Tests  2 failed | 3 passed (5)",
+        "   Start at  23:17:25",
+        "   Duration  642ms (environment 63%, tests 27%, transform 7%, import 1%, worker 1%)",
+        ""
+      ]
+    },
+    "toc-green": {
+      "sha256": "1cc2dff4da37ee9272093402c8399b5ff5c8b6d644b9074e53550862a8dc2590",
+      "tail": [
+        "npm notice run transcriptions-platform@1.1.0-dev test:v2",
+        "npm notice run vitest run tests/unit_v2/tocAccordion.test.ts tests/unit_v2/sessionTocProjection.test.ts",
+        "(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:",
+        "  - `__dirname` (vite.config.ts:10:25). Use `import.meta.dirname` instead",
+        "Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.",
+        "",
+        " RUN  v5.1.0 /private/tmp/transcriptions-s03-local",
+        "",
+        "",
+        " Test Files  2 passed (2)",
+        "      Tests  8 passed (8)",
+        "   Start at  23:17:39",
+        "   Duration  1.01s (environment 56%, tests 22%, transform 13%, import 8%, worker 2%)",
+        ""
+      ]
+    },
+    "generator-green": {
+      "sha256": "a5f5c3f77c0a8f9720ffc02517d69277be1f56d4c97b5a0419e932af9ac2c34e",
+      "tail": [
+        "# Subtest: source-reviewed transcript editorial overview still enforces final digest, quotes, and provider restrictions",
+        "ok 33 - source-reviewed transcript editorial overview still enforces final digest, quotes, and provider restrictions",
+        "  ---",
+        "  duration_ms: 0.411917",
+        "  type: 'test'",
+        "  ...",
+        "1..33",
+        "# tests 33",
+        "# suites 0",
+        "# pass 33",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 1732.2625"
+      ]
+    }
+  },
+  "scope": "session03 passes; full course audit has historical out-of-scope failures; no thresholds weakened",
+  "rollback": "If deployed lecture cannot load, download loses content or guide contradicts final qualification: stop publication acceptance and issue a revert/fix PR. No force push."
+}
