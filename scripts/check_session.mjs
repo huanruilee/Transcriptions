@@ -1,0 +1,166 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
+
+const END_PUNCT_RE = /[。？！…」』）"'：；]$/;
+
+export function computeSessionMetrics(session, rootDir = process.cwd(), relPath = '') {
+  const paras = Array.isArray(session.paragraphs) ? session.paragraphs : [];
+  const paraLens = paras.map(p => (Array.isArray(p.sentences) ? p.sentences.length : 0));
+  const totalSentences = paraLens.reduce((a, b) => a + b, 0);
+
+  let noEndPunct = 0;
+  let shortFragments = 0;
+  let headingsCount = 0;
+  let longHeadingsOver35Chars = 0;
+
+  for (const p of paras) {
+    const h = String(p.heading || p.title || p.sectionTitle || '').trim();
+    if (h) {
+      headingsCount += 1;
+      if (h.length > 35) longHeadingsOver35Chars += 1;
+    }
+    for (const st of p.sentences || []) {
+      const t = String(st.text || '').trim();
+      if (!t) continue;
+      if (t.length <= 3) shortFragments += 1;
+      if (!END_PUNCT_RE.test(t)) noEndPunct += 1;
+    }
+  }
+
+  const maxPara = paraLens.length ? Math.max(...paraLens) : 0;
+  const minPara = paraLens.length ? Math.min(...paraLens) : 0;
+  const avgPara = paraLens.length ? Number((totalSentences / paraLens.length).toFixed(1)) : 0;
+  const noEndPunctPct = totalSentences ? Number(((100 * noEndPunct) / totalSentences).toFixed(1)) : 0;
+  const shortFragmentPct = totalSentences ? Number(((100 * shortFragments) / totalSentences).toFixed(1)) : 0;
+
+  let rawTextDiffCount = null;
+  if (relPath) {
+    try {
+      const baseJson = execFileSync('git', ['show', `origin/main:${relPath}`], {
+        cwd: rootDir,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      });
+      const baseSession = JSON.parse(baseJson);
+      const baseMap = new Map();
+      for (const p of baseSession.paragraphs || []) {
+        for (const st of p.sentences || []) {
+          if (st.id) baseMap.set(st.id, String(st.rawText || ''));
+        }
+      }
+      let diffs = 0;
+      for (const p of paras) {
+        for (const st of p.sentences || []) {
+          if (st.id && baseMap.has(st.id) && baseMap.get(st.id) !== String(st.rawText || '')) {
+            diffs += 1;
+          }
+        }
+      }
+      rawTextDiffCount = diffs;
+    } catch {
+      rawTextDiffCount = null;
+    }
+  }
+
+  const co = session.contentOverview || {};
+  const dq = session.discussionQuestions || session.discussionTopics || [];
+
+  return {
+    paragraphs: paras.length,
+    paraSents: { min: minPara, avg: avgPara, max: maxPara },
+    totalSentences,
+    noEndPunctPct,
+    shortFragmentPct,
+    maxParaOver35: paraLens.filter(n => n > 35).length,
+    headingsCount,
+    longHeadingsOver35Chars,
+    discussionQuestionsCount: dq.length,
+    contentOverview: {
+      status: co.status || null,
+      mainPointsCount: Array.isArray(co.mainPoints) ? co.mainPoints.length : 0,
+      hasSourceDigest: Boolean(co.sourceDigest),
+    },
+    rawTextDiffCount,
+  };
+}
+
+function resolveCourse(catalog, courseArg) {
+  const norm = courseArg.replace(/\/+$/, '');
+  const withPrefix = norm.startsWith('courses/') ? norm : `courses/${norm}`;
+  return (catalog.courses || []).find(
+    c => c.id === courseArg || c.path === norm || c.path === withPrefix
+  );
+}
+
+function resolveSessionFile(courseDir, sessionArg) {
+  const clean = sessionArg.replace(/^sessions\//, '').replace(/\.json$/, '');
+  const m = clean.match(/^(?:session[_-])?(\d+)$/i);
+  const fileName = m ? `session_${m[1].padStart(2, '0')}.json` : `${clean}.json`;
+  return path.join(courseDir, 'sessions', fileName);
+}
+
+function collectRelatedFiles(rootDir, courseId, courseDir, sessionPath) {
+  const related = [];
+  const tocPath = path.join(courseDir, 'toc.json');
+  if (fs.existsSync(path.join(rootDir, tocPath))) related.push(tocPath);
+
+  const outlinesDir = path.join(courseDir, 'source_outlines');
+  if (fs.existsSync(path.join(rootDir, outlinesDir))) related.push(outlinesDir);
+
+  const numMatch = path.basename(sessionPath).match(/session_(\d+)\.json$/);
+  if (numMatch && courseId === 'shi-liang-lun-study-group-2025') {
+    const num = numMatch[1];
+    const bundlePath = path.join('reviews/evidence/study-group-2025', `playlist-${num}`, 'remote_reviewer_bundle.json');
+    if (fs.existsSync(path.join(rootDir, bundlePath))) related.push(bundlePath);
+  }
+  return related;
+}
+
+export function inspectSession(courseArg, sessionArg, rootDir = process.cwd()) {
+  const catalog = JSON.parse(fs.readFileSync(path.join(rootDir, 'courses/catalog.json'), 'utf8'));
+  const course = resolveCourse(catalog, courseArg);
+  if (!course || !course.path) {
+    throw new Error(`Course not found in catalog.json: ${courseArg}`);
+  }
+  const sessionRelPath = resolveSessionFile(course.path, sessionArg);
+  const absSessionPath = path.join(rootDir, sessionRelPath);
+  if (!fs.existsSync(absSessionPath)) {
+    throw new Error(`Session file not found: ${sessionRelPath}`);
+  }
+  const session = JSON.parse(fs.readFileSync(absSessionPath, 'utf8'));
+  const metrics = computeSessionMetrics(session, rootDir, sessionRelPath);
+
+  return {
+    courseId: course.id,
+    sessionFile: sessionRelPath,
+    publicationState: course.publicationState ?? null,
+    hasGrounding: fs.existsSync(path.join(rootDir, course.path, 'grounding.json')),
+    hasCourseGuide: fs.existsSync(path.join(rootDir, course.path, 'COURSE_GUIDE.md')),
+    ...metrics,
+    relatedFiles: collectRelatedFiles(rootDir, course.id, course.path, sessionRelPath),
+  };
+}
+
+if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
+  const [courseArg, sessionArg] = process.argv.slice(2);
+  if (!courseArg || !sessionArg) {
+    console.error('Usage: node scripts/check_session.mjs <course_dir_or_id> <session_num_or_file>');
+    process.exit(2);
+  }
+  const summary = inspectSession(courseArg, sessionArg);
+  const compact = Object.fromEntries(
+    Object.entries(summary).map(([k, v]) => [k, v])
+  );
+  // Keep output <= 20 lines by serializing nested objects/arrays on one line
+  const lines = ['{'];
+  const entries = Object.entries(compact);
+  entries.forEach(([k, v], idx) => {
+    const comma = idx < entries.length - 1 ? ',' : '';
+    lines.push(`  ${JSON.stringify(k)}: ${JSON.stringify(v)}${comma}`);
+  });
+  lines.push('}');
+  console.log(lines.join('\n'));
+}
