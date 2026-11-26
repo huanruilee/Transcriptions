@@ -49,6 +49,21 @@ jobs:
       - name: Verify transcript overview evidence and source digests
         run: npm run summaries:audit
 
+      - name: Enforce strict quality flags on PR-modified sessions
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --depth=50 origin "${{ github.base_ref }}"
+          changed=$(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- 'courses/*/sessions/session_*.json' 2>/dev/null || git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}" HEAD -- 'courses/*/sessions/session_*.json')
+          if [ -z "$changed" ]; then
+            echo "No session JSON files added or modified in this PR."
+            exit 0
+          fi
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            echo "Checking $f with --strict..."
+            node scripts/check_session.mjs --file "$f" --strict
+          done <<< "$changed"
+
       - name: Verify committed human-review package semantics
         # Rebuilds the review queue in memory without local audio, ignores
         # local-only clip fields, and checks the committed HTML manifest.
