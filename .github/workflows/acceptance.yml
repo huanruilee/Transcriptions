@@ -3,8 +3,28 @@ name: Completion Acceptance
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '!docs/COMPLETION_ACCEPTANCE.md'
+      - 'AGENTS.md'
+      - 'START_HERE.md'
+      - 'TASKS.md'
+      - 'PIPELINE.md'
+      - 'PROMPTS.md'
+      - 'TESTING.md'
+      - 'prompts/**'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '!docs/COMPLETION_ACCEPTANCE.md'
+      - 'AGENTS.md'
+      - 'START_HERE.md'
+      - 'TASKS.md'
+      - 'PIPELINE.md'
+      - 'PROMPTS.md'
+      - 'TESTING.md'
+      - 'prompts/**'
 
 permissions:
   contents: read
@@ -106,6 +126,17 @@ jobs:
         run: npx playwright install chromium
       - name: Install release browser OS dependencies
         run: npx playwright install-deps chromium
+      - name: Determine browser smoke scope
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --depth=50 origin "${{ github.base_ref }}"
+          changed=$(git -c core.quotePath=false diff --name-only "origin/${{ github.base_ref }}...HEAD" 2>/dev/null || git -c core.quotePath=false diff --name-only "origin/${{ github.base_ref }}" HEAD)
+          if echo "$changed" | grep -qE '^(src/|index\.html$|vite\.config\.ts$|playwright\.reader\.config\.ts$|tests/browser/|package(-lock)?\.json$|courses/入中論善顯密意疏/)'; then
+            echo "UI or Ruzhong assets changed -> full 96-test browser suite."
+          else
+            echo "READER_SMOKE_SCOPE=core" >> "$GITHUB_ENV"
+            echo "Non-UI/non-Ruzhong PR -> core browser smoke."
+          fi
       - run: bash scripts/test_reader_artifact.sh
       - name: Save reader browser evidence
         if: always()
