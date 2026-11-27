@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { computeSessionMetrics, evaluateStrictSession, inspectSessionByFile } from '../../scripts/check_session.mjs';
+import { computeSessionMetrics, evaluateLastUpdatedBump, evaluateStrictSession, inspectSessionByFile } from '../../scripts/check_session.mjs';
 import { cleanStudyGroupText } from '../../scripts/study_group_preflight.mjs';
 
 const ROOT = process.cwd();
@@ -91,4 +91,12 @@ test('evaluateStrictSession and --file --strict pass on session_49.json and fail
     encoding: 'utf8',
   });
   assert.equal(JSON.parse(stdout).courseId, 'shi-liang-lun-study-group-2025');
+});
+
+test('evaluateLastUpdatedBump enforces YYYY-MM-DD HH:MM format and base-ref bump', () => {
+  assert.equal(evaluateLastUpdatedBump(null, null).pass, false);
+  assert.equal(evaluateLastUpdatedBump('2026-11-27', '2026-11-15').pass, false);
+  assert.equal(evaluateLastUpdatedBump('2026-11-27 15:24', '2026-11-27 15:24').pass, false);
+  assert.deepEqual(evaluateLastUpdatedBump('2026-11-27 18:30', '2026-11-15'), { pass: true, violations: [] });
+  assert.deepEqual(evaluateLastUpdatedBump('2026-11-27 18:30:00', null), { pass: true, violations: [] });
 });

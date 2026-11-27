@@ -60,8 +60,8 @@ jobs:
           fi
           while IFS= read -r f; do
             [ -z "$f" ] && continue
-            echo "Checking $f with --strict..."
-            node scripts/check_session.mjs --file "$f" --strict
+            echo "Checking $f with --strict --base-ref origin/${{ github.base_ref }}..."
+            node scripts/check_session.mjs --file "$f" --strict --base-ref "origin/${{ github.base_ref }}"
           done <<< "$changed"
 
       - name: Enforce lastUpdated freshness on PR-modified sessions
