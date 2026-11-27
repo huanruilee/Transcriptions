@@ -113,3 +113,31 @@ test('底本清理後不得殘留校稿者的編輯指令標記（白名單外�
     }
   }
 });
+
+test('結行節章界必須完整落錨：5 個提問＋結語，且 heading 對齊失敗清單為空', () => {
+  const session = readJson(path.join(COURSE_DIR, 'sessions', 'session_06.json'));
+  const headings = session.paragraphs
+    .map((p) => (p.heading && typeof p.heading === 'object' ? p.heading.title : p.heading))
+    .filter(Boolean);
+
+  // 結行只有 5 組問答＋1 段結語；缺結語＝讀者看到問答後正文斷掉，沒有收束段。
+  assert.equal(headings.length, 6, `結行應有 6 個章界，實得 ${headings.length}：${headings.join(' / ')}`);
+  assert.equal(headings.filter((h) => /^問題\s*\d/.test(h)).length, 5);
+  assert.ok(headings.includes('結語'), `章界缺少「結語」：${headings.join(' / ')}`);
+
+  // 結語必須落在最後一個提問之後，且時間戳單調。
+  const closing = session.paragraphs.find((p) => {
+    const title = p.heading && typeof p.heading === 'object' ? p.heading.title : p.heading;
+    return title === '結語';
+  });
+  const lastQuestion = session.paragraphs.filter((p) => {
+    const title = p.heading && typeof p.heading === 'object' ? p.heading.title : p.heading;
+    return title && /^問題\s*\d/.test(title);
+  }).at(-1);
+  assert.ok(closing.start > lastQuestion.start, '結語段落起點必須晚於最後一個提問');
+
+  // 章界對齊證據不得留下失敗項（失敗項＝時間碼來源不明，不得進正式檔）。
+  const alignment = readJson(path.join(EVIDENCE_DIR, 'work', 'heading_alignment.json'));
+  const lecture06 = (alignment.failures || []).filter((f) => f.lecture === '06');
+  assert.deepEqual(lecture06, [], `lecture 06 仍有章界對齊失敗：${JSON.stringify(lecture06)}`);
+});

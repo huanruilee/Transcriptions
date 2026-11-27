@@ -40,6 +40,27 @@ SOURCE_DIR = COURSE_DIR / "source_text"
 SESSIONS_DIR = COURSE_DIR / "sessions"
 EVIDENCE = BASE / "reviews" / "evidence" / "朝聖前行課程"
 WORK = EVIDENCE / "work"
+ANCHOR_CACHE = WORK / "anchor_cache.json"
+
+
+def load_anchor_cache() -> dict:
+    """已定錨的結行章界快取（key = 講次|kind|probe 前 60 字）。
+
+    模型輔助定錨不可重現：同一份 ASR 重跑可能得到不同 index，
+    因此把「已接受」的定錨寫回磁碟，重跑時先讀快取，讓 artifact 可重現。
+    """
+    if not ANCHOR_CACHE.exists():
+        return {}
+    try:
+        return json.loads(ANCHOR_CACHE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def save_anchor_cache(cache: dict) -> None:
+    ANCHOR_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    ANCHOR_CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+                            encoding="utf-8")
 OUTLINE_REF = EVIDENCE / "reference" / "closing_outline.txt"
 
 CONVERTER = opencc.OpenCC("s2twp")
@@ -567,6 +588,35 @@ def align_closing_sections(segments, outline_text):
                              "probeText": group["text"][:120],
                              "reason": "outline-probe-too-short", "topScore": 0.0})
             continue
+        if group["kind"] == "closing":
+            # 結語在錄音尾端，而提問集中在前面 → 不能用 cursor 起的 120 句窗，
+            # 否則永遠找不到（曾誤匹配到 sentenceIndex 114、score 0.145）。
+            # 紀要的結語是「摘要」，長度遠大於單句 → 改以首句為定錨鍵、逐句比對。
+            key = canon(group["text"][:20])
+            best = None
+            for seg_index in range(len(segments)):
+                score = difflib.SequenceMatcher(None, key, canon(segments[seg_index]["text"]),
+                                                autojunk=False).ratio()
+                if best is None or score > best[0]:
+                    best = (score, seg_index)
+                if score >= 0.85:
+                    break
+            if best is None or best[0] < MIN_HEADING_SIMILARITY:
+                failures.append({"lecture": "06", "heading": label, "kind": group["kind"],
+                                 "probeText": group["text"][:120],
+                                 "candidates": [{"sentenceIndex": best[1], "score": round(best[0], 3)}] if best else [],
+                                 "topScore": round(best[0], 3) if best else 0.0,
+                                 "reason": "closing-anchor-below-threshold"})
+                continue
+            score, seg_index = best
+            if boundaries and seg_index <= boundaries[-1]["sentenceIndex"]:
+                failures.append({"lecture": "06", "heading": label, "topScore": round(score, 3),
+                                 "reason": "not-monotonic"})
+                continue
+            boundaries.append({"sentenceIndex": seg_index, "heading": label,
+                               "score": round(score, 3), "method": "outline-closing-anchor"})
+            cursor_seg = seg_index + 1
+            continue
         best = None
         limit = min(len(segments), cursor_seg + 120)
         for seg_index in range(cursor_seg, limit):
@@ -866,15 +916,36 @@ def build_session(session_id: str, corpus, glossary, now_str: str) -> dict:
         # 改以模型輔助定錨「提問段落」，失敗者保留為失敗（不硬塞）。
         if failures:
             resolved = []
+            cache = load_anchor_cache()
+            cache_dirty = False
             for failure in list(failures):
                 if failure.get("kind") not in ("question", "closing"):
                     resolved.append(failure)
                     continue
-                lower = max([b["sentenceIndex"] for b in boundaries] or [0])
+                # 窗口下界只能取「已落錨的提問章界」：結語在錄音尾端（約第 489 句），
+                # 若把它算進來，提問段（第 170–246 句）會全部落在窗外而被判失敗。
+                lower = max([b["sentenceIndex"] for b in boundaries
+                             if b.get("heading") != "結語"] or [0])
                 upper = min(len(segments), lower + 250)
                 if failure.get("kind") == "closing":
                     upper = len(segments)
-                anchor = llm_anchor_question(failure, segments, lower, upper)
+                # 同一份 artifact 必須可重現：已定錨過的章界先讀快取，不再問模型。
+                cache_key = f"06|{failure.get('kind')}|{(failure.get('probeText') or '')[:60]}"
+                cached = cache.get(cache_key) or {}
+                cached_index = cached.get("sentenceIndex")
+                if isinstance(cached_index, int) and lower <= cached_index < upper:
+                    anchor = {"sentenceIndex": cached_index,
+                              "confidence": cached.get("confidence", 1.0),
+                              "reason": cached.get("reason"),
+                              "probe": cached.get("probe")}
+                else:
+                    anchor = llm_anchor_question(failure, segments, lower, upper)
+                    if anchor and anchor.get("sentenceIndex") is not None:
+                        cache[cache_key] = {"sentenceIndex": anchor["sentenceIndex"],
+                                            "confidence": anchor["confidence"],
+                                            "reason": anchor.get("reason"),
+                                            "probe": anchor.get("probe")}
+                        cache_dirty = True
                 if anchor and anchor.get("sentenceIndex") is not None:
                     raw_title = (failure.get("probeText") or "").strip()
                     if failure.get("kind") == "closing":
@@ -896,6 +967,8 @@ def build_session(session_id: str, corpus, glossary, now_str: str) -> dict:
                                     "baseProbe": anchor.get("probe")})
                 else:
                     resolved.append(failure)
+            if cache_dirty:
+                save_anchor_cache(cache)
             failures = resolved
             boundaries.sort(key=lambda b: b["sentenceIndex"])
             monotonic = []
