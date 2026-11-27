@@ -64,6 +64,8 @@ jobs:
         run: npx playwright install-deps chromium
 
       - name: Verify original reader URL in the exact site artifact
+        env:
+          READER_SMOKE_SCOPE: core
         run: bash scripts/test_reader_artifact.sh
 
       - name: Setup Pages
@@ -131,6 +133,7 @@ jobs:
         env:
           READER_BASE_URL: ${{ steps.deployment.outputs.page_url }}
           READER_SMOKE_PHASE: deployed
+          READER_SMOKE_SCOPE: core
         run: npm run test:reader-smoke
 
       - name: Save reader release evidence
