@@ -2,6 +2,7 @@
 """Model-agnostic one-pass proofreading CLI & deterministic guardrail assembler."""
 import argparse
 import concurrent.futures
+import datetime
 import json
 import os
 import re
@@ -390,6 +391,7 @@ def assemble_corrected_chunks(
 
     out = dict(base_session)
     out["paragraphs"] = paragraphs
+    out["lastUpdated"] = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d")
 
     total_segs = len(raw_segs)
     cov_pct = round(100.0 * len(covered_indices) / total_segs, 2) if total_segs else 0.0
