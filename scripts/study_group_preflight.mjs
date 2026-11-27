@@ -35,6 +35,17 @@ const TEXT_REPLACEMENTS = [
 const SAFE_HONORIFICS = new Set(["各位師兄", "幾位師姐", "面幾位師姐", "位師姐", "各位師姐", "眾位師兄", "眾位師姐"]);
 const SAFE_THANKS = new Set(["謝謝法師", "謝謝老師", "謝謝主持", "謝謝主持人", "謝謝大家", "謝謝同學", "謝謝師兄", "謝謝師姐", "謝謝學員"]);
 
+// 「X師兄／X師姐」的 X 若是稱謂、量詞或指示詞，就不是人名。
+// 30上（session_48）原本被誤判 7 處：法師兄、以上師兄、其他的師兄、有個師姐…
+// 真正的姓名（美惠師姐、淑貞師姐）不在這份清單，仍會被抓出來。
+const HONORIFIC_PREFIX_STOPWORDS = new Set([
+  "法", "以上", "其他的", "的", "個", "位", "有個", "幾位", "各位", "眾位",
+  "前面", "您", "你", "我", "他", "她", "這", "那", "其他", "我們", "他們",
+]);
+
+// 「謝謝」後面接代稱或稱謂（謝謝您…／謝謝大家…）不是姓名。
+const THANKS_NON_NAME_PREFIXES = ["您", "你", "我", "他", "她", "大家", "各位", "同學", "法師", "師兄", "師姐", "學員", "主持"];
+
 export function cleanStudyGroupText(text) {
   let out = String(text || "");
   for (const [src, dst] of TEXT_REPLACEMENTS) {
@@ -48,15 +59,16 @@ export function findPossibleNameLeaks(text) {
   const leaks = [];
   for (const m of s.matchAll(/[\u4e00-\u9fff]{1,3}(?:師姐|師兄)/g)) {
     const val = m[0];
-    if (!SAFE_HONORIFICS.has(val) && !val.startsWith("前面") && !val.startsWith("各位") && !val.startsWith("幾位")) {
-      leaks.push(val);
-    }
+    const prefix = val.slice(0, -2);
+    if (SAFE_HONORIFICS.has(val) || SAFE_THANKS.has(val) || HONORIFIC_PREFIX_STOPWORDS.has(prefix)) continue;
+    leaks.push(val);
   }
   for (const m of s.matchAll(/謝謝[\u4e00-\u9fff]{2,3}/g)) {
     const val = m[0];
-    if (!SAFE_THANKS.has(val)) {
-      leaks.push(val);
-    }
+    if (SAFE_THANKS.has(val)) continue;
+    const rest = val.slice(2);
+    if (THANKS_NON_NAME_PREFIXES.some((p) => rest.startsWith(p))) continue;
+    leaks.push(val);
   }
   return leaks;
 }

@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { isShortFragment } from './check_session.mjs';
 
 const FILLER_ONLY_RE = /^(呃|嗯|啊|喔|哦|欸|唉|嘿|那|好|就是說|對|是)[，。、！？\s]*$/u;
 const END_PUNCT_RE = /[。？！…」》）】；：，、]$/u;
@@ -114,8 +115,10 @@ export function auditSession(session, opts = {}) {
     if (!END_PUNCT_RE.test(txt)) {
       missingEndPunct += 1;
     }
+    // 與 strict gate 共用判定：字數少「而且」沒有句末標點才算碎句。
+    // 完整的一字應答（可以。／是的。／謝謝。）不是碎句。
     const bare = txt.replace(/[，。、！？；：「」『』（）《》\s]/g, '');
-    if (bare.length > 0 && bare.length <= 3) {
+    if (isShortFragment(txt)) {
       shortFragments += 1;
     }
 
@@ -217,7 +220,7 @@ export function auditSession(session, opts = {}) {
   if (shortFragmentRatio > cfg.maxShortFragmentRatio) {
     violations.push({
       code: 'SHORT_FRAGMENT_RATIO',
-      message: `Isolated 1-3 char fragment ratio ${(shortFragmentRatio * 100).toFixed(1)}% exceeds ${(cfg.maxShortFragmentRatio * 100).toFixed(1)}% (${shortFragments}/${totalSentences}).`,
+      message: `Isolated chopped fragment (<=3 chars, no end punctuation) ratio ${(shortFragmentRatio * 100).toFixed(1)}% exceeds ${(cfg.maxShortFragmentRatio * 100).toFixed(1)}% (${shortFragments}/${totalSentences}).`,
     });
   }
   if (hallucinationMatches > 0 || hasRepeatedLoop) {
