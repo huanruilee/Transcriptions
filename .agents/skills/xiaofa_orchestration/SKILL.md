@@ -133,6 +133,7 @@ Based on the full 219-session production rollout and continuous calibration:
 5. **One-Pass Smart-Model Handoff (`scripts/onepass_proofread.py`)**:
    - Do NOT improvise ad-hoc proofreading prompts. Run the version-controlled CLI:
      `python3 scripts/onepass_proofread.py --course <course> --session <num> --provider minimax --apply`
+   - Prefer `hermes peer run` over `hermes peer dm` for automated dispatch when Bot Chat may be open.
    - Verify `coverage_pct >= 98.0` and `node scripts/check_session.mjs --file <session.json> --strict` exits `0` before opening a PR.
 
 ### M1: Establish the workspace
