@@ -2,6 +2,10 @@
 
 當使用者對任何 Agent（`gx10-xiaofa`、`gx10-xiaomin`、Antigravity 等）下達 **「Review 第 X 講」** 或 **「建立新逐字稿」** 指令時，一律依本頁固定劇本執行，**禁止臨場自創 Prompt 或跳過驗收門檻**。
 
+**預設交付終點為「正式上線並附上線上閱讀連結」**（讓使用者直接在 `github.io` 確認）：
+- **由主控 AGY 直接執行時**：完成測試 → 開 PR → 等 CI 全綠 → `--merge` 合併至 `main` → 等 `Deploy to GitHub Pages` 成功並實測線上頁面 → 回報直接閱讀連結。
+- **由 GX10 Worker Agent（如 `gx10-xiaofa`）執行時**：完成測試後開 PR，**交由 AGY 做最後一次獨立 Review**；由 AGY 複驗 diff／`--strict`／開場結尾後執行 `--merge` 合併與線上部署驗證，再回報直接閱讀連結。
+
 ---
 
 ## 前置共通紀律
@@ -42,9 +46,10 @@
    npm run test:v2
    npm test
    ```
-5. **開立 PR 與結案回報**：
-   - 確認 `git -c core.quotePath=false status --short` 僅含目標檔案，推上分支並以 `gh pr create` 開 PR（不可自行合併除非明確授權）。
-   - 回報須附：**PR URL、commit SHA、`check_session --strict` 結果、`summaries:audit` 結果、`npm test` 通過數、開場前 3 句與結尾後 3 句摘錄**。
+5. **AGY 最後 Review、合併與直接上線**：
+   - 確認 `git -c core.quotePath=false status --short` 僅含目標檔案，推上分支並以 `gh pr create` 開 PR。
+   - 若為 GX10 Worker 執行，於此處交由 **AGY 做最後一次獨立 Review**；AGY 複驗通過且 PR CI 全綠後，執行 `gh pr merge <PR> --merge --delete-branch`，等候 `Deploy to GitHub Pages` 完成並實測線上 JSON／頁面 `HTTP 200`。
+   - 最終回報須附：**線上直接閱讀連結（`https://huanruilee.github.io/Transcriptions/?course=<courseId>#session-<XX>`）、PR URL、`check_session --strict` 與 `summaries:audit` 結果、開場前 3 句與結尾後 3 句摘錄**。
 
 ---
 
@@ -57,6 +62,6 @@
    - 補齊 `discussionQuestions`（3～7 題，`？` 結尾）、`teacherSummary`、`contentOverview`（自動重算 `sourceDigest`）。
    - 若課程含研讀講記，產出 `publications/lecture_XX_study_guide.md` 並執行 `python3 scripts/render_study_guide_html.py` 產生 `.html` 與 `.txt`。
    - 同步更新 `course.json`、`toc.json`、`courses/catalog.json` 及相關講次總數單元測試斷言。
-5. **Step 5 驗收、合併與線上實測**：
-   - 跑完指令 A 第 4 步全套驗證＋`npm run build:v2`，開 PR 並等 GitHub Actions 全綠以 `--merge` 合併。
-   - 確認 `Deploy to GitHub Pages` 成功後，實測 `https://huanruilee.github.io/Transcriptions/` 回傳 HTTP 200 且新講次已生效。
+5. **Step 5 驗收、AGY 最後 Review 與直接上線**：
+   - 跑完指令 A 第 4 步全套驗證＋`npm run build:v2`，開 PR；若為 GX10 Worker 執行，交由 **AGY 做最後一次獨立 Review**。
+   - PR CI 全綠後由 AGY 以 `--merge` 合併至 `main`，等候 `Deploy to GitHub Pages` 成功並實測 `https://huanruilee.github.io/Transcriptions/?course=<courseId>#session-<XX>` 回傳 `HTTP 200` 且新講次已生效，再將直接閱讀連結回報給使用者確認。
