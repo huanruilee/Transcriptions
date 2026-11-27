@@ -237,6 +237,19 @@ def run_session(session_id: str, limit_chunks: int = 0, dry_run: bool = False) -
                           "start": round(cursor, 2), "end": duration,
                           "durationSec": round(duration - cursor, 2)})
 
+    # 更隱蔽的一種遺漏：VAD 把整段唱誦壓成一個極短句子（實測開經偈 62 秒只剩「請放掌，」）。
+    # 這種段落會「假裝」涵蓋了該時段 → 以「長時段／極短文字」偵測並如實記錄。
+    suspected_non_speech = []
+    for seg in segments:
+        span = seg["end"] - seg["start"]
+        if span > 20 and len(seg["text"]) < 12:
+            suspected_non_speech.append({
+                "segmentId": seg["id"], "start": round(seg["start"], 2),
+                "end": round(seg["end"], 2), "durationSec": round(span, 2),
+                "text": seg["text"],
+                "note": "長時段卻只有極短文字：疑似唱誦／非語音段被 VAD 壓縮，需人工回聽",
+            })
+
     artifact = {
         "schema": "chaosheng-raw-asr/v1",
         "sessionId": session_id,
@@ -261,6 +274,7 @@ def run_session(session_id: str, limit_chunks: int = 0, dry_run: bool = False) -
         "chunkRtfSamples": rtf_samples,
         "tailGapSec": tail_gap,
         "longGaps": long_gaps,
+        "suspectedNonSpeechSpans": suspected_non_speech,
         "segmentCount": len(segments),
         "charCount": sum(len(s["text"]) for s in segments),
         "segmentIdType": "integer",

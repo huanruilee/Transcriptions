@@ -43,9 +43,10 @@ describe('iOS 風格 UI（feat/ios-style-ui）', () => {
     await flushPromises();
 
     expect(wrapper.find('#course-chooser').exists()).toBe(true);
-    // 8 課＝8 個圖示磚，每磚都有漸層圖示
-    expect(wrapper.findAll('.course-choice')).toHaveLength(8);
-    expect(wrapper.findAll('.course-choice-icon')).toHaveLength(8);
+    // 9 課＝9 個圖示磚，每磚都有漸層圖示
+    // （2026-11-28 新增「朝聖前行課程」：5 講＋結行，共 6 節，待閱校版）
+    expect(wrapper.findAll('.course-choice')).toHaveLength(9);
+    expect(wrapper.findAll('.course-choice-icon')).toHaveLength(9);
     const firstIcon = wrapper.findAll('.course-choice-icon')[0];
     expect(firstIcon.attributes('style') || '').toContain('gradient');
     // 圖示磚保留課程說明（入中論 description）

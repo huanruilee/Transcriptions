@@ -41,7 +41,7 @@ LEDGER_DIR = WORK / "normalize"
 
 ROUTER_URL = "http://100.113.144.100:18770/v1/chat/completions"
 MODEL = "auto-cloud"
-BATCH_SIZE = 40
+BATCH_SIZE = 25
 MIN_SEG_RATIO = 0.85
 MAX_SEG_RATIO = 1.15
 MIN_TOTAL_RATIO = 0.95
@@ -71,6 +71,22 @@ PUNCT_FULL = {
 JUNK_RE = re.compile(r"[\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff\ufffd\u0000-\u001f]")
 HAN_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]")
 SENT_END = "。！？；：」』）"
+
+LEXICON = set()
+
+
+def load_lexicon() -> set:
+    """本課程確定名相（learned_corrections.domain_lexicon ∪ grounding.high_frequency_doctrinal_terms）。"""
+    terms = set()
+    corrections = COURSE_DIR / "learned_corrections.json"
+    if corrections.exists():
+        data = json.loads(corrections.read_text(encoding="utf-8"))
+        terms.update(data.get("domain_lexicon", {}).keys())
+    grounding = COURSE_DIR / "grounding.json"
+    if grounding.exists():
+        data = json.loads(grounding.read_text(encoding="utf-8"))
+        terms.update(t["term"] for t in data.get("high_frequency_doctrinal_terms", []) if t.get("term"))
+    return {t for t in terms if len(t) >= 2}
 
 
 def deterministic_punctuation(text: str) -> str:
@@ -105,33 +121,57 @@ def han_only(text: str) -> str:
     return "".join(HAN_RE.findall(text))
 
 
-def change_is_plausible(before: str, after: str) -> tuple:
-    """回傳 (ok, reason, changed)。只准同音／近音的等長替換（或差 1 字的替換）。"""
+def change_is_plausible(before: str, after: str, lexicon=None):
+    """逐段檢查模型提案；不合理的差異只回退該處，不整段丟棄。
+
+    回傳 (ok, reason, changed, filtered_text)：
+      ok=False 表示有部分差異被回退（filtered_text 只保留可接受的修改）。
+    只准同音／近音的等長替換（或差 1 字的替換），或改成本課程詞庫（lexicon）裡的
+    確定名相（例：蘭比尼→藍毗尼，b/p 不同音但詞庫唯一）。
+    """
     a, b = han_only(before), han_only(after)
     if a == b:
-        return True, "punctuation-only", 0
+        return True, "punctuation-only", 0, after
+
+    # 逐字元保留原字串的索引，才能把回退套回含標點的原文
+    positions = [i for i, ch in enumerate(before) if HAN_RE.match(ch)]
     ops = difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes()
     changed = 0
+    rejected = []
     for tag, i1, i2, j1, j2 in ops:
         if tag == "equal":
             continue
         left, right = a[i1:i2], b[j1:j2]
+        plausible = False
         if tag == "replace":
             if abs(len(left) - len(right)) > 1:
-                return False, f"length-delta>{1}: {left}->{right}", changed
-            if len(left) == len(right):
-                for ch_a, ch_b in zip(left, right):
-                    if not same_sound(ch_a, ch_b):
-                        return False, f"not-homophone: {ch_a}->{ch_b}", changed
+                plausible = False
+            elif len(left) == len(right):
+                plausible = all(same_sound(x, y) for x, y in zip(left, right))
+                if not plausible and lexicon:
+                    plausible = right in lexicon and left not in lexicon
             else:
-                if not same_sound(left, right):
-                    return False, f"not-homophone: {left}->{right}", changed
+                plausible = same_sound(left, right)
+        if plausible:
             changed += max(len(left), len(right))
         else:
-            return False, f"{tag}: {left or right}", changed
+            rejected.append((i1, i2, j1, j2, left, right))
+
     if changed > MAX_CHANGED_CHARS:
-        return False, f"changed-chars>{MAX_CHANGED_CHARS}", changed
-    return True, "homophone-fix", changed
+        return False, f"changed-chars>{MAX_CHANGED_CHARS}", changed, before
+
+    if not rejected:
+        return True, "homophone-fix" if changed else "punctuation-only", changed, after
+
+    # 只保留可接受的差異：把被拒的 opcode 改回原字
+    text = after
+    for i1, i2, j1, j2, left, right in sorted(rejected, key=lambda r: r[2], reverse=True):
+        if j1 >= len(positions) or j2 > len(positions):
+            return False, f"unmappable: {left}->{right}", changed, before
+        start = positions[j1]
+        end = positions[j2 - 1] + 1
+        text = text[:start] + left + text[end:]
+    return False, f"partial-revert: {','.join(f'{l}->{r}' for _, _, _, _, l, r in rejected)}", changed, text
 
 
 def call_router(messages, timeout=600) -> tuple:
@@ -206,15 +246,27 @@ def normalize_session(session_id: str, limit_batches: int = 0, dry_run: bool = F
         stats["batches"] += 1
         ids_in = [s["id"] for s in batch]
         ids_out = [p.get("id") for p in proposal if isinstance(p, dict)]
-        if ids_in != ids_out:
-            print(f"[norm] {session_id} batch {batch_index}: id 不符（in {len(ids_in)} / out {len(ids_out)}）→ 整批退回",
+        # 模型偶爾漏一兩筆（實測 40 筆回 39 筆）。漏筆不該讓整批白跑：
+        # 只接受「輸入 id 的子集、無未知 id、無重複」，漏掉的段落保留原文並標 reviewNeeded。
+        if len(set(ids_out)) != len(ids_out) or any(i not in ids_in for i in ids_out):
+            print(f"[norm] {session_id} batch {batch_index}: id 不合契約（in {len(ids_in)} / out {len(ids_out)}）→ 整批退回",
                   flush=True)
             stats["batchesRejected"] += 1
             for seg in batch:
                 review_needed.add(seg["id"])
             continue
+        missing = [i for i in ids_in if i not in set(ids_out)]
+        if missing:
+            print(f"[norm] {session_id} batch {batch_index}: 模型漏 {len(missing)} 筆（{missing[:5]}）→ 該批保留原文",
+                  flush=True)
+            stats["droppedIds"] = stats.get("droppedIds", 0) + len(missing)
+            for seg_id in missing:
+                review_needed.add(seg_id)
+        by_id = {p["id"]: p for p in proposal if isinstance(p, dict)}
+        batch = [seg for seg in batch if seg["id"] in by_id]
 
-        for seg, prop in zip(batch, proposal):
+        for seg in batch:
+            prop = by_id[seg["id"]]
             before = base_texts[seg["id"]]
             after = deterministic_punctuation(str(prop.get("text") or ""))
             if not after:
@@ -225,18 +277,26 @@ def normalize_session(session_id: str, limit_batches: int = 0, dry_run: bool = F
                 stats["noop"] += 1
                 continue
             ratio = len(after) / max(1, len(before))
-            if not (MIN_SEG_RATIO <= ratio <= MAX_SEG_RATIO):
+            short_ok = len(before) < 30 and abs(len(after) - len(before)) <= 2
+            if not (MIN_SEG_RATIO <= ratio <= MAX_SEG_RATIO) and not short_ok:
                 review_needed.add(seg["id"])
                 stats["rejectedSegments"] += 1
                 ledger.append({"id": seg["id"], "stage": "length-guard", "before": before,
                                "proposed": after, "applied": False, "ratio": round(ratio, 3)})
                 continue
-            ok, reason, changed = change_is_plausible(before, after)
+            ok, reason, changed, filtered = change_is_plausible(before, after, LEXICON)
             if not ok:
                 review_needed.add(seg["id"])
                 stats["rejectedSegments"] += 1
-                ledger.append({"id": seg["id"], "stage": "character-guard", "before": before,
-                               "proposed": after, "applied": False, "reason": reason})
+                if filtered and filtered != before:
+                    cleaned_texts[seg["id"]] = filtered
+                    stats["partialApplied"] = stats.get("partialApplied", 0) + 1
+                    ledger.append({"id": seg["id"], "stage": "character-guard-partial",
+                                   "before": before, "proposed": after, "after": filtered,
+                                   "applied": True, "reason": reason})
+                else:
+                    ledger.append({"id": seg["id"], "stage": "character-guard", "before": before,
+                                   "proposed": after, "applied": False, "reason": reason})
                 continue
             cleaned_texts[seg["id"]] = after
             stats["applied"] += 1
@@ -305,6 +365,9 @@ def main() -> int:
     parser.add_argument("--limit-batches", type=int, default=0)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    global LEXICON
+    LEXICON = load_lexicon()
+    print(f"[norm] lexicon terms: {len(LEXICON)}", flush=True)
     for session_id in [s.strip() for s in args.sessions.split(",") if s.strip()]:
         normalize_session(session_id, limit_batches=args.limit_batches, dry_run=args.dry_run)
     return 0
