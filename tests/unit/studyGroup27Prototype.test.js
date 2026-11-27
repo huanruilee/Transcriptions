@@ -261,7 +261,7 @@ test('session 23 (12下) syncs 5 discussionQuestions to toc.json, preserves App.
 test('all 50 study-group sessions sync curated questions to toc.json and maintain clean complete study guides', () => {
   const course = readJson(`${COURSE_PATH}/course.json`);
   const toc = readJson(`${COURSE_PATH}/toc.json`);
-  const validSpeakers = new Set(['如性法師', '學員', '維那/主持']);
+  const validSpeakers = new Set(['如性法師', '學員', '主持', '維那/主持']);
 
   assert.equal(course.sessions.length, 50);
 
