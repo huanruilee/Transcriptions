@@ -63,7 +63,7 @@ const REQUIRED_QUESTION_IDS = {
   '21': ['q-02-01', 'q-07-02', 'q-16-01', 'q-23-02', 'q-28-02', 'q-28-04', 'q-31-01'],
 };
 
-const VALID_SPEAKERS = new Set(['如性法師', '學員', '維那/主持']);
+const VALID_SPEAKERS = new Set(['如性法師', '學員', '主持', '維那/主持']);
 
 // Deterministic Buddhist, Pramāṇavārttika & Simplified->Traditional replacements.
 // Never applied to `sentences[].rawText`.
@@ -387,7 +387,7 @@ function fixSpeakerHandoffs(session) {
     }
 
     // Also align p.speaker with majority weighted speaker text
-    const weight = { '如性法師': 0, '學員': 0, '維那/主持': 0 };
+    const weight = { '如性法師': 0, '學員': 0, '主持': 0, '維那/主持': 0 };
     for (const s of sentences) {
       weight[s.speaker] = (weight[s.speaker] || 0) + (s.text || '').length;
     }
