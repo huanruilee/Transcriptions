@@ -269,7 +269,12 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
 
 
 def _today() -> str:
-    return datetime.date.today().isoformat()
+    """Asia/Taipei timestamp in the format check_session --strict requires.
+
+    The reader shows this string verbatim and CI enforces ``YYYY-MM-DD HH:MM``
+    (and that it differs from the base ref), so a bare date fails the gate.
+    """
+    return datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")
 
 
 def _sync_course_json(session_path: Path, session: dict) -> dict | None:
@@ -351,7 +356,7 @@ def main() -> None:
     parser.add_argument("--apply", action="store_true", help="write the file (default: dry run)")
     parser.add_argument("--ledger", help="write merge ledger JSON here")
     parser.add_argument("--no-overview-sync", action="store_true", help="skip digest/quote re-hydration")
-    parser.add_argument("--date", help="override lastUpdated (YYYY-MM-DD; default today)")
+    parser.add_argument("--date", help="override lastUpdated (YYYY-MM-DD[ HH:MM]; default now in Asia/Taipei)")
     args = parser.parse_args()
 
     path = Path(args.file)
