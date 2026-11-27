@@ -1,0 +1,62 @@
+# Agent 一句話指令執行劇本（SSOT Playbook）
+
+當使用者對任何 Agent（`gx10-xiaofa`、`gx10-xiaomin`、Antigravity 等）下達 **「Review 第 X 講」** 或 **「建立新逐字稿」** 指令時，一律依本頁固定劇本執行，**禁止臨場自創 Prompt 或跳過驗收門檻**。
+
+---
+
+## 前置共通紀律
+1. **同步最新基準並開隔離工作樹**：
+   ```bash
+   git fetch origin
+   # 嚴禁直接修改 main 或共用的 dirty workspace
+   git worktree add -b <feat/branch-name> <isolated-worktree-path> origin/main
+   ```
+2. **禁止修改鎖定講次**：開工前必查 [config/locked-sessions.json](../config/locked-sessions.json)（例如《釋量論》`session_01.json`、`四念住` `session_08.json` 嚴禁改動）。
+3. **遠端派工通道**：透過 Hermes 派工且需收回結果時，一律使用 `hermes peer run <peer> --idempotency-key <key>`，避免 `hermes peer dm` 被開啟中的 Bot Chat 攔截回訊。
+
+---
+
+## 指令 A：Review ／ 翻修既有講次（例如「Review 第 2 講」）
+
+1. **檢查現況與奠基**：
+   - 讀取 `courses/<課程名>/grounding.json` 與 `courses/<課程名>/COURSE_GUIDE.md`（若存在）。
+   - 先跑基準檢查：`node scripts/check_session.mjs --file courses/<課程名>/sessions/session_XX.json --strict`。
+2. **執行標準化單趟校對 CLI（MiniMax 優先）**：
+   ```bash
+   python3 scripts/onepass_proofread.py \
+     --course <課程名> \
+     --session <XX> \
+     --provider minimax \
+     --apply \
+     --allow-warnings
+   ```
+   - 腳本會自動套用版控雙層 Prompt（`prompts/onepass_proofread_v2.md`）、確定性防呆（`speaker` 枚舉、`<=35` 句拆段、簡轉正、`lastUpdated` 時分戳）、`study_group_preflight.mjs`、`contentOverview` 引文與 `sourceDigest` 同步，以及 `check_session.mjs --strict`。
+   - 若 GX10 Router 上的 MiniMax 在冷卻期，`auto-cloud` 會自動備援至 `DeepSeek-V4.1-Flash` / `Gemini`。
+3. **Stage 5 定向人工／高階覆核**：
+   - 若 `--strict` 仍有違規（例如 `possibleNameLeaks > 0`），只針對標記句子進行去識別化（`學員1`、`學員2`……）。
+   - 必檢重點：開場保留「`禮敬法師`」（不誤改為 `如性法師`）、開場與結尾迴向歸屬 `主持`、經典偈頌與佛法專名正字（如 `伺意知`、`迴向`）。
+4. **全套驗收（全綠才准開 PR）**：
+   ```bash
+   node scripts/check_session.mjs --file courses/<課程名>/sessions/session_XX.json --strict
+   npm run summaries:audit   # 必須 complete: true, invalid: 0
+   npm run test:v2
+   npm test
+   ```
+5. **開立 PR 與結案回報**：
+   - 確認 `git -c core.quotePath=false status --short` 僅含目標檔案，推上分支並以 `gh pr create` 開 PR（不可自行合併除非明確授權）。
+   - 回報須附：**PR URL、commit SHA、`check_session --strict` 結果、`summaries:audit` 結果、`npm test` 通過數、開場前 3 句與結尾後 3 句摘錄**。
+
+---
+
+## 指令 B：建立全新講次逐字稿（例如「建立第 50 講，YouTube URL」）
+
+1. **Step 0 實體奠基**：確認課程 `grounding.json`、`COURSE_GUIDE.md`、YouTube 影片 ID／時間碼提綱，並於 `source_outlines/` 建立提綱或 `pending` 檔。
+2. **Step 1 GX10 本地 Whisper 轉寫**：下載音訊至 GX10 暫存（嚴禁提交至 GitHub），呼叫 GX10 Whisper（`127.0.0.1:8010`）產生帶時間戳的原始段落，建立初始 `sessions/session_XX.json`（完整保留 `rawText`）。
+3. **Step 2 執行標準單趟校對 CLI**：同指令 A 第 2～3 步（`python3 scripts/onepass_proofread.py --course <課程名> --session <XX> --provider minimax --apply`），完成合句、去冗詞、分段、標點與 `--strict` 清零。
+4. **Step 3～4 產出講記與註冊清單**：
+   - 補齊 `discussionQuestions`（3～7 題，`？` 結尾）、`teacherSummary`、`contentOverview`（自動重算 `sourceDigest`）。
+   - 若課程含研讀講記，產出 `publications/lecture_XX_study_guide.md` 並執行 `python3 scripts/render_study_guide_html.py` 產生 `.html` 與 `.txt`。
+   - 同步更新 `course.json`、`toc.json`、`courses/catalog.json` 及相關講次總數單元測試斷言。
+5. **Step 5 驗收、合併與線上實測**：
+   - 跑完指令 A 第 4 步全套驗證＋`npm run build:v2`，開 PR 並等 GitHub Actions 全綠以 `--merge` 合併。
+   - 確認 `Deploy to GitHub Pages` 成功後，實測 `https://huanruilee.github.io/Transcriptions/` 回傳 HTTP 200 且新講次已生效。

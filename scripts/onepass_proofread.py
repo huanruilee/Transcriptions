@@ -294,6 +294,73 @@ def strip_fences_and_think(text: str) -> str:
     return "\n".join(lines).strip()
 
 
+def sync_content_overview_evidence(session_data: dict) -> None:
+    """Remap contentOverview evidence[] sentenceIds & quotes to current paragraphs."""
+    co = session_data.get("contentOverview")
+    if not isinstance(co, dict):
+        return
+    sents = [
+        (st["id"], st["text"])
+        for p in session_data.get("paragraphs", [])
+        for st in p.get("sentences", [])
+        if st.get("id") and st.get("text")
+    ]
+    if not sents:
+        return
+    smap = dict(sents)
+
+    def _best_match(quote: str, used_ids: set[str]):
+        q_clean = re.sub(r"[\s，。？！、；：「」『』（）]", "", quote or "")
+        for sid, txt in sents:
+            if sid in used_ids:
+                continue
+            if quote and quote in txt:
+                return sid, txt
+            if q_clean and q_clean in re.sub(r"[\s，。？！、；：「」『』（）]", "", txt):
+                return sid, txt
+        if not q_clean:
+            return None
+        q_chars = set(q_clean)
+        best = None
+        best_score = 0.0
+        for sid, txt in sents:
+            if sid in used_ids:
+                continue
+            t_clean = re.sub(r"[\s，。？！、；：「」『』（）]", "", txt)
+            if not t_clean:
+                continue
+            score = len(q_chars & set(t_clean)) / max(1, len(q_chars))
+            if score > best_score:
+                best_score = score
+                best = (sid, txt)
+        return best if best_score >= 0.45 else None
+
+    for group in ("mainPoints", "discussionTopics", "sections", "referenceViews"):
+        items = co.get(group)
+        if not isinstance(items, list):
+            continue
+        for item in items:
+            evs = item.get("evidence")
+            if not isinstance(evs, list) or not evs:
+                continue
+            used = set()
+            new_evs = []
+            for ev in evs:
+                sid = ev.get("sentenceId", "")
+                quote = ev.get("quote", "")
+                if sid in smap and sid not in used:
+                    used.add(sid)
+                    new_evs.append({"sentenceId": sid, "quote": smap[sid]})
+                else:
+                    matched = _best_match(quote, used)
+                    if matched:
+                        m_sid, m_txt = matched
+                        used.add(m_sid)
+                        new_evs.append({"sentenceId": m_sid, "quote": m_txt})
+            if new_evs:
+                item["evidence"] = new_evs
+
+
 def assemble_corrected_chunks(
     base_session: dict,
     raw_segs: list[dict],
@@ -392,6 +459,7 @@ def assemble_corrected_chunks(
     out = dict(base_session)
     out["paragraphs"] = paragraphs
     out["lastUpdated"] = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")
+    sync_content_overview_evidence(out)
 
     total_segs = len(raw_segs)
     cov_pct = round(100.0 * len(covered_indices) / total_segs, 2) if total_segs else 0.0
@@ -596,6 +664,16 @@ def main() -> int:
     preflight_script = repo_root / "scripts" / "study_group_preflight.mjs"
     if not args.skip_preflight and preflight_script.exists() and "釋量論" in course_dir.name:
         subprocess.run(["node", str(preflight_script), str(out_path), "--apply"], cwd=str(repo_root), check=False)
+
+    if assembled.get("contentOverview"):
+        digest_js = (
+            "import fs from 'node:fs';"
+            "import { computeSourceDigest } from './scripts/content_overview_pipeline.mjs';"
+            "const p = process.argv[1];"
+            "const d = JSON.parse(fs.readFileSync(p, 'utf8'));"
+            "if (d.contentOverview) { d.contentOverview.sourceDigest = computeSourceDigest(d); fs.writeFileSync(p, JSON.stringify(d, null, 1) + '\\n', 'utf8'); }"
+        )
+        subprocess.run(["node", "--input-type=module", "-e", digest_js, str(out_path)], cwd=str(repo_root), check=False)
 
     strict_proc = subprocess.run(
         ["node", str(repo_root / "scripts" / "check_session.mjs"), "--file", str(out_path), "--strict"],

@@ -4,7 +4,18 @@ import path from 'path';
 import { generateCorrectionDates } from './scripts/course_correction_dates.mjs';
 
 export default defineConfig({
-  plugins: [vue(), { name: 'course-correction-dates', buildStart() { generateCorrectionDates(); } }],
+  plugins: [
+    vue(),
+    {
+      name: 'course-correction-dates',
+      apply: 'build',
+      buildStart() {
+        if (!process.env.VITEST) {
+          generateCorrectionDates();
+        }
+      },
+    },
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
