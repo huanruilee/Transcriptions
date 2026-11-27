@@ -8,6 +8,7 @@ import { findPossibleNameLeaks } from './study_group_preflight.mjs';
 const END_PUNCT_RE = /[。？！…」』）"'：；]$/;
 const SIMPLIFIED_ONLY_RE = /[虽却这为体学师义论说对问题发会国经时过还进异间]/g;
 const CURLY_QUOTES_RE = /[“”‘’]/g;
+const LAST_UPDATED_HM_RE = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(?::\d{2})?$/;
 
 export function computeSessionMetrics(session, rootDir = process.cwd(), relPath = '') {
   const paras = Array.isArray(session.paragraphs) ? session.paragraphs : [];
@@ -190,6 +191,17 @@ export function inspectSession(courseArg, sessionArg, rootDir = process.cwd()) {
 }
 
 
+export function evaluateLastUpdatedBump(currentLastUpdated, baseLastUpdated = null) {
+  const violations = [];
+  const cur = currentLastUpdated == null ? '' : String(currentLastUpdated).trim();
+  if (!cur || !LAST_UPDATED_HM_RE.test(cur)) {
+    violations.push(`lastUpdated must be YYYY-MM-DD HH:MM (got: ${cur || 'missing'})`);
+  } else if (baseLastUpdated !== null && cur === String(baseLastUpdated).trim()) {
+    violations.push(`lastUpdated unchanged from base (${cur})`);
+  }
+  return { pass: violations.length === 0, violations };
+}
+
 export function evaluateStrictSession(summary) {
   const violations = [];
   if (summary.noEndPunctPct >= 5) violations.push(`noEndPunctPct=${summary.noEndPunctPct} (>= 5%)`);
@@ -232,7 +244,11 @@ if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) 
   const strict = rawArgs.includes('--strict');
   const fileIdx = rawArgs.indexOf('--file');
   const fileArg = fileIdx >= 0 ? rawArgs[fileIdx + 1] : null;
-  const positional = rawArgs.filter((a, i) => !a.startsWith('--') && (fileIdx < 0 || i !== fileIdx + 1));
+  const baseRefIdx = rawArgs.indexOf('--base-ref');
+  const baseRefArg = baseRefIdx >= 0 ? rawArgs[baseRefIdx + 1] : null;
+  const positional = rawArgs.filter(
+    (a, i) => !a.startsWith('--') && (fileIdx < 0 || i !== fileIdx + 1) && (baseRefIdx < 0 || i !== baseRefIdx + 1)
+  );
 
   if (!fileArg && positional.length < 2) {
     console.error('Usage: node scripts/check_session.mjs <course_dir_or_id> <session_num_or_file> [--strict] | --file <path> [--strict]');
@@ -253,6 +269,24 @@ if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) 
   console.log(lines.join('\n'));
   if (strict) {
     const res = evaluateStrictSession(summary);
+    if (baseRefArg && fileArg) {
+      const curSession = JSON.parse(fs.readFileSync(fileArg, 'utf8'));
+      let baseLastUpdated = null;
+      try {
+        const baseRaw = execFileSync('git', ['show', `${baseRefArg}:${summary.sessionFile}`], {
+          encoding: 'utf8',
+          stdio: ['ignore', 'pipe', 'ignore'],
+        });
+        baseLastUpdated = JSON.parse(baseRaw).lastUpdated ?? null;
+      } catch {
+        baseLastUpdated = null;
+      }
+      const luRes = evaluateLastUpdatedBump(curSession.lastUpdated ?? null, baseLastUpdated);
+      if (!luRes.pass) {
+        res.violations.push(...luRes.violations);
+        res.pass = false;
+      }
+    }
     if (!res.pass) {
       console.error(`STRICT_CHECK_FAILED: ${res.violations.join(', ')}`);
       process.exit(1);
