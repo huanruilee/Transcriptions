@@ -64,6 +64,20 @@ jobs:
             node scripts/check_session.mjs --file "$f" --strict
           done <<< "$changed"
 
+      - name: Enforce lastUpdated freshness on PR-modified sessions
+        # 讀者頁「🕒 最後校正更新」直接顯示 session.lastUpdated；改內容不蓋日期
+        # 就等於對讀者宣稱更舊的校正日（TESTING.md 的 FAIL 條件）。
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --depth=50 origin "${{ github.base_ref }}"
+          changed=$(git -c core.quotePath=false diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- 'courses/*/sessions/session_*.json' 2>/dev/null || git -c core.quotePath=false diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}" HEAD -- 'courses/*/sessions/session_*.json')
+          if [ -z "$changed" ]; then
+            echo "No session JSON files added or modified in this PR."
+            exit 0
+          fi
+          mapfile -t session_files <<< "$changed"
+          node scripts/check_session_dates.mjs --files "${session_files[@]}"
+
       - name: Verify committed human-review package semantics
         # Rebuilds the review queue in memory without local audio, ignores
         # local-only clip fields, and checks the committed HTML manifest.

@@ -43,6 +43,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import re
 import subprocess
@@ -267,6 +268,27 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
     return {"session": session, "stats": stats, "ledger": ledger}
 
 
+def _today() -> str:
+    return datetime.date.today().isoformat()
+
+
+def _sync_course_json(session_path: Path, session: dict) -> dict | None:
+    """Mirror lastUpdated into the course.json session entry (course list reads it)."""
+    course_json = session_path.parent.parent / "course.json"
+    if not course_json.exists():
+        return None
+    course = json.loads(course_json.read_text(encoding="utf-8"))
+    session_id = str(session.get("sessionId") or session_path.stem.replace("session_", ""))
+    for entry in course.get("sessions") or []:
+        if str(entry.get("sessionId")) == session_id:
+            if entry.get("lastUpdated") == session["lastUpdated"]:
+                return {"file": str(course_json), "changed": False}
+            entry["lastUpdated"] = session["lastUpdated"]
+            course_json.write_text(json.dumps(course, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            return {"file": str(course_json), "changed": True, "lastUpdated": session["lastUpdated"]}
+    return {"file": str(course_json), "changed": False, "reason": f"sessionId {session_id} not listed"}
+
+
 def char_stream(session: dict) -> str:
     text = "".join(
         str(s.get("text") or "") for p in session["paragraphs"] for s in p.get("sentences") or []
@@ -329,6 +351,7 @@ def main() -> None:
     parser.add_argument("--apply", action="store_true", help="write the file (default: dry run)")
     parser.add_argument("--ledger", help="write merge ledger JSON here")
     parser.add_argument("--no-overview-sync", action="store_true", help="skip digest/quote re-hydration")
+    parser.add_argument("--date", help="override lastUpdated (YYYY-MM-DD; default today)")
     args = parser.parse_args()
 
     path = Path(args.file)
@@ -362,7 +385,12 @@ def main() -> None:
             "paragraphsAfter": report["stats"]["paragraphsAfter"],
             "note": "只重切句與段界；用字、語序、rawText 未變更",
         }
+        # 讀者頁的「最後校正更新」直接顯示 lastUpdated；改內容卻不蓋日期，
+        # 頁面就會宣稱比實際更舊的校正日（TESTING.md 列為 FAIL 條件）。
+        merged["lastUpdated"] = args.date or _today()
+        report["lastUpdated"] = merged["lastUpdated"]
         path.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        report["courseJson"] = _sync_course_json(path, merged)
         if not args.no_overview_sync:
             report["overview"] = sync_overview(path)
     print(json.dumps(report, ensure_ascii=False, indent=2))
