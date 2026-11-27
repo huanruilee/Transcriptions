@@ -1,0 +1,332 @@
+{
+  "courseId": "chao-sheng-qian-xing-2026",
+  "courseTitle": "朝聖前行課程",
+  "title": "朝聖前行：從歡喜欲見到依教奉行（2026 印度朝聖前行課程）",
+  "lecturer": "如性法師",
+  "venue": "臺灣",
+  "year": 2026,
+  "lectureCount": 6,
+  "verified_at": "2026-11-27",
+  "step0_entity_grounding": {
+    "note": "Step 0 產物＝5 份三校稿底本＋結行問答紀要＋6 個原始音檔；名相與段落骨架以底本為準，時間碼一律以本機 ASR 為準。",
+    "probe_1_source_location": {
+      "query": "HuanruileeDrive:2026 印度朝聖/20260925-朝聖前行課程/",
+      "result": "找到原始音檔 6 檔、三校稿 5 檔（5-1〜5-5 分別對應第一〜第五講）、整理稿 5 份、舊字幕 5 份、校稿分工表 1 份、結行問答紀要 PDF 1 份（位於 2026 印度朝聖/ 根目錄）。",
+      "status": "verified",
+      "evidence": "reviews/evidence/朝聖前行課程/reference/README.md"
+    },
+    "probe_2_base_text": {
+      "query": "三校稿是否為逐字 gold？",
+      "result": "否。三校稿為整編校稿（已潤稿、含編號小標），不可推論為一字不差的錄音原話；舊字幕檔時間碼只到 60 分鐘，與音檔長度不符，不可作時間軸。",
+      "status": "verified",
+      "evidence": "reviews/evidence/朝聖前行課程/reference/README.md"
+    },
+    "probe_3_listened_benchmark": {
+      "query": "是否有既有的人工聽核稿可作 benchmark？",
+      "result": "查無。全課程無 audio-listened-benchmark；只有整編校稿。",
+      "status": "not-found",
+      "evidence": "reviews/evidence/朝聖前行課程/reference/README.md"
+    }
+  },
+  "entities": {
+    "instructor": {
+      "name": "如性法師",
+      "role": "主講"
+    },
+    "organization": {
+      "name": "2026 印度朝聖前行課程（臺灣）"
+    },
+    "venue": {
+      "name": "臺灣"
+    }
+  },
+  "high_frequency_doctrinal_terms": [
+    {
+      "term": "歡喜欲見",
+      "note": "朝聖三層憶念之一；三校稿標點待確認（見 pending_confirmations PC-01）"
+    },
+    {
+      "term": "憶念不忘"
+    },
+    {
+      "term": "生戀慕心"
+    },
+    {
+      "term": "開經偈"
+    },
+    {
+      "term": "無上甚深微妙法"
+    },
+    {
+      "term": "四諦"
+    },
+    {
+      "term": "因果"
+    },
+    {
+      "term": "無我"
+    },
+    {
+      "term": "三法類",
+      "note": "因果、四諦、無我"
+    },
+    {
+      "term": "護身符",
+      "note": "喻三法類"
+    },
+    {
+      "term": "七支"
+    },
+    {
+      "term": "八大聖地"
+    },
+    {
+      "term": "佛陀"
+    },
+    {
+      "term": "陀羅尼"
+    },
+    {
+      "term": "菩提心"
+    },
+    {
+      "term": "空性"
+    },
+    {
+      "term": "唯識"
+    },
+    {
+      "term": "中觀"
+    },
+    {
+      "term": "迴向"
+    },
+    {
+      "term": "供養"
+    },
+    {
+      "term": "皈依"
+    },
+    {
+      "term": "布施"
+    },
+    {
+      "term": "持戒"
+    },
+    {
+      "term": "忍辱"
+    },
+    {
+      "term": "精進"
+    },
+    {
+      "term": "禪定"
+    },
+    {
+      "term": "智慧"
+    },
+    {
+      "term": "菩提迦耶",
+      "note": "讀音待確認（PC-03）"
+    },
+    {
+      "term": "藍毗尼"
+    },
+    {
+      "term": "鹿野苑"
+    },
+    {
+      "term": "拘尸那羅"
+    },
+    {
+      "term": "般泥洹",
+      "note": "讀音待確認（PC-02）"
+    },
+    {
+      "term": "正等覺"
+    },
+    {
+      "term": "阿難"
+    },
+    {
+      "term": "長阿含經"
+    },
+    {
+      "term": "遊行經"
+    }
+  ],
+  "reference_materials": [
+    {
+      "referenceId": "chaosheng-base-5-1",
+      "type": "edited-text-reference",
+      "title": "2026臺灣《朝聖前行課程》5-1（第一講 什麼是朝聖）三校稿",
+      "author": "如性法師",
+      "publisher": "課程文字稿校對組",
+      "remote_path": "HuanruileeDrive:2026 印度朝聖/20260925-朝聖前行課程/朝聖前行課程文字稿校對/05_三校稿/2026臺灣《朝聖前行課程》5-1.doc(x)",
+      "retrieved_at": "2026-11-27",
+      "local_path": "courses/朝聖前行課程/source_text/lecture_01.txt",
+      "sha256": "2268d33c13792d6aeab6137d605c55ea456c948f594eac958e97c5db2ecee305",
+      "source_doc_sha256": "c47483c8b2461c1eea475bba84c33f3ddd36d65f4ab44dabfefb69496abcafd4",
+      "covers": "第1講全文",
+      "verification": "verified",
+      "role": "edited-text-reference（整編校稿：只作名相與段落骨架，非逐字 gold）"
+    },
+    {
+      "referenceId": "chaosheng-base-5-2",
+      "type": "edited-text-reference",
+      "title": "2026臺灣《朝聖前行課程》5-2（第二講 帶著成績單去見佛陀）三校稿",
+      "author": "如性法師",
+      "publisher": "課程文字稿校對組",
+      "remote_path": "HuanruileeDrive:2026 印度朝聖/20260925-朝聖前行課程/朝聖前行課程文字稿校對/05_三校稿/2026臺灣《朝聖前行課程》5-2.doc(x)",
+      "retrieved_at": "2026-11-27",
+      "local_path": "courses/朝聖前行課程/source_text/lecture_02.txt",
+      "sha256": "7919f516cc04a3400aa0412670f453d9ea777b00c3e388ba1533b69aecb2678d",
+      "source_doc_sha256": "3601f498d09c1d57f7f5d18b4a10d007d8e7e25803e5279e29d0c29be8623b44",
+      "covers": "第2講全文",
+      "verification": "verified",
+      "role": "edited-text-reference（整編校稿：只作名相與段落骨架，非逐字 gold）"
+    },
+    {
+      "referenceId": "chaosheng-base-5-3",
+      "type": "edited-text-reference",
+      "title": "2026臺灣《朝聖前行課程》5-3（第三講 別忘了隨身攜帶這個護身符）三校稿",
+      "author": "如性法師",
+      "publisher": "課程文字稿校對組",
+      "remote_path": "HuanruileeDrive:2026 印度朝聖/20260925-朝聖前行課程/朝聖前行課程文字稿校對/05_三校稿/2026臺灣《朝聖前行課程》5-3.doc(x)",
+      "retrieved_at": "2026-11-27",
+      "local_path": "courses/朝聖前行課程/source_text/lecture_03.txt",
+      "sha256": "391de4075e09c6e341991b7674251a5ca7fb090f97f374ff85c1280d421896dc",
+      "source_doc_sha256": "a2920969a7e00eba37641c48b9f5e1d96f380c689ee6b618a8ff4737750bc816",
+      "covers": "第3講全文",
+      "verification": "verified",
+      "role": "edited-text-reference（整編校稿：只作名相與段落骨架，非逐字 gold）"
+    },
+    {
+      "referenceId": "chaosheng-base-5-4",
+      "type": "edited-text-reference",
+      "title": "2026臺灣《朝聖前行課程》5-4（第四講 到了聖地如何修行）三校稿",
+      "author": "如性法師",
+      "publisher": "課程文字稿校對組",
+      "remote_path": "HuanruileeDrive:2026 印度朝聖/20260925-朝聖前行課程/朝聖前行課程文字稿校對/05_三校稿/2026臺灣《朝聖前行課程》5-4.doc(x)",
+      "retrieved_at": "2026-11-27",
+      "local_path": "courses/朝聖前行課程/source_text/lecture_04.txt",
+      "sha256": "befdd7e9be0e57d28e09f944e9117df513770c0198992644187381d9c627ad78",
+      "source_doc_sha256": "48c7ccb9f97a2325c3da996029d8a2d01da512ae81e071bfd3b1aaf8888b32bc",
+      "covers": "第4講全文",
+      "verification": "verified",
+      "role": "edited-text-reference（整編校稿：只作名相與段落骨架，非逐字 gold）"
+    },
+    {
+      "referenceId": "chaosheng-base-5-5",
+      "type": "edited-text-reference",
+      "title": "2026臺灣《朝聖前行課程》5-5（第五講 把朝聖帶回生活）三校稿",
+      "author": "如性法師",
+      "publisher": "課程文字稿校對組",
+      "remote_path": "HuanruileeDrive:2026 印度朝聖/20260925-朝聖前行課程/朝聖前行課程文字稿校對/05_三校稿/2026臺灣《朝聖前行課程》5-5.doc(x)",
+      "retrieved_at": "2026-11-27",
+      "local_path": "courses/朝聖前行課程/source_text/lecture_05.txt",
+      "sha256": "d3a01d09570d8a2080087350271e1aa6fbc283ee7893de2692e335b29b54c87d",
+      "source_doc_sha256": "db7dc8e9f76b80287ec538aff88da447973dea5a6f51f5dbc0eebb9dcd1e67f2",
+      "covers": "第5講全文",
+      "verification": "verified",
+      "role": "edited-text-reference（整編校稿：只作名相與段落骨架，非逐字 gold）"
+    },
+    {
+      "referenceId": "chaosheng-closing-outline",
+      "type": "edited-text-reference",
+      "title": "朝聖前行課程 - 結行指導與問答（問答紀要）",
+      "author": "如性法師",
+      "remote_path": "HuanruileeDrive:2026 印度朝聖/朝聖前行課程 - 結行指導與問答.pdf",
+      "retrieved_at": "2026-11-27",
+      "local_path": "reviews/evidence/朝聖前行課程/reference/closing_outline.txt",
+      "sha256": "1ff3b9e1b76053a34f2201e6ab1f6a5d19d63c7dff427df3760b6c5f40afd50d",
+      "covers": "結行節 5 組問答＋結語（4 頁，4,874 字）",
+      "verification": "verified",
+      "role": "edited-text-reference（提綱式問答紀要，密度 44 字/分鐘；僅作結構線索，非逐字底本）"
+    },
+    {
+      "referenceId": "chaosheng-audio-01",
+      "type": "audio-source",
+      "title": "朝聖前行課程 第一講 什麼是朝聖 錄音",
+      "retrieved_at": "2026-11-27",
+      "url": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_01.mp3",
+      "local_path": null,
+      "sha256": null,
+      "durationSec": 5265.144,
+      "verification": "verified",
+      "role": "audio-source（時間碼唯一權威；sha256 見 reviews/evidence/朝聖前行課程/reference/README.md）"
+    },
+    {
+      "referenceId": "chaosheng-audio-02",
+      "type": "audio-source",
+      "title": "朝聖前行課程 第二講 帶著成績單去見佛陀 錄音",
+      "retrieved_at": "2026-11-27",
+      "url": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_02.mp3",
+      "local_path": null,
+      "sha256": null,
+      "durationSec": 5137.56,
+      "verification": "verified",
+      "role": "audio-source（時間碼唯一權威；sha256 見 reviews/evidence/朝聖前行課程/reference/README.md）"
+    },
+    {
+      "referenceId": "chaosheng-audio-03",
+      "type": "audio-source",
+      "title": "朝聖前行課程 第三講 別忘了隨身攜帶這個護身符 錄音",
+      "retrieved_at": "2026-11-27",
+      "url": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_03.mp3",
+      "local_path": null,
+      "sha256": null,
+      "durationSec": 5831.088,
+      "verification": "verified",
+      "role": "audio-source（時間碼唯一權威；sha256 見 reviews/evidence/朝聖前行課程/reference/README.md）"
+    },
+    {
+      "referenceId": "chaosheng-audio-04",
+      "type": "audio-source",
+      "title": "朝聖前行課程 第四講 到了聖地如何修行 錄音",
+      "retrieved_at": "2026-11-27",
+      "url": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_04.mp3",
+      "local_path": null,
+      "sha256": null,
+      "durationSec": 5019.168,
+      "verification": "verified",
+      "role": "audio-source（時間碼唯一權威；sha256 見 reviews/evidence/朝聖前行課程/reference/README.md）"
+    },
+    {
+      "referenceId": "chaosheng-audio-05",
+      "type": "audio-source",
+      "title": "朝聖前行課程 第五講 把朝聖帶回生活 錄音",
+      "retrieved_at": "2026-11-27",
+      "url": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_05.mp3",
+      "local_path": null,
+      "sha256": null,
+      "durationSec": 3776.544,
+      "verification": "verified",
+      "role": "audio-source（時間碼唯一權威；sha256 見 reviews/evidence/朝聖前行課程/reference/README.md）"
+    },
+    {
+      "referenceId": "chaosheng-audio-06",
+      "type": "audio-source",
+      "title": "朝聖前行課程 結行指導與問答 錄音",
+      "retrieved_at": "2026-11-27",
+      "url": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_06.mp3",
+      "local_path": null,
+      "sha256": null,
+      "durationSec": 6635.76,
+      "verification": "verified",
+      "role": "audio-source（時間碼唯一權威；sha256 見 reviews/evidence/朝聖前行課程/reference/README.md）"
+    }
+  ],
+  "alignment_method": {
+    "timecodes": "本機 Whisper ASR（faster-whisper large-v3-turbo, 600s chunks, offsets 由 chunks.csv 還原）",
+    "base_text_alignment": "difflib 字級對齊（t2s 正規化比較鍵）；只套用短距離同音／近音名相差異（≤6 字），其餘退回 ASR 原話",
+    "heading_boundaries": "底本編號小標經滑動視窗相似度（≥0.6）對齊到 ASR 句起點；未達門檻者不入正式 heading，寫入 work/heading_alignment.json 交人工",
+    "closing_session": "第 6 節（結行）無逐字底本：ASR-primary，僅以問答紀要作結構線索"
+  },
+  "known_gaps": [
+    "三校稿為整編校稿，非逐字原話，亦非人工聽核 gold。",
+    "舊字幕檔（.md）時間碼只覆蓋 60 分鐘，與音檔長度不符，不採為時間軸。",
+    "逐講日期為推定值（音檔 mtime＋正文互證），來源未逐節公告。",
+    "第 4 講底本有『抱歉，這裡有干擾，但未補錄』註記 → 該處音檔內容缺漏，需人工回聽（PC-04）。"
+  ]
+}
