@@ -55,8 +55,8 @@ echo "=== 4. Watch Deploy to GitHub Pages ($MERGE_SHA) ==="
 DEPLOY_ID=""
 for _ in $(seq 1 24); do
   DEPLOY_ID=$(gh run list --repo "$REPO" --branch main --limit 10 \
-    --json databaseId,workflowName,headSha \
-    -q ".[] | select(.workflowName==\"Deploy to GitHub Pages\" and .headSha==\"$MERGE_SHA\") | .databaseId" | head -n 1)
+    --json databaseId,workflowName,headSha,conclusion \
+    -q ".[] | select(.workflowName==\"Deploy to GitHub Pages\" and .headSha==\"$MERGE_SHA\" and .conclusion!=\"skipped\") | .databaseId" | head -n 1)
   if [ -n "$DEPLOY_ID" ]; then
     break
   fi
