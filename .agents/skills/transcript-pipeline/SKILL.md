@@ -17,3 +17,5 @@ description: Stage 0～7 單向轉稿與品管流水線（含 Re-ASR、冗詞清
    - **極簡雙段呼叫（`eNeural / glm53-flash` 優先）**：90% 格式與正字交由本地確定性規則處理；僅對單講壓縮送出 **Prompt A（結構、3–7 題核心研討問句、`法師開示摘要`）** 與 **Prompt B（`20%–100%` 區段取樣補齊講記尾段至結尾迴向）**，嚴禁將全文反覆送往高階雲端模型。
    - **API 直連避坑**：批次呼叫 `eNeural` 時應使用 **Node IPv4 SSE Streaming 直連**（`family: 4`、`stream: true`、`reasoning_effort: 'none'`、讀取 `/Users/henry/.hermes/.env` 的 `ENEURAL_API_KEY`），`hermes` CLI 僅作單次失敗備援，避免 `state.db` 鎖定與 IPv6 卡頓。
    - **分波試點與冪等護欄**：先以 1 講試點＋審查，再分波推進；腳本必須具備 URL 遮罩（保護 `watch?v=`）、`HH:MM:SS → [▶ mm:ss]` 換算、上下文同音字正則（如保護「建立他宗」與「無法值遇」）、未閉合引號修補及 `###` 標題去重冪等性。
+10. **Model-Agnostic 單趟校對標準 CLI（`scripts/onepass_proofread.py`）**：
+    - 優先使用版控 Prompt（`prompts/onepass_proofread_v2.md`）與 `python3 scripts/onepass_proofread.py --course <課程> --session <講次> --provider minimax --apply` 完成 4-chunk 單趟合句與校訂（含確定性 `speaker`/簡繁/`<=35` 句拆段/小標節流防呆），並以 `node scripts/check_session.mjs --file <session.json> --strict` 作為開 PR 前必過門檻。
