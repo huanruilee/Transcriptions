@@ -43,6 +43,10 @@ SIMPLIFIED_TO_TRADITIONAL = {
     "决": "決",
     "没": "沒",
     "与": "與",
+    "净": "淨",
+    "现": "現",
+    "觉": "覺",
+    "样": "樣",
 }
 
 AUTHOR_TITLE_FIXES = (
@@ -325,15 +329,19 @@ def assemble_corrected_chunks(
                 continue
 
             m = re.match(r"^(\d+)-(\d+)\|(.+)$", s)
-            if not m:
-                format_errors.append(f"chunk_{k} L{lineno}: unparseable: {s[:60]}")
-                continue
+            if m:
+                i_start, i_end = int(m.group(1)), int(m.group(2))
+                text = normalize_text_deterministic(m.group(3).strip())
+            else:
+                m_alt = re.match(r"^(\d+)\|\d+(?:\.\d+)?-\d+(?:\.\d+)?\|(.+)$", s)
+                if not m_alt:
+                    format_errors.append(f"chunk_{k} L{lineno}: unparseable: {s[:60]}")
+                    continue
+                i_start = i_end = int(m_alt.group(1))
+                text = normalize_text_deterministic(m_alt.group(2).strip())
             if cur_para is None:
                 format_errors.append(f"chunk_{k} L{lineno}: sentence before @PARA: {s[:60]}")
                 continue
-
-            i_start, i_end = int(m.group(1)), int(m.group(2))
-            text = normalize_text_deterministic(m.group(3).strip())
             if not (1 <= i_start <= i_end <= len(raw_segs)):
                 format_errors.append(f"chunk_{k} L{lineno}: invalid range {i_start}-{i_end}")
                 continue
@@ -343,6 +351,7 @@ def assemble_corrected_chunks(
             raw_text = "".join(c["rawText"] for c in seg_slice)
             cur_para["sentences"].append({
                 "id": "",
+                "speaker": cur_para["speaker"],
                 "start": seg_slice[0]["start"],
                 "end": seg_slice[-1]["end"],
                 "text": text,
@@ -360,8 +369,24 @@ def assemble_corrected_chunks(
         for st in p["sentences"]:
             sent_counter += 1
             st["id"] = f"seg-{sent_counter:04d}"
+            st["speaker"] = p["speaker"]
         p["start"] = p["sentences"][0]["start"]
         p["end"] = p["sentences"][-1]["end"]
+
+    # Preserve any existing teacherSummary blocks by nearest start timestamp
+    old_summaries = [
+        (float(op.get("start", 0.0)), op["teacherSummary"])
+        for op in base_session.get("paragraphs", [])
+        if op.get("teacherSummary")
+    ]
+    if old_summaries and paragraphs:
+        teacher_paras = [p for p in paragraphs if "法師" in (p.get("speaker") or "")] or paragraphs
+        used_ids = set()
+        for ts_start, ts_obj in old_summaries:
+            candidates = [p for p in teacher_paras if p["id"] not in used_ids] or paragraphs
+            best_p = min(candidates, key=lambda p: abs(float(p["start"]) - ts_start))
+            best_p["teacherSummary"] = ts_obj
+            used_ids.add(best_p["id"])
 
     out = dict(base_session)
     out["paragraphs"] = paragraphs

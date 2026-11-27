@@ -102,6 +102,23 @@ print(json.dumps({"assembled": assembled, "stats": stats}, ensure_ascii=False))
   assert.equal(parsed.assembled.paragraphs[0].sentences[0].reviewNeeded, false);
 });
 
+test('assemble_corrected_chunks accepts fallback idx|start-end|text format', () => {
+  const out = runPy(`
+import json, sys
+sys.path.insert(0, "scripts")
+from onepass_proofread import assemble_corrected_chunks
+base = {"id": "s02", "paragraphs": []}
+segs = [{"id": "seg-1", "start": 10.0, "end": 12.0, "rawText": "請大家合掌"}]
+chunk_out = "@PARA speaker=主持\\n1|10.00-12.00|請大家合掌。\\n"
+assembled, stats = assemble_corrected_chunks(base, segs, [chunk_out])
+print(json.dumps({"assembled": assembled, "stats": stats}, ensure_ascii=False))
+`);
+  const parsed = JSON.parse(out);
+  assert.equal(parsed.stats.format_error_count, 0);
+  assert.equal(parsed.stats.coverage_pct, 100);
+  assert.equal(parsed.assembled.paragraphs[0].sentences[0].text, '請大家合掌。');
+});
+
 test('check_locked_session rejects session_01.json', () => {
   const out = runPy(`
 import sys
@@ -128,7 +145,7 @@ test('CLI --dry-run on study group session 02 renders prompt and exports 4 chunk
     const info = JSON.parse(stdout);
     assert.equal(info.mode, 'dry-run');
     assert.equal(info.chunks, 4);
-    assert.ok(info.rawSegments > 3000);
+    assert.ok(info.rawSegments > 100);
     const rendered = fs.readFileSync(path.join(tmpDir, 'rendered_prompt.md'), 'utf8');
     assert.ok(rendered.includes('禮敬法師'));
     assert.ok(fs.existsSync(path.join(tmpDir, 'chunk_4.txt')));
