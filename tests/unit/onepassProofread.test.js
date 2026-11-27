@@ -100,7 +100,7 @@ print(json.dumps({"assembled": assembled, "stats": stats}, ensure_ascii=False))
   assert.equal(parsed.assembled.paragraphs[0].sentences[0].start, 1.0);
   assert.equal(parsed.assembled.paragraphs[0].sentences[0].end, 4.0);
   assert.equal(parsed.assembled.paragraphs[0].sentences[0].reviewNeeded, false);
-  assert.match(parsed.assembled.lastUpdated, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(parsed.assembled.lastUpdated, /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/);
 });
 
 test('assemble_corrected_chunks accepts fallback idx|start-end|text format', () => {
