@@ -53,7 +53,7 @@
    ```
 5. **AGY 最後 Review、合併與直接上線**：
    - 確認 `git -c core.quotePath=false status --short` 僅含目標檔案，推上分支並以 `gh pr create` 開 PR。
-   - 若為 GX10 Worker 執行，於此處交由 **AGY 做最後一次獨立 Review**；AGY 複驗通過且 PR CI 全綠後，執行 `gh pr merge <PR> --merge --delete-branch`，等候 `Deploy to GitHub Pages` 完成並實測線上 JSON／頁面 `HTTP 200`。
+   - 若為 GX10 Worker 執行，於此處交由 **AGY 做最後一次獨立 Review**；AGY 複驗通過後，直接執行 `npm run pr:ship -- <PR_NUM>`（自動啟用 `gh pr merge --auto --merge`、等 CI 全綠自動合併刪分支、追蹤 `main` Completion Acceptance 與 `Deploy to GitHub Pages` 並驗證線上 `HTTP 200`）。
    - 最終回報須附：**線上直接閱讀連結（`https://huanruilee.github.io/Transcriptions/?course=<courseId>#session-<XX>`）、PR URL、`check_session --strict` 與 `summaries:audit` 結果、開場前 3 句與結尾後 3 句摘錄**。
 
 ---
