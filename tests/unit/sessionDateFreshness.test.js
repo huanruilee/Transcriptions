@@ -21,7 +21,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { evaluateLastUpdatedBump } from '../../scripts/check_session.mjs';
-import { buildRows, renderCorrectionDates } from '../../scripts/course_correction_dates.mjs';
+import { buildRows, renderCorrectionDates, correctionDate } from '../../scripts/course_correction_dates.mjs';
 
 const ROOT = process.cwd();
 /** lastUpdated 可能帶時分（YYYY-MM-DD HH:MM），比較只取日期前綴。 */
@@ -62,6 +62,27 @@ test('已存在的 correction-dates.html 與正式產生器輸出一致（不得
     [],
     `以下課程的 correction-dates.html 與逐字稿日期不同步，請跑 node scripts/course_correction_dates.mjs：${drifted.join('、')}`,
   );
+});
+
+test('CI 認可的 lastUpdated 格式，日期總表必須讀得懂（不得雙軌）', () => {
+  const unrecognized = [];
+  for (const dir of fs.readdirSync(path.join(ROOT, 'courses'))) {
+    const base = path.join(ROOT, 'courses', dir);
+    const courseFile = path.join(base, 'course.json');
+    if (!fs.existsSync(courseFile)) continue;
+    const sessionsDir = path.join(base, 'sessions');
+    if (!fs.existsSync(sessionsDir)) continue;
+    for (const file of fs.readdirSync(sessionsDir)) {
+      if (!/^session_.*\.json$/.test(file)) continue;
+      const session = JSON.parse(fs.readFileSync(path.join(sessionsDir, file), 'utf8'));
+      const value = session.lastUpdated;
+      // 只有 CI 已經認可的格式才要求總表讀得懂；歷史資料不在此限。
+      if (!evaluateLastUpdatedBump(value, null).pass) continue;
+      const row = correctionDate(session);
+      if (row.value === '未記錄') unrecognized.push(`${dir}/${file} lastUpdated=${value}`);
+    }
+  }
+  assert.deepEqual(unrecognized, []);
 });
 
 test('29上（session_46）：重切句後 lastUpdated 已蓋到當次更新且符合 YYYY-MM-DD HH:MM', () => {

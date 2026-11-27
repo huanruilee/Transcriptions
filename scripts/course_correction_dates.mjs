@@ -5,7 +5,7 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 export function correctionDate(t){
  for(const [source,value] of [['lastUpdated',t.lastUpdated],['last_updated',t.last_updated],['_meta.processed_at',t._meta?.processed_at],['_meta.last_updated',t._meta?.last_updated]]){
   if(typeof value!=='string')continue;
-  const m=value.match(/^(\d{4}-\d{2}-\d{2})(?:[ T](?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?)?$/);
+  const m=value.match(/^(\d{4}-\d{2}-\d{2})(?:[ T](?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?)?$/);
   if(m&&Number.isFinite(Date.parse(m[1]))&&new Date(m[1]).toISOString().slice(0,10)===m[1])return {value,source};
  }
  return {value:'未記錄',source:'無有效日期欄位'};
