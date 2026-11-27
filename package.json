@@ -70,7 +70,8 @@
     "audit:sinianzhu:check": "python3 scripts/audit_sinianzhu_release.py --check",
     "test:reader-smoke": "playwright test --config playwright.reader.config.ts",
     "check:session": "node scripts/check_session.mjs",
-    "preflight:study-group": "node scripts/study_group_preflight.mjs"
+    "preflight:study-group": "node scripts/study_group_preflight.mjs",
+    "pr:ship": "bash scripts/pr_ship.sh"
   },
   "repository": {
     "type": "git",
