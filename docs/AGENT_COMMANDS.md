@@ -58,15 +58,23 @@
 
 ---
 
-## 指令 B：建立全新講次逐字稿（例如「建立第 50 講，YouTube URL」）
+## 指令 B：建立全新講次／新課程逐字稿（例如「建立第 50 講」或「開新課程」）
 
-1. **Step 0 實體奠基**：確認課程 `grounding.json`、`COURSE_GUIDE.md`、YouTube 影片 ID／時間碼提綱，並於 `source_outlines/` 建立提綱或 `pending` 檔。
-2. **Step 1 GX10 本地 Whisper 轉寫**：下載音訊至 GX10 暫存（嚴禁提交至 GitHub），呼叫 GX10 Whisper（`127.0.0.1:8010`）產生帶時間戳的原始段落，建立初始 `sessions/session_XX.json`（完整保留 `rawText`）。
+1. **Step 0 實體奠基與簡短計畫**：確認課程 `grounding.json`、`COURSE_GUIDE.md`、音檔與官方底本（若有）；新課直接用精簡清單對齊分工，**禁止撰寫 40KB 超長計畫檔或重複造輪子**。
+2. **Step 1 GX10 本地 Whisper 轉寫（統一共用 CLI）**：下載音訊至 GX10 `/home/henry/.gx10/projects/<slug>/audio/`（嚴禁提交至 GitHub），並依音檔政策佈署 `/var/www/remote-audio/<slug>/`；統一呼叫通用管線（禁止每開一課重寫專用 ASR 腳本）：
+   ```bash
+   python3 scripts/course_asr_pipeline.py \
+     --course <課程名> \
+     --audio-dir /home/henry/.gx10/projects/<slug>/audio \
+     --sha-file /home/henry/.gx10/projects/<slug>/notes/audio-sha256.txt \
+     --write-sha \
+     --initial-prompt "<課程與講師專名提示>"
+   ```
 3. **Step 2 執行標準單趟校對 CLI**：同指令 A 第 2～3 步（`python3 scripts/onepass_proofread.py --course <課程名> --session <XX> --provider minimax --apply`），完成合句、去冗詞、分段、標點與 `--strict` 清零。
 4. **Step 3～4 產出講記與註冊清單**：
    - 補齊 `discussionQuestions`（3～7 題，`？` 結尾）、`teacherSummary`、`contentOverview`（自動重算 `sourceDigest`）。
    - 若課程含研讀講記，產出 `publications/lecture_XX_study_guide.md` 並執行 `python3 scripts/render_study_guide_html.py` 產生 `.html` 與 `.txt`。
-   - 同步更新 `course.json`、`toc.json`、`courses/catalog.json` 及相關講次總數單元測試斷言。
+   - 同步更新 `course.json`、`toc.json`、`courses/catalog.json`、執行 `node scripts/course_correction_dates.mjs` 更新日期總表，並更新相關講次總數單元測試斷言。
 5. **Step 5 驗收、AGY 最後 Review 與直接上線**：
    - 跑完指令 A 第 4 步全套驗證＋`npm run build:v2`，開 PR；若為 GX10 Worker 執行，交由 **AGY 做最後一次獨立 Review**。
-   - PR CI 全綠後由 AGY 以 `--merge` 合併至 `main`，等候 `Deploy to GitHub Pages` 成功並實測 `https://huanruilee.github.io/Transcriptions/?course=<courseId>#session-<XX>` 回傳 `HTTP 200` 且新講次已生效，再將直接閱讀連結回報給使用者確認。
+   - 確認通過後執行 `npm run pr:ship -- <PR_NUM>`（自動啟用 `--auto --merge`、等 CI 全綠合併、追蹤 `main` Completion Acceptance 與 `Deploy to GitHub Pages` 並驗證線上 `HTTP 200`），再將直接閱讀連結回報給使用者確認。
