@@ -130,6 +130,10 @@ Based on the full 219-session production rollout and continuous calibration:
    - Run the repository's current unit and acceptance commands and record the
      observed pass, fail, and skip counts. Do not hard-code a historical test
      total or grant merge authority from the worker prompt.
+5. **One-Pass Smart-Model Handoff (`scripts/onepass_proofread.py`)**:
+   - Do NOT improvise ad-hoc proofreading prompts. Run the version-controlled CLI:
+     `python3 scripts/onepass_proofread.py --course <course> --session <num> --provider minimax --apply`
+   - Verify `coverage_pct >= 98.0` and `node scripts/check_session.mjs --file <session.json> --strict` exits `0` before opening a PR.
 
 ### M1: Establish the workspace
 

@@ -46,6 +46,7 @@
     "proofread:audio:align-all": "node scripts/build_full_transcript_asr_alignment.mjs",
     "proofread:reference:align": "python3 scripts/align_transcript_reference.py",
     "proofread:reference:candidate": "node scripts/build_reference_proofreading_candidate.mjs",
+    "proofread:onepass": "python3 scripts/onepass_proofread.py",
     "proofread:reference:risk-repair": "node scripts/run_reference_risk_repair.mjs",
     "proofread:reference:final-candidate": "node scripts/build_session08_final_candidate.mjs",
     "proofread:session08:promote": "node scripts/promote_session08_candidate.mjs",

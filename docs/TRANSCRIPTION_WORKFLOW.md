@@ -1,6 +1,6 @@
 # 逐字稿標準流程
 
-版本：1.13。更新：2026-11-26（Asia/Taipei）。適用：所有課程及所有 Agent。
+版本：1.14。更新：2026-11-27（Asia/Taipei）。適用：所有課程及所有 Agent。
 本文件合併至 `main` 後生效；後續一律讀取 [main 最新版](https://github.com/huanruilee/Transcriptions/blob/main/docs/TRANSCRIPTION_WORKFLOW.md)，並與 [逐字稿排版與編輯標準化計劃](EDITORIAL_FORMATTING_PLAN.md) 及 [Agent 交接與全流程執行手冊](AGENT_HANDOFF_PLAYBOOK.md) 保持一致，不要複製一份自行維護。
 
 ## 1. 權威與適用順序
@@ -129,6 +129,17 @@
    - **二級自然段（正文段落）**：在冗詞清除、碎句合併定型後，由 `paragraphLayoutPlanner.js` 或語意切段規則將各官方章節內正文切分為每段 **150～350 字（約 8～20 句；硬上限 35 句）** 的無標題自然段（同步更新 `paragraph.start = 首句.start`、`paragraph.end = 末句.end`），兼顧「章節標題忠於官方提綱」與「不致數百句擠成同一段落」。
 5. **Stage 5（Agent 佛法專家逐段通讀審核）**：
    - 主控 Agent 必須親自逐段通讀全文，同時驗收「佛法名相與義理 100% 正確」及「零發語詞殘留（無 `呃/嗯/啊`）、無破碎逗號斷句、文句自然流暢」。遇有疑義音段立即調用 GX10 Whisper 重聽確認。
+
+### 4.1 Model-Agnostic 單趟校對與 Agent 交接標準介面（v1.14）
+
+為避免執行型 Agent 臨場編寫 Prompt 或反覆以逐句小批次消耗雲端／Router 配額，全倉提供統一的單趟校對 CLI（[scripts/onepass_proofread.py](../scripts/onepass_proofread.py)）與版控雙層 Prompt（[prompts/onepass_proofread_v2.md](../prompts/onepass_proofread_v2.md)）：
+
+- **MiniMax-first 零成本策略（5 小時重置視窗）**：預設 `--provider minimax` 經 GX10 Router `auto-cloud` 呼叫 MiniMax-M3.1-Flash（`max_workers=2`、全講拆 4 塊），單講僅需 4 次請求（約 2 分鐘），不觸發限流且零額外花費。
+- **確定性後處理防呆層**：組裝階段自動執行 `speaker` 枚舉歸一（`學員N → 學員`、`維那/主持 → 主持`）、URL 遮罩下之簡轉正與標點正規化（含 `回向 → 迴向`、移除論師名書名號）、超過 35 句段落自動對半拆段、過密小標節流，並強制串接 `study_group_preflight.mjs` 與 `check_session.mjs --strict`。
+- **三角色交接契約**：
+  1. **操作 Agent（如 `gx10-xiaofa`）**：禁止自創 Prompt，直接執行 `python3 scripts/onepass_proofread.py --course <課程> --session <講次> --provider minimax --apply`，並針對 `--strict` 標記之剩餘少數違規（如疑似人名或結尾輪次）做定向修補。
+  2. **聰明模型（MiniMax / Codex / Gemini）**：透過標準 Prompt 負責語意合句、去冗詞、專名校訂與導讀。
+  3. **獨立驗證（`gx10-xiaojian` / 主控）**：只看 diff、`check_session.mjs --strict` 報告與抽檢偈頌／人名／開頭結尾輪次，確認通過後合併並驗證 `github.io` 上線。
 
 ## 5. Stage 6：導讀摘要（`contentOverview`）與資料同步
 
