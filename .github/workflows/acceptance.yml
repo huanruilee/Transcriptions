@@ -3,28 +3,8 @@ name: Completion Acceptance
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
-      - '!docs/COMPLETION_ACCEPTANCE.md'
-      - 'AGENTS.md'
-      - 'START_HERE.md'
-      - 'TASKS.md'
-      - 'PIPELINE.md'
-      - 'PROMPTS.md'
-      - 'TESTING.md'
-      - 'prompts/**'
   pull_request:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
-      - '!docs/COMPLETION_ACCEPTANCE.md'
-      - 'AGENTS.md'
-      - 'START_HERE.md'
-      - 'TASKS.md'
-      - 'PIPELINE.md'
-      - 'PROMPTS.md'
-      - 'TESTING.md'
-      - 'prompts/**'
 
 permissions:
   contents: read
