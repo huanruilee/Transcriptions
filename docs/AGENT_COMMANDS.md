@@ -9,14 +9,19 @@
 ---
 
 ## 前置共通紀律
-1. **同步最新基準並開隔離工作樹**：
+1. **同步最新基準並開隔離工作樹（Fail-Closed）**：
    ```bash
    git fetch origin
+   # 若 git fetch 失敗，必須立刻回報 BLOCKED；嚴禁退回使用落後的本地舊 main 或重造輪子
    # 嚴禁直接修改 main 或共用的 dirty workspace
    git worktree add -b <feat/branch-name> <isolated-worktree-path> origin/main
    ```
 2. **禁止修改鎖定講次**：開工前必查 [config/locked-sessions.json](../config/locked-sessions.json)（例如《釋量論》`session_01.json`、`四念住` `session_08.json` 嚴禁改動）。
 3. **遠端派工通道**：透過 Hermes 派工且需收回結果時，一律使用 `hermes peer run <peer> --idempotency-key <key>`，避免 `hermes peer dm` 被開啟中的 Bot Chat 攔截回訊。
+4. **防 Compress 與 Context 衛生紀律**：
+   - 執行 `npm test`、`npm run test:v2` 等長輸出指令時，導向 `/tmp/*.log` 只看尾部摘要，避免塞爆主對話。
+   - 重度排查、跨檔比對或反覆除錯改交由 `delegate_task`（Subagent）隔離執行；主對話只收精煉結論。
+   - Review 講次直接跑 `scripts/onepass_proofread.py`，**禁止開瀏覽器截圖**、**禁止自寫合句腳本**。
 
 ---
 
