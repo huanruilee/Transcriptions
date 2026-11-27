@@ -120,6 +120,30 @@ print(json.dumps({"assembled": assembled, "stats": stats}, ensure_ascii=False))
   assert.equal(parsed.assembled.paragraphs[0].sentences[0].text, '請大家合掌。');
 });
 
+test('sync_content_overview_evidence remaps stale sentenceIds to exact new sentences', () => {
+  const out = runPy(`
+import json, sys
+sys.path.insert(0, "scripts")
+from onepass_proofread import sync_content_overview_evidence
+s = {
+    "paragraphs": [{"id": "p_1", "speaker": "如性法師", "sentences": [
+        {"id": "seg-0001", "text": "因為透由了解法義改變自心，能淨化惡業。"},
+        {"id": "seg-0002", "text": "猶豫知比伺意知更重要。"},
+    ]}],
+    "contentOverview": {
+        "mainPoints": [{"text": "改變自心", "evidence": [{"sentenceId": "seg-9999", "quote": "透由了解法義改變自心"}]}],
+        "discussionTopics": [{"text": "猶豫知", "evidence": [{"sentenceId": "seg-8888", "quote": "猶豫知比伺意知更重要"}]}],
+    },
+}
+sync_content_overview_evidence(s)
+print(json.dumps(s["contentOverview"], ensure_ascii=False))
+`);
+  const co = JSON.parse(out);
+  assert.equal(co.mainPoints[0].evidence[0].sentenceId, 'seg-0001');
+  assert.equal(co.mainPoints[0].evidence[0].quote, '因為透由了解法義改變自心，能淨化惡業。');
+  assert.equal(co.discussionTopics[0].evidence[0].sentenceId, 'seg-0002');
+});
+
 test('check_locked_session rejects session_01.json', () => {
   const out = runPy(`
 import sys

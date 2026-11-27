@@ -5,7 +5,7 @@
 ## 開工必走順序
 1. **先同步遠端**：詢問專案現況或啟動任何新計畫前，必須先執行 `git fetch origin` 確認 `origin/main` 最新狀態（不可僅憑本地舊分支或過時快取做判斷）。
 2. **兩層指導必讀**：
-   - 全域層：閱讀 [最新版逐字稿流程](docs/TRANSCRIPTION_WORKFLOW.md)（以 GitHub `main` 最新版為準）與 [START_HERE.md](START_HERE.md)。
+   - 全域層：閱讀 [最新版逐字稿流程](docs/TRANSCRIPTION_WORKFLOW.md)（以 GitHub `main` 最新版為準）、[一句話指令執行劇本（`docs/AGENT_COMMANDS.md`）](docs/AGENT_COMMANDS.md) 與 [START_HERE.md](START_HERE.md)。
    - 課程層：操作任一課程前，必須讀取 `courses/<課程名>/grounding.json`；若該目錄存在 `courses/<課程名>/COURSE_GUIDE.md`，在不牴觸全域紅線前提下優先遵守。
 3. **保護工作區與分支紀律**：保留無關 dirty 檔；不得直接改 `main`；程式行為變更須先有能重現問題的測試；文件修改須檢查規範與連結。
 
