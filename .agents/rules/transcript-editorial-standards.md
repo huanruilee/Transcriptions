@@ -17,3 +17,4 @@ description: 逐字稿口語冗詞清除、碎句整併、分段粒度與閱讀�
   6. **全域置換與底本護欄**：執行正字／標點置換前先遮罩 `https?://...` URL（避免破壞 `watch?v=`）；具備官方底本時須先做 Unicode NFKC 正規化並執行底本專名強制對齊；保護已鎖定講次（`config/locked-sessions.json`）。
   7. **自動化門檻驗收**：交付與合併前必跑 `npm run audit:reading-quality -- courses/<課程名>`（適用「待閱校版」與定稿）。
   8. **體裁分流、角色邊界與狀態誠實標記**：開工前必備該課程 `grounding.json` 與 `COURSE_GUIDE.md`；共學／問答型課程須先區分「法師／主持人／學員」角色輪次，`teacherSummary` 僅歸納法師引導脈絡、破立邏輯與結論，不得混入學員原話或只留單句斷言。未通過 `audit:reading-quality` 前不得標記 `published` 或留空 `publicationState`，接手課程時須將「待整編歷史舊債」與「新標準講次」分軌標示處理。
+  9. **講者枚舉、禮敬保護與時分更新戳**：共學講者欄位僅允許 `主持`（不用 `維那/主持`）、`學員` 與指導法師尊稱（`學員1`、`學員2`……僅用於內文對話匿名）；開場「禮敬法師」嚴禁誤覆寫為指導法師法號；每次校訂輸出必須以 Asia/Taipei 時分格式 `YYYY-MM-DD HH:MM` 更新 `lastUpdated`。
