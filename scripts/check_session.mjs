@@ -10,6 +10,25 @@ const SIMPLIFIED_ONLY_RE = /[虽却这为体学师义论说对问题发会国经
 const CURLY_QUOTES_RE = /[“”‘’]/g;
 const LAST_UPDATED_HM_RE = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(?::\d{2})?$/;
 
+const STRONG_END_RE = /[。？！…」』）】]\s*$/u;
+const PUNCT_STRIP_RE = /[，。、！？；：「」『』（）《》\s]/g;
+
+/**
+ * 短句（ASR 碎句）判定——strict gate 與 audit_reading_quality 共用這一個定義。
+ *
+ * 只看字數會把「可以。」「是的。」「謝謝。」這種完整的一字應答算成碎句，
+ * 在師生一問一答的討論課（如 30上）比率必然超標；併回相鄰句又會跨講者，
+ * 讓發言歸屬錯誤。真正的碎句特徵是「被切在半句」：字數少 **而且** 沒有句末標點，
+ * 例如「那，」「傳，」「就是」。兩個條件同時成立才算。
+ */
+export function isShortFragment(text) {
+  const txt = String(text ?? '').trim();
+  if (!txt) return false;
+  const bare = txt.replace(PUNCT_STRIP_RE, '');
+  if (bare.length === 0 || bare.length > 3) return false;
+  return !STRONG_END_RE.test(txt);
+}
+
 export function computeSessionMetrics(session, rootDir = process.cwd(), relPath = '') {
   const paras = Array.isArray(session.paragraphs) ? session.paragraphs : [];
   const paraLens = paras.map(p => (Array.isArray(p.sentences) ? p.sentences.length : 0));
@@ -53,7 +72,9 @@ export function computeSessionMetrics(session, rootDir = process.cwd(), relPath 
       const cq = t.match(CURLY_QUOTES_RE);
       if (cq) curlyQuotes += cq.length;
       possibleNameLeaks += findPossibleNameLeaks(t).length;
-      if (t.length <= 3) shortFragments += 1;
+      if (isShortFragment(t)) {
+        shortFragments += 1;
+      }
       if (!END_PUNCT_RE.test(t)) noEndPunct += 1;
     }
   }

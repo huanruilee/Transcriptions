@@ -125,6 +125,7 @@ npm test
 - 來源／核定驗證失敗而回退原稿時，不得顯示新版已套用或新版日期。原本開著的分頁重新載入時，應取得最新 publication metadata，不沿用舊入口設定。
 - 在 PR／main 的 App 測試及 Linux browser gate、部署前 artifact、部署後正式網址，均驗證此契約。目前涵蓋第 30、31 講的桌面／手機與真實下載；不是全庫日期校訂宣告。
 - 全庫（不限重整版）另有兩層自動化：PR 改到的 session 由 `check_session.mjs --strict --base-ref origin/main` 強制 `lastUpdated` 為 `YYYY-MM-DD HH:MM` 且必須相對 base 更新（改內容不蓋日期即 FAIL）；`course.json` 條目與 session 日期一致、`correction-dates.html` 等於正式產生器輸出，由 `tests/unit/sessionDateFreshness.test.js` 在 `npm test` 驗證。改內容請跑 `node scripts/course_correction_dates.mjs` 重生日期總表。
+- 「碎句率」（`shortFragmentPct`／`SHORT_FRAGMENT_RATIO`，門檻 2%）只有一個定義，由 `scripts/check_session.mjs` 的 `isShortFragment` 提供，`audit_reading_quality.mjs` 共用：字數（去標點）≤3 **且** 沒有句末標點才算碎句。完整的一字應答（`可以。`／`是的。`／`謝謝。`／`認同。`）各自是一個發言回合，不算碎句——把它們併進相鄰句會跨講者、讓發言歸屬錯誤。判定與兩側反例由 `tests/unit/shortFragmentDefinition.test.js` 固定。
 
 瀏覽器 gate 不得因缺 Chromium 或網址不可達而 skip；載入舊資產、舊正文或缺少正文皆失敗。預期值來自 checkout 的 build 與已核定 publication，不能從待驗證網站反推預期值。部署成功後 smoke 失敗，整個部署 workflow 仍為失敗，須修復或 revert，不以 deploy-pages 成功冒稱驗收完成。
 
