@@ -149,6 +149,19 @@ export const useCourseStore = defineStore('course', {
         description:
           '如性法師主講，2020 年 7 月導論與臺灣營隊十講，共 11 講。闡釋諸行無常、有漏皆苦、諸法無我、涅槃寂靜四法印。',
       },
+      {
+        id: 'chao-sheng-qian-xing-2026',
+        icon: '🛕',
+        accent: 'linear-gradient(160deg, #C08A3E, #7A5320)',
+        title: '朝聖前行課程',
+        master: '如性法師',
+        path: 'courses/朝聖前行課程',
+        mediaType: 'audio/mp3',
+        sessionCount: 6,
+        updatedAt: '2026-11-28',
+        description:
+          '如性法師《朝聖前行：從歡喜欲見到依教奉行》2026 年臺灣授課，五講＋結行指導與問答，共 6 節。逐字稿屬待閱校版。',
+      },
     ] as CourseMeta[],
     sessions: [] as SessionMeta[],
     tocTree: [] as TOCNode[],
