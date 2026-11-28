@@ -1,0 +1,730 @@
+[
+  {
+    "session": "04",
+    "blockIndex": 0,
+    "blockRange": [
+      1,
+      45
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 16.5,
+      "usage": {
+        "total_tokens": 3792,
+        "total_characters": 0,
+        "prompt_tokens": 1934,
+        "completion_tokens": 1858,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1458
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 15,
+        "type": "term",
+        "current": "如果我們把在聖地朝聖看成座上，座上可以聽得懂吧？座上跟座間，可以嗎？",
+        "find": "座間",
+        "replace": "座下",
+        "confidence": 0.99,
+        "reason": "佛教語境應為「座上跟座下」，並與下一句「座上修，座下修」相呼應。"
+      },
+      {
+        "idx": 16,
+        "type": "term",
+        "current": "座上修，座間修，可以嗎？",
+        "find": "座間",
+        "replace": "座下",
+        "confidence": 0.99,
+        "reason": "應為佛教常見的「座上修，座下修」。"
+      },
+      {
+        "idx": 17,
+        "type": "term",
+        "current": "如果我們把在聖地朝聖看成座上，那麼從一個聖地前往下一個聖地的車程，就可以看成座間。",
+        "find": "座間",
+        "replace": "座下",
+        "confidence": 0.98,
+        "reason": "此處與「座上」對舉的用語應為「座下」。"
+      },
+      {
+        "idx": 18,
+        "type": "term",
+        "current": "平時打坐修行，在座間，雖然有很多事情可以做，但最重要的是要把座上修行的體會延續下去。",
+        "find": "在座間",
+        "replace": "在座上",
+        "confidence": 0.98,
+        "reason": "「平時打坐修行」是在「座上」，後文亦明稱「座上修行」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 15,\n    \"type\": \"term\",\n    \"current\": \"如果我們把在聖地朝聖看成座上，座上可以聽得懂吧？座上跟座間，可以嗎？\",\n    \"find\": \"座間\",\n    \"replace\": \"座下\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛教語境應為「座上跟座下」，並與下一句「座上修，座下修」相呼應。\"\n  },\n  {\n    \"idx\": 16,\n    \"type\": \"term\",\n    \"current\": \"座上修，座間修，可以嗎？\",\n    \"find\": \"座間\",\n    \"replace\": \"座下\",\n    \"confidence\": 0.99,\n    \"reason\": \"應為佛教常見的「座上修，座下修」。\"\n  },\n  {\n    \"idx\": 17,\n    \"type\": \"term\",\n    \"current\": \"如果我們把在聖地朝聖看成座上，那麼從一個聖地前往下一個聖地的車程，就可以看成座間。\",\n    \"find\": \"座間\",\n    \"replace\": \"座下\",\n    \"confidence\": 0.98,\n    \"reason\": \"此處與「座上」對舉的用語應為「座下」。\"\n  },\n  {\n    \"idx\": 18,\n    \"type\": \"term\",\n    \"current\": \"平時打坐修行，在座間，雖然有很多事情可以做，但最重要的是要把座上修行的體會延續下去。\",\n    \"find\": \"在座間\",\n    \"replace\": \"在座上\",\n    \"confidence\": 0.98,\n    \"reason\": \"「平時打坐修行」是在「座上」，後文亦明稱「座上修行」。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 1,
+    "blockRange": [
+      46,
+      90
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.0,
+      "usage": {
+        "total_tokens": 2268,
+        "total_characters": 0,
+        "prompt_tokens": 1664,
+        "completion_tokens": 604,
+        "completion_tokens_details": {
+          "reasoning_tokens": 413
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 68,
+        "type": "broken",
+        "current": "此時，禮拜的重點，不在於是問訊，短拜，還是大禮拜。",
+        "find": "在於是問訊",
+        "replace": "在於問訊",
+        "confidence": 0.99,
+        "reason": "「在於是」語意不通，應為「不在於問訊」。"
+      },
+      {
+        "idx": 90,
+        "type": "broken",
+        "current": "雖然離實踐或許還有一段距離，但光是瞭解這個道理，對我們而言。",
+        "find": "對我們而言",
+        "replace": "",
+        "confidence": 0.95,
+        "reason": "句末「對我們而言」後缺少述語，整句語意殘缺。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 68,\n    \"type\": \"broken\",\n    \"current\": \"此時，禮拜的重點，不在於是問訊，短拜，還是大禮拜。\",\n    \"find\": \"在於是問訊\",\n    \"replace\": \"在於問訊\",\n    \"confidence\": 0.99,\n    \"reason\": \"「在於是」語意不通，應為「不在於問訊」。\"\n  },\n  {\n    \"idx\": 90,\n    \"type\": \"broken\",\n    \"current\": \"雖然離實踐或許還有一段距離，但光是瞭解這個道理，對我們而言。\",\n    \"find\": \"對我們而言\",\n    \"replace\": \"\",\n    \"confidence\": 0.95,\n    \"reason\": \"句末「對我們而言」後缺少述語，整句語意殘缺。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 2,
+    "blockRange": [
+      91,
+      135
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.1,
+      "usage": {
+        "total_tokens": 2890,
+        "total_characters": 0,
+        "prompt_tokens": 1877,
+        "completion_tokens": 1013,
+        "completion_tokens_details": {
+          "reasoning_tokens": 932
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 130,
+        "type": "sound",
+        "current": "也正因為如此，在這次課程中，我們花了不少篇幅，介紹因果、四地、五我。",
+        "find": "四地",
+        "replace": "四諦",
+        "confidence": 0.96,
+        "reason": "「四諦」為佛法術語，指四聖諦；「四地」應為同音誤寫。"
+      }
+    ],
+    "raw": "[{\"idx\":130,\"type\":\"sound\",\"current\":\"也正因為如此，在這次課程中，我們花了不少篇幅，介紹因果、四地、五我。\",\"find\":\"四地\",\"replace\":\"四諦\",\"confidence\":0.96,\"reason\":\"「四諦」為佛法術語，指四聖諦；「四地」應為同音誤寫。\"}]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 3,
+    "blockRange": [
+      136,
+      180
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 2.9,
+      "usage": {
+        "total_tokens": 1904,
+        "total_characters": 0,
+        "prompt_tokens": 1329,
+        "completion_tokens": 575,
+        "completion_tokens_details": {
+          "reasoning_tokens": 395
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 161,
+        "type": "sound",
+        "current": "而且各位沒有發現我在按部計劃的執行嗎？",
+        "find": "按部計劃的執行",
+        "replace": "按部就班的執行",
+        "confidence": 0.99,
+        "reason": "「按部計劃」為同音誤寫，應為「按部就班」。"
+      },
+      {
+        "idx": 174,
+        "type": "broken",
+        "current": "你覺得他把我想運動的動機放在。",
+        "find": "放在",
+        "replace": "哪裡",
+        "confidence": 0.72,
+        "reason": "句末成分殘缺，「放在」後應有疑問詞，語意方可完整。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 161,\n    \"type\": \"sound\",\n    \"current\": \"而且各位沒有發現我在按部計劃的執行嗎？\",\n    \"find\": \"按部計劃的執行\",\n    \"replace\": \"按部就班的執行\",\n    \"confidence\": 0.99,\n    \"reason\": \"「按部計劃」為同音誤寫，應為「按部就班」。\"\n  },\n  {\n    \"idx\": 174,\n    \"type\": \"broken\",\n    \"current\": \"你覺得他把我想運動的動機放在。\",\n    \"find\": \"放在\",\n    \"replace\": \"哪裡\",\n    \"confidence\": 0.72,\n    \"reason\": \"句末成分殘缺，「放在」後應有疑問詞，語意方可完整。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 4,
+    "blockRange": [
+      181,
+      225
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.4,
+      "usage": {
+        "total_tokens": 2447,
+        "total_characters": 0,
+        "prompt_tokens": 2040,
+        "completion_tokens": 407,
+        "completion_tokens_details": {
+          "reasoning_tokens": 405
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [],
+    "raw": "[]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 5,
+    "blockRange": [
+      226,
+      270
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 8.4,
+      "usage": {
+        "total_tokens": 3234,
+        "total_characters": 0,
+        "prompt_tokens": 1884,
+        "completion_tokens": 1350,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1007
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 230,
+        "type": "broken",
+        "current": "願意此次朝聖所累積的一切善業，增強對三寶的信心，增長聞思修的力量，並願自己能夠真正依教奉行。",
+        "find": "願意此次",
+        "replace": "願意讓此次",
+        "confidence": 0.93,
+        "reason": "「願意此次」缺少引導動詞，句意不通，應為「願意讓此次」。"
+      },
+      {
+        "idx": 256,
+        "type": "repeat",
+        "current": "之前曾經曾經記住的，有感受的部分，過了一段時間，全部忘光。這些都是惡業所導致的。不僅如此，我們所遭遇的所有苦果，也都是過往惡業感得的果報。",
+        "find": "曾經曾經",
+        "replace": "曾經",
+        "confidence": 0.98,
+        "reason": "「曾經」明顯重複。"
+      },
+      {
+        "idx": 257,
+        "type": "repeat",
+        "current": "為了扭轉這些不利的情況，懺悔就顯得格外重要。不過懺悔，不是要一直責怪自己。懺悔，不是要一直責怪自己。",
+        "find": "。懺悔，不是要一直責怪自己。",
+        "replace": "",
+        "confidence": 0.88,
+        "reason": "整句連續重複，應刪除後一次重複內容。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 230,\n    \"type\": \"broken\",\n    \"current\": \"願意此次朝聖所累積的一切善業，增強對三寶的信心，增長聞思修的力量，並願自己能夠真正依教奉行。\",\n    \"find\": \"願意此次\",\n    \"replace\": \"願意讓此次\",\n    \"confidence\": 0.93,\n    \"reason\": \"「願意此次」缺少引導動詞，句意不通，應為「願意讓此次」。\"\n  },\n  {\n    \"idx\": 256,\n    \"type\": \"repeat\",\n    \"current\": \"之前曾經曾經記住的，有感受的部分，過了一段時間，全部忘光。這些都是惡業所導致的。不僅如此，我們所遭遇的所有苦果，也都是過往惡業感得的果報。\",\n    \"find\": \"曾經曾經\",\n    \"replace\": \"曾經\",\n    \"confidence\": 0.98,\n    \"reason\": \"「曾經」明顯重複。\"\n  },\n  {\n    \"idx\": 257,\n    \"type\": \"repeat\",\n    \"current\": \"為了扭轉這些不利的情況，懺悔就顯得格外重要。不過懺悔，不是要一直責怪自己。懺悔，不是要一直責怪自己。\",\n    \"find\": \"。懺悔，不是要一直責怪自己。\",\n    \"replace\": \"\",\n    \"confidence\": 0.88,\n    \"reason\": \"整句連續重複，應刪除後一次重複內容。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 6,
+    "blockRange": [
+      271,
+      315
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.1,
+      "usage": {
+        "total_tokens": 2492,
+        "total_characters": 0,
+        "prompt_tokens": 1467,
+        "completion_tokens": 1025,
+        "completion_tokens_details": {
+          "reasoning_tokens": 685
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 295,
+        "type": "term",
+        "current": "一指令，找到今後真正可以依靠的力量。",
+        "find": "一指令",
+        "replace": "依止力",
+        "confidence": 0.99,
+        "reason": "四力中的第四項為「依止力」，「一指令」為同音誤寫。"
+      },
+      {
+        "idx": 298,
+        "type": "term",
+        "current": "雖然他知道一指令是在講歸一三寶，發菩提心。",
+        "find": "一指令",
+        "replace": "依止力",
+        "confidence": 0.99,
+        "reason": "此處所指的是四力中的「依止力」。"
+      },
+      {
+        "idx": 298,
+        "type": "sound",
+        "current": "雖然他知道一指令是在講歸一三寶，發菩提心。",
+        "find": "歸一三寶",
+        "replace": "皈依三寶",
+        "confidence": 0.98,
+        "reason": "佛教用語應為「皈依三寶」。"
+      },
+      {
+        "idx": 304,
+        "type": "term",
+        "current": "為什麼一指令是放在最後面，而不是放在最前面。",
+        "find": "一指令",
+        "replace": "依止力",
+        "confidence": 0.99,
+        "reason": "此處所指的是四力中的「依止力」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 295,\n    \"type\": \"term\",\n    \"current\": \"一指令，找到今後真正可以依靠的力量。\",\n    \"find\": \"一指令\",\n    \"replace\": \"依止力\",\n    \"confidence\": 0.99,\n    \"reason\": \"四力中的第四項為「依止力」，「一指令」為同音誤寫。\"\n  },\n  {\n    \"idx\": 298,\n    \"type\": \"term\",\n    \"current\": \"雖然他知道一指令是在講歸一三寶，發菩提心。\",\n    \"find\": \"一指令\",\n    \"replace\": \"依止力\",\n    \"confidence\": 0.99,\n    \"reason\": \"此處所指的是四力中的「依止力」。\"\n  },\n  {\n    \"idx\": 298,\n    \"type\": \"sound\",\n    \"current\": \"雖然他知道一指令是在講歸一三寶，發菩提心。\",\n    \"find\": \"歸一三寶\",\n    \"replace\": \"皈依三寶\",\n    \"confidence\": 0.98,\n    \"reason\": \"佛教用語應為「皈依三寶」。\"\n  },\n  {\n    \"idx\": 304,\n    \"type\": \"term\",\n    \"current\": \"為什麼一指令是放在最後面，而不是放在最前面。\",\n    \"find\": \"一指令\",\n    \"replace\": \"依止力\",\n    \"confidence\": 0.99,\n    \"reason\": \"此處所指的是四力中的「依止力」。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 7,
+    "blockRange": [
+      316,
+      360
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.3,
+      "usage": {
+        "total_tokens": 3053,
+        "total_characters": 0,
+        "prompt_tokens": 1642,
+        "completion_tokens": 1411,
+        "completion_tokens_details": {
+          "reasoning_tokens": 904
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 337,
+        "type": "broken",
+        "current": "這時候，就需要找到今後真正可以。",
+        "find": "找到今後真正可以。",
+        "replace": "找到今後真正可以依靠的力量。",
+        "confidence": 0.97,
+        "reason": "「找到今後真正可以」後缺關鍵成分，句意殘缺。"
+      },
+      {
+        "idx": 339,
+        "type": "repeat",
+        "current": "依靠的力量，這股力量分別是皈依三寶，發起菩提心，這股力量分別是皈依三寶，發起菩提心，為什麼？畢竟我們造惡的物件多半是三寶和眾生，那要如何防範對他們再次造惡，必須改變自己面對三寶和眾生時的心態。",
+        "find": "發起菩提心，這股力量分別是皈依三寶，發起菩提心，",
+        "replace": "發起菩提心，",
+        "confidence": 0.99,
+        "reason": "「這股力量分別是皈依三寶，發起菩提心」明顯重複一次。"
+      },
+      {
+        "idx": 339,
+        "type": "term",
+        "current": "依靠的力量，這股力量分別是皈依三寶，發起菩提心，這股力量分別是皈依三寶，發起菩提心，為什麼？畢竟我們造惡的物件多半是三寶和眾生，那要如何防範對他們再次造惡，必須改變自己面對三寶和眾生時的心態。",
+        "find": "造惡的物件",
+        "replace": "造惡的對象",
+        "confidence": 0.98,
+        "reason": "此處指造惡所面向的對象，「物件」應作「對象」。"
+      },
+      {
+        "idx": 349,
+        "type": "sound",
+        "current": "懺悔，不是隻是為了過去做錯的事情道歉，而是真正讓自己的生命重新轉向。",
+        "find": "隻是",
+        "replace": "只是",
+        "confidence": 0.99,
+        "reason": "「隻」為誤字，應作「只」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 337,\n    \"type\": \"broken\",\n    \"current\": \"這時候，就需要找到今後真正可以。\",\n    \"find\": \"找到今後真正可以。\",\n    \"replace\": \"找到今後真正可以依靠的力量。\",\n    \"confidence\": 0.97,\n    \"reason\": \"「找到今後真正可以」後缺關鍵成分，句意殘缺。\"\n  },\n  {\n    \"idx\": 339,\n    \"type\": \"repeat\",\n    \"current\": \"依靠的力量，這股力量分別是皈依三寶，發起菩提心，這股力量分別是皈依三寶，發起菩提心，為什麼？畢竟我們造惡的物件多半是三寶和眾生，那要如何防範對他們再次造惡，必須改變自己面對三寶和眾生時的心態。\",\n    \"find\": \"發起菩提心，這股力量分別是皈依三寶，發起菩提心，\",\n    \"replace\": \"發起菩提心，\",\n    \"confidence\": 0.99,\n    \"reason\": \"「這股力量分別是皈依三寶，發起菩提心」明顯重複一次。\"\n  },\n  {\n    \"idx\": 339,\n    \"type\": \"term\",\n    \"current\": \"依靠的力量，這股力量分別是皈依三寶，發起菩提心，這股力量分別是皈依三寶，發起菩提心，為什麼？畢竟我們造惡的物件多半是三寶和眾生，那要如何防範對他們再次造惡，必須改變自己面對三寶和眾生時的心態。\",\n    \"find\": \"造惡的物件\",\n    \"replace\": \"造惡的對象\",\n    \"confidence\": 0.98,\n    \"reason\": \"此處指造惡所面向的對象，「物件」應作「對象」。\"\n  },\n  {\n    \"idx\": 349,\n    \"type\": \"sound\",\n    \"current\": \"懺悔，不是隻是為了過去做錯的事情道歉，而是真正讓自己的生命重新轉向。\",\n    \"find\": \"隻是\",\n    \"replace\": \"只是\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」為誤字，應作「只」。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 8,
+    "blockRange": [
+      361,
+      405
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 2.7,
+      "usage": {
+        "total_tokens": 1727,
+        "total_characters": 0,
+        "prompt_tokens": 1406,
+        "completion_tokens": 321,
+        "completion_tokens_details": {
+          "reasoning_tokens": 249
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 373,
+        "type": "broken",
+        "current": "換言之，懺悔，讓我們看見自己還有哪。",
+        "find": "還有哪",
+        "replace": "還有哪裡需要改善",
+        "confidence": 0.99,
+        "reason": "句末殘缺，「還有哪」未形成完整語意。"
+      }
+    ],
+    "raw": "[{\"idx\":373,\"type\":\"broken\",\"current\":\"換言之，懺悔，讓我們看見自己還有哪。\",\"find\":\"還有哪\",\"replace\":\"還有哪裡需要改善\",\"confidence\":0.99,\"reason\":\"句末殘缺，「還有哪」未形成完整語意。\"}]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 9,
+    "blockRange": [
+      406,
+      450
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.2,
+      "usage": {
+        "total_tokens": 3886,
+        "total_characters": 0,
+        "prompt_tokens": 1984,
+        "completion_tokens": 1902,
+        "completion_tokens_details": {
+          "reasoning_tokens": 875
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 433,
+        "type": "broken",
+        "current": "我在開始釋放答案。",
+        "find": "釋放答案",
+        "replace": "揭示答案",
+        "confidence": 0.72,
+        "reason": "「釋放答案」語意不通，依上下文應為提示、揭示答案。"
+      },
+      {
+        "idx": 441,
+        "type": "hallucination",
+        "current": "看別人的過失。到底是為什麼？總要找出一個原因嘛。對不對？總不會說這個就是習性。習性使然。這個問題各位放在心中思考。所以我們剛剛提到，看到對方曾經做錯的一件事情。11。51。",
+        "find": "11。51。",
+        "replace": "",
+        "confidence": 0.95,
+        "reason": "句末出現與上下文無關的數字，疑為 ASR 誤插入。"
+      },
+      {
+        "idx": 443,
+        "type": "broken",
+        "current": "如果看到別人看到別人的優點時，也不要馬上拿自己和對方比較。不要變成他比我好，所以我不如他。心裡因此感到失落或不是滋味。而是單純看到對方的優點。真心為他的善行感到歡喜。",
+        "find": "看到別人看到別人的優點時",
+        "replace": "看到別人的優點時",
+        "confidence": 0.98,
+        "reason": "「看到別人看到別人的優點時」有明顯重複，導致句意不通。"
+      },
+      {
+        "idx": 449,
+        "type": "punct",
+        "current": "所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。",
+        "find": "轉法輪請為",
+        "replace": "轉法輪。請為",
+        "confidence": 0.99,
+        "reason": "相鄰句間缺少句號。"
+      },
+      {
+        "idx": 449,
+        "type": "punct",
+        "current": "所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。",
+        "find": "轉法輪換句話說請轉法輪對我們來說",
+        "replace": "轉法輪。換句話說，請轉法輪，對我們來說",
+        "confidence": 0.99,
+        "reason": "句間及分句間缺少標點，造成語意黏連。"
+      },
+      {
+        "idx": 449,
+        "type": "punct",
+        "current": "所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。",
+        "find": "祈願更是一個提醒",
+        "replace": "祈願，更是一個提醒",
+        "confidence": 0.98,
+        "reason": "分句間缺少逗號。"
+      },
+      {
+        "idx": 449,
+        "type": "punct",
+        "current": "所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。",
+        "find": "提醒佛陀請您繼續轉法輪而我也願意",
+        "replace": "提醒佛陀請您繼續轉法輪，而我也願意",
+        "confidence": 0.99,
+        "reason": "相鄰分句間缺少標點。"
+      },
+      {
+        "idx": 450,
+        "type": "repeat",
+        "current": "由此可知，真正的請轉法輪不只是提醒佛佛佛、善知識說法，也包括自己願意聽聞、思惟、實修，讓佛法真正進入自己的生命，並繼續運轉下去。",
+        "find": "佛佛佛",
+        "replace": "佛",
+        "confidence": 0.99,
+        "reason": "「佛」字明顯重複。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 433,\n    \"type\": \"broken\",\n    \"current\": \"我在開始釋放答案。\",\n    \"find\": \"釋放答案\",\n    \"replace\": \"揭示答案\",\n    \"confidence\": 0.72,\n    \"reason\": \"「釋放答案」語意不通，依上下文應為提示、揭示答案。\"\n  },\n  {\n    \"idx\": 441,\n    \"type\": \"hallucination\",\n    \"current\": \"看別人的過失。到底是為什麼？總要找出一個原因嘛。對不對？總不會說這個就是習性。習性使然。這個問題各位放在心中思考。所以我們剛剛提到，看到對方曾經做錯的一件事情。11。51。\",\n    \"find\": \"11。51。\",\n    \"replace\": \"\",\n    \"confidence\": 0.95,\n    \"reason\": \"句末出現與上下文無關的數字，疑為 ASR 誤插入。\"\n  },\n  {\n    \"idx\": 443,\n    \"type\": \"broken\",\n    \"current\": \"如果看到別人看到別人的優點時，也不要馬上拿自己和對方比較。不要變成他比我好，所以我不如他。心裡因此感到失落或不是滋味。而是單純看到對方的優點。真心為他的善行感到歡喜。\",\n    \"find\": \"看到別人看到別人的優點時\",\n    \"replace\": \"看到別人的優點時\",\n    \"confidence\": 0.98,\n    \"reason\": \"「看到別人看到別人的優點時」有明顯重複，導致句意不通。\"\n  },\n  {\n    \"idx\": 449,\n    \"type\": \"punct\",\n    \"current\": \"所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。\",\n    \"find\": \"轉法輪請為\",\n    \"replace\": \"轉法輪。請為\",\n    \"confidence\": 0.99,\n    \"reason\": \"相鄰句間缺少句號。\"\n  },\n  {\n    \"idx\": 449,\n    \"type\": \"punct\",\n    \"current\": \"所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。\",\n    \"find\": \"轉法輪換句話說請轉法輪對我們來說\",\n    \"replace\": \"轉法輪。換句話說，請轉法輪，對我們來說\",\n    \"confidence\": 0.99,\n    \"reason\": \"句間及分句間缺少標點，造成語意黏連。\"\n  },\n  {\n    \"idx\": 449,\n    \"type\": \"punct\",\n    \"current\": \"所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。\",\n    \"find\": \"祈願更是一個提醒\",\n    \"replace\": \"祈願，更是一個提醒\",\n    \"confidence\": 0.98,\n    \"reason\": \"分句間缺少逗號。\"\n  },\n  {\n    \"idx\": 449,\n    \"type\": \"punct\",\n    \"current\": \"所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。\",\n    \"find\": \"提醒佛陀請您繼續轉法輪而我也願意\",\n    \"replace\": \"提醒佛陀請您繼續轉法輪，而我也願意\",\n    \"confidence\": 0.99,\n    \"reason\": \"相鄰分句間缺少標點。\"\n  },\n  {\n    \"idx\": 450,\n    \"type\": \"repeat\",\n    \"current\": \"由此可知，真正的請轉法輪不只是提醒佛佛佛、善知識說法，也包括自己願意聽聞、思惟、實修，讓佛法真正進入自己的生命，並繼續運轉下去。\",\n    \"find\": \"佛佛佛\",\n    \"replace\": \"佛\",\n    \"confidence\": 0.99,\n    \"reason\": \"「佛」字明顯重複。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 10,
+    "blockRange": [
+      451,
+      495
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 10.0,
+      "usage": {
+        "total_tokens": 3802,
+        "total_characters": 0,
+        "prompt_tokens": 1774,
+        "completion_tokens": 2028,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1235
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 451,
+        "type": "punct",
+        "current": "第六支請佛住世前面談到請轉法輪我們說到我願意聽我需要這個法我願意接受這個法。",
+        "find": "我願意聽我需要",
+        "replace": "我願意聽，我需要",
+        "confidence": 0.98,
+        "reason": "句內缺少逗號，導致語意黏連。"
+      },
+      {
+        "idx": 451,
+        "type": "punct",
+        "current": "第六支請佛住世前面談到請轉法輪我們說到我願意聽我需要這個法我願意接受這個法。",
+        "find": "第六支請佛住世前面",
+        "replace": "第六支，請佛住世。前面",
+        "confidence": 0.97,
+        "reason": "法門名稱及段落銜接處缺少標點。"
+      },
+      {
+        "idx": 475,
+        "type": "hallucination",
+        "current": "趁著善知識。請不吝點贊訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱。",
+        "find": "請不吝點贊訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱。",
+        "replace": "",
+        "confidence": 1.0,
+        "reason": "與上下文無關的訂閱提示，並含大量重複文字。"
+      },
+      {
+        "idx": 475,
+        "type": "punct",
+        "current": "趁著善知識。請不吝點贊訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱。",
+        "find": "趁著善知識。",
+        "replace": "趁著善知識",
+        "confidence": 0.99,
+        "reason": "此處應與後文「還住世的時候」相連，不應以句號切斷。"
+      },
+      {
+        "idx": 479,
+        "type": "term",
+        "current": "為什麼要回向？不迴向，善業並不會因此消失。但是透過迴向，可以將所累積的善業導向自己真正想要成就的目標。",
+        "find": "回向？",
+        "replace": "迴向？",
+        "confidence": 0.99,
+        "reason": "佛教法門名稱應統一寫作「迴向」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 451,\n    \"type\": \"punct\",\n    \"current\": \"第六支請佛住世前面談到請轉法輪我們說到我願意聽我需要這個法我願意接受這個法。\",\n    \"find\": \"我願意聽我需要\",\n    \"replace\": \"我願意聽，我需要\",\n    \"confidence\": 0.98,\n    \"reason\": \"句內缺少逗號，導致語意黏連。\"\n  },\n  {\n    \"idx\": 451,\n    \"type\": \"punct\",\n    \"current\": \"第六支請佛住世前面談到請轉法輪我們說到我願意聽我需要這個法我願意接受這個法。\",\n    \"find\": \"第六支請佛住世前面\",\n    \"replace\": \"第六支，請佛住世。前面\",\n    \"confidence\": 0.97,\n    \"reason\": \"法門名稱及段落銜接處缺少標點。\"\n  },\n  {\n    \"idx\": 475,\n    \"type\": \"hallucination\",\n    \"current\": \"趁著善知識。請不吝點贊訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱。\",\n    \"find\": \"請不吝點贊訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱。\",\n    \"replace\": \"\",\n    \"confidence\": 1.0,\n    \"reason\": \"與上下文無關的訂閱提示，並含大量重複文字。\"\n  },\n  {\n    \"idx\": 475,\n    \"type\": \"punct\",\n    \"current\": \"趁著善知識。請不吝點贊訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱訂閱。\",\n    \"find\": \"趁著善知識。\",\n    \"replace\": \"趁著善知識\",\n    \"confidence\": 0.99,\n    \"reason\": \"此處應與後文「還住世的時候」相連，不應以句號切斷。\"\n  },\n  {\n    \"idx\": 479,\n    \"type\": \"term\",\n    \"current\": \"為什麼要回向？不迴向，善業並不會因此消失。但是透過迴向，可以將所累積的善業導向自己真正想要成就的目標。\",\n    \"find\": \"回向？\",\n    \"replace\": \"迴向？\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛教法門名稱應統一寫作「迴向」。\"\n  }\n]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 11,
+    "blockRange": [
+      496,
+      540
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.2,
+      "usage": {
+        "total_tokens": 1773,
+        "total_characters": 0,
+        "prompt_tokens": 1334,
+        "completion_tokens": 439,
+        "completion_tokens_details": {
+          "reasoning_tokens": 375
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 539,
+        "type": "broken",
+        "current": "怎麼做這樣的行為？",
+        "find": "怎麼做",
+        "replace": "怎麼會做",
+        "confidence": 0.96,
+        "reason": "句中缺少「會」，「怎麼會做這樣的行為？」語意完整自然。"
+      }
+    ],
+    "raw": "[{\"idx\":539,\"type\":\"broken\",\"current\":\"怎麼做這樣的行為？\",\"find\":\"怎麼做\",\"replace\":\"怎麼會做\",\"confidence\":0.96,\"reason\":\"句中缺少「會」，「怎麼會做這樣的行為？」語意完整自然。\"}]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 12,
+    "blockRange": [
+      541,
+      585
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.4,
+      "usage": {
+        "total_tokens": 1926,
+        "total_characters": 0,
+        "prompt_tokens": 1377,
+        "completion_tokens": 549,
+        "completion_tokens_details": {
+          "reasoning_tokens": 479
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 186
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 562,
+        "type": "broken",
+        "current": "我覺得這個問題真正的關鍵。",
+        "find": "真正的關鍵",
+        "replace": "真正的關鍵是",
+        "confidence": 0.82,
+        "reason": "句末缺少繫詞「是」，且下一句承接「不只是……」，原句成分不完整。"
+      }
+    ],
+    "raw": "[{\"idx\":562,\"type\":\"broken\",\"current\":\"我覺得這個問題真正的關鍵。\",\"find\":\"真正的關鍵\",\"replace\":\"真正的關鍵是\",\"confidence\":0.82,\"reason\":\"句末缺少繫詞「是」，且下一句承接「不只是……」，原句成分不完整。\"}]"
+  },
+  {
+    "session": "04",
+    "blockIndex": 13,
+    "blockRange": [
+      586,
+      625
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.4,
+      "usage": {
+        "total_tokens": 1783,
+        "total_characters": 0,
+        "prompt_tokens": 1376,
+        "completion_tokens": 407,
+        "completion_tokens_details": {
+          "reasoning_tokens": 403
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 187
+        }
+      }
+    },
+    "findings": [],
+    "raw": "[]"
+  }
+]

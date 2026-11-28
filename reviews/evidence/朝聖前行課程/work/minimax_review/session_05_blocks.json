@@ -1,0 +1,431 @@
+[
+  {
+    "session": "05",
+    "blockIndex": 0,
+    "blockRange": [
+      1,
+      45
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.6,
+      "usage": {
+        "total_tokens": 2706,
+        "total_characters": 0,
+        "prompt_tokens": 1972,
+        "completion_tokens": 734,
+        "completion_tokens_details": {
+          "reasoning_tokens": 469
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 1,
+        "type": "repeat",
+        "current": "第四堂課，我們談到到了聖地如何修行。當中搭配了七支的內容。其實，這些內容不需要等到了印度、到了聖地才開始練習。各位可以先在家中練習。",
+        "find": "談到到了",
+        "replace": "談到",
+        "confidence": 0.99,
+        "reason": "「談到到了」有連續重複的「到」字。"
+      },
+      {
+        "idx": 2,
+        "type": "broken",
+        "current": "增加自己對這。各位可以先在家中練習。增加自己對這套流程的熟悉度。等真的站在佛陀的面前時，才不會手忙腳亂。能夠更專注地把心放在憶念佛陀、憶念佛法上。",
+        "find": "增加自己對這",
+        "replace": "增加自己對這套流程的熟悉度",
+        "confidence": 0.99,
+        "reason": "「增加自己對這」殘缺，句末應為與後文一致的「增加自己對這套流程的熟悉度」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 1,\n    \"type\": \"repeat\",\n    \"current\": \"第四堂課，我們談到到了聖地如何修行。當中搭配了七支的內容。其實，這些內容不需要等到了印度、到了聖地才開始練習。各位可以先在家中練習。\",\n    \"find\": \"談到到了\",\n    \"replace\": \"談到\",\n    \"confidence\": 0.99,\n    \"reason\": \"「談到到了」有連續重複的「到」字。\"\n  },\n  {\n    \"idx\": 2,\n    \"type\": \"broken\",\n    \"current\": \"增加自己對這。各位可以先在家中練習。增加自己對這套流程的熟悉度。等真的站在佛陀的面前時，才不會手忙腳亂。能夠更專注地把心放在憶念佛陀、憶念佛法上。\",\n    \"find\": \"增加自己對這\",\n    \"replace\": \"增加自己對這套流程的熟悉度\",\n    \"confidence\": 0.99,\n    \"reason\": \"「增加自己對這」殘缺，句末應為與後文一致的「增加自己對這套流程的熟悉度」。\"\n  }\n]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 1,
+    "blockRange": [
+      46,
+      90
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 8.4,
+      "usage": {
+        "total_tokens": 2402,
+        "total_characters": 0,
+        "prompt_tokens": 1612,
+        "completion_tokens": 790,
+        "completion_tokens_details": {
+          "reasoning_tokens": 590
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 53,
+        "type": "punct",
+        "current": "這時候應該會有人問，如果那個想控制喉嚨的我不存在。",
+        "find": "不存在。",
+        "replace": "不存在，",
+        "confidence": 0.96,
+        "reason": "「如果」引出的間接問句尚未結束，句末應接下一句的「那為什麼」，不宜用句號。"
+      },
+      {
+        "idx": 62,
+        "type": "term",
+        "current": "《釋量論》第二品當中說的，身心互相隨足。",
+        "find": "隨足",
+        "replace": "隨逐",
+        "confidence": 0.99,
+        "reason": "《釋量論》相應法相應作「身心互相隨逐」，「隨足」為同音錯字。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 53,\n    \"type\": \"punct\",\n    \"current\": \"這時候應該會有人問，如果那個想控制喉嚨的我不存在。\",\n    \"find\": \"不存在。\",\n    \"replace\": \"不存在，\",\n    \"confidence\": 0.96,\n    \"reason\": \"「如果」引出的間接問句尚未結束，句末應接下一句的「那為什麼」，不宜用句號。\"\n  },\n  {\n    \"idx\": 62,\n    \"type\": \"term\",\n    \"current\": \"《釋量論》第二品當中說的，身心互相隨足。\",\n    \"find\": \"隨足\",\n    \"replace\": \"隨逐\",\n    \"confidence\": 0.99,\n    \"reason\": \"《釋量論》相應法相應作「身心互相隨逐」，「隨足」為同音錯字。\"\n  }\n]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 2,
+    "blockRange": [
+      91,
+      135
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 2.6,
+      "usage": {
+        "total_tokens": 1659,
+        "total_characters": 0,
+        "prompt_tokens": 1309,
+        "completion_tokens": 350,
+        "completion_tokens_details": {
+          "reasoning_tokens": 187
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 116,
+        "type": "sound",
+        "current": "他身上不是隻有這個缺點。",
+        "find": "隻有",
+        "replace": "只有",
+        "confidence": 0.99,
+        "reason": "「隻」用於量詞，此處應為副詞「只」。"
+      },
+      {
+        "idx": 132,
+        "type": "term",
+        "current": "因為當我們很在意我的時候。",
+        "find": "我的",
+        "replace": "他的",
+        "confidence": 0.94,
+        "reason": "依上下文應為「很在意他的時候」，「我的」疑為「他的」之誤。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 116,\n    \"type\": \"sound\",\n    \"current\": \"他身上不是隻有這個缺點。\",\n    \"find\": \"隻有\",\n    \"replace\": \"只有\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」用於量詞，此處應為副詞「只」。\"\n  },\n  {\n    \"idx\": 132,\n    \"type\": \"term\",\n    \"current\": \"因為當我們很在意我的時候。\",\n    \"find\": \"我的\",\n    \"replace\": \"他的\",\n    \"confidence\": 0.94,\n    \"reason\": \"依上下文應為「很在意他的時候」，「我的」疑為「他的」之誤。\"\n  }\n]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 3,
+    "blockRange": [
+      136,
+      180
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 15.4,
+      "usage": {
+        "total_tokens": 5119,
+        "total_characters": 0,
+        "prompt_tokens": 2209,
+        "completion_tokens": 2910,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1365
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 834
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 148,
+        "type": "sound",
+        "current": "我為什麼這麼在意它的過失？我是不是想要藉此證明我比它好？這是我們需要觀察的。不然說真的，觀察別人的過失對我們有什麼好處？沒有什麼好處。在沒有好處的情況下，為什麼我們習慣持續做這件事情，做這個動作？會不會原因就是這個？我們想要藉此證明我比它好。",
+        "find": "它的過失",
+        "replace": "他的過失",
+        "confidence": 0.95,
+        "reason": "此處指涉他人，「它」應作代詞「他」。"
+      },
+      {
+        "idx": 148,
+        "type": "sound",
+        "current": "我為什麼這麼在意它的過失？我是不是想要藉此證明我比它好？這是我們需要觀察的。不然說真的，觀察別人的過失對我們有什麼好處？沒有什麼好處。在沒有好處的情況下，為什麼我們習慣持續做這件事情，做這個動作？會不會原因就是這個？我們想要藉此證明我比它好。",
+        "find": "我比它好",
+        "replace": "我比他好",
+        "confidence": 0.95,
+        "reason": "此處比較的是自己與他人，「它」應作「他」。"
+      },
+      {
+        "idx": 149,
+        "type": "broken",
+        "current": "因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？",
+        "find": "隨喜他人並……",
+        "replace": "隨喜他人並不是要求我們完全不看別人的過失。",
+        "confidence": 0.9,
+        "reason": "句末內容明顯殘缺；下一行亦以「隨喜他人並不是要求我們完全不看別人的過失」承接，可據以補全。"
+      },
+      {
+        "idx": 149,
+        "type": "sound",
+        "current": "因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？",
+        "find": "不可以讓它輸給別人",
+        "replace": "不可以讓他輸給別人",
+        "confidence": 0.95,
+        "reason": "此處代詞指涉他人，「它」應作「他」。"
+      },
+      {
+        "idx": 149,
+        "type": "sound",
+        "current": "因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？",
+        "find": "不可以讓它落後。因為這個我實在太重要。",
+        "replace": "不可以讓他落後。因為這個我實在太重要。",
+        "confidence": 0.95,
+        "reason": "此處代詞指涉他人，「它」應作「他」。"
+      },
+      {
+        "idx": 149,
+        "type": "sound",
+        "current": "因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？",
+        "find": "它必須遙遙領先",
+        "replace": "他必須遙遙領先",
+        "confidence": 0.95,
+        "reason": "此處代詞指涉他人，「它」應作「他」。"
+      },
+      {
+        "idx": 151,
+        "type": "term",
+        "current": "麻婆豆腐是咳嗽的因是不是？其中一個因是主因嗎？不是外源呢？主因是什麼？主因是什麼？",
+        "find": "不是外源呢",
+        "replace": "不是外緣呢",
+        "confidence": 0.8,
+        "reason": "佛教因緣語境通常以「主因」與「外緣」相對，此處「外源」疑為近音誤字。"
+      },
+      {
+        "idx": 152,
+        "type": "term",
+        "current": "主因是喉嚨的本質就不好。像我以前跟在仁波切身邊。哇，有時候仁波切一上課，咳的時間比上課的時間還多。整堂課有30分鐘都在咳嗽。真的很不容易。",
+        "find": "仁波切身邊",
+        "replace": "仁波切身邊",
+        "confidence": 0.99,
+        "reason": "「仁波切」是稱謂，應作「仁波切」，非「仁波切」。"
+      },
+      {
+        "idx": 157,
+        "type": "broken",
+        "current": "就像我們對自己一樣。當我們發現自己的過失時不會只盯著這一點看。也不會因為自己的某個過失而就完全否定自己的其他優點。對待他人應該也要如此。尤其是對那些我們已經很熟悉的人更要練習這一點。因為越熟悉一個人，我們就越容易把他的缺點牢牢記住。",
+        "find": "而就完全",
+        "replace": "就完全",
+        "confidence": 0.97,
+        "reason": "「而就」語序不成立，應為「就」。"
+      },
+      {
+        "idx": 178,
+        "type": "sound",
+        "current": "我看到了。我昨天去聽了一組的共學，聽到有同學說了一些事情。回去之後，我就把這一段加進去。其實我的課程就是這樣，東拼西湊拼出來。但說這個是拼裝車嗎？我不覺得像。從你們的研討，從跟你們互動的過程中，把一些問題全部彙整起來。該放在第一講的放第一講，該放第二講的放第二講，井然有序。不得不這樣說。",
+        "find": "一組的共學",
+        "replace": "一期共學",
+        "confidence": 0.96,
+        "reason": "佛教共學活動通常稱「一期共學」，「一組的共學」疑為 ASR 誤寫。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 148,\n    \"type\": \"sound\",\n    \"current\": \"我為什麼這麼在意它的過失？我是不是想要藉此證明我比它好？這是我們需要觀察的。不然說真的，觀察別人的過失對我們有什麼好處？沒有什麼好處。在沒有好處的情況下，為什麼我們習慣持續做這件事情，做這個動作？會不會原因就是這個？我們想要藉此證明我比它好。\",\n    \"find\": \"它的過失\",\n    \"replace\": \"他的過失\",\n    \"confidence\": 0.95,\n    \"reason\": \"此處指涉他人，「它」應作代詞「他」。\"\n  },\n  {\n    \"idx\": 148,\n    \"type\": \"sound\",\n    \"current\": \"我為什麼這麼在意它的過失？我是不是想要藉此證明我比它好？這是我們需要觀察的。不然說真的，觀察別人的過失對我們有什麼好處？沒有什麼好處。在沒有好處的情況下，為什麼我們習慣持續做這件事情，做這個動作？會不會原因就是這個？我們想要藉此證明我比它好。\",\n    \"find\": \"我比它好\",\n    \"replace\": \"我比他好\",\n    \"confidence\": 0.95,\n    \"reason\": \"此處比較的是自己與他人，「它」應作「他」。\"\n  },\n  {\n    \"idx\": 149,\n    \"type\": \"broken\",\n    \"current\": \"因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？\",\n    \"find\": \"隨喜他人並……\",\n    \"replace\": \"隨喜他人並不是要求我們完全不看別人的過失。\",\n    \"confidence\": 0.9,\n    \"reason\": \"句末內容明顯殘缺；下一行亦以「隨喜他人並不是要求我們完全不看別人的過失」承接，可據以補全。\"\n  },\n  {\n    \"idx\": 149,\n    \"type\": \"sound\",\n    \"current\": \"因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？\",\n    \"find\": \"不可以讓它輸給別人\",\n    \"replace\": \"不可以讓他輸給別人\",\n    \"confidence\": 0.95,\n    \"reason\": \"此處代詞指涉他人，「它」應作「他」。\"\n  },\n  {\n    \"idx\": 149,\n    \"type\": \"sound\",\n    \"current\": \"因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？\",\n    \"find\": \"不可以讓它落後。因為這個我實在太重要。\",\n    \"replace\": \"不可以讓他落後。因為這個我實在太重要。\",\n    \"confidence\": 0.95,\n    \"reason\": \"此處代詞指涉他人，「它」應作「他」。\"\n  },\n  {\n    \"idx\": 149,\n    \"type\": \"sound\",\n    \"current\": \"因為這個我實在太重要。我不可以讓它落後。因為這個我實在太重要。我不可以讓它輸給別人。我不可以讓它落後。它必須遙遙領先。這個問題放在心中思考。所以隨喜他人並……這一講要剪的可多了……我今天中午吃了什麼嗎？\",\n    \"find\": \"它必須遙遙領先\",\n    \"replace\": \"他必須遙遙領先\",\n    \"confidence\": 0.95,\n    \"reason\": \"此處代詞指涉他人，「它」應作「他」。\"\n  },\n  {\n    \"idx\": 151,\n    \"type\": \"term\",\n    \"current\": \"麻婆豆腐是咳嗽的因是不是？其中一個因是主因嗎？不是外源呢？主因是什麼？主因是什麼？\",\n    \"find\": \"不是外源呢\",\n    \"replace\": \"不是外緣呢\",\n    \"confidence\": 0.8,\n    \"reason\": \"佛教因緣語境通常以「主因」與「外緣」相對，此處「外源」疑為近音誤字。\"\n  },\n  {\n    \"idx\": 152,\n    \"type\": \"term\",\n    \"current\": \"主因是喉嚨的本質就不好。像我以前跟在仁波切身邊。哇，有時候仁波切一上課，咳的時間比上課的時間還多。整堂課有30分鐘都在咳嗽。真的很不容易。\",\n    \"find\": \"仁波切身邊\",\n    \"replace\": \"仁波切身邊\",\n    \"confidence\": 0.99,\n    \"reason\": \"「仁波切」是稱謂，應作「仁波切」，非「仁波切」。\"\n  },\n  {\n    \"idx\": 157,\n    \"type\": \"broken\",\n    \"current\": \"就像我們對自己一樣。當我們發現自己的過失時不會只盯著這一點看。也不會因為自己的某個過失而就完全否定自己的其他優點。對待他人應該也要如此。尤其是對那些我們已經很熟悉的人更要練習這一點。因為越熟悉一個人，我們就越容易把他的缺點牢牢記住。\",\n    \"find\": \"而就完全\",\n    \"replace\": \"就完全\",\n    \"confidence\": 0.97,\n    \"reason\": \"「而就」語序不成立，應為「就」。\"\n  },\n  {\n    \"idx\": 178,\n    \"type\": \"sound\",\n    \"current\": \"我看到了。我昨天去聽了一組的共學，聽到有同學說了一些事情。回去之後，我就把這一段加進去。其實我的課程就是這樣，東拼西湊拼出來。但說這個是拼裝車嗎？我不覺得像。從你們的研討，從跟你們互動的過程中，把一些問題全部彙整起來。該放在第一講的放第一講，該放第二講的放第二講，井然有序。不得不這樣說。\",\n    \"find\": \"一組的共學\",\n    \"replace\": \"一期共學\",\n    \"confidence\": 0.96,\n    \"reason\": \"佛教共學活動通常稱「一期共學」，「一組的共學」疑為 ASR 誤寫。\"\n  }\n]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 4,
+    "blockRange": [
+      181,
+      225
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "DeepSeek-V4.1-Flash-1017",
+      "elapsed": 2.7,
+      "usage": {
+        "completion_tokens": 176,
+        "prompt_tokens": 1523,
+        "total_tokens": 1699,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 191,
+        "type": "broken",
+        "current": "這一段可以聽懂，道理不難懂，實踐起來就不確定。",
+        "find": "實踐起來就不確定",
+        "replace": "實踐起來就不容易",
+        "confidence": 0.6,
+        "reason": "「不確定」語意不通，應為「不容易」之誤"
+      },
+      {
+        "idx": 200,
+        "type": "repeat",
+        "current": "整天等著喝供水，成佛之後唯一做的事情就是等別人供供水，然後自己喝供水。",
+        "find": "喝供水",
+        "replace": "喝供水",
+        "confidence": 0.3,
+        "reason": "「喝供水」疑為「喝供養的水」或語意重複，但屬講者口語，把握不足"
+      }
+    ],
+    "raw": "[\n  {\"idx\": 191, \"type\": \"broken\", \"current\": \"這一段可以聽懂，道理不難懂，實踐起來就不確定。\", \"find\": \"實踐起來就不確定\", \"replace\": \"實踐起來就不容易\", \"confidence\": 0.6, \"reason\": \"「不確定」語意不通，應為「不容易」之誤\"},\n  {\"idx\": 200, \"type\": \"repeat\", \"current\": \"整天等著喝供水，成佛之後唯一做的事情就是等別人供供水，然後自己喝供水。\", \"find\": \"喝供水\", \"replace\": \"喝供水\", \"confidence\": 0.3, \"reason\": \"「喝供水」疑為「喝供養的水」或語意重複，但屬講者口語，把握不足\"}\n]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 5,
+    "blockRange": [
+      226,
+      270
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.2,
+      "usage": {
+        "total_tokens": 3201,
+        "total_characters": 0,
+        "prompt_tokens": 2539,
+        "completion_tokens": 662,
+        "completion_tokens_details": {
+          "reasoning_tokens": 407
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 247,
+        "type": "broken",
+        "current": "這條漫長的時間，有時候我們會進步，有時候我們會退步。會有很想學的時候，也會有覺得疲累，想放棄的時候。如果什麼事情都只能自己一個人面對，這條路其實不容易走得下去。這條路其實不容易走得長久。但如果身邊有一群人，大家一起學法，一起討論，一起面對問題，情況就會不太一樣。",
+        "find": "漫長的時間",
+        "replace": "漫長的路",
+        "confidence": 0.92,
+        "reason": "「漫長的時間」與後文討論學法道路及進退的語意不符，應指「漫長的路」。"
+      },
+      {
+        "idx": 264,
+        "type": "repeat",
+        "current": "更是一次，更是一次重新檢視自己的機會。",
+        "find": "更是一次，更是一次",
+        "replace": "更是一次",
+        "confidence": 0.99,
+        "reason": "句內「更是一次」明顯重複。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 247,\n    \"type\": \"broken\",\n    \"current\": \"這條漫長的時間，有時候我們會進步，有時候我們會退步。會有很想學的時候，也會有覺得疲累，想放棄的時候。如果什麼事情都只能自己一個人面對，這條路其實不容易走得下去。這條路其實不容易走得長久。但如果身邊有一群人，大家一起學法，一起討論，一起面對問題，情況就會不太一樣。\",\n    \"find\": \"漫長的時間\",\n    \"replace\": \"漫長的路\",\n    \"confidence\": 0.92,\n    \"reason\": \"「漫長的時間」與後文討論學法道路及進退的語意不符，應指「漫長的路」。\"\n  },\n  {\n    \"idx\": 264,\n    \"type\": \"repeat\",\n    \"current\": \"更是一次，更是一次重新檢視自己的機會。\",\n    \"find\": \"更是一次，更是一次\",\n    \"replace\": \"更是一次\",\n    \"confidence\": 0.99,\n    \"reason\": \"句內「更是一次」明顯重複。\"\n  }\n]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 6,
+    "blockRange": [
+      271,
+      315
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 2.7,
+      "usage": {
+        "total_tokens": 1930,
+        "total_characters": 0,
+        "prompt_tokens": 1536,
+        "completion_tokens": 394,
+        "completion_tokens_details": {
+          "reasoning_tokens": 288
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 315,
+        "type": "broken",
+        "current": "並持續。不要老是三分鐘熱度。我們的生命所剩無幾。沒有幾個三分鐘熱度可以讓我們揮霍。",
+        "find": "沒有幾個三分鐘熱度可以讓我們揮霍",
+        "replace": "沒有一個三分鐘熱度可以讓我們揮霍",
+        "confidence": 0.96,
+        "reason": "「沒有幾個……可以」語意不通，應為否定單一的「沒有一個」。"
+      }
+    ],
+    "raw": "[{\"idx\":315,\"type\":\"broken\",\"current\":\"並持續。不要老是三分鐘熱度。我們的生命所剩無幾。沒有幾個三分鐘熱度可以讓我們揮霍。\",\"find\":\"沒有幾個三分鐘熱度可以讓我們揮霍\",\"replace\":\"沒有一個三分鐘熱度可以讓我們揮霍\",\"confidence\":0.96,\"reason\":\"「沒有幾個……可以」語意不通，應為否定單一的「沒有一個」。\"}]"
+  },
+  {
+    "session": "05",
+    "blockIndex": 7,
+    "blockRange": [
+      316,
+      324
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.6,
+      "usage": {
+        "total_tokens": 1598,
+        "total_characters": 0,
+        "prompt_tokens": 1142,
+        "completion_tokens": 456,
+        "completion_tokens_details": {
+          "reasoning_tokens": 363
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 318,
+        "type": "repeat",
+        "current": "第四題。半年或一年後，我怎麼確定自己真的改變？半年或一年後，我怎麼確定自己真的改變？有可能你每天花15分鐘，應該說。",
+        "find": "半年或一年後，我怎麼確定自己真的改變？",
+        "replace": "",
+        "confidence": 0.99,
+        "reason": "同一問題在句內完整重複一次。"
+      }
+    ],
+    "raw": "[{\"idx\":318,\"type\":\"repeat\",\"current\":\"第四題。半年或一年後，我怎麼確定自己真的改變？半年或一年後，我怎麼確定自己真的改變？有可能你每天花15分鐘，應該說。\",\"find\":\"半年或一年後，我怎麼確定自己真的改變？\",\"replace\":\"\",\"confidence\":0.99,\"reason\":\"同一問題在句內完整重複一次。\"}]"
+  }
+]
