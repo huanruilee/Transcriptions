@@ -71,7 +71,8 @@
     "test:reader-smoke": "playwright test --config playwright.reader.config.ts",
     "check:session": "node scripts/check_session.mjs",
     "preflight:study-group": "node scripts/study_group_preflight.mjs",
-    "pr:ship": "bash scripts/pr_ship.sh"
+    "pr:ship": "bash scripts/pr_ship.sh",
+    "asr:course": "python3 scripts/course_asr_pipeline.py"
   },
   "repository": {
     "type": "git",
