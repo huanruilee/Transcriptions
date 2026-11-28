@@ -3,7 +3,7 @@
   "title": "第四講 到了聖地如何修行",
   "mediaType": "audio/mp3",
   "audioUrl": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_04.mp3",
-  "lastUpdated": "2026-11-28 09:30",
+  "lastUpdated": "2026-11-28 11:40",
   "publicationState": "candidate-review-required",
   "audioAvailable": true,
   "durationSec": 5019.168,
@@ -1314,7 +1314,7 @@
           "id": "seg-0130",
           "start": 1459.08,
           "end": 1467.83,
-          "text": "也正因為如此，在這次課程中，我們花了不少篇幅，介紹因果、四諦、五蘊。",
+          "text": "也正因為如此，在這次課程中，我們花了不少篇幅，介紹因果、四諦、無我。",
           "rawText": "也正因為如此，在這次課程中，我們花了不少篇幅，介紹因果、四地、五我。",
           "reviewNeeded": false,
           "rawAsrSegmentId": 130
@@ -1609,7 +1609,7 @@
           "id": "seg-0161",
           "start": 1647.72,
           "end": 1651.12,
-          "text": "而且各位沒有發現我在按部就班的執行嗎？",
+          "text": "而且各位沒有發現我在按部計畫的執行嗎？",
           "rawText": "而且各位沒有發現我在按部計劃的執行嗎？",
           "reviewNeeded": false,
           "rawAsrSegmentId": 161,
@@ -6397,7 +6397,7 @@
       "findingsValidated": 211,
       "appliedCorrections": 10,
       "newPendingSentences": 0,
-      "asrRecheck": "無新的 full large-v3 獨立複辨（GPU 記憶體被 strata-qwen38 佔用，載入即 CUDA OOM）；改以 large-v3-turbo（vad_filter=false）對 104 個候選音窗做旁證，僅供參考",
+      "asrRecheck": "已補做 full large-v3 獨立複辨：178 個音窗，覆蓋已套用修正 10 筆；據此回退 2 筆過度修正",
       "evidence": [
         "reviews/evidence/朝聖前行課程/work/minimax_review/findings.json",
         "reviews/evidence/朝聖前行課程/work/minimax_review/decisions.json",
@@ -6405,6 +6405,20 @@
       ],
       "humanListened": false,
       "note": "本紀錄不宣稱已完成人工校對或錄音忠實度；成品為待閱校版。"
+    },
+    "asrVerifyRecord": {
+      "reviewedAt": "2026-11-28 11:40",
+      "model": "faster-whisper large-v3（本地 snapshot, int8_float16, vad_filter=false）",
+      "windows": 178,
+      "coveredCorrections": 10,
+      "revertedCorrections": 2,
+      "verdict": "6 筆依官方整編校稿（集諦／無我／按部計畫／一組的共學／那只要／請佛住世上）、2 筆依 large-v3 與 turbo 一致之讀音（比重／無我）",
+      "evidence": [
+        "reviews/evidence/朝聖前行課程/work/asr_v3_verify.json",
+        "reviews/evidence/朝聖前行課程/work/asr_v3_fixes.json"
+      ],
+      "humanListened": false,
+      "note": "獨立於 MiniMax 的音訊複核；僅回退與原音或底本不合者，未做人工逐句聽核"
     }
   },
   "qualityReview": {
@@ -6415,81 +6429,118 @@
     "schemaVersion": 1,
     "status": "ai-reviewed",
     "sourceTranscriptId": "chao-sheng-qian-xing-2026/session_04",
-    "sourceDigest": "sha256:7fbb216dd175c70d2875d8f58415609594e1ca7781e699aa6ac72ef3cdb2fd4e",
+    "sourceDigest": "sha256:e986162687278d3829a6d1df7018ddaeeaaf4a7333f42008fa0dd6ca539b0e11",
     "generatedBy": "MiniMax-M3",
-    "generatedAt": "2026-11-28T00:58:33.946Z",
+    "generatedAt": "2026-11-28T02:02:15.671Z",
     "mainPoints": [
       {
-        "text": "朝聖的核心價值在於利用特殊環境讓心與佛法結合，而非單純追求人到了聖地就能獲得不勞而獲的加持。",
+        "text": "車程應回顧上一個聖地的所見所聞，並預想下一站與自己的關聯。",
         "evidence": [
-          {
-            "sentenceId": "seg-0589",
-            "quote": "淨罪集資真正的關鍵並不是我們做了多少事情，而是我們的心與法結合到什麼程度。"
-          },
-          {
-            "sentenceId": "seg-0620",
-            "quote": "讓自己的心與佛法更靠近。"
-          }
-        ]
-      },
-      {
-        "text": "車程應視為座間修，透過回顧上一聖地見聞與預想下一聖地內容，讓修行體會延續而不散失。",
-        "evidence": [
-          {
-            "sentenceId": "seg-0017",
-            "quote": "如果我們把在聖地朝聖看成座上，那麼從一個聖地前往下一個聖地的車程，就可以看成座間。"
-          },
           {
             "sentenceId": "seg-0022",
             "quote": "這段時間，可以回想一下，在上一個聖地，我看到了什麼，聽到了什麼，想到了什麼，把這些內容重新回顧一遍，讓這份體會在心裡沉澱下來。"
           },
           {
-            "sentenceId": "seg-0019",
-            "quote": "最重要的事情，是要把座上修行時的體會延續下去。不要讓它散失，否則座上修的效果就無法延續。"
+            "sentenceId": "seg-0023",
+            "quote": "如果還有時間，也可以提前想一想，下一個聖地曾經發生過哪些事，這些事跟我的生命有什麼關聯。"
+          }
+        ]
+      },
+      {
+        "text": "抵達聖地後，七支修持以禮拜、供養、懺悔、隨喜等實踐展開。",
+        "evidence": [
+          {
+            "sentenceId": "seg-0052",
+            "quote": "接著，我們進行七支的修持。"
+          },
+          {
+            "sentenceId": "seg-0350",
+            "quote": "第四支，隨喜。介紹完懺悔，緊接著談到隨喜。"
+          },
+          {
+            "sentenceId": "seg-0477",
+            "quote": "這段可以聽懂嗎？接著，第七支迴向。前面我們談了禮敬、供養、懺悔、隨喜、請轉法輪、請佛住世。"
           }
         ]
       }
     ],
     "discussionTopics": [
       {
-        "text": "為什麼我們容易對他人的過失貼上標籤，且這些標籤難以撕下？",
+        "text": "朝聖期間為何要特別強調淨罪集資？",
         "evidence": [
           {
-            "sentenceId": "seg-0414",
-            "quote": "為什麼標籤貼上去就撕不下來？"
+            "sentenceId": "seg-0558",
+            "quote": "在這裡，我們可以先思考一個問題。"
+          },
+          {
+            "sentenceId": "seg-0559",
+            "quote": "為什麼要在朝聖期間特別強調淨罪集資？"
           }
         ]
       },
       {
-        "text": "若只祈請善知識說法卻不認真聞思修，持續請轉法輪的意義究竟在哪裡？",
+        "text": "真正請轉法輪時，求法者應當如何承接佛法？",
         "evidence": [
           {
             "sentenceId": "seg-0447",
             "quote": "請轉法輪是祈請佛陀或善知識為眾生宣說佛法，讓佛法能夠不斷流傳，利益更多眾生。這當中也包含自己，所謂的利益更多眾生，眾生當中也包含自己。所以這裡需要思考一個問題：我真的想學法嗎？"
+          },
+          {
+            "sentenceId": "seg-0448",
+            "quote": "如果我只是祈請佛陀、善知識繼續說法，卻沒有認真地去聽聞、思惟、實修，那麼一直請法的意義在哪裡？《律經》裡有一句話，未請不應說。通常情況下，如果他人沒有主動請求，就不應該為對方說法。這說明，說法這件事，本來就不是單方面地給予，而是求法的人要先意識到自己需要法。"
+          },
+          {
+            "sentenceId": "seg-0449",
+            "quote": "所以請轉法輪的意思是請為我轉法輪請為想學法的我轉法輪換句話說請轉法輪對我們來說不只是一個祈願更是一個提醒佛陀請您繼續轉法輪而我也願意成為承接法輪的人。"
           }
         ]
       },
       {
-        "text": "為什麼四力懺悔中，依止力被安排在最後一個步驟而非最前面？",
+        "text": "懺悔中的依止力為何要安排在四力的最後？",
         "evidence": [
+          {
+            "sentenceId": "seg-0303",
+            "quote": "而且各位回去看《廣論略論》是怎麼講述四力的。"
+          },
           {
             "sentenceId": "seg-0304",
             "quote": "為什麼依止力是放在最後面，而不是放在最前面。"
+          },
+          {
+            "sentenceId": "seg-0321",
+            "quote": "這當中有修行的關鍵。"
           }
         ]
       }
     ],
     "referenceViews": [
       {
-        "text": "懺悔不是陷入罪惡感，而是坦承過失並透過四力讓生命重新轉向，避免重複造惡。",
+        "text": "法師主張以長、中、短程計畫學法，尤其要設定能判斷進度的短程目標。",
         "evidence": [
           {
-            "sentenceId": "seg-0258",
-            "quote": "讓自己陷在罪惡感裡，而是要坦承自己的過失，願意麵對，並做出改變。"
+            "sentenceId": "seg-0211",
+            "quote": "這應該是馬上就能夠察覺到的事吧？那如果你把目標都設定在解脫呢？學完15分鐘，我有離解脫比較近嗎？怎麼判斷？怎麼判斷？沒有辦法判斷？學了一個月，我有離解脫比較近嗎？無法判斷。你把目標設定在解脫，你學了一年，你依舊覺得自己在原地踏步。"
           },
           {
-            "sentenceId": "seg-0349",
-            "quote": "懺悔，不是只是為了過去做錯的事情道歉，而是真正讓自己的生命重新轉向。"
+            "sentenceId": "seg-0212",
+            "quote": "學法不應該這樣。你應該要長程、中程、短程的計畫。這當中，短程的計畫尤為重要。而不要好高騖遠，就跟著一群人說，我要解脫，我要成佛。"
+          }
+        ]
+      },
+      {
+        "text": "法師認為供養的重點是內在轉變，依教奉行才是最好的供燈。",
+        "evidence": [
+          {
+            "sentenceId": "seg-0126",
+            "quote": "而是透過供燈的行為提醒自己，這些象徵背後真正要成就的，還是自己的內在轉變。"
+          },
+          {
+            "sentenceId": "seg-0127",
+            "quote": "而要讓這些轉變真正發生，就不能離開聞思修。"
+          },
+          {
+            "sentenceId": "seg-0128",
+            "quote": "就如同第二堂課所提到的，依教奉行才是最好的供燈。"
           }
         ]
       }
@@ -6501,40 +6552,46 @@
           "group": "mainPoints",
           "index": 0,
           "verdict": "supported",
-          "reason": "引句支持心法結合為關鍵，非單純行為"
+          "reason": "相鄰句直接支持回顧與預想關聯"
         },
         {
           "group": "mainPoints",
           "index": 1,
           "verdict": "supported",
-          "reason": "原文明確將車程視為座間，並建議回顧上一聖地及預想下一聖地以延續體會。"
+          "reason": "明言進行七支並列出各支實踐"
         },
         {
           "group": "discussionTopics",
           "index": 0,
           "verdict": "supported",
-          "reason": "引句明確提出標籤難撕下的問題"
+          "reason": "原文直接提出該問題"
         },
         {
           "group": "discussionTopics",
           "index": 1,
           "verdict": "supported",
-          "reason": "引句討論只祈請不聞思修的意義問題"
+          "reason": "原文討論聽聞思惟實修與承接"
         },
         {
           "group": "discussionTopics",
           "index": 2,
           "verdict": "supported",
-          "reason": "引句明確提出依止力順序的問題"
+          "reason": "原文直接提出依止力排序問題"
         },
         {
           "group": "referenceViews",
           "index": 0,
           "verdict": "supported",
-          "reason": "引句支持坦承過失、轉向及避免重犯"
+          "reason": "明言長中短程及短程可判進度"
+        },
+        {
+          "group": "referenceViews",
+          "index": 1,
+          "verdict": "supported",
+          "reason": "明言內在轉變與依教奉行供燈"
         }
       ]
     },
-    "attemptCount": 2
+    "attemptCount": 1
   }
 }

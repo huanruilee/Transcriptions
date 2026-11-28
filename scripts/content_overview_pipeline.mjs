@@ -543,9 +543,38 @@ function coverageRetryRequest(acceptedByGroup) {
 
 function parseModelJson(raw) {
   const text = String(raw || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
-  const parsed = JSON.parse(text);
-  if (typeof parsed?.content === 'string') return parseModelJson(parsed.content);
-  return parsed;
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    // 部分本地模型會在 JSON 前後夾帶說明文字：取第一個完整的 {} 區塊再解析。
+    const start = text.indexOf('{');
+    if (start >= 0) {
+      let depth = 0, inStr = false, esc = false, end = -1;
+      for (let i = start; i < text.length; i += 1) {
+        const ch = text[i];
+        if (esc) { esc = false; continue; }
+        if (ch === '\\') { esc = true; continue; }
+        if (ch === '"') { inStr = !inStr; continue; }
+        if (inStr) continue;
+        if (ch === '{') depth += 1;
+        else if (ch === '}') { depth -= 1; if (depth === 0) { end = i; break; } }
+      }
+      if (end > start) {
+        const parsed = JSON.parse(text.slice(start, end + 1));
+        if (typeof parsed?.content === 'string') return parseModelJson(parsed.content);
+        return parsed;
+      }
+    }
+    dumpOverviewParseFailure(raw, err);
+    throw err;
+  }
+}
+
+function dumpOverviewParseFailure(raw, err) {
+  try {
+    fs.writeFileSync('/tmp/overview_parse_fail.txt',
+      `${err?.message}\n----\n${String(raw || '').slice(0, 4000)}\n`, 'utf8');
+  } catch { /* debug only */ }
 }
 
 export function buildMiniMaxResponsesRequest(messages, maxOutputTokens, promptCacheKey, {
@@ -602,7 +631,13 @@ function callOpenAiCompatFallback(messages, maxOutputTokens, endpoint, model, ap
 
   const result = spawnSync('curl', args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
   if (result.status !== 0) throw new Error(result.stderr.trim() || `Fallback curl exited ${result.status}`);
-  const data = JSON.parse(result.stdout);
+  let data;
+  try {
+    data = JSON.parse(result.stdout);
+  } catch (err) {
+    dumpOverviewParseFailure(result.stdout, err);
+    throw err;
+  }
   if (data.error) throw new Error(`Fallback error: ${JSON.stringify(data.error)}`);
   const text = data?.choices?.[0]?.message?.content ?? '';
   return parseModelJson(text);
@@ -1069,6 +1104,7 @@ function main() {
     } catch (error) {
       failures += 1;
       console.error(`[${index + 1}] ${target.sourceTranscriptId} ERROR ${error.message}`);
+      if (process.env.OVERVIEW_DEBUG) console.error(error.stack);
       if (isMiniMaxQuotaError(error)) {
         console.error('[halt] MiniMax Token Plan quota is exhausted or rate-limited; resume after quota reset.');
         process.exitCode = 4;

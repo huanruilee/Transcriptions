@@ -28,13 +28,15 @@ SESSION_IDS = ["01", "02", "03", "04", "05", "06"]
 CLOSING_NOTICE = (
     "**待閱校版**：本節**沒有逐字底本**，正文為本機 Whisper ASR 轉寫＋名相校正，"
     "僅以官方問答紀要大綱作結構線索；待確認句已再以 faster-whisper large-v3 複辨並經 AGY 裁決，"
-    "第三輪另以 MiniMax 全稿複審套用有依據的局部修正（見下方 metadata），"
+    "第三輪另以 MiniMax 全稿複審套用有依據的局部修正，並以 full large-v3 逐音窗複核、"
+    "回退與原音不合的過度修正（見下方 metadata），"
     "**尚未人工逐句聽核**，疑義請配合原音核對。"
 )
 BASE_NOTICE = (
     "**待閱校版**：本講逐字稿由本機 Whisper ASR 轉寫，並與講師官方整編校稿逐句對校名相與段落小標；"
     "待確認句已再以 faster-whisper large-v3 複辨並經 AGY 裁決，"
-    "第三輪另以 MiniMax 全稿複審套用有依據的局部修正（見下方 metadata），"
+    "第三輪另以 MiniMax 全稿複審套用有依據的局部修正，並以 full large-v3 逐音窗複核、"
+    "回退與原音不合的過度修正（見下方 metadata），"
     "**尚未人工逐句聽核**，疑義請配合原音核對。"
 )
 
@@ -124,6 +126,13 @@ def build(session_id: str, course: dict) -> Path:
             f"（原始發現 {mm.get('findingsRaw')} 筆、驗證後 {mm.get('findingsValidated')} 筆），"
             f"套用局部修正 {mm.get('appliedCorrections')} 筆、新增待聽核 {mm.get('newPendingSentences')} 句；"
             f"{mm.get('asrRecheck')}（{mm.get('evidence')[-1]}）"
+        )
+    av = meta.get("asrVerifyRecord") or {}
+    if av:
+        lines.append(
+            f"- 第三輪音訊複核：{av.get('model')} 對 {av.get('windows')} 個音窗獨立轉寫，"
+            f"覆蓋已套用修正 {av.get('coveredCorrections')} 筆；回退與原音不合者 "
+            f"{av.get('revertedCorrections')} 筆（{av.get('verdict')}）"
         )
     if adj:
         lines.append(
