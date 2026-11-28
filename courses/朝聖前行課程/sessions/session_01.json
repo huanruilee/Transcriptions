@@ -4613,7 +4613,7 @@
       "findingsValidated": 211,
       "appliedCorrections": 26,
       "newPendingSentences": 1,
-      "asrRecheck": "無新的 full large-v3 獨立複辨（GPU 記憶體被 strata-qwen38 佔用，載入即 CUDA OOM）；改以 large-v3-turbo（vad_filter=false）對 104 個候選音窗做旁證，僅供參考",
+      "asrRecheck": "已補做 full large-v3 獨立複辨：178 個音窗，覆蓋已套用修正 23 筆；據此回退 0 筆過度修正",
       "evidence": [
         "reviews/evidence/朝聖前行課程/work/minimax_review/findings.json",
         "reviews/evidence/朝聖前行課程/work/minimax_review/decisions.json",
@@ -4621,6 +4621,20 @@
       ],
       "humanListened": false,
       "note": "本紀錄不宣稱已完成人工校對或錄音忠實度；成品為待閱校版。"
+    },
+    "asrVerifyRecord": {
+      "reviewedAt": "2026-11-28 11:40",
+      "model": "faster-whisper large-v3（本地 snapshot, int8_float16, vad_filter=false）",
+      "windows": 178,
+      "coveredCorrections": 23,
+      "revertedCorrections": 0,
+      "verdict": "本節無需回退",
+      "evidence": [
+        "reviews/evidence/朝聖前行課程/work/asr_v3_verify.json",
+        "reviews/evidence/朝聖前行課程/work/asr_v3_fixes.json"
+      ],
+      "humanListened": false,
+      "note": "獨立於 MiniMax 的音訊複核；僅回退與原音或底本不合者，未做人工逐句聽核"
     }
   },
   "qualityReview": {

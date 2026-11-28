@@ -3,7 +3,7 @@
   "title": "第五講 把朝聖帶回生活",
   "mediaType": "audio/mp3",
   "audioUrl": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_05.mp3",
-  "lastUpdated": "2026-11-28 09:30",
+  "lastUpdated": "2026-11-28 11:40",
   "publicationState": "candidate-review-required",
   "audioAvailable": true,
   "durationSec": 3776.544,
@@ -1785,7 +1785,7 @@
           "id": "seg-0178",
           "start": 1800.41,
           "end": 1851.4,
-          "text": "我看到了。我昨天去聽了一期共學，聽到有同學說了一些事情。回去之後，我就把這一段加進去。其實我的課程就是這樣，東拼西湊拼出來。但說這個是拼裝車嗎？我不覺得像。從你們的研討，從跟你們互動的過程中，把一些問題全部彙整起來。該放在第一講的放第一講，該放第二講的放第二講，井然有序。不得不這樣說。",
+          "text": "我看到了。我昨天去聽了一組的共學，聽到有同學說了一些事情。回去之後，我就把這一段加進去。其實我的課程就是這樣，東拼西湊拼出來。但說這個是拼裝車嗎？我不覺得像。從你們的研討，從跟你們互動的過程中，把一些問題全部彙整起來。該放在第一講的放第一講，該放第二講的放第二講，井然有序。不得不這樣說。",
           "rawText": "我看到了。我昨天去聽了一組的共學，聽到有同學說了一些事情。回去之後，我就把這一段加進去。其實我的課程就是這樣，東拼西奏拼出來。但說這個是拼裝車嗎？我不覺得像。從你們的研討，從跟你們互動的過程中，把一些問題全部彙整起來。該放在第一獎的放第一獎，該放第二獎的放第二獎，井然有序。不得不這樣說。",
           "reviewNeeded": false,
           "rawAsrSegmentId": 196,
@@ -3393,7 +3393,7 @@
       "findingsValidated": 211,
       "appliedCorrections": 4,
       "newPendingSentences": 0,
-      "asrRecheck": "無新的 full large-v3 獨立複辨（GPU 記憶體被 strata-qwen38 佔用，載入即 CUDA OOM）；改以 large-v3-turbo（vad_filter=false）對 104 個候選音窗做旁證，僅供參考",
+      "asrRecheck": "已補做 full large-v3 獨立複辨：178 個音窗，覆蓋已套用修正 4 筆；據此回退 1 筆過度修正",
       "evidence": [
         "reviews/evidence/朝聖前行課程/work/minimax_review/findings.json",
         "reviews/evidence/朝聖前行課程/work/minimax_review/decisions.json",
@@ -3401,6 +3401,20 @@
       ],
       "humanListened": false,
       "note": "本紀錄不宣稱已完成人工校對或錄音忠實度；成品為待閱校版。"
+    },
+    "asrVerifyRecord": {
+      "reviewedAt": "2026-11-28 11:40",
+      "model": "faster-whisper large-v3（本地 snapshot, int8_float16, vad_filter=false）",
+      "windows": 178,
+      "coveredCorrections": 4,
+      "revertedCorrections": 1,
+      "verdict": "6 筆依官方整編校稿（集諦／無我／按部計畫／一組的共學／那只要／請佛住世上）、2 筆依 large-v3 與 turbo 一致之讀音（比重／無我）",
+      "evidence": [
+        "reviews/evidence/朝聖前行課程/work/asr_v3_verify.json",
+        "reviews/evidence/朝聖前行課程/work/asr_v3_fixes.json"
+      ],
+      "humanListened": false,
+      "note": "獨立於 MiniMax 的音訊複核；僅回退與原音或底本不合者，未做人工逐句聽核"
     }
   },
   "qualityReview": {
@@ -3411,50 +3425,49 @@
     "schemaVersion": 1,
     "status": "ai-reviewed",
     "sourceTranscriptId": "chao-sheng-qian-xing-2026/session_05",
-    "sourceDigest": "sha256:fd39cfceb3c266199148501fc838fe9f0f9d8ed42d89055e2785081b368db4e1",
+    "sourceDigest": "sha256:0c66a3d7a488ca79f363c97cc5be4dacc391e14aeb6609985015f241dc54b7da",
     "generatedBy": "MiniMax-M3",
-    "generatedAt": "2026-11-28T00:59:09.514Z",
+    "generatedAt": "2026-11-28T02:12:08.015Z",
     "mainPoints": [
       {
-        "text": "真正的供養與懺悔需落實於日常，從最影響自己的問題開始改變，並觀察境界中的進步。",
+        "text": "朝聖結束後應反問自己這趟行程為生命帶來什麼改變，並將所見所聞的佛法帶回生活。",
         "evidence": [
           {
-            "sentenceId": "seg-0032",
-            "quote": "這就是我們回到生活之後最實際的一份供養。"
+            "sentenceId": "seg-0004",
+            "quote": "如果回到原來的生活，一切又恢復原樣。工作照做，生活照過，原來的煩惱與習氣也照舊。那我們就要反問自己，這趟朝聖究竟為我的生命帶來了什麼改變？"
+          },
+          {
+            "sentenceId": "seg-0005",
+            "quote": "所以，朝聖，真正重要的，不只是我們曾經去過哪些地方，而是在這些地方所看到，所聽到，所思惟的佛法，能不能真正帶回自己的生活。"
           }
         ]
       },
       {
-        "text": "真正的隨喜是不靠否定他人來證明自身價值，也不因自身不足而否定進步。",
+        "text": "回到生活後，禮敬支的觀察重點是有沒有珍惜佛陀的說法恩，進而認真聞思並依教奉行。",
         "evidence": [
           {
-            "sentenceId": "seg-0164",
-            "quote": "不需要靠否定別人來證明自己的價值。不需要靠否定他人來證明自己的價值。也不需要因為自己的不足而否定自己的進步。"
+            "sentenceId": "seg-0015",
+            "quote": "既然我知道佛陀所說的法，能夠幫助我離苦得樂，那我有沒有好好珍惜這份說法恩？"
+          },
+          {
+            "sentenceId": "seg-0017",
+            "quote": "如果真的感恩佛陀的說法恩，就應該會更願意認真聽聞佛法，思惟佛法，並且依教奉行。"
           }
         ]
       }
     ],
     "discussionTopics": [
       {
-        "text": "這趟朝聖究竟為我的生命帶來了什麼改變？",
+        "text": "回到原本的生活之後，禮敬支應該觀察的重點是什麼？",
         "evidence": [
           {
-            "sentenceId": "seg-0004",
-            "quote": "如果回到原來的生活，一切又恢復原樣。工作照做，生活照過，原來的煩惱與習氣也照舊。那我們就要反問自己，這趟朝聖究竟為我的生命帶來了什麼改變？"
+            "sentenceId": "seg-0014",
+            "quote": "那麼回到原本的生活之後，我們應該觀察的重點是什麼？"
           }
         ]
       },
       {
-        "text": "佛陀教我的這些法，我準備從哪裡開始實踐？",
-        "evidence": [
-          {
-            "sentenceId": "seg-0023",
-            "quote": "佛陀教我的這些法，我準備從哪裡開始實踐？"
-          }
-        ]
-      },
-      {
-        "text": "我在佛前懺悔過的問題，回到原本的生活之後，有沒有真的開始改變？",
+        "text": "在佛前懺悔過的問題，回到生活後有沒有真的開始改變？",
         "evidence": [
           {
             "sentenceId": "seg-0037",
@@ -3463,31 +3476,43 @@
         ]
       },
       {
-        "text": "哪一天，當善知識不在身邊時，我還能不能按照該有的步驟繼續聞思修？",
+        "text": "回到生活後，隨喜支應該觀察自己有沒有哪些地方比以前進步？",
         "evidence": [
           {
-            "sentenceId": "seg-0233",
-            "quote": "我還能不能按照該有的步驟繼續聞思修？"
+            "sentenceId": "seg-0075",
+            "quote": "那麼回到原本的生活之後，我們應該觀察的重點是什麼？"
+          },
+          {
+            "sentenceId": "seg-0076",
+            "quote": "這段時間，我有沒有哪些地方比以前進步了？"
           }
         ]
       }
     ],
     "referenceViews": [
       {
-        "text": "佛陀留給我們最珍貴的，不是讓我們可以禮拜的行相，而是讓我們可以依循的教法。",
+        "text": "依教奉行不是一下子做出大轉變，而是從一個對自己影響最大的問題開始認真執行。",
         "evidence": [
           {
-            "sentenceId": "seg-0019",
-            "quote": "這段有沒有聽懂？因為佛陀留給我們最珍貴的，不是讓我們可以禮拜的行相，而是讓我們可以依循的教法。"
+            "sentenceId": "seg-0030",
+            "quote": "依教奉行，不是一下子就要做出180度的大轉變，而是把所學的佛法真正用在自己最需要的地方。"
+          },
+          {
+            "sentenceId": "seg-0031",
+            "quote": "從一個地方開始，認真執行。"
           }
         ]
       },
       {
-        "text": "真正的請佛住世，是提醒自己把該學的法好好學起來，讓自己逐漸具備獨立修行的能力。",
+        "text": "隨喜他人不是完全不看別人過失，而是看到過失時不只看那一點，也不因此否定對方其他優點。",
         "evidence": [
           {
-            "sentenceId": "seg-0239",
-            "quote": "真正的請佛住世，不是希望師長一直陪著我，而是提醒自己，在善知識住世時，把該學的法好好學起來，讓自己逐漸具備獨立修行的能力。有沒有聽懂？在善知識住世時，把該學的法好好學起來，讓自己逐漸具備獨立修行的能力。"
+            "sentenceId": "seg-0155",
+            "quote": "剛剛講到哪？我知道。平時我們持續看對方的過失是不是想證明我比他好？我們剛剛講到這一段。這個問題放在心中思考。其實隨喜他人並不是要求我們完全不看別人的過失。"
+          },
+          {
+            "sentenceId": "seg-0156",
+            "quote": "而是看到別人的過失時不要只盯著那一點。也不要因為那個過失而否定對方的其他優點。"
           }
         ]
       }
@@ -3499,52 +3524,46 @@
           "group": "mainPoints",
           "index": 0,
           "verdict": "supported",
-          "reason": "供養與懺悔段落支持從問題開始改變及觀察進步"
+          "reason": "原文明確提問朝聖帶來改變及佛法回生活"
         },
         {
           "group": "mainPoints",
           "index": 1,
           "verdict": "supported",
-          "reason": "引句直接支持不靠否定他人及不因不足否定進步。"
+          "reason": "珍惜說法恩後確實應聞思依教奉行"
         },
         {
           "group": "discussionTopics",
           "index": 0,
           "verdict": "supported",
-          "reason": "原文明確提出此反問作為討論主題"
+          "reason": "原文明確提問回生活後的觀察重點"
         },
         {
           "group": "discussionTopics",
           "index": 1,
           "verdict": "supported",
-          "reason": "原文明確提出此實踐起點的提問"
+          "reason": "原文明確提問懺悔問題是否開始改變"
         },
         {
           "group": "discussionTopics",
           "index": 2,
           "verdict": "supported",
-          "reason": "原文明確提出懺悔後是否改變的觀察問題"
-        },
-        {
-          "group": "discussionTopics",
-          "index": 3,
-          "verdict": "supported",
-          "reason": "原文明確討論善知識不在時能否繼續聞思修"
+          "reason": "原文明確詢問隨喜支應觀察的進步"
         },
         {
           "group": "referenceViews",
           "index": 0,
           "verdict": "supported",
-          "reason": "引句直接支持珍貴的是教法而非行相的觀點"
+          "reason": "原文支持從影響最大的問題開始執行"
         },
         {
           "group": "referenceViews",
           "index": 1,
           "verdict": "supported",
-          "reason": "引句直接支持請佛住世即具備獨立修行能力"
+          "reason": "原文明確支持不盯單點且不否定其他優點"
         }
       ]
     },
-    "attemptCount": 2
+    "attemptCount": 1
   }
 }

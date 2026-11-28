@@ -3,7 +3,7 @@
   "title": "第二講 帶著成績單去見佛陀",
   "mediaType": "audio/mp3",
   "audioUrl": "https://gx10-2887.tail378c21.ts.net/audio/chaosheng-qianxing-2026/CSQX_02.mp3",
-  "lastUpdated": "2026-11-28 09:30",
+  "lastUpdated": "2026-11-28 11:40",
   "publicationState": "candidate-review-required",
   "audioAvailable": true,
   "durationSec": 5137.56,
@@ -1376,7 +1376,7 @@
           "id": "seg-0125",
           "start": 1548.88,
           "end": 1563.54,
-          "text": "只要我們學法的心態正確、方向正確、步驟正確，最終也能達到同樣的目的地。",
+          "text": "那只要我們學法的心態正確、方向正確、步驟正確，最終也能達到同樣的目的地。",
           "rawText": "那隻要我們學法的心態正確、方向正確、步驟正確，最終也能達到同樣的目的地。",
           "reviewNeeded": false,
           "rawAsrSegmentId": 125
@@ -2865,7 +2865,7 @@
           "id": "seg-0271",
           "start": 3208.88,
           "end": 3222.3,
-          "text": "同樣的道理，也可以用在請佛住世。",
+          "text": "同樣的道理，也可以用在請佛住世上。",
           "rawText": "同樣的道理，也可以用在請佛住世上。",
           "reviewNeeded": false,
           "rawAsrSegmentId": 274
@@ -5641,7 +5641,7 @@
       "findingsValidated": 211,
       "appliedCorrections": 9,
       "newPendingSentences": 1,
-      "asrRecheck": "無新的 full large-v3 獨立複辨（GPU 記憶體被 strata-qwen38 佔用，載入即 CUDA OOM）；改以 large-v3-turbo（vad_filter=false）對 104 個候選音窗做旁證，僅供參考",
+      "asrRecheck": "已補做 full large-v3 獨立複辨：178 個音窗，覆蓋已套用修正 9 筆；據此回退 2 筆過度修正",
       "evidence": [
         "reviews/evidence/朝聖前行課程/work/minimax_review/findings.json",
         "reviews/evidence/朝聖前行課程/work/minimax_review/decisions.json",
@@ -5649,6 +5649,20 @@
       ],
       "humanListened": false,
       "note": "本紀錄不宣稱已完成人工校對或錄音忠實度；成品為待閱校版。"
+    },
+    "asrVerifyRecord": {
+      "reviewedAt": "2026-11-28 11:40",
+      "model": "faster-whisper large-v3（本地 snapshot, int8_float16, vad_filter=false）",
+      "windows": 178,
+      "coveredCorrections": 9,
+      "revertedCorrections": 2,
+      "verdict": "6 筆依官方整編校稿（集諦／無我／按部計畫／一組的共學／那只要／請佛住世上）、2 筆依 large-v3 與 turbo 一致之讀音（比重／無我）",
+      "evidence": [
+        "reviews/evidence/朝聖前行課程/work/asr_v3_verify.json",
+        "reviews/evidence/朝聖前行課程/work/asr_v3_fixes.json"
+      ],
+      "humanListened": false,
+      "note": "獨立於 MiniMax 的音訊複核；僅回退與原音或底本不合者，未做人工逐句聽核"
     }
   },
   "qualityReview": {
@@ -5659,9 +5673,9 @@
     "schemaVersion": 1,
     "status": "ai-reviewed",
     "sourceTranscriptId": "chao-sheng-qian-xing-2026/session_02",
-    "sourceDigest": "sha256:91f120a9ddf7e7cb24122fae3e2e5bac2831386a5bb72a305cd5b73a6f79cc96",
+    "sourceDigest": "sha256:b2d989ce40127ed749fa42a8c7ea1a8079eedd363ebacbf709a24221142dc9e9",
     "generatedBy": "MiniMax-M3",
-    "generatedAt": "2026-11-28T00:55:27.061Z",
+    "generatedAt": "2026-11-28T01:59:57.296Z",
     "mainPoints": [
       {
         "text": "憶念佛陀聖地並非僅記住地名，而是思考佛陀經歷與自身生命的深刻關聯。",
@@ -5677,7 +5691,7 @@
         ]
       },
       {
-        "text": "依教奉行是供養佛陀的最佳方式，因為佛陀說法旨在讓眾生離苦得樂。",
+        "text": "依教奉行是所有供養中最好的供養，因為佛陀說法的目的就是為了讓眾生離苦得樂。",
         "evidence": [
           {
             "sentenceId": "seg-0449",
@@ -5692,7 +5706,7 @@
     ],
     "discussionTopics": [
       {
-        "text": "在佛陀出生處，應如何檢視自己使用暇滿人身的方向與目的？",
+        "text": "在佛陀出生處，我們應如何反思暇滿人身的價值與使用方向？",
         "evidence": [
           {
             "sentenceId": "seg-0079",
@@ -5701,28 +5715,37 @@
         ]
       },
       {
-        "text": "如何讓法輪繼續轉動，避免以懂得有限或無人請法為藉口而停止傳法？",
+        "text": "學佛的心態、方向與步驟是否正確，能否真正導向究竟解脫？",
         "evidence": [
           {
-            "sentenceId": "seg-0230",
-            "quote": "第二個問題，我要如何讓這個法輪繼續轉動下去，而不會停在我這裡？"
+            "sentenceId": "seg-0126",
+            "quote": "但問題是，我們學法的心態正確嗎？"
           },
           {
-            "sentenceId": "seg-0347",
-            "quote": "講白了就是一個字懶，沒有其他的答案，就這麼簡單，就是無心。"
+            "sentenceId": "seg-0128",
+            "quote": "我們學法的步驟正確嗎？"
           }
         ]
       },
       {
-        "text": "面對死亡無常，是否已誠實回答這一生想留下什麼及是否完成重要之事？",
+        "text": "如何接住轉到面前的法輪，並讓其繼續轉動而不停滯在自己身上？",
+        "evidence": [
+          {
+            "sentenceId": "seg-0229",
+            "quote": "第一個問題，法輪已經轉到了我的面前，我會怎麼接住它？"
+          },
+          {
+            "sentenceId": "seg-0230",
+            "quote": "第二個問題，我要如何讓這個法輪繼續轉動下去，而不會停在我這裡？"
+          }
+        ]
+      },
+      {
+        "text": "面對生命無常，我們這一生究竟想留下什麼樣的成就與貢獻？",
         "evidence": [
           {
             "sentenceId": "seg-0411",
             "quote": "更應該誠實地問自己，那我這一生想留下什麼？"
-          },
-          {
-            "sentenceId": "seg-0412",
-            "quote": "如果生命在此刻結束，我這一生有沒有真正去完成那些我認為重要的事？"
           }
         ]
       }
@@ -5740,6 +5763,19 @@
             "quote": "最終，當祂找到了那條解脫之道，必然會把那條道路指給眾生看，讓眾生也有機會走出去。"
           }
         ]
+      },
+      {
+        "text": "透過面對挫折時的平靜反應與待人處事的改變，即是無言的身教傳法。",
+        "evidence": [
+          {
+            "sentenceId": "seg-0372",
+            "quote": "當身邊的人看到你面對挫折時，沒有像以前一樣崩潰、抱怨，而是相對平靜地去處理，他們心裡就會好奇，你最近是不是學了什麼？"
+          },
+          {
+            "sentenceId": "seg-0384",
+            "quote": "有這種不說一句話的身教，往往比講一百句道理，更能讓人感受到佛法真的有用。"
+          }
+        ]
       }
     ],
     "review": {
@@ -5749,7 +5785,7 @@
           "group": "mainPoints",
           "index": 0,
           "verdict": "supported",
-          "reason": "原文指出思考關聯才是真正憶念，非僅記住。"
+          "reason": "原文指出思考生命關聯才是真正憶念，支持摘要。"
         },
         {
           "group": "mainPoints",
@@ -5761,28 +5797,40 @@
           "group": "discussionTopics",
           "index": 0,
           "verdict": "supported",
-          "reason": "原文在出生處提問如何使用人身，符合摘要。"
+          "reason": "原文在出生處提問如何使用人身，符合摘要主題。"
         },
         {
           "group": "discussionTopics",
           "index": 1,
           "verdict": "supported",
-          "reason": "原文提問如何讓法輪轉動，並指出懶惰無心是障礙。"
+          "reason": "原文明確提出心態、方向、步驟是否正確的問題。"
         },
         {
           "group": "discussionTopics",
           "index": 2,
           "verdict": "supported",
-          "reason": "原文在涅槃處提問想留下什麼及是否完成重要事。"
+          "reason": "原文直接提出接住法輪與讓其繼續轉動的兩個問題。"
+        },
+        {
+          "group": "discussionTopics",
+          "index": 3,
+          "verdict": "supported",
+          "reason": "原文在涅槃處提問這一生想留下什麼，符合摘要。"
         },
         {
           "group": "referenceViews",
           "index": 0,
           "verdict": "supported",
-          "reason": "原文明確指出出家動機是不忍眾生受苦，成道後指路。"
+          "reason": "引句明確說明出家動機是不忍眾生受苦及指路給眾生。"
+        },
+        {
+          "group": "referenceViews",
+          "index": 1,
+          "verdict": "supported",
+          "reason": "原文描述平靜面對挫折的身教比講道理更有效，支持摘要。"
         }
       ]
     },
-    "attemptCount": 3
+    "attemptCount": 2
   }
 }

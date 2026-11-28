@@ -1,6 +1,6 @@
 # 《朝聖前行：從歡喜欲見到依教奉行》第一講 什麼是朝聖 — 閱讀版
 
-> **待閱校版**：本講逐字稿由本機 Whisper ASR 轉寫，並與講師官方整編校稿逐句對校名相與段落小標；待確認句已再以 faster-whisper large-v3 複辨並經 AGY 裁決，第三輪另以 MiniMax 全稿複審套用有依據的局部修正（見下方 metadata），**尚未人工逐句聽核**，疑義請配合原音核對。
+> **待閱校版**：本講逐字稿由本機 Whisper ASR 轉寫，並與講師官方整編校稿逐句對校名相與段落小標；待確認句已再以 faster-whisper large-v3 複辨並經 AGY 裁決，第三輪另以 MiniMax 全稿複審套用有依據的局部修正，並以 full large-v3 逐音窗複核、回退與原音不合的過度修正（見下方 metadata），**尚未人工逐句聽核**，疑義請配合原音核對。
 
 - **講者**：如性法師
 - **日期**：2026-09-25（**推定，待確認**：來源未逐節公告，依音檔 mtime 與正文互證）
@@ -128,7 +128,8 @@
 - ASR：faster-whisper-large-v3-turbo（whisper-gpu-service:8010，600 秒切段、時間碼由 chunks.csv 還原）
 - 段落數／句數：36／430
 - 自動套用的名相校正：第一輪 150 筆；第二輪 AGY 裁決套用 35 筆；待人工確認句數：2
-- 第三輪全稿複審：MiniMax-M3.1-Flash（經 GX10 Smart LLM Router，OpenAI-compatible），審閱範圍 430 句（原始發現 233 筆、驗證後 211 筆），套用局部修正 26 筆、新增待聽核 1 句；無新的 full large-v3 獨立複辨（GPU 記憶體被 strata-qwen38 佔用，載入即 CUDA OOM）；改以 large-v3-turbo（vad_filter=false）對 104 個候選音窗做旁證，僅供參考（reviews/evidence/朝聖前行課程/work/minimax_review/applied_ledger.json）
+- 第三輪全稿複審：MiniMax-M3.1-Flash（經 GX10 Smart LLM Router，OpenAI-compatible），審閱範圍 430 句（原始發現 233 筆、驗證後 211 筆），套用局部修正 26 筆、新增待聽核 1 句；已補做 full large-v3 獨立複辨：178 個音窗，覆蓋已套用修正 23 筆；據此回退 0 筆過度修正（reviews/evidence/朝聖前行課程/work/minimax_review/applied_ledger.json）
+- 第三輪音訊複核：faster-whisper large-v3（本地 snapshot, int8_float16, vad_filter=false） 對 178 個音窗獨立轉寫，覆蓋已套用修正 23 筆；回退與原音不合者 0 筆（本節無需回退）
 - 第二輪裁決：待確認句 60 句，以 faster-whisper large-v3 複辨後經 AGY 裁決，套用修正 35 句；仍待人工聽核 1 句（`reviews/evidence/朝聖前行課程/work/adjudication_v3.json`）
 - 小標對齊：9 個落錨；失敗 0 個（失敗者不進正式 heading）
 - 人工聽核：**未執行**（`humanListened` 不填 true）
