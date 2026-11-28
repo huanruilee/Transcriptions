@@ -34,7 +34,11 @@ const SESSION_PATH = path.join(
 // 重切前（分支 xiaofa/lecture27-strict @ aa8bc55）為 37825；重切只在 2 個換講者處補了
 // 句號（另 2 處是逗號換句號），故 +2。origin/main 的 37794 較少，是因為本分支先前的
 // 去識別化與 ASR 勘誤已改過正文，不是重切造成的。
-const EXPECTED_TOTAL_CHARS = 37827;
+// 37827 -> 37837：抽屜掃描（t_7ae0ccb0）抓到 6 處裸名未被第一輪去識別化涵蓋
+// （點名式「好，X，我確認一下」「謝謝。X，那我想再請…」等，無師姐／師兄後綴故
+// leak detector 未攔），改為 學員N 各 +2 字；另 1 處「以上如是」的裸名刪去 -2 字。
+// 淨 +10。逐條見 PR 說明。
+const EXPECTED_TOTAL_CHARS = 37837;
 
 function loadSession() {
   return JSON.parse(fs.readFileSync(SESSION_PATH, 'utf8'));
