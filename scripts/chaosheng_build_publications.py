@@ -27,10 +27,12 @@ SESSION_IDS = ["01", "02", "03", "04", "05", "06"]
 
 CLOSING_NOTICE = (
     "**待閱校版**：本節**沒有逐字底本**，正文為本機 Whisper ASR 轉寫＋名相校正，"
-    "僅以官方問答紀要大綱作結構線索；**尚未人工逐句聽核**，疑義請配合原音核對。"
+    "僅以官方問答紀要大綱作結構線索；待確認句已再以 faster-whisper large-v3 複辨並經 AGY 裁決，"
+    "**尚未人工逐句聽核**，疑義請配合原音核對。"
 )
 BASE_NOTICE = (
     "**待閱校版**：本講逐字稿由本機 Whisper ASR 轉寫，並與講師官方整編校稿逐句對校名相與段落小標；"
+    "待確認句已再以 faster-whisper large-v3 複辨並經 AGY 裁決，"
     "**尚未人工逐句聽核**，疑義請配合原音核對。"
 )
 
@@ -106,7 +108,19 @@ def build(session_id: str, course: dict) -> Path:
     lines.append(f"- 底本角色：{meta.get('baseTextRole')}")
     lines.append(f"- ASR：{meta.get('engine', {}).get('asr')}（whisper-gpu-service:8010，600 秒切段、時間碼由 chunks.csv 還原）")
     lines.append(f"- 段落數／句數：{meta.get('total_paragraphs')}／{meta.get('total_sentences')}")
-    lines.append(f"- 自動套用的名相校正：{meta.get('correctionsAutoApplied')} 筆；待人工確認句數：{meta.get('correctionsPending')}")
+    adj = meta.get("adjudicationRecord", {}) or {}
+    second = int(adj.get("appliedCorrections") or 0)
+    first = max(int(meta.get("correctionsAutoApplied") or 0) - second, 0)
+    lines.append(
+        f"- 自動套用的名相校正：第一輪 {first} 筆；第二輪 AGY 裁決套用 {second} 筆；"
+        f"待人工確認句數：{meta.get('correctionsPending')}"
+    )
+    if adj:
+        lines.append(
+            f"- 第二輪裁決：待確認句 {adj.get('adjudicatedSentences')} 句，"
+            f"以 faster-whisper large-v3 複辨後經 AGY 裁決，套用修正 {adj.get('appliedCorrections')} 句；"
+            f"仍待人工聽核 {adj.get('pendingSentences')} 句（`reviews/evidence/朝聖前行課程/work/adjudication_v3.json`）"
+        )
     lines.append(f"- 小標對齊：{meta.get('headingsAnchored')} 個落錨；失敗 {meta.get('headingAlignmentFailures')} 個（失敗者不進正式 heading）")
     lines.append("- 人工聽核：**未執行**（`humanListened` 不填 true）")
     lines.append("")

@@ -47,3 +47,12 @@
 - `audio_map.json`：短 id → 音源 URL（字串值，供前端取用）。
 - `grounding.json`：本課程專有名相與參考資料清單。
 - `correction-dates.html`：各節最後校訂／更新日期總表；有日期不代表已人工聽核。
+
+## 7. 第二輪精準校對（full large-v3 複辨＋AGY 裁決）
+
+- 對象：第一輪機器層校字後仍標 `reviewNeeded` 的全部 274 句（六節合計 60／48／28／53／20／65）。
+- 流程：先裁出每句前後 2–4 秒音窗（`recheck/windows/`），以 `faster-whisper large-v3`（**`int8_float16`**、`vad_filter=false`；GB10 上 float16 會 CUDA OOM）複辨，再由 AGY 對照「現文／原始 ASR／large-v3 複辨」逐句裁決，輸出 `KEEP`／`CORRECT`／`NEEDS_AUDIO`。
+- 套用規則（`scripts/chaosheng_apply_adjudication.py`）：只套用有依據者——01–05 以官方整編校稿的名相寫法為依據，06 僅接受 large-v3 明確支持或全篇一致性的法相專名；**僅憑語意臆測一律不套用**。人工否決（如「分別智」不得改成「分別知」）以明確清單表達並留痕。
+- 結果：套用 166 句、機器判定原文無誤 78 句、仍待人工聽核 30 句；逐筆稽核見 `reviews/evidence/朝聖前行課程/work/adjudication_v3.json`。
+- 待人工聽核清單見 `courses/朝聖前行課程/PENDING_REVIEW.md`（含校稿者原留 5 筆人工確認事項與 AGY 建議）。**該清單不得併入發布正文。**
+- 本輪仍**未做人工逐句聽核**，`humanListened` 一律維持 `false`，成品維持待閱校版。
