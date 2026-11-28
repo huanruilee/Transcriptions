@@ -1,0 +1,676 @@
+[
+  {
+    "session": "02",
+    "blockIndex": 0,
+    "blockRange": [
+      1,
+      45
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 20.7,
+      "usage": {
+        "total_tokens": 2568,
+        "total_characters": 0,
+        "prompt_tokens": 1989,
+        "completion_tokens": 579,
+        "completion_tokens_details": {
+          "reasoning_tokens": 377
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 34,
+        "type": "term",
+        "current": "我們可以記得，蘭比尼是佛陀出生的地方。",
+        "find": "蘭比尼",
+        "replace": "藍毘尼",
+        "confidence": 0.99,
+        "reason": "佛陀出生地應為「藍毘尼」，「蘭比尼」為同音誤寫。"
+      },
+      {
+        "idx": 37,
+        "type": "repeat",
+        "current": "而拘尸那羅是佛陀成道，而拘尸那羅是佛陀涅槃的地方。",
+        "find": "成道，而拘尸那羅是佛陀",
+        "replace": "",
+        "confidence": 0.99,
+        "reason": "句內重複誤插，且成道地為菩提迦耶；刪除後語意完整。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 34,\n    \"type\": \"term\",\n    \"current\": \"我們可以記得，蘭比尼是佛陀出生的地方。\",\n    \"find\": \"蘭比尼\",\n    \"replace\": \"藍毘尼\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛陀出生地應為「藍毘尼」，「蘭比尼」為同音誤寫。\"\n  },\n  {\n    \"idx\": 37,\n    \"type\": \"repeat\",\n    \"current\": \"而拘尸那羅是佛陀成道，而拘尸那羅是佛陀涅槃的地方。\",\n    \"find\": \"成道，而拘尸那羅是佛陀\",\n    \"replace\": \"\",\n    \"confidence\": 0.99,\n    \"reason\": \"句內重複誤插，且成道地為菩提迦耶；刪除後語意完整。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 1,
+    "blockRange": [
+      46,
+      90
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.5,
+      "usage": {
+        "total_tokens": 2237,
+        "total_characters": 0,
+        "prompt_tokens": 1765,
+        "completion_tokens": 472,
+        "completion_tokens_details": {
+          "reasoning_tokens": 375
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 187
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 54,
+        "type": "term",
+        "current": "所以在蘭比尼，想到這是佛陀的出生地，這意味著什麼？佛陀曾經來到這個世間，得到了一個殊勝的人生。",
+        "find": "蘭比尼",
+        "replace": "藍毗尼",
+        "confidence": 0.98,
+        "reason": "佛陀出生地的標準佛教專名為「藍毗尼」，「蘭比尼」屬同音誤寫。"
+      }
+    ],
+    "raw": "[{\"idx\":54,\"type\":\"term\",\"current\":\"所以在蘭比尼，想到這是佛陀的出生地，這意味著什麼？佛陀曾經來到這個世間，得到了一個殊勝的人生。\",\"find\":\"蘭比尼\",\"replace\":\"藍毗尼\",\"confidence\":0.98,\"reason\":\"佛陀出生地的標準佛教專名為「藍毗尼」，「蘭比尼」屬同音誤寫。\"}]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 2,
+    "blockRange": [
+      91,
+      135
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.6,
+      "usage": {
+        "total_tokens": 2398,
+        "total_characters": 0,
+        "prompt_tokens": 1755,
+        "completion_tokens": 643,
+        "completion_tokens_details": {
+          "reasoning_tokens": 566
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 125,
+        "type": "sound",
+        "current": "那隻要我們學法的心態正確、方向正確、步驟正確，最終也能達到同樣的目的地。",
+        "find": "那隻要",
+        "replace": "只要",
+        "confidence": 0.99,
+        "reason": "「那隻要」為同音誤寫，應作「只要」。"
+      }
+    ],
+    "raw": "[{\"idx\":125,\"type\":\"sound\",\"current\":\"那隻要我們學法的心態正確、方向正確、步驟正確，最終也能達到同樣的目的地。\",\"find\":\"那隻要\",\"replace\":\"只要\",\"confidence\":0.99,\"reason\":\"「那隻要」為同音誤寫，應作「只要」。\"}]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 3,
+    "blockRange": [
+      136,
+      180
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.5,
+      "usage": {
+        "total_tokens": 3594,
+        "total_characters": 0,
+        "prompt_tokens": 2029,
+        "completion_tokens": 1565,
+        "completion_tokens_details": {
+          "reasoning_tokens": 900
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 151,
+        "type": "broken",
+        "current": "心，我們只是希望讓自己遇到逆境時。",
+        "find": "心，",
+        "replace": "",
+        "confidence": 0.98,
+        "reason": "句首殘留多餘的「心」，造成語意重複與不通。"
+      },
+      {
+        "idx": 161,
+        "type": "repeat",
+        "current": "在生活中，雖然煩惱會帶來困擾。",
+        "find": "在生活中，雖然煩惱會帶來困擾。",
+        "replace": "",
+        "confidence": 0.99,
+        "reason": "與上一行完全重複。"
+      },
+      {
+        "idx": 169,
+        "type": "sound",
+        "current": "而第二個問題，我使用這個人身，我使用這個人身究竟想走向哪裡？他想要問的是，我學習佛法的最終目標是什麼？",
+        "find": "他想要問的是",
+        "replace": "它想要問的是",
+        "confidence": 0.8,
+        "reason": "指涉前文的「問題」，應使用非人稱代詞「它」。"
+      },
+      {
+        "idx": 172,
+        "type": "sound",
+        "current": "這次上完課，到了現場，都不用開示，直接把音檔拿出來放就可以了，這樣一舉數得。以後的朝聖既不用做前行，現場也不需要再開示，一舉數得。",
+        "find": "都沒有開示，直接把音檔拿出來放就可以了，這樣一舉數得",
+        "replace": "都沒有開示，直接把音檔拿出來放就可以了，這樣一舉兩得",
+        "confidence": 0.99,
+        "reason": "「一舉數得」應為成语「一舉兩得」。"
+      },
+      {
+        "idx": 172,
+        "type": "sound",
+        "current": "這次上完課，到了現場，都不用開示，直接把音檔拿出來放就可以了，這樣一舉數得。以後的朝聖既不用做前行，現場也不需要再開示，一舉數得。",
+        "find": "以後的朝聖既不用做前行，現場也不需要再開示，一舉數得",
+        "replace": "以後的朝聖既不用做前行，現場也不需要再開示，一舉兩得",
+        "confidence": 0.99,
+        "reason": "「一舉數得」應為成语「一舉兩得」。"
+      },
+      {
+        "idx": 177,
+        "type": "sound",
+        "current": "所以我們多數人的心態，看到佛陀成就瞭解脫，表面上看似想追求解脫。",
+        "find": "成就瞭解脫",
+        "replace": "成就了解脫",
+        "confidence": 0.97,
+        "reason": "此處「了」表示完成，不應寫作「瞭」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 151,\n    \"type\": \"broken\",\n    \"current\": \"心，我們只是希望讓自己遇到逆境時。\",\n    \"find\": \"心，\",\n    \"replace\": \"\",\n    \"confidence\": 0.98,\n    \"reason\": \"句首殘留多餘的「心」，造成語意重複與不通。\"\n  },\n  {\n    \"idx\": 161,\n    \"type\": \"repeat\",\n    \"current\": \"在生活中，雖然煩惱會帶來困擾。\",\n    \"find\": \"在生活中，雖然煩惱會帶來困擾。\",\n    \"replace\": \"\",\n    \"confidence\": 0.99,\n    \"reason\": \"與上一行完全重複。\"\n  },\n  {\n    \"idx\": 169,\n    \"type\": \"sound\",\n    \"current\": \"而第二個問題，我使用這個人身，我使用這個人身究竟想走向哪裡？他想要問的是，我學習佛法的最終目標是什麼？\",\n    \"find\": \"他想要問的是\",\n    \"replace\": \"它想要問的是\",\n    \"confidence\": 0.8,\n    \"reason\": \"指涉前文的「問題」，應使用非人稱代詞「它」。\"\n  },\n  {\n    \"idx\": 172,\n    \"type\": \"sound\",\n    \"current\": \"這次上完課，到了現場，都不用開示，直接把音檔拿出來放就可以了，這樣一舉數得。以後的朝聖既不用做前行，現場也不需要再開示，一舉數得。\",\n    \"find\": \"都沒有開示，直接把音檔拿出來放就可以了，這樣一舉數得\",\n    \"replace\": \"都沒有開示，直接把音檔拿出來放就可以了，這樣一舉兩得\",\n    \"confidence\": 0.99,\n    \"reason\": \"「一舉數得」應為成语「一舉兩得」。\"\n  },\n  {\n    \"idx\": 172,\n    \"type\": \"sound\",\n    \"current\": \"這次上完課，到了現場，都不用開示，直接把音檔拿出來放就可以了，這樣一舉數得。以後的朝聖既不用做前行，現場也不需要再開示，一舉數得。\",\n    \"find\": \"以後的朝聖既不用做前行，現場也不需要再開示，一舉數得\",\n    \"replace\": \"以後的朝聖既不用做前行，現場也不需要再開示，一舉兩得\",\n    \"confidence\": 0.99,\n    \"reason\": \"「一舉數得」應為成语「一舉兩得」。\"\n  },\n  {\n    \"idx\": 177,\n    \"type\": \"sound\",\n    \"current\": \"所以我們多數人的心態，看到佛陀成就瞭解脫，表面上看似想追求解脫。\",\n    \"find\": \"成就瞭解脫\",\n    \"replace\": \"成就了解脫\",\n    \"confidence\": 0.97,\n    \"reason\": \"此處「了」表示完成，不應寫作「瞭」。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 4,
+    "blockRange": [
+      181,
+      225
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 21.8,
+      "usage": {
+        "total_tokens": 2465,
+        "total_characters": 0,
+        "prompt_tokens": 1880,
+        "completion_tokens": 585,
+        "completion_tokens_details": {
+          "reasoning_tokens": 454
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 217,
+        "type": "repeat",
+        "current": "我們平常多一事不如少一事的心態，有沒有可能成為我們，有沒有可能成為我們成佛的阻礙？",
+        "find": "有沒有可能成為我們，有沒有可能成為我們成佛的阻礙",
+        "replace": "有沒有可能成為我們成佛的阻礙",
+        "confidence": 0.98,
+        "reason": "「有沒有可能成為我們」明顯重複，刪除重複片段後句意完整。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 217,\n    \"type\": \"repeat\",\n    \"current\": \"我們平常多一事不如少一事的心態，有沒有可能成為我們，有沒有可能成為我們成佛的阻礙？\",\n    \"find\": \"有沒有可能成為我們，有沒有可能成為我們成佛的阻礙\",\n    \"replace\": \"有沒有可能成為我們成佛的阻礙\",\n    \"confidence\": 0.98,\n    \"reason\": \"「有沒有可能成為我們」明顯重複，刪除重複片段後句意完整。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 5,
+    "blockRange": [
+      226,
+      270
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.6,
+      "usage": {
+        "total_tokens": 2171,
+        "total_characters": 0,
+        "prompt_tokens": 1703,
+        "completion_tokens": 468,
+        "completion_tokens_details": {
+          "reasoning_tokens": 368
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 241,
+        "type": "punct",
+        "current": "如果只是嘴上念著請轉法輪，卻沒有珍惜眼前聞法的機緣。",
+        "find": "機緣。",
+        "replace": "機緣，",
+        "confidence": 0.95,
+        "reason": "「如果……」條件句未完，句末誤用句號，應為逗號。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 241,\n    \"type\": \"punct\",\n    \"current\": \"如果只是嘴上念著請轉法輪，卻沒有珍惜眼前聞法的機緣。\",\n    \"find\": \"機緣。\",\n    \"replace\": \"機緣，\",\n    \"confidence\": 0.95,\n    \"reason\": \"「如果……」條件句未完，句末誤用句號，應為逗號。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 6,
+    "blockRange": [
+      271,
+      315
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 17.9,
+      "usage": {
+        "total_tokens": 2875,
+        "total_characters": 0,
+        "prompt_tokens": 1395,
+        "completion_tokens": 1480,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1304
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 271,
+        "type": "term",
+        "current": "同樣的道理，也可以用在請佛住世上。",
+        "find": "請佛住世上",
+        "replace": "請佛住世",
+        "confidence": 0.98,
+        "reason": "佛學慣用語為「請佛住世」，「住世上」疑為衍字。"
+      },
+      {
+        "idx": 289,
+        "type": "repeat",
+        "current": "以及處理問題的方式會完全不同。",
+        "find": "以及處理問題的方式會完全不同。",
+        "replace": "",
+        "confidence": 0.9,
+        "reason": "與前文第287行的「以及處理問題的方式會全然不同。」構成明顯內容重複。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 271,\n    \"type\": \"term\",\n    \"current\": \"同樣的道理，也可以用在請佛住世上。\",\n    \"find\": \"請佛住世上\",\n    \"replace\": \"請佛住世\",\n    \"confidence\": 0.98,\n    \"reason\": \"佛學慣用語為「請佛住世」，「住世上」疑為衍字。\"\n  },\n  {\n    \"idx\": 289,\n    \"type\": \"repeat\",\n    \"current\": \"以及處理問題的方式會完全不同。\",\n    \"find\": \"以及處理問題的方式會完全不同。\",\n    \"replace\": \"\",\n    \"confidence\": 0.9,\n    \"reason\": \"與前文第287行的「以及處理問題的方式會全然不同。」構成明顯內容重複。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 7,
+    "blockRange": [
+      316,
+      360
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 8.0,
+      "usage": {
+        "total_tokens": 2360,
+        "total_characters": 0,
+        "prompt_tokens": 1362,
+        "completion_tokens": 998,
+        "completion_tokens_details": {
+          "reasoning_tokens": 824
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 336,
+        "type": "sound",
+        "current": "還是隻是因為我們覺得太麻煩而懶得做？",
+        "find": "隻是",
+        "replace": "只是",
+        "confidence": 0.99,
+        "reason": "「隻是」應寫作「只是」。"
+      },
+      {
+        "idx": 358,
+        "type": "term",
+        "current": "那你自己沒有進步，你有辦法培養自立。",
+        "find": "自立。",
+        "replace": "自利，",
+        "confidence": 0.92,
+        "reason": "佛教語境應為「自利」，並與下句「培養利他的這種機會嗎」銜接。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 336,\n    \"type\": \"sound\",\n    \"current\": \"還是隻是因為我們覺得太麻煩而懶得做？\",\n    \"find\": \"隻是\",\n    \"replace\": \"只是\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻是」應寫作「只是」。\"\n  },\n  {\n    \"idx\": 358,\n    \"type\": \"term\",\n    \"current\": \"那你自己沒有進步，你有辦法培養自立。\",\n    \"find\": \"自立。\",\n    \"replace\": \"自利，\",\n    \"confidence\": 0.92,\n    \"reason\": \"佛教語境應為「自利」，並與下句「培養利他的這種機會嗎」銜接。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 8,
+    "blockRange": [
+      361,
+      405
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.6,
+      "usage": {
+        "total_tokens": 2288,
+        "total_characters": 0,
+        "prompt_tokens": 1582,
+        "completion_tokens": 706,
+        "completion_tokens_details": {
+          "reasoning_tokens": 509
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 369,
+        "type": "broken",
+        "current": "所以剛剛我們提到，也有人會說，不會有人跟我請法？",
+        "find": "不會有人跟我請法？",
+        "replace": "會不會有人跟我請法？",
+        "confidence": 0.98,
+        "reason": "問句多出「不」而致語意相反。"
+      },
+      {
+        "idx": 391,
+        "type": "sound",
+        "current": "第一個問題，法輪已經轉到了我的面前，我會怎麼接住他？",
+        "find": "我會怎麼接住他",
+        "replace": "我會怎麼接住它",
+        "confidence": 0.96,
+        "reason": "所接住的對象是「法輪」，代詞應作「它」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 369,\n    \"type\": \"broken\",\n    \"current\": \"所以剛剛我們提到，也有人會說，不會有人跟我請法？\",\n    \"find\": \"不會有人跟我請法？\",\n    \"replace\": \"會不會有人跟我請法？\",\n    \"confidence\": 0.98,\n    \"reason\": \"問句多出「不」而致語意相反。\"\n  },\n  {\n    \"idx\": 391,\n    \"type\": \"sound\",\n    \"current\": \"第一個問題，法輪已經轉到了我的面前，我會怎麼接住他？\",\n    \"find\": \"我會怎麼接住他\",\n    \"replace\": \"我會怎麼接住它\",\n    \"confidence\": 0.96,\n    \"reason\": \"所接住的對象是「法輪」，代詞應作「它」。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 9,
+    "blockRange": [
+      406,
+      450
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 12.9,
+      "usage": {
+        "total_tokens": 4109,
+        "total_characters": 0,
+        "prompt_tokens": 1760,
+        "completion_tokens": 2349,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2074
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 407,
+        "type": "broken",
+        "current": "從這裡往下思考，在佛陀涅槃的地方，呈現的是。",
+        "find": "呈現的是。",
+        "replace": "呈現的是什麼？",
+        "confidence": 0.96,
+        "reason": "句末缺少疑問詞，且問號誤用。"
+      },
+      {
+        "idx": 413,
+        "type": "sound",
+        "current": "還是隻是停留在我知道，我想做，卻始終沒有真正跨出那一步？",
+        "find": "隻是",
+        "replace": "只是",
+        "confidence": 0.99,
+        "reason": "「隻是」誤作「只是」。"
+      },
+      {
+        "idx": 416,
+        "type": "broken",
+        "current": "以及每一次學法的機會，才顯得格外珍貴，不容許我們隨意恢復。",
+        "find": "恢復",
+        "replace": "揮霍",
+        "confidence": 0.82,
+        "reason": "「隨意恢復」與珍貴的人身及學法機會語意不合，應為「隨意揮霍」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 407,\n    \"type\": \"broken\",\n    \"current\": \"從這裡往下思考，在佛陀涅槃的地方，呈現的是。\",\n    \"find\": \"呈現的是。\",\n    \"replace\": \"呈現的是什麼？\",\n    \"confidence\": 0.96,\n    \"reason\": \"句末缺少疑問詞，且問號誤用。\"\n  },\n  {\n    \"idx\": 413,\n    \"type\": \"sound\",\n    \"current\": \"還是隻是停留在我知道，我想做，卻始終沒有真正跨出那一步？\",\n    \"find\": \"隻是\",\n    \"replace\": \"只是\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻是」誤作「只是」。\"\n  },\n  {\n    \"idx\": 416,\n    \"type\": \"broken\",\n    \"current\": \"以及每一次學法的機會，才顯得格外珍貴，不容許我們隨意恢復。\",\n    \"find\": \"恢復\",\n    \"replace\": \"揮霍\",\n    \"confidence\": 0.82,\n    \"reason\": \"「隨意恢復」與珍貴的人身及學法機會語意不合，應為「隨意揮霍」。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 10,
+    "blockRange": [
+      451,
+      495
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.9,
+      "usage": {
+        "total_tokens": 2630,
+        "total_characters": 0,
+        "prompt_tokens": 1323,
+        "completion_tokens": 1307,
+        "completion_tokens_details": {
+          "reasoning_tokens": 451
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 453,
+        "type": "punct",
+        "current": "所以，如果我們千里迢迢去見佛陀？",
+        "find": "佛陀？",
+        "replace": "佛陀，",
+        "confidence": 0.98,
+        "reason": "此處為假設語氣的敘述，應接續下一句說明捧花供佛的情境，不應使用問號。"
+      },
+      {
+        "idx": 456,
+        "type": "punct",
+        "current": "既然依教奉行如此重要？",
+        "find": "重要？",
+        "replace": "重要，",
+        "confidence": 0.99,
+        "reason": "此處是承接前文的因果關係，應以逗號連續下行，不應使用問號。"
+      },
+      {
+        "idx": 457,
+        "type": "punct",
+        "current": "那我們就應該問問自己？",
+        "find": "自己？",
+        "replace": "自己，",
+        "confidence": 0.99,
+        "reason": "「問問自己」後列出自省內容，應以逗號連接，不應使用問號。"
+      },
+      {
+        "idx": 460,
+        "type": "punct",
+        "current": "如果要將這些內容做個統整？",
+        "find": "統整？",
+        "replace": "統整，",
+        "confidence": 0.99,
+        "reason": "此處引出後續的整理方式，應為逗號而非問號。"
+      },
+      {
+        "idx": 462,
+        "type": "punct",
+        "current": "到了佛陀面前？",
+        "find": "面前？",
+        "replace": "面前，",
+        "confidence": 0.99,
+        "reason": "此處引出如何供養學法心得，應以逗號連接下文。"
+      },
+      {
+        "idx": 464,
+        "type": "punct",
+        "current": "在過往的課程中，我曾經提到。",
+        "find": "提到。",
+        "replace": "提到：",
+        "confidence": 0.99,
+        "reason": "後文直接列出三個法類，句末應使用冒號提示列舉內容。"
+      },
+      {
+        "idx": 471,
+        "type": "punct",
+        "current": "而這三個法類正好也是課程中。",
+        "find": "中。",
+        "replace": "中",
+        "confidence": 0.96,
+        "reason": "「課程中反覆強調」語意連貫，句號造成句內殘斷。"
+      },
+      {
+        "idx": 473,
+        "type": "punct",
+        "current": "所以我們花一點時間。",
+        "find": "時間。",
+        "replace": "時間，",
+        "confidence": 0.98,
+        "reason": "此處應連接下一句「一起將這三個法類重新梳理一遍」，宜用逗號。"
+      },
+      {
+        "idx": 479,
+        "type": "punct",
+        "current": "因果的道理是。",
+        "find": "是。",
+        "replace": "是，",
+        "confidence": 0.99,
+        "reason": "「因果的道理是」直接引出下一句的解釋，應以逗號連接。"
+      },
+      {
+        "idx": 493,
+        "type": "punct",
+        "current": "這正是凡夫為果。",
+        "find": "為果。",
+        "replace": "為果，",
+        "confidence": 0.98,
+        "reason": "「凡夫為果，菩薩為因」為相連對舉，此處應用逗號承接下一句。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 453,\n    \"type\": \"punct\",\n    \"current\": \"所以，如果我們千里迢迢去見佛陀？\",\n    \"find\": \"佛陀？\",\n    \"replace\": \"佛陀，\",\n    \"confidence\": 0.98,\n    \"reason\": \"此處為假設語氣的敘述，應接續下一句說明捧花供佛的情境，不應使用問號。\"\n  },\n  {\n    \"idx\": 456,\n    \"type\": \"punct\",\n    \"current\": \"既然依教奉行如此重要？\",\n    \"find\": \"重要？\",\n    \"replace\": \"重要，\",\n    \"confidence\": 0.99,\n    \"reason\": \"此處是承接前文的因果關係，應以逗號連續下行，不應使用問號。\"\n  },\n  {\n    \"idx\": 457,\n    \"type\": \"punct\",\n    \"current\": \"那我們就應該問問自己？\",\n    \"find\": \"自己？\",\n    \"replace\": \"自己，\",\n    \"confidence\": 0.99,\n    \"reason\": \"「問問自己」後列出自省內容，應以逗號連接，不應使用問號。\"\n  },\n  {\n    \"idx\": 460,\n    \"type\": \"punct\",\n    \"current\": \"如果要將這些內容做個統整？\",\n    \"find\": \"統整？\",\n    \"replace\": \"統整，\",\n    \"confidence\": 0.99,\n    \"reason\": \"此處引出後續的整理方式，應為逗號而非問號。\"\n  },\n  {\n    \"idx\": 462,\n    \"type\": \"punct\",\n    \"current\": \"到了佛陀面前？\",\n    \"find\": \"面前？\",\n    \"replace\": \"面前，\",\n    \"confidence\": 0.99,\n    \"reason\": \"此處引出如何供養學法心得，應以逗號連接下文。\"\n  },\n  {\n    \"idx\": 464,\n    \"type\": \"punct\",\n    \"current\": \"在過往的課程中，我曾經提到。\",\n    \"find\": \"提到。\",\n    \"replace\": \"提到：\",\n    \"confidence\": 0.99,\n    \"reason\": \"後文直接列出三個法類，句末應使用冒號提示列舉內容。\"\n  },\n  {\n    \"idx\": 471,\n    \"type\": \"punct\",\n    \"current\": \"而這三個法類正好也是課程中。\",\n    \"find\": \"中。\",\n    \"replace\": \"中\",\n    \"confidence\": 0.96,\n    \"reason\": \"「課程中反覆強調」語意連貫，句號造成句內殘斷。\"\n  },\n  {\n    \"idx\": 473,\n    \"type\": \"punct\",\n    \"current\": \"所以我們花一點時間。\",\n    \"find\": \"時間。\",\n    \"replace\": \"時間，\",\n    \"confidence\": 0.98,\n    \"reason\": \"此處應連接下一句「一起將這三個法類重新梳理一遍」，宜用逗號。\"\n  },\n  {\n    \"idx\": 479,\n    \"type\": \"punct\",\n    \"current\": \"因果的道理是。\",\n    \"find\": \"是。\",\n    \"replace\": \"是，\",\n    \"confidence\": 0.99,\n    \"reason\": \"「因果的道理是」直接引出下一句的解釋，應以逗號連接。\"\n  },\n  {\n    \"idx\": 493,\n    \"type\": \"punct\",\n    \"current\": \"這正是凡夫為果。\",\n    \"find\": \"為果。\",\n    \"replace\": \"為果，\",\n    \"confidence\": 0.98,\n    \"reason\": \"「凡夫為果，菩薩為因」為相連對舉，此處應用逗號承接下一句。\"\n  }\n]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 11,
+    "blockRange": [
+      496,
+      540
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.1,
+      "usage": {
+        "total_tokens": 1850,
+        "total_characters": 0,
+        "prompt_tokens": 1635,
+        "completion_tokens": 215,
+        "completion_tokens_details": {
+          "reasoning_tokens": 163
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 187
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 539,
+        "type": "repeat",
+        "current": "再來一次。",
+        "find": "再來一次。",
+        "replace": "",
+        "confidence": 0.97,
+        "reason": "與前後文重複，屬無意義插入片段。"
+      }
+    ],
+    "raw": "[{\"idx\":539,\"type\":\"repeat\",\"current\":\"再來一次。\",\"find\":\"再來一次。\",\"replace\":\"\",\"confidence\":0.97,\"reason\":\"與前後文重複，屬無意義插入片段。\"}]"
+  },
+  {
+    "session": "02",
+    "blockIndex": 12,
+    "blockRange": [
+      541,
+      547
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.4,
+      "usage": {
+        "total_tokens": 1372,
+        "total_characters": 0,
+        "prompt_tokens": 965,
+        "completion_tokens": 407,
+        "completion_tokens_details": {
+          "reasoning_tokens": 309
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 543,
+        "type": "punct",
+        "current": "如果能帶著這份供養去見佛陀，比雙手捧著再多鮮花水果，嘴裡念著再多祈願文。",
+        "find": "祈願文。",
+        "replace": "祈願文，",
+        "confidence": 0.98,
+        "reason": "「如果……比……都更能……」為同一條件句，句末應使用逗號承接下句，不應以句號截斷。"
+      }
+    ],
+    "raw": "[{\"idx\":543,\"type\":\"punct\",\"current\":\"如果能帶著這份供養去見佛陀，比雙手捧著再多鮮花水果，嘴裡念著再多祈願文。\",\"find\":\"祈願文。\",\"replace\":\"祈願文，\",\"confidence\":0.98,\"reason\":\"「如果……比……都更能……」為同一條件句，句末應使用逗號承接下句，不應以句號截斷。\"}]"
+  }
+]

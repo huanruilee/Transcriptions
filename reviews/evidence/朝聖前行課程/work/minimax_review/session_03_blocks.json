@@ -1,0 +1,451 @@
+[
+  {
+    "session": "03",
+    "blockIndex": 0,
+    "blockRange": [
+      1,
+      45
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.3,
+      "usage": {
+        "total_tokens": 3590,
+        "total_characters": 0,
+        "prompt_tokens": 2370,
+        "completion_tokens": 1220,
+        "completion_tokens_details": {
+          "reasoning_tokens": 778
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 2,
+        "type": "sound",
+        "current": "其實這三個法類，不只是我們要帶去見佛陀的供養，也是我們出門必備的護身符。但這個護身符，真正的作用，不是隻帶在身上，而是在境界現前的那一刻，我們能不能想得起來，用得出來。",
+        "find": "隻帶在身上",
+        "replace": "只帶在身上",
+        "confidence": 0.99,
+        "reason": "「隻」誤用，應為表示限定的「只」。"
+      },
+      {
+        "idx": 4,
+        "type": "repeat",
+        "current": "很多人，很多人學法的時候，聽得懂，也覺得很有道理，但真正遇到事情時，第一個反應，還是原本那套慣性，抱怨、煩躁、跟人計較。",
+        "find": "很多人，很多人學法的時候",
+        "replace": "很多人學法的時候",
+        "confidence": 0.96,
+        "reason": "句首「很多人」明顯重複。"
+      },
+      {
+        "idx": 22,
+        "type": "punct",
+        "current": "車子拋錨可能跟車況有關，可能跟零件老化有關，也可能跟維修路況等因素有關。",
+        "find": "維修路況",
+        "replace": "維修、路況",
+        "confidence": 0.84,
+        "reason": "「維修」與「路況」應為兩個並列因素，其間疑缺頓號。"
+      },
+      {
+        "idx": 33,
+        "type": "sound",
+        "current": "所以，學習因果不是隻叫我們想開一點，更不是自我安慰的話術，而是重新學習怎麼看待一件事情。",
+        "find": "隻叫我們",
+        "replace": "只叫我們",
+        "confidence": 0.99,
+        "reason": "「隻」誤用，應為表示限定的「只」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 2,\n    \"type\": \"sound\",\n    \"current\": \"其實這三個法類，不只是我們要帶去見佛陀的供養，也是我們出門必備的護身符。但這個護身符，真正的作用，不是隻帶在身上，而是在境界現前的那一刻，我們能不能想得起來，用得出來。\",\n    \"find\": \"隻帶在身上\",\n    \"replace\": \"只帶在身上\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」誤用，應為表示限定的「只」。\"\n  },\n  {\n    \"idx\": 4,\n    \"type\": \"repeat\",\n    \"current\": \"很多人，很多人學法的時候，聽得懂，也覺得很有道理，但真正遇到事情時，第一個反應，還是原本那套慣性，抱怨、煩躁、跟人計較。\",\n    \"find\": \"很多人，很多人學法的時候\",\n    \"replace\": \"很多人學法的時候\",\n    \"confidence\": 0.96,\n    \"reason\": \"句首「很多人」明顯重複。\"\n  },\n  {\n    \"idx\": 22,\n    \"type\": \"punct\",\n    \"current\": \"車子拋錨可能跟車況有關，可能跟零件老化有關，也可能跟維修路況等因素有關。\",\n    \"find\": \"維修路況\",\n    \"replace\": \"維修、路況\",\n    \"confidence\": 0.84,\n    \"reason\": \"「維修」與「路況」應為兩個並列因素，其間疑缺頓號。\"\n  },\n  {\n    \"idx\": 33,\n    \"type\": \"sound\",\n    \"current\": \"所以，學習因果不是隻叫我們想開一點，更不是自我安慰的話術，而是重新學習怎麼看待一件事情。\",\n    \"find\": \"隻叫我們\",\n    \"replace\": \"只叫我們\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」誤用，應為表示限定的「只」。\"\n  }\n]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 1,
+    "blockRange": [
+      46,
+      90
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 20.0,
+      "usage": {
+        "total_tokens": 2523,
+        "total_characters": 0,
+        "prompt_tokens": 1715,
+        "completion_tokens": 808,
+        "completion_tokens_details": {
+          "reasoning_tokens": 717
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 64,
+        "type": "punct",
+        "current": "其實因果的思考不只是回頭追究，這件事情為什麼會發生？",
+        "find": "會發生？",
+        "replace": "會發生。",
+        "confidence": 0.5,
+        "reason": "句內為陳述句，卻用問號且後接「也要往前看」，問號疑為誤用。"
+      }
+    ],
+    "raw": "[{\"idx\": 64, \"type\": \"punct\", \"current\": \"其實因果的思考不只是回頭追究，這件事情為什麼會發生？\", \"find\": \"會發生？\", \"replace\": \"會發生。\", \"confidence\": 0.5, \"reason\": \"句內為陳述句，卻用問號且後接「也要往前看」，問號疑為誤用。\"}]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 2,
+    "blockRange": [
+      91,
+      135
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 11.6,
+      "usage": {
+        "total_tokens": 5057,
+        "total_characters": 0,
+        "prompt_tokens": 2649,
+        "completion_tokens": 2408,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1784
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 114,
+        "type": "broken",
+        "current": "但我們什麼時候對自己說，我是故意的。",
+        "find": "但我們什麼時候對自己說，我是故意的",
+        "replace": "但我們什麼時候對自己說過，我是故意的",
+        "confidence": 0.93,
+        "reason": "「對自己說」後缺少動詞「過」，句意與文法均不完整。"
+      },
+      {
+        "idx": 122,
+        "type": "repeat",
+        "current": "有人完全不在意，沒關係啊，等一下就好了。甚至有人會擔心他是不是出了什麼事情。可見讓我們產生不耐煩的，不是脫隊。可見讓我們產生不耐煩的。",
+        "find": "可見讓我們產生不耐煩的，不是脫隊。",
+        "replace": "",
+        "confidence": 0.9,
+        "reason": "同一句「可見讓我們產生不耐煩的」明顯重複，應保留後續接續下一句的版本。"
+      },
+      {
+        "idx": 125,
+        "type": "repeat",
+        "current": "如果我們帶著情緒責備對方，如果我們帶著情緒責備對方，對方可能覺得委屈，甚至反過來對我們動氣。看到他這樣的反應，我們心裡又忍不住想，你遲到還講什麼理由？我們應該會有這樣的反應。",
+        "find": "責備對方，如果我們帶著情緒責備對方，",
+        "replace": "責備對方，",
+        "confidence": 0.97,
+        "reason": "句內連續重複相同的條件句，屬明顯重複。"
+      },
+      {
+        "idx": 133,
+        "type": "repeat",
+        "current": "我又正在種下的這一刻，我又正在種下什麼因呢？這一點很重要。",
+        "find": "我又正在種下的這一刻，",
+        "replace": "",
+        "confidence": 0.95,
+        "reason": "句首語意殘缺，且與後文「我又正在種下什麼因呢」明顯重複。"
+      },
+      {
+        "idx": 135,
+        "type": "broken",
+        "current": "這能化解，這是單一原因造成的執著。但我們依舊會覺得，雖然自己的苦有眾多因緣，但那件事情本身就是造成我痛苦的主要原因，甚至可以左右我們的苦樂。",
+        "find": "這能化解，這是單一原因造成的執著",
+        "replace": "這能化解對單一原因造成的執著",
+        "confidence": 0.94,
+        "reason": "「化解」與後面的執著之間缺少介詞「對」，且原句結構黏連、不通順。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 114,\n    \"type\": \"broken\",\n    \"current\": \"但我們什麼時候對自己說，我是故意的。\",\n    \"find\": \"但我們什麼時候對自己說，我是故意的\",\n    \"replace\": \"但我們什麼時候對自己說過，我是故意的\",\n    \"confidence\": 0.93,\n    \"reason\": \"「對自己說」後缺少動詞「過」，句意與文法均不完整。\"\n  },\n  {\n    \"idx\": 122,\n    \"type\": \"repeat\",\n    \"current\": \"有人完全不在意，沒關係啊，等一下就好了。甚至有人會擔心他是不是出了什麼事情。可見讓我們產生不耐煩的，不是脫隊。可見讓我們產生不耐煩的。\",\n    \"find\": \"可見讓我們產生不耐煩的，不是脫隊。\",\n    \"replace\": \"\",\n    \"confidence\": 0.9,\n    \"reason\": \"同一句「可見讓我們產生不耐煩的」明顯重複，應保留後續接續下一句的版本。\"\n  },\n  {\n    \"idx\": 125,\n    \"type\": \"repeat\",\n    \"current\": \"如果我們帶著情緒責備對方，如果我們帶著情緒責備對方，對方可能覺得委屈，甚至反過來對我們動氣。看到他這樣的反應，我們心裡又忍不住想，你遲到還講什麼理由？我們應該會有這樣的反應。\",\n    \"find\": \"責備對方，如果我們帶著情緒責備對方，\",\n    \"replace\": \"責備對方，\",\n    \"confidence\": 0.97,\n    \"reason\": \"句內連續重複相同的條件句，屬明顯重複。\"\n  },\n  {\n    \"idx\": 133,\n    \"type\": \"repeat\",\n    \"current\": \"我又正在種下的這一刻，我又正在種下什麼因呢？這一點很重要。\",\n    \"find\": \"我又正在種下的這一刻，\",\n    \"replace\": \"\",\n    \"confidence\": 0.95,\n    \"reason\": \"句首語意殘缺，且與後文「我又正在種下什麼因呢」明顯重複。\"\n  },\n  {\n    \"idx\": 135,\n    \"type\": \"broken\",\n    \"current\": \"這能化解，這是單一原因造成的執著。但我們依舊會覺得，雖然自己的苦有眾多因緣，但那件事情本身就是造成我痛苦的主要原因，甚至可以左右我們的苦樂。\",\n    \"find\": \"這能化解，這是單一原因造成的執著\",\n    \"replace\": \"這能化解對單一原因造成的執著\",\n    \"confidence\": 0.94,\n    \"reason\": \"「化解」與後面的執著之間缺少介詞「對」，且原句結構黏連、不通順。\"\n  }\n]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 3,
+    "blockRange": [
+      136,
+      180
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.5,
+      "usage": {
+        "total_tokens": 3563,
+        "total_characters": 0,
+        "prompt_tokens": 2115,
+        "completion_tokens": 1448,
+        "completion_tokens_details": {
+          "reasoning_tokens": 928
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 143,
+        "type": "sound",
+        "current": "其實聽歌要聽到的是這個重點，什麼叫做外境可以左右我們的苦樂？我們平常就是這樣在看事情。",
+        "find": "聽歌",
+        "replace": "聽懂",
+        "confidence": 0.98,
+        "reason": "依上下文應為「聽懂」，「聽歌」為同音誤字。"
+      },
+      {
+        "idx": 167,
+        "type": "sound",
+        "current": "這就要進入極地的範疇。",
+        "find": "極地",
+        "replace": "境地",
+        "confidence": 0.99,
+        "reason": "「進入……的範疇」應為「進入境地的範疇」，「極地」為同音誤字。"
+      },
+      {
+        "idx": 173,
+        "type": "punct",
+        "current": "我是可以感到不滿的，因為車子拋錨，所以原本安排好的行程全被打亂。這是我們多數人很自然的反應。再往下剝一層，再問自己，行程被打亂，為什麼會讓我感到不滿？來，問自己。我剛剛分析的應該是各位的想法吧？不會只有我這樣想吧？先確定這件事。如果各位都不會這樣想，那這一段直接跳過。剛才我們提到，我為什麼會。",
+        "find": "我為什麼會。",
+        "replace": "我為什麼會？",
+        "confidence": 0.96,
+        "reason": "句末使用句號造成明顯語意殘缺，依上下文應為疑問句。"
+      },
+      {
+        "idx": 180,
+        "type": "broken",
+        "current": "不重要。我快樂重要嗎？很重要。為什麼？因為我比別人重要啊。是不是這樣？這應該是唯一的理由吧。我們之所以會覺得，別人快樂與否不重要。我快樂很重要。那是基於。因為我比別人重要。",
+        "find": "那是基於。",
+        "replace": "那是基於，",
+        "confidence": 0.95,
+        "reason": "「那是基於。」與後文「因為我比別人重要」之間誤加句號，造成語意斷裂。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 143,\n    \"type\": \"sound\",\n    \"current\": \"其實聽歌要聽到的是這個重點，什麼叫做外境可以左右我們的苦樂？我們平常就是這樣在看事情。\",\n    \"find\": \"聽歌\",\n    \"replace\": \"聽懂\",\n    \"confidence\": 0.98,\n    \"reason\": \"依上下文應為「聽懂」，「聽歌」為同音誤字。\"\n  },\n  {\n    \"idx\": 167,\n    \"type\": \"sound\",\n    \"current\": \"這就要進入極地的範疇。\",\n    \"find\": \"極地\",\n    \"replace\": \"境地\",\n    \"confidence\": 0.99,\n    \"reason\": \"「進入……的範疇」應為「進入境地的範疇」，「極地」為同音誤字。\"\n  },\n  {\n    \"idx\": 173,\n    \"type\": \"punct\",\n    \"current\": \"我是可以感到不滿的，因為車子拋錨，所以原本安排好的行程全被打亂。這是我們多數人很自然的反應。再往下剝一層，再問自己，行程被打亂，為什麼會讓我感到不滿？來，問自己。我剛剛分析的應該是各位的想法吧？不會只有我這樣想吧？先確定這件事。如果各位都不會這樣想，那這一段直接跳過。剛才我們提到，我為什麼會。\",\n    \"find\": \"我為什麼會。\",\n    \"replace\": \"我為什麼會？\",\n    \"confidence\": 0.96,\n    \"reason\": \"句末使用句號造成明顯語意殘缺，依上下文應為疑問句。\"\n  },\n  {\n    \"idx\": 180,\n    \"type\": \"broken\",\n    \"current\": \"不重要。我快樂重要嗎？很重要。為什麼？因為我比別人重要啊。是不是這樣？這應該是唯一的理由吧。我們之所以會覺得，別人快樂與否不重要。我快樂很重要。那是基於。因為我比別人重要。\",\n    \"find\": \"那是基於。\",\n    \"replace\": \"那是基於，\",\n    \"confidence\": 0.95,\n    \"reason\": \"「那是基於。」與後文「因為我比別人重要」之間誤加句號，造成語意斷裂。\"\n  }\n]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 4,
+    "blockRange": [
+      181,
+      225
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.0,
+      "usage": {
+        "total_tokens": 3638,
+        "total_characters": 0,
+        "prompt_tokens": 2899,
+        "completion_tokens": 739,
+        "completion_tokens_details": {
+          "reasoning_tokens": 461
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 186
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 185,
+        "type": "broken",
+        "current": "我是一個獨立自主人。我是一個獨立自主的。我是一個獨立自主的個體。我是一個獨立自主的個體。我是身心的主人。具有掌控身心的主導權。基於這一點，我們會認為我很重要。我比別人重要。",
+        "find": "我是一個獨立自主人。",
+        "replace": "我是一個獨立自主的人。",
+        "confidence": 0.99,
+        "reason": "「獨立自主人」缺少量詞「的」，應為「獨立自主的人」。"
+      },
+      {
+        "idx": 185,
+        "type": "broken",
+        "current": "我是一個獨立自主人。我是一個獨立自主的。我是一個獨立自主的個體。我是一個獨立自主的個體。我是身心的主人。具有掌控身心的主導權。基於這一點，我們會認為我很重要。我比別人重要。",
+        "find": "我是一個獨立自主的。",
+        "replace": "我是一個獨立自主的個體。",
+        "confidence": 0.97,
+        "reason": "句末殘缺，應補足中心語「個體」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 185,\n    \"type\": \"broken\",\n    \"current\": \"我是一個獨立自主人。我是一個獨立自主的。我是一個獨立自主的個體。我是一個獨立自主的個體。我是身心的主人。具有掌控身心的主導權。基於這一點，我們會認為我很重要。我比別人重要。\",\n    \"find\": \"我是一個獨立自主人。\",\n    \"replace\": \"我是一個獨立自主的人。\",\n    \"confidence\": 0.99,\n    \"reason\": \"「獨立自主人」缺少量詞「的」，應為「獨立自主的人」。\"\n  },\n  {\n    \"idx\": 185,\n    \"type\": \"broken\",\n    \"current\": \"我是一個獨立自主人。我是一個獨立自主的。我是一個獨立自主的個體。我是一個獨立自主的個體。我是身心的主人。具有掌控身心的主導權。基於這一點，我們會認為我很重要。我比別人重要。\",\n    \"find\": \"我是一個獨立自主的。\",\n    \"replace\": \"我是一個獨立自主的個體。\",\n    \"confidence\": 0.97,\n    \"reason\": \"句末殘缺，應補足中心語「個體」。\"\n  }\n]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 5,
+    "blockRange": [
+      226,
+      270
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 4.7,
+      "usage": {
+        "total_tokens": 2675,
+        "total_characters": 0,
+        "prompt_tokens": 1981,
+        "completion_tokens": 694,
+        "completion_tokens_details": {
+          "reasoning_tokens": 400
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 255,
+        "type": "broken",
+        "current": "即使將我認定為是身心的主人，具有掌控身心的主導權。既然如此，我們進一步分析，這樣的我真的存在嗎？哪一個我？具有掌控身心主導權的那個我真的存在嗎？首先，如果這個我真的存在，它存在於哪裡？這個問題的答案應該很清楚。",
+        "find": "即使將我認定為",
+        "replace": "我執將我認定為",
+        "confidence": 0.99,
+        "reason": "依前後文應為「我執將我認定為……」，「即使」造成語意殘缺。"
+      },
+      {
+        "idx": 257,
+        "type": "broken",
+        "current": "從我們的生活經驗當中就能得知，我們所感受到的那個我，是和這個身心緊密地連在一起的，而不是存在於身體以外的某個地方。這應該沒有問題。如果身體是坐在椅子上，我們所認定的那個我，應該就是在這個範圍。而不會身體坐在椅子上，那個我坐在桌上。不會有這樣的情況發生。",
+        "find": "不會身體坐在",
+        "replace": "不會是身體坐在",
+        "confidence": 0.98,
+        "reason": "句中缺少判断動詞「是」，導致語意不通。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 255,\n    \"type\": \"broken\",\n    \"current\": \"即使將我認定為是身心的主人，具有掌控身心的主導權。既然如此，我們進一步分析，這樣的我真的存在嗎？哪一個我？具有掌控身心主導權的那個我真的存在嗎？首先，如果這個我真的存在，它存在於哪裡？這個問題的答案應該很清楚。\",\n    \"find\": \"即使將我認定為\",\n    \"replace\": \"我執將我認定為\",\n    \"confidence\": 0.99,\n    \"reason\": \"依前後文應為「我執將我認定為……」，「即使」造成語意殘缺。\"\n  },\n  {\n    \"idx\": 257,\n    \"type\": \"broken\",\n    \"current\": \"從我們的生活經驗當中就能得知，我們所感受到的那個我，是和這個身心緊密地連在一起的，而不是存在於身體以外的某個地方。這應該沒有問題。如果身體是坐在椅子上，我們所認定的那個我，應該就是在這個範圍。而不會身體坐在椅子上，那個我坐在桌上。不會有這樣的情況發生。\",\n    \"find\": \"不會身體坐在\",\n    \"replace\": \"不會是身體坐在\",\n    \"confidence\": 0.98,\n    \"reason\": \"句中缺少判断動詞「是」，導致語意不通。\"\n  }\n]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 6,
+    "blockRange": [
+      271,
+      315
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 2.4,
+      "usage": {
+        "total_tokens": 2386,
+        "total_characters": 0,
+        "prompt_tokens": 2154,
+        "completion_tokens": 232,
+        "completion_tokens_details": {
+          "reasoning_tokens": 230
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [],
+    "raw": "[]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 7,
+    "blockRange": [
+      316,
+      360
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 9.5,
+      "usage": {
+        "total_tokens": 2113,
+        "total_characters": 0,
+        "prompt_tokens": 1544,
+        "completion_tokens": 569,
+        "completion_tokens_details": {
+          "reasoning_tokens": 397
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 329,
+        "type": "broken",
+        "current": "但能，感覺很明顯是真的。",
+        "find": "但能",
+        "replace": "但不能",
+        "confidence": 0.98,
+        "reason": "「但能」疑似脫漏否定詞「不」。"
+      },
+      {
+        "idx": 354,
+        "type": "repeat",
+        "current": "如果那個主角我不存在的話，我們每天從早到晚在在意的我的快樂、我的痛苦、我的期待、我的利益。",
+        "find": "在在意",
+        "replace": "在意",
+        "confidence": 0.99,
+        "reason": "「在」明顯重複。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 329,\n    \"type\": \"broken\",\n    \"current\": \"但能，感覺很明顯是真的。\",\n    \"find\": \"但能\",\n    \"replace\": \"但不能\",\n    \"confidence\": 0.98,\n    \"reason\": \"「但能」疑似脫漏否定詞「不」。\"\n  },\n  {\n    \"idx\": 354,\n    \"type\": \"repeat\",\n    \"current\": \"如果那個主角我不存在的話，我們每天從早到晚在在意的我的快樂、我的痛苦、我的期待、我的利益。\",\n    \"find\": \"在在意\",\n    \"replace\": \"在意\",\n    \"confidence\": 0.99,\n    \"reason\": \"「在」明顯重複。\"\n  }\n]"
+  },
+  {
+    "session": "03",
+    "blockIndex": 8,
+    "blockRange": [
+      361,
+      402
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.5,
+      "usage": {
+        "total_tokens": 2606,
+        "total_characters": 0,
+        "prompt_tokens": 1513,
+        "completion_tokens": 1093,
+        "completion_tokens_details": {
+          "reasoning_tokens": 983
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 365,
+        "type": "broken",
+        "current": "第三個法類，如果繼續追問下去，為什麼我會如此在意我快樂？我會如此在意我的期待？",
+        "find": "我快樂",
+        "replace": "我的快樂",
+        "confidence": 0.98,
+        "reason": "句中缺少結構助詞「的」，「在意我快樂」應為「在意我的快樂」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 365,\n    \"type\": \"broken\",\n    \"current\": \"第三個法類，如果繼續追問下去，為什麼我會如此在意我快樂？我會如此在意我的期待？\",\n    \"find\": \"我快樂\",\n    \"replace\": \"我的快樂\",\n    \"confidence\": 0.98,\n    \"reason\": \"句中缺少結構助詞「的」，「在意我快樂」應為「在意我的快樂」。\"\n  }\n]"
+  }
+]

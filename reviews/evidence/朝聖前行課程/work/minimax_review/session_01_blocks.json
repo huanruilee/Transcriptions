@@ -1,0 +1,615 @@
+[
+  {
+    "session": "01",
+    "blockIndex": 0,
+    "blockRange": [
+      1,
+      45
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.1,
+      "usage": {
+        "total_tokens": 3228,
+        "total_characters": 0,
+        "prompt_tokens": 2326,
+        "completion_tokens": 902,
+        "completion_tokens_details": {
+          "reasoning_tokens": 744
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 14,
+        "type": "hallucination",
+        "current": "而佛陀就是所有聖者，有聲音嗎？有哦？剛剛好像有一段，有哦？而佛陀就是所有聖者中最圓滿的一位。所以把這兩個字合起來看，朝聖的意思就是，以恭敬仰望的心，前往與佛陀密切相關的地方。",
+        "find": "而佛陀就是所有聖者，有聲音嗎？有哦？剛剛好像有一段，有哦？",
+        "replace": "而佛陀就是所有聖者中最圓滿的一位。",
+        "confidence": 0.96,
+        "reason": "句中插入與上下文無關的「有聲音嗎」等重複片段，且造成「佛陀就是所有聖者」的語意重複。"
+      }
+    ],
+    "raw": "[{\"idx\":14,\"type\":\"hallucination\",\"current\":\"而佛陀就是所有聖者，有聲音嗎？有哦？剛剛好像有一段，有哦？而佛陀就是所有聖者中最圓滿的一位。所以把這兩個字合起來看，朝聖的意思就是，以恭敬仰望的心，前往與佛陀密切相關的地方。\",\"find\":\"而佛陀就是所有聖者，有聲音嗎？有哦？剛剛好像有一段，有哦？\",\"replace\":\"而佛陀就是所有聖者中最圓滿的一位。\",\"confidence\":0.96,\"reason\":\"句中插入與上下文無關的「有聲音嗎」等重複片段，且造成「佛陀就是所有聖者」的語意重複。\"}]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 1,
+    "blockRange": [
+      46,
+      90
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.6,
+      "usage": {
+        "total_tokens": 1850,
+        "total_characters": 0,
+        "prompt_tokens": 1460,
+        "completion_tokens": 390,
+        "completion_tokens_details": {
+          "reasoning_tokens": 386
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [],
+    "raw": "[]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 2,
+    "blockRange": [
+      91,
+      135
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 10.4,
+      "usage": {
+        "total_tokens": 3464,
+        "total_characters": 0,
+        "prompt_tokens": 1956,
+        "completion_tokens": 1508,
+        "completion_tokens_details": {
+          "reasoning_tokens": 991
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 105,
+        "type": "term",
+        "current": "這當中的意念，不是單純把一個地名記住，也不是告訴自己，我來過蘭比尼，我來過菩提迦野，而是透過這個地方重新憶念，佛陀曾經在這裡做過的事情。",
+        "find": "蘭比尼",
+        "replace": "藍毗尼",
+        "confidence": 0.98,
+        "reason": "佛陀出生地應作「藍毗尼」。"
+      },
+      {
+        "idx": 105,
+        "type": "term",
+        "current": "這當中的意念，不是單純把一個地名記住，也不是告訴自己，我來過蘭比尼，我來過菩提迦野，而是透過這個地方重新憶念，佛陀曾經在這裡做過的事情。",
+        "find": "菩提迦野",
+        "replace": "菩提迦耶",
+        "confidence": 0.99,
+        "reason": "佛陀成道地應作「菩提迦耶」。"
+      },
+      {
+        "idx": 106,
+        "type": "term",
+        "current": "例如，到了蘭比尼，不是隻知道這是佛陀出生的地方，而是進一步想到佛陀曾經來到這個世界。",
+        "find": "蘭比尼",
+        "replace": "藍毗尼",
+        "confidence": 0.98,
+        "reason": "佛陀出生地應作「藍毗尼」。"
+      },
+      {
+        "idx": 106,
+        "type": "sound",
+        "current": "例如，到了蘭比尼，不是隻知道這是佛陀出生的地方，而是進一步想到佛陀曾經來到這個世界。",
+        "find": "隻知道",
+        "replace": "只知道",
+        "confidence": 0.99,
+        "reason": "「隻」為量詞，此處應作「只」。"
+      },
+      {
+        "idx": 107,
+        "type": "sound",
+        "current": "看到菩提迦耶，不是隻知道這裡是佛陀成道的地方，而是要進一步想到佛陀曾經在這裡成就正等覺。",
+        "find": "隻知道",
+        "replace": "只知道",
+        "confidence": 0.99,
+        "reason": "「隻」為量詞，此處應作「只」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 105,\n    \"type\": \"term\",\n    \"current\": \"這當中的意念，不是單純把一個地名記住，也不是告訴自己，我來過蘭比尼，我來過菩提迦野，而是透過這個地方重新憶念，佛陀曾經在這裡做過的事情。\",\n    \"find\": \"蘭比尼\",\n    \"replace\": \"藍毗尼\",\n    \"confidence\": 0.98,\n    \"reason\": \"佛陀出生地應作「藍毗尼」。\"\n  },\n  {\n    \"idx\": 105,\n    \"type\": \"term\",\n    \"current\": \"這當中的意念，不是單純把一個地名記住，也不是告訴自己，我來過蘭比尼，我來過菩提迦野，而是透過這個地方重新憶念，佛陀曾經在這裡做過的事情。\",\n    \"find\": \"菩提迦野\",\n    \"replace\": \"菩提迦耶\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛陀成道地應作「菩提迦耶」。\"\n  },\n  {\n    \"idx\": 106,\n    \"type\": \"term\",\n    \"current\": \"例如，到了蘭比尼，不是隻知道這是佛陀出生的地方，而是進一步想到佛陀曾經來到這個世界。\",\n    \"find\": \"蘭比尼\",\n    \"replace\": \"藍毗尼\",\n    \"confidence\": 0.98,\n    \"reason\": \"佛陀出生地應作「藍毗尼」。\"\n  },\n  {\n    \"idx\": 106,\n    \"type\": \"sound\",\n    \"current\": \"例如，到了蘭比尼，不是隻知道這是佛陀出生的地方，而是進一步想到佛陀曾經來到這個世界。\",\n    \"find\": \"隻知道\",\n    \"replace\": \"只知道\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」為量詞，此處應作「只」。\"\n  },\n  {\n    \"idx\": 107,\n    \"type\": \"sound\",\n    \"current\": \"看到菩提迦耶，不是隻知道這裡是佛陀成道的地方，而是要進一步想到佛陀曾經在這裡成就正等覺。\",\n    \"find\": \"隻知道\",\n    \"replace\": \"只知道\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」為量詞，此處應作「只」。\"\n  }\n]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 3,
+    "blockRange": [
+      136,
+      180
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 17.8,
+      "usage": {
+        "total_tokens": 3594,
+        "total_characters": 0,
+        "prompt_tokens": 1792,
+        "completion_tokens": 1802,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1321
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 143,
+        "type": "repeat",
+        "current": "也就是佛陀出生，也就是佛陀出生，跟我有什麼關係？佛陀成道，跟我有什麼關係？",
+        "find": "也就是佛陀出生，也就是佛陀出生",
+        "replace": "就是佛陀出生",
+        "confidence": 0.98,
+        "reason": "句內明顯重複，且與後文「佛陀成道」形成平行問句。"
+      },
+      {
+        "idx": 145,
+        "type": "broken",
+        "current": "當我們一一看見這些關聯，我們對佛陀的感受就會從我知道佛陀，慢慢變成佛陀所做的事情。",
+        "find": "我知道佛陀，慢慢變成佛陀所做的事情",
+        "replace": "只知道佛陀，慢慢變成理解佛陀所做的事情",
+        "confidence": 0.92,
+        "reason": "原句缺少「理解」等動詞，造成「感受變成佛陀所做的事情」語意不通。"
+      },
+      {
+        "idx": 149,
+        "type": "broken",
+        "current": "白話來說，宗大師每當想起佛陀宣說緣起性空時莊嚴的樣貌。",
+        "find": "每當想起佛陀宣說緣起性空時莊嚴的樣貌",
+        "replace": "每當想起佛陀宣說緣起性空時所見的莊嚴樣貌",
+        "confidence": 0.9,
+        "reason": "原句缺少連接成分，無法表達憶起佛陀莊嚴樣貌之意。"
+      },
+      {
+        "idx": 166,
+        "type": "repeat",
+        "current": "如果將這三句話合併起來，就會發現這是一個由外而內的過程。",
+        "find": "如果將這三句話合併起來，就會發現這是一個由外而內的過程。",
+        "replace": "",
+        "confidence": 0.96,
+        "reason": "與第164行完全重複，且中間已有「歡喜欲見」插句，疑似誤重複。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 143,\n    \"type\": \"repeat\",\n    \"current\": \"也就是佛陀出生，也就是佛陀出生，跟我有什麼關係？佛陀成道，跟我有什麼關係？\",\n    \"find\": \"也就是佛陀出生，也就是佛陀出生\",\n    \"replace\": \"就是佛陀出生\",\n    \"confidence\": 0.98,\n    \"reason\": \"句內明顯重複，且與後文「佛陀成道」形成平行問句。\"\n  },\n  {\n    \"idx\": 145,\n    \"type\": \"broken\",\n    \"current\": \"當我們一一看見這些關聯，我們對佛陀的感受就會從我知道佛陀，慢慢變成佛陀所做的事情。\",\n    \"find\": \"我知道佛陀，慢慢變成佛陀所做的事情\",\n    \"replace\": \"只知道佛陀，慢慢變成理解佛陀所做的事情\",\n    \"confidence\": 0.92,\n    \"reason\": \"原句缺少「理解」等動詞，造成「感受變成佛陀所做的事情」語意不通。\"\n  },\n  {\n    \"idx\": 149,\n    \"type\": \"broken\",\n    \"current\": \"白話來說，宗大師每當想起佛陀宣說緣起性空時莊嚴的樣貌。\",\n    \"find\": \"每當想起佛陀宣說緣起性空時莊嚴的樣貌\",\n    \"replace\": \"每當想起佛陀宣說緣起性空時所見的莊嚴樣貌\",\n    \"confidence\": 0.9,\n    \"reason\": \"原句缺少連接成分，無法表達憶起佛陀莊嚴樣貌之意。\"\n  },\n  {\n    \"idx\": 166,\n    \"type\": \"repeat\",\n    \"current\": \"如果將這三句話合併起來，就會發現這是一個由外而內的過程。\",\n    \"find\": \"如果將這三句話合併起來，就會發現這是一個由外而內的過程。\",\n    \"replace\": \"\",\n    \"confidence\": 0.96,\n    \"reason\": \"與第164行完全重複，且中間已有「歡喜欲見」插句，疑似誤重複。\"\n  }\n]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 4,
+    "blockRange": [
+      181,
+      225
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.9,
+      "usage": {
+        "total_tokens": 3253,
+        "total_characters": 0,
+        "prompt_tokens": 1628,
+        "completion_tokens": 1625,
+        "completion_tokens_details": {
+          "reasoning_tokens": 981
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 181,
+        "type": "term",
+        "current": "沉浸性、聖解性、希求性。",
+        "find": "沉浸性",
+        "replace": "澄淨信",
+        "confidence": 0.99,
+        "reason": "佛法語境中的第一種信心應為「澄淨信」。"
+      },
+      {
+        "idx": 181,
+        "type": "term",
+        "current": "沉浸性、聖解性、希求性。",
+        "find": "聖解性",
+        "replace": "勝解性",
+        "confidence": 0.99,
+        "reason": "法相用字應為「勝解性」。"
+      },
+      {
+        "idx": 189,
+        "type": "term",
+        "current": "這就像沉浸性一樣。",
+        "find": "沉浸性",
+        "replace": "澄淨信",
+        "confidence": 0.98,
+        "reason": "依後文三種信心的分類，此處應為「澄淨信」。"
+      },
+      {
+        "idx": 194,
+        "type": "term",
+        "current": "剛才的那一段，先要說明沉浸性。",
+        "find": "沉浸性",
+        "replace": "澄淨信",
+        "confidence": 0.98,
+        "reason": "依後文三種信心的分類，此處應為「澄淨信」。"
+      },
+      {
+        "idx": 201,
+        "type": "term",
+        "current": "這就像是聖解性一樣。",
+        "find": "聖解性",
+        "replace": "勝解性",
+        "confidence": 0.99,
+        "reason": "法相用字應為「勝解性」。"
+      },
+      {
+        "idx": 207,
+        "type": "punct",
+        "current": "所以，這三種信心可以簡單理解成。",
+        "find": "成。",
+        "replace": "成：",
+        "confidence": 0.97,
+        "reason": "冒號後接續列舉內容，句末句號造成語意中斷。"
+      },
+      {
+        "idx": 214,
+        "type": "term",
+        "current": "第二種信心，聖解性。",
+        "find": "聖解性",
+        "replace": "勝解性",
+        "confidence": 0.99,
+        "reason": "法相用字應為「勝解性」。"
+      },
+      {
+        "idx": 225,
+        "type": "term",
+        "current": "接著，聖解性對應的是憶念不忘。",
+        "find": "聖解性",
+        "replace": "勝解性",
+        "confidence": 0.99,
+        "reason": "法相用字應為「勝解性」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 181,\n    \"type\": \"term\",\n    \"current\": \"沉浸性、聖解性、希求性。\",\n    \"find\": \"沉浸性\",\n    \"replace\": \"澄淨信\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛法語境中的第一種信心應為「澄淨信」。\"\n  },\n  {\n    \"idx\": 181,\n    \"type\": \"term\",\n    \"current\": \"沉浸性、聖解性、希求性。\",\n    \"find\": \"聖解性\",\n    \"replace\": \"勝解性\",\n    \"confidence\": 0.99,\n    \"reason\": \"法相用字應為「勝解性」。\"\n  },\n  {\n    \"idx\": 189,\n    \"type\": \"term\",\n    \"current\": \"這就像沉浸性一樣。\",\n    \"find\": \"沉浸性\",\n    \"replace\": \"澄淨信\",\n    \"confidence\": 0.98,\n    \"reason\": \"依後文三種信心的分類，此處應為「澄淨信」。\"\n  },\n  {\n    \"idx\": 194,\n    \"type\": \"term\",\n    \"current\": \"剛才的那一段，先要說明沉浸性。\",\n    \"find\": \"沉浸性\",\n    \"replace\": \"澄淨信\",\n    \"confidence\": 0.98,\n    \"reason\": \"依後文三種信心的分類，此處應為「澄淨信」。\"\n  },\n  {\n    \"idx\": 201,\n    \"type\": \"term\",\n    \"current\": \"這就像是聖解性一樣。\",\n    \"find\": \"聖解性\",\n    \"replace\": \"勝解性\",\n    \"confidence\": 0.99,\n    \"reason\": \"法相用字應為「勝解性」。\"\n  },\n  {\n    \"idx\": 207,\n    \"type\": \"punct\",\n    \"current\": \"所以，這三種信心可以簡單理解成。\",\n    \"find\": \"成。\",\n    \"replace\": \"成：\",\n    \"confidence\": 0.97,\n    \"reason\": \"冒號後接續列舉內容，句末句號造成語意中斷。\"\n  },\n  {\n    \"idx\": 214,\n    \"type\": \"term\",\n    \"current\": \"第二種信心，聖解性。\",\n    \"find\": \"聖解性\",\n    \"replace\": \"勝解性\",\n    \"confidence\": 0.99,\n    \"reason\": \"法相用字應為「勝解性」。\"\n  },\n  {\n    \"idx\": 225,\n    \"type\": \"term\",\n    \"current\": \"接著，聖解性對應的是憶念不忘。\",\n    \"find\": \"聖解性\",\n    \"replace\": \"勝解性\",\n    \"confidence\": 0.99,\n    \"reason\": \"法相用字應為「勝解性」。\"\n  }\n]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 5,
+    "blockRange": [
+      226,
+      270
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 3.5,
+      "usage": {
+        "total_tokens": 2506,
+        "total_characters": 0,
+        "prompt_tokens": 1981,
+        "completion_tokens": 525,
+        "completion_tokens_details": {
+          "reasoning_tokens": 438
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 236,
+        "type": "sound",
+        "current": "還是隻停留在歡喜欲見的這一層？",
+        "find": "還是隻",
+        "replace": "還是只",
+        "confidence": 0.99,
+        "reason": "「隻」為量詞，此處應使用表示單一的「只」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 236,\n    \"type\": \"sound\",\n    \"current\": \"還是隻停留在歡喜欲見的這一層？\",\n    \"find\": \"還是隻\",\n    \"replace\": \"還是只\",\n    \"confidence\": 0.99,\n    \"reason\": \"「隻」為量詞，此處應使用表示單一的「只」。\"\n  }\n]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 6,
+    "blockRange": [
+      271,
+      315
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 9.6,
+      "usage": {
+        "total_tokens": 3702,
+        "total_characters": 0,
+        "prompt_tokens": 1707,
+        "completion_tokens": 1995,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1190
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 289,
+        "type": "sound",
+        "current": "以法如釋啊，哇，那要到很久耶。",
+        "find": "以法如釋",
+        "replace": "依法如是",
+        "confidence": 0.82,
+        "reason": "「以法如釋」疑為同音誤寫，應作「依法如是」。"
+      },
+      {
+        "idx": 290,
+        "type": "term",
+        "current": "就這樣，就這樣，反正等一下可以聽音檔，剛剛是講到來到居尸那羅，所以來到居尸那羅，我們憶念的重點，不是停在佛陀已經不在世間，而是進一步想到，雖然佛陀不在世間，但還有佛陀留下的法，能成為我的依靠。",
+        "find": "來到居尸那羅，所以",
+        "replace": "來到拘尸那羅，所以",
+        "confidence": 0.99,
+        "reason": "佛陀涅槃之地應作「拘尸那羅」。"
+      },
+      {
+        "idx": 290,
+        "type": "term",
+        "current": "就這樣，就這樣，反正等一下可以聽音檔，剛剛是講到來到居尸那羅，所以來到居尸那羅，我們憶念的重點，不是停在佛陀已經不在世間，而是進一步想到，雖然佛陀不在世間，但還有佛陀留下的法，能成為我的依靠。",
+        "find": "所以來到居尸那羅，我們",
+        "replace": "所以來到拘尸那羅，我們",
+        "confidence": 0.99,
+        "reason": "佛陀涅槃之地應作「拘尸那羅」。"
+      },
+      {
+        "idx": 291,
+        "type": "term",
+        "current": "而是進一步想到，雖然佛陀不在世間，但還有佛陀留下的法，能成為我的依靠。因此，來到居尸那羅，對佛陀的戀慕，可以落實為非常具體的行動。",
+        "find": "居尸那羅",
+        "replace": "拘尸那羅",
+        "confidence": 0.99,
+        "reason": "佛陀涅槃之地應作「拘尸那羅」。"
+      },
+      {
+        "idx": 293,
+        "type": "sound",
+        "current": "以上，我們介紹的是念。當中包含了三層心境，以及四個地方各自應該憶念什麼。接住，經文談到行。",
+        "find": "接住",
+        "replace": "接著",
+        "confidence": 0.98,
+        "reason": "依上下文應為「接著」，「接住」為同音誤寫。"
+      },
+      {
+        "idx": 298,
+        "type": "sound",
+        "current": "而且它就不是說，一曰去佛生處。有沒有發現？",
+        "find": "一曰去佛生處",
+        "replace": "一曰念佛生處",
+        "confidence": 0.9,
+        "reason": "後文明確說明「念是憶念，而不是前往」，故此處應為「念佛生處」。"
+      },
+      {
+        "idx": 299,
+        "type": "sound",
+        "current": "依約念佛生處。念是憶念，而不是前往。",
+        "find": "依約念佛生處",
+        "replace": "一曰念佛生處",
+        "confidence": 0.94,
+        "reason": "「依約」為「一曰」的同音誤寫；此句承前引述經文並解釋「念」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 289,\n    \"type\": \"sound\",\n    \"current\": \"以法如釋啊，哇，那要到很久耶。\",\n    \"find\": \"以法如釋\",\n    \"replace\": \"依法如是\",\n    \"confidence\": 0.82,\n    \"reason\": \"「以法如釋」疑為同音誤寫，應作「依法如是」。\"\n  },\n  {\n    \"idx\": 290,\n    \"type\": \"term\",\n    \"current\": \"就這樣，就這樣，反正等一下可以聽音檔，剛剛是講到來到居尸那羅，所以來到居尸那羅，我們憶念的重點，不是停在佛陀已經不在世間，而是進一步想到，雖然佛陀不在世間，但還有佛陀留下的法，能成為我的依靠。\",\n    \"find\": \"來到居尸那羅，所以\",\n    \"replace\": \"來到拘尸那羅，所以\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛陀涅槃之地應作「拘尸那羅」。\"\n  },\n  {\n    \"idx\": 290,\n    \"type\": \"term\",\n    \"current\": \"就這樣，就這樣，反正等一下可以聽音檔，剛剛是講到來到居尸那羅，所以來到居尸那羅，我們憶念的重點，不是停在佛陀已經不在世間，而是進一步想到，雖然佛陀不在世間，但還有佛陀留下的法，能成為我的依靠。\",\n    \"find\": \"所以來到居尸那羅，我們\",\n    \"replace\": \"所以來到拘尸那羅，我們\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛陀涅槃之地應作「拘尸那羅」。\"\n  },\n  {\n    \"idx\": 291,\n    \"type\": \"term\",\n    \"current\": \"而是進一步想到，雖然佛陀不在世間，但還有佛陀留下的法，能成為我的依靠。因此，來到居尸那羅，對佛陀的戀慕，可以落實為非常具體的行動。\",\n    \"find\": \"居尸那羅\",\n    \"replace\": \"拘尸那羅\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛陀涅槃之地應作「拘尸那羅」。\"\n  },\n  {\n    \"idx\": 293,\n    \"type\": \"sound\",\n    \"current\": \"以上，我們介紹的是念。當中包含了三層心境，以及四個地方各自應該憶念什麼。接住，經文談到行。\",\n    \"find\": \"接住\",\n    \"replace\": \"接著\",\n    \"confidence\": 0.98,\n    \"reason\": \"依上下文應為「接著」，「接住」為同音誤寫。\"\n  },\n  {\n    \"idx\": 298,\n    \"type\": \"sound\",\n    \"current\": \"而且它就不是說，一曰去佛生處。有沒有發現？\",\n    \"find\": \"一曰去佛生處\",\n    \"replace\": \"一曰念佛生處\",\n    \"confidence\": 0.9,\n    \"reason\": \"後文明確說明「念是憶念，而不是前往」，故此處應為「念佛生處」。\"\n  },\n  {\n    \"idx\": 299,\n    \"type\": \"sound\",\n    \"current\": \"依約念佛生處。念是憶念，而不是前往。\",\n    \"find\": \"依約念佛生處\",\n    \"replace\": \"一曰念佛生處\",\n    \"confidence\": 0.94,\n    \"reason\": \"「依約」為「一曰」的同音誤寫；此句承前引述經文並解釋「念」。\"\n  }\n]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 7,
+    "blockRange": [
+      316,
+      360
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 7.5,
+      "usage": {
+        "total_tokens": 3129,
+        "total_characters": 0,
+        "prompt_tokens": 1848,
+        "completion_tokens": 1281,
+        "completion_tokens_details": {
+          "reasoning_tokens": 936
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 325,
+        "type": "term",
+        "current": "到了這裡，我們也可以重新理解，朝聖不是隻有念，也不是隻有行。",
+        "find": "隻有",
+        "replace": "只有",
+        "confidence": 0.99,
+        "reason": "「隻」為「只」的形近誤植，此處應作「只有」。"
+      },
+      {
+        "idx": 326,
+        "type": "sound",
+        "current": "而是從唸到行，讓內心的憶念真正轉化為外在的實踐。",
+        "find": "唸到行",
+        "replace": "念到行",
+        "confidence": 0.9,
+        "reason": "上下文及前文均使用「念」，「唸」疑為同音誤植。"
+      },
+      {
+        "idx": 327,
+        "type": "repeat",
+        "current": "讓內心的憶念真正轉化為外在的實踐。",
+        "find": "讓內心的憶念真正轉化為外在的實踐。",
+        "replace": "",
+        "confidence": 0.9,
+        "reason": "與上一句完全重複，且未形成新的語意。"
+      },
+      {
+        "idx": 343,
+        "type": "term",
+        "current": "什麼才是朝聖真正不可或缺少的部分？",
+        "find": "不可或缺少",
+        "replace": "不可或缺",
+        "confidence": 0.99,
+        "reason": "「不可或缺」後誤加「少」字。"
+      },
+      {
+        "idx": 344,
+        "type": "punct",
+        "current": "如果沒有帶上歡喜欲見憶念不忘，生戀慕心出發。",
+        "find": "生戀慕心出發",
+        "replace": "生戀慕心，出發",
+        "confidence": 0.86,
+        "reason": "「生戀慕心」與「出發」之間缺少逗號，句意黏連不清。"
+      }
+    ],
+    "raw": "[{\"idx\":325,\"type\":\"term\",\"current\":\"到了這裡，我們也可以重新理解，朝聖不是隻有念，也不是隻有行。\",\"find\":\"隻有\",\"replace\":\"只有\",\"confidence\":0.99,\"reason\":\"「隻」為「只」的形近誤植，此處應作「只有」。\"},{\"idx\":326,\"type\":\"sound\",\"current\":\"而是從唸到行，讓內心的憶念真正轉化為外在的實踐。\",\"find\":\"唸到行\",\"replace\":\"念到行\",\"confidence\":0.9,\"reason\":\"上下文及前文均使用「念」，「唸」疑為同音誤植。\"},{\"idx\":327,\"type\":\"repeat\",\"current\":\"讓內心的憶念真正轉化為外在的實踐。\",\"find\":\"讓內心的憶念真正轉化為外在的實踐。\",\"replace\":\"\",\"confidence\":0.9,\"reason\":\"與上一句完全重複，且未形成新的語意。\"},{\"idx\":343,\"type\":\"term\",\"current\":\"什麼才是朝聖真正不可或缺少的部分？\",\"find\":\"不可或缺少\",\"replace\":\"不可或缺\",\"confidence\":0.99,\"reason\":\"「不可或缺」後誤加「少」字。\"},{\"idx\":344,\"type\":\"punct\",\"current\":\"如果沒有帶上歡喜欲見憶念不忘，生戀慕心出發。\",\"find\":\"生戀慕心出發\",\"replace\":\"生戀慕心，出發\",\"confidence\":0.86,\"reason\":\"「生戀慕心」與「出發」之間缺少逗號，句意黏連不清。\"}]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 8,
+    "blockRange": [
+      361,
+      405
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 5.4,
+      "usage": {
+        "total_tokens": 3108,
+        "total_characters": 0,
+        "prompt_tokens": 1853,
+        "completion_tokens": 1255,
+        "completion_tokens_details": {
+          "reasoning_tokens": 936
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 371,
+        "type": "sound",
+        "current": "很多同學學佛之後，不太好意思跟別人說，我要去歐洲，我要去美果，我要去哪裡哪裡玩。",
+        "find": "美果",
+        "replace": "美國",
+        "confidence": 0.99,
+        "reason": "「美果」為同音誤字，應為「美國」。"
+      },
+      {
+        "idx": 375,
+        "type": "term",
+        "current": "畢竟你們是我的所化肌嘛，所以你們有什麼想法，我要盡可能在我的課程當中，透過理路一一破斥。",
+        "find": "所化肌",
+        "replace": "所化機",
+        "confidence": 0.99,
+        "reason": "佛教法相用語應為「所化機」。"
+      },
+      {
+        "idx": 394,
+        "type": "repeat",
+        "current": "後來，隨著佛教的發展，又陸續加入了，後來隨著佛教的發展，又陸續加入了另外四個地方，分別是舍衛城，王舍城，吠舍離，僧伽施。",
+        "find": "後來，隨著佛教的發展，又陸續加入了，",
+        "replace": "",
+        "confidence": 0.99,
+        "reason": "句內明顯重複同一段內容。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 371,\n    \"type\": \"sound\",\n    \"current\": \"很多同學學佛之後，不太好意思跟別人說，我要去歐洲，我要去美果，我要去哪裡哪裡玩。\",\n    \"find\": \"美果\",\n    \"replace\": \"美國\",\n    \"confidence\": 0.99,\n    \"reason\": \"「美果」為同音誤字，應為「美國」。\"\n  },\n  {\n    \"idx\": 375,\n    \"type\": \"term\",\n    \"current\": \"畢竟你們是我的所化肌嘛，所以你們有什麼想法，我要盡可能在我的課程當中，透過理路一一破斥。\",\n    \"find\": \"所化肌\",\n    \"replace\": \"所化機\",\n    \"confidence\": 0.99,\n    \"reason\": \"佛教法相用語應為「所化機」。\"\n  },\n  {\n    \"idx\": 394,\n    \"type\": \"repeat\",\n    \"current\": \"後來，隨著佛教的發展，又陸續加入了，後來隨著佛教的發展，又陸續加入了另外四個地方，分別是舍衛城，王舍城，吠舍離，僧伽施。\",\n    \"find\": \"後來，隨著佛教的發展，又陸續加入了，\",\n    \"replace\": \"\",\n    \"confidence\": 0.99,\n    \"reason\": \"句內明顯重複同一段內容。\"\n  }\n]"
+  },
+  {
+    "session": "01",
+    "blockIndex": 9,
+    "blockRange": [
+      406,
+      430
+    ],
+    "status": "ok",
+    "error": null,
+    "meta": {
+      "model": "MiniMax-M3.1-Flash",
+      "elapsed": 6.1,
+      "usage": {
+        "total_tokens": 2002,
+        "total_characters": 0,
+        "prompt_tokens": 1413,
+        "completion_tokens": 589,
+        "completion_tokens_details": {
+          "reasoning_tokens": 376
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      }
+    },
+    "findings": [
+      {
+        "idx": 413,
+        "type": "punct",
+        "current": "例如，現在有些法師透過唱歌、創作佛曲來弘法，有人把心經改編成電音曲風，或許在不久的將來還會有AI法師出來講法。",
+        "find": "。",
+        "replace": "？",
+        "confidence": 0.99,
+        "reason": "句末為疑問句，應使用問號。"
+      },
+      {
+        "idx": 421,
+        "type": "broken",
+        "current": "聖不是那塊土地本身有多麼神奇，而是這些地方與佛陀與佛法產生了深刻的連結。",
+        "find": "聖不是",
+        "replace": "聖的意義不在於",
+        "confidence": 0.88,
+        "reason": "原句主詞與謂語搭配不完整，語意應為「聖的意義不在於……」。"
+      }
+    ],
+    "raw": "[\n  {\n    \"idx\": 413,\n    \"type\": \"punct\",\n    \"current\": \"例如，現在有些法師透過唱歌、創作佛曲來弘法，有人把心經改編成電音曲風，或許在不久的將來還會有AI法師出來講法。\",\n    \"find\": \"。\",\n    \"replace\": \"？\",\n    \"confidence\": 0.99,\n    \"reason\": \"句末為疑問句，應使用問號。\"\n  },\n  {\n    \"idx\": 421,\n    \"type\": \"broken\",\n    \"current\": \"聖不是那塊土地本身有多麼神奇，而是這些地方與佛陀與佛法產生了深刻的連結。\",\n    \"find\": \"聖不是\",\n    \"replace\": \"聖的意義不在於\",\n    \"confidence\": 0.88,\n    \"reason\": \"原句主詞與謂語搭配不完整，語意應為「聖的意義不在於……」。\"\n  }\n]"
+  }
+]
