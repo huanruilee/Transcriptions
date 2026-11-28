@@ -28,7 +28,14 @@ def digits(s):
     return re.findall(r"\d+(?:\.\d+)?", s or "")
 
 
+LEDGER = WORK / "applied_ledger.json"
+
+
 def apply_decisions(dry_run=False):
+    # 套用後 find 已不在現文，重跑會把 ledger 覆蓋成全 rejected，抹掉審計軌跡。
+    if not dry_run and LEDGER.exists() and "--force" not in sys.argv:
+        print(f"{LEDGER.name} 已存在；本輪已套用過，重跑需 --force")
+        sys.exit(1)
     dec = json.loads((WORK / "decisions.json").read_text(encoding="utf-8"))
     by_session = {}
     for item in dec["apply"]:
