@@ -48,6 +48,8 @@ def main():
                 f"已補做 full large-v3 獨立複辨：{verify['windows']} 個音窗，"
                 f"覆蓋已套用修正 {covered.get(sid, 0)} 筆；據此回退 {reverted.get(sid, 0)} 筆過度修正"
             )
+        # 本輪改了 _meta 即算本講有更新，日期必須同步（strict gate 會比 base）
+        data["lastUpdated"] = "2026-11-28 11:40"
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"session {sid}: covered={covered.get(sid, 0)} reverted={reverted.get(sid, 0)}")
 
