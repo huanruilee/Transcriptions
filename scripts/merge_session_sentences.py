@@ -70,8 +70,13 @@ def group_paragraphs(paragraphs: list[dict], para_max: int) -> list[list[dict]]:
     current: list[dict] = [paragraphs[0]]
     for paragraph in paragraphs[1:]:
         same_speaker = paragraph.get("speaker") == current[0].get("speaker")
+        # A paragraph's questionId says which discussion question its content
+        # answers (the reader groups by it), so a change of questionId is a hard
+        # group boundary -- merging across it would silently reassign content.
+        same_question = paragraph.get("questionId") == current[0].get("questionId")
         absorbable = (
             same_speaker
+            and same_question
             and not paragraph.get("heading")
             and "teacherSummary" not in paragraph
             and "teacherSummary" not in current[0]
@@ -124,6 +129,11 @@ def protected_ids(session: dict) -> dict[str, str]:
         sid = str(question.get("sentenceId") or "").strip()
         if sid:
             refs.setdefault(sid, f"discussionQuestions:{question.get('id', '')}")
+        teaching = question.get("teacherTeaching") or {}
+        for field in ("startSentenceId", "endSentenceId"):
+            tid = str(teaching.get(field) or "").strip()
+            if tid:
+                refs.setdefault(tid, f"discussionQuestions:{question.get('id', '')}:{field}")
     for group in ("mainPoints", "discussionTopics", "referenceViews"):
         for index, item in enumerate((session.get("contentOverview") or {}).get(group) or []):
             for evidence in item.get("evidence") or []:
@@ -133,38 +143,46 @@ def protected_ids(session: dict) -> dict[str, str]:
     return refs
 
 
-def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -> dict:
+def merge_session(
+    session: dict, min_chars: int, soft_min: int, para_max: int, preserve_para_ids: bool = False
+) -> dict:
     paragraphs = session["paragraphs"]
     refs = protected_ids(session)
     groups = group_paragraphs(paragraphs, para_max)
 
     # Pull each group's dangling tail into the next group when the speaker continues.
+    # If the group is a single dangling run the tail cannot be moved without
+    # emptying the paragraph, so the run is left open instead of being closed
+    # with a fabricated terminator (that is what pins 27B's p_007/p_008).
     pending_prefix: list[dict] = []
-    prepared: list[list[dict]] = []
+    prepared: list[tuple[int, list[dict], list[dict]]] = []
+    leave_open: set[int] = set()
     for index, group in enumerate(groups):
         sentences = [s for p in group for s in p.get("sentences") or []]
         if pending_prefix:
             sentences = pending_prefix + sentences
             pending_prefix = []
-        prepared.append((group, sentences))
+        prepared.append((index, group, sentences))
         runs = build_runs(sentences, min_chars, soft_min)
         last_text = "".join(str(s.get("text") or "") for s in runs[-1]).strip() if runs else ""
-        if (
-            len(runs) > 1
-            and index + 1 < len(groups)
+        continues = (
+            index + 1 < len(groups)
             and last_text
             and not END_RE.search(last_text)
             and groups[index + 1][0].get("speaker") == group[0].get("speaker")
-        ):
+        )
+        if continues and len(runs) > 1:
             pending_prefix = runs[-1]
-            prepared[-1] = (group, sentences[: len(sentences) - len(runs[-1])])
+            prepared[-1] = (index, group, sentences[: len(sentences) - len(runs[-1])])
+        elif continues and len(runs) == 1:
+            leave_open.add(index)
 
     new_paragraphs: list[dict] = []
     old_to_new: dict[str, str] = {}
     merged_members: dict[str, list[str]] = {}
     carried_chars = 0
 
-    for group, sentences in prepared:
+    for index, group, sentences in prepared:
         if not sentences:
             continue
         runs = build_runs(sentences, min_chars, soft_min)
@@ -188,14 +206,21 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
             if len(run) > 1:
                 merged_members[str(head.get("id"))] = [str(s.get("id")) for s in run]
 
-        # turn-final sentence must end with a terminator
+        # Turn-final sentence gets a terminator, except for the runs flagged
+        # above: those are utterances the speaker demonstrably continues in the
+        # next paragraph, so appending 。 would assert a sentence end that the
+        # audio does not have (27B p_007/p_008 are pinned on exactly that).
         last = built[-1]
-        closed = close_dangling(last["text"])
-        if closed != last["text"]:
-            carried_chars += 1
-            last["text"] = closed
+        if index not in leave_open:
+            closed = close_dangling(last["text"])
+            if closed != last["text"]:
+                carried_chars += 1
+                last["text"] = closed
 
-        paragraph = {"id": f"p_{len(new_paragraphs) + 1:04d}", "speaker": group[0].get("speaker")}
+        para_id = group[0].get("id") if preserve_para_ids else f"p_{len(new_paragraphs) + 1:04d}"
+        paragraph = {"id": para_id, "speaker": group[0].get("speaker")}
+        if group[0].get("questionId"):
+            paragraph["questionId"] = group[0]["questionId"]
         paragraph["sentences"] = built
         heading = next((p.get("heading") for p in group if p.get("heading")), None)
         if heading:
@@ -227,6 +252,11 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
         sid = str(question.get("sentenceId") or "").strip()
         if sid in remapped_refs:
             question["sentenceId"] = remapped_refs[sid]
+        teaching = question.get("teacherTeaching") or {}
+        for field in ("startSentenceId", "endSentenceId"):
+            tid = str(teaching.get(field) or "").strip()
+            if tid in remapped_refs:
+                teaching[field] = remapped_refs[tid]
     deduped = 0
     for group_name in ("mainPoints", "discussionTopics", "referenceViews"):
         for item in (session.get("contentOverview") or {}).get(group_name) or []:
@@ -353,6 +383,7 @@ def main() -> None:
     parser.add_argument("--min-chars", type=int, default=100, help="accumulate until a strong terminator and >= N chars")
     parser.add_argument("--soft-min", type=int, default=80, help="same, for ：； terminators")
     parser.add_argument("--para-max", type=int, default=300, help="max characters per merged paragraph")
+    parser.add_argument("--preserve-para-ids", action="store_true", help="keep each group's first paragraph id instead of renumbering p_0001..")
     parser.add_argument("--apply", action="store_true", help="write the file (default: dry run)")
     parser.add_argument("--ledger", help="write merge ledger JSON here")
     parser.add_argument("--no-overview-sync", action="store_true", help="skip digest/quote re-hydration")
@@ -364,7 +395,7 @@ def main() -> None:
     before_stream = char_stream(session)
     before = metrics(session)
 
-    result = merge_session(session, args.min_chars, args.soft_min, args.para_max)
+    result = merge_session(session, args.min_chars, args.soft_min, args.para_max, args.preserve_para_ids)
     merged = result["session"]
     after_stream = char_stream(merged)
     if before_stream != after_stream:
