@@ -52,13 +52,42 @@ test('published 27B text is traditional Chinese while raw ASR remains untouched'
   assert.equal(sentences.some((sentence) => /能够|有关聯/u.test(sentence.rawText)), true);
 });
 
-test('27B only closes the paragraph whose final sentence is complete', () => {
+// 契約變更（2026-11-28，t_1c724626 重切 session_27B 段界）：原本釘死
+// p_007／p_008／p_029／p_030 四個 magic id，要求「續句尾端不得出現句末標點」。
+// 段界重切後那幾個續句已落在段中、magic id 也不再保證存在（p_008／p_029 已被併段），
+// 所以改釘真正的規則，而不是刪測試或放寬：
+// 1. 段末句沒有句末標點時，下一段必須是同一位講者 —— 那是發言中的續行，工具選擇留白
+//    而不是偽造句號；換講者（發言結束）處必定收尾。
+// 2. 原本被釘的續行點（疑惑／同學／蘊體）在正文裡仍不得被句末標點截斷；
+//    真正的問句（第三種可能性嗎？）仍保留問號。
+test('27B does not fabricate sentence-final punctuation on a continued utterance', () => {
   const session = JSON.parse(fs.readFileSync(path.join(COURSE_DIR, 'sessions/session_27B.json'), 'utf8'));
-  const finalText = (id) => session.paragraphs.find((paragraph) => paragraph.id === id).sentences.at(-1).text;
-  assert.equal(finalText('p_007').endsWith('疑惑。'), false);
-  assert.equal(finalText('p_008').endsWith('同學。'), false);
-  assert.equal(finalText('p_029').endsWith('蘊體。'), false);
-  assert.equal(finalText('p_030').endsWith('嗎？'), true);
+  const paragraphs = session.paragraphs;
+  const END_PUNCT = /[。！？…」』）]\s*$/u;
+
+  for (let i = 0; i < paragraphs.length - 1; i += 1) {
+    const last = paragraphs[i].sentences.at(-1).text.trim();
+    if (!END_PUNCT.test(last)) {
+      assert.equal(
+        paragraphs[i].speaker,
+        paragraphs[i + 1].speaker,
+        `${paragraphs[i].id} 段末未收尾，下一段卻換講者：發言結束處漏了句末標點`,
+      );
+    }
+  }
+
+  const body = paragraphs.flatMap((paragraph) => paragraph.sentences).map((sentence) => sentence.text).join('');
+  for (const continuation of ['就產生了疑惑', '跟八號的同學', '如果它與蘊體']) {
+    const at = body.indexOf(continuation);
+    assert.ok(at >= 0, `正文找不到續行片段「${continuation}」`);
+    const next = body.slice(at + continuation.length, at + continuation.length + 1);
+    assert.equal(
+      /[。！？]/u.test(next),
+      false,
+      `續行片段「${continuation}」被偽造的句末標點截斷：「${body.slice(at, at + continuation.length + 6)}」`,
+    );
+  }
+  assert.ok(body.includes('第三種可能性嗎？'), '真正的問句「第三種可能性嗎？」不得丟失問號');
 });
 
 test('study-group publication ends inside a combined closing segment after the dedication', () => {

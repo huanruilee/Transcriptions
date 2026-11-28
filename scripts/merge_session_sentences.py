@@ -21,7 +21,12 @@ What the pass does
 3. Carries a group-final dangling run into the next group when the speaker is the
    same (ASR split a sentence across a paragraph break), otherwise closes it by
    replacing a trailing ``，``/``、`` with ``。`` (or appending ``。``).
-4. Remaps every external sentence reference (``discussionQuestions[].sentenceId``,
+4. With ``--split-mixed-speakers``: splits a paragraph whose sentences carry more
+   than one speaker at the speaker change (the first part keeps the paragraph id,
+   later parts get ``<id>b``, ``<id>c`` ...). ASR sometimes attaches the next
+   speaker's first fragments to the previous paragraph; merging such a paragraph
+   would relabel those fragments and leave one paragraph showing two speakers.
+5. Remaps every external sentence reference (``discussionQuestions[].sentenceId``,
    ``contentOverview.*.evidence[].sentenceId``) to the run-head id that now holds
    that fragment, then re-hydrates evidence quotes and the sourceDigest through
    ``scripts/content_overview_pipeline.mjs`` (single source of truth for both).
@@ -65,13 +70,66 @@ def group_chars(group: list[dict]) -> int:
     return sum(para_chars(p) for p in group)
 
 
+def split_mixed_speaker_paragraphs(paragraphs: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Split a paragraph at sentence-speaker changes (one paragraph = one turn).
+
+    ASR occasionally attaches the next speaker's opening fragments to the previous
+    paragraph. Merging such a paragraph silently relabels those fragments (the run
+    head's speaker wins) and leaves one paragraph showing two speakers, so the split
+    happens before grouping. Headings / teacherSummary paragraphs are left alone:
+    their position is meaningful and cannot be split without inventing a second one.
+    """
+    out: list[dict] = []
+    splits: list[dict] = []
+    for paragraph in paragraphs:
+        sentences = paragraph.get("sentences") or []
+        speakers = [s.get("speaker") for s in sentences]
+        if (
+            len(set(speakers)) <= 1
+            or paragraph.get("heading")
+            or "teacherSummary" in paragraph
+        ):
+            out.append(paragraph)
+            continue
+        chunks: list[list[dict]] = []
+        current = [sentences[0]]
+        for sentence in sentences[1:]:
+            if sentence.get("speaker") == current[0].get("speaker"):
+                current.append(sentence)
+            else:
+                chunks.append(current)
+                current = [sentence]
+        chunks.append(current)
+        for index, chunk in enumerate(chunks):
+            part = dict(paragraph)
+            part["sentences"] = chunk
+            part["speaker"] = chunk[0].get("speaker")
+            if index:
+                part["id"] = f"{paragraph.get('id')}b{index}"
+            out.append(part)
+            splits.append(
+                {
+                    "from": paragraph.get("id"),
+                    "to": part["id"],
+                    "speaker": part["speaker"],
+                    "sentences": [s.get("id") for s in chunk],
+                }
+            )
+    return out, splits
+
+
 def group_paragraphs(paragraphs: list[dict], para_max: int) -> list[list[dict]]:
     groups: list[list[dict]] = []
     current: list[dict] = [paragraphs[0]]
     for paragraph in paragraphs[1:]:
         same_speaker = paragraph.get("speaker") == current[0].get("speaker")
+        # A paragraph's questionId says which discussion question its content
+        # answers (the reader groups by it), so a change of questionId is a hard
+        # group boundary -- merging across it would silently reassign content.
+        same_question = paragraph.get("questionId") == current[0].get("questionId")
         absorbable = (
             same_speaker
+            and same_question
             and not paragraph.get("heading")
             and "teacherSummary" not in paragraph
             and "teacherSummary" not in current[0]
@@ -86,10 +144,18 @@ def group_paragraphs(paragraphs: list[dict], para_max: int) -> list[list[dict]]:
     return groups
 
 
-def build_runs(sentences: list[dict], min_chars: int, soft_min: int) -> list[list[dict]]:
+def build_runs(
+    sentences: list[dict], min_chars: int, soft_min: int, respect_speakers: bool = False
+) -> list[list[dict]]:
     runs: list[list[dict]] = []
     current: list[dict] = []
     for sentence in sentences:
+        # A sentence cannot span two speakers: when the speaker changes mid-paragraph
+        # (ASR attached the next turn's opening fragments), the run has to break or the
+        # tail would be relabelled with the run head's speaker.
+        if respect_speakers and current and sentence.get("speaker") != current[0].get("speaker"):
+            runs.append(current)
+            current = []
         current.append(sentence)
         text = "".join(str(s.get("text") or "") for s in current).strip()
         if not text:
@@ -124,6 +190,11 @@ def protected_ids(session: dict) -> dict[str, str]:
         sid = str(question.get("sentenceId") or "").strip()
         if sid:
             refs.setdefault(sid, f"discussionQuestions:{question.get('id', '')}")
+        teaching = question.get("teacherTeaching") or {}
+        for field in ("startSentenceId", "endSentenceId"):
+            tid = str(teaching.get(field) or "").strip()
+            if tid:
+                refs.setdefault(tid, f"discussionQuestions:{question.get('id', '')}:{field}")
     for group in ("mainPoints", "discussionTopics", "referenceViews"):
         for index, item in enumerate((session.get("contentOverview") or {}).get(group) or []):
             for evidence in item.get("evidence") or []:
@@ -133,41 +204,57 @@ def protected_ids(session: dict) -> dict[str, str]:
     return refs
 
 
-def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -> dict:
+def merge_session(
+    session: dict,
+    min_chars: int,
+    soft_min: int,
+    para_max: int,
+    preserve_para_ids: bool = False,
+    split_mixed_speakers: bool = False,
+) -> dict:
     paragraphs = session["paragraphs"]
+    speaker_splits: list[dict] = []
+    if split_mixed_speakers:
+        paragraphs, speaker_splits = split_mixed_speaker_paragraphs(paragraphs)
     refs = protected_ids(session)
     groups = group_paragraphs(paragraphs, para_max)
 
     # Pull each group's dangling tail into the next group when the speaker continues.
+    # If the group is a single dangling run the tail cannot be moved without
+    # emptying the paragraph, so the run is left open instead of being closed
+    # with a fabricated terminator (that is what pins 27B's p_007/p_008).
     pending_prefix: list[dict] = []
-    prepared: list[list[dict]] = []
+    prepared: list[tuple[int, list[dict], list[dict]]] = []
+    leave_open: set[int] = set()
     for index, group in enumerate(groups):
         sentences = [s for p in group for s in p.get("sentences") or []]
         if pending_prefix:
             sentences = pending_prefix + sentences
             pending_prefix = []
-        prepared.append((group, sentences))
-        runs = build_runs(sentences, min_chars, soft_min)
+        prepared.append((index, group, sentences))
+        runs = build_runs(sentences, min_chars, soft_min, split_mixed_speakers)
         last_text = "".join(str(s.get("text") or "") for s in runs[-1]).strip() if runs else ""
-        if (
-            len(runs) > 1
-            and index + 1 < len(groups)
+        continues = (
+            index + 1 < len(groups)
             and last_text
             and not END_RE.search(last_text)
             and groups[index + 1][0].get("speaker") == group[0].get("speaker")
-        ):
+        )
+        if continues and len(runs) > 1:
             pending_prefix = runs[-1]
-            prepared[-1] = (group, sentences[: len(sentences) - len(runs[-1])])
+            prepared[-1] = (index, group, sentences[: len(sentences) - len(runs[-1])])
+        elif continues and len(runs) == 1:
+            leave_open.add(index)
 
     new_paragraphs: list[dict] = []
     old_to_new: dict[str, str] = {}
     merged_members: dict[str, list[str]] = {}
     carried_chars = 0
 
-    for group, sentences in prepared:
+    for index, group, sentences in prepared:
         if not sentences:
             continue
-        runs = build_runs(sentences, min_chars, soft_min)
+        runs = build_runs(sentences, min_chars, soft_min, split_mixed_speakers)
         built: list[dict] = []
         for run in runs:
             text = "".join(str(s.get("text") or "") for s in run).strip()
@@ -188,14 +275,21 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
             if len(run) > 1:
                 merged_members[str(head.get("id"))] = [str(s.get("id")) for s in run]
 
-        # turn-final sentence must end with a terminator
+        # Turn-final sentence gets a terminator, except for the runs flagged
+        # above: those are utterances the speaker demonstrably continues in the
+        # next paragraph, so appending 。 would assert a sentence end that the
+        # audio does not have (27B p_007/p_008 are pinned on exactly that).
         last = built[-1]
-        closed = close_dangling(last["text"])
-        if closed != last["text"]:
-            carried_chars += 1
-            last["text"] = closed
+        if index not in leave_open:
+            closed = close_dangling(last["text"])
+            if closed != last["text"]:
+                carried_chars += 1
+                last["text"] = closed
 
-        paragraph = {"id": f"p_{len(new_paragraphs) + 1:04d}", "speaker": group[0].get("speaker")}
+        para_id = group[0].get("id") if preserve_para_ids else f"p_{len(new_paragraphs) + 1:04d}"
+        paragraph = {"id": para_id, "speaker": group[0].get("speaker")}
+        if group[0].get("questionId"):
+            paragraph["questionId"] = group[0]["questionId"]
         paragraph["sentences"] = built
         heading = next((p.get("heading") for p in group if p.get("heading")), None)
         if heading:
@@ -227,6 +321,11 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
         sid = str(question.get("sentenceId") or "").strip()
         if sid in remapped_refs:
             question["sentenceId"] = remapped_refs[sid]
+        teaching = question.get("teacherTeaching") or {}
+        for field in ("startSentenceId", "endSentenceId"):
+            tid = str(teaching.get(field) or "").strip()
+            if tid in remapped_refs:
+                teaching[field] = remapped_refs[tid]
     deduped = 0
     for group_name in ("mainPoints", "discussionTopics", "referenceViews"):
         for item in (session.get("contentOverview") or {}).get(group_name) or []:
@@ -258,12 +357,19 @@ def merge_session(session: dict, min_chars: int, soft_min: int, para_max: int) -
         "minChars": min_chars,
         "softMin": soft_min,
         "paraMax": para_max,
+        "speakerSplits": speaker_splits,
     }
     ledger = {
         "tool": "scripts/merge_session_sentences.py",
-        "params": {"minChars": min_chars, "softMin": soft_min, "paraMax": para_max},
+        "params": {
+            "minChars": min_chars,
+            "softMin": soft_min,
+            "paraMax": para_max,
+            "splitMixedSpeakers": split_mixed_speakers,
+        },
         "stats": stats,
         "mergedMembers": merged_members,
+        "speakerSplits": speaker_splits,
     }
     return {"session": session, "stats": stats, "ledger": ledger}
 
@@ -353,6 +459,12 @@ def main() -> None:
     parser.add_argument("--min-chars", type=int, default=100, help="accumulate until a strong terminator and >= N chars")
     parser.add_argument("--soft-min", type=int, default=80, help="same, for ：； terminators")
     parser.add_argument("--para-max", type=int, default=300, help="max characters per merged paragraph")
+    parser.add_argument("--preserve-para-ids", action="store_true", help="keep each group's first paragraph id instead of renumbering p_0001..")
+    parser.add_argument(
+        "--split-mixed-speakers",
+        action="store_true",
+        help="split paragraphs whose sentences carry more than one speaker (one paragraph = one turn) before grouping",
+    )
     parser.add_argument("--apply", action="store_true", help="write the file (default: dry run)")
     parser.add_argument("--ledger", help="write merge ledger JSON here")
     parser.add_argument("--no-overview-sync", action="store_true", help="skip digest/quote re-hydration")
@@ -364,7 +476,14 @@ def main() -> None:
     before_stream = char_stream(session)
     before = metrics(session)
 
-    result = merge_session(session, args.min_chars, args.soft_min, args.para_max)
+    result = merge_session(
+        session,
+        args.min_chars,
+        args.soft_min,
+        args.para_max,
+        args.preserve_para_ids,
+        args.split_mixed_speakers,
+    )
     merged = result["session"]
     after_stream = char_stream(merged)
     if before_stream != after_stream:
