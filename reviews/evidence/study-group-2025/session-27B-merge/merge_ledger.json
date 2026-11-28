@@ -1,0 +1,559 @@
+{
+  "tool": "scripts/merge_session_sentences.py",
+  "params": {
+    "minChars": 100,
+    "softMin": 80,
+    "paraMax": 1200,
+    "splitMixedSpeakers": true
+  },
+  "stats": {
+    "sentencesBefore": 371,
+    "sentencesAfter": 188,
+    "paragraphsBefore": 100,
+    "paragraphsAfter": 53,
+    "runsWithMergedFragments": 81,
+    "danglingTailsClosed": 4,
+    "dedupedEvidence": 1,
+    "remappedReferences": {
+      "sent-0031": "sent-0027",
+      "sent-0095": "sent-0095",
+      "sent-0164": "sent-0164",
+      "sent-0166": "sent-0166",
+      "sent-0210": "sent-0210",
+      "sent-0258": "sent-0258",
+      "sent-0262": "sent-0262",
+      "sent-0284": "sent-0284",
+      "sent-0292": "sent-0291",
+      "sent-0321": "sent-0321",
+      "sent-0368": "sent-0365",
+      "sent-0105": "sent-0104",
+      "sent-0214": "sent-0210",
+      "sent-0218": "sent-0210",
+      "sent-0338": "sent-0336",
+      "sent-0293": "sent-0293",
+      "sent-0343": "sent-0342",
+      "sent-0344": "sent-0344"
+    },
+    "minChars": 100,
+    "softMin": 80,
+    "paraMax": 1200,
+    "speakerSplits": [
+      {
+        "from": "p_001",
+        "to": "p_001",
+        "speaker": "學員",
+        "sentences": [
+          "sent-0001"
+        ]
+      },
+      {
+        "from": "p_001",
+        "to": "p_001b1",
+        "speaker": "如性法師",
+        "sentences": [
+          "sent-0002"
+        ]
+      },
+      {
+        "from": "p_001",
+        "to": "p_001b2",
+        "speaker": "學員",
+        "sentences": [
+          "sent-0003",
+          "sent-0004"
+        ]
+      },
+      {
+        "from": "p_074",
+        "to": "p_074",
+        "speaker": "學員",
+        "sentences": [
+          "sent-0282",
+          "sent-0283"
+        ]
+      },
+      {
+        "from": "p_074",
+        "to": "p_074b1",
+        "speaker": "如性法師",
+        "sentences": [
+          "sent-0284",
+          "sent-0285"
+        ]
+      }
+    ]
+  },
+  "mergedMembers": {
+    "sent-0003": [
+      "sent-0003",
+      "sent-0004"
+    ],
+    "sent-0006": [
+      "sent-0006",
+      "sent-0007"
+    ],
+    "sent-0008": [
+      "sent-0008",
+      "sent-0009"
+    ],
+    "sent-0010": [
+      "sent-0010",
+      "sent-0011",
+      "sent-0012",
+      "sent-0013",
+      "sent-0014",
+      "sent-0015"
+    ],
+    "sent-0017": [
+      "sent-0017",
+      "sent-0018",
+      "sent-0019",
+      "sent-0020",
+      "sent-0021",
+      "sent-0022"
+    ],
+    "sent-0023": [
+      "sent-0023",
+      "sent-0024",
+      "sent-0025"
+    ],
+    "sent-0027": [
+      "sent-0027",
+      "sent-0028",
+      "sent-0029",
+      "sent-0030",
+      "sent-0031",
+      "sent-0032",
+      "sent-0033",
+      "sent-0034"
+    ],
+    "sent-0035": [
+      "sent-0035",
+      "sent-0036"
+    ],
+    "sent-0038": [
+      "sent-0038",
+      "sent-0039"
+    ],
+    "sent-0041": [
+      "sent-0041",
+      "sent-0042"
+    ],
+    "sent-0043": [
+      "sent-0043",
+      "sent-0044"
+    ],
+    "sent-0045": [
+      "sent-0045",
+      "sent-0046",
+      "sent-0047",
+      "sent-0048",
+      "sent-0049",
+      "sent-0050",
+      "sent-0051"
+    ],
+    "sent-0052": [
+      "sent-0052",
+      "sent-0053",
+      "sent-0054",
+      "sent-0055",
+      "sent-0056",
+      "sent-0057",
+      "sent-0058",
+      "sent-0059",
+      "sent-0060"
+    ],
+    "sent-0061": [
+      "sent-0061",
+      "sent-0062",
+      "sent-0063",
+      "sent-0064",
+      "sent-0065",
+      "sent-0066"
+    ],
+    "sent-0070": [
+      "sent-0070",
+      "sent-0071",
+      "sent-0072"
+    ],
+    "sent-0076": [
+      "sent-0076",
+      "sent-0077"
+    ],
+    "sent-0082": [
+      "sent-0082",
+      "sent-0083"
+    ],
+    "sent-0086": [
+      "sent-0086",
+      "sent-0087"
+    ],
+    "sent-0091": [
+      "sent-0091",
+      "sent-0092"
+    ],
+    "sent-0095": [
+      "sent-0095",
+      "sent-0096"
+    ],
+    "sent-0097": [
+      "sent-0097",
+      "sent-0098",
+      "sent-0099",
+      "sent-0100",
+      "sent-0101",
+      "sent-0102",
+      "sent-0103"
+    ],
+    "sent-0104": [
+      "sent-0104",
+      "sent-0105"
+    ],
+    "sent-0110": [
+      "sent-0110",
+      "sent-0111"
+    ],
+    "sent-0112": [
+      "sent-0112",
+      "sent-0113",
+      "sent-0114",
+      "sent-0115"
+    ],
+    "sent-0116": [
+      "sent-0116",
+      "sent-0117",
+      "sent-0118"
+    ],
+    "sent-0119": [
+      "sent-0119",
+      "sent-0120"
+    ],
+    "sent-0121": [
+      "sent-0121",
+      "sent-0122",
+      "sent-0123"
+    ],
+    "sent-0124": [
+      "sent-0124",
+      "sent-0125",
+      "sent-0126",
+      "sent-0127"
+    ],
+    "sent-0128": [
+      "sent-0128",
+      "sent-0129"
+    ],
+    "sent-0130": [
+      "sent-0130",
+      "sent-0131",
+      "sent-0132",
+      "sent-0133",
+      "sent-0134",
+      "sent-0135",
+      "sent-0136"
+    ],
+    "sent-0146": [
+      "sent-0146",
+      "sent-0147"
+    ],
+    "sent-0150": [
+      "sent-0150",
+      "sent-0151"
+    ],
+    "sent-0154": [
+      "sent-0154",
+      "sent-0155",
+      "sent-0156"
+    ],
+    "sent-0158": [
+      "sent-0158",
+      "sent-0159"
+    ],
+    "sent-0169": [
+      "sent-0169",
+      "sent-0170"
+    ],
+    "sent-0172": [
+      "sent-0172",
+      "sent-0173"
+    ],
+    "sent-0175": [
+      "sent-0175",
+      "sent-0176",
+      "sent-0177",
+      "sent-0178",
+      "sent-0179",
+      "sent-0180",
+      "sent-0181",
+      "sent-0182",
+      "sent-0183",
+      "sent-0184"
+    ],
+    "sent-0185": [
+      "sent-0185",
+      "sent-0186",
+      "sent-0187"
+    ],
+    "sent-0189": [
+      "sent-0189",
+      "sent-0190",
+      "sent-0191"
+    ],
+    "sent-0192": [
+      "sent-0192",
+      "sent-0193"
+    ],
+    "sent-0194": [
+      "sent-0194",
+      "sent-0195",
+      "sent-0196"
+    ],
+    "sent-0197": [
+      "sent-0197",
+      "sent-0198",
+      "sent-0199",
+      "sent-0200"
+    ],
+    "sent-0204": [
+      "sent-0204",
+      "sent-0205"
+    ],
+    "sent-0207": [
+      "sent-0207",
+      "sent-0208"
+    ],
+    "sent-0210": [
+      "sent-0210",
+      "sent-0211",
+      "sent-0212",
+      "sent-0213",
+      "sent-0214",
+      "sent-0215",
+      "sent-0216",
+      "sent-0217",
+      "sent-0218",
+      "sent-0219",
+      "sent-0220",
+      "sent-0221"
+    ],
+    "sent-0222": [
+      "sent-0222",
+      "sent-0223",
+      "sent-0224"
+    ],
+    "sent-0234": [
+      "sent-0234",
+      "sent-0235",
+      "sent-0236",
+      "sent-0237"
+    ],
+    "sent-0238": [
+      "sent-0238",
+      "sent-0239"
+    ],
+    "sent-0248": [
+      "sent-0248",
+      "sent-0249",
+      "sent-0250"
+    ],
+    "sent-0251": [
+      "sent-0251",
+      "sent-0252"
+    ],
+    "sent-0253": [
+      "sent-0253",
+      "sent-0254",
+      "sent-0255"
+    ],
+    "sent-0262": [
+      "sent-0262",
+      "sent-0263"
+    ],
+    "sent-0265": [
+      "sent-0265",
+      "sent-0266",
+      "sent-0267",
+      "sent-0268"
+    ],
+    "sent-0269": [
+      "sent-0269",
+      "sent-0270",
+      "sent-0271",
+      "sent-0272",
+      "sent-0273",
+      "sent-0274",
+      "sent-0275",
+      "sent-0276",
+      "sent-0277"
+    ],
+    "sent-0278": [
+      "sent-0278",
+      "sent-0279",
+      "sent-0280",
+      "sent-0281"
+    ],
+    "sent-0282": [
+      "sent-0282",
+      "sent-0283"
+    ],
+    "sent-0284": [
+      "sent-0284",
+      "sent-0285"
+    ],
+    "sent-0288": [
+      "sent-0288",
+      "sent-0289"
+    ],
+    "sent-0291": [
+      "sent-0291",
+      "sent-0292"
+    ],
+    "sent-0293": [
+      "sent-0293",
+      "sent-0294",
+      "sent-0295"
+    ],
+    "sent-0299": [
+      "sent-0299",
+      "sent-0300"
+    ],
+    "sent-0301": [
+      "sent-0301",
+      "sent-0302"
+    ],
+    "sent-0303": [
+      "sent-0303",
+      "sent-0304"
+    ],
+    "sent-0305": [
+      "sent-0305",
+      "sent-0306"
+    ],
+    "sent-0311": [
+      "sent-0311",
+      "sent-0312"
+    ],
+    "sent-0313": [
+      "sent-0313",
+      "sent-0314",
+      "sent-0315"
+    ],
+    "sent-0316": [
+      "sent-0316",
+      "sent-0317"
+    ],
+    "sent-0321": [
+      "sent-0321",
+      "sent-0322"
+    ],
+    "sent-0325": [
+      "sent-0325",
+      "sent-0326",
+      "sent-0327",
+      "sent-0328",
+      "sent-0329",
+      "sent-0330"
+    ],
+    "sent-0333": [
+      "sent-0333",
+      "sent-0334",
+      "sent-0335"
+    ],
+    "sent-0336": [
+      "sent-0336",
+      "sent-0337",
+      "sent-0338"
+    ],
+    "sent-0339": [
+      "sent-0339",
+      "sent-0340"
+    ],
+    "sent-0342": [
+      "sent-0342",
+      "sent-0343"
+    ],
+    "sent-0344": [
+      "sent-0344",
+      "sent-0345",
+      "sent-0346"
+    ],
+    "sent-0348": [
+      "sent-0348",
+      "sent-0349"
+    ],
+    "sent-0350": [
+      "sent-0350",
+      "sent-0351"
+    ],
+    "sent-0352": [
+      "sent-0352",
+      "sent-0353"
+    ],
+    "sent-0359": [
+      "sent-0359",
+      "sent-0360",
+      "sent-0361"
+    ],
+    "sent-0362": [
+      "sent-0362",
+      "sent-0363",
+      "sent-0364"
+    ],
+    "sent-0365": [
+      "sent-0365",
+      "sent-0366",
+      "sent-0367",
+      "sent-0368"
+    ],
+    "sent-0369": [
+      "sent-0369",
+      "sent-0370",
+      "sent-0371"
+    ]
+  },
+  "speakerSplits": [
+    {
+      "from": "p_001",
+      "to": "p_001",
+      "speaker": "學員",
+      "sentences": [
+        "sent-0001"
+      ]
+    },
+    {
+      "from": "p_001",
+      "to": "p_001b1",
+      "speaker": "如性法師",
+      "sentences": [
+        "sent-0002"
+      ]
+    },
+    {
+      "from": "p_001",
+      "to": "p_001b2",
+      "speaker": "學員",
+      "sentences": [
+        "sent-0003",
+        "sent-0004"
+      ]
+    },
+    {
+      "from": "p_074",
+      "to": "p_074",
+      "speaker": "學員",
+      "sentences": [
+        "sent-0282",
+        "sent-0283"
+      ]
+    },
+    {
+      "from": "p_074",
+      "to": "p_074b1",
+      "speaker": "如性法師",
+      "sentences": [
+        "sent-0284",
+        "sent-0285"
+      ]
+    }
+  ]
+}
