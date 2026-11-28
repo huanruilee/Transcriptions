@@ -292,6 +292,116 @@
       ],
       "positive_example": "行者修習中觀空觀，能斷除常斷二邊之執著。",
       "negative_example": "禪師在寺中閉關修行三個月。"
+    },
+    {
+      "id": "DISAMB_013",
+      "term_pair": "有我 vs 由我",
+      "target_correct": "有我",
+      "target_keep": "由我",
+      "requiresContext": true,
+      "correct_context_keywords": [
+        "我執",
+        "增益",
+        "無我",
+        "所破",
+        "獨立自主",
+        "執著為",
+        "受苦者",
+        "非一非異"
+      ],
+      "keep_context_keywords": [
+        "由我們",
+        "由我來",
+        "由我決定",
+        "由我負責",
+        "藉由",
+        "透由",
+        "經由"
+      ],
+      "positive_example": "我執會把受苦者增益為有我。",
+      "negative_example": "這件事由我來決定就好。",
+      "note": "全課「由我」76 處，講27 僅 8 處應作「有我」；「藉由我們」「由我來決定」等一律保留。禁止全域替換。"
+    },
+    {
+      "id": "DISAMB_014",
+      "term_pair": "支分 vs 之分",
+      "target_correct": "支分",
+      "target_keep": "之",
+      "requiresContext": true,
+      "correct_context_keywords": [
+        "身心",
+        "蘊體",
+        "假立",
+        "我所有的",
+        "一分",
+        "支"
+      ],
+      "keep_context_keywords": [
+        "之所以",
+        "之後",
+        "之間",
+        "之一",
+        "之類",
+        "之中",
+        "之前"
+      ],
+      "positive_example": "由於身心都是我的支分，所以不必把我所有的支分都顯現出來。",
+      "negative_example": "我們之所以會這樣做，是因為已經了解無常。",
+      "note": "「之」是文言虛詞，全課數百處；只有「我的之分」這類『身心所攝的一分』語境才是「支分」。"
+    },
+    {
+      "id": "DISAMB_015",
+      "term_pair": "非異 vs 非意／非易",
+      "target_correct": "異",
+      "target_keep": "意",
+      "requiresContext": true,
+      "correct_context_keywords": [
+        "非一",
+        "非異",
+        "一異",
+        "相異",
+        "自性",
+        "離一異",
+        "既非一"
+      ],
+      "keep_context_keywords": [
+        "意思",
+        "意知",
+        "意根",
+        "意識",
+        "注意",
+        "意見",
+        "留意"
+      ],
+      "positive_example": "自主的我與蘊體既非一又非異。",
+      "negative_example": "他的意思是要我們先確認這一點。",
+      "note": "「意」在《心類學》語境（意知、意根、意識）全數保留；只有與「非一」並舉的對辨語境才是「非異」。另注意「非一」本身正確，不可改為「非異」。"
+    },
+    {
+      "id": "DISAMB_016",
+      "term_pair": "只 vs 隻",
+      "target_correct": "只",
+      "target_keep": "隻",
+      "requiresContext": true,
+      "correct_context_keywords": [
+        "只要",
+        "只是",
+        "只能",
+        "不只",
+        "只為",
+        "只在"
+      ],
+      "keep_context_keywords": [
+        "一隻",
+        "兩隻",
+        "數隻",
+        "隻身",
+        "船隻",
+        "隻影"
+      ],
+      "positive_example": "我們只要掌握這個理路就好。",
+      "negative_example": "一隻鳥從窗前飛過。",
+      "note": "本課語料「隻」全數為「只」的誤認（隻是／隻能／隻要）；但量詞「一隻」等仍為正字，須看後接成分。"
     }
   ]
 }
